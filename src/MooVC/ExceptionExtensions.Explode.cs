@@ -1,0 +1,25 @@
+﻿namespace MooVC
+{
+    using System;
+    using Collections.Generic;
+
+    public static class ExceptionExtensions
+    {
+        public static void Explode(this Exception exception, Action<Exception> handler)
+        {
+            if (exception != null)
+            {
+                handler(exception);
+
+                if (exception is AggregateException aggregate)
+                {
+                    aggregate.InnerExceptions.ForEach(ex => ex.Explode(handler));
+                }
+                else
+                {
+                    exception.InnerException.Explode(handler);
+                }
+            }
+        }
+    }
+}
