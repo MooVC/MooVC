@@ -8,7 +8,8 @@
     <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
