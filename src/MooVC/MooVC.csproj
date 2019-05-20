@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.1.0-alpha2</Version>
+    <Version>1.1.0-alpha20190520103000</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,5 +1,6 @@
 namespace MooVC.Dynamic.ExpandoObjectExtensionsTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Dynamic;
     using Xunit;
@@ -51,6 +52,25 @@ namespace MooVC.Dynamic.ExpandoObjectExtensionsTests
             Assert.NotStrictEqual(parent.Child, clone.Child);
 
             Assert.Equal(parent.Child, clone.Child);
+        }
+
+        [Fact]
+        public void GivenANullObjectWithDefaultIfNullSetToFalseThenAnArgumentNullExceptionIsThrown()
+        {
+            ExpandoObject source = null;
+
+            _ = Assert.Throws<ArgumentNullException>(() => source.Clone(defaultIfNull: false));
+        }
+
+        [Fact]
+        public void GivenANullObjectWithDefaultIfNullSetToTrueThenAnEmptyObjectIsReturned()
+        {
+            ExpandoObject source = null;
+
+            ExpandoObject value = source.Clone(defaultIfNull: true);
+
+            Assert.NotNull(value);
+            Assert.True(((IDictionary<string, object>)value).Count == 0);
         }
     }
 }
