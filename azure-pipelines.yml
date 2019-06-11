@@ -1,0 +1,84 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
+  solution: '**/*.sln'
+  majorVersion: '1'
+  minorVersion: '1'
+  patchVersion: '0'
+  version: '$(majorVersion).$(minorVersion).$(patchVersion)'
+
+steps:
+
+- task: StyleCop@3
+  displayName: 'StyleCOP'
+  inputs:
+    allowableViolationCount: '0'
+    cacheResults: False
+    detailedSummary: False
+    forceFullAnalysis: True
+    loggingfolder: '$(build.ArtifactStagingDirectory)'
+    maximumViolationCount: '1000'
+    settingsFile: 'Settings.StyleCop'
+    showOutput: False
+    sourcefolder: '$(build.SourcesDirectory)'
+    summaryFileName: 'stylecopsummary.md'
+    treatStyleCopViolationsErrorsAsWarnings: False
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Restore Nuget Packages for Solution'
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    projects: '$(solution)'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Build Solution'
+  inputs:
+    arguments: '--configuration $(buildConfiguration)'
+    command: 'build'
+    projects: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test Solution'
+  inputs:
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    command: 'test'
+    projects: '$(solution)'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Package Prerelease Artifacts'
+  inputs:
+    command: 'pack'
+    majorVersion: '$(majorVersion)'
+    minorVersion: '$(minorVersion)'
+    patchVersion: '$(patchVersion)'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Package Release Artifacts'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versionEnvVar: 'version'
+    versioningScheme: 'byEnvVar'
+
+- task: CopyFiles@2
+  displayName: 'Copy Packages for Publish'
+  inputs:
+    contents: '**/*.nupkg'
+    targetFolder: '$(Build.ArtifactStagingDirectory)/Packages'
+    sourceFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
+  inputs:
+    artifactName: 'drop'
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/Packages'
+    publishLocation: 'Container'
