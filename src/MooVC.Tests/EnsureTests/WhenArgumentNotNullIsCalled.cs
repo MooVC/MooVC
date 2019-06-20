@@ -15,9 +15,9 @@
         [InlineData(false)]
         [InlineData("")]
         [InlineData(" ")]
-        public void GivenANonNullValueThenNotExceptionIsThrown(object argument)
+        public void GivenANonNullValueThenNoExceptionIsThrown(object argument)
         {
-            Ensure.ArgumentNotNull(argument, string.Empty);
+            Ensure.ArgumentNotNull(argument, nameof(argument));
         }
 
         [Theory]
@@ -30,9 +30,9 @@
         [InlineData(false)]
         [InlineData("")]
         [InlineData(" ")]
-        public void GivenANonNullValueAndAMessageThenNotExceptionIsThrown(object argument)
+        public void GivenANonNullValueAndAMessageThenNoExceptionIsThrown(object argument)
         {
-            Ensure.ArgumentNotNull(argument, string.Empty, "Some message.");
+            Ensure.ArgumentNotNull(argument, nameof(argument), "Some message.");
         }
 
         [Fact]
