@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Collections.Generic
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -10,7 +11,26 @@
         {
             if (items != null)
             {
-                _ = Parallel.ForEach(items, action);
+                var exceptions = new ConcurrentQueue<Exception>();
+
+                _ = Parallel.ForEach(
+                    items, 
+                    item =>
+                    {
+                        try
+                        {
+                            action(item);
+                        }
+                        catch (Exception ex)
+                        {
+                            exceptions.Enqueue(ex);
+                        }
+                    });
+
+                if (exceptions.Count > 0)
+                {
+                    throw new AggregateException(exceptions);
+                }
             }
         }
     }
