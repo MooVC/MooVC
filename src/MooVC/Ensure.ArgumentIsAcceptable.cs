@@ -10,7 +10,7 @@
             Func<T, bool> predicate, 
             string message)
         {
-            Ensure.ArgumentNotNull(argument, argumentName, message);
+            ArgumentNotNull(argument, argumentName, message);
 
             if (!predicate(argument))
             {
