@@ -2,7 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
+    [Serializable]
     public class Paging
     {
         public const ushort DefaultSize = 10,
@@ -15,6 +18,12 @@
             Size = Math.Max(size, MinimumSize);
         }
 
+        protected Paging(SerializationInfo info, StreamingContext context)
+        {
+            Page = (ushort)info.GetValue(nameof(Page), typeof(ushort));
+            Size = (ushort)info.GetValue(nameof(Size), typeof(ushort));
+        }
+
         public ushort Page { get; }
 
         public ushort Size { get; }
@@ -24,6 +33,13 @@
             int skip = (Page - FirstPage) * Size;
 
             return queryable.Skip(skip).Take(Size);
+        }
+
+        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(nameof(Page), Page);
+            info.AddValue(nameof(Size), Size);
         }
     }
 }
