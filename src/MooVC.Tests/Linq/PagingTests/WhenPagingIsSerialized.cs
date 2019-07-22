@@ -28,7 +28,7 @@
 
             Assert.Equal(paging.Page, deserialized.Page);
             Assert.Equal(paging.Size, deserialized.Size);
-            Assert.NotStrictEqual(paging, deserialized);
+            Assert.NotSame(paging, deserialized);
         }
     }
 }
