@@ -4,7 +4,7 @@ namespace MooVC.Linq
     using System.Collections.Generic;
     using System.Linq;
 
-    public static class EnumerableExtensions
+    public static partial class EnumerableExtensions
     {
         public static int IndexOf<T>(this IEnumerable<T> enumeration, Func<T, bool> predicate)
         {

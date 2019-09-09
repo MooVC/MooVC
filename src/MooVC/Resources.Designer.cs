@@ -61,6 +61,15 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must provide the target collection..
+        /// </summary>
+        internal static string CollectionExtensionsAddRangeTargetRequired {
+            get {
+                return ResourceManager.GetString("CollectionExtensionsAddRangeTargetRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must provide a message..
         /// </summary>
         internal static string ExceptionEventArgsMessageRequired {
