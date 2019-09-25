@@ -2,10 +2,9 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Xunit;
 
-    public sealed class WhenAddRangeIsCalled
+    public sealed class WhenReplaceIsCalled
     {
         [Fact]
         public void GivenANullListThenNoArgumentNullExcetionIsThrown()
@@ -13,7 +12,7 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
             ICollection<int> target = new List<int>();
             int[] items = null;
 
-            target.AddRange(items);
+            target.Replace(items);
         }
 
         [Fact]
@@ -22,7 +21,7 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
             ICollection<int> target = null;
             int[] items = new[] { 1, 2, 3 };
 
-            _ = Assert.Throws<ArgumentNullException>(() => target.AddRange(items));
+            _ = Assert.Throws<ArgumentNullException>(() => target.Replace(items));
         }
 
         [Fact]
@@ -31,19 +30,18 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
             ICollection<int> actual = new List<int>();
             int[] expected = new[] { 1, 2, 3 };
 
-            actual.AddRange(expected);
+            actual.Replace(expected);
 
             Assert.Equal(expected, actual);
         }
 
         [Fact]
-        public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetWithoutRemovingTheExistingEntries()
+        public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetAndTheExistingEntriesAreRemoved()
         {
             ICollection<int> actual = new List<int> { 1, 2, 3 };
-            int[] items = new[] { 4, 5, 6 };
-            IEnumerable<int> expected = Enumerable.Range(1, 6);
+            int[] expected = new[] { 4, 5, 6 };
 
-            actual.AddRange(items);
+            actual.Replace(expected);
 
             Assert.Equal(expected, actual);
         }
