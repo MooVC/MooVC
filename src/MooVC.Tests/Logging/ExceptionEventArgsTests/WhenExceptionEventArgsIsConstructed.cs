@@ -9,13 +9,13 @@
         public static readonly IEnumerable<object[]> GivenAMessageAndAnExceptionThenThePropertiesMatchData = new[]
         {
             new object[] { "Test Message 1", null },
-            new object[] { "Test Message 2", new ArgumentException() }
+            new object[] { "Test Message 2", new ArgumentException() },
         };
 
         public static readonly IEnumerable<object[]> GivenAnExceptionThenTheMessageMatchesTheExceptionMessageData = new[]
         {
             new object[] { new InvalidOperationException("Test Message 1") },
-            new object[] { new ArgumentException("Test Message 2") }
+            new object[] { new ArgumentException("Test Message 2") },
         };
 
         [Theory]
@@ -37,7 +37,7 @@
             Assert.Equal(exception.Message, value.Message);
             Assert.Equal(exception, value.Exception);
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(" ")]
@@ -51,7 +51,7 @@
         {
             _ = Assert.Throws<ArgumentNullException>(() => new ExceptionEventArgs(null));
         }
-        
+
         [Fact]
         public void GivenANullMessageThenAnArgumentNullExceptionIsThrown()
         {

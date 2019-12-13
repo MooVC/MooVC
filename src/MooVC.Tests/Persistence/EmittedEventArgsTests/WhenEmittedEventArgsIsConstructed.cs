@@ -9,7 +9,7 @@
         public static readonly IEnumerable<object[]> GivenAnEventThenTheStateIsPropagatedData = new[]
         {
             new object[] { new object() },
-            new object[] { new InvalidOperationException() } 
+            new object[] { new InvalidOperationException() },
         };
 
         [Theory]

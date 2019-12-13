@@ -14,7 +14,7 @@
                 var exceptions = new ConcurrentQueue<Exception>();
 
                 _ = Parallel.ForEach(
-                    items, 
+                    items,
                     item =>
                     {
                         try

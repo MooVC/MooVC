@@ -3,7 +3,7 @@
     using System;
     using MooVC.Logging;
 
-    public interface IEventStore<T, TId> 
+    public interface IEventStore<T, TId>
         : IEmitFailures
         where T : class
     {

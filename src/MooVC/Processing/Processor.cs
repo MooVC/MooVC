@@ -4,7 +4,7 @@
     using System.Threading;
     using MooVC.Logging;
 
-    public abstract class Processor 
+    public abstract class Processor
         : IProcessor, IEmitFailures, IEmitWarnings
     {
         private Thread continuationThread;

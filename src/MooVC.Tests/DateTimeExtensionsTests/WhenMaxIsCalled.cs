@@ -11,7 +11,7 @@
             new object[] { new DateTime(2019, 1, 1), new DateTime(2019, 12, 31) },
             new object[] { new DateTime(2019, 1, 31), new DateTime(2019, 12, 1) },
             new object[] { new DateTime(2018, 12, 1), new DateTime(2019, 1, 31) },
-            new object[] { new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) }
+            new object[] { new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) },
         };
 
         [Theory]

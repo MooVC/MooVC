@@ -9,27 +9,12 @@ variables:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
   solution: '**/*.sln'
-  majorVersion: '1'
-  minorVersion: '2'
+  majorVersion: '2'
+  minorVersion: '0'
   patchVersion: '0'
   version: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
 steps:
-
-- task: StyleCop@3
-  displayName: 'StyleCOP'
-  inputs:
-    allowableViolationCount: '0'
-    cacheResults: False
-    detailedSummary: False
-    forceFullAnalysis: True
-    loggingfolder: '$(build.ArtifactStagingDirectory)'
-    maximumViolationCount: '1000'
-    settingsFile: 'Settings.StyleCop'
-    showOutput: False
-    sourcefolder: '$(build.SourcesDirectory)'
-    summaryFileName: 'stylecopsummary.md'
-    treatStyleCopViolationsErrorsAsWarnings: False
     
 - task: DotNetCoreCLI@2
   displayName: 'Restore Nuget Packages for Solution'

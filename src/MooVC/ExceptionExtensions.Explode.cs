@@ -1,7 +1,7 @@
 ﻿namespace MooVC
 {
     using System;
-    using Collections.Generic;
+    using MooVC.Collections.Generic;
 
     public static class ExceptionExtensions
     {

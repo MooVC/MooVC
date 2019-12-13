@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ExceptionEventArgs 
+    public class ExceptionEventArgs
         : EventArgs
     {
         public ExceptionEventArgs(string message, Exception exception = null)

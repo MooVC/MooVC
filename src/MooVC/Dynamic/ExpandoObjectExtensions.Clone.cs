@@ -30,7 +30,7 @@ namespace MooVC.Dynamic
             {
                 throw new ArgumentNullException(nameof(orignal));
             }
-            
+
             return clone;
         }
     }

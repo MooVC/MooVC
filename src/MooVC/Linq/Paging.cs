@@ -8,9 +8,9 @@
     [Serializable]
     public class Paging
     {
-        public const ushort DefaultSize = 10,
-            FirstPage = 1,
-            MinimumSize = 1;
+        public const ushort DefaultSize = 10;
+        public const ushort FirstPage = 1;
+        public const ushort MinimumSize = 1;
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {

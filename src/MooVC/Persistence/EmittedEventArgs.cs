@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class EmittedEventArgs<T> 
+    public class EmittedEventArgs<T>
         : EventArgs
         where T : class
     {
