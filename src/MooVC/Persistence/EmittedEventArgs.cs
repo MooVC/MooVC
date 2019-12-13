@@ -1,6 +1,8 @@
 ﻿namespace MooVC.Persistence
 {
     using System;
+    using static MooVC.Ensure;
+    using static Resources;
 
     public class EmittedEventArgs<T>
         : EventArgs
@@ -8,7 +10,7 @@
     {
         public EmittedEventArgs(T @event)
         {
-            Ensure.ArgumentNotNull(@event, nameof(@event));
+            ArgumentNotNull(@event, nameof(@event), EmittedEventArgsEventRequired);
 
             Event = @event;
         }

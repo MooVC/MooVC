@@ -5,7 +5,7 @@ namespace MooVC.Collections.Generic
 
     public static partial class EnumerableExtensions
     {
-        public static void For<T>(this IEnumerable<T> items, Action<int, T> action)
+        public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
         {
             if (items is { })
             {

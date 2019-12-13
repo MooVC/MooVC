@@ -7,7 +7,7 @@
 
     public static partial class EnumerableExtensions
     {
-        public static void ForAll<T>(this IEnumerable<T> items, Action<T> action)
+        public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
         {
             if (items is { })
             {

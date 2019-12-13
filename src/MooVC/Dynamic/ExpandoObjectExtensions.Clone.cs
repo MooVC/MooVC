@@ -6,7 +6,7 @@ namespace MooVC.Dynamic
 
     public static class ExpandoObjectExtensions
     {
-        public static ExpandoObject Clone(this ExpandoObject orignal, bool defaultIfNull = true)
+        public static ExpandoObject Clone(this ExpandoObject? orignal, bool defaultIfNull = true)
         {
             var clone = new ExpandoObject();
 

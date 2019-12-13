@@ -5,7 +5,7 @@
 
     public static class ExceptionExtensions
     {
-        public static void Explode(this Exception exception, Action<Exception> handler)
+        public static void Explode(this Exception? exception, Action<Exception> handler)
         {
             if (exception is { })
             {

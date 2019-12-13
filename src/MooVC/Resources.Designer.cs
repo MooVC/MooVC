@@ -61,7 +61,7 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must provide the target collection..
+        ///   Looks up a localized string similar to The target collection must be provided..
         /// </summary>
         internal static string CollectionExtensionsGenericTargetRequired {
             get {
@@ -70,7 +70,25 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must provide a message..
+        ///   Looks up a localized string similar to The event must be provided..
+        /// </summary>
+        internal static string EmittedEventArgsEventRequired {
+            get {
+                return ResourceManager.GetString("EmittedEventArgsEventRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The exception must be provided..
+        /// </summary>
+        internal static string ExceptionEventArgsExceptionRequired {
+            get {
+                return ResourceManager.GetString("ExceptionEventArgsExceptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message must be provided..
         /// </summary>
         internal static string ExceptionEventArgsMessageRequired {
             get {

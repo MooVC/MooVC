@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CollectionExtensionsGenericTargetRequired" xml:space="preserve">
-    <value>You must provide the target collection.</value>
+    <value>The target collection must be provided.</value>
+  </data>
+  <data name="EmittedEventArgsEventRequired" xml:space="preserve">
+    <value>The event must be provided.</value>
+  </data>
+  <data name="ExceptionEventArgsExceptionRequired" xml:space="preserve">
+    <value>The exception must be provided.</value>
   </data>
   <data name="ExceptionEventArgsMessageRequired" xml:space="preserve">
-    <value>You must provide a message.</value>
+    <value>The message must be provided.</value>
   </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>

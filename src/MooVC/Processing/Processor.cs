@@ -7,7 +7,7 @@
     public abstract class Processor
         : IProcessor, IEmitFailures, IEmitWarnings
     {
-        private Thread continuationThread;
+        private Thread? continuationThread;
         private ProcessorState state;
 
         protected Processor()
@@ -15,11 +15,11 @@
             state = ProcessorState.Stopped;
         }
 
-        public event EventHandler<ExceptionEventArgs> FailureEmitted;
+        public event EventHandler<ExceptionEventArgs>? FailureEmitted;
 
-        public event EventHandler<ProcessorStateChangedEventArgs> ProcessStateChanged;
+        public event EventHandler<ProcessorStateChangedEventArgs>? ProcessStateChanged;
 
-        public event EventHandler<ExceptionEventArgs> WarningEmitted;
+        public event EventHandler<ExceptionEventArgs>? WarningEmitted;
 
         public ProcessorState State
         {
@@ -72,7 +72,7 @@
 
             State = ProcessorState.Stopping;
 
-            if (PerformStop() && continuationThread != null)
+            if (PerformStop() && continuationThread is { })
             {
                 AbortContinuationThread();
             }
@@ -108,7 +108,7 @@
         {
             try
             {
-                continuationThread.Abort();
+                continuationThread!.Abort();
                 continuationThread.Join();
             }
             catch (Exception ex)
