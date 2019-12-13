@@ -1,6 +1,9 @@
 trigger:
 - master
 - develop
+- release/*
+- feature/*
+- hotfix/*
 
 pool:
   vmImage: 'windows-latest'
@@ -9,13 +12,18 @@ variables:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
   solution: '**/*.sln'
-  majorVersion: '1'
-  minorVersion: '3'
-  patchVersion: '0'
-  version: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
 steps:
-    
+- checkout: self
+  clean: true
+  persistCredentials: true
+
+- task: GitVersion@5
+  displayName: 'Version Management'
+  inputs:
+    configFilePath: 'gitversion.yml'
+    runtime: 'core'
+
 - task: DotNetCoreCLI@2
   displayName: 'Restore Nuget Packages for Solution'
   inputs:
@@ -26,33 +34,23 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Build Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) /p:Version=$(GitVersion.NuGetVersion)'
     command: 'build'
     projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
     command: 'test'
     projects: '$(solution)'
-    
+
 - task: DotNetCoreCLI@2
-  displayName: 'Package Prerelease Artifacts'
-  inputs:
-    command: 'pack'
-    majorVersion: '$(majorVersion)'
-    minorVersion: '$(minorVersion)'
-    patchVersion: '$(patchVersion)'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    
-- task: DotNetCoreCLI@2
-  displayName: 'Package Release Artifacts'
+  displayName: 'Package Artifacts'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    versionEnvVar: 'version'
+    versionEnvVar: 'GitVersion.NuGetVersion'
     versioningScheme: 'byEnvVar'
 
 - task: CopyFiles@2
