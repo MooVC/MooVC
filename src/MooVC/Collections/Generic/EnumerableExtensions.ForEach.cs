@@ -7,7 +7,7 @@
     {
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
         {
-            if (items != null)
+            if (items is { })
             {
                 foreach (T item in items)
                 {

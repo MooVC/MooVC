@@ -10,7 +10,7 @@ namespace MooVC.Dynamic
         {
             var clone = new ExpandoObject();
 
-            if (orignal != null)
+            if (orignal is { })
             {
                 var target = (IDictionary<string, object>)clone;
 

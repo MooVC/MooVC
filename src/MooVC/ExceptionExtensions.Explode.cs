@@ -7,7 +7,7 @@
     {
         public static void Explode(this Exception exception, Action<Exception> handler)
         {
-            if (exception != null)
+            if (exception is { })
             {
                 handler(exception);
 

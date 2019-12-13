@@ -7,7 +7,7 @@ namespace MooVC.Collections.Generic
     {
         public static void For<T>(this IEnumerable<T> items, Action<int, T> action)
         {
-            if (items != null)
+            if (items is { })
             {
                 int index = 0;
 

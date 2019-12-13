@@ -7,6 +7,7 @@
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoWarn>NU5105</NoWarn>
+    <LangVersion>latest</LangVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
