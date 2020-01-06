@@ -5,7 +5,9 @@
     using MooVC.Logging;
 
     public abstract class Processor
-        : IProcessor, IEmitFailures, IEmitWarnings
+        : IEmitFailures,
+          IEmitWarnings,
+          IProcessor
     {
         private Thread? continuationThread;
         private ProcessorState state;

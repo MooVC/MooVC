@@ -28,11 +28,11 @@
 
         public ushort Size { get; }
 
+        public int Skip => (Page - FirstPage) * Size;
+
         public virtual IQueryable<T> Apply<T>(IQueryable<T> queryable)
         {
-            int skip = (Page - FirstPage) * Size;
-
-            return queryable.Skip(skip).Take(Size);
+            return queryable.Skip(Skip).Take(Size);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
