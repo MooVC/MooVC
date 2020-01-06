@@ -1,4 +1,4 @@
-namespace MooVC.Linq
+namespace MooVC.Collections.Generic
 {
     using System;
     using System.Collections.Generic;
