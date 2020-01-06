@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    public static partial class PagingExtensions
+    public static partial class QueryableExtensions
     {
         public static IQueryable<T> Page<T>(this IQueryable<T> queryable, Paging? paging)
         {
