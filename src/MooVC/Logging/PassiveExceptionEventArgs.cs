@@ -5,10 +5,10 @@
     using static MooVC.Ensure;
     using static Resources;
 
-    public class ExceptionEventArgs
+    public sealed class PassiveExceptionEventArgs
         : EventArgs
     {
-        public ExceptionEventArgs(string message, Exception? exception = null)
+        public PassiveExceptionEventArgs(string message, Exception? exception = null)
         {
             ArgumentIsAcceptable(
                 message,
@@ -20,7 +20,7 @@
             Exception = exception;
         }
 
-        public ExceptionEventArgs(Exception exception)
+        public PassiveExceptionEventArgs(Exception exception)
         {
             ArgumentNotNull(exception, nameof(exception), ExceptionEventArgsExceptionRequired);
 

@@ -4,7 +4,7 @@
 
     public interface IProcessor
     {
-        event EventHandler<ProcessorStateChangedEventArgs> ProcessStateChanged;
+        event ProcessorStateChangedEventHandler ProcessStateChanged;
 
         ProcessorState State { get; }
 

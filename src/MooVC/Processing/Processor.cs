@@ -3,6 +3,8 @@
     using System;
     using System.Threading;
     using MooVC.Logging;
+    using static System.String;
+    using static Resources;
 
     public abstract class Processor
         : IEmitFailures,
@@ -17,11 +19,11 @@
             state = ProcessorState.Stopped;
         }
 
-        public event EventHandler<ExceptionEventArgs>? FailureEmitted;
+        public event PassiveExceptionEventHandler? FailureEmitted;
 
-        public event EventHandler<ProcessorStateChangedEventArgs>? ProcessStateChanged;
+        public event ProcessorStateChangedEventHandler? ProcessStateChanged;
 
-        public event EventHandler<ExceptionEventArgs>? WarningEmitted;
+        public event PassiveExceptionEventHandler? WarningEmitted;
 
         public ProcessorState State
         {
@@ -98,12 +100,12 @@
 
         protected void EmitFailure(string message, Exception failure)
         {
-            FailureEmitted?.Invoke(this, new ExceptionEventArgs(message, failure));
+            FailureEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, failure));
         }
 
         protected void EmitWarning(string message, Exception warning)
         {
-            WarningEmitted?.Invoke(this, new ExceptionEventArgs(message, warning));
+            WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, warning));
         }
 
         private void AbortContinuationThread()
@@ -116,7 +118,7 @@
             catch (Exception ex)
             {
                 EmitWarning(
-                    string.Format(Resources.ProcessorContinuationAbortFailure, GetType().Name),
+                    Format(ProcessorContinuationAbortFailure, GetType().Name),
                     ex);
             }
         }
@@ -136,7 +138,7 @@
                 catch (Exception ex)
                 {
                     EmitFailure(
-                        string.Format(Resources.ProcessorContinuationInteruppted, GetType().Name),
+                        Format(ProcessorContinuationInteruppted, GetType().Name),
                         ex);
                 }
 

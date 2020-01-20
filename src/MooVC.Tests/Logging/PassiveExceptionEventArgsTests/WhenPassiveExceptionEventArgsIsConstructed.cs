@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Xunit;
 
-    public sealed class WhenExceptionEventArgsIsConstructed
+    public sealed class WhenPassiveExceptionEventArgsIsConstructed
     {
         public static readonly IEnumerable<object[]> GivenAMessageAndAnExceptionThenThePropertiesMatchData = new[]
         {
@@ -22,7 +22,7 @@
         [MemberData(nameof(GivenAMessageAndAnExceptionThenThePropertiesMatchData))]
         public void GivenAMessageAndAnExceptionThenThePropertiesAreSetToMatch(string message, Exception exception)
         {
-            var value = new ExceptionEventArgs(message, exception);
+            var value = new PassiveExceptionEventArgs(message, exception);
 
             Assert.Equal(message, value.Message);
             Assert.Equal(exception, value.Exception);
@@ -32,7 +32,7 @@
         [MemberData(nameof(GivenAnExceptionThenTheMessageMatchesTheExceptionMessageData))]
         public void GivenAnExceptionThenTheMessageMatchesTheExceptionMessage(Exception exception)
         {
-            var value = new ExceptionEventArgs(exception);
+            var value = new PassiveExceptionEventArgs(exception);
 
             Assert.Equal(exception.Message, value.Message);
             Assert.Equal(exception, value.Exception);
@@ -43,19 +43,19 @@
         [InlineData(" ")]
         public void GivenABlanklMessageThenAnArgumentExceptionIsThrown(string message)
         {
-            _ = Assert.Throws<ArgumentException>(() => new ExceptionEventArgs(message));
+            _ = Assert.Throws<ArgumentException>(() => new PassiveExceptionEventArgs(message));
         }
 
         [Fact]
         public void GivenANullExceptionThenAnArgumentNullExceptionIsThrown()
         {
-            _ = Assert.Throws<ArgumentNullException>(() => new ExceptionEventArgs(null));
+            _ = Assert.Throws<ArgumentNullException>(() => new PassiveExceptionEventArgs(null));
         }
 
         [Fact]
         public void GivenANullMessageThenAnArgumentNullExceptionIsThrown()
         {
-            _ = Assert.Throws<ArgumentNullException>(() => new ExceptionEventArgs(null, null));
+            _ = Assert.Throws<ArgumentNullException>(() => new PassiveExceptionEventArgs(null, null));
         }
     }
 }

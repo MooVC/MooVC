@@ -6,7 +6,7 @@
     <NoWarn>NU5105</NoWarn>
     <LangVersion>latest</LangVersion>
     <RootNamespace>MooVC</RootNamespace>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
