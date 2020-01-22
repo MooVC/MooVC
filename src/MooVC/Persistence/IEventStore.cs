@@ -1,10 +1,15 @@
 ﻿namespace MooVC.Persistence
 {
-    public interface IEventStore<T, TId>
+    using System.Collections.Generic;
+    using MooVC.Linq;
+
+    public interface IEventStore<T, TIndex>
         where T : class
     {
-        void Insert(T @event);
+        TIndex Insert(T @event);
 
-        T Read(TId id);
+        T Read(TIndex id);
+
+        IEnumerable<TIndex> Read(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
     }
 }
