@@ -10,6 +10,6 @@
 
         T Read(TIndex id);
 
-        IEnumerable<TIndex> Read(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
+        IEnumerable<T> Read(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
     }
 }
