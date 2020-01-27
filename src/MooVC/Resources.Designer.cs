@@ -131,5 +131,14 @@ namespace MooVC {
                 return ResourceManager.GetString("StopOperationInvalidExceptionMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A failure has occured during the handling of a timed event by {0}..
+        /// </summary>
+        internal static string TimedProcessorCallbackHandlingFailure {
+            get {
+                return ResourceManager.GetString("TimedProcessorCallbackHandlingFailure", resourceCulture);
+            }
+        }
     }
 }
