@@ -135,6 +135,12 @@
   <data name="ProcessorContinuationInteruppted" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from continuing its processing.</value>
   </data>
+  <data name="ProcessorStartFailure" xml:space="preserve">
+    <value>Processor {0} has encountered an issue that has prevented it from starting.</value>
+  </data>
+  <data name="ProcessorStopFailure" xml:space="preserve">
+    <value>Processor {0} has encountered an issue that has prevented it from stopping.</value>
+  </data>
   <data name="StartOperationInvalidExceptionMessage" xml:space="preserve">
     <value>The process cannot be started because it is currently in a {0:g} state.</value>
   </data>

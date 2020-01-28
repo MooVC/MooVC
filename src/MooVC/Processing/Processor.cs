@@ -39,6 +39,38 @@
             }
         }
 
+        public bool TryStart()
+        {
+            try
+            {
+                Start();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                EmitFailure(Format(ProcessorStartFailure, GetType().Name), ex);
+            }
+
+            return false;
+        }
+
+        public bool TryStop()
+        {
+            try
+            {
+                Stop();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                EmitFailure(Format(ProcessorStopFailure, GetType().Name), ex);
+            }
+
+            return false;
+        }
+
         public void Start()
         {
             if (State != ProcessorState.Stopped)

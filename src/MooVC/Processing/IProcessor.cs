@@ -1,12 +1,14 @@
 ﻿namespace MooVC.Processing
 {
-    using System;
-
     public interface IProcessor
     {
         event ProcessorStateChangedEventHandler ProcessStateChanged;
 
         ProcessorState State { get; }
+
+        bool TryStart();
+
+        bool TryStop();
 
         void Start();
 

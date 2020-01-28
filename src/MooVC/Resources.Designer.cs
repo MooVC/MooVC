@@ -115,6 +115,24 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from starting..
+        /// </summary>
+        internal static string ProcessorStartFailure {
+            get {
+                return ResourceManager.GetString("ProcessorStartFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from stopping..
+        /// </summary>
+        internal static string ProcessorStopFailure {
+            get {
+                return ResourceManager.GetString("ProcessorStopFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The process cannot be started because it is currently in a {0:g} state..
         /// </summary>
         internal static string StartOperationInvalidExceptionMessage {
