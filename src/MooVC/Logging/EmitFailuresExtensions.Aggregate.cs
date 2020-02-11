@@ -1,8 +1,7 @@
-namespace ControlSoft
+namespace MooVC.Logging
 {
     using System;
     using System.Collections.Generic;
-    using MooVC.Logging;
     using static EmitWarningsExtensions;
 
     public static partial class EmitFailuresExtensions
