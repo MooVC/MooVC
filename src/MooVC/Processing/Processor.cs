@@ -11,8 +11,12 @@
           IEmitWarnings,
           IProcessor
     {
+        private const int StartedFlag = 1;
+        private const int StoppedFlag = 0;
+
         private Thread? continuationThread;
         private ProcessorState state;
+        private volatile int flag = StoppedFlag;
 
         protected Processor()
         {
@@ -73,7 +77,7 @@
 
         public void Start()
         {
-            if (State != ProcessorState.Stopped)
+            if (Interlocked.CompareExchange(ref flag, StartedFlag, StoppedFlag) == StartedFlag)
             {
                 throw new StartOperationInvalidException(State);
             }
@@ -101,7 +105,7 @@
 
         public void Stop()
         {
-            if (State == ProcessorState.Stopped)
+            if (Interlocked.CompareExchange(ref flag, StoppedFlag, StartedFlag) == StoppedFlag)
             {
                 throw new StopOperationInvalidException(State);
             }
