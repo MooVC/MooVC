@@ -5,7 +5,7 @@
     using static System.String;
     using static Resources;
 
-    public abstract class TimedProcessor
+    public class TimedProcessor
         : Processor,
           IDisposable
     {
@@ -14,12 +14,14 @@
         private readonly Lazy<Timer> timer;
         private bool isDisposed;
 
-        protected TimedProcessor(TimeSpan delay, TimeSpan? initial = default)
+        public TimedProcessor(TimeSpan delay, TimeSpan? initial = default)
         {
             this.initial = initial ?? delay;
             this.delay = delay;
             timer = new Lazy<Timer>(() => new Timer(TimerCallback));
         }
+
+        public event EventHandler? Triggered;
 
         public void Dispose()
         {
@@ -53,17 +55,26 @@
             return false;
         }
 
-        protected abstract void PerformTimerCallback();
+        protected virtual void PerformTimerCallback()
+        {
+        }
 
         private void TimerCallback(object state)
         {
             try
             {
-                PerformTimerCallback();
+                try
+                {
+                    Triggered?.Invoke(this, EventArgs.Empty);
+                }
+                finally
+                {
+                    PerformTimerCallback();
+                }
             }
             catch (Exception ex)
             {
-                EmitFailure(Format(TimedProcessorCallbackHandlingFailure, GetType().Name), ex);
+                OnFailureEncountered(Format(TimedProcessorCallbackHandlingFailure, GetType().Name), ex);
             }
         }
     }

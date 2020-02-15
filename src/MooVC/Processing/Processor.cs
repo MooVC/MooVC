@@ -53,7 +53,7 @@
             }
             catch (Exception ex)
             {
-                EmitFailure(Format(ProcessorStartFailure, GetType().Name), ex);
+                OnFailureEncountered(Format(ProcessorStartFailure, GetType().Name), ex);
             }
 
             return false;
@@ -69,7 +69,7 @@
             }
             catch (Exception ex)
             {
-                EmitFailure(Format(ProcessorStopFailure, GetType().Name), ex);
+                OnFailureEncountered(Format(ProcessorStopFailure, GetType().Name), ex);
             }
 
             return false;
@@ -134,12 +134,12 @@
             return true;
         }
 
-        protected void EmitFailure(string message, Exception failure)
+        protected void OnFailureEncountered(string message, Exception failure)
         {
             FailureEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, failure));
         }
 
-        protected void EmitWarning(string message, Exception warning)
+        protected void OnWarningEncountered(string message, Exception warning)
         {
             WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, warning));
         }
@@ -153,7 +153,7 @@
             }
             catch (Exception ex)
             {
-                EmitWarning(
+                OnWarningEncountered(
                     Format(ProcessorContinuationAbortFailure, GetType().Name),
                     ex);
             }
@@ -173,7 +173,7 @@
                 }
                 catch (Exception ex)
                 {
-                    EmitFailure(
+                    OnFailureEncountered(
                         Format(ProcessorContinuationInteruppted, GetType().Name),
                         ex);
                 }
