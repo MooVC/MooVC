@@ -129,6 +129,9 @@
   <data name="ExceptionEventArgsMessageRequired" xml:space="preserve">
     <value>The message must be provided.</value>
   </data>
+  <data name="JobQueueTimerRequired" xml:space="preserve">
+    <value>The timer that manages the job queue must be provided.</value>
+  </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
   </data>

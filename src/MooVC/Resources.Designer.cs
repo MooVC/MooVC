@@ -97,6 +97,15 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The timer that manages the job queue must be provided..
+        /// </summary>
+        internal static string JobQueueTimerRequired {
+            get {
+                return ResourceManager.GetString("JobQueueTimerRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease..
         /// </summary>
         internal static string ProcessorContinuationAbortFailure {
