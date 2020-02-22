@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Serialization
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.Serialization;
     using MooVC.Linq;
 
@@ -11,7 +10,7 @@
         {
             if (value.SafeAny())
             {
-                info.AddValue(name, value.ToArray());
+                info.AddEnumerable(name, value);
 
                 return true;
             }
