@@ -30,6 +30,7 @@
             UnsignedInteger = info.TryGetInternalValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetInternalValue<ulong>(nameof(UnsignedLong));
             Value = info.TryGetInternalValue<object>(nameof(Value));
+            Enumerable = info.TryGetInternalEnumerable<int>(nameof(Enumerable));
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
@@ -51,6 +52,7 @@
             _ = info.TryAddInternalValue(nameof(UnsignedInteger), UnsignedInteger);
             _ = info.TryAddInternalValue(nameof(UnsignedLong), UnsignedLong);
             _ = info.TryAddInternalValue(nameof(Value), Value);
+            _ = info.TryAddInternalEnumerable(nameof(Enumerable), Enumerable);
         }
     }
 }

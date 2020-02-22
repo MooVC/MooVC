@@ -30,6 +30,7 @@
             UnsignedInteger = info.TryGetValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetValue<ulong>(nameof(UnsignedLong));
             Value = info.TryGetValue<object>(nameof(Value));
+            Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable));
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
@@ -51,6 +52,7 @@
             _ = info.TryAddValue(nameof(UnsignedInteger), UnsignedInteger);
             _ = info.TryAddValue(nameof(UnsignedLong), UnsignedLong);
             _ = info.TryAddValue(nameof(Value), Value);
+            _ = info.TryAddEnumerable(nameof(Enumerable), Enumerable);
         }
     }
 }

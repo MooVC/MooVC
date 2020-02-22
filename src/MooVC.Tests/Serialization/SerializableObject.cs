@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Serialization
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 
@@ -39,6 +40,8 @@
         public ulong UnsignedLong { get; set; }
 
         public object Value { get; set; }
+
+        public IEnumerable<int> Enumerable { get; set; } = new int[0];
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);

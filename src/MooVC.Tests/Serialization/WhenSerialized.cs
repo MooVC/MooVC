@@ -134,6 +134,7 @@
             Assert.Equal(expected.UnsignedInteger, actual.UnsignedInteger);
             Assert.Equal(expected.UnsignedLong, actual.UnsignedLong);
             Assert.Equal(expected.Value, actual.Value);
+            Assert.Equal(expected.Enumerable, actual.Enumerable);
         }
     }
 }
