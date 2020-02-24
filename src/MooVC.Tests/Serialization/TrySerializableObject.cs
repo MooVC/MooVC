@@ -25,7 +25,7 @@
             Long = info.TryGetValue<long>(nameof(Long));
             SignedByte = info.TryGetValue<sbyte>(nameof(SignedByte));
             Single = info.TryGetValue<float>(nameof(Single));
-            String = info.TryGetValue<string>(nameof(String));
+            String = info.TryGetString(nameof(String));
             UnsignedShort = info.TryGetValue<ushort>(nameof(UnsignedShort));
             UnsignedInteger = info.TryGetValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetValue<ulong>(nameof(UnsignedLong));
@@ -47,7 +47,7 @@
             _ = info.TryAddValue(nameof(Long), Long);
             _ = info.TryAddValue(nameof(SignedByte), SignedByte);
             _ = info.TryAddValue(nameof(Single), Single);
-            _ = info.TryAddValue(nameof(String), String);
+            _ = info.TryAddString(nameof(String), String);
             _ = info.TryAddValue(nameof(UnsignedShort), UnsignedShort);
             _ = info.TryAddValue(nameof(UnsignedInteger), UnsignedInteger);
             _ = info.TryAddValue(nameof(UnsignedLong), UnsignedLong);

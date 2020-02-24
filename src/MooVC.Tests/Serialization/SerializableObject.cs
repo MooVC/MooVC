@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using static System.String;
 
     [Serializable]
     public abstract class SerializableObject
@@ -31,7 +32,7 @@
 
         public float Single { get; set; }
 
-        public string String { get; set; }
+        public string String { get; set; } = Empty;
 
         public ushort UnsignedShort { get; set; }
 

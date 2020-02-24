@@ -25,7 +25,7 @@
             Long = info.TryGetInternalValue<long>(nameof(Long));
             SignedByte = info.TryGetInternalValue<sbyte>(nameof(SignedByte));
             Single = info.TryGetInternalValue<float>(nameof(Single));
-            String = info.TryGetInternalValue<string>(nameof(String));
+            String = info.TryGetInternalString(nameof(String));
             UnsignedShort = info.TryGetInternalValue<ushort>(nameof(UnsignedShort));
             UnsignedInteger = info.TryGetInternalValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetInternalValue<ulong>(nameof(UnsignedLong));
@@ -47,7 +47,7 @@
             _ = info.TryAddInternalValue(nameof(Long), Long);
             _ = info.TryAddInternalValue(nameof(SignedByte), SignedByte);
             _ = info.TryAddInternalValue(nameof(Single), Single);
-            _ = info.TryAddInternalValue(nameof(String), String);
+            _ = info.TryAddInternalString(nameof(String), String);
             _ = info.TryAddInternalValue(nameof(UnsignedShort), UnsignedShort);
             _ = info.TryAddInternalValue(nameof(UnsignedInteger), UnsignedInteger);
             _ = info.TryAddInternalValue(nameof(UnsignedLong), UnsignedLong);
