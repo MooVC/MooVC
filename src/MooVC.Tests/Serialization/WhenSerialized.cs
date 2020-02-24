@@ -25,7 +25,7 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value = "World",
+                Value1 = "World",
             };
 
             InternalSerializableObject serialized = serializable.Clone();
@@ -62,7 +62,8 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value = "World",
+                Value1 = "World",
+                Value2 = Guid.NewGuid(),
             };
 
             TryInternalSerializableObject serialized = serializable.Clone();
@@ -99,7 +100,8 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value = "World",
+                Value1 = "World",
+                Value2 = Guid.NewGuid(),
             };
 
             TrySerializableObject serialized = serializable.Clone();
@@ -133,7 +135,8 @@
             Assert.Equal(expected.UnsignedShort, actual.UnsignedShort);
             Assert.Equal(expected.UnsignedInteger, actual.UnsignedInteger);
             Assert.Equal(expected.UnsignedLong, actual.UnsignedLong);
-            Assert.Equal(expected.Value, actual.Value);
+            Assert.Equal(expected.Value1, actual.Value1);
+            Assert.Equal(expected.Value2, actual.Value2);
             Assert.Equal(expected.Enumerable, actual.Enumerable);
         }
     }

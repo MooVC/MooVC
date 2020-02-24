@@ -29,7 +29,8 @@
             UnsignedShort = info.TryGetInternalValue<ushort>(nameof(UnsignedShort));
             UnsignedInteger = info.TryGetInternalValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetInternalValue<ulong>(nameof(UnsignedLong));
-            Value = info.TryGetInternalValue<object>(nameof(Value));
+            Value1 = info.TryGetInternalValue<object>(nameof(Value1));
+            Value2 = info.TryGetInternalValue<Guid>(nameof(Value2));
             Enumerable = info.TryGetInternalEnumerable<int>(nameof(Enumerable));
         }
 
@@ -51,7 +52,8 @@
             _ = info.TryAddInternalValue(nameof(UnsignedShort), UnsignedShort);
             _ = info.TryAddInternalValue(nameof(UnsignedInteger), UnsignedInteger);
             _ = info.TryAddInternalValue(nameof(UnsignedLong), UnsignedLong);
-            _ = info.TryAddInternalValue(nameof(Value), Value);
+            _ = info.TryAddInternalValue(nameof(Value1), Value1);
+            _ = info.TryAddInternalValue(nameof(Value2), Value2);
             _ = info.TryAddInternalEnumerable(nameof(Enumerable), Enumerable);
         }
     }

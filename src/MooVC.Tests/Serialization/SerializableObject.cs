@@ -40,7 +40,9 @@
 
         public ulong UnsignedLong { get; set; }
 
-        public object Value { get; set; }
+        public object Value1 { get; set; }
+
+        public Guid Value2 { get; set; }
 
         public IEnumerable<int> Enumerable { get; set; } = new int[0];
 
