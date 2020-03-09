@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface ITransaction 
+    public interface ITransaction
         : IDisposable
     {
         void Begin();

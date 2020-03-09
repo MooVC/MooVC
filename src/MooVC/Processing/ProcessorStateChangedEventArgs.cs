@@ -2,7 +2,7 @@
 {
     using System;
 
-    public sealed class ProcessorStateChangedEventArgs 
+    public sealed class ProcessorStateChangedEventArgs
         : EventArgs
     {
         internal ProcessorStateChangedEventArgs(ProcessorState state)

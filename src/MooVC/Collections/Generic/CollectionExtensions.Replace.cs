@@ -6,12 +6,16 @@ namespace MooVC.Collections.Generic
 
     public static partial class CollectionExtensions
     {
-        public static void Replace<T>(this ICollection<T> target, IEnumerable<T> replacements)
+        public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
         {
             ArgumentNotNull(target, nameof(target), CollectionExtensionsGenericTargetRequired);
 
             target.Clear();
-            target.AddRange(replacements);
+
+            if (replacements is { })
+            {
+                target.AddRange(replacements);
+            }
         }
     }
 }

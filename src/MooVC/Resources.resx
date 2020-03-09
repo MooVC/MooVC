@@ -118,10 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CollectionExtensionsGenericTargetRequired" xml:space="preserve">
-    <value>You must provide the target collection.</value>
+    <value>The target collection must be provided.</value>
+  </data>
+  <data name="EmittedEventArgsEventRequired" xml:space="preserve">
+    <value>The event must be provided.</value>
+  </data>
+  <data name="ExceptionEventArgsExceptionRequired" xml:space="preserve">
+    <value>The exception must be provided.</value>
   </data>
   <data name="ExceptionEventArgsMessageRequired" xml:space="preserve">
-    <value>You must provide a message.</value>
+    <value>The message must be provided.</value>
+  </data>
+  <data name="JobQueueTimerRequired" xml:space="preserve">
+    <value>The timer that manages the job queue must be provided.</value>
   </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
@@ -129,10 +138,19 @@
   <data name="ProcessorContinuationInteruppted" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from continuing its processing.</value>
   </data>
+  <data name="ProcessorStartFailure" xml:space="preserve">
+    <value>Processor {0} has encountered an issue that has prevented it from starting.</value>
+  </data>
+  <data name="ProcessorStopFailure" xml:space="preserve">
+    <value>Processor {0} has encountered an issue that has prevented it from stopping.</value>
+  </data>
   <data name="StartOperationInvalidExceptionMessage" xml:space="preserve">
     <value>The process cannot be started because it is currently in a {0:g} state.</value>
   </data>
   <data name="StopOperationInvalidExceptionMessage" xml:space="preserve">
     <value>The process cannot be stopped because it is currently in a {0:g} state.</value>
+  </data>
+  <data name="TimedProcessorCallbackHandlingFailure" xml:space="preserve">
+    <value>A failure has occured during the handling of a timed event by {0}.</value>
   </data>
 </root>

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public sealed class StartOperationInvalidException 
+    public sealed class StartOperationInvalidException
         : InvalidOperationException
     {
         public StartOperationInvalidException(ProcessorState state)

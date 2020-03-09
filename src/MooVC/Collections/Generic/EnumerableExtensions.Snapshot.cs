@@ -5,7 +5,7 @@ namespace MooVC.Collections.Generic
 
     public static partial class EnumerableExtensions
     {
-        public static T[] Snapshot<T>(this IEnumerable<T> enumerable)
+        public static T[] Snapshot<T>(this IEnumerable<T>? enumerable)
         {
             return enumerable?.ToArray() ?? new T[0];
         }

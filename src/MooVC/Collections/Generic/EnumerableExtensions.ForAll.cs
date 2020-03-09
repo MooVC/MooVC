@@ -7,14 +7,14 @@
 
     public static partial class EnumerableExtensions
     {
-        public static void ForAll<T>(this IEnumerable<T> items, Action<T> action)
+        public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
         {
-            if (items != null)
+            if (items is { })
             {
                 var exceptions = new ConcurrentQueue<Exception>();
 
                 _ = Parallel.ForEach(
-                    items, 
+                    items,
                     item =>
                     {
                         try

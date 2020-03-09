@@ -6,11 +6,11 @@ namespace MooVC.Dynamic
 
     public static class ExpandoObjectExtensions
     {
-        public static ExpandoObject Clone(this ExpandoObject orignal, bool defaultIfNull = true)
+        public static ExpandoObject Clone(this ExpandoObject? orignal, bool defaultIfNull = true)
         {
             var clone = new ExpandoObject();
 
-            if (orignal != null)
+            if (orignal is { })
             {
                 var target = (IDictionary<string, object>)clone;
 
@@ -30,7 +30,7 @@ namespace MooVC.Dynamic
             {
                 throw new ArgumentNullException(nameof(orignal));
             }
-            
+
             return clone;
         }
     }

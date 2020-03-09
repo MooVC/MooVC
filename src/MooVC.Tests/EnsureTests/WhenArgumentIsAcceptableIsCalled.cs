@@ -21,7 +21,7 @@
                 return false;
             }
 
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => 
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
                 Ensure.ArgumentIsAcceptable<string>(null, ExpectedArgumentName, Predicate, ExpectedMessage));
 
             Assert.Equal(ExpectedArgumentName, exception.ParamName);

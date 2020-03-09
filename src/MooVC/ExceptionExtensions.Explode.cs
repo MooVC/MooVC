@@ -1,13 +1,13 @@
 ﻿namespace MooVC
 {
     using System;
-    using Collections.Generic;
+    using MooVC.Collections.Generic;
 
     public static class ExceptionExtensions
     {
-        public static void Explode(this Exception exception, Action<Exception> handler)
+        public static void Explode(this Exception? exception, Action<Exception> handler)
         {
-            if (exception != null)
+            if (exception is { })
             {
                 handler(exception);
 

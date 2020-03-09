@@ -1,8 +1,6 @@
-namespace MooVC.Linq.EnumerableExtensionsTests
+namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using Xunit;
 
     public sealed class WhenIndexOfIsCalled

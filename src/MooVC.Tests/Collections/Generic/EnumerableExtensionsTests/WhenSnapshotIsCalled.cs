@@ -10,7 +10,7 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
         {
             new object[] { new int[] { 1, 2 } },
             new object[] { new int[] { 1 } },
-            new object[] { new int[0] }
+            new object[] { new int[0] },
         };
 
         [Theory]

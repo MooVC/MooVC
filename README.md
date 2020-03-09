@@ -1,6 +1,6 @@
 # moovc
 
-[![Build Status](https://dev.azure.com/vmartinspaul/MooVC/_apis/build/status/MooVC.moovc?branchName=master)](https://dev.azure.com/vmartinspaul/MooVC/_build/latest?definitionId=2&branchName=master)
+<img alt="Azure DevOps builds (branch)" src="https://img.shields.io/azure-devops/build/vmartinspaul/MooVC/2/master?label=master&style=plastic" /><img alt="Azure DevOps tests (branch)" src="https://img.shields.io/azure-devops/tests/vmartinspaul/MooVC/2/master?label=Tests%20%28master%29&style=plastic" /><BR /><img alt="Azure DevOps builds (branch)" src="https://img.shields.io/azure-devops/build/vmartinspaul/MooVC/2/develop?label=develop&style=plastic" /><img alt="Azure DevOps tests (branch)" src="https://img.shields.io/azure-devops/tests/vmartinspaul/MooVC/2/develop?label=Tests%20%28develop%29&style=plastic" /><BR /><img alt="Nuget" src="https://img.shields.io/nuget/v/moovc?style=plastic" /><img alt="Nuget (with prereleases)" src="https://img.shields.io/nuget/vpre/moovc?style=plastic" /><img alt="Nuget" src="https://img.shields.io/nuget/dt/moovc?style=plastic" />
 
 The MooVC library contains a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.
 

@@ -6,6 +6,6 @@
         Started,
         Starting,
         Stopped,
-        Stopping
+        Stopping,
     }
 }

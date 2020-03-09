@@ -3,23 +3,31 @@
     using System;
     using System.Threading;
     using MooVC.Logging;
+    using static System.String;
+    using static Resources;
 
-    public abstract class Processor 
-        : IProcessor, IEmitFailures, IEmitWarnings
+    public abstract class Processor
+        : IEmitFailures,
+          IEmitWarnings,
+          IProcessor
     {
-        private Thread continuationThread;
+        private const int StartedFlag = 1;
+        private const int StoppedFlag = 0;
+
+        private Thread? continuationThread;
         private ProcessorState state;
+        private volatile int flag = StoppedFlag;
 
         protected Processor()
         {
             state = ProcessorState.Stopped;
         }
 
-        public event EventHandler<ExceptionEventArgs> FailureEmitted;
+        public event PassiveExceptionEventHandler? FailureEmitted;
 
-        public event EventHandler<ProcessorStateChangedEventArgs> ProcessStateChanged;
+        public event ProcessorStateChangedEventHandler? ProcessStateChanged;
 
-        public event EventHandler<ExceptionEventArgs> WarningEmitted;
+        public event PassiveExceptionEventHandler? WarningEmitted;
 
         public ProcessorState State
         {
@@ -35,9 +43,41 @@
             }
         }
 
+        public bool TryStart()
+        {
+            try
+            {
+                Start();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnFailureEncountered(Format(ProcessorStartFailure, GetType().Name), ex);
+            }
+
+            return false;
+        }
+
+        public bool TryStop()
+        {
+            try
+            {
+                Stop();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnFailureEncountered(Format(ProcessorStopFailure, GetType().Name), ex);
+            }
+
+            return false;
+        }
+
         public void Start()
         {
-            if (State != ProcessorState.Stopped)
+            if (Interlocked.CompareExchange(ref flag, StartedFlag, StoppedFlag) == StartedFlag)
             {
                 throw new StartOperationInvalidException(State);
             }
@@ -65,14 +105,14 @@
 
         public void Stop()
         {
-            if (State == ProcessorState.Stopped)
+            if (Interlocked.CompareExchange(ref flag, StoppedFlag, StartedFlag) == StoppedFlag)
             {
                 throw new StopOperationInvalidException(State);
             }
 
             State = ProcessorState.Stopping;
 
-            if (PerformStop() && continuationThread != null)
+            if (PerformStop() && continuationThread is { })
             {
                 AbortContinuationThread();
             }
@@ -94,27 +134,27 @@
             return true;
         }
 
-        protected void EmitFailure(string message, Exception failure)
+        protected void OnFailureEncountered(string message, Exception failure)
         {
-            FailureEmitted?.Invoke(this, new ExceptionEventArgs(message, failure));
+            FailureEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, failure));
         }
 
-        protected void EmitWarning(string message, Exception warning)
+        protected void OnWarningEncountered(string message, Exception warning)
         {
-            WarningEmitted?.Invoke(this, new ExceptionEventArgs(message, warning));
+            WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, warning));
         }
 
         private void AbortContinuationThread()
         {
             try
             {
-                continuationThread.Abort();
+                continuationThread!.Abort();
                 continuationThread.Join();
             }
             catch (Exception ex)
             {
-                EmitWarning(
-                    string.Format(Resources.ProcessorContinuationAbortFailure, GetType().Name),
+                OnWarningEncountered(
+                    Format(ProcessorContinuationAbortFailure, GetType().Name),
                     ex);
             }
         }
@@ -133,8 +173,8 @@
                 }
                 catch (Exception ex)
                 {
-                    EmitFailure(
-                        string.Format(Resources.ProcessorContinuationInteruppted, GetType().Name),
+                    OnFailureEncountered(
+                        Format(ProcessorContinuationInteruppted, GetType().Name),
                         ex);
                 }
 

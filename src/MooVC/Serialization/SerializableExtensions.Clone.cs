@@ -11,13 +11,12 @@ namespace MooVC.Serialization
         {
             var binaryFormatter = new BinaryFormatter();
 
-            using (var stream = new MemoryStream())
-            {
-                binaryFormatter.Serialize(stream, original);
-                _ = stream.Seek(0, SeekOrigin.Begin);
+            using var stream = new MemoryStream();
 
-                return (T)binaryFormatter.Deserialize(stream);
-            }
+            binaryFormatter.Serialize(stream, original);
+            _ = stream.Seek(0, SeekOrigin.Begin);
+
+            return (T)binaryFormatter.Deserialize(stream);
         }
     }
 }

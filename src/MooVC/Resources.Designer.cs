@@ -61,7 +61,7 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must provide the target collection..
+        ///   Looks up a localized string similar to The target collection must be provided..
         /// </summary>
         internal static string CollectionExtensionsGenericTargetRequired {
             get {
@@ -70,11 +70,38 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must provide a message..
+        ///   Looks up a localized string similar to The event must be provided..
+        /// </summary>
+        internal static string EmittedEventArgsEventRequired {
+            get {
+                return ResourceManager.GetString("EmittedEventArgsEventRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The exception must be provided..
+        /// </summary>
+        internal static string ExceptionEventArgsExceptionRequired {
+            get {
+                return ResourceManager.GetString("ExceptionEventArgsExceptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message must be provided..
         /// </summary>
         internal static string ExceptionEventArgsMessageRequired {
             get {
                 return ResourceManager.GetString("ExceptionEventArgsMessageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The timer that manages the job queue must be provided..
+        /// </summary>
+        internal static string JobQueueTimerRequired {
+            get {
+                return ResourceManager.GetString("JobQueueTimerRequired", resourceCulture);
             }
         }
         
@@ -97,6 +124,24 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from starting..
+        /// </summary>
+        internal static string ProcessorStartFailure {
+            get {
+                return ResourceManager.GetString("ProcessorStartFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from stopping..
+        /// </summary>
+        internal static string ProcessorStopFailure {
+            get {
+                return ResourceManager.GetString("ProcessorStopFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The process cannot be started because it is currently in a {0:g} state..
         /// </summary>
         internal static string StartOperationInvalidExceptionMessage {
@@ -111,6 +156,15 @@ namespace MooVC {
         internal static string StopOperationInvalidExceptionMessage {
             get {
                 return ResourceManager.GetString("StopOperationInvalidExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A failure has occured during the handling of a timed event by {0}..
+        /// </summary>
+        internal static string TimedProcessorCallbackHandlingFailure {
+            get {
+                return ResourceManager.GetString("TimedProcessorCallbackHandlingFailure", resourceCulture);
             }
         }
     }
