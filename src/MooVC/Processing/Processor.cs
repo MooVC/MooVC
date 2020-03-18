@@ -11,12 +11,12 @@
           IEmitWarnings,
           IProcessor
     {
-        private const int StartedFlag = 1;
-        private const int StoppedFlag = 0;
+        private const int StartRequestedFlag = 1;
+        private const int StopRequestedFlag = 0;
 
         private Thread? continuationThread;
         private ProcessorState state;
-        private volatile int flag = StoppedFlag;
+        private volatile int flag = StopRequestedFlag;
 
         protected Processor()
         {
@@ -45,15 +45,18 @@
 
         public bool TryStart()
         {
-            try
+            if (RequestStart())
             {
-                Start();
+                try
+                {
+                    ExecuteStart();
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                OnFailureEncountered(Format(ProcessorStartFailure, GetType().Name), ex);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    OnFailureEncountered(Format(ProcessorStartFailure, GetType().Name), ex);
+                }
             }
 
             return false;
@@ -61,15 +64,18 @@
 
         public bool TryStop()
         {
-            try
+            if (RequestStop())
             {
-                Stop();
+                try
+                {
+                    ExecuteStop();
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                OnFailureEncountered(Format(ProcessorStopFailure, GetType().Name), ex);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    OnFailureEncountered(Format(ProcessorStopFailure, GetType().Name), ex);
+                }
             }
 
             return false;
@@ -77,47 +83,22 @@
 
         public void Start()
         {
-            if (Interlocked.CompareExchange(ref flag, StartedFlag, StoppedFlag) == StartedFlag)
+            if (!RequestStart())
             {
                 throw new StartOperationInvalidException(State);
             }
 
-            State = ProcessorState.Starting;
-
-            try
-            {
-                bool shouldContinue = PerformStart();
-
-                State = ProcessorState.Started;
-
-                if (shouldContinue)
-                {
-                    Continue();
-                }
-            }
-            catch
-            {
-                Stop();
-
-                throw;
-            }
+            ExecuteStart();
         }
 
         public void Stop()
         {
-            if (Interlocked.CompareExchange(ref flag, StoppedFlag, StartedFlag) == StoppedFlag)
+            if (!RequestStop())
             {
                 throw new StopOperationInvalidException(State);
             }
 
-            State = ProcessorState.Stopping;
-
-            if (PerformStop() && continuationThread is { })
-            {
-                AbortContinuationThread();
-            }
-
-            State = ProcessorState.Stopped;
+            ExecuteStop();
         }
 
         protected virtual void PerformContinue()
@@ -187,6 +168,51 @@
             });
 
             continuationThread.Start();
+        }
+
+        private void ExecuteStart()
+        {
+            State = ProcessorState.Starting;
+
+            try
+            {
+                bool shouldContinue = PerformStart();
+
+                State = ProcessorState.Started;
+
+                if (shouldContinue)
+                {
+                    Continue();
+                }
+            }
+            catch
+            {
+                Stop();
+
+                throw;
+            }
+        }
+
+        private void ExecuteStop()
+        {
+            State = ProcessorState.Stopping;
+
+            if (PerformStop() && continuationThread is { })
+            {
+                AbortContinuationThread();
+            }
+
+            State = ProcessorState.Stopped;
+        }
+
+        private bool RequestStart()
+        {
+            return Interlocked.CompareExchange(ref flag, StartRequestedFlag, StopRequestedFlag) == StopRequestedFlag;
+        }
+
+        private bool RequestStop()
+        {
+            return Interlocked.CompareExchange(ref flag, StopRequestedFlag, StartRequestedFlag) == StartRequestedFlag;
         }
     }
 }
