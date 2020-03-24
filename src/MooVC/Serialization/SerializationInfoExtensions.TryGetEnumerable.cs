@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using MooVC.Collections.Generic;
 
     public static partial class SerializationInfoExtensions
     {
@@ -12,7 +13,7 @@
 
         public static IEnumerable<T> TryGetEnumerable<T>(this SerializationInfo info, string name, IEnumerable<T> defaultValue)
         {
-            return info.TryGetValue(name, defaultValue);
+            return info.TryGetValue(name, defaultValue.Snapshot());
         }
     }
 }
