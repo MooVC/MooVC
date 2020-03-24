@@ -7,7 +7,12 @@
     {
         public static IEnumerable<T> TryGetInternalEnumerable<T>(this SerializationInfo info, string name)
         {
-            return info.TryGetValue(FormatName(name), new T[0]);
+            return info.TryGetEnumerable<T>(FormatName(name));
+        }
+
+        public static IEnumerable<T> TryGetInternalEnumerable<T>(this SerializationInfo info, string name, IEnumerable<T> defaultValue)
+        {
+            return info.TryGetEnumerable(FormatName(name), defaultValue);
         }
     }
 }

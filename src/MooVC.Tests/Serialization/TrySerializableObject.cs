@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Serialization
 {
     using System;
+    using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 
@@ -31,7 +32,7 @@
             UnsignedLong = info.TryGetValue<ulong>(nameof(UnsignedLong));
             Value1 = info.TryGetValue<object>(nameof(Value1));
             Value2 = info.TryGetValue<Guid>(nameof(Value2));
-            Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable));
+            Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable), new int[0]);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
@@ -54,7 +55,7 @@
             _ = info.TryAddValue(nameof(UnsignedLong), UnsignedLong);
             _ = info.TryAddValue(nameof(Value1), Value1);
             _ = info.TryAddValue(nameof(Value2), Value2);
-            _ = info.TryAddEnumerable(nameof(Enumerable), Enumerable);
+            _ = info.TryAddEnumerable(nameof(Enumerable), Enumerable, predicate: value => value.Any());
         }
     }
 }

@@ -7,7 +7,12 @@
     {
         public static IEnumerable<T> TryGetEnumerable<T>(this SerializationInfo info, string name)
         {
-            return info.TryGetValue(name, new T[0]);
+            return info.TryGetEnumerable(name, new T[0]);
+        }
+
+        public static IEnumerable<T> TryGetEnumerable<T>(this SerializationInfo info, string name, IEnumerable<T> defaultValue)
+        {
+            return info.TryGetValue(name, defaultValue);
         }
     }
 }
