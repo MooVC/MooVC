@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Serialization
 {
     using System;
+    using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 
@@ -31,7 +32,7 @@
             UnsignedLong = info.TryGetInternalValue<ulong>(nameof(UnsignedLong));
             Value1 = info.TryGetInternalValue<object>(nameof(Value1));
             Value2 = info.TryGetInternalValue<Guid>(nameof(Value2));
-            Enumerable = info.TryGetInternalEnumerable<int>(nameof(Enumerable));
+            Enumerable = info.TryGetInternalEnumerable<int>(nameof(Enumerable), new int[0]);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
@@ -54,7 +55,7 @@
             _ = info.TryAddInternalValue(nameof(UnsignedLong), UnsignedLong);
             _ = info.TryAddInternalValue(nameof(Value1), Value1);
             _ = info.TryAddInternalValue(nameof(Value2), Value2);
-            _ = info.TryAddInternalEnumerable(nameof(Enumerable), Enumerable);
+            _ = info.TryAddInternalEnumerable(nameof(Enumerable), Enumerable, predicate: value => value.Any());
         }
     }
 }
