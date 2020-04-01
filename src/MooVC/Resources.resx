@@ -120,6 +120,12 @@
   <data name="CollectionExtensionsGenericTargetRequired" xml:space="preserve">
     <value>The target collection must be provided.</value>
   </data>
+  <data name="CoordinatorApplyContextRequired" xml:space="preserve">
+    <value>The coordination context must be provided.</value>
+  </data>
+  <data name="CoordinatorApplyOperationRequired" xml:space="preserve">
+    <value>The operation to be coordinated must be provided.</value>
+  </data>
   <data name="EmittedEventArgsEventRequired" xml:space="preserve">
     <value>The event must be provided.</value>
   </data>
