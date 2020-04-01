@@ -126,6 +126,9 @@
   <data name="CoordinatorApplyOperationRequired" xml:space="preserve">
     <value>The operation to be coordinated must be provided.</value>
   </data>
+  <data name="CoordinatorApplyTimeout" xml:space="preserve">
+    <value>A request to coordinate an operation in the context of {0} has timed out.</value>
+  </data>
   <data name="EmittedEventArgsEventRequired" xml:space="preserve">
     <value>The event must be provided.</value>
   </data>

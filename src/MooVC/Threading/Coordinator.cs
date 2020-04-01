@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
+    using static System.String;
     using static MooVC.Ensure;
     using static Resources;
 
@@ -32,7 +33,7 @@
             }
             else
             {
-                throw new TimeoutException();
+                throw new TimeoutException(Format(CoordinatorApplyTimeout, context));
             }
         }
     }

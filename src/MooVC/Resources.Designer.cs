@@ -88,6 +88,15 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A request to coordinate an operation in the context of {0} has timed out..
+        /// </summary>
+        internal static string CoordinatorApplyTimeout {
+            get {
+                return ResourceManager.GetString("CoordinatorApplyTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The event must be provided..
         /// </summary>
         internal static string EmittedEventArgsEventRequired {
