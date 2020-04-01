@@ -52,7 +52,7 @@
 
             static void Operation()
             {
-                Thread.Sleep(100);
+                Thread.Sleep(250);
             }
 
             Task[] tasks = CreateTasks(
