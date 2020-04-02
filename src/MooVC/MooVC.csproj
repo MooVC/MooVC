@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Authors>Paul Martins</Authors>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
-    <Copyright>MooVC © 2020</Copyright>
+    <Copyright>MooVC © 2019-2020</Copyright>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoWarn>NU5105</NoWarn>

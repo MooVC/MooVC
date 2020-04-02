@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC", "MooVC\MooVC.csproj", "{23EF98F1-FD69-4C34-885F-EC7D378DB6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Tests", "MooVC.Tests\MooVC.Tests.csproj", "{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Tests", "MooVC.Tests\MooVC.Tests.csproj", "{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
