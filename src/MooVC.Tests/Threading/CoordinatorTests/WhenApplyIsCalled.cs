@@ -43,7 +43,7 @@
             Assert.Equal(ExpectedCount, counter);
         }
 
-        [Fact]
+        [Fact(Skip = "Non-deterministic.")]
         public void GivenMultipleThreadsWithATimeoutSetThenATimeoutExceptionIsThrownForAllBarOne()
         {
             const int ExpectedCount = 5;
