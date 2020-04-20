@@ -12,18 +12,19 @@ variables:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
   solution: '**/*.sln'
-  versions: '-p:AssemblyVersion="$(GitVersion.AssemblySemVer)" -p:FileVersion="$(GitVersion.AssemblySemFileVer)" -p:InformationalVersion="$(GitVersion.InformationalVersion)" -p:PackageVersion="$(GitVersion.NuGetVersion)" -p:Version="$(GitVersion.AssemblySemVer)'
 
 steps:
 - checkout: self
   clean: true
   persistCredentials: true
 
-- task: GitVersion@5
+- task: UseGitVersion@5
   displayName: 'Version Management'
   inputs:
     configFilePath: 'gitversion.yml'
-    runtime: 'core'
+    updateAssemblyInfo: true
+    useConfigFile: true
+    versionSpec: 5.x
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore Nuget Packages for Solution'
@@ -31,11 +32,11 @@ steps:
     command: 'restore'
     feedsToUse: 'select'
     projects: '$(solution)'
-    
+
 - task: DotNetCoreCLI@2
   displayName: 'Build Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --no-restore $(versions)'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
     command: 'build'
     projects: '$(solution)'
 
