@@ -120,9 +120,9 @@
             FailureEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, failure));
         }
 
-        protected void OnWarningEncountered(string message, Exception warning)
+        protected void OnWarningEncountered(string message, Exception? warning = default)
         {
-            WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, warning));
+            WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, exception: warning));
         }
 
         private void AbortContinuationThread()
@@ -163,7 +163,7 @@
 
                 if (State == ProcessorState.Started)
                 {
-                    Stop();
+                    _ = TryStop();
                 }
             });
 
@@ -187,7 +187,7 @@
             }
             catch
             {
-                Stop();
+                _ = TryStop();
 
                 throw;
             }
