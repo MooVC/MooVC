@@ -97,7 +97,7 @@
             }
             catch
             {
-                Stop();
+                _ = TryStop();
 
                 throw;
             }
@@ -182,7 +182,7 @@
 
                 if (State == ProcessorState.Started)
                 {
-                    Stop();
+                    _ = TryStop();
                 }
             });
 
