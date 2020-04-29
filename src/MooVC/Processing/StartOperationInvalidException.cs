@@ -1,12 +1,13 @@
 ﻿namespace MooVC.Processing
 {
     using System;
+    using static Resources;
 
     public sealed class StartOperationInvalidException
         : InvalidOperationException
     {
         public StartOperationInvalidException(ProcessorState state)
-            : base(string.Format(Resources.StartOperationInvalidExceptionMessage, state))
+            : base(StartOperationInvalidExceptionMessage)
         {
             State = state;
         }

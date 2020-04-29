@@ -169,7 +169,7 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The process cannot be started because it is currently in a {0:g} state..
+        ///   Looks up a localized string similar to The process cannot be started because another process has initiated a Start operation..
         /// </summary>
         internal static string StartOperationInvalidExceptionMessage {
             get {
@@ -178,7 +178,7 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The process cannot be stopped because it is currently in a {0:g} state..
+        ///   Looks up a localized string similar to The process cannot be stopped because another process has initiated a Stop operation..
         /// </summary>
         internal static string StopOperationInvalidExceptionMessage {
             get {
