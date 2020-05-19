@@ -4,6 +4,7 @@
     using static MooVC.Ensure;
     using static Resources;
 
+    [Obsolete]
     public class EmittedEventArgs<T>
         : EventArgs
         where T : class
