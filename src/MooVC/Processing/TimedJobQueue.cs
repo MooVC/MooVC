@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     using MooVC.Collections.Generic;
     using static MooVC.Ensure;
     using static Resources;
@@ -22,7 +23,7 @@
             this.timer.Triggered += Timer_Triggered;
         }
 
-        public bool HasJobsPending => queue.Count > 0;
+        public bool HasJobsPending => queue.Any();
 
         public void Enqueue(T job)
         {

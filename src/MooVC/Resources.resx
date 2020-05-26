@@ -141,6 +141,15 @@
   <data name="JobQueueTimerRequired" xml:space="preserve">
     <value>The timer that manages the job queue must be provided.</value>
   </data>
+  <data name="MappedStoreInnerMappingRequired" xml:space="preserve">
+    <value>The mapping between the outter store and the inner store must be provided.</value>
+  </data>
+  <data name="MappedStoreOutterMappingRequired" xml:space="preserve">
+    <value>The mapping between the inner store and the outter store must be provided.</value>
+  </data>
+  <data name="MappedStoreStoreRequired" xml:space="preserve">
+    <value>The inner store must be provided.</value>
+  </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
   </data>
