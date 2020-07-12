@@ -54,7 +54,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Packages for Publish'
   inputs:
-    contents: '**/*.nupkg'
+    contents: '**/*.*nupkg'
     targetFolder: '$(Build.ArtifactStagingDirectory)/Packages'
     sourceFolder: '$(Build.ArtifactStagingDirectory)'
 
