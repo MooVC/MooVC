@@ -8,7 +8,7 @@
     public sealed class PassiveExceptionEventArgs
         : EventArgs
     {
-        public PassiveExceptionEventArgs(string message, Exception? exception = null)
+        public PassiveExceptionEventArgs(string message, Exception? exception = default)
         {
             ArgumentIsAcceptable(
                 message,
