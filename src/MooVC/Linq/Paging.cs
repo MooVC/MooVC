@@ -11,6 +11,7 @@
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
         public const ushort MinimumSize = 1;
+        private static readonly Lazy<Paging> @default = new Lazy<Paging>(() => new Paging());
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {
@@ -23,6 +24,10 @@
             Page = (ushort)info.GetValue(nameof(Page), typeof(ushort));
             Size = (ushort)info.GetValue(nameof(Size), typeof(ushort));
         }
+
+        public static Paging Default => @default.Value;
+
+        public bool IsDefault => this == Default;
 
         public ushort Page { get; }
 
