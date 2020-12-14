@@ -12,9 +12,9 @@ namespace MooVC.Dynamic
 
             if (orignal is { })
             {
-                var target = (IDictionary<string, object>)clone;
+                var target = (IDictionary<string, object?>)clone;
 
-                foreach (KeyValuePair<string, object> value in orignal)
+                foreach (KeyValuePair<string, object?> value in orignal)
                 {
                     if (value.Value is ExpandoObject child)
                     {

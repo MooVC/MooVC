@@ -34,7 +34,6 @@
             Enumerable = info.GetInternalEnumerable<int>(nameof(Enumerable));
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddInternalValue(nameof(Boolean), Boolean);

@@ -46,7 +46,6 @@
 
         public IEnumerable<int> Enumerable { get; set; } = new int[0];
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
     }
 }

@@ -35,7 +35,6 @@
             Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable), new int[0]);
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             _ = info.TryAddValue(nameof(Boolean), Boolean);
