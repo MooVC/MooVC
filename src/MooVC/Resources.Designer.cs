@@ -61,42 +61,6 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The target collection must be provided..
-        /// </summary>
-        internal static string CollectionExtensionsGenericTargetRequired {
-            get {
-                return ResourceManager.GetString("CollectionExtensionsGenericTargetRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The coordination context must be provided..
-        /// </summary>
-        internal static string CoordinatorApplyContextRequired {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyContextRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The operation to be coordinated must be provided..
-        /// </summary>
-        internal static string CoordinatorApplyOperationRequired {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyOperationRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A request to coordinate an operation in the context of {0} has timed out..
-        /// </summary>
-        internal static string CoordinatorApplyTimeout {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyTimeout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The event must be provided..
         /// </summary>
         internal static string EmittedEventArgsEventRequired {
@@ -120,6 +84,15 @@ namespace MooVC {
         internal static string ExceptionEventArgsMessageRequired {
             get {
                 return ResourceManager.GetString("ExceptionEventArgsMessageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The handler for each exception must be provided..
+        /// </summary>
+        internal static string ExceptionExtensionsExplodeHandlerRequired {
+            get {
+                return ResourceManager.GetString("ExceptionExtensionsExplodeHandlerRequired", resourceCulture);
             }
         }
         

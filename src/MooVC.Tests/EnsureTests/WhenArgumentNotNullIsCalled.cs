@@ -2,6 +2,7 @@
 {
     using System;
     using Xunit;
+    using static MooVC.Ensure;
 
     public sealed class WhenArgumentNotNullIsCalled
     {
@@ -17,7 +18,7 @@
         [InlineData(" ")]
         public void GivenANonNullValueThenNoExceptionIsThrown(object argument)
         {
-            Ensure.ArgumentNotNull(argument, nameof(argument));
+            ArgumentNotNull(argument, nameof(argument));
         }
 
         [Theory]
@@ -32,7 +33,7 @@
         [InlineData(" ")]
         public void GivenANonNullValueAndAMessageThenNoExceptionIsThrown(object argument)
         {
-            Ensure.ArgumentNotNull(argument, nameof(argument), "Some message.");
+            ArgumentNotNull(argument, nameof(argument), "Some message.");
         }
 
         [Fact]
@@ -40,8 +41,10 @@
         {
             const string ExpectedArgumentName = "expected";
 
+            string? value = default;
+
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
-                Ensure.ArgumentNotNull(null, ExpectedArgumentName));
+                ArgumentNotNull(value, ExpectedArgumentName));
 
             Assert.Equal(ExpectedArgumentName, exception.ParamName);
         }
@@ -52,8 +55,10 @@
             const string ExpectedArgumentName = "expected";
             const string ExpectedMessage = "Expected is null.";
 
+            string? value = default;
+
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
-                Ensure.ArgumentNotNull(null, ExpectedArgumentName, ExpectedMessage));
+                ArgumentNotNull(value, ExpectedArgumentName, ExpectedMessage));
 
             Assert.Equal(ExpectedArgumentName, exception.ParamName);
             Assert.StartsWith(ExpectedMessage, exception.Message);

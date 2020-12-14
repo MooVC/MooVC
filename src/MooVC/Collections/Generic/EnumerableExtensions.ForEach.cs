@@ -2,6 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using MooVC.Linq;
+    using static MooVC.Collections.Generic.Resources;
+    using static MooVC.Ensure;
 
     public static partial class EnumerableExtensions
     {
@@ -9,6 +12,8 @@
         {
             if (items is { })
             {
+                ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
+
                 foreach (T item in items)
                 {
                     action(item);

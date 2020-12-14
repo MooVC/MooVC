@@ -1,4 +1,4 @@
-﻿namespace MooVC.DateTimeExtensionsTests
+﻿namespace MooVC.DateTimeOffsetExtensionsTests
 {
     using System;
     using System.Collections.Generic;
@@ -19,9 +19,12 @@
         [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
         public void GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturned(DateTime oldest, DateTime newest)
         {
-            DateTime selected = oldest.Max(newest);
+            var first = new DateTimeOffset(oldest);
+            var second = new DateTimeOffset(newest);
 
-            Assert.Equal(newest, selected);
+            DateTimeOffset selected = first.Max(second);
+
+            Assert.Equal(second, selected);
         }
     }
 }

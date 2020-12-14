@@ -5,7 +5,7 @@
     using System.Threading;
     using static System.String;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Threading.Resources;
 
     public sealed class Coordinator
     {

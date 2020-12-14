@@ -5,6 +5,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using static MooVC.Collections.Generic.Resources;
+    using static MooVC.Ensure;
 
     public static partial class EnumerableExtensions
     {
@@ -12,6 +14,8 @@
         {
             if (items is { })
             {
+                ArgumentNotNull(action, nameof(action), EnumerableExtensionsForAllActionRequired);
+
                 var exceptions = new ConcurrentQueue<Exception>();
 
                 _ = Parallel.ForEach(

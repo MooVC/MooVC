@@ -2,8 +2,9 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
-    <NoWarn>NU5105</NoWarn>
     <LangVersion>latest</LangVersion>
+    <NoWarn>NU5105</NoWarn>
+    <Nullable>enable</Nullable>
     <RootNamespace>MooVC</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>

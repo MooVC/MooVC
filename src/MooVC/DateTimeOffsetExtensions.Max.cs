@@ -2,9 +2,9 @@
 {
     using System;
 
-    public static partial class DateTimeExtensions
+    public static partial class DateTimeOffsetExtensions
     {
-        public static DateTime Max(this DateTime first, DateTime second)
+        public static DateTimeOffset Max(this DateTimeOffset first, DateTimeOffset second)
         {
             return first > second
                 ? first
