@@ -8,6 +8,7 @@
 
     [Serializable]
     public record Paging
+        : ISerializable
     {
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
