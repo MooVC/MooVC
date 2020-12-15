@@ -8,20 +8,20 @@
         public static void ArgumentIsAcceptable<T>(
             [NotNull] T? argument,
             string argumentName,
-            Func<T?, bool> predicate)
+            Func<T, bool> predicate)
         {
             ArgumentNotNull(argument, argumentName);
 
             if (!predicate(argument))
             {
-                throw new ArgumentException(argumentName);
+                throw new ArgumentException(default, argumentName);
             }
         }
 
         public static void ArgumentIsAcceptable<T>(
             [NotNull] T? argument,
             string argumentName,
-            Func<T?, bool> predicate,
+            Func<T, bool> predicate,
             string message)
         {
             ArgumentNotNull(argument, argumentName, message);

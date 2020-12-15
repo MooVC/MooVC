@@ -10,7 +10,7 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
         public void GivenANullListThenNoArgumentNullExcetionIsThrown()
         {
             ICollection<int> target = new List<int>();
-            int[] items = null;
+            IEnumerable<int>? items = default;
 
             target.Replace(items);
         }
@@ -18,10 +18,10 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests
         [Fact]
         public void GivenANullTargetThenAnArgumentNullExcetionIsThrown()
         {
-            ICollection<int> target = null;
+            ICollection<int>? target = default;
             int[] items = new[] { 1, 2, 3 };
 
-            _ = Assert.Throws<ArgumentNullException>(() => target.Replace(items));
+            _ = Assert.Throws<ArgumentNullException>(() => target!.Replace(items));
         }
 
         [Fact]

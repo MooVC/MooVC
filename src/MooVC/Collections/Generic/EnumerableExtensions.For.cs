@@ -2,7 +2,6 @@ namespace MooVC.Collections.Generic
 {
     using System;
     using System.Collections.Generic;
-    using MooVC.Linq;
     using static MooVC.Collections.Generic.Resources;
     using static MooVC.Ensure;
 
