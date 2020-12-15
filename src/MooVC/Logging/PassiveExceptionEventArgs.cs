@@ -5,6 +5,7 @@
     using static MooVC.Ensure;
     using static Resources;
 
+    [Obsolete("Replaced by Diagnostics", false)]
     public sealed class PassiveExceptionEventArgs
         : EventArgs
     {

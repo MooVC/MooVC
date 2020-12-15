@@ -16,16 +16,16 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 
 ## Enhancements
 
-- Added a new async variant of ITransaction, called IAsyncTransaction.
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
-- Added a new variant of ArgumentIsAcceptable that does not require a message.
-- Added new Min and Max extensions for DateTimeOffset
+- Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
+- Added new Min and Max extensions for DateTimeOffset.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
-- Changed Paging to a Record type(**Breaking Change**).
-- Deleted ICredentialProvider from the Net namespace (**Breaking Change**).
-- Deleted EmittedEventArgs<T> from the Persistence namespace (**Breaking Change**).
+- Changed Linq.Paging to a Record type(**Breaking Change**).
+- Deleted Net.ICredentialProvider from the Net namespace (**Breaking Change**).
+- Deleted Persistence.EmittedEventArgs<T> from the Persistence namespace (**Breaking Change**).
 - Deleted the Logging namespace (**Breaking Change**).
+- Deleted the Transactions namespace (**Breaking Change**). 
 
 ## Bug Fixes
 
@@ -34,15 +34,15 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 
 ## End-User Impact
 
-### MooVC.Net.ICredentialProvider (Impact: Low)
+### Net.ICredentialProvider (Impact: Low)
 
 The ICredentialProvider interface was not referenced anywhere in the MooVC framework or within any of its known dependants.  It has been marked as deprecated since v2.3.0 and therefore, the impact is expected to be minimal.
 
-### MooVC.Persistence.EmittedEventArgs<T> (Impact: Low)
+### Persistence.EmittedEventArgs<T> (Impact: Low)
 
 The EmittedEventArgs<T> class was not used anywhere in the MooVC framework or within any of its known dependants.  It has been marked as deprecated since v2.3.0 and therefore, the impact is expected to be minimal.
 
-### MooVC.Linq.Paging (Impact: Low)
+### Linq.Paging (Impact: Low)
 
 An instance of Paging will now be deemed to be equal to that of another if the Size and Page values between the two separate instances are the same.  This means that any new instance that shares the same values as the Default instance will now be deemed to be IsDefault.  This was not the case prior to v3.0.0.
 
@@ -51,3 +51,7 @@ An instance of Paging will now be deemed to be equal to that of another if the S
 The members of the Logging namespace where intended to facilitate passive emission of diagnostic information without directly coupling a class with a logging framework.  Two separate flavours where provided, Warning and Failure.  One challenge that presented with this approach was the need for observers to select specific levels to observe by directly targetting a specific implementation type.  This made it very difficult to scale the solution to support a variety of levels (e.g. Debug, Trace, Information).  These concepts have now been reimplemented under the MooVC.Diagnostics namespace, with a single interface encapsulating a wider range of possible levels.
 
 The Aggregate extension has also been replaced with two new extensions.  The first, called Invoke, will trigger a given action on each member and aggregate the diagnostics messages raised during that invocation.  The second, called Throw, will enable the caller to trigger an exception if one or more members of a diagnostics collection matches a given predicate.
+
+### Transactions (Impact: Low)
+
+The Transactions namespace was not used anywhere in the MooVC framework or within any of its known dependants.  The impact of its unplanned removal is expected to be minimal.

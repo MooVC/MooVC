@@ -6,12 +6,14 @@ namespace MooVC.Logging
 
     public static partial class EmitFailuresExtensions
     {
+        [Obsolete("Replaced by Diagnostics", false)]
         public static void Aggregate<T>(this T source, Action<T> action, string? message = default)
             where T : IEmitFailures
         {
             new[] { source }.Aggregate(action, message: message);
         }
 
+        [Obsolete("Replaced by Diagnostics", false)]
         public static void Aggregate<T>(this IEnumerable<T> sources, Action<T> action, string? message = default)
             where T : IEmitFailures
         {

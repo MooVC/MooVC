@@ -6,12 +6,14 @@ namespace MooVC.Logging
 
     public static partial class EmitWarningsExtensions
     {
+        [Obsolete("Replaced by Diagnostics", false)]
         public static void Aggregate<T>(this T source, Action<T> action, string? message = default)
             where T : IEmitWarnings
         {
             new[] { source }.Aggregate(action, message: message);
         }
 
+        [Obsolete("Replaced by Diagnostics", false)]
         public static void Aggregate<T>(this IEnumerable<T> sources, Action<T> action, string? message = default)
             where T : IEmitWarnings
         {
@@ -28,6 +30,7 @@ namespace MooVC.Logging
                 sources);
         }
 
+        [Obsolete("Replaced by Diagnostics", false)]
         internal static void PerformAggregation<T>(Action<T, PassiveExceptionEventHandler> action, string? message, IEnumerable<T> sources)
         {
             var exceptions = new List<Exception>();
