@@ -16,6 +16,47 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
         }
 
         [Fact]
+        public void GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
+        {
+            IEnumerable<int>? enumeration = default;
+            bool wasEvaluated = false;
+
+            bool Condition()
+            {
+                return wasEvaluated = true;
+            }
+
+            bool Predicate(int value)
+            {
+                return wasEvaluated = true;
+            }
+
+            IEnumerable<int>? result = enumeration
+                .WhereIf(Condition, Predicate);
+
+            Assert.Null(result);
+            Assert.False(wasEvaluated);
+        }
+
+        [Fact]
+        public void GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
+        {
+            IEnumerable<int>? enumeration = default;
+            bool wasEvaluated = false;
+
+            bool Predicate(int value)
+            {
+                return wasEvaluated = true;
+            }
+
+            IEnumerable<int>? result = enumeration
+                .WhereIf(true, Predicate);
+
+            Assert.Null(result);
+            Assert.False(wasEvaluated);
+        }
+
+        [Fact]
         public void GivenAPassingConditionThenThePredicateIsApplied()
         {
             bool wasInvoked = VerifyPredicateInvocationWithCondition(true);

@@ -13,20 +13,25 @@
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
         {
-            ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
+            if (source is { })
+            {
+                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
 
-            return source.ProcessAll(
-                source =>
-                {
-                    TResult result = transform(source);
-
-                    if (result is { })
+                return source.ProcessAll(
+                    source =>
                     {
-                        return new[] { result };
-                    }
+                        TResult result = transform(source);
 
-                    return Enumerable.Empty<TResult>();
-                });
+                        if (result is { })
+                        {
+                            return new[] { result };
+                        }
+
+                        return Enumerable.Empty<TResult>();
+                    });
+            }
+
+            return Enumerable.Empty<TResult>();
         }
 
         public static IEnumerable<TResult> ProcessAll<TSource, TResult>(

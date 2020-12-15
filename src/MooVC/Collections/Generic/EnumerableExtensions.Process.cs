@@ -13,18 +13,25 @@
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
         {
-            return source.Process(
-                source =>
-                {
-                    TResult result = transform(source);
+            if (source is { })
+            {
+                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
 
-                    if (result is { })
+                return source.Process(
+                    source =>
                     {
-                        return new[] { result };
-                    }
+                        TResult result = transform(source);
 
-                    return Enumerable.Empty<TResult>();
-                });
+                        if (result is { })
+                        {
+                            return new[] { result };
+                        }
+
+                        return Enumerable.Empty<TResult>();
+                    });
+            }
+
+            return Enumerable.Empty<TResult>();
         }
 
         public static IEnumerable<TResult> Process<TResult, TSource>(
@@ -49,7 +56,7 @@
             Func<IEnumerable<TResult>> snapshot,
             Func<TSource, IEnumerable<TResult>> transform)
         {
-            if (source.SafeAny())
+            if (source is { })
             {
                 ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
 
