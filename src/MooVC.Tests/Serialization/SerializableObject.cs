@@ -3,48 +3,47 @@
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
     using static System.String;
 
     [Serializable]
     public abstract class SerializableObject
         : ISerializable
     {
-        public bool Boolean { get; set; }
+        public bool Boolean { get; init; }
 
-        public byte Byte { get; set; }
+        public byte Byte { get; init; }
 
-        public char Char { get; set; }
+        public char Char { get; init; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; init; }
 
-        public decimal Decimal { get; set; }
+        public decimal Decimal { get; init; }
 
-        public double Double { get; set; }
+        public double Double { get; init; }
 
-        public short Short { get; set; }
+        public short Short { get; init; }
 
-        public int Integer { get; set; }
+        public int Integer { get; init; }
 
-        public long Long { get; set; }
+        public long Long { get; init; }
 
-        public sbyte SignedByte { get; set; }
+        public sbyte SignedByte { get; init; }
 
-        public float Single { get; set; }
+        public float Single { get; init; }
 
-        public string String { get; set; } = Empty;
+        public string String { get; init; } = Empty;
 
-        public ushort UnsignedShort { get; set; }
+        public ushort UnsignedShort { get; init; }
 
-        public uint UnsignedInteger { get; set; }
+        public uint UnsignedInteger { get; init; }
 
-        public ulong UnsignedLong { get; set; }
+        public ulong UnsignedLong { get; init; }
 
-        public object Value1 { get; set; }
+        public object Value1 { get; init; } = Guid.NewGuid();
 
-        public Guid Value2 { get; set; }
+        public Guid Value2 { get; init; }
 
-        public IEnumerable<int> Enumerable { get; set; } = new int[0];
+        public IEnumerable<int> Enumerable { get; init; } = new int[0];
 
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
     }

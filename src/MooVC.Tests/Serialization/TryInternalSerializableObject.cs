@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
     [Serializable]
     public sealed class TryInternalSerializableObject
@@ -30,9 +29,9 @@
             UnsignedShort = info.TryGetInternalValue<ushort>(nameof(UnsignedShort));
             UnsignedInteger = info.TryGetInternalValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetInternalValue<ulong>(nameof(UnsignedLong));
-            Value1 = info.TryGetInternalValue<object>(nameof(Value1));
+            Value1 = info.TryGetInternalValue(nameof(Value1), defaultValue: Value1);
             Value2 = info.TryGetInternalValue<Guid>(nameof(Value2));
-            Enumerable = info.TryGetInternalEnumerable<int>(nameof(Enumerable), new int[0]);
+            Enumerable = info.TryGetInternalEnumerable(nameof(Enumerable), Enumerable);
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

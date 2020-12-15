@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
     using MooVC.Linq;
 
@@ -10,16 +11,19 @@
         public static bool TryAddEnumerable<T>(
             this SerializationInfo info,
             string name,
-            IEnumerable<T> value,
+            [NotNullWhen(true)] IEnumerable<T>? value,
             Func<IEnumerable<T>, bool>? predicate = default)
         {
-            predicate ??= input => input.SafeAny();
-
-            if (predicate(value))
+            if (value is { })
             {
-                info.AddEnumerable(name, value);
+                predicate ??= input => input.SafeAny();
 
-                return true;
+                if (predicate(value))
+                {
+                    info.AddEnumerable(name, value);
+
+                    return true;
+                }
             }
 
             return false;
