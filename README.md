@@ -22,8 +22,10 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
 - Changed Linq.Paging to a Record type(**Breaking Change**).
+- Modified Serialization extensions to account for null state(**Breaking Change**).
 - Deleted Net.ICredentialProvider from the Net namespace (**Breaking Change**).
 - Deleted Persistence.EmittedEventArgs<T> from the Persistence namespace (**Breaking Change**).
+- Deleted Serialization.Clone extension (**Breaking Change**).
 - Deleted the Logging namespace (**Breaking Change**).
 - Deleted the Transactions namespace (**Breaking Change**). 
 
@@ -39,6 +41,10 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 The members of the Logging namespace where intended to facilitate passive emission of diagnostic information without directly coupling a class with a logging framework.  Two separate flavours where provided, Warning and Failure.  One challenge that presented with this approach was the need for observers to select specific levels to observe by directly targetting a specific implementation type.  This made it very difficult to scale the solution to support a variety of levels (e.g. Debug, Trace, Information).  These concepts have now been reimplemented under the MooVC.Diagnostics namespace, with a single interface encapsulating a wider range of possible levels.
 
 The Aggregate extension has also been replaced with two new extensions.  The first, called Invoke, will trigger a given action on each member and aggregate the diagnostics messages raised during that invocation.  The second, called Throw, will enable the caller to trigger an exception if one or more members of a diagnostics collection matches a given predicate.
+
+### Serialization.Clone (Impact: High)
+
+The Clone extension was deemed to be very useful, particular on test projects.  Regretable, the BinaryFormatter used to implement the extension has been marked obsolette and is disabled in ASP.NET apps since Net 5 (see [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)).  The suggested alternatives provided directly by the framework have proven to be unworkable, producing failures in a wide range of possible serialization scenarios.  As the MooVC framework is intended to provide functionalities common to all applications, coupling MooVC to a third-party package to restore this feature was deemed to be inappropriate.
 
 ### Null State (Impact: Medium)
 

@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
-    <NoWarn>NU5105</NoWarn>
+    <NoWarn>NU5105;SYSLIB0011</NoWarn>
     <Nullable>enable</Nullable>
     <RootNamespace>MooVC</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>

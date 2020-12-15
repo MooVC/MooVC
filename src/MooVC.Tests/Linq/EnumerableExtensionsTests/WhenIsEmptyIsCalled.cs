@@ -24,7 +24,7 @@
         [Fact]
         public void GivenANullSourceThenAPositiveResponseIsReturned()
         {
-            IEnumerable<int> source = null;
+            IEnumerable<int>? source = null;
 
             Assert.True(source.IsEmpty());
         }
