@@ -1,4 +1,4 @@
 ﻿namespace MooVC.Processing
 {
-    public delegate void ProcessorStateChangedEventHandler(object sender, ProcessorStateChangedEventArgs e);
+    public delegate void ProcessorStateChangedEventHandler(IProcessor sender, ProcessorStateChangedEventArgs e);
 }

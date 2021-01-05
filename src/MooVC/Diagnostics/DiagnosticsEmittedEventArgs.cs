@@ -3,14 +3,29 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Runtime.Serialization;
+    using MooVC.Serialization;
     using static System.String;
 
+    [Serializable]
     public sealed class DiagnosticsEmittedEventArgs
-        : EventArgs
+        : EventArgs,
+          ISerializable
     {
         private readonly Exception? cause;
         private readonly Level level = Level.Information;
         private readonly string message = string.Empty;
+
+        public DiagnosticsEmittedEventArgs()
+        {
+        }
+
+        private DiagnosticsEmittedEventArgs(SerializationInfo info, StreamingContext context)
+        {
+            cause = info.TryGetValue<Exception?>(nameof(Cause));
+            level = info.GetValue<Level>(nameof(Level));
+            message = info.GetValue<string>(nameof(Message));
+        }
 
         public Exception? Cause
         {
@@ -57,6 +72,13 @@
                     message = value;
                 }
             }
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            _ = info.TryAddValue(nameof(Cause), Cause);
+            info.AddValue(nameof(Level), Level);
+            info.AddValue(nameof(Message), Message);
         }
     }
 }

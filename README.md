@@ -18,9 +18,12 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
+- Added Async variants of Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore.
 - Added new Min and Max extensions for DateTimeOffset.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
+- Changed Processing.ProcessorStateChangedEventArgs so that it is now serializable.
+- Changed the type of the first parameter of Processing.ProcessorStateChangedEventHandler to IProcessor (**Breaking Change**).
 - Changed Linq.Paging to a Record type(**Breaking Change**).
 - Modified Serialization extensions to account for null state(**Breaking Change**).
 - Deleted Net.ICredentialProvider from the Net namespace (**Breaking Change**).
@@ -61,6 +64,10 @@ The ICredentialProvider interface was not referenced anywhere in the MooVC frame
 ### Persistence.EmittedEventArgs<T> (Impact: Low)
 
 The EmittedEventArgs<T> class was not used anywhere in the MooVC framework or within any of its known dependants.  It has been marked as deprecated since v2.3.0 and therefore, the impact is expected to be minimal.
+
+### Processing.ProcessorStateChangedEventHandler (Impact: None)
+
+The event handler requires an argument that was previously only possible to create internally.  It is therefore expected that this change will have zero impact.
 
 ### Transactions (Impact: Low)
 
