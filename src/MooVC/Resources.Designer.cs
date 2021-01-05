@@ -106,33 +106,6 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The mapping between the outter store and the inner store must be provided..
-        /// </summary>
-        internal static string MappedStoreInnerMappingRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreInnerMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mapping between the inner store and the outter store must be provided..
-        /// </summary>
-        internal static string MappedStoreOutterMappingRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreOutterMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The inner store must be provided..
-        /// </summary>
-        internal static string MappedStoreStoreRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreStoreRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease..
         /// </summary>
         internal static string ProcessorContinuationAbortFailure {

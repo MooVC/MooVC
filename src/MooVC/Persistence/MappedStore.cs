@@ -9,9 +9,9 @@
     public sealed class MappedStore<T, TOutterKey, TInnerKey>
         : IStore<T, TOutterKey>
     {
-        private readonly IStore<T, TInnerKey> store;
         private readonly Func<TOutterKey, TInnerKey> innerMapping;
         private readonly Func<T, TInnerKey, TOutterKey> outterMapping;
+        private readonly IStore<T, TInnerKey> store;
 
         public MappedStore(
             Func<TOutterKey, TInnerKey> innerMapping,
