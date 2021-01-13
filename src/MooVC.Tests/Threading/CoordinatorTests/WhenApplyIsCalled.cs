@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -12,15 +11,17 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown(string context)
+        public void GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown(string? context)
         {
-            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply(context, () => { }));
+            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply(context!, () => { }));
         }
 
         [Fact]
         public void GivenAnEmptyOperationThenAnArgumentNullExceptionIsThrown()
         {
-            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply("Valid", null));
+            Action? action = default;
+
+            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply("Valid", action!));
         }
 
         [Fact]
@@ -41,30 +42,6 @@
             Task.WaitAll(tasks);
 
             Assert.Equal(ExpectedCount, counter);
-        }
-
-        [Fact(Skip = "Non-deterministic.")]
-        public void GivenMultipleThreadsWithATimeoutSetThenATimeoutExceptionIsThrownForAllBarOne()
-        {
-            const int ExpectedCount = 5;
-
-            string context = "Test";
-
-            static void Operation()
-            {
-                Thread.Sleep(250);
-            }
-
-            Task[] tasks = CreateTasks(
-                () => Coordinator.Apply(
-                    context,
-                    Operation,
-                    timeout: TimeSpan.FromMilliseconds(50)),
-                ExpectedCount + 1);
-
-            AggregateException exception = Assert.Throws<AggregateException>(() => Task.WaitAll(tasks));
-
-            Assert.Equal(ExpectedCount, exception.InnerExceptions.Count);
         }
 
         private Task[] CreateTasks(Action operation, int total)

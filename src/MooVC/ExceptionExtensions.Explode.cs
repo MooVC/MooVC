@@ -2,10 +2,19 @@
 {
     using System;
     using MooVC.Collections.Generic;
+    using static MooVC.Ensure;
+    using static MooVC.Resources;
 
     public static class ExceptionExtensions
     {
         public static void Explode(this Exception? exception, Action<Exception> handler)
+        {
+            ArgumentNotNull(handler, nameof(handler), ExceptionExtensionsExplodeHandlerRequired);
+
+            exception?.PerformExplode(handler);
+        }
+
+        public static void PerformExplode(this Exception? exception, Action<Exception> handler)
         {
             if (exception is { })
             {
@@ -13,11 +22,11 @@
 
                 if (exception is AggregateException aggregate)
                 {
-                    aggregate.InnerExceptions.ForEach(ex => ex.Explode(handler));
+                    aggregate.InnerExceptions.ForEach(ex => ex.PerformExplode(handler));
                 }
                 else
                 {
-                    exception.InnerException.Explode(handler);
+                    exception.InnerException.PerformExplode(handler);
                 }
             }
         }

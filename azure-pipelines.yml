@@ -39,7 +39,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Test Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage" --settings .runsettings'
     command: 'test'
     projects: '$(solution)'
 

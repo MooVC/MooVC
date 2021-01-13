@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Serialization
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
     using static System.String;
 
@@ -9,7 +10,7 @@
         public static bool TryAddString(
             this SerializationInfo info,
             string name,
-            string value,
+            [NotNullWhen(true)] string? value,
             string? defaultValue = default,
             Func<string?, bool>? predicate = default)
         {

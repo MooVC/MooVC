@@ -3,35 +3,47 @@
     using System;
     using System.Linq;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
+    using MooVC.Serialization;
+    using static System.Math;
 
     [Serializable]
-    public class Paging
+    public record Paging
+        : ISerializable
     {
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
         public const ushort MinimumSize = 1;
         private static readonly Lazy<Paging> @default = new Lazy<Paging>(() => new Paging());
+        private readonly ushort size;
+        private readonly ushort page;
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {
-            Page = Math.Max(page, FirstPage);
-            Size = Math.Max(size, MinimumSize);
+            Page = page;
+            Size = size;
         }
 
         protected Paging(SerializationInfo info, StreamingContext context)
         {
-            Page = (ushort)info.GetValue(nameof(Page), typeof(ushort));
-            Size = (ushort)info.GetValue(nameof(Size), typeof(ushort));
+            page = info.GetValue<ushort>(nameof(Page));
+            size = info.GetValue<ushort>(nameof(Size));
         }
 
         public static Paging Default => @default.Value;
 
         public bool IsDefault => this == Default;
 
-        public ushort Page { get; }
+        public ushort Page
+        {
+            get => page;
+            init => page = Max(value, FirstPage);
+        }
 
-        public ushort Size { get; }
+        public ushort Size
+        {
+            get => size;
+            init => size = Max(value, MinimumSize);
+        }
 
         public int Skip => (Page - FirstPage) * Size;
 
@@ -40,7 +52,6 @@
             return queryable.Skip(Skip).Take(Size);
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue(nameof(Page), Page);

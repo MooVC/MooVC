@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
     [Serializable]
     public sealed class TrySerializableObject
@@ -30,12 +29,11 @@
             UnsignedShort = info.TryGetValue<ushort>(nameof(UnsignedShort));
             UnsignedInteger = info.TryGetValue<uint>(nameof(UnsignedInteger));
             UnsignedLong = info.TryGetValue<ulong>(nameof(UnsignedLong));
-            Value1 = info.TryGetValue<object>(nameof(Value1));
+            Value1 = info.TryGetValue(nameof(Value1), defaultValue: new object());
             Value2 = info.TryGetValue<Guid>(nameof(Value2));
             Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable), new int[0]);
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             _ = info.TryAddValue(nameof(Boolean), Boolean);

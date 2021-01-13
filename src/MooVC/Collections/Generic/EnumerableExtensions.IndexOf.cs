@@ -3,6 +3,9 @@ namespace MooVC.Collections.Generic
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using MooVC.Linq;
+    using static MooVC.Collections.Generic.Resources;
+    using static MooVC.Ensure;
 
     public static partial class EnumerableExtensions
     {
@@ -14,6 +17,8 @@ namespace MooVC.Collections.Generic
             {
                 return Default;
             }
+
+            ArgumentNotNull(predicate, nameof(predicate), EnumerableExtensionsIndexOfPredicateRequired);
 
             return enumeration
                 .Select((item, index) => new { Index = index, Item = item })

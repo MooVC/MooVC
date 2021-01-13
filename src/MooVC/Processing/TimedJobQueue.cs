@@ -4,9 +4,11 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using MooVC.Collections.Generic;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Processing.Resources;
 
     public abstract class TimedJobQueue<T>
         : IDisposable
@@ -29,7 +31,7 @@
         {
             queue.Enqueue(job);
 
-            StartTimer();
+            _ = StartTimerAsync();
         }
 
         public void Dispose()
@@ -56,15 +58,17 @@
 
         protected abstract IEnumerable<T> Process(IEnumerable<T> jobs);
 
-        private void StartTimer()
+        private async Task StartTimerAsync()
         {
             if (HasJobsPending)
             {
-                _ = timer.TryStart();
+                _ = await timer
+                    .TryStartAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
             }
         }
 
-        private void Timer_Triggered(object sender, EventArgs e)
+        private async void Timer_Triggered(object? sender, EventArgs e)
         {
             var pending = new List<T>();
 
@@ -72,7 +76,9 @@
             {
                 try
                 {
-                    _ = timer.TryStop();
+                    _ = await timer
+                        .TryStopAsync(CancellationToken.None)
+                        .ConfigureAwait(false);
 
                     while (queue.TryDequeue(out T @event))
                     {
@@ -83,7 +89,8 @@
                 }
                 finally
                 {
-                    StartTimer();
+                    await StartTimerAsync()
+                        .ConfigureAwait(false);
                 }
             }
             catch (Exception failure)

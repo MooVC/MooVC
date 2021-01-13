@@ -2,11 +2,13 @@
 {
     using System;
     using System.Threading;
+    using System.Threading.Tasks;
+    using MooVC.Diagnostics;
     using static System.String;
     using static Resources;
 
     public class TimedProcessor
-        : Processor,
+        : ThreadSafeProcessor,
           IDisposable
     {
         private readonly TimeSpan delay;
@@ -18,7 +20,7 @@
         {
             this.initial = initial ?? delay;
             this.delay = delay;
-            timer = new Lazy<Timer>(() => new Timer(TimerCallback));
+            timer = new Lazy<Timer>(() => new Timer(TimerCallbackAsync));
         }
 
         public event EventHandler? Triggered;
@@ -41,25 +43,26 @@
             }
         }
 
-        protected override bool PerformStart()
+        protected override async Task PerformStartAsync(CancellationToken cancellationToken)
         {
             _ = timer.Value.Change(initial, delay);
 
-            return false;
+            await Task.CompletedTask;
         }
 
-        protected override bool PerformStop()
+        protected override async Task PerformStopAsync(CancellationToken cancellationToken)
         {
             _ = timer.Value.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
-            return false;
+            await Task.CompletedTask;
         }
 
-        protected virtual void PerformTimerCallback()
+        protected virtual async Task PerformTimerCallbackAsync()
         {
+            await Task.CompletedTask;
         }
 
-        private void TimerCallback(object state)
+        private async void TimerCallbackAsync(object? state)
         {
             try
             {
@@ -69,12 +72,16 @@
                 }
                 finally
                 {
-                    PerformTimerCallback();
+                    await PerformTimerCallbackAsync()
+                        .ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
             {
-                OnFailureEncountered(Format(TimedProcessorCallbackHandlingFailure, GetType().Name), ex);
+                OnDiagnosticsEmitted(
+                    Level.Error,
+                    cause: ex,
+                    message: Format(TimedProcessorTimerCallbackFailure, GetType().Name));
             }
         }
     }

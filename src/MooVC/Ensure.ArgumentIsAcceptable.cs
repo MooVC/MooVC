@@ -1,11 +1,25 @@
 ﻿namespace MooVC
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     public static partial class Ensure
     {
         public static void ArgumentIsAcceptable<T>(
-            T argument,
+            [NotNull] T? argument,
+            string argumentName,
+            Func<T, bool> predicate)
+        {
+            ArgumentNotNull(argument, argumentName);
+
+            if (!predicate(argument))
+            {
+                throw new ArgumentException(default, argumentName);
+            }
+        }
+
+        public static void ArgumentIsAcceptable<T>(
+            [NotNull] T? argument,
             string argumentName,
             Func<T, bool> predicate,
             string message)

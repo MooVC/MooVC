@@ -3,9 +3,10 @@
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
+    using System.Threading.Tasks;
     using static System.String;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Threading.Resources;
 
     public sealed class Coordinator
     {
@@ -13,8 +14,28 @@
 
         public static void Apply(string context, Action operation, TimeSpan? timeout = default)
         {
-            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyContextRequired);
             ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
+
+            object? InvokeOperation()
+            {
+                operation();
+
+                return default;
+            }
+
+            _ = Coordinate(context, InvokeOperation, timeout);
+        }
+
+        public static async Task ApplyAsync(string context, Func<Task> operation, TimeSpan? timeout = default)
+        {
+            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
+
+            await Coordinate(context, operation, timeout);
+        }
+
+        private static T Coordinate<T>(string context, Func<T> operation, TimeSpan? timeout)
+        {
+            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyContextRequired);
 
             timeout ??= Timeout.InfiniteTimeSpan;
 
@@ -24,7 +45,7 @@
             {
                 try
                 {
-                    operation();
+                    return operation();
                 }
                 finally
                 {

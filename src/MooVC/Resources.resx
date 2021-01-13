@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CollectionExtensionsGenericTargetRequired" xml:space="preserve">
-    <value>The target collection must be provided.</value>
-  </data>
-  <data name="CoordinatorApplyContextRequired" xml:space="preserve">
-    <value>The coordination context must be provided.</value>
-  </data>
-  <data name="CoordinatorApplyOperationRequired" xml:space="preserve">
-    <value>The operation to be coordinated must be provided.</value>
-  </data>
-  <data name="CoordinatorApplyTimeout" xml:space="preserve">
-    <value>A request to coordinate an operation in the context of {0} has timed out.</value>
-  </data>
   <data name="EmittedEventArgsEventRequired" xml:space="preserve">
     <value>The event must be provided.</value>
   </data>
@@ -138,17 +126,8 @@
   <data name="ExceptionEventArgsMessageRequired" xml:space="preserve">
     <value>The message must be provided.</value>
   </data>
-  <data name="JobQueueTimerRequired" xml:space="preserve">
-    <value>The timer that manages the job queue must be provided.</value>
-  </data>
-  <data name="MappedStoreInnerMappingRequired" xml:space="preserve">
-    <value>The mapping between the outter store and the inner store must be provided.</value>
-  </data>
-  <data name="MappedStoreOutterMappingRequired" xml:space="preserve">
-    <value>The mapping between the inner store and the outter store must be provided.</value>
-  </data>
-  <data name="MappedStoreStoreRequired" xml:space="preserve">
-    <value>The inner store must be provided.</value>
+  <data name="ExceptionExtensionsExplodeHandlerRequired" xml:space="preserve">
+    <value>The handler for each exception must be provided.</value>
   </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
@@ -161,14 +140,5 @@
   </data>
   <data name="ProcessorStopFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from stopping.</value>
-  </data>
-  <data name="StartOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be started because another process has initiated a Start operation.</value>
-  </data>
-  <data name="StopOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be stopped because another process has initiated a Stop operation.</value>
-  </data>
-  <data name="TimedProcessorCallbackHandlingFailure" xml:space="preserve">
-    <value>A failure has occured during the handling of a timed event by {0}.</value>
   </data>
 </root>

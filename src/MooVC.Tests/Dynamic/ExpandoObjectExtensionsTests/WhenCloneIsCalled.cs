@@ -57,7 +57,7 @@ namespace MooVC.Dynamic.ExpandoObjectExtensionsTests
         [Fact]
         public void GivenANullObjectWithDefaultIfNullSetToFalseThenAnArgumentNullExceptionIsThrown()
         {
-            ExpandoObject source = null;
+            ExpandoObject? source = default;
 
             _ = Assert.Throws<ArgumentNullException>(() => source.Clone(defaultIfNull: false));
         }
@@ -65,12 +65,11 @@ namespace MooVC.Dynamic.ExpandoObjectExtensionsTests
         [Fact]
         public void GivenANullObjectWithDefaultIfNullSetToTrueThenAnEmptyObjectIsReturned()
         {
-            ExpandoObject source = null;
-
+            ExpandoObject? source = default;
             ExpandoObject value = source.Clone(defaultIfNull: true);
 
             Assert.NotNull(value);
-            Assert.True(((IDictionary<string, object>)value).Count == 0);
+            Assert.True(((IDictionary<string, object?>)value).Count == 0);
         }
     }
 }

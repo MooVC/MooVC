@@ -7,7 +7,14 @@
     {
         public static IEnumerable<T> GetEnumerable<T>(this SerializationInfo info, string name)
         {
-            return (T[])info.GetValue(name, typeof(T[]));
+            object? value = info.GetValue(name, typeof(T[]));
+
+            if (value is T[] result)
+            {
+                return result;
+            }
+
+            return new T[0];
         }
     }
 }
