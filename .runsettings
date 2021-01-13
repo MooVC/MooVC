@@ -12,7 +12,10 @@
           <CodeCoverage>
             <ModulePaths>
               <Exclude>
+                <ModulePath>*.Tests.dll</ModulePath>
+                <ModulePath>*.tests.dll</ModulePath>
                 <ModulePath>*.Tests</ModulePath>
+                <ModulePath>*.tests</ModulePath>
               </Exclude>
             </ModulePaths>
             <UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
