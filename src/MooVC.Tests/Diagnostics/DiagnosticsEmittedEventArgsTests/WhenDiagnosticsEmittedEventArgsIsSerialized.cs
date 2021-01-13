@@ -26,15 +26,7 @@
 
             DiagnosticsEmittedEventArgs deserialized = original.Clone();
 
-            if (cause)
-            {
-                Assert.Equal(original.Cause.Message, deserialized.Cause.Message);
-            }
-            else
-            {
-                Assert.Null(deserialized.Cause);
-            }
-
+            Assert.Equal(original.Cause?.Message, deserialized.Cause?.Message);
             Assert.Equal(original.Level, deserialized.Level);
             Assert.Equal(original.Message, deserialized.Message);
             Assert.NotSame(original, deserialized);

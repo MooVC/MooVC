@@ -129,9 +129,6 @@
   <data name="ExceptionExtensionsExplodeHandlerRequired" xml:space="preserve">
     <value>The handler for each exception must be provided.</value>
   </data>
-  <data name="JobQueueTimerRequired" xml:space="preserve">
-    <value>The timer that manages the job queue must be provided.</value>
-  </data>
   <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
   </data>
@@ -143,14 +140,5 @@
   </data>
   <data name="ProcessorStopFailure" xml:space="preserve">
     <value>Processor {0} has encountered an issue that has prevented it from stopping.</value>
-  </data>
-  <data name="StartOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be started because another process has initiated a Start operation.</value>
-  </data>
-  <data name="StopOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be stopped because another process has initiated a Stop operation.</value>
-  </data>
-  <data name="TimedProcessorCallbackHandlingFailure" xml:space="preserve">
-    <value>A failure has occured during the handling of a timed event by {0}.</value>
   </data>
 </root>

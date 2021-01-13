@@ -2,217 +2,145 @@
 {
     using System;
     using System.Threading;
-    using MooVC.Logging;
-    using static System.String;
-    using static Resources;
+    using System.Threading.Tasks;
+    using MooVC.Diagnostics;
+    using static MooVC.Processing.Resources;
 
     public abstract class Processor
-        : IEmitFailures,
-          IEmitWarnings,
-          IProcessor
+        : IProcessor,
+          IEmitDiagnostics
     {
-        private const int StartRequestedFlag = 1;
-        private const int StopRequestedFlag = 0;
+        private ProcessorState state = ProcessorState.Stopped;
 
-        private Thread? continuationThread;
-        private ProcessorState state;
-        private volatile int flag = StopRequestedFlag;
-
-        protected Processor()
-        {
-            state = ProcessorState.Stopped;
-        }
-
-        public event PassiveExceptionEventHandler? FailureEmitted;
+        public event DiagnosticsEmittedEventHandler? DiagnosticsEmitted;
 
         public event ProcessorStateChangedEventHandler? ProcessStateChanged;
-
-        public event PassiveExceptionEventHandler? WarningEmitted;
 
         public ProcessorState State
         {
             get => state;
-            private set
+            set
             {
                 if (state != value)
                 {
                     state = value;
 
-                    ProcessStateChanged?.Invoke(this, new ProcessorStateChangedEventArgs(value));
+                    OnProcessingStateChanged(value);
                 }
             }
         }
 
-        public bool TryStart()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            if (RequestStart())
+            if (CanStart())
             {
+                State = ProcessorState.Starting;
+
                 try
                 {
-                    ExecuteStart();
-
-                    return true;
+                    await PerformStartAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    OnFailureEncountered(Format(ProcessorStartFailure, GetType().Name), ex);
+                    State = ProcessorState.Unknown;
+
+                    await PerformStopAsync(cancellationToken)
+                        .ConfigureAwait(false);
+
+                    State = ProcessorState.Stopped;
+
+                    throw;
                 }
+
+                State = ProcessorState.Started;
             }
-
-            return false;
-        }
-
-        public bool TryStop()
-        {
-            if (RequestStop())
-            {
-                try
-                {
-                    ExecuteStop();
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    OnFailureEncountered(Format(ProcessorStopFailure, GetType().Name), ex);
-                }
-            }
-
-            return false;
-        }
-
-        public void Start()
-        {
-            if (!RequestStart())
+            else
             {
                 throw new StartOperationInvalidException(State);
             }
-
-            ExecuteStart();
         }
 
-        public void Stop()
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
-            if (!RequestStop())
+            if (CanStop())
+            {
+                State = ProcessorState.Stopping;
+
+                await PerformStopAsync(cancellationToken)
+                    .ConfigureAwait(false);
+
+                State = ProcessorState.Stopped;
+            }
+            else
             {
                 throw new StopOperationInvalidException(State);
             }
-
-            ExecuteStop();
         }
 
-        protected virtual void PerformContinue()
-        {
-        }
-
-        protected virtual bool PerformStart()
-        {
-            return true;
-        }
-
-        protected virtual bool PerformStop()
-        {
-            return true;
-        }
-
-        protected void OnFailureEncountered(string message, Exception failure)
-        {
-            FailureEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, failure));
-        }
-
-        protected void OnWarningEncountered(string message, Exception? warning = default)
-        {
-            WarningEmitted?.Invoke(this, new PassiveExceptionEventArgs(message, exception: warning));
-        }
-
-        private void AbortContinuationThread()
+        public async Task<bool> TryStartAsync(CancellationToken cancellationToken)
         {
             try
             {
-                continuationThread!.Abort();
-                continuationThread.Join();
+                await StartAsync(cancellationToken)
+                    .ConfigureAwait(false);
+
+                return true;
             }
             catch (Exception ex)
             {
-                OnWarningEncountered(
-                    Format(ProcessorContinuationAbortFailure, GetType().Name),
-                    ex);
+                OnDiagnosticsEmitted(Level.Error, cause: ex, message: ProcessorTryStartFailure);
             }
+
+            return false;
         }
 
-        private void Continue()
+        public async Task<bool> TryStopAsync(CancellationToken cancellationToken)
         {
-            continuationThread = new Thread(() =>
-            {
-                try
-                {
-                    PerformContinue();
-                }
-                catch (ThreadAbortException)
-                {
-                    Thread.ResetAbort();
-                }
-                catch (Exception ex)
-                {
-                    OnFailureEncountered(
-                        Format(ProcessorContinuationInteruppted, GetType().Name),
-                        ex);
-                }
-
-                continuationThread = null;
-
-                if (State == ProcessorState.Started)
-                {
-                    _ = TryStop();
-                }
-            });
-
-            continuationThread.Start();
-        }
-
-        private void ExecuteStart()
-        {
-            State = ProcessorState.Starting;
-
             try
             {
-                bool shouldContinue = PerformStart();
+                await StopAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                State = ProcessorState.Started;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnDiagnosticsEmitted(Level.Error, cause: ex, message: ProcessorTryStopFailure);
+            }
 
-                if (shouldContinue)
+            return false;
+        }
+
+        protected virtual bool CanStart()
+        {
+            return State == ProcessorState.Stopped;
+        }
+
+        protected virtual bool CanStop()
+        {
+            return State == ProcessorState.Started;
+        }
+
+        protected virtual void OnDiagnosticsEmitted(Level level, Exception? cause = default, string? message = default)
+        {
+            DiagnosticsEmitted?.Invoke(
+                this,
+                new DiagnosticsEmittedEventArgs
                 {
-                    Continue();
-                }
-            }
-            catch
-            {
-                _ = TryStop();
-
-                throw;
-            }
+                    Cause = cause,
+                    Level = level,
+                    Message = message,
+                });
         }
 
-        private void ExecuteStop()
+        protected virtual void OnProcessingStateChanged(ProcessorState state)
         {
-            State = ProcessorState.Stopping;
-
-            if (PerformStop() && continuationThread is { })
-            {
-                AbortContinuationThread();
-            }
-
-            State = ProcessorState.Stopped;
+            ProcessStateChanged?.Invoke(this, new ProcessorStateChangedEventArgs(state));
         }
 
-        private bool RequestStart()
-        {
-            return Interlocked.CompareExchange(ref flag, StartRequestedFlag, StopRequestedFlag) == StopRequestedFlag;
-        }
+        protected abstract Task PerformStartAsync(CancellationToken cancellationToken);
 
-        private bool RequestStop()
-        {
-            return Interlocked.CompareExchange(ref flag, StopRequestedFlag, StartRequestedFlag) == StartRequestedFlag;
-        }
+        protected abstract Task PerformStopAsync(CancellationToken cancellationToken);
     }
 }

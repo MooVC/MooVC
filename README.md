@@ -20,12 +20,18 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
 - Added Async variants of Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore.
 - Added new Min and Max extensions for DateTimeOffset.
+- Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
+- Changed Processing.IProcessor so that it now inherits from Microsoft.Extensions.Hosting.IHostedService (**Breaking Change**).
+- Changed the constituents of Processing namespace to account for new Processing.IProcessor signature.
 - Changed Processing.ProcessorStateChangedEventArgs so that it is now serializable.
+- Changed Processing.StartOperationInvalidException so that it is now serializable.
+- Changed Processing.StopOperationInvalidException so that it is now serializable.
 - Changed the type of the first parameter of Processing.ProcessorStateChangedEventHandler to IProcessor (**Breaking Change**).
-- Changed Linq.Paging to a Record type(**Breaking Change**).
-- Modified Serialization extensions to account for null state(**Breaking Change**).
+- Changed Linq.Paging to a Record type (**Breaking Change**).
+- Changed TimedProcessor to comform to the new IProcessor interface (**Breaking Change**).
+- Modified Serialization extensions to account for null state (**Breaking Change**).
 - Deleted Net.ICredentialProvider from the Net namespace (**Breaking Change**).
 - Deleted Persistence.EmittedEventArgs<T> from the Persistence namespace (**Breaking Change**).
 - Deleted Serialization.Clone extension (**Breaking Change**).
@@ -44,6 +50,10 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 The members of the Logging namespace where intended to facilitate passive emission of diagnostic information without directly coupling a class with a logging framework.  Two separate flavours where provided, Warning and Failure.  One challenge that presented with this approach was the need for observers to select specific levels to observe by directly targetting a specific implementation type.  This made it very difficult to scale the solution to support a variety of levels (e.g. Debug, Trace, Information).  These concepts have now been reimplemented under the MooVC.Diagnostics namespace, with a single interface encapsulating a wider range of possible levels.
 
 The Aggregate extension has also been replaced with two new extensions.  The first, called Invoke, will trigger a given action on each member and aggregate the diagnostics messages raised during that invocation.  The second, called Throw, will enable the caller to trigger an exception if one or more members of a diagnostics collection matches a given predicate.
+
+### Processing (Impact: High)
+
+The IHostedService from Microsoft.Extensions.Hosting addresses many of the core features offered by IProcessor.  Two features found absent are the ability to determine the state of the processor and the ability guarantee thread safety.  It has therefore been decided to retain IProcessor, with the caveat that it will now implement the Microsoft.Extensions.Hosting.IHostedService interface, thereby allowing for processors implementations to be consumed by a more broad range of consumers.  A new ThreadSafeHostedService has also been added to enable IHostedServices to gain the aforementioned traits of IProcessor, should they be required.  As there are significant differences between the original and new IProcessor implementations, significant impact on existing code consumers is expected.
 
 ### Serialization.Clone (Impact: High)
 

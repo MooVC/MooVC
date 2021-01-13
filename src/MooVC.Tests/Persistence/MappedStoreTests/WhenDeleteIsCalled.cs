@@ -12,7 +12,7 @@
         public void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvoked()
         {
             bool wasInvoked = false;
-            string expectedInnerKey = default;
+            string? expectedInnerKey = default;
 
             string LocalInnerMapping(Guid key)
             {
