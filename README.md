@@ -22,6 +22,7 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 - Added Async variant of Threading.Coordinator.Apply.
 - Added new Min and Max extensions for DateTimeOffset.
 - Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
+- Added Serialization.ICloner to facilitate migration from the Serialization.Clone extension by supporting a range of possible implementations.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
 - Changed Processing.IProcessor so that it now inherits from Microsoft.Extensions.Hosting.IHostedService (**Breaking Change**).
@@ -58,7 +59,7 @@ The IHostedService from Microsoft.Extensions.Hosting addresses many of the core 
 
 ### Serialization.Clone (Impact: High)
 
-The Clone extension was deemed to be very useful, particular on test projects.  Regretable, the BinaryFormatter used to implement the extension has been marked obsolette and is disabled in ASP.NET apps since Net 5 (see [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)).  The suggested alternatives provided directly by the framework have proven to be unworkable, producing failures in a wide range of possible serialization scenarios.  As the MooVC framework is intended to provide functionalities common to all applications, coupling MooVC to a third-party package to restore this feature was deemed to be inappropriate.
+The Clone extension was deemed to be very useful, particular on test projects.  Regretable, the BinaryFormatter used to implement the extension has been marked obsolette and is disabled in ASP.NET apps since Net 5 (see [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)).  The suggested alternatives provided directly by the framework have proven to be unworkable, producing failures in a wide range of possible serialization scenarios.  As the MooVC framework is intended to provide functionalities common to all applications, coupling MooVC to a third-party package to restore this feature was deemed to be inappropriate.  In an effort to facilitate migration, a new Serialization.ICloner interface was added, with a BinaryFormatterCloner provided that offers functionality equal to that of the original Serialization.Clone extension.  This implementation can be used in the short term, with an eye towards utilizing an alternative long term solution via the same interface.
 
 ### Null State (Impact: Medium)
 
