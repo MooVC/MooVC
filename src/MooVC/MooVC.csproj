@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Authors>Paul Martins</Authors>
+    <Authors>Paul Martins;ControlSoft Automation Systems Limited</Authors>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
     <Copyright>MooVC © 2019-2020</Copyright>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
