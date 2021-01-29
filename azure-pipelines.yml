@@ -62,7 +62,7 @@ steps:
   condition: succeeded()
   displayName: 'Test Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:ExcludeByAttribute="Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute"'
+    arguments: '--configuration $(buildConfiguration) --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:ExcludeByAttribute=\"Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute\" /p:ExcludeByFile=\"**/*.Designer.cs\"'
     command: 'test'
     projects: '$(solution)'
 
