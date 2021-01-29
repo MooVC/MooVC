@@ -5,9 +5,6 @@
     <Copyright>MooVC © 2019-2020</Copyright>
     <Description>Tests a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
-    <ExcludeByAttribute>CompilerGenerated</ExcludeByAttribute>
-    <ExcludeByAttribute>GeneratedCode</ExcludeByAttribute>
-    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
     <NoWarn>NU5105;SYSLIB0011</NoWarn>
