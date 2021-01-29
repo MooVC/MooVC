@@ -89,7 +89,10 @@
             }
             catch (Exception ex)
             {
-                OnDiagnosticsEmitted(Level.Error, cause: ex, message: ProcessorTryStartFailure);
+                OnDiagnosticsEmitted(
+                    Level.Error,
+                    cause: ex,
+                    message: ProcessorTryStartFailure);
             }
 
             return false;
@@ -106,7 +109,10 @@
             }
             catch (Exception ex)
             {
-                OnDiagnosticsEmitted(Level.Error, cause: ex, message: ProcessorTryStopFailure);
+                OnDiagnosticsEmitted(
+                    Level.Error,
+                    cause: ex,
+                    message: ProcessorTryStopFailure);
             }
 
             return false;
@@ -122,7 +128,10 @@
             return State == ProcessorState.Started;
         }
 
-        protected virtual void OnDiagnosticsEmitted(Level level, Exception? cause = default, string? message = default)
+        protected virtual void OnDiagnosticsEmitted(
+            Level level,
+            Exception? cause = default,
+            string? message = default)
         {
             DiagnosticsEmitted?.Invoke(
                 this,

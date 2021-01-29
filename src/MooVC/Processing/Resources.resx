@@ -135,6 +135,9 @@
   <data name="ThreadSafeHostedServiceServiceRequired" xml:space="preserve">
     <value>The service that is to be the subject of this processor must be provided.</value>
   </data>
+  <data name="TimedJobQueueProcessQueueAsyncFailure" xml:space="preserve">
+    <value>A failure has prevented the successful processing of the job queue.</value>
+  </data>
   <data name="TimedProcessorTimerCallbackFailure" xml:space="preserve">
     <value>A failure has occured during the handling of a timed event by {0}.</value>
   </data>

@@ -26,10 +26,11 @@ MooVC has been upgraded to target .Net 5.0, taking advantage of the many new lan
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
 - Changed Processing.IProcessor so that it now inherits from Microsoft.Extensions.Hosting.IHostedService (**Breaking Change**).
-- Changed the constituents of Processing namespace to account for new Processing.IProcessor signature.
 - Changed Processing.ProcessorStateChangedEventArgs so that it is now serializable.
 - Changed Processing.StartOperationInvalidException so that it is now serializable.
 - Changed Processing.StopOperationInvalidException so that it is now serializable.
+- Changed Processing.TimedJobQueue to implement IEmitDiagnostics (**Breaking Change**).
+- Changed the constituents of Processing namespace to account for new Processing.IProcessor signature.
 - Changed the type of the first parameter of Processing.ProcessorStateChangedEventHandler to IProcessor (**Breaking Change**).
 - Changed Linq.Paging to a Record type (**Breaking Change**).
 - Changed TimedProcessor to comform to the new IProcessor interface (**Breaking Change**).
@@ -80,6 +81,10 @@ The EmittedEventArgs<T> class was not used anywhere in the MooVC framework or wi
 ### Processing.ProcessorStateChangedEventHandler (Impact: None)
 
 The event handler requires an argument that was previously only possible to create internally.  It is therefore expected that this change will have zero impact.
+
+### Processing.TimedJobQueue (Impact Low)
+
+Processing.TimedJobQueue now implements Diagnostics.IEmitDiagnostics.  As a result, the OnFailureEncountered abstract method has been removed in favour of a new virtual OnDiagnosticsEmitted method.  Derivations of Processing.TimedJobQueue should now either A) remove their OnFailureEncountered overrides or B) override OnDiagnosticsEmitted and reimplement their OnFailureEncountered here.
 
 ### Transactions (Impact: Low)
 
