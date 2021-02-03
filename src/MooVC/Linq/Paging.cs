@@ -7,43 +7,33 @@
     using static System.Math;
 
     [Serializable]
-    public record Paging
+    public class Paging
         : ISerializable
     {
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
         public const ushort MinimumSize = 1;
         private static readonly Lazy<Paging> @default = new Lazy<Paging>(() => new Paging());
-        private readonly ushort size;
-        private readonly ushort page;
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {
-            Page = page;
-            Size = size;
+            Page = Max(page, FirstPage);
+            Size = Max(size, MinimumSize);
         }
 
         protected Paging(SerializationInfo info, StreamingContext context)
         {
-            page = info.GetValue<ushort>(nameof(Page));
-            size = info.GetValue<ushort>(nameof(Size));
+            Page = info.GetValue<ushort>(nameof(Page));
+            Size = info.GetValue<ushort>(nameof(Size));
         }
 
         public static Paging Default => @default.Value;
 
         public bool IsDefault => this == Default;
 
-        public ushort Page
-        {
-            get => page;
-            init => page = Max(value, FirstPage);
-        }
+        public ushort Page { get; } = FirstPage;
 
-        public ushort Size
-        {
-            get => size;
-            init => size = Max(value, MinimumSize);
-        }
+        public ushort Size { get; } = DefaultSize;
 
         public int Skip => (Page - FirstPage) * Size;
 

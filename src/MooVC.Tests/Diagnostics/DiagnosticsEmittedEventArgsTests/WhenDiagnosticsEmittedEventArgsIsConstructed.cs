@@ -14,10 +14,7 @@
 
             var cause = new Exception(ExpectedMessage);
 
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Cause = cause,
-            };
+            var value = new DiagnosticsEmittedEventArgs(cause: cause);
 
             Assert.Equal(cause, value.Cause);
             Assert.Equal(ExpectedMessage, value.Message);
@@ -30,10 +27,7 @@
             byte raw = (byte)max;
             var level = (Level)(raw + 1);
 
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Level = level,
-            };
+            var value = new DiagnosticsEmittedEventArgs(level: level);
 
             Assert.Equal(max, value.Level);
         }
@@ -44,10 +38,7 @@
         [InlineData(Level.Critical)]
         public void GivenALevelWithinRangeThenTheLevelIsApplied(Level level)
         {
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Level = level,
-            };
+            var value = new DiagnosticsEmittedEventArgs(level: level);
 
             Assert.Equal(level, value.Level);
         }
@@ -57,10 +48,7 @@
         {
             const string ExpectedMessage = "Something something Dark Side";
 
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Message = ExpectedMessage,
-            };
+            var value = new DiagnosticsEmittedEventArgs(message: ExpectedMessage);
 
             Assert.Equal(ExpectedMessage, value.Message);
         }
@@ -75,11 +63,7 @@
 
             var cause = new Exception(ExpectedMessage);
 
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Cause = cause,
-                Message = message,
-            };
+            var value = new DiagnosticsEmittedEventArgs(cause: cause, message: message);
 
             Assert.Equal(ExpectedMessage, value.Message);
         }
@@ -90,10 +74,7 @@
         [InlineData(" ")]
         public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnEmptyMessageIsApplied(string? message)
         {
-            var value = new DiagnosticsEmittedEventArgs
-            {
-                Message = message,
-            };
+            var value = new DiagnosticsEmittedEventArgs(message: message);
 
             Assert.Equal(Empty, value.Message);
         }

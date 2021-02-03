@@ -135,12 +135,10 @@
         {
             DiagnosticsEmitted?.Invoke(
                 this,
-                new DiagnosticsEmittedEventArgs
-                {
-                    Cause = cause,
-                    Level = level,
-                    Message = message,
-                });
+                new DiagnosticsEmittedEventArgs(
+                    cause: cause,
+                    level: level,
+                    message: message));
         }
 
         protected virtual void OnProcessingStateChanged(ProcessorState state)
