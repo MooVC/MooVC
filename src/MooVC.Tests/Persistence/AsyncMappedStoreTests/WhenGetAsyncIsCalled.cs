@@ -33,7 +33,7 @@
 
             var store = new AsyncMappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-            object actualItem = await store.GetAsync(outterKey);
+            object? actualItem = await store.GetAsync(outterKey);
 
             Assert.True(wasInvoked);
             Assert.Equal(expectedItem, actualItem);

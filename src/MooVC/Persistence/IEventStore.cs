@@ -8,7 +8,7 @@
     {
         TIndex Insert(T @event);
 
-        T Read(TIndex id);
+        T? Read(TIndex id);
 
         IEnumerable<T> Read(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
     }

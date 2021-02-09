@@ -33,7 +33,7 @@
 
             var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-            object actualItem = store.Get(outterKey);
+            object? actualItem = store.Get(outterKey);
 
             Assert.True(wasInvoked);
             Assert.Equal(expectedItem, actualItem);

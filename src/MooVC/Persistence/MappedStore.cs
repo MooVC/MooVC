@@ -46,7 +46,7 @@
             store.Delete(innerKey);
         }
 
-        public T Get(TOutterKey outterKey)
+        public T? Get(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 

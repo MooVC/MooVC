@@ -47,7 +47,7 @@
             await store.DeleteAsync(innerKey);
         }
 
-        public async Task<T> GetAsync(TOutterKey outterKey)
+        public async Task<T?> GetAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 

@@ -9,7 +9,7 @@
     {
         Task<TIndex> InsertAsync(T @event);
 
-        Task<T> ReadAsync(TIndex id);
+        Task<T?> ReadAsync(TIndex id);
 
         IAsyncEnumerable<T> ReadAsync(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
     }

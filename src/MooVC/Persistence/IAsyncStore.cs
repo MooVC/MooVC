@@ -12,7 +12,7 @@
 
         Task DeleteAsync(TKey key);
 
-        Task<T> GetAsync(TKey key);
+        Task<T?> GetAsync(TKey key);
 
         Task<IEnumerable<T>> GetAsync(Paging? paging = default);
 

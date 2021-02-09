@@ -11,7 +11,7 @@
 
         void Delete(TKey key);
 
-        T Get(TKey key);
+        T? Get(TKey key);
 
         IEnumerable<T> Get(Paging? paging = default);
 
