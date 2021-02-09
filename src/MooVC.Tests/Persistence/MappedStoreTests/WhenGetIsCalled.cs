@@ -2,7 +2,6 @@
 {
     using System;
     using MooVC.Linq;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 

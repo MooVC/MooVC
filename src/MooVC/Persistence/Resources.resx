@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsyncMappedStoreInnerMappingRequired" xml:space="preserve">
-    <value>The mapping between the outter store and the inner store must be provided.</value>
-  </data>
-  <data name="AsyncMappedStoreOutterMappingRequired" xml:space="preserve">
-    <value>The mapping between the inner store and the outter store must be provided.</value>
-  </data>
-  <data name="AsyncMappedStoreStoreRequired" xml:space="preserve">
-    <value>The inner store must be provided.</value>
-  </data>
   <data name="MappedStoreInnerMappingRequired" xml:space="preserve">
     <value>The mapping between the outter store and the inner store must be provided.</value>
   </data>

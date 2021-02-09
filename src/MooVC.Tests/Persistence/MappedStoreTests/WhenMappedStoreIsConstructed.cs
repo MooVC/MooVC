@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
-    using MooVC.Persistence;
     using Xunit;
 
     public sealed class WhenMappedStoreIsConstructed

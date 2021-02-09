@@ -1,13 +1,12 @@
-﻿namespace MooVC.Persistence.AsyncMappedStoreTests
+﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
     using MooVC.Linq;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 
     public sealed class WhenGetAsyncIsCalled
-        : AsyncMappedStoreTests
+        : MappedStoreTests
     {
         [Fact]
         public async void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
@@ -31,7 +30,7 @@
                 .Setup(store => store.GetAsync(It.Is<string>(parameter => parameter == expectedInnerKey)))
                 .ReturnsAsync(expectedItem);
 
-            var store = new AsyncMappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
+            var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
             object? actualItem = await store.GetAsync(outterKey);
 
@@ -46,7 +45,7 @@
         {
             var paging = new Paging();
 
-            var store = new AsyncMappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+            var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
             _ = await store.GetAsync(paging: paging);
 
