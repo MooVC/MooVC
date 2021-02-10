@@ -1,4 +1,4 @@
-﻿namespace MooVC.Persistence.StoreTests
+﻿namespace MooVC.Persistence.SynchronousStoreTests
 {
     using System;
     using System.Threading.Tasks;
@@ -12,7 +12,7 @@
             const int ExpectedKey = 1;
             bool wasInvoked = false;
 
-            var store = new TestableStore(deleteByKey: key =>
+            var store = new TestableSynchronousStore(deleteByKey: key =>
             {
                 wasInvoked = true;
 
@@ -30,7 +30,7 @@
             const string ExpectedItem = "Something something dark side...";
             bool wasInvoked = false;
 
-            var store = new TestableStore(deleteByItem: item =>
+            var store = new TestableSynchronousStore(deleteByItem: item =>
             {
                 wasInvoked = true;
 
@@ -45,7 +45,7 @@
         [Fact]
         public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableStore();
+            var store = new TestableSynchronousStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.DeleteAsync(2));
@@ -54,7 +54,7 @@
         [Fact]
         public async Task GivenAnItemWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableStore();
+            var store = new TestableSynchronousStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.DeleteAsync("Something Irrelevant"));

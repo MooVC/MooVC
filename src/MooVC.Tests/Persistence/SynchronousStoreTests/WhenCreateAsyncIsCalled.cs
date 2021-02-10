@@ -1,4 +1,4 @@
-﻿namespace MooVC.Persistence.StoreTests
+﻿namespace MooVC.Persistence.SynchronousStoreTests
 {
     using System;
     using System.Threading.Tasks;
@@ -12,7 +12,7 @@
             const string ExpectedItem = "Something something dark side...";
             const int ExpectedKey = 1;
 
-            var store = new TestableStore(create: item =>
+            var store = new TestableSynchronousStore(create: item =>
             {
                 Assert.Equal(ExpectedItem, item);
 
@@ -26,7 +26,7 @@
         [Fact]
         public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableStore();
+            var store = new TestableSynchronousStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.CreateAsync("Irrelevant Test Data"));

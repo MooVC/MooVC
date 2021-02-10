@@ -1,4 +1,4 @@
-﻿namespace MooVC.Persistence.EventStoreTests
+﻿namespace MooVC.Persistence.SynchronousEventStoreTests
 {
     using System;
     using System.Threading.Tasks;
@@ -12,7 +12,7 @@
             const int ExpectedIndex = 1;
             object expectedItem = new object();
 
-            var store = new TestableEventStore(insert: item =>
+            var store = new TestableSynchronousEventStore(insert: item =>
             {
                 Assert.Equal(expectedItem, item);
 
@@ -27,7 +27,7 @@
         [Fact]
         public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableEventStore();
+            var store = new TestableSynchronousEventStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.InsertAsync(default!));

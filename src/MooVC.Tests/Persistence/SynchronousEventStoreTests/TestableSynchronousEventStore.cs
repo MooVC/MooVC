@@ -1,16 +1,16 @@
-﻿namespace MooVC.Persistence.EventStoreTests
+﻿namespace MooVC.Persistence.SynchronousEventStoreTests
 {
     using System;
     using System.Collections.Generic;
 
-    public sealed class TestableEventStore
-        : EventStore<object, int>
+    public sealed class TestableSynchronousEventStore
+        : SynchronousEventStore<object, int>
     {
         private readonly Func<object, int>? insert;
         private readonly Func<int, object?>? readByIndex;
         private readonly Func<int, ushort, IEnumerable<object>>? readFromIndex;
 
-        public TestableEventStore(
+        public TestableSynchronousEventStore(
             Func<object, int>? insert = default,
             Func<int, object?>? readByIndex = default,
             Func<int, ushort, IEnumerable<object>>? readFromIndex = default)
@@ -20,7 +20,7 @@
             this.readFromIndex = readFromIndex;
         }
 
-        public override int Insert(object @event)
+        protected override int PerformInsert(object @event)
         {
             if (insert is { })
             {
@@ -30,7 +30,7 @@
             throw new NotImplementedException();
         }
 
-        public override object? Read(int index)
+        protected override object? PerformRead(int index)
         {
             if (readByIndex is { })
             {
@@ -40,7 +40,7 @@
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<object> Read(int lastIndex, ushort numberToRead = 10)
+        protected override IEnumerable<object> PerformRead(int lastIndex, ushort numberToRead = 10)
         {
             if (readFromIndex is { })
             {

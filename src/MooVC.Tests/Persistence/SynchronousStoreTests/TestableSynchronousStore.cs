@@ -1,11 +1,11 @@
-﻿namespace MooVC.Persistence.StoreTests
+﻿namespace MooVC.Persistence.SynchronousStoreTests
 {
     using System;
     using System.Collections.Generic;
     using MooVC.Linq;
 
-    public sealed class TestableStore
-        : Store<string, int>
+    public sealed class TestableSynchronousStore
+        : SynchronousStore<string, int>
     {
         private readonly Func<string, int>? create;
         private readonly Action<string>? deleteByItem;
@@ -14,7 +14,7 @@
         private readonly Func<Paging?, IEnumerable<string>>? getAll;
         private readonly Action<string>? update;
 
-        public TestableStore(
+        public TestableSynchronousStore(
             Func<string, int>? create = default,
             Action<string>? deleteByItem = default,
             Action<int>? deleteByKey = default,
@@ -30,7 +30,7 @@
             this.update = update;
         }
 
-        public override int Create(string item)
+        protected override int PerformCreate(string item)
         {
             if (create is { })
             {
@@ -40,7 +40,7 @@
             throw new NotImplementedException();
         }
 
-        public override void Delete(string item)
+        protected override void PerformDelete(string item)
         {
             if (deleteByItem is null)
             {
@@ -50,7 +50,7 @@
             deleteByItem(item);
         }
 
-        public override void Delete(int key)
+        protected override void PerformDelete(int key)
         {
             if (deleteByKey is null)
             {
@@ -60,7 +60,7 @@
             deleteByKey(key);
         }
 
-        public override string? Get(int key)
+        protected override string? PerformGet(int key)
         {
             if (getByKey is { })
             {
@@ -70,7 +70,7 @@
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<string> Get(Paging? paging = default)
+        protected override IEnumerable<string> PerformGet(Paging? paging = default)
         {
             if (getAll is { })
             {
@@ -80,7 +80,7 @@
             throw new NotImplementedException();
         }
 
-        public override void Update(string item)
+        protected override void PerformUpdate(string item)
         {
             if (update is null)
             {

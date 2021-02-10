@@ -22,9 +22,10 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 - Added new Min and Max extensions for DateTimeOffset.
 - Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
 - Added Serialization.ICloner to facilitate migration from the Serialization.Clone extension by supporting a range of possible implementations.
+- Added Persistence.SynchronousStore and Persistence.SynchronousEventStore to facilitate migration from synchronous to asynchronous implementations of Persistence.IEventStore, Persistence.IStore.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
-- Changed Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore to support async variants of each operation (**Breaking Change**).
+- Changed Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore to only support async variants of each operation (**Breaking Change**).
 - Changed Processing.IProcessor so that it now inherits from Microsoft.Extensions.Hosting.IHostedService (**Breaking Change**).
 - Changed Processing.ProcessorStateChangedEventArgs so that it is now serializable.
 - Changed Processing.StartOperationInvalidException so that it is now serializable.

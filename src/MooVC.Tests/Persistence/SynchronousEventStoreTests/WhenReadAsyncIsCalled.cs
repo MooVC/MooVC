@@ -1,4 +1,4 @@
-﻿namespace MooVC.Persistence.EventStoreTests
+﻿namespace MooVC.Persistence.SynchronousEventStoreTests
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@
             const int ExpectedIndex = 1;
             object expectedItem = new object();
 
-            var store = new TestableEventStore(readByIndex: index =>
+            var store = new TestableSynchronousEventStore(readByIndex: index =>
             {
                 Assert.Equal(ExpectedIndex, index);
 
@@ -33,7 +33,7 @@
 
             object[] expected = new[] { new object(), new object() };
 
-            var store = new TestableEventStore(readFromIndex: (last, number) =>
+            var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
             {
                 Assert.Equal(ExpectedLast, last);
                 Assert.Equal(ExpectedNumber, number);
@@ -49,7 +49,7 @@
         [Fact]
         public async Task GivenAnIndexWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableEventStore();
+            var store = new TestableSynchronousEventStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.ReadAsync(3));
@@ -58,7 +58,7 @@
         [Fact]
         public async Task GivenLastIndexAndANumberWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
         {
-            var store = new TestableEventStore();
+            var store = new TestableSynchronousEventStore();
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(
                 () => store.ReadAsync(3, numberToRead: 2));
