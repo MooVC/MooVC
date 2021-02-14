@@ -129,6 +129,9 @@
   <data name="EnumerableExtensionsForAllActionRequired" xml:space="preserve">
     <value>The action to be performed in parallel must be provided.</value>
   </data>
+  <data name="EnumerableExtensionsForAllAsyncOperationRequired" xml:space="preserve">
+    <value>The operation to be performed in parallel must be provided.</value>
+  </data>
   <data name="EnumerableExtensionsIndexOfPredicateRequired" xml:space="preserve">
     <value>The predicate to be applied when searching for the index of the first occurance within the enumeration must be provided.</value>
   </data>
