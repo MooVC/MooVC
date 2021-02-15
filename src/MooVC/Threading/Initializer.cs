@@ -20,33 +20,40 @@
             this.initializer = initializer;
         }
 
+        public bool IsInitialized { get; private set; }
+
         public async Task<T> InitializeAsync()
         {
-            try
+            if (!IsInitialized)
             {
-                mutex.EnterUpgradeableReadLock();
-
-                if (resource is null)
+                try
                 {
-                    try
-                    {
-                        mutex.EnterWriteLock();
+                    mutex.EnterUpgradeableReadLock();
 
-                        resource = await initializer()
-                            .ConfigureAwait(false);
-                    }
-                    finally
+                    if (resource is null)
                     {
-                        mutex.ExitWriteLock();
+                        try
+                        {
+                            mutex.EnterWriteLock();
+
+                            resource = await initializer()
+                                .ConfigureAwait(false);
+
+                            IsInitialized = true;
+                        }
+                        finally
+                        {
+                            mutex.ExitWriteLock();
+                        }
                     }
                 }
-            }
-            finally
-            {
-                mutex.ExitUpgradeableReadLock();
+                finally
+                {
+                    mutex.ExitUpgradeableReadLock();
+                }
             }
 
-            return resource;
+            return resource!;
         }
     }
 }
