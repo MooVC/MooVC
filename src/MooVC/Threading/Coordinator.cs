@@ -26,11 +26,11 @@
             _ = Coordinate(context, InvokeOperation, timeout);
         }
 
-        public static async Task ApplyAsync(string context, Func<Task> operation, TimeSpan? timeout = default)
+        public static Task ApplyAsync(string context, Func<Task> operation, TimeSpan? timeout = default)
         {
             ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
 
-            await Coordinate(context, operation, timeout);
+            return Coordinate(context, operation, timeout);
         }
 
         private static T Coordinate<T>(string context, Func<T> operation, TimeSpan? timeout)

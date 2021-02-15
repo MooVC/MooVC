@@ -43,23 +43,23 @@
             }
         }
 
-        protected override async Task PerformStartAsync(CancellationToken cancellationToken)
+        protected override Task PerformStartAsync(CancellationToken cancellationToken)
         {
             _ = timer.Value.Change(initial, delay);
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        protected override async Task PerformStopAsync(CancellationToken cancellationToken)
+        protected override Task PerformStopAsync(CancellationToken cancellationToken)
         {
             _ = timer.Value.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        protected virtual async Task PerformTimerCallbackAsync()
+        protected virtual Task PerformTimerCallbackAsync()
         {
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         private async void TimerCallbackAsync(object? state)
