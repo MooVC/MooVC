@@ -1,15 +1,14 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 
-    public sealed class WhenCreateIsCalled
+    public sealed class WhenCreateAsyncIsCalled
         : MappedStoreTests
     {
         [Fact]
-        public void GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturned()
+        public async void GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturnedAsync()
         {
             bool wasInvoked = false;
 
@@ -26,16 +25,16 @@
             object item = new object();
 
             _ = Store
-                .Setup(store => store.Create(It.Is<object>(parameter => parameter == item)))
-                .Returns(expectedInnerKey);
+                .Setup(store => store.CreateAsync(It.Is<object>(parameter => parameter == item)))
+                .ReturnsAsync(expectedInnerKey);
 
             var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
-            Guid actualOutterKey = store.Create(item);
+            Guid actualOutterKey = await store.CreateAsync(item);
 
             Assert.True(wasInvoked);
             Assert.Equal(expectedOutterKey, actualOutterKey);
 
-            Store.Verify(store => store.Create(It.IsAny<object>()), times: Times.Once);
+            Store.Verify(store => store.CreateAsync(It.IsAny<object>()), times: Times.Once);
         }
     }
 }

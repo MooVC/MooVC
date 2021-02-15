@@ -40,20 +40,20 @@
         {
             IEnumerable<DiagnosticsEmittedEventArgs> expected = new[]
             {
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Critical },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Error },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Warning },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Information },
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Error),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Warning),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Information),
             };
 
             IEnumerable<DiagnosticsEmittedEventArgs> unexpected = new[]
             {
-                new DiagnosticsEmittedEventArgs { Level = Level.Critical },
-                new DiagnosticsEmittedEventArgs { Level = Level.Error },
-                new DiagnosticsEmittedEventArgs { Level = Level.Warning },
-                new DiagnosticsEmittedEventArgs { Level = Level.Information },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Debug },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Trace },
+                new DiagnosticsEmittedEventArgs(level: Level.Critical),
+                new DiagnosticsEmittedEventArgs(level: Level.Error),
+                new DiagnosticsEmittedEventArgs(level: Level.Warning),
+                new DiagnosticsEmittedEventArgs(level: Level.Information),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Debug),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Trace),
             };
 
             IEnumerable<DiagnosticsEmittedEventArgs> source = expected.Union(unexpected);
@@ -71,16 +71,16 @@
 
             IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
             {
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Critical },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(ExpectedMessage), Level = Level.Error },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Warning },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Information },
-                new DiagnosticsEmittedEventArgs { Level = Level.Critical },
-                new DiagnosticsEmittedEventArgs { Level = Level.Error },
-                new DiagnosticsEmittedEventArgs { Level = Level.Warning },
-                new DiagnosticsEmittedEventArgs { Level = Level.Information },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Debug },
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Trace },
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(ExpectedMessage), level: Level.Error),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Warning),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Information),
+                new DiagnosticsEmittedEventArgs(level: Level.Critical),
+                new DiagnosticsEmittedEventArgs(level: Level.Error),
+                new DiagnosticsEmittedEventArgs(level: Level.Warning),
+                new DiagnosticsEmittedEventArgs(level: Level.Information),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Debug),
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Trace),
             };
 
             AggregateException exception = Assert.Throws<AggregateException>(
@@ -97,7 +97,7 @@
 
             IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
             {
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Critical },
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw(level: Level.Trace, message: ExpectedMessage));
@@ -112,7 +112,7 @@
 
             IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
             {
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Critical },
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw((_, __) => true, message: ExpectedMessage));
@@ -127,7 +127,7 @@
 
             IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
             {
-                new DiagnosticsEmittedEventArgs { Cause = new Exception(), Level = Level.Critical },
+                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw(message: ExpectedMessage));

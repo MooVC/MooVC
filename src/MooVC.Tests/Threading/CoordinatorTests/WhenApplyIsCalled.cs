@@ -44,7 +44,7 @@
             Assert.Equal(ExpectedCount, counter);
         }
 
-        private Task[] CreateTasks(Action operation, int total)
+        private static Task[] CreateTasks(Action operation, int total)
         {
             var tasks = new List<Task>();
 

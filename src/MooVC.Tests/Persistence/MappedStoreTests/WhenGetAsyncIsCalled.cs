@@ -2,15 +2,14 @@
 {
     using System;
     using MooVC.Linq;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 
-    public sealed class WhenGetIsCalled
+    public sealed class WhenGetAsyncIsCalled
         : MappedStoreTests
     {
         [Fact]
-        public void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvoked()
+        public async void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
         {
             bool wasInvoked = false;
             string? expectedInnerKey = default;
@@ -28,29 +27,29 @@
             object expectedItem = new object();
 
             _ = Store
-                .Setup(store => store.Get(It.Is<string>(parameter => parameter == expectedInnerKey)))
-                .Returns(expectedItem);
+                .Setup(store => store.GetAsync(It.Is<string>(parameter => parameter == expectedInnerKey)))
+                .ReturnsAsync(expectedItem);
 
             var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-            object actualItem = store.Get(outterKey);
+            object? actualItem = await store.GetAsync(outterKey);
 
             Assert.True(wasInvoked);
             Assert.Equal(expectedItem, actualItem);
 
-            Store.Verify(store => store.Get(It.IsAny<string>()), times: Times.Once);
+            Store.Verify(store => store.GetAsync(It.IsAny<string>()), times: Times.Once);
         }
 
         [Fact]
-        public void GivenPagingThenTheInnerStoreIsInvoked()
+        public async void GivenPagingThenTheInnerStoreIsInvokedAsync()
         {
             var paging = new Paging();
 
             var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-            _ = store.Get(paging: paging);
+            _ = await store.GetAsync(paging: paging);
 
-            Store.Verify(store => store.Get(It.IsAny<Paging>()), times: Times.Once);
+            Store.Verify(store => store.GetAsync(It.IsAny<Paging>()), times: Times.Once);
         }
     }
 }

@@ -17,7 +17,9 @@
 
         [Theory]
         [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
-        public void GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturned(DateTime oldest, DateTime newest)
+        public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFuturetIsReturned(
+            DateTime oldest,
+            DateTime newest)
         {
             var first = new DateTimeOffset(oldest);
             var second = new DateTimeOffset(newest);
@@ -25,6 +27,20 @@
             DateTimeOffset selected = first.Max(second);
 
             Assert.Equal(second, selected);
+        }
+
+        [Theory]
+        [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
+        public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInTheFuturetIsReturned(
+            DateTime oldest,
+            DateTime newest)
+        {
+            var first = new DateTimeOffset(newest);
+            var second = new DateTimeOffset(oldest);
+
+            DateTimeOffset selected = first.Max(second);
+
+            Assert.Equal(first, selected);
         }
     }
 }

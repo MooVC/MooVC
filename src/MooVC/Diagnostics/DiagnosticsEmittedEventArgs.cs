@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using System.Runtime.Serialization;
     using MooVC.Serialization;
     using static System.String;
@@ -12,12 +11,18 @@
         : EventArgs,
           ISerializable
     {
-        private readonly Exception? cause;
-        private readonly Level level = Level.Information;
-        private readonly string message = string.Empty;
+        private Exception? cause;
+        private Level level = Level.Information;
+        private string message = string.Empty;
 
-        public DiagnosticsEmittedEventArgs()
+        public DiagnosticsEmittedEventArgs(
+            Exception? cause = default,
+            Level level = Level.Information,
+            string? message = default)
         {
+            Cause = cause;
+            Level = level;
+            Message = message;
         }
 
         private DiagnosticsEmittedEventArgs(SerializationInfo info, StreamingContext context)
@@ -30,7 +35,7 @@
         public Exception? Cause
         {
             get => cause;
-            init
+            private set
             {
                 if (value is { } && IsNullOrWhiteSpace(Message))
                 {
@@ -44,7 +49,7 @@
         public Level Level
         {
             get => level;
-            init
+            private set
             {
                 if (Enum.IsDefined(typeof(Level), value))
                 {
@@ -52,7 +57,7 @@
                 }
                 else
                 {
-                    level = Enum.GetValues<Level>().Max();
+                    level = Level.Critical;
                 }
             }
         }
@@ -61,7 +66,7 @@
         public string Message
         {
             get => message;
-            init
+            private set
             {
                 if (IsNullOrWhiteSpace(value))
                 {

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using MooVC.Linq;
     using static MooVC.Ensure;
     using static Resources;
@@ -27,40 +28,40 @@
             this.store = store;
         }
 
-        public TOutterKey Create(T item)
+        public async Task<TOutterKey> CreateAsync(T item)
         {
-            TInnerKey innerKey = store.Create(item);
+            TInnerKey innerKey = await store.CreateAsync(item);
 
             return outterMapping(item, innerKey);
         }
 
-        public void Delete(T item)
+        public async Task DeleteAsync(T item)
         {
-            store.Delete(item);
+            await store.DeleteAsync(item);
         }
 
-        public void Delete(TOutterKey outterKey)
+        public async Task DeleteAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            store.Delete(innerKey);
+            await store.DeleteAsync(innerKey);
         }
 
-        public T Get(TOutterKey outterKey)
+        public async Task<T?> GetAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            return store.Get(innerKey);
+            return await store.GetAsync(innerKey);
         }
 
-        public IEnumerable<T> Get(Paging? paging = default)
+        public async Task<IEnumerable<T>> GetAsync(Paging? paging = default)
         {
-            return store.Get(paging: paging);
+            return await store.GetAsync(paging: paging);
         }
 
-        public void Update(T item)
+        public async Task UpdateAsync(T item)
         {
-            store.Update(item);
+            await store.UpdateAsync(item);
         }
     }
 }

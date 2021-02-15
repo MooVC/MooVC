@@ -97,6 +97,15 @@ namespace MooVC.Collections.Generic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation to be performed in parallel must be provided..
+        /// </summary>
+        internal static string EnumerableExtensionsForAllAsyncOperationRequired {
+            get {
+                return ResourceManager.GetString("EnumerableExtensionsForAllAsyncOperationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The predicate to be applied when searching for the index of the first occurance within the enumeration must be provided..
         /// </summary>
         internal static string EnumerableExtensionsIndexOfPredicateRequired {

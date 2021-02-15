@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using MooVC.Diagnostics;
     using static System.String;
-    using static Resources;
+    using static MooVC.Processing.Resources;
 
     public class TimedProcessor
         : ThreadSafeProcessor,

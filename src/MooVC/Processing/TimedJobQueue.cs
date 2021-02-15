@@ -7,11 +7,13 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MooVC.Collections.Generic;
+    using MooVC.Diagnostics;
     using static MooVC.Ensure;
     using static MooVC.Processing.Resources;
 
     public abstract class TimedJobQueue<T>
-        : IDisposable
+        : IDisposable,
+          IEmitDiagnostics
     {
         private readonly ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
         private readonly TimedProcessor timer;
@@ -24,6 +26,8 @@
             this.timer = timer;
             this.timer.Triggered += Timer_Triggered;
         }
+
+        public event DiagnosticsEmittedEventHandler? DiagnosticsEmitted;
 
         public bool HasJobsPending => queue.Any();
 
@@ -54,21 +58,22 @@
             }
         }
 
-        protected abstract void OnFailureEncountered(Exception failure);
+        protected virtual void OnDiagnosticsEmitted(
+            Level level,
+            Exception? cause = default,
+            string? message = default)
+        {
+            DiagnosticsEmitted?.Invoke(
+                this,
+                new DiagnosticsEmittedEventArgs(
+                    cause: cause,
+                    level: level,
+                    message: message));
+        }
 
         protected abstract IEnumerable<T> Process(IEnumerable<T> jobs);
 
-        private async Task StartTimerAsync()
-        {
-            if (HasJobsPending)
-            {
-                _ = await timer
-                    .TryStartAsync(CancellationToken.None)
-                    .ConfigureAwait(false);
-            }
-        }
-
-        private async void Timer_Triggered(object? sender, EventArgs e)
+        private async Task ProcessQueueAsync()
         {
             var pending = new List<T>();
 
@@ -95,8 +100,27 @@
             }
             catch (Exception failure)
             {
-                OnFailureEncountered(failure);
+                OnDiagnosticsEmitted(
+                    Level.Error,
+                    cause: failure,
+                    message: TimedJobQueueProcessQueueAsyncFailure);
             }
+        }
+
+        private async Task StartTimerAsync()
+        {
+            if (HasJobsPending)
+            {
+                _ = await timer
+                    .TryStartAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
+            }
+        }
+
+        private async void Timer_Triggered(object? sender, EventArgs e)
+        {
+            await ProcessQueueAsync()
+                .ConfigureAwait(false);
         }
     }
 }

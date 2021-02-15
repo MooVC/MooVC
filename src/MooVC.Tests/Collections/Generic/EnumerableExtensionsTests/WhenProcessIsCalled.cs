@@ -94,5 +94,15 @@
 
             Assert.Equal(nameof(transform), exception.ParamName);
         }
+
+        [Fact]
+        public void GivenASourceWhenATransformIsProvidedThatReturnsANullResponseThenResultsReturnedAreEmpty()
+        {
+            IEnumerable<int> source = new[] { 1, 2, 3 };
+            IEnumerable<object> results = source.Process(value => default(object)!);
+
+            Assert.NotNull(results);
+            Assert.Empty(results);
+        }
     }
 }

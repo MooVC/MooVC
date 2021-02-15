@@ -12,33 +12,36 @@ While the original MooVC PHP based framework has long since been deprecated, man
 
 ## Overview
 
-MooVC has been upgraded to target .Net 5.0, taking advantage of the many new language features which can be found [here](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five).
+MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advantage of the many new language features which can be found [here](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five).
 
 ## Enhancements
 
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
-- Added Async variants of Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore.
-- Added Async variant of Threading.Coordinator.Apply.
+- Added an async variant of Collections.Generic.EnumerableExtensions.ForAll.
+- Added an async variant of Threading.Coordinator.Apply.
 - Added new Min and Max extensions for DateTimeOffset.
 - Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
 - Added Serialization.ICloner to facilitate migration from the Serialization.Clone extension by supporting a range of possible implementations.
+- Added Persistence.SynchronousStore and Persistence.SynchronousEventStore to facilitate migration from synchronous to asynchronous implementations of Persistence.IEventStore, Persistence.IStore.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
+- Changed Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore to only support async variants of each operation (**Breaking Change**).
 - Changed Processing.IProcessor so that it now inherits from Microsoft.Extensions.Hosting.IHostedService (**Breaking Change**).
-- Changed the constituents of Processing namespace to account for new Processing.IProcessor signature.
 - Changed Processing.ProcessorStateChangedEventArgs so that it is now serializable.
 - Changed Processing.StartOperationInvalidException so that it is now serializable.
 - Changed Processing.StopOperationInvalidException so that it is now serializable.
+- Changed Processing.TimedJobQueue to implement IEmitDiagnostics (**Breaking Change**).
+- Changed the constituents of Processing namespace to account for new Processing.IProcessor signature.
 - Changed the type of the first parameter of Processing.ProcessorStateChangedEventHandler to IProcessor (**Breaking Change**).
 - Changed Linq.Paging to a Record type (**Breaking Change**).
 - Changed TimedProcessor to comform to the new IProcessor interface (**Breaking Change**).
-- Modified Serialization extensions to account for null state (**Breaking Change**).
 - Deleted Net.ICredentialProvider from the Net namespace (**Breaking Change**).
 - Deleted Persistence.EmittedEventArgs<T> from the Persistence namespace (**Breaking Change**).
-- Deleted Serialization.Clone extension (**Breaking Change**).
 - Deleted the Logging namespace (**Breaking Change**).
 - Deleted the Transactions namespace (**Breaking Change**). 
+- Marked the Serialization.Clone extension as obsolete to encourage migration to the Serialization.ICloner alternative.
+- Modified Serialization extensions to account for null state (**Breaking Change**).
 
 ## Bug Fixes
 
@@ -57,13 +60,13 @@ The Aggregate extension has also been replaced with two new extensions.  The fir
 
 The IHostedService from Microsoft.Extensions.Hosting addresses many of the core features offered by IProcessor.  Two features found absent are the ability to determine the state of the processor and the ability guarantee thread safety.  It has therefore been decided to retain IProcessor, with the caveat that it will now implement the Microsoft.Extensions.Hosting.IHostedService interface, thereby allowing for processors implementations to be consumed by a more broad range of consumers.  A new ThreadSafeHostedService has also been added to enable IHostedServices to gain the aforementioned traits of IProcessor, should they be required.  As there are significant differences between the original and new IProcessor implementations, significant impact on existing code consumers is expected.
 
-### Serialization.Clone (Impact: High)
-
-The Clone extension was deemed to be very useful, particular on test projects.  Regretable, the BinaryFormatter used to implement the extension has been marked obsolette and is disabled in ASP.NET apps since Net 5 (see [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)).  The suggested alternatives provided directly by the framework have proven to be unworkable, producing failures in a wide range of possible serialization scenarios.  As the MooVC framework is intended to provide functionalities common to all applications, coupling MooVC to a third-party package to restore this feature was deemed to be inappropriate.  In an effort to facilitate migration, a new Serialization.ICloner interface was added, with a BinaryFormatterCloner provided that offers functionality equal to that of the original Serialization.Clone extension.  This implementation can be used in the short term, with an eye towards utilizing an alternative long term solution via the same interface.
-
 ### Null State (Impact: Medium)
 
 The signatures of a number of serialization extensions have been changed to facilitate the propagation of null values.  As the previous variants did not explicitly permit null, it has been assumed that a default value should be used and, where not available, an exception thrown.  Default values will apply to String (Empty) and IEnumerable<T> (new T[0]), with a SerializationException throw for Value<T> as it is not possible to determine the default in this circumstance.
+
+### Serialization.Clone (Impact: Low)
+
+The Clone extension was deemed to be very useful, particular on test projects.  Regretable, the BinaryFormatter used to implement the extension has been marked obsolette and is disabled in ASP.NET apps since Net 5 (see [here](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)).  The suggested alternatives provided directly by the framework have proven to be unworkable, producing failures in a wide range of possible serialization scenarios.  As the MooVC framework is intended to provide functionalities common to all applications, coupling MooVC to a third-party package to restore this feature was deemed to be inappropriate.  In an effort to facilitate migration, a new Serialization.ICloner interface was added, with a BinaryFormatterCloner provided that offers functionality equal to that of the original Serialization.Clone extension.  This implementation can be used in the short term, with an eye towards utilizing an alternative long term solution via the same interface.
 
 ### Linq.Paging (Impact: Low)
 
@@ -80,6 +83,10 @@ The EmittedEventArgs<T> class was not used anywhere in the MooVC framework or wi
 ### Processing.ProcessorStateChangedEventHandler (Impact: None)
 
 The event handler requires an argument that was previously only possible to create internally.  It is therefore expected that this change will have zero impact.
+
+### Processing.TimedJobQueue (Impact Low)
+
+Processing.TimedJobQueue now implements Diagnostics.IEmitDiagnostics.  As a result, the OnFailureEncountered abstract method has been removed in favour of a new virtual OnDiagnosticsEmitted method.  Derivations of Processing.TimedJobQueue should now either A) remove their OnFailureEncountered overrides or B) override OnDiagnosticsEmitted and reimplement their OnFailureEncountered here.
 
 ### Transactions (Impact: Low)
 

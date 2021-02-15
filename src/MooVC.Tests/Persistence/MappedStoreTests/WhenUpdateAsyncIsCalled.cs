@@ -1,21 +1,20 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 
-    public sealed class WhenUpdateIsCalled
+    public sealed class WhenUpdateAsyncIsCalled
         : MappedStoreTests
     {
         [Fact]
-        public void GivenAnItemThenTheInnerStoreIsInvoked()
+        public async void GivenAnItemThenTheInnerStoreIsInvokedAsync()
         {
             var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-            store.Update(new object());
+            await store.UpdateAsync(new object());
 
-            Store.Verify(store => store.Update(It.IsAny<object>()), times: Times.Once);
+            Store.Verify(store => store.UpdateAsync(It.IsAny<object>()), times: Times.Once);
         }
     }
 }

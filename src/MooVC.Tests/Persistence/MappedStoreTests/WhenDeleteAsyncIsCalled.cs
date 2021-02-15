@@ -1,12 +1,11 @@
-﻿namespace MooVC.Persistence.AsyncMappedStoreTests
+﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
-    using MooVC.Persistence;
     using Moq;
     using Xunit;
 
     public sealed class WhenDeleteAsyncIsCalled
-        : AsyncMappedStoreTests
+        : MappedStoreTests
     {
         [Fact]
         public async void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
@@ -25,7 +24,7 @@
 
             var key = Guid.NewGuid();
 
-            var store = new AsyncMappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
+            var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
             await store.DeleteAsync(key);
 
@@ -40,7 +39,7 @@
         {
             object item = new object();
 
-            var store = new AsyncMappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+            var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
             await store.DeleteAsync(item);
 

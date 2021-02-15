@@ -43,7 +43,7 @@
 
         public Guid Value2 { get; init; }
 
-        public IEnumerable<int> Enumerable { get; init; } = new int[0];
+        public IEnumerable<int> Enumerable { get; init; } = Array.Empty<int>();
 
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
     }

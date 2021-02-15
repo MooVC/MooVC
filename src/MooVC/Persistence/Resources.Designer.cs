@@ -63,33 +63,6 @@ namespace MooVC.Persistence {
         /// <summary>
         ///   Looks up a localized string similar to The mapping between the outter store and the inner store must be provided..
         /// </summary>
-        internal static string AsyncMappedStoreInnerMappingRequired {
-            get {
-                return ResourceManager.GetString("AsyncMappedStoreInnerMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mapping between the inner store and the outter store must be provided..
-        /// </summary>
-        internal static string AsyncMappedStoreOutterMappingRequired {
-            get {
-                return ResourceManager.GetString("AsyncMappedStoreOutterMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The inner store must be provided..
-        /// </summary>
-        internal static string AsyncMappedStoreStoreRequired {
-            get {
-                return ResourceManager.GetString("AsyncMappedStoreStoreRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mapping between the outter store and the inner store must be provided..
-        /// </summary>
         internal static string MappedStoreInnerMappingRequired {
             get {
                 return ResourceManager.GetString("MappedStoreInnerMappingRequired", resourceCulture);
