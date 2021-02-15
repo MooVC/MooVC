@@ -86,5 +86,14 @@ namespace MooVC.Threading {
                 return ResourceManager.GetString("CoordinatorApplyTimeout", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The initialization factory must be provided..
+        /// </summary>
+        internal static string InitializerInitializerRequired {
+            get {
+                return ResourceManager.GetString("InitializerInitializerRequired", resourceCulture);
+            }
+        }
     }
 }
