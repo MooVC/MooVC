@@ -19,6 +19,7 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
 - Added an async variant of Collections.Generic.EnumerableExtensions.ForAll.
+- Added an async variant of Collections.Generic.EnumerableExtensions.ProcessAll.
 - Added an async variant of Threading.Coordinator.Apply.
 - Added new Min and Max extensions for DateTimeOffset.
 - Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
