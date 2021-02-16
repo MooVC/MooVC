@@ -39,7 +39,7 @@
                             if (!IsInitialized)
                             {
                                 resource = await initializer()
-                                .ConfigureAwait(false);
+                                    .ConfigureAwait(false);
 
                                 IsInitialized = resource is { };
                             }
