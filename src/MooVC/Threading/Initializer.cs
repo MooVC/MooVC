@@ -7,7 +7,7 @@
     using static MooVC.Threading.Resources;
 
     public sealed class Initializer<T>
-        where T : class
+        where T : notnull
     {
         private readonly Func<Task<T>> initializer;
         private readonly ReaderWriterLockSlim mutex = new ReaderWriterLockSlim();
