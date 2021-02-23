@@ -16,12 +16,17 @@
         }
 
         [Fact]
-        public void GivenANullHostedServiceThenAnArgumentNullExceptionIsThrown()
+        public void GivenANullHostedServicesThenAnArgumentNullExceptionIsThrown()
         {
-            IHostedService? service = default;
+            _ = Assert.Throws<ArgumentNullException>(
+                () => _ = new ThreadSafeHostedService(default!));
+        }
 
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => _ = new ThreadSafeHostedService(service!));
+        [Fact]
+        public void GivenNoHostedServicesThenAnArgumentExceptionIsThrown()
+        {
+            _ = Assert.Throws<ArgumentException>(
+                () => _ = new ThreadSafeHostedService());
         }
     }
 }

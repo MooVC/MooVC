@@ -106,11 +106,11 @@ namespace MooVC.Processing {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The service that is to be the subject of this processor must be provided..
+        ///   Looks up a localized string similar to The services that are to be the subject of this processor must be provided..
         /// </summary>
-        internal static string ThreadSafeHostedServiceServiceRequired {
+        internal static string ThreadSafeHostedServiceServicesRequired {
             get {
-                return ResourceManager.GetString("ThreadSafeHostedServiceServiceRequired", resourceCulture);
+                return ResourceManager.GetString("ThreadSafeHostedServiceServicesRequired", resourceCulture);
             }
         }
         
