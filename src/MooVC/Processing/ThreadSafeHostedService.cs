@@ -14,7 +14,7 @@
     {
         private readonly IEnumerable<IHostedService> services;
 
-        public ThreadSafeHostedService(params IHostedService[] services)
+        public ThreadSafeHostedService(IEnumerable<IHostedService> services)
         {
             ArgumentIsAcceptable(
                 services,
