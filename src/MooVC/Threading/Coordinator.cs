@@ -16,24 +16,26 @@
         {
             ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
 
-            object? InvokeOperation()
+            Task InvokeOperation()
             {
                 operation();
 
-                return default;
+                return Task.CompletedTask;
             }
 
-            _ = Coordinate(context, InvokeOperation, timeout);
+            CoordinateAsync(context, InvokeOperation, timeout)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public static Task ApplyAsync(string context, Func<Task> operation, TimeSpan? timeout = default)
         {
             ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
 
-            return Coordinate(context, operation, timeout);
+            return CoordinateAsync(context, operation, timeout);
         }
 
-        private static T Coordinate<T>(string context, Func<T> operation, TimeSpan? timeout)
+        private static async Task CoordinateAsync(string context, Func<Task> operation, TimeSpan? timeout)
         {
             ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyContextRequired);
 
@@ -45,7 +47,7 @@
             {
                 try
                 {
-                    return operation();
+                    await operation();
                 }
                 finally
                 {

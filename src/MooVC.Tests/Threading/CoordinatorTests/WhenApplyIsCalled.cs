@@ -13,7 +13,8 @@
         [InlineData(" ")]
         public void GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown(string? context)
         {
-            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply(context!, () => { }));
+            _ = Assert.Throws<ArgumentNullException>(
+                () => Coordinator.Apply(context!, () => { }));
         }
 
         [Fact]
@@ -21,7 +22,24 @@
         {
             Action? action = default;
 
-            _ = Assert.Throws<ArgumentNullException>(() => Coordinator.Apply("Valid", action!));
+            _ = Assert.Throws<ArgumentNullException>(
+                () => Coordinator.Apply("Valid", action!));
+        }
+
+        [Fact]
+        public void GivenAnExceptionThenTheExceptionIsThrown()
+        {
+            var expected = new InvalidOperationException();
+
+            void Operation()
+            {
+                throw expected;
+            }
+
+            InvalidOperationException actual = Assert.Throws<InvalidOperationException>(
+                () => Coordinator.Apply("Valid", Operation));
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
