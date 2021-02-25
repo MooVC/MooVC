@@ -33,6 +33,65 @@
         }
 
         [Fact]
+        public async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceAsync()
+        {
+            const int ExpectedInvocations = 1;
+            int invocations = 0;
+
+            Task<object> Initializer()
+            {
+                invocations++;
+
+                return Task.FromResult(new object());
+            }
+
+            var initializer = new Initializer<object>(Initializer);
+
+            _ = await initializer
+                .InitializeAsync()
+                .ConfigureAwait(false);
+
+            _ = await initializer
+                .InitializeAsync()
+                .ConfigureAwait(false);
+
+            _ = await initializer
+                .InitializeAsync()
+                .ConfigureAwait(false);
+
+            Assert.Equal(ExpectedInvocations, invocations);
+        }
+
+        [Fact]
+        public async Task GivenAnInitializerWhenAwaitedTogetherThenTheInitializerIsOnlyCalledOnceAsync()
+        {
+            const int ExpectedInvocations = 1;
+            int invocations = 0;
+
+            Task<object> Initializer()
+            {
+                invocations++;
+
+                return Task.FromResult(new object());
+            }
+
+            var initializer = new Initializer<object>(Initializer);
+
+            Task<object>[] tasks = new[]
+            {
+                initializer.InitializeAsync(),
+                initializer.InitializeAsync(),
+                initializer.InitializeAsync(),
+            };
+
+            _ = await Task
+                .WhenAll(tasks)
+                .ConfigureAwait(false);
+
+            Assert.Equal(ExpectedInvocations, invocations);
+        }
+
+        [Fact]
         public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
         {
             static Task<object> Initializer()
@@ -43,6 +102,19 @@
             var initializer = new Initializer<object>(Initializer);
 
             _ = await Assert.ThrowsAsync<NotImplementedException>(() => initializer.InitializeAsync());
+        }
+
+        [Fact]
+        public async Task GivenAFailureToInitializeThenAnInvalidOperationExceptionIsThrown()
+        {
+            static Task<object> Initializer()
+            {
+                return Task.FromResult<object>(default!);
+            }
+
+            var initializer = new Initializer<object>(Initializer);
+
+            _ = await Assert.ThrowsAsync<InvalidOperationException>(() => initializer.InitializeAsync());
         }
     }
 }

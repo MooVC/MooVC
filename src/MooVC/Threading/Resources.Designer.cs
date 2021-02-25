@@ -88,6 +88,15 @@ namespace MooVC.Threading {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The initialization has failed to return the required instance..
+        /// </summary>
+        internal static string InitializerInitializeAsyncResourceRequired {
+            get {
+                return ResourceManager.GetString("InitializerInitializeAsyncResourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The initialization factory must be provided..
         /// </summary>
         internal static string InitializerInitializerRequired {

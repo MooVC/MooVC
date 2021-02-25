@@ -10,7 +10,7 @@
         where T : notnull
     {
         private readonly Func<Task<T>> initializer;
-        private readonly ReaderWriterLockSlim mutex = new ReaderWriterLockSlim();
+        private readonly SemaphoreSlim mutex = new SemaphoreSlim(1, 1);
         private T? resource;
 
         public Initializer(Func<Task<T>> initializer)
@@ -26,32 +26,25 @@
         {
             if (!IsInitialized)
             {
-                mutex.EnterUpgradeableReadLock();
+                await mutex.WaitAsync();
 
                 try
                 {
                     if (!IsInitialized)
                     {
-                        mutex.EnterWriteLock();
+                        resource = await initializer();
 
-                        try
+                        if (resource is null)
                         {
-                            if (!IsInitialized)
-                            {
-                                resource = await initializer();
+                            throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
+                        }
 
-                                IsInitialized = resource is { };
-                            }
-                        }
-                        finally
-                        {
-                            mutex.ExitWriteLock();
-                        }
+                        IsInitialized = true;
                     }
                 }
                 finally
                 {
-                    mutex.ExitUpgradeableReadLock();
+                    _ = mutex.Release();
                 }
             }
 
