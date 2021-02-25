@@ -26,20 +26,19 @@
         {
             if (!IsInitialized)
             {
+                mutex.EnterUpgradeableReadLock();
+
                 try
                 {
-                    mutex.EnterUpgradeableReadLock();
-
                     if (!IsInitialized)
                     {
+                        mutex.EnterWriteLock();
+
                         try
                         {
-                            mutex.EnterWriteLock();
-
                             if (!IsInitialized)
                             {
-                                resource = await initializer()
-                                    .ConfigureAwait(false);
+                                resource = await initializer();
 
                                 IsInitialized = resource is { };
                             }
