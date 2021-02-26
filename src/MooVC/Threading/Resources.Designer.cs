@@ -63,27 +63,27 @@ namespace MooVC.Threading {
         /// <summary>
         ///   Looks up a localized string similar to The coordination context must be provided..
         /// </summary>
-        internal static string CoordinatorApplyContextRequired {
+        internal static string CoordinatorApplyAsyncContextRequired {
             get {
-                return ResourceManager.GetString("CoordinatorApplyContextRequired", resourceCulture);
+                return ResourceManager.GetString("CoordinatorApplyAsyncContextRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The operation to be coordinated must be provided..
         /// </summary>
-        internal static string CoordinatorApplyOperationRequired {
+        internal static string CoordinatorApplyAsyncOperationRequired {
             get {
-                return ResourceManager.GetString("CoordinatorApplyOperationRequired", resourceCulture);
+                return ResourceManager.GetString("CoordinatorApplyAsyncOperationRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to A request to coordinate an operation in the context of {0} has timed out..
         /// </summary>
-        internal static string CoordinatorApplyTimeout {
+        internal static string CoordinatorApplyAsyncTimeout {
             get {
-                return ResourceManager.GetString("CoordinatorApplyTimeout", resourceCulture);
+                return ResourceManager.GetString("CoordinatorApplyAsyncTimeout", resourceCulture);
             }
         }
         

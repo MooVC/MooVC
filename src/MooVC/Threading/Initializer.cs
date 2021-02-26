@@ -22,11 +22,11 @@
 
         public bool IsInitialized { get; private set; }
 
-        public async Task<T> InitializeAsync()
+        public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
         {
             if (!IsInitialized)
             {
-                await mutex.WaitAsync();
+                await mutex.WaitAsync(cancellationToken ?? CancellationToken.None);
 
                 try
                 {
