@@ -19,11 +19,12 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
 - Added an async variant of Collections.Generic.EnumerableExtensions.ForAll.
-- Added an async variant of Threading.Coordinator.Apply.
+- Added an async variant of Collections.Generic.EnumerableExtensions.ProcessAll.
 - Added new Min and Max extensions for DateTimeOffset.
+- Added Persistence.SynchronousStore and Persistence.SynchronousEventStore to facilitate migration from synchronous to asynchronous implementations of Persistence.IEventStore, Persistence.IStore.
 - Added Processing.ThreadSafeHostedService, a class designed to enabled IHostedServices to take advantage of the thread safe features offered by the Processing.ThreadSafeProcessor.
 - Added Serialization.ICloner to facilitate migration from the Serialization.Clone extension by supporting a range of possible implementations.
-- Added Persistence.SynchronousStore and Persistence.SynchronousEventStore to facilitate migration from synchronous to asynchronous implementations of Persistence.IEventStore, Persistence.IStore.
+- Added Threading.Initializer to support async lazy initialization.
 - Annotated extensions to better support static analysis for null state.
 - Created new contextual resource files and migrated resources from centralized resource file.
 - Changed Persistence.IEventStore, Persistence.IStore and Persistence.MappedStore to only support async variants of each operation (**Breaking Change**).
@@ -42,6 +43,7 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 - Deleted the Transactions namespace (**Breaking Change**). 
 - Marked the Serialization.Clone extension as obsolete to encourage migration to the Serialization.ICloner alternative.
 - Modified Serialization extensions to account for null state (**Breaking Change**).
+- Replaced Threading.Coordinator.Apply with an async variant that uses SemaphoreSlim instead of Monitor (**Breaking Change**).
 
 ## Bug Fixes
 
@@ -49,6 +51,10 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 - Paging is now correctly annotated as ISerializable.
 
 ## End-User Impact
+
+### Threading.Coordinator.Apply
+
+It proved difficult to implement an approach that could successfully and efficiently coordinate in both synchronous and asynchrous modes. As much of the .Net Framework has moved towards async only operations, it was decided to offer the async variant only.  All existing calls to Apply will need to be changed to target ApplyAync, with caution advised when attempting to synchronize a task.  Please see https://docs.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming for more infromation.
 
 ### Logging (Impact: High)
 

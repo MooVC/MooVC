@@ -12,35 +12,35 @@
             return await Task.FromResult(PerformCreate(item));
         }
 
-        public virtual async Task DeleteAsync(T item)
+        public virtual Task DeleteAsync(T item)
         {
             PerformDelete(item);
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public virtual async Task DeleteAsync(TKey key)
+        public virtual Task DeleteAsync(TKey key)
         {
             PerformDelete(key);
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public virtual async Task<T?> GetAsync(TKey key)
+        public virtual Task<T?> GetAsync(TKey key)
         {
-            return await Task.FromResult(PerformGet(key));
+            return Task.FromResult(PerformGet(key));
         }
 
-        public virtual async Task<IEnumerable<T>> GetAsync(Paging? paging = default)
+        public virtual Task<IEnumerable<T>> GetAsync(Paging? paging = default)
         {
-            return await Task.FromResult(PerformGet(paging: paging));
+            return Task.FromResult(PerformGet(paging: paging));
         }
 
-        public virtual async Task UpdateAsync(T item)
+        public virtual Task UpdateAsync(T item)
         {
             PerformUpdate(item);
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         protected abstract TKey PerformCreate(T item);

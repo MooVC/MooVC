@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests
 {
     using System;
+    using System.Linq;
     using Microsoft.Extensions.Hosting;
     using Moq;
     using Xunit;
@@ -12,16 +13,21 @@
         {
             var service = new Mock<IHostedService>();
 
-            _ = new ThreadSafeHostedService(service.Object);
+            _ = new ThreadSafeHostedService(new[] { service.Object });
         }
 
         [Fact]
-        public void GivenANullHostedServiceThenAnArgumentNullExceptionIsThrown()
+        public void GivenANullHostedServicesThenAnArgumentNullExceptionIsThrown()
         {
-            IHostedService? service = default;
+            _ = Assert.Throws<ArgumentNullException>(
+                () => _ = new ThreadSafeHostedService(default!));
+        }
 
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => _ = new ThreadSafeHostedService(service!));
+        [Fact]
+        public void GivenNoHostedServicesThenAnArgumentExceptionIsThrown()
+        {
+            _ = Assert.Throws<ArgumentException>(
+                () => _ = new ThreadSafeHostedService(Enumerable.Empty<IHostedService>()));
         }
     }
 }

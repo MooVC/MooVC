@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoordinatorApplyContextRequired" xml:space="preserve">
+  <data name="CoordinatorApplyAsyncContextRequired" xml:space="preserve">
     <value>The coordination context must be provided.</value>
   </data>
-  <data name="CoordinatorApplyOperationRequired" xml:space="preserve">
+  <data name="CoordinatorApplyAsyncOperationRequired" xml:space="preserve">
     <value>The operation to be coordinated must be provided.</value>
   </data>
-  <data name="CoordinatorApplyTimeout" xml:space="preserve">
+  <data name="CoordinatorApplyAsyncTimeout" xml:space="preserve">
     <value>A request to coordinate an operation in the context of {0} has timed out.</value>
+  </data>
+  <data name="InitializerInitializeAsyncResourceRequired" xml:space="preserve">
+    <value>The initialization has failed to return the required instance.</value>
+  </data>
+  <data name="InitializerInitializerRequired" xml:space="preserve">
+    <value>The initialization factory must be provided.</value>
   </data>
 </root>

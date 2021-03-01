@@ -10,51 +10,38 @@
 
     public sealed class Coordinator
     {
-        private static readonly ConcurrentDictionary<string, object> contexts = new ConcurrentDictionary<string, object>();
+        private static readonly ConcurrentDictionary<string, SemaphoreSlim> contexts
+            = new ConcurrentDictionary<string, SemaphoreSlim>();
 
-        public static void Apply(string context, Action operation, TimeSpan? timeout = default)
+        public static async Task ApplyAsync(
+            string context,
+            Func<Task> operation,
+            CancellationToken? cancellationToken = default,
+            TimeSpan? timeout = default)
         {
-            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
+            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyAsyncContextRequired);
+            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyAsyncOperationRequired);
 
-            object? InvokeOperation()
-            {
-                operation();
+            SemaphoreSlim semaphore = contexts.GetOrAdd(context, _ => new SemaphoreSlim(1, 1));
 
-                return default;
-            }
+            bool isSuccessful = await semaphore.WaitAsync(
+                timeout ?? Timeout.InfiniteTimeSpan,
+                cancellationToken ?? CancellationToken.None);
 
-            _ = Coordinate(context, InvokeOperation, timeout);
-        }
-
-        public static async Task ApplyAsync(string context, Func<Task> operation, TimeSpan? timeout = default)
-        {
-            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
-
-            await Coordinate(context, operation, timeout);
-        }
-
-        private static T Coordinate<T>(string context, Func<T> operation, TimeSpan? timeout)
-        {
-            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyContextRequired);
-
-            timeout ??= Timeout.InfiniteTimeSpan;
-
-            object monitor = contexts.GetOrAdd(context, _ => new object());
-
-            if (Monitor.TryEnter(monitor, timeout.Value))
+            if (isSuccessful)
             {
                 try
                 {
-                    return operation();
+                    await operation();
                 }
                 finally
                 {
-                    Monitor.Exit(monitor);
+                    _ = semaphore.Release();
                 }
             }
             else
             {
-                throw new TimeoutException(Format(CoordinatorApplyTimeout, context));
+                throw new TimeoutException(Format(CoordinatorApplyAsyncTimeout, context));
             }
         }
     }

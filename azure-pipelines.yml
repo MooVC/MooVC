@@ -24,6 +24,7 @@ variables:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
   solution: '**/*.sln'
+  versions: '-p:AssemblyVersion="$(GitVersion.AssemblySemVer)" -p:FileVersion="$(GitVersion.AssemblySemFileVer)" -p:InformationalVersion="$(GitVersion.InformationalVersion)" -p:PackageVersion="$(GitVersion.NuGetVersion)" -p:Version="$(GitVersion.AssemblySemVer)'
 
 steps:
 - checkout: self
@@ -54,7 +55,7 @@ steps:
   condition: succeeded()
   displayName: 'Build Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+    arguments: '--configuration $(buildConfiguration) --no-restore $(versions)'
     command: 'build'
     projects: '$(solution)'
 

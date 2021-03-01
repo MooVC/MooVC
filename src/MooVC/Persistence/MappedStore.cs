@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using MooVC.Linq;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Persistence.Resources;
 
     public sealed class MappedStore<T, TOutterKey, TInnerKey>
         : IStore<T, TOutterKey>
@@ -35,33 +35,33 @@
             return outterMapping(item, innerKey);
         }
 
-        public async Task DeleteAsync(T item)
+        public Task DeleteAsync(T item)
         {
-            await store.DeleteAsync(item);
+            return store.DeleteAsync(item);
         }
 
-        public async Task DeleteAsync(TOutterKey outterKey)
+        public Task DeleteAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            await store.DeleteAsync(innerKey);
+            return store.DeleteAsync(innerKey);
         }
 
-        public async Task<T?> GetAsync(TOutterKey outterKey)
+        public Task<T?> GetAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            return await store.GetAsync(innerKey);
+            return store.GetAsync(innerKey);
         }
 
-        public async Task<IEnumerable<T>> GetAsync(Paging? paging = default)
+        public Task<IEnumerable<T>> GetAsync(Paging? paging = default)
         {
-            return await store.GetAsync(paging: paging);
+            return store.GetAsync(paging: paging);
         }
 
-        public async Task UpdateAsync(T item)
+        public Task UpdateAsync(T item)
         {
-            await store.UpdateAsync(item);
+            return store.UpdateAsync(item);
         }
     }
 }

@@ -16,7 +16,7 @@
         public WhenTryStartAsyncIsCalled()
         {
             service = new Mock<IHostedService>();
-            processor = new ThreadSafeHostedService(service.Object);
+            processor = new ThreadSafeHostedService(new[] { service.Object });
         }
 
         [Fact]

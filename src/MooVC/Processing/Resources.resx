@@ -132,8 +132,8 @@
   <data name="StopOperationInvalidExceptionMessage" xml:space="preserve">
     <value>The process cannot be stopped because another process has initiated a Stop operation.</value>
   </data>
-  <data name="ThreadSafeHostedServiceServiceRequired" xml:space="preserve">
-    <value>The service that is to be the subject of this processor must be provided.</value>
+  <data name="ThreadSafeHostedServiceServicesRequired" xml:space="preserve">
+    <value>The services that are to be the subject of this processor must be provided.</value>
   </data>
   <data name="TimedJobQueueProcessQueueAsyncFailure" xml:space="preserve">
     <value>A failure has prevented the successful processing of the job queue.</value>

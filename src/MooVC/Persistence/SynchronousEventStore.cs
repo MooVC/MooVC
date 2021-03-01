@@ -7,19 +7,19 @@
         : IEventStore<T, TIndex>
         where T : class
     {
-        public virtual async Task<TIndex> InsertAsync(T @event)
+        public virtual Task<TIndex> InsertAsync(T @event)
         {
-            return await Task.FromResult(PerformInsert(@event));
+            return Task.FromResult(PerformInsert(@event));
         }
 
-        public virtual async Task<T?> ReadAsync(TIndex index)
+        public virtual Task<T?> ReadAsync(TIndex index)
         {
-            return await Task.FromResult(PerformRead(index));
+            return Task.FromResult(PerformRead(index));
         }
 
-        public virtual async Task<IEnumerable<T>> ReadAsync(TIndex lastIndex, ushort numberToRead = 10)
+        public virtual Task<IEnumerable<T>> ReadAsync(TIndex lastIndex, ushort numberToRead = 10)
         {
-            return await Task.FromResult(PerformRead(lastIndex, numberToRead: numberToRead));
+            return Task.FromResult(PerformRead(lastIndex, numberToRead: numberToRead));
         }
 
         protected abstract TIndex PerformInsert(T @event);
