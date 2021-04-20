@@ -16,6 +16,7 @@ MooVC has been upgraded to target .Net Standard 2.1 and .Net 5.0, taking advanta
 
 ## Enhancements
 
+- Added a new Collections.Generic.DictionaryExtensions.Snapshot extension that will produce a shallow copy of a dictionary.
 - Added a new Diagnostics namespace, intended to support a more scalable variant of passive information emission than that provided by the Logging namespace.
 - Added a new variant of Ensure.ArgumentIsAcceptable that does not require a message.
 - Added an async variant of Collections.Generic.EnumerableExtensions.ForAll.
