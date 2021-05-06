@@ -8,10 +8,9 @@
     using static MooVC.Ensure;
     using static MooVC.Threading.Resources;
 
-    public sealed class Coordinator
+    public static class Coordinator
     {
-        private static readonly ConcurrentDictionary<string, SemaphoreSlim> contexts
-            = new ConcurrentDictionary<string, SemaphoreSlim>();
+        private static readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
 
         public static async Task ApplyAsync(
             string context,

@@ -10,7 +10,7 @@ namespace MooVC.Collections.Generic
     {
         public static T[] Snapshot<T>(this IEnumerable<T>? enumerable)
         {
-            return enumerable?.ToArray() ?? new T[0];
+            return enumerable?.ToArray() ?? Array.Empty<T>();
         }
 
         public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order)
@@ -24,7 +24,7 @@ namespace MooVC.Collections.Generic
                     .ToArray();
             }
 
-            return new T[0];
+            return Array.Empty<T>();
         }
     }
 }

@@ -15,7 +15,7 @@
         : IDisposable,
           IEmitDiagnostics
     {
-        private readonly ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
+        private readonly ConcurrentQueue<T> queue = new();
         private readonly TimedProcessor timer;
         private bool isDisposed = false;
 
@@ -87,7 +87,7 @@
                         .TryStopAsync(CancellationToken.None)
                         .ConfigureAwait(false);
 
-                    while (queue.TryDequeue(out T @event))
+                    while (queue.TryDequeue(out T? @event))
                     {
                         pending.Add(@event);
                     }

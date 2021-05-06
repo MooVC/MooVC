@@ -14,7 +14,7 @@
             exception?.PerformExplode(handler);
         }
 
-        public static void PerformExplode(this Exception? exception, Action<Exception> handler)
+        private static void PerformExplode(this Exception? exception, Action<Exception> handler)
         {
             if (exception is { })
             {
