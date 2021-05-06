@@ -64,13 +64,13 @@
             Assert.Equal(ExpectedCount, counter);
         }
 
-        private static Task[] CreateTasks(Action operation, int total)
+        private static Task[] CreateTasks(Func<Task> operation, int total)
         {
             var tasks = new List<Task>();
 
             for (int index = 0; index < total; index++)
             {
-                tasks.Add(Task.Run(operation));
+                tasks.Add(operation());
             }
 
             return tasks.ToArray();

@@ -10,7 +10,7 @@
         where T : notnull
     {
         private readonly Func<Task<T>> initializer;
-        private readonly SemaphoreSlim mutex = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim mutex = new(1, 1);
         private T? resource;
 
         public Initializer(Func<Task<T>> initializer)
