@@ -11,9 +11,9 @@
         }
 
         [Fact]
-        public void GivenAPagingInstanceThenANegativeResponseIsReturned()
+        public void GivenAPagingInstanceThatDoesNotUseDefaultSettingsThenANegativeResponseIsReturned()
         {
-            var paging = new Paging();
+            var paging = new Paging(page: 2, size: 5);
 
             Assert.False(paging.IsDefault);
         }

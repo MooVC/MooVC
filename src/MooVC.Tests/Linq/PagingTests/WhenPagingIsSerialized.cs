@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Linq.PagingTests
 {
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
+    using MooVC.Serialization;
     using Xunit;
 
     public sealed class WhenPagingIsSerialized
@@ -14,17 +13,7 @@
         public void GivenAnInstanceThenAllPropertiesAreSerialized(ushort page, ushort size)
         {
             var paging = new Paging(page: page, size: size);
-            Paging deserialized;
-
-            var binaryFormatter = new BinaryFormatter();
-
-            using (var stream = new MemoryStream())
-            {
-                binaryFormatter.Serialize(stream, paging);
-                _ = stream.Seek(0, SeekOrigin.Begin);
-
-                deserialized = (Paging)binaryFormatter.Deserialize(stream);
-            }
+            Paging deserialized = paging.Clone();
 
             Assert.Equal(paging.Page, deserialized.Page);
             Assert.Equal(paging.Size, deserialized.Size);

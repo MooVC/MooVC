@@ -1,14 +1,43 @@
 ﻿namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 {
+    using System;
     using System.Collections.Generic;
     using Xunit;
 
     public sealed class WhenForEachIsCalled
     {
         [Fact]
-        public void GivenANullEnumerationThenTheActionIsGracefullyIgnored()
+        public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
         {
-            int[] enumeration = null;
+            int[] enumeration = new[] { 1, 2, 3 };
+            var invocations = new List<int>();
+
+            void Action(int value)
+            {
+                invocations.Add(value);
+            }
+
+            enumeration.ForEach(Action);
+
+            Assert.Equal(enumeration, invocations);
+        }
+
+        [Fact]
+        public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+        {
+            int[] enumeration = new[] { 1, 2, 3 };
+            Action<int>? action = default;
+
+            ArgumentNullException? exception = Assert.Throws<ArgumentNullException>(
+                () => enumeration.ForEach(action!));
+
+            Assert.Equal(nameof(action), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+        {
+            IEnumerable<int>? enumeration = default;
             bool wasInvoked = false;
 
             void Action(int value)
@@ -22,19 +51,11 @@
         }
 
         [Fact]
-        public void GivenAnEnumerationThenTheActionIsInvokedInOrderForEachEnumerationMember()
+        public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
         {
-            int[] enumeration = new[] { 1, 2, 3 };
-            var invocations = new List<int>();
+            IEnumerable<int>? enumeration = default;
 
-            void Action(int value)
-            {
-                invocations.Add(value);
-            }
-
-            enumeration.ForEach(Action);
-
-            Assert.Equal(enumeration, invocations);
+            enumeration.ForEach(default!);
         }
     }
 }

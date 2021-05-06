@@ -3,27 +3,39 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using MooVC.Linq;
+    using static MooVC.Collections.Generic.Resources;
+    using static MooVC.Ensure;
 
     public static partial class EnumerableExtensions
     {
-        public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
+        public static IEnumerable<TResult> Process<TResult, TSource>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, TResult> transform)
         {
-            return source.Process(
-                source =>
-                {
-                    TResult result = transform(source);
+            if (source is { })
+            {
+                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
 
-                    if (result is { })
+                return source.Process(
+                    source =>
                     {
-                        return new[] { result };
-                    }
+                        TResult result = transform(source);
 
-                    return Enumerable.Empty<TResult>();
-                });
+                        if (result is { })
+                        {
+                            return new[] { result };
+                        }
+
+                        return Enumerable.Empty<TResult>();
+                    });
+            }
+
+            return Enumerable.Empty<TResult>();
         }
 
-        public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
+        public static IEnumerable<TResult> Process<TResult, TSource>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, IEnumerable<TResult>> transform)
         {
             IList<TResult>? list = default;
 
@@ -43,21 +55,13 @@
             Func<IEnumerable<TResult>> snapshot,
             Func<TSource, IEnumerable<TResult>> transform)
         {
-            if (source.SafeAny())
+            if (source is { })
             {
+                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
+
                 initialize();
 
-                enumerator(
-                    source,
-                    item =>
-                    {
-                        IEnumerable<TResult> result = transform(item);
-
-                        if (result is { })
-                        {
-                            result.ForEach(add);
-                        }
-                    });
+                enumerator(source, item => transform(item).ForEach(add));
 
                 return snapshot();
             }

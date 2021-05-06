@@ -9,7 +9,7 @@
         [Fact]
         public void GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
         {
-            IEnumerable<int> items = default;
+            IEnumerable<int>? items = default;
             IEnumerable<string> results = items.Aggregate<int, string>(default);
 
             Assert.Empty(results);
@@ -18,7 +18,7 @@
         [Fact]
         public void GivenAnNullListThenAnEmptyListOfResultsIsReturned()
         {
-            IEnumerable<int> items = default;
+            IEnumerable<int>? items = default;
             IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
 
             Assert.Empty(results);

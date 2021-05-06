@@ -2,16 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using MooVC.Linq;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Persistence.Resources;
 
     public sealed class MappedStore<T, TOutterKey, TInnerKey>
         : IStore<T, TOutterKey>
     {
-        private readonly IStore<T, TInnerKey> store;
         private readonly Func<TOutterKey, TInnerKey> innerMapping;
         private readonly Func<T, TInnerKey, TOutterKey> outterMapping;
+        private readonly IStore<T, TInnerKey> store;
 
         public MappedStore(
             Func<TOutterKey, TInnerKey> innerMapping,
@@ -27,40 +28,40 @@
             this.store = store;
         }
 
-        public TOutterKey Create(T item)
+        public async Task<TOutterKey> CreateAsync(T item)
         {
-            TInnerKey innerKey = store.Create(item);
+            TInnerKey innerKey = await store.CreateAsync(item);
 
             return outterMapping(item, innerKey);
         }
 
-        public void Delete(T item)
+        public Task DeleteAsync(T item)
         {
-            store.Delete(item);
+            return store.DeleteAsync(item);
         }
 
-        public void Delete(TOutterKey outterKey)
+        public Task DeleteAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            store.Delete(innerKey);
+            return store.DeleteAsync(innerKey);
         }
 
-        public T Get(TOutterKey outterKey)
+        public Task<T?> GetAsync(TOutterKey outterKey)
         {
             TInnerKey innerKey = innerMapping(outterKey);
 
-            return store.Get(innerKey);
+            return store.GetAsync(innerKey);
         }
 
-        public IEnumerable<T> Get(Paging? paging = default)
+        public Task<IEnumerable<T>> GetAsync(Paging? paging = default)
         {
-            return store.Get(paging: paging);
+            return store.GetAsync(paging: paging);
         }
 
-        public void Update(T item)
+        public Task UpdateAsync(T item)
         {
-            store.Update(item);
+            return store.UpdateAsync(item);
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿namespace MooVC
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using static System.String;
 
     public static partial class Ensure
     {
-        public static void ArgumentNotNullOrWhiteSpace(string argument, string argumentName)
+        public static void ArgumentNotNullOrWhiteSpace(
+            [NotNull] string? argument,
+            string argumentName)
         {
             if (IsNullOrWhiteSpace(argument))
             {
@@ -13,7 +16,10 @@
             }
         }
 
-        public static void ArgumentNotNullOrWhiteSpace(string argument, string argumentName, string message)
+        public static void ArgumentNotNullOrWhiteSpace(
+            [NotNull] string? argument,
+            string argumentName,
+            string message)
         {
             if (IsNullOrWhiteSpace(argument))
             {

@@ -3,37 +3,44 @@
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
+    using System.Threading.Tasks;
     using static System.String;
     using static MooVC.Ensure;
-    using static Resources;
+    using static MooVC.Threading.Resources;
 
-    public sealed class Coordinator
+    public static class Coordinator
     {
-        private static readonly ConcurrentDictionary<string, object> contexts = new ConcurrentDictionary<string, object>();
+        private static readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
 
-        public static void Apply(string context, Action operation, TimeSpan? timeout = default)
+        public static async Task ApplyAsync(
+            string context,
+            Func<Task> operation,
+            CancellationToken? cancellationToken = default,
+            TimeSpan? timeout = default)
         {
-            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyContextRequired);
-            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyOperationRequired);
+            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyAsyncContextRequired);
+            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyAsyncOperationRequired);
 
-            timeout ??= Timeout.InfiniteTimeSpan;
+            SemaphoreSlim semaphore = contexts.GetOrAdd(context, _ => new SemaphoreSlim(1, 1));
 
-            object monitor = contexts.GetOrAdd(context, _ => new object());
+            bool isSuccessful = await semaphore.WaitAsync(
+                timeout ?? Timeout.InfiniteTimeSpan,
+                cancellationToken ?? CancellationToken.None);
 
-            if (Monitor.TryEnter(monitor, timeout.Value))
+            if (isSuccessful)
             {
                 try
                 {
-                    operation();
+                    await operation();
                 }
                 finally
                 {
-                    Monitor.Exit(monitor);
+                    _ = semaphore.Release();
                 }
             }
             else
             {
-                throw new TimeoutException(Format(CoordinatorApplyTimeout, context));
+                throw new TimeoutException(Format(CoordinatorApplyAsyncTimeout, context));
             }
         }
     }

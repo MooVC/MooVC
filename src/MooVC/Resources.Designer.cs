@@ -61,42 +61,6 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The target collection must be provided..
-        /// </summary>
-        internal static string CollectionExtensionsGenericTargetRequired {
-            get {
-                return ResourceManager.GetString("CollectionExtensionsGenericTargetRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The coordination context must be provided..
-        /// </summary>
-        internal static string CoordinatorApplyContextRequired {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyContextRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The operation to be coordinated must be provided..
-        /// </summary>
-        internal static string CoordinatorApplyOperationRequired {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyOperationRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A request to coordinate an operation in the context of {0} has timed out..
-        /// </summary>
-        internal static string CoordinatorApplyTimeout {
-            get {
-                return ResourceManager.GetString("CoordinatorApplyTimeout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The event must be provided..
         /// </summary>
         internal static string EmittedEventArgsEventRequired {
@@ -124,38 +88,11 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The timer that manages the job queue must be provided..
+        ///   Looks up a localized string similar to The handler for each exception must be provided..
         /// </summary>
-        internal static string JobQueueTimerRequired {
+        internal static string ExceptionExtensionsExplodeHandlerRequired {
             get {
-                return ResourceManager.GetString("JobQueueTimerRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mapping between the outter store and the inner store must be provided..
-        /// </summary>
-        internal static string MappedStoreInnerMappingRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreInnerMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mapping between the inner store and the outter store must be provided..
-        /// </summary>
-        internal static string MappedStoreOutterMappingRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreOutterMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The inner store must be provided..
-        /// </summary>
-        internal static string MappedStoreStoreRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreStoreRequired", resourceCulture);
+                return ResourceManager.GetString("ExceptionExtensionsExplodeHandlerRequired", resourceCulture);
             }
         }
         
@@ -192,33 +129,6 @@ namespace MooVC {
         internal static string ProcessorStopFailure {
             get {
                 return ResourceManager.GetString("ProcessorStopFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The process cannot be started because another process has initiated a Start operation..
-        /// </summary>
-        internal static string StartOperationInvalidExceptionMessage {
-            get {
-                return ResourceManager.GetString("StartOperationInvalidExceptionMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The process cannot be stopped because another process has initiated a Stop operation..
-        /// </summary>
-        internal static string StopOperationInvalidExceptionMessage {
-            get {
-                return ResourceManager.GetString("StopOperationInvalidExceptionMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A failure has occured during the handling of a timed event by {0}..
-        /// </summary>
-        internal static string TimedProcessorCallbackHandlingFailure {
-            get {
-                return ResourceManager.GetString("TimedProcessorCallbackHandlingFailure", resourceCulture);
             }
         }
     }

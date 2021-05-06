@@ -4,26 +4,39 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using static MooVC.Collections.Generic.Resources;
+    using static MooVC.Ensure;
 
     public static partial class EnumerableExtensions
     {
-        public static IEnumerable<TResult> ProcessAll<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
+        public static IEnumerable<TResult> ProcessAll<TResult, TSource>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, TResult> transform)
         {
-            return source.ProcessAll(
-                source =>
-                {
-                    TResult result = transform(source);
+            if (source is { })
+            {
+                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
 
-                    if (result is { })
+                return source.ProcessAll(
+                    source =>
                     {
-                        return new[] { result };
-                    }
+                        TResult result = transform(source);
 
-                    return Enumerable.Empty<TResult>();
-                });
+                        if (result is { })
+                        {
+                            return new[] { result };
+                        }
+
+                        return Enumerable.Empty<TResult>();
+                    });
+            }
+
+            return Enumerable.Empty<TResult>();
         }
 
-        public static IEnumerable<TResult> ProcessAll<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
+        public static IEnumerable<TResult> ProcessAll<TSource, TResult>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, IEnumerable<TResult>> transform)
         {
             ConcurrentBag<TResult>? bag = default;
 

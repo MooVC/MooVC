@@ -8,7 +8,7 @@
         [Fact]
         public void GivenANullExceptionThenTheActionIsGracefullyIgnored()
         {
-            Exception exception = null;
+            Exception? exception = default;
             bool wasInvoked = false;
 
             void Action(Exception value)

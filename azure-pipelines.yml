@@ -5,6 +5,18 @@ trigger:
 - feature/*
 - hotfix/*
 
+schedules:
+  - cron: "0 3 * * *"
+    displayName: Nightly Build
+    branches:
+      include:
+        - develop
+        - feature/*
+        - hotfix/*
+        - master
+        - release/*
+    always: true
+
 pool:
   vmImage: 'windows-latest'
 
@@ -12,17 +24,27 @@ variables:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
   solution: '**/*.sln'
+  versions: '-p:AssemblyVersion="$(GitVersion.AssemblySemVer)" -p:FileVersion="$(GitVersion.AssemblySemFileVer)" -p:InformationalVersion="$(GitVersion.InformationalVersion)" -p:PackageVersion="$(GitVersion.NuGetVersion)" -p:Version="$(GitVersion.AssemblySemVer)'
 
 steps:
 - checkout: self
   clean: true
   persistCredentials: true
 
-- task: UseGitVersion@5
+- task: gitversion/setup@0
+  displayName: 'Versioning Installation'
   inputs:
     versionSpec: '5.x'
 
+- task: gitversion/execute@0
+  condition: succeeded()
+  displayName: 'Version Determination ($(buildConfiguration))'
+  inputs:
+    useConfigFile: true
+    configFilePath: './gitversion.yml'
+
 - task: DotNetCoreCLI@2
+  condition: succeeded()
   displayName: 'Restore Nuget Packages for Solution'
   inputs:
     command: 'restore'
@@ -30,20 +52,38 @@ steps:
     projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  condition: succeeded()
   displayName: 'Build Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+    arguments: '--configuration $(buildConfiguration) --no-restore $(versions)'
     command: 'build'
     projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  condition: succeeded()
   displayName: 'Test Solution'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+    arguments: '--configuration $(buildConfiguration) --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:ExcludeByAttribute=CompilerGeneratedAttribute /p:ExcludeByAttribute=GeneratedCodeAttribute /p:ExcludeByAttribute=Obsolete /p:ExcludeByFile=\"**/*.Designer.cs\"'
     command: 'test'
     projects: '$(solution)'
 
+- task: reportgenerator@4
+  condition: succeeded()
+  displayName: 'Generate Coverage Report'
+  inputs:
+    reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/Coverage'
+
+- task: PublishCodeCoverageResults@1
+  condition: succeeded()
+  displayName: 'Publish Code Coverage'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/Coverage/Cobertura.xml'
+    failIfCoverageEmpty: true
+
 - task: DotNetCoreCLI@2
+  condition: succeeded()
   displayName: 'Package Artifacts'
   inputs:
     command: 'pack'
@@ -52,6 +92,7 @@ steps:
     versioningScheme: 'byEnvVar'
 
 - task: CopyFiles@2
+  condition: succeeded()
   displayName: 'Copy Packages for Publish'
   inputs:
     contents: '**/*.*nupkg'
@@ -59,6 +100,7 @@ steps:
     sourceFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
+  condition: succeeded()
   displayName: 'Publish Build Artifacts'
   inputs:
     artifactName: 'drop'

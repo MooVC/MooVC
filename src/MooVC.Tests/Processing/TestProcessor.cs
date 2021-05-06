@@ -1,40 +1,33 @@
 ﻿namespace MooVC.Processing
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public sealed class TestProcessor
-        : Processor
+        : ThreadSafeProcessor
     {
-        private readonly Action @continue;
-        private readonly Func<bool> start;
-        private readonly Func<bool> stop;
+        private readonly Action? start;
+        private readonly Action? stop;
 
-        public TestProcessor(Action @continue = default, Func<bool> start = default, Func<bool> stop = default)
+        public TestProcessor(Action? start = default, Action? stop = default)
         {
-            this.@continue = @continue;
             this.start = start;
             this.stop = stop;
         }
 
-        protected override void PerformContinue()
+        protected override async Task PerformStartAsync(CancellationToken cancellationToken)
         {
-            @continue?.Invoke();
+            start?.Invoke();
+
+            await Task.CompletedTask;
         }
 
-        protected override bool PerformStart()
+        protected override async Task PerformStopAsync(CancellationToken cancellationToken)
         {
-            return start is { }
-                ? start()
-                : false;
-        }
+            stop?.Invoke();
 
-        protected override bool PerformStop()
-        {
-            return stop is { }
-                ? stop()
-                : false;
+            await Task.CompletedTask;
         }
     }
 }

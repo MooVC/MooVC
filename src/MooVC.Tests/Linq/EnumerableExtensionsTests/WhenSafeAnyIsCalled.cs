@@ -48,7 +48,7 @@
         [Fact]
         public void GivenANullSourceThenANegativeResponseIsReturned()
         {
-            IEnumerable<int> source = null;
+            IEnumerable<int>? source = default;
 
             Assert.False(source.SafeAny());
         }
@@ -56,7 +56,7 @@
         [Fact]
         public void GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
         {
-            IEnumerable<int> source = null;
+            IEnumerable<int>? source = default;
 
             Assert.False(source.SafeAny(predicate => true));
         }

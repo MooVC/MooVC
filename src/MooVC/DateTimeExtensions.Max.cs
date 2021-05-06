@@ -6,9 +6,9 @@
     {
         public static DateTime Max(this DateTime first, DateTime second)
         {
-            double value = Math.Max(first.ToOADate(), second.ToOADate());
-
-            return DateTime.FromOADate(value);
+            return first > second
+                ? first
+                : second;
         }
     }
 }

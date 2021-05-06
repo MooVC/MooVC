@@ -3,10 +3,12 @@
     using System;
     using System.Linq;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
+    using MooVC.Serialization;
+    using static System.Math;
 
     [Serializable]
     public class Paging
+        : ISerializable
     {
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
@@ -15,23 +17,23 @@
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {
-            Page = Math.Max(page, FirstPage);
-            Size = Math.Max(size, MinimumSize);
+            Page = Max(page, FirstPage);
+            Size = Max(size, MinimumSize);
         }
 
         protected Paging(SerializationInfo info, StreamingContext context)
         {
-            Page = (ushort)info.GetValue(nameof(Page), typeof(ushort));
-            Size = (ushort)info.GetValue(nameof(Size), typeof(ushort));
+            Page = info.GetValue<ushort>(nameof(Page));
+            Size = info.GetValue<ushort>(nameof(Size));
         }
 
         public static Paging Default => @default.Value;
 
         public bool IsDefault => this == Default;
 
-        public ushort Page { get; }
+        public ushort Page { get; } = FirstPage;
 
-        public ushort Size { get; }
+        public ushort Size { get; } = DefaultSize;
 
         public int Skip => (Page - FirstPage) * Size;
 
@@ -40,7 +42,6 @@
             return queryable.Skip(Skip).Take(Size);
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue(nameof(Page), Page);

@@ -6,9 +6,9 @@
     {
         public static DateTime Min(this DateTime first, DateTime second)
         {
-            double value = Math.Min(first.ToOADate(), second.ToOADate());
-
-            return DateTime.FromOADate(value);
+            return first > second
+                ? second
+                : first;
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
     [Serializable]
     public sealed class InternalSerializableObject
@@ -34,7 +33,6 @@
             Enumerable = info.GetInternalEnumerable<int>(nameof(Enumerable));
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddInternalValue(nameof(Boolean), Boolean);

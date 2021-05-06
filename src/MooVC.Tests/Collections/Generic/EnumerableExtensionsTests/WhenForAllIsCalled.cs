@@ -8,39 +8,6 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 
     public sealed class WhenForAllIsCalled
     {
-        [Fact]
-        public void GivenANullEnumerationThenTheActionIsGracefullyIgnored()
-        {
-            int[] enumeration = null;
-            bool wasInvoked = false;
-
-            void Action(int value)
-            {
-                wasInvoked = true;
-            }
-
-            enumeration.ForAll(Action);
-
-            Assert.False(wasInvoked);
-        }
-
-        [Fact]
-        public void GivenAnEnumerationThenTheActionIsInvokedForEachEnumerationMember()
-        {
-            int[] enumeration = new[] { 1, 2, 3 };
-            var invocations = new ConcurrentBag<int>();
-
-            void Action(int value)
-            {
-                invocations.Add(value);
-            }
-
-            enumeration.ForAll(Action);
-
-            Assert.All(enumeration, value => Assert.Contains(value, invocations));
-            Assert.Equal(enumeration.Length, invocations.Count);
-        }
-
         [Theory]
         [InlineData(1, 3)]
         [InlineData(2, 6)]
@@ -60,6 +27,59 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
             AggregateException exception = Assert.Throws<AggregateException>(() => enumeration.ForAll(Action));
 
             Assert.Equal(range / mod, exception.InnerExceptions.Count);
+        }
+
+        [Fact]
+        public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
+        {
+            int[] enumeration = new[] { 1, 2, 3 };
+            var invocations = new ConcurrentBag<int>();
+
+            void Action(int value)
+            {
+                invocations.Add(value);
+            }
+
+            enumeration.ForAll(Action);
+
+            Assert.All(enumeration, value => Assert.Contains(value, invocations));
+            Assert.Equal(enumeration.Length, invocations.Count);
+        }
+
+        [Fact]
+        public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+        {
+            int[] enumeration = new[] { 1, 2, 3 };
+            Action<int>? action = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => enumeration.ForAll(action!));
+
+            Assert.Equal(nameof(action), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+        {
+            IEnumerable<int>? enumeration = default;
+            bool wasInvoked = false;
+
+            void Action(int value)
+            {
+                wasInvoked = true;
+            }
+
+            enumeration.ForAll(Action);
+
+            Assert.False(wasInvoked);
+        }
+
+        [Fact]
+        public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+        {
+            IEnumerable<int>? enumeration = default;
+
+            enumeration.ForAll(default!);
         }
     }
 }

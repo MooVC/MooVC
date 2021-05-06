@@ -1,17 +1,18 @@
 ﻿namespace MooVC.Processing
 {
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.Hosting;
+
     public interface IProcessor
+        : IHostedService
     {
         event ProcessorStateChangedEventHandler ProcessStateChanged;
 
         ProcessorState State { get; }
 
-        bool TryStart();
+        Task<bool> TryStartAsync(CancellationToken cancellationToken);
 
-        bool TryStop();
-
-        void Start();
-
-        void Stop();
+        Task<bool> TryStopAsync(CancellationToken cancellationToken);
     }
 }
