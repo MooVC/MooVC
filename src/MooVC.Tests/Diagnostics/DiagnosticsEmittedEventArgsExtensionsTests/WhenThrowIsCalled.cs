@@ -115,7 +115,7 @@
                 new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw((_, __) => true, message: ExpectedMessage));
+                () => source.Throw((_, _) => true, message: ExpectedMessage));
 
             Assert.StartsWith(ExpectedMessage, exception.Message);
         }

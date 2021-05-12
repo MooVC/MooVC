@@ -97,6 +97,42 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the arguments..
+        /// </summary>
+        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectArgsParameterType {
+            get {
+                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectArgsParameterType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the two required parameters..
+        /// </summary>
+        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectNumberOfParameters {
+            get {
+                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectNumberOfParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The multicast delegate supplied does not return a task..
+        /// </summary>
+        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType {
+            get {
+                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the sender..
+        /// </summary>
+        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectSenderParameterType {
+            get {
+                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectSenderParameterType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease..
         /// </summary>
         internal static string ProcessorContinuationAbortFailure {
