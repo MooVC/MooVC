@@ -65,7 +65,7 @@
             Exception? cause = default,
             string? message = default)
         {
-            DiagnosticsEmitted?.Invoke(
+            DiagnosticsEmitted?.PassiveInvoke(
                 this,
                 new DiagnosticsEmittedEventArgs(
                     cause: cause,

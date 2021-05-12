@@ -120,6 +120,9 @@
   <data name="JobQueueTimerRequired" xml:space="preserve">
     <value>The timer that manages the job queue must be provided.</value>
   </data>
+  <data name="ProcessorOnProcessingStateChangedFailure" xml:space="preserve">
+    <value>A failure has prevented one or more listeners for changes to the state of the processor from successfully handling a change.</value>
+  </data>
   <data name="ProcessorTryStartFailure" xml:space="preserve">
     <value>The processor could not be started.</value>
   </data>
