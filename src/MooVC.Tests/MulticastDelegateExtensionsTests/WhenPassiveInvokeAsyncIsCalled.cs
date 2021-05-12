@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Xunit;
 
-    public sealed class WhenInvokeAsyncIsCalled
+    public sealed class WhenPassiveInvokeAsyncIsCalled
     {
         private event AsyncEventHandler? Tested;
 
@@ -29,7 +29,7 @@
                 return Task.CompletedTask;
             };
 
-            await Tested.InvokeAsync(this, EventArgs.Empty);
+            await Tested.PassiveInvokeAsync(this, EventArgs.Empty);
 
             Assert.True(wasInvoked);
         }
@@ -51,23 +51,30 @@
             Tested += Handler;
             Tested += Handler;
 
-            await Tested.InvokeAsync(this, EventArgs.Empty);
+            await Tested.PassiveInvokeAsync(this, EventArgs.Empty);
 
             Assert.Equal(Expected, actual);
         }
 
         [Fact]
-        public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
+        public async Task GivenAnExceptionThenNoExceptionIsThrownAsync()
         {
+            bool wasInvoked = false;
             var expected = new InvalidOperationException();
 
             Tested += (sender, e) => throw expected;
 
-            TargetInvocationException exception = await Assert.ThrowsAsync<TargetInvocationException>(
-                () => Tested.InvokeAsync(this, EventArgs.Empty));
+            await Tested.PassiveInvokeAsync(
+                this,
+                EventArgs.Empty,
+                onFailure: actual =>
+                {
+                    wasInvoked = true;
 
-            Assert.NotNull(exception);
-            Assert.Equal(expected, exception.InnerException);
+                    Assert.Equal(expected, actual.InnerException);
+                });
+
+            Assert.True(wasInvoked);
         }
 
         [Fact]
@@ -76,7 +83,7 @@
             Invalid += (_, _) => { };
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Invalid.InvokeAsync(this, EventArgs.Empty));
+                () => Invalid.PassiveInvokeAsync(this, EventArgs.Empty));
         }
 
         [Fact]
@@ -85,7 +92,7 @@
             TypedSender += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedSender.InvokeAsync(this, EventArgs.Empty));
+                () => TypedSender.PassiveInvokeAsync(this, EventArgs.Empty));
         }
 
         [Fact]
@@ -94,7 +101,7 @@
             TypedArgs += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedArgs.InvokeAsync(this, EventArgs.Empty));
+                () => TypedArgs.PassiveInvokeAsync(this, EventArgs.Empty));
         }
 
         [Fact]
@@ -103,7 +110,7 @@
             IncorrectParameters += (_, _, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => IncorrectParameters.InvokeAsync(this, EventArgs.Empty));
+                () => IncorrectParameters.PassiveInvokeAsync(this, EventArgs.Empty));
         }
     }
 }

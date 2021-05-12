@@ -16,7 +16,7 @@
         {
             if (isEmitting)
             {
-                DiagnosticsEmitted?.Invoke(this, new DiagnosticsEmittedEventArgs());
+                DiagnosticsEmitted?.PassiveInvoke(this, new DiagnosticsEmittedEventArgs());
             }
         }
     }

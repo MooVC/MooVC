@@ -99,18 +99,27 @@ namespace MooVC {
         /// <summary>
         ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the arguments..
         /// </summary>
-        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectArgsParameterType {
+        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectArgsParameterType {
             get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectArgsParameterType", resourceCulture);
+                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectArgsParameterType", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The multicast delegate supplied does not specify the two required parameters..
         /// </summary>
-        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectNumberOfParameters {
+        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectNumberOfParameters {
             get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectNumberOfParameters", resourceCulture);
+                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectNumberOfParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the sender..
+        /// </summary>
+        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectSenderParameterType {
+            get {
+                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectSenderParameterType", resourceCulture);
             }
         }
         
@@ -124,11 +133,11 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the sender..
+        ///   Looks up a localized string similar to The multicast delegate supplied is not marked as void..
         /// </summary>
-        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectSenderParameterType {
+        internal static string MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType {
             get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectSenderParameterType", resourceCulture);
+                return ResourceManager.GetString("MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType", resourceCulture);
             }
         }
         

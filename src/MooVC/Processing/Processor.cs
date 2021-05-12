@@ -19,7 +19,7 @@
         public ProcessorState State
         {
             get => state;
-            set
+            private set
             {
                 if (state != value)
                 {
@@ -133,7 +133,7 @@
             Exception? cause = default,
             string? message = default)
         {
-            DiagnosticsEmitted?.Invoke(
+            DiagnosticsEmitted?.PassiveInvoke(
                 this,
                 new DiagnosticsEmittedEventArgs(
                     cause: cause,
@@ -143,7 +143,13 @@
 
         protected virtual void OnProcessingStateChanged(ProcessorState state)
         {
-            ProcessStateChanged?.Invoke(this, new ProcessorStateChangedEventArgs(state));
+            ProcessStateChanged?.PassiveInvoke(
+                this,
+                new ProcessorStateChangedEventArgs(state),
+                onFailure: failure => OnDiagnosticsEmitted(
+                    Level.Warning,
+                    cause: failure,
+                    message: ProcessorOnProcessingStateChangedFailure));
         }
 
         protected abstract Task PerformStartAsync(CancellationToken cancellationToken);
