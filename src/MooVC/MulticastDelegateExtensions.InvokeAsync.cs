@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
-    using static System.String;
     using static MooVC.Resources;
 
     public static partial class MulticastDelegateExtensions
@@ -25,30 +24,7 @@
                     throw new NotSupportedException(MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType);
                 }
 
-                ParameterInfo[] parameters = method.GetParameters();
-
-                if (parameters.Length != 2)
-                {
-                    throw new NotSupportedException(MulticastDelegateExtensionsInvokeAsyncIncorrectNumberOfParameters);
-                }
-
-                Type senderType = typeof(TSender);
-
-                if (!parameters[0].ParameterType.IsAssignableFrom(senderType))
-                {
-                    throw new NotSupportedException(Format(
-                        MulticastDelegateExtensionsInvokeAsyncIncorrectSenderParameterType,
-                        senderType.FullName));
-                }
-
-                Type argsType = typeof(TArgs);
-
-                if (!parameters[1].ParameterType.IsAssignableFrom(argsType))
-                {
-                    throw new NotSupportedException(Format(
-                        MulticastDelegateExtensionsInvokeAsyncIncorrectArgsParameterType,
-                        argsType.FullName));
-                }
+                EnsureParameters<TSender, TArgs>(method);
 
                 Delegate[] delegates = handler.GetInvocationList();
 

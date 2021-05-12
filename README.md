@@ -18,3 +18,5 @@ Added additional support for asynchonrous event handling.
 
 - Added AsyncEventHandler to represent an event handler that can be awaited by the sender.
 - Added a MulticastDelegateExtensions.InvokeAsync method that will await the invocation of a multicast delegate that returns a Task.
+- Added a MulticastDelegateExtensions.PassiveInvokeAsync method that will await the invocation of a multicast delegate that returns a Task and absorb any error encountered.
+- Added a MulticastDelegateExtensions.PassiveInvoke method that will invoke a multicast delegate absorb any errors encountered.

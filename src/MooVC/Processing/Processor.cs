@@ -19,7 +19,7 @@
         public ProcessorState State
         {
             get => state;
-            set
+            private set
             {
                 if (state != value)
                 {
