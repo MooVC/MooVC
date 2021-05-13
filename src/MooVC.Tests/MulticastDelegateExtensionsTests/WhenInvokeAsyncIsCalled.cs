@@ -63,11 +63,11 @@
 
             Tested += (sender, e) => throw expected;
 
-            TargetInvocationException exception = await Assert.ThrowsAsync<TargetInvocationException>(
+            AggregateException exception = await Assert.ThrowsAsync<AggregateException>(
                 () => Tested.InvokeAsync(this, EventArgs.Empty));
 
             Assert.NotNull(exception);
-            Assert.Equal(expected, exception.InnerException);
+            Assert.Equal(expected, exception.InnerException?.InnerException);
         }
 
         [Fact]

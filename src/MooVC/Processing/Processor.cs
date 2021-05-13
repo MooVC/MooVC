@@ -12,9 +12,9 @@
     {
         private ProcessorState state = ProcessorState.Stopped;
 
-        public event DiagnosticsEmittedEventHandler? DiagnosticsEmitted;
+        public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
 
-        public event ProcessorStateChangedEventHandler? ProcessStateChanged;
+        public event ProcessorStateChangedAsyncEventHandler? ProcessStateChanged;
 
         public ProcessorState State
         {
@@ -133,7 +133,7 @@
             Exception? cause = default,
             string? message = default)
         {
-            DiagnosticsEmitted?.PassiveInvoke(
+            _ = DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
                 new DiagnosticsEmittedEventArgs(
                     cause: cause,
@@ -143,13 +143,15 @@
 
         protected virtual void OnProcessingStateChanged(ProcessorState state)
         {
-            ProcessStateChanged?.PassiveInvoke(
+            _ = ProcessStateChanged.PassiveInvokeAsync(
                 this,
                 new ProcessorStateChangedEventArgs(state),
-                onFailure: failure => OnDiagnosticsEmitted(
-                    Level.Warning,
-                    cause: failure,
-                    message: ProcessorOnProcessingStateChangedFailure));
+                onFailure: failure => DiagnosticsEmitted.PassiveInvokeAsync(
+                    this,
+                    new DiagnosticsEmittedEventArgs(
+                        cause: failure,
+                        level: Level.Warning,
+                        message: ProcessorOnProcessingStateChangedFailure)));
         }
 
         protected abstract Task PerformStartAsync(CancellationToken cancellationToken);

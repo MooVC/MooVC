@@ -1,9 +1,9 @@
 ﻿namespace MooVC
 {
     using System;
-    using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
+    using MooVC.Collections.Generic;
     using static MooVC.Resources;
 
     public static partial class MulticastDelegateExtensions
@@ -32,8 +32,8 @@
                     delegates,
                     @delegate => () => (Task)@delegate.DynamicInvoke(sender, e)!);
 
-                await Task
-                    .WhenAll(handlers.Select(handler => handler()))
+                await handlers
+                    .ForAllAsync(handler => handler())
                     .ConfigureAwait(false);
             }
         }

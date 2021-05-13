@@ -8,11 +8,11 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Upcoming Release v3.1.0
+# Upcoming Release v4.0.0
 
 ## Overview
 
-Added additional support for asynchonrous event handling.
+Added additional support for asynchonrous event handling and cancellation.
 
 ## Enhancements
 
@@ -22,7 +22,10 @@ Added additional support for asynchonrous event handling.
 - Added a MulticastDelegateExtensions.PassiveInvoke method that will invoke a multicast delegate absorb any errors encountered.
 - Changed the invocation of the ProcessStateChanged event handler of Processing.Processor to utilize the passive implementation.
 - Changed the invocation of the DiagnosticsEmitted event handler of Processing.TimedJobQueue to utilize the passive implementation.
+- Changed Diagnostics.DiagnosticsEmittedEventHandler to an async variant named Diagnostics.DiagnosticsEmittedAsyncEventHandler (**Breaking Change**).
+- Changed Diagnostics.EmitDiagnosticsExtensions.Invoke to an async variant named Diagnostics.EmitDiagnosticsExtensions.InvokeAsync (**Breaking Change**).
+- Changed Processing.ProcessorStateChangedEventHandler to an async variant named Processing.ProcessorStateChangedAsyncEventHandler (**Breaking Change**).
 
 ## Bug Fixes
 
-- Corrected the scope for the State setter on Processing.Processor
+- Corrected the scope for the State setter on Processing.Processor (**Breaking Change**).

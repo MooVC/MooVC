@@ -71,7 +71,9 @@
                 {
                     wasInvoked = true;
 
-                    Assert.Equal(expected, actual.InnerException);
+                    Assert.Equal(expected, actual.InnerException?.InnerException);
+
+                    return Task.CompletedTask;
                 });
 
             Assert.True(wasInvoked);

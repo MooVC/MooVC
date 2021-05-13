@@ -10,7 +10,7 @@
             this MulticastDelegate? handler,
             TSender? sender,
             TArgs e,
-            Action<TargetInvocationException>? onFailure = default)
+            Func<AggregateException, Task>? onFailure = default)
             where TSender : class
             where TArgs : EventArgs
         {
@@ -20,9 +20,13 @@
                     .InvokeAsync(sender, e)
                     .ConfigureAwait(false);
             }
-            catch (TargetInvocationException tie)
+            catch (AggregateException ex)
             {
-                onFailure?.Invoke(tie);
+                if (onFailure is { })
+                {
+                    await onFailure(ex)
+                        .ConfigureAwait(false);
+                }
             }
         }
     }
