@@ -25,7 +25,7 @@
                 {
                     state = value;
 
-                    OnProcessingStateChanged(value);
+                    _ = OnProcessingStateChangedAsync(value);
                 }
             }
         }
@@ -89,10 +89,12 @@
             }
             catch (Exception ex)
             {
-                OnDiagnosticsEmitted(
-                    Level.Error,
-                    cause: ex,
-                    message: ProcessorTryStartFailure);
+                await
+                    OnDiagnosticsEmittedAsync(
+                        Level.Error,
+                        cause: ex,
+                        message: ProcessorTryStartFailure)
+                    .ConfigureAwait(false);
             }
 
             return false;
@@ -109,10 +111,12 @@
             }
             catch (Exception ex)
             {
-                OnDiagnosticsEmitted(
-                    Level.Error,
-                    cause: ex,
-                    message: ProcessorTryStopFailure);
+                await
+                    OnDiagnosticsEmittedAsync(
+                        Level.Error,
+                        cause: ex,
+                        message: ProcessorTryStopFailure)
+                    .ConfigureAwait(false);
             }
 
             return false;
@@ -128,12 +132,12 @@
             return State == ProcessorState.Started;
         }
 
-        protected virtual void OnDiagnosticsEmitted(
+        protected virtual Task OnDiagnosticsEmittedAsync(
             Level level,
             Exception? cause = default,
             string? message = default)
         {
-            _ = DiagnosticsEmitted.PassiveInvokeAsync(
+            return DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
                 new DiagnosticsEmittedEventArgs(
                     cause: cause,
@@ -141,17 +145,15 @@
                     message: message));
         }
 
-        protected virtual void OnProcessingStateChanged(ProcessorState state)
+        protected virtual Task OnProcessingStateChangedAsync(ProcessorState state)
         {
-            _ = ProcessStateChanged.PassiveInvokeAsync(
+            return ProcessStateChanged.PassiveInvokeAsync(
                 this,
                 new ProcessorStateChangedEventArgs(state),
-                onFailure: failure => DiagnosticsEmitted.PassiveInvokeAsync(
-                    this,
-                    new DiagnosticsEmittedEventArgs(
-                        cause: failure,
-                        level: Level.Warning,
-                        message: ProcessorOnProcessingStateChangedFailure)));
+                onFailure: failure => OnDiagnosticsEmittedAsync(
+                    Level.Warning,
+                    cause: failure,
+                    message: ProcessorOnProcessingStateChangedAsyncFailure));
         }
 
         protected abstract Task PerformStartAsync(CancellationToken cancellationToken);
