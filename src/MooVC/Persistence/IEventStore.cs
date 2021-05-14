@@ -1,16 +1,24 @@
 ﻿namespace MooVC.Persistence
 {
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
     using MooVC.Linq;
 
     public interface IEventStore<T, TIndex>
         where T : class
     {
-        Task<TIndex> InsertAsync(T @event);
+        Task<T?> GetAsync(
+            TIndex index,
+            CancellationToken? cancellationToken = default);
 
-        Task<T?> ReadAsync(TIndex index);
+        Task<TIndex> InsertAsync(
+            T @event,
+            CancellationToken? cancellationToken = default);
 
-        Task<IEnumerable<T>> ReadAsync(TIndex lastIndex, ushort numberToRead = Paging.DefaultSize);
+        Task<IEnumerable<T>> ReadAsync(
+            TIndex lastIndex,
+            CancellationToken? cancellationToken = default,
+            ushort numberToRead = Paging.DefaultSize);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
+    using System.Threading;
     using Moq;
     using Xunit;
 
@@ -14,7 +15,11 @@
 
             await store.UpdateAsync(new object());
 
-            Store.Verify(store => store.UpdateAsync(It.IsAny<object>()), times: Times.Once);
+            Store.Verify(
+                store => store.UpdateAsync(
+                    It.IsAny<object>(),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
         }
     }
 }

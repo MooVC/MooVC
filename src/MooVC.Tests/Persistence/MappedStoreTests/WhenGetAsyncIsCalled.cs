@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
+    using System.Threading;
     using MooVC.Linq;
     using Moq;
     using Xunit;
@@ -27,7 +28,9 @@
             object expectedItem = new object();
 
             _ = Store
-                .Setup(store => store.GetAsync(It.Is<string>(parameter => parameter == expectedInnerKey)))
+                .Setup(store => store.GetAsync(
+                    It.Is<string>(parameter => parameter == expectedInnerKey),
+                    It.IsAny<CancellationToken?>()))
                 .ReturnsAsync(expectedItem);
 
             var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
@@ -37,7 +40,11 @@
             Assert.True(wasInvoked);
             Assert.Equal(expectedItem, actualItem);
 
-            Store.Verify(store => store.GetAsync(It.IsAny<string>()), times: Times.Once);
+            Store.Verify(
+                store => store.GetAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
         }
 
         [Fact]
@@ -49,7 +56,11 @@
 
             _ = await store.GetAsync(paging: paging);
 
-            Store.Verify(store => store.GetAsync(It.IsAny<Paging>()), times: Times.Once);
+            Store.Verify(
+                store => store.GetAsync(
+                    It.IsAny<CancellationToken?>(),
+                    It.IsAny<Paging>()),
+                times: Times.Once);
         }
     }
 }

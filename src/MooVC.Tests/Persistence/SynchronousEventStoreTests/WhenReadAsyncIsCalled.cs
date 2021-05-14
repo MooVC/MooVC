@@ -11,18 +11,18 @@
         public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
         {
             const int ExpectedIndex = 1;
-            object expectedItem = new object();
+            object[] expected = new[] { new object(), new object() };
 
-            var store = new TestableSynchronousEventStore(readByIndex: index =>
+            var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
             {
-                Assert.Equal(ExpectedIndex, index);
+                Assert.Equal(ExpectedIndex, last);
 
-                return expectedItem;
+                return expected;
             });
 
-            object? actualItem = await store.ReadAsync(ExpectedIndex);
+            IEnumerable<object> actual = await store.ReadAsync(ExpectedIndex);
 
-            Assert.Equal(expectedItem, actualItem);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
