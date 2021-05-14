@@ -11,7 +11,7 @@ namespace MooVC.Diagnostics
 
     public static partial class EmitDiagnosticsExtensions
     {
-        public static async Task<IEnumerable<DiagnosticsEmittedEventArgs>> InvokeAsync<T>(
+        public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(
             this IEnumerable<T>? sources,
             Func<T, Task> action)
             where T : IEmitDiagnostics
@@ -35,16 +35,16 @@ namespace MooVC.Diagnostics
                     .ConfigureAwait(false);
             }
 
-            return Enumerable.Empty<DiagnosticsEmittedEventArgs>();
+            return Enumerable.Empty<DiagnosticsEmittedAsyncEventArgs>();
         }
 
-        private static async Task<IEnumerable<DiagnosticsEmittedEventArgs>> PerformInvocationAsync<T>(
+        private static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> PerformInvocationAsync<T>(
             this IEnumerable<T> sources,
             Func<T, DiagnosticsEmittedAsyncEventHandler, Task> action)
         {
-            var diagnostics = new ConcurrentBag<DiagnosticsEmittedEventArgs>();
+            var diagnostics = new ConcurrentBag<DiagnosticsEmittedAsyncEventArgs>();
 
-            Task Source_Raised(IEmitDiagnostics sender, DiagnosticsEmittedEventArgs e)
+            Task Source_Raised(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e)
             {
                 diagnostics.Add(e);
 

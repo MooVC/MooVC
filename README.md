@@ -17,6 +17,7 @@ Added additional support for asynchonrous event handling and cancellation.
 ## Enhancements
 
 - Added AsyncEventHandler to represent an event handler that can be awaited by the sender.
+- Added AsyncEventArgs to represent a event arguments that can be used to cancel operations by the sender.
 - Added a MulticastDelegateExtensions.InvokeAsync method that will await the invocation of a multicast delegate that returns a Task.
 - Added a MulticastDelegateExtensions.PassiveInvokeAsync method that will await the invocation of a multicast delegate that returns a Task and absorb any error encountered.
 - Added a MulticastDelegateExtensions.PassiveInvoke method that will invoke a multicast delegate absorb any errors encountered.
@@ -27,7 +28,7 @@ Added additional support for asynchonrous event handling and cancellation.
 - Changed Diagnostics.DiagnosticsEmittedEventHandler to an async variant named Diagnostics.DiagnosticsEmittedAsyncEventHandler (**Breaking Change**).
 - Changed Diagnostics.EmitDiagnosticsExtensions.Invoke to an async variant named Diagnostics.EmitDiagnosticsExtensions.InvokeAsync (**Breaking Change**).
 - Changed Processing.ProcessorStateChangedEventHandler to an async variant named Processing.ProcessorStateChangedAsyncEventHandler (**Breaking Change**).
-- Renamed  Persistence.IEventStore.ReadAsync for individual reads to GetAsync due to unintended ambiguity (**Breaking Change**).
+- Renamed Persistence.IEventStore.ReadAsync for individual reads to GetAsync due to unintended ambiguity (**Breaking Change**).
 
 ## Bug Fixes
 

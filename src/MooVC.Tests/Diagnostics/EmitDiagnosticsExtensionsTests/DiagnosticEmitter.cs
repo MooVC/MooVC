@@ -18,7 +18,7 @@
         {
             if (isEmitting)
             {
-                await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedEventArgs());
+                await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs());
             }
         }
     }

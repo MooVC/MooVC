@@ -13,7 +13,7 @@
             TSender? sender,
             TArgs e)
             where TSender : class
-            where TArgs : EventArgs
+            where TArgs : AsyncEventArgs
         {
             if (handler is { })
             {

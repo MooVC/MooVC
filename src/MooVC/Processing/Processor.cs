@@ -139,7 +139,7 @@
         {
             return DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
-                new DiagnosticsEmittedEventArgs(
+                new DiagnosticsEmittedAsyncEventArgs(
                     cause: cause,
                     level: level,
                     message: message));
@@ -149,7 +149,7 @@
         {
             return ProcessStateChanged.PassiveInvokeAsync(
                 this,
-                new ProcessorStateChangedEventArgs(state),
+                new ProcessorStateChangedAsyncEventArgs(state),
                 onFailure: failure => OnDiagnosticsEmittedAsync(
                     Level.Warning,
                     cause: failure,

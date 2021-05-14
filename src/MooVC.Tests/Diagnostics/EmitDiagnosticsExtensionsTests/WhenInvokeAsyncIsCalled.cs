@@ -29,7 +29,7 @@
                 new DiagnosticEmitter(true),
             };
 
-            IEnumerable<DiagnosticsEmittedEventArgs> diagnostics = await source
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
                 .InvokeAsync(emitter => emitter.ExecuteAsync());
 
             Assert.Equal(ExpectedCount, diagnostics.Count());
@@ -45,7 +45,7 @@
                 new DiagnosticEmitter(false),
             };
 
-            IEnumerable<DiagnosticsEmittedEventArgs> diagnostics = await source
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
                 .InvokeAsync(emitter => emitter.ExecuteAsync());
 
             Assert.Empty(diagnostics);

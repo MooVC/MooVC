@@ -2,5 +2,5 @@
 {
     using System.Threading.Tasks;
 
-    public delegate Task DiagnosticsEmittedAsyncEventHandler(IEmitDiagnostics sender, DiagnosticsEmittedEventArgs e);
+    public delegate Task DiagnosticsEmittedAsyncEventHandler(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e);
 }

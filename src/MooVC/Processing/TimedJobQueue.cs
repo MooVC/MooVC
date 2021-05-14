@@ -67,7 +67,7 @@
         {
             _ = DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
-                new DiagnosticsEmittedEventArgs(
+                new DiagnosticsEmittedAsyncEventArgs(
                     cause: cause,
                     level: level,
                     message: message));

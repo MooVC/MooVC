@@ -12,7 +12,7 @@
             TArgs e,
             Func<AggregateException, Task>? onFailure = default)
             where TSender : class
-            where TArgs : EventArgs
+            where TArgs : AsyncEventArgs
         {
             try
             {

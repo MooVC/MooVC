@@ -2,5 +2,5 @@
 {
     using System.Threading.Tasks;
 
-    public delegate Task ProcessorStateChangedAsyncEventHandler(IProcessor sender, ProcessorStateChangedEventArgs e);
+    public delegate Task ProcessorStateChangedAsyncEventHandler(IProcessor sender, ProcessorStateChangedAsyncEventArgs e);
 }

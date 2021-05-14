@@ -17,12 +17,12 @@
         [InlineData(new object[] { true, Level.Warning, DefaultMessage })]
         public void GivenAnInstanceThenAllPropertiesAreSerialized(bool cause, Level level, string? message)
         {
-            var original = new DiagnosticsEmittedEventArgs(
+            var original = new DiagnosticsEmittedAsyncEventArgs(
                 cause: cause ? new Exception(message) : default,
                 level: level,
                 message: message);
 
-            DiagnosticsEmittedEventArgs deserialized = original.Clone();
+            DiagnosticsEmittedAsyncEventArgs deserialized = original.Clone();
 
             Assert.Equal(original.Cause?.Message, deserialized.Cause?.Message);
             Assert.Equal(original.Level, deserialized.Level);
