@@ -29,7 +29,7 @@
                 return Task.CompletedTask;
             };
 
-            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty);
+            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
 
             Assert.True(wasInvoked);
         }
@@ -51,7 +51,7 @@
             Tested += Handler;
             Tested += Handler;
 
-            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty);
+            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
 
             Assert.Equal(Expected, actual);
         }
@@ -66,7 +66,7 @@
 
             await Tested.PassiveInvokeAsync(
                 this,
-                AsyncEventArgs.Empty,
+                AsyncEventArgs.Empty(),
                 onFailure: actual =>
                 {
                     wasInvoked = true;
@@ -85,7 +85,7 @@
             Invalid += (_, _) => { };
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Invalid.PassiveInvokeAsync(this, AsyncEventArgs.Empty));
+                () => Invalid.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -94,7 +94,7 @@
             TypedSender += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedSender.PassiveInvokeAsync(this, AsyncEventArgs.Empty));
+                () => TypedSender.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -103,7 +103,7 @@
             TypedArgs += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedArgs.PassiveInvokeAsync(this, AsyncEventArgs.Empty));
+                () => TypedArgs.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -112,7 +112,7 @@
             IncorrectParameters += (_, _, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => IncorrectParameters.PassiveInvokeAsync(this, AsyncEventArgs.Empty));
+                () => IncorrectParameters.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
         }
     }
 }

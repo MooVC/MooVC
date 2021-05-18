@@ -13,8 +13,16 @@
             CancellationToken = cancellationToken.GetValueOrDefault();
         }
 
-        public static new AsyncEventArgs Empty => empty.Value;
-
         public CancellationToken CancellationToken { get; }
+
+        public static new AsyncEventArgs Empty(CancellationToken? cancellationToken = default)
+        {
+            if (cancellationToken is { })
+            {
+                return new AsyncEventArgs(cancellationToken: cancellationToken);
+            }
+
+            return empty.Value;
+        }
     }
 }

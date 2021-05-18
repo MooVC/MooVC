@@ -28,7 +28,7 @@
                 return Task.CompletedTask;
             };
 
-            await Tested.InvokeAsync(this, AsyncEventArgs.Empty);
+            await Tested.InvokeAsync(this, AsyncEventArgs.Empty());
 
             Assert.True(wasInvoked);
         }
@@ -50,7 +50,7 @@
             Tested += Handler;
             Tested += Handler;
 
-            await Tested.InvokeAsync(this, AsyncEventArgs.Empty);
+            await Tested.InvokeAsync(this, AsyncEventArgs.Empty());
 
             Assert.Equal(Expected, actual);
         }
@@ -63,7 +63,7 @@
             Tested += (sender, e) => throw expected;
 
             AggregateException exception = await Assert.ThrowsAsync<AggregateException>(
-                () => Tested.InvokeAsync(this, AsyncEventArgs.Empty));
+                () => Tested.InvokeAsync(this, AsyncEventArgs.Empty()));
 
             Assert.NotNull(exception);
             Assert.Equal(expected, exception.InnerException?.InnerException);
@@ -75,7 +75,7 @@
             Invalid += (_, _) => { };
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Invalid.InvokeAsync(this, AsyncEventArgs.Empty));
+                () => Invalid.InvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -84,7 +84,7 @@
             TypedSender += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedSender.InvokeAsync(this, AsyncEventArgs.Empty));
+                () => TypedSender.InvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -93,7 +93,7 @@
             TypedArgs += (_, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedArgs.InvokeAsync(this, AsyncEventArgs.Empty));
+                () => TypedArgs.InvokeAsync(this, AsyncEventArgs.Empty()));
         }
 
         [Fact]
@@ -102,7 +102,7 @@
             IncorrectParameters += (_, _, _) => Task.CompletedTask;
 
             NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => IncorrectParameters.InvokeAsync(this, AsyncEventArgs.Empty));
+                () => IncorrectParameters.InvokeAsync(this, AsyncEventArgs.Empty()));
         }
     }
 }
