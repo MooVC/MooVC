@@ -21,6 +21,7 @@ Added additional support for asynchonrous event handling and cancellation.
 - Added a MulticastDelegateExtensions.InvokeAsync method that will await the invocation of a multicast delegate that returns a Task.
 - Added a MulticastDelegateExtensions.PassiveInvokeAsync method that will await the invocation of a multicast delegate that returns a Task and absorb any error encountered.
 - Added a MulticastDelegateExtensions.PassiveInvoke method that will invoke a multicast delegate absorb any errors encountered.
+- Changed Collections.Generic.Snapshot to accept an optional predicate to filter the final result.
 - Changed method signatures for Persistence.IEventStore to include an optional cancellation token (**Breaking Change**).
 - Changed method signatures for Persistence.IStore to include an optional cancellation token (**Breaking Change**).
 - Changed the invocation of the ProcessStateChanged event handler of Processing.Processor to utilize the passive implementation.
