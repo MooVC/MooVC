@@ -9,11 +9,11 @@
     public sealed class Initializer<T>
         where T : notnull
     {
-        private readonly Func<Task<T>> initializer;
+        private readonly Func<CancellationToken, Task<T>> initializer;
         private readonly SemaphoreSlim mutex = new(1, 1);
         private T? resource;
 
-        public Initializer(Func<Task<T>> initializer)
+        public Initializer(Func<CancellationToken, Task<T>> initializer)
         {
             ArgumentNotNull(initializer, nameof(initializer), InitializerInitializerRequired);
 
@@ -26,13 +26,15 @@
         {
             if (!IsInitialized)
             {
-                await mutex.WaitAsync(cancellationToken ?? CancellationToken.None);
+                cancellationToken = cancellationToken.GetValueOrDefault();
+
+                await mutex.WaitAsync(cancellationToken.Value);
 
                 try
                 {
                     if (!IsInitialized)
                     {
-                        resource = await initializer();
+                        resource = await initializer(cancellationToken.Value);
 
                         if (resource is null)
                         {

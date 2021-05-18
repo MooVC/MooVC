@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Threading.InitializerTests
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -12,7 +13,7 @@
             const int ExpectedInvocations = 1;
             int invocations = 0;
 
-            Task<object> Initializer()
+            Task<object> Initializer(CancellationToken cancellationToken)
             {
                 invocations++;
 
@@ -38,7 +39,7 @@
             const int ExpectedInvocations = 1;
             int invocations = 0;
 
-            Task<object> Initializer()
+            Task<object> Initializer(CancellationToken cancellationToken)
             {
                 invocations++;
 
@@ -68,7 +69,7 @@
             const int ExpectedInvocations = 1;
             int invocations = 0;
 
-            Task<object> Initializer()
+            Task<object> Initializer(CancellationToken cancellationToken)
             {
                 invocations++;
 
@@ -94,7 +95,7 @@
         [Fact]
         public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
         {
-            static Task<object> Initializer()
+            static Task<object> Initializer(CancellationToken cancellationToken)
             {
                 throw new NotImplementedException();
             }
@@ -107,7 +108,7 @@
         [Fact]
         public async Task GivenAFailureToInitializeThenAnInvalidOperationExceptionIsThrown()
         {
-            static Task<object> Initializer()
+            static Task<object> Initializer(CancellationToken cancellationToken)
             {
                 return Task.FromResult<object>(default!);
             }
