@@ -92,6 +92,7 @@
                 await
                     OnDiagnosticsEmittedAsync(
                         Level.Error,
+                        cancellationToken: cancellationToken,
                         cause: ex,
                         message: ProcessorTryStartFailure)
                     .ConfigureAwait(false);
@@ -114,6 +115,7 @@
                 await
                     OnDiagnosticsEmittedAsync(
                         Level.Error,
+                        cancellationToken: cancellationToken,
                         cause: ex,
                         message: ProcessorTryStopFailure)
                     .ConfigureAwait(false);
@@ -134,24 +136,29 @@
 
         protected virtual Task OnDiagnosticsEmittedAsync(
             Level level,
+            CancellationToken? cancellationToken = default,
             Exception? cause = default,
             string? message = default)
         {
             return DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
                 new DiagnosticsEmittedAsyncEventArgs(
+                    cancellationToken: cancellationToken,
                     cause: cause,
                     level: level,
                     message: message));
         }
 
-        protected virtual Task OnProcessingStateChangedAsync(ProcessorState state)
+        protected virtual Task OnProcessingStateChangedAsync(
+            ProcessorState state,
+            CancellationToken? cancellationToken = default)
         {
             return ProcessStateChanged.PassiveInvokeAsync(
                 this,
                 new ProcessorStateChangedAsyncEventArgs(state),
                 onFailure: failure => OnDiagnosticsEmittedAsync(
                     Level.Warning,
+                    cancellationToken: cancellationToken,
                     cause: failure,
                     message: ProcessorOnProcessingStateChangedAsyncFailure));
         }
