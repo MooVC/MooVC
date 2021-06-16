@@ -30,6 +30,7 @@ Added additional support for asynchonrous event handling and cancellation.
 - Changed Diagnostics.EmitDiagnosticsExtensions.Invoke to an async variant named Diagnostics.EmitDiagnosticsExtensions.InvokeAsync (**Breaking Change**).
 - Changed Processing.ProcessorStateChangedEventHandler to an async variant named Processing.ProcessorStateChangedAsyncEventHandler (**Breaking Change**).
 - Changed Threading.Initializer so that the delegate now accepts a cancellation token (**Breaking Change**).
+- Changed Serialization.SerializationInfoExtensions.TryGetValue extension to call internal GetValueNoThrow method instead of relying on serialization exception to detect missing values.
 - Renamed Persistence.IEventStore.ReadAsync for individual reads to GetAsync due to unintended ambiguity (**Breaking Change**).
 
 ## Bug Fixes
