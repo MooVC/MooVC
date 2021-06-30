@@ -4,6 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Runtime.Serialization;
+    using static MooVC.Serialization.Resources;
 
     public static partial class SerializationInfoExtensions
     {
@@ -41,9 +42,16 @@
         {
             Type type = typeof(SerializationInfo);
 
-            return type.GetMethod(
+            MethodInfo? method = type.GetMethod(
                 MethodName,
                 BindingFlags.Instance | BindingFlags.NonPublic);
+
+            if (method is null)
+            {
+                throw new InvalidOperationException(SerializationInfoExtensionsCreateMethodInfoFailure);
+            }
+
+            return method;
         }
     }
 }

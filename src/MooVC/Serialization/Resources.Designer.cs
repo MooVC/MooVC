@@ -61,6 +61,15 @@ namespace MooVC.Serialization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The required deserialization method is not supported by the current version of the .NET framework..
+        /// </summary>
+        internal static string SerializationInfoExtensionsCreateMethodInfoFailure {
+            get {
+                return ResourceManager.GetString("SerializationInfoExtensionsCreateMethodInfoFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Element {0} could not be deserialized to type {1}..
         /// </summary>
         internal static string SerializationInfoExtensionsGetValueTypeInvalid {
