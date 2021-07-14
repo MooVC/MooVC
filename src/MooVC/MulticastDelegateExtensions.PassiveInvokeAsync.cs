@@ -1,7 +1,6 @@
 ﻿namespace MooVC
 {
     using System;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     public static partial class MulticastDelegateExtensions

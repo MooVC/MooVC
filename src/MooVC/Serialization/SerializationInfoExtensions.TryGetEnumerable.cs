@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Serialization
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
@@ -8,7 +9,7 @@
     {
         public static IEnumerable<T> TryGetEnumerable<T>(this SerializationInfo info, string name)
         {
-            return info.TryGetValue(name, new T[0]);
+            return info.TryGetValue(name, Array.Empty<T>());
         }
 
         [return: NotNullIfNotNull("defaultValue")]
