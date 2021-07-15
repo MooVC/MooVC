@@ -15,7 +15,14 @@
         [return: NotNullIfNotNull("defaultValue")]
         public static IEnumerable<T>? TryGetEnumerable<T>(this SerializationInfo info, string name, IEnumerable<T>? defaultValue)
         {
-            return info.TryGetValue(name, defaultValue: defaultValue);
+            T[]? value = info.TryGetValue<T[]>(name);
+
+            if (value is { })
+            {
+                return value;
+            }
+
+            return defaultValue;
         }
     }
 }
