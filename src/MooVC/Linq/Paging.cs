@@ -13,7 +13,8 @@
         public const ushort DefaultSize = 10;
         public const ushort FirstPage = 1;
         public const ushort MinimumSize = 1;
-        private static readonly Lazy<Paging> @default = new Lazy<Paging>(() => new Paging());
+        private static readonly Lazy<Paging> @default = new(() => new Paging());
+        private static readonly Lazy<Paging> none = new(() => new Paging(size: ushort.MaxValue));
 
         public Paging(ushort page = FirstPage, ushort size = DefaultSize)
         {
@@ -29,7 +30,11 @@
 
         public static Paging Default => @default.Value;
 
+        public static Paging None => none.Value;
+
         public bool IsDefault => this == Default;
+
+        public bool IsNone => this == None;
 
         public ushort Page { get; } = FirstPage;
 
@@ -39,6 +44,11 @@
 
         public virtual IQueryable<T> Apply<T>(IQueryable<T> queryable)
         {
+            if (IsNone)
+            {
+                return queryable;
+            }
+
             return queryable.Skip(Skip).Take(Size);
         }
 

@@ -12,7 +12,7 @@
         [InlineData(ProcessorState.Unknown)]
         public void GivenAStateThenTheStatePropertyIsSet(ProcessorState expected)
         {
-            var argument = new ProcessorStateChangedEventArgs(expected);
+            var argument = new ProcessorStateChangedAsyncEventArgs(expected);
 
             Assert.Equal(expected, argument.State);
         }

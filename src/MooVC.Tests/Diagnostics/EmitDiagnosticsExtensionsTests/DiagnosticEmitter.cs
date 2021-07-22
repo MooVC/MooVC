@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Diagnostics.EmitDiagnosticsExtensionsTests
 {
+    using System.Threading.Tasks;
+
     public sealed class DiagnosticEmitter
         : IEmitDiagnostics
     {
@@ -10,13 +12,13 @@
             this.isEmitting = isEmitting;
         }
 
-        public event DiagnosticsEmittedEventHandler? DiagnosticsEmitted;
+        public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
 
-        public void Execute()
+        public async Task ExecuteAsync()
         {
             if (isEmitting)
             {
-                DiagnosticsEmitted?.Invoke(this, new DiagnosticsEmittedEventArgs());
+                await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs());
             }
         }
     }

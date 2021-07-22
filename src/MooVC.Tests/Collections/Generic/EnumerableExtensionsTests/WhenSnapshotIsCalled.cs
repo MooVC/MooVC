@@ -7,19 +7,35 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 
     public sealed class WhenSnapshotIsCalled
     {
+        public static readonly IEnumerable<object[]> GivenAnEnumerableAPredicateAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData = new[]
+        {
+            new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 3 } },
+            new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 3 } },
+            new object[] { new int[] { 1 }, new int[] { 1 } },
+            new object[] { Array.Empty<int>(), Array.Empty<int>() },
+        };
+
         public static readonly IEnumerable<object[]> GivenAnEnumerableAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData = new[]
         {
             new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 2, 3 } },
             new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 } },
             new object[] { new int[] { 1 }, new int[] { 1 } },
-            new object[] { new int[0], new int[0] },
+            new object[] { Array.Empty<int>(), Array.Empty<int>() },
         };
 
         public static readonly IEnumerable<object[]> GivenAnEnumerableThenAMatchingArrayIsReturnedData = new[]
         {
             new object[] { new int[] { 1, 2 } },
             new object[] { new int[] { 1 } },
-            new object[] { new int[0] },
+            new object[] { Array.Empty<int>() },
+        };
+
+        public static readonly IEnumerable<object[]> GivenAnEnumerableAndAPredicateThenAMatchingArrayIsReturnedData = new[]
+        {
+            new object[] { new int[] { 3, 1, 2 }, new int[] { 3, 1 } },
+            new object[] { new int[] { 1, 2, 3 }, new int[] { 1, 3 } },
+            new object[] { new int[] { 1 }, new int[] { 1 } },
+            new object[] { Array.Empty<int>(), Array.Empty<int>() },
         };
 
         [Theory]
@@ -29,6 +45,17 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
             IEnumerable<int> expected)
         {
             int[] result = original.Snapshot(element => element);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(GivenAnEnumerableAPredicateAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData))]
+        public void GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
+            IEnumerable<int> original,
+            IEnumerable<int> expected)
+        {
+            int[] result = original.Snapshot(element => element, predicate: value => value != 2);
 
             Assert.Equal(expected, result);
         }
@@ -50,8 +77,18 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
         public void GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
         {
             int[] expected = enumerable.ToArray();
-
             int[] result = enumerable.Snapshot();
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(GivenAnEnumerableAndAPredicateThenAMatchingArrayIsReturnedData))]
+        public void GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(
+            IEnumerable<int> original,
+            IEnumerable<int> expected)
+        {
+            int[] result = original.Snapshot(predicate: value => value != 2);
 
             Assert.Equal(expected, result);
         }
@@ -63,16 +100,7 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 
             string[] result = enumerable.Snapshot(element => element);
 
-            Assert.Equal(new string[0], result);
-        }
-
-        [Fact]
-        public void GivenANullEnumerableWhenANullOrderIsProvidedThenNoArgumentExceptionIsThrown()
-        {
-            IEnumerable<string>? enumerable = default;
-            Func<string, string>? order = default;
-
-            _ = enumerable.Snapshot(order!);
+            Assert.Equal(Array.Empty<string>(), result);
         }
 
         [Fact]
@@ -82,7 +110,7 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests
 
             string[] result = enumerable.Snapshot();
 
-            Assert.Equal(new string[0], result);
+            Assert.Equal(Array.Empty<string>(), result);
         }
     }
 }

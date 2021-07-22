@@ -10,8 +10,8 @@
         [Fact]
         public void GivenAnEmptySourceWhenANullPredicateIsProvidedThenAnArgumentNullExceptionIsThrown()
         {
-            IEnumerable<DiagnosticsEmittedEventArgs>? source = new DiagnosticsEmittedEventArgs[0];
-            Func<DiagnosticsEmittedEventArgs, Exception, bool>? predicate = default;
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
+            Func<DiagnosticsEmittedAsyncEventArgs, Exception, bool>? predicate = default;
 
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
                 () => source.Throw(predicate!));
@@ -22,7 +22,7 @@
         [Fact]
         public void GivenAnEmptySourceWhenNoPredicateIsProvidedThenNoAggregateExceptionIsThrown()
         {
-            IEnumerable<DiagnosticsEmittedEventArgs>? source = new DiagnosticsEmittedEventArgs[0];
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
 
             source.Throw();
         }
@@ -30,7 +30,7 @@
         [Fact]
         public void GivenAnNullSourceThenNoAggregateExceptionIsThrown()
         {
-            IEnumerable<DiagnosticsEmittedEventArgs>? source = default;
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = default;
 
             source.Throw();
         }
@@ -38,25 +38,25 @@
         [Fact]
         public void GivenASourceWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
         {
-            IEnumerable<DiagnosticsEmittedEventArgs> expected = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> expected = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Error),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Warning),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Information),
+                new(cause: new Exception(), level: Level.Critical),
+                new(cause: new Exception(), level: Level.Error),
+                new(cause: new Exception(), level: Level.Warning),
+                new(cause: new Exception(), level: Level.Information),
             };
 
-            IEnumerable<DiagnosticsEmittedEventArgs> unexpected = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> unexpected = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(level: Level.Critical),
-                new DiagnosticsEmittedEventArgs(level: Level.Error),
-                new DiagnosticsEmittedEventArgs(level: Level.Warning),
-                new DiagnosticsEmittedEventArgs(level: Level.Information),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Debug),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Trace),
+                new(level: Level.Critical),
+                new(level: Level.Error),
+                new(level: Level.Warning),
+                new(level: Level.Information),
+                new(cause: new Exception(), level: Level.Debug),
+                new(cause: new Exception(), level: Level.Trace),
             };
 
-            IEnumerable<DiagnosticsEmittedEventArgs> source = expected.Union(unexpected);
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = expected.Union(unexpected);
 
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw(level: Level.Information));
@@ -69,18 +69,18 @@
         {
             const string ExpectedMessage = "Test";
 
-            IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(ExpectedMessage), level: Level.Error),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Warning),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Information),
-                new DiagnosticsEmittedEventArgs(level: Level.Critical),
-                new DiagnosticsEmittedEventArgs(level: Level.Error),
-                new DiagnosticsEmittedEventArgs(level: Level.Warning),
-                new DiagnosticsEmittedEventArgs(level: Level.Information),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Debug),
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Trace),
+                new(cause: new Exception(), level: Level.Critical),
+                new(cause: new Exception(ExpectedMessage), level: Level.Error),
+                new(cause: new Exception(), level: Level.Warning),
+                new(cause: new Exception(), level: Level.Information),
+                new(level: Level.Critical),
+                new(level: Level.Error),
+                new(level: Level.Warning),
+                new(level: Level.Information),
+                new(cause: new Exception(), level: Level.Debug),
+                new(cause: new Exception(), level: Level.Trace),
             };
 
             AggregateException exception = Assert.Throws<AggregateException>(
@@ -95,9 +95,9 @@
         {
             const string ExpectedMessage = "Something something Dark Side";
 
-            IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
+                new(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw(level: Level.Trace, message: ExpectedMessage));
@@ -110,12 +110,12 @@
         {
             const string ExpectedMessage = "Something something Dark Side";
 
-            IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
+                new(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw((_, __) => true, message: ExpectedMessage));
+                () => source.Throw((_, _) => true, message: ExpectedMessage));
 
             Assert.StartsWith(ExpectedMessage, exception.Message);
         }
@@ -125,9 +125,9 @@
         {
             const string ExpectedMessage = "Something something Dark Side";
 
-            IEnumerable<DiagnosticsEmittedEventArgs> source = new[]
+            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
             {
-                new DiagnosticsEmittedEventArgs(cause: new Exception(), level: Level.Critical),
+                new(cause: new Exception(), level: Level.Critical),
             };
             AggregateException exception = Assert.Throws<AggregateException>(
                 () => source.Throw(message: ExpectedMessage));

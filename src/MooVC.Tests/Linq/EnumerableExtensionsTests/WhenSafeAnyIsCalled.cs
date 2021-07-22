@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Xunit;
 
     public sealed class WhenSafeAnyIsCalled
@@ -8,7 +9,7 @@
         [Fact]
         public void GivenAnEmptySourceThenANegativeResponseIsReturned()
         {
-            IEnumerable<int> source = new int[0];
+            IEnumerable<int> source = Enumerable.Empty<int>();
 
             Assert.False(source.SafeAny());
         }
@@ -16,7 +17,7 @@
         [Fact]
         public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
         {
-            IEnumerable<int> source = new int[0];
+            IEnumerable<int> source = Enumerable.Empty<int>();
 
             Assert.False(source.SafeAny(predicate => true));
         }

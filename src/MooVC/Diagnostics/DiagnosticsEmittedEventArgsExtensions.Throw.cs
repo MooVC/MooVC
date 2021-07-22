@@ -9,7 +9,7 @@
     public static class DiagnosticsEmittedEventArgsExtensions
     {
         public static void Throw(
-            this IEnumerable<DiagnosticsEmittedEventArgs>? diagnostics,
+            this IEnumerable<DiagnosticsEmittedAsyncEventArgs>? diagnostics,
             Level level = Level.Warning,
             string? message = default)
         {
@@ -17,8 +17,8 @@
         }
 
         public static void Throw(
-            this IEnumerable<DiagnosticsEmittedEventArgs>? diagnostics,
-            Func<DiagnosticsEmittedEventArgs, Exception, bool> predicate,
+            this IEnumerable<DiagnosticsEmittedAsyncEventArgs>? diagnostics,
+            Func<DiagnosticsEmittedAsyncEventArgs, Exception, bool> predicate,
             string? message = default)
         {
             if (diagnostics is { })

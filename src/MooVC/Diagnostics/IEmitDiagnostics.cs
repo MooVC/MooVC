@@ -2,6 +2,6 @@
 {
     public interface IEmitDiagnostics
     {
-        event DiagnosticsEmittedEventHandler DiagnosticsEmitted;
+        event DiagnosticsEmittedAsyncEventHandler DiagnosticsEmitted;
     }
 }

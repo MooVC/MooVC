@@ -7,16 +7,16 @@
         : SynchronousEventStore<object, int>
     {
         private readonly Func<object, int>? insert;
-        private readonly Func<int, object?>? readByIndex;
+        private readonly Func<int, object?>? getByIndex;
         private readonly Func<int, ushort, IEnumerable<object>>? readFromIndex;
 
         public TestableSynchronousEventStore(
             Func<object, int>? insert = default,
-            Func<int, object?>? readByIndex = default,
+            Func<int, object?>? getByIndex = default,
             Func<int, ushort, IEnumerable<object>>? readFromIndex = default)
         {
             this.insert = insert;
-            this.readByIndex = readByIndex;
+            this.getByIndex = getByIndex;
             this.readFromIndex = readFromIndex;
         }
 
@@ -30,11 +30,11 @@
             throw new NotImplementedException();
         }
 
-        protected override object? PerformRead(int index)
+        protected override object? PerformGet(int index)
         {
-            if (readByIndex is { })
+            if (getByIndex is { })
             {
-                return readByIndex(index);
+                return getByIndex(index);
             }
 
             throw new NotImplementedException();

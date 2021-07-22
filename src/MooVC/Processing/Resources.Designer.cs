@@ -70,6 +70,15 @@ namespace MooVC.Processing {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A failure has prevented one or more listeners for changes to the state of the processor from successfully handling a change..
+        /// </summary>
+        internal static string ProcessorOnProcessingStateChangedAsyncFailure {
+            get {
+                return ResourceManager.GetString("ProcessorOnProcessingStateChangedAsyncFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The processor could not be started..
         /// </summary>
         internal static string ProcessorTryStartFailure {
