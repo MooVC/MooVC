@@ -21,9 +21,6 @@ Added additional support for asynchonrous event handling and cancellation.
 - Added a MulticastDelegateExtensions.InvokeAsync method that will await the invocation of a multicast delegate that returns a Task.
 - Added a MulticastDelegateExtensions.PassiveInvokeAsync method that will await the invocation of a multicast delegate that returns a Task and absorb any error encountered.
 - Added a MulticastDelegateExtensions.PassiveInvoke method that will invoke a multicast delegate absorb any errors encountered.
-- Added a Serialization.IDeserializer to encapsulate the concept of a deserializer.
-- Added a Serialization.ISerializer to encapsulate the concept of a serializer.
-- Added a Serialization.DeserializerExtensions.TryDeserialize to support passive deserialzation.
 - Added a static None instance to Linq.Paging to support solutions whereby the default behavior when null is to use Default, instead of None.
 - Changed Collections.Generic.Snapshot to accept an optional predicate to filter the final result.
 - Changed method signatures for Persistence.IEventStore to include an optional cancellation token (**Breaking Change**).
