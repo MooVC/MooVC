@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Threading.InitializerTests
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -9,7 +10,7 @@
         [Fact]
         public void GivenAnInitiazerThenAnInstanceIsReturned()
         {
-            static Task<object> Initializer()
+            static Task<object> Initializer(CancellationToken cancellationToken)
             {
                 return Task.FromResult(new object());
             }
@@ -20,7 +21,7 @@
         [Fact]
         public void GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
         {
-            Func<Task<object>>? initializer = default;
+            Func<CancellationToken, Task<object>>? initializer = default;
 
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
                 () => new Initializer<object>(initializer!));

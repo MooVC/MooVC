@@ -3,29 +3,33 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
+    using System.Threading;
     using MooVC.Serialization;
     using static System.String;
 
     [Serializable]
-    public sealed class DiagnosticsEmittedEventArgs
-        : EventArgs,
+    public sealed class DiagnosticsEmittedAsyncEventArgs
+        : AsyncEventArgs,
           ISerializable
     {
         private Exception? cause;
         private Level level = Level.Information;
         private string message = string.Empty;
 
-        public DiagnosticsEmittedEventArgs(
+        public DiagnosticsEmittedAsyncEventArgs(
+            CancellationToken? cancellationToken = default,
             Exception? cause = default,
             Level level = Level.Information,
             string? message = default)
+            : base(cancellationToken: cancellationToken)
         {
             Cause = cause;
             Level = level;
             Message = message;
         }
 
-        private DiagnosticsEmittedEventArgs(SerializationInfo info, StreamingContext context)
+        private DiagnosticsEmittedAsyncEventArgs(SerializationInfo info, StreamingContext context)
+            : base(default)
         {
             cause = info.TryGetValue<Exception?>(nameof(Cause));
             level = info.GetValue<Level>(nameof(Level));

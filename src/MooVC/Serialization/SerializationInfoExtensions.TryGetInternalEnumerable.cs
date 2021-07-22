@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Serialization
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
@@ -8,7 +9,7 @@
     {
         public static IEnumerable<T> TryGetInternalEnumerable<T>(this SerializationInfo info, string name)
         {
-            return info.TryGetInternalEnumerable<T>(name, new T[0]);
+            return info.TryGetInternalEnumerable(name, Array.Empty<T>());
         }
 
         [return: NotNullIfNotNull("defaultValue")]

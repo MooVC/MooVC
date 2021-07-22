@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
+    using System.Threading;
     using Moq;
     using Xunit;
 
@@ -25,7 +26,9 @@
             object item = new object();
 
             _ = Store
-                .Setup(store => store.CreateAsync(It.Is<object>(parameter => parameter == item)))
+                .Setup(store => store.CreateAsync(
+                    It.Is<object>(parameter => parameter == item),
+                    It.IsAny<CancellationToken?>()))
                 .ReturnsAsync(expectedInnerKey);
 
             var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
@@ -34,7 +37,11 @@
             Assert.True(wasInvoked);
             Assert.Equal(expectedOutterKey, actualOutterKey);
 
-            Store.Verify(store => store.CreateAsync(It.IsAny<object>()), times: Times.Once);
+            Store.Verify(
+                store => store.CreateAsync(
+                    It.IsAny<object>(),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
         }
     }
 }

@@ -8,23 +8,31 @@ namespace MooVC.Collections.Generic
 
     public static partial class EnumerableExtensions
     {
-        public static T[] Snapshot<T>(this IEnumerable<T>? enumerable)
-        {
-            return enumerable?.ToArray() ?? Array.Empty<T>();
-        }
-
-        public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order)
+        public static T[] Snapshot<T>(
+            this IEnumerable<T>? enumerable,
+            Func<T, bool>? predicate = default)
         {
             if (enumerable is { })
             {
-                ArgumentNotNull(order, nameof(order), EnumerableExtensionsSnapshotOrderRequired);
-
                 return enumerable
-                    .OrderBy(order)
+                    .WhereIf(predicate is { }, predicate!)
                     .ToArray();
             }
 
             return Array.Empty<T>();
+        }
+
+        public static T[] Snapshot<T, TKey>(
+            this IEnumerable<T>? enumerable,
+            Func<T, TKey> order,
+            Func<T, bool>? predicate = default)
+        {
+            ArgumentNotNull(order, nameof(order), EnumerableExtensionsSnapshotOrderRequired);
+
+            return enumerable
+                .Snapshot(predicate: predicate)
+                .OrderBy(order)
+                .ToArray();
         }
     }
 }

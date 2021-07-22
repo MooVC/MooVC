@@ -7,7 +7,7 @@
     public interface IProcessor
         : IHostedService
     {
-        event ProcessorStateChangedEventHandler ProcessStateChanged;
+        event ProcessorStateChangedAsyncEventHandler ProcessStateChanged;
 
         ProcessorState State { get; }
 

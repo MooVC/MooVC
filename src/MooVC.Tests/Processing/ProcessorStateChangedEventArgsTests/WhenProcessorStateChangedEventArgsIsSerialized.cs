@@ -13,8 +13,8 @@
         [InlineData(ProcessorState.Unknown)]
         public void GivenAnInstanceThenAllPropertiesAreSerialized(ProcessorState expected)
         {
-            var original = new ProcessorStateChangedEventArgs(expected);
-            ProcessorStateChangedEventArgs deserialized = original.Clone();
+            var original = new ProcessorStateChangedAsyncEventArgs(expected);
+            ProcessorStateChangedAsyncEventArgs deserialized = original.Clone();
 
             Assert.Equal(original.State, deserialized.State);
             Assert.NotSame(original, deserialized);

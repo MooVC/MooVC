@@ -1,7 +1,6 @@
 ﻿namespace MooVC
 {
     using System;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     public static partial class MulticastDelegateExtensions
@@ -10,9 +9,9 @@
             this MulticastDelegate? handler,
             TSender? sender,
             TArgs e,
-            Action<TargetInvocationException>? onFailure = default)
+            Func<AggregateException, Task>? onFailure = default)
             where TSender : class
-            where TArgs : EventArgs
+            where TArgs : AsyncEventArgs
         {
             try
             {
@@ -20,9 +19,13 @@
                     .InvokeAsync(sender, e)
                     .ConfigureAwait(false);
             }
-            catch (TargetInvocationException tie)
+            catch (AggregateException ex)
             {
-                onFailure?.Invoke(tie);
+                if (onFailure is { })
+                {
+                    await onFailure(ex)
+                        .ConfigureAwait(false);
+                }
             }
         }
     }

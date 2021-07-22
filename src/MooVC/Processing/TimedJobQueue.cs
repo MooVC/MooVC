@@ -27,7 +27,7 @@
             this.timer.Triggered += Timer_Triggered;
         }
 
-        public event DiagnosticsEmittedEventHandler? DiagnosticsEmitted;
+        public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
 
         public bool HasJobsPending => queue.Any();
 
@@ -65,9 +65,9 @@
             Exception? cause = default,
             string? message = default)
         {
-            DiagnosticsEmitted?.PassiveInvoke(
+            _ = DiagnosticsEmitted.PassiveInvokeAsync(
                 this,
-                new DiagnosticsEmittedEventArgs(
+                new DiagnosticsEmittedAsyncEventArgs(
                     cause: cause,
                     level: level,
                     message: message));

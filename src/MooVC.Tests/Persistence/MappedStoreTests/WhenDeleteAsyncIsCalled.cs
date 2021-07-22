@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests
 {
     using System;
+    using System.Threading;
     using Moq;
     using Xunit;
 
@@ -30,8 +31,17 @@
 
             Assert.True(wasInvoked);
 
-            Store.Verify(store => store.DeleteAsync(It.IsAny<string>()), times: Times.Once);
-            Store.Verify(store => store.DeleteAsync(It.Is<string>(argument => argument == expectedInnerKey)), times: Times.Once);
+            Store.Verify(
+                store => store.DeleteAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
+
+            Store.Verify(
+                store => store.DeleteAsync(
+                    It.Is<string>(argument => argument == expectedInnerKey),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
         }
 
         [Fact]
@@ -43,7 +53,11 @@
 
             await store.DeleteAsync(item);
 
-            Store.Verify(store => store.DeleteAsync(It.IsAny<object>()), times: Times.Once);
+            Store.Verify(
+                store => store.DeleteAsync(
+                    It.IsAny<object>(),
+                    It.IsAny<CancellationToken?>()),
+                times: Times.Once);
         }
     }
 }

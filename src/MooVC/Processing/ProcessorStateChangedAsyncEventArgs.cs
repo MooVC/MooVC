@@ -2,19 +2,21 @@
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Threading;
     using MooVC.Serialization;
 
     [Serializable]
-    public sealed class ProcessorStateChangedEventArgs
-        : EventArgs,
+    public sealed class ProcessorStateChangedAsyncEventArgs
+        : AsyncEventArgs,
           ISerializable
     {
-        public ProcessorStateChangedEventArgs(ProcessorState state)
+        public ProcessorStateChangedAsyncEventArgs(ProcessorState state, CancellationToken? cancellationToken = default)
+            : base(cancellationToken: cancellationToken)
         {
             State = state;
         }
 
-        private ProcessorStateChangedEventArgs(SerializationInfo info, StreamingContext context)
+        private ProcessorStateChangedAsyncEventArgs(SerializationInfo info, StreamingContext context)
         {
             State = info.GetValue<ProcessorState>(nameof(State));
         }
