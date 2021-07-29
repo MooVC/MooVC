@@ -16,9 +16,12 @@ This release focuses on standardizing the concept of serialization.
 
 ## Enhancements
 
-- Added a Serialization.ISerializer to encapsulate the concept of a serializer.
+- Added a Compression.ICompressor to encapsulate the concept of a data compressor.
+- Added a Compression.Compressor to support development of streams based compression.
+- Added a Compression.SynchronousCompressor to support development of synchsonous compression components.
+- Added a Serialization.ISerializer to encapsulate the concept of an object serializer.
 - Added a Serialization.SynchronousCloner to support migration to the async variant.
-- Added a Serialization.SynchronousSerializer to support migration to the async variant.
+- Added a Serialization.SynchronousSerializer to support development of synchsonous serialization components.
 - Changed Serialization.ICloner to no longer require that the type implement System.ISerializable.
 - Changed Serialization.ICloner.Clone to an async variant called Serialization.ICloner.CloneAsync (**Breaking Change**).
 - Removed Serialization.BinaryFormatterCloner due to reliance on deprecated BinaryFormatter (See https://aka.ms/binaryformatter for more information) (**Breaking Change**).
