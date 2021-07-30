@@ -5,7 +5,6 @@
     using System.Threading;
     using MooVC.Serialization;
 
-    [Serializable]
     public sealed class ProcessorStateChangedAsyncEventArgs
         : AsyncEventArgs,
           ISerializable

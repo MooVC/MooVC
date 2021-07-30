@@ -5,7 +5,6 @@
     using MooVC.Serialization;
     using static MooVC.Processing.Resources;
 
-    [Serializable]
     public sealed class StopOperationInvalidException
         : InvalidOperationException
     {

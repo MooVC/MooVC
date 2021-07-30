@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Runtime.Serialization;
 
-    [Serializable]
     public sealed class TrySerializableObject
         : SerializableObject
     {
@@ -31,7 +30,7 @@
             UnsignedLong = info.TryGetValue<ulong>(nameof(UnsignedLong));
             Value1 = info.TryGetValue(nameof(Value1), defaultValue: new object());
             Value2 = info.TryGetValue<Guid>(nameof(Value2));
-            Enumerable = info.TryGetEnumerable<int>(nameof(Enumerable), new int[0]);
+            Enumerable = info.TryGetEnumerable(nameof(Enumerable), Array.Empty<int>());
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

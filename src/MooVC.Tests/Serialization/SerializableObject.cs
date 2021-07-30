@@ -5,7 +5,6 @@
     using System.Runtime.Serialization;
     using static System.String;
 
-    [Serializable]
     public abstract class SerializableObject
         : ISerializable
     {
