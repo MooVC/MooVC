@@ -109,6 +109,8 @@
                         cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
 
+                compressed.Position = 0;
+
                 await compressed
                     .CopyToAsync(target, cancellationToken.GetValueOrDefault())
                     .ConfigureAwait(false);
@@ -133,6 +135,8 @@
                         source,
                         cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
+
+                decompressed.Position = 0;
 
                 await decompressed
                     .CopyToAsync(target, cancellationToken.GetValueOrDefault())
