@@ -2,21 +2,50 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
+    using MooVC.Compression;
+    using MooVC.IO;
+    using Moq;
     using Xunit;
 
     public sealed class WhenDeserializeAsyncIsCalled
     {
         [Fact]
+        public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
+        {
+            var compressor = new Mock<ICompressor>();
+
+            _ = compressor
+                .Setup(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()))
+                .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
+
+            var serializer = new TestableSynchronousSerializer(
+                compressor: compressor.Object,
+                onDeserialize: instance => "Something irrelevant");
+
+            using var source = new MemoryStream();
+            _ = await serializer.DeserializeAsync<string>(source);
+
+            compressor.Verify(
+                compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()),
+                Times.Once);
+        }
+
+        [Fact]
         public async Task GivenDataThenDataDeserializationIsRequestedAsync()
         {
-            IEnumerable<byte> data = new byte[] { 1, 2, 3 };
+            IEnumerable<byte> expected = new byte[] { 1, 2, 3 };
             string instance = "Something something dark side...";
             bool wasInvoked = false;
 
             object Deserializer(object input)
             {
-                Assert.Equal(data, input);
+                Stream stream = Assert.IsAssignableFrom<Stream>(input);
+                IEnumerable<byte> actual = stream.GetBytes();
+
+                Assert.Equal(expected, actual);
 
                 wasInvoked = true;
 
@@ -24,7 +53,7 @@
             }
 
             var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
-            string deserialized = await serializer.DeserializeAsync<string>(data);
+            string deserialized = await serializer.DeserializeAsync<string>(expected);
 
             Assert.True(wasInvoked);
             Assert.Equal(instance, deserialized);
@@ -33,13 +62,17 @@
         [Fact]
         public async Task GivenAStreamThenStreamDeserializationIsRequestedAsync()
         {
-            using var stream = new MemoryStream();
+            IEnumerable<byte> expected = new byte[] { 1, 2, 3 };
+            using var stream = new MemoryStream(expected.ToArray());
             string instance = "Something something dark side...";
             bool wasInvoked = false;
 
             object Deserializer(object input)
             {
-                Assert.Equal(stream, input);
+                Stream stream = Assert.IsAssignableFrom<Stream>(input);
+                IEnumerable<byte> actual = stream.GetBytes();
+
+                Assert.Equal(expected, actual);
 
                 wasInvoked = true;
 

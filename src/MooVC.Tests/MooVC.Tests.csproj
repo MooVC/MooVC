@@ -39,4 +39,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Serialization\SerializerTests\" />
+  </ItemGroup>
 </Project>
