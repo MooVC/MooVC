@@ -45,6 +45,8 @@
                     cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 
+            decompressed.Position = 0;
+
             return await
                 PerformDeserializeAsync<T>(
                     decompressed,
@@ -83,6 +85,8 @@
                     serialized,
                     cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
+
+            serialized.Position = 0;
 
             await
                 CompressAsync(
