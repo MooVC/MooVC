@@ -23,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
     <PackageReference Include="Moq" Version="4.*" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.*">
@@ -38,8 +38,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Serialization\SerializerTests\" />
   </ItemGroup>
 </Project>

@@ -62,7 +62,7 @@
 
         public static void AddInternalValue(this SerializationInfo info, string name, object value)
         {
-            info.AddValue(FormatName(name), value);
+            info.AddValue(FormatName(name), value, value.GetType());
         }
 
         public static void AddInternalValue(this SerializationInfo info, string name, long value)
