@@ -6,6 +6,7 @@
     using MooVC.Serialization;
     using static System.Math;
 
+    [Serializable]
     public class Paging
         : ISerializable
     {

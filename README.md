@@ -26,7 +26,6 @@ This release focuses on standardizing the concept of serialization.
 - Changed Serialization.ICloner to no longer require that the type implement System.ISerializable.
 - Changed Serialization.ICloner.Clone to an async variant called Serialization.ICloner.CloneAsync (**Breaking Change**).
 - Removed Serialization.BinaryFormatterCloner due to reliance on deprecated BinaryFormatter (See https://aka.ms/binaryformatter for more information) (**Breaking Change**).
-- Removed serializable attributes from all serializable classes as they are not used by any mainstream serializers (**Breaking Change**).
 - Removed Serialization.SerializableExtensions due to reliance on deprecated BinaryFormatter (See https://aka.ms/binaryformatter for more information) (**Breaking Change**).
 
 ## End-User Impact

@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Runtime.Serialization;
 
+    [Serializable]
     public sealed class TryInternalSerializableObject
         : SerializableObject
     {

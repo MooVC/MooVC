@@ -7,6 +7,7 @@
     using MooVC.Serialization;
     using static System.String;
 
+    [Serializable]
     public sealed class DiagnosticsEmittedAsyncEventArgs
         : AsyncEventArgs,
           ISerializable
