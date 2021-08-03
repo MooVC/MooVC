@@ -6,7 +6,7 @@
     {
         public static string Serialize<T>(this T original)
         {
-            return JsonConvert.SerializeObject(original, Settings.Default);
+            return JsonConvert.SerializeObject(original);
         }
     }
 }

@@ -6,7 +6,7 @@
     {
         public static T Deserialize<T>(this string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, Settings.Default)!;
+            return JsonConvert.DeserializeObject<T>(json)!;
         }
     }
 }
