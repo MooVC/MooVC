@@ -19,6 +19,8 @@ This release focuses on standardizing the concept of serialization.
 - Added a Compression.ICompressor to encapsulate the concept of a data compressor.
 - Added a Compression.Compressor to support development of streams based compression.
 - Added a Compression.SynchronousCompressor to support development of synchsonous compression components.
+- Added a Next method to Linq.Paging that will return a Paging instance that represents the next page.
+- Added a Previous method to Linq.Paging that will return a Paging instance that represents the previous page or the current page if it is the first page.
 - Added a Serialization.ISerializer to encapsulate the concept of an object serializer.
 - Added a Serialization.Serializer to support development of streams based serialization with optional compression.
 - Added a Serialization.SynchronousCloner to support migration to the async variant.

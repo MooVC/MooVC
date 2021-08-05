@@ -57,5 +57,25 @@
             info.AddValue(nameof(Page), Page);
             info.AddValue(nameof(Size), Size);
         }
+
+        public virtual Paging Next()
+        {
+            if (Page == ushort.MaxValue)
+            {
+                return this;
+            }
+
+            return new Paging(page: (ushort)(Page + 1), size: Size);
+        }
+
+        public virtual Paging Previous()
+        {
+            if (Page == FirstPage)
+            {
+                return this;
+            }
+
+            return new Paging(page: (ushort)(Page - 1), size: Size);
+        }
     }
 }
