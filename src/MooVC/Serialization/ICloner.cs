@@ -1,10 +1,11 @@
 ﻿namespace MooVC.Serialization
 {
-    using System.Runtime.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public interface ICloner
     {
-        T Clone<T>(T original)
-            where T : ISerializable;
+        Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
+            where T : notnull;
     }
 }

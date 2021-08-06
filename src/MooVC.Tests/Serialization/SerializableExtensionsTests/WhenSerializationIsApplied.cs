@@ -1,10 +1,19 @@
-﻿namespace MooVC.Serialization.BinaryFormatterClonerTests
+﻿namespace MooVC.Serialization.SerializableExtensionsTests
 {
     using System;
     using Xunit;
 
-    public sealed class WhenCloneIsCalled
+    public sealed class WhenSerializationIsApplied
     {
+        [Fact]
+        public void GivenAnInternalSerializableObjectWhenNoPropertiesAreSetThenAllPropertiesMatch()
+        {
+            var serializable = new InternalSerializableObject();
+            InternalSerializableObject serialized = serializable.Clone();
+
+            AssertEquality(serializable, serialized);
+        }
+
         [Fact]
         public void GivenAnInternalSerializableObjectWhenPropertiesAreSetThenAllPropertiesMatch()
         {
@@ -25,21 +34,9 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value1 = "World",
             };
 
-            var cloner = new BinaryFormatterCloner();
-            InternalSerializableObject serialized = cloner.Clone(serializable);
-
-            AssertEquality(serializable, serialized);
-        }
-
-        [Fact]
-        public void GivenAnInternalSerializableObjectWhenNoPropertiesAreSetThenAllPropertiesMatch()
-        {
-            var serializable = new InternalSerializableObject();
-            var cloner = new BinaryFormatterCloner();
-            InternalSerializableObject serialized = cloner.Clone(serializable);
+            InternalSerializableObject serialized = serializable.Clone();
 
             AssertEquality(serializable, serialized);
         }
@@ -64,12 +61,10 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value1 = "World",
-                Value2 = Guid.NewGuid(),
+                Value = Guid.NewGuid(),
             };
 
-            var cloner = new BinaryFormatterCloner();
-            TryInternalSerializableObject serialized = cloner.Clone(serializable);
+            TryInternalSerializableObject serialized = serializable.Clone();
 
             AssertEquality(serializable, serialized);
         }
@@ -78,8 +73,7 @@
         public void GivenATryInternalSerializableObjectWhenNoPropertiesAreSetThenAllPropertiesMatch()
         {
             var serializable = new TryInternalSerializableObject();
-            var cloner = new BinaryFormatterCloner();
-            TryInternalSerializableObject serialized = cloner.Clone(serializable);
+            TryInternalSerializableObject serialized = serializable.Clone();
 
             AssertEquality(serializable, serialized);
         }
@@ -104,12 +98,10 @@
                 UnsignedShort = 3,
                 UnsignedInteger = 88651,
                 UnsignedLong = 9862846,
-                Value1 = "World",
-                Value2 = Guid.NewGuid(),
+                Value = Guid.NewGuid(),
             };
 
-            var cloner = new BinaryFormatterCloner();
-            TrySerializableObject serialized = cloner.Clone(serializable);
+            TrySerializableObject serialized = serializable.Clone();
 
             AssertEquality(serializable, serialized);
         }
@@ -118,13 +110,12 @@
         public void GivenATrySerializableObjectWhenNoPropertiesAreSetThenAllPropertiesMatch()
         {
             var serializable = new TrySerializableObject();
-            var cloner = new BinaryFormatterCloner();
-            TrySerializableObject serialized = cloner.Clone(serializable);
+            TrySerializableObject serialized = serializable.Clone();
 
             AssertEquality(serializable, serialized);
         }
 
-        private void AssertEquality(SerializableObject expected, SerializableObject actual)
+        private static void AssertEquality(SerializableObject expected, SerializableObject actual)
         {
             Assert.Equal(expected.Boolean, actual.Boolean);
             Assert.Equal(expected.Byte, actual.Byte);
@@ -141,8 +132,7 @@
             Assert.Equal(expected.UnsignedShort, actual.UnsignedShort);
             Assert.Equal(expected.UnsignedInteger, actual.UnsignedInteger);
             Assert.Equal(expected.UnsignedLong, actual.UnsignedLong);
-            Assert.Equal(expected.Value1, actual.Value1);
-            Assert.Equal(expected.Value2, actual.Value2);
+            Assert.Equal(expected.Value, actual.Value);
             Assert.Equal(expected.Enumerable, actual.Enumerable);
         }
     }
