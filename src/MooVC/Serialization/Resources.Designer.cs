@@ -61,6 +61,15 @@ namespace MooVC.Serialization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The serializer from which clones are to be produced must be provided..
+        /// </summary>
+        internal static string DefaultClonerSerializerRequired {
+            get {
+                return ResourceManager.GetString("DefaultClonerSerializerRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The required deserialization method is not supported by the current version of the .NET framework..
         /// </summary>
         internal static string SerializationInfoExtensionsCreateMethodInfoFailure {

@@ -19,7 +19,7 @@
 
                 if (predicate(value))
                 {
-                    info.AddValue(name, value);
+                    info.AddValue(name, value, value.GetType());
 
                     return true;
                 }
