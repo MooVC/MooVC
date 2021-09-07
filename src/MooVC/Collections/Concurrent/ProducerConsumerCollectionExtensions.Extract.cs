@@ -18,7 +18,7 @@
 
             count ??= ulong.MaxValue;
 
-            while (index++ < count && source.TryTake(out T current))
+            while (index++ < count && source.TryTake(out T? current))
             {
                 taken.Add(current);
             }
