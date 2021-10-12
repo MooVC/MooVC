@@ -8,8 +8,9 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v5.1.0
+# Release v5.2.0
 
 ## Enhancements
 
-- Added a Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract method to support unordered removal of items from a concurrent collection.
+- Added a Serialization.SerializationInfoEnumeratorExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
+- Added a Serialization.SerializationInfoExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
