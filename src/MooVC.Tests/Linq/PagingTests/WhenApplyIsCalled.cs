@@ -13,10 +13,23 @@
         {
             var paging = new Paging(page: page, size: size);
             IQueryable<int> queryable = Enumerable.Range(0, 20).AsQueryable();
+            IQueryable<int> result = paging.Apply(queryable);
 
-            int[] actual = paging.Apply(queryable).ToArray();
+            Assert.NotSame(queryable, result);
+
+            int[] actual = result.ToArray();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenAQueryableWhenNoneIsProvidedThenTheQueryableIsReturnedUnchanged()
+        {
+            Paging paging = Paging.None;
+            IQueryable<int> expected = Enumerable.Range(0, 20).AsQueryable();
+            IQueryable<int> actual = paging.Apply(expected);
+
+            Assert.Same(expected, actual);
         }
     }
 }
