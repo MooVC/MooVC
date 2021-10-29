@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Processing
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Hosting;
@@ -16,13 +15,10 @@
 
         public ThreadSafeHostedService(IEnumerable<IHostedService> services)
         {
-            ArgumentIsAcceptable(
+            this.services = ArgumentNotEmpty(
                 services,
                 nameof(services),
-                _ => services.Any(),
                 ThreadSafeHostedServiceServicesRequired);
-
-            this.services = services.Snapshot();
         }
 
         protected override Task PerformStartAsync(CancellationToken cancellationToken)
