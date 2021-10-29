@@ -168,6 +168,33 @@
         }
 
         [Fact]
+        public void GivenAReferenceThenNoExceptionIsThrown()
+        {
+            object expected = new();
+            object actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenAStructThenNoExceptionIsThrown()
+        {
+            TimeSpan expected = TimeSpan.Zero;
+            TimeSpan actual = ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenAValueThenNoExceptionIsThrown()
+        {
+            int expected = 1;
+            int actual = ArgumentIsAcceptable<int>(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenAValidArgumentWhenAMessageIsProvidedThenNoExceptionIsThrown()
         {
             const int ExpectedInvocationCount = 1;
