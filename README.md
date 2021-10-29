@@ -16,5 +16,7 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Serialization.SerializationInfoEnumeratorExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
 - Added a Serialization.SerializationInfoExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
 - Changed Ensure.ArgumentIsAcceptable so that it now returns the tested value.
+- Changed Ensure.ArgumentIsAcceptable so that it now differentiates between references and structs.
 - Changed Ensure.ArgumentNotNull so that it now returns the tested value.
+- Changed Ensure.ArgumentNotNull so that it now differentiates between references and structs.
 - Changed Ensure.ArgumentNotNullOrWhiteSpace so that it now returns the tested value.

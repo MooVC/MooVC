@@ -6,21 +6,31 @@
 
     public sealed class WhenArgumentNotNullIsCalled
     {
-        [Theory]
-        [InlineData(0)]
-        [InlineData(1)]
-        [InlineData(-1)]
-        [InlineData(1.0)]
-        [InlineData(-1.0)]
-        [InlineData(true)]
-        [InlineData(false)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void GivenANonNullValueThenNoExceptionIsThrown(object argument)
+        [Fact]
+        public void GivenANonNullNullableReferenceThenNoExceptionIsThrown()
         {
-            object result = ArgumentNotNull(argument, nameof(argument));
+            object? expected = new();
+            object actual = ArgumentNotNull(expected, nameof(expected));
 
-            Assert.Same(argument, result);
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableStructThenNoExceptionIsThrown()
+        {
+            TimeSpan? expected = TimeSpan.Zero;
+            TimeSpan actual = ArgumentNotNull(expected, nameof(expected));
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableValueThenNoExceptionIsThrown()
+        {
+            int? expected = 1;
+            int actual = ArgumentNotNull(expected, nameof(expected));
+
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -39,6 +49,23 @@
                 argument,
                 nameof(argument),
                 "Some message.");
+
+            Assert.Same(argument, result);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(-1)]
+        [InlineData(1.0)]
+        [InlineData(-1.0)]
+        [InlineData(true)]
+        [InlineData(false)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void GivenANonNullValueThenNoExceptionIsThrown(object argument)
+        {
+            object result = ArgumentNotNull(argument, nameof(argument));
 
             Assert.Same(argument, result);
         }
@@ -69,6 +96,39 @@
 
             Assert.Equal(ExpectedArgumentName, exception.ParamName);
             Assert.StartsWith(ExpectedMessage, exception.Message);
+        }
+
+        [Fact]
+        public void GivenANullNullableReferenceThenNoExceptionIsThrown()
+        {
+            object? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentNotNull(expected, nameof(expected)));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableStructThenAnArgumentNullExceptionIsThrown()
+        {
+            TimeSpan? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentNotNull(expected, nameof(expected)));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableValueThenAnArgumentNullExceptionIsThrown()
+        {
+            int? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentNotNull(expected, nameof(expected)));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
         }
     }
 }

@@ -60,6 +60,33 @@
         }
 
         [Fact]
+        public void GivenANonNullNullableReferenceThenNoExceptionIsThrown()
+        {
+            object? expected = new();
+            object actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableStructThenNoExceptionIsThrown()
+        {
+            TimeSpan? expected = TimeSpan.Zero;
+            TimeSpan actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableValueThenNoExceptionIsThrown()
+        {
+            int? expected = 1;
+            int actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenANullArgumentWhenAMessageIsProvidedThenAnArgumentNullExceptionIsThrownWithoutInvokingThePredicate()
         {
             const int ExpectedInvocationCount = 0;
@@ -105,6 +132,39 @@
 
             Assert.Equal(ExpectedArgumentName, exception.ParamName);
             Assert.Equal(ExpectedInvocationCount, invocationCount);
+        }
+
+        [Fact]
+        public void GivenANullNullableReferenceThenNoExceptionIsThrown()
+        {
+            object? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableStructThenAnArgumentNullExceptionIsThrown()
+        {
+            TimeSpan? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableValueThenAnArgumentNullExceptionIsThrown()
+        {
+            int? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
         }
 
         [Fact]
