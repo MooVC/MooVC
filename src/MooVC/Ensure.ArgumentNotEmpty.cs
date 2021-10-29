@@ -26,7 +26,7 @@
             string message,
             Func<T, bool>? predicate = default)
         {
-            ArgumentNotNull(argument, argumentName, message);
+            _ = ArgumentNotNull(argument, argumentName, message);
 
             predicate ??= element => element is { };
 

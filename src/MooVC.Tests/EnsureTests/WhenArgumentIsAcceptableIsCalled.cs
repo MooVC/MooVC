@@ -124,8 +124,9 @@
                 return true;
             }
 
-            ArgumentIsAcceptable(argument, Empty, Predicate, Empty);
+            string result = ArgumentIsAcceptable(argument, Empty, Predicate, Empty);
 
+            Assert.Same(argument, result);
             Assert.Equal(ExpectedInvocationCount, invocationCount);
         }
 
@@ -146,8 +147,9 @@
                 return true;
             }
 
-            ArgumentIsAcceptable(argument, Empty, Predicate);
+            string result = ArgumentIsAcceptable(argument, Empty, Predicate);
 
+            Assert.Same(argument, result);
             Assert.Equal(ExpectedInvocationCount, invocationCount);
         }
     }

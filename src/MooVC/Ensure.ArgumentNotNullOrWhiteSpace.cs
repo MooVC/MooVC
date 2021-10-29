@@ -6,7 +6,7 @@
 
     public static partial class Ensure
     {
-        public static void ArgumentNotNullOrWhiteSpace(
+        public static string ArgumentNotNullOrWhiteSpace(
             [NotNull] string? argument,
             string argumentName)
         {
@@ -14,9 +14,11 @@
             {
                 throw new ArgumentNullException(argumentName);
             }
+
+            return argument;
         }
 
-        public static void ArgumentNotNullOrWhiteSpace(
+        public static string ArgumentNotNullOrWhiteSpace(
             [NotNull] string? argument,
             string argumentName,
             string message)
@@ -25,6 +27,8 @@
             {
                 throw new ArgumentNullException(argumentName, message);
             }
+
+            return argument;
         }
     }
 }

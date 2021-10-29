@@ -18,7 +18,9 @@
         [InlineData(" ")]
         public void GivenANonNullValueThenNoExceptionIsThrown(object argument)
         {
-            ArgumentNotNull(argument, nameof(argument));
+            object result = ArgumentNotNull(argument, nameof(argument));
+
+            Assert.Same(argument, result);
         }
 
         [Theory]
@@ -33,7 +35,12 @@
         [InlineData(" ")]
         public void GivenANonNullValueAndAMessageThenNoExceptionIsThrown(object argument)
         {
-            ArgumentNotNull(argument, nameof(argument), "Some message.");
+            object result = ArgumentNotNull(
+                argument,
+                nameof(argument),
+                "Some message.");
+
+            Assert.Same(argument, result);
         }
 
         [Fact]

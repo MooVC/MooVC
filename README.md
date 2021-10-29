@@ -15,3 +15,6 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Ensure.ArgumentNotEmpty to simplify guard conditions where an enumerable must contain at least one element.
 - Added a Serialization.SerializationInfoEnumeratorExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
 - Added a Serialization.SerializationInfoExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
+- Changed Ensure.ArgumentIsAcceptable so that it now returns the tested value.
+- Changed Ensure.ArgumentNotNull so that it now returns the tested value.
+- Changed Ensure.ArgumentNotNullOrWhiteSpace so that it now returns the tested value.

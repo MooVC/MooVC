@@ -8,13 +8,26 @@
         [Fact]
         public void GivenANonNullValueThenNoExceptionIsThrown()
         {
-            Ensure.ArgumentNotNullOrWhiteSpace("Some Value", "Value");
+            const string Argument = "Some Value";
+
+            string result = Ensure.ArgumentNotNullOrWhiteSpace(
+                Argument,
+                "Value");
+
+            Assert.Same(Argument, result);
         }
 
         [Fact]
         public void GivenANonNullValueAndAMessageThenNoExceptionIsThrown()
         {
-            Ensure.ArgumentNotNullOrWhiteSpace("Some Value", "Value", "Some message.");
+            const string Argument = "Some Value";
+
+            string result = Ensure.ArgumentNotNullOrWhiteSpace(
+                Argument,
+                "Value",
+                "Some message.");
+
+            Assert.Same(Argument, result);
         }
 
         [Theory]

@@ -5,7 +5,7 @@
 
     public static partial class Ensure
     {
-        public static void ArgumentNotNull<T>(
+        public static T ArgumentNotNull<T>(
             [NotNull] T? argument,
             string argumentName)
         {
@@ -13,9 +13,11 @@
             {
                 throw new ArgumentNullException(argumentName);
             }
+
+            return argument;
         }
 
-        public static void ArgumentNotNull<T>(
+        public static T ArgumentNotNull<T>(
             [NotNull] T? argument,
             string argumentName,
             string message)
@@ -24,6 +26,8 @@
             {
                 throw new ArgumentNullException(argumentName, message);
             }
+
+            return argument;
         }
     }
 }
