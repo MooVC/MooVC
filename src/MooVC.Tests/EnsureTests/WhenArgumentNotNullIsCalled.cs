@@ -130,5 +130,50 @@
 
             Assert.Equal(nameof(expected), exception.ParamName);
         }
+
+        [Fact]
+        public void GivenANullNullableReferenceThenAnArgumentNullExceptionIsThrownWithTheMessageAttached()
+        {
+            const string ExpectedArgumentName = "expected";
+            const string ExpectedMessage = "Expected is null.";
+
+            object? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                ArgumentNotNull(expected, ExpectedArgumentName, ExpectedMessage));
+
+            Assert.Equal(ExpectedArgumentName, exception.ParamName);
+            Assert.StartsWith(ExpectedMessage, exception.Message);
+        }
+
+        [Fact]
+        public void GivenANullNullableStructThenAnArgumentNullExceptionIsThrownWithTheMessageAttached()
+        {
+            const string ExpectedArgumentName = "expected";
+            const string ExpectedMessage = "Expected is null.";
+
+            TimeSpan? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                ArgumentNotNull(expected, ExpectedArgumentName, ExpectedMessage));
+
+            Assert.Equal(ExpectedArgumentName, exception.ParamName);
+            Assert.StartsWith(ExpectedMessage, exception.Message);
+        }
+
+        [Fact]
+        public void GivenANullNullableValueThenAnArgumentNullExceptionIsThrownWithTheMessageAttached()
+        {
+            const string ExpectedArgumentName = "expected";
+            const string ExpectedMessage = "Expected is null.";
+
+            int? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                ArgumentNotNull(expected, ExpectedArgumentName, ExpectedMessage));
+
+            Assert.Equal(ExpectedArgumentName, exception.ParamName);
+            Assert.StartsWith(ExpectedMessage, exception.Message);
+        }
     }
 }

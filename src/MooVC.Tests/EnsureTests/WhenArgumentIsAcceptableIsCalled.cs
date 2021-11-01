@@ -177,6 +177,54 @@
         }
 
         [Fact]
+        public void GivenAStructWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => false));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAValueWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            int expected = 1;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<int>(expected, nameof(expected), _ => false));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAStructAndAMessageWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => false, Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
+        public void GivenAValueAndAMessageWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            int expected = 1;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<int>(expected, nameof(expected), _ => false, Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
         public void GivenAStructThenNoExceptionIsThrown()
         {
             TimeSpan expected = TimeSpan.Zero;
