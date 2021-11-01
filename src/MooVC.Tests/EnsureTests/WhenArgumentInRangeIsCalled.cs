@@ -69,6 +69,80 @@
 
         [Theory]
         [InlineData(50, 40, 45)]
+        public void GivenAByteWithinRangeWithAMessageThenNoExceptionIsThrown(
+            byte end,
+            byte start,
+            byte value)
+        {
+            const string Message = "Irrelevant";
+
+            _ = ArgumentInRange(value, nameof(value), Message, end: end, start: start);
+        }
+
+        [Theory]
+        [InlineData((byte)50, (byte)40, (byte)60)]
+        [InlineData((byte)(byte.MaxValue - 1), byte.MinValue, byte.MaxValue)]
+        public void GivenANonNullNullablleByteAboveTheEndRangeWithAMessageThenArgumentOutOfRangeExceptionIsThrown(
+            byte? end,
+            byte? start,
+            byte? value)
+        {
+            const string Message = "Something something dark side...";
+
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => ArgumentInRange(value, nameof(value), Message, end: end, start: start));
+
+            Assert.Equal(nameof(value), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Theory]
+        [InlineData((byte)50, (byte)40, (byte)30)]
+        [InlineData(byte.MaxValue, (byte)(byte.MinValue + 1), byte.MinValue)]
+        public void GivenANonNullNullablleByteBelowTheStartRangeWithAMessageThenArgumentOutOfRangeExceptionIsThrown(
+            byte? end,
+            byte? start,
+            byte? value)
+        {
+            const string Message = "Something something dark side...";
+
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => ArgumentInRange(value, nameof(value), Message, end: end, start: start));
+
+            Assert.Equal(nameof(value), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Theory]
+        [InlineData((byte)50, (byte)40, (byte)45)]
+        [InlineData(byte.MaxValue, byte.MinValue, byte.MinValue)]
+        [InlineData(byte.MaxValue, byte.MinValue, byte.MaxValue)]
+        public void GivenANonNullNullablleByteWithinRangeWithAMessageThenNoExceptionIsThrown(
+            byte? end,
+            byte? start,
+            byte? value)
+        {
+            const string Message = "Irrelevant";
+
+            _ = ArgumentInRange(value, nameof(value), Message, end: end, start: start);
+        }
+
+        [Fact]
+        public void GivenANullNullablleByteWithinRangeWithAMessageThenAnArgumentNullExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+
+            byte? value = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentInRange(value, nameof(value), Message));
+
+            Assert.Equal(nameof(value), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Theory]
+        [InlineData(50, 40, 45)]
         public void GivenAnSignedByteWithinRangeThenNoExceptionIsThrown(
             sbyte end,
             sbyte start,
