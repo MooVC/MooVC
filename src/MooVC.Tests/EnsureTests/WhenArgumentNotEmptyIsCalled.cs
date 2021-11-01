@@ -9,6 +9,54 @@
     public sealed class WhenArgumentNotEmptyIsCalled
     {
         [Fact]
+        public void GivenAnEmptyGuidThenAnArgumentExceptionIsThrown()
+        {
+            Guid expected = Guid.Empty;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(
+                () => ArgumentNotEmpty(expected, nameof(expected)));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAnEmptyGuidWithAMessageThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            Guid expected = Guid.Empty;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(
+                () => ArgumentNotEmpty(expected, nameof(expected), Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
+        public void GivenAnEmptyTimeSpanThenAnArgumentExceptionIsThrown()
+        {
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(
+                () => ArgumentNotEmpty(expected, nameof(expected)));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAnEmptyTimeSpanWithAMessageThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(
+                () => ArgumentNotEmpty(expected, nameof(expected), Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
         public void GivenAnEnumerationWithAMessageAndANegativePredicateThenAnArgumentExceptionIsThrown()
         {
             const string Message = "Something something dark side...";

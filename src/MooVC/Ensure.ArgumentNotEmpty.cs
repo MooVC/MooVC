@@ -8,6 +8,26 @@
 
     public static partial class Ensure
     {
+        public static Guid ArgumentNotEmpty(
+            [NotNull] Guid? argument,
+            string argumentName)
+        {
+            return ArgumentIsAcceptable(
+                argument,
+                argumentName,
+                predicate: value => value != Guid.Empty);
+        }
+
+        public static TimeSpan ArgumentNotEmpty(
+            [NotNull] TimeSpan? argument,
+            string argumentName)
+        {
+            return ArgumentIsAcceptable(
+                argument,
+                argumentName,
+                predicate: value => value > TimeSpan.Zero);
+        }
+
         public static T[] ArgumentNotEmpty<T>(
             [NotNull] IEnumerable<T>? argument,
             string argumentName,
@@ -18,6 +38,30 @@
                 argumentName,
                 default!,
                 predicate: predicate);
+        }
+
+        public static Guid ArgumentNotEmpty(
+           [NotNull] Guid? argument,
+           string argumentName,
+           string message)
+        {
+            return ArgumentIsAcceptable(
+                argument,
+                argumentName,
+                predicate: value => value != Guid.Empty,
+                message);
+        }
+
+        public static TimeSpan ArgumentNotEmpty(
+           [NotNull] TimeSpan? argument,
+           string argumentName,
+           string message)
+        {
+            return ArgumentIsAcceptable(
+                argument,
+                argumentName,
+                predicate: value => value > TimeSpan.Zero,
+                message);
         }
 
         public static T[] ArgumentNotEmpty<T>(
