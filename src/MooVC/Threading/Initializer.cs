@@ -15,9 +15,10 @@
 
         public Initializer(Func<CancellationToken, Task<T>> initializer)
         {
-            ArgumentNotNull(initializer, nameof(initializer), InitializerInitializerRequired);
-
-            this.initializer = initializer;
+            this.initializer = ArgumentNotNull(
+                initializer,
+                nameof(initializer),
+                InitializerInitializerRequired);
         }
 
         public bool IsInitialized { get; private set; }

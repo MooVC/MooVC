@@ -15,7 +15,10 @@
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessAllTransformRequired);
 
                 return source.ProcessAll(
                     source =>

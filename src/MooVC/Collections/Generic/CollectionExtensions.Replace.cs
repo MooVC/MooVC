@@ -8,7 +8,10 @@ namespace MooVC.Collections.Generic
     {
         public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
         {
-            ArgumentNotNull(target, nameof(target), CollectionExtensionsReplaceTargetRequired);
+            _ = ArgumentNotNull(
+                target,
+                nameof(target),
+                CollectionExtensionsReplaceTargetRequired);
 
             target.Clear();
 

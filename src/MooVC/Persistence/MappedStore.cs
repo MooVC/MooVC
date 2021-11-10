@@ -20,13 +20,20 @@
             Func<T, TInnerKey, TOutterKey> outterMapping,
             IStore<T, TInnerKey> store)
         {
-            ArgumentNotNull(innerMapping, nameof(innerMapping), MappedStoreInnerMappingRequired);
-            ArgumentNotNull(outterMapping, nameof(outterMapping), MappedStoreOutterMappingRequired);
-            ArgumentNotNull(store, nameof(store), MappedStoreStoreRequired);
+            this.innerMapping = ArgumentNotNull(
+                innerMapping,
+                nameof(innerMapping),
+                MappedStoreInnerMappingRequired);
 
-            this.innerMapping = innerMapping;
-            this.outterMapping = outterMapping;
-            this.store = store;
+            this.outterMapping = ArgumentNotNull(
+                outterMapping,
+                nameof(outterMapping),
+                MappedStoreOutterMappingRequired);
+
+            this.store = ArgumentNotNull(
+                store,
+                nameof(store),
+                MappedStoreStoreRequired);
         }
 
         public async Task<TOutterKey> CreateAsync(T item, CancellationToken? cancellationToken = default)

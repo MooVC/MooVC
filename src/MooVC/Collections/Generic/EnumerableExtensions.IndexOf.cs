@@ -18,7 +18,10 @@ namespace MooVC.Collections.Generic
                 return Default;
             }
 
-            ArgumentNotNull(predicate, nameof(predicate), EnumerableExtensionsIndexOfPredicateRequired);
+            _ = ArgumentNotNull(
+                predicate,
+                nameof(predicate),
+                EnumerableExtensionsIndexOfPredicateRequired);
 
             return enumeration
                 .Select((item, index) => new { Index = index, Item = item })

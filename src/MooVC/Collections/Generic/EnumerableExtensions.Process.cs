@@ -14,7 +14,10 @@
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessTransformRequired);
 
                 return source.Process(
                     source =>
@@ -57,7 +60,10 @@
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessTransformRequired);
 
                 initialize();
 
