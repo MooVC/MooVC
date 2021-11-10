@@ -40,22 +40,22 @@
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
         {
-            IList<TResult>? list = default;
+            IDictionary<TSource, IEnumerable<TResult>>? list = default;
 
             return source.Process(
-                result => list!.Add(result),
+                (item, results) => list![item] = results,
                 ForEach,
-                () => list = new List<TResult>(),
-                () => list!.ToArray(),
+                () => list = new Dictionary<TSource, IEnumerable<TResult>>(),
+                () => list!.Values,
                 transform);
         }
 
         private static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
-            Action<TResult> add,
+            Action<TSource, IEnumerable<TResult>> add,
             Action<IEnumerable<TSource>?, Action<TSource>> enumerator,
             Action initialize,
-            Func<IEnumerable<TResult>> snapshot,
+            Func<IEnumerable<IEnumerable<TResult>>> snapshot,
             Func<TSource, IEnumerable<TResult>> transform)
         {
             if (source is { })
@@ -67,9 +67,12 @@
 
                 initialize();
 
-                enumerator(source, item => transform(item).ForEach(add));
+                enumerator(source, item => add(item, transform(item)));
 
-                return snapshot();
+                return snapshot()
+                    .Where(result => result is { })
+                    .SelectMany(result => result)
+                    .ToArray();
             }
 
             return Enumerable.Empty<TResult>();

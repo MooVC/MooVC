@@ -52,7 +52,7 @@
                     nameof(transform),
                     EnumerableExtensionsProcessAllTransformRequired);
 
-                var bag = new ConcurrentBag<TResult>();
+                var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
 
                 await source
                     .ForAllAsync(async item =>
@@ -60,11 +60,15 @@
                         IEnumerable<TResult> results = await transform(item)
                             .ConfigureAwait(false);
 
-                        results.ForEach(bag.Add);
+                        transforms[item] = results;
                     })
                     .ConfigureAwait(false);
 
-                return bag.ToArray();
+                return transforms
+                    .Values
+                    .Where(transform => transform is { })
+                    .SelectMany(transform => transform)
+                    .ToArray();
             }
 
             return Enumerable.Empty<TResult>();

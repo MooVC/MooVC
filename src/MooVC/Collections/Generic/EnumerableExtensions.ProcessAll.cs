@@ -41,13 +41,13 @@
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
         {
-            ConcurrentBag<TResult>? bag = default;
+            ConcurrentDictionary<TSource, IEnumerable<TResult>>? bag = default;
 
             return source.Process(
-                result => bag!.Add(result),
+                (item, results) => bag![item] = results,
                 ForAll,
-                () => bag = new ConcurrentBag<TResult>(),
-                () => bag!.ToArray(),
+                () => bag = new ConcurrentDictionary<TSource, IEnumerable<TResult>>(),
+                () => bag!.Values,
                 transform);
         }
     }
