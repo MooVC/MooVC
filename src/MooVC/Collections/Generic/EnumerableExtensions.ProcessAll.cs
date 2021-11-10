@@ -43,13 +43,13 @@
             Func<TSource, IEnumerable<TResult>> transform)
             where TSource : notnull
         {
-            ConcurrentDictionary<TSource, IEnumerable<TResult>>? bag = default;
+            ConcurrentDictionary<TSource, IEnumerable<TResult>>? transforms = default;
 
             return source.Process(
-                (item, results) => bag![item] = results,
+                (item, results) => transforms![item] = results,
+                () => transforms!,
                 ForAll,
-                () => bag = new ConcurrentDictionary<TSource, IEnumerable<TResult>>(),
-                () => bag!.Values,
+                () => transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>(),
                 transform);
         }
     }

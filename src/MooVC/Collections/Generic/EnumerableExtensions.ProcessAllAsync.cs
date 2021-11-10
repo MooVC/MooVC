@@ -56,6 +56,8 @@
 
                 var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
 
+                source = source.Snapshot();
+
                 await source
                     .ForAllAsync(async item =>
                     {
@@ -66,8 +68,8 @@
                     })
                     .ConfigureAwait(false);
 
-                return transforms
-                    .Values
+                return source
+                    .Select(original => transforms[original])
                     .Where(transform => transform is { })
                     .SelectMany(transform => transform)
                     .ToArray();

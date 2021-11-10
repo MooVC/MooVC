@@ -73,8 +73,8 @@
         [Fact]
         public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
         {
-            IEnumerable<int> source = new[] { 0, 5, 10, 15 };
-            IEnumerable<int> expected = Enumerable.Range(0, 20);
+            IEnumerable<int> source = new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
+            IEnumerable<int> expected = Enumerable.Range(0, 60);
 
             IEnumerable<int> actual = await source.ProcessAllAsync(
                 value => Task.FromResult(Enumerable.Range(value, 5)));
@@ -99,7 +99,7 @@
         [Fact]
         public async Task GivenASourceWhenATransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
         {
-            const int Maximum = 20;
+            const int Maximum = 60;
 
             IEnumerable<int> source = Enumerable.Range(0, Maximum + 1);
             IEnumerable<int> expected = source.Reverse();

@@ -42,22 +42,22 @@
             Func<TSource, IEnumerable<TResult>> transform)
             where TSource : notnull
         {
-            IDictionary<TSource, IEnumerable<TResult>>? list = default;
+            IDictionary<TSource, IEnumerable<TResult>>? transforms = default;
 
             return source.Process(
-                (item, results) => list![item] = results,
+                (item, results) => transforms![item] = results,
+                () => transforms!,
                 ForEach,
-                () => list = new Dictionary<TSource, IEnumerable<TResult>>(),
-                () => list!.Values,
+                () => transforms = new Dictionary<TSource, IEnumerable<TResult>>(),
                 transform);
         }
 
         private static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Action<TSource, IEnumerable<TResult>> add,
+            Func<IDictionary<TSource, IEnumerable<TResult>>> commit,
             Action<IEnumerable<TSource>?, Action<TSource>> enumerator,
             Action initialize,
-            Func<IEnumerable<IEnumerable<TResult>>> snapshot,
             Func<TSource, IEnumerable<TResult>> transform)
         {
             if (source is { })
@@ -67,12 +67,16 @@
                     nameof(transform),
                     EnumerableExtensionsProcessTransformRequired);
 
-                initialize();
+                source = source.Snapshot();
 
+                initialize();
                 enumerator(source, item => add(item, transform(item)));
 
-                return snapshot()
-                    .Where(result => result is { })
+                IDictionary<TSource, IEnumerable<TResult>> transforms = commit();
+
+                return source
+                    .Select(original => transforms[original])
+                    .Where(transform => transform is { })
                     .SelectMany(result => result)
                     .ToArray();
             }
