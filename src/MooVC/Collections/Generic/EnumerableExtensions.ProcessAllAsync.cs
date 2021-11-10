@@ -13,6 +13,7 @@
         public static async Task<IEnumerable<TResult>> ProcessAllAsync<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, Task<TResult>> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
@@ -44,6 +45,7 @@
         public static async Task<IEnumerable<TResult>> ProcessAllAsync<TSource, TResult>(
             this IEnumerable<TSource>? source,
             Func<TSource, Task<IEnumerable<TResult>>> transform)
+            where TSource : notnull
         {
             if (source is { })
             {

@@ -12,6 +12,7 @@
         public static IEnumerable<TResult> ProcessAll<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
@@ -40,6 +41,7 @@
         public static IEnumerable<TResult> ProcessAll<TSource, TResult>(
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
+            where TSource : notnull
         {
             ConcurrentDictionary<TSource, IEnumerable<TResult>>? bag = default;
 

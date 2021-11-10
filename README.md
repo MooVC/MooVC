@@ -18,8 +18,8 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Ensure.ArgumentNotEmpty to simplify guard conditions where a TimeSpan must be greater than TimeSpan.Zero.
 - Added a Serialization.SerializationInfoEnumeratorExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
 - Added a Serialization.SerializationInfoExtensions.ToDictionary extension to produce a dictionary containing the elements stored within a SerializationInfo object.
-- Changed Collections.Generic.EnumerableExtensions.ProcessAll so that it guarentees that the results will be returned based on the order received.
-- Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync so that it guarentees that the results will be returned based on the order received.
+- Changed Collections.Generic.EnumerableExtensions.ProcessAll so that it guarentees that the results will be returned based on the order received (**breaking change**).
+- Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync so that it guarentees that the results will be returned based on the order received (**breaking change**).
 - Changed Ensure.ArgumentIsAcceptable so that it now returns the tested value.
 - Changed Ensure.ArgumentIsAcceptable so that it now differentiates between references and structs (**breaking change**).
 - Changed Ensure.ArgumentNotNull so that it now returns the tested value.

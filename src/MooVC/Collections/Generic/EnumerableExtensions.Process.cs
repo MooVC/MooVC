@@ -11,6 +11,7 @@
         public static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
@@ -39,6 +40,7 @@
         public static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
+            where TSource : notnull
         {
             IDictionary<TSource, IEnumerable<TResult>>? list = default;
 
