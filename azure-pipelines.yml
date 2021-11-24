@@ -44,10 +44,11 @@ steps:
     configFilePath: './gitversion.yml'
 
 - task: UseDotNet@2
-  displayName: 'Use .NET 6 Core sdk'
+  condition: succeeded()
+  displayName: 'Use .NET 6 Core SDK'
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'
+    version: '6.x'
     includePreviewVersions: true
         
 - task: DotNetCoreCLI@2
