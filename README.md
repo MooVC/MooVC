@@ -25,6 +25,7 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Changed Ensure.ArgumentNotNull so that it now returns the tested value.
 - Changed Ensure.ArgumentNotNull so that it now differentiates between references and structs.
 - Changed Ensure.ArgumentNotNullOrWhiteSpace so that it now returns the tested value.
+- Changed to target NET 6 in addition to NET 5 and NET Standard 2.1.
 
 ## End-User Impact
 
