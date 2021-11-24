@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Authors>Paul Martins;ControlSoft Automation Systems Limited</Authors>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
-    <Copyright>MooVC © 2019-2020</Copyright>
+    <Copyright>MooVC © 2019-2021</Copyright>
     <Description>Tests a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <RootNamespace>MooVC</RootNamespace>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="3.*">
