@@ -51,7 +51,7 @@
             const string ExpectedMessage = "Expected is null.";
 
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
-                Ensure.ArgumentNotNullOrWhiteSpace(null, nameof(argument), ExpectedMessage));
+                Ensure.ArgumentNotNullOrWhiteSpace(argument, nameof(argument), ExpectedMessage));
 
             Assert.Equal(nameof(argument), exception.ParamName);
             Assert.StartsWith(ExpectedMessage, exception.Message);
