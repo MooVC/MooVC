@@ -43,6 +43,14 @@ steps:
     useConfigFile: true
     configFilePath: './gitversion.yml'
 
+- task: UseDotNet@2
+  condition: succeeded()
+  displayName: 'Use .NET 6 Core SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+    includePreviewVersions: true
+        
 - task: DotNetCoreCLI@2
   condition: succeeded()
   displayName: 'Restore Nuget Packages for Solution'

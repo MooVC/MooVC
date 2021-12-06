@@ -18,7 +18,10 @@ namespace MooVC.Diagnostics
         {
             if (sources is { })
             {
-                ArgumentNotNull(action, nameof(action), EmitDiagnosticsExtensionsInvokeActionRequired);
+                _ = ArgumentNotNull(
+                    action,
+                    nameof(action),
+                    EmitDiagnosticsExtensionsInvokeActionRequired);
 
                 async Task Action(T source, DiagnosticsEmittedAsyncEventHandler handler)
                 {

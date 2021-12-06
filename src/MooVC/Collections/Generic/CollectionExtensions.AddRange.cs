@@ -8,7 +8,10 @@ namespace MooVC.Collections.Generic
     {
         public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
         {
-            ArgumentNotNull(target, nameof(target), CollectionExtensionsAddRangeTargetRequired);
+            _ = ArgumentNotNull(
+                target,
+                nameof(target),
+                CollectionExtensionsAddRangeTargetRequired);
 
             items.ForEach(item => target.Add(item));
         }

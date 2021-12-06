@@ -60,6 +60,33 @@
         }
 
         [Fact]
+        public void GivenANonNullNullableReferenceThenNoExceptionIsThrown()
+        {
+            object? expected = new();
+            object actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableStructThenNoExceptionIsThrown()
+        {
+            TimeSpan? expected = TimeSpan.Zero;
+            TimeSpan actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenANonNullNullableValueThenNoExceptionIsThrown()
+        {
+            int? expected = 1;
+            int actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenANullArgumentWhenAMessageIsProvidedThenAnArgumentNullExceptionIsThrownWithoutInvokingThePredicate()
         {
             const int ExpectedInvocationCount = 0;
@@ -108,6 +135,114 @@
         }
 
         [Fact]
+        public void GivenANullNullableReferenceThenNoExceptionIsThrown()
+        {
+            object? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableStructThenAnArgumentNullExceptionIsThrown()
+        {
+            TimeSpan? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenANullNullableValueThenAnArgumentNullExceptionIsThrown()
+        {
+            int? expected = default;
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => ArgumentIsAcceptable(expected, nameof(expected), _ => true));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAReferenceThenNoExceptionIsThrown()
+        {
+            object expected = new();
+            object actual = ArgumentIsAcceptable(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenAStructWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => false));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAValueWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            int expected = 1;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<int>(expected, nameof(expected), _ => false));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenAStructAndAMessageWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            TimeSpan expected = TimeSpan.Zero;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => false, Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
+        public void GivenAValueAndAMessageWhenThePredicateFailsThenAnArgumentExceptionIsThrown()
+        {
+            const string Message = "Something something dark side...";
+            int expected = 1;
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                ArgumentIsAcceptable<int>(expected, nameof(expected), _ => false, Message));
+
+            Assert.Equal(nameof(expected), exception.ParamName);
+            Assert.StartsWith(Message, exception.Message);
+        }
+
+        [Fact]
+        public void GivenAStructThenNoExceptionIsThrown()
+        {
+            TimeSpan expected = TimeSpan.Zero;
+            TimeSpan actual = ArgumentIsAcceptable<TimeSpan>(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenAValueThenNoExceptionIsThrown()
+        {
+            int expected = 1;
+            int actual = ArgumentIsAcceptable<int>(expected, nameof(expected), _ => true);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenAValidArgumentWhenAMessageIsProvidedThenNoExceptionIsThrown()
         {
             const int ExpectedInvocationCount = 1;
@@ -124,8 +259,9 @@
                 return true;
             }
 
-            ArgumentIsAcceptable(argument, Empty, Predicate, Empty);
+            string result = ArgumentIsAcceptable(argument, Empty, Predicate, Empty);
 
+            Assert.Same(argument, result);
             Assert.Equal(ExpectedInvocationCount, invocationCount);
         }
 
@@ -146,8 +282,9 @@
                 return true;
             }
 
-            ArgumentIsAcceptable(argument, Empty, Predicate);
+            string result = ArgumentIsAcceptable(argument, Empty, Predicate);
 
+            Assert.Same(argument, result);
             Assert.Equal(ExpectedInvocationCount, invocationCount);
         }
     }

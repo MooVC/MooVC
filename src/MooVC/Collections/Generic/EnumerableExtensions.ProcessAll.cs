@@ -12,10 +12,14 @@
         public static IEnumerable<TResult> ProcessAll<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessAllTransformRequired);
 
                 return source.ProcessAll(
                     source =>
@@ -37,14 +41,15 @@
         public static IEnumerable<TResult> ProcessAll<TSource, TResult>(
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
+            where TSource : notnull
         {
-            ConcurrentBag<TResult>? bag = default;
+            ConcurrentDictionary<TSource, IEnumerable<TResult>>? transforms = default;
 
             return source.Process(
-                result => bag!.Add(result),
+                (item, results) => transforms![item] = results,
+                () => transforms!,
                 ForAll,
-                () => bag = new ConcurrentBag<TResult>(),
-                () => bag!.ToArray(),
+                () => transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>(),
                 transform);
         }
     }

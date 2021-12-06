@@ -11,7 +11,10 @@ namespace MooVC.Collections.Generic
         {
             if (items is { })
             {
-                ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
+                _ = ArgumentNotNull(
+                    action,
+                    nameof(action),
+                    EnumerableExtensionsActionRequired);
 
                 int index = 0;
 

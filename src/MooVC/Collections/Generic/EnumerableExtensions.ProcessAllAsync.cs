@@ -13,10 +13,14 @@
         public static async Task<IEnumerable<TResult>> ProcessAllAsync<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, Task<TResult>> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessAllTransformRequired);
 
                 return await source
                     .ProcessAllAsync(
@@ -41,12 +45,18 @@
         public static async Task<IEnumerable<TResult>> ProcessAllAsync<TSource, TResult>(
             this IEnumerable<TSource>? source,
             Func<TSource, Task<IEnumerable<TResult>>> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessAllTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessAllTransformRequired);
 
-                var bag = new ConcurrentBag<TResult>();
+                var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
+
+                source = source.Snapshot();
 
                 await source
                     .ForAllAsync(async item =>
@@ -54,11 +64,15 @@
                         IEnumerable<TResult> results = await transform(item)
                             .ConfigureAwait(false);
 
-                        results.ForEach(bag.Add);
+                        transforms[item] = results;
                     })
                     .ConfigureAwait(false);
 
-                return bag.ToArray();
+                return source
+                    .Select(original => transforms[original])
+                    .Where(transform => transform is { })
+                    .SelectMany(transform => transform)
+                    .ToArray();
             }
 
             return Enumerable.Empty<TResult>();

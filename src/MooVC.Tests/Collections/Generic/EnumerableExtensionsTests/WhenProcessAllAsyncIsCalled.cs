@@ -71,6 +71,18 @@
         }
 
         [Fact]
+        public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
+        {
+            IEnumerable<int> source = new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
+            IEnumerable<int> expected = Enumerable.Range(0, 60);
+
+            IEnumerable<int> actual = await source.ProcessAllAsync(
+                value => Task.FromResult(Enumerable.Range(value, 5)));
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public async Task GivenASourceWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
         {
             IEnumerable<int> source = new[] { 1, 2, 3 };
@@ -82,6 +94,20 @@
             Assert.NotNull(results);
             Assert.Contains(results, element => expected.Contains(element));
             Assert.Equal(expected.Count(), results.Count());
+        }
+
+        [Fact]
+        public async Task GivenASourceWhenATransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
+        {
+            const int Maximum = 60;
+
+            IEnumerable<int> source = Enumerable.Range(0, Maximum + 1);
+            IEnumerable<int> expected = source.Reverse();
+
+            IEnumerable<int> actual = await source.ProcessAllAsync(
+                value => Task.FromResult(Maximum - value));
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

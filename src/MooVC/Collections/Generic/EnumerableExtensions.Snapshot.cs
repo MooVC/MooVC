@@ -27,7 +27,10 @@ namespace MooVC.Collections.Generic
             Func<T, TKey> order,
             Func<T, bool>? predicate = default)
         {
-            ArgumentNotNull(order, nameof(order), EnumerableExtensionsSnapshotOrderRequired);
+            _ = ArgumentNotNull(
+                order,
+                nameof(order),
+                EnumerableExtensionsSnapshotOrderRequired);
 
             return enumerable
                 .Snapshot(predicate: predicate)

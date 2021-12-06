@@ -18,10 +18,19 @@
             CancellationToken? cancellationToken = default,
             TimeSpan? timeout = default)
         {
-            ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyAsyncContextRequired);
-            ArgumentNotNull(operation, nameof(operation), CoordinatorApplyAsyncOperationRequired);
+            _ = ArgumentNotNullOrWhiteSpace(
+                context,
+                nameof(context),
+                CoordinatorApplyAsyncContextRequired);
 
-            SemaphoreSlim semaphore = contexts.GetOrAdd(context, _ => new SemaphoreSlim(1, 1));
+            _ = ArgumentNotNull(
+                operation,
+                nameof(operation),
+                CoordinatorApplyAsyncOperationRequired);
+
+            SemaphoreSlim semaphore = contexts.GetOrAdd(
+                context,
+                _ => new SemaphoreSlim(1, 1));
 
             bool isSuccessful = await semaphore.WaitAsync(
                 timeout ?? Timeout.InfiniteTimeSpan,

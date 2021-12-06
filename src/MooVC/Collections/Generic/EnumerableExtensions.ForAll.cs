@@ -14,7 +14,10 @@
         {
             if (items is { })
             {
-                ArgumentNotNull(action, nameof(action), EnumerableExtensionsForAllActionRequired);
+                _ = ArgumentNotNull(
+                    action,
+                    nameof(action),
+                    EnumerableExtensionsForAllActionRequired);
 
                 var exceptions = new ConcurrentQueue<Exception>();
 

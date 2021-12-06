@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using MooVC.Linq;
     using static MooVC.Collections.Generic.Resources;
     using static MooVC.Ensure;
 
@@ -12,7 +11,10 @@
         {
             if (items is { })
             {
-                ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
+                _ = ArgumentNotNull(
+                    action,
+                    nameof(action),
+                    EnumerableExtensionsActionRequired);
 
                 foreach (T item in items)
                 {

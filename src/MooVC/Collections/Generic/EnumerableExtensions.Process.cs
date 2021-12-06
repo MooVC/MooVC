@@ -11,10 +11,14 @@
         public static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, TResult> transform)
+            where TSource : notnull
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessTransformRequired);
 
                 return source.Process(
                     source =>
@@ -36,34 +40,45 @@
         public static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> transform)
+            where TSource : notnull
         {
-            IList<TResult>? list = default;
+            IDictionary<TSource, IEnumerable<TResult>>? transforms = default;
 
             return source.Process(
-                result => list!.Add(result),
+                (item, results) => transforms![item] = results,
+                () => transforms!,
                 ForEach,
-                () => list = new List<TResult>(),
-                () => list!.ToArray(),
+                () => transforms = new Dictionary<TSource, IEnumerable<TResult>>(),
                 transform);
         }
 
         private static IEnumerable<TResult> Process<TResult, TSource>(
             this IEnumerable<TSource>? source,
-            Action<TResult> add,
+            Action<TSource, IEnumerable<TResult>> add,
+            Func<IDictionary<TSource, IEnumerable<TResult>>> commit,
             Action<IEnumerable<TSource>?, Action<TSource>> enumerator,
             Action initialize,
-            Func<IEnumerable<TResult>> snapshot,
             Func<TSource, IEnumerable<TResult>> transform)
         {
             if (source is { })
             {
-                ArgumentNotNull(transform, nameof(transform), EnumerableExtensionsProcessTransformRequired);
+                _ = ArgumentNotNull(
+                    transform,
+                    nameof(transform),
+                    EnumerableExtensionsProcessTransformRequired);
+
+                source = source.Snapshot();
 
                 initialize();
+                enumerator(source, item => add(item, transform(item)));
 
-                enumerator(source, item => transform(item).ForEach(add));
+                IDictionary<TSource, IEnumerable<TResult>> transforms = commit();
 
-                return snapshot();
+                return source
+                    .Select(original => transforms[original])
+                    .Where(transform => transform is { })
+                    .SelectMany(result => result)
+                    .ToArray();
             }
 
             return Enumerable.Empty<TResult>();

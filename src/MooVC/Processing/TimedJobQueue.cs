@@ -21,9 +21,11 @@
 
         protected TimedJobQueue(TimedProcessor timer)
         {
-            ArgumentNotNull(timer, nameof(timer), JobQueueTimerRequired);
+            this.timer = ArgumentNotNull(
+                timer,
+                nameof(timer),
+                JobQueueTimerRequired);
 
-            this.timer = timer;
             this.timer.Triggered += Timer_Triggered;
         }
 

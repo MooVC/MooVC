@@ -72,6 +72,19 @@
         }
 
         [Fact]
+        public void GivenASourceWhenATransformIsProvidedThenTheSetOfResultsIsOrderedAsReturned()
+        {
+            const int Maximum = 60;
+
+            IEnumerable<int> source = Enumerable.Range(0, Maximum + 1);
+            IEnumerable<int> expected = source.Reverse();
+
+            IEnumerable<int> actual = source.Process(value => Maximum - value);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenASourceWhenNoEnumerableResultTransformIsProvidedThenAnArgumentExceptionIsThrown()
         {
             IEnumerable<int> source = new[] { 1, 2, 3 };
@@ -93,6 +106,18 @@
                 () => source.Process(transform!));
 
             Assert.Equal(nameof(transform), exception.ParamName);
+        }
+
+        [Fact]
+        public void GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturned()
+        {
+            IEnumerable<int> source = new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
+            IEnumerable<int> expected = Enumerable.Range(0, 60);
+
+            IEnumerable<int> actual = source.Process(
+                value => Enumerable.Range(value, 5));
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

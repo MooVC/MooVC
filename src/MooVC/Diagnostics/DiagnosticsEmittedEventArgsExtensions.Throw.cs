@@ -23,7 +23,10 @@
         {
             if (diagnostics is { })
             {
-                ArgumentNotNull(predicate, nameof(predicate), DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired);
+                _ = ArgumentNotNull(
+                    predicate,
+                    nameof(predicate),
+                    DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired);
 
                 IEnumerable<Exception> matches = diagnostics
                     .Where(diagnostic => diagnostic.Cause is { })

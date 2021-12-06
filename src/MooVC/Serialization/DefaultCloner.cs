@@ -13,9 +13,10 @@
 
         public DefaultCloner(ISerializer serializer)
         {
-            ArgumentNotNull(serializer, nameof(serializer), DefaultClonerSerializerRequired);
-
-            this.serializer = serializer;
+            this.serializer = ArgumentNotNull(
+                serializer,
+                nameof(serializer),
+                DefaultClonerSerializerRequired);
         }
 
         public async Task<T> CloneAsync<T>(
