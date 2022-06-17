@@ -1,32 +1,31 @@
-﻿namespace MooVC.Processing
+﻿namespace MooVC.Processing;
+
+using System;
+using System.Runtime.Serialization;
+using MooVC.Serialization;
+using static MooVC.Processing.Resources;
+
+[Serializable]
+public sealed class StartOperationInvalidException
+    : InvalidOperationException
 {
-    using System;
-    using System.Runtime.Serialization;
-    using MooVC.Serialization;
-    using static MooVC.Processing.Resources;
-
-    [Serializable]
-    public sealed class StartOperationInvalidException
-        : InvalidOperationException
+    public StartOperationInvalidException(ProcessorState state)
+        : base(StartOperationInvalidExceptionMessage)
     {
-        public StartOperationInvalidException(ProcessorState state)
-            : base(StartOperationInvalidExceptionMessage)
-        {
-            State = state;
-        }
+        State = state;
+    }
 
-        private StartOperationInvalidException(SerializationInfo info, StreamingContext context)
-        {
-            State = info.GetValue<ProcessorState>(nameof(State));
-        }
+    private StartOperationInvalidException(SerializationInfo info, StreamingContext context)
+    {
+        State = info.GetValue<ProcessorState>(nameof(State));
+    }
 
-        public ProcessorState State { get; }
+    public ProcessorState State { get; }
 
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
+    public override void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        base.GetObjectData(info, context);
 
-            info.AddValue(nameof(State), State);
-        }
+        info.AddValue(nameof(State), State);
     }
 }

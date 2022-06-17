@@ -1,138 +1,140 @@
-﻿namespace MooVC.Diagnostics.DiagnosticsEmittedEventArgsExtensionsTests
+﻿namespace MooVC.Diagnostics.DiagnosticsEmittedEventArgsExtensionsTests;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+public sealed class WhenThrowIsCalled
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Xunit;
-
-    public sealed class WhenThrowIsCalled
+    [Fact]
+    public void GivenAnEmptySourceWhenANullPredicateIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
-        [Fact]
-        public void GivenAnEmptySourceWhenANullPredicateIsProvidedThenAnArgumentNullExceptionIsThrown()
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
+        Func<DiagnosticsEmittedAsyncEventArgs, Exception, bool>? predicate = default;
+
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+            () => source.Throw(predicate!));
+
+        Assert.Equal(nameof(predicate), exception.ParamName);
+    }
+
+    [Fact]
+    public void GivenAnEmptySourceWhenNoPredicateIsProvidedThenNoAggregateExceptionIsThrown()
+    {
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
+
+        source.Throw();
+    }
+
+    [Fact]
+    public void GivenAnNullSourceThenNoAggregateExceptionIsThrown()
+    {
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = default;
+
+        source.Throw();
+    }
+
+    [Fact]
+    public void GivenASourceWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
+    {
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> expected = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
-            Func<DiagnosticsEmittedAsyncEventArgs, Exception, bool>? predicate = default;
+            new(cause: new InvalidOperationException(), level: Level.Critical),
+            new(cause: new InvalidOperationException(), level: Level.Error),
+            new(cause: new InvalidOperationException(), level: Level.Warning),
+            new(cause: new InvalidOperationException(), level: Level.Information),
+        };
 
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => source.Throw(predicate!));
-
-            Assert.Equal(nameof(predicate), exception.ParamName);
-        }
-
-        [Fact]
-        public void GivenAnEmptySourceWhenNoPredicateIsProvidedThenNoAggregateExceptionIsThrown()
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> unexpected = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = Array.Empty<DiagnosticsEmittedAsyncEventArgs>();
+            new(level: Level.Critical),
+            new(level: Level.Error),
+            new(level: Level.Warning),
+            new(level: Level.Information),
+            new(cause: new InvalidOperationException(), level: Level.Debug),
+            new(cause: new InvalidOperationException(), level: Level.Trace),
+        };
 
-            source.Throw();
-        }
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = expected.Union(unexpected);
 
-        [Fact]
-        public void GivenAnNullSourceThenNoAggregateExceptionIsThrown()
+        AggregateException exception = Assert.Throws<AggregateException>(
+            () => source.Throw(level: Level.Information));
+
+        Assert.Equal(expected.Select(expected => expected.Cause), exception.InnerExceptions);
+    }
+
+    [Fact]
+    public void GivenASourceWhenAPredicateIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
+    {
+        const string ExpectedMessage = "Test";
+
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs>? source = default;
+            new(cause: new InvalidOperationException(), level: Level.Critical),
+            new(cause: new InvalidOperationException(ExpectedMessage), level: Level.Error),
+            new(cause: new InvalidOperationException(), level: Level.Warning),
+            new(cause: new InvalidOperationException(), level: Level.Information),
+            new(level: Level.Critical),
+            new(level: Level.Error),
+            new(level: Level.Warning),
+            new(level: Level.Information),
+            new(cause: new InvalidOperationException(), level: Level.Debug),
+            new(cause: new InvalidOperationException(), level: Level.Trace),
+        };
 
-            source.Throw();
-        }
+        AggregateException exception = Assert.Throws<AggregateException>(
+            () => source.Throw((_, cause) => cause.Message == ExpectedMessage));
 
-        [Fact]
-        public void GivenASourceWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
+        Exception expected = Assert.Single(exception.InnerExceptions);
+        Assert.Equal(ExpectedMessage, expected.Message);
+    }
+
+    [Fact]
+    public void GivenASourceAndAMessageWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
+    {
+        const string ExpectedMessage = "Something something Dark Side";
+
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> expected = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(cause: new Exception(), level: Level.Critical),
-                new(cause: new Exception(), level: Level.Error),
-                new(cause: new Exception(), level: Level.Warning),
-                new(cause: new Exception(), level: Level.Information),
-            };
+            new(cause: new InvalidOperationException(), level: Level.Critical),
+        };
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> unexpected = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(level: Level.Critical),
-                new(level: Level.Error),
-                new(level: Level.Warning),
-                new(level: Level.Information),
-                new(cause: new Exception(), level: Level.Debug),
-                new(cause: new Exception(), level: Level.Trace),
-            };
+        AggregateException exception = Assert.Throws<AggregateException>(
+            () => source.Throw(level: Level.Trace, message: ExpectedMessage));
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = expected.Union(unexpected);
+        Assert.StartsWith(ExpectedMessage, exception.Message);
+    }
 
-            AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw(level: Level.Information));
+    [Fact]
+    public void GivenASourceAndAMessageWhenAPredicateIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
+    {
+        const string ExpectedMessage = "Something something Dark Side";
 
-            Assert.Equal(expected.Select(expected => expected.Cause), exception.InnerExceptions);
-        }
-
-        [Fact]
-        public void GivenASourceWhenAPredicateIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            const string ExpectedMessage = "Test";
+            new(cause: new InvalidOperationException(), level: Level.Critical),
+        };
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(cause: new Exception(), level: Level.Critical),
-                new(cause: new Exception(ExpectedMessage), level: Level.Error),
-                new(cause: new Exception(), level: Level.Warning),
-                new(cause: new Exception(), level: Level.Information),
-                new(level: Level.Critical),
-                new(level: Level.Error),
-                new(level: Level.Warning),
-                new(level: Level.Information),
-                new(cause: new Exception(), level: Level.Debug),
-                new(cause: new Exception(), level: Level.Trace),
-            };
+        AggregateException exception = Assert.Throws<AggregateException>(
+            () => source.Throw((_, _) => true, message: ExpectedMessage));
 
-            AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw((_, cause) => cause.Message == ExpectedMessage));
+        Assert.StartsWith(ExpectedMessage, exception.Message);
+    }
 
-            Exception expected = Assert.Single(exception.InnerExceptions);
-            Assert.Equal(ExpectedMessage, expected.Message);
-        }
+    [Fact]
+    public void GivenASourceAndAMessageWhenNoLevelIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
+    {
+        const string ExpectedMessage = "Something something Dark Side";
 
-        [Fact]
-        public void GivenASourceAndAMessageWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            const string ExpectedMessage = "Something something Dark Side";
+            new(cause: new InvalidOperationException(), level: Level.Critical),
+        };
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(cause: new Exception(), level: Level.Critical),
-            };
-            AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw(level: Level.Trace, message: ExpectedMessage));
+        AggregateException exception = Assert.Throws<AggregateException>(
+            () => source.Throw(message: ExpectedMessage));
 
-            Assert.StartsWith(ExpectedMessage, exception.Message);
-        }
-
-        [Fact]
-        public void GivenASourceAndAMessageWhenAPredicateIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
-        {
-            const string ExpectedMessage = "Something something Dark Side";
-
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(cause: new Exception(), level: Level.Critical),
-            };
-            AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw((_, _) => true, message: ExpectedMessage));
-
-            Assert.StartsWith(ExpectedMessage, exception.Message);
-        }
-
-        [Fact]
-        public void GivenASourceAndAMessageWhenNoLevelIsProvidedThenAnAggregateExceptionIsThrownWithAMatchingMessage()
-        {
-            const string ExpectedMessage = "Something something Dark Side";
-
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> source = new DiagnosticsEmittedAsyncEventArgs[]
-            {
-                new(cause: new Exception(), level: Level.Critical),
-            };
-            AggregateException exception = Assert.Throws<AggregateException>(
-                () => source.Throw(message: ExpectedMessage));
-
-            Assert.StartsWith(ExpectedMessage, exception.Message);
-        }
+        Assert.StartsWith(ExpectedMessage, exception.Message);
     }
 }

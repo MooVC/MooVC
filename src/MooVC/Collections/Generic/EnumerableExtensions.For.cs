@@ -1,27 +1,26 @@
-namespace MooVC.Collections.Generic
+namespace MooVC.Collections.Generic;
+
+using System;
+using System.Collections.Generic;
+using static MooVC.Collections.Generic.Resources;
+using static MooVC.Ensure;
+
+public static partial class EnumerableExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using static MooVC.Collections.Generic.Resources;
-    using static MooVC.Ensure;
-
-    public static partial class EnumerableExtensions
+    public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
     {
-        public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
+        if (items is { })
         {
-            if (items is { })
+            _ = ArgumentNotNull(
+                action,
+                nameof(action),
+                EnumerableExtensionsActionRequired);
+
+            int index = 0;
+
+            foreach (T item in items)
             {
-                _ = ArgumentNotNull(
-                    action,
-                    nameof(action),
-                    EnumerableExtensionsActionRequired);
-
-                int index = 0;
-
-                foreach (T item in items)
-                {
-                    action(index++, item);
-                }
+                action(index++, item);
             }
         }
     }

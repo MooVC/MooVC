@@ -1,35 +1,34 @@
-﻿namespace MooVC.Persistence.SynchronousStoreTests
+﻿namespace MooVC.Persistence.SynchronousStoreTests;
+
+using System;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenCreateAsyncIsCalled
 {
-    using System;
-    using System.Threading.Tasks;
-    using Xunit;
-
-    public sealed class WhenCreateAsyncIsCalled
+    [Fact]
+    public async Task GivenAnItemThenTheExpectedKeyIsReturnedAsync()
     {
-        [Fact]
-        public async Task GivenAnItemThenTheExpectedKeyIsReturnedAsync()
+        const string ExpectedItem = "Something something dark side...";
+        const int ExpectedKey = 1;
+
+        var store = new TestableSynchronousStore(create: item =>
         {
-            const string ExpectedItem = "Something something dark side...";
-            const int ExpectedKey = 1;
+            Assert.Equal(ExpectedItem, item);
 
-            var store = new TestableSynchronousStore(create: item =>
-            {
-                Assert.Equal(ExpectedItem, item);
+            return ExpectedKey;
+        });
+        int actualKey = await store.CreateAsync(ExpectedItem);
 
-                return ExpectedKey;
-            });
-            int actualKey = await store.CreateAsync(ExpectedItem);
+        Assert.Equal(ExpectedKey, actualKey);
+    }
 
-            Assert.Equal(ExpectedKey, actualKey);
-        }
+    [Fact]
+    public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousStore();
 
-        [Fact]
-        public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousStore();
-
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.CreateAsync("Irrelevant Test Data"));
-        }
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.CreateAsync("Irrelevant Test Data"));
     }
 }

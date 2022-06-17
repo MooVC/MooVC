@@ -1,41 +1,40 @@
-﻿namespace MooVC
+﻿namespace MooVC;
+
+using System;
+using System.Reflection;
+using MooVC.Collections.Generic;
+using static MooVC.Resources;
+
+public static partial class MulticastDelegateExtensions
 {
-    using System;
-    using System.Reflection;
-    using MooVC.Collections.Generic;
-    using static MooVC.Resources;
-
-    public static partial class MulticastDelegateExtensions
+    public static void PassiveInvoke<TSender, TArgs>(
+        this MulticastDelegate? handler,
+        TSender? sender,
+        TArgs e,
+        Action<AggregateException>? onFailure = default)
+        where TSender : class
+        where TArgs : EventArgs
     {
-        public static void PassiveInvoke<TSender, TArgs>(
-            this MulticastDelegate? handler,
-            TSender? sender,
-            TArgs e,
-            Action<AggregateException>? onFailure = default)
-            where TSender : class
-            where TArgs : EventArgs
+        if (handler is { })
         {
-            if (handler is { })
+            try
             {
-                try
+                MethodInfo method = handler.GetMethodInfo();
+
+                if (method.ReturnType != typeof(void))
                 {
-                    MethodInfo method = handler.GetMethodInfo();
-
-                    if (method.ReturnType != typeof(void))
-                    {
-                        throw new NotSupportedException(MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType);
-                    }
-
-                    EnsureParameters<TSender, TArgs>(method);
-
-                    handler
-                        .GetInvocationList()
-                        .ForAll(@delegate => @delegate.DynamicInvoke(sender, e));
+                    throw new NotSupportedException(MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType);
                 }
-                catch (AggregateException ex)
-                {
-                    onFailure?.Invoke(ex);
-                }
+
+                EnsureParameters<TSender, TArgs>(method);
+
+                handler
+                    .GetInvocationList()
+                    .ForAll(@delegate => @delegate.DynamicInvoke(sender, e));
+            }
+            catch (AggregateException ex)
+            {
+                onFailure?.Invoke(ex);
             }
         }
     }

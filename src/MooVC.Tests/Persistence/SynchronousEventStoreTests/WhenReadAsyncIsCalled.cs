@@ -1,67 +1,66 @@
-﻿namespace MooVC.Persistence.SynchronousEventStoreTests
+﻿namespace MooVC.Persistence.SynchronousEventStoreTests;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenReadAsyncIsCalled
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Xunit;
-
-    public sealed class WhenReadAsyncIsCalled
+    [Fact]
+    public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
     {
-        [Fact]
-        public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
+        const int ExpectedIndex = 1;
+        object[] expected = new[] { new object(), new object() };
+
+        var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
         {
-            const int ExpectedIndex = 1;
-            object[] expected = new[] { new object(), new object() };
+            Assert.Equal(ExpectedIndex, last);
 
-            var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
-            {
-                Assert.Equal(ExpectedIndex, last);
+            return expected;
+        });
 
-                return expected;
-            });
+        IEnumerable<object> actual = await store.ReadAsync(ExpectedIndex);
 
-            IEnumerable<object> actual = await store.ReadAsync(ExpectedIndex);
+        Assert.Equal(expected, actual);
+    }
 
-            Assert.Equal(expected, actual);
-        }
+    [Fact]
+    public async Task GivenALastIndexAndANumberToReadThenTheExpectedItemsAreReturnedAsync()
+    {
+        const int ExpectedLast = 5;
+        const int ExpectedNumber = 30;
 
-        [Fact]
-        public async Task GivenALastIndexAndANumberToReadThenTheExpectedItemsAreReturnedAsync()
+        object[] expected = new[] { new object(), new object() };
+
+        var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
         {
-            const int ExpectedLast = 5;
-            const int ExpectedNumber = 30;
+            Assert.Equal(ExpectedLast, last);
+            Assert.Equal(ExpectedNumber, number);
 
-            object[] expected = new[] { new object(), new object() };
+            return expected;
+        });
 
-            var store = new TestableSynchronousEventStore(readFromIndex: (last, number) =>
-            {
-                Assert.Equal(ExpectedLast, last);
-                Assert.Equal(ExpectedNumber, number);
+        IEnumerable<object> actual = await store.ReadAsync(ExpectedLast, numberToRead: ExpectedNumber);
 
-                return expected;
-            });
+        Assert.Equal(expected, actual);
+    }
 
-            IEnumerable<object> actual = await store.ReadAsync(ExpectedLast, numberToRead: ExpectedNumber);
+    [Fact]
+    public async Task GivenAnIndexWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousEventStore();
 
-            Assert.Equal(expected, actual);
-        }
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.ReadAsync(3));
+    }
 
-        [Fact]
-        public async Task GivenAnIndexWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousEventStore();
+    [Fact]
+    public async Task GivenLastIndexAndANumberWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousEventStore();
 
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.ReadAsync(3));
-        }
-
-        [Fact]
-        public async Task GivenLastIndexAndANumberWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousEventStore();
-
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.ReadAsync(3, numberToRead: 2));
-        }
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.ReadAsync(3, numberToRead: 2));
     }
 }

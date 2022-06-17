@@ -1,43 +1,42 @@
-﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests
+﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests;
+
+using System.Threading;
+using Microsoft.Extensions.Hosting;
+using Moq;
+using Xunit;
+
+public sealed class WhenStopAsyncIsCalled
 {
-    using System.Threading;
-    using Microsoft.Extensions.Hosting;
-    using Moq;
-    using Xunit;
+    private readonly ThreadSafeHostedService processor;
+    private readonly Mock<IHostedService> service;
 
-    public sealed class WhenStopAsyncIsCalled
+    public WhenStopAsyncIsCalled()
     {
-        private readonly ThreadSafeHostedService processor;
-        private readonly Mock<IHostedService> service;
+        service = new Mock<IHostedService>();
+        processor = new ThreadSafeHostedService(new[] { service.Object });
+    }
 
-        public WhenStopAsyncIsCalled()
-        {
-            service = new Mock<IHostedService>();
-            processor = new ThreadSafeHostedService(new[] { service.Object });
-        }
+    [Fact]
+    public async void GivenAStartedProcessorThenTheProcessorStopsAsync()
+    {
+        await processor.StartAsync(CancellationToken.None);
 
-        [Fact]
-        public async void GivenAStartedProcessorThenTheProcessorStopsAsync()
-        {
-            await processor.StartAsync(CancellationToken.None);
+        Assert.Equal(ProcessorState.Started, processor.State);
 
-            Assert.Equal(ProcessorState.Started, processor.State);
+        await processor.StopAsync(CancellationToken.None);
 
-            await processor.StopAsync(CancellationToken.None);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
-            service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.Equal(ProcessorState.Stopped, processor.State);
+    }
 
-            Assert.Equal(ProcessorState.Stopped, processor.State);
-        }
+    [Fact]
+    public async void GivenAStoppedProcessorThenAStopOperationInvalidExceptionIsThrownAsync()
+    {
+        _ = await Assert.ThrowsAsync<StopOperationInvalidException>(
+            () => processor.StopAsync(CancellationToken.None));
 
-        [Fact]
-        public async void GivenAStoppedProcessorThenAStopOperationInvalidExceptionIsThrownAsync()
-        {
-            _ = await Assert.ThrowsAsync<StopOperationInvalidException>(
-                () => processor.StopAsync(CancellationToken.None));
-
-            service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Never);
-        }
+        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 }

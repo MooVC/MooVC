@@ -1,164 +1,163 @@
-﻿namespace MooVC.Serialization
+﻿namespace MooVC.Serialization;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using MooVC.Compression;
+
+public abstract class Serializer
+    : ISerializer
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MooVC.Compression;
+    private readonly ICompressor? compressor;
 
-    public abstract class Serializer
-        : ISerializer
+    protected Serializer(ICompressor? compressor = default)
     {
-        private readonly ICompressor? compressor;
+        this.compressor = compressor;
+    }
 
-        protected Serializer(ICompressor? compressor = default)
+    public async Task<T> DeserializeAsync<T>(
+        IEnumerable<byte> data,
+        CancellationToken? cancellationToken = default)
+        where T : notnull
+    {
+        using var source = new MemoryStream(data.ToArray());
+
+        return await
+            DeserializeAsync<T>(
+                source,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<T> DeserializeAsync<T>(
+        Stream source,
+        CancellationToken? cancellationToken = default)
+        where T : notnull
+    {
+        using var decompressed = new MemoryStream();
+
+        await
+            DecompressAsync(
+                source,
+                decompressed,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+
+        decompressed.Position = 0;
+
+        return await
+            PerformDeserializeAsync<T>(
+                decompressed,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<IEnumerable<byte>> SerializeAsync<T>(
+        T instance,
+        CancellationToken? cancellationToken = default)
+        where T : notnull
+    {
+        using var target = new MemoryStream();
+
+        await
+            SerializeAsync(
+                instance,
+                target,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+
+        return target.ToArray();
+    }
+
+    public async Task SerializeAsync<T>(
+        T instance,
+        Stream target,
+        CancellationToken? cancellationToken = default)
+        where T : notnull
+    {
+        using var serialized = new MemoryStream();
+
+        await
+            PerformSerializeAsync(
+                instance,
+                serialized,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+
+        serialized.Position = 0;
+
+        await
+            CompressAsync(
+                serialized,
+                target,
+                cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    protected async Task CompressAsync(
+        Stream source,
+        Stream target,
+        CancellationToken? cancellationToken = default)
+    {
+        if (compressor is { })
         {
-            this.compressor = compressor;
-        }
-
-        public async Task<T> DeserializeAsync<T>(
-            IEnumerable<byte> data,
-            CancellationToken? cancellationToken = default)
-            where T : notnull
-        {
-            using var source = new MemoryStream(data.ToArray());
-
-            return await
-                DeserializeAsync<T>(
+            using Stream compressed = await compressor
+                .CompressAsync(
                     source,
                     cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
+
+            compressed.Position = 0;
+
+            await compressed
+                .CopyToAsync(target, cancellationToken.GetValueOrDefault())
+                .ConfigureAwait(false);
         }
-
-        public async Task<T> DeserializeAsync<T>(
-            Stream source,
-            CancellationToken? cancellationToken = default)
-            where T : notnull
+        else
         {
-            using var decompressed = new MemoryStream();
+            await source
+                .CopyToAsync(target, cancellationToken.GetValueOrDefault())
+                .ConfigureAwait(false);
+        }
+    }
 
-            await
-                DecompressAsync(
+    protected async Task DecompressAsync(
+        Stream source,
+        Stream target,
+        CancellationToken? cancellationToken = default)
+    {
+        if (compressor is { })
+        {
+            using Stream decompressed = await compressor
+                .DecompressAsync(
                     source,
-                    decompressed,
                     cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 
             decompressed.Position = 0;
 
-            return await
-                PerformDeserializeAsync<T>(
-                    decompressed,
-                    cancellationToken: cancellationToken)
+            await decompressed
+                .CopyToAsync(target, cancellationToken.GetValueOrDefault())
                 .ConfigureAwait(false);
         }
-
-        public async Task<IEnumerable<byte>> SerializeAsync<T>(
-            T instance,
-            CancellationToken? cancellationToken = default)
-            where T : notnull
+        else
         {
-            using var target = new MemoryStream();
-
-            await
-                SerializeAsync(
-                    instance,
-                    target,
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
-
-            return target.ToArray();
-        }
-
-        public async Task SerializeAsync<T>(
-            T instance,
-            Stream target,
-            CancellationToken? cancellationToken = default)
-            where T : notnull
-        {
-            using var serialized = new MemoryStream();
-
-            await
-                PerformSerializeAsync(
-                    instance,
-                    serialized,
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
-
-            serialized.Position = 0;
-
-            await
-                CompressAsync(
-                    serialized,
-                    target,
-                    cancellationToken: cancellationToken)
+            await source
+                .CopyToAsync(target, cancellationToken.GetValueOrDefault())
                 .ConfigureAwait(false);
         }
-
-        protected async Task CompressAsync(
-            Stream source,
-            Stream target,
-            CancellationToken? cancellationToken = default)
-        {
-            if (compressor is { })
-            {
-                using Stream compressed = await compressor
-                    .CompressAsync(
-                        source,
-                        cancellationToken: cancellationToken)
-                    .ConfigureAwait(false);
-
-                compressed.Position = 0;
-
-                await compressed
-                    .CopyToAsync(target, cancellationToken.GetValueOrDefault())
-                    .ConfigureAwait(false);
-            }
-            else
-            {
-                await source
-                    .CopyToAsync(target, cancellationToken.GetValueOrDefault())
-                    .ConfigureAwait(false);
-            }
-        }
-
-        protected async Task DecompressAsync(
-            Stream source,
-            Stream target,
-            CancellationToken? cancellationToken = default)
-        {
-            if (compressor is { })
-            {
-                using Stream decompressed = await compressor
-                    .DecompressAsync(
-                        source,
-                        cancellationToken: cancellationToken)
-                    .ConfigureAwait(false);
-
-                decompressed.Position = 0;
-
-                await decompressed
-                    .CopyToAsync(target, cancellationToken.GetValueOrDefault())
-                    .ConfigureAwait(false);
-            }
-            else
-            {
-                await source
-                    .CopyToAsync(target, cancellationToken.GetValueOrDefault())
-                    .ConfigureAwait(false);
-            }
-        }
-
-        protected abstract Task<T> PerformDeserializeAsync<T>(
-            Stream source,
-            CancellationToken? cancellationToken = default)
-            where T : notnull;
-
-        protected abstract Task PerformSerializeAsync<T>(
-            T instance,
-            Stream target,
-            CancellationToken? cancellationToken = default)
-            where T : notnull;
     }
+
+    protected abstract Task<T> PerformDeserializeAsync<T>(
+        Stream source,
+        CancellationToken? cancellationToken = default)
+        where T : notnull;
+
+    protected abstract Task PerformSerializeAsync<T>(
+        T instance,
+        Stream target,
+        CancellationToken? cancellationToken = default)
+        where T : notnull;
 }

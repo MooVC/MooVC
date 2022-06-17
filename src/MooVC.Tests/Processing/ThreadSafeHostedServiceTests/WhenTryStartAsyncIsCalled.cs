@@ -1,73 +1,72 @@
-﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests
+﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Moq;
+using Xunit;
+
+public sealed class WhenTryStartAsyncIsCalled
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Hosting;
-    using Moq;
-    using Xunit;
+    private readonly ThreadSafeHostedService processor;
+    private readonly Mock<IHostedService> service;
 
-    public sealed class WhenTryStartAsyncIsCalled
+    public WhenTryStartAsyncIsCalled()
     {
-        private readonly ThreadSafeHostedService processor;
-        private readonly Mock<IHostedService> service;
+        service = new Mock<IHostedService>();
+        processor = new ThreadSafeHostedService(new[] { service.Object });
+    }
 
-        public WhenTryStartAsyncIsCalled()
-        {
-            service = new Mock<IHostedService>();
-            processor = new ThreadSafeHostedService(new[] { service.Object });
-        }
+    [Fact]
+    public async void GivenAStoppedProcessorThenAPositiveResponseIsReturnedAsync()
+    {
+        bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
 
-        [Fact]
-        public async void GivenAStoppedProcessorThenAPositiveResponseIsReturnedAsync()
-        {
-            bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.True(wasStarted);
+    }
 
-            Assert.True(wasStarted);
-        }
+    [Fact]
+    public async void GivenAStartedProcessorThenANegativeResponseIsReturnedAsync()
+    {
+        await processor.StartAsync(CancellationToken.None);
 
-        [Fact]
-        public async void GivenAStartedProcessorThenANegativeResponseIsReturnedAsync()
-        {
-            await processor.StartAsync(CancellationToken.None);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
 
-            bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.False(wasStarted);
+    }
 
-            Assert.False(wasStarted);
-        }
+    [Fact]
+    public async void GivenAStoppedProcessorWhenMultipleConsumersAreInvoledThenAPositiveResponseIsReturnedToOnlyOneAsync()
+    {
+        const int ExpectedCount = 1;
 
-        [Fact]
-        public async void GivenAStoppedProcessorWhenMultipleConsumersAreInvoledThenAPositiveResponseIsReturnedToOnlyOneAsync()
-        {
-            const int ExpectedCount = 1;
+        int counter = 0;
 
-            int counter = 0;
+        IEnumerable<Task> tasks = Enumerable
+            .Range(0, 20)
+            .Select(_ => Task.Run(async () =>
+            {
+                bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
 
-            IEnumerable<Task> tasks = Enumerable
-                .Range(0, 20)
-                .Select(_ => Task.Run(async () =>
+                if (wasStarted)
                 {
-                    bool wasStarted = await processor.TryStartAsync(CancellationToken.None);
+                    counter++;
+                }
+            }))
+            .ToArray();
 
-                    if (wasStarted)
-                    {
-                        counter++;
-                    }
-                }))
-                .ToArray();
+        await Task.WhenAll(tasks);
 
-            await Task.WhenAll(tasks);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
-
-            Assert.Equal(ExpectedCount, counter);
-        }
+        Assert.Equal(ExpectedCount, counter);
     }
 }

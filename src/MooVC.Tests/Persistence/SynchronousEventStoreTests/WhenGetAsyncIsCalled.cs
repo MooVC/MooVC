@@ -1,36 +1,35 @@
-﻿namespace MooVC.Persistence.SynchronousEventStoreTests
+﻿namespace MooVC.Persistence.SynchronousEventStoreTests;
+
+using System;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenGetAsyncIsCalled
 {
-    using System;
-    using System.Threading.Tasks;
-    using Xunit;
-
-    public sealed class WhenGetAsyncIsCalled
+    [Fact]
+    public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
     {
-        [Fact]
-        public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
+        const int ExpectedIndex = 1;
+        object expectedItem = new object();
+
+        var store = new TestableSynchronousEventStore(getByIndex: index =>
         {
-            const int ExpectedIndex = 1;
-            object expectedItem = new object();
+            Assert.Equal(ExpectedIndex, index);
 
-            var store = new TestableSynchronousEventStore(getByIndex: index =>
-            {
-                Assert.Equal(ExpectedIndex, index);
+            return expectedItem;
+        });
 
-                return expectedItem;
-            });
+        object? actualItem = await store.GetAsync(ExpectedIndex);
 
-            object? actualItem = await store.GetAsync(ExpectedIndex);
+        Assert.Equal(expectedItem, actualItem);
+    }
 
-            Assert.Equal(expectedItem, actualItem);
-        }
+    [Fact]
+    public async Task GivenAnIndexWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousEventStore();
 
-        [Fact]
-        public async Task GivenAnIndexWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousEventStore();
-
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.GetAsync(3));
-        }
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.GetAsync(3));
     }
 }

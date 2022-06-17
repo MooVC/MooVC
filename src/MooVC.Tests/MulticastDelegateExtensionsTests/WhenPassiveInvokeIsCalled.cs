@@ -1,109 +1,107 @@
-﻿namespace MooVC.MulticastDelegateExtensionsTests
+﻿namespace MooVC.MulticastDelegateExtensionsTests;
+
+using System;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenPassiveInvokeIsCalled
 {
-    using System;
-    using System.Reflection;
-    using System.Threading.Tasks;
-    using Xunit;
+    private event EventHandler? Tested;
 
-    public sealed class WhenPassiveInvokeIsCalled
+    private event Action<Exception, EventArgs>? TypedSender;
+
+    private event EventHandler<TestEventArgs>? TypedArgs;
+
+    private event AsyncEventHandler? Invalid;
+
+    private event Action<object?, EventArgs, object>? IncorrectParameters;
+
+    [Fact]
+    public void GivenAHandlerThenTheHandlerIsInvoked()
     {
-        private event EventHandler? Tested;
+        bool wasInvoked = false;
 
-        private event Action<Exception, EventArgs>? TypedSender;
+        Tested += (sender, e) => wasInvoked = true;
 
-        private event EventHandler<TestEventArgs>? TypedArgs;
+        Tested.PassiveInvoke(this, EventArgs.Empty);
 
-        private event AsyncEventHandler? Invalid;
+        Assert.True(wasInvoked);
+    }
 
-        private event Action<object?, EventArgs, object>? IncorrectParameters;
+    [Fact]
+    public void GivenMultipleHandlersThenEachHandlerIsInvoked()
+    {
+        const byte Expected = 3;
+        byte actual = 0;
 
-        [Fact]
-        public void GivenAHandlerThenTheHandlerIsInvoked()
+        void Handler(object? sender, EventArgs e)
         {
-            bool wasInvoked = false;
-
-            Tested += (sender, e) => wasInvoked = true;
-
-            Tested.PassiveInvoke(this, EventArgs.Empty);
-
-            Assert.True(wasInvoked);
+            actual++;
         }
 
-        [Fact]
-        public void GivenMultipleHandlersThenEachHandlerIsInvoked()
-        {
-            const byte Expected = 3;
-            byte actual = 0;
+        Tested += Handler;
+        Tested += Handler;
+        Tested += Handler;
 
-            void Handler(object? sender, EventArgs e)
+        Tested.PassiveInvoke(this, EventArgs.Empty);
+
+        Assert.Equal(Expected, actual);
+    }
+
+    [Fact]
+    public void GivenAnExceptionThenTheExceptionIsPassedthrough()
+    {
+        bool wasInvoked = false;
+        var expected = new InvalidOperationException();
+
+        Tested += (sender, e) => throw expected;
+
+        Tested.PassiveInvoke(
+            this,
+            EventArgs.Empty,
+            onFailure: actual =>
             {
-                actual++;
-            }
+                wasInvoked = true;
 
-            Tested += Handler;
-            Tested += Handler;
-            Tested += Handler;
+                Assert.Equal(expected, actual.InnerException?.InnerException);
+            });
 
-            Tested.PassiveInvoke(this, EventArgs.Empty);
+        Assert.True(wasInvoked);
+    }
 
-            Assert.Equal(Expected, actual);
-        }
+    [Fact]
+    public void GivenAnInvalidHandlerThenANotSupportedExceptionIsThrown()
+    {
+        Invalid += (_, _) => Task.CompletedTask;
 
-        [Fact]
-        public void GivenAnExceptionThenTheExceptionIsPassedthrough()
-        {
-            bool wasInvoked = false;
-            var expected = new InvalidOperationException();
+        NotSupportedException exception = Assert.Throws<NotSupportedException>(
+            () => Invalid.PassiveInvoke(this, EventArgs.Empty));
+    }
 
-            Tested += (sender, e) => throw expected;
+    [Fact]
+    public void GivenAnInvalidSenderThenANotSupportedExceptionIsThrown()
+    {
+        TypedSender += (_, _) => { };
 
-            Tested.PassiveInvoke(
-                this,
-                EventArgs.Empty,
-                onFailure: actual =>
-                {
-                    wasInvoked = true;
+        NotSupportedException exception = Assert.Throws<NotSupportedException>(
+            () => TypedSender.PassiveInvoke(this, EventArgs.Empty));
+    }
 
-                    Assert.Equal(expected, actual.InnerException?.InnerException);
-                });
+    [Fact]
+    public void GivenAnInvalidArgsThenANotSupportedExceptionIsThrown()
+    {
+        TypedArgs += (_, _) => { };
 
-            Assert.True(wasInvoked);
-        }
+        NotSupportedException exception = Assert.Throws<NotSupportedException>(
+            () => TypedArgs.PassiveInvoke(this, EventArgs.Empty));
+    }
 
-        [Fact]
-        public void GivenAnInvalidHandlerThenANotSupportedExceptionIsThrown()
-        {
-            Invalid += (_, _) => Task.CompletedTask;
+    [Fact]
+    public void GivenAnInvalidNumberOfParametersThenANotSupportedExceptionIsThrown()
+    {
+        IncorrectParameters += (_, _, _) => { };
 
-            NotSupportedException exception = Assert.Throws<NotSupportedException>(
-                () => Invalid.PassiveInvoke(this, EventArgs.Empty));
-        }
-
-        [Fact]
-        public void GivenAnInvalidSenderThenANotSupportedExceptionIsThrown()
-        {
-            TypedSender += (_, _) => { };
-
-            NotSupportedException exception = Assert.Throws<NotSupportedException>(
-                () => TypedSender.PassiveInvoke(this, EventArgs.Empty));
-        }
-
-        [Fact]
-        public void GivenAnInvalidArgsThenANotSupportedExceptionIsThrown()
-        {
-            TypedArgs += (_, _) => { };
-
-            NotSupportedException exception = Assert.Throws<NotSupportedException>(
-                () => TypedArgs.PassiveInvoke(this, EventArgs.Empty));
-        }
-
-        [Fact]
-        public void GivenAnInvalidNumberOfParametersThenANotSupportedExceptionIsThrown()
-        {
-            IncorrectParameters += (_, _, _) => { };
-
-            NotSupportedException exception = Assert.Throws<NotSupportedException>(
-                () => IncorrectParameters.PassiveInvoke(this, EventArgs.Empty));
-        }
+        NotSupportedException exception = Assert.Throws<NotSupportedException>(
+            () => IncorrectParameters.PassiveInvoke(this, EventArgs.Empty));
     }
 }

@@ -1,57 +1,56 @@
-﻿namespace MooVC.Serialization
+﻿namespace MooVC.Serialization;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Runtime.Serialization;
+using static MooVC.Serialization.Resources;
+
+public static partial class SerializationInfoExtensions
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
-    using System.Runtime.Serialization;
-    using static MooVC.Serialization.Resources;
+    private const string MethodName = "GetValueNoThrow";
+    private static readonly Lazy<MethodInfo> method;
 
-    public static partial class SerializationInfoExtensions
+    static SerializationInfoExtensions()
     {
-        private const string MethodName = "GetValueNoThrow";
-        private static readonly Lazy<MethodInfo> method;
+        method = new Lazy<MethodInfo>(CreateMethodInfo);
+    }
 
-        static SerializationInfoExtensions()
+    private static MethodInfo Method => method.Value;
+
+    [return: NotNullIfNotNull("defaultValue")]
+    public static T? TryGetValue<T>(this SerializationInfo info, string name, T? defaultValue = default)
+    {
+        try
         {
-            method = new Lazy<MethodInfo>(CreateMethodInfo);
-        }
+            object? value = Method.Invoke(info, new object[] { name, typeof(T) });
 
-        private static MethodInfo Method => method.Value;
-
-        [return: NotNullIfNotNull("defaultValue")]
-        public static T? TryGetValue<T>(this SerializationInfo info, string name, T? defaultValue = default)
-        {
-            try
+            if (value is T result)
             {
-                object? value = Method.Invoke(info, new object[] { name, typeof(T) });
-
-                if (value is T result)
-                {
-                    return result;
-                }
-
-                return defaultValue;
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
-
-        private static MethodInfo CreateMethodInfo()
-        {
-            Type type = typeof(SerializationInfo);
-
-            MethodInfo? method = type.GetMethod(
-                MethodName,
-                BindingFlags.Instance | BindingFlags.NonPublic);
-
-            if (method is null)
-            {
-                throw new InvalidOperationException(SerializationInfoExtensionsCreateMethodInfoFailure);
+                return result;
             }
 
-            return method;
+            return defaultValue;
         }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    private static MethodInfo CreateMethodInfo()
+    {
+        Type type = typeof(SerializationInfo);
+
+        MethodInfo? method = type.GetMethod(
+            MethodName,
+            BindingFlags.Instance | BindingFlags.NonPublic);
+
+        if (method is null)
+        {
+            throw new InvalidOperationException(SerializationInfoExtensionsCreateMethodInfoFailure);
+        }
+
+        return method;
     }
 }

@@ -1,18 +1,17 @@
-﻿namespace MooVC.IO
+﻿namespace MooVC.IO;
+
+using System.Collections.Generic;
+using System.IO;
+
+public static partial class StreamExtensions
 {
-    using System.Collections.Generic;
-    using System.IO;
-
-    public static partial class StreamExtensions
+    public static IEnumerable<byte> GetBytes(this Stream source)
     {
-        public static IEnumerable<byte> GetBytes(this Stream source)
-        {
-            using var target = new MemoryStream();
+        using var target = new MemoryStream();
 
-            source.Position = 0;
-            source.CopyTo(target);
+        source.Position = 0;
+        source.CopyTo(target);
 
-            return target.ToArray();
-        }
+        return target.ToArray();
     }
 }

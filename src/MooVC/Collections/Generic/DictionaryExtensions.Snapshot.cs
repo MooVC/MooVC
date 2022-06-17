@@ -1,17 +1,16 @@
-﻿namespace MooVC.Collections.Generic
+﻿namespace MooVC.Collections.Generic;
+
+using System.Collections.Generic;
+
+public static partial class DictionaryExtensions
 {
-    using System.Collections.Generic;
-
-    public static partial class DictionaryExtensions
+    public static IDictionary<TKey, TValue> Snapshot<TKey, TValue>(this IDictionary<TKey, TValue>? source)
+        where TKey : notnull
     {
-        public static IDictionary<TKey, TValue> Snapshot<TKey, TValue>(this IDictionary<TKey, TValue>? source)
-            where TKey : notnull
-        {
-            var snapshot = new Dictionary<TKey, TValue>();
+        var snapshot = new Dictionary<TKey, TValue>();
 
-            source.ForEach(entry => snapshot.Add(entry.Key, entry.Value));
+        source.ForEach(entry => snapshot.Add(entry.Key, entry.Value));
 
-            return snapshot;
-        }
+        return snapshot;
     }
 }

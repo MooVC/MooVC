@@ -1,76 +1,75 @@
-﻿namespace MooVC.Serialization.SynchronousSerializerTests
+﻿namespace MooVC.Serialization.SynchronousSerializerTests;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using MooVC.Compression;
+using Moq;
+using Xunit;
+
+public sealed class WhenSerializeAsyncIsCalled
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MooVC.Compression;
-    using Moq;
-    using Xunit;
-
-    public sealed class WhenSerializeAsyncIsCalled
+    [Fact]
+    public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
     {
-        [Fact]
-        public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
+        string instance = "Something something dark side...";
+        var compressor = new Mock<ICompressor>();
+
+        _ = compressor
+            .Setup(compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()))
+            .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
+
+        var serializer = new TestableSynchronousSerializer(
+            compressor: compressor.Object,
+            onSerialize: (_, _) => { });
+
+        _ = await serializer.SerializeAsync(instance);
+
+        compressor.Verify(
+            compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()),
+            Times.Once);
+    }
+
+    [Fact]
+    public async Task GivenAnInstanceThenDataSerializationIsRequestedAsync()
+    {
+        using var stream = new MemoryStream();
+        string instance = "Something something dark side...";
+        bool wasInvoked = false;
+
+        void Serializer(object input1, object input2)
         {
-            string instance = "Something something dark side...";
-            var compressor = new Mock<ICompressor>();
+            Assert.Equal(instance, input1);
+            _ = Assert.IsAssignableFrom<Stream>(input2);
 
-            _ = compressor
-                .Setup(compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()))
-                .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
-
-            var serializer = new TestableSynchronousSerializer(
-                compressor: compressor.Object,
-                onSerialize: (_, _) => { });
-
-            _ = await serializer.SerializeAsync(instance);
-
-            compressor.Verify(
-                compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()),
-                Times.Once);
+            wasInvoked = true;
         }
 
-        [Fact]
-        public async Task GivenAnInstanceThenDataSerializationIsRequestedAsync()
+        var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
+        IEnumerable<byte> serialized = await serializer.SerializeAsync(instance);
+
+        Assert.True(wasInvoked);
+    }
+
+    [Fact]
+    public async Task GivenAStreamThenStreamSerializationIsRequestedAsync()
+    {
+        using var stream = new MemoryStream();
+        string instance = "Something something dark side...";
+        bool wasInvoked = false;
+
+        void Serializer(object input1, object input2)
         {
-            using var stream = new MemoryStream();
-            string instance = "Something something dark side...";
-            bool wasInvoked = false;
+            Assert.Equal(instance, input1);
+            _ = Assert.IsAssignableFrom<Stream>(input2);
 
-            void Serializer(object input1, object input2)
-            {
-                Assert.Equal(instance, input1);
-                _ = Assert.IsAssignableFrom<Stream>(input2);
-
-                wasInvoked = true;
-            }
-
-            var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
-            IEnumerable<byte> serialized = await serializer.SerializeAsync(instance);
-
-            Assert.True(wasInvoked);
+            wasInvoked = true;
         }
 
-        [Fact]
-        public async Task GivenAStreamThenStreamSerializationIsRequestedAsync()
-        {
-            using var stream = new MemoryStream();
-            string instance = "Something something dark side...";
-            bool wasInvoked = false;
+        var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
+        await serializer.SerializeAsync(instance, stream);
 
-            void Serializer(object input1, object input2)
-            {
-                Assert.Equal(instance, input1);
-                _ = Assert.IsAssignableFrom<Stream>(input2);
-
-                wasInvoked = true;
-            }
-
-            var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
-            await serializer.SerializeAsync(instance, stream);
-
-            Assert.True(wasInvoked);
-        }
+        Assert.True(wasInvoked);
     }
 }

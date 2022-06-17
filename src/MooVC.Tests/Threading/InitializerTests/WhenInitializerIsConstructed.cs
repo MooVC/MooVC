@@ -1,32 +1,31 @@
-﻿namespace MooVC.Threading.InitializerTests
+﻿namespace MooVC.Threading.InitializerTests;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenInitializerIsConstructed
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Xunit;
-
-    public sealed class WhenInitializerIsConstructed
+    [Fact]
+    public void GivenAnInitiazerThenAnInstanceIsReturned()
     {
-        [Fact]
-        public void GivenAnInitiazerThenAnInstanceIsReturned()
+        static Task<object> Initializer(CancellationToken cancellationToken)
         {
-            static Task<object> Initializer(CancellationToken cancellationToken)
-            {
-                return Task.FromResult(new object());
-            }
-
-            _ = new Initializer<object>(Initializer);
+            return Task.FromResult(new object());
         }
 
-        [Fact]
-        public void GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
-        {
-            Func<CancellationToken, Task<object>>? initializer = default;
+        _ = new Initializer<object>(Initializer);
+    }
 
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => new Initializer<object>(initializer!));
+    [Fact]
+    public void GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
+    {
+        Func<CancellationToken, Task<object>>? initializer = default;
 
-            Assert.Equal(nameof(initializer), exception.ParamName);
-        }
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+            () => new Initializer<object>(initializer!));
+
+        Assert.Equal(nameof(initializer), exception.ParamName);
     }
 }

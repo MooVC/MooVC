@@ -1,20 +1,19 @@
-﻿namespace MooVC.Processing.ProcessorStateChangedEventArgsTests
+﻿namespace MooVC.Processing.ProcessorStateChangedEventArgsTests;
+
+using Xunit;
+
+public sealed class WhenProcessorStateChangedEventArgsIsConstructed
 {
-    using Xunit;
-
-    public sealed class WhenProcessorStateChangedEventArgsIsConstructed
+    [Theory]
+    [InlineData(ProcessorState.Started)]
+    [InlineData(ProcessorState.Starting)]
+    [InlineData(ProcessorState.Stopped)]
+    [InlineData(ProcessorState.Stopping)]
+    [InlineData(ProcessorState.Unknown)]
+    public void GivenAStateThenTheStatePropertyIsSet(ProcessorState expected)
     {
-        [Theory]
-        [InlineData(ProcessorState.Started)]
-        [InlineData(ProcessorState.Starting)]
-        [InlineData(ProcessorState.Stopped)]
-        [InlineData(ProcessorState.Stopping)]
-        [InlineData(ProcessorState.Unknown)]
-        public void GivenAStateThenTheStatePropertyIsSet(ProcessorState expected)
-        {
-            var argument = new ProcessorStateChangedAsyncEventArgs(expected);
+        var argument = new ProcessorStateChangedAsyncEventArgs(expected);
 
-            Assert.Equal(expected, argument.State);
-        }
+        Assert.Equal(expected, argument.State);
     }
 }

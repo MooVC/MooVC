@@ -1,22 +1,21 @@
-﻿namespace MooVC.Processing.TimedJobQueueTests
+﻿namespace MooVC.Processing.TimedJobQueueTests;
+
+using System.Collections.Generic;
+using MooVC.Collections.Generic;
+
+public sealed class TestTimedJobQueue
+    : TimedJobQueue<int>
 {
-    using System.Collections.Generic;
-    using MooVC.Collections.Generic;
+    private readonly IEnumerable<int> processed;
 
-    public sealed class TestTimedJobQueue
-        : TimedJobQueue<int>
+    public TestTimedJobQueue(TimedProcessor timer, params int[] processed)
+        : base(timer)
     {
-        private readonly IEnumerable<int> processed;
+        this.processed = processed.Snapshot();
+    }
 
-        public TestTimedJobQueue(TimedProcessor timer, params int[] processed)
-            : base(timer)
-        {
-            this.processed = processed.Snapshot();
-        }
-
-        protected override IEnumerable<int> Process(IEnumerable<int> jobs)
-        {
-            return processed;
-        }
+    protected override IEnumerable<int> Process(IEnumerable<int> jobs)
+    {
+        return processed;
     }
 }

@@ -1,17 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AnalysisMode>Recommended</AnalysisMode>
     <Authors>Paul Martins;ControlSoft Automation Systems Limited</Authors>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
-    <Copyright>MooVC © 2019-2021</Copyright>
+    <Copyright>MooVC © 2019-2022</Copyright>
     <Description>Tests a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
-    <NoWarn>NU5105;CS0618</NoWarn>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <NoWarn>CA1720;NU5105</NoWarn>
+    <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>
+    <Product>MooVC</Product>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <RootNamespace>MooVC</RootNamespace>

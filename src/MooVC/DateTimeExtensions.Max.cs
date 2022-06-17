@@ -1,14 +1,13 @@
-﻿namespace MooVC
-{
-    using System;
+﻿namespace MooVC;
 
-    public static partial class DateTimeExtensions
+using System;
+
+public static partial class DateTimeExtensions
+{
+    public static DateTime Max(this DateTime first, DateTime second)
     {
-        public static DateTime Max(this DateTime first, DateTime second)
-        {
-            return first > second
-                ? first
-                : second;
-        }
+        return first > second
+            ? first
+            : second;
     }
 }

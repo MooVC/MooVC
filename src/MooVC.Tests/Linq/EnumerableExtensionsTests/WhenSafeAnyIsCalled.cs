@@ -1,65 +1,64 @@
-﻿namespace MooVC.Linq.EnumerableExtensionsTests
+﻿namespace MooVC.Linq.EnumerableExtensionsTests;
+
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+public sealed class WhenSafeAnyIsCalled
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Xunit;
-
-    public sealed class WhenSafeAnyIsCalled
+    [Fact]
+    public void GivenAnEmptySourceThenANegativeResponseIsReturned()
     {
-        [Fact]
-        public void GivenAnEmptySourceThenANegativeResponseIsReturned()
-        {
-            IEnumerable<int> source = Enumerable.Empty<int>();
+        IEnumerable<int> source = Enumerable.Empty<int>();
 
-            Assert.False(source.SafeAny());
-        }
+        Assert.False(source.SafeAny());
+    }
 
-        [Fact]
-        public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
-        {
-            IEnumerable<int> source = Enumerable.Empty<int>();
+    [Fact]
+    public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
+    {
+        IEnumerable<int> source = Enumerable.Empty<int>();
 
-            Assert.False(source.SafeAny(predicate => true));
-        }
+        Assert.False(source.SafeAny(predicate => true));
+    }
 
-        [Fact]
-        public void GivenAnPopulatedSourceThenAPositiveResponseIsReturned()
-        {
-            IEnumerable<int> source = new int[1];
+    [Fact]
+    public void GivenAnPopulatedSourceThenAPositiveResponseIsReturned()
+    {
+        IEnumerable<int> source = new int[1];
 
-            Assert.True(source.SafeAny());
-        }
+        Assert.True(source.SafeAny());
+    }
 
-        [Fact]
-        public void GivenAnPopulatedSourceAndAFailingPredicateThenANegativeResponseIsReturned()
-        {
-            IEnumerable<int> source = new int[1];
+    [Fact]
+    public void GivenAnPopulatedSourceAndAFailingPredicateThenANegativeResponseIsReturned()
+    {
+        IEnumerable<int> source = new int[1];
 
-            Assert.False(source.SafeAny(predicate => false));
-        }
+        Assert.False(source.SafeAny(predicate => false));
+    }
 
-        [Fact]
-        public void GivenAnPopulatedSourceAndAPassingPredicateThenAPositiveResponseIsReturned()
-        {
-            IEnumerable<int> source = new int[1];
+    [Fact]
+    public void GivenAnPopulatedSourceAndAPassingPredicateThenAPositiveResponseIsReturned()
+    {
+        IEnumerable<int> source = new int[1];
 
-            Assert.True(source.SafeAny(predicate => true));
-        }
+        Assert.True(source.SafeAny(predicate => true));
+    }
 
-        [Fact]
-        public void GivenANullSourceThenANegativeResponseIsReturned()
-        {
-            IEnumerable<int>? source = default;
+    [Fact]
+    public void GivenANullSourceThenANegativeResponseIsReturned()
+    {
+        IEnumerable<int>? source = default;
 
-            Assert.False(source.SafeAny());
-        }
+        Assert.False(source.SafeAny());
+    }
 
-        [Fact]
-        public void GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
-        {
-            IEnumerable<int>? source = default;
+    [Fact]
+    public void GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
+    {
+        IEnumerable<int>? source = default;
 
-            Assert.False(source.SafeAny(predicate => true));
-        }
+        Assert.False(source.SafeAny(predicate => true));
     }
 }

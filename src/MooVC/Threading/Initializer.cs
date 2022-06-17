@@ -1,57 +1,56 @@
-﻿namespace MooVC.Threading
+﻿namespace MooVC.Threading;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using static MooVC.Ensure;
+using static MooVC.Threading.Resources;
+
+public sealed class Initializer<T>
+    where T : notnull
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using static MooVC.Ensure;
-    using static MooVC.Threading.Resources;
+    private readonly Func<CancellationToken, Task<T>> initializer;
+    private readonly SemaphoreSlim mutex = new(1, 1);
+    private T? resource;
 
-    public sealed class Initializer<T>
-        where T : notnull
+    public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        private readonly Func<CancellationToken, Task<T>> initializer;
-        private readonly SemaphoreSlim mutex = new(1, 1);
-        private T? resource;
+        this.initializer = ArgumentNotNull(
+            initializer,
+            nameof(initializer),
+            InitializerInitializerRequired);
+    }
 
-        public Initializer(Func<CancellationToken, Task<T>> initializer)
+    public bool IsInitialized { get; private set; }
+
+    public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
+    {
+        if (!IsInitialized)
         {
-            this.initializer = ArgumentNotNull(
-                initializer,
-                nameof(initializer),
-                InitializerInitializerRequired);
-        }
+            cancellationToken = cancellationToken.GetValueOrDefault();
 
-        public bool IsInitialized { get; private set; }
+            await mutex.WaitAsync(cancellationToken.Value);
 
-        public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
-        {
-            if (!IsInitialized)
+            try
             {
-                cancellationToken = cancellationToken.GetValueOrDefault();
-
-                await mutex.WaitAsync(cancellationToken.Value);
-
-                try
+                if (!IsInitialized)
                 {
-                    if (!IsInitialized)
+                    resource = await initializer(cancellationToken.Value);
+
+                    if (resource is null)
                     {
-                        resource = await initializer(cancellationToken.Value);
-
-                        if (resource is null)
-                        {
-                            throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
-                        }
-
-                        IsInitialized = true;
+                        throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
                     }
-                }
-                finally
-                {
-                    _ = mutex.Release();
+
+                    IsInitialized = true;
                 }
             }
-
-            return resource!;
+            finally
+            {
+                _ = mutex.Release();
+            }
         }
+
+        return resource!;
     }
 }

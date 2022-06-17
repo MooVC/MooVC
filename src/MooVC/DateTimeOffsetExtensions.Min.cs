@@ -1,14 +1,13 @@
-﻿namespace MooVC
-{
-    using System;
+﻿namespace MooVC;
 
-    public static partial class DateTimeOffsetExtensions
+using System;
+
+public static partial class DateTimeOffsetExtensions
+{
+    public static DateTimeOffset Min(this DateTimeOffset first, DateTimeOffset second)
     {
-        public static DateTimeOffset Min(this DateTimeOffset first, DateTimeOffset second)
-        {
-            return first > second
-                ? second
-                : first;
-        }
+        return first > second
+            ? second
+            : first;
     }
 }

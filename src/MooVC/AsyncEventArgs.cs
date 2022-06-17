@@ -1,28 +1,27 @@
-﻿namespace MooVC
+﻿namespace MooVC;
+
+using System;
+using System.Threading;
+
+public class AsyncEventArgs
+    : EventArgs
 {
-    using System;
-    using System.Threading;
+    private static readonly Lazy<AsyncEventArgs> empty = new(() => new AsyncEventArgs());
 
-    public class AsyncEventArgs
-        : EventArgs
+    protected AsyncEventArgs(CancellationToken? cancellationToken = default)
     {
-        private static readonly Lazy<AsyncEventArgs> empty = new(() => new AsyncEventArgs());
+        CancellationToken = cancellationToken.GetValueOrDefault();
+    }
 
-        protected AsyncEventArgs(CancellationToken? cancellationToken = default)
+    public CancellationToken CancellationToken { get; }
+
+    public static new AsyncEventArgs Empty(CancellationToken? cancellationToken = default)
+    {
+        if (cancellationToken is { })
         {
-            CancellationToken = cancellationToken.GetValueOrDefault();
+            return new AsyncEventArgs(cancellationToken: cancellationToken);
         }
 
-        public CancellationToken CancellationToken { get; }
-
-        public static new AsyncEventArgs Empty(CancellationToken? cancellationToken = default)
-        {
-            if (cancellationToken is { })
-            {
-                return new AsyncEventArgs(cancellationToken: cancellationToken);
-            }
-
-            return empty.Value;
-        }
+        return empty.Value;
     }
 }
