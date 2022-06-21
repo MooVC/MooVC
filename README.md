@@ -15,3 +15,5 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a ArrayExtensions.Append that will place an entry at the end of an existing array.
 - Added a ArrayExtensions.Extend that will place the contents of an array at the end of an existing array.
 - Added a ArrayExtensions.Prepend that will place an entry at the start of an existing array.
+- Added a Linq.PagedResult to encapsulate the results of a page query.
+- Added a Linq.QueryableExtensions.ToResult extension to provide default support for results capture.
