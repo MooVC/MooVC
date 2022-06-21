@@ -1,65 +1,64 @@
-﻿namespace MooVC.Persistence.SynchronousStoreTests
+﻿namespace MooVC.Persistence.SynchronousStoreTests;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MooVC.Linq;
+using Xunit;
+
+public sealed class WhenGetAsyncIsCalled
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using MooVC.Linq;
-    using Xunit;
-
-    public sealed class WhenGetAsyncIsCalled
+    [Fact]
+    public async Task GivenAnKeyThenTheExpectedItemIsReturnedAsync()
     {
-        [Fact]
-        public async Task GivenAnKeyThenTheExpectedItemIsReturnedAsync()
+        const string ExpectedItem = "Something something dark side...";
+        const int ExpectedKey = 1;
+
+        var store = new TestableSynchronousStore(getByKey: key =>
         {
-            const string ExpectedItem = "Something something dark side...";
-            const int ExpectedKey = 1;
+            Assert.Equal(ExpectedKey, key);
 
-            var store = new TestableSynchronousStore(getByKey: key =>
-            {
-                Assert.Equal(ExpectedKey, key);
+            return ExpectedItem;
+        });
 
-                return ExpectedItem;
-            });
+        string? actualItem = await store.GetAsync(ExpectedKey);
 
-            string? actualItem = await store.GetAsync(ExpectedKey);
+        Assert.Equal(ExpectedItem, actualItem);
+    }
 
-            Assert.Equal(ExpectedItem, actualItem);
-        }
+    [Fact]
+    public async Task GivenPagingThenTheExpectedItemsAreReturnedAsync()
+    {
+        var expected = new Paging();
+        string[] results = new[] { "Something", "Dark", "Side" };
 
-        [Fact]
-        public async Task GivenPagingThenTheExpectedItemsAreReturnedAsync()
+        var store = new TestableSynchronousStore(getAll: actual =>
         {
-            var expected = new Paging();
-            string[] results = new[] { "Something", "Dark", "Side" };
+            Assert.Equal(expected, actual);
 
-            var store = new TestableSynchronousStore(getAll: actual =>
-            {
-                Assert.Equal(expected, actual);
+            return results;
+        });
 
-                return results;
-            });
+        IEnumerable<string> actual = await store.GetAsync(paging: expected);
 
-            IEnumerable<string> actual = await store.GetAsync(paging: expected);
+        Assert.Equal(results, actual);
+    }
 
-            Assert.Equal(results, actual);
-        }
+    [Fact]
+    public async Task GiveAKeyWhennAnExceptionOccursThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousStore();
 
-        [Fact]
-        public async Task GiveAKeyWhennAnExceptionOccursThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousStore();
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.GetAsync(3));
+    }
 
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.GetAsync(3));
-        }
+    [Fact]
+    public async Task GivenPagingWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    {
+        var store = new TestableSynchronousStore();
 
-        [Fact]
-        public async Task GivenPagingWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
-        {
-            var store = new TestableSynchronousStore();
-
-            _ = await Assert.ThrowsAsync<NotImplementedException>(
-                () => store.GetAsync(paging: Paging.Default));
-        }
+        _ = await Assert.ThrowsAsync<NotImplementedException>(
+            () => store.GetAsync(paging: Paging.Default));
     }
 }

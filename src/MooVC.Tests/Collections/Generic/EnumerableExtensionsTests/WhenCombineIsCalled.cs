@@ -1,71 +1,70 @@
-﻿namespace MooVC.Collections.Generic.EnumerableExtensionsTests
+﻿namespace MooVC.Collections.Generic.EnumerableExtensionsTests;
+
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+public sealed class WhenCombineIsCalled
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Xunit;
-
-    public sealed class WhenCombineIsCalled
+    [Fact]
+    public void GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
     {
-        [Fact]
-        public void GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
-        {
-            const int ExpectedValue = 9;
-            const int ExpectedCount = 4;
+        const int ExpectedValue = 9;
+        const int ExpectedCount = 4;
 
-            int[] source = new[] { 1, 2, 3 };
-            IEnumerable<int> actual = source.Combine(ExpectedValue);
+        int[] source = new[] { 1, 2, 3 };
+        IEnumerable<int> actual = source.Combine(ExpectedValue);
 
-            Assert.Equal(ExpectedCount, actual.Count());
-            Assert.Contains(ExpectedValue, actual);
-        }
+        Assert.Equal(ExpectedCount, actual.Count());
+        Assert.Contains(ExpectedValue, actual);
+    }
 
-        [Fact]
-        public void GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
-        {
-            const int ExpectedValue = 9;
+    [Fact]
+    public void GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
+    {
+        const int ExpectedValue = 9;
 
-            IEnumerable<int>? source = default;
-            IEnumerable<int> actual = source.Combine(ExpectedValue);
+        IEnumerable<int>? source = default;
+        IEnumerable<int> actual = source.Combine(ExpectedValue);
 
-            int actualValue = Assert.Single(actual);
-            Assert.Equal(ExpectedValue, actualValue);
-        }
+        int actualValue = Assert.Single(actual);
+        Assert.Equal(ExpectedValue, actualValue);
+    }
 
-        [Fact]
-        public void GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
-        {
-            IEnumerable<int>? source = default;
-            IEnumerable<int>? expected = default;
+    [Fact]
+    public void GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
+    {
+        IEnumerable<int>? source = default;
+        IEnumerable<int>? expected = default;
 
-            IEnumerable<int> actual = source.Combine(expected);
+        IEnumerable<int> actual = source.Combine(expected);
 
-            Assert.Empty(actual);
-        }
+        Assert.Empty(actual);
+    }
 
-        [Fact]
-        public void GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
-        {
-            const int ExpectedCount = 6;
+    [Fact]
+    public void GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
+    {
+        const int ExpectedCount = 6;
 
-            IEnumerable<int>? source = new[] { 1, 2, 3 };
-            IEnumerable<int>? expected = new[] { 4, 5, 6 };
+        IEnumerable<int>? source = new[] { 1, 2, 3 };
+        IEnumerable<int>? expected = new[] { 4, 5, 6 };
 
-            IEnumerable<int> actual = source.Combine(expected);
+        IEnumerable<int> actual = source.Combine(expected);
 
-            Assert.Equal(ExpectedCount, actual.Count());
-            Assert.Contains(source, value => actual.Contains(value));
-            Assert.Contains(expected, value => actual.Contains(value));
-        }
+        Assert.Equal(ExpectedCount, actual.Count());
+        Assert.Contains(source, value => actual.Contains(value));
+        Assert.Contains(expected, value => actual.Contains(value));
+    }
 
-        [Fact]
-        public void GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
-        {
-            IEnumerable<int>? source = default;
-            IEnumerable<int>? expected = new[] { 4, 5, 6 };
+    [Fact]
+    public void GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
+    {
+        IEnumerable<int>? source = default;
+        IEnumerable<int>? expected = new[] { 4, 5, 6 };
 
-            IEnumerable<int> actual = source.Combine(expected);
+        IEnumerable<int> actual = source.Combine(expected);
 
-            Assert.Equal(expected, actual);
-        }
+        Assert.Equal(expected, actual);
     }
 }

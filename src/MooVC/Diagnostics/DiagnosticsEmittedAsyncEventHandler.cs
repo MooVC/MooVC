@@ -1,6 +1,5 @@
-﻿namespace MooVC.Diagnostics
-{
-    using System.Threading.Tasks;
+﻿namespace MooVC.Diagnostics;
 
-    public delegate Task DiagnosticsEmittedAsyncEventHandler(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e);
-}
+using System.Threading.Tasks;
+
+public delegate Task DiagnosticsEmittedAsyncEventHandler(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e);

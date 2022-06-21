@@ -1,23 +1,22 @@
-﻿namespace MooVC.Processing
+﻿namespace MooVC.Processing;
+
+using System.Threading;
+
+public abstract class ThreadSafeProcessor
+    : Processor
 {
-    using System.Threading;
+    private const int StartRequestedFlag = 1;
+    private const int StopRequestedFlag = 0;
 
-    public abstract class ThreadSafeProcessor
-        : Processor
+    private volatile int flag = StopRequestedFlag;
+
+    protected sealed override bool CanStart()
     {
-        private const int StartRequestedFlag = 1;
-        private const int StopRequestedFlag = 0;
+        return Interlocked.CompareExchange(ref flag, StartRequestedFlag, StopRequestedFlag) == StopRequestedFlag;
+    }
 
-        private volatile int flag = StopRequestedFlag;
-
-        protected sealed override bool CanStart()
-        {
-            return Interlocked.CompareExchange(ref flag, StartRequestedFlag, StopRequestedFlag) == StopRequestedFlag;
-        }
-
-        protected sealed override bool CanStop()
-        {
-            return Interlocked.CompareExchange(ref flag, StopRequestedFlag, StartRequestedFlag) == StartRequestedFlag;
-        }
+    protected sealed override bool CanStop()
+    {
+        return Interlocked.CompareExchange(ref flag, StopRequestedFlag, StartRequestedFlag) == StartRequestedFlag;
     }
 }

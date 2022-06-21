@@ -1,7 +1,6 @@
-﻿namespace MooVC.Diagnostics
+﻿namespace MooVC.Diagnostics;
+
+public interface IEmitDiagnostics
 {
-    public interface IEmitDiagnostics
-    {
-        event DiagnosticsEmittedAsyncEventHandler DiagnosticsEmitted;
-    }
+    event DiagnosticsEmittedAsyncEventHandler DiagnosticsEmitted;
 }

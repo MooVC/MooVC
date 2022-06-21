@@ -1,82 +1,79 @@
-﻿namespace MooVC.Diagnostics.DiagnosticsEmittedEventArgsTests
+﻿namespace MooVC.Diagnostics.DiagnosticsEmittedEventArgsTests;
+
+using System;
+using System.Linq;
+using Xunit;
+using static System.String;
+
+public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
 {
-    using System;
-    using System.Linq;
-    using Xunit;
-    using static System.String;
-
-    public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
+    [Fact]
+    public void GivenACauseWhenNoMessageIsProvidedThenTheMessageDefaultsToTheMessageWithinTheCause()
     {
-        [Fact]
-        public void GivenACauseWhenNoMessageIsProvidedThenTheMessageDefaultsToTheMessageWithinTheCause()
-        {
-            const string ExpectedMessage = "Something something Dark Side";
+        const string ExpectedMessage = "Something something Dark Side";
 
-            var cause = new Exception(ExpectedMessage);
+        var cause = new InvalidOperationException(ExpectedMessage);
+        var value = new DiagnosticsEmittedAsyncEventArgs(cause: cause);
 
-            var value = new DiagnosticsEmittedAsyncEventArgs(cause: cause);
+        Assert.Equal(cause, value.Cause);
+        Assert.Equal(ExpectedMessage, value.Message);
+    }
 
-            Assert.Equal(cause, value.Cause);
-            Assert.Equal(ExpectedMessage, value.Message);
-        }
+    [Fact]
+    public void GivenALevelOutsideOfRangeThenTheMaxLevelIsApplied()
+    {
+        Level max = Enum.GetValues<Level>().Max();
+        byte raw = (byte)max;
+        var level = (Level)(raw + 1);
 
-        [Fact]
-        public void GivenALevelOutsideOfRangeThenTheMaxLevelIsApplied()
-        {
-            Level max = Enum.GetValues<Level>().Max();
-            byte raw = (byte)max;
-            var level = (Level)(raw + 1);
+        var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
 
-            var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
+        Assert.Equal(max, value.Level);
+    }
 
-            Assert.Equal(max, value.Level);
-        }
+    [Theory]
+    [InlineData(Level.Trace)]
+    [InlineData(Level.Information)]
+    [InlineData(Level.Critical)]
+    public void GivenALevelWithinRangeThenTheLevelIsApplied(Level level)
+    {
+        var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
 
-        [Theory]
-        [InlineData(Level.Trace)]
-        [InlineData(Level.Information)]
-        [InlineData(Level.Critical)]
-        public void GivenALevelWithinRangeThenTheLevelIsApplied(Level level)
-        {
-            var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
+        Assert.Equal(level, value.Level);
+    }
 
-            Assert.Equal(level, value.Level);
-        }
+    [Fact]
+    public void GivenAMessageThenTheMessageIsApplied()
+    {
+        const string ExpectedMessage = "Something something Dark Side";
 
-        [Fact]
-        public void GivenAMessageThenTheMessageIsApplied()
-        {
-            const string ExpectedMessage = "Something something Dark Side";
+        var value = new DiagnosticsEmittedAsyncEventArgs(message: ExpectedMessage);
 
-            var value = new DiagnosticsEmittedAsyncEventArgs(message: ExpectedMessage);
+        Assert.Equal(ExpectedMessage, value.Message);
+    }
 
-            Assert.Equal(ExpectedMessage, value.Message);
-        }
+    [Theory]
+    [InlineData(default)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void GivenAnEmptyMessageWhenACauseIsProvidedTheMessageDefaultsToTheMessageWithinTheCause(string? message)
+    {
+        const string ExpectedMessage = "Something something Dark Side";
 
-        [Theory]
-        [InlineData(default)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void GivenAnEmptyMessageWhenACauseIsProvidedTheMessageDefaultsToTheMessageWithinTheCause(string? message)
-        {
-            const string ExpectedMessage = "Something something Dark Side";
+        var cause = new InvalidOperationException(ExpectedMessage);
+        var value = new DiagnosticsEmittedAsyncEventArgs(cause: cause, message: message);
 
-            var cause = new Exception(ExpectedMessage);
+        Assert.Equal(ExpectedMessage, value.Message);
+    }
 
-            var value = new DiagnosticsEmittedAsyncEventArgs(cause: cause, message: message);
+    [Theory]
+    [InlineData(default)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnEmptyMessageIsApplied(string? message)
+    {
+        var value = new DiagnosticsEmittedAsyncEventArgs(message: message);
 
-            Assert.Equal(ExpectedMessage, value.Message);
-        }
-
-        [Theory]
-        [InlineData(default)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnEmptyMessageIsApplied(string? message)
-        {
-            var value = new DiagnosticsEmittedAsyncEventArgs(message: message);
-
-            Assert.Equal(Empty, value.Message);
-        }
+        Assert.Equal(Empty, value.Message);
     }
 }

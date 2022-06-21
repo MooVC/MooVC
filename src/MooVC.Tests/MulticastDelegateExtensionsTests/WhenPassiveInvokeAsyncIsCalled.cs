@@ -1,118 +1,116 @@
-﻿namespace MooVC.MulticastDelegateExtensionsTests
+﻿namespace MooVC.MulticastDelegateExtensionsTests;
+
+using System;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenPassiveInvokeAsyncIsCalled
 {
-    using System;
-    using System.Reflection;
-    using System.Threading.Tasks;
-    using Xunit;
+    private event AsyncEventHandler? Tested;
 
-    public sealed class WhenPassiveInvokeAsyncIsCalled
+    private event Func<Exception, EventArgs, Task>? TypedSender;
+
+    private event AsyncEventHandler<TestEventArgs>? TypedArgs;
+
+    private event EventHandler? Invalid;
+
+    private event Func<object?, EventArgs, object, Task>? IncorrectParameters;
+
+    [Fact]
+    public async Task GivenAHandlerThenTheHandlerIsInvokedAsync()
     {
-        private event AsyncEventHandler? Tested;
+        bool wasInvoked = false;
 
-        private event Func<Exception, EventArgs, Task>? TypedSender;
-
-        private event AsyncEventHandler<TestEventArgs>? TypedArgs;
-
-        private event EventHandler? Invalid;
-
-        private event Func<object?, EventArgs, object, Task>? IncorrectParameters;
-
-        [Fact]
-        public async Task GivenAHandlerThenTheHandlerIsInvokedAsync()
+        Tested += (sender, e) =>
         {
-            bool wasInvoked = false;
+            wasInvoked = true;
 
-            Tested += (sender, e) =>
+            return Task.CompletedTask;
+        };
+
+        await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
+
+        Assert.True(wasInvoked);
+    }
+
+    [Fact]
+    public async Task GivenMultipleHandlersThenEachHandlerIsInvokedAsync()
+    {
+        const byte Expected = 3;
+        byte actual = 0;
+
+        Task Handler(object? sender, EventArgs e)
+        {
+            actual++;
+
+            return Task.CompletedTask;
+        }
+
+        Tested += Handler;
+        Tested += Handler;
+        Tested += Handler;
+
+        await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
+
+        Assert.Equal(Expected, actual);
+    }
+
+    [Fact]
+    public async Task GivenAnExceptionThenNoExceptionIsThrownAsync()
+    {
+        bool wasInvoked = false;
+        var expected = new InvalidOperationException();
+
+        Tested += (sender, e) => throw expected;
+
+        await Tested.PassiveInvokeAsync(
+            this,
+            AsyncEventArgs.Empty(),
+            onFailure: actual =>
             {
                 wasInvoked = true;
 
-                return Task.CompletedTask;
-            };
-
-            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
-
-            Assert.True(wasInvoked);
-        }
-
-        [Fact]
-        public async Task GivenMultipleHandlersThenEachHandlerIsInvokedAsync()
-        {
-            const byte Expected = 3;
-            byte actual = 0;
-
-            Task Handler(object? sender, EventArgs e)
-            {
-                actual++;
+                Assert.Equal(expected, actual.InnerException?.InnerException);
 
                 return Task.CompletedTask;
-            }
+            });
 
-            Tested += Handler;
-            Tested += Handler;
-            Tested += Handler;
+        Assert.True(wasInvoked);
+    }
 
-            await Tested.PassiveInvokeAsync(this, AsyncEventArgs.Empty());
+    [Fact]
+    public async Task GivenAnInvalidHandlerThenANotSupportedExceptionIsThrownAsync()
+    {
+        Invalid += (_, _) => { };
 
-            Assert.Equal(Expected, actual);
-        }
+        NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
+            () => Invalid.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
+    }
 
-        [Fact]
-        public async Task GivenAnExceptionThenNoExceptionIsThrownAsync()
-        {
-            bool wasInvoked = false;
-            var expected = new InvalidOperationException();
+    [Fact]
+    public async Task GivenAnInvalidSenderThenANotSupportedExceptionIsThrownAsync()
+    {
+        TypedSender += (_, _) => Task.CompletedTask;
 
-            Tested += (sender, e) => throw expected;
+        NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
+            () => TypedSender.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
+    }
 
-            await Tested.PassiveInvokeAsync(
-                this,
-                AsyncEventArgs.Empty(),
-                onFailure: actual =>
-                {
-                    wasInvoked = true;
+    [Fact]
+    public async Task GivenAnInvalidArgsThenANotSupportedExceptionIsThrownAsync()
+    {
+        TypedArgs += (_, _) => Task.CompletedTask;
 
-                    Assert.Equal(expected, actual.InnerException?.InnerException);
+        NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
+            () => TypedArgs.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
+    }
 
-                    return Task.CompletedTask;
-                });
+    [Fact]
+    public async Task GivenAnInvalidNumberOfParametersThenANotSupportedExceptionIsThrownAsync()
+    {
+        IncorrectParameters += (_, _, _) => Task.CompletedTask;
 
-            Assert.True(wasInvoked);
-        }
-
-        [Fact]
-        public async Task GivenAnInvalidHandlerThenANotSupportedExceptionIsThrownAsync()
-        {
-            Invalid += (_, _) => { };
-
-            NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Invalid.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
-        }
-
-        [Fact]
-        public async Task GivenAnInvalidSenderThenANotSupportedExceptionIsThrownAsync()
-        {
-            TypedSender += (_, _) => Task.CompletedTask;
-
-            NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedSender.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
-        }
-
-        [Fact]
-        public async Task GivenAnInvalidArgsThenANotSupportedExceptionIsThrownAsync()
-        {
-            TypedArgs += (_, _) => Task.CompletedTask;
-
-            NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => TypedArgs.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
-        }
-
-        [Fact]
-        public async Task GivenAnInvalidNumberOfParametersThenANotSupportedExceptionIsThrownAsync()
-        {
-            IncorrectParameters += (_, _, _) => Task.CompletedTask;
-
-            NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                () => IncorrectParameters.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
-        }
+        NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
+            () => IncorrectParameters.PassiveInvokeAsync(this, AsyncEventArgs.Empty()));
     }
 }

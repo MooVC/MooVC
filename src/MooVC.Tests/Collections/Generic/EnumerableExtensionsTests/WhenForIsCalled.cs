@@ -1,64 +1,63 @@
-namespace MooVC.Collections.Generic.EnumerableExtensionsTests
+namespace MooVC.Collections.Generic.EnumerableExtensionsTests;
+
+using System;
+using System.Collections.Generic;
+using Xunit;
+
+public sealed class WhenForIsCalled
 {
-    using System;
-    using System.Collections.Generic;
-    using Xunit;
-
-    public sealed class WhenForIsCalled
+    [Fact]
+    public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
-        [Fact]
-        public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+        IEnumerable<int>? enumeration = default;
+        bool wasInvoked = false;
+
+        void Action(int index, int value)
         {
-            IEnumerable<int>? enumeration = default;
-            bool wasInvoked = false;
-
-            void Action(int index, int value)
-            {
-                wasInvoked = true;
-            }
-
-            enumeration.For(Action);
-
-            Assert.False(wasInvoked);
+            wasInvoked = true;
         }
 
-        [Fact]
-        public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
-        {
-            IEnumerable<int>? enumeration = default;
+        enumeration.For(Action);
 
-            enumeration.For(default!);
+        Assert.False(wasInvoked);
+    }
+
+    [Fact]
+    public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+    {
+        IEnumerable<int>? enumeration = default;
+
+        enumeration.For(default!);
+    }
+
+    [Fact]
+    public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
+    {
+        int[] enumeration = new[] { 1, 2, 3 };
+        var invocations = new List<int>();
+        int expected = 0;
+
+        void Action(int index, int value)
+        {
+            Assert.Equal(expected++, index);
+
+            invocations.Add(value);
         }
 
-        [Fact]
-        public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
-        {
-            int[] enumeration = new[] { 1, 2, 3 };
-            var invocations = new List<int>();
-            int expected = 0;
+        enumeration.For(Action);
 
-            void Action(int index, int value)
-            {
-                Assert.Equal(expected++, index);
+        Assert.Equal(enumeration, invocations);
+    }
 
-                invocations.Add(value);
-            }
+    [Fact]
+    public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+    {
+        int[] enumeration = new[] { 1, 2, 3 };
+        Action<int, int>? action = default;
 
-            enumeration.For(Action);
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+            () => enumeration.For(action!));
 
-            Assert.Equal(enumeration, invocations);
-        }
-
-        [Fact]
-        public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
-        {
-            int[] enumeration = new[] { 1, 2, 3 };
-            Action<int, int>? action = default;
-
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => enumeration.For(action!));
-
-            Assert.Equal(nameof(action), exception.ParamName);
-        }
+        Assert.Equal(nameof(action), exception.ParamName);
     }
 }

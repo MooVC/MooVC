@@ -1,32 +1,31 @@
-﻿namespace MooVC.Serialization
+﻿namespace MooVC.Serialization;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using MooVC.Linq;
+
+public static partial class SerializationInfoExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.Serialization;
-    using MooVC.Linq;
-
-    public static partial class SerializationInfoExtensions
+    public static bool TryAddEnumerable<T>(
+        this SerializationInfo info,
+        string name,
+        [NotNullWhen(true)] IEnumerable<T>? value,
+        Func<IEnumerable<T>, bool>? predicate = default)
     {
-        public static bool TryAddEnumerable<T>(
-            this SerializationInfo info,
-            string name,
-            [NotNullWhen(true)] IEnumerable<T>? value,
-            Func<IEnumerable<T>, bool>? predicate = default)
+        if (value is { })
         {
-            if (value is { })
+            predicate ??= input => input.SafeAny();
+
+            if (predicate(value))
             {
-                predicate ??= input => input.SafeAny();
+                info.AddEnumerable(name, value);
 
-                if (predicate(value))
-                {
-                    info.AddEnumerable(name, value);
-
-                    return true;
-                }
+                return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 }

@@ -1,40 +1,39 @@
-﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests
+﻿namespace MooVC.Processing.ThreadSafeHostedServiceTests;
+
+using System.Threading;
+using Microsoft.Extensions.Hosting;
+using Moq;
+using Xunit;
+
+public sealed class WhenStartAsyncIsCalled
 {
-    using System.Threading;
-    using Microsoft.Extensions.Hosting;
-    using Moq;
-    using Xunit;
+    private readonly ThreadSafeHostedService processor;
+    private readonly Mock<IHostedService> service;
 
-    public sealed class WhenStartAsyncIsCalled
+    public WhenStartAsyncIsCalled()
     {
-        private readonly ThreadSafeHostedService processor;
-        private readonly Mock<IHostedService> service;
+        service = new Mock<IHostedService>();
+        processor = new ThreadSafeHostedService(new[] { service.Object });
+    }
 
-        public WhenStartAsyncIsCalled()
-        {
-            service = new Mock<IHostedService>();
-            processor = new ThreadSafeHostedService(new[] { service.Object });
-        }
+    [Fact]
+    public async void GivenAStoppedProcessorThenTheProcessorStartsAsync()
+    {
+        await processor.StartAsync(CancellationToken.None);
 
-        [Fact]
-        public async void GivenAStoppedProcessorThenTheProcessorStartsAsync()
-        {
-            await processor.StartAsync(CancellationToken.None);
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
 
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.Equal(ProcessorState.Started, processor.State);
+    }
 
-            Assert.Equal(ProcessorState.Started, processor.State);
-        }
+    [Fact]
+    public async void GivenAStartedProcessorThenAStartOperationInvalidExceptionIsThrownAsync()
+    {
+        await processor.StartAsync(CancellationToken.None);
 
-        [Fact]
-        public async void GivenAStartedProcessorThenAStartOperationInvalidExceptionIsThrownAsync()
-        {
-            await processor.StartAsync(CancellationToken.None);
+        _ = await Assert.ThrowsAsync<StartOperationInvalidException>(
+            () => processor.StartAsync(CancellationToken.None));
 
-            _ = await Assert.ThrowsAsync<StartOperationInvalidException>(
-                () => processor.StartAsync(CancellationToken.None));
-
-            service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
-        }
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 }

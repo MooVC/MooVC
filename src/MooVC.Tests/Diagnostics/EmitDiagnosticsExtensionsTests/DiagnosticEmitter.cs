@@ -1,25 +1,24 @@
-﻿namespace MooVC.Diagnostics.EmitDiagnosticsExtensionsTests
+﻿namespace MooVC.Diagnostics.EmitDiagnosticsExtensionsTests;
+
+using System.Threading.Tasks;
+
+public sealed class DiagnosticEmitter
+    : IEmitDiagnostics
 {
-    using System.Threading.Tasks;
+    private readonly bool isEmitting;
 
-    public sealed class DiagnosticEmitter
-        : IEmitDiagnostics
+    public DiagnosticEmitter(bool isEmitting)
     {
-        private readonly bool isEmitting;
+        this.isEmitting = isEmitting;
+    }
 
-        public DiagnosticEmitter(bool isEmitting)
+    public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
+
+    public async Task ExecuteAsync()
+    {
+        if (isEmitting)
         {
-            this.isEmitting = isEmitting;
-        }
-
-        public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
-
-        public async Task ExecuteAsync()
-        {
-            if (isEmitting)
-            {
-                await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs());
-            }
+            await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs());
         }
     }
 }

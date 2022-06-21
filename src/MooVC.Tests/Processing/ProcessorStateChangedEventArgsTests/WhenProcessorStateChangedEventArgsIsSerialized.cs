@@ -1,23 +1,22 @@
-﻿namespace MooVC.Processing.ProcessorStateChangedEventArgsTests
+﻿namespace MooVC.Processing.ProcessorStateChangedEventArgsTests;
+
+using MooVC.Serialization;
+using Xunit;
+
+public sealed class WhenProcessorStateChangedEventArgsIsSerialized
 {
-    using MooVC.Serialization;
-    using Xunit;
-
-    public sealed class WhenProcessorStateChangedEventArgsIsSerialized
+    [Theory]
+    [InlineData(ProcessorState.Started)]
+    [InlineData(ProcessorState.Starting)]
+    [InlineData(ProcessorState.Stopped)]
+    [InlineData(ProcessorState.Stopping)]
+    [InlineData(ProcessorState.Unknown)]
+    public void GivenAnInstanceThenAllPropertiesAreSerialized(ProcessorState expected)
     {
-        [Theory]
-        [InlineData(ProcessorState.Started)]
-        [InlineData(ProcessorState.Starting)]
-        [InlineData(ProcessorState.Stopped)]
-        [InlineData(ProcessorState.Stopping)]
-        [InlineData(ProcessorState.Unknown)]
-        public void GivenAnInstanceThenAllPropertiesAreSerialized(ProcessorState expected)
-        {
-            var original = new ProcessorStateChangedAsyncEventArgs(expected);
-            ProcessorStateChangedAsyncEventArgs deserialized = original.Clone();
+        var original = new ProcessorStateChangedAsyncEventArgs(expected);
+        ProcessorStateChangedAsyncEventArgs deserialized = original.Clone();
 
-            Assert.Equal(original.State, deserialized.State);
-            Assert.NotSame(original, deserialized);
-        }
+        Assert.Equal(original.State, deserialized.State);
+        Assert.NotSame(original, deserialized);
     }
 }

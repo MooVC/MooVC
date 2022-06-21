@@ -1,66 +1,65 @@
-﻿namespace MooVC.Diagnostics.EmitDiagnosticsExtensionsTests
+﻿namespace MooVC.Diagnostics.EmitDiagnosticsExtensionsTests;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
+
+public sealed class WhenInvokeAsyncIsCalled
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Xunit;
-
-    public sealed class WhenInvokeAsyncIsCalled
+    [Fact]
+    public async Task GivenANullSourceWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
     {
-        [Fact]
-        public async Task GivenANullSourceWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
+        IEnumerable<DiagnosticEmitter>? source = default;
+        Func<DiagnosticEmitter, Task>? action = default;
+
+        _ = await source.InvokeAsync(action!);
+    }
+
+    [Fact]
+    public async Task GivenASourceAndAnActionWhenDiagnosticsAreEmittedThenDiagnosticsAreReturnedForEachEmitterAsync()
+    {
+        const int ExpectedCount = 2;
+
+        IEnumerable<DiagnosticEmitter> source = new[]
         {
-            IEnumerable<DiagnosticEmitter>? source = default;
-            Func<DiagnosticEmitter, Task>? action = default;
+            new DiagnosticEmitter(true),
+            new DiagnosticEmitter(false),
+            new DiagnosticEmitter(true),
+        };
 
-            _ = await source.InvokeAsync(action!);
-        }
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
+            .InvokeAsync(emitter => emitter.ExecuteAsync());
 
-        [Fact]
-        public async Task GivenASourceAndAnActionWhenDiagnosticsAreEmittedThenDiagnosticsAreReturnedForEachEmitterAsync()
+        Assert.Equal(ExpectedCount, diagnostics.Count());
+    }
+
+    [Fact]
+    public async Task GivenASourceAndAnActionWhenNoDiagnosticsAreEmittedThenNoDiagnosticsAreReturnedAsync()
+    {
+        IEnumerable<DiagnosticEmitter> source = new[]
         {
-            const int ExpectedCount = 2;
+            new DiagnosticEmitter(false),
+            new DiagnosticEmitter(false),
+            new DiagnosticEmitter(false),
+        };
 
-            IEnumerable<DiagnosticEmitter> source = new[]
-            {
-                new DiagnosticEmitter(true),
-                new DiagnosticEmitter(false),
-                new DiagnosticEmitter(true),
-            };
+        IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
+            .InvokeAsync(emitter => emitter.ExecuteAsync());
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
-                .InvokeAsync(emitter => emitter.ExecuteAsync());
+        Assert.Empty(diagnostics);
+    }
 
-            Assert.Equal(ExpectedCount, diagnostics.Count());
-        }
+    [Fact]
+    public async Task GivenASourceWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
+    {
+        IEnumerable<DiagnosticEmitter> source = Array.Empty<DiagnosticEmitter>();
+        Func<DiagnosticEmitter, Task>? action = default;
 
-        [Fact]
-        public async Task GivenASourceAndAnActionWhenNoDiagnosticsAreEmittedThenNoDiagnosticsAreReturnedAsync()
-        {
-            IEnumerable<DiagnosticEmitter> source = new[]
-            {
-                new DiagnosticEmitter(false),
-                new DiagnosticEmitter(false),
-                new DiagnosticEmitter(false),
-            };
+        ArgumentNullException exception = await Assert.ThrowsAsync<ArgumentNullException>(
+            () => source.InvokeAsync(action!));
 
-            IEnumerable<DiagnosticsEmittedAsyncEventArgs> diagnostics = await source
-                .InvokeAsync(emitter => emitter.ExecuteAsync());
-
-            Assert.Empty(diagnostics);
-        }
-
-        [Fact]
-        public async Task GivenASourceWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
-        {
-            IEnumerable<DiagnosticEmitter> source = Array.Empty<DiagnosticEmitter>();
-            Func<DiagnosticEmitter, Task>? action = default;
-
-            ArgumentNullException exception = await Assert.ThrowsAsync<ArgumentNullException>(
-                () => source.InvokeAsync(action!));
-
-            Assert.Equal(nameof(action), exception.ParamName);
-        }
+        Assert.Equal(nameof(action), exception.ParamName);
     }
 }

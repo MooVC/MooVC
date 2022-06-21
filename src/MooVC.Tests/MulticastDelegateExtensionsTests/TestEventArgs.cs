@@ -1,7 +1,6 @@
-﻿namespace MooVC.MulticastDelegateExtensionsTests
+﻿namespace MooVC.MulticastDelegateExtensionsTests;
+
+internal sealed class TestEventArgs
+    : AsyncEventArgs
 {
-    internal sealed class TestEventArgs
-        : AsyncEventArgs
-    {
-    }
 }

@@ -1,22 +1,21 @@
-﻿namespace MooVC.Serialization
+﻿namespace MooVC.Serialization;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using static System.String;
+
+public static partial class SerializationInfoExtensions
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.Serialization;
-    using static System.String;
-
-    public static partial class SerializationInfoExtensions
+    public static bool TryAddString(
+        this SerializationInfo info,
+        string name,
+        [NotNullWhen(true)] string? value,
+        string? defaultValue = default,
+        Func<string?, bool>? predicate = default)
     {
-        public static bool TryAddString(
-            this SerializationInfo info,
-            string name,
-            [NotNullWhen(true)] string? value,
-            string? defaultValue = default,
-            Func<string?, bool>? predicate = default)
-        {
-            predicate ??= input => !(IsNullOrEmpty(input) || input!.Equals(defaultValue));
+        predicate ??= input => !(IsNullOrEmpty(input) || input!.Equals(defaultValue, StringComparison.Ordinal));
 
-            return info.TryAddValue(name, value, predicate: predicate);
-        }
+        return info.TryAddValue(name, value, predicate: predicate);
     }
 }

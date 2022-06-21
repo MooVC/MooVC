@@ -1,6 +1,5 @@
-﻿namespace MooVC.Processing
-{
-    using System.Threading.Tasks;
+﻿namespace MooVC.Processing;
 
-    public delegate Task ProcessorStateChangedAsyncEventHandler(IProcessor sender, ProcessorStateChangedAsyncEventArgs e);
-}
+using System.Threading.Tasks;
+
+public delegate Task ProcessorStateChangedAsyncEventHandler(IProcessor sender, ProcessorStateChangedAsyncEventArgs e);

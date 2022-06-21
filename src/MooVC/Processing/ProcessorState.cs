@@ -1,11 +1,10 @@
-﻿namespace MooVC.Processing
+﻿namespace MooVC.Processing;
+
+public enum ProcessorState
 {
-    public enum ProcessorState
-    {
-        Unknown,
-        Started,
-        Starting,
-        Stopped,
-        Stopping,
-    }
+    Unknown,
+    Started,
+    Starting,
+    Stopped,
+    Stopping,
 }
