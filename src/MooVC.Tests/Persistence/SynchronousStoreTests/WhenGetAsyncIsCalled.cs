@@ -1,8 +1,6 @@
 ﻿namespace MooVC.Persistence.SynchronousStoreTests;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MooVC.Linq;
 using Xunit;
