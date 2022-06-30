@@ -15,6 +15,11 @@ public sealed class PagedResult<T>
 {
     private readonly Lazy<ulong> count;
 
+    public PagedResult(Paging request)
+        : this(request, () => 0, Enumerable.Empty<T>())
+    {
+    }
+
     public PagedResult(Paging request, IEnumerable<T> values)
         : this(request, () => (ulong)values.LongCount(), values)
     {

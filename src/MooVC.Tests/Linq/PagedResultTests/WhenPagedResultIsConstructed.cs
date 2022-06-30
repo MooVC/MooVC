@@ -6,6 +6,19 @@ using Xunit;
 public sealed class WhenPagedResultIsConstructed
 {
     [Theory]
+    [InlineData(1, 10)]
+    [InlineData(5, 0)]
+    [InlineData(0, 100)]
+    public void GivenNoValuesThenAllPropertiesAreSetToDefaults(ushort page, ushort size)
+    {
+        var request = new Paging(page: page, size: size);
+
+        var result = new PagedResult<int>(request);
+
+        Assert.Equal(request, result.Request);
+    }
+
+    [Theory]
     [InlineData(1, 10, new[] { 1, 2, 3, 4 })]
     [InlineData(5, 0, new int[0])]
     [InlineData(0, 100, new[] { 1 })]
