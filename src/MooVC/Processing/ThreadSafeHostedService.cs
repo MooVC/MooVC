@@ -15,10 +15,7 @@ public sealed class ThreadSafeHostedService
 
     public ThreadSafeHostedService(IEnumerable<IHostedService> services)
     {
-        this.services = ArgumentNotEmpty(
-            services,
-            nameof(services),
-            ThreadSafeHostedServiceServicesRequired);
+        this.services = ArgumentNotEmpty(services, nameof(services), ThreadSafeHostedServiceServicesRequired);
     }
 
     protected override Task PerformStartAsync(CancellationToken cancellationToken)

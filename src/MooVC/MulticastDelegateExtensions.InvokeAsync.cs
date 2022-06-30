@@ -8,10 +8,7 @@ using static MooVC.Resources;
 
 public static partial class MulticastDelegateExtensions
 {
-    public static async Task InvokeAsync<TSender, TArgs>(
-        this MulticastDelegate? handler,
-        TSender? sender,
-        TArgs e)
+    public static async Task InvokeAsync<TSender, TArgs>(this MulticastDelegate? handler, TSender? sender, TArgs e)
         where TSender : class
         where TArgs : AsyncEventArgs
     {

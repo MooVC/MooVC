@@ -13,17 +13,12 @@ public abstract class SynchronousSerializer
     {
     }
 
-    protected override Task<T> PerformDeserializeAsync<T>(
-        Stream source,
-        CancellationToken? cancellationToken = default)
+    protected override Task<T> PerformDeserializeAsync<T>(Stream source, CancellationToken? cancellationToken = default)
     {
         return Task.FromResult(PerformDeserialize<T>(source));
     }
 
-    protected override Task PerformSerializeAsync<T>(
-        T instance,
-        Stream target,
-        CancellationToken? cancellationToken = default)
+    protected override Task PerformSerializeAsync<T>(T instance, Stream target, CancellationToken? cancellationToken = default)
     {
         PerformSerialize(instance, target);
 

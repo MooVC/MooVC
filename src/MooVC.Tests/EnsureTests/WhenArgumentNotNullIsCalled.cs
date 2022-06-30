@@ -45,10 +45,7 @@ public sealed class WhenArgumentNotNullIsCalled
     [InlineData(" ")]
     public void GivenANonNullValueAndAMessageThenNoExceptionIsThrown(object argument)
     {
-        object result = ArgumentNotNull(
-            argument,
-            nameof(argument),
-            "Some message.");
+        object result = ArgumentNotNull(argument, nameof(argument), "Some message.");
 
         Assert.Same(argument, result);
     }

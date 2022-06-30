@@ -13,15 +13,10 @@ public sealed class DefaultCloner
 
     public DefaultCloner(ISerializer serializer)
     {
-        this.serializer = ArgumentNotNull(
-            serializer,
-            nameof(serializer),
-            DefaultClonerSerializerRequired);
+        this.serializer = ArgumentNotNull(serializer, nameof(serializer), DefaultClonerSerializerRequired);
     }
 
-    public async Task<T> CloneAsync<T>(
-        T original,
-        CancellationToken? cancellationToken = default)
+    public async Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
         where T : notnull
     {
         IEnumerable<byte> data = await serializer

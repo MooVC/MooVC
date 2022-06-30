@@ -10,9 +10,7 @@ public sealed class WhenArgumentNotNullOrWhiteSpaceIsCalled
     {
         const string Argument = "Some Value";
 
-        string result = Ensure.ArgumentNotNullOrWhiteSpace(
-            Argument,
-            "Value");
+        string result = Ensure.ArgumentNotNullOrWhiteSpace(Argument, "Value");
 
         Assert.Same(Argument, result);
     }
@@ -22,10 +20,7 @@ public sealed class WhenArgumentNotNullOrWhiteSpaceIsCalled
     {
         const string Argument = "Some Value";
 
-        string result = Ensure.ArgumentNotNullOrWhiteSpace(
-            Argument,
-            "Value",
-            "Some message.");
+        string result = Ensure.ArgumentNotNullOrWhiteSpace(Argument, "Value", "Some message.");
 
         Assert.Same(Argument, result);
     }

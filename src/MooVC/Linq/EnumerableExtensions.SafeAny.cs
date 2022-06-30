@@ -12,9 +12,7 @@ public static partial class EnumerableExtensions
         return source is { } && source.Any();
     }
 
-    public static bool SafeAny<T>(
-        [NotNullWhen(true)] this IEnumerable<T>? source,
-        Func<T, bool> predicate)
+    public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source, Func<T, bool> predicate)
     {
         return source is { } && source.Any(predicate);
     }

@@ -8,10 +8,7 @@ public static partial class CollectionExtensions
 {
     public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
     {
-        _ = ArgumentNotNull(
-            target,
-            nameof(target),
-            CollectionExtensionsReplaceTargetRequired);
+        _ = ArgumentNotNull(target, nameof(target), CollectionExtensionsReplaceTargetRequired);
 
         target.Clear();
 

@@ -5,9 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 public static partial class Ensure
 {
-    public static T ArgumentNotNull<T>(
-       [NotNull] T? argument,
-       string argumentName)
+    public static T ArgumentNotNull<T>([NotNull] T? argument, string argumentName)
        where T : struct
     {
         if (!argument.HasValue)
@@ -18,9 +16,7 @@ public static partial class Ensure
         return argument.Value;
     }
 
-    public static T ArgumentNotNull<T>(
-        [NotNull] T? argument,
-        string argumentName)
+    public static T ArgumentNotNull<T>([NotNull] T? argument, string argumentName)
         where T : class
     {
         if (argument is null)
@@ -31,10 +27,7 @@ public static partial class Ensure
         return argument;
     }
 
-    public static T ArgumentNotNull<T>(
-        [NotNull] T? argument,
-        string argumentName,
-        string message)
+    public static T ArgumentNotNull<T>([NotNull] T? argument, string argumentName, string message)
         where T : struct
     {
         if (!argument.HasValue)
@@ -45,10 +38,7 @@ public static partial class Ensure
         return argument.Value;
     }
 
-    public static T ArgumentNotNull<T>(
-        [NotNull] T? argument,
-        string argumentName,
-        string message)
+    public static T ArgumentNotNull<T>([NotNull] T? argument, string argumentName, string message)
         where T : class
     {
         if (argument is null)

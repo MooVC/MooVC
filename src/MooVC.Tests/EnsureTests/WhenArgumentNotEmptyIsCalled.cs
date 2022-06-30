@@ -75,11 +75,7 @@ public sealed class WhenArgumentNotEmptyIsCalled
         const string Message = "Something something dark side...";
         IEnumerable<int> enumeration = Enumerable.Range(1, 5);
 
-        int[] snapshot = ArgumentNotEmpty(
-            enumeration,
-            nameof(enumeration),
-            Message,
-            predicate: _ => true);
+        int[] snapshot = ArgumentNotEmpty(enumeration, nameof(enumeration), Message, predicate: _ => true);
 
         Assert.NotSame(enumeration, snapshot);
         Assert.Equal(enumeration, snapshot);

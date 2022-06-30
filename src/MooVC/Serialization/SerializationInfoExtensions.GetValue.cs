@@ -15,9 +15,6 @@ public static partial class SerializationInfoExtensions
             return result;
         }
 
-        throw new SerializationException(Format(
-            SerializationInfoExtensionsGetValueTypeInvalid,
-            name,
-            typeof(T).FullName));
+        throw new SerializationException(Format(SerializationInfoExtensionsGetValueTypeInvalid, name, typeof(T).FullName));
     }
 }

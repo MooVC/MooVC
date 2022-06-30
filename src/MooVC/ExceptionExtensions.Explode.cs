@@ -9,10 +9,7 @@ public static class ExceptionExtensions
 {
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
-        _ = ArgumentNotNull(
-            handler,
-            nameof(handler),
-            ExceptionExtensionsExplodeHandlerRequired);
+        _ = ArgumentNotNull(handler, nameof(handler), ExceptionExtensionsExplodeHandlerRequired);
 
         exception?.PerformExplode(handler);
     }

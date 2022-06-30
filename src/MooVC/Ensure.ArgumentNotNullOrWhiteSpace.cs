@@ -6,9 +6,7 @@ using static System.String;
 
 public static partial class Ensure
 {
-    public static string ArgumentNotNullOrWhiteSpace(
-        [NotNull] string? argument,
-        string argumentName)
+    public static string ArgumentNotNullOrWhiteSpace([NotNull] string? argument, string argumentName)
     {
         if (IsNullOrWhiteSpace(argument))
         {
@@ -18,10 +16,7 @@ public static partial class Ensure
         return argument;
     }
 
-    public static string ArgumentNotNullOrWhiteSpace(
-        [NotNull] string? argument,
-        string argumentName,
-        string message)
+    public static string ArgumentNotNullOrWhiteSpace([NotNull] string? argument, string argumentName, string message)
     {
         if (IsNullOrWhiteSpace(argument))
         {

@@ -5,10 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 public static partial class Ensure
 {
-    public static T ArgumentIsAcceptable<T>(
-        [NotNull] T? argument,
-        string argumentName,
-        Func<T, bool> predicate)
+    public static T ArgumentIsAcceptable<T>([NotNull] T? argument, string argumentName, Func<T, bool> predicate)
         where T : struct
     {
         T actual = ArgumentNotNull(argument, argumentName);

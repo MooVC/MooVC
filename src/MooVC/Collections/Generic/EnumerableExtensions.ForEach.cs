@@ -11,10 +11,7 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = ArgumentNotNull(
-                action,
-                nameof(action),
-                EnumerableExtensionsActionRequired);
+            _ = ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
 
             foreach (T item in items)
             {

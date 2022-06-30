@@ -8,67 +8,32 @@ using MooVC.Linq;
 
 public static partial class Ensure
 {
-    public static Guid ArgumentNotEmpty(
-        [NotNull] Guid? argument,
-        string argumentName)
+    public static Guid ArgumentNotEmpty([NotNull] Guid? argument, string argumentName)
     {
-        return ArgumentIsAcceptable(
-            argument,
-            argumentName,
-            predicate: value => value != Guid.Empty);
+        return ArgumentIsAcceptable(argument, argumentName, predicate: value => value != Guid.Empty);
     }
 
-    public static TimeSpan ArgumentNotEmpty(
-        [NotNull] TimeSpan? argument,
-        string argumentName)
+    public static TimeSpan ArgumentNotEmpty([NotNull] TimeSpan? argument, string argumentName)
     {
-        return ArgumentIsAcceptable(
-            argument,
-            argumentName,
-            predicate: value => value > TimeSpan.Zero);
+        return ArgumentIsAcceptable(argument, argumentName, predicate: value => value > TimeSpan.Zero);
     }
 
-    public static T[] ArgumentNotEmpty<T>(
-        [NotNull] IEnumerable<T>? argument,
-        string argumentName,
-        Func<T, bool>? predicate = default)
+    public static T[] ArgumentNotEmpty<T>([NotNull] IEnumerable<T>? argument, string argumentName, Func<T, bool>? predicate = default)
     {
-        return ArgumentNotEmpty(
-            argument,
-            argumentName,
-            default!,
-            predicate: predicate);
+        return ArgumentNotEmpty(argument, argumentName, default!, predicate: predicate);
     }
 
-    public static Guid ArgumentNotEmpty(
-       [NotNull] Guid? argument,
-       string argumentName,
-       string message)
+    public static Guid ArgumentNotEmpty([NotNull] Guid? argument, string argumentName, string message)
     {
-        return ArgumentIsAcceptable(
-            argument,
-            argumentName,
-            predicate: value => value != Guid.Empty,
-            message);
+        return ArgumentIsAcceptable(argument, argumentName, predicate: value => value != Guid.Empty, message);
     }
 
-    public static TimeSpan ArgumentNotEmpty(
-       [NotNull] TimeSpan? argument,
-       string argumentName,
-       string message)
+    public static TimeSpan ArgumentNotEmpty([NotNull] TimeSpan? argument, string argumentName, string message)
     {
-        return ArgumentIsAcceptable(
-            argument,
-            argumentName,
-            predicate: value => value > TimeSpan.Zero,
-            message);
+        return ArgumentIsAcceptable(argument, argumentName, predicate: value => value > TimeSpan.Zero, message);
     }
 
-    public static T[] ArgumentNotEmpty<T>(
-        [NotNull] IEnumerable<T>? argument,
-        string argumentName,
-        string message,
-        Func<T, bool>? predicate = default)
+    public static T[] ArgumentNotEmpty<T>([NotNull] IEnumerable<T>? argument, string argumentName, string message, Func<T, bool>? predicate = default)
     {
         _ = ArgumentNotNull(argument, argumentName, message);
 

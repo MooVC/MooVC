@@ -8,9 +8,7 @@ using static MooVC.Ensure;
 
 public static partial class EnumerableExtensions
 {
-    public static T[] Snapshot<T>(
-        this IEnumerable<T>? enumerable,
-        Func<T, bool>? predicate = default)
+    public static T[] Snapshot<T>(this IEnumerable<T>? enumerable, Func<T, bool>? predicate = default)
     {
         if (enumerable is { })
         {
@@ -22,15 +20,9 @@ public static partial class EnumerableExtensions
         return Array.Empty<T>();
     }
 
-    public static T[] Snapshot<T, TKey>(
-        this IEnumerable<T>? enumerable,
-        Func<T, TKey> order,
-        Func<T, bool>? predicate = default)
+    public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = ArgumentNotNull(
-            order,
-            nameof(order),
-            EnumerableExtensionsSnapshotOrderRequired);
+        _ = ArgumentNotNull(order, nameof(order), EnumerableExtensionsSnapshotOrderRequired);
 
         return enumerable
             .Snapshot(predicate: predicate)

@@ -89,12 +89,7 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await
-                OnDiagnosticsEmittedAsync(
-                    Level.Error,
-                    cancellationToken: cancellationToken,
-                    cause: ex,
-                    message: ProcessorTryStartFailure)
+            await OnDiagnosticsEmittedAsync(Level.Error, cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStartFailure)
                 .ConfigureAwait(false);
         }
 
@@ -112,12 +107,7 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await
-                OnDiagnosticsEmittedAsync(
-                    Level.Error,
-                    cancellationToken: cancellationToken,
-                    cause: ex,
-                    message: ProcessorTryStopFailure)
+            await OnDiagnosticsEmittedAsync(Level.Error, cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStopFailure)
                 .ConfigureAwait(false);
         }
 
@@ -142,11 +132,7 @@ public abstract class Processor
     {
         return DiagnosticsEmitted.PassiveInvokeAsync(
             this,
-            new DiagnosticsEmittedAsyncEventArgs(
-                cancellationToken: cancellationToken,
-                cause: cause,
-                level: level,
-                message: message));
+            new DiagnosticsEmittedAsyncEventArgs(cancellationToken: cancellationToken, cause: cause, level: level, message: message));
     }
 
     protected virtual Task OnProcessingStateChangedAsync(

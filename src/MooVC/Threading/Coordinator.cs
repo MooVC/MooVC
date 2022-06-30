@@ -18,23 +18,15 @@ public static class Coordinator
         CancellationToken? cancellationToken = default,
         TimeSpan? timeout = default)
     {
-        _ = ArgumentNotNullOrWhiteSpace(
-            context,
-            nameof(context),
-            CoordinatorApplyAsyncContextRequired);
+        _ = ArgumentNotNullOrWhiteSpace(context, nameof(context), CoordinatorApplyAsyncContextRequired);
+        _ = ArgumentNotNull(operation, nameof(operation), CoordinatorApplyAsyncOperationRequired);
 
-        _ = ArgumentNotNull(
-            operation,
-            nameof(operation),
-            CoordinatorApplyAsyncOperationRequired);
+        SemaphoreSlim semaphore = contexts.GetOrAdd(context, _ => new SemaphoreSlim(1, 1));
 
-        SemaphoreSlim semaphore = contexts.GetOrAdd(
-            context,
-            _ => new SemaphoreSlim(1, 1));
+        timeout ??= Timeout.InfiniteTimeSpan;
+        cancellationToken = cancellationToken.GetValueOrDefault();
 
-        bool isSuccessful = await semaphore.WaitAsync(
-            timeout ?? Timeout.InfiniteTimeSpan,
-            cancellationToken ?? CancellationToken.None);
+        bool isSuccessful = await semaphore.WaitAsync(timeout.Value, cancellationToken.Value);
 
         if (isSuccessful)
         {
