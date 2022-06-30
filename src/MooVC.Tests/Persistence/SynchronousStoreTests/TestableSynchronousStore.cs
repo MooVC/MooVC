@@ -11,7 +11,7 @@ public sealed class TestableSynchronousStore
     private readonly Action<string>? deleteByItem;
     private readonly Action<int>? deleteByKey;
     private readonly Func<int, string?>? getByKey;
-    private readonly Func<Paging?, IEnumerable<string>>? getAll;
+    private readonly Func<Paging?, PagedResult<string>>? getAll;
     private readonly Action<string>? update;
 
     public TestableSynchronousStore(
@@ -19,7 +19,7 @@ public sealed class TestableSynchronousStore
         Action<string>? deleteByItem = default,
         Action<int>? deleteByKey = default,
         Func<int, string?>? getByKey = default,
-        Func<Paging?, IEnumerable<string>>? getAll = default,
+        Func<Paging?, PagedResult<string>>? getAll = default,
         Action<string>? update = default)
     {
         this.create = create;
@@ -70,7 +70,7 @@ public sealed class TestableSynchronousStore
         throw new NotImplementedException();
     }
 
-    protected override IEnumerable<string> PerformGet(Paging? paging = default)
+    protected override PagedResult<string> PerformGet(Paging? paging = default)
     {
         if (getAll is { })
         {

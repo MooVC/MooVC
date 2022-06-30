@@ -8,12 +8,11 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v6.2.0
+# Release v7.0.0
 
 ## Enhancements
 
-- Added a ArrayExtensions.Append that will place an entry at the end of an existing array.
-- Added a ArrayExtensions.Extend that will place the contents of an array at the end of an existing array.
-- Added a ArrayExtensions.Prepend that will place an entry at the start of an existing array.
-- Added a Linq.PagedResult to encapsulate the results of a page query.
-- Added a Linq.QueryableExtensions.ToResult extension to provide default support for results capture.
+- Changed the return type for Persistence.IStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
+- Changed the return type for Persistence.MappedStore<T, TOutterKey, TInnerKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
+- Changed the return type for Persistence.SynchronousStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
+- Changed the return type for Persistence.SynchronousStore<T, TKey>.PerformGet(Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
