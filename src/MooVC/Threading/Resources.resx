@@ -120,9 +120,6 @@
   <data name="CoordinatorApplyAsyncContextRequired" xml:space="preserve">
     <value>The coordination context must be provided.</value>
   </data>
-  <data name="CoordinatorApplyAsyncOperationRequired" xml:space="preserve">
-    <value>The operation to be coordinated must be provided.</value>
-  </data>
   <data name="CoordinatorApplyAsyncTimeout" xml:space="preserve">
     <value>A request to coordinate an operation in the context of {0} has timed out.</value>
   </data>

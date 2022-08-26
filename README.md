@@ -14,6 +14,7 @@ While the original MooVC PHP based framework has long since been deprecated, man
 
 - Added a Collections.Generic.ObjectExtensions.AsArray extension that will return an array containing the value on which the request was made.
 - Added a Collections.Generic.ObjectExtensions.AsEnumerable extension that will return an enumerable containing the value on which the request was made.
+- Changed Threading.Coordinator so that it is now extensible i.e. It is no longer static (**Breaking Change**).
 - Changed the return type for Persistence.IStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.MappedStore<T, TOutterKey, TInnerKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.SynchronousStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
