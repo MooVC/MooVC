@@ -7,39 +7,17 @@ using Xunit;
 
 public sealed class WhenApplyAsyncIsCalled
 {
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
-    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync(string? context)
+    private readonly ICoordinator coordinator;
+
+    public WhenApplyAsyncIsCalled()
     {
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            () => Coordinator.ApplyAsync(context!, () => Task.CompletedTask));
+        coordinator = new Coordinator();
     }
 
     [Fact]
-    public async Task GivenAnEmptyOperationThenAnArgumentNullExceptionIsThrownAsync()
+    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
     {
-        Func<Task>? operation = default;
-
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            () => Coordinator.ApplyAsync("Valid", operation!));
-    }
-
-    [Fact]
-    public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
-    {
-        var expected = new InvalidOperationException();
-
-        Task Operation()
-        {
-            throw expected;
-        }
-
-        InvalidOperationException actual = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => Coordinator.ApplyAsync("Valid", Operation));
-
-        Assert.Equal(expected, actual);
+        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync<object>(default!));
     }
 
     [Fact]
@@ -50,14 +28,19 @@ public sealed class WhenApplyAsyncIsCalled
         int counter = 0;
         string context = "Test";
 
-        Task Operation()
-        {
-            counter++;
+        Task[] tasks = CreateTasks(
+            async () =>
+            {
+                ICoordinationContext<string> coordination = await coordinator
+                    .ApplyAsync(context)
+                    .ConfigureAwait(false);
 
-            return Task.CompletedTask;
-        }
-
-        Task[] tasks = CreateTasks(() => Coordinator.ApplyAsync(context, Operation), ExpectedCount);
+                using (coordination)
+                {
+                    counter++;
+                }
+            },
+            ExpectedCount);
 
         await Task.WhenAll(tasks);
 

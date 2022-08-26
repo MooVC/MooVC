@@ -8,6 +8,7 @@ using static System.String;
 using static MooVC.Threading.Resources;
 
 public sealed class Coordinator
+    : ICoordinator
 {
     private readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
 
