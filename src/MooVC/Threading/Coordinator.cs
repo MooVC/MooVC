@@ -44,9 +44,11 @@ public sealed class Coordinator<T>
 
     private static string GetKey(T context)
     {
-        if (context is ICoordinatable coordinatable)
+        if (context is ICoordinatable<T> coordinatable)
         {
-            return coordinatable.GetKey();
+            return coordinatable
+                .GetKey()
+                .ToString();
         }
 
         return context

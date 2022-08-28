@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Threading;
 
-public interface ICoordinatable
+public interface ICoordinatable<T>
+    where T : notnull
 {
-    string GetKey();
+    T GetKey();
 }
