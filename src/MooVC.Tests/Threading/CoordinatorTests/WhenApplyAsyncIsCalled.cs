@@ -7,17 +7,17 @@ using Xunit;
 
 public sealed class WhenApplyAsyncIsCalled
 {
-    private readonly ICoordinator coordinator;
+    private readonly ICoordinator<string> coordinator;
 
     public WhenApplyAsyncIsCalled()
     {
-        coordinator = new Coordinator();
+        coordinator = new Coordinator<string>();
     }
 
     [Fact]
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
     {
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync<object>(default!));
+        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync(default!));
     }
 
     [Fact]

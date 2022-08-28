@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using static System.String;
 using static MooVC.Threading.Resources;
 
-public sealed class Coordinator
-    : ICoordinator
+public sealed class Coordinator<T>
+    : ICoordinator<T>
+    where T : notnull
 {
+    public const string NumberFormat = "X";
     private readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
 
-    public async Task<ICoordinationContext<T>> ApplyAsync<T>(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default)
-        where T : notnull
+    public async Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default)
     {
         context = context ?? throw new ArgumentNullException(nameof(context), CoordinatorApplyAsyncContextRequired);
 
@@ -33,14 +34,15 @@ public sealed class Coordinator
         return new CoordinationContext<T>(context, semaphore);
     }
 
-    private static string GetKey<T>(T context)
-        where T : notnull
+    private static string GetKey(T context)
     {
         if (context is ICoordinatable coordinatable)
         {
             return coordinatable.GetKey();
         }
 
-        return $"{context.GetType().FullName}_{context.GetHashCode()}";
+        return context
+            .GetHashCode()
+            .ToString(NumberFormat);
     }
 }
