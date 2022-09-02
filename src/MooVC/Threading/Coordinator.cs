@@ -44,15 +44,22 @@ public sealed class Coordinator<T>
 
     private static string GetKey(T context)
     {
+        string? key = default;
+
         if (context is ICoordinatable<T> coordinatable)
         {
-            return coordinatable
+            key = coordinatable
                 .GetKey()
                 .ToString();
         }
 
-        return context
-            .GetHashCode()
-            .ToString(NumberFormat);
+        if (IsNullOrWhiteSpace(key))
+        {
+            return context
+                .GetHashCode()
+                .ToString(NumberFormat);
+        }
+
+        return key;
     }
 }
