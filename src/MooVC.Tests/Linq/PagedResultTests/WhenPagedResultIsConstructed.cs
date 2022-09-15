@@ -15,6 +15,8 @@ public sealed class WhenPagedResultIsConstructed
 
         var result = new PagedResult<int>(request);
 
+        Assert.False(result.HasResults);
+        Assert.True(result.IsEmpty);
         Assert.Equal(request, result.Request);
     }
 
@@ -87,6 +89,8 @@ public sealed class WhenPagedResultIsConstructed
 
         var result = new PagedResult<int>(request, 5, values);
 
+        Assert.False(result.HasResults);
+        Assert.True(result.IsEmpty);
         Assert.NotNull(result.Values);
         Assert.Empty(result.Values);
     }
