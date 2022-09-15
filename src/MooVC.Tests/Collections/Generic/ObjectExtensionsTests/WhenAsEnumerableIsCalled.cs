@@ -31,7 +31,7 @@ public sealed class WhenAsEnumerableIsCalled
     [Fact]
     public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
     {
-        object expected = new object();
+        object expected = new();
 
         IEnumerable<object> value = expected.AsEnumerable();
 

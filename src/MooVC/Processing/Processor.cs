@@ -10,9 +10,19 @@ public abstract class Processor
     : IProcessor,
       IEmitDiagnostics
 {
+    private readonly IDiagnosticsProxy diagnostics;
     private ProcessorState state = ProcessorState.Stopped;
 
-    public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
+    protected Processor(IDiagnosticsProxy? diagnostics = default)
+    {
+        this.diagnostics = diagnostics ?? DiagnosticsProxy.Default;
+    }
+
+    public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
+    {
+        add => diagnostics.DiagnosticsEmitted += value;
+        remove => diagnostics.DiagnosticsEmitted -= value;
+    }
 
     public event ProcessorStateChangedAsyncEventHandler? ProcessStateChanged;
 
@@ -89,7 +99,7 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await OnDiagnosticsEmittedAsync(Level.Error, cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStartFailure)
+            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStartFailure)
                 .ConfigureAwait(false);
         }
 
@@ -107,7 +117,7 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await OnDiagnosticsEmittedAsync(Level.Error, cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStopFailure)
+            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStopFailure)
                 .ConfigureAwait(false);
         }
 
@@ -125,14 +135,12 @@ public abstract class Processor
     }
 
     protected virtual Task OnDiagnosticsEmittedAsync(
-        Level level,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        Level? level = default,
         string? message = default)
     {
-        return DiagnosticsEmitted.PassiveInvokeAsync(
-            this,
-            new DiagnosticsEmittedAsyncEventArgs(cancellationToken: cancellationToken, cause: cause, level: level, message: message));
+        return diagnostics.EmitAsync(this, cancellationToken: cancellationToken, cause: cause, level: level, message: message);
     }
 
     protected virtual Task OnProcessingStateChangedAsync(
@@ -143,9 +151,9 @@ public abstract class Processor
             this,
             new ProcessorStateChangedAsyncEventArgs(state),
             onFailure: failure => OnDiagnosticsEmittedAsync(
-                Level.Warning,
                 cancellationToken: cancellationToken,
                 cause: failure,
+                level: Level.Warning,
                 message: ProcessorOnProcessingStateChangedAsyncFailure));
     }
 

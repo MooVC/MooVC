@@ -30,7 +30,7 @@ public sealed class WhenAsArrayIsCalled
     [Fact]
     public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
     {
-        object expected = new object();
+        object expected = new();
 
         object[] value = expected.AsArray();
 
