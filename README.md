@@ -17,6 +17,8 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Collections.Generic.EnumerableExtensions.ToIndex extension that simplifies conversion to a dictionary when the subject of the enumerable is the key for the dictionary.
 - Added Diagnostics.DiagnosticsProxy to serve as a default implementaiton for Diagnostics.IDiagnosticsProxy.
 - Added Diagnostics.IDiagnosticsProxy to simplify contextual configurability for diagnostics.
+- Added Diagnostics.Impact to enable diagnostics emitters to communicate the impact on a workflow, thereby enabling the observer to determine the appropriate level.
+- Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to include impact.
 - Changed Processing.Processor and it's implementations to optionally accept an instance of Diagnostics.IDiagnosticsProxy.
 - Changed Processing.Processor.OnDiagnosticsEmittedAsync so that the level is no longer required (**Breaking Change**).
 - Changed Threading.Coordinator so that it is now extensible i.e. It is no longer static (**Breaking Change**).

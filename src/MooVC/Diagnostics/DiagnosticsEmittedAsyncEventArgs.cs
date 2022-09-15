@@ -13,17 +13,20 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
       ISerializable
 {
     private Exception? cause;
+    private Impact impact = Impact.None;
     private Level level = Level.Information;
     private string message = string.Empty;
 
     public DiagnosticsEmittedAsyncEventArgs(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        Impact impact = Impact.None,
         Level level = Level.Information,
         string? message = default)
         : base(cancellationToken: cancellationToken)
     {
         Cause = cause;
+        Impact = impact;
         Level = level;
         Message = message;
     }
@@ -32,8 +35,9 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
         : base(default)
     {
         cause = info.TryGetValue<Exception?>(nameof(Cause));
-        level = info.GetValue<Level>(nameof(Level));
-        message = info.GetValue<string>(nameof(Message));
+        Impact = info.TryGetValue(nameof(Impact), defaultValue: Impact.None);
+        level = info.TryGetValue(nameof(Level), defaultValue: Level.Information);
+        message = info.TryGetString(nameof(Message));
     }
 
     public Exception? Cause
@@ -47,6 +51,22 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
             }
 
             cause = value;
+        }
+    }
+
+    public Impact Impact
+    {
+        get => impact;
+        private set
+        {
+            if (Enum.IsDefined(typeof(Impact), value))
+            {
+                impact = value;
+            }
+            else
+            {
+                impact = Impact.None;
+            }
         }
     }
 
@@ -86,7 +106,8 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         _ = info.TryAddValue(nameof(Cause), Cause);
-        info.AddValue(nameof(Level), Level);
-        info.AddValue(nameof(Message), Message);
+        _ = info.TryAddValue(nameof(Impact), Impact, defaultValue: Impact.None);
+        _ = info.TryAddValue(nameof(Level), Level, defaultValue: Level.Information);
+        _ = info.TryAddString(nameof(Message), Message);
     }
 }

@@ -99,7 +99,11 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStartFailure)
+            Impact impact = ex is StartOperationInvalidException
+                ? Impact.None
+                : Impact.Recoverable;
+
+            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStartFailure)
                 .ConfigureAwait(false);
         }
 
@@ -117,7 +121,11 @@ public abstract class Processor
         }
         catch (Exception ex)
         {
-            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, message: ProcessorTryStopFailure)
+            Impact impact = ex is StopOperationInvalidException
+                ? Impact.None
+                : Impact.Recoverable;
+
+            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStopFailure)
                 .ConfigureAwait(false);
         }
 
@@ -137,10 +145,11 @@ public abstract class Processor
     protected virtual Task OnDiagnosticsEmittedAsync(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        Impact? impact = default,
         Level? level = default,
         string? message = default)
     {
-        return diagnostics.EmitAsync(this, cancellationToken: cancellationToken, cause: cause, level: level, message: message);
+        return diagnostics.EmitAsync(this, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message);
     }
 
     protected virtual Task OnProcessingStateChangedAsync(

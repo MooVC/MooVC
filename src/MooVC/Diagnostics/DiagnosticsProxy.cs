@@ -1,33 +1,75 @@
 ﻿namespace MooVC.Diagnostics;
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 public sealed class DiagnosticsProxy
     : IDiagnosticsProxy
 {
-    private readonly Level level;
-
-    public DiagnosticsProxy(Level @default = Level.Error)
+    private static readonly IDictionary<Impact, Level> standard = new Dictionary<Impact, Level>
     {
-        level = @default;
+        { Impact.None, Level.Information },
+        { Impact.Negligible, Level.Warning },
+        { Impact.Recoverable, Level.Error },
+        { Impact.Unrecoverable, Level.Critical },
+    };
+
+    private readonly IDictionary<Impact, Level> defaults;
+
+    public DiagnosticsProxy(IDictionary<Impact, Level>? defaults = default)
+    {
+        this.defaults = defaults ?? standard;
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
+
+    public Level this[Impact impact]
+    {
+        get
+        {
+            if (defaults.TryGetValue(impact, out Level level))
+            {
+                return level;
+            }
+
+            return Level.Error;
+        }
+    }
 
     public Task EmitAsync<T>(
         T source,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        Impact? impact = default,
         Level? level = default,
         string? message = default)
         where T : class, IEmitDiagnostics
     {
-        level ??= this.level;
+        if (level.HasValue)
+        {
+            impact ??= Impact.None;
+        }
+        else
+        {
+            if (!impact.HasValue)
+            {
+                impact = cause is { }
+                    ? Impact.Negligible
+                    : Impact.None;
+            }
+
+            level = this[impact.Value];
+        }
 
         return DiagnosticsEmitted.PassiveInvokeAsync(
             source,
-            new DiagnosticsEmittedAsyncEventArgs(cancellationToken: cancellationToken, cause: cause, level: level.Value, message: message));
+            new DiagnosticsEmittedAsyncEventArgs(
+                cancellationToken: cancellationToken,
+                cause: cause,
+                impact: impact.Value,
+                level: level.Value,
+                message: message));
     }
 }

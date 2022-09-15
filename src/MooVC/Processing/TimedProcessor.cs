@@ -81,7 +81,11 @@ public class TimedProcessor
         }
         catch (Exception ex)
         {
-            await OnDiagnosticsEmittedAsync(cause: ex, message: Format(TimedProcessorTimerCallbackFailure, GetType().Name))
+            await
+                OnDiagnosticsEmittedAsync(
+                    cause: ex,
+                    impact: Impact.Recoverable,
+                    message: Format(TimedProcessorTimerCallbackFailure, GetType().Name))
                 .ConfigureAwait(false);
         }
     }
