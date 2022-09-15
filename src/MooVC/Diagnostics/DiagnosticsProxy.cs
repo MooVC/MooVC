@@ -5,9 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 public sealed class DiagnosticsProxy
-    : IEmitDiagnostics, IDiagnosticsProxy
+    : IDiagnosticsProxy
 {
-    private static readonly Lazy<DiagnosticsProxy> @default = new(() => new DiagnosticsProxy());
     private readonly Level level;
 
     public DiagnosticsProxy(Level @default = Level.Error)
@@ -16,8 +15,6 @@ public sealed class DiagnosticsProxy
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
-
-    public static DiagnosticsProxy Default => @default.Value;
 
     public Task EmitAsync<T>(
         T source,

@@ -15,7 +15,7 @@ public abstract class Processor
 
     protected Processor(IDiagnosticsProxy? diagnostics = default)
     {
-        this.diagnostics = diagnostics ?? DiagnosticsProxy.Default;
+        this.diagnostics = diagnostics ?? new DiagnosticsProxy();
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
