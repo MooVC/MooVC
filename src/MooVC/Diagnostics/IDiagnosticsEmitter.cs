@@ -4,17 +4,13 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-public interface IDiagnosticsProxy
+public interface IDiagnosticsEmitter
     : IEmitDiagnostics
 {
-    Level this[Impact impact] { get; }
-
-    Task EmitAsync<T>(
-        T source,
+    Task EmitAsync(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        string? message = default)
-        where T : class, IEmitDiagnostics;
+        string? message = default);
 }

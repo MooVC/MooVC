@@ -10,18 +10,17 @@ public abstract class Processor
     : IProcessor,
       IEmitDiagnostics
 {
-    private readonly IDiagnosticsProxy diagnostics;
     private ProcessorState state = ProcessorState.Stopped;
 
     protected Processor(IDiagnosticsProxy? diagnostics = default)
     {
-        this.diagnostics = diagnostics ?? new DiagnosticsProxy();
+        Diagnostics = new DiagnosticsEmitter<Processor>(this, diagnostics: diagnostics);
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
     {
-        add => diagnostics.DiagnosticsEmitted += value;
-        remove => diagnostics.DiagnosticsEmitted -= value;
+        add => Diagnostics.DiagnosticsEmitted += value;
+        remove => Diagnostics.DiagnosticsEmitted -= value;
     }
 
     public event ProcessorStateChangedAsyncEventHandler? ProcessStateChanged;
@@ -39,6 +38,8 @@ public abstract class Processor
             }
         }
     }
+
+    protected IDiagnosticsEmitter Diagnostics { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
@@ -103,7 +104,8 @@ public abstract class Processor
                 ? Impact.None
                 : Impact.Recoverable;
 
-            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStartFailure)
+            await Diagnostics
+                .EmitAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStartFailure)
                 .ConfigureAwait(false);
         }
 
@@ -125,7 +127,8 @@ public abstract class Processor
                 ? Impact.None
                 : Impact.Recoverable;
 
-            await OnDiagnosticsEmittedAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStopFailure)
+            await Diagnostics
+                .EmitAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStopFailure)
                 .ConfigureAwait(false);
         }
 
@@ -142,16 +145,6 @@ public abstract class Processor
         return State == ProcessorState.Started;
     }
 
-    protected virtual Task OnDiagnosticsEmittedAsync(
-        CancellationToken? cancellationToken = default,
-        Exception? cause = default,
-        Impact? impact = default,
-        Level? level = default,
-        string? message = default)
-    {
-        return diagnostics.EmitAsync(this, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message);
-    }
-
     protected virtual Task OnProcessingStateChangedAsync(
         ProcessorState state,
         CancellationToken? cancellationToken = default)
@@ -159,10 +152,10 @@ public abstract class Processor
         return ProcessStateChanged.PassiveInvokeAsync(
             this,
             new ProcessorStateChangedAsyncEventArgs(state),
-            onFailure: failure => OnDiagnosticsEmittedAsync(
+            onFailure: failure => Diagnostics.EmitAsync(
                 cancellationToken: cancellationToken,
                 cause: failure,
-                level: Level.Warning,
+                impact: Impact.None,
                 message: ProcessorOnProcessingStateChangedAsyncFailure));
     }
 

@@ -120,6 +120,9 @@
   <data name="DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired" xml:space="preserve">
     <value>The predicate to be applied to the diagnostic messages must be provided.</value>
   </data>
+  <data name="DiagnosticsEmitterSourceRequired" xml:space="preserve">
+    <value>The source of the diagnostic messages must be provided.</value>
+  </data>
   <data name="EmitDiagnosticsExtensionsInvokeActionRequired" xml:space="preserve">
     <value>The action to be performed on each of the diagnostics emitters must be provided.</value>
   </data>
