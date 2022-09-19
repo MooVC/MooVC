@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-public interface IDiagnosticsEmitter
+public interface IDiagnosticsRelay
     : IEmitDiagnostics
 {
     Task EmitAsync(

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Diagnostics.DiagnosticsEmitterTests;
+﻿namespace MooVC.Diagnostics.DiagnosticsRelayTests;
 
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using Xunit;
 public sealed class WhenEmitAsyncIsCalled
     : IEmitDiagnostics
 {
-    private readonly IDiagnosticsEmitter diagnostics;
+    private readonly IDiagnosticsRelay diagnostics;
 
     public WhenEmitAsyncIsCalled()
     {
-        diagnostics = new DiagnosticsEmitter<WhenEmitAsyncIsCalled>(this);
+        diagnostics = new DiagnosticsRelay(this);
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
@@ -77,7 +77,7 @@ public sealed class WhenEmitAsyncIsCalled
 
         string message = $"Something something dark side - {exception}, {impact}, {level}";
 
-        var diagnostics = new DiagnosticsEmitter<WhenEmitAsyncIsCalled>(
+        var diagnostics = new DiagnosticsRelay(
             this,
             diagnostics: new DiagnosticsProxy(defaults: new Dictionary<Impact, Level>
             {
@@ -95,11 +95,13 @@ public sealed class WhenEmitAsyncIsCalled
         string? message,
         Impact expectedImpact,
         Level expectedLevel,
-        IDiagnosticsEmitter? diagnostics = default)
+        IDiagnosticsRelay? diagnostics = default)
     {
+        const int ExpectedEmissions = 1;
+
         var token = new CancellationToken(false);
 
-        bool wasEmitted = false;
+        int emissions = 0;
 
         diagnostics ??= this.diagnostics;
 
@@ -111,12 +113,14 @@ public sealed class WhenEmitAsyncIsCalled
             Assert.Equal(expectedImpact, e.Impact);
             Assert.Equal(expectedLevel, e.Level);
             Assert.Equal(message, e.Message);
-            wasEmitted = true;
+
+            emissions++;
+
             return Task.CompletedTask;
         };
 
         await diagnostics.EmitAsync(cancellationToken: token, cause: cause, impact: impact, level: level, message: message);
 
-        Assert.True(wasEmitted);
+        Assert.Equal(ExpectedEmissions, emissions);
     }
 }

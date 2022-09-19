@@ -9,12 +9,11 @@ public interface IDiagnosticsProxy
 {
     Level this[Impact impact] { get; }
 
-    Task EmitAsync<T>(
-        T source,
+    Task EmitAsync(
+        IEmitDiagnostics source,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        string? message = default)
-        where T : class, IEmitDiagnostics;
+        string? message = default);
 }

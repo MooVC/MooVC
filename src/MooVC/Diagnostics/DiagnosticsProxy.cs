@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 public sealed class DiagnosticsProxy
     : IDiagnosticsProxy
 {
+    private static readonly Lazy<DiagnosticsProxy> @default = new(() => new DiagnosticsProxy());
+
     private static readonly IDictionary<Impact, Level> standard = new Dictionary<Impact, Level>
     {
         { Impact.None, Level.Information },
@@ -25,6 +27,8 @@ public sealed class DiagnosticsProxy
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
 
+    public static DiagnosticsProxy Default => @default.Value;
+
     public Level this[Impact impact]
     {
         get
@@ -38,14 +42,13 @@ public sealed class DiagnosticsProxy
         }
     }
 
-    public Task EmitAsync<T>(
-        T source,
+    public Task EmitAsync(
+        IEmitDiagnostics source,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
         string? message = default)
-        where T : class, IEmitDiagnostics
     {
         if (level.HasValue)
         {

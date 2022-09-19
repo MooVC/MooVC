@@ -15,10 +15,10 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Collections.Generic.ObjectExtensions.AsArray extension that will return an array containing the value on which the request was made.
 - Added a Collections.Generic.ObjectExtensions.AsEnumerable extension that will return an enumerable containing the value on which the request was made.
 - Added a Collections.Generic.EnumerableExtensions.ToIndex extension that simplifies conversion to a dictionary when the subject of the enumerable is the key for the dictionary.
-- Added Diagnostics.DiagnosticsEmitter to serve as a default implementaiton for Diagnostics.IDiagnosticsEmitter.
-- Added Diagnostics.IDiagnosticsEmitter to simplify diagnostics implementation in class hierarchies (composition over inheritance).
 - Added Diagnostics.DiagnosticsProxy to serve as a default implementaiton for Diagnostics.IDiagnosticsProxy.
 - Added Diagnostics.IDiagnosticsProxy to simplify contextual configurability for diagnostics.
+- Added Diagnostics.DiagnosticsRelay to serve as a default implementaiton for Diagnostics.IDiagnosticsRelay.
+- Added Diagnostics.IDiagnosticsRelay to simplify diagnostics implementation in class hierarchies (composition over inheritance).
 - Added Diagnostics.Impact to enable diagnostics emitters to communicate the impact on a workflow, thereby enabling the observer to determine the appropriate level.
 - Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to include impact.
 - Changed Processing.Processor and it's implementations to optionally accept an instance of Diagnostics.IDiagnosticsProxy.
@@ -27,4 +27,4 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Changed the return type for Persistence.MappedStore<T, TOutterKey, TInnerKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.SynchronousStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.SynchronousStore<T, TKey>.PerformGet(Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
-- Removed Processing.Processor.OnDiagnosticsEmittedAsync in favour of a new protected Processing.Processor.Diagnostics property that enabled access to diagnostics emission (**Breaking Change**).
+- Removed Processing.Processor.OnDiagnosticsEmittedAsync in favour of a new protected Diagnostics property that enabled access to diagnostics emission (**Breaking Change**).

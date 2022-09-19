@@ -13,7 +13,7 @@ public sealed class WhenEmitAsyncIsCalled
 
     public WhenEmitAsyncIsCalled()
     {
-        diagnostics = new DiagnosticsProxy();
+        diagnostics = DiagnosticsProxy.Default;
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted

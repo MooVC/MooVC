@@ -10,7 +10,7 @@ public sealed class WhenTimedJobQueueIsConstructed
     [Fact]
     public void GivenATimerThenAnInstanceIsReturned()
     {
-        var timer = new Mock<TimedProcessor>(TimeSpan.Zero, new DiagnosticsProxy(), TimeSpan.Zero);
+        var timer = new Mock<TimedProcessor>(TimeSpan.Zero, DiagnosticsProxy.Default, TimeSpan.Zero);
         _ = new TestTimedJobQueue(timer.Object);
     }
 

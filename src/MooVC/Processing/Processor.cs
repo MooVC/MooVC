@@ -14,7 +14,7 @@ public abstract class Processor
 
     protected Processor(IDiagnosticsProxy? diagnostics = default)
     {
-        Diagnostics = new DiagnosticsEmitter<Processor>(this, diagnostics: diagnostics);
+        Diagnostics = new DiagnosticsRelay(this, diagnostics: diagnostics);
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
@@ -39,7 +39,7 @@ public abstract class Processor
         }
     }
 
-    protected IDiagnosticsEmitter Diagnostics { get; }
+    protected IDiagnosticsRelay Diagnostics { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {

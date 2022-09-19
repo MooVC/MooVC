@@ -30,7 +30,7 @@ public sealed class WhenDiagnosticsProxyIsIndexed
     [Fact]
     public void GivenANonExistingLevelThenTheLevelIsReturned()
     {
-        var diagnostics = new DiagnosticsProxy();
+        DiagnosticsProxy diagnostics = DiagnosticsProxy.Default;
         Level level = diagnostics[(Impact)255];
 
         Assert.Equal(Level.Error, level);
