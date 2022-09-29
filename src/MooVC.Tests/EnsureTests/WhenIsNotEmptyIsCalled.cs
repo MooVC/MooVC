@@ -107,7 +107,6 @@ public sealed class WhenIsNotEmptyIsCalled
 
         int[] snapshot = AssertEnumeration(argumentName, enumeration, message);
 
-        Assert.NotSame(enumeration, snapshot);
         Assert.Equal(enumeration, snapshot);
     }
 
@@ -122,7 +121,6 @@ public sealed class WhenIsNotEmptyIsCalled
 
         int[] snapshot = AssertEnumeration(argumentName, enumeration, message, predicate: _ => true);
 
-        Assert.NotSame(enumeration, snapshot);
         Assert.Equal(enumeration, snapshot);
     }
 
@@ -151,7 +149,6 @@ public sealed class WhenIsNotEmptyIsCalled
     {
         int[] snapshot = AssertEnumeration(argumentName, enumeration, message, @default: @default);
 
-        Assert.NotSame(@default, snapshot);
         Assert.Equal(@default, snapshot);
     }
 
@@ -173,7 +170,6 @@ public sealed class WhenIsNotEmptyIsCalled
 
         int[] snapshot = AssertEnumeration(argumentName, enumeration, message, @default: @default, predicate: _ => false);
 
-        Assert.NotSame(@default, snapshot);
         Assert.Equal(@default, snapshot);
     }
 
