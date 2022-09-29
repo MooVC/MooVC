@@ -74,7 +74,7 @@ public sealed class DiagnosticsMessage
 
     public static bool operator !=(DiagnosticsMessage message, string? value)
     {
-        return message.Equals(value);
+        return !message.Equals(value);
     }
 
     public override bool Equals(object? other)
