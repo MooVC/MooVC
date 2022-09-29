@@ -15,17 +15,43 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a Collections.Generic.ObjectExtensions.AsArray extension that will return an array containing the value on which the request was made.
 - Added a Collections.Generic.ObjectExtensions.AsEnumerable extension that will return an enumerable containing the value on which the request was made.
 - Added a Collections.Generic.EnumerableExtensions.ToIndex extension that simplifies conversion to a dictionary when the subject of the enumerable is the key for the dictionary.
+- Added a Ensure.ArgumentIsDefined method to facilitate validation of enumerations.
 - Added a series of extensions relating to Diagnostics.IDiagnosticsRelay to simplify consumption by providing methods akin to that offered by most logging frameworks.
+- Added Diagnostics.DiagnosticsMessage to facilitate encapsulation of a parameterized message, to take advantage of custom logging sinks.
 - Added Diagnostics.DiagnosticsProxy to serve as a default implementaiton for Diagnostics.IDiagnosticsProxy.
 - Added Diagnostics.IDiagnosticsProxy to simplify contextual configurability for diagnostics.
 - Added Diagnostics.DiagnosticsRelay to serve as a default implementaiton for Diagnostics.IDiagnosticsRelay.
 - Added Diagnostics.IDiagnosticsRelay to simplify diagnostics implementation in class hierarchies (composition over inheritance).
 - Added Diagnostics.Impact to enable diagnostics emitters to communicate the impact on a workflow, thereby enabling the observer to determine the appropriate level.
 - Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to include impact.
+- Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to utilize Diagnostics.DiagnosticsMessage as the data type for message, instead of string  (**Breaking Change**).
+- Changed Ensure.ArgumentInRange (now Ensure.InRange) so that a default value can now be passed and used if the argument fails to pass the assertion.
+- Changed Ensure.ArgumentInRange (now Ensure.InRange) so that the message is now a named optional parameter (**Breaking Change**).
+- Changed Ensure.ArgumentInRange (now Ensure.InRange) so that the name of the argument is now optional (**Breaking Change**).
+- Changed Ensure.ArgumentIsAcceptable (now Ensure.Satisfies) so that a default value can now be passed and used if the argument fails to pass the assertion.
+- Changed Ensure.ArgumentIsAcceptable (now Ensure.Satisfies) so the message is now a named optional parameter (**Breaking Change**).
+- Changed Ensure.ArgumentIsAcceptable (now Ensure.Satisfies) so that the name of the argument is now optional (**Breaking Change**).
+- Changed Ensure.ArgumentNotEmpty (now Ensure.IsNotEmpty) so that a default value can now be passed and used if the argument fails to pass the assertion.
+- Changed Ensure.ArgumentNotEmpty (now Ensure.IsNotEmpty) so that the message is now a named optional parameter (**Breaking Change**).
+- Changed Ensure.ArgumentNotEmpty (now Ensure.IsNotEmpty) so that the name of the argument is now optional (**Breaking Change**).
+- Changed Ensure.ArgumentNotNull (now Ensure.IsNotNull) so that a default value can now be passed and used if the argument fails to pass the assertion.
+- Changed Ensure.ArgumentNotNull (now Ensure.IsNotNull) so that the message is now a named optional parameter (**Breaking Change**).
+- Changed Ensure.ArgumentNotNull (now Ensure.IsNotNull) so that the name of the argument is now optional (**Breaking Change**).
+- Changed Ensure.ArgumentNotNullOrWhiteSpace (now Ensure.IsNotNullOrWhiteSpace) so that a default value can now be passed and used if the argument fails to pass the assertion.
+- Changed Ensure.ArgumentNotNullOrWhiteSpace (now Ensure.IsNotNullOrWhiteSpace) so that the message is now a named optional parameter (**Breaking Change**).
+- Changed Ensure.ArgumentNotNullOrWhiteSpace (now Ensure.IsNotNullOrWhiteSpace) so that the name of the argument is now optional (**Breaking Change**).
 - Changed Processing.Processor and it's implementations to optionally accept an instance of Diagnostics.IDiagnosticsProxy.
 - Changed Threading.Coordinator so that it is now extensible i.e. It is no longer static (**Breaking Change**).
+- Changed the default level for Diagnostics.DiagnosticsEmittedAsyncEventArgs from Critical to Trace (**Breaking Change**).
 - Changed the return type for Persistence.IStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.MappedStore<T, TOutterKey, TInnerKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.SynchronousStore<T, TKey>.GetAsync(CancellationToken, Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Changed the return type for Persistence.SynchronousStore<T, TKey>.PerformGet(Paging) from IEnumerable<T> to PagedResult<T> (**Breaking Change**).
 - Removed Processing.Processor.OnDiagnosticsEmittedAsync in favour of a new protected Diagnostics property that enabled access to diagnostics emission (**Breaking Change**).
+- Removed support for .Net Standard 2.1 (**Breaking Change**).
+- Removed support for .Net 5 (**Breaking Change**).
+- Renamed Ensure.ArgumentInRange to Ensure.InRange (**Breaking Change**).
+- Renamed Ensure.ArgumentIsAcceptable to Ensure.Satisfies (**Breaking Change**).
+- Renamed Ensure.ArgumentNotEmpty to Ensure.IsNotEmpty (**Breaking Change**).
+- Renamed Ensure.ArgumentNotNull to Ensure.IsNotNull (**Breaking Change**).
+- Renamed Ensure.ArgumentNotNullOrWhiteSpace to Ensure.IsNotNullOrWhiteSpace (**Breaking Change**).

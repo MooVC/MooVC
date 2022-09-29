@@ -13,7 +13,7 @@ public sealed class DefaultCloner
 
     public DefaultCloner(ISerializer serializer)
     {
-        this.serializer = ArgumentNotNull(serializer, nameof(serializer), DefaultClonerSerializerRequired);
+        this.serializer = IsNotNull(serializer, message: DefaultClonerSerializerRequired);
     }
 
     public async Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)

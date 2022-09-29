@@ -9,9 +9,9 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsSerialized
     private const string DefaultMessage = "Something something Dark Side";
 
     [Theory]
-    [InlineData(new object[] { false, Impact.Recoverable, Level.Critical, "" })]
+    [InlineData(new object[] { false, Impact.Recoverable, Level.Critical, DefaultMessage })]
     [InlineData(new object[] { false, Impact.Unrecoverable, Level.Debug, DefaultMessage })]
-    [InlineData(new object[] { false, Impact.Negligible, Level.Error, "" })]
+    [InlineData(new object[] { false, Impact.Negligible, Level.Error, DefaultMessage })]
     [InlineData(new object[] { true, Impact.None, Level.Information, DefaultMessage })]
     [InlineData(new object[] { true, Impact.Recoverable, Level.Trace, "" })]
     [InlineData(new object[] { true, Impact.Unrecoverable, Level.Warning, DefaultMessage })]

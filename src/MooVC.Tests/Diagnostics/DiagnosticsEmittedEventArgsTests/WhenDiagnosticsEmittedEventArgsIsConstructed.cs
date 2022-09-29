@@ -22,13 +22,14 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
     [Fact]
     public void GivenALevelOutsideOfRangeThenTheMaxLevelIsApplied()
     {
+        Level min = Enum.GetValues<Level>().Min();
         Level max = Enum.GetValues<Level>().Max();
         byte raw = (byte)max;
         var level = (Level)(raw + 1);
 
-        var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
+        var value = new DiagnosticsEmittedAsyncEventArgs(level: level, message: "Something happened");
 
-        Assert.Equal(max, value.Level);
+        Assert.Equal(min, value.Level);
     }
 
     [Theory]
@@ -37,7 +38,7 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
     [InlineData(Level.Critical)]
     public void GivenALevelWithinRangeThenTheLevelIsApplied(Level level)
     {
-        var value = new DiagnosticsEmittedAsyncEventArgs(level: level);
+        var value = new DiagnosticsEmittedAsyncEventArgs(level: level, message: "Something happened");
 
         Assert.Equal(level, value.Level);
     }
@@ -70,10 +71,11 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
     [InlineData(default)]
     [InlineData("")]
     [InlineData(" ")]
-    public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnEmptyMessageIsApplied(string? message)
+    public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnArgumentNullExceptionIsThrown(string? message)
     {
-        var value = new DiagnosticsEmittedAsyncEventArgs(message: message);
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            new DiagnosticsEmittedAsyncEventArgs(message: message));
 
-        Assert.Equal(Empty, value.Message);
+        Assert.Equal(nameof(message), exception.ParamName);
     }
 }

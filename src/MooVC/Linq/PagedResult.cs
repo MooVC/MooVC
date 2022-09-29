@@ -42,7 +42,7 @@ public sealed class PagedResult<T>
 
     private PagedResult(Paging request, Func<ulong> total, IEnumerable<T> values)
     {
-        Request = ArgumentNotNull(request, nameof(request), PagedResultRequestRequired);
+        Request = IsNotNull(request, message: PagedResultRequestRequired);
         Total = total();
         Values = values.Snapshot();
 

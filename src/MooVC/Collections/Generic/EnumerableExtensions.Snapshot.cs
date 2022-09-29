@@ -22,7 +22,7 @@ public static partial class EnumerableExtensions
 
     public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = ArgumentNotNull(order, nameof(order), EnumerableExtensionsSnapshotOrderRequired);
+        _ = IsNotNull(order, message: EnumerableExtensionsSnapshotOrderRequired);
 
         return enumerable
             .Snapshot(predicate: predicate)

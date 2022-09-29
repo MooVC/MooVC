@@ -11,13 +11,15 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
+            _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
 
-            int index = 0;
+            ReadOnlySpan<T> elements = items.ToSpan();
 
-            foreach (T item in items)
+            for (int index = 0; index < elements.Length; index++)
             {
-                action(index++, item);
+                T element = elements[index];
+
+                action(index, element);
             }
         }
     }

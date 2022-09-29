@@ -16,7 +16,7 @@ public static partial class EmitDiagnosticsExtensions
     {
         if (sources is { })
         {
-            _ = ArgumentNotNull(action, nameof(action), EmitDiagnosticsExtensionsInvokeActionRequired);
+            _ = IsNotNull(action, message: EmitDiagnosticsExtensionsInvokeActionRequired);
 
             async Task Action(T source, DiagnosticsEmittedAsyncEventHandler handler)
             {

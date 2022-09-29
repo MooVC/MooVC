@@ -18,7 +18,7 @@ public sealed class DiagnosticEmitter
     {
         if (isEmitting)
         {
-            await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs());
+            await DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs(message: "Test"));
         }
     }
 }

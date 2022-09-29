@@ -38,6 +38,8 @@ public sealed class WhenThrowIsCalled
     [Fact]
     public void GivenASourceWhenALevelIsProvidedThenAnAggregateExceptionIsThrownWithTheExpectedDiagnosticsAsTheCause()
     {
+        const string DefaultMessage = "Something happened";
+
         IEnumerable<DiagnosticsEmittedAsyncEventArgs> expected = new DiagnosticsEmittedAsyncEventArgs[]
         {
             new(cause: new InvalidOperationException(), level: Level.Critical),
@@ -48,10 +50,10 @@ public sealed class WhenThrowIsCalled
 
         IEnumerable<DiagnosticsEmittedAsyncEventArgs> unexpected = new DiagnosticsEmittedAsyncEventArgs[]
         {
-            new(level: Level.Critical),
-            new(level: Level.Error),
-            new(level: Level.Warning),
-            new(level: Level.Information),
+            new(level: Level.Critical, message: DefaultMessage),
+            new(level: Level.Error, message: DefaultMessage),
+            new(level: Level.Warning, message: DefaultMessage),
+            new(level: Level.Information, message: DefaultMessage),
             new(cause: new InvalidOperationException(), level: Level.Debug),
             new(cause: new InvalidOperationException(), level: Level.Trace),
         };
@@ -75,10 +77,10 @@ public sealed class WhenThrowIsCalled
             new(cause: new InvalidOperationException(ExpectedMessage), level: Level.Error),
             new(cause: new InvalidOperationException(), level: Level.Warning),
             new(cause: new InvalidOperationException(), level: Level.Information),
-            new(level: Level.Critical),
-            new(level: Level.Error),
-            new(level: Level.Warning),
-            new(level: Level.Information),
+            new(level: Level.Critical, message: ExpectedMessage),
+            new(level: Level.Error, message: ExpectedMessage),
+            new(level: Level.Warning, message: ExpectedMessage),
+            new(level: Level.Information, message: ExpectedMessage),
             new(cause: new InvalidOperationException(), level: Level.Debug),
             new(cause: new InvalidOperationException(), level: Level.Trace),
         };

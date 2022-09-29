@@ -14,7 +14,7 @@ public static partial class EnumerableExtensions
     {
         if (enumeration is { } && isApplicable)
         {
-            _ = ArgumentNotNull(predicate, nameof(predicate), EnumerableExtensionsWhereIfPredicateRequired);
+            _ = IsNotNull(predicate, message: EnumerableExtensionsWhereIfPredicateRequired);
 
             return enumeration.Where(predicate);
         }
@@ -27,7 +27,7 @@ public static partial class EnumerableExtensions
     {
         if (enumeration is { })
         {
-            _ = ArgumentNotNull(condition, nameof(condition), EnumerableExtensionsWhereIfConditionRequired);
+            _ = IsNotNull(condition, message: EnumerableExtensionsWhereIfConditionRequired);
 
             return enumeration.WhereIf(condition(), predicate);
         }

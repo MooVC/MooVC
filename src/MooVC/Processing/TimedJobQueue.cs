@@ -21,7 +21,7 @@ public abstract class TimedJobQueue<T>
 
     protected TimedJobQueue(TimedProcessor timer)
     {
-        this.timer = ArgumentNotNull(timer, nameof(timer), JobQueueTimerRequired);
+        this.timer = IsNotNull(timer, message: JobQueueTimerRequired);
 
         this.timer.Triggered += Timer_Triggered;
     }

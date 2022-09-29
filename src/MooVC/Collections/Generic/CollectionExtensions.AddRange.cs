@@ -8,7 +8,7 @@ public static partial class CollectionExtensions
 {
     public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
     {
-        _ = ArgumentNotNull(target, nameof(target), CollectionExtensionsAddRangeTargetRequired);
+        _ = IsNotNull(target, message: CollectionExtensionsAddRangeTargetRequired);
 
         items.ForEach(item => target.Add(item));
     }

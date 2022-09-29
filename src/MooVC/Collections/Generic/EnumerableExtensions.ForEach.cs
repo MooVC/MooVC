@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -11,11 +12,13 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = ArgumentNotNull(action, nameof(action), EnumerableExtensionsActionRequired);
+            _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
 
-            foreach (T item in items)
+            ReadOnlySpan<T> elements = items.ToSpan();
+
+            foreach (T element in elements)
             {
-                action(item);
+                action(element);
             }
         }
     }

@@ -16,7 +16,7 @@ public sealed class DiagnosticsRelay
 
     public DiagnosticsRelay(IEmitDiagnostics source, IDiagnosticsProxy? diagnostics = default)
     {
-        this.source = ArgumentNotNull(source, nameof(source), DiagnosticsEmitterSourceRequired);
+        this.source = IsNotNull(source, message: DiagnosticsEmitterSourceRequired);
         this.diagnostics = diagnostics ?? DiagnosticsProxy.Default;
     }
 

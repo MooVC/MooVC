@@ -7,7 +7,7 @@ using Xunit;
 public sealed class WhenReplaceIsCalled
 {
     [Fact]
-    public void GivenANullListThenNoArgumentNullExcetionIsThrown()
+    public void GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         ICollection<int> target = new List<int>();
         IEnumerable<int>? items = default;
@@ -16,7 +16,7 @@ public sealed class WhenReplaceIsCalled
     }
 
     [Fact]
-    public void GivenANullTargetThenAnArgumentNullExcetionIsThrown()
+    public void GivenANullTargetThenAnArgumentNullExceptionIsThrown()
     {
         ICollection<int>? target = default;
         int[] items = new[] { 1, 2, 3 };

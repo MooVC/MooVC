@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -13,7 +14,7 @@ public sealed class WhenEmitAsyncIsCalled
 
     public WhenEmitAsyncIsCalled()
     {
-        diagnostics = new DiagnosticsRelay(this);
+        diagnostics = new DiagnosticsRelay(this, diagnostics: new DiagnosticsProxy());
     }
 
     public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
@@ -102,18 +103,15 @@ public sealed class WhenEmitAsyncIsCalled
         var token = new CancellationToken(false);
 
         int emissions = 0;
+        DiagnosticsEmittedAsyncEventArgs? captured = default;
+        object? source = default;
 
         diagnostics ??= this.diagnostics;
 
         diagnostics.DiagnosticsEmitted += (sender, e) =>
         {
-            Assert.Same(this, sender);
-            Assert.Equal(cause, e.Cause);
-            Assert.Equal(token, e.CancellationToken);
-            Assert.Equal(expectedImpact, e.Impact);
-            Assert.Equal(expectedLevel, e.Level);
-            Assert.Equal(message, e.Message);
-
+            source = sender;
+            captured = e;
             emissions++;
 
             return Task.CompletedTask;
@@ -121,6 +119,14 @@ public sealed class WhenEmitAsyncIsCalled
 
         await diagnostics.EmitAsync(cancellationToken: token, cause: cause, impact: impact, level: level, message: message);
 
+        Assert.NotNull(captured);
+        Assert.NotNull(source);
+        Assert.Same(this, source);
+        Assert.Equal(cause, captured.Cause);
+        Assert.Equal(token, captured.CancellationToken);
+        Assert.Equal(expectedImpact, captured.Impact);
+        Assert.Equal(expectedLevel, captured.Level);
+        Assert.Equal(message, captured.Message);
         Assert.Equal(ExpectedEmissions, emissions);
     }
 }

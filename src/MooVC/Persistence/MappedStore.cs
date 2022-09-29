@@ -16,9 +16,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
 
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = ArgumentNotNull(innerMapping, nameof(innerMapping), MappedStoreInnerMappingRequired);
-        this.outterMapping = ArgumentNotNull(outterMapping, nameof(outterMapping), MappedStoreOutterMappingRequired);
-        this.store = ArgumentNotNull(store, nameof(store), MappedStoreStoreRequired);
+        this.innerMapping = IsNotNull(innerMapping, message: MappedStoreInnerMappingRequired);
+        this.outterMapping = IsNotNull(outterMapping, message: MappedStoreOutterMappingRequired);
+        this.store = IsNotNull(store, message: MappedStoreStoreRequired);
     }
 
     public async Task<TOutterKey> CreateAsync(T item, CancellationToken? cancellationToken = default)

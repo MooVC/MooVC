@@ -15,7 +15,7 @@ public sealed class Initializer<T>
 
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = ArgumentNotNull(initializer, nameof(initializer), InitializerInitializerRequired);
+        this.initializer = IsNotNull(initializer, message: InitializerInitializerRequired);
     }
 
     public bool IsInitialized { get; private set; }

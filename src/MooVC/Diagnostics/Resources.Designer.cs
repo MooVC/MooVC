@@ -61,6 +61,15 @@ namespace MooVC.Diagnostics {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An explaination for the event must be provided, either via a message or via a cause..
+        /// </summary>
+        internal static string DiagnosticsEmittedAsyncEventArgsMessageRequired {
+            get {
+                return ResourceManager.GetString("DiagnosticsEmittedAsyncEventArgsMessageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The predicate to be applied to the diagnostic messages must be provided..
         /// </summary>
         internal static string DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired {
@@ -75,6 +84,15 @@ namespace MooVC.Diagnostics {
         internal static string DiagnosticsEmitterSourceRequired {
             get {
                 return ResourceManager.GetString("DiagnosticsEmitterSourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A description must be provided..
+        /// </summary>
+        internal static string DiagnosticsMessageDescriptionRequired {
+            get {
+                return ResourceManager.GetString("DiagnosticsMessageDescriptionRequired", resourceCulture);
             }
         }
         
