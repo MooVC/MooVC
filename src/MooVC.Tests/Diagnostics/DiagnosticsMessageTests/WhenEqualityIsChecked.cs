@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Diagnostics.DiagnosticsMessageTests;
 
 using Xunit;
+using Xunit.Sdk;
 
 public sealed class WhenEqualityIsChecked
     : EqualityChecked
@@ -84,6 +85,17 @@ public sealed class WhenEqualityIsChecked
         Assert.False(isEqual);
     }
 
+    [Fact]
+    public void GivenNullWhenEqualsIsUsedThenANegativeResponseIsReturned()
+    {
+        var first = new DiagnosticsMessage("Test");
+        object? second = default;
+
+        bool isEqual = first.Equals(second);
+
+        Assert.False(isEqual);
+    }
+
     [Theory]
     [InlineData("Something {0}", 1)]
     [InlineData("something {0} {1}", 2)]
@@ -126,9 +138,44 @@ public sealed class WhenEqualityIsChecked
     [InlineData("something {0} {1}", 2)]
     [InlineData("dark  {0} {1} {2}", 3)]
     [InlineData("side. {3} ..  {0} {1} {2}", 4)]
-    public void GivenAStringThatDoesNotMatcheTheExpectedOutputWhenEqualsIsUsedThenAPositiveResponseIsReturned(string description, int arguments)
+    public void GivenAStringThatDoesNotMatcheTheExpectedOutputWhenEqualsIsUsedThenANegativeResponseIsReturned(string description, int arguments)
     {
         _ = Prepare(description, arguments, out DiagnosticsMessage message);
+        bool isEqual = message.Equals(description);
+
+        Assert.False(isEqual);
+    }
+
+    [Theory]
+    [InlineData("Something {0}", 1)]
+    [InlineData("something {0} {1}", 2)]
+    [InlineData("dark  {0} {1} {2}", 3)]
+    [InlineData("side. {3} ..  {0} {1} {2}", 4)]
+    public void GivenAStringMasqueradingAsAnObjectThatMatchesTheExpectedOutputWhenEqualsIsUsedThenAPositiveResponseIsReturned(string description, int arguments)
+    {
+        object expected = Prepare(description, arguments, out DiagnosticsMessage message);
+
+        bool isEqual = message.Equals(expected);
+
+        Assert.True(isEqual);
+    }
+
+    [Fact]
+    public void GivenAStringMasqueradingAsAnObjectThatDoesNotMatchWhenEqualsIsUsedThenANegativeResponseIsReturned()
+    {
+        var first = new DiagnosticsMessage("Test");
+        object? second = "Mismatch";
+
+        bool isEqual = first.Equals(second);
+
+        Assert.False(isEqual);
+    }
+
+    [Fact]
+    public void GivenNullStringWhenEqualsIsUsedThenANegativeResponseIsReturned()
+    {
+        string? description = default;
+        var message = new DiagnosticsMessage("Test");
         bool isEqual = message.Equals(description);
 
         Assert.False(isEqual);
