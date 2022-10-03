@@ -47,6 +47,16 @@ public sealed class DiagnosticsMessage
 
     public bool IsEmpty => this == Empty;
 
+    public static implicit operator object[](DiagnosticsMessage? message)
+    {
+        if (message is null)
+        {
+            return Array.Empty<object>();
+        }
+
+        return message.Arguments.ToArray();
+    }
+
     public static implicit operator DiagnosticsMessage(string? description)
     {
         if (IsNullOrWhiteSpace(description))
