@@ -1,7 +1,6 @@
 ﻿namespace MooVC.EnsureTests;
 
 using System;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Xunit;
 using static System.String;
 using static MooVC.Ensure;

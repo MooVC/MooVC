@@ -1,7 +1,6 @@
 ﻿namespace MooVC.EnsureTests;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 using static MooVC.Ensure;
 

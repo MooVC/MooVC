@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Xunit;
-using static System.String;
 
 public sealed class WhenImplicitlyCastToObjectArray
 {

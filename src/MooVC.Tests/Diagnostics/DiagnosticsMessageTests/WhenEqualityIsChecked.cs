@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Diagnostics.DiagnosticsMessageTests;
 
 using Xunit;
-using Xunit.Sdk;
 
 public sealed class WhenEqualityIsChecked
     : EqualityChecked
