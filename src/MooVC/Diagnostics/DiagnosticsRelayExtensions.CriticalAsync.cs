@@ -3,7 +3,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.String;
 
 public static partial class DiagnosticsRelayExtensions
 {

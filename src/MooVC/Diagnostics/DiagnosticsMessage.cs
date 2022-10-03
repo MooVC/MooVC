@@ -68,6 +68,21 @@ public sealed class DiagnosticsMessage
         return new DiagnosticsMessage(description);
     }
 
+    public static implicit operator DiagnosticsMessage((string Description, object Argument1) message)
+    {
+        return (message.Description, new[] { message.Argument1 });
+    }
+
+    public static implicit operator DiagnosticsMessage((string Description, object Argument1, object Argument2) message)
+    {
+        return (message.Description, new[] { message.Argument1, message.Argument2 });
+    }
+
+    public static implicit operator DiagnosticsMessage((string Description, object Argument1, object Argument2, object Argument3) message)
+    {
+        return (message.Description, new[] { message.Argument1, message.Argument2, message.Argument3 });
+    }
+
     public static implicit operator DiagnosticsMessage((string Description, object[] Arguments) message)
     {
         if (IsNullOrWhiteSpace(message.Description) && message.Arguments.IsEmpty())
