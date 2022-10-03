@@ -29,6 +29,6 @@ public static partial class DiagnosticsRelayExtensions
         string message,
         params object[] args)
     {
-        return diagnostics.TryEmitAsync(cancellationToken: cancellationToken, cause: cause, level: Level.Error, message: Format(message, args));
+        return diagnostics.TryEmitAsync(cancellationToken: cancellationToken, cause: cause, level: Level.Error, message: (message, args));
     }
 }

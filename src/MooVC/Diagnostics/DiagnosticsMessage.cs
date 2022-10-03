@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using MooVC.Collections.Generic;
+using MooVC.Linq;
 using MooVC.Serialization;
 using static System.String;
 using static MooVC.Diagnostics.Resources;
@@ -65,6 +66,16 @@ public sealed class DiagnosticsMessage
         }
 
         return new DiagnosticsMessage(description);
+    }
+
+    public static implicit operator DiagnosticsMessage((string Description, object[] Arguments) message)
+    {
+        if (IsNullOrWhiteSpace(message.Description) && message.Arguments.IsEmpty())
+        {
+            return Empty;
+        }
+
+        return new DiagnosticsMessage(message.Description, message.Arguments);
     }
 
     public static implicit operator string(DiagnosticsMessage? message)

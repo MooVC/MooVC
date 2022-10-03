@@ -12,7 +12,7 @@ public static partial class DiagnosticsRelayExtensions
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        string? message = default)
+        DiagnosticsMessage? message = default)
     {
         if (diagnostics is { })
         {

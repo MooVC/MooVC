@@ -48,7 +48,7 @@ public sealed class DiagnosticsRelay
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        string? message = default)
+        DiagnosticsMessage? message = default)
     {
         return diagnostics.EmitAsync(source, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message);
     }

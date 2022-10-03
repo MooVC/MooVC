@@ -37,6 +37,6 @@ public static partial class DiagnosticsRelayExtensions
             cancellationToken: cancellationToken,
             cause: cause,
             level: Level.Information,
-            message: Format(message, args));
+            message: (message, args));
     }
 }

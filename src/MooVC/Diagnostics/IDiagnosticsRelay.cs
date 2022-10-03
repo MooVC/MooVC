@@ -12,5 +12,5 @@ public interface IDiagnosticsRelay
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        string? message = default);
+        DiagnosticsMessage? message = default);
 }
