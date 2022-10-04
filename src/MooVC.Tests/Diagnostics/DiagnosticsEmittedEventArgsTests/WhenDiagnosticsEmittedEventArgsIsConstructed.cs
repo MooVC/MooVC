@@ -70,9 +70,9 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
     [InlineData(default)]
     [InlineData("")]
     [InlineData(" ")]
-    public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnArgumentNullExceptionIsThrown(string? message)
+    public void GivenAnEmptyMessageWhenNoCauseIsProvidedThenAnArgumentExceptionIsThrown(string? message)
     {
-        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+        ArgumentException exception = Assert.Throws<ArgumentException>(() =>
             new DiagnosticsEmittedAsyncEventArgs(message: message));
 
         Assert.Equal(nameof(message), exception.ParamName);

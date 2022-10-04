@@ -16,35 +16,39 @@ public sealed class WhenErrorAsyncIsCalled
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.ErrorAsync(cancellationToken, cause, message);
+        return diagnostics.ErrorAsync(cancellationToken, cause, message, args);
     }
 
     protected override Task EmitWithCancellationTokenAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.ErrorAsync(cancellationToken, message);
+        return diagnostics.ErrorAsync(cancellationToken, message, args);
     }
 
     protected override Task EmitWithCauseAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.ErrorAsync(cause, message);
+        return diagnostics.ErrorAsync(cause, message, args);
     }
 
     protected override Task EmitWithMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.ErrorAsync(message);
+        return diagnostics.ErrorAsync(message, args);
     }
 }

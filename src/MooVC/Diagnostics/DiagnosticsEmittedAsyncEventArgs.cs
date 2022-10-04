@@ -4,6 +4,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Threading;
 using MooVC.Serialization;
+using static System.String;
 using static MooVC.Diagnostics.Resources;
 using static MooVC.Ensure;
 
@@ -20,9 +21,14 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
         DiagnosticsMessage? message = default)
         : base(cancellationToken: cancellationToken)
     {
+        if (message is null || message.IsEmpty)
+        {
+            message = cause?.Message;
+        }
+
         Impact = IsDefined(impact, @default: Impact);
         Level = IsDefined(level, @default: Level);
-        Message = IsNotNullOrWhiteSpace(message, @default: cause?.Message, message: DiagnosticsEmittedAsyncEventArgsMessageRequired);
+        Message = Satisfies(message, _ => !IsNullOrWhiteSpace(message), message: DiagnosticsEmittedAsyncEventArgsMessageRequired);
         Cause = cause;
     }
 

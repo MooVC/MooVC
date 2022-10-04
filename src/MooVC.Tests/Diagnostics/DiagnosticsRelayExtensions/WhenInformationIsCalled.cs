@@ -15,35 +15,39 @@ public sealed class WhenInformationIsCalled
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        diagnostics.Information(cancellationToken, cause, message);
+        diagnostics.Information(cancellationToken, cause, message, args);
     }
 
     protected override void EmitWithCancellationTokenAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        diagnostics.Information(cancellationToken, message);
+        diagnostics.Information(cancellationToken, message, args);
     }
 
     protected override void EmitWithCauseAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        diagnostics.Information(cause, message);
+        diagnostics.Information(cause, message, args);
     }
 
     protected override void EmitWithMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        diagnostics.Information(message);
+        diagnostics.Information(message, args);
     }
 }

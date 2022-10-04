@@ -16,35 +16,39 @@ public sealed class WhenCriticalAsyncIsCalled
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.CriticalAsync(cancellationToken, cause, message);
+        return diagnostics.CriticalAsync(cancellationToken, cause, message, args);
     }
 
     protected override Task EmitWithCancellationTokenAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.CriticalAsync(cancellationToken, message);
+        return diagnostics.CriticalAsync(cancellationToken, message, args);
     }
 
     protected override Task EmitWithCauseAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.CriticalAsync(cause, message);
+        return diagnostics.CriticalAsync(cause, message, args);
     }
 
     protected override Task EmitWithMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
-        return diagnostics.CriticalAsync(message);
+        return diagnostics.CriticalAsync(message, args);
     }
 }

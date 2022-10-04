@@ -27,11 +27,12 @@ public abstract class FireAndAwait
     public Task GivenACancellationTokenAndAMessageThenTheCancellationTokenAndTheMessageAreEmittedAsync()
     {
         var cancellation = new CancellationTokenSource();
-        string expected = $"Message {DateTime.UtcNow}, {DateTime.Today.Ticks}";
+        string expected = $"Message  {0} {1}";
 
         return GivenParametersThenTheExpectedValuesAreEmittedAsync(
             EmitWithCancellationTokenAndMessageAsync,
             expected,
+            args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks },
             cancellationToken: cancellation.Token);
     }
 
@@ -39,9 +40,13 @@ public abstract class FireAndAwait
     public Task GivenACauseAndAMessageThenTheCauseAndMessageAreEmittedAsync()
     {
         var cause = new ArgumentException();
-        string expected = $"Message {DateTime.UtcNow}, {DateTime.Today.Ticks}";
+        string expected = $"Message  {0} {1}";
 
-        return GivenParametersThenTheExpectedValuesAreEmittedAsync(EmitWithCauseAndMessageAsync, expected, cause: cause);
+        return GivenParametersThenTheExpectedValuesAreEmittedAsync(
+            EmitWithCauseAndMessageAsync,
+            expected,
+            args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks },
+            cause: cause);
     }
 
     [Fact]
@@ -49,11 +54,12 @@ public abstract class FireAndAwait
     {
         var cancellation = new CancellationTokenSource();
         var cause = new ArgumentException();
-        string expected = $"Message {DateTime.UtcNow}, {DateTime.Today.Ticks}";
+        string expected = $"Message  {0} {1}";
 
         return GivenParametersThenTheExpectedValuesAreEmittedAsync(
             EmitWithAllAsync,
             expected,
+            args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks },
             cancellationToken: cancellation.Token,
             cause: cause);
     }
@@ -61,61 +67,72 @@ public abstract class FireAndAwait
     [Fact]
     public Task GivenAMessageThenTheMessageIsEmittedAsync()
     {
-        string expected = $"Message {DateTime.UtcNow}, {DateTime.Today.Ticks}";
+        string expected = $"Message  {0} {1}";
 
-        return GivenParametersThenTheExpectedValuesAreEmittedAsync(EmitWithMessageAsync, expected);
+        return GivenParametersThenTheExpectedValuesAreEmittedAsync(
+            EmitWithMessageAsync,
+            expected,
+            args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks });
     }
 
     protected abstract Task EmitWithAllAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default);
+        Exception? cause = default,
+        params object[] args);
 
     protected abstract Task EmitWithCancellationTokenAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default);
+        Exception? cause = default,
+        params object[] args);
 
     protected abstract Task EmitWithCauseAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default);
+        Exception? cause = default,
+        params object[] args);
 
     protected abstract Task EmitWithMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default);
+        Exception? cause = default,
+        params object[] args);
 
     protected async Task GivenParametersThenTheExpectedValuesAreEmittedAsync(
-        Func<IDiagnosticsRelay?, string, CancellationToken?, Exception?, Task> emitter,
+        Func<IDiagnosticsRelay?, string, CancellationToken?, Exception?, object[], Task> emitter,
         string message,
         CancellationToken? cancellationToken = default,
-        Exception? cause = default)
+        Exception? cause = default,
+        params object[] args)
     {
         bool wasEmitted = false;
+        DiagnosticsEmittedAsyncEventArgs? emitted = default;
 
         Task EmittedAsync(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e)
         {
-            Assert.Equal(cancellationToken.GetValueOrDefault(), e.CancellationToken);
-            Assert.Equal(cause, e.Cause);
-            Assert.Equal(message, e.Message);
-            Assert.Equal(level, e.Level);
-
             wasEmitted = true;
+            emitted = e;
 
             return Task.CompletedTask;
         }
 
         diagnostics.DiagnosticsEmitted += EmittedAsync;
 
-        await emitter(diagnostics, message, cancellationToken, cause);
+        await emitter(diagnostics, message, cancellationToken, cause, args);
 
         diagnostics.DiagnosticsEmitted -= EmittedAsync;
 
         Assert.True(wasEmitted);
+        Assert.NotNull(emitted);
+        Assert.Equal(cancellationToken.GetValueOrDefault(), emitted.CancellationToken);
+        Assert.Equal(cause, emitted.Cause);
+        Assert.Equal(message, emitted.Message.Description);
+        Assert.Equal(level, emitted.Level);
+        Assert.Equal(args, emitted.Message.Arguments);
     }
 }
