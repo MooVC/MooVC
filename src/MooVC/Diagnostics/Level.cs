@@ -3,10 +3,11 @@
 public enum Level
     : byte
 {
-    Critical = 5,
-    Debug = 1,
-    Error = 4,
-    Information = 2,
-    Trace = 0,
-    Warning = 3,
+    Critical = 6,
+    Debug = 2,
+    Error = 5,
+    Ignore = 0,
+    Information = 3,
+    Trace = 1,
+    Warning = 4,
 }

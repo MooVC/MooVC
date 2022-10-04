@@ -21,14 +21,14 @@ public sealed class WhenDiagnosticsEmittedEventArgsIsConstructed
     [Fact]
     public void GivenALevelOutsideOfRangeThenTheMaxLevelIsApplied()
     {
-        Level min = Enum.GetValues<Level>().Min();
+        Level expected = Level.Trace;
         Level max = Enum.GetValues<Level>().Max();
         byte raw = (byte)max;
         var level = (Level)(raw + 1);
 
         var value = new DiagnosticsEmittedAsyncEventArgs(level: level, message: "Something happened");
 
-        Assert.Equal(min, value.Level);
+        Assert.Equal(expected, value.Level);
     }
 
     [Theory]

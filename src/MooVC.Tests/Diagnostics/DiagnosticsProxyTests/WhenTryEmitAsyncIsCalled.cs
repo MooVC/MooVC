@@ -6,12 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-public sealed class WhenEmitAsyncIsCalled
+public sealed class WhenTryEmitAsyncIsCalled
     : IEmitDiagnostics
 {
     private readonly IDiagnosticsProxy diagnostics;
 
-    public WhenEmitAsyncIsCalled()
+    public WhenTryEmitAsyncIsCalled()
     {
         diagnostics = DiagnosticsProxy.Default;
     }
@@ -31,6 +31,17 @@ public sealed class WhenEmitAsyncIsCalled
         var cause = new InvalidOperationException();
 
         await AssertAsync(cause, default, Level, Message, Impact.None, Level);
+    }
+
+    [Fact]
+    public async Task GivenAnIgnoreLevelThenNoDiagnosticsAreEmittedAsync()
+    {
+        const string Message = "Something something dark side";
+        const Level Level = Level.Ignore;
+
+        var cause = new InvalidOperationException();
+
+        await AssertAsync(cause, default, Level, Message, Impact.None, Level, isExpected: false);
     }
 
     [Theory]
@@ -93,11 +104,13 @@ public sealed class WhenEmitAsyncIsCalled
         string? message,
         Impact expectedImpact,
         Level expectedLevel,
-        IDiagnosticsProxy? diagnostics = default)
+        IDiagnosticsProxy? diagnostics = default,
+        bool isExpected = true)
     {
         var token = new CancellationToken(false);
 
         bool wasEmitted = false;
+        DiagnosticsEmittedAsyncEventArgs? received = default;
 
         diagnostics ??= this.diagnostics;
 
@@ -109,12 +122,32 @@ public sealed class WhenEmitAsyncIsCalled
             Assert.Equal(expectedImpact, e.Impact);
             Assert.Equal(expectedLevel, e.Level);
             Assert.Equal(message, e.Message);
+
             wasEmitted = true;
+            received = e;
+
             return Task.CompletedTask;
         };
 
-        await diagnostics.EmitAsync(this, cancellationToken: token, cause: cause, impact: impact, level: level, message: message);
+        DiagnosticsEmittedAsyncEventArgs? actual = await diagnostics.TryEmitAsync(
+            this,
+            cancellationToken: token,
+            cause: cause,
+            impact: impact,
+            level: level,
+            message: message);
 
-        Assert.True(wasEmitted);
+        if (isExpected)
+        {
+            Assert.NotNull(actual);
+            Assert.Same(received, actual);
+            Assert.True(wasEmitted);
+        }
+        else
+        {
+            Assert.Null(actual);
+            Assert.Null(received);
+            Assert.False(wasEmitted);
+        }
     }
 }

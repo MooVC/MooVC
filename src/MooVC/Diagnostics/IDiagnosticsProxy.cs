@@ -9,7 +9,7 @@ public interface IDiagnosticsProxy
 {
     Level this[Impact impact] { get; }
 
-    Task EmitAsync(
+    Task<DiagnosticsEmittedAsyncEventArgs?> TryEmitAsync(
         IEmitDiagnostics source,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,

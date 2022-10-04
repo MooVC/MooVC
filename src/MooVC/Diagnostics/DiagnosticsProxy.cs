@@ -42,7 +42,7 @@ public sealed class DiagnosticsProxy
         }
     }
 
-    public Task EmitAsync(
+    public async Task<DiagnosticsEmittedAsyncEventArgs?> TryEmitAsync(
         IEmitDiagnostics source,
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
@@ -66,13 +66,22 @@ public sealed class DiagnosticsProxy
             level = this[impact.Value];
         }
 
-        return DiagnosticsEmitted.PassiveInvokeAsync(
-            source,
-            new DiagnosticsEmittedAsyncEventArgs(
+        DiagnosticsEmittedAsyncEventArgs? diagnostics = default;
+
+        if (level > Level.Ignore)
+        {
+            diagnostics = new DiagnosticsEmittedAsyncEventArgs(
                 cancellationToken: cancellationToken,
                 cause: cause,
                 impact: impact.Value,
                 level: level.Value,
-                message: message));
+                message: message);
+
+            await DiagnosticsEmitted
+                .PassiveInvokeAsync(source, diagnostics)
+                .ConfigureAwait(false);
+        }
+
+        return diagnostics;
     }
 }

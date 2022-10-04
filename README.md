@@ -21,10 +21,11 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Added a series of extensions relating to Diagnostics.IDiagnosticsRelay to simplify consumption by providing methods akin to that offered by most logging frameworks.
 - Added Diagnostics.DiagnosticsMessage to facilitate encapsulation of a parameterized message, to take advantage of custom logging sinks.
 - Added Diagnostics.DiagnosticsProxy to serve as a default implementaiton for Diagnostics.IDiagnosticsProxy.
-- Added Diagnostics.IDiagnosticsProxy to simplify contextual configurability for diagnostics.
+- Added Diagnostics.IDiagnosticsProxy to simplify contextual configurability and filtering for diagnostics emission.
 - Added Diagnostics.DiagnosticsRelay to serve as a default implementaiton for Diagnostics.IDiagnosticsRelay.
 - Added Diagnostics.IDiagnosticsRelay to simplify diagnostics implementation in class hierarchies (composition over inheritance).
 - Added Diagnostics.Impact to enable diagnostics emitters to communicate the impact on a workflow, thereby enabling the observer to determine the appropriate level.
+- Added Diagnostics.Level.Ignore to facilitate emission filtering via the DiagnosticsProxy (**Breaking Change**).
 - Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to include impact.
 - Changed Diagnostics.DiagnosticsEmittedAsyncEventArgs to utilize Diagnostics.DiagnosticsMessage as the data type for message, instead of string  (**Breaking Change**).
 - Changed Ensure.ArgumentInRange (now Ensure.InRange) so that a default value can now be passed and used if the argument fails to pass the assertion.

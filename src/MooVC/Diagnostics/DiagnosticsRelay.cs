@@ -11,8 +11,6 @@ public sealed class DiagnosticsRelay
 {
     private readonly IDiagnosticsProxy diagnostics;
     private readonly IEmitDiagnostics source;
-    private DiagnosticsEmittedAsyncEventHandler? @internal;
-    private int listeners;
 
     public DiagnosticsRelay(IEmitDiagnostics source, IDiagnosticsProxy? diagnostics = default)
     {
@@ -20,41 +18,24 @@ public sealed class DiagnosticsRelay
         this.diagnostics = diagnostics ?? DiagnosticsProxy.Default;
     }
 
-    public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted
-    {
-        add
-        {
-            @internal += value;
+    public event DiagnosticsEmittedAsyncEventHandler? DiagnosticsEmitted;
 
-            if (Interlocked.Increment(ref listeners) == 1)
-            {
-                diagnostics.DiagnosticsEmitted += DiagnosticsRelay_DiagnosticsEmitted;
-            }
-        }
-
-        remove
-        {
-            if (Interlocked.Decrement(ref listeners) == 0)
-            {
-                diagnostics.DiagnosticsEmitted -= DiagnosticsRelay_DiagnosticsEmitted;
-            }
-
-            @internal -= value;
-        }
-    }
-
-    public Task EmitAsync(
+    public async Task EmitAsync(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
         DiagnosticsMessage? message = default)
     {
-        return diagnostics.EmitAsync(source, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message);
-    }
+        DiagnosticsEmittedAsyncEventArgs? @event = await diagnostics
+            .TryEmitAsync(this, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message)
+            .ConfigureAwait(false);
 
-    private Task DiagnosticsRelay_DiagnosticsEmitted(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e)
-    {
-        return @internal.PassiveInvokeAsync(sender, e);
+        if (@event is { })
+        {
+            await DiagnosticsEmitted
+                .PassiveInvokeAsync(source, @event)
+                .ConfigureAwait(false);
+        }
     }
 }
