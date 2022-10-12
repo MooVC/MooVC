@@ -21,7 +21,7 @@ public sealed class DeflateCompressor
     {
         var result = new MemoryStream();
 
-        using var compressor = new DeflateStream(result, CompressionLevel.SmallestSize, true);
+        using var compressor = new DeflateStream(result, level, true);
 
         await source
             .CopyToAsync(compressor, cancellationToken.GetValueOrDefault())
