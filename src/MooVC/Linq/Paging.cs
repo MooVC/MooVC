@@ -15,6 +15,7 @@ public class Paging
     public const ushort MinimumSize = 1;
     private static readonly Lazy<Paging> @default = new(() => new Paging());
     private static readonly Lazy<Paging> none = new(() => new Paging(size: ushort.MaxValue));
+    private static readonly Lazy<Paging> one = new(() => new Paging(size: 1));
 
     public Paging(ushort page = FirstPage, ushort size = DefaultSize)
     {
@@ -32,6 +33,8 @@ public class Paging
 
     public static Paging None => none.Value;
 
+    public static Paging One => one.Value;
+
     public bool IsDefault => this == Default;
 
     public bool IsNone => this == None;
@@ -41,6 +44,29 @@ public class Paging
     public ushort Size { get; } = DefaultSize;
 
     public int Skip => (Page - FirstPage) * Size;
+
+    public static implicit operator Paging(ushort size)
+    {
+        return (FirstPage, size);
+    }
+
+    public static implicit operator Paging((ushort Page, ushort Size) paging)
+    {
+        Paging? result = default;
+
+        if (paging.Page == 1)
+        {
+            result = paging.Size switch
+            {
+                MinimumSize => One,
+                DefaultSize => Default,
+                ushort.MaxValue => None,
+                _ => default,
+            };
+        }
+
+        return result ?? new Paging(page: paging.Page, size: paging.Size);
+    }
 
     public virtual IQueryable<T> Apply<T>(IQueryable<T> queryable)
     {
