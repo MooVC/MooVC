@@ -1,25 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AnalysisMode>Recommended</AnalysisMode>
-    <Authors>Paul Martins</Authors>
-    <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
-    <Copyright>MooVC © 2019-2022</Copyright>
     <Description>Tests a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <IncludeSymbols>true</IncludeSymbols>
     <IsPackable>false</IsPackable>
-    <LangVersion>latest</LangVersion>
-    <NeutralLanguage>en</NeutralLanguage>
     <NoWarn>CA1720</NoWarn>
-    <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>
-    <Product>MooVC</Product>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <RootNamespace>MooVC</RootNamespace>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="3.*">
@@ -29,10 +14,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="Moq" Version="4.*" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="xunit" Version="2.*" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.*">
       <PrivateAssets>all</PrivateAssets>
