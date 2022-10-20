@@ -96,8 +96,8 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: |
-      **/*.csproj
-      !**/*.Tests.csproj
+      src/**/*.csproj
+      !src/**/*.Tests.csproj
     versionEnvVar: 'GitVersion.NuGetVersion'
     versioningScheme: 'byEnvVar'
 
