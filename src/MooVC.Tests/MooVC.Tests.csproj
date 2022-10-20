@@ -5,4 +5,7 @@
     <NoWarn>CA1720</NoWarn>
     <RootNamespace>MooVC</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.*" />
+  </ItemGroup>
 </Project>

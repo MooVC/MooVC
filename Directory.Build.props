@@ -9,17 +9,18 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable Condition=" '$(IsTestProject)' != 'true' ">true</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSymbols Condition=" '$(IsTestProject)' != 'true' ">true</IncludeSymbols>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en</NeutralLanguage>
     <NoWarn>$(NoWarn);NU5105</NoWarn>
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>
     <Product>MooVC</Product>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <SymbolPackageFormat Condition=" '$(IsTestProject)' != 'true' ">snupkg</SymbolPackageFormat>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
