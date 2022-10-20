@@ -2,10 +2,19 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using MooVC.Collections.Generic;
 
 public static partial class ProducerConsumerCollectionExtensions
 {
+    /// <summary>
+    /// Extracts all elements from a producer consumer collection.
+    /// </summary>
+    /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
+    /// <param name="source">The collection from which the elements are to be extracted.</param>
+    /// <param name="count">The total number of elements to extract (extracts all elements by default).</param>
+    /// <returns>An enumerable containing the extracted elements.</returns>
     public static IEnumerable<T> Extract<T>(this IProducerConsumerCollection<T>? source, ulong? count = default)
     {
         if (source is null)
@@ -13,7 +22,10 @@ public static partial class ProducerConsumerCollectionExtensions
             return Enumerable.Empty<T>();
         }
 
-        var taken = new List<T>();
+        IList<T> taken = count.HasValue && count.Value <= int.MaxValue
+            ? new List<T>((int)count.Value)
+            : new List<T>();
+
         ulong index = 0;
 
         count ??= ulong.MaxValue;
