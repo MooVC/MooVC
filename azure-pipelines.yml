@@ -95,7 +95,7 @@ steps:
   displayName: 'Package Artifacts'
   inputs:
     command: 'pack'
-    packagesToPack: **/*.csproj;!**/*.Tests.csproj
+    packagesToPack: '**/*.csproj;!**/*.Tests.csproj'
     versionEnvVar: 'GitVersion.NuGetVersion'
     versioningScheme: 'byEnvVar'
 
