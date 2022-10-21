@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 public interface IProcessor
     : IHostedService
 {
-    event ProcessorStateChangedAsyncEventHandler ProcessStateChanged;
+    event ProcessorStateChangedAsyncEventHandler StateChanged;
 
     ProcessorState State { get; }
 

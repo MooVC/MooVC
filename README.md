@@ -61,3 +61,4 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Renamed Ensure.ArgumentNotEmpty to Ensure.IsNotEmpty (**Breaking Change**).
 - Renamed Ensure.ArgumentNotNull to Ensure.IsNotNull (**Breaking Change**).
 - Renamed Ensure.ArgumentNotNullOrWhiteSpace to Ensure.IsNotNullOrWhiteSpace (**Breaking Change**).
+- Renamed Processing.IProcessor.ProcessStateChanged to Processing.IProcessor.StateChanged (**Breaking Change**).

@@ -23,7 +23,7 @@ public abstract class Processor
         remove => Diagnostics.DiagnosticsEmitted -= value;
     }
 
-    public event ProcessorStateChangedAsyncEventHandler? ProcessStateChanged;
+    public event ProcessorStateChangedAsyncEventHandler? StateChanged;
 
     public ProcessorState State
     {
@@ -149,7 +149,7 @@ public abstract class Processor
         ProcessorState state,
         CancellationToken? cancellationToken = default)
     {
-        return ProcessStateChanged.PassiveInvokeAsync(
+        return StateChanged.PassiveInvokeAsync(
             this,
             new ProcessorStateChangedAsyncEventArgs(state),
             onFailure: failure => Diagnostics.EmitAsync(
