@@ -20,7 +20,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' != 'true'">
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)analyzers/stylecop.code.ruleset</CodeAnalysisRuleSet>
