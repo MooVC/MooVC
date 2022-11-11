@@ -7,11 +7,13 @@ using static MooVC.Ensure;
 using static MooVC.Threading.Resources;
 
 public sealed class Initializer<T>
+    : IDisposable
     where T : notnull
 {
     private readonly Func<CancellationToken, Task<T>> initializer;
     private readonly SemaphoreSlim mutex = new(1, 1);
     private T? resource;
+    private bool isDisposed;
 
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
@@ -22,6 +24,13 @@ public sealed class Initializer<T>
     }
 
     public bool IsInitialized { get; private set; }
+
+    public void Dispose()
+    {
+        Dispose(isDisposing: true);
+
+        GC.SuppressFinalize(this);
+    }
 
     public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
     {
@@ -52,5 +61,18 @@ public sealed class Initializer<T>
         }
 
         return resource!;
+    }
+
+    private void Dispose(bool isDisposing)
+    {
+        if (!isDisposed)
+        {
+            if (isDisposing)
+            {
+                mutex.Dispose();
+            }
+
+            isDisposed = true;
+        }
     }
 }

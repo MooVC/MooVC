@@ -8,12 +8,12 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v6.2.0
+# Release v6.3.0
 
 ## Enhancements
 
-- Added a ArrayExtensions.Append that will place an entry at the end of an existing array.
-- Added a ArrayExtensions.Extend that will place the contents of an array at the end of an existing array.
-- Added a ArrayExtensions.Prepend that will place an entry at the start of an existing array.
-- Added a Linq.PagedResult to encapsulate the results of a page query.
-- Added a Linq.QueryableExtensions.ToResult extension to provide default support for results capture.
+- Added support for .NET 7.
+
+## Bug Fixes
+
+- Correctly marked Threading.Initializer<T> as disposable.
