@@ -10,7 +10,7 @@ public sealed class WhenGetAsyncIsCalled
     public async Task GivenAnIndexThenTheExpectedItemIsReturnedAsync()
     {
         const int ExpectedIndex = 1;
-        object expectedItem = new object();
+        object expectedItem = new();
 
         var store = new TestableSynchronousEventStore(getByIndex: index =>
         {

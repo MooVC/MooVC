@@ -45,10 +45,10 @@ steps:
 
 - task: UseDotNet@2
   condition: succeeded()
-  displayName: 'Use .NET 6 Core SDK'
+  displayName: 'Use .NET 7 Core SDK'
   inputs:
     packageType: 'sdk'
-    version: '6.x'
+    version: '7.x'
     includePreviewVersions: true
         
 - task: DotNetCoreCLI@2
@@ -75,20 +75,20 @@ steps:
     command: 'test'
     projects: '$(solution)'
 
-- task: reportgenerator@4
-  condition: succeeded()
-  displayName: 'Generate Coverage Report'
-  inputs:
-    reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
-    targetdir: '$(Build.SourcesDirectory)/Coverage'
+#- task: reportgenerator@5
+#  condition: succeeded()
+#  displayName: 'Generate Coverage Report'
+#  inputs:
+#    reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
+#    targetdir: '$(Build.SourcesDirectory)/Coverage'
 
-- task: PublishCodeCoverageResults@1
-  condition: succeeded()
-  displayName: 'Publish Code Coverage'
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/Coverage/Cobertura.xml'
-    failIfCoverageEmpty: true
+#- task: PublishCodeCoverageResults@1
+#  condition: succeeded()
+#  displayName: 'Publish Code Coverage'
+#  inputs:
+#    codeCoverageTool: 'Cobertura'
+#    summaryFileLocation: '$(Build.SourcesDirectory)/Coverage/Cobertura.xml'
+#    failIfCoverageEmpty: true
 
 - task: DotNetCoreCLI@2
   condition: succeeded()
