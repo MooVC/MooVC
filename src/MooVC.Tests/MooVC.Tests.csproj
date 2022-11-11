@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AnalysisMode>Recommended</AnalysisMode>
-    <Authors>Paul Martins;ControlSoft Automation Systems Limited</Authors>
+    <Authors>Paul Martins</Authors>
     <CodeAnalysisRuleSet>../../stylecop.analyzers.ruleset</CodeAnalysisRuleSet>
     <Copyright>MooVC © 2019-2022</Copyright>
     <Description>Tests a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
