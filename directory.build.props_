@@ -49,6 +49,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
+    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
   </ItemGroup>
 </Project>
