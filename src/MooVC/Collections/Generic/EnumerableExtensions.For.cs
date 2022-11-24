@@ -2,6 +2,8 @@ namespace MooVC.Collections.Generic;
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -22,11 +24,12 @@ public static partial class EnumerableExtensions
         {
             _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
 
-            ReadOnlySpan<T> elements = items.ToSpan();
+            T[] elements = items.ToArray();
+            ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
 
             for (int index = 0; index < elements.Length; index++)
             {
-                T element = elements[index];
+                T element = Unsafe.Add(ref source, index);
 
                 action(index, element);
             }

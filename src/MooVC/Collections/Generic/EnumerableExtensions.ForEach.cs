@@ -13,12 +13,7 @@ public static partial class EnumerableExtensions
         {
             _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
 
-            ReadOnlySpan<T> elements = items.ToSpan();
-
-            foreach (T element in elements)
-            {
-                action(element);
-            }
+            items.For((_, item) => action(item));
         }
     }
 }
