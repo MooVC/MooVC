@@ -1,7 +1,13 @@
 ﻿<Project>
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-    <IsTestProject>true</IsTestProject>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)analyzers/stylecop.tests.ruleset</CodeAnalysisRuleSet>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
+    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <PropertyGroup>
     <AnalysisMode>Recommended</AnalysisMode>
@@ -49,12 +55,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
-    <CollectCoverage>true</CollectCoverage>
-    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
-    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
-    <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
-    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
-    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
   </ItemGroup>
 </Project>
