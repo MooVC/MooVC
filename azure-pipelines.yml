@@ -45,10 +45,10 @@ steps:
 
 - task: UseDotNet@2
   condition: succeeded()
-  displayName: 'Use .NET 6 Core SDK'
+  displayName: 'Use .NET 7 Core SDK'
   inputs:
     packageType: 'sdk'
-    version: '6.x'
+    version: '7.x'
         
 - task: DotNetCoreCLI@2
   condition: succeeded()
