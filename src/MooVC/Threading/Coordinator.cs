@@ -4,17 +4,20 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using MooVC.Collections.Generic;
 using static System.String;
 using static MooVC.Threading.Resources;
 
 public sealed class Coordinator<T>
-    : ICoordinator<T>
+    : ICoordinator<T>,
+      IDisposable
     where T : notnull
 {
     public const string NumberFormat = "X";
 
     private readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
     private readonly TimeSpan? @default;
+    private bool isDisposed;
 
     public Coordinator(TimeSpan? @default = default)
     {
@@ -23,6 +26,11 @@ public sealed class Coordinator<T>
 
     public async Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default)
     {
+        if (isDisposed)
+        {
+            throw new ObjectDisposedException(GetType().FullName);
+        }
+
         context = context ?? throw new ArgumentNullException(nameof(context), CoordinatorApplyAsyncContextRequired);
         timeout ??= @default;
 
@@ -40,6 +48,13 @@ public sealed class Coordinator<T>
         }
 
         return new CoordinationContext<T>(context, semaphore);
+    }
+
+    public void Dispose()
+    {
+        Dispose(isDisposing: true);
+
+        GC.SuppressFinalize(this);
     }
 
     private static string GetKey(T context)
@@ -61,5 +76,18 @@ public sealed class Coordinator<T>
         }
 
         return key;
+    }
+
+    private void Dispose(bool isDisposing)
+    {
+        if (!isDisposed)
+        {
+            if (isDisposing)
+            {
+                contexts.Values.ForAll(semaphore => semaphore.Dispose());
+            }
+
+            isDisposed = true;
+        }
     }
 }

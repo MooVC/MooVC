@@ -23,8 +23,7 @@ public sealed class WhenInitializerIsConstructed
     {
         Func<CancellationToken, Task<object>>? initializer = default;
 
-        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-            () => new Initializer<object>(initializer!));
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new Initializer<object>(initializer!));
 
         Assert.Equal(nameof(initializer), exception.ParamName);
     }

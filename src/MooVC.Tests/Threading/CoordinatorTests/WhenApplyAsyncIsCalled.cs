@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 public sealed class WhenApplyAsyncIsCalled
+    : IDisposable
 {
     private readonly ICoordinator<string> coordinator;
 
@@ -14,10 +15,23 @@ public sealed class WhenApplyAsyncIsCalled
         coordinator = new Coordinator<string>();
     }
 
+    public void Dispose()
+    {
+        coordinator.Dispose();
+    }
+
     [Fact]
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
     {
         _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync(default!));
+    }
+
+    [Fact]
+    public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrownAsync()
+    {
+        coordinator.Dispose();
+
+        _ = await Assert.ThrowsAsync<ObjectDisposedException>(() => coordinator.ApplyAsync(default!));
     }
 
     [Fact]

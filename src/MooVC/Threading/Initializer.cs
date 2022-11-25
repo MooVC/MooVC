@@ -7,13 +7,12 @@ using static MooVC.Ensure;
 using static MooVC.Threading.Resources;
 
 public sealed class Initializer<T>
-    : IDisposable
     where T : notnull
 {
     private readonly Func<CancellationToken, Task<T>> initializer;
-    private readonly SemaphoreSlim mutex = new(1, 1);
+    private readonly Lazy<SemaphoreSlim> mutex = new(() => new(1, 1));
     private T? resource;
-    private bool isDisposed;
+    private int waiting;
 
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
@@ -22,54 +21,52 @@ public sealed class Initializer<T>
 
     public bool IsInitialized { get; private set; }
 
-    public void Dispose()
-    {
-        Dispose(isDisposing: true);
-
-        GC.SuppressFinalize(this);
-    }
+    private SemaphoreSlim Mutex => mutex.Value;
 
     public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
     {
         if (!IsInitialized)
         {
-            cancellationToken = cancellationToken.GetValueOrDefault();
+            int remaining;
 
-            await mutex.WaitAsync(cancellationToken.Value);
+            _ = Interlocked.Increment(ref waiting);
 
             try
             {
-                if (!IsInitialized)
-                {
-                    resource = await initializer(cancellationToken.Value);
+                cancellationToken = cancellationToken.GetValueOrDefault();
 
-                    if (resource is null)
-                    {
-                        throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
-                    }
-
-                    IsInitialized = true;
-                }
+                await Mutex.WaitAsync(cancellationToken.Value);
+                await PerformInitializeAsync(cancellationToken.Value);
             }
             finally
             {
-                _ = mutex.Release();
+                remaining = Interlocked.Decrement(ref waiting);
+
+                _ = Mutex.Release();
+            }
+
+            if (remaining == 0)
+            {
+                Mutex.Dispose();
             }
         }
 
         return resource!;
     }
 
-    private void Dispose(bool isDisposing)
+    private async Task PerformInitializeAsync(CancellationToken cancellationToken)
     {
-        if (!isDisposed)
+        if (!IsInitialized)
         {
-            if (isDisposing)
+            resource = await initializer(cancellationToken)
+                .ConfigureAwait(false);
+
+            if (resource is null)
             {
-                mutex.Dispose();
+                throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
             }
 
-            isDisposed = true;
+            IsInitialized = true;
         }
     }
 }

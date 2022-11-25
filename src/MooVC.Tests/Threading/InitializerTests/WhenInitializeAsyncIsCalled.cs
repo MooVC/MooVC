@@ -63,33 +63,83 @@ public sealed class WhenInitializeAsyncIsCalled
         Assert.Equal(ExpectedInvocations, invocations);
     }
 
-    [Fact]
-    public async Task GivenAnInitializerWhenAwaitedTogetherThenTheInitializerIsOnlyCalledOnceAsync()
+    [Theory]
+    [InlineData(10)]
+    [InlineData(100)]
+    [InlineData(1000)]
+    public async Task GivenAnInitializerWhenAwaitedTogetherThenTheInitializerIsOnlyCalledOnceAsync(int threads)
     {
         const int ExpectedInvocations = 1;
         int invocations = 0;
+        object expected = new();
 
         Task<object> Initializer(CancellationToken cancellationToken)
         {
             invocations++;
 
-            return Task.FromResult(new object());
+            return Task.FromResult(expected);
         }
 
         var initializer = new Initializer<object>(Initializer);
 
-        Task<object>[] tasks = new[]
-        {
-            initializer.InitializeAsync(),
-            initializer.InitializeAsync(),
-            initializer.InitializeAsync(),
-        };
+        Task<object>[] tasks = Enumerable
+            .Range(1, threads)
+            .Select(_ => initializer.InitializeAsync())
+            .ToArray();
 
-        _ = await Task
-            .WhenAll(tasks)
-            .ConfigureAwait(false);
+        _ = await Task.WhenAll(tasks);
 
         Assert.Equal(ExpectedInvocations, invocations);
+        Assert.All(tasks, task => Assert.Same(task.Result, expected));
+    }
+
+    [Theory]
+    [InlineData(3, 10)]
+    [InlineData(80, 100)]
+    [InlineData(999, 1000)]
+    [InlineData(0, 1000)]
+    public async Task GivenAnFailingInitializerWhenAwaitedTogetherThenOutcomeThatIsReturnedRemainsUniqueAsync(int failures, int threads)
+    {
+        const int ExpectedSuccesses = 1;
+
+        int invocations = 0;
+        int successes = 0;
+        object expected = new();
+
+        Task<object> Initializer(CancellationToken cancellationToken)
+        {
+            if (invocations++ < failures)
+            {
+                throw new InvalidOperationException();
+            }
+
+            successes++;
+
+            return Task.FromResult(expected);
+        }
+
+        var initializer = new Initializer<object>(Initializer);
+
+        Task<object>[] tasks = Enumerable
+            .Range(1, threads)
+            .Select(_ => initializer.InitializeAsync())
+            .ToArray();
+
+        try
+        {
+            _ = await Task.WhenAll(tasks);
+        }
+        catch
+        {
+            // The exception is unimportant
+        }
+
+        IEnumerable<Task<object>> fails = tasks.Where(task => task.IsFaulted);
+        IEnumerable<Task<object>> others = tasks.Except(fails);
+
+        Assert.Equal(ExpectedSuccesses, successes);
+        Assert.Equal(failures, fails.Count());
+        Assert.All(others, task => Assert.Same(task.Result, expected));
     }
 
     [Fact]
