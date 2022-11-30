@@ -16,7 +16,8 @@ public class TimedProcessor
     private readonly Lazy<Timer> timer;
     private bool isDisposed;
 
-    public TimedProcessor(TimeSpan delay, TimeSpan? initial = default)
+    public TimedProcessor(TimeSpan delay, IDiagnosticsProxy? diagnostics = default, TimeSpan? initial = default)
+        : base(diagnostics: diagnostics)
     {
         this.initial = initial ?? delay;
         this.delay = delay;
@@ -80,10 +81,10 @@ public class TimedProcessor
         }
         catch (Exception ex)
         {
-            await
-                OnDiagnosticsEmittedAsync(
-                    Level.Error,
+            await Diagnostics
+                .EmitAsync(
                     cause: ex,
+                    impact: Impact.Recoverable,
                     message: Format(TimedProcessorTimerCallbackFailure, GetType().Name))
                 .ConfigureAwait(false);
         }

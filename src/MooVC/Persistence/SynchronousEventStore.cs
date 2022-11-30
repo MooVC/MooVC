@@ -18,10 +18,7 @@ public abstract class SynchronousEventStore<T, TIndex>
         return Task.FromResult(PerformInsert(@event));
     }
 
-    public virtual Task<IEnumerable<T>> ReadAsync(
-        TIndex lastIndex,
-        CancellationToken? cancellationToken = default,
-        ushort numberToRead = 10)
+    public virtual Task<IEnumerable<T>> ReadAsync(TIndex lastIndex, CancellationToken? cancellationToken = default, ushort numberToRead = 10)
     {
         return Task.FromResult(PerformRead(lastIndex, numberToRead: numberToRead));
     }

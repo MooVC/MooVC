@@ -9,6 +9,14 @@ using static System.String;
 public abstract class SerializableObject
     : ISerializable
 {
+    protected SerializableObject()
+    {
+    }
+
+    protected SerializableObject(SerializationInfo info, StreamingContext context)
+    {
+    }
+
     public bool Boolean { get; init; }
 
     public byte Byte { get; init; }

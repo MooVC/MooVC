@@ -6,12 +6,17 @@ using static Resources;
 
 public static partial class CollectionExtensions
 {
+    /// <summary>
+    /// Clears the contents of the <paramref name="target" /> collection and replaces them with the elements from the <paramref name="items" />
+    /// enumeration.
+    /// </summary>
+    /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
+    /// <param name="target">The collection in which the elements are to be replaced.</param>
+    /// <param name="replacements">The elements to be inserted into the collection once the collection has been cleared.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="target" /> is null.</exception>
     public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
     {
-        _ = ArgumentNotNull(
-            target,
-            nameof(target),
-            CollectionExtensionsReplaceTargetRequired);
+        _ = IsNotNull(target, message: CollectionExtensionsReplaceTargetRequired);
 
         target.Clear();
 

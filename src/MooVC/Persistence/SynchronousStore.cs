@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Persistence;
 
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MooVC.Linq;
@@ -32,9 +31,7 @@ public abstract class SynchronousStore<T, TKey>
         return Task.FromResult(PerformGet(key));
     }
 
-    public virtual Task<IEnumerable<T>> GetAsync(
-        CancellationToken? cancellationToken = default,
-        Paging? paging = default)
+    public virtual Task<PagedResult<T>> GetAsync(CancellationToken? cancellationToken = default, Paging? paging = default)
     {
         return Task.FromResult(PerformGet(paging: paging));
     }
@@ -54,7 +51,7 @@ public abstract class SynchronousStore<T, TKey>
 
     protected abstract T? PerformGet(TKey key);
 
-    protected abstract IEnumerable<T> PerformGet(Paging? paging = default);
+    protected abstract PagedResult<T> PerformGet(Paging? paging = default);
 
     protected abstract void PerformUpdate(T item);
 }

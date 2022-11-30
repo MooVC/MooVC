@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 public abstract class SynchronousCloner
     : ICloner
 {
-    public Task<T> CloneAsync<T>(
-        T original,
-        CancellationToken? cancellationToken = default)
+    public Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
         where T : notnull
     {
         return Task.FromResult(PerformClone(original));

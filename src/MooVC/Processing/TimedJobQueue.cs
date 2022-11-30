@@ -21,10 +21,7 @@ public abstract class TimedJobQueue<T>
 
     protected TimedJobQueue(TimedProcessor timer)
     {
-        this.timer = ArgumentNotNull(
-            timer,
-            nameof(timer),
-            JobQueueTimerRequired);
+        this.timer = IsNotNull(timer, message: JobQueueTimerRequired);
 
         this.timer.Triggered += Timer_Triggered;
     }
@@ -62,17 +59,9 @@ public abstract class TimedJobQueue<T>
         }
     }
 
-    protected virtual void OnDiagnosticsEmitted(
-        Level level,
-        Exception? cause = default,
-        string? message = default)
+    protected virtual void OnDiagnosticsEmitted(Level level, Exception? cause = default, string? message = default)
     {
-        _ = DiagnosticsEmitted.PassiveInvokeAsync(
-            this,
-            new DiagnosticsEmittedAsyncEventArgs(
-                cause: cause,
-                level: level,
-                message: message));
+        _ = DiagnosticsEmitted.PassiveInvokeAsync(this, new DiagnosticsEmittedAsyncEventArgs(cause: cause, level: level, message: message));
     }
 
     protected abstract IEnumerable<T> Process(IEnumerable<T> jobs);
@@ -104,10 +93,7 @@ public abstract class TimedJobQueue<T>
         }
         catch (Exception failure)
         {
-            OnDiagnosticsEmitted(
-                Level.Error,
-                cause: failure,
-                message: TimedJobQueueProcessQueueAsyncFailure);
+            OnDiagnosticsEmitted(Level.Error, cause: failure, message: TimedJobQueueProcessQueueAsyncFailure);
         }
     }
 

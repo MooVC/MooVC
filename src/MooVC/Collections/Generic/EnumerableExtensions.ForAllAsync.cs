@@ -14,10 +14,7 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = ArgumentNotNull(
-                operation,
-                nameof(operation),
-                EnumerableExtensionsForAllAsyncOperationRequired);
+            _ = IsNotNull(operation, message: EnumerableExtensionsForAllAsyncOperationRequired);
 
             var exceptions = new ConcurrentQueue<Exception>();
 

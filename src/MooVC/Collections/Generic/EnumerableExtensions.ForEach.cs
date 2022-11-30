@@ -11,15 +11,9 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = ArgumentNotNull(
-                action,
-                nameof(action),
-                EnumerableExtensionsActionRequired);
+            _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
 
-            foreach (T item in items)
-            {
-                action(item);
-            }
+            items.For((_, item) => action(item));
         }
     }
 }

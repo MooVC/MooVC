@@ -10,17 +10,11 @@ using static MooVC.Ensure;
 public static partial class EnumerableExtensions
 {
     [return: NotNullIfNotNull("enumeration")]
-    public static IEnumerable<T>? WhereIf<T>(
-        this IEnumerable<T>? enumeration,
-        bool isApplicable,
-        Func<T, bool> predicate)
+    public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, bool isApplicable, Func<T, bool> predicate)
     {
         if (enumeration is { } && isApplicable)
         {
-            _ = ArgumentNotNull(
-                predicate,
-                nameof(predicate),
-                EnumerableExtensionsWhereIfPredicateRequired);
+            _ = IsNotNull(predicate, message: EnumerableExtensionsWhereIfPredicateRequired);
 
             return enumeration.Where(predicate);
         }
@@ -29,17 +23,11 @@ public static partial class EnumerableExtensions
     }
 
     [return: NotNullIfNotNull("enumeration")]
-    public static IEnumerable<T>? WhereIf<T>(
-        this IEnumerable<T>? enumeration,
-        Func<bool> condition,
-        Func<T, bool> predicate)
+    public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, Func<bool> condition, Func<T, bool> predicate)
     {
         if (enumeration is { })
         {
-            _ = ArgumentNotNull(
-                condition,
-                nameof(condition),
-                EnumerableExtensionsWhereIfConditionRequired);
+            _ = IsNotNull(condition, message: EnumerableExtensionsWhereIfConditionRequired);
 
             return enumeration.WhereIf(condition(), predicate);
         }

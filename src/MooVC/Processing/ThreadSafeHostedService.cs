@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using MooVC.Collections.Generic;
+using MooVC.Diagnostics;
 using static MooVC.Ensure;
 using static MooVC.Processing.Resources;
 
@@ -13,12 +14,10 @@ public sealed class ThreadSafeHostedService
 {
     private readonly IEnumerable<IHostedService> services;
 
-    public ThreadSafeHostedService(IEnumerable<IHostedService> services)
+    public ThreadSafeHostedService(IEnumerable<IHostedService> services, IDiagnosticsProxy? diagnostics = default)
+        : base(diagnostics: diagnostics)
     {
-        this.services = ArgumentNotEmpty(
-            services,
-            nameof(services),
-            ThreadSafeHostedServiceServicesRequired);
+        this.services = IsNotEmpty(services, message: ThreadSafeHostedServiceServicesRequired);
     }
 
     protected override Task PerformStartAsync(CancellationToken cancellationToken)

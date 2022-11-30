@@ -9,17 +9,12 @@ using static MooVC.Ensure;
 
 public static partial class EnumerableExtensions
 {
-    public static IEnumerable<TResult> ProcessAll<TResult, TSource>(
-        this IEnumerable<TSource>? source,
-        Func<TSource, TResult> transform)
+    public static IEnumerable<TResult> ProcessAll<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
         where TSource : notnull
     {
         if (source is { })
         {
-            _ = ArgumentNotNull(
-                transform,
-                nameof(transform),
-                EnumerableExtensionsProcessAllTransformRequired);
+            _ = IsNotNull(transform, message: EnumerableExtensionsProcessAllTransformRequired);
 
             return source.ProcessAll(
                 source =>
@@ -38,9 +33,7 @@ public static partial class EnumerableExtensions
         return Enumerable.Empty<TResult>();
     }
 
-    public static IEnumerable<TResult> ProcessAll<TSource, TResult>(
-        this IEnumerable<TSource>? source,
-        Func<TSource, IEnumerable<TResult>> transform)
+    public static IEnumerable<TResult> ProcessAll<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {
         ConcurrentDictionary<TSource, IEnumerable<TResult>>? transforms = default;

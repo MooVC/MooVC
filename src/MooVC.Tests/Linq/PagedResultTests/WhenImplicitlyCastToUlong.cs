@@ -17,4 +17,13 @@ public sealed class WhenImplicitlyCastToUlong
 
         Assert.Equal((ulong)expected.Length, actual);
     }
+
+    [Fact]
+    public void GivenNoInstanceThenAZeroValueIsReturned()
+    {
+        PagedResult<int>? instance = default;
+        ulong value = instance;
+
+        Assert.Equal(ulong.MinValue, value);
+    }
 }

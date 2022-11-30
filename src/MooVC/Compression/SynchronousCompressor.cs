@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 public abstract class SynchronousCompressor
     : Compressor
 {
-    public override Task<Stream> CompressAsync(
-        Stream source,
-        CancellationToken? cancellationToken = default)
+    public override Task<Stream> CompressAsync(Stream source, CancellationToken? cancellationToken = default)
     {
         return Task.FromResult(PerformCompress(source));
     }
 
-    public override Task<Stream> DecompressAsync(
-        Stream source,
-        CancellationToken? cancellationToken = default)
+    public override Task<Stream> DecompressAsync(Stream source, CancellationToken? cancellationToken = default)
     {
         return Task.FromResult(PerformDecompress(source));
     }

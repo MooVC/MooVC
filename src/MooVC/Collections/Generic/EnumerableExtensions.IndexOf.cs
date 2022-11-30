@@ -17,10 +17,7 @@ public static partial class EnumerableExtensions
             return Default;
         }
 
-        _ = ArgumentNotNull(
-            predicate,
-            nameof(predicate),
-            EnumerableExtensionsIndexOfPredicateRequired);
+        _ = IsNotNull(predicate, message: EnumerableExtensionsIndexOfPredicateRequired);
 
         return enumeration
             .Select((item, index) => new { Index = index, Item = item })

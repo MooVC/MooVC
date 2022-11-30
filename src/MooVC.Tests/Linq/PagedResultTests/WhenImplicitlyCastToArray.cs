@@ -17,4 +17,13 @@ public sealed class WhenImplicitlyCastToArray
 
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void GivenNoInstanceThenAZeroSizedArrayIsReturned()
+    {
+        PagedResult<int>? instance = default;
+        int[] value = instance;
+
+        Assert.Empty(value);
+    }
 }

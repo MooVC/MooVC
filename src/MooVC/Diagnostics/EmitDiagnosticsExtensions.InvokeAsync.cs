@@ -11,17 +11,12 @@ using static MooVC.Ensure;
 
 public static partial class EmitDiagnosticsExtensions
 {
-    public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(
-        this IEnumerable<T>? sources,
-        Func<T, Task> action)
+    public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(this IEnumerable<T>? sources, Func<T, Task> action)
         where T : IEmitDiagnostics
     {
         if (sources is { })
         {
-            _ = ArgumentNotNull(
-                action,
-                nameof(action),
-                EmitDiagnosticsExtensionsInvokeActionRequired);
+            _ = IsNotNull(action, message: EmitDiagnosticsExtensionsInvokeActionRequired);
 
             async Task Action(T source, DiagnosticsEmittedAsyncEventHandler handler)
             {

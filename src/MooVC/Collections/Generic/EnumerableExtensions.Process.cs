@@ -8,17 +8,12 @@ using static MooVC.Ensure;
 
 public static partial class EnumerableExtensions
 {
-    public static IEnumerable<TResult> Process<TResult, TSource>(
-        this IEnumerable<TSource>? source,
-        Func<TSource, TResult> transform)
+    public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
         where TSource : notnull
     {
         if (source is { })
         {
-            _ = ArgumentNotNull(
-                transform,
-                nameof(transform),
-                EnumerableExtensionsProcessTransformRequired);
+            _ = IsNotNull(transform, message: EnumerableExtensionsProcessTransformRequired);
 
             return source.Process(
                 source =>
@@ -37,9 +32,7 @@ public static partial class EnumerableExtensions
         return Enumerable.Empty<TResult>();
     }
 
-    public static IEnumerable<TResult> Process<TResult, TSource>(
-        this IEnumerable<TSource>? source,
-        Func<TSource, IEnumerable<TResult>> transform)
+    public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {
         IDictionary<TSource, IEnumerable<TResult>>? transforms = default;
@@ -62,10 +55,7 @@ public static partial class EnumerableExtensions
     {
         if (source is { })
         {
-            _ = ArgumentNotNull(
-                transform,
-                nameof(transform),
-                EnumerableExtensionsProcessTransformRequired);
+            _ = IsNotNull(transform, message: EnumerableExtensionsProcessTransformRequired);
 
             source = source.Snapshot();
 

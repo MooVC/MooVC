@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Processing.TimedJobQueueTests;
 
 using System;
+using MooVC.Diagnostics;
 using Moq;
 using Xunit;
 
@@ -9,7 +10,7 @@ public sealed class WhenTimedJobQueueIsConstructed
     [Fact]
     public void GivenATimerThenAnInstanceIsReturned()
     {
-        var timer = new Mock<TimedProcessor>(TimeSpan.Zero, TimeSpan.Zero);
+        var timer = new Mock<TimedProcessor>(TimeSpan.Zero, DiagnosticsProxy.Default, TimeSpan.Zero);
         _ = new TestTimedJobQueue(timer.Object);
     }
 

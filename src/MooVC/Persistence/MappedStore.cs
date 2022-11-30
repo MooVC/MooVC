@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Persistence;
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MooVC.Linq;
@@ -15,25 +14,11 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     private readonly Func<T, TInnerKey, TOutterKey> outterMapping;
     private readonly IStore<T, TInnerKey> store;
 
-    public MappedStore(
-        Func<TOutterKey, TInnerKey> innerMapping,
-        Func<T, TInnerKey, TOutterKey> outterMapping,
-        IStore<T, TInnerKey> store)
+    public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = ArgumentNotNull(
-            innerMapping,
-            nameof(innerMapping),
-            MappedStoreInnerMappingRequired);
-
-        this.outterMapping = ArgumentNotNull(
-            outterMapping,
-            nameof(outterMapping),
-            MappedStoreOutterMappingRequired);
-
-        this.store = ArgumentNotNull(
-            store,
-            nameof(store),
-            MappedStoreStoreRequired);
+        this.innerMapping = IsNotNull(innerMapping, message: MappedStoreInnerMappingRequired);
+        this.outterMapping = IsNotNull(outterMapping, message: MappedStoreOutterMappingRequired);
+        this.store = IsNotNull(store, message: MappedStoreStoreRequired);
     }
 
     public async Task<TOutterKey> CreateAsync(T item, CancellationToken? cancellationToken = default)
@@ -64,9 +49,7 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
         return store.GetAsync(innerKey, cancellationToken: cancellationToken);
     }
 
-    public Task<IEnumerable<T>> GetAsync(
-        CancellationToken? cancellationToken = default,
-        Paging? paging = default)
+    public Task<PagedResult<T>> GetAsync(CancellationToken? cancellationToken = default, Paging? paging = default)
     {
         return store.GetAsync(cancellationToken: cancellationToken, paging: paging);
     }

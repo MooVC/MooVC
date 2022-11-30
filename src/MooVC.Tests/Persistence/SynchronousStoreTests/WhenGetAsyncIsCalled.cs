@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Persistence.SynchronousStoreTests;
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using MooVC.Linq;
 using Xunit;
@@ -36,10 +35,10 @@ public sealed class WhenGetAsyncIsCalled
         {
             Assert.Equal(expected, actual);
 
-            return results;
+            return new PagedResult<string>(expected, results);
         });
 
-        IEnumerable<string> actual = await store.GetAsync(paging: expected);
+        PagedResult<string> actual = await store.GetAsync(paging: expected);
 
         Assert.Equal(results, actual);
     }

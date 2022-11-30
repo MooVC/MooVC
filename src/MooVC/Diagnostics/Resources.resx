@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DiagnosticsEmittedAsyncEventArgsMessageRequired" xml:space="preserve">
+    <value>An explaination for the event must be provided, either via a message or via a cause.</value>
+  </data>
   <data name="DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired" xml:space="preserve">
     <value>The predicate to be applied to the diagnostic messages must be provided.</value>
+  </data>
+  <data name="DiagnosticsEmitterSourceRequired" xml:space="preserve">
+    <value>The source of the diagnostic messages must be provided.</value>
+  </data>
+  <data name="DiagnosticsMessageDescriptionRequired" xml:space="preserve">
+    <value>A description must be provided.</value>
   </data>
   <data name="EmitDiagnosticsExtensionsInvokeActionRequired" xml:space="preserve">
     <value>The action to be performed on each of the diagnostics emitters must be provided.</value>

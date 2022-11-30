@@ -19,7 +19,7 @@ namespace MooVC.Diagnostics {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,11 +61,38 @@ namespace MooVC.Diagnostics {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An explaination for the event must be provided, either via a message or via a cause..
+        /// </summary>
+        internal static string DiagnosticsEmittedAsyncEventArgsMessageRequired {
+            get {
+                return ResourceManager.GetString("DiagnosticsEmittedAsyncEventArgsMessageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The predicate to be applied to the diagnostic messages must be provided..
         /// </summary>
         internal static string DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired {
             get {
                 return ResourceManager.GetString("DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The source of the diagnostic messages must be provided..
+        /// </summary>
+        internal static string DiagnosticsEmitterSourceRequired {
+            get {
+                return ResourceManager.GetString("DiagnosticsEmitterSourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A description must be provided..
+        /// </summary>
+        internal static string DiagnosticsMessageDescriptionRequired {
+            get {
+                return ResourceManager.GetString("DiagnosticsMessageDescriptionRequired", resourceCulture);
             }
         }
         

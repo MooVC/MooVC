@@ -15,10 +15,35 @@ public sealed class PagedResult<T>
 {
     private readonly Lazy<ulong> count;
 
-    public PagedResult(Paging request, ulong total, IEnumerable<T> values)
+    public PagedResult(Paging request)
+        : this(request, () => 0, Enumerable.Empty<T>())
     {
-        Request = ArgumentNotNull(request, nameof(request), PagedResultRequestRequired);
-        Total = total;
+    }
+
+    public PagedResult(Paging request, IEnumerable<T> values)
+        : this(request, () => (ulong)values.LongCount(), values)
+    {
+    }
+
+    public PagedResult(Paging request, int total, IEnumerable<T> values)
+        : this(request, () => (ulong)total, values)
+    {
+    }
+
+    public PagedResult(Paging request, long total, IEnumerable<T> values)
+        : this(request, () => (ulong)total, values)
+    {
+    }
+
+    public PagedResult(Paging request, ulong total, IEnumerable<T> values)
+        : this(request, () => total, values)
+    {
+    }
+
+    private PagedResult(Paging request, Func<ulong> total, IEnumerable<T> values)
+    {
+        Request = IsNotNull(request, message: PagedResultRequestRequired);
+        Total = total();
         Values = values.Snapshot();
 
         count = new(CalculateCount);

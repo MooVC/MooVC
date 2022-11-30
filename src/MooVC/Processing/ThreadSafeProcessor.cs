@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Processing;
 
 using System.Threading;
+using MooVC.Diagnostics;
 
 public abstract class ThreadSafeProcessor
     : Processor
@@ -9,6 +10,11 @@ public abstract class ThreadSafeProcessor
     private const int StopRequestedFlag = 0;
 
     private volatile int flag = StopRequestedFlag;
+
+    protected ThreadSafeProcessor(IDiagnosticsProxy? diagnostics = default)
+        : base(diagnostics: diagnostics)
+    {
+    }
 
     protected sealed override bool CanStart()
     {

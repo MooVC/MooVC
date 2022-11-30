@@ -1,92 +1,59 @@
 ﻿namespace MooVC.Diagnostics;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Threading;
 using MooVC.Serialization;
 using static System.String;
+using static MooVC.Diagnostics.Resources;
+using static MooVC.Ensure;
 
 [Serializable]
 public sealed class DiagnosticsEmittedAsyncEventArgs
     : AsyncEventArgs,
       ISerializable
 {
-    private Exception? cause;
-    private Level level = Level.Information;
-    private string message = string.Empty;
-
     public DiagnosticsEmittedAsyncEventArgs(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        Impact impact = Impact.None,
         Level level = Level.Information,
-        string? message = default)
+        DiagnosticsMessage? message = default)
         : base(cancellationToken: cancellationToken)
     {
+        if (message is null || message.IsEmpty)
+        {
+            message = cause?.Message;
+        }
+
+        Impact = IsDefined(impact, @default: Impact);
+        Level = IsDefined(level, @default: Level);
+        Message = Satisfies(message, _ => !IsNullOrWhiteSpace(message), message: DiagnosticsEmittedAsyncEventArgsMessageRequired);
         Cause = cause;
-        Level = level;
-        Message = message;
     }
 
     private DiagnosticsEmittedAsyncEventArgs(SerializationInfo info, StreamingContext context)
         : base(default)
     {
-        cause = info.TryGetValue<Exception?>(nameof(Cause));
-        level = info.GetValue<Level>(nameof(Level));
-        message = info.GetValue<string>(nameof(Message));
+        Cause = info.TryGetValue<Exception?>(nameof(Cause));
+        Impact = info.TryGetValue(nameof(Impact), defaultValue: Impact.None);
+        Level = info.TryGetValue(nameof(Level), defaultValue: Level.Information);
+        Message = info.TryGetValue(nameof(Message), defaultValue: DiagnosticsMessage.Empty);
     }
 
-    public Exception? Cause
-    {
-        get => cause;
-        private set
-        {
-            if (value is { } && IsNullOrWhiteSpace(Message))
-            {
-                Message = value.Message;
-            }
+    public Exception? Cause { get; }
 
-            cause = value;
-        }
-    }
+    public Impact Impact { get; } = Impact.None;
 
-    public Level Level
-    {
-        get => level;
-        private set
-        {
-            if (Enum.IsDefined(typeof(Level), value))
-            {
-                level = value;
-            }
-            else
-            {
-                level = Level.Critical;
-            }
-        }
-    }
+    public Level Level { get; } = Level.Trace;
 
-    [AllowNull]
-    public string Message
-    {
-        get => message;
-        private set
-        {
-            if (IsNullOrWhiteSpace(value))
-            {
-                message = Cause?.Message ?? string.Empty;
-            }
-            else
-            {
-                message = value;
-            }
-        }
-    }
+    public DiagnosticsMessage Message { get; }
 
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         _ = info.TryAddValue(nameof(Cause), Cause);
-        info.AddValue(nameof(Level), Level);
-        info.AddValue(nameof(Message), Message);
+        _ = info.TryAddValue(nameof(Impact), Impact, defaultValue: Impact.None);
+        _ = info.TryAddValue(nameof(Level), Level, defaultValue: Level.Information);
+        _ = info.TryAddValue(nameof(Message), Message, defaultValue: DiagnosticsMessage.Empty);
     }
 }
