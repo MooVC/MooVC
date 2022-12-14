@@ -5,6 +5,22 @@ using System.Runtime.CompilerServices;
 
 public static partial class Ensure
 {
+    /// <summary>
+    /// Returns the given argument if it satisfies the specified predicate, or the default value if it is not <c>null</c> and if specified,
+    /// or throws an <see cref="ArgumentException"/> if the default value is not specified.
+    /// </summary>
+    /// <typeparam name="T">The type of the argument to check.</typeparam>
+    /// <param name="argument">The argument to check.</param>
+    /// <param name="predicate">The predicate to evaluate the argument against.</param>
+    /// <param name="argumentName">The name of the argument, provided by the caller.</param>
+    /// <param name="default">The default value to return if the argument is not <c>null</c>.</param>
+    /// <param name="message">The error message to use if the argument does not satisfy the predicate and no default value is specified.</param>
+    /// <returns>
+    /// The given argument if it satisfies the specified predicate, or the default value if it is not <c>null</c> and if specified.
+    /// </returns>
+    /// <exception cref="ArgumentException">
+    /// The given argument does not satisfy the specified predicate and no default value is specified.
+    /// </exception>
     public static T Satisfies<T>(
         T? argument,
         Func<T, bool> predicate,
@@ -33,6 +49,22 @@ public static partial class Ensure
         return actual;
     }
 
+    /// <summary>
+    /// Returns the given argument if it satisfies the specified predicate, or the default value if it is not <c>null</c> and if specified,
+    /// or throws an <see cref="ArgumentException"/> if the default value is not specified.
+    /// </summary>
+    /// <typeparam name="T">The type of the argument to check.</typeparam>
+    /// <param name="argument">The argument to check.</param>
+    /// <param name="predicate">The predicate to evaluate the argument against.</param>
+    /// <param name="argumentName">The name of the argument, provided by the caller.</param>
+    /// <param name="default">The default value to return if the argument is not <c>null</c>.</param>
+    /// <param name="message">The error message to use if the argument does not satisfy the predicate and no default value is specified.</param>
+    /// <returns>
+    /// The given argument if it satisfies the specified predicate, or the default value if it is not <c>null</c> and if specified.
+    /// </returns>
+    /// <exception cref="ArgumentException">
+    /// The given argument does not satisfy the specified predicate and no default value is specified.
+    /// </exception>
     public static T Satisfies<T>(
         T? argument,
         Func<T, bool> predicate,
