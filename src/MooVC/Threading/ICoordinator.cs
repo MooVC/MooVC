@@ -19,7 +19,7 @@ public interface ICoordinator<T>
     /// </summary>
     /// <param name="context">The context in which coordination is to be applied.</param>
     /// <param name="cancellationToken">
-    /// A cancellation token that can be used to cancel the operation.
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
     /// </param>
     /// <param name="timeout">
     /// A timeout that specifies how long the operation should wait for coordination to be granted.

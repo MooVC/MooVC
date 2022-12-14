@@ -8,11 +8,24 @@ using static System.String;
 using static MooVC.Diagnostics.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Represents the event data for the <see cref="IEmitDiagnostics.DiagnosticsEmitted" /> event.
+/// </summary>
 [Serializable]
 public sealed class DiagnosticsEmittedAsyncEventArgs
     : AsyncEventArgs,
       ISerializable
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DiagnosticsEmittedAsyncEventArgs" /> class.
+    /// </summary>
+    /// <param name="cancellationToken">
+    /// An optional <see cref="CancellationToken" /> that can be used to cancel the operation that raised the event.
+    /// </param>
+    /// <param name="cause">An optional <see cref="Exception" /> that caused the emission of the event.</param>
+    /// <param name="impact">An optional perceived <see cref="Impact" /> of the event from the perspective of the source.</param>
+    /// <param name="level">An optional perceived <see cref="Level" /> of the event from the perspective of the source.</param>
+    /// <param name="message">An optional <see cref="DiagnosticsMessage" /> providing a friendly description of the event.</param>
     public DiagnosticsEmittedAsyncEventArgs(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,
@@ -32,6 +45,12 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
         Cause = cause;
     }
 
+    /// <summary>
+    /// Supports deserialization of an instance of the <see cref="DiagnosticsEmittedAsyncEventArgs"/> class
+    /// via the specified <paramref name="info"/> and <paramref name="context"/>.
+    /// </summary>
+    /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
+    /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
     private DiagnosticsEmittedAsyncEventArgs(SerializationInfo info, StreamingContext context)
         : base(default)
     {
@@ -41,14 +60,44 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
         Message = info.TryGetValue(nameof(Message), defaultValue: DiagnosticsMessage.Empty);
     }
 
+    /// <summary>
+    /// Get the <see cref="Exception" /> that caused the emission of the event, if any.
+    /// </summary>
+    /// <value>
+    /// The <see cref="Exception" /> that caused the emission of the event, if any.
+    /// </value>
     public Exception? Cause { get; }
 
+    /// <summary>
+    /// Gets the perceived <see cref="Impact" /> of the event from the perspective of the source.
+    /// </summary>
+    /// <value>
+    /// The perceived <see cref="Impact" /> of the event from the perspective of the source.
+    /// </value>
     public Impact Impact { get; } = Impact.None;
 
+    /// <summary>
+    /// Gets the perceived <see cref="Level" /> of the event from the perspective of the source.
+    /// </summary>
+    /// <value>
+    /// The perceived <see cref="Level" /> of the event from the perspective of the source.
+    /// </value>
     public Level Level { get; } = Level.Trace;
 
+    /// <summary>
+    /// Gets the <see cref="DiagnosticsMessage" /> providing a friendly description of the event.
+    /// </summary>
+    /// <value>
+    /// The <see cref="DiagnosticsMessage" /> providing a friendly description of the event.
+    /// </value>
     public DiagnosticsMessage Message { get; }
 
+    /// <summary>
+    /// Populates the specified <see cref="SerializationInfo"/> object with the data needed to serialize the current instance
+    /// of the <see cref="DiagnosticsMessage"/> class.
+    /// </summary>
+    /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
+    /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         _ = info.TryAddValue(nameof(Cause), Cause);

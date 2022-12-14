@@ -16,7 +16,7 @@ public interface ISerializer
     /// <typeparam name="T">The type of the object to serialize.</typeparam>
     /// <param name="instance">The object to serialize.</param>
     /// <param name="cancellationToken">
-    /// A cancellation token that can be used to cancel the operation.
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
     /// </param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation. The result of the task is a sequence
@@ -32,7 +32,7 @@ public interface ISerializer
     /// <param name="instance">The object to serialize.</param>
     /// <param name="target">The target stream to which to serialize the object.</param>
     /// <param name="cancellationToken">
-    /// A cancellation token that can be used to cancel the operation.
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
     /// </param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous serialization operation.</returns>
     Task SerializeAsync<T>(T instance, Stream target, CancellationToken? cancellationToken = default)
@@ -44,7 +44,7 @@ public interface ISerializer
     /// <typeparam name="T">The type of the object to deserialize.</typeparam>
     /// <param name="data">The sequence of bytes to deserialize.</param>
     /// <param name="cancellationToken">
-    /// A cancellation token that can be used to cancel the operation.
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
     /// </param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation. The result of the task is the
@@ -59,7 +59,7 @@ public interface ISerializer
     /// <typeparam name="T">The type of the object to deserialize.</typeparam>
     /// <param name="source">The stream from which the object is to be deserialized.</param>
     /// <param name="cancellationToken">
-    /// A cancellation token that can be used to cancel the operation.
+    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
     /// </param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation. The result of the task is the instance

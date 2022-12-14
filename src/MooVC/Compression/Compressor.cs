@@ -47,7 +47,7 @@ public abstract class Compressor
     /// Asynchronously decompresses a given sequence of bytes.
     /// </summary>
     /// <param name="data">The sequence of bytes to decompress.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous decompression operation. The task result contains the
     /// decompressed data as a sequence of bytes.
@@ -66,7 +66,7 @@ public abstract class Compressor
     /// Asynchronously decompresses a given stream of data.
     /// </summary>
     /// <param name="source">The stream of data to decompress.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous decompression operation. The task result contains the
     /// decompressed data as a stream.
