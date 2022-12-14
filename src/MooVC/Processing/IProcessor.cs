@@ -27,15 +27,15 @@ public interface IProcessor
     /// Tries to start the processor asynchronously.
     /// </summary>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A task representing the asynchronous operation. The result of the task is a boolean value indicating whether the attempt to
-    /// start the processor was successful.</returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation. The result of the task is a boolean value
+    /// indicating whether the attempt to start the processor was successful.</returns>
     Task<bool> TryStartAsync(CancellationToken cancellationToken);
 
     /// <summary>
     /// Tries to stop the processor asynchronously.
     /// </summary>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A task representing the asynchronous operation. The result of the task is a boolean value indicating whether the attempt to
-    /// stop the processor was successful.</returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation. The result of the task is a boolean value
+    /// indicating whether the attempt to stop the processor was successful.</returns>
     Task<bool> TryStopAsync(CancellationToken cancellationToken);
 }

@@ -18,7 +18,7 @@ public interface IDiagnosticsRelay
     /// <param name="impact">The perceived impact of the event from the perspective of the source for which this relay is acting.</param>
     /// <param name="level">The perceived level of the event from the perspective of the source for which this relay is acting.</param>
     /// <param name="message">A friendly description of the event, if any.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     Task EmitAsync(
         CancellationToken? cancellationToken = default,
         Exception? cause = default,

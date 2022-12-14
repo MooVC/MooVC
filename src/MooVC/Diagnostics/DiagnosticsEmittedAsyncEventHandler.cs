@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
 /// <param name="e">An object containing information about the diagnostics.</param>
-/// <returns>A task representing the asynchronous operation.</returns>
+/// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
 public delegate Task DiagnosticsEmittedAsyncEventHandler(IEmitDiagnostics sender, DiagnosticsEmittedAsyncEventArgs e);

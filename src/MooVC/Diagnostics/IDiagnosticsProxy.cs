@@ -26,8 +26,8 @@ public interface IDiagnosticsProxy
     /// <param name="impact">The perceived impact of the event from the perspective of the <paramref name="source"/>.</param>
     /// <param name="level">The perceived level of the event from the perspective of the <paramref name="source"/>.</param>
     /// <param name="message">A friendly description of the event, if any.</param>
-    /// <returns>A task representing the asynchronous operation. The result of the task is an object containing information about the
-    /// emitted diagnostic message, or null if the message was not emitted.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The result of the task is an object containing
+    /// information about the emitted diagnostic message, or null if the message was not emitted.</returns>
     Task<DiagnosticsEmittedAsyncEventArgs?> TryEmitAsync(
         IEmitDiagnostics source,
         CancellationToken? cancellationToken = default,

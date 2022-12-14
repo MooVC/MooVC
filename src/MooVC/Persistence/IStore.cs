@@ -19,8 +19,7 @@ public interface IStore<T, TKey>
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result
-    /// contains the key of the newly created item.
+    /// A <see cref="Task"/> that represents the asynchronous operation. The task result contains the key of the newly created item.
     /// </returns>
     Task<TKey> CreateAsync(T item, CancellationToken? cancellationToken = default);
 
@@ -31,7 +30,7 @@ public interface IStore<T, TKey>
     /// <param name="cancellationToken">
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
     Task DeleteAsync(T item, CancellationToken? cancellationToken = default);
 
     /// <summary>
@@ -41,7 +40,7 @@ public interface IStore<T, TKey>
     /// <param name="cancellationToken">
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
     Task DeleteAsync(TKey key, CancellationToken? cancellationToken = default);
 
     /// <summary>
@@ -52,7 +51,7 @@ public interface IStore<T, TKey>
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains the item with the specified
+    /// A <see cref="Task"/> that represents the asynchronous operation. The task result contains the item with the specified
     /// <paramref name="key"/>, or null if no such item exists.
     /// </returns>
     Task<T?> GetAsync(TKey key, CancellationToken? cancellationToken = default);
@@ -65,7 +64,7 @@ public interface IStore<T, TKey>
     /// </param>
     /// <param name="paging">Optional paging instructions to be applied to the results.</param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains paging instructions for the matching items.
+    /// A <see cref="Task"/> that represents the asynchronous operation. The task result contains paging instructions for the matching items.
     /// </returns>
     Task<PagedResult<T>> GetAsync(CancellationToken? cancellationToken = default, Paging? paging = default);
 
@@ -76,6 +75,6 @@ public interface IStore<T, TKey>
     /// <param name="cancellationToken">
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
     Task UpdateAsync(T item, CancellationToken? cancellationToken = default);
 }

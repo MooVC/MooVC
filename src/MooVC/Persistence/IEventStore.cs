@@ -23,7 +23,7 @@ public interface IEventStore<T, TIndex>
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains the event with the specified
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation. The task result contains the event with the specified
     /// <paramref name="index"/>, or null if no such event exists.
     /// </returns>
     Task<T?> GetAsync(TIndex index, CancellationToken? cancellationToken = default);
@@ -38,7 +38,7 @@ public interface IEventStore<T, TIndex>
     /// An optional cancellation token that can be used to cancel the operation.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains the index of the newly inserted event.
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation. The task result contains the index of the newly inserted event.
     /// </returns>
     Task<TIndex> InsertAsync(T @event, CancellationToken? cancellationToken = default);
 
@@ -55,7 +55,7 @@ public interface IEventStore<T, TIndex>
     /// The number of events to read from the stream following <paramref name="lastIndex"/>.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains the list of matching events.
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation. The task result contains the list of matching events.
     /// </returns>
     Task<IEnumerable<T>> ReadAsync(TIndex lastIndex, CancellationToken? cancellationToken = default, ushort numberToRead = Paging.DefaultSize);
 }

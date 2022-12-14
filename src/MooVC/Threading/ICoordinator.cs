@@ -25,8 +25,8 @@ public interface ICoordinator<T>
     /// A timeout that specifies how long the operation should wait for coordination to be granted.
     /// </param>
     /// <returns>
-    /// A task that represents the asynchronous operation. The result of the task is metadata relating to the mutual exclusive access
-    /// granted by the coordinator in the specified context.
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation. The result of the task is metadata relating
+    /// to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
     Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default);
 }

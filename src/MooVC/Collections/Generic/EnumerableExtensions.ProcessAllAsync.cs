@@ -22,8 +22,8 @@ public static partial class EnumerableExtensions
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
-    /// <returns>A task representing the asynchronous operation. The result of the task is an enumerable sequence containing the results
-    /// of the transform function applied to each element of the source sequence.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The result of the task is an enumerable sequence
+    /// containing the results of the transform function applied to each element of the source sequence.</returns>
     public static async Task<IEnumerable<TResult>> ProcessAllAsync<TResult, TSource>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<TResult>> transform)
@@ -61,8 +61,8 @@ public static partial class EnumerableExtensions
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
-    /// <returns>A task representing the asynchronous operation. The result of the task is an enumerable sequence containing the results
-    /// of the transform function applied to each element of the source sequence.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The result of the task is an enumerable sequence containing
+    /// the results of the transform function applied to each element of the source sequence.</returns>
     public static async Task<IEnumerable<TResult>> ProcessAllAsync<TSource, TResult>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<IEnumerable<TResult>>> transform)

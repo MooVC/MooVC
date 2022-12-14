@@ -16,7 +16,7 @@ public interface ICloner
     /// <param name="cancellationToken">
     /// A cancellation token that can be used to cancel the operation.
     /// </param>
-    /// <returns>A task that represents the asynchronous clone operation.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.</returns>
     Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
         where T : notnull;
 }

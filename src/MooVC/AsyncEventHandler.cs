@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// </summary>
 /// <param name="sender">The source of the event.</param>
 /// <param name="e">An object that contains data relating to the event.</param>
-/// <returns>A task representing the asynchronous operation.</returns>
+/// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
 public delegate Task AsyncEventHandler(object? sender, AsyncEventArgs e);
 
 /// <summary>
@@ -16,7 +16,7 @@ public delegate Task AsyncEventHandler(object? sender, AsyncEventArgs e);
 /// <typeparam name="TArgs">The type of the event data.</typeparam>
 /// <param name="sender">The source of the event.</param>
 /// <param name="e">The type specific event data.</param>
-/// <returns>A task representing the asynchronous operation.</returns>
+/// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
 public delegate Task AsyncEventHandler<TArgs>(object? sender, TArgs e)
     where TArgs : AsyncEventArgs;
 
@@ -27,7 +27,7 @@ public delegate Task AsyncEventHandler<TArgs>(object? sender, TArgs e)
 /// <typeparam name="TArgs">The type of the event data.</typeparam>
 /// <param name="sender">The source of the event.</param>
 /// <param name="e">The type specific event data.</param>
-/// <returns>A task representing the asynchronous operation.</returns>
+/// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
 public delegate Task AsyncEventHandler<TSender, TArgs>(TSender? sender, TArgs e)
     where TSender : class
     where TArgs : AsyncEventArgs;
