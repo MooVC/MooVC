@@ -57,8 +57,8 @@ public static partial class EnumerableExtensions
     /// Asyncrhonously processes the elements of an enumerable sequence, returning the aggregate results of the transformation function applied
     /// to each element.
     /// </summary>
-    /// <typeparam name="TResult">The type of the results of the transform function.</typeparam>
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+    /// <typeparam name="TResult">The type of the results of the transform function.</typeparam>
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
     /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The result of the task is an enumerable sequence containing

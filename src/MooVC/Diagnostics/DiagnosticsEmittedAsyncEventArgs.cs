@@ -61,7 +61,7 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
     }
 
     /// <summary>
-    /// Get the <see cref="Exception" /> that caused the emission of the event, if any.
+    /// Gets the <see cref="Exception" /> that caused the emission of the event, if any.
     /// </summary>
     /// <value>
     /// The <see cref="Exception" /> that caused the emission of the event, if any.
