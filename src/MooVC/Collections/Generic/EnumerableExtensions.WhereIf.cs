@@ -7,6 +7,10 @@ using System.Linq;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Provides extensions relating to IEnumerable{T}.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
     /// <summary>

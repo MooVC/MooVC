@@ -18,6 +18,9 @@ public interface IProcessor
     /// <summary>
     /// Gets the current state of the processor.
     /// </summary>
+    /// <value>
+    /// The current state of the processor.
+    /// </value>
     ProcessorState State { get; }
 
     /// <summary>

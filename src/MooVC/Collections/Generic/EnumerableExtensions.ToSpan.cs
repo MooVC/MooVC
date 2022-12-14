@@ -3,6 +3,10 @@ namespace MooVC.Collections.Generic;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides extensions relating to IEnumerable{T}.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
     /// <summary>

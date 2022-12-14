@@ -2,6 +2,9 @@
 
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides extensions relating to object.
+/// </summary>
 public static partial class ObjectExtensions
 {
     /// <summary>

@@ -5,6 +5,9 @@ using MooVC.Collections.Generic;
 using static MooVC.Ensure;
 using static MooVC.Resources;
 
+/// <summary>
+/// Provides extensions relating to Exception.
+/// </summary>
 public static class ExceptionExtensions
 {
     /// <summary>
@@ -14,7 +17,7 @@ public static class ExceptionExtensions
     /// <param name="exception">The exception to perform the action on.</param>
     /// <param name="handler">The action to perform on the given exception.</param>
     /// <exception cref="ArgumentNullException">
-    /// The <paramref name="handler"/> parameter is <c>null</c>.
+    /// The <paramref name="handler"/> parameter is null.
     /// </exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {

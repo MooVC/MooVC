@@ -4,6 +4,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Provides extensions relating to IProducerConsumerCollection{T}.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class ProducerConsumerCollectionExtensions
 {
     /// <summary>

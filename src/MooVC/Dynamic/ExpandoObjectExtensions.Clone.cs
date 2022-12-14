@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 
+/// <summary>
+/// Provides extensions relating to ExpandoObject.
+/// </summary>
 public static class ExpandoObjectExtensions
 {
     /// <summary>
@@ -20,15 +23,15 @@ public static class ExpandoObjectExtensions
     /// Thrown if defaultIfNull is false and the original object is null.
     /// </exception>
     /// <returns>A clone of the original ExpandoObject.</returns>
-    public static ExpandoObject Clone(this ExpandoObject? orignal, bool defaultIfNull = true)
+    public static ExpandoObject Clone(this ExpandoObject? original, bool defaultIfNull = true)
     {
         var clone = new ExpandoObject();
 
-        if (orignal is { })
+        if (original is { })
         {
             var target = (IDictionary<string, object?>)clone;
 
-            foreach (KeyValuePair<string, object?> value in orignal)
+            foreach (KeyValuePair<string, object?> value in original)
             {
                 if (value.Value is ExpandoObject child)
                 {
@@ -42,7 +45,7 @@ public static class ExpandoObjectExtensions
         }
         else if (!defaultIfNull)
         {
-            throw new ArgumentNullException(nameof(orignal));
+            throw new ArgumentNullException(nameof(original));
         }
 
         return clone;

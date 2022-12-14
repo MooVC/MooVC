@@ -24,6 +24,9 @@ public class AsyncEventArgs
     /// <summary>
     /// Gets the cancellation token associated with this event.
     /// </summary>
+    /// <value>
+    /// The cancellation token associated with this event.
+    /// </value>
     public CancellationToken CancellationToken { get; }
 
     /// <summary>

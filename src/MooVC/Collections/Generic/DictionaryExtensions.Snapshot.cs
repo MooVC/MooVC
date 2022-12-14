@@ -2,6 +2,11 @@
 
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides extensions relating to IDictionary{TKey, TValue}.
+/// </summary>
+/// <typeparam name="TKey">Specifies the type of keys in the dictionary.</typeparam>
+/// <typeparam name="TValue">Specifies the type of values in the dictionary.</typeparam>
 public static partial class DictionaryExtensions
 {
     /// <summary>
