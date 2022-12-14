@@ -94,7 +94,7 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
 
     /// <summary>
     /// Populates the specified <see cref="SerializationInfo"/> object with the data needed to serialize the current instance
-    /// of the <see cref="DiagnosticsMessage"/> class.
+    /// of the <see cref="DiagnosticsEmittedAsyncEventArgs"/> class.
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
     /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>

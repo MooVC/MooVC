@@ -23,6 +23,12 @@ public class Paging
         Size = Max(size, MinimumSize);
     }
 
+    /// <summary>
+    /// Supports deserialization of an instance of the <see cref="Paging"/> class
+    /// via the specified <paramref name="info"/> and <paramref name="context"/>.
+    /// </summary>
+    /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
+    /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
     protected Paging(SerializationInfo info, StreamingContext context)
     {
         Page = info.GetValue<ushort>(nameof(Page));
@@ -78,6 +84,12 @@ public class Paging
         return queryable.Skip(Skip).Take(Size);
     }
 
+    /// <summary>
+    /// Populates the specified <see cref="SerializationInfo"/> object with the data needed to serialize the current instance
+    /// of the <see cref="Paging"/> class.
+    /// </summary>
+    /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
+    /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
     public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         info.AddValue(nameof(Page), Page);
