@@ -6,19 +6,16 @@ using static MooVC.Ensure;
 using static MooVC.Resources;
 
 /// <summary>
-/// Provides extensions relating to Exception.
+/// Provides extensions relating to <see cref="Exception"/>.
 /// </summary>
 public static class ExceptionExtensions
 {
     /// <summary>
-    /// Performs an action on the given exception and any of its inner exceptions,
-    /// recursively.
+    /// Performs an action on the given <see cref="Exception"/> and any of its inner exceptions, recursively.
     /// </summary>
-    /// <param name="exception">The exception to perform the action on.</param>
-    /// <param name="handler">The action to perform on the given exception.</param>
-    /// <exception cref="ArgumentNullException">
-    /// The <paramref name="handler"/> parameter is null.
-    /// </exception>
+    /// <param name="exception">The <see cref="Exception"/> to perform the action on.</param>
+    /// <param name="handler">The <see cref="Action{T}"/> to perform on the given exception.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> parameter is null.</exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
         _ = IsNotNull(handler, message: ExceptionExtensionsExplodeHandlerRequired);
@@ -27,11 +24,10 @@ public static class ExceptionExtensions
     }
 
     /// <summary>
-    /// Performs an action on the given exception and any of its inner exceptions,
-    /// recursively.
+    /// Performs an action on the given <see cref="Exception"/> and any of its inner exceptions, recursively.
     /// </summary>
-    /// <param name="exception">The exception to perform the action on.</param>
-    /// <param name="handler">The action to perform on the given exception.</param>
+    /// <param name="exception">The <see cref="Exception"/> to perform the action on.</param>
+    /// <param name="handler">The <see cref="Action{T}"/> to perform on the given exception.</param>
     private static void PerformExplode(this Exception? exception, Action<Exception> handler)
     {
         if (exception is { })

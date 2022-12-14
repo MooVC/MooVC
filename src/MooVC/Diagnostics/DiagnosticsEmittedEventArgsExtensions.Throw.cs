@@ -30,8 +30,10 @@ public static class DiagnosticsEmittedEventArgsExtensions
     /// Throws an <see cref="AggregateException"/> if any emitted diagnostics match the specified <see cref="predicate"/>.
     /// </summary>
     /// <param name="diagnostics">The collection of <see cref="DiagnosticsEmittedAsyncEventArgs"/> objects to evaluate.</param>
-    /// <param name="predicate">A function to test each diagnostics for a condition. Only diagnostics that satisfy the condition will
-    /// be included in the <see cref="AggregateException"/>.</param>
+    /// <param name="predicate">
+    /// A function to test each diagnostics for a condition. Only diagnostics that satisfy the condition will be included in the
+    /// <see cref="AggregateException"/>.
+    /// </param>
     /// <param name="message">An optional message to include in the thrown <see cref="AggregateException"/>.</param>
     /// <exception cref="AggregateException">Thrown if one or more diagnostics satisfy the specified <see cref="predicate"/>.</exception>
     public static void Throw(

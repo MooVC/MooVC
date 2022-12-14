@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading;
+using Token = System.Threading.CancellationToken;
 
 /// <summary>
 /// Represents a class that provides event data for async events.
@@ -12,30 +13,28 @@ public class AsyncEventArgs
     private static readonly Lazy<AsyncEventArgs> empty = new(() => new AsyncEventArgs());
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AsyncEventArgs"/> class
-    /// with the specified cancellation token.
+    /// Initializes a new instance of the <see cref="AsyncEventArgs"/> class with the specified <see cref="Token"/>.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token associated with this event.</param>
-    protected AsyncEventArgs(CancellationToken? cancellationToken = default)
+    /// <param name="cancellationToken">An optional <see cref="Token"/> associated with this event.</param>
+    protected AsyncEventArgs(Token? cancellationToken = default)
     {
         CancellationToken = cancellationToken.GetValueOrDefault();
     }
 
     /// <summary>
-    /// Gets the cancellation token associated with this event.
+    /// Gets the <see cref="CancellationToken"/> associated with this event.
     /// </summary>
     /// <value>
-    /// The cancellation token associated with this event.
+    /// The <see cref="CancellationToken"/> associated with this event.
     /// </value>
-    public CancellationToken CancellationToken { get; }
+    public Token CancellationToken { get; }
 
     /// <summary>
-    /// Gets an empty instance of the <see cref="AsyncEventArgs"/> class
-    /// with the specified cancellation token.
+    /// Gets an empty instance of the <see cref="AsyncEventArgs"/> class with the specified <see cref="Token"/>.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token associated with this event.</param>
+    /// <param name="cancellationToken">The <see cref="Token"/> associated with this event.</param>
     /// <returns>An empty instance of the <see cref="AsyncEventArgs"/> class.</returns>
-    public static new AsyncEventArgs Empty(CancellationToken? cancellationToken = default)
+    public static new AsyncEventArgs Empty(Token? cancellationToken = default)
     {
         if (cancellationToken is { })
         {

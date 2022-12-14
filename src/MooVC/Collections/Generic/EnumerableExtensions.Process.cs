@@ -7,14 +7,13 @@ using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
 /// <summary>
-/// Provides extensions relating to IEnumerable{T}.
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
     /// <summary>
-    /// Synchronously processes the elements of an enumerable sequence, returning the results of the transformation function
-    /// applied to each element.
+    /// Synchronously processes the elements of an enumerable sequence, returning the results of the transformation function applied to each element.
     /// </summary>
     /// <typeparam name="TResult">The type of the results of the transform function.</typeparam>
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>

@@ -8,7 +8,7 @@ using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
 /// <summary>
-/// Provides extensions relating to IEnumerable{T}.
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions

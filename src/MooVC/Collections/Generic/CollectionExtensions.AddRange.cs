@@ -5,7 +5,7 @@ using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
 /// <summary>
-/// Provides extensions relating to ICollection{T}.
+/// Provides extensions relating to <see cref="ICollection{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class CollectionExtensions

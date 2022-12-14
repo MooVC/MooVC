@@ -7,14 +7,14 @@ using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
 /// <summary>
-/// Provides extensions relating to IEnumerable{T}.
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
     /// <summary>
-    /// Creates a dictionary from an enumerable source by applying a selector function to each element of the source. The selector function
-    /// specifies the key for each element of the resulting dictionary.
+    /// Creates a dictionary from an enumerable source by applying a selector function to each element of the source.
+    /// The selector function specifies the key for each element of the resulting dictionary.
     /// </summary>
     /// <typeparam name="TSubject">The type of elements in the source enumerable.</typeparam>
     /// <typeparam name="TValue">The type of value that the selector function returns.</typeparam>

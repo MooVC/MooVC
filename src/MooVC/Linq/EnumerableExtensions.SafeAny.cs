@@ -24,8 +24,9 @@ public static partial class EnumerableExtensions
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for elements that satisfy the condition.</param>
     /// <param name="predicate">A function to test each element for a condition.</param>
-    /// <returns>True if any elements in the enumerable sequence satisfy the condition, or false if none of the elements do or
-    /// the sequence is empty or null.</returns>
+    /// <returns>
+    /// True if any elements in the enumerable sequence satisfy the condition, or false if none of the elements do or the sequence is empty or null.
+    /// </returns>
     public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source, Func<T, bool> predicate)
     {
         return source is { } && source.Any(predicate);

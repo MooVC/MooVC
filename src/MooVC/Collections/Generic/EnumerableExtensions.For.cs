@@ -8,7 +8,7 @@ using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
 /// <summary>
-/// Provides extensions relating to IEnumerable{T}.
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
@@ -19,8 +19,10 @@ public static partial class EnumerableExtensions
     /// </summary>
     /// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
     /// <param name="items">The enumeration to be enumerated.</param>
-    /// <param name="action">The action to be called for each element of the enumeration, with a zero-index value indicating the position of the
-    /// element in the enueration.</param>
+    /// <param name="action">
+    /// The action to be called for each element of the enumeration, with a zero-index value indicating the position of the element
+    /// in the enueration.
+    /// </param>
     /// <exception cref="ArgumentNullException">The <paramref name="action"/> is null.</exception>
     public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
     {

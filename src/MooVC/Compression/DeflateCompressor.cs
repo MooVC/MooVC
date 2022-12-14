@@ -48,8 +48,9 @@ public sealed class DeflateCompressor
     /// </summary>
     /// <param name="source">The stream to decompress.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the decompressed stream
-    /// as the result.</returns>
+    /// <returns>
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the decompressed stream as the result.
+    /// </returns>
     public override async Task<Stream> DecompressAsync(Stream source, CancellationToken? cancellationToken = null)
     {
         var result = new MemoryStream();

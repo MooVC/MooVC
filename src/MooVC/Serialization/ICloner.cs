@@ -13,9 +13,7 @@ public interface ICloner
     /// </summary>
     /// <typeparam name="T">The type of the object to clone.</typeparam>
     /// <param name="original">The original object to clone.</param>
-    /// <param name="cancellationToken">
-    /// A <see cref="CancellationToken" /> that can be used to cancel the operation.
-    /// </param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.</returns>
     Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
         where T : notnull;

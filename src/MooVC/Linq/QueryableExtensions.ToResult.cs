@@ -13,7 +13,8 @@ public static partial class QueryableExtensions
     /// <param name="paging">The paging parameters to apply to the IQueryable sequence.</param>
     /// <returns>
     /// A paged result that contains the elements of the IQueryable sequence, with paging applied and metadata about the total number of
-    /// elements and the applied paging parameters.</returns>
+    /// elements and the applied paging parameters.
+    /// </returns>
     public static PagedResult<T> ToResult<T>(this IQueryable<T>? queryable, Paging? paging)
     {
         ulong total = 0;
