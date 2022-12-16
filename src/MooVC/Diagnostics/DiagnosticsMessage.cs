@@ -203,8 +203,6 @@ public sealed class DiagnosticsMessage
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        info.AddEnumerable(nameof(Arguments), Arguments);
-
         _ = info.TryAddEnumerable(nameof(Arguments), Arguments);
         _ = info.TryAddString(nameof(Description), Description);
     }
