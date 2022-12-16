@@ -2,6 +2,9 @@
 
 using System;
 
+/// <summary>
+/// Provides the Min extension for <see cref="DateTime"/>.
+/// </summary>
 public static partial class DateTimeExtensions
 {
     /// <summary>

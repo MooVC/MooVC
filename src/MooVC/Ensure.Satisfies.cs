@@ -3,6 +3,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// Provides methods to support validation.
+/// </summary>
 public static partial class Ensure
 {
     /// <summary>
@@ -12,7 +15,10 @@ public static partial class Ensure
     /// <typeparam name="T">The type of the argument to check.</typeparam>
     /// <param name="argument">The argument to check.</param>
     /// <param name="predicate">The predicate to evaluate the argument against.</param>
-    /// <param name="argumentName">The name of the argument, provided by the caller.</param>
+    /// <param name="argumentName">
+    /// The name of the argument, which will be used in the exception message if the validation fails.
+    /// This value is optional and can be provided automatically by the caller via <see cref="CallerArgumentExpressionAttribute"/>.
+    /// </param>
     /// <param name="default">The default value to return if the argument is not null.</param>
     /// <param name="message">The error message to use if the argument does not satisfy the predicate and no default value is specified.</param>
     /// <returns>
@@ -56,7 +62,10 @@ public static partial class Ensure
     /// <typeparam name="T">The type of the argument to check.</typeparam>
     /// <param name="argument">The argument to check.</param>
     /// <param name="predicate">The predicate to evaluate the argument against.</param>
-    /// <param name="argumentName">The name of the argument, provided by the caller.</param>
+    /// <param name="argumentName">
+    /// The name of the argument, which will be used in the exception message if the validation fails.
+    /// This value is optional and can be provided automatically by the caller via <see cref="CallerArgumentExpressionAttribute"/>.
+    /// </param>
     /// <param name="default">The default value to return if the argument is not null.</param>
     /// <param name="message">The error message to use if the argument does not satisfy the predicate and no default value is specified.</param>
     /// <returns>

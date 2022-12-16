@@ -14,6 +14,10 @@ using static MooVC.Ensure;
 /// <summary>
 /// Represents a friendly message relating to a diagnostics event.
 /// </summary>
+/// /// <remarks>
+/// This class implements <see cref="ISerializable"/> and <see cref="IEquatable{T}"/> for string.
+/// It also defines several implicit operators for converting between different types.
+/// </remarks>
 [Serializable]
 public sealed class DiagnosticsMessage
     : ISerializable,
@@ -86,13 +90,18 @@ public sealed class DiagnosticsMessage
     public string Description { get; } = string.Empty;
 
     /// <summary>
-    /// Gets the flag which indicates whether or not the current instance is the default instance.
+    /// Gets a value indicating whether or not the current instance is the default instance.
     /// </summary>
     /// <value>
-    /// The flag which indicates whether or not the current instance is the default instance.
+    /// The value indicating whether or not the current instance is the default instance.
     /// </value>
     public bool IsEmpty => this == Empty;
 
+    /// <summary>
+    /// Converts a <see cref="DiagnosticsMessage"/> to an array of objects, using the arguments of the message as its basis.
+    /// </summary>
+    /// <param name="message">The message to be converted.</param>
+    /// <returns>An array of objects representing the arguments in the message.</returns>
     public static implicit operator object[](DiagnosticsMessage? message)
     {
         if (message is null)
@@ -103,6 +112,11 @@ public sealed class DiagnosticsMessage
         return message.Arguments.ToArray();
     }
 
+    /// <summary>
+    /// Converts a string to a <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <param name="description">The string to be converted.</param>
+    /// <returns>A <see cref="DiagnosticsMessage"/> with the given description and no arguments.</returns>
     public static implicit operator DiagnosticsMessage(string? description)
     {
         if (IsNullOrWhiteSpace(description))
@@ -113,21 +127,41 @@ public sealed class DiagnosticsMessage
         return new DiagnosticsMessage(description);
     }
 
+    /// <summary>
+    /// Converts a tuple of a string and an object to a <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <param name="message">The tuple to be converted. The string represents the description, and the object represents the first argument.</param>
+    /// <returns>A <see cref="DiagnosticsMessage"/> with the given description and the given argument.</returns>
     public static implicit operator DiagnosticsMessage((string Description, object Argument1) message)
     {
         return (message.Description, new[] { message.Argument1 });
     }
 
+    /// <summary>
+    /// Converts a tuple of a string and two objects to a <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <param name="message">The tuple to be converted. The string represents the description, and the objects represent the arguments.</param>
+    /// <returns>A <see cref="DiagnosticsMessage"/> with the given description and the given arguments.</returns>
     public static implicit operator DiagnosticsMessage((string Description, object Argument1, object Argument2) message)
     {
         return (message.Description, new[] { message.Argument1, message.Argument2 });
     }
 
+    /// <summary>
+    /// Converts a tuple of a string and three objects to a <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <param name="message">The tuple to be converted. The string represents the description, and the objects represent the arguments.</param>
+    /// <returns>A <see cref="DiagnosticsMessage"/> with the given description and the given arguments.</returns>
     public static implicit operator DiagnosticsMessage((string Description, object Argument1, object Argument2, object Argument3) message)
     {
         return (message.Description, new[] { message.Argument1, message.Argument2, message.Argument3 });
     }
 
+    /// <summary>
+    /// Converts a tuple of a string and an array of objects to a <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <param name="message">The tuple to be converted. The string represents the description, and the objects represent the arguments.</param>
+    /// <returns>A <see cref="DiagnosticsMessage"/> with the given description and the given arguments.</returns>
     public static implicit operator DiagnosticsMessage((string Description, object[] Arguments) message)
     {
         if (IsNullOrWhiteSpace(message.Description) && message.Arguments.IsEmpty())
@@ -138,6 +172,11 @@ public sealed class DiagnosticsMessage
         return new DiagnosticsMessage(message.Description, message.Arguments);
     }
 
+    /// <summary>
+    /// Converts a <see cref="DiagnosticsMessage"/> to a string.
+    /// </summary>
+    /// <param name="message">The message to be converted.</param>
+    /// <returns>A string representation of the rendered message.</returns>
     public static implicit operator string(DiagnosticsMessage? message)
     {
         if (message is null)
@@ -148,16 +187,33 @@ public sealed class DiagnosticsMessage
         return message.ToString();
     }
 
+    /// <summary>
+    /// Determines if a <see cref="DiagnosticsMessage"/> is equal to a string.
+    /// </summary>
+    /// <param name="message">The message to be compared.</param>
+    /// <param name="value">The string to be compared.</param>
+    /// <returns><c>true</c> if the rendered message is equal to the string; <c>false</c> otherwise.</returns>
     public static bool operator ==(DiagnosticsMessage message, string? value)
     {
         return message.Equals(value);
     }
 
+    /// <summary>
+    /// Determines if a <see cref="DiagnosticsMessage"/> is not equal to a string.
+    /// </summary>
+    /// <param name="message">The message to be compared.</param>
+    /// <param name="value">The string to be compared.</param>
+    /// <returns><c>true</c> if the rendered message is not equal to the string; <c>false</c> otherwise.</returns>
     public static bool operator !=(DiagnosticsMessage message, string? value)
     {
         return !message.Equals(value);
     }
 
+    /// <summary>
+    /// Determines if this instance is equal to another object.
+    /// </summary>
+    /// <param name="other">The object to be compared.</param>
+    /// <returns><c>true</c> if the object is equal to this instance; <c>false</c> otherwise.</returns>
     public override bool Equals(object? other)
     {
         if (other is string @string)
@@ -173,6 +229,11 @@ public sealed class DiagnosticsMessage
         return false;
     }
 
+    /// <summary>
+    /// Determines if this instance is equal to another string.
+    /// </summary>
+    /// <param name="other">The string to be compared.</param>
+    /// <returns><c>true</c> if the stirng is equal to this rendered instance; <c>false</c> otherwise.</returns>
     public bool Equals(string? other)
     {
         if (other is null)

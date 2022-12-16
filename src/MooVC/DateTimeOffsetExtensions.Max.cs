@@ -2,6 +2,9 @@
 
 using System;
 
+/// <summary>
+/// Provides the Max extension for <see cref="DateTimeOffset"/>.
+/// </summary>
 public static partial class DateTimeOffsetExtensions
 {
     /// <summary>
