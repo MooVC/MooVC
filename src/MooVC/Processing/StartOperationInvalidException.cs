@@ -21,6 +21,8 @@ public sealed class StartOperationInvalidException
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
     /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     private StartOperationInvalidException(SerializationInfo info, StreamingContext context)
     {
         State = info.GetValue<ProcessorState>(nameof(State));
@@ -34,6 +36,8 @@ public sealed class StartOperationInvalidException
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
     /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public override void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         base.GetObjectData(info, context);

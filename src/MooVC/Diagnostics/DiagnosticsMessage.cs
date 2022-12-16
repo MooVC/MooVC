@@ -11,6 +11,9 @@ using static System.String;
 using static MooVC.Diagnostics.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Represents a friendly message relating to a diagnostics event.
+/// </summary>
 [Serializable]
 public sealed class DiagnosticsMessage
     : ISerializable,
@@ -19,6 +22,13 @@ public sealed class DiagnosticsMessage
     private static readonly Lazy<DiagnosticsMessage> empty = new(() => new DiagnosticsMessage());
     private readonly Lazy<string> @string;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DiagnosticsMessage"/> class.
+    /// </summary>
+    /// <param name="description">The friendly description of the event.</param>
+    /// <param name="arguments">The arguments relating to the friendly description of the event.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is null.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="description"/> is whitespace.</exception>
     public DiagnosticsMessage(string description, params object[] arguments)
         : this()
     {
@@ -32,6 +42,8 @@ public sealed class DiagnosticsMessage
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
     /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     private DiagnosticsMessage(SerializationInfo info, StreamingContext context)
         : this()
     {
@@ -41,17 +53,44 @@ public sealed class DiagnosticsMessage
         @string = new(GetString);
     }
 
+    /// <summary>
+    /// Initializes a default instance of the <see cref="DiagnosticsMessage"/> class.
+    /// </summary>
     private DiagnosticsMessage()
     {
         @string = new(GetString);
     }
 
+    /// <summary>
+    /// Gets the default instance of the <see cref="DiagnosticsMessage"/> class.
+    /// </summary>
+    /// <value>
+    /// The default instance of the <see cref="DiagnosticsMessage"/> class.
+    /// </value>
     public static DiagnosticsMessage Empty => empty.Value;
 
+    /// <summary>
+    /// Gets the arguments relating to the friendly description of the event.
+    /// </summary>
+    /// <value>
+    /// The arguments relating to the friendly description of the event.
+    /// </value>
     public IEnumerable<object> Arguments { get; } = Enumerable.Empty<object>();
 
+    /// <summary>
+    /// Gets the friendly description of the event.
+    /// </summary>
+    /// <value>
+    /// The friendly description of the event.
+    /// </value>
     public string Description { get; } = string.Empty;
 
+    /// <summary>
+    /// Gets the flag which indicates whether or not the current instance is the default instance.
+    /// </summary>
+    /// <value>
+    /// The flag which indicates whether or not the current instance is the default instance.
+    /// </value>
     public bool IsEmpty => this == Empty;
 
     public static implicit operator object[](DiagnosticsMessage? message)
@@ -144,6 +183,10 @@ public sealed class DiagnosticsMessage
         return ToString() == other;
     }
 
+    /// <summary>
+    /// Gets the hash code associated with the instance of <see cref="DiagnosticsMessage"/>.
+    /// </summary>
+    /// <returns>The hash code associated with the instance of <see cref="DiagnosticsMessage"/>.</returns>
     public override int GetHashCode()
     {
         return ToString()
@@ -156,17 +199,29 @@ public sealed class DiagnosticsMessage
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
     /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
+        info.AddEnumerable(nameof(Arguments), Arguments);
+
         _ = info.TryAddEnumerable(nameof(Arguments), Arguments);
         _ = info.TryAddString(nameof(Description), Description);
     }
 
+    /// <summary>
+    /// Gets the friendly description of the event formatted with the arguments provided, if any.
+    /// </summary>
+    /// <returns>The friendly description of the event formatted with the arguments provided, if any.</returns>
     public override string ToString()
     {
         return @string.Value;
     }
 
+    /// <summary>
+    /// Formats the friendly description of the event with the arguments provided, if any.
+    /// </summary>
+    /// <returns>The friendly description of the event formatted with the arguments provided, if any.</returns>
     private string GetString()
     {
         if (Arguments.Any())

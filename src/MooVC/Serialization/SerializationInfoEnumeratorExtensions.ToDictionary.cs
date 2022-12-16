@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 
 public static partial class SerializationInfoEnumeratorExtensions
 {
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public static IDictionary<string, object?> ToDictionary(this SerializationInfoEnumerator enumerator)
     {
         var contents = new Dictionary<string, object?>();

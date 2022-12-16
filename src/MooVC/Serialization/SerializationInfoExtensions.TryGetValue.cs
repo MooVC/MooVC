@@ -18,6 +18,8 @@ public static partial class SerializationInfoExtensions
 
     private static MethodInfo Method => method.Value;
 
+    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     [return: NotNullIfNotNull("defaultValue")]
     public static T? TryGetValue<T>(this SerializationInfo info, string name, T? defaultValue = default)
     {
