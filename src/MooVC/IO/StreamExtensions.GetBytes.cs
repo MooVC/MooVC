@@ -3,6 +3,9 @@
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// Provides extensions relating to <see cref="Stream"/>.
+/// </summary>
 public static partial class StreamExtensions
 {
     /// <summary>

@@ -27,3 +27,17 @@
     Justification = "Obsolete feature, slated for removal in v8 - Not worth documentating.",
     Scope = "type",
     Target = "~T:MooVC.Serialization.SerializationInfoExtensions")]
+
+[assembly: SuppressMessage(
+    "StyleCop.CSharp.DocumentationRules",
+    "SA1600:Elements should be documented",
+    Justification = "Obsolete feature, slated for removal in v8 - Not worth documentating.",
+    Scope = "type",
+    Target = "~T:MooVC.Serialization.SerializationInfoEnumeratorExtensions")]
+
+[assembly: SuppressMessage(
+    "StyleCop.CSharp.DocumentationRules",
+    "SA1601:Partial elements should be documented",
+    Justification = "Obsolete feature, slated for removal in v8 - Not worth documentating.",
+    Scope = "type",
+    Target = "~T:MooVC.Serialization.SerializationInfoEnumeratorExtensions")]

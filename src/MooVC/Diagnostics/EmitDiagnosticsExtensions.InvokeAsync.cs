@@ -9,6 +9,10 @@ using MooVC.Collections.Generic;
 using static MooVC.Diagnostics.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Provides extensions to support capture of diagnostics events from source of type <see cref="IEnumerable{T}"/>.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration that implement <see cref="IEmitDiagnostics"/>.</typeparam>
 public static partial class EmitDiagnosticsExtensions
 {
     /// <summary>

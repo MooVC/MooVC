@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using static MooVC.Ensure;
 using static MooVC.Threading.Resources;
 
+/// <summary>
+/// Provides support for asynchronous lazy initialization of a resource.
+/// </summary>
+/// <typeparam name="T">The type of the resource to be initialized.</typeparam>
 public sealed class Initializer<T>
     where T : notnull
 {
@@ -14,15 +18,33 @@ public sealed class Initializer<T>
     private T? resource;
     private int waiting;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Initializer{T}"/> class.
+    /// </summary>
+    /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
         this.initializer = IsNotNull(initializer, message: InitializerInitializerRequired);
     }
 
+    /// <summary>
+    /// Gets a value indicating whether the resource has been initialized.
+    /// </summary>
+    /// <value>
+    /// <c>true</c> if the resource has been initialized; otherwise, <c>false</c>.
+    /// </value>
     public bool IsInitialized { get; private set; }
 
     private SemaphoreSlim Mutex => mutex.Value;
 
+    /// <summary>
+    /// Asynchronously initializes the resource and coordinates access to it.
+    /// </summary>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+    /// <returns>
+    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
+    /// The result of the task is the initialized resource.
+    /// </returns>
     public async Task<T> InitializeAsync(CancellationToken? cancellationToken = default)
     {
         if (!IsInitialized)
