@@ -21,7 +21,7 @@ public static partial class EnumerableExtensions
     /// <param name="enumeration">The sequence to search for an element that satisfies the condition.</param>
     /// <param name="predicate">A function to test each element for a condition.</param>
     /// <returns>The index of the first element in the sequence that satisfies the condition, or -1 if no such element is found.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="predicate"/> is null.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="predicate"/> is <see langword="null" />.</exception>
     public static int IndexOf<T>(this IEnumerable<T>? enumeration, Func<T, bool> predicate)
     {
         if (enumeration is null)

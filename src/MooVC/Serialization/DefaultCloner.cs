@@ -18,7 +18,7 @@ public sealed class DefaultCloner
     /// Initializes a new instance of the <see cref="DefaultCloner"/> class with the specified <see cref="ISerializer"/>.
     /// </summary>
     /// <param name="serializer">The serializer to use for cloning objects.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is <see langword="null" />.</exception>
     public DefaultCloner(ISerializer serializer)
     {
         this.serializer = IsNotNull(serializer, message: DefaultClonerSerializerRequired);

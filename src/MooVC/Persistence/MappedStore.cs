@@ -27,11 +27,11 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <param name="outterMapping">A function that maps an item and an internal key to an external key.</param>
     /// <param name="store">The store to wrap.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="innerMapping"/> is null.
+    /// <paramref name="innerMapping"/> is <see langword="null" />.
     /// <para>-or-</para>
-    /// <paramref name="outterMapping"/> is null.
+    /// <paramref name="outterMapping"/> is <see langword="null" />.
     /// <para>-or-</para>
-    /// <paramref name="store"/> is null.
+    /// <paramref name="store"/> is <see langword="null" />.
     /// </exception>
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {

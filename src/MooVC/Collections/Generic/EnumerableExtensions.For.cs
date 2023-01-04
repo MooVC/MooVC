@@ -23,7 +23,7 @@ public static partial class EnumerableExtensions
     /// The action to be called for each element of the enumeration, with a zero-index value indicating the position of the element
     /// in the enueration.
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="action"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="action"/> is <see langword="null" />.</exception>
     public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
     {
         if (items is { })

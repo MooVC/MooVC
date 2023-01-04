@@ -18,7 +18,7 @@ public static partial class Ensure
     /// This value is optional and can be provided automatically by the caller via <see cref="CallerArgumentExpressionAttribute"/>.
     /// </param>
     /// <param name="default">
-    /// The default value to return if the argument is null.
+    /// The default value to return if the argument is <see langword="null" />.
     /// If this is not specified, an exception will be thrown instead.
     /// </param>
     /// <param name="message">
@@ -61,7 +61,7 @@ public static partial class Ensure
     /// This value is optional and can be provided automatically by the caller via <see cref="CallerArgumentExpressionAttribute"/>.
     /// </param>
     /// <param name="default">
-    /// The default value to return if the argument is null.
+    /// The default value to return if the argument is <see langword="null" />.
     /// If this is not specified, an exception will be thrown instead.
     /// </param>
     /// <param name="message">

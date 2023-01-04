@@ -21,7 +21,7 @@ public static partial class EnumerableExtensions
     /// <param name="items">The sequence of elements to iterate over.</param>
     /// <param name="operation">The asynchronous operation to execute for each element.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="operation"/> is null.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="operation"/> is <see langword="null" />.</exception>
     /// <exception cref="AggregateException">At least one of the executed operations threw an exception.</exception>
     public static async Task ForAllAsync<T>(this IEnumerable<T>? items, Func<T, Task> operation)
     {

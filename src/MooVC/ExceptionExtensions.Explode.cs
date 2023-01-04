@@ -15,7 +15,7 @@ public static class ExceptionExtensions
     /// </summary>
     /// <param name="exception">The <see cref="Exception"/> to perform the action on.</param>
     /// <param name="handler">The <see cref="Action{T}"/> to perform on the given exception.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> parameter is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> parameter is <see langword="null" />.</exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
         _ = IsNotNull(handler, message: ExceptionExtensionsExplodeHandlerRequired);

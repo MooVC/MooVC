@@ -21,7 +21,7 @@ public static partial class EmitDiagnosticsExtensions
     /// <typeparam name="T">The type of the elements in the input sequence.</typeparam>
     /// <param name="sources">The input sequence.</param>
     /// <param name="action">An asynchronous action to be performed on each element of the input sequence.</param>
-    /// <exception cref="ArgumentNullException">Thrown if the action is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown if the action is <see langword="null" />.</exception>
     /// <returns>A collection containing the emitted diagnostics.</returns>
     public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(this IEnumerable<T>? sources, Func<T, Task> action)
         where T : IEmitDiagnostics

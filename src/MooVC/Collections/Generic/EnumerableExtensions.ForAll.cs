@@ -24,7 +24,7 @@ public static partial class EnumerableExtensions
     /// <param name="items">The enumeration to be enumerated.</param>
     /// <param name="action">The action to be called for each element of the enumeration.</param>
     /// <exception cref="AggregateException">One or more elements resulted in an exception being thrown by <paramref name="action"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="action"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="action"/> is <see langword="null" />.</exception>
     public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
     {
         if (items is { })

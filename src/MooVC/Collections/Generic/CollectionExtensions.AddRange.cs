@@ -16,7 +16,7 @@ public static partial class CollectionExtensions
     /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
     /// <param name="target">The collection to which the elements are inserted.</param>
     /// <param name="items">The items to be inserted into the collection.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="target" /> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target" /> is <see langword="null" />.</exception>
     public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
     {
         _ = IsNotNull(target, message: CollectionExtensionsAddRangeTargetRequired);

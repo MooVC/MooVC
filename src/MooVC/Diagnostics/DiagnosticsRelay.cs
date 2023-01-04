@@ -22,7 +22,7 @@ public sealed class DiagnosticsRelay
     /// <param name="diagnostics">
     /// The proxy that determines if diagnostics are to be emitted, with the default configuration used if not provided.
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null" />.</exception>
     public DiagnosticsRelay(IEmitDiagnostics source, IDiagnosticsProxy? diagnostics = default)
     {
         this.source = IsNotNull(source, message: DiagnosticsEmitterSourceRequired);

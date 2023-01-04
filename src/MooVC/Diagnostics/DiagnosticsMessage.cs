@@ -31,7 +31,7 @@ public sealed class DiagnosticsMessage
     /// </summary>
     /// <param name="description">The friendly description of the event.</param>
     /// <param name="arguments">The arguments relating to the friendly description of the event.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is <see langword="null" />.</exception>
     /// <exception cref="ArgumentException">The <paramref name="description"/> is whitespace.</exception>
     public DiagnosticsMessage(string description, params object[] arguments)
         : this()
