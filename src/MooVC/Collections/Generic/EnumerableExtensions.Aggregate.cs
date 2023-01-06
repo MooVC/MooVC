@@ -3,6 +3,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
     /// <summary>

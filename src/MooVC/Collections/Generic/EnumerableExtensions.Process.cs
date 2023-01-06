@@ -6,8 +6,20 @@ using System.Linq;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Provides extensions relating to <see cref="IEnumerable{T}"/>.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration.</typeparam>
 public static partial class EnumerableExtensions
 {
+    /// <summary>
+    /// Synchronously processes the elements of an enumerable sequence, returning the results of the transformation function applied to each element.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the results of the transform function.</typeparam>
+    /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+    /// <param name="source">The sequence of elements to transform.</param>
+    /// <param name="transform">The function to apply to each element of the sequence.</param>
+    /// <returns>An enumerable sequence containing the results of the transform function applied to each element of the source sequence.</returns>
     public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
         where TSource : notnull
     {
@@ -32,6 +44,15 @@ public static partial class EnumerableExtensions
         return Enumerable.Empty<TResult>();
     }
 
+    /// <summary>
+    /// Synchronously processes the elements of an enumerable sequence, returning the aggregated results of the transformation function
+    /// applied to each element.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the results of the transform function.</typeparam>
+    /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+    /// <param name="source">The sequence of elements to transform.</param>
+    /// <param name="transform">The function to apply to each element of the sequence.</param>
+    /// <returns>An enumerable sequence containing the results of the transform function applied to each element of the source sequence.</returns>
     public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {

@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Linq.PagingTests;
 
-using System.Drawing;
 using Xunit;
 
 public sealed class WhenImplicitlyCastFromTuple

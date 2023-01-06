@@ -9,8 +9,20 @@ using MooVC.Collections.Generic;
 using static MooVC.Diagnostics.Resources;
 using static MooVC.Ensure;
 
+/// <summary>
+/// Provides extensions to support capture of diagnostics events from source of type <see cref="IEnumerable{T}"/>.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the enumeration that implement <see cref="IEmitDiagnostics"/>.</typeparam>
 public static partial class EmitDiagnosticsExtensions
 {
+    /// <summary>
+    /// Invokes the specified asynchronous action on each element of a sequence of sources, and returns the emitted diagnostics.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements in the input sequence.</typeparam>
+    /// <param name="sources">The input sequence.</param>
+    /// <param name="action">An asynchronous action to be performed on each element of the input sequence.</param>
+    /// <exception cref="ArgumentNullException">Thrown if the action is <see langword="null" />.</exception>
+    /// <returns>A collection containing the emitted diagnostics.</returns>
     public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(this IEnumerable<T>? sources, Func<T, Task> action)
         where T : IEmitDiagnostics
     {

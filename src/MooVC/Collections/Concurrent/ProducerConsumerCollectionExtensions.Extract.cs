@@ -2,10 +2,12 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using MooVC.Collections.Generic;
 
+/// <summary>
+/// Provides extensions relating to IProducerConsumerCollection{T}.
+/// </summary>
+/// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class ProducerConsumerCollectionExtensions
 {
     /// <summary>
