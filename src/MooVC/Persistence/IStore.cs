@@ -50,7 +50,7 @@ public interface IStore<T, TKey>
     Task<T?> GetAsync(TKey key, CancellationToken? cancellationToken = default);
 
     /// <summary>
-    /// Asynchronously retrieves item from the store, and optionally applies <paramref name="paging"/>.
+    /// Asynchronously retrieves items from the store, and optionally applies <paramref name="paging"/>.
     /// </summary>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <param name="paging">Optional paging instructions to be applied to the results.</param>

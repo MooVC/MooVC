@@ -18,7 +18,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en</NeutralLanguage>
-    <NoWarn>$(NoWarn);NU5105</NoWarn>
+    <NoWarn>$(NoWarn);CS0618;NU5105</NoWarn>
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>

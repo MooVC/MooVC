@@ -5,10 +5,17 @@ using System.Runtime.Serialization;
 using MooVC.Serialization;
 using static MooVC.Processing.Resources;
 
+/// <summary>
+/// Encapsulates information relating to a failed attempt to start an instance of <see cref="IProcessor"/>.
+/// </summary>
 [Serializable]
 public sealed class StartOperationInvalidException
     : InvalidOperationException
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StartOperationInvalidException" /> class.
+    /// </summary>
+    /// <param name="state">The state of the processor was in at the time the request to start was made.</param>
     public StartOperationInvalidException(ProcessorState state)
         : base(StartOperationInvalidExceptionMessage)
     {
@@ -28,6 +35,12 @@ public sealed class StartOperationInvalidException
         State = info.GetValue<ProcessorState>(nameof(State));
     }
 
+    /// <summary>
+    /// Gets the state of the processor was in at the time the request to start was made.
+    /// </summary>
+    /// <value>
+    /// The state of the processor was in at the time the request to start was made.
+    /// </value>
     public ProcessorState State { get; }
 
     /// <summary>

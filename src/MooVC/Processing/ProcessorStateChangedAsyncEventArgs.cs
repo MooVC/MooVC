@@ -5,11 +5,21 @@ using System.Runtime.Serialization;
 using System.Threading;
 using MooVC.Serialization;
 
+/// <summary>
+/// Represents the event data for the <see cref="IProcessor.StateChanged" /> event.
+/// </summary>
 [Serializable]
 public sealed class ProcessorStateChangedAsyncEventArgs
     : AsyncEventArgs,
       ISerializable
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ProcessorStateChangedAsyncEventArgs" /> class.
+    /// </summary>
+    /// <param name="state">The state of the processor at the time the event was raised.</param>
+    /// <param name="cancellationToken">
+    /// An optional <see cref="CancellationToken" /> that can be used to cancel the operation that raised the event.
+    /// </param>
     public ProcessorStateChangedAsyncEventArgs(ProcessorState state, CancellationToken? cancellationToken = default)
         : base(cancellationToken: cancellationToken)
     {
@@ -29,6 +39,12 @@ public sealed class ProcessorStateChangedAsyncEventArgs
         State = info.GetValue<ProcessorState>(nameof(State));
     }
 
+    /// <summary>
+    /// Gets the state of the processor at the time the event was raised.
+    /// </summary>
+    /// <value>
+    /// The state of the processor at the time the event was raised.
+    /// </value>
     public ProcessorState State { get; }
 
     /// <summary>

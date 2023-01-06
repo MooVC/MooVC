@@ -5,10 +5,17 @@ using System.Runtime.Serialization;
 using MooVC.Serialization;
 using static MooVC.Processing.Resources;
 
+/// <summary>
+/// Encapsulates information relating to a failed attempt to stop an instance of <see cref="IProcessor"/>.
+/// </summary>
 [Serializable]
 public sealed class StopOperationInvalidException
     : InvalidOperationException
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StopOperationInvalidException" /> class.
+    /// </summary>
+    /// <param name="state">The state of the processor was in at the time the request to stop was made.</param>
     public StopOperationInvalidException(ProcessorState state)
         : base(StopOperationInvalidExceptionMessage)
     {
@@ -28,6 +35,12 @@ public sealed class StopOperationInvalidException
         State = info.GetValue<ProcessorState>(nameof(State));
     }
 
+    /// <summary>
+    /// Gets the state of the processor was in at the time the request to stop was made.
+    /// </summary>
+    /// <value>
+    /// The state of the processor was in at the time the request to stop was made.
+    /// </value>
     public ProcessorState State { get; }
 
     /// <summary>
