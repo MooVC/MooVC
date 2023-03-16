@@ -8,12 +8,10 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v7.1.0
-
-In preparation for the removal of ISerializable as part of Microsoft's BinaryFormatter Obsoletion Strategy, all supporting elements have been marked as obsolete, with the intention of full removal in v8. Please see https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md for more information.
+# Release v7.2.0
 
 ## Enhancements
 
-- Marked all Serialization.SerializationInfoExtensions as obsolete.
-- Marked all Serialization.SerializationInfoEnumeratorExtensions as obsolete.
-- Marked all implementations specific to ISerializable as obsolete.
+- Added a Compression.BrotliCompressor to encapsulate the System.IO.BrotliStream compression implementation.
+- Added a Compression.GZipCompressor to encapsulate the System.IO.GZipStream compression implementation.
+- Added a Compression.StreamCompressor to support encapsulation of streams that utilize the System.IO.CompressionLevel enum.
