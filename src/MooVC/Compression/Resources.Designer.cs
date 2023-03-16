@@ -63,9 +63,9 @@ namespace MooVC.Compression {
         /// <summary>
         ///   Looks up a localized string similar to The compression level must be provided..
         /// </summary>
-        internal static string DeflateCompressorLevelRequired {
+        internal static string StreamCompressorLevelRequired {
             get {
-                return ResourceManager.GetString("DeflateCompressorLevelRequired", resourceCulture);
+                return ResourceManager.GetString("StreamCompressorLevelRequired", resourceCulture);
             }
         }
     }

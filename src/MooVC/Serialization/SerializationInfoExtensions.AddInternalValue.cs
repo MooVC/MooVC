@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Serialization;
 
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 
 public static partial class SerializationInfoExtensions
@@ -119,6 +120,6 @@ public static partial class SerializationInfoExtensions
 
     private static string FormatName(string name)
     {
-        return $"_{name.ToLower()}";
+        return $"_{name.ToLower(CultureInfo.InvariantCulture)}";
     }
 }
