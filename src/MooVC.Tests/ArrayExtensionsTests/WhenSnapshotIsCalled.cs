@@ -1,0 +1,114 @@
+namespace MooVC.ArrayExtensionsTests;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+public sealed class WhenSnapshotIsCalled
+{
+    public static readonly IEnumerable<object[]> GivenAnArrayAPredicateAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData = new[]
+    {
+        new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 3 } },
+        new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 3 } },
+        new object[] { new int[] { 1 }, new int[] { 1 } },
+        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+    };
+
+    public static readonly IEnumerable<object[]> GivenAnArrayAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData = new[]
+    {
+        new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 2, 3 } },
+        new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 } },
+        new object[] { new int[] { 1 }, new int[] { 1 } },
+        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+    };
+
+    public static readonly IEnumerable<object[]> GivenAnArrayThenAMatchingArrayIsReturnedData = new[]
+    {
+        new object[] { new int[] { 1, 2 } },
+        new object[] { new int[] { 1 } },
+        new object[] { Array.Empty<int>() },
+    };
+
+    public static readonly IEnumerable<object[]> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData = new[]
+    {
+        new object[] { new int[] { 3, 1, 2 }, new int[] { 3, 1 } },
+        new object[] { new int[] { 1, 2, 3 }, new int[] { 1, 3 } },
+        new object[] { new int[] { 1 }, new int[] { 1 } },
+        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+    };
+
+    [Theory]
+    [MemberData(nameof(GivenAnArrayAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData))]
+    public void GivenAnArrayWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
+        int[] original,
+        int[] expected)
+    {
+        int[] result = original.Snapshot(element => element);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [MemberData(nameof(GivenAnArrayAPredicateAndAnOrderThenAnArrayMatchingTheOrderIsReturnedData))]
+    public void GivenAnArrayAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
+        int[] original,
+        int[] expected)
+    {
+        int[] result = original.Snapshot(element => element, predicate: value => value != 2);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void GivenAnArrayWhenANullOrderIsProvidedThenNoArgumentExceptionIsThrown()
+    {
+        var source = new int[] { 1 };
+        Func<int, int>? order = default;
+
+        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+            () => source.Snapshot(order!));
+
+        Assert.Equal(nameof(order), exception.ParamName);
+    }
+
+    [Theory]
+    [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
+    public void GivenAnArrayWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(int[] source)
+    {
+        int[] result = source.Snapshot();
+
+        Assert.Equal(source, result);
+    }
+
+    [Theory]
+    [MemberData(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
+    public void GivenAnArrayAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(
+        int[] original,
+        int[] expected)
+    {
+        int[] result = original.Snapshot(predicate: value => value != 2);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void GivenANullArrayWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
+    {
+        string[]? source = default;
+
+        string[] result = source.Snapshot(element => element);
+
+        Assert.Equal(Array.Empty<string>(), result);
+    }
+
+    [Fact]
+    public void GivenANullArrayWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
+    {
+        string[]? source = default;
+
+        string[] result = source.Snapshot();
+
+        Assert.Equal(Array.Empty<string>(), result);
+    }
+}
