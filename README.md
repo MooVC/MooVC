@@ -8,10 +8,8 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v7.2.0
+# Release v7.3.0
 
 ## Enhancements
 
-- Added a Compression.BrotliCompressor to encapsulate the System.IO.BrotliStream compression implementation.
-- Added a Compression.GZipCompressor to encapsulate the System.IO.GZipStream compression implementation.
-- Added a Compression.StreamCompressor to support encapsulation of streams that utilize the System.IO.CompressionLevel enum.
+- Added ArrayExtensions.Snapshot to facilitate array copy with an optional predicate.
