@@ -21,7 +21,7 @@ public static partial class ArrayExtensions
     /// <returns>An array that contains the elements of the snapshot.</returns>
     public static T[] Snapshot<T>(this T[]? values, Func<T, bool>? predicate = default)
     {
-        if (values is { })
+        if (values is { } && values.Length > 0)
         {
             if (predicate is null)
             {
