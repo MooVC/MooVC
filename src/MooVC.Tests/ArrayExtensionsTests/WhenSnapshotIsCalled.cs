@@ -61,7 +61,7 @@ public sealed class WhenSnapshotIsCalled
     [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
-        string[] result = source.Snapshot(predicate: value => value != 2);
+        string[] result = source.Snapshot(predicate: value => value != "Aarrgh!");
 
         Assert.Empty(result);
     }
