@@ -22,6 +22,12 @@ public sealed class WhenSnapshotIsCalled
         new object[] { Array.Empty<int>(), Array.Empty<int>() },
     };
 
+    public static readonly IEnumerable<object?[]> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData = new[]
+    {
+        new object?[] { new string[0] },
+        new object?[] { default },
+    }
+
     [Theory]
     [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
@@ -43,8 +49,7 @@ public sealed class WhenSnapshotIsCalled
     }
 
     [Theory]
-    [InlineData(new string[0])]
-    [InlineData(default)]
+    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
         string[] result = source.Snapshot();
@@ -53,8 +58,7 @@ public sealed class WhenSnapshotIsCalled
     }
 
     [Theory]
-    [InlineData(new string[0])]
-    [InlineData(default)]
+    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
         string[] result = source.Snapshot(predicate: value => value != 2);
