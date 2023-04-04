@@ -26,7 +26,7 @@ public sealed class WhenSnapshotIsCalled
     {
         new object?[] { new string[0] },
         new object?[] { default },
-    }
+    };
 
     [Theory]
     [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
