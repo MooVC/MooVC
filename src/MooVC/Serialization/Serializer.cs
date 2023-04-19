@@ -37,7 +37,7 @@ public abstract class Serializer
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation.
     /// The result of the task is the instance deserialized from the sequence of bytes that represented the object.
     /// </returns>
-    public async Task<T> DeserializeAsync<T>(IEnumerable<byte> data, CancellationToken? cancellationToken = default)
+    public async Task<T> DeserializeAsync<T>(IEnumerable<byte> data, CancellationToken cancellationToken = default)
         where T : notnull
     {
         using var source = new MemoryStream(data.ToArray());
@@ -56,7 +56,7 @@ public abstract class Serializer
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation.
     /// The result of the task is the instance deserialized from the stream that represented the object.
     /// </returns>
-    public async Task<T> DeserializeAsync<T>(Stream source, CancellationToken? cancellationToken = default)
+    public async Task<T> DeserializeAsync<T>(Stream source, CancellationToken cancellationToken = default)
         where T : notnull
     {
         using var decompressed = new MemoryStream();
@@ -80,7 +80,7 @@ public abstract class Serializer
     /// A <see cref="Task{TResult}"/> that represents the asynchronous serialization operation.
     /// The result of the task is a sequence of bytes representing the serialized object.
     /// </returns>
-    public async Task<IEnumerable<byte>> SerializeAsync<T>(T instance, CancellationToken? cancellationToken = default)
+    public async Task<IEnumerable<byte>> SerializeAsync<T>(T instance, CancellationToken cancellationToken = default)
         where T : notnull
     {
         using var target = new MemoryStream();
@@ -99,7 +99,7 @@ public abstract class Serializer
     /// <param name="target">The target stream to which to serialize the object.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous serialization operation.</returns>
-    public async Task SerializeAsync<T>(T instance, Stream target, CancellationToken? cancellationToken = default)
+    public async Task SerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken = default)
         where T : notnull
     {
         using var serialized = new MemoryStream();
@@ -122,10 +122,8 @@ public abstract class Serializer
     /// <param name="target">The stream to which the data will be written.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous serialization operation.</returns>
-    protected async Task CompressAsync(Stream source, Stream target, CancellationToken? cancellationToken = default)
+    protected async Task CompressAsync(Stream source, Stream target, CancellationToken cancellationToken = default)
     {
-        cancellationToken = cancellationToken.GetValueOrDefault();
-
         if (compressor is { })
         {
             using Stream compressed = await compressor
@@ -135,13 +133,13 @@ public abstract class Serializer
             compressed.Position = 0;
 
             await compressed
-                .CopyToAsync(target, cancellationToken.Value)
+                .CopyToAsync(target, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
             await source
-                .CopyToAsync(target, cancellationToken.Value)
+                .CopyToAsync(target, cancellationToken)
                 .ConfigureAwait(false);
         }
     }
@@ -155,10 +153,8 @@ public abstract class Serializer
     /// <param name="target">The stream to which the data will be written.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    protected async Task DecompressAsync(Stream source, Stream target, CancellationToken? cancellationToken = default)
+    protected async Task DecompressAsync(Stream source, Stream target, CancellationToken cancellationToken = default)
     {
-        cancellationToken = cancellationToken.GetValueOrDefault();
-
         if (compressor is { })
         {
             using Stream decompressed = await compressor
@@ -168,13 +164,13 @@ public abstract class Serializer
             decompressed.Position = 0;
 
             await decompressed
-                .CopyToAsync(target, cancellationToken.Value)
+                .CopyToAsync(target, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
             await source
-                .CopyToAsync(target, cancellationToken.Value)
+                .CopyToAsync(target, cancellationToken)
                 .ConfigureAwait(false);
         }
     }
@@ -189,7 +185,7 @@ public abstract class Serializer
     /// A <see cref="Task{TResult}"/> that represents the asynchronous deserialization operation.
     /// The result of the task is the instance deserialized from the stream that represented the object.
     /// </returns>
-    protected abstract Task<T> PerformDeserializeAsync<T>(Stream source, CancellationToken? cancellationToken = default)
+    protected abstract Task<T> PerformDeserializeAsync<T>(Stream source, CancellationToken cancellationToken = default)
         where T : notnull;
 
     /// <summary>
@@ -200,6 +196,6 @@ public abstract class Serializer
     /// <param name="target">The target stream to which to serialize the object.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous serialization operation.</returns>
-    protected abstract Task PerformSerializeAsync<T>(T instance, Stream target, CancellationToken? cancellationToken = default)
+    protected abstract Task PerformSerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken = default)
         where T : notnull;
 }

@@ -59,9 +59,9 @@ public abstract class FireAndForget
         GivenParametersThenTheExpectedValuesAreEmitted(
             EmitWithAll,
             expected,
-            cancellationToken: cancellation.Token,
             args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks },
-            cause: cause);
+            cause: cause,
+            cancellationToken: cancellation.Token);
     }
 
     [Fact]
@@ -75,36 +75,36 @@ public abstract class FireAndForget
     protected abstract void EmitWithAll(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract void EmitWithCancellationTokenAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract void EmitWithCauseAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract void EmitWithMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected void GivenParametersThenTheExpectedValuesAreEmitted(
-        Action<IDiagnosticsRelay?, string, CancellationToken?, Exception?, object[]> emitter,
+        Action<IDiagnosticsRelay?, string, Exception?, CancellationToken, object[]> emitter,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         bool wasEmitted = false;
@@ -120,16 +120,16 @@ public abstract class FireAndForget
 
         diagnostics.DiagnosticsEmitted += EmittedAsync;
 
-        emitter(diagnostics, message, cancellationToken, cause, args);
+        emitter(diagnostics, message, cause, cancellationToken, args);
 
         diagnostics.DiagnosticsEmitted -= EmittedAsync;
 
         Assert.True(wasEmitted);
         Assert.NotNull(emitted);
-        Assert.Equal(cancellationToken.GetValueOrDefault(), emitted.CancellationToken);
+        Assert.Equal(args, emitted.Message.Arguments);
+        Assert.Equal(cancellationToken, emitted.CancellationToken);
         Assert.Equal(cause, emitted.Cause);
         Assert.Equal(message, emitted.Message.Description);
         Assert.Equal(level, emitted.Level);
-        Assert.Equal(args, emitted.Message.Arguments);
     }
 }

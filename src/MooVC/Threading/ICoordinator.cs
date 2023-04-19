@@ -18,11 +18,11 @@ public interface ICoordinator<T>
     /// Asynchronously applies coordination in the specified context.
     /// </summary>
     /// <param name="context">The context in which coordination is to be applied.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <param name="timeout">A timeout that specifies how long the operation should wait for coordination to be granted.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The result of the task is metadata relating to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
-    Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default);
+    Task<ICoordinationContext<T>> ApplyAsync(T context, TimeSpan? timeout = default, CancellationToken cancellationToken = default);
 }

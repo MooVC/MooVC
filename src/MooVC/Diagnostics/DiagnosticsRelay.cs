@@ -37,7 +37,6 @@ public sealed class DiagnosticsRelay
     /// <summary>
     /// Emits a diagnostic event asynchronously if the event is deemed relevant by the configuration associated with the proxy.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <param name="cause">The <see cref="Exception" /> that caused the diagnostic event to be emitted, if any.</param>
     /// <param name="impact">
     /// The perceived <see cref="Impact" /> of the event from the perspective of the source for which this relay is acting.
@@ -46,16 +45,17 @@ public sealed class DiagnosticsRelay
     /// The perceived <see cref="Level" /> of the event from the perspective of the source for which this relay is acting.
     /// </param>
     /// <param name="message">An optional <see cref="DiagnosticsMessage" />, providing a friendly description of the event.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task EmitAsync(
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        DiagnosticsMessage? message = default)
+        DiagnosticsMessage? message = default,
+        CancellationToken cancellationToken = default)
     {
         DiagnosticsEmittedAsyncEventArgs? @event = await diagnostics
-            .TryEmitAsync(this, cancellationToken: cancellationToken, cause: cause, impact: impact, level: level, message: message)
+            .TryEmitAsync(this, cause: cause, impact: impact, level: level, message: message, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
         if (@event is { })

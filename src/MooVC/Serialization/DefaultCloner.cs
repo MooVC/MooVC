@@ -34,7 +34,7 @@ public sealed class DefaultCloner
     /// A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    public async Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
+    public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken = default)
         where T : notnull
     {
         IEnumerable<byte> data = await serializer

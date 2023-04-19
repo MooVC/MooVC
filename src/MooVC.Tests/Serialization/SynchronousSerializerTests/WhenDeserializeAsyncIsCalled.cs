@@ -18,7 +18,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         var compressor = new Mock<ICompressor>();
 
         _ = compressor
-            .Setup(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()))
+            .Setup(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
 
         var serializer = new TestableSynchronousSerializer(
@@ -29,7 +29,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         _ = await serializer.DeserializeAsync<string>(source);
 
         compressor.Verify(
-            compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken?>()),
+            compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()),
             Times.Once);
     }
 

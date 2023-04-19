@@ -25,13 +25,13 @@ public static partial class DiagnosticsRelayExtensions
     /// Emits a warning diagnostic event with the specified message and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
-    public static async void Warning(this IDiagnosticsRelay? diagnostics, CancellationToken? cancellationToken, string message, params object[] args)
+    public static async void Warning(this IDiagnosticsRelay? diagnostics, string message, CancellationToken cancellationToken, params object[] args)
     {
         await diagnostics
-            .WarningAsync(cancellationToken, message, args)
+            .WarningAsync(message, cancellationToken, args)
             .ConfigureAwait(false);
     }
 
@@ -53,19 +53,19 @@ public static partial class DiagnosticsRelayExtensions
     /// Emits a warning diagnostic event with the specified message, cause, and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="cause">The cause of the diagnostic event.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
     public static async void Warning(
         this IDiagnosticsRelay? diagnostics,
-        CancellationToken? cancellationToken,
         Exception? cause,
         string message,
+        CancellationToken cancellationToken,
         params object[] args)
     {
         await diagnostics
-            .WarningAsync(cancellationToken, cause, message, args)
+            .WarningAsync(cause, message, cancellationToken, args)
             .ConfigureAwait(false);
     }
 }

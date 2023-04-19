@@ -14,28 +14,28 @@ public sealed class WhenTraceIsCalled
     protected override void EmitWithAll(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Trace(cancellationToken, cause, message, args);
+        diagnostics.Trace(cause, message, cancellationToken, args);
     }
 
     protected override void EmitWithCancellationTokenAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Trace(cancellationToken, message, args);
+        diagnostics.Trace(message, cancellationToken, args);
     }
 
     protected override void EmitWithCauseAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Trace(cause, message, args);
@@ -44,8 +44,8 @@ public sealed class WhenTraceIsCalled
     protected override void EmitWithMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Trace(message, args);

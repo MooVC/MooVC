@@ -2,7 +2,6 @@ namespace MooVC.ArrayExtensionsTests;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 public sealed class WhenSnapshotIsCalled
@@ -24,7 +23,7 @@ public sealed class WhenSnapshotIsCalled
 
     public static readonly IEnumerable<object?[]> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData = new[]
     {
-        new object?[] { new string[0] },
+        new object?[] { Array.Empty<string>() },
         new object?[] { default },
     };
 
