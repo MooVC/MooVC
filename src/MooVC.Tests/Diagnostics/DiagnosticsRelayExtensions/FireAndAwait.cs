@@ -60,8 +60,8 @@ public abstract class FireAndAwait
             EmitWithAllAsync,
             expected,
             args: new object[] { DateTime.UtcNow, DateTime.UtcNow.Ticks },
-            cancellationToken: cancellation.Token,
-            cause: cause);
+            cause: cause,
+            cancellationToken: cancellation.Token);
     }
 
     [Fact]
@@ -78,36 +78,36 @@ public abstract class FireAndAwait
     protected abstract Task EmitWithAllAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract Task EmitWithCancellationTokenAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract Task EmitWithCauseAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected abstract Task EmitWithMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args);
 
     protected async Task GivenParametersThenTheExpectedValuesAreEmittedAsync(
-        Func<IDiagnosticsRelay?, string, CancellationToken?, Exception?, object[], Task> emitter,
+        Func<IDiagnosticsRelay?, string, Exception?, CancellationToken, object[], Task> emitter,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         bool wasEmitted = false;
@@ -123,16 +123,16 @@ public abstract class FireAndAwait
 
         diagnostics.DiagnosticsEmitted += EmittedAsync;
 
-        await emitter(diagnostics, message, cancellationToken, cause, args);
+        await emitter(diagnostics, message, cause, cancellationToken, args);
 
         diagnostics.DiagnosticsEmitted -= EmittedAsync;
 
         Assert.True(wasEmitted);
         Assert.NotNull(emitted);
-        Assert.Equal(cancellationToken.GetValueOrDefault(), emitted.CancellationToken);
-        Assert.Equal(cause, emitted.Cause);
-        Assert.Equal(message, emitted.Message.Description);
-        Assert.Equal(level, emitted.Level);
         Assert.Equal(args, emitted.Message.Arguments);
+        Assert.Equal(cancellationToken, emitted.CancellationToken);
+        Assert.Equal(cause, emitted.Cause);
+        Assert.Equal(level, emitted.Level);
+        Assert.Equal(message, emitted.Message.Description);
     }
 }

@@ -30,7 +30,7 @@ public sealed class WhenGetAsyncIsCalled
         _ = Store
             .Setup(store => store.GetAsync(
                 It.Is<string>(parameter => parameter == expectedInnerKey),
-                It.IsAny<CancellationToken?>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedItem);
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
@@ -43,7 +43,7 @@ public sealed class WhenGetAsyncIsCalled
         Store.Verify(
             store => store.GetAsync(
                 It.IsAny<string>(),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 
@@ -57,9 +57,7 @@ public sealed class WhenGetAsyncIsCalled
         _ = await store.GetAsync(paging: paging);
 
         Store.Verify(
-            store => store.GetAsync(
-                It.IsAny<CancellationToken?>(),
-                It.IsAny<Paging>()),
+            store => store.GetAsync(It.IsAny<Paging>(), It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 }

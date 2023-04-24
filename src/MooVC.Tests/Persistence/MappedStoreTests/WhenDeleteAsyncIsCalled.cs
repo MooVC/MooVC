@@ -34,13 +34,13 @@ public sealed class WhenDeleteAsyncIsCalled
         Store.Verify(
             store => store.DeleteAsync(
                 It.IsAny<string>(),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
 
         Store.Verify(
             store => store.DeleteAsync(
                 It.Is<string>(argument => argument == expectedInnerKey),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 
@@ -56,7 +56,7 @@ public sealed class WhenDeleteAsyncIsCalled
         Store.Verify(
             store => store.DeleteAsync(
                 It.IsAny<object>(),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 }

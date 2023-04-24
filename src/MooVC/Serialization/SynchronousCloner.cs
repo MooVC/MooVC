@@ -19,7 +19,7 @@ public abstract class SynchronousCloner
     /// A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    public Task<T> CloneAsync<T>(T original, CancellationToken? cancellationToken = default)
+    public Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken = default)
         where T : notnull
     {
         return Task.FromResult(PerformClone(original));

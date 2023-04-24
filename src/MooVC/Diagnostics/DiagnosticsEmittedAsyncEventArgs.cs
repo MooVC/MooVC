@@ -19,19 +19,19 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="DiagnosticsEmittedAsyncEventArgs" /> class.
     /// </summary>
-    /// <param name="cancellationToken">
-    /// An optional <see cref="CancellationToken" /> that can be used to cancel the operation that raised the event.
-    /// </param>
     /// <param name="cause">An optional <see cref="Exception" /> that caused the emission of the event.</param>
     /// <param name="impact">An optional perceived <see cref="Impact" /> of the event from the perspective of the source.</param>
     /// <param name="level">An optional perceived <see cref="Level" /> of the event from the perspective of the source.</param>
     /// <param name="message">An optional <see cref="DiagnosticsMessage" /> providing a friendly description of the event.</param>
+    /// <param name="cancellationToken">
+    /// An optional <see cref="CancellationToken" /> that can be used to cancel the operation that raised the event.
+    /// </param>
     public DiagnosticsEmittedAsyncEventArgs(
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact impact = Impact.None,
         Level level = Level.Information,
-        DiagnosticsMessage? message = default)
+        DiagnosticsMessage? message = default,
+        CancellationToken cancellationToken = default)
         : base(cancellationToken: cancellationToken)
     {
         if (message is null || message.IsEmpty)
@@ -51,7 +51,7 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
     /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
-    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+    [Obsolete(@"Slated for removal as part of Microsoft's BinaryFormatter Obsoletion Strategy.
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     private DiagnosticsEmittedAsyncEventArgs(SerializationInfo info, StreamingContext context)
         : base(default)
@@ -100,7 +100,7 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
     /// </summary>
     /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
     /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
-    [Obsolete(@"Slated for removal in v8 as part of Microsoft's BinaryFormatter Obsoletion Strategy.
+    [Obsolete(@"Slated for removal as part of Microsoft's BinaryFormatter Obsoletion Strategy.
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {

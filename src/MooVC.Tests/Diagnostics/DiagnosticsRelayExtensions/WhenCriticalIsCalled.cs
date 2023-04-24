@@ -14,28 +14,28 @@ public sealed class WhenCriticalIsCalled
     protected override void EmitWithAll(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Critical(cancellationToken, cause, message, args);
+        diagnostics.Critical(cause, message, cancellationToken, args);
     }
 
     protected override void EmitWithCancellationTokenAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Critical(cancellationToken, message, args);
+        diagnostics.Critical(message, cancellationToken, args);
     }
 
     protected override void EmitWithCauseAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Critical(cause, message, args);
@@ -44,8 +44,8 @@ public sealed class WhenCriticalIsCalled
     protected override void EmitWithMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Critical(message, args);

@@ -30,14 +30,14 @@ public abstract class StreamCompressor
     /// <param name="source">The stream to compress.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the compressed stream as the result.</returns>
-    public override async Task<Stream> CompressAsync(Stream source, CancellationToken? cancellationToken = default)
+    public override async Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken = default)
     {
         var compressed = new MemoryStream();
 
         using Stream compressor = CreateCompressor(level, compressed);
 
         await source
-            .CopyToAsync(compressor, cancellationToken.GetValueOrDefault())
+            .CopyToAsync(compressor, cancellationToken)
             .ConfigureAwait(false);
 
         return compressed;
@@ -51,14 +51,14 @@ public abstract class StreamCompressor
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the decompressed stream as the result.
     /// </returns>
-    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken? cancellationToken = null)
+    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken = default)
     {
         var decompressed = new MemoryStream();
 
         using Stream decompressor = CreateDecompressor(level, source);
 
         await decompressor
-            .CopyToAsync(decompressed, cancellationToken.GetValueOrDefault())
+            .CopyToAsync(decompressed, cancellationToken)
             .ConfigureAwait(false);
 
         return decompressed;
@@ -68,7 +68,7 @@ public abstract class StreamCompressor
     /// Wraps the <paramref name="source"/> in a new <see cref="Stream"/> that is configured for compression based on the <paramref name="level"/>.
     /// </summary>
     /// <param name="level">The <see cref="CompressionLevel"/> to use for compression.</param>
-    /// <param name="level">The <see cref="Stream"/> to compress.</param>
+    /// <param name="source">The <see cref="Stream"/> to compress.</param>
     /// <returns>The wrapped <paramref name="source"/> configured for compression based on the <paramref name="level"/>.</returns>
     protected abstract Stream CreateCompressor(CompressionLevel level, Stream source);
 
@@ -76,7 +76,7 @@ public abstract class StreamCompressor
     /// Wraps the <paramref name="source"/> in a new <see cref="Stream"/> that is configured for decompression based on the <paramref name="level"/>.
     /// </summary>
     /// <param name="level">The <see cref="CompressionLevel"/> to use for decompression.</param>
-    /// <param name="level">The <see cref="Stream"/> to compress.</param>
+    /// <param name="source">The <see cref="Stream"/> to compress.</param>
     /// <returns>The wrapped <paramref name="source"/> configured for decompression based on the <paramref name="level"/>.</returns>
     protected abstract Stream CreateDecompressor(CompressionLevel level, Stream source);
 }

@@ -15,28 +15,28 @@ public sealed class WhenDebugAsyncIsCalled
     protected override Task EmitWithAllAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        return diagnostics.DebugAsync(cancellationToken, cause, message, args);
+        return diagnostics.DebugAsync(cause, message, cancellationToken, args);
     }
 
     protected override Task EmitWithCancellationTokenAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        return diagnostics.DebugAsync(cancellationToken, message, args);
+        return diagnostics.DebugAsync(message, cancellationToken, args);
     }
 
     protected override Task EmitWithCauseAndMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         return diagnostics.DebugAsync(cause, message, args);
@@ -45,8 +45,8 @@ public sealed class WhenDebugAsyncIsCalled
     protected override Task EmitWithMessageAsync(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         return diagnostics.DebugAsync(message, args);

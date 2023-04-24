@@ -162,7 +162,7 @@ public abstract class Processor
                 : Impact.Recoverable;
 
             await Diagnostics
-                .EmitAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStartFailure)
+                .EmitAsync(cause: ex, impact: impact, message: ProcessorTryStartFailure, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -193,7 +193,7 @@ public abstract class Processor
                 : Impact.Recoverable;
 
             await Diagnostics
-                .EmitAsync(cancellationToken: cancellationToken, cause: ex, impact: impact, message: ProcessorTryStopFailure)
+                .EmitAsync(cause: ex, impact: impact, message: ProcessorTryStopFailure, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -228,16 +228,16 @@ public abstract class Processor
     /// <param name="state">The new processing state.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    protected virtual Task OnProcessingStateChangedAsync(ProcessorState state, CancellationToken? cancellationToken = default)
+    protected virtual Task OnProcessingStateChangedAsync(ProcessorState state, CancellationToken cancellationToken = default)
     {
         return StateChanged.PassiveInvokeAsync(
             this,
             new ProcessorStateChangedAsyncEventArgs(state),
             onFailure: failure => Diagnostics.EmitAsync(
-                cancellationToken: cancellationToken,
                 cause: failure,
                 impact: Impact.None,
-                message: ProcessorOnProcessingStateChangedAsyncFailure));
+                message: ProcessorOnProcessingStateChangedAsyncFailure,
+                cancellationToken: cancellationToken));
     }
 
     /// <summary>

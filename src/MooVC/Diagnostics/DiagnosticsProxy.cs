@@ -67,22 +67,22 @@ public sealed class DiagnosticsProxy
     /// Emits a diagnostic event asynchronously if the proxy deems it appropriate.
     /// </summary>
     /// <param name="source">The object emitting the event for the purpose of diagnostics.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <param name="cause">The <see cref="Exception" /> that caused the diagnostic event to be emitted, if any.</param>
     /// <param name="impact">The perceived <see cref="Impact" /> of the event from the perspective of the <paramref name="source"/>.</param>
     /// <param name="level">The perceived <see cref="Level" /> of the event from the perspective of the <paramref name="source"/>.</param>
     /// <param name="message">A <see cref="DiagnosticsMessage" />, providing a friendly description of the event, if any.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> representing the asynchronous operation.
     /// The result of the task is an object containing information about the emitted diagnostic message, or null if the message was not emitted.
     /// </returns>
     public async Task<DiagnosticsEmittedAsyncEventArgs?> TryEmitAsync(
         IEmitDiagnostics source,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
         Impact? impact = default,
         Level? level = default,
-        DiagnosticsMessage? message = default)
+        DiagnosticsMessage? message = default,
+        CancellationToken cancellationToken = default)
     {
         if (level.HasValue)
         {
@@ -105,11 +105,11 @@ public sealed class DiagnosticsProxy
         if (level > Level.Ignore)
         {
             diagnostics = new DiagnosticsEmittedAsyncEventArgs(
-                cancellationToken: cancellationToken,
                 cause: cause,
                 impact: impact.Value,
                 level: level.Value,
-                message: message);
+                message: message,
+                cancellationToken: cancellationToken);
 
             await DiagnosticsEmitted
                 .PassiveInvokeAsync(source, diagnostics)

@@ -14,28 +14,28 @@ public sealed class WhenDebugIsCalled
     protected override void EmitWithAll(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Debug(cancellationToken, cause, message, args);
+        diagnostics.Debug(cause, message, cancellationToken, args);
     }
 
     protected override void EmitWithCancellationTokenAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
-        diagnostics.Debug(cancellationToken, message, args);
+        diagnostics.Debug(message, cancellationToken, args);
     }
 
     protected override void EmitWithCauseAndMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Debug(cause, message, args);
@@ -44,8 +44,8 @@ public sealed class WhenDebugIsCalled
     protected override void EmitWithMessage(
         IDiagnosticsRelay? diagnostics,
         string message,
-        CancellationToken? cancellationToken = default,
         Exception? cause = default,
+        CancellationToken cancellationToken = default,
         params object[] args)
     {
         diagnostics.Debug(message, args);

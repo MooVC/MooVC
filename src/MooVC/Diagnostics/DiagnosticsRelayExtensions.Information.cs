@@ -25,17 +25,17 @@ public static partial class DiagnosticsRelayExtensions
     /// Emits an information diagnostic event with the specified message and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
     public static async void Information(
         this IDiagnosticsRelay? diagnostics,
-        CancellationToken? cancellationToken,
         string message,
+        CancellationToken cancellationToken,
         params object[] args)
     {
         await diagnostics
-            .InformationAsync(cancellationToken, message, args)
+            .InformationAsync(message, cancellationToken, args)
             .ConfigureAwait(false);
     }
 
@@ -57,19 +57,19 @@ public static partial class DiagnosticsRelayExtensions
     /// Emits an information diagnostic event with the specified message, cause, and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="cause">The cause of the diagnostic event.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
     public static async void Information(
         this IDiagnosticsRelay? diagnostics,
-        CancellationToken? cancellationToken,
         Exception? cause,
         string message,
+        CancellationToken cancellationToken,
         params object[] args)
     {
         await diagnostics
-            .InformationAsync(cancellationToken, cause, message, args)
+            .InformationAsync(cause, message, cancellationToken, args)
             .ConfigureAwait(false);
     }
 }

@@ -18,7 +18,7 @@ public sealed class WhenUpdateAsyncIsCalled
         Store.Verify(
             store => store.UpdateAsync(
                 It.IsAny<object>(),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 }

@@ -18,20 +18,20 @@ public static partial class DiagnosticsRelayExtensions
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public static Task CriticalAsync(this IDiagnosticsRelay? diagnostics, string message, params object[] args)
     {
-        return diagnostics.CriticalAsync(CancellationToken.None, message, args);
+        return diagnostics.CriticalAsync(message, default, args);
     }
 
     /// <summary>
     /// Asynchronously emits a critical diagnostic event with the specified message and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public static Task CriticalAsync(this IDiagnosticsRelay? diagnostics, CancellationToken? cancellationToken, string message, params object[] args)
+    public static Task CriticalAsync(this IDiagnosticsRelay? diagnostics, string message, CancellationToken cancellationToken, params object[] args)
     {
-        return diagnostics.CriticalAsync(cancellationToken, default, message, args);
+        return diagnostics.CriticalAsync(default, message, cancellationToken, args);
     }
 
     /// <summary>
@@ -44,29 +44,29 @@ public static partial class DiagnosticsRelayExtensions
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public static Task CriticalAsync(this IDiagnosticsRelay? diagnostics, Exception? cause, string message, params object[] args)
     {
-        return diagnostics.CriticalAsync(CancellationToken.None, cause, message, args);
+        return diagnostics.CriticalAsync(cause, message, default, args);
     }
 
     /// <summary>
     /// Asynchronously emits a critical diagnostic event with the specified message, cause, and cancellation token.
     /// </summary>
     /// <param name="diagnostics">The <see cref="IDiagnosticsRelay"/> to use to emit the diagnostic event.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="cause">The cause of the diagnostic event.</param>
     /// <param name="message">The message associated with the diagnostic event.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the emission operation.</param>
     /// <param name="args">The arguments of the message (if any).</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public static Task CriticalAsync(
         this IDiagnosticsRelay? diagnostics,
-        CancellationToken? cancellationToken,
         Exception? cause,
         string message,
+        CancellationToken cancellationToken,
         params object[] args)
     {
         return diagnostics.TryEmitAsync(
-            cancellationToken: cancellationToken,
             cause: cause,
             level: Level.Critical,
-            message: (message, args));
+            message: (message, args),
+            cancellationToken: cancellationToken);
     }
 }

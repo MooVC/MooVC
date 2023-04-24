@@ -28,7 +28,7 @@ public sealed class WhenCreateAsyncIsCalled
         _ = Store
             .Setup(store => store.CreateAsync(
                 It.Is<object>(parameter => parameter == item),
-                It.IsAny<CancellationToken?>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedInnerKey);
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
@@ -40,7 +40,7 @@ public sealed class WhenCreateAsyncIsCalled
         Store.Verify(
             store => store.CreateAsync(
                 It.IsAny<object>(),
-                It.IsAny<CancellationToken?>()),
+                It.IsAny<CancellationToken>()),
             times: Times.Once);
     }
 }

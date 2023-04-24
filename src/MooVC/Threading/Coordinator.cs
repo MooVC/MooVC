@@ -39,13 +39,13 @@ public sealed class Coordinator<T>
     /// Asynchronously applies coordination in the specified context.
     /// </summary>
     /// <param name="context">The context in which coordination is to be applied.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <param name="timeout">A timeout that specifies how long the operation should wait for coordination to be granted.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The result of the task is metadata relating to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
-    public async Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken? cancellationToken = default, TimeSpan? timeout = default)
+    public async Task<ICoordinationContext<T>> ApplyAsync(T context, TimeSpan? timeout = default, CancellationToken cancellationToken = default)
     {
         if (isDisposed)
         {
@@ -59,9 +59,8 @@ public sealed class Coordinator<T>
         SemaphoreSlim semaphore = contexts.GetOrAdd(key, _ => new SemaphoreSlim(1, 1));
 
         timeout ??= Timeout.InfiniteTimeSpan;
-        cancellationToken = cancellationToken.GetValueOrDefault();
 
-        bool isSuccessful = await semaphore.WaitAsync(timeout.Value, cancellationToken.Value);
+        bool isSuccessful = await semaphore.WaitAsync(timeout.Value, cancellationToken);
 
         if (!isSuccessful)
         {
