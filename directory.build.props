@@ -1,14 +1,4 @@
 ﻿<Project>
-  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)analyzers/stylecop.tests.ruleset</CodeAnalysisRuleSet>
-    <CollectCoverage>true</CollectCoverage>
-    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
-    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
-    <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
-    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
-    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
-    <IsTestProject>true</IsTestProject>
-  </PropertyGroup>
   <PropertyGroup>
     <AnalysisMode>Recommended</AnalysisMode>
     <Authors>Paul Martins</Authors>
@@ -26,6 +16,18 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
+    <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)analyzers/stylecop.tests.ruleset</CodeAnalysisRuleSet>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
+    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+    <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
+    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' != 'true'">

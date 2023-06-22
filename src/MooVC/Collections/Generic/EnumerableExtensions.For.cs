@@ -28,8 +28,9 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
+            _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
 
+#if NET6_0_OR_GREATER
             T[] elements = items.ToArray();
             ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
 
@@ -39,6 +40,14 @@ public static partial class EnumerableExtensions
 
                 action(index, element);
             }
+#else
+            int index = 0;
+
+            foreach (var item in items)
+            {
+                action(index++, item);
+            }
+#endif
         }
     }
 }

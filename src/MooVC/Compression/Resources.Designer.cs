@@ -61,6 +61,15 @@ namespace MooVC.Compression {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A non-zero positive buffer size must be provided..
+        /// </summary>
+        internal static string StreamCompressorBufferSizeRequired {
+            get {
+                return ResourceManager.GetString("StreamCompressorBufferSizeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The compression level must be provided..
         /// </summary>
         internal static string StreamCompressorLevelRequired {

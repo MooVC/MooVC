@@ -39,9 +39,9 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
             message = cause?.Message;
         }
 
-        Impact = IsDefined(impact, @default: Impact);
-        Level = IsDefined(level, @default: Level);
-        Message = Satisfies(message, _ => !IsNullOrWhiteSpace(message), message: DiagnosticsEmittedAsyncEventArgsMessageRequired);
+        Impact = IsDefined(impact, argumentName: nameof(impact), @default: Impact);
+        Level = IsDefined(level, argumentName: nameof(level), @default: Level);
+        Message = Satisfies(message, _ => !IsNullOrWhiteSpace(message), argumentName: nameof(message), message: DiagnosticsEmittedAsyncEventArgsMessageRequired);
         Cause = cause;
     }
 
@@ -59,7 +59,7 @@ public sealed class DiagnosticsEmittedAsyncEventArgs
         Cause = info.TryGetValue<Exception?>(nameof(Cause));
         Impact = info.TryGetValue(nameof(Impact), defaultValue: Impact.None);
         Level = info.TryGetValue(nameof(Level), defaultValue: Level.Information);
-        Message = info.TryGetValue(nameof(Message), defaultValue: DiagnosticsMessage.Empty);
+        Message = info.TryGetValue(nameof(Message), defaultValue: DiagnosticsMessage.Empty)!;
     }
 
     /// <summary>

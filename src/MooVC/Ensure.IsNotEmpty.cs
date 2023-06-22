@@ -25,7 +25,10 @@ public static partial class Ensure
     /// <exception cref="ArgumentException">Thrown if the given <see cref="Guid"/> value is empty and no default value is provided.</exception>
     public static Guid IsNotEmpty(
         Guid? argument,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         Guid? @default = default,
         string? message = default)
     {
@@ -46,7 +49,10 @@ public static partial class Ensure
     /// <exception cref="ArgumentException">Thrown if the given <see cref="TimeSpan"/> value is empty and no default value is provided.</exception>
     public static TimeSpan IsNotEmpty(
         TimeSpan? argument,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         TimeSpan? @default = default,
         string? message = default)
     {
@@ -89,7 +95,10 @@ public static partial class Ensure
     /// </exception>
     public static T[] IsNotEmpty<T>(
         IEnumerable<T>? argument,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         IEnumerable<T>? @default = default,
         string? message = default,
         Func<T, bool>? predicate = default)

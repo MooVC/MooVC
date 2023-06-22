@@ -29,7 +29,7 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = IsNotNull(action, message: EnumerableExtensionsForAllActionRequired);
+            _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsForAllActionRequired);
 
             var exceptions = new ConcurrentQueue<Exception>();
 

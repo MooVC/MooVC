@@ -98,7 +98,7 @@ public sealed class Coordinator<T>
                 .ToString(NumberFormat);
         }
 
-        return key;
+        return key!;
     }
 
     private void Dispose(bool isDisposing)

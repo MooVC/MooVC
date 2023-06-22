@@ -18,7 +18,7 @@ public static class ExceptionExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="handler"/> parameter is <see langword="null" />.</exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
-        _ = IsNotNull(handler, message: ExceptionExtensionsExplodeHandlerRequired);
+        _ = IsNotNull(handler, argumentName: nameof(handler), message: ExceptionExtensionsExplodeHandlerRequired);
 
         exception.PerformExplode(handler);
     }

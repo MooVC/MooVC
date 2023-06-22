@@ -20,7 +20,7 @@ public static partial class CollectionExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="target" /> is <see langword="null" />.</exception>
     public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
     {
-        _ = IsNotNull(target, message: CollectionExtensionsReplaceTargetRequired);
+        _ = IsNotNull(target, argumentName: nameof(target), message: CollectionExtensionsReplaceTargetRequired);
 
         target.Clear();
 

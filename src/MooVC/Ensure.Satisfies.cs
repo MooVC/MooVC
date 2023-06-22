@@ -30,7 +30,10 @@ public static partial class Ensure
     public static T Satisfies<T>(
         T? argument,
         Func<T, bool> predicate,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : struct
@@ -77,7 +80,10 @@ public static partial class Ensure
     public static T Satisfies<T>(
         T? argument,
         Func<T, bool> predicate,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : class

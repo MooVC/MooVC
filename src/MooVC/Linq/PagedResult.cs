@@ -97,7 +97,7 @@ public sealed class PagedResult<T>
     /// </exception>
     private PagedResult(Paging request, Func<ulong> total, IEnumerable<T> values)
     {
-        Request = IsNotNull(request, message: PagedResultRequestRequired);
+        Request = IsNotNull(request, argumentName: nameof(request), message: PagedResultRequestRequired);
         Total = total();
         Values = values.Snapshot();
 
@@ -114,7 +114,7 @@ public sealed class PagedResult<T>
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     private PagedResult(SerializationInfo info, StreamingContext context)
     {
-        Request = info.TryGetValue(nameof(Request), defaultValue: Paging.Default);
+        Request = info.TryGetValue(nameof(Request), defaultValue: Paging.Default)!;
         Total = info.TryGetValue<ulong>(nameof(Total));
         Values = info.TryGetEnumerable<T>(nameof(Values));
 

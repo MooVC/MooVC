@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MooVC.Compression;
+using static MooVC.Ensure;
+using static MooVC.Serialization.Resources;
 
 /// <summary>
 /// Provides a default implementation of the <see cref="ISerializer"/> contract for serializing and deserializing objects.
@@ -13,17 +15,25 @@ using MooVC.Compression;
 public abstract class Serializer
     : ISerializer
 {
+    /// <summary>
+    /// The default buffer size for stream copy operations.
+    /// </summary>
+    public const int DefaultBufferSize = 81920;
+
+    private readonly int bufferSize;
     private readonly ICompressor? compressor;
 
     /// <summary>
     /// Facilitates the Initialization of new instance based on the <see cref="Serializer"/> class.
     /// </summary>
+    /// <param name="bufferSize">The buffer size to use when copying from one stream to another.</param>
     /// <param name="compressor">
     /// The optional <see cref="ICompressor"/> to use to compress/decompress the serialize/deserialized data.
     /// If no instance is provided, the streams will not be compressed/decompressed.
     /// </param>
-    protected Serializer(ICompressor? compressor = default)
+    protected Serializer(int bufferSize = DefaultBufferSize, ICompressor? compressor = default)
     {
+        this.bufferSize = InRange(bufferSize, argumentName: nameof(bufferSize), message: SerializerBufferSizeRequired, start: 1);
         this.compressor = compressor;
     }
 
@@ -133,13 +143,13 @@ public abstract class Serializer
             compressed.Position = 0;
 
             await compressed
-                .CopyToAsync(target, cancellationToken)
+                .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
             await source
-                .CopyToAsync(target, cancellationToken)
+                .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
     }
@@ -164,13 +174,13 @@ public abstract class Serializer
             decompressed.Position = 0;
 
             await decompressed
-                .CopyToAsync(target, cancellationToken)
+                .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
             await source
-                .CopyToAsync(target, cancellationToken)
+                .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

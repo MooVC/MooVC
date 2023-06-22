@@ -17,7 +17,11 @@ public static partial class EnumerableExtensions
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
     /// <returns>True if the enumerable sequence is not empty, or false if it is empty or null.</returns>
-    public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source)
+    public static bool SafeAny<T>(
+#if NET6_0_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        this IEnumerable<T>? source)
     {
         return source is { } && source.Any();
     }
@@ -31,7 +35,12 @@ public static partial class EnumerableExtensions
     /// <returns>
     /// True if any elements in the enumerable sequence satisfy the condition, or false if none of the elements do or the sequence is empty or null.
     /// </returns>
-    public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source, Func<T, bool> predicate)
+    public static bool SafeAny<T>(
+#if NET6_0_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        this IEnumerable<T>? source,
+        Func<T, bool> predicate)
     {
         return source is { } && source.Any(predicate);
     }

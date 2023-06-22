@@ -34,7 +34,7 @@ public static partial class EnumerableExtensions
     {
         if (source is { })
         {
-            _ = IsNotNull(transform, message: EnumerableExtensionsProcessAllTransformRequired);
+            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
 
             return await source
                 .ProcessAllAsync(
@@ -76,7 +76,7 @@ public static partial class EnumerableExtensions
     {
         if (source is { })
         {
-            _ = IsNotNull(transform, message: EnumerableExtensionsProcessAllTransformRequired);
+            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
 
             var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
 

@@ -35,7 +35,10 @@ public static partial class Ensure
     /// </exception>
     public static T IsDefined<T>(
         T? argument,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : struct, Enum
@@ -77,7 +80,10 @@ public static partial class Ensure
     /// </exception>
     public static T IsDefined<T>(
         T argument,
-        [CallerArgumentExpression("argument")] string? argumentName = default,
+#if NET6_0_OR_GREATER
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : struct, Enum

@@ -27,7 +27,7 @@ public static partial class EnumerableExtensions
     {
         if (source is { })
         {
-            _ = IsNotNull(transform, message: EnumerableExtensionsProcessAllTransformRequired);
+            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
 
             return source.ProcessAll(
                 source =>

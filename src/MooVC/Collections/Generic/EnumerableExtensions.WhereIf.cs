@@ -25,12 +25,14 @@ public static partial class EnumerableExtensions
     /// If <paramref name="enumeration"/> is null and <paramref name="isApplicable"/> is true, an exception is thrown.
     /// If <paramref name="isApplicable"/> is false, the input sequence is returned unchanged.
     /// </remarks>
-    [return: NotNullIfNotNull("enumeration")]
+ #if NET6_0_OR_GREATER
+    [return: NotNullIfNotNull(nameof(enumeration))]
+#endif
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, bool isApplicable, Func<T, bool> predicate)
     {
         if (enumeration is { } && isApplicable)
         {
-            _ = IsNotNull(predicate, message: EnumerableExtensionsWhereIfPredicateRequired);
+            _ = IsNotNull(predicate, argumentName: nameof(predicate), message: EnumerableExtensionsWhereIfPredicateRequired);
 
             return enumeration.Where(predicate);
         }
@@ -50,12 +52,14 @@ public static partial class EnumerableExtensions
     /// If <paramref name="enumeration"/> is null and the result of <paramref name="condition"/> is true, an exception is thrown.
     /// If the result of <paramref name="condition"/> is false, the input sequence is returned unchanged.
     /// </remarks>
-    [return: NotNullIfNotNull("enumeration")]
+#if NET6_0_OR_GREATER
+    [return: NotNullIfNotNull(nameof(enumeration))]
+#endif
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, Func<bool> condition, Func<T, bool> predicate)
     {
         if (enumeration is { })
         {
-            _ = IsNotNull(condition, message: EnumerableExtensionsWhereIfConditionRequired);
+            _ = IsNotNull(condition, argumentName: nameof(condition), message: EnumerableExtensionsWhereIfConditionRequired);
 
             return enumeration.WhereIf(condition(), predicate);
         }

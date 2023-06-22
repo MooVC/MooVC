@@ -29,12 +29,13 @@ public static partial class EnumerableExtensions
             return Default;
         }
 
-        _ = IsNotNull(predicate, message: EnumerableExtensionsIndexOfPredicateRequired);
+        _ = IsNotNull(predicate, argumentName: nameof(predicate), message: EnumerableExtensionsIndexOfPredicateRequired);
 
         return enumeration
             .Select((item, index) => new { Index = index, Item = item })
             .Where(item => predicate(item.Item))
             .Select(item => item.Index)
-            .FirstOrDefault(Default);
+            .DefaultIfEmpty(Default)
+            .First();
     }
 }

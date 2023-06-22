@@ -126,4 +126,7 @@
   <data name="SerializationInfoExtensionsGetValueTypeInvalid" xml:space="preserve">
     <value>Element {0} could not be deserialized to type {1}.</value>
   </data>
+  <data name="SerializerBufferSizeRequired" xml:space="preserve">
+    <value>A non-zero positive buffer size must be provided.</value>
+  </data>
 </root>
