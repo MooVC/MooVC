@@ -27,6 +27,7 @@
     <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
     <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IsTestProject)' != 'true'">

@@ -18,4 +18,4 @@ While the original MooVC PHP based framework has long since been deprecated, man
 - Removed Persistence.SynchronousEventStore<T, TIndex> (**Breaking Change**).
 - Removed Processing.TimedJobQueue<T> (**Breaking Change**).
 - Removed Processing.TimedProcessor (**Breaking Change**).
-- Restored support for .NET Standard 2.0
+- Restored support for .NET Standard 2.0.
