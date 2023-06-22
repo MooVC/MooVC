@@ -43,7 +43,7 @@ public static class DiagnosticsEmittedEventArgsExtensions
     {
         if (diagnostics is { })
         {
-            _ = IsNotNull(predicate, message: DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired);
+            _ = IsNotNull(predicate, argumentName: nameof(predicate), message: DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired);
 
             IEnumerable<Exception> matches = diagnostics
                 .Where(diagnostic => diagnostic.Cause is { })

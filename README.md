@@ -12,8 +12,10 @@ While the original MooVC PHP based framework has long since been deprecated, man
 
 ## Enhancements
 
-- Optional CancellationToken parameters are no longer marked as nullable (**Breaking Change**).
+- Changed optional CancellationToken parameters so that they are no longer marked as nullable (**Breaking Change**).
+- Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Removed Persistence.IEventStore (**Breaking Change**).
 - Removed Persistence.SynchronousEventStore<T, TIndex> (**Breaking Change**).
 - Removed Processing.TimedJobQueue<T> (**Breaking Change**).
 - Removed Processing.TimedProcessor (**Breaking Change**).
+- Restored support for .NET Standard 2.0

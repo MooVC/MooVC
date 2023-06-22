@@ -21,7 +21,7 @@ public sealed class DefaultCloner
     /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is <see langword="null" />.</exception>
     public DefaultCloner(ISerializer serializer)
     {
-        this.serializer = IsNotNull(serializer, message: DefaultClonerSerializerRequired);
+        this.serializer = IsNotNull(serializer, argumentName: nameof(serializer), message: DefaultClonerSerializerRequired);
     }
 
     /// <summary>

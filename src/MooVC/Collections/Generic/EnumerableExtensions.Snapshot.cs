@@ -48,7 +48,7 @@ public static partial class EnumerableExtensions
     /// <returns>An array that contains the elements of the snapshot, ordered by the given key.</returns>
     public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = IsNotNull(order, message: EnumerableExtensionsSnapshotOrderRequired);
+        _ = IsNotNull(order, argumentName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
 
         return enumerable
             .Snapshot(predicate: predicate)

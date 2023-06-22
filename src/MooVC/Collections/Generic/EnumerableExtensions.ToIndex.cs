@@ -43,8 +43,8 @@ public static partial class EnumerableExtensions
         Func<TValue, TTransform> transform)
         where TSubject : notnull
     {
-        selector = IsNotNull(selector, message: EnumerableExtensionsToIndexSelectorRequired);
-        transform = IsNotNull(transform, message: EnumerableExtensionsToIndexTransformRequired);
+        selector = IsNotNull(selector, argumentName: nameof(selector), message: EnumerableExtensionsToIndexSelectorRequired);
+        transform = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsToIndexTransformRequired);
 
         if (source is null)
         {

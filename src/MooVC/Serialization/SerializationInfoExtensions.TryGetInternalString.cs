@@ -10,12 +10,14 @@ public static partial class SerializationInfoExtensions
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
     public static string TryGetInternalString(this SerializationInfo info, string name)
     {
-        return info.TryGetInternalString(name, Empty);
+        return info.TryGetInternalString(name, Empty)!;
     }
 
     [Obsolete(@"Slated for removal as part of Microsoft's BinaryFormatter Obsoletion Strategy.
                        (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
-    [return: NotNullIfNotNull("defaultValue")]
+#if NET6_0_OR_GREATER
+    [return: NotNullIfNotNull(nameof(defaultValue))]
+#endif
     public static string? TryGetInternalString(this SerializationInfo info, string name, string? defaultValue)
     {
         return info.TryGetString(FormatName(name), defaultValue: defaultValue);

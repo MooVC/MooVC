@@ -29,7 +29,7 @@ public sealed class ThreadSafeHostedService
     public ThreadSafeHostedService(IEnumerable<IHostedService> services, IDiagnosticsProxy? diagnostics = default)
         : base(diagnostics: diagnostics)
     {
-        this.services = IsNotEmpty(services, message: ThreadSafeHostedServiceServicesRequired);
+        this.services = IsNotEmpty(services, argumentName: nameof(services), message: ThreadSafeHostedServiceServicesRequired);
     }
 
     /// <summary>

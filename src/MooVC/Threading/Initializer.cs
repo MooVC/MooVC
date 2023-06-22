@@ -24,7 +24,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = IsNotNull(initializer, message: InitializerInitializerRequired);
+        this.initializer = IsNotNull(initializer, argumentName: nameof(initializer), message: InitializerInitializerRequired);
     }
 
     /// <summary>

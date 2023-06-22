@@ -13,15 +13,23 @@ using static MooVC.Ensure;
 public abstract class StreamCompressor
     : Compressor
 {
+    /// <summary>
+    /// The default buffer size for stream copy operations.
+    /// </summary>
+    public const int DefaultBufferSize = 81920;
+
+    private readonly int bufferSize;
     private readonly CompressionLevel level;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BrotliCompressor"/> class.
     /// </summary>
+    /// <param name="bufferSize">The buffer size to use when copying from one stream to another.</param>
     /// <param name="level">The <see cref="CompressionLevel"/> to use for compression and decompression.</param>
-    protected StreamCompressor(CompressionLevel level = CompressionLevel.SmallestSize)
+    protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.level = IsDefined(level, message: StreamCompressorLevelRequired);
+        this.bufferSize = InRange(bufferSize, argumentName: nameof(bufferSize), message: StreamCompressorBufferSizeRequired, start: 1);
+        this.level = IsDefined(level, argumentName: nameof(level), message: StreamCompressorLevelRequired);
     }
 
     /// <summary>
@@ -37,7 +45,7 @@ public abstract class StreamCompressor
         using Stream compressor = CreateCompressor(level, compressed);
 
         await source
-            .CopyToAsync(compressor, cancellationToken)
+            .CopyToAsync(compressor, bufferSize, cancellationToken)
             .ConfigureAwait(false);
 
         return compressed;
@@ -58,7 +66,7 @@ public abstract class StreamCompressor
         using Stream decompressor = CreateDecompressor(level, source);
 
         await decompressor
-            .CopyToAsync(decompressed, cancellationToken)
+            .CopyToAsync(decompressed, bufferSize, cancellationToken)
             .ConfigureAwait(false);
 
         return decompressed;

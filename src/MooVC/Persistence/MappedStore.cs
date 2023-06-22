@@ -35,9 +35,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// </exception>
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = IsNotNull(innerMapping, message: MappedStoreInnerMappingRequired);
-        this.outterMapping = IsNotNull(outterMapping, message: MappedStoreOutterMappingRequired);
-        this.store = IsNotNull(store, message: MappedStoreStoreRequired);
+        this.innerMapping = IsNotNull(innerMapping, argumentName: nameof(innerMapping), message: MappedStoreInnerMappingRequired);
+        this.outterMapping = IsNotNull(outterMapping, argumentName: nameof(outterMapping), message: MappedStoreOutterMappingRequired);
+        this.store = IsNotNull(store, argumentName: nameof(store), message: MappedStoreStoreRequired);
     }
 
     /// <summary>

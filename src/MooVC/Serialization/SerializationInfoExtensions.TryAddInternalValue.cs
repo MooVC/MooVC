@@ -11,7 +11,10 @@ public static partial class SerializationInfoExtensions
     public static bool TryAddInternalValue<T>(
         this SerializationInfo info,
         string name,
-        [NotNullWhen(true)] T? value,
+#if NET6_0_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        T? value,
         T? defaultValue = default,
         Func<T, bool>? predicate = default)
     {

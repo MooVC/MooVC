@@ -25,7 +25,7 @@ public sealed class DiagnosticsRelay
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null" />.</exception>
     public DiagnosticsRelay(IEmitDiagnostics source, IDiagnosticsProxy? diagnostics = default)
     {
-        this.source = IsNotNull(source, message: DiagnosticsEmitterSourceRequired);
+        this.source = IsNotNull(source, argumentName: nameof(source), message: DiagnosticsEmitterSourceRequired);
         this.diagnostics = diagnostics ?? DiagnosticsProxy.Default;
     }
 

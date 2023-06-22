@@ -22,7 +22,7 @@ public static partial class EnumerableExtensions
     {
         if (items is { })
         {
-            _ = IsNotNull(action, message: EnumerableExtensionsActionRequired);
+            _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
 
             items.For((_, item) => action(item));
         }

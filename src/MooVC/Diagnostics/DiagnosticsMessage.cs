@@ -36,7 +36,7 @@ public sealed class DiagnosticsMessage
     public DiagnosticsMessage(string description, params object[] arguments)
         : this()
     {
-        Description = IsNotNullOrWhiteSpace(description, message: DiagnosticsMessageDescriptionRequired);
+        Description = IsNotNullOrWhiteSpace(description, argumentName: nameof(description), message: DiagnosticsMessageDescriptionRequired);
         Arguments = arguments.Snapshot();
     }
 
@@ -124,7 +124,7 @@ public sealed class DiagnosticsMessage
             return Empty;
         }
 
-        return new DiagnosticsMessage(description);
+        return new DiagnosticsMessage(description!);
     }
 
     /// <summary>

@@ -19,7 +19,7 @@ public static partial class CollectionExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="target" /> is <see langword="null" />.</exception>
     public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
     {
-        _ = IsNotNull(target, message: CollectionExtensionsAddRangeTargetRequired);
+        _ = IsNotNull(target, argumentName: nameof(target), message: CollectionExtensionsAddRangeTargetRequired);
 
         items.ForEach(target.Add);
     }
