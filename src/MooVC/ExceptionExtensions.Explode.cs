@@ -30,7 +30,7 @@ public static class ExceptionExtensions
     /// <param name="handler">The <see cref="Action{T}"/> to perform on the given exception.</param>
     private static void PerformExplode(this Exception? exception, Action<Exception> handler)
     {
-        if (exception is { })
+        if (exception is not null)
         {
             handler(exception);
 

@@ -21,13 +21,13 @@ public static partial class EnumerableExtensions
     /// </remarks>
     public static ReadOnlySpan<T> ToSpan<T>(this IEnumerable<T>? items)
     {
-        if (items is { })
+        if (items is null)
         {
-            T[] elements = items.ToArray();
-
-            return new ReadOnlySpan<T>(elements);
+            return ReadOnlySpan<T>.Empty;
         }
 
-        return ReadOnlySpan<T>.Empty;
+        T[] elements = items.ToArray();
+
+        return new ReadOnlySpan<T>(elements);
     }
 }

@@ -12,8 +12,14 @@ While the original MooVC PHP based framework has long since been deprecated, man
 
 ## Enhancements
 
+- Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
+- Changed Collections.Generic.EnumerableExtensions.Aggregate to return IReadOnlyList<T> instead of IEnumerable<T>.
+- Changed Collections.Generic.EnumerableExtensions.Process to return IReadOnlyList<T> instead of IEnumerable<T>.
+- Changed Collections.Generic.EnumerableExtensions.ProcessAll to return IReadOnlyList<T> instead of IEnumerable<T>.
+- Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed optional CancellationToken parameters so that they are no longer marked as nullable (**Breaking Change**).
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
+- Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.AsArray (**Breaking Change**).
 - Removed Persistence.IEventStore (**Breaking Change**).
 - Removed Persistence.SynchronousEventStore<T, TIndex> (**Breaking Change**).
 - Removed Processing.TimedJobQueue<T> (**Breaking Change**).

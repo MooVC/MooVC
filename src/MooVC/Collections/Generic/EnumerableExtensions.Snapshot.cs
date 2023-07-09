@@ -24,14 +24,14 @@ public static partial class EnumerableExtensions
     /// <returns>An array that contains the elements of the snapshot.</returns>
     public static T[] Snapshot<T>(this IEnumerable<T>? enumerable, Func<T, bool>? predicate = default)
     {
-        if (enumerable is { })
+        if (enumerable is null)
         {
-            return enumerable
-                .WhereIf(predicate is { }, predicate!)
-                .ToArray();
+            return Array.Empty<T>();
         }
 
-        return Array.Empty<T>();
+        return enumerable
+            .WhereIf(predicate is not null, predicate!)
+            .ToArray();
     }
 
     /// <summary>

@@ -26,7 +26,7 @@ public static partial class EnumerableExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="action"/> is <see langword="null" />.</exception>
     public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
     {
-        if (items is { })
+        if (items is not null)
         {
             _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
 
@@ -43,7 +43,7 @@ public static partial class EnumerableExtensions
 #else
             int index = 0;
 
-            foreach (var item in items)
+            foreach (T item in items)
             {
                 action(index++, item);
             }

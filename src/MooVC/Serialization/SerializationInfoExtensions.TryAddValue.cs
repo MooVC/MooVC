@@ -18,9 +18,9 @@ public static partial class SerializationInfoExtensions
         T? defaultValue = default,
         Func<T, bool>? predicate = default)
     {
-        if (value is { })
+        if (value is not null)
         {
-            predicate ??= input => input is { } && !input.Equals(defaultValue);
+            predicate ??= input => !(input is null || input.Equals(defaultValue));
 
             if (predicate(value))
             {

@@ -17,24 +17,24 @@ public static partial class EnumerableExtensions
     /// <typeparam name="TResult">Specifies the type of values in the dictionary.</typeparam>
     /// <param name="items">The enumeration from which the contents are to be matched.</param>
     /// <param name="source">The dictionary from which the results are to be extracted.</param>
-    /// <returns>An enumerable containing the <typeparamref name="TResult"/> values that match the contents of <paramref name="items"/>.</returns>
-    public static IEnumerable<TResult> Aggregate<T, TResult>(this IEnumerable<T>? items, IDictionary<T, TResult>? source)
+    /// <returns>A readonly list containing the <typeparamref name="TResult"/> values that match the contents of <paramref name="items"/>.</returns>
+    public static IReadOnlyList<TResult> Aggregate<T, TResult>(this IEnumerable<T>? items, IDictionary<T, TResult>? source)
     {
-        if (items is { } && source is { })
+        if (items is null || source is null)
         {
-            var results = new List<TResult>();
-
-            foreach (T item in items)
-            {
-                if (source.TryGetValue(item, out TResult? result))
-                {
-                    results.Add(result);
-                }
-            }
-
-            return results.ToArray();
+            return Array.Empty<TResult>();
         }
 
-        return Enumerable.Empty<TResult>();
+        var results = new List<TResult>();
+
+        foreach (T item in items)
+        {
+            if (source.TryGetValue(item, out TResult? result))
+            {
+                results.Add(result);
+            }
+        }
+
+        return results.AsReadOnly();
     }
 }

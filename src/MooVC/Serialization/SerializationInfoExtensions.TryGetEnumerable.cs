@@ -23,11 +23,11 @@ public static partial class SerializationInfoExtensions
     {
         T[]? value = info.TryGetValue<T[]>(name);
 
-        if (value is { })
+        if (value is null)
         {
-            return value;
+            return defaultValue;
         }
 
-        return defaultValue;
+        return value;
     }
 }

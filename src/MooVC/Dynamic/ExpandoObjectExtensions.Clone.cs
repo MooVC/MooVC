@@ -23,27 +23,29 @@ public static class ExpandoObjectExtensions
     /// <returns>A clone of the original ExpandoObject.</returns>
     public static ExpandoObject Clone(this ExpandoObject? original, bool defaultIfNull = true)
     {
-        var clone = new ExpandoObject();
-
-        if (original is { })
+        if (original is null)
         {
-            var target = (IDictionary<string, object?>)clone;
-
-            foreach (KeyValuePair<string, object?> value in original)
+            if (defaultIfNull)
             {
-                if (value.Value is ExpandoObject child)
-                {
-                    target.Add(value.Key, child.Clone());
-                }
-                else
-                {
-                    target.Add(value);
-                }
+                return new ExpandoObject();
             }
-        }
-        else if (!defaultIfNull)
-        {
+
             throw new ArgumentNullException(nameof(original));
+        }
+
+        var clone = new ExpandoObject();
+        var target = (IDictionary<string, object?>)clone;
+
+        foreach (KeyValuePair<string, object?> value in original)
+        {
+            if (value.Value is ExpandoObject child)
+            {
+                target.Add(value.Key, child.Clone());
+            }
+            else
+            {
+                target.Add(value);
+            }
         }
 
         return clone;

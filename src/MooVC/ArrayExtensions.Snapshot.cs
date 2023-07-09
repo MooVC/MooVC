@@ -21,22 +21,22 @@ public static partial class ArrayExtensions
     /// <returns>An array that contains the elements of the snapshot.</returns>
     public static T[] Snapshot<T>(this T[]? values, Func<T, bool>? predicate = default)
     {
-        if (values is { } && values.Length > 0)
+        if (values is null || values.Length == 0)
         {
-            if (predicate is null)
-            {
-                var snapshot = new T[values.Length];
-
-                Array.Copy(values, snapshot, values.Length);
-
-                return snapshot;
-            }
-
-            return values
-                .WhereIf(predicate is { }, predicate!)
-                .ToArray();
+            return Array.Empty<T>();
         }
 
-        return Array.Empty<T>();
+        if (predicate is null)
+        {
+            var snapshot = new T[values.Length];
+
+            Array.Copy(values, snapshot, values.Length);
+
+            return snapshot;
+        }
+
+        return values
+            .WhereIf(predicate is not null, predicate!)
+            .ToArray();
     }
 }

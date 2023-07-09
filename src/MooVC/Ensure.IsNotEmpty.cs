@@ -105,7 +105,7 @@ public static partial class Ensure
     {
         _ = IsNotNull(argument, argumentName: argumentName, @default: @default, message: message);
 
-        predicate ??= element => element is { };
+        predicate ??= element => element is not null;
 
         T[] snapshot = argument.Snapshot(predicate: predicate);
 

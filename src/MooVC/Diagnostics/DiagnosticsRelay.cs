@@ -58,7 +58,7 @@ public sealed class DiagnosticsRelay
             .TryEmitAsync(this, cause: cause, impact: impact, level: level, message: message, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
-        if (@event is { })
+        if (@event is not null)
         {
             await DiagnosticsEmitted
                 .PassiveInvokeAsync(source, @event)

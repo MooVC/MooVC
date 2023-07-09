@@ -31,11 +31,11 @@ public static partial class DiagnosticsRelayExtensions
         DiagnosticsMessage? message = default,
         CancellationToken cancellationToken = default)
     {
-        if (diagnostics is { })
+        if (diagnostics is null)
         {
-            return diagnostics.EmitAsync(cause: cause, impact: impact, level: level, message: message, cancellationToken: cancellationToken);
+            return Task.CompletedTask;
         }
 
-        return Task.CompletedTask;
+        return diagnostics.EmitAsync(cause: cause, impact: impact, level: level, message: message, cancellationToken: cancellationToken);
     }
 }

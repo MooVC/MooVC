@@ -25,7 +25,7 @@ public static partial class EnumerableExtensions
     /// <exception cref="AggregateException">At least one of the executed operations threw an exception.</exception>
     public static async Task ForAllAsync<T>(this IEnumerable<T>? items, Func<T, Task> operation)
     {
-        if (items is { })
+        if (items is not null)
         {
             _ = IsNotNull(operation, argumentName: nameof(operation), message: EnumerableExtensionsForAllAsyncOperationRequired);
 

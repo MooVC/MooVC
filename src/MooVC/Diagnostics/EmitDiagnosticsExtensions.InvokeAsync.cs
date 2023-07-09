@@ -26,26 +26,26 @@ public static partial class EmitDiagnosticsExtensions
     public static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> InvokeAsync<T>(this IEnumerable<T>? sources, Func<T, Task> action)
         where T : IEmitDiagnostics
     {
-        if (sources is { })
+        if (sources is null)
         {
-            _ = IsNotNull(action, argumentName: nameof(action), message: EmitDiagnosticsExtensionsInvokeActionRequired);
-
-            async Task Action(T source, DiagnosticsEmittedAsyncEventHandler handler)
-            {
-                source.DiagnosticsEmitted += handler;
-
-                await action(source)
-                    .ConfigureAwait(false);
-
-                source.DiagnosticsEmitted -= handler;
-            }
-
-            return await sources
-                .PerformInvocationAsync(Action)
-                .ConfigureAwait(false);
+            return Enumerable.Empty<DiagnosticsEmittedAsyncEventArgs>();
         }
 
-        return Enumerable.Empty<DiagnosticsEmittedAsyncEventArgs>();
+        _ = IsNotNull(action, argumentName: nameof(action), message: EmitDiagnosticsExtensionsInvokeActionRequired);
+
+        async Task Action(T source, DiagnosticsEmittedAsyncEventHandler handler)
+        {
+            source.DiagnosticsEmitted += handler;
+
+            await action(source)
+                .ConfigureAwait(false);
+
+            source.DiagnosticsEmitted -= handler;
+        }
+
+        return await sources
+            .PerformInvocationAsync(Action)
+            .ConfigureAwait(false);
     }
 
     private static async Task<IEnumerable<DiagnosticsEmittedAsyncEventArgs>> PerformInvocationAsync<T>(

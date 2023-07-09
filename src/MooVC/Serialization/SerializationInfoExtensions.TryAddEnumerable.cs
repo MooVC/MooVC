@@ -19,7 +19,7 @@ public static partial class SerializationInfoExtensions
         IEnumerable<T>? value,
         Func<IEnumerable<T>, bool>? predicate = default)
     {
-        if (value is { })
+        if (value is not null)
         {
             predicate ??= input => input.SafeAny();
 

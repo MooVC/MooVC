@@ -35,7 +35,7 @@ public static partial class MulticastDelegateExtensions
         }
         catch (AggregateException ex)
         {
-            if (onFailure is { })
+            if (onFailure is not null)
             {
                 await onFailure(ex)
                     .ConfigureAwait(false);

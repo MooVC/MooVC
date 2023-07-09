@@ -92,9 +92,9 @@ public sealed class DiagnosticsProxy
         {
             if (!impact.HasValue)
             {
-                impact = cause is { }
-                    ? Impact.Negligible
-                    : Impact.None;
+                impact = cause is null
+                    ? Impact.None
+                    : Impact.Negligible;
             }
 
             level = this[impact.Value];

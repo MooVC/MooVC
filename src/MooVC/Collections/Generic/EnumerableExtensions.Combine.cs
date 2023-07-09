@@ -21,12 +21,12 @@ public static partial class EnumerableExtensions
     /// </returns>
     public static IEnumerable<T> Combine<T>(this IEnumerable<T>? source, T instance)
     {
-        if (source is { })
+        if (source is null)
         {
-            return source.Append(instance);
+            return instance.AsEnumerable();
         }
 
-        return instance.AsEnumerable();
+        return source.Append(instance);
     }
 
     /// <summary>

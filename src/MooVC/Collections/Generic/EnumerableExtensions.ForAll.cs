@@ -27,7 +27,7 @@ public static partial class EnumerableExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="action"/> is <see langword="null" />.</exception>
     public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
     {
-        if (items is { })
+        if (items is not null)
         {
             _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsForAllActionRequired);
 

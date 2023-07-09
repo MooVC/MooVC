@@ -24,7 +24,7 @@ public static partial class CollectionExtensions
 
         target.Clear();
 
-        if (replacements is { })
+        if (replacements is not null)
         {
             target.AddRange(replacements);
         }

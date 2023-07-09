@@ -2,7 +2,6 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// Provides extensions relating to IProducerConsumerCollection{T}.
@@ -16,27 +15,29 @@ public static partial class ProducerConsumerCollectionExtensions
     /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
     /// <param name="source">The collection from which the elements are to be extracted.</param>
     /// <param name="count">The total number of elements to extract (extracts all elements by default).</param>
-    /// <returns>An enumerable containing the extracted elements.</returns>
-    public static IEnumerable<T> Extract<T>(this IProducerConsumerCollection<T>? source, ulong? count = default)
+    /// <returns>A readonly list containing the extracted elements.</returns>
+    public static IReadOnlyList<T> Extract<T>(this IProducerConsumerCollection<T>? source, ulong? count = default)
     {
-        if (source is null)
+        if (source is null || source.Count == 0)
         {
-            return Enumerable.Empty<T>();
+            return Array.Empty<T>();
         }
 
-        IList<T> taken = count.HasValue && count.Value <= int.MaxValue
-            ? new List<T>((int)count.Value)
-            : new List<T>();
+        int total = source.Count;
 
-        ulong index = 0;
-
-        count ??= ulong.MaxValue;
-
-        while (index++ < count && source.TryTake(out T? current))
+        if (count.HasValue)
         {
-            taken.Add(current);
+            total = Math.Min(total, (int)count.Value);
         }
 
-        return taken.ToArray();
+        var taken = new T[total];
+        int index = 0;
+
+        while (index < total && source.TryTake(out T? current))
+        {
+            taken[index++] = current;
+        }
+
+        return taken;
     }
 }

@@ -27,7 +27,7 @@ public static partial class MulticastDelegateExtensions
         where TSender : class
         where TArgs : EventArgs
     {
-        if (handler is { })
+        if (handler is not null)
         {
             try
             {

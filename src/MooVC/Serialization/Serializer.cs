@@ -134,7 +134,13 @@ public abstract class Serializer
     /// <returns>A <see cref="Task"/> that represents the asynchronous serialization operation.</returns>
     protected async Task CompressAsync(Stream source, Stream target, CancellationToken cancellationToken = default)
     {
-        if (compressor is { })
+        if (compressor is null)
+        {
+            await source
+                .CopyToAsync(target, bufferSize, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        else
         {
             using Stream compressed = await compressor
                 .CompressAsync(source, cancellationToken: cancellationToken)
@@ -143,12 +149,6 @@ public abstract class Serializer
             compressed.Position = 0;
 
             await compressed
-                .CopyToAsync(target, bufferSize, cancellationToken)
-                .ConfigureAwait(false);
-        }
-        else
-        {
-            await source
                 .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -165,7 +165,13 @@ public abstract class Serializer
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     protected async Task DecompressAsync(Stream source, Stream target, CancellationToken cancellationToken = default)
     {
-        if (compressor is { })
+        if (compressor is null)
+        {
+            await source
+                .CopyToAsync(target, bufferSize, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        else
         {
             using Stream decompressed = await compressor
                 .DecompressAsync(source, cancellationToken: cancellationToken)
@@ -174,12 +180,6 @@ public abstract class Serializer
             decompressed.Position = 0;
 
             await decompressed
-                .CopyToAsync(target, bufferSize, cancellationToken)
-                .ConfigureAwait(false);
-        }
-        else
-        {
-            await source
                 .CopyToAsync(target, bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }

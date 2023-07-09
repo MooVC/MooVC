@@ -15,9 +15,9 @@ public class AsyncEventArgs
     /// Initializes a new instance of the <see cref="AsyncEventArgs"/> class with the specified <see cref="Token"/>.
     /// </summary>
     /// <param name="cancellationToken">An optional <see cref="Token"/> associated with this event.</param>
-    protected AsyncEventArgs(Token? cancellationToken = default)
+    protected AsyncEventArgs(Token cancellationToken = default)
     {
-        CancellationToken = cancellationToken.GetValueOrDefault();
+        CancellationToken = cancellationToken;
     }
 
     /// <summary>
@@ -33,13 +33,13 @@ public class AsyncEventArgs
     /// </summary>
     /// <param name="cancellationToken">The <see cref="Token"/> associated with this event.</param>
     /// <returns>An empty instance of the <see cref="AsyncEventArgs"/> class.</returns>
-    public static new AsyncEventArgs Empty(Token? cancellationToken = default)
+    public static new AsyncEventArgs Empty(Token cancellationToken = default)
     {
-        if (cancellationToken is { })
+        if (cancellationToken == Token.None)
         {
-            return new AsyncEventArgs(cancellationToken: cancellationToken);
+            return empty.Value;
         }
 
-        return empty.Value;
+        return new AsyncEventArgs(cancellationToken: cancellationToken);
     }
 }

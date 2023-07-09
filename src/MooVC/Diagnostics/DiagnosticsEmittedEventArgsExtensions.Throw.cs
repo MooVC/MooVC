@@ -41,12 +41,12 @@ public static class DiagnosticsEmittedEventArgsExtensions
         Func<DiagnosticsEmittedAsyncEventArgs, Exception, bool> predicate,
         string? message = default)
     {
-        if (diagnostics is { })
+        if (diagnostics is not null)
         {
             _ = IsNotNull(predicate, argumentName: nameof(predicate), message: DiagnosticsEmittedEventArgsExtensionsThrowPredicateRequired);
 
             IEnumerable<Exception> matches = diagnostics
-                .Where(diagnostic => diagnostic.Cause is { })
+                .Where(diagnostic => diagnostic.Cause is not null)
                 .Where(diagnostic => predicate(diagnostic, diagnostic.Cause!))
                 .Select(diagnostic => diagnostic.Cause!)
                 .ToArray();

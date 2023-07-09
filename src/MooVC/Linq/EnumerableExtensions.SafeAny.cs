@@ -23,7 +23,7 @@ public static partial class EnumerableExtensions
 #endif
         this IEnumerable<T>? source)
     {
-        return source is { } && source.Any();
+        return source is not null && source.Any();
     }
 
     /// <summary>
@@ -42,6 +42,6 @@ public static partial class EnumerableExtensions
         this IEnumerable<T>? source,
         Func<T, bool> predicate)
     {
-        return source is { } && source.Any(predicate);
+        return source is not null && source.Any(predicate);
     }
 }

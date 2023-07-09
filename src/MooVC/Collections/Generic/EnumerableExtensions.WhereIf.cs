@@ -30,14 +30,14 @@ public static partial class EnumerableExtensions
 #endif
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, bool isApplicable, Func<T, bool> predicate)
     {
-        if (enumeration is { } && isApplicable)
+        if (enumeration is null || !isApplicable)
         {
-            _ = IsNotNull(predicate, argumentName: nameof(predicate), message: EnumerableExtensionsWhereIfPredicateRequired);
-
-            return enumeration.Where(predicate);
+            return enumeration;
         }
 
-        return enumeration;
+        _ = IsNotNull(predicate, argumentName: nameof(predicate), message: EnumerableExtensionsWhereIfPredicateRequired);
+
+        return enumeration.Where(predicate);
     }
 
     /// <summary>
@@ -57,13 +57,13 @@ public static partial class EnumerableExtensions
 #endif
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, Func<bool> condition, Func<T, bool> predicate)
     {
-        if (enumeration is { })
+        if (enumeration is null)
         {
-            _ = IsNotNull(condition, argumentName: nameof(condition), message: EnumerableExtensionsWhereIfConditionRequired);
-
-            return enumeration.WhereIf(condition(), predicate);
+            return enumeration;
         }
 
-        return enumeration;
+        _ = IsNotNull(condition, argumentName: nameof(condition), message: EnumerableExtensionsWhereIfConditionRequired);
+
+        return enumeration.WhereIf(condition(), predicate);
     }
 }

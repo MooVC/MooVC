@@ -23,11 +23,11 @@ public static partial class QueryableExtensions
 #endif
     public static IQueryable<T>? Page<T>(this IQueryable<T>? queryable, Paging? paging)
     {
-        if (queryable is { } && paging is { })
+        if (queryable is null || paging is null)
         {
-            return paging.Apply(queryable);
+            return queryable;
         }
 
-        return queryable;
+        return paging.Apply(queryable);
     }
 }
