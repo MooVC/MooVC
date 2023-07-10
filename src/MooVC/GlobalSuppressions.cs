@@ -13,38 +13,3 @@
     Justification = "The problem the class solves precludes any reduction in the number of generic parameters.",
     Scope = "type",
     Target = "~T:MooVC.Persistence.MappedStore`3")]
-
-[assembly: SuppressMessage(
-    "StyleCop.CSharp.DocumentationRules",
-    "SA1600:Elements should be documented",
-    Justification = "Obsolete feature, Slated for removal - Not worth documentating.",
-    Scope = "type",
-    Target = "~T:MooVC.Serialization.SerializationInfoExtensions")]
-
-[assembly: SuppressMessage(
-    "StyleCop.CSharp.DocumentationRules",
-    "SA1601:Partial elements should be documented",
-    Justification = "Obsolete feature, Slated for removal - Not worth documentating.",
-    Scope = "type",
-    Target = "~T:MooVC.Serialization.SerializationInfoExtensions")]
-
-[assembly: SuppressMessage(
-    "StyleCop.CSharp.DocumentationRules",
-    "SA1600:Elements should be documented",
-    Justification = "Obsolete feature, Slated for removal - Not worth documentating.",
-    Scope = "type",
-    Target = "~T:MooVC.Serialization.SerializationInfoEnumeratorExtensions")]
-
-[assembly: SuppressMessage(
-    "StyleCop.CSharp.DocumentationRules",
-    "SA1601:Partial elements should be documented",
-    Justification = "Obsolete feature, Slated for removal - Not worth documentating.",
-    Scope = "type",
-    Target = "~T:MooVC.Serialization.SerializationInfoEnumeratorExtensions")]
-
-[assembly: SuppressMessage(
-    "Style",
-    "IDE0270:Use coalesce expression",
-    Justification = "The suggested approach is less readable.",
-    Scope = "member",
-    Target = "~M:MooVC.Serialization.SerializationInfoExtensions.CreateMethodInfo~System.Reflection.MethodInfo")]

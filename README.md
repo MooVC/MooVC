@@ -8,20 +8,11 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v8.0.0
+# Release v9.0.0
 
 ## Enhancements
 
-- Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
-- Changed Collections.Generic.EnumerableExtensions.Aggregate to return IReadOnlyList<T> instead of IEnumerable<T>.
-- Changed Collections.Generic.EnumerableExtensions.Process to return IReadOnlyList<T> instead of IEnumerable<T>.
-- Changed Collections.Generic.EnumerableExtensions.ProcessAll to return IReadOnlyList<T> instead of IEnumerable<T>.
-- Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync to return IReadOnlyList<T> instead of IEnumerable<T>.
-- Changed optional CancellationToken parameters so that they are no longer marked as nullable (**Breaking Change**).
-- Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
-- Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.AsArray (**Breaking Change**).
-- Removed Persistence.IEventStore (**Breaking Change**).
-- Removed Persistence.SynchronousEventStore<T, TIndex> (**Breaking Change**).
-- Removed Processing.TimedJobQueue<T> (**Breaking Change**).
-- Removed Processing.TimedProcessor (**Breaking Change**).
-- Restored support for .NET Standard 2.0.
+- Removed Diagnostics (**Breaking Change**).
+- Removed support for legacy serialization (**Breaking Change**).
+- Removed support for Async event handling (**Breaking Change**).
+- Removed MulticastDelegateExtensions (**Breaking Change**).
