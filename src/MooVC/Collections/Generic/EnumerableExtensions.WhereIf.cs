@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -25,9 +26,10 @@ public static partial class EnumerableExtensions
     /// If <paramref name="enumeration"/> is null and <paramref name="isApplicable"/> is true, an exception is thrown.
     /// If <paramref name="isApplicable"/> is false, the input sequence is returned unchanged.
     /// </remarks>
- #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, bool isApplicable, Func<T, bool> predicate)
     {
         if (enumeration is null || !isApplicable)
@@ -55,6 +57,7 @@ public static partial class EnumerableExtensions
 #if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, Func<bool> condition, Func<T, bool> predicate)
     {
         if (enumeration is null)

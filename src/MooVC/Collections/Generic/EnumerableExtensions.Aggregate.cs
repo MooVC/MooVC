@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -18,6 +19,7 @@ public static partial class EnumerableExtensions
     /// <param name="items">The enumeration from which the contents are to be matched.</param>
     /// <param name="source">The dictionary from which the results are to be extracted.</param>
     /// <returns>A readonly list containing the <typeparamref name="TResult"/> values that match the contents of <paramref name="items"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IReadOnlyList<TResult> Aggregate<T, TResult>(this IEnumerable<T>? items, IDictionary<T, TResult>? source)
     {
         if (items is null || source is null)

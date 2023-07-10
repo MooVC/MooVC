@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF41C794-0E91-44A2-8299-B7031DEF80C7}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+		..\.filenesting.json = ..\.filenesting.json
 		..\.gitignore = ..\.gitignore
 		..\.runsettings = ..\.runsettings
 		..\azure-pipelines.yml = ..\azure-pipelines.yml

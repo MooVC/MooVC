@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
@@ -27,6 +28,7 @@ public static partial class EnumerableExtensions
     /// The result of the task is an enumerable sequence containing the results of the transform function applied to each element of the
     /// source sequence.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static async Task<IReadOnlyList<TResult>> ProcessAllAsync<TResult, TSource>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<TResult>> transform)
@@ -69,6 +71,7 @@ public static partial class EnumerableExtensions
     /// The result of the task is an enumerable sequence containing the results of the transform function applied to each element of the
     /// source sequence.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static async Task<IReadOnlyList<TResult>> ProcessAllAsync<TSource, TResult>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<IEnumerable<TResult>>> transform)

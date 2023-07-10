@@ -33,25 +33,27 @@ public static partial class Ensure
     /// <exception cref="ArgumentException">
     /// Thrown if the argument is not defined as a member of the specified enumeration and no default value was provided.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T IsDefined<T>(
         T? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
+        T? @default = default,
+        string? message = default)
+        where T : struct, Enum
+    {
+        return PerformIsDefined(argument, argumentName, @default, message);
+    }
+#else
+    public static T IsDefined<T>(
+        T? argument,
         string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : struct, Enum
     {
-        T actual = IsNotNull(argument, argumentName: argumentName, @default: @default, message: message);
-
-        if (@default.HasValue && actual.Equals(@default.Value))
-        {
-            return actual;
-        }
-
-        return IsDefined(actual, argumentName: argumentName, @default: @default, message: message);
+        return PerformIsDefined(argument, argumentName, @default, message);
     }
+#endif
 
     /// <summary>
     /// Validates that the given nullable value is defined as a member of the specified enumeration.
@@ -78,14 +80,44 @@ public static partial class Ensure
     /// <exception cref="ArgumentException">
     /// Thrown if the argument is not defined as a member of the specified enumeration and no default value was provided.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T IsDefined<T>(
         T argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
+        T? @default = default,
+        string? message = default)
+        where T : struct, Enum
+    {
+        return PerformIsDefined(argument, argumentName, @default, message);
+    }
+#else
+    public static T IsDefined<T>(
+        T argument,
         string? argumentName = default,
         T? @default = default,
         string? message = default)
+        where T : struct, Enum
+    {
+        return PerformIsDefined(argument, argumentName, @default, message);
+    }
+#endif
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T PerformIsDefined<T>(T? argument, string? argumentName, T? @default, string? message)
+        where T : struct, Enum
+    {
+        T actual = IsNotNull(argument, argumentName: argumentName, @default: @default, message: message);
+
+        if (@default.HasValue && actual.Equals(@default.Value))
+        {
+            return actual;
+        }
+
+        return IsDefined(actual, argumentName: argumentName, @default: @default, message: message);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T PerformIsDefined<T>(T argument, string? argumentName, T? @default, string? message)
         where T : struct, Enum
     {
         Type type = typeof(T);

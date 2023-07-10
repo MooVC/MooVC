@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -16,24 +17,32 @@ public static partial class EnumerableExtensions
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
     /// <returns>True if the enumerable sequence is empty, or false if it is not.</returns>
-    public static bool IsEmpty<T>(
 #if NET6_0_OR_GREATER
-        [NotNullWhen(false)]
-#endif
-        this IEnumerable<T>? source)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? source)
     {
         if (source is null)
         {
             return true;
         }
 
-#if NET6_0_OR_GREATER
         if (source.TryGetNonEnumeratedCount(out int count))
         {
             return count == 0;
         }
-#endif
 
         return !source.Any();
     }
+#else
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsEmpty<T>(this IEnumerable<T>? source)
+    {
+        if (source is null)
+        {
+            return true;
+        }
+
+        return !source.Any();
+    }
+#endif
 }

@@ -10,9 +10,16 @@ While the original MooVC PHP based framework has long since been deprecated, man
 
 # Release v9.0.0
 
+Features within MooVC that were intended to address shortcomings within the .NET Framework have now been removed in favour of the standardized offering or accepted best practice.
+
 ## Enhancements
 
+- Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
+- Changed Linq.PagedResult<T> so that now implements IReadOnlyList<T> (**Breaking Change**).
+- Changed Linq.Paging so that it can no longer be extended (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
+- Removed Linq.Paging.Apply (**Breaking Change**).
+- Removed Processing (**Breaking Change**).
 - Removed support for legacy serialization (**Breaking Change**).
-- Removed support for Async event handling (**Breaking Change**).
+- Removed support for async event handling (**Breaking Change**).
 - Removed MulticastDelegateExtensions (**Breaking Change**).

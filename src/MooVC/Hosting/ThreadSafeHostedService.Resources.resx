@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="JobQueueTimerRequired" xml:space="preserve">
-    <value>The timer that manages the job queue must be provided.</value>
+  <data name="LoggerRequired" xml:space="preserve">
+    <value>The logger must be provided.</value>
   </data>
-  <data name="ProcessorOnProcessingStateChangedAsyncFailure" xml:space="preserve">
-    <value>A failure has prevented one or more listeners for changes to the state of the processor from successfully handling a change.</value>
+  <data name="ServicesRequired" xml:space="preserve">
+    <value>The services that are to be subject of thread safety must be provided.</value>
   </data>
-  <data name="ProcessorTryStartFailure" xml:space="preserve">
-    <value>The processor could not be started.</value>
-  </data>
-  <data name="ProcessorTryStopFailure" xml:space="preserve">
-    <value>The processor could not be stopped.</value>
-  </data>
-  <data name="StartOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be started because another process has initiated a Start operation.</value>
-  </data>
-  <data name="StopOperationInvalidExceptionMessage" xml:space="preserve">
-    <value>The process cannot be stopped because another process has initiated a Stop operation.</value>
-  </data>
-  <data name="ThreadSafeHostedServiceServicesRequired" xml:space="preserve">
-    <value>The services that are to be the subject of this processor must be provided.</value>
-  </data>
-  <data name="TimedJobQueueProcessQueueAsyncFailure" xml:space="preserve">
-    <value>A failure has prevented the successful processing of the job queue.</value>
-  </data>
-  <data name="TimedProcessorTimerCallbackFailure" xml:space="preserve">
-    <value>A failure has occured during the handling of a timed event by {0}.</value>
+  <data name="TryStopAsyncFailure" xml:space="preserve">
+    <value>An unexpected failure has prevented an attempt to stop one or more services.</value>
   </data>
 </root>

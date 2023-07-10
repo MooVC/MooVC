@@ -1,6 +1,7 @@
 namespace MooVC.Collections.Generic;
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -17,6 +18,7 @@ public static partial class CollectionExtensions
     /// <param name="target">The collection to which the elements are inserted.</param>
     /// <param name="items">The items to be inserted into the collection.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="target" /> is <see langword="null" />.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
     {
         _ = IsNotNull(target, argumentName: nameof(target), message: CollectionExtensionsAddRangeTargetRequired);

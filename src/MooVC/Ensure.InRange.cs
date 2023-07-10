@@ -26,11 +26,21 @@ public static partial class Ensure
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown if the argument is outside of the specified range and no default value is provided.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T InRange<T>(
         T argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
+        T? @default = default,
+        T? end = default,
+        string? message = default,
+        T? start = default)
+        where T : struct, IComparable<T>
+    {
+        return PerformInRange(argument, argumentName: argumentName, @default: @default, end: end, message: message, start: start);
+    }
+#else
+    public static T InRange<T>(
+        T argument,
         string? argumentName = default,
         T? @default = default,
         T? end = default,
@@ -38,18 +48,9 @@ public static partial class Ensure
         T? start = default)
         where T : struct, IComparable<T>
     {
-        if ((start.HasValue && argument.CompareTo(start.Value) < 0) || (end.HasValue && argument.CompareTo(end.Value) > 0))
-        {
-            if (@default.HasValue)
-            {
-                return @default.Value;
-            }
-
-            throw new ArgumentOutOfRangeException(argumentName, argument, message);
-        }
-
-        return argument;
+        return PerformInRange(argument, argumentName: argumentName, @default: @default, end: end, message: message, start: start);
     }
+#endif
 
     /// <summary>
     /// Validates that a given nullable argument is within a specified range.
@@ -69,16 +70,51 @@ public static partial class Ensure
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown if the argument is outside of the specified range and no default value is provided.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T InRange<T>(
         T? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
+        T? @default = default,
+        T? end = default,
+        string? message = default,
+        T? start = default)
+       where T : struct, IComparable<T>
+    {
+        return PerformInRange(argument, argumentName, @default, end, message, start);
+    }
+#else
+    public static T InRange<T>(
+        T? argument,
         string? argumentName = default,
         T? @default = default,
         T? end = default,
         string? message = default,
         T? start = default)
+       where T : struct, IComparable<T>
+    {
+        return PerformInRange(argument, argumentName, @default, end, message, start);
+    }
+#endif
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T PerformInRange<T>(T argument, string? argumentName, T? @default, T? end, string? message, T? start)
+        where T : struct, IComparable<T>
+    {
+        if ((start.HasValue && argument.CompareTo(start.Value) < 0) || (end.HasValue && argument.CompareTo(end.Value) > 0))
+        {
+            if (@default.HasValue)
+            {
+                return @default.Value;
+            }
+
+            throw new ArgumentOutOfRangeException(argumentName, argument, message);
+        }
+
+        return argument;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static T PerformInRange<T>(T? argument, string? argumentName, T? @default, T? end, string? message, T? start)
        where T : struct, IComparable<T>
     {
         T actual = IsNotNull(argument, argumentName: argumentName, @default: @default, message: message);

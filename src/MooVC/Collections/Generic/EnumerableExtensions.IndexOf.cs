@@ -3,6 +3,7 @@ namespace MooVC.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -22,6 +23,7 @@ public static partial class EnumerableExtensions
     /// <param name="predicate">A function to test each element for a condition.</param>
     /// <returns>The index of the first element in the sequence that satisfies the condition, or -1 if no such element is found.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="predicate"/> is <see langword="null" />.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int IndexOf<T>(this IEnumerable<T>? enumeration, Func<T, bool> predicate)
     {
         if (enumeration is null)

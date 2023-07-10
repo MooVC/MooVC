@@ -31,14 +31,23 @@ public static partial class Ensure
     /// <exception cref="ArgumentNullException">
     /// The argument is null or whitespace and no default value has been specified.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static string IsNotNullOrWhiteSpace(
         string? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
-        string? argumentName = default,
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
         string? @default = default,
         string? message = default)
+    {
+        return PerformIsNotNullOrWhiteSpace(argument, argumentName, @default, message);
+    }
+#else
+    public static string IsNotNullOrWhiteSpace(string? argument, string? argumentName = default, string? @default = default, string? message = default)
+    {
+        return PerformIsNotNullOrWhiteSpace(argument, argumentName, @default, message);
+    }
+#endif
+
+    private static string PerformIsNotNullOrWhiteSpace(string? argument, string? argumentName, string? @default, string? message)
     {
         if (IsNullOrWhiteSpace(argument))
         {

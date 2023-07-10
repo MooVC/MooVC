@@ -30,24 +30,34 @@ public static partial class EnumerableExtensions
         {
             _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
 
-#if NET6_0_OR_GREATER
-            T[] elements = items.ToArray();
-            ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
-
-            for (int index = 0; index < elements.Length; index++)
-            {
-                T element = Unsafe.Add(ref source, index);
-
-                action(index, element);
-            }
-#else
-            int index = 0;
-
-            foreach (T item in items)
-            {
-                action(index++, item);
-            }
-#endif
+            PerformFor(items, action);
         }
     }
+
+#if NET6_0_OR_GREATER
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
+    {
+        T[] elements = items.ToArray();
+        ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
+
+        for (int index = 0; index < elements.Length; index++)
+        {
+            T element = Unsafe.Add(ref source, index);
+
+            action(index, element);
+        }
+    }
+#else
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
+    {
+        int index = 0;
+
+        foreach (T item in items)
+        {
+            action(index++, item);
+        }
+    }
+#endif
 }

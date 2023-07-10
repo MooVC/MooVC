@@ -2,6 +2,7 @@ namespace MooVC.Collections.Generic;
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -19,6 +20,7 @@ public static partial class EnumerableExtensions
     /// If <paramref name="items"/> is null or empty, an empty <see cref="ReadOnlySpan{T}"/> is returned.
     /// Otherwise, the input sequence is first converted to an array, and then the array is wrapped in a <see cref="ReadOnlySpan{T}"/>.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ReadOnlySpan<T> ToSpan<T>(this IEnumerable<T>? items)
     {
         if (items is null)

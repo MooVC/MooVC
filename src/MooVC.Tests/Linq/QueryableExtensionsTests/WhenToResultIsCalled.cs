@@ -11,11 +11,11 @@ public sealed class WhenToResultIsCalled
     public void GivenNoPagingThenAnEmptyResultIsReturned(int[] expected)
     {
         IQueryable<int> query = expected.AsQueryable();
-        PagedResult<int> result = query.ToResult(null);
+        PagedResult<int> result = query.ToResult(default);
 
         Assert.Equal(Paging.None, result.Request);
         Assert.Equal((ulong)expected.LongLength, result.Total);
-        Assert.Equal(expected, result.Values);
+        Assert.Equal(expected, result);
     }
 
     [Theory]
@@ -30,6 +30,6 @@ public sealed class WhenToResultIsCalled
 
         Assert.Equal(request, result.Request);
         Assert.Equal(total, result.Total);
-        Assert.Equal(expected, result.Values);
+        Assert.Equal(expected, result);
     }
 }

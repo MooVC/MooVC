@@ -23,17 +23,21 @@ public static partial class Ensure
     /// <param name="message">The error message to be used in the exception if the validation fails. This value is optional.</param>
     /// <returns>The given <see cref="Guid"/> value if it is not empty, or the default value if provided and the validation fails.</returns>
     /// <exception cref="ArgumentException">Thrown if the given <see cref="Guid"/> value is empty and no default value is provided.</exception>
+#if NET6_0_OR_GREATER
     public static Guid IsNotEmpty(
         Guid? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
-        string? argumentName = default,
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
         Guid? @default = default,
         string? message = default)
     {
-        return Satisfies(argument, value => value != Guid.Empty, argumentName: argumentName, @default: @default, message: message);
+        return PerformIsNotEmpty(argument, argumentName, @default, message);
     }
+#else
+    public static Guid IsNotEmpty(Guid? argument, string? argumentName = default, Guid? @default = default, string? message = default)
+    {
+        return PerformIsNotEmpty(argument, argumentName, @default, message);
+    }
+#endif
 
     /// <summary>
     /// Validates that the given <see cref="TimeSpan"/> value is not empty.
@@ -47,22 +51,21 @@ public static partial class Ensure
     /// <param name="message">The error message to be used in the exception if the validation fails. This value is optional.</param>
     /// <returns>The given <see cref="TimeSpan"/> value if it is not empty, or the default value if provided and the validation fails.</returns>
     /// <exception cref="ArgumentException">Thrown if the given <see cref="TimeSpan"/> value is empty and no default value is provided.</exception>
+#if NET6_0_OR_GREATER
     public static TimeSpan IsNotEmpty(
         TimeSpan? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
-        string? argumentName = default,
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
         TimeSpan? @default = default,
         string? message = default)
     {
-        return Satisfies(
-            argument,
-            value => value > TimeSpan.Zero,
-            argumentName: argumentName,
-            @default: @default,
-            message: message);
+        return PerformIsNotEmpty(argument, argumentName, @default, message);
     }
+#else
+    public static TimeSpan IsNotEmpty(TimeSpan? argument, string? argumentName = default, TimeSpan? @default = default, string? message = default)
+    {
+        return PerformIsNotEmpty(argument, argumentName, @default, message);
+    }
+#endif
 
     /// <summary>
     /// Validates that the given sequence of elements is not empty.
@@ -87,21 +90,46 @@ public static partial class Ensure
     /// A predicate to apply to each element in the sequence to determine if it should be included.
     /// This value is optional. If not provided, the default predicate will include all elements that are not null.
     /// </param>
-    /// <returns>
-    /// The given sequence of elements if it is not empty, or <paramref name="default"/> if provided.
-    /// </returns>
-    /// <exception cref="ArgumentException">
-    /// Thrown if the argument is empty and no default value was provided.
-    /// </exception>
+    /// <returns>The given sequence of elements if it is not empty, or <paramref name="default"/> if provided.</returns>
+    /// <exception cref="ArgumentException">Thrown if the argument is empty and no default value was provided.</exception>
+#if NET6_0_OR_GREATER
     public static T[] IsNotEmpty<T>(
         IEnumerable<T>? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
+        IEnumerable<T>? @default = default,
+        string? message = default,
+        Func<T, bool>? predicate = default)
+    {
+        return PerformIsNotEmpty(argument, argumentName, @default, message, predicate);
+    }
+#else
+    public static T[] IsNotEmpty<T>(
+        IEnumerable<T>? argument,
         string? argumentName = default,
         IEnumerable<T>? @default = default,
         string? message = default,
         Func<T, bool>? predicate = default)
+    {
+        return PerformIsNotEmpty(argument, argumentName, @default, message, predicate);
+    }
+#endif
+
+    private static Guid PerformIsNotEmpty(Guid? argument, string? argumentName, Guid? @default, string? message)
+    {
+        return Satisfies(argument, value => value != Guid.Empty, argumentName: argumentName, @default: @default, message: message);
+    }
+
+    private static TimeSpan PerformIsNotEmpty(TimeSpan? argument, string? argumentName, TimeSpan? @default, string? message)
+    {
+        return Satisfies(argument, value => value > TimeSpan.Zero, argumentName: argumentName, @default: @default, message: message);
+    }
+
+    private static T[] PerformIsNotEmpty<T>(
+        IEnumerable<T>? argument,
+        string? argumentName,
+        IEnumerable<T>? @default,
+        string? message,
+        Func<T, bool>? predicate)
     {
         _ = IsNotNull(argument, argumentName: argumentName, @default: @default, message: message);
 

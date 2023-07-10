@@ -31,28 +31,23 @@ public static partial class Ensure
     /// <exception cref="ArgumentNullException">
     /// The original nullable value type argument is null and no default value has been specified.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T IsNotNull<T>(
         T? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
-        string? argumentName = default,
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
         T? @default = default,
         string? message = default)
         where T : struct
     {
-        if (!argument.HasValue)
-        {
-            if (@default.HasValue)
-            {
-                return @default.Value;
-            }
-
-            throw new ArgumentNullException(argumentName, message);
-        }
-
-        return argument.Value;
+        return PerformIsNotNull(argument, argumentName, @default, message);
     }
+#else
+    public static T IsNotNull<T>(T? argument, string? argumentName = default, T? @default = default, string? message = default)
+        where T : struct
+    {
+        return PerformIsNotNull(argument, argumentName, @default, message);
+    }
+#endif
 
     /// <summary>
     /// Ensures that the specified nullable reference type argument is not null.
@@ -77,14 +72,41 @@ public static partial class Ensure
     /// <exception cref="ArgumentNullException">
     /// The original nullable reference type argument is null and no default value has been specified.
     /// </exception>
+#if NET6_0_OR_GREATER
     public static T IsNotNull<T>(
         T? argument,
-#if NET6_0_OR_GREATER
-        [CallerArgumentExpression(nameof(argument))]
-#endif
-        string? argumentName = default,
+        [CallerArgumentExpression(nameof(argument))] string? argumentName = default,
         T? @default = default,
         string? message = default)
+        where T : class
+    {
+        return PerformIsNotNull(argument, argumentName, @default, message);
+    }
+#else
+    public static T IsNotNull<T>(T? argument, string? argumentName = default, T? @default = default, string? message = default)
+        where T : class
+    {
+        return PerformIsNotNull(argument, argumentName, @default, message);
+    }
+#endif
+
+    private static T PerformIsNotNull<T>(T? argument, string? argumentName, T? @default, string? message)
+        where T : struct
+    {
+        if (!argument.HasValue)
+        {
+            if (@default.HasValue)
+            {
+                return @default.Value;
+            }
+
+            throw new ArgumentNullException(argumentName, message);
+        }
+
+        return argument.Value;
+    }
+
+    private static T PerformIsNotNull<T>(T? argument, string? argumentName, T? @default, string? message)
         where T : class
     {
         if (argument is null)

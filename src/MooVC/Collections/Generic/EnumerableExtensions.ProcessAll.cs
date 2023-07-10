@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using static MooVC.Collections.Generic.Resources;
 using static MooVC.Ensure;
 
@@ -22,6 +23,7 @@ public static partial class EnumerableExtensions
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
     /// <returns>A readonly list containing the results of the transform function applied to each element of the source sequence.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IReadOnlyList<TResult> ProcessAll<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
         where TSource : notnull
     {
@@ -55,6 +57,7 @@ public static partial class EnumerableExtensions
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
     /// <returns>A readonly list containing the results of the transform function applied to each element of the source sequence.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IReadOnlyList<TResult> ProcessAll<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {

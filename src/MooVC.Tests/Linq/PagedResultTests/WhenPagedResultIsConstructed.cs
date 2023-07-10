@@ -32,7 +32,7 @@ public sealed class WhenPagedResultIsConstructed
 
         Assert.Equal(request, result.Request);
         Assert.Equal((ulong)values.LongLength, result.Total);
-        Assert.Equal(values, result.Values);
+        Assert.Equal(values, result);
     }
 
     [Theory]
@@ -47,7 +47,7 @@ public sealed class WhenPagedResultIsConstructed
 
         Assert.Equal(request, result.Request);
         Assert.Equal((ulong)total, result.Total);
-        Assert.Equal(values, result.Values);
+        Assert.Equal(values, result);
     }
 
     [Theory]
@@ -62,7 +62,7 @@ public sealed class WhenPagedResultIsConstructed
 
         Assert.Equal(request, result.Request);
         Assert.Equal((ulong)total, result.Total);
-        Assert.Equal(values, result.Values);
+        Assert.Equal(values, result);
     }
 
     [Theory]
@@ -77,7 +77,7 @@ public sealed class WhenPagedResultIsConstructed
 
         Assert.Equal(request, result.Request);
         Assert.Equal(total, result.Total);
-        Assert.Equal(values, result.Values);
+        Assert.Equal(values, result);
     }
 
     [Theory]
@@ -91,8 +91,7 @@ public sealed class WhenPagedResultIsConstructed
 
         Assert.False(result.HasResults);
         Assert.True(result.IsEmpty);
-        Assert.NotNull(result.Values);
-        Assert.Empty(result.Values);
+        Assert.Empty(result);
     }
 
     [Fact]
