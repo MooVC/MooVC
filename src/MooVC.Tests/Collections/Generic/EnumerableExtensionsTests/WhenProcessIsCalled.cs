@@ -220,5 +220,4 @@ public sealed class WhenProcessIsCalled
         // Assert
         _ = results.All(result => result.GetType() == typeof(string)).Should().BeTrue();
     }
-
 }
