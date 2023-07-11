@@ -27,7 +27,7 @@ public sealed class WhenDeleteAsyncIsCalled
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-        await store.DeleteAsync(key);
+        await store.DeleteAsync(key, CancellationToken.None);
 
         Assert.True(wasInvoked);
 
@@ -51,12 +51,8 @@ public sealed class WhenDeleteAsyncIsCalled
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-        await store.DeleteAsync(item);
+        await store.DeleteAsync(item, CancellationToken.None);
 
-        Store.Verify(
-            store => store.DeleteAsync(
-                It.IsAny<object>(),
-                It.IsAny<CancellationToken>()),
-            times: Times.Once);
+        Store.Verify(store => store.DeleteAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
     }
 }

@@ -35,7 +35,7 @@ public sealed class WhenGetAsyncIsCalled
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-        object? actualItem = await store.GetAsync(outterKey);
+        object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
 
         Assert.True(wasInvoked);
         Assert.Equal(expectedItem, actualItem);

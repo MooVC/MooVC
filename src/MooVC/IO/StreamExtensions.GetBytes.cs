@@ -2,6 +2,8 @@
 
 using System.Collections.Generic;
 using System.IO;
+using static MooVC.Ensure;
+using static MooVC.IO.StreamExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="Stream"/>.
@@ -15,6 +17,8 @@ public static partial class StreamExtensions
     /// <returns>An enumerable sequence of bytes representing the data in the source stream.</returns>
     public static IEnumerable<byte> GetBytes(this Stream source)
     {
+        _ = IsNotNull(source, argumentName: nameof(source), message: GetBytesSourceRequired);
+
         using var target = new MemoryStream();
 
         source.Position = 0;

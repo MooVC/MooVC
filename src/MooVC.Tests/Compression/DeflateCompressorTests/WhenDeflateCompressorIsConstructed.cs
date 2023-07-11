@@ -2,6 +2,7 @@
 
 using System;
 using System.IO.Compression;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenDeflateCompressorIsConstructed
@@ -9,7 +10,11 @@ public sealed class WhenDeflateCompressorIsConstructed
     [Fact]
     public void GivenNoLevelThenAnInstanceIsCreated()
     {
-        _ = new DeflateCompressor();
+        // Act
+        Func<ICompressor> act = () => new DeflateCompressor();
+
+        // Assert
+        _ = act.Should().NotThrow();
     }
 
     [Theory]
@@ -19,7 +24,11 @@ public sealed class WhenDeflateCompressorIsConstructed
     [InlineData(CompressionLevel.SmallestSize)]
     public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
     {
-        _ = new DeflateCompressor(level: level);
+        // Act
+        Func<ICompressor> act = () => new DeflateCompressor(level: level);
+
+        // Assert
+        _ = act.Should().NotThrow();
     }
 
     [Theory]
@@ -27,8 +36,11 @@ public sealed class WhenDeflateCompressorIsConstructed
     [InlineData((CompressionLevel)27)]
     public void GivenAnInvalidValidLevelThenAnArgumentExceptionIsThrown(CompressionLevel level)
     {
-        ArgumentException exception = Assert.Throws<ArgumentException>(() => new DeflateCompressor(level: level));
+        // Act
+        Func<ICompressor> act = () => new DeflateCompressor(level: level);
 
-        Assert.Equal(nameof(level), exception.ParamName);
+        // Assert
+        _ = act.Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be(nameof(level));
     }
 }

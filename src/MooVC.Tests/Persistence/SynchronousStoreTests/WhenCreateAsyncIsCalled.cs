@@ -18,7 +18,7 @@ public sealed class WhenCreateAsyncIsCalled
 
             return ExpectedKey;
         });
-        int actualKey = await store.CreateAsync(ExpectedItem);
+        int actualKey = await store.CreateAsync(ExpectedItem, CancellationToken.None);
 
         Assert.Equal(ExpectedKey, actualKey);
     }
@@ -28,7 +28,6 @@ public sealed class WhenCreateAsyncIsCalled
     {
         var store = new TestableSynchronousStore();
 
-        _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.CreateAsync("Irrelevant Test Data"));
+        _ = await Assert.ThrowsAsync<NotImplementedException>(() => store.CreateAsync("Irrelevant Test Data", CancellationToken.None));
     }
 }

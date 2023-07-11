@@ -13,12 +13,8 @@ public sealed class WhenUpdateAsyncIsCalled
     {
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-        await store.UpdateAsync(new object());
+        await store.UpdateAsync(new object(), CancellationToken.None);
 
-        Store.Verify(
-            store => store.UpdateAsync(
-                It.IsAny<object>(),
-                It.IsAny<CancellationToken>()),
-            times: Times.Once);
+        Store.Verify(store => store.UpdateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
     }
 }

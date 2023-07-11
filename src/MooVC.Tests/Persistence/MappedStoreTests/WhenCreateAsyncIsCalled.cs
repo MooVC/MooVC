@@ -32,15 +32,11 @@ public sealed class WhenCreateAsyncIsCalled
             .ReturnsAsync(expectedInnerKey);
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
-        Guid actualOutterKey = await store.CreateAsync(item);
+        Guid actualOutterKey = await store.CreateAsync(item, CancellationToken.None);
 
         Assert.True(wasInvoked);
         Assert.Equal(expectedOutterKey, actualOutterKey);
 
-        Store.Verify(
-            store => store.CreateAsync(
-                It.IsAny<object>(),
-                It.IsAny<CancellationToken>()),
-            times: Times.Once);
+        Store.Verify(store => store.CreateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
     }
 }

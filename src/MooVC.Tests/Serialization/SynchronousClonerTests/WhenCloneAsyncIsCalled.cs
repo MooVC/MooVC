@@ -19,7 +19,7 @@ public sealed class WhenCloneAsyncIsCalled
         }
 
         var cloner = new TestableSynchronousCloner(Cloner);
-        string clone = await cloner.CloneAsync(instance);
+        string clone = await cloner.CloneAsync(instance, CancellationToken.None);
 
         Assert.True(wasInvoked);
         Assert.Equal(instance, clone);

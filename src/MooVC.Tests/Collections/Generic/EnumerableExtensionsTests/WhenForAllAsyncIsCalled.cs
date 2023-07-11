@@ -5,6 +5,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
+using FluentAssertions.Specialized;
 using Xunit;
 
 public sealed class WhenForAllAsyncIsCalled
@@ -13,10 +15,9 @@ public sealed class WhenForAllAsyncIsCalled
     [InlineData(1, 3)]
     [InlineData(2, 6)]
     [InlineData(3, 9)]
-    public async Task GivenAnEnumerationThatRaisesExceptionsThenAnAggregateExceptionIsThrownContainingAllExceptionsAsync(
-        int mod,
-        int range)
+    public async Task GivenAnEnumerationThatRaisesExceptionsThenAnAggregateExceptionIsThrownContainingAllExceptionsAsync(int mod, int range)
     {
+        // Arrange
         IEnumerable<int> enumeration = Enumerable.Range(0, range);
 
         async Task Operation(int value)
@@ -29,15 +30,18 @@ public sealed class WhenForAllAsyncIsCalled
             await Task.CompletedTask;
         }
 
-        AggregateException exception = await Assert.ThrowsAsync<AggregateException>(
-            () => enumeration.ForAllAsync(Operation));
+        // Act
+        Func<Task> act = async () => await enumeration.ForAllAsync(Operation);
 
-        Assert.Equal(range / mod, exception.InnerExceptions.Count);
+        // Assert
+        ExceptionAssertions<AggregateException> exception = await act.Should().ThrowAsync<AggregateException>();
+        _ = exception.Which.InnerExceptions.Count.Should().Be(range / mod);
     }
 
     [Fact]
     public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMemberTask()
     {
+        // Arrange
         int[] enumeration = new[] { 1, 2, 3 };
         var invocations = new ConcurrentBag<int>();
 
@@ -48,27 +52,33 @@ public sealed class WhenForAllAsyncIsCalled
             await Task.CompletedTask;
         }
 
+        // Act
         await enumeration.ForAllAsync(Operation);
 
-        Assert.All(enumeration, value => Assert.Contains(value, invocations));
-        Assert.Equal(enumeration.Length, invocations.Count);
+        // Assert
+        _ = enumeration.All(value => invocations.Contains(value)).Should().BeTrue();
+        _ = invocations.Should().HaveCount(enumeration.Length);
     }
 
     [Fact]
     public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrownAsync()
     {
+        // Arrange
         int[] enumeration = new[] { 1, 2, 3 };
         Func<int, Task>? operation = default;
 
-        ArgumentNullException exception = await Assert.ThrowsAsync<ArgumentNullException>(
-            () => enumeration.ForAllAsync(operation!));
+        // Act
+        Func<Task> act = async () => await enumeration.ForAllAsync(operation!);
 
-        Assert.Equal(nameof(operation), exception.ParamName);
+        // Assert
+        ExceptionAssertions<ArgumentNullException> exception = await act.Should().ThrowAsync<ArgumentNullException>();
+        _ = exception.Which.ParamName.Should().Be(nameof(operation));
     }
 
     [Fact]
     public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnoredAsync()
     {
+        // Arrange
         IEnumerable<int>? enumeration = default;
         bool wasInvoked = false;
 
@@ -79,16 +89,23 @@ public sealed class WhenForAllAsyncIsCalled
             await Task.CompletedTask;
         }
 
+        // Act
         await enumeration.ForAllAsync(Operation);
 
-        Assert.False(wasInvoked);
+        // Assert
+        _ = wasInvoked.Should().BeFalse();
     }
 
     [Fact]
     public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
     {
+        // Arrange
         IEnumerable<int>? enumeration = default;
 
-        await enumeration.ForAllAsync(default!);
+        // Act
+        Func<Task> act = async () => await enumeration.ForAllAsync(default!);
+
+        // Assert
+        _ = await act.Should().NotThrowAsync<ArgumentNullException>();
     }
 }

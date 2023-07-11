@@ -19,7 +19,7 @@ public sealed class ThreadSafeHostedService
     private const int Started = 1;
     private const int Stopped = 0;
 
-    private static readonly Action<ILogger, Exception> LogTryStopAsyncFailure = LoggerMessage.Define(
+    private static readonly Action<ILogger, Exception> logTryStopAsyncFailure = LoggerMessage.Define(
         LogLevel.Warning,
         new EventId(1, name: nameof(TryStopAsync)),
         TryStopAsyncFailure);
@@ -111,7 +111,7 @@ public sealed class ThreadSafeHostedService
         }
         catch (Exception ex)
         {
-            LogTryStopAsyncFailure(logger, ex);
+            logTryStopAsyncFailure(logger, ex);
         }
     }
 }

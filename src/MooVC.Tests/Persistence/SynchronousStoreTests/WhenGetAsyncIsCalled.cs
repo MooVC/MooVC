@@ -20,7 +20,7 @@ public sealed class WhenGetAsyncIsCalled
             return ExpectedItem;
         });
 
-        string? actualItem = await store.GetAsync(ExpectedKey);
+        string? actualItem = await store.GetAsync(ExpectedKey, CancellationToken.None);
 
         Assert.Equal(ExpectedItem, actualItem);
     }

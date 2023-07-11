@@ -19,7 +19,7 @@ public sealed class WhenUpdateAsyncIsCalled
             Assert.Equal(ExpectedItem, item);
         });
 
-        await store.UpdateAsync(ExpectedItem);
+        await store.UpdateAsync(ExpectedItem, CancellationToken.None);
 
         Assert.True(wasInvoked);
     }
@@ -29,7 +29,6 @@ public sealed class WhenUpdateAsyncIsCalled
     {
         var store = new TestableSynchronousStore();
 
-        _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.UpdateAsync("Something Irrelevant"));
+        _ = await Assert.ThrowsAsync<NotImplementedException>(() => store.UpdateAsync("Something Irrelevant", CancellationToken.None));
     }
 }

@@ -14,11 +14,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitignore = ..\.gitignore
 		..\.runsettings = ..\.runsettings
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\directory.build.props = ..\directory.build.props
 		..\gitversion.yml = ..\gitversion.yml
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
-		..\stylecop.analyzers.ruleset = ..\stylecop.analyzers.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{51E8218E-BACE-4FEA-B951-35DFD32FCA7E}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\benchmarks.props = ..\build\benchmarks.props
+		..\directory.build.props = ..\directory.build.props
+		..\build\libraries.props = ..\build\libraries.props
+		..\build\tests.props = ..\build\tests.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{7755FACA-C000-4C6F-8047-56E0112603FF}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\analyzers\stylecop.code.ruleset = ..\analyzers\stylecop.code.ruleset
+		..\analyzers\stylecop.tests.ruleset = ..\analyzers\stylecop.tests.ruleset
 	EndProjectSection
 EndProject
 Global

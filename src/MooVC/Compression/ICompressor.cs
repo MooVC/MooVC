@@ -19,7 +19,7 @@ public interface ICompressor
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The task result contains the compressed data as a sequence of bytes.
     /// </returns>
-    Task<IEnumerable<byte>> CompressAsync(IEnumerable<byte> data, CancellationToken cancellationToken = default);
+    Task<IEnumerable<byte>> CompressAsync(IEnumerable<byte> data, CancellationToken cancellationToken);
 
     /// <summary>
     /// Compresses a stream asynchronously.
@@ -30,7 +30,7 @@ public interface ICompressor
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The task result contains the compressed data as a stream.
     /// </returns>
-    Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken = default);
+    Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken);
 
     /// <summary>
     /// Decompresses a sequence of bytes asynchronously.
@@ -41,7 +41,7 @@ public interface ICompressor
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The task result contains the decompressed data as a sequence of bytes.
     /// </returns>
-    Task<IEnumerable<byte>> DecompressAsync(IEnumerable<byte> data, CancellationToken cancellationToken = default);
+    Task<IEnumerable<byte>> DecompressAsync(IEnumerable<byte> data, CancellationToken cancellationToken);
 
     /// <summary>
     /// Decompresses a stream asynchronously.
@@ -52,5 +52,5 @@ public interface ICompressor
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The task result contains the decompressed data as a stream.
     /// </returns>
-    Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken = default);
+    Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken);
 }

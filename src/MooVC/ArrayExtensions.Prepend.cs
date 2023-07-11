@@ -1,7 +1,5 @@
 ﻿namespace MooVC;
 
-using MooVC.Collections.Generic;
-
 /// <summary>
 /// Provides extensions relating to <see cref="Array"/>.
 /// </summary>

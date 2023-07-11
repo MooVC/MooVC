@@ -24,7 +24,7 @@ public sealed class WhenSerializeAsyncIsCalled
             compressor: compressor.Object,
             onSerialize: (_, _) => { });
 
-        _ = await serializer.SerializeAsync(instance);
+        _ = await serializer.SerializeAsync(instance, CancellationToken.None);
 
         compressor.Verify(
             compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()),
@@ -47,7 +47,7 @@ public sealed class WhenSerializeAsyncIsCalled
         }
 
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
-        IEnumerable<byte> serialized = await serializer.SerializeAsync(instance);
+        IEnumerable<byte> serialized = await serializer.SerializeAsync(instance, CancellationToken.None);
 
         Assert.True(wasInvoked);
     }
@@ -68,7 +68,7 @@ public sealed class WhenSerializeAsyncIsCalled
         }
 
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
-        await serializer.SerializeAsync(instance, stream);
+        await serializer.SerializeAsync(instance, stream, CancellationToken.None);
 
         Assert.True(wasInvoked);
     }

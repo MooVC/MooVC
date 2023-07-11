@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenBytesAreCompressed
@@ -11,18 +12,39 @@ public sealed class WhenBytesAreCompressed
     [Fact]
     public async Task GivenBytesThenTheResultMatchesAsync()
     {
+        // Arrange
         byte[] expected = new byte[32768];
         var random = RandomNumberGenerator.Create();
-
         random.GetNonZeroBytes(expected);
 
         var compressor = new BrotliCompressor(level: CompressionLevel.Fastest);
-        IEnumerable<byte> compressed = await compressor.CompressAsync(expected);
 
-        Assert.NotEqual(expected, compressed);
+        // Act
+        IEnumerable<byte> compressed = await compressor.CompressAsync(expected, CancellationToken.None);
 
-        IEnumerable<byte> decompressed = await compressor.DecompressAsync(compressed);
+        // Assert
+        _ = compressed.Should().NotEqual(expected);
 
-        Assert.Equal(expected, decompressed);
+        // Act
+        IEnumerable<byte> decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+
+        // Assert
+        _ = decompressed.Should().Equal(expected);
+    }
+
+    [Fact]
+    public async Task GivenNoBytesThenTheResultMatchesAsync()
+    {
+        // Arrange
+        byte[] expected = Array.Empty<byte>();
+
+        var compressor = new BrotliCompressor(level: CompressionLevel.Fastest);
+
+        // Act
+        IEnumerable<byte> compressed = await compressor.CompressAsync(expected, CancellationToken.None);
+        IEnumerable<byte> decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+
+        // Assert
+        _ = decompressed.Should().Equal(expected);
     }
 }

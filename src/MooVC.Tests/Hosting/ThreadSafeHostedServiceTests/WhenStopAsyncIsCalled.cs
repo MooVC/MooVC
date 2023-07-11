@@ -56,4 +56,20 @@ public sealed class WhenStopAsyncIsCalled
         service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
         service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
     }
+
+    [Fact]
+    public async void GivenMultipleStartsAndStopThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
+    {
+        // Arrange
+        await host.StartAsync(CancellationToken.None);
+
+        // Act
+        await host.StartAsync(CancellationToken.None);
+        await host.StopAsync(CancellationToken.None);
+        await host.StopAsync(CancellationToken.None);
+
+        // Assert
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
 }

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenMinIsCalled
@@ -16,29 +17,44 @@ public sealed class WhenMinIsCalled
 
     [Theory]
     [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(
-        DateTime oldest,
-        DateTime newest)
+    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
+        // Arrange
         var first = new DateTimeOffset(oldest);
         var second = new DateTimeOffset(newest);
 
+        // Act
         DateTimeOffset selected = first.Min(second);
 
-        Assert.Equal(first, selected);
+        // Assert
+        _ = selected.Should().Be(first);
     }
 
     [Theory]
     [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(
-        DateTime oldest,
-        DateTime newest)
+    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
+        // Arrange
         var first = new DateTimeOffset(newest);
         var second = new DateTimeOffset(oldest);
 
+        // Act
         DateTimeOffset selected = first.Min(second);
 
-        Assert.Equal(second, selected);
+        // Assert
+        _ = selected.Should().Be(second);
+    }
+
+    [Fact]
+    public void GivenSameDatesThenTheSameDateIsReturned()
+    {
+        // Arrange
+        var sameDate = new DateTimeOffset(new DateTime(2019, 1, 1));
+
+        // Act
+        DateTimeOffset selected = sameDate.Min(sameDate);
+
+        // Assert
+        _ = selected.Should().Be(sameDate);
     }
 }

@@ -2,7 +2,6 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to IProducerConsumerCollection{T}.

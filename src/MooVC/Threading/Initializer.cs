@@ -45,7 +45,7 @@ public sealed class Initializer<T>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
     /// The result of the task is the initialized resource.
     /// </returns>
-    public async Task<T> InitializeAsync(CancellationToken cancellationToken = default)
+    public async Task<T> InitializeAsync(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {

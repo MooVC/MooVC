@@ -28,7 +28,7 @@ public sealed class WhenCloneAsyncIsCalled
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(this);
 
-        WhenCloneAsyncIsCalled clone = await cloner.CloneAsync(instance);
+        WhenCloneAsyncIsCalled clone = await cloner.CloneAsync(instance, CancellationToken.None);
 
         serializer.Verify(
             serializer => serializer.SerializeAsync(

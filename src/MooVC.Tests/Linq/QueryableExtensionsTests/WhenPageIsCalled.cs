@@ -2,9 +2,7 @@
 
 using System.Linq;
 using Bogus;
-using Bogus.DataSets;
 using FluentAssertions;
-using Moq;
 using Xunit;
 
 public sealed class WhenPageIsCalled

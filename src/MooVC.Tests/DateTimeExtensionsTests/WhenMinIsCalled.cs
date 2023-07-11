@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenMinIsCalled
@@ -16,23 +17,36 @@ public sealed class WhenMinIsCalled
 
     [Theory]
     [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(
-        DateTime oldest,
-        DateTime newest)
+    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
+        // Act
         DateTime selected = oldest.Min(newest);
 
-        Assert.Equal(oldest, selected);
+        // Assert
+        _ = selected.Should().Be(oldest);
     }
 
     [Theory]
     [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(
-        DateTime oldest,
-        DateTime newest)
+    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
+        // Act
         DateTime selected = newest.Min(oldest);
 
-        Assert.Equal(oldest, selected);
+        // Assert
+        _ = selected.Should().Be(oldest);
+    }
+
+    [Fact]
+    public void GivenSameDatesThenTheSameDateIsReturned()
+    {
+        // Arrange
+        var sameDate = new DateTime(2019, 1, 1);
+
+        // Act
+        DateTime selected = sameDate.Min(sameDate);
+
+        // Assert
+        _ = selected.Should().Be(sameDate);
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Dynamic.ExpandoObjectExtensionsTests;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenCloneIsCalled
@@ -31,44 +32,72 @@ public sealed class WhenCloneIsCalled
     [MemberData(nameof(GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData))]
     public void GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembers(ExpandoObject original)
     {
+        // Act
         ExpandoObject clone = original.Clone();
 
-        Assert.NotStrictEqual(original, clone);
-        Assert.Equal(original, clone);
+        // Assert
+        _ = clone.Should().NotBeSameAs(original);
+        _ = clone.Should().BeEquivalentTo(original);
     }
 
     [Fact]
     public void GivenAnInitializedObjectWithAnExpandoObjectContainedWithinThenItWillReturnANewObjectWithTheChildCloned()
     {
+        // Arrange
         dynamic parent = new ExpandoObject();
         dynamic child = new ExpandoObject();
 
         parent.Child = child;
         child.Value = "Hello World";
 
+        // Act
         dynamic clone = ((ExpandoObject)parent).Clone();
 
-        Assert.NotStrictEqual(parent, clone);
-        Assert.NotStrictEqual(parent.Child, clone.Child);
-
-        Assert.Equal(parent.Child, clone.Child);
+        // Assert
+        _ = ((ExpandoObject)clone).Should().NotBeSameAs(parent);
+        _ = ((ExpandoObject)clone.Child).Should().NotBeSameAs(parent.Child);
+        _ = ((ExpandoObject)clone.Child).Should().BeEquivalentTo(parent.Child);
     }
 
     [Fact]
     public void GivenANullObjectWithDefaultIfNullSetToFalseThenAnArgumentNullExceptionIsThrown()
     {
+        // Arrange
         ExpandoObject? source = default;
 
-        _ = Assert.Throws<ArgumentNullException>(() => source.Clone(defaultIfNull: false));
+        // Act
+        Action act = () => source.Clone(defaultIfNull: false);
+
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>();
     }
 
     [Fact]
     public void GivenANullObjectWithDefaultIfNullSetToTrueThenAnEmptyObjectIsReturned()
     {
+        // Arrange
         ExpandoObject? source = default;
+
+        // Act
         ExpandoObject value = source.Clone(defaultIfNull: true);
 
-        Assert.NotNull(value);
-        Assert.True(((IDictionary<string, object?>)value).Count == 0);
+        // Assert
+        _ = value.Should().NotBeNull();
+        _ = value.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void GivenAnInitializedObjectWithNonExpandoChildThenTheChildIsNotCloned()
+    {
+        // Arrange
+        dynamic parent = new ExpandoObject();
+        parent.Child = new object();
+
+        // Act
+        dynamic clone = ((ExpandoObject)parent).Clone();
+
+        // Assert
+        _ = ((ExpandoObject)clone).Should().NotBeSameAs(parent);
+        _ = ((object)clone.Child).Should().BeSameAs(parent.Child);
     }
 }

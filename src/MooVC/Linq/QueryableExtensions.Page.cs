@@ -18,7 +18,7 @@ public static partial class QueryableExtensions
     /// <returns>
     /// The original IQueryable sequence with paging applied, or null if the original IQueryable was null.
     /// </returns>
- #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(queryable))]
 #endif
     public static IQueryable<T>? Page<T>(this IQueryable<T>? queryable, Paging? paging)

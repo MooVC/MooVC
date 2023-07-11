@@ -19,18 +19,16 @@ public sealed class WhenDeserializeAsyncIsCalled
 
         _ = compressor
             .Setup(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
+            .ReturnsAsync<Stream, CancellationToken, ICompressor, Stream>((stream, _) => stream);
 
         var serializer = new TestableSynchronousSerializer(
             compressor: compressor.Object,
             onDeserialize: instance => "Something irrelevant");
 
         using var source = new MemoryStream();
-        _ = await serializer.DeserializeAsync<string>(source);
+        _ = await serializer.DeserializeAsync<string>(source, CancellationToken.None);
 
-        compressor.Verify(
-            compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()),
-            Times.Once);
+        compressor.Verify(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
@@ -53,7 +51,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         }
 
         var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
-        string deserialized = await serializer.DeserializeAsync<string>(expected);
+        string deserialized = await serializer.DeserializeAsync<string>(expected, CancellationToken.None);
 
         Assert.True(wasInvoked);
         Assert.Equal(instance, deserialized);
@@ -80,7 +78,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         }
 
         var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
-        string deserialized = await serializer.DeserializeAsync<string>(stream);
+        string deserialized = await serializer.DeserializeAsync<string>(stream, CancellationToken.None);
 
         Assert.True(wasInvoked);
         Assert.Equal(instance, deserialized);

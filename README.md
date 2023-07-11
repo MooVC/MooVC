@@ -17,6 +17,7 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
 - Changed Linq.PagedResult<T> so that now implements IReadOnlyList<T> (**Breaking Change**).
 - Changed Linq.Paging so that it can no longer be extended (**Breaking Change**).
+- Changed methods accepting a CancellationToken so that it is no longer an optional parameter (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).
 - Removed Processing (**Breaking Change**).

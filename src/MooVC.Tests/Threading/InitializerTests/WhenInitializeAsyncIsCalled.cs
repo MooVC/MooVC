@@ -22,9 +22,9 @@ public sealed class WhenInitializeAsyncIsCalled
 
         var initializer = new Initializer<object>(Initializer);
 
-        object? first = await initializer.InitializeAsync();
-        object? second = await initializer.InitializeAsync();
-        object? third = await initializer.InitializeAsync();
+        object? first = await initializer.InitializeAsync(CancellationToken.None);
+        object? second = await initializer.InitializeAsync(CancellationToken.None);
+        object? third = await initializer.InitializeAsync(CancellationToken.None);
 
         Assert.Equal(ExpectedInvocations, invocations);
         Assert.NotNull(first);
@@ -49,15 +49,15 @@ public sealed class WhenInitializeAsyncIsCalled
         var initializer = new Initializer<object>(Initializer);
 
         _ = await initializer
-            .InitializeAsync()
+            .InitializeAsync(CancellationToken.None)
             .ConfigureAwait(false);
 
         _ = await initializer
-            .InitializeAsync()
+            .InitializeAsync(CancellationToken.None)
             .ConfigureAwait(false);
 
         _ = await initializer
-            .InitializeAsync()
+            .InitializeAsync(CancellationToken.None)
             .ConfigureAwait(false);
 
         Assert.Equal(ExpectedInvocations, invocations);
@@ -84,7 +84,7 @@ public sealed class WhenInitializeAsyncIsCalled
 
         Task<object>[] tasks = Enumerable
             .Range(1, threads)
-            .Select(_ => initializer.InitializeAsync())
+            .Select(_ => initializer.InitializeAsync(CancellationToken.None))
             .ToArray();
 
         _ = await Task.WhenAll(tasks);
@@ -122,7 +122,7 @@ public sealed class WhenInitializeAsyncIsCalled
 
         Task<object>[] tasks = Enumerable
             .Range(1, threads)
-            .Select(_ => initializer.InitializeAsync())
+            .Select(_ => initializer.InitializeAsync(CancellationToken.None))
             .ToArray();
 
         try
@@ -152,7 +152,7 @@ public sealed class WhenInitializeAsyncIsCalled
 
         var initializer = new Initializer<object>(Initializer);
 
-        _ = await Assert.ThrowsAsync<NotImplementedException>(() => initializer.InitializeAsync());
+        _ = await Assert.ThrowsAsync<NotImplementedException>(() => initializer.InitializeAsync(CancellationToken.None));
     }
 
     [Fact]
@@ -165,6 +165,6 @@ public sealed class WhenInitializeAsyncIsCalled
 
         var initializer = new Initializer<object>(Initializer);
 
-        _ = await Assert.ThrowsAsync<InvalidOperationException>(() => initializer.InitializeAsync());
+        _ = await Assert.ThrowsAsync<InvalidOperationException>(() => initializer.InitializeAsync(CancellationToken.None));
     }
 }

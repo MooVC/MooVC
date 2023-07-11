@@ -19,7 +19,7 @@ public sealed class WhenDeleteAsyncIsCalled
             Assert.Equal(ExpectedKey, key);
         });
 
-        await store.DeleteAsync(ExpectedKey);
+        await store.DeleteAsync(ExpectedKey, CancellationToken.None);
 
         Assert.True(wasInvoked);
     }
@@ -37,7 +37,7 @@ public sealed class WhenDeleteAsyncIsCalled
             Assert.Equal(ExpectedItem, item);
         });
 
-        await store.DeleteAsync(ExpectedItem);
+        await store.DeleteAsync(ExpectedItem, CancellationToken.None);
 
         Assert.True(wasInvoked);
     }
@@ -48,7 +48,7 @@ public sealed class WhenDeleteAsyncIsCalled
         var store = new TestableSynchronousStore();
 
         _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.DeleteAsync(2));
+            () => store.DeleteAsync(2, CancellationToken.None));
     }
 
     [Fact]
@@ -57,6 +57,6 @@ public sealed class WhenDeleteAsyncIsCalled
         var store = new TestableSynchronousStore();
 
         _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.DeleteAsync("Something Irrelevant"));
+            () => store.DeleteAsync("Something Irrelevant", CancellationToken.None));
     }
 }

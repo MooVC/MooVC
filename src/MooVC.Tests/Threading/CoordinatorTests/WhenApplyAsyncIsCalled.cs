@@ -23,7 +23,7 @@ public sealed class WhenApplyAsyncIsCalled
     [Fact]
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
     {
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync(default!));
+        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync(default!, CancellationToken.None));
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public sealed class WhenApplyAsyncIsCalled
     {
         coordinator.Dispose();
 
-        _ = await Assert.ThrowsAsync<ObjectDisposedException>(() => coordinator.ApplyAsync(default!));
+        _ = await Assert.ThrowsAsync<ObjectDisposedException>(() => coordinator.ApplyAsync(default!, CancellationToken.None));
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class WhenApplyAsyncIsCalled
             async () =>
             {
                 ICoordinationContext<string> coordination = await coordinator
-                    .ApplyAsync(context)
+                    .ApplyAsync(context, CancellationToken.None)
                     .ConfigureAwait(false);
 
                 using (coordination)

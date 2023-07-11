@@ -3,6 +3,7 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenWhereIfIsCalled
@@ -12,7 +13,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(false);
 
-        Assert.False(wasInvoked);
+        _ = wasInvoked.Should().BeFalse();
     }
 
     [Fact]
@@ -34,8 +35,8 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(Condition, Predicate);
 
-        Assert.Null(result);
-        Assert.False(wasEvaluated);
+        _ = result.Should().BeNull();
+        _ = wasEvaluated.Should().BeFalse();
     }
 
     [Fact]
@@ -52,8 +53,8 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(true, Predicate);
 
-        Assert.Null(result);
-        Assert.False(wasEvaluated);
+        _ = result.Should().BeNull();
+        _ = wasEvaluated.Should().BeFalse();
     }
 
     [Fact]
@@ -61,7 +62,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(true);
 
-        Assert.True(wasInvoked);
+        _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
@@ -69,15 +70,51 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(false);
 
-        Assert.False(wasInvoked);
+        _ = wasInvoked.Should().BeFalse();
     }
 
     [Fact]
-    public void GivenPassingApplicabilityThenThePredicateIsNotApplied()
+    public void GivenPassingApplicabilityThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
 
-        Assert.True(wasInvoked);
+        _ = wasInvoked.Should().BeTrue();
+    }
+
+    [Fact]
+    public void GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
+    {
+        // Arrange
+        int[] enumeration = new[] { 1, 2, 3, 4, 5 };
+
+        static bool Predicate(int value)
+        {
+            return value % 2 == 0;
+        }
+
+        // Act
+        IEnumerable<int> result = enumeration.WhereIf(() => true, Predicate);
+
+        // Assert
+        _ = result.Should().Equal(2, 4);
+    }
+
+    [Fact]
+    public void GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
+    {
+        // Arrange
+        int[] enumeration = new[] { 1, 2, 3, 4, 5 };
+
+        static bool Predicate(int value)
+        {
+            return value % 2 == 0;
+        }
+
+        // Act
+        IEnumerable<int> result = enumeration.WhereIf(() => false, Predicate);
+
+        // Assert
+        _ = result.Should().Equal(1, 2, 3, 4, 5);
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>> invocation)

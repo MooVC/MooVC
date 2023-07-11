@@ -54,4 +54,11 @@ public sealed class WhenStartAsyncIsCalled
         service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
         service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
+
+    [Fact]
+    public void GivenAStoppedHostStartAsyncIsNotCalled()
+    {
+        // Assert
+        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Never);
+    }
 }

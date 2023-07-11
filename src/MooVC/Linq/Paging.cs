@@ -1,9 +1,6 @@
 ﻿namespace MooVC.Linq;
 
 using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using MooVC.Serialization;
 using static System.Math;
 
 /// <summary>
