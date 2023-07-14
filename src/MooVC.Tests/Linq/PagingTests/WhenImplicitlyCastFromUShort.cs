@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Linq.PagingTests;
 
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenImplicitlyCastFromUShort
@@ -10,33 +11,41 @@ public sealed class WhenImplicitlyCastFromUShort
     [InlineData(ushort.MaxValue, ushort.MaxValue)]
     public void GivenAValueThenAnInstanceIsReturnedWithTheExpectedSize(ushort expected, ushort size)
     {
+        // Act
         Paging paging = size;
 
-        Assert.Equal(Paging.FirstPage, paging.Page);
-        Assert.Equal(expected, paging.Size);
+        // Assert
+        _ = paging.Page.Should().Be(Paging.FirstPage);
+        _ = paging.Size.Should().Be(expected);
     }
 
     [Fact]
     public void GivenASizeOfDefaultThenDefaultIsReturned()
     {
+        // Act
         Paging paging = Paging.DefaultSize;
 
-        Assert.Same(Paging.Default, paging);
+        // Assert
+        _ = paging.Should().BeSameAs(Paging.Default);
     }
 
     [Fact]
     public void GivenASizeOfOneThenOneIsReturned()
     {
+        // Act
         Paging paging = 1;
 
-        Assert.Same(Paging.One, paging);
+        // Assert
+        _ = paging.Should().BeSameAs(Paging.One);
     }
 
     [Fact]
     public void GivenSizeOfMaxThenNoneIsReturned()
     {
+        // Act
         Paging paging = ushort.MaxValue;
 
-        Assert.Same(Paging.None, paging);
+        // Assert
+        _ = paging.Should().BeSameAs(Paging.None);
     }
 }

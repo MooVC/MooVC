@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
 using System;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenMappedStoreIsConstructed
@@ -9,27 +10,52 @@ public sealed class WhenMappedStoreIsConstructed
     [Fact]
     public void GivenAnInnerMappingAnOutterMappingAndANullStoreThenAnArgumentNullExceptionIsThrown()
     {
-        _ = Assert.Throws<ArgumentNullException>(
-            () => new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, default!));
+        // Arrange
+        IStore<object, string>? store = default;
+
+        // Act
+        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, store!);
+
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+            .WithParameterName(nameof(store));
     }
 
     [Fact]
     public void GivenAnInnerMappingAStoreAndANullOutterMappingThenAnArgumentNullExceptionIsThrown()
     {
-        _ = Assert.Throws<ArgumentNullException>(
-            () => new MappedStore<object, Guid, string>(InnerMapping, default!, Store.Object));
+        // Arrange
+        Func<object, string, Guid>? outterMapping = default;
+
+        // Act
+        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(InnerMapping, outterMapping!, Store.Object);
+
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+            .WithParameterName(nameof(outterMapping));
     }
 
     [Fact]
     public void GivenAnInnerMappingAnOutterMappingAndAStoreTheInstanceIsConstructed()
     {
-        _ = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+        // Act
+        var instance = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+
+        // Assert
+        _ = instance.Should().NotBeNull();
     }
 
     [Fact]
     public void GivenAnOutterMappingAStoreAndANullInnerMappingThenAnArgumentNullExceptionIsThrown()
     {
-        _ = Assert.Throws<ArgumentNullException>(
-            () => new MappedStore<object, Guid, string>(default!, OutterMapping, Store.Object));
+        // Arrange
+        Func<Guid, string>? innerMapping = default;
+
+        // Act
+        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(innerMapping!, OutterMapping, Store.Object);
+
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+            .WithParameterName(nameof(innerMapping));
     }
 }

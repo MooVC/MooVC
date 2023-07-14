@@ -1,4 +1,5 @@
-﻿namespace MooVC.Compression.BrotliCompressorTests;
+﻿#if NET6_0_OR_GREATER
+namespace MooVC.Compression.BrotliCompressorTests;
 
 using System;
 using System.IO.Compression;
@@ -44,3 +45,4 @@ public sealed class WhenBrotliCompressorIsConstructed
             .And.ParamName.Should().Be(nameof(level));
     }
 }
+#endif

@@ -40,13 +40,13 @@ public sealed class WhenGetBytesIsCalled
     public void GivenANullStreamThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Stream? stream = default;
+        Stream? source = default;
 
         // Act
-        Action act = () => stream!.GetBytes();
+        Action act = () => source!.GetBytes();
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(stream));
+            .WithParameterName(nameof(source));
     }
 }

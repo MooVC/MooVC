@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -11,10 +12,18 @@ public sealed class WhenUpdateAsyncIsCalled
     [Fact]
     public async void GivenAnItemThenTheInnerStoreIsInvokedAsync()
     {
+        // Arrange
+        object expectedItem = new();
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-        await store.UpdateAsync(new object(), CancellationToken.None);
+        // Act
+        Func<Task> act = async () => await store.UpdateAsync(expectedItem, CancellationToken.None);
 
-        Store.Verify(store => store.UpdateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
+        // Assert
+        _ = await act.Should().NotThrowAsync();
+
+        Store.Verify(
+            store => store.UpdateAsync(It.Is<object>(parameter => parameter == expectedItem), It.IsAny<CancellationToken>()),
+            Times.Once);
     }
 }

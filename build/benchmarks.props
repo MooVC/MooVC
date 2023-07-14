@@ -6,8 +6,8 @@
     <TargetFrameworks>net7.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.*" />
-    <PackageReference Include="Bogus" Version="34.*" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.6" />
+    <PackageReference Include="Bogus" Version="34.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />

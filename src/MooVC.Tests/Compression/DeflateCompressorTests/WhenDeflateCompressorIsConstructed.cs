@@ -21,7 +21,6 @@ public sealed class WhenDeflateCompressorIsConstructed
     [InlineData(CompressionLevel.Optimal)]
     [InlineData(CompressionLevel.Fastest)]
     [InlineData(CompressionLevel.NoCompression)]
-    [InlineData(CompressionLevel.SmallestSize)]
     public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
     {
         // Act

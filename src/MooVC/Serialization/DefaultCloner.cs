@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using static MooVC.Ensure;
 using static MooVC.Serialization.Resources;
 
@@ -37,6 +38,8 @@ public sealed class DefaultCloner
     public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
+        _ = Guard.Against.Null(original, nameof(original), message: DefaultClonerCloneAsyncOriginalRequired);
+
         IEnumerable<byte> data = await serializer
             .SerializeAsync(original, cancellationToken)
             .ConfigureAwait(false);

@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Linq.PagingTests;
 
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenIsDefaultIsCalled
@@ -7,14 +8,26 @@ public sealed class WhenIsDefaultIsCalled
     [Fact]
     public void GivenThePagingDefaultThenAPositiveResponseIsReturned()
     {
-        Assert.True(Paging.Default.IsDefault);
+        // Arrange
+        Paging paging = Paging.Default;
+
+        // Act
+        bool isDefault = paging.IsDefault;
+
+        // Assert
+        _ = isDefault.Should().BeTrue();
     }
 
     [Fact]
     public void GivenAPagingInstanceThatDoesNotUseDefaultSettingsThenANegativeResponseIsReturned()
     {
+        // Arrange
         var paging = new Paging(page: 2, size: 5);
 
-        Assert.False(paging.IsDefault);
+        // Act
+        bool isDefault = paging.IsDefault;
+
+        // Assert
+        _ = isDefault.Should().BeFalse();
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Linq.QueryableExtensionsTests;
 
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenToResultIsCalled
@@ -10,12 +11,16 @@ public sealed class WhenToResultIsCalled
     [InlineData(new int[0])]
     public void GivenNoPagingThenAnEmptyResultIsReturned(int[] expected)
     {
+        // Arrange
         IQueryable<int> query = expected.AsQueryable();
+
+        // Act
         PagedResult<int> result = query.ToResult(default);
 
-        Assert.Equal(Paging.None, result.Request);
-        Assert.Equal((ulong)expected.LongLength, result.Total);
-        Assert.Equal(expected, result);
+        // Assert
+        _ = result.Request.Should().BeEquivalentTo(Paging.None);
+        _ = result.Total.Should().Be((ulong)expected.LongLength);
+        _ = result.Should().BeEquivalentTo(expected);
     }
 
     [Theory]
@@ -24,12 +29,31 @@ public sealed class WhenToResultIsCalled
     [InlineData(new int[0], 3, 2, 4, new[] { 1, 2, 3, 4 })]
     public void GivenPagingThenAnEmptyResultIsReturned(int[] expected, ushort page, ushort size, ulong total, int[] values)
     {
+        // Arrange
         var request = new Paging(page: page, size: size);
         IQueryable<int> query = values.AsQueryable();
+
+        // Act
         PagedResult<int> result = query.ToResult(request);
 
-        Assert.Equal(request, result.Request);
-        Assert.Equal(total, result.Total);
-        Assert.Equal(expected, result);
+        // Assert
+        _ = result.Request.Should().BeEquivalentTo(request);
+        _ = result.Total.Should().Be(total);
+        _ = result.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void GivenNullQueryThenAnEmptyResultIsReturned()
+    {
+        // Arrange
+        IQueryable<int>? query = default;
+        var request = new Paging(page: 1, size: 1);
+
+        // Act
+        PagedResult<int> result = query.ToResult(request);
+
+        // Assert
+        _ = result.Request.Should().BeSameAs(request);
+        _ = result.Total.Should().Be(ulong.MinValue);
     }
 }

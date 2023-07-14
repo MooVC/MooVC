@@ -1,4 +1,5 @@
-﻿namespace MooVC.Compression.BrotliCompressorTests;
+﻿#if NET6_0_OR_GREATER
+namespace MooVC.Compression.BrotliCompressorTests;
 
 using System.Collections.Generic;
 using System.IO.Compression;
@@ -48,3 +49,4 @@ public sealed class WhenBytesAreCompressed
         _ = decompressed.Should().Equal(expected);
     }
 }
+#endif

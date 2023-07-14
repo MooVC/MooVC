@@ -2,62 +2,77 @@
 
 using System;
 using System.Threading.Tasks;
+using FluentAssertions;
 using MooVC.Linq;
 using Xunit;
 
 public sealed class WhenGetAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnKeyThenTheExpectedItemIsReturnedAsync()
+    public async Task GivenAKeyThenTheExpectedItemIsReturnedAsync()
     {
+        // Arrange
         const string ExpectedItem = "Something something dark side...";
         const int ExpectedKey = 1;
 
         var store = new TestableSynchronousStore(getByKey: key =>
         {
-            Assert.Equal(ExpectedKey, key);
+            _ = key.Should().Be(ExpectedKey);
 
             return ExpectedItem;
         });
 
+        // Act
         string? actualItem = await store.GetAsync(ExpectedKey, CancellationToken.None);
 
-        Assert.Equal(ExpectedItem, actualItem);
+        // Assert
+        _ = actualItem.Should().Be(ExpectedItem);
     }
 
     [Fact]
     public async Task GivenPagingThenTheExpectedItemsAreReturnedAsync()
     {
-        var expected = new Paging();
-        string[] results = new[] { "Something", "Dark", "Side" };
+        // Arrange
+        var expectedPaging = new Paging();
+        string[] expectedResults = new[] { "Something", "Dark", "Side" };
 
-        var store = new TestableSynchronousStore(getAll: actual =>
+        var store = new TestableSynchronousStore(getAll: actualPaging =>
         {
-            Assert.Equal(expected, actual);
+            _ = actualPaging.Should().Be(expectedPaging);
 
-            return new PagedResult<string>(expected, results);
+            return new PagedResult<string>(expectedPaging, expectedResults);
         });
 
-        PagedResult<string> actual = await store.GetAsync(paging: expected);
+        // Act
+        PagedResult<string> actual = await store.GetAsync(paging: expectedPaging);
 
-        Assert.Equal(results, actual);
+        // Assert
+        _ = actual.Should().BeEquivalentTo(expectedResults);
     }
 
     [Fact]
-    public async Task GiveAKeyWhennAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
     {
+        // Arrange
         var store = new TestableSynchronousStore();
 
-        _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.GetAsync(3));
+        // Act
+        Func<Task> act = async () => await store.GetAsync(3);
+
+        // Assert
+        _ = await act.Should().ThrowAsync<NotImplementedException>();
     }
 
     [Fact]
     public async Task GivenPagingWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
     {
+        // Arrange
         var store = new TestableSynchronousStore();
 
-        _ = await Assert.ThrowsAsync<NotImplementedException>(
-            () => store.GetAsync(paging: Paging.Default));
+        // Act
+        Func<Task> act = async () => await store.GetAsync(paging: Paging.Default);
+
+        // Assert
+        _ = await act.Should().ThrowAsync<NotImplementedException>();
     }
 }

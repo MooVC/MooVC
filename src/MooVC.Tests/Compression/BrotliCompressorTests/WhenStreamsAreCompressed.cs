@@ -1,4 +1,5 @@
-﻿namespace MooVC.Compression.BrotliCompressorTests;
+﻿#if NET6_0_OR_GREATER
+namespace MooVC.Compression.BrotliCompressorTests;
 
 using System.IO;
 using System.Security.Cryptography;
@@ -58,3 +59,4 @@ public sealed class WhenStreamsAreCompressed
         _ = decompressedBytes.Should().Equal(expected);
     }
 }
+#endif

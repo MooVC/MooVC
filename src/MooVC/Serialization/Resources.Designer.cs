@@ -61,6 +61,15 @@ namespace MooVC.Serialization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The original item must be provided..
+        /// </summary>
+        internal static string DefaultClonerCloneAsyncOriginalRequired {
+            get {
+                return ResourceManager.GetString("DefaultClonerCloneAsyncOriginalRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The serializer from which clones are to be produced must be provided..
         /// </summary>
         internal static string DefaultClonerSerializerRequired {
