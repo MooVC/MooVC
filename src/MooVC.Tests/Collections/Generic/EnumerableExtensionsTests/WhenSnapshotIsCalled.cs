@@ -75,7 +75,7 @@ public sealed class WhenSnapshotIsCalled
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-           .And.ParamName.Should().Be(nameof(order));
+           .WithParameterName(nameof(order));
     }
 
     [Theory]

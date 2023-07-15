@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -39,7 +39,7 @@ public static partial class EnumerableExtensions
             return Array.Empty<TResult>();
         }
 
-        _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
 
         return await source
             .ProcessAllAsync(
@@ -82,7 +82,7 @@ public static partial class EnumerableExtensions
             return Array.Empty<TResult>();
         }
 
-        _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
 
         var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
 

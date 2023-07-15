@@ -3,8 +3,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using MooVC.Linq;
-using static MooVC.Ensure;
 using static MooVC.Persistence.Resources;
 
 /// <summary>
@@ -35,9 +35,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// </exception>
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = IsNotNull(innerMapping, argumentName: nameof(innerMapping), message: MappedStoreInnerMappingRequired);
-        this.outterMapping = IsNotNull(outterMapping, argumentName: nameof(outterMapping), message: MappedStoreOutterMappingRequired);
-        this.store = IsNotNull(store, argumentName: nameof(store), message: MappedStoreStoreRequired);
+        this.innerMapping = Guard.Against.Null(innerMapping, parameterName: nameof(innerMapping), message: MappedStoreInnerMappingRequired);
+        this.outterMapping = Guard.Against.Null(outterMapping, parameterName: nameof(outterMapping), message: MappedStoreOutterMappingRequired);
+        this.store = Guard.Against.Null(store, parameterName: nameof(store), message: MappedStoreStoreRequired);
     }
 
     /// <summary>

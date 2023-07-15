@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using MooVC.Compression;
-using static MooVC.Ensure;
 using static MooVC.Serialization.Resources;
 
 /// <summary>
@@ -33,7 +33,7 @@ public abstract class Serializer
     /// </param>
     protected Serializer(int bufferSize = DefaultBufferSize, ICompressor? compressor = default)
     {
-        this.bufferSize = InRange(bufferSize, argumentName: nameof(bufferSize), message: SerializerBufferSizeRequired, start: 1);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: SerializerBufferSizeRequired);
         this.compressor = compressor;
     }
 
@@ -50,6 +50,8 @@ public abstract class Serializer
     public async Task<T> DeserializeAsync<T>(IEnumerable<byte> data, CancellationToken cancellationToken)
         where T : notnull
     {
+        _ = Guard.Against.Null(data, parameterName: nameof(data), SerializerDeserializeAsyncDataRequired);
+
         using var source = new MemoryStream(data.ToArray());
 
         return await DeserializeAsync<T>(source, cancellationToken)
@@ -69,6 +71,8 @@ public abstract class Serializer
     public async Task<T> DeserializeAsync<T>(Stream source, CancellationToken cancellationToken)
         where T : notnull
     {
+        _ = Guard.Against.Null(source, parameterName: nameof(source), SerializerDeserializeAsyncSourceRequired);
+
         using var decompressed = new MemoryStream();
 
         await DecompressAsync(source, decompressed, cancellationToken)
@@ -112,6 +116,8 @@ public abstract class Serializer
     public async Task SerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken)
         where T : notnull
     {
+        _ = Guard.Against.Null(target, parameterName: nameof(target), SerializerSerializeAsyncTargetRequired);
+
         using var serialized = new MemoryStream();
 
         await PerformSerializeAsync(instance, serialized, cancellationToken)

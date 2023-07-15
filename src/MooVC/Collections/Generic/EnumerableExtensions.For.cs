@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -28,7 +28,7 @@ public static partial class EnumerableExtensions
     {
         if (items is not null)
         {
-            _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
+            _ = Guard.Against.Null(action, parameterName: nameof(action), message: EnumerableExtensionsActionRequired);
 
             PerformFor(items, action);
         }

@@ -4,8 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Ardalis.GuardClauses;
 using MooVC.Collections.Generic;
-using static MooVC.Ensure;
 using static MooVC.Linq.Resources;
 
 /// <summary>
@@ -91,7 +91,7 @@ public sealed class PagedResult<T>
 
     private PagedResult(Paging request, Func<ulong> total, Func<IReadOnlyList<T>> values)
     {
-        Request = IsNotNull(request, argumentName: nameof(request), message: PagedResultRequestRequired);
+        Request = Guard.Against.Null(request, parameterName: nameof(request), message: PagedResultRequestRequired);
         Total = total();
         this.values = values();
     }
@@ -155,6 +155,10 @@ public sealed class PagedResult<T>
         return values.GetEnumerator();
     }
 
+    /// <summary>
+    /// Returns an enumerator that iterates through the elements in the result set.
+    /// </summary>
+    /// <returns>An enumerator for the elements in the result set.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return values.GetEnumerator();

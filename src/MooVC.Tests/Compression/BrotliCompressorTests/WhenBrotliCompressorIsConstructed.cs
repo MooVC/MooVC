@@ -2,6 +2,7 @@
 namespace MooVC.Compression.BrotliCompressorTests;
 
 using System;
+using System.ComponentModel;
 using System.IO.Compression;
 using FluentAssertions;
 using Xunit;
@@ -35,14 +36,13 @@ public sealed class WhenBrotliCompressorIsConstructed
     [Theory]
     [InlineData((CompressionLevel)9)]
     [InlineData((CompressionLevel)27)]
-    public void GivenAnInvalidValidLevelThenAnArgumentExceptionIsThrown(CompressionLevel level)
+    public void GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
     {
         // Act
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        _ = act.Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be(nameof(level));
+        _ = act.Should().Throw<InvalidEnumArgumentException>();
     }
 }
 #endif

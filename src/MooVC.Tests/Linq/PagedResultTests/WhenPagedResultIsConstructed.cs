@@ -106,7 +106,7 @@ public sealed class WhenPagedResultIsConstructed
 
         // Assert
         _ = construct.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be(nameof(request));
+            .WithParameterName(nameof(request));
     }
 
     [Fact]

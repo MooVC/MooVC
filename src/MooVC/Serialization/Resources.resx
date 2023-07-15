@@ -132,4 +132,13 @@
   <data name="SerializerBufferSizeRequired" xml:space="preserve">
     <value>A non-zero positive buffer size must be provided.</value>
   </data>
+  <data name="SerializerDeserializeAsyncDataRequired" xml:space="preserve">
+    <value>The data to deserialize must be provided.</value>
+  </data>
+  <data name="SerializerDeserializeAsyncSourceRequired" xml:space="preserve">
+    <value>The stream from which the data is to be deserialized must be provided.</value>
+  </data>
+  <data name="SerializerSerializeAsyncTargetRequired" xml:space="preserve">
+    <value>The stream to which the data is to be serialized must be provided.</value>
+  </data>
 </root>

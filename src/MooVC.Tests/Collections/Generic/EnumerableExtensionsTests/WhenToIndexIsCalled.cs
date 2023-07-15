@@ -19,7 +19,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-           .And.ParamName.Should().Be(nameof(selector));
+           .WithParameterName(nameof(selector));
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-           .And.ParamName.Should().Be(nameof(transform));
+           .WithParameterName(nameof(transform));
     }
 
     [Fact]

@@ -3,7 +3,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using static MooVC.Ensure;
+using Ardalis.GuardClauses;
 using static MooVC.Threading.Resources;
 
 /// <summary>
@@ -24,7 +24,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = IsNotNull(initializer, argumentName: nameof(initializer), message: InitializerInitializerRequired);
+        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerInitializerRequired);
     }
 
     /// <summary>

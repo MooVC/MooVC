@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -51,7 +51,7 @@ public static partial class EnumerableExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = IsNotNull(order, argumentName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
+        _ = Guard.Against.Null(order, parameterName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
 
         return enumerable
             .Snapshot(predicate: predicate)

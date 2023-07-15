@@ -159,7 +159,7 @@ public sealed class WhenProcessAllIsCalled
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-           .And.ParamName.Should().Be(nameof(transform));
+           .WithParameterName(nameof(transform));
     }
 
     [Fact]
@@ -174,6 +174,6 @@ public sealed class WhenProcessAllIsCalled
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
-           .And.ParamName.Should().Be(nameof(transform));
+           .WithParameterName(nameof(transform));
     }
 }

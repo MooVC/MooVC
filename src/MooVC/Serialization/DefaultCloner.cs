@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
-using static MooVC.Ensure;
 using static MooVC.Serialization.Resources;
 
 /// <summary>
@@ -22,7 +21,7 @@ public sealed class DefaultCloner
     /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is <see langword="null" />.</exception>
     public DefaultCloner(ISerializer serializer)
     {
-        this.serializer = IsNotNull(serializer, argumentName: nameof(serializer), message: DefaultClonerSerializerRequired);
+        this.serializer = Guard.Against.Null(serializer, parameterName: nameof(serializer), message: DefaultClonerSerializerRequired);
     }
 
     /// <summary>

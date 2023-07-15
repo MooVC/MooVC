@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MooVC.Collections.Generic;
-using static MooVC.Ensure;
 using static MooVC.Hosting.ThreadSafeHostedService_Resources;
 
 /// <summary>
@@ -39,8 +39,8 @@ public sealed class ThreadSafeHostedService
     /// </param>
     public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
     {
-        this.logger = IsNotNull(logger, argumentName: nameof(logger), message: LoggerRequired);
-        this.services = IsNotNull(services, argumentName: nameof(services), message: ServicesRequired);
+        this.logger = Guard.Against.Null(logger, parameterName: nameof(logger), message: LoggerRequired);
+        this.services = Guard.Against.Null(services, parameterName: nameof(services), message: ServicesRequired);
     }
 
     /// <summary>

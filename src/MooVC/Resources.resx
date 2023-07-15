@@ -117,43 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmittedEventArgsEventRequired" xml:space="preserve">
-    <value>The event must be provided.</value>
-  </data>
-  <data name="ExceptionEventArgsExceptionRequired" xml:space="preserve">
-    <value>The exception must be provided.</value>
-  </data>
-  <data name="ExceptionEventArgsMessageRequired" xml:space="preserve">
-    <value>The message must be provided.</value>
-  </data>
   <data name="ExceptionExtensionsExplodeHandlerRequired" xml:space="preserve">
     <value>The handler for each exception must be provided.</value>
-  </data>
-  <data name="MulticastDelegateExtensionsEnsureParametersIncorrectArgsParameterType" xml:space="preserve">
-    <value>The multicast delegate supplied does not specify the required type of {0} for the arguments.</value>
-  </data>
-  <data name="MulticastDelegateExtensionsEnsureParametersIncorrectNumberOfParameters" xml:space="preserve">
-    <value>The multicast delegate supplied does not specify the two required parameters.</value>
-  </data>
-  <data name="MulticastDelegateExtensionsEnsureParametersIncorrectSenderParameterType" xml:space="preserve">
-    <value>The multicast delegate supplied does not specify the required type of {0} for the sender.</value>
-  </data>
-  <data name="MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType" xml:space="preserve">
-    <value>The multicast delegate supplied does not return a task.</value>
-  </data>
-  <data name="MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType" xml:space="preserve">
-    <value>The multicast delegate supplied is not marked as void.</value>
-  </data>
-  <data name="ProcessorContinuationAbortFailure" xml:space="preserve">
-    <value>Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease.</value>
-  </data>
-  <data name="ProcessorContinuationInteruppted" xml:space="preserve">
-    <value>Processor {0} has encountered an issue that has prevented it from continuing its processing.</value>
-  </data>
-  <data name="ProcessorStartFailure" xml:space="preserve">
-    <value>Processor {0} has encountered an issue that has prevented it from starting.</value>
-  </data>
-  <data name="ProcessorStopFailure" xml:space="preserve">
-    <value>Processor {0} has encountered an issue that has prevented it from stopping.</value>
   </data>
 </root>
