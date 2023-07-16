@@ -9,12 +9,12 @@ on:
       - feature/*
       - hotfix/*
   schedule:
-    - cron:  '0 3 * * *'  # Scheduled nightly build
+    - cron:  '0 3 * * *'
 
 env:
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
-  solution: '**/*.sln'
+  solution: 'src/MooVC.sln'
 
 jobs:
   build:
