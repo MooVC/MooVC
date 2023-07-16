@@ -1,6 +1,9 @@
 name: .NET Build, Test and Publish
 
 on:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
@@ -9,15 +12,16 @@ on:
       - feature/*
       - hotfix/*
   schedule:
-    - cron:  '0 3 * * *'
+    - cron: '0 3 * * *'
 
 env:
-  buildConfiguration: 'Release'
-  buildPlatform: 'Any CPU'
+  configuration: 'Release'
+  platform: 'Any CPU'
   solution: 'src/MooVC.sln'
 
 jobs:
   build:
+    name: Build & Test
     runs-on: windows-latest
 
     steps:
@@ -46,15 +50,12 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build --configuration ${{ env.buildConfiguration }} --no-restore
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.buildConfiguration }} --no-restore
 
     - name: Test Solution
-      run: dotnet test --configuration ${{ env.buildConfiguration }} --no-build
+      run: dotnet test ${{ env.solution }} --configuration ${{ env.buildConfiguration }} --collect:"XPlat Code Coverage" --no-build
 
-    - name: Test Solution with coverage
-      run: dotnet test --collect:"XPlat Code Coverage"
-
-    - name: Generate coverage report
+    - name: Generate Coverage Report
       run: |
         dotnet tool install --global dotnet-reportgenerator-globaltool
         reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:./Coverage" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
