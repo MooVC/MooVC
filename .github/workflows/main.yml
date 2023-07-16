@@ -53,7 +53,7 @@ jobs:
       run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
 
     - name: Test Solution
-      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --collect:"XPlat Code Coverage" --no-build
+      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
 
     - name: Install ReportGenerator Tool for Code Coverage
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
@@ -61,7 +61,7 @@ jobs:
     - name: Create Code Coverage Reports
       run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
 
-    - name: Archive Code Voverage Results
+    - name: Archive Code Coverage Results
       uses: actions/upload-artifact@v1
       with:
         name: code-coverage-report
