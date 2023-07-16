@@ -1,0 +1,73 @@
+name: .NET Build, Test and Publish
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - release/*
+      - feature/*
+      - hotfix/*
+  schedule:
+    - cron:  '0 3 * * *'  # Scheduled nightly build
+
+env:
+  buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
+  solution: '**/*.sln'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+
+    - name: Use GitVersion
+      run: dotnet gitversion /config ./gitversion.yml /output buildserver
+
+    - name: Use .NET 6 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.x
+
+    - name: Use .NET 7 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.x
+
+    - name: Restore Nuget Packages for Solution
+      run: dotnet restore ${{ env.solution }}
+
+    - name: Build Solution
+      run: dotnet build --configuration ${{ env.buildConfiguration }} --no-restore
+
+    - name: Test Solution
+      run: dotnet test --configuration ${{ env.buildConfiguration }} --no-build
+
+    - name: Test Solution with coverage
+      run: dotnet test --collect:"XPlat Code Coverage"
+
+    - name: Generate coverage report
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool
+        reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:./Coverage" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
+
+    - name: Upload coverage to GitHub
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage
+        path: ./Coverage
+
+    - name: Package Artifacts
+      run: dotnet pack --no-build --configuration ${{ env.buildConfiguration }} --output ./artifacts
+
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ./artifacts/*.nupkg
