@@ -21,9 +21,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v2
-
+      with:
+        fetch-depth: 0
+        
     - name: Setup GitVersion
       run: dotnet tool install --global GitVersion.Tool
 
@@ -57,7 +59,7 @@ jobs:
         dotnet tool install --global dotnet-reportgenerator-globaltool
         reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:./Coverage" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
 
-    - name: Upload coverage to GitHub
+    - name: Upload Coverage to GitHub
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage
