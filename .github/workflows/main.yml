@@ -55,22 +55,14 @@ jobs:
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --collect:"XPlat Code Coverage" --no-build
 
-    - name: Generate Coverage Report
-      run: |
-        dotnet tool install --global dotnet-reportgenerator-globaltool
-        reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:./Coverage" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
+    - name: Install ReportGenerator Tool for Code Coverage
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
-    - name: Upload Coverage to GitHub
-      uses: actions/upload-artifact@v2
+    - name: Create Code Coverage Reports
+      run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
+
+    - name: Archive Code Voverage Results
+      uses: actions/upload-artifact@v1
       with:
-        name: code-coverage
-        path: ./Coverage
-
-    - name: Package Artifacts
-      run: dotnet pack --no-build --configuration ${{ env.configuration }} --output ./artifacts
-
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: package
-        path: ./artifacts/*.nupkg
+        name: code-coverage-report
+        path: coveragereport
