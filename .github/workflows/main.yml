@@ -50,7 +50,7 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore -p:AssemblyVersion="$(GitVersion.AssemblySemVer)" -p:FileVersion="$(GitVersion.AssemblySemFileVer)" -p:InformationalVersion="$(GitVersion.InformationalVersion)" -p:PackageVersion="$(GitVersion.NuGetVersion)" -p:Version="$(GitVersion.AssemblySemVer)"
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
