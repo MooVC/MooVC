@@ -16,10 +16,10 @@ on:
 
 env:
   configuration: 'Release'
-  platform: 'Any CPU'
   solution: 'src/MooVC.sln'
 
 jobs:
+
   build:
     name: Build & Test
     runs-on: windows-latest
@@ -50,10 +50,10 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.buildConfiguration }} --no-restore
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
 
     - name: Test Solution
-      run: dotnet test ${{ env.solution }} --configuration ${{ env.buildConfiguration }} --collect:"XPlat Code Coverage" --no-build
+      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --collect:"XPlat Code Coverage" --no-build
 
     - name: Generate Coverage Report
       run: |
@@ -67,7 +67,7 @@ jobs:
         path: ./Coverage
 
     - name: Package Artifacts
-      run: dotnet pack --no-build --configuration ${{ env.buildConfiguration }} --output ./artifacts
+      run: dotnet pack --no-build --configuration ${{ env.configuration }} --output ./artifacts
 
     - name: Publish Artifacts
       uses: actions/upload-artifact@v2
