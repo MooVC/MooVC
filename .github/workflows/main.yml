@@ -50,16 +50,16 @@ jobs:
       run: dotnet restore ${{ env.solution }}
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore -p:AssemblyVersion="$(GitVersion.AssemblySemVer)" -p:FileVersion="$(GitVersion.AssemblySemFileVer)" -p:InformationalVersion="$(GitVersion.InformationalVersion)" -p:PackageVersion="$(GitVersion.NuGetVersion)" -p:Version="$(GitVersion.AssemblySemVer)"
 
     - name: Test Solution
-      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
     - name: Install ReportGenerator Tool for Code Coverage
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Create Code Coverage Reports
-      run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
+      run: reportgenerator "-reports:**/*.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
 
     - name: Archive Code Coverage Results
       uses: actions/upload-artifact@v1
