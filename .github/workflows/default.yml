@@ -2,9 +2,7 @@ name: .NET Build & Test
 
 on:
   pull_request:
-    branches:
-      - master
-      - develop
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - master
@@ -58,3 +56,6 @@ jobs:
       with:
         name: code-coverage-report
         path: coveragereport
+        
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v1.9.1
