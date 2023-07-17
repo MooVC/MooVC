@@ -57,5 +57,5 @@ jobs:
         name: code-coverage-report
         path: coveragereport
         
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@v1.9.1
+    - name: CodeQL Bundle
+      uses: advanced-security/codeql-bundle-action@v1.1.0
