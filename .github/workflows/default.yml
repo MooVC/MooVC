@@ -45,16 +45,7 @@ jobs:
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
-    - uses: codecov/codecov-action@v3
-
-    #- name: Install ReportGenerator Tool for Code Coverage
-    #  run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-    #- name: Create Code Coverage Reports
-    #  run: reportgenerator "-reports:**/*.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
-
-    #- name: Archive Code Coverage Results
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: code-coverage-report
-    #    path: coveragereport
+    - name: Upload Code Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: true
