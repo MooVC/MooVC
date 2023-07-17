@@ -45,17 +45,16 @@ jobs:
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
-    - name: Install ReportGenerator Tool for Code Coverage
-      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+    - uses: codecov/codecov-action@v3
 
-    - name: Create Code Coverage Reports
-      run: reportgenerator "-reports:**/*.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
+    #- name: Install ReportGenerator Tool for Code Coverage
+    #  run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
-    - name: Archive Code Coverage Results
-      uses: actions/upload-artifact@v1
-      with:
-        name: code-coverage-report
-        path: coveragereport
-        
-    - name: CodeQL Bundle
-      uses: advanced-security/codeql-bundle-action@v1.1.0
+    #- name: Create Code Coverage Reports
+    #  run: reportgenerator "-reports:**/*.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura"
+
+    #- name: Archive Code Coverage Results
+    #  uses: actions/upload-artifact@v1
+    #  with:
+    #    name: code-coverage-report
+    #    path: coveragereport
