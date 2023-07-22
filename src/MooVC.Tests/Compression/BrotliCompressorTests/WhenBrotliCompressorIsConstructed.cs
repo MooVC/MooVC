@@ -1,7 +1,10 @@
-﻿namespace MooVC.Compression.BrotliCompressorTests;
+﻿#if NET6_0_OR_GREATER
+namespace MooVC.Compression.BrotliCompressorTests;
 
 using System;
+using System.ComponentModel;
 using System.IO.Compression;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenBrotliCompressorIsConstructed
@@ -9,7 +12,11 @@ public sealed class WhenBrotliCompressorIsConstructed
     [Fact]
     public void GivenNoLevelThenAnInstanceIsCreated()
     {
-        _ = new BrotliCompressor();
+        // Act
+        Func<ICompressor> act = () => new BrotliCompressor();
+
+        // Assert
+        _ = act.Should().NotThrow();
     }
 
     [Theory]
@@ -19,16 +26,23 @@ public sealed class WhenBrotliCompressorIsConstructed
     [InlineData(CompressionLevel.SmallestSize)]
     public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
     {
-        _ = new BrotliCompressor(level: level);
+        // Act
+        Func<ICompressor> act = () => new BrotliCompressor(level: level);
+
+        // Assert
+        _ = act.Should().NotThrow();
     }
 
     [Theory]
     [InlineData((CompressionLevel)9)]
     [InlineData((CompressionLevel)27)]
-    public void GivenAnInvalidValidLevelThenAnArgumentExceptionIsThrown(CompressionLevel level)
+    public void GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
     {
-        ArgumentException exception = Assert.Throws<ArgumentException>(() => new BrotliCompressor(level: level));
+        // Act
+        Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
-        Assert.Equal(nameof(level), exception.ParamName);
+        // Assert
+        _ = act.Should().Throw<InvalidEnumArgumentException>();
     }
 }
+#endif

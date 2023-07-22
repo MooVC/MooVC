@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenApplyAsyncIsCalled
@@ -23,22 +24,35 @@ public sealed class WhenApplyAsyncIsCalled
     [Fact]
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
     {
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(() => coordinator.ApplyAsync(default!));
+        // Arrange
+        string? context = default;
+
+        // Act
+        Func<Task> act = async () => await coordinator.ApplyAsync(context!, CancellationToken.None);
+
+        // Assert
+        _ = await act.Should().ThrowAsync<ArgumentNullException>()
+            .WithParameterName(nameof(context));
     }
 
     [Fact]
     public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrownAsync()
     {
+        // Arrange
         coordinator.Dispose();
 
-        _ = await Assert.ThrowsAsync<ObjectDisposedException>(() => coordinator.ApplyAsync(default!));
+        // Act
+        Func<Task> act = async () => await coordinator.ApplyAsync("N/A", CancellationToken.None);
+
+        // Assert
+        _ = await act.Should().ThrowAsync<ObjectDisposedException>();
     }
 
     [Fact]
     public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrownAsync()
     {
+        // Arrange
         const int ExpectedCount = 5;
-
         int counter = 0;
         string context = "Test";
 
@@ -46,7 +60,7 @@ public sealed class WhenApplyAsyncIsCalled
             async () =>
             {
                 ICoordinationContext<string> coordination = await coordinator
-                    .ApplyAsync(context)
+                    .ApplyAsync(context, CancellationToken.None)
                     .ConfigureAwait(false);
 
                 using (coordination)
@@ -56,9 +70,11 @@ public sealed class WhenApplyAsyncIsCalled
             },
             ExpectedCount);
 
+        // Act
         await Task.WhenAll(tasks);
 
-        Assert.Equal(ExpectedCount, counter);
+        // Assert
+        _ = counter.Should().Be(ExpectedCount);
     }
 
     private static Task[] CreateTasks(Func<Task> operation, int total)

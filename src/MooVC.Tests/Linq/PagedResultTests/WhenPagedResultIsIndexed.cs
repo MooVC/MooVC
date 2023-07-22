@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Linq.PagedResultTests;
 
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenPagedResultIsIndexed
@@ -10,11 +11,30 @@ public sealed class WhenPagedResultIsIndexed
     [InlineData(5, 0, new[] { 5, 4, 3 })]
     public void GivenAnIndexThenTheElementAtThatIndexIsReturned(int expected, int index, int[] values)
     {
+        // Arrange
         Paging request = Paging.Default;
         var result = new PagedResult<int>(request, values);
 
+        // Act
         int actual = result[index];
 
-        Assert.Equal(expected, actual);
+        // Assert
+        _ = actual.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(-1, new[] { 1, 2, 3 })]
+    [InlineData(3, new[] { 1, 2, 3 })]
+    public void GivenAnInvalidIndexThenArgumentOutOfRangeExceptionIsThrown(int index, int[] values)
+    {
+        // Arrange
+        Paging request = Paging.Default;
+        var result = new PagedResult<int>(request, values);
+
+        // Act
+        Action act = () => { int value = result[index]; };
+
+        // Assert
+        _ = act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }

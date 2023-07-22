@@ -61,6 +61,15 @@ namespace MooVC.Serialization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The original item must be provided..
+        /// </summary>
+        internal static string DefaultClonerCloneAsyncOriginalRequired {
+            get {
+                return ResourceManager.GetString("DefaultClonerCloneAsyncOriginalRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The serializer from which clones are to be produced must be provided..
         /// </summary>
         internal static string DefaultClonerSerializerRequired {
@@ -93,6 +102,33 @@ namespace MooVC.Serialization {
         internal static string SerializerBufferSizeRequired {
             get {
                 return ResourceManager.GetString("SerializerBufferSizeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data to deserialize must be provided..
+        /// </summary>
+        internal static string SerializerDeserializeAsyncDataRequired {
+            get {
+                return ResourceManager.GetString("SerializerDeserializeAsyncDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stream from which the data is to be deserialized must be provided..
+        /// </summary>
+        internal static string SerializerDeserializeAsyncSourceRequired {
+            get {
+                return ResourceManager.GetString("SerializerDeserializeAsyncSourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stream to which the data is to be serialized must be provided..
+        /// </summary>
+        internal static string SerializerSerializeAsyncTargetRequired {
+            get {
+                return ResourceManager.GetString("SerializerSerializeAsyncTargetRequired", resourceCulture);
             }
         }
     }

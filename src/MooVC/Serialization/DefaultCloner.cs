@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using static MooVC.Ensure;
+using Ardalis.GuardClauses;
 using static MooVC.Serialization.Resources;
 
 /// <summary>
@@ -21,7 +21,7 @@ public sealed class DefaultCloner
     /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is <see langword="null" />.</exception>
     public DefaultCloner(ISerializer serializer)
     {
-        this.serializer = IsNotNull(serializer, argumentName: nameof(serializer), message: DefaultClonerSerializerRequired);
+        this.serializer = Guard.Against.Null(serializer, parameterName: nameof(serializer), message: DefaultClonerSerializerRequired);
     }
 
     /// <summary>
@@ -34,15 +34,17 @@ public sealed class DefaultCloner
     /// A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken = default)
+    public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
+        _ = Guard.Against.Null(original, nameof(original), message: DefaultClonerCloneAsyncOriginalRequired);
+
         IEnumerable<byte> data = await serializer
-            .SerializeAsync(original, cancellationToken: cancellationToken)
+            .SerializeAsync(original, cancellationToken)
             .ConfigureAwait(false);
 
         return await serializer
-            .DeserializeAsync<T>(data, cancellationToken: cancellationToken)
+            .DeserializeAsync<T>(data, cancellationToken)
             .ConfigureAwait(false);
     }
 }

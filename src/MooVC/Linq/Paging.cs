@@ -1,17 +1,12 @@
 ﻿namespace MooVC.Linq;
 
 using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using MooVC.Serialization;
 using static System.Math;
 
 /// <summary>
 /// Represents paging information used to control the amount of data returned from a sequence or query.
 /// </summary>
-[Serializable]
-public class Paging
-    : ISerializable
+public sealed class Paging
 {
     /// <summary>
     /// The default number of items per page.
@@ -41,20 +36,6 @@ public class Paging
     {
         Page = Max(page, FirstPage);
         Size = Max(size, MinimumSize);
-    }
-
-    /// <summary>
-    /// Supports deserialization of an instance of the <see cref="Paging"/> class
-    /// via the specified <paramref name="info"/> and <paramref name="context"/>.
-    /// </summary>
-    /// <param name="info">The <see cref="SerializationInfo"/> object that holds the serialized object data relating to the instance.</param>
-    /// <param name="context">The <see cref="StreamingContext"/> object that contains contextual information about the stream.</param>
-    [Obsolete(@"Slated for removal as part of Microsoft's BinaryFormatter Obsoletion Strategy.
-                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
-    protected Paging(SerializationInfo info, StreamingContext context)
-    {
-        Page = info.GetValue<ushort>(nameof(Page));
-        Size = info.GetValue<ushort>(nameof(Size));
     }
 
     /// <summary>
@@ -156,42 +137,12 @@ public class Paging
     }
 
     /// <summary>
-    /// Applies the paging information to the specified <paramref name="queryable"/>.
-    /// </summary>
-    /// <typeparam name="T">The type of element in the queryable.</typeparam>
-    /// <param name="queryable">The queryable to which the paging is to be applied.</param>
-    /// <returns>A new <see cref="IQueryable{T}"/> with the paging information applied.</returns>
-    public virtual IQueryable<T> Apply<T>(IQueryable<T> queryable)
-    {
-        if (IsNone)
-        {
-            return queryable;
-        }
-
-        return queryable.Skip(Skip).Take(Size);
-    }
-
-    /// <summary>
-    /// Populates the specified <see cref="SerializationInfo"/> object with the data needed to serialize the current instance
-    /// of the <see cref="Paging"/> class.
-    /// </summary>
-    /// <param name="info">The <see cref="SerializationInfo"/> object that will be populated with data.</param>
-    /// <param name="context">The destination (see <see cref="StreamingContext"/>) for the serialization operation.</param>
-    [Obsolete(@"Slated for removal as part of Microsoft's BinaryFormatter Obsoletion Strategy.
-                       (see: https://github.com/dotnet/designs/blob/main/accepted/2020/better-obsoletion/binaryformatter-obsoletion.md)")]
-    public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        info.AddValue(nameof(Page), Page);
-        info.AddValue(nameof(Size), Size);
-    }
-
-    /// <summary>
     /// Returns a new <see cref="Paging"/> instance representing the next page in the sequence or query.
     /// </summary>
     /// <returns>
     /// A new <see cref="Paging"/> instance representing the next page in the sequence or query.
     /// </returns>
-    public virtual Paging Next()
+    public Paging Next()
     {
         if (Page == ushort.MaxValue)
         {
@@ -207,7 +158,7 @@ public class Paging
     /// <returns>
     /// A new <see cref="Paging"/> instance representing the previous page in the sequence or query.
     /// </returns>
-    public virtual Paging Previous()
+    public Paging Previous()
     {
         if (Page == FirstPage)
         {

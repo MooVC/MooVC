@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading;
+using FluentAssertions;
 using MooVC.Linq;
 using Moq;
 using Xunit;
@@ -24,6 +25,7 @@ public sealed class WhenGetAsyncIsCalled
             return expectedInnerKey;
         }
 
+        // Arrange
         var outterKey = Guid.NewGuid();
         object expectedItem = new();
 
@@ -35,29 +37,50 @@ public sealed class WhenGetAsyncIsCalled
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-        object? actualItem = await store.GetAsync(outterKey);
+        // Act
+        object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
 
-        Assert.True(wasInvoked);
-        Assert.Equal(expectedItem, actualItem);
+        // Assert
+        _ = wasInvoked.Should().BeTrue();
+        _ = actualItem.Should().Be(expectedItem);
 
         Store.Verify(
             store => store.GetAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()),
-            times: Times.Once);
+            Times.Once);
     }
 
     [Fact]
     public async void GivenPagingThenTheInnerStoreIsInvokedAsync()
     {
+        // Arrange
         var paging = new Paging();
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
+        // Act
         _ = await store.GetAsync(paging: paging);
 
+        // Assert
         Store.Verify(
             store => store.GetAsync(It.IsAny<Paging>(), It.IsAny<CancellationToken>()),
-            times: Times.Once);
+            Times.Once);
+    }
+
+    [Fact]
+    public async void GivenANonExistingKeyThenNullShouldBeReturnedAsync()
+    {
+        // Arrange
+        var outterKey = Guid.NewGuid();
+        object expectedItem = new();
+
+        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+
+        // Act
+        object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
+
+        // Assert
+        _ = actualItem.Should().BeNull();
     }
 }

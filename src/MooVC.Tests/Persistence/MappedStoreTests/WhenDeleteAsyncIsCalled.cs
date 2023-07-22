@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -23,40 +24,42 @@ public sealed class WhenDeleteAsyncIsCalled
             return expectedInnerKey;
         }
 
+        // Arrange
         var key = Guid.NewGuid();
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
 
-        await store.DeleteAsync(key);
+        // Act
+        await store.DeleteAsync(key, CancellationToken.None);
 
-        Assert.True(wasInvoked);
+        // Assert
+        _ = wasInvoked.Should().BeTrue();
 
         Store.Verify(
             store => store.DeleteAsync(
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()),
-            times: Times.Once);
+            Times.Once);
 
         Store.Verify(
             store => store.DeleteAsync(
                 It.Is<string>(argument => argument == expectedInnerKey),
                 It.IsAny<CancellationToken>()),
-            times: Times.Once);
+            Times.Once);
     }
 
     [Fact]
     public async void GivenAnItemThenTheInnerStoreIsInvokedAsync()
     {
+        // Arrange
         object item = new();
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
 
-        await store.DeleteAsync(item);
+        // Act
+        await store.DeleteAsync(item, CancellationToken.None);
 
-        Store.Verify(
-            store => store.DeleteAsync(
-                It.IsAny<object>(),
-                It.IsAny<CancellationToken>()),
-            times: Times.Once);
+        // Assert
+        Store.Verify(store => store.DeleteAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }

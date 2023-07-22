@@ -4,9 +4,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -23,37 +24,38 @@ public static partial class EnumerableExtensions
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    /// A <see cref="Task{IReadOnlyList{TResult}}"/> representing the asynchronous operation.
     /// The result of the task is an enumerable sequence containing the results of the transform function applied to each element of the
     /// source sequence.
     /// </returns>
-    public static async Task<IEnumerable<TResult>> ProcessAllAsync<TResult, TSource>(
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static async Task<IReadOnlyList<TResult>> ProcessAllAsync<TResult, TSource>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<TResult>> transform)
         where TSource : notnull
     {
-        if (source is { })
+        if (source is null)
         {
-            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
-
-            return await source
-                .ProcessAllAsync(
-                    async source =>
-                    {
-                        TResult result = await transform(source)
-                            .ConfigureAwait(false);
-
-                        if (result is { })
-                        {
-                            return new[] { result };
-                        }
-
-                        return Enumerable.Empty<TResult>();
-                    })
-                .ConfigureAwait(false);
+            return Array.Empty<TResult>();
         }
 
-        return Enumerable.Empty<TResult>();
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
+
+        return await source
+            .ProcessAllAsync(
+                async source =>
+                {
+                    TResult result = await transform(source)
+                        .ConfigureAwait(false);
+
+                    if (result is null)
+                    {
+                        return Enumerable.Empty<TResult>();
+                    }
+
+                    return result.AsEnumerable();
+                })
+            .ConfigureAwait(false);
     }
 
     /// <summary>
@@ -65,40 +67,41 @@ public static partial class EnumerableExtensions
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    /// A <see cref="Task{IReadOnlyList{{TResult}}"/> representing the asynchronous operation.
     /// The result of the task is an enumerable sequence containing the results of the transform function applied to each element of the
     /// source sequence.
     /// </returns>
-    public static async Task<IEnumerable<TResult>> ProcessAllAsync<TSource, TResult>(
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static async Task<IReadOnlyList<TResult>> ProcessAllAsync<TSource, TResult>(
         this IEnumerable<TSource>? source,
         Func<TSource, Task<IEnumerable<TResult>>> transform)
         where TSource : notnull
     {
-        if (source is { })
+        if (source is null)
         {
-            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
-
-            var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
-
-            source = source.Snapshot();
-
-            await source
-                .ForAllAsync(async item =>
-                {
-                    IEnumerable<TResult> results = await transform(item)
-                        .ConfigureAwait(false);
-
-                    transforms[item] = results;
-                })
-                .ConfigureAwait(false);
-
-            return source
-                .Select(original => transforms[original])
-                .Where(transform => transform is { })
-                .SelectMany(transform => transform)
-                .ToArray();
+            return Array.Empty<TResult>();
         }
 
-        return Enumerable.Empty<TResult>();
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessAllTransformRequired);
+
+        var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
+
+        source = source.Snapshot();
+
+        await source
+            .ForAllAsync(async item =>
+            {
+                IEnumerable<TResult> results = await transform(item)
+                    .ConfigureAwait(false);
+
+                transforms[item] = results;
+            })
+            .ConfigureAwait(false);
+
+        return source
+            .Select(original => transforms[original])
+            .Where(transform => transform is not null)
+            .SelectMany(transform => transform)
+            .ToArray();
     }
 }

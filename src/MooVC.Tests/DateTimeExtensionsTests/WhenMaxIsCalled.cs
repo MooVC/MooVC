@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using MooVC;
 using Xunit;
 
@@ -17,13 +18,13 @@ public sealed class WhenMaxIsCalled
 
     [Theory]
     [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstDateIsTheOldestThenTheDateFurthestInTheFuturetIsReturnedData(
-        DateTime oldest,
-        DateTime newest)
+    public void GivenDifferentDatesWhenTheFirstDateIsTheOldestThenTheDateFurthestInTheFuturetIsReturnedData(DateTime oldest, DateTime newest)
     {
+        // Act
         DateTime selected = oldest.Max(newest);
 
-        Assert.Equal(newest, selected);
+        // Assert
+        _ = selected.Should().Be(newest);
     }
 
     [Theory]
@@ -32,8 +33,23 @@ public sealed class WhenMaxIsCalled
         DateTime oldest,
         DateTime newest)
     {
+        // Act
         DateTime selected = newest.Max(oldest);
 
-        Assert.Equal(newest, selected);
+        // Assert
+        _ = selected.Should().Be(newest);
+    }
+
+    [Fact]
+    public void GivenSameDatesThenTheSameDateIsReturned()
+    {
+        // Arrange
+        var sameDate = new DateTime(2019, 1, 1);
+
+        // Act
+        DateTime selected = sameDate.Max(sameDate);
+
+        // Assert
+        _ = selected.Should().Be(sameDate);
     }
 }

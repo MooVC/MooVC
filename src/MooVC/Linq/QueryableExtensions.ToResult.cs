@@ -26,7 +26,7 @@ public static partial class QueryableExtensions
 
         paging ??= Paging.None;
 
-        if (queryable is { })
+        if (queryable is not null)
         {
             total = (ulong)queryable.LongCount();
             queryable = queryable.Page(paging);

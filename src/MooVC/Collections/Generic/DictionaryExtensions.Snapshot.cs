@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Collections.Generic;
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IDictionary{TKey, TValue}"/>.
@@ -16,6 +17,7 @@ public static partial class DictionaryExtensions
     /// <typeparam name="TValue">Specifies the type of values in the dictionary.</typeparam>
     /// <param name="source">The dictionary from which the contents are to be copied.</param>
     /// <returns>A new dictionary instance that contains the contents of the <paramref name="source"/> dictionary.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IDictionary<TKey, TValue> Snapshot<TKey, TValue>(this IDictionary<TKey, TValue>? source)
         where TKey : notnull
     {

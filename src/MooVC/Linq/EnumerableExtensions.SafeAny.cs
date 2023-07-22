@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -17,14 +18,17 @@ public static partial class EnumerableExtensions
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
     /// <returns>True if the enumerable sequence is not empty, or false if it is empty or null.</returns>
-    public static bool SafeAny<T>(
 #if NET6_0_OR_GREATER
-        [NotNullWhen(true)]
-#endif
-        this IEnumerable<T>? source)
+    public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source)
     {
-        return source is { } && source.Any();
+        return !source.IsEmpty();
     }
+#else
+    public static bool SafeAny<T>(this IEnumerable<T>? source)
+    {
+        return !source.IsEmpty();
+    }
+#endif
 
     /// <summary>
     /// Determines whether any elements of an enumerable sequence satisfy a condition.
@@ -35,13 +39,21 @@ public static partial class EnumerableExtensions
     /// <returns>
     /// True if any elements in the enumerable sequence satisfy the condition, or false if none of the elements do or the sequence is empty or null.
     /// </returns>
-    public static bool SafeAny<T>(
 #if NET6_0_OR_GREATER
-        [NotNullWhen(true)]
-#endif
-        this IEnumerable<T>? source,
-        Func<T, bool> predicate)
+    public static bool SafeAny<T>([NotNullWhen(true)] this IEnumerable<T>? source, Func<T, bool> predicate)
     {
-        return source is { } && source.Any(predicate);
+        return PerformSafeAny(source, predicate);
+    }
+#else
+    public static bool SafeAny<T>(this IEnumerable<T>? source, Func<T, bool> predicate)
+    {
+        return PerformSafeAny(source, predicate);
+    }
+#endif
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool PerformSafeAny<T>(this IEnumerable<T>? source, Func<T, bool> predicate)
+    {
+        return source is not null && source.Any(predicate);
     }
 }

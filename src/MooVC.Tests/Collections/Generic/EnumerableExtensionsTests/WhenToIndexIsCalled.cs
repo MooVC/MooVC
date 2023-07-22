@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenToIndexIsCalled
@@ -9,62 +10,88 @@ public sealed class WhenToIndexIsCalled
     [Fact]
     public void GivenANullSelectorThenAnArgumentNullExceptionIsThrown()
     {
+        // Arrange
         Func<int, string>? selector = default;
         IEnumerable<int> source = new[] { 1, 2, 3 };
 
-        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => source.ToIndex(selector!));
+        // Act
+        Action act = () => source.ToIndex(selector!);
 
-        Assert.Equal(nameof(selector), exception.ParamName);
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+           .WithParameterName(nameof(selector));
     }
 
     [Fact]
     public void GivenANullSourceThenAnEmptyDictionaryIsReturned()
     {
+        // Arrange
         IEnumerable<int>? source = default;
 
+        // Act
         IDictionary<int, int> index = source.ToIndex(value => value);
 
-        Assert.NotNull(index);
-        Assert.Empty(index);
+        // Assert
+        _ = index.Should().NotBeNull()
+            .And.BeEmpty();
     }
 
     [Fact]
     public void GivenANullTransformThenAnArgumentNullExceptionIsThrown()
     {
+        // Arrange
         Func<int, string>? transform = default;
         IEnumerable<int> source = new[] { 1, 2, 3 };
 
-        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => source.ToIndex(value => value, transform!));
+        // Act
+        Action act = () => source.ToIndex(value => value, transform!);
 
-        Assert.Equal(nameof(transform), exception.ParamName);
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+           .WithParameterName(nameof(transform));
     }
 
     [Fact]
     public void GivenASourceThenAMatchingDictionaryIsReturned()
     {
+        // Arrange
         IEnumerable<int> source = new[] { 1, 2, 3 };
 
+        // Act
         IDictionary<int, int> index = source.ToIndex(value => value);
 
-        Assert.NotNull(index);
-        Assert.Equal(source, index.Keys);
-        Assert.Equal(source, index.Values);
+        // Assert
+        _ = index.Should().NotBeNull();
+        _ = index.Keys.Should().Equal(source);
+        _ = index.Values.Should().Equal(source);
     }
 
     [Fact]
     public void GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
     {
+        // Arrange
         IEnumerable<int> source = new[] { 1, 2, 3 };
+        Func<int, string> transform = value => value.ToString();
 
-        static string Transform(int value)
-        {
-            return value.ToString();
-        }
+        // Act
+        IDictionary<int, string> index = source.ToIndex(value => value, transform);
 
-        IDictionary<int, string> index = source.ToIndex(value => value, Transform);
+        // Assert
+        _ = index.Should().NotBeNull();
+        _ = index.Keys.Should().Equal(source);
+        _ = index.All(element => element.Value == transform(element.Key)).Should().BeTrue();
+    }
 
-        Assert.NotNull(index);
-        Assert.Equal(source, index.Keys);
-        Assert.All(index, element => Assert.Equal(Transform(element.Key), element.Value));
+    [Fact]
+    public void GivenASourceWithDuplicatesThenAnArgumentExceptionIsThrown()
+    {
+        // Arrange
+        IEnumerable<int> source = new[] { 1, 1, 2 };
+
+        // Act
+        Action act = () => source.ToIndex(value => value);
+
+        // Assert
+        _ = act.Should().Throw<ArgumentException>();
     }
 }

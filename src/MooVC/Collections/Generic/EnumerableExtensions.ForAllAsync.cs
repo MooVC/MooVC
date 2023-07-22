@@ -4,9 +4,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -23,11 +24,12 @@ public static partial class EnumerableExtensions
     /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="operation"/> is <see langword="null" />.</exception>
     /// <exception cref="AggregateException">At least one of the executed operations threw an exception.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static async Task ForAllAsync<T>(this IEnumerable<T>? items, Func<T, Task> operation)
     {
-        if (items is { })
+        if (items is not null)
         {
-            _ = IsNotNull(operation, argumentName: nameof(operation), message: EnumerableExtensionsForAllAsyncOperationRequired);
+            _ = Guard.Against.Null(operation, parameterName: nameof(operation), message: EnumerableExtensionsForAllAsyncOperationRequired);
 
             var exceptions = new ConcurrentQueue<Exception>();
 

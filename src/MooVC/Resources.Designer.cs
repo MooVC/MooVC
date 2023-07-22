@@ -61,119 +61,11 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The event must be provided..
-        /// </summary>
-        internal static string EmittedEventArgsEventRequired {
-            get {
-                return ResourceManager.GetString("EmittedEventArgsEventRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The exception must be provided..
-        /// </summary>
-        internal static string ExceptionEventArgsExceptionRequired {
-            get {
-                return ResourceManager.GetString("ExceptionEventArgsExceptionRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The message must be provided..
-        /// </summary>
-        internal static string ExceptionEventArgsMessageRequired {
-            get {
-                return ResourceManager.GetString("ExceptionEventArgsMessageRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The handler for each exception must be provided..
         /// </summary>
         internal static string ExceptionExtensionsExplodeHandlerRequired {
             get {
                 return ResourceManager.GetString("ExceptionExtensionsExplodeHandlerRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the arguments..
-        /// </summary>
-        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectArgsParameterType {
-            get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectArgsParameterType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the two required parameters..
-        /// </summary>
-        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectNumberOfParameters {
-            get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectNumberOfParameters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied does not specify the required type of {0} for the sender..
-        /// </summary>
-        internal static string MulticastDelegateExtensionsEnsureParametersIncorrectSenderParameterType {
-            get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsEnsureParametersIncorrectSenderParameterType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied does not return a task..
-        /// </summary>
-        internal static string MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType {
-            get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsInvokeAsyncIncorrectReturnType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The multicast delegate supplied is not marked as void..
-        /// </summary>
-        internal static string MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType {
-            get {
-                return ResourceManager.GetString("MulticastDelegateExtensionsPassiveInvokeIncorrectReturnType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from waiting for continuation to cease..
-        /// </summary>
-        internal static string ProcessorContinuationAbortFailure {
-            get {
-                return ResourceManager.GetString("ProcessorContinuationAbortFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from continuing its processing..
-        /// </summary>
-        internal static string ProcessorContinuationInteruppted {
-            get {
-                return ResourceManager.GetString("ProcessorContinuationInteruppted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from starting..
-        /// </summary>
-        internal static string ProcessorStartFailure {
-            get {
-                return ResourceManager.GetString("ProcessorStartFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processor {0} has encountered an issue that has prevented it from stopping..
-        /// </summary>
-        internal static string ProcessorStopFailure {
-            get {
-                return ResourceManager.GetString("ProcessorStopFailure", resourceCulture);
             }
         }
     }

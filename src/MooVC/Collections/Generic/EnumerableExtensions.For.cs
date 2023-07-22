@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -26,28 +26,38 @@ public static partial class EnumerableExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="action"/> is <see langword="null" />.</exception>
     public static void For<T>(this IEnumerable<T>? items, Action<int, T> action)
     {
-        if (items is { })
+        if (items is not null)
         {
-            _ = IsNotNull(action, argumentName: nameof(action), message: EnumerableExtensionsActionRequired);
+            _ = Guard.Against.Null(action, parameterName: nameof(action), message: EnumerableExtensionsActionRequired);
 
-#if NET6_0_OR_GREATER
-            T[] elements = items.ToArray();
-            ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
-
-            for (int index = 0; index < elements.Length; index++)
-            {
-                T element = Unsafe.Add(ref source, index);
-
-                action(index, element);
-            }
-#else
-            int index = 0;
-
-            foreach (var item in items)
-            {
-                action(index++, item);
-            }
-#endif
+            PerformFor(items, action);
         }
     }
+
+#if NET6_0_OR_GREATER
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
+    {
+        T[] elements = items.ToArray();
+        ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
+
+        for (int index = 0; index < elements.Length; index++)
+        {
+            T element = Unsafe.Add(ref source, index);
+
+            action(index, element);
+        }
+    }
+#else
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
+    {
+        int index = 0;
+
+        foreach (T item in items)
+        {
+            action(index++, item);
+        }
+    }
+#endif
 }

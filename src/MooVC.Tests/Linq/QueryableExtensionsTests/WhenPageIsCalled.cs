@@ -1,35 +1,59 @@
 ﻿namespace MooVC.Linq.QueryableExtensionsTests;
 
 using System.Linq;
-using Moq;
+using Bogus;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenPageIsCalled
 {
     [Fact]
-    public void GivenNoPagingThenTheQueryAbleIsReturned()
+    public void GivenNoQueryableThenTheEmptyQueryableIsReturned()
     {
-        IQueryable<int> expected = Enumerable.Empty<int>().AsQueryable();
-        IQueryable<int> actual = expected.Page(null);
+        // Arrange
+        IQueryable<int>? queryable = default;
+        var paging = new Paging();
 
-        Assert.Equal(expected, actual);
+        // Act
+        IQueryable<int>? actual = queryable.Page(paging);
+
+        // Assert
+        _ = actual.Should().BeNull();
     }
 
     [Fact]
-    public void GivenPagingThenApplyIsCalled()
+    public void GivenNoPagingThenTheQueryAbleIsReturned()
     {
-        var paging = new Mock<Paging>(Paging.FirstPage, Paging.MinimumSize);
+        // Arrange
+        var faker = new Faker();
 
-        IQueryable<int> expected = Enumerable.Empty<int>().AsQueryable();
+        IQueryable<int> expected = faker
+            .Random
+            .Digits(1000)
+            .AsQueryable();
 
-        _ = paging
-            .Setup(pg => pg.Apply(It.Is<IQueryable<int>>(value => value == expected)))
-            .Returns(expected);
+        // Act
+        IQueryable<int> actual = expected.Page(default);
 
-        IQueryable<int> actual = expected.Page(paging.Object);
+        // Assert
+        _ = actual.Should().Equal(expected);
+    }
 
-        paging.Verify(pg => pg.Apply(It.IsAny<IQueryable<int>>()), Times.Once);
+    [Fact]
+    public void GivenPagingThenTheSetIsFilteredIsCalled()
+    {
+        // Arrange
+        var faker = new Faker();
+        var paging = new Paging(page: 5, size: 20);
 
-        Assert.Equal(expected, actual);
+        IEnumerable<int> set = faker.Random.Digits(1000);
+        IQueryable<int> queryable = set.AsQueryable();
+        IEnumerable<int> expected = set.Skip(paging.Skip).Take(paging.Size);
+
+        // Act
+        IQueryable<int> actual = queryable.Page(paging);
+
+        // Assert
+        _ = actual.Should().Equal(expected);
     }
 }

@@ -1,8 +1,9 @@
 namespace MooVC.Collections.Generic;
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="ICollection{T}"/>.
@@ -18,13 +19,14 @@ public static partial class CollectionExtensions
     /// <param name="target">The collection in which the elements are to be replaced.</param>
     /// <param name="replacements">The elements to be inserted into the collection once the collection has been cleared.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="target" /> is <see langword="null" />.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
     {
-        _ = IsNotNull(target, argumentName: nameof(target), message: CollectionExtensionsReplaceTargetRequired);
+        _ = Guard.Against.Null(target, parameterName: nameof(target), message: CollectionExtensionsReplaceTargetRequired);
 
         target.Clear();
 
-        if (replacements is { })
+        if (replacements is not null)
         {
             target.AddRange(replacements);
         }

@@ -21,7 +21,7 @@ public abstract class SynchronousStore<T, TKey>
     /// A <see cref="Task"/> that represents the asynchronous operation.
     /// The task result contains the key of the newly created item.
     /// </returns>
-    public virtual async Task<TKey> CreateAsync(T item, CancellationToken cancellationToken = default)
+    public virtual async Task<TKey> CreateAsync(T item, CancellationToken cancellationToken)
     {
         return await Task.FromResult(PerformCreate(item));
     }
@@ -32,7 +32,7 @@ public abstract class SynchronousStore<T, TKey>
     /// <param name="item">The item to delete.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public virtual Task DeleteAsync(T item, CancellationToken cancellationToken = default)
+    public virtual Task DeleteAsync(T item, CancellationToken cancellationToken)
     {
         PerformDelete(item);
 
@@ -45,7 +45,7 @@ public abstract class SynchronousStore<T, TKey>
     /// <param name="key">The key that identifies the item to delete.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public virtual Task DeleteAsync(TKey key, CancellationToken cancellationToken = default)
+    public virtual Task DeleteAsync(TKey key, CancellationToken cancellationToken)
     {
         PerformDelete(key);
 
@@ -61,7 +61,7 @@ public abstract class SynchronousStore<T, TKey>
     /// A <see cref="Task"/> that represents the asynchronous operation.
     /// The task result contains the item with the specified <paramref name="key"/>, or null if no such item exists.
     /// </returns>
-    public virtual Task<T?> GetAsync(TKey key, CancellationToken cancellationToken = default)
+    public virtual Task<T?> GetAsync(TKey key, CancellationToken cancellationToken)
     {
         return Task.FromResult(PerformGet(key));
     }
@@ -86,7 +86,7 @@ public abstract class SynchronousStore<T, TKey>
     /// <param name="item">The item to update.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public virtual Task UpdateAsync(T item, CancellationToken cancellationToken = default)
+    public virtual Task UpdateAsync(T item, CancellationToken cancellationToken)
     {
         PerformUpdate(item);
 

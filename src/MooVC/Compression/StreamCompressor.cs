@@ -4,8 +4,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using static MooVC.Compression.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
@@ -28,8 +28,8 @@ public abstract class StreamCompressor
     /// <param name="level">The <see cref="CompressionLevel"/> to use for compression and decompression.</param>
     protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.bufferSize = InRange(bufferSize, argumentName: nameof(bufferSize), message: StreamCompressorBufferSizeRequired, start: 1);
-        this.level = IsDefined(level, argumentName: nameof(level), message: StreamCompressorLevelRequired);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: StreamCompressorBufferSizeRequired);
+        this.level = Guard.Against.EnumOutOfRange(level, parameterName: nameof(level), message: StreamCompressorLevelRequired);
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public abstract class StreamCompressor
     /// <param name="source">The stream to compress.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the compressed stream as the result.</returns>
-    public override async Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken = default)
+    public override async Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken)
     {
         var compressed = new MemoryStream();
 
@@ -59,7 +59,7 @@ public abstract class StreamCompressor
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the decompressed stream as the result.
     /// </returns>
-    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken = default)
+    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken)
     {
         var decompressed = new MemoryStream();
 

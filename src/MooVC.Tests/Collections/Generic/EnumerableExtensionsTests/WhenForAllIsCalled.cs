@@ -4,6 +4,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
+using FluentAssertions.Specialized;
 using Xunit;
 
 public sealed class WhenForAllIsCalled
@@ -14,6 +16,7 @@ public sealed class WhenForAllIsCalled
     [InlineData(3, 9)]
     public void GivenAnEnumerationThatRaisesExceptionsThenAnAggregateExceptionIsThrownContainingAllExceptions(int mod, int range)
     {
+        // Arrange
         IEnumerable<int> enumeration = Enumerable.Range(0, range);
 
         void Action(int value)
@@ -24,14 +27,18 @@ public sealed class WhenForAllIsCalled
             }
         }
 
-        AggregateException exception = Assert.Throws<AggregateException>(() => enumeration.ForAll(Action));
+        // Act
+        Action act = () => enumeration.ForAll(Action);
 
-        Assert.Equal(range / mod, exception.InnerExceptions.Count);
+        // Assert
+        ExceptionAssertions<AggregateException> exception = act.Should().Throw<AggregateException>();
+        _ = exception.Which.InnerExceptions.Count.Should().Be(range / mod);
     }
 
     [Fact]
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
     {
+        // Arrange
         int[] enumeration = new[] { 1, 2, 3 };
         var invocations = new ConcurrentBag<int>();
 
@@ -40,27 +47,33 @@ public sealed class WhenForAllIsCalled
             invocations.Add(value);
         }
 
+        // Act
         enumeration.ForAll(Action);
 
-        Assert.All(enumeration, value => Assert.Contains(value, invocations));
-        Assert.Equal(enumeration.Length, invocations.Count);
+        // Assert
+        _ = enumeration.All(value => invocations.Contains(value)).Should().BeTrue();
+        _ = invocations.Should().HaveCount(enumeration.Length);
     }
 
     [Fact]
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
+        // Arrange
         int[] enumeration = new[] { 1, 2, 3 };
         Action<int>? action = default;
 
-        ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-            () => enumeration.ForAll(action!));
+        // Act
+        Action act = () => enumeration.ForAll(action!);
 
-        Assert.Equal(nameof(action), exception.ParamName);
+        // Assert
+        ExceptionAssertions<ArgumentNullException> exception = act.Should().Throw<ArgumentNullException>();
+        _ = exception.Which.ParamName.Should().Be(nameof(action));
     }
 
     [Fact]
     public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
+        // Arrange
         IEnumerable<int>? enumeration = default;
         bool wasInvoked = false;
 
@@ -69,16 +82,23 @@ public sealed class WhenForAllIsCalled
             wasInvoked = true;
         }
 
+        // Act
         enumeration.ForAll(Action);
 
-        Assert.False(wasInvoked);
+        // Assert
+        _ = wasInvoked.Should().BeFalse();
     }
 
     [Fact]
     public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
+        // Arrange
         IEnumerable<int>? enumeration = default;
 
-        enumeration.ForAll(default!);
+        // Act
+        Action act = () => enumeration.ForAll(default!);
+
+        // Assert
+        _ = act.Should().NotThrow<ArgumentNullException>();
     }
 }

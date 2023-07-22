@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -19,29 +20,30 @@ public static partial class EnumerableExtensions
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
-    /// <returns>An enumerable sequence containing the results of the transform function applied to each element of the source sequence.</returns>
-    public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
+    /// <returns>A readonly list containing the results of the transform function applied to each element of the source sequence.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static IReadOnlyList<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, TResult> transform)
         where TSource : notnull
     {
-        if (source is { })
+        if (source is null)
         {
-            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
-
-            return source.Process(
-                source =>
-                {
-                    TResult result = transform(source);
-
-                    if (result is { })
-                    {
-                        return new[] { result };
-                    }
-
-                    return Enumerable.Empty<TResult>();
-                });
+            return Array.Empty<TResult>();
         }
 
-        return Enumerable.Empty<TResult>();
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
+
+        return source.Process(
+            source =>
+            {
+                TResult result = transform(source);
+
+                if (result is null)
+                {
+                    return Enumerable.Empty<TResult>();
+                }
+
+                return result.AsEnumerable();
+            });
     }
 
     /// <summary>
@@ -52,8 +54,9 @@ public static partial class EnumerableExtensions
     /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
     /// <param name="source">The sequence of elements to transform.</param>
     /// <param name="transform">The function to apply to each element of the sequence.</param>
-    /// <returns>An enumerable sequence containing the results of the transform function applied to each element of the source sequence.</returns>
-    public static IEnumerable<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
+    /// <returns>A readonly list containing the results of the transform function applied to each element of the source sequence.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static IReadOnlyList<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {
         IDictionary<TSource, IEnumerable<TResult>>? transforms = default;
@@ -66,7 +69,7 @@ public static partial class EnumerableExtensions
             transform);
     }
 
-    private static IEnumerable<TResult> Process<TResult, TSource>(
+    private static IReadOnlyList<TResult> Process<TResult, TSource>(
         this IEnumerable<TSource>? source,
         Action<TSource, IEnumerable<TResult>> add,
         Func<IDictionary<TSource, IEnumerable<TResult>>> commit,
@@ -74,24 +77,24 @@ public static partial class EnumerableExtensions
         Action initialize,
         Func<TSource, IEnumerable<TResult>> transform)
     {
-        if (source is { })
+        if (source is null)
         {
-            _ = IsNotNull(transform, argumentName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
-
-            source = source.Snapshot();
-
-            initialize();
-            enumerator(source, item => add(item, transform(item)));
-
-            IDictionary<TSource, IEnumerable<TResult>> transforms = commit();
-
-            return source
-                .Select(original => transforms[original])
-                .Where(transform => transform is { })
-                .SelectMany(result => result)
-                .ToArray();
+            return Array.Empty<TResult>();
         }
 
-        return Enumerable.Empty<TResult>();
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
+
+        source = source.Snapshot();
+
+        initialize();
+        enumerator(source, item => add(item, transform(item)));
+
+        IDictionary<TSource, IEnumerable<TResult>> transforms = commit();
+
+        return source
+            .Select(original => transforms[original])
+            .Where(transform => transform is not null)
+            .SelectMany(result => result)
+            .ToArray();
     }
 }

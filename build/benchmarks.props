@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../analyzers/stylecop.tests.ruleset</CodeAnalysisRuleSet>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Benchmarks', ''))</RootNamespace>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.6" />
+    <PackageReference Include="Bogus" Version="34.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
+  </ItemGroup>
+</Project>

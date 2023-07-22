@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -20,6 +21,7 @@ public sealed class WhenCreateAsyncIsCalled
             return OutterMapping(item, key);
         }
 
+        // Arrange
         var expectedOutterKey = Guid.NewGuid();
         string expectedInnerKey = expectedOutterKey.ToString();
 
@@ -32,15 +34,14 @@ public sealed class WhenCreateAsyncIsCalled
             .ReturnsAsync(expectedInnerKey);
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
-        Guid actualOutterKey = await store.CreateAsync(item);
 
-        Assert.True(wasInvoked);
-        Assert.Equal(expectedOutterKey, actualOutterKey);
+        // Act
+        Guid actualOutterKey = await store.CreateAsync(item, CancellationToken.None);
 
-        Store.Verify(
-            store => store.CreateAsync(
-                It.IsAny<object>(),
-                It.IsAny<CancellationToken>()),
-            times: Times.Once);
+        // Assert
+        _ = wasInvoked.Should().BeTrue();
+        _ = actualOutterKey.Should().Be(expectedOutterKey);
+
+        Store.Verify(store => store.CreateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
     }
 }

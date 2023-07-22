@@ -2,6 +2,7 @@ namespace MooVC.ArrayExtensionsTests;
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenSnapshotIsCalled
@@ -31,37 +32,43 @@ public sealed class WhenSnapshotIsCalled
     [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
+        // Act
         int[] result = source.Snapshot();
 
-        Assert.Equal(source, result);
+        // Assert
+        _ = result.Should().Equal(source);
     }
 
     [Theory]
     [MemberData(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
-    public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(
-        int[] original,
-        int[] expected)
+    public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
+        // Act
         int[] result = original.Snapshot(predicate: value => value != 2);
 
-        Assert.Equal(expected, result);
+        // Assert
+        _ = result.Should().Equal(expected);
     }
 
     [Theory]
     [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
+        // Act
         string[] result = source.Snapshot();
 
-        Assert.Empty(result);
+        // Assert
+        _ = result.Should().BeEmpty();
     }
 
     [Theory]
     [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
+        // Act
         string[] result = source.Snapshot(predicate: value => value != "Aarrgh!");
 
-        Assert.Empty(result);
+        // Assert
+        _ = result.Should().BeEmpty();
     }
 }

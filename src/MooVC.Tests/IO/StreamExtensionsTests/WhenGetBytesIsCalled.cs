@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using FluentAssertions;
 using Xunit;
 
 public sealed class WhenGetBytesIsCalled
@@ -10,10 +11,42 @@ public sealed class WhenGetBytesIsCalled
     [Fact]
     public void GivenAStreamThenTheBytesWithinTheStreamAreReturned()
     {
+        // Arrange
         byte[] expected = new byte[] { 1, 2, 3 };
         using var stream = new MemoryStream(expected);
+
+        // Act
         IEnumerable<byte> actual = stream.GetBytes();
 
-        Assert.Equal(expected, actual);
+        // Assert
+        _ = actual.Should().Equal(expected);
+    }
+
+    [Fact]
+    public void GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
+    {
+        // Arrange
+        byte[] expected = Array.Empty<byte>();
+        using var stream = new MemoryStream(expected);
+
+        // Act
+        IEnumerable<byte> actual = stream.GetBytes();
+
+        // Assert
+        _ = actual.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void GivenANullStreamThenAnArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Stream? source = default;
+
+        // Act
+        Action act = () => source!.GetBytes();
+
+        // Assert
+        _ = act.Should().Throw<ArgumentNullException>()
+            .WithParameterName(nameof(source));
     }
 }

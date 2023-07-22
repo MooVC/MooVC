@@ -3,8 +3,9 @@ namespace MooVC.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Ardalis.GuardClauses;
 using static MooVC.Collections.Generic.Resources;
-using static MooVC.Ensure;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}"/>.
@@ -22,16 +23,17 @@ public static partial class EnumerableExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] Snapshot<T>(this IEnumerable<T>? enumerable, Func<T, bool>? predicate = default)
     {
-        if (enumerable is { })
+        if (enumerable is null)
         {
-            return enumerable
-                .WhereIf(predicate is { }, predicate!)
-                .ToArray();
+            return Array.Empty<T>();
         }
 
-        return Array.Empty<T>();
+        return enumerable
+            .WhereIf(predicate is not null, predicate!)
+            .ToArray();
     }
 
     /// <summary>
@@ -46,9 +48,10 @@ public static partial class EnumerableExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot, ordered by the given key.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] Snapshot<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = IsNotNull(order, argumentName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
+        _ = Guard.Against.Null(order, parameterName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
 
         return enumerable
             .Snapshot(predicate: predicate)
