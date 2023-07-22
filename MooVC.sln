@@ -3,35 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC", "MooVC\MooVC.csproj", "{23EF98F1-FD69-4C34-885F-EC7D378DB6E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC", "src\MooVC\MooVC.csproj", "{23EF98F1-FD69-4C34-885F-EC7D378DB6E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Tests", "MooVC.Tests\MooVC.Tests.csproj", "{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Tests", "src\MooVC.Tests\MooVC.Tests.csproj", "{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF41C794-0E91-44A2-8299-B7031DEF80C7}"
 	ProjectSection(SolutionItems) = preProject
-		..\.editorconfig = ..\.editorconfig
-		..\.filenesting.json = ..\.filenesting.json
-		..\.gitignore = ..\.gitignore
-		..\.runsettings = ..\.runsettings
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\gitversion.yml = ..\gitversion.yml
-		..\LICENSE = ..\LICENSE
-		..\README.md = ..\README.md
+		.editorconfig = .editorconfig
+		.filenesting.json = .filenesting.json
+		.gitignore = .gitignore
+		.runsettings = .runsettings
+		azure-pipelines.yml = azure-pipelines.yml
+		gitversion.yml = gitversion.yml
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{51E8218E-BACE-4FEA-B951-35DFD32FCA7E}"
 	ProjectSection(SolutionItems) = preProject
-		..\build\benchmarks.props = ..\build\benchmarks.props
-		..\directory.build.props = ..\directory.build.props
-		..\build\libraries.props = ..\build\libraries.props
-		..\build\tests.props = ..\build\tests.props
+		build\benchmarks.props = build\benchmarks.props
+		directory.build.props = directory.build.props
+		build\libraries.props = build\libraries.props
+		build\tests.props = build\tests.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{7755FACA-C000-4C6F-8047-56E0112603FF}"
 	ProjectSection(SolutionItems) = preProject
-		..\.editorconfig = ..\.editorconfig
-		..\analyzers\stylecop.code.ruleset = ..\analyzers\stylecop.code.ruleset
-		..\analyzers\stylecop.tests.ruleset = ..\analyzers\stylecop.tests.ruleset
+		.editorconfig = .editorconfig
+		analyzers\stylecop.code.ruleset = analyzers\stylecop.code.ruleset
+		analyzers\stylecop.tests.ruleset = analyzers\stylecop.tests.ruleset
 	EndProjectSection
 EndProject
 Global
