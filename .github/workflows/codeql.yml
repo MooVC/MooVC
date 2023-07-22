@@ -22,7 +22,7 @@ on:
 
 env:
   configuration: 'Debug'
-  solution: 'src/MooVC.sln'
+  solution: 'MooVC.sln'
 
 jobs:
   analyze:
