@@ -9,7 +9,11 @@
 		"vscode": {
 			"extensions": [
 				"github.vscode-github-actions",
-				"formulahendry.dotnet-test-explorer"
+				"formulahendry.dotnet-test-explorer",
+				"ms-dotnettools.csharp",
+				"streetsidesoftware.code-spell-checker",
+				"dbaeumer.vscode-eslint",
+				"ms-dotnettools.vscode-dotnet-runtime"
 			]
 		}
 	}
