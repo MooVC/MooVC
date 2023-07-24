@@ -21,6 +21,9 @@
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Benchmarks'))">
     <IsBenchmarkProject>true</IsBenchmarkProject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(CODESPACES)' == 'true'">
+    <IsCodespace>true</IsCodespace>
+  </PropertyGroup>
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
