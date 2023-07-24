@@ -61,7 +61,7 @@ public sealed class WhenInitializerIsConstructed
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
         {
-            throw new Exception();
+            throw new InvalidOperationException();
         }
 
         // Act
