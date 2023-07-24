@@ -2,7 +2,6 @@ namespace MooVC.Collections.Generic.EnumerableExtensionsTests;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -93,7 +92,7 @@ public sealed class WhenWhereIfIsCalled
         }
 
         // Act
-        IEnumerable<int> result = enumeration.WhereIf(() => true, Predicate);
+        IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
 
         // Assert
         _ = result.Should().Equal(2, 4);
@@ -111,13 +110,13 @@ public sealed class WhenWhereIfIsCalled
         }
 
         // Act
-        IEnumerable<int> result = enumeration.WhereIf(() => false, Predicate);
+        IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
 
         // Assert
         _ = result.Should().Equal(1, 2, 3, 4, 5);
     }
 
-    private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>> invocation)
+    private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)
     {
         bool wasInvoked = false;
         int[] enumeration = new[] { 1, 2, 3 };
@@ -129,9 +128,9 @@ public sealed class WhenWhereIfIsCalled
             return wasInvoked;
         }
 
-        IEnumerable<int> result = invocation(enumeration, Predicate);
+        IEnumerable<int>? result = invocation(enumeration, Predicate);
 
-        _ = result.ToArray();
+        _ = result.Snapshot();
 
         return wasInvoked;
     }
