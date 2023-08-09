@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Hosting.ThreadSafeHostedServiceTests;
 
 using System.Threading;
+using FluentAssertions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -60,5 +61,38 @@ public sealed class WhenStartAsyncIsCalled
     {
         // Assert
         _ = service.DidNotReceive().StartAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async void GivenServiceStartAsyncThrowsExceptionThenHostIsStoppedAsync()
+    {
+        // Arrange
+        var expected = new InvalidOperationException("Service failed to start.");
+        service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
+
+        // Act & Assert
+        AggregateException actual = await Assert.ThrowsAsync<AggregateException>(() => host.StartAsync(CancellationToken.None));
+
+        _ = actual.InnerException.Should().Be(expected);
+
+        await service.Received(1).StopAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async void GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStoppedAsync()
+    {
+        // Arrange
+        var start = new InvalidOperationException("Service failed to start.");
+        var stop = new InvalidOperationException("Service failed to stop.");
+        service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw start);
+        service.When(services => service.StopAsync(Arg.Any<CancellationToken>())).Do(_ => throw stop);
+
+        // Act & Assert
+        AggregateException actual = await Assert.ThrowsAsync<AggregateException>(() => host.StartAsync(CancellationToken.None));
+
+        _ = actual.InnerException.Should().Be(start);
+        _ = actual.InnerExceptions.Should().NotContain(stop);
+
+        await service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 }

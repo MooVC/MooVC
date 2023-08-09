@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenApplyAsyncIsCalled
@@ -75,6 +76,72 @@ public sealed class WhenApplyAsyncIsCalled
 
         // Assert
         _ = counter.Should().Be(ExpectedCount);
+    }
+
+    [Fact]
+    public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrownAsync()
+    {
+        // Arrange
+        string context = "Test";
+        using var semaphore = new SemaphoreSlim(0, 1);
+
+        // Act
+        _ = Task.Run(async () =>
+        {
+            using (await coordinator.ApplyAsync(context, CancellationToken.None))
+            {
+                _ = semaphore.Release();
+                await Task.Delay(TimeSpan.FromSeconds(10));
+            }
+        });
+
+        await semaphore.WaitAsync();
+
+        // Act
+        Func<Task> act = async () => await coordinator.ApplyAsync(context, CancellationToken.None, TimeSpan.FromMilliseconds(250));
+
+        // Assert
+        _ = await act.Should().ThrowAsync<TimeoutException>();
+    }
+
+    [Fact]
+    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordinationAsync()
+    {
+        // Arrange
+        var expected = Guid.NewGuid();
+        ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
+        var coordinator = new Coordinator<ITestCoordinatable>();
+
+        _ = context.GetKey().Returns(expected);
+
+        // Act
+        ICoordinationContext<ITestCoordinatable> coordination = await coordinator
+            .ApplyAsync(context, CancellationToken.None)
+            .ConfigureAwait(false);
+
+        // Assert
+        using (coordination)
+        {
+            _ = context.Received(1).GetKey();
+        }
+    }
+
+    [Fact]
+    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordinationAsync()
+    {
+        // Arrange
+        object context = Substitute.For<object>();
+        var coordinator = new Coordinator<object>();
+
+        // Act
+        ICoordinationContext<object> coordination = await coordinator
+            .ApplyAsync(context, CancellationToken.None)
+            .ConfigureAwait(false);
+
+        using (coordination)
+        {
+            _ = context.Received(1).GetHashCode();
+        }
     }
 
     private static Task[] CreateTasks(Func<Task> operation, int total)
