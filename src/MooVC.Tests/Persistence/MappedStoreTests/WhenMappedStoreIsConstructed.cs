@@ -28,7 +28,7 @@ public sealed class WhenMappedStoreIsConstructed
         Func<object, string, Guid>? outterMapping = default;
 
         // Act
-        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(InnerMapping, outterMapping!, Store.Object);
+        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(InnerMapping, outterMapping!, Store);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
@@ -39,7 +39,7 @@ public sealed class WhenMappedStoreIsConstructed
     public void GivenAnInnerMappingAnOutterMappingAndAStoreTheInstanceIsConstructed()
     {
         // Act
-        var instance = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+        var instance = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Assert
         _ = instance.Should().NotBeNull();
@@ -52,7 +52,7 @@ public sealed class WhenMappedStoreIsConstructed
         Func<Guid, string>? innerMapping = default;
 
         // Act
-        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(innerMapping!, OutterMapping, Store.Object);
+        Func<IStore<object, Guid>> act = () => new MappedStore<object, Guid, string>(innerMapping!, OutterMapping, Store);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()

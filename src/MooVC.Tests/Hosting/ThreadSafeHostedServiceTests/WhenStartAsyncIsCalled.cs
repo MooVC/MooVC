@@ -3,18 +3,18 @@
 using System.Threading;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenStartAsyncIsCalled
 {
     private readonly ThreadSafeHostedService host;
-    private readonly Mock<IHostedService> service;
+    private readonly IHostedService service;
 
     public WhenStartAsyncIsCalled()
     {
-        service = new Mock<IHostedService>();
-        host = new ThreadSafeHostedService(Mock.Of<ILogger<ThreadSafeHostedService>>(), new[] { service.Object });
+        service = Substitute.For<IHostedService>();
+        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), new[] { service });
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public sealed class WhenStartAsyncIsCalled
         await host.StartAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        await service.Received(1).StartAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public sealed class WhenStartAsyncIsCalled
         await host.StartAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
+        await service.Received(1).StartAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -51,14 +51,14 @@ public sealed class WhenStartAsyncIsCalled
         await host.StartAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
-        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
+        await service.Received(2).StartAsync(Arg.Any<CancellationToken>());
+        await service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
     public void GivenAStoppedHostStartAsyncIsNotCalled()
     {
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Never);
+        _ = service.DidNotReceive().StartAsync(Arg.Any<CancellationToken>());
     }
 }

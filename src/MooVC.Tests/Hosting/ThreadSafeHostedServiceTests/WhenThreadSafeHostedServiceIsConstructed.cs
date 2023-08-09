@@ -4,7 +4,7 @@ using System;
 using FluentAssertions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenThreadSafeHostedServiceIsConstructed
@@ -13,11 +13,11 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
     public void GivenALoggerAndServicesThenAnInstanceIsCreated()
     {
         // Arrange
-        var logger = new Mock<ILogger<ThreadSafeHostedService>>();
-        var service = new Mock<IHostedService>();
+        ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
+        IHostedService service = Substitute.For<IHostedService>();
 
         // Act
-        Func<IHostedService> act = () => new ThreadSafeHostedService(logger.Object, new[] { service.Object });
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, new[] { service });
 
         // Assert
         _ = act.Should().NotThrow();
@@ -27,11 +27,11 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
     public void GivenALoggerAndNoServicesThenAnInstanceIsCreated()
     {
         // Arrange
-        var logger = new Mock<ILogger<ThreadSafeHostedService>>();
+        ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
         IHostedService[] services = Array.Empty<IHostedService>();
 
         // Act
-        Func<IHostedService> act = () => new ThreadSafeHostedService(logger.Object, services);
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services);
 
         // Assert
         _ = act.Should().NotThrow();
@@ -41,11 +41,11 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
     public void GivenALoggerAndNullServicesThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        var logger = new Mock<ILogger<ThreadSafeHostedService>>();
+        ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
         IHostedService[]? services = default;
 
         // Act
-        Func<IHostedService> act = () => _ = new ThreadSafeHostedService(logger.Object, services!);
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services!);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
@@ -57,10 +57,10 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
     {
         // Arrange
         ILogger<ThreadSafeHostedService>? logger = default;
-        var service = new Mock<IHostedService>();
+        IHostedService service = Substitute.For<IHostedService>();
 
         // Act
-        Func<IHostedService> act = () => _ = new ThreadSafeHostedService(logger!, new[] { service.Object });
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, new[] { service });
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MooVC.Compression;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenSerializeAsyncIsCalled
@@ -16,21 +16,21 @@ public sealed class WhenSerializeAsyncIsCalled
     {
         // Arrange
         string instance = "Something something dark side...";
-        var compressor = new Mock<ICompressor>();
+        ICompressor compressor = Substitute.For<ICompressor>();
 
         _ = compressor
-            .Setup(compressor => compressor.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync<Stream, CancellationToken?, ICompressor, Stream>((stream, _) => stream);
+            .CompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
+            .Returns(info => info.Arg<Stream>());
 
         var serializer = new TestableSynchronousSerializer(
-            compressor: compressor.Object,
+            compressor: compressor,
             onSerialize: (_, _) => { });
 
         // Act
         _ = await serializer.SerializeAsync(instance, CancellationToken.None);
 
         // Assert
-        compressor.Verify(c => c.CompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()), Times.Once);
+        _ = await compressor.Received().CompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
