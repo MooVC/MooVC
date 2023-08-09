@@ -2,7 +2,7 @@ namespace MooVC.Threading.CoordinatorTests;
 
 using System;
 
-internal interface ITestCoordinatable
+public interface ITestCoordinatable
     : ICoordinatable<Guid>
 {
 }
