@@ -25,6 +25,7 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Changed Linq.Paging so that it can no longer be extended (**Breaking Change**).
 - Changed methods accepting a CancellationToken so that it is no longer an optional parameter (**Breaking Change**).
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
+- Changed Threading.ICoordinatable<T> so that it no longer accepts a generic type (**Breaking Change**).
 - Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.AsArray (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
 - Removed Ensure (**Breaking Change**).

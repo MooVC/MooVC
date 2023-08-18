@@ -108,7 +108,7 @@ public sealed class WhenApplyAsyncIsCalled
     public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordinationAsync()
     {
         // Arrange
-        var expected = Guid.NewGuid();
+        string expected = Guid.NewGuid().ToString();
         ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
         var coordinator = new Coordinator<ITestCoordinatable>();
 
