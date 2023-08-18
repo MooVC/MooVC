@@ -3,7 +3,7 @@
 using System;
 using System.Threading;
 using FluentAssertions;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenCreateAsyncIsCalled
@@ -28,12 +28,10 @@ public sealed class WhenCreateAsyncIsCalled
         object item = new();
 
         _ = Store
-            .Setup(store => store.CreateAsync(
-                It.Is<object>(parameter => parameter == item),
-                It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedInnerKey);
+            .CreateAsync(item, Arg.Any<CancellationToken>())
+            .Returns(expectedInnerKey);
 
-        var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store.Object);
+        var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store);
 
         // Act
         Guid actualOutterKey = await store.CreateAsync(item, CancellationToken.None);
@@ -42,6 +40,6 @@ public sealed class WhenCreateAsyncIsCalled
         _ = wasInvoked.Should().BeTrue();
         _ = actualOutterKey.Should().Be(expectedOutterKey);
 
-        Store.Verify(store => store.CreateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()), times: Times.Once);
+        _ = await Store.Received(1).CreateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>());
     }
 }

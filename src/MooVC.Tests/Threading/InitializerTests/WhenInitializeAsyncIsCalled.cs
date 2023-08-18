@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Threading.InitializerTests;
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -75,7 +74,7 @@ public sealed class WhenInitializeAsyncIsCalled
         async Task<object> Initializer(CancellationToken cancellationToken)
         {
             invocations++;
-            await Task.Delay(500);  // Simulate some delay
+            await Task.Delay(500, cancellationToken);
             return new object();
         }
 

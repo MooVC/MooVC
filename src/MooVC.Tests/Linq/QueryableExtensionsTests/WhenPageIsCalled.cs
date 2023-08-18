@@ -33,7 +33,7 @@ public sealed class WhenPageIsCalled
             .AsQueryable();
 
         // Act
-        IQueryable<int> actual = expected.Page(default);
+        IQueryable<int>? actual = expected.Page(default);
 
         // Assert
         _ = actual.Should().Equal(expected);
@@ -51,7 +51,7 @@ public sealed class WhenPageIsCalled
         IEnumerable<int> expected = set.Skip(paging.Skip).Take(paging.Size);
 
         // Act
-        IQueryable<int> actual = queryable.Page(paging);
+        IQueryable<int>? actual = queryable.Page(paging);
 
         // Assert
         _ = actual.Should().Equal(expected);

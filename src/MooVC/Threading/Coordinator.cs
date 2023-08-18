@@ -9,8 +9,8 @@ using static System.String;
 using static MooVC.Threading.Resources;
 
 /// <summary>
-/// Represents a coordinator that manages access to resources based on context specific string, provided via the ToString method for the
-/// <see cref="ICoordinatable{T}"/> implementation of the context instance provided, or via its hashcode.
+/// Represents a coordinator that manages access to resources based on context specific string, provided via the GetKey method for the
+/// <see cref="ICoordinatable"/> implementation of the context instance provided, or via its hashcode.
 /// </summary>
 /// <typeparam name="T">The type to which the context applies.</typeparam>
 public sealed class Coordinator<T>
@@ -28,7 +28,7 @@ public sealed class Coordinator<T>
     /// Initializes a new instance of the <see cref="Coordinator{T}"/> class.
     /// </summary>
     /// <param name="default">
-    /// The duration to wait for coordination to be granted if no duraiton has been explicitly specified in the context of the request.
+    /// The duration to wait for coordination to be granted if no duration has been explicitly specified in the context of the request.
     /// </param>
     public Coordinator(TimeSpan? @default = default)
     {
@@ -84,11 +84,9 @@ public sealed class Coordinator<T>
     {
         string? key = default;
 
-        if (context is ICoordinatable<T> coordinatable)
+        if (context is ICoordinatable coordinatable)
         {
-            key = coordinatable
-                .GetKey()
-                .ToString();
+            key = coordinatable.GetKey();
         }
 
         if (IsNullOrWhiteSpace(key))

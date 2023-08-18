@@ -3,7 +3,7 @@
 using System;
 using System.Threading;
 using FluentAssertions;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenUpdateAsyncIsCalled
@@ -14,7 +14,7 @@ public sealed class WhenUpdateAsyncIsCalled
     {
         // Arrange
         object expectedItem = new();
-        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
         Func<Task> act = async () => await store.UpdateAsync(expectedItem, CancellationToken.None);
@@ -22,8 +22,6 @@ public sealed class WhenUpdateAsyncIsCalled
         // Assert
         _ = await act.Should().NotThrowAsync();
 
-        Store.Verify(
-            store => store.UpdateAsync(It.Is<object>(parameter => parameter == expectedItem), It.IsAny<CancellationToken>()),
-            Times.Once);
+        await Store.Received(1).UpdateAsync(Arg.Is<object>(parameter => parameter == expectedItem), Arg.Any<CancellationToken>());
     }
 }

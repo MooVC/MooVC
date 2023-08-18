@@ -3,18 +3,18 @@
 using System.Threading;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenStopAsyncIsCalled
 {
     private readonly ThreadSafeHostedService host;
-    private readonly Mock<IHostedService> service;
+    private readonly IHostedService service;
 
     public WhenStopAsyncIsCalled()
     {
-        service = new Mock<IHostedService>();
-        host = new ThreadSafeHostedService(Mock.Of<ILogger<ThreadSafeHostedService>>(), new[] { service.Object });
+        service = Substitute.For<IHostedService>();
+        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), new[] { service });
     }
 
     [Fact]
@@ -27,8 +27,8 @@ public sealed class WhenStopAsyncIsCalled
         await host.StopAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
-        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
+        await service.Received(1).StartAsync(Arg.Any<CancellationToken>());
+        await service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -38,11 +38,11 @@ public sealed class WhenStopAsyncIsCalled
         await host.StopAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Never);
+        await service.DidNotReceive().StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async void GivenARestartThenTheServiceIsStopeedTheSecondTimeAsync()
+    public async void GivenARestartThenTheServiceIsStoppedTheSecondTimeAsync()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -53,12 +53,12 @@ public sealed class WhenStopAsyncIsCalled
         await host.StopAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
-        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
+        await service.Received(2).StartAsync(Arg.Any<CancellationToken>());
+        await service.Received(2).StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async void GivenMultipleStartsAndStopThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
+    public async void GivenMultipleStartsAndStopsThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -69,7 +69,7 @@ public sealed class WhenStopAsyncIsCalled
         await host.StopAsync(CancellationToken.None);
 
         // Assert
-        service.Verify(host => host.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
-        service.Verify(host => host.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
+        await service.Received(1).StartAsync(Arg.Any<CancellationToken>());
+        await service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 }

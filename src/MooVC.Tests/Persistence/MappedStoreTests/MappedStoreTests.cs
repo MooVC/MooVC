@@ -1,7 +1,7 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
 using System;
-using Moq;
+using NSubstitute;
 
 public abstract class MappedStoreTests
 {
@@ -9,12 +9,12 @@ public abstract class MappedStoreTests
     {
         InnerMapping = key => key.ToString();
         OutterMapping = (item, key) => new Guid(key);
-        Store = new Mock<IStore<object, string>>();
+        Store = Substitute.For<IStore<object, string>>();
     }
 
     protected Func<Guid, string> InnerMapping { get; }
 
     protected Func<object, string, Guid> OutterMapping { get; }
 
-    protected Mock<IStore<object, string>> Store { get; }
+    protected IStore<object, string> Store { get; }
 }

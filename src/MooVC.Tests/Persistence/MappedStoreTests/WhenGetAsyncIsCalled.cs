@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using FluentAssertions;
 using MooVC.Linq;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenGetAsyncIsCalled
@@ -30,12 +30,10 @@ public sealed class WhenGetAsyncIsCalled
         object expectedItem = new();
 
         _ = Store
-            .Setup(store => store.GetAsync(
-                It.Is<string>(parameter => parameter == expectedInnerKey),
-                It.IsAny<CancellationToken>()))
-            .ReturnsAsync(expectedItem);
+            .GetAsync(Arg.Is<string>(parameter => parameter == expectedInnerKey), Arg.Any<CancellationToken>())
+            .Returns(expectedItem);
 
-        var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store.Object);
+        var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store);
 
         // Act
         object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
@@ -44,11 +42,7 @@ public sealed class WhenGetAsyncIsCalled
         _ = wasInvoked.Should().BeTrue();
         _ = actualItem.Should().Be(expectedItem);
 
-        Store.Verify(
-            store => store.GetAsync(
-                It.IsAny<string>(),
-                It.IsAny<CancellationToken>()),
-            Times.Once);
+        _ = await Store.Received(1).GetAsync(Arg.Any<string>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -57,15 +51,13 @@ public sealed class WhenGetAsyncIsCalled
         // Arrange
         var paging = new Paging();
 
-        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
         _ = await store.GetAsync(paging: paging);
 
         // Assert
-        Store.Verify(
-            store => store.GetAsync(It.IsAny<Paging>(), It.IsAny<CancellationToken>()),
-            Times.Once);
+        _ = await Store.Received(1).GetAsync(paging, Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -75,7 +67,7 @@ public sealed class WhenGetAsyncIsCalled
         var outterKey = Guid.NewGuid();
         object expectedItem = new();
 
-        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store.Object);
+        var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
         object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);

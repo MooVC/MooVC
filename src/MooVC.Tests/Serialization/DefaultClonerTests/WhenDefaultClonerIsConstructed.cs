@@ -2,7 +2,7 @@
 
 using System;
 using FluentAssertions;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenDefaultClonerIsConstructed
@@ -11,10 +11,10 @@ public sealed class WhenDefaultClonerIsConstructed
     public void GivenASerializerThenAnInstanceIsReturned()
     {
         // Arrange
-        var serializer = new Mock<ISerializer>();
+        ISerializer serializer = Substitute.For<ISerializer>();
 
         // Act
-        var cloner = new DefaultCloner(serializer.Object);
+        var cloner = new DefaultCloner(serializer);
 
         // Assert
         _ = cloner.Should().NotBeNull();

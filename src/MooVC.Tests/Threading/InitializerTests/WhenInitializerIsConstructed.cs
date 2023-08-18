@@ -18,7 +18,7 @@ public sealed class WhenInitializerIsConstructed
         }
 
         // Act
-        Action act = () => new Initializer<object>(Initializer);
+        Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
         _ = act.Should().NotThrow();
@@ -31,7 +31,7 @@ public sealed class WhenInitializerIsConstructed
         Func<CancellationToken, Task<object>>? initializer = default;
 
         // Act
-        Action act = () => new Initializer<object>(initializer!);
+        Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
@@ -49,7 +49,7 @@ public sealed class WhenInitializerIsConstructed
         }
 
         // Act
-        Action act = () => new Initializer<object>(Initializer);
+        Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
         _ = act.Should().NotThrow();
@@ -61,11 +61,11 @@ public sealed class WhenInitializerIsConstructed
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
         {
-            throw new Exception();
+            throw new InvalidOperationException();
         }
 
         // Act
-        Action act = () => new Initializer<object>(Initializer);
+        Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
         _ = act.Should().NotThrow();

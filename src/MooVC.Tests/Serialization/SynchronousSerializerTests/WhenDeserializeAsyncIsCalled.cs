@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MooVC.Compression;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 public sealed class WhenDeserializeAsyncIsCalled
@@ -14,14 +14,14 @@ public sealed class WhenDeserializeAsyncIsCalled
     public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
     {
         // Arrange
-        var compressor = new Mock<ICompressor>();
+        ICompressor compressor = Substitute.For<ICompressor>();
 
         _ = compressor
-            .Setup(compressor => compressor.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync<Stream, CancellationToken, ICompressor, Stream>((stream, _) => stream);
+            .DecompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
+            .Returns(info => info.Arg<Stream>());
 
         var serializer = new TestableSynchronousSerializer(
-            compressor: compressor.Object,
+            compressor: compressor,
             onDeserialize: instance => "Something irrelevant");
 
         using var source = new MemoryStream();
@@ -30,7 +30,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         _ = await serializer.DeserializeAsync<string>(source, CancellationToken.None);
 
         // Assert
-        compressor.Verify(c => c.DecompressAsync(It.IsAny<Stream>(), It.IsAny<CancellationToken>()), Times.Once);
+        _ = await compressor.Received(1).DecompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
