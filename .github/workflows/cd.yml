@@ -59,16 +59,8 @@ jobs:
       with:
         fail_ci_if_error: true
 
-    - name: Print Current Working Directory (Windows)
-      run: echo %CD%
-      shell: cmd
-
     - name: Pack Solution
-      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }}
-
-    - name: Print Current Working Directory (Windows)
-      run: echo %CD%
-      shell: cmd
+      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }} --verbosity detailed
 
     - name: Publish Packages to NuGet
-      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --verbosity detailed
