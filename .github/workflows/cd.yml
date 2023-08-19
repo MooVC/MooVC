@@ -32,8 +32,11 @@ jobs:
     - name: Restore Nuget Packages for Solution
       run: dotnet restore ${{ env.solution }}
 
+    - name: Extract Version from Tag
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore /p:Version=${{ env.VERSION }} /p:FileVersion=${{ env.VERSION }} /p:AssemblyVersion=${{ env.VERSION }}
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
@@ -44,7 +47,7 @@ jobs:
         fail_ci_if_error: true
         
     - name: Pack Solution
-      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts
+      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts /p:Version=${{ env.VERSION }}
 
     - name: Publish Packages to NuGet
       run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
