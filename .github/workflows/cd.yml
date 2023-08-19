@@ -33,21 +33,24 @@ jobs:
     - name: Restore Nuget Packages for Solution
       run: dotnet restore ${{ env.solution }}
 
-    - name: Set VERSION from tag
+    - name: Extract and Format Version from Tag
       run: |
         if ($env:GITHUB_REF -match '^refs/tags/') {
-          $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
+          $rawTag = $env:GITHUB_REF -replace '^refs/tags/', ''
         } else {
-          $tag = git describe --tags (git rev-list --tags --max-count=1)
+          $rawTag = git describe --tags (git rev-list --tags --max-count=1)
         }
 
-        $version = $tag -replace '^v', ''
-
-        echo "VERSION=$version" >> $env:GITHUB_ENV
+        $semantic = $rawTag -replace '^v', '' -replace 'beta0+', 'beta.' 
+        $numeric = ($semantic -split "-")[0] + ".0"
+        
+        echo "version=$numeric" >> $env:GITHUB_ENV
+        echo "semantic=$semantic" >> $env:GITHUB_ENV
+        echo "informational=$rawTag" >> $env:GITHUB_ENV
       shell: pwsh
 
     - name: Build Solution
-      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore /p:Version=${{ env.VERSION }} /p:FileVersion=${{ env.VERSION }} /p:AssemblyVersion=${{ env.VERSION }}
+      run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore -p:AssemblyVersion=${{ env.version }} -p:FileVersion=${{ env.version }} -p:InformationalVersion=${{ env.informational }} -p:PackageVersion=${{ env.semantic }} -p:Version=${{ env.version }}
 
     - name: Test Solution
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
@@ -58,7 +61,7 @@ jobs:
         fail_ci_if_error: true
         
     - name: Pack Solution
-      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts /p:Version=${{ env.VERSION }}
+      run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts /p:Version=${{ env.semantic }}
 
     - name: Publish Packages to NuGet
       run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
