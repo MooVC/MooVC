@@ -33,14 +33,19 @@ jobs:
     - name: Restore Nuget Packages for Solution
       run: dotnet restore ${{ env.solution }}
 
-    - name: Get Version from Tag (Push)
-      if: github.event_name == 'push'
-      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+    - name: Set VERSION from tag
+      run: |
+        if ($env:GITHUB_REF -match '^refs/tags/') {
+          $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
+        } else {
+          $tag = git describe --tags (git rev-list --tags --max-count=1)
+        }
 
-    - name: Get Latest Tag (Dispatch)
-      if: github.event_name == 'workflow_dispatch'
-      run: echo "LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
-      
+        $version = $tag -replace '^v', ''
+
+        echo "VERSION=$version" >> $env:GITHUB_ENV
+      shell: pwsh
+
     - name: Build Solution
       run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore /p:Version=${{ env.VERSION }} /p:FileVersion=${{ env.VERSION }} /p:AssemblyVersion=${{ env.VERSION }}
 
