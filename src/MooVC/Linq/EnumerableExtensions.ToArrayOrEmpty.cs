@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
-using static MooVC.Collections.Generic.Resources;
+using static MooVC.Linq.EnumerableExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}" />.
@@ -51,7 +51,7 @@ public static partial class EnumerableExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] ToArrayOrEmpty<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
-        _ = Guard.Against.Null(order, parameterName: nameof(order), message: EnumerableExtensionsSnapshotOrderRequired);
+        _ = Guard.Against.Null(order, parameterName: nameof(order), message: ToArrayOrEmptyOrderRequired);
 
         return enumerable
             .ToArrayOrEmpty(predicate: predicate)

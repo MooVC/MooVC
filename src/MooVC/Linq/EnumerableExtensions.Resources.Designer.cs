@@ -61,6 +61,33 @@ namespace MooVC.Linq {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The action to be performed must be provided..
+        /// </summary>
+        internal static string ForActionRequired {
+            get {
+                return ResourceManager.GetString("ForActionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The action to be performed in parallel must be provided..
+        /// </summary>
+        internal static string ForAllActionRequired {
+            get {
+                return ResourceManager.GetString("ForAllActionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation to be performed in parallel must be provided..
+        /// </summary>
+        internal static string ForAllAsyncOperationRequired {
+            get {
+                return ResourceManager.GetString("ForAllAsyncOperationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The predicate to be applied must be provided..
         /// </summary>
         internal static string HasAnyPredicateRequired {
@@ -70,11 +97,83 @@ namespace MooVC.Linq {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The predicate to be applied when searching for the index of the first occurance within the enumeration must be provided..
+        /// </summary>
+        internal static string IndexOfPredicateRequired {
+            get {
+                return ResourceManager.GetString("IndexOfPredicateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The source enumerable must be provided..
         /// </summary>
         internal static string IsEmptySourceRequired {
             get {
                 return ResourceManager.GetString("IsEmptySourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The transform to be applied in parallel to each element within the enumeration must be provided..
+        /// </summary>
+        internal static string ProcessAllTransformRequired {
+            get {
+                return ResourceManager.GetString("ProcessAllTransformRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The transform to be applied to each element within the enumeration must be provided..
+        /// </summary>
+        internal static string ProcessTransformRequired {
+            get {
+                return ResourceManager.GetString("ProcessTransformRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selector to be applied when ordering the elements within the snapshot must be provided..
+        /// </summary>
+        internal static string ToArrayOrEmptyOrderRequired {
+            get {
+                return ResourceManager.GetString("ToArrayOrEmptyOrderRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value selector must be provided..
+        /// </summary>
+        internal static string ToIndexSelectorRequired {
+            get {
+                return ResourceManager.GetString("ToIndexSelectorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value transform must be provided..
+        /// </summary>
+        internal static string ToIndexTransformRequired {
+            get {
+                return ResourceManager.GetString("ToIndexTransformRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The condition that determines whether or not the predicate is to be applied must be provided..
+        /// </summary>
+        internal static string WhereIfConditionRequired {
+            get {
+                return ResourceManager.GetString("WhereIfConditionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The predicate to be applied to the enumeration when applicable must be provided..
+        /// </summary>
+        internal static string WhereIfPredicateRequired {
+            get {
+                return ResourceManager.GetString("WhereIfPredicateRequired", resourceCulture);
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using MooVC.Compression;
-using static MooVC.Serialization.Resources;
+using static MooVC.Serialization.Serializer_Resources;
 
 /// <summary>
 /// Provides a default implementation of the <see cref="ISerializer" /> contract for serializing and deserializing objects.
@@ -33,7 +33,7 @@ public abstract class Serializer
     /// </param>
     protected Serializer(int bufferSize = DefaultBufferSize, ICompressor? compressor = default)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: SerializerBufferSizeRequired);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: BufferSizeRequired);
         this.compressor = compressor;
     }
 
@@ -50,7 +50,7 @@ public abstract class Serializer
     public async Task<T> DeserializeAsync<T>(IEnumerable<byte> data, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(data, parameterName: nameof(data), SerializerDeserializeAsyncDataRequired);
+        _ = Guard.Against.Null(data, parameterName: nameof(data), DeserializeAsyncDataRequired);
 
         using var source = new MemoryStream(data.ToArray());
 
@@ -71,7 +71,7 @@ public abstract class Serializer
     public async Task<T> DeserializeAsync<T>(Stream source, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(source, parameterName: nameof(source), SerializerDeserializeAsyncSourceRequired);
+        _ = Guard.Against.Null(source, parameterName: nameof(source), DeserializeAsyncSourceRequired);
 
         using var decompressed = new MemoryStream();
 
@@ -116,7 +116,7 @@ public abstract class Serializer
     public async Task SerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(target, parameterName: nameof(target), SerializerSerializeAsyncTargetRequired);
+        _ = Guard.Against.Null(target, parameterName: nameof(target), SerializeAsyncTargetRequired);
 
         using var serialized = new MemoryStream();
 

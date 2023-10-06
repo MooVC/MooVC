@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ardalis.GuardClauses;
 using MooVC.Collections.Generic;
-using static MooVC.Linq.Resources;
+using static MooVC.Linq.PagedResult_Resources;
 
 /// <summary>
 /// Represents the result of a request to page a sequence of type <see cref="T" />.

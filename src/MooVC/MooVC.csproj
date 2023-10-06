@@ -11,15 +11,20 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Collections\Generic\Resources.Designer.cs">
+    <Compile Update="Collections\Generic\CollectionExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>CollectionExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Compression\Resources.Designer.cs">
+    <Compile Update="Compression\StreamCompressor.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>StreamCompressor.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="ExceptionExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExceptionExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Hosting\ThreadSafeHostedService.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -36,40 +41,54 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>EnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Linq\Resources.Designer.cs">
+    <Compile Update="Linq\PagedResult.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>PagedResult.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Persistence\Resources.Designer.cs">
+    <Compile Update="Persistence\MappedStore.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>MappedStore.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources.Designer.cs">
+    <Compile Update="Serialization\Cloner.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Cloner.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Threading\Resources.Designer.cs">
+    <Compile Update="Serialization\Serializer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Serializer.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Threading\Coordinator.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Coordinator.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Threading\Initializer.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Initializer.Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Collections\Generic\Resources.resx">
+    <EmbeddedResource Update="Collections\Generic\CollectionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>CollectionExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Compression\Resources.resx">
+    <EmbeddedResource Update="Compression\StreamCompressor.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>StreamCompressor.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ExceptionExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Hosting\ThreadSafeHostedService.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,25 +102,33 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Linq\Resources.resx">
+    <EmbeddedResource Update="Linq\PagedResult.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>PagedResult.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Persistence\Resources.resx">
+    <EmbeddedResource Update="Persistence\MappedStore.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>MappedStore.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources.resx">
+    <EmbeddedResource Update="Serialization\Cloner.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Cloner.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Threading\Resources.resx">
+    <EmbeddedResource Update="Serialization\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Threading\Coordinator.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Coordinator.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Threading\Initializer.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Initializer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

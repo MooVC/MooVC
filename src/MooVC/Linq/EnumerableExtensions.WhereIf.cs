@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
-using static MooVC.Collections.Generic.Resources;
+using static MooVC.Linq.EnumerableExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}" />.
@@ -37,7 +37,7 @@ public static partial class EnumerableExtensions
             return enumeration;
         }
 
-        _ = Guard.Against.Null(predicate, parameterName: nameof(predicate), message: EnumerableExtensionsWhereIfPredicateRequired);
+        _ = Guard.Against.Null(predicate, parameterName: nameof(predicate), message: WhereIfPredicateRequired);
 
         return enumeration.Where(predicate);
     }
@@ -65,7 +65,7 @@ public static partial class EnumerableExtensions
             return enumeration;
         }
 
-        _ = Guard.Against.Null(condition, parameterName: nameof(condition), message: EnumerableExtensionsWhereIfConditionRequired);
+        _ = Guard.Against.Null(condition, parameterName: nameof(condition), message: WhereIfConditionRequired);
 
         return enumeration.WhereIf(condition(), predicate);
     }

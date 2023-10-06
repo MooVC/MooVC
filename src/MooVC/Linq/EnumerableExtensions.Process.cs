@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
-using static MooVC.Collections.Generic.Resources;
+using static MooVC.Linq.EnumerableExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}" />.
@@ -30,7 +30,7 @@ public static partial class EnumerableExtensions
             return Array.Empty<TResult>();
         }
 
-        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: ProcessTransformRequired);
 
         return source.Process(
             source =>
@@ -82,7 +82,7 @@ public static partial class EnumerableExtensions
             return Array.Empty<TResult>();
         }
 
-        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
+        _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: ProcessTransformRequired);
 
         source = source.ToArrayOrEmpty();
 

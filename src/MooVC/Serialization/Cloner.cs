@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
-using static MooVC.Serialization.Resources;
+using static MooVC.Serialization.Cloner_Resources;
 
 /// <summary>
 /// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.

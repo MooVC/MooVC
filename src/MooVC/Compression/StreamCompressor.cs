@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
-using static MooVC.Compression.Resources;
+using static MooVC.Compression.StreamCompressor_Resources;
 
 /// <summary>
 /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
@@ -28,8 +28,8 @@ public abstract class StreamCompressor
     /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
     protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: StreamCompressorBufferSizeRequired);
-        this.level = Guard.Against.EnumOutOfRange(level, parameterName: nameof(level), message: StreamCompressorLevelRequired);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: BufferSizeRequired);
+        this.level = Guard.Against.EnumOutOfRange(level, parameterName: nameof(level), message: LevelRequired);
     }
 
     /// <summary>

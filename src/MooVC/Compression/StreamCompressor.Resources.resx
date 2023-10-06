@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BufferSizeRequired" xml:space="preserve">
+    <value>A non-zero positive buffer size must be provided.</value>
+  </data>
+  <data name="LevelRequired" xml:space="preserve">
+    <value>The compression level must be provided.</value>
+  </data>
 </root>

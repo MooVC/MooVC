@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Persistence {
+namespace MooVC.Compression {
     using System;
     
     
@@ -19,17 +19,17 @@ namespace MooVC.Persistence {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class StreamCompressor_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal StreamCompressor_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Persistence {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Persistence.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Compression.StreamCompressor.Resources", typeof(StreamCompressor_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,20 @@ namespace MooVC.Persistence {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The mapping between the outter store and the inner store must be provided..
+        ///   Looks up a localized string similar to A non-zero positive buffer size must be provided..
         /// </summary>
-        internal static string MappedStoreInnerMappingRequired {
+        internal static string BufferSizeRequired {
             get {
-                return ResourceManager.GetString("MappedStoreInnerMappingRequired", resourceCulture);
+                return ResourceManager.GetString("BufferSizeRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The mapping between the inner store and the outter store must be provided..
+        ///   Looks up a localized string similar to The compression level must be provided..
         /// </summary>
-        internal static string MappedStoreOutterMappingRequired {
+        internal static string LevelRequired {
             get {
-                return ResourceManager.GetString("MappedStoreOutterMappingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The inner store must be provided..
-        /// </summary>
-        internal static string MappedStoreStoreRequired {
-            get {
-                return ResourceManager.GetString("MappedStoreStoreRequired", resourceCulture);
+                return ResourceManager.GetString("LevelRequired", resourceCulture);
             }
         }
     }

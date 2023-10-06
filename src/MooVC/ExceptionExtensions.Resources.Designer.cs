@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Linq {
+namespace MooVC {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Linq {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class ExceptionExtensions_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ExceptionExtensions_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Linq {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Linq.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.ExceptionExtensions.Resources", typeof(ExceptionExtensions_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace MooVC.Linq {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The paging request that triggered the result must be provided..
+        ///   Looks up a localized string similar to The handler for each exception must be provided..
         /// </summary>
-        internal static string PagedResultRequestRequired {
+        internal static string ExplodeHandlerRequired {
             get {
-                return ResourceManager.GetString("PagedResultRequestRequired", resourceCulture);
+                return ResourceManager.GetString("ExplodeHandlerRequired", resourceCulture);
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
-using static MooVC.Collections.Generic.Resources;
+using static MooVC.Linq.EnumerableExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}" />.
@@ -46,8 +46,8 @@ public static partial class EnumerableExtensions
         Func<TValue, TTransform> transform)
         where TSubject : notnull
     {
-        selector = Guard.Against.Null(selector, parameterName: nameof(selector), message: EnumerableExtensionsToIndexSelectorRequired);
-        transform = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsToIndexTransformRequired);
+        selector = Guard.Against.Null(selector, parameterName: nameof(selector), message: ToIndexSelectorRequired);
+        transform = Guard.Against.Null(transform, parameterName: nameof(transform), message: ToIndexTransformRequired);
 
         if (source is null)
         {

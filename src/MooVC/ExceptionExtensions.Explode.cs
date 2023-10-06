@@ -2,9 +2,8 @@
 
 using System;
 using Ardalis.GuardClauses;
-using MooVC.Collections.Generic;
 using MooVC.Linq;
-using static MooVC.Resources;
+using static MooVC.ExceptionExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="Exception" />.
@@ -19,7 +18,7 @@ public static class ExceptionExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="handler" /> parameter is <see langword="null" />.</exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
-        _ = Guard.Against.Null(handler, parameterName: nameof(handler), message: ExceptionExtensionsExplodeHandlerRequired);
+        _ = Guard.Against.Null(handler, parameterName: nameof(handler), message: ExplodeHandlerRequired);
 
         exception.PerformExplode(handler);
     }

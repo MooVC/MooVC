@@ -117,10 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ForActionRequired" xml:space="preserve">
+    <value>The action to be performed must be provided.</value>
+  </data>
+  <data name="ForAllActionRequired" xml:space="preserve">
+    <value>The action to be performed in parallel must be provided.</value>
+  </data>
+  <data name="ForAllAsyncOperationRequired" xml:space="preserve">
+    <value>The operation to be performed in parallel must be provided.</value>
+  </data>
   <data name="HasAnyPredicateRequired" xml:space="preserve">
     <value>The predicate to be applied must be provided.</value>
   </data>
+  <data name="IndexOfPredicateRequired" xml:space="preserve">
+    <value>The predicate to be applied when searching for the index of the first occurance within the enumeration must be provided.</value>
+  </data>
   <data name="IsEmptySourceRequired" xml:space="preserve">
     <value>The source enumerable must be provided.</value>
+  </data>
+  <data name="ProcessAllTransformRequired" xml:space="preserve">
+    <value>The transform to be applied in parallel to each element within the enumeration must be provided.</value>
+  </data>
+  <data name="ProcessTransformRequired" xml:space="preserve">
+    <value>The transform to be applied to each element within the enumeration must be provided.</value>
+  </data>
+  <data name="ToArrayOrEmptyOrderRequired" xml:space="preserve">
+    <value>The selector to be applied when ordering the elements within the snapshot must be provided.</value>
+  </data>
+  <data name="ToIndexSelectorRequired" xml:space="preserve">
+    <value>The value selector must be provided.</value>
+  </data>
+  <data name="ToIndexTransformRequired" xml:space="preserve">
+    <value>The value transform must be provided.</value>
+  </data>
+  <data name="WhereIfConditionRequired" xml:space="preserve">
+    <value>The condition that determines whether or not the predicate is to be applied must be provided.</value>
+  </data>
+  <data name="WhereIfPredicateRequired" xml:space="preserve">
+    <value>The predicate to be applied to the enumeration when applicable must be provided.</value>
   </data>
 </root>

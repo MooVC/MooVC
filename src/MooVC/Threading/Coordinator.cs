@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MooVC.Collections.Generic;
 using MooVC.Linq;
 using static System.String;
-using static MooVC.Threading.Resources;
+using static MooVC.Threading.Coordinator_Resources;
 
 /// <summary>
 /// Represents a coordinator that manages access to resources based on context specific string, provided via the GetKey method for the
@@ -53,7 +53,7 @@ public sealed class Coordinator<T>
             throw new ObjectDisposedException(GetType().FullName);
         }
 
-        context = context ?? throw new ArgumentNullException(nameof(context), CoordinatorApplyAsyncContextRequired);
+        context = context ?? throw new ArgumentNullException(nameof(context), ApplyAsyncContextRequired);
         timeout ??= @default;
 
         string key = GetKey(context);
@@ -65,7 +65,7 @@ public sealed class Coordinator<T>
 
         if (!isSuccessful)
         {
-            throw new TimeoutException(Format(CoordinatorApplyAsyncTimeout, context));
+            throw new TimeoutException(Format(ApplyAsyncTimeout, context));
         }
 
         return new CoordinationContext<T>(context, semaphore);

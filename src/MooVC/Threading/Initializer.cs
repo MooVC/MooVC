@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
-using static MooVC.Threading.Resources;
+using static MooVC.Threading.Initializer_Resources;
 
 /// <summary>
 /// Provides support for asynchronous lazy initialization of a resource.
@@ -24,7 +24,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerInitializerRequired);
+        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerRequired);
     }
 
     /// <summary>
@@ -83,7 +83,7 @@ public sealed class Initializer<T>
 
             if (resource is null)
             {
-                throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
+                throw new InvalidOperationException(InitializeAsyncResourceRequired);
             }
 
             IsInitialized = true;

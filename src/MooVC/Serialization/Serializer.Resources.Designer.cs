@@ -22,14 +22,14 @@ namespace MooVC.Serialization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Serializer_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Serializer_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Serialization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Serialization.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Serialization.Serializer.Resources", typeof(Serializer_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,42 @@ namespace MooVC.Serialization {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A non-zero positive buffer size must be provided..
+        /// </summary>
+        internal static string BufferSizeRequired {
+            get {
+                return ResourceManager.GetString("BufferSizeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data to deserialize must be provided..
+        /// </summary>
+        internal static string DeserializeAsyncDataRequired {
+            get {
+                return ResourceManager.GetString("DeserializeAsyncDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stream from which the data is to be deserialized must be provided..
+        /// </summary>
+        internal static string DeserializeAsyncSourceRequired {
+            get {
+                return ResourceManager.GetString("DeserializeAsyncSourceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stream to which the data is to be serialized must be provided..
+        /// </summary>
+        internal static string SerializeAsyncTargetRequired {
+            get {
+                return ResourceManager.GetString("SerializeAsyncTargetRequired", resourceCulture);
             }
         }
     }

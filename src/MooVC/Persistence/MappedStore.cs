@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using MooVC.Linq;
-using static MooVC.Persistence.Resources;
+using static MooVC.Persistence.MappedStore_Resources;
 
 /// <summary>
 /// Serves as an adapter, allowing for access to a resource via an alternative key than that applied by the implementing.
@@ -35,9 +35,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// </exception>
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = Guard.Against.Null(innerMapping, parameterName: nameof(innerMapping), message: MappedStoreInnerMappingRequired);
-        this.outterMapping = Guard.Against.Null(outterMapping, parameterName: nameof(outterMapping), message: MappedStoreOutterMappingRequired);
-        this.store = Guard.Against.Null(store, parameterName: nameof(store), message: MappedStoreStoreRequired);
+        this.innerMapping = Guard.Against.Null(innerMapping, parameterName: nameof(innerMapping), message: InnerMappingRequired);
+        this.outterMapping = Guard.Against.Null(outterMapping, parameterName: nameof(outterMapping), message: OutterMappingRequired);
+        this.store = Guard.Against.Null(store, parameterName: nameof(store), message: StoreRequired);
     }
 
     /// <summary>
