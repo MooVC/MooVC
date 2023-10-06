@@ -7,7 +7,7 @@ using Ardalis.GuardClauses;
 using static MooVC.Serialization.Resources;
 
 /// <summary>
-/// Defines a default implementation of the <see cref="ICloner"/> interface, supporting object cloning via <see cref="ISerializer"/>.
+/// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.
 /// </summary>
 public sealed class DefaultCloner
     : ICloner
@@ -15,10 +15,10 @@ public sealed class DefaultCloner
     private readonly ISerializer serializer;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DefaultCloner"/> class with the specified <see cref="ISerializer"/>.
+    /// Initializes a new instance of the <see cref="DefaultCloner" /> class with the specified <see cref="ISerializer" />.
     /// </summary>
     /// <param name="serializer">The serializer to use for cloning objects.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="serializer"/> is <see langword="null" />.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="serializer" /> is <see langword="null" />.</exception>
     public DefaultCloner(ISerializer serializer)
     {
         this.serializer = Guard.Against.Null(serializer, parameterName: nameof(serializer), message: DefaultClonerSerializerRequired);
@@ -31,7 +31,7 @@ public sealed class DefaultCloner
     /// <param name="original">The original object to clone.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.
+    /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
     public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)

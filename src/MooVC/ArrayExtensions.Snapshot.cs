@@ -3,16 +3,17 @@ namespace MooVC;
 using System;
 using System.Linq;
 using MooVC.Collections.Generic;
+using MooVC.Linq;
 
 /// <summary>
-/// Provides extensions relating to <see cref="Array"/>.
+/// Provides extensions relating to <see cref="Array" />.
 /// </summary>
 public static partial class ArrayExtensions
 {
     /// <summary>
     /// Returns a snapshot of a array sequence.
     /// </summary>
-    /// <typeparam name="T">The type of the elements within <paramref name="values"/>.</typeparam>
+    /// <typeparam name="T">The type of the elements within <paramref name="values" />.</typeparam>
     /// <param name="values">The sequence to take a snapshot of.</param>
     /// <param name="predicate">
     /// An optional function to test each element for a condition.
@@ -35,8 +36,8 @@ public static partial class ArrayExtensions
             return snapshot;
         }
 
-        return values
+        return Enumerable.ToArray(values
             .WhereIf(predicate is not null, predicate!)
-            .ToArray();
+);
     }
 }

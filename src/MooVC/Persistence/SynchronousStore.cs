@@ -16,9 +16,9 @@ public abstract class SynchronousStore<T, TKey>
     /// Asynchronously creates a new item in the store.
     /// </summary>
     /// <param name="item">The item to create.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task"/> that represents the asynchronous operation.
+    /// A <see cref="Task" /> that represents the asynchronous operation.
     /// The task result contains the key of the newly created item.
     /// </returns>
     public virtual async Task<TKey> CreateAsync(T item, CancellationToken cancellationToken)
@@ -30,8 +30,8 @@ public abstract class SynchronousStore<T, TKey>
     /// Asynchronously deletes an item from the store.
     /// </summary>
     /// <param name="item">The item to delete.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
     public virtual Task DeleteAsync(T item, CancellationToken cancellationToken)
     {
         PerformDelete(item);
@@ -43,8 +43,8 @@ public abstract class SynchronousStore<T, TKey>
     /// Asynchronously deletes an item from the store.
     /// </summary>
     /// <param name="key">The key that identifies the item to delete.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
     public virtual Task DeleteAsync(TKey key, CancellationToken cancellationToken)
     {
         PerformDelete(key);
@@ -56,10 +56,10 @@ public abstract class SynchronousStore<T, TKey>
     /// Asynchronously retrieves an item from the store.
     /// </summary>
     /// <param name="key">The key that identifies the item to retrieve.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task"/> that represents the asynchronous operation.
-    /// The task result contains the item with the specified <paramref name="key"/>, or null if no such item exists.
+    /// A <see cref="Task" /> that represents the asynchronous operation.
+    /// The task result contains the item with the specified <paramref name="key" />, or null if no such item exists.
     /// </returns>
     public virtual Task<T?> GetAsync(TKey key, CancellationToken cancellationToken)
     {
@@ -67,12 +67,12 @@ public abstract class SynchronousStore<T, TKey>
     }
 
     /// <summary>
-    /// Asynchronously retrieves items from the store, and optionally applies <paramref name="paging"/>.
+    /// Asynchronously retrieves items from the store, and optionally applies <paramref name="paging" />.
     /// </summary>
     /// <param name="paging">Optional paging instructions to be applied to the results.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task"/> that represents the asynchronous operation.
+    /// A <see cref="Task" /> that represents the asynchronous operation.
     /// The task result contains paging instructions for the matching items.
     /// </returns>
     public virtual Task<PagedResult<T>> GetAsync(Paging? paging = default, CancellationToken cancellationToken = default)
@@ -84,8 +84,8 @@ public abstract class SynchronousStore<T, TKey>
     /// Asynchronously updates an existing item within the store.
     /// </summary>
     /// <param name="item">The item to update.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
     public virtual Task UpdateAsync(T item, CancellationToken cancellationToken)
     {
         PerformUpdate(item);
@@ -116,11 +116,11 @@ public abstract class SynchronousStore<T, TKey>
     /// Facilitates synchronous implementation of item retrieval from the store.
     /// </summary>
     /// <param name="key">The key that identifies the item to retrieve.</param>
-    /// <returns>The item with the specified <paramref name="key"/>, or null if no such item exists.</returns>
+    /// <returns>The item with the specified <paramref name="key" />, or null if no such item exists.</returns>
     protected abstract T? PerformGet(TKey key);
 
     /// <summary>
-    /// Facilitates synchronous implementation items retrieval from the store, and optionally applies <paramref name="paging"/>.
+    /// Facilitates synchronous implementation items retrieval from the store, and optionally applies <paramref name="paging" />.
     /// </summary>
     /// <param name="paging">Optional paging instructions to be applied to the results.</param>
     /// <returns>Paging instructions for the matching items.</returns>

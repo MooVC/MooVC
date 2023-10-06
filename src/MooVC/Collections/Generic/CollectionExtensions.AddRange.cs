@@ -3,10 +3,11 @@ namespace MooVC.Collections.Generic;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
+using MooVC.Linq;
 using static MooVC.Collections.Generic.Resources;
 
 /// <summary>
-/// Provides extensions relating to <see cref="ICollection{T}"/>.
+/// Provides extensions relating to <see cref="ICollection{T}" />.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class CollectionExtensions

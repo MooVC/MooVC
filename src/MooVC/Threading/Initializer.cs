@@ -19,7 +19,7 @@ public sealed class Initializer<T>
     private int waiting;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Initializer{T}"/> class.
+    /// Initializes a new instance of the <see cref="Initializer{T}" /> class.
     /// </summary>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
@@ -42,7 +42,7 @@ public sealed class Initializer<T>
     /// </summary>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
+    /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is the initialized resource.
     /// </returns>
     public async Task<T> InitializeAsync(CancellationToken cancellationToken)

@@ -28,7 +28,7 @@ public sealed class Paging
     private static readonly Lazy<Paging> one = new(() => new Paging(size: 1));
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Paging"/> class.
+    /// Initializes a new instance of the <see cref="Paging" /> class.
     /// </summary>
     /// <param name="page">The page number to retrieve.</param>
     /// <param name="size">The number of items per page.</param>
@@ -39,26 +39,26 @@ public sealed class Paging
     }
 
     /// <summary>
-    /// Gets the default <see cref="Paging"/> instance.
+    /// Gets the default <see cref="Paging" /> instance.
     /// </summary>
     /// <value>
-    /// The default <see cref="Paging"/> instance, which uses the <see cref="FirstPage"/> and <see cref="DefaultSize"/> values.
+    /// The default <see cref="Paging" /> instance, which uses the <see cref="FirstPage" /> and <see cref="DefaultSize" /> values.
     /// </value>
     public static Paging Default => @default.Value;
 
     /// <summary>
-    /// Gets the <see cref="Paging"/> instance that indicates that no paging be applied.
+    /// Gets the <see cref="Paging" /> instance that indicates that no paging be applied.
     /// </summary>
     /// <value>
-    /// The <see cref="Paging"/> instance that indicates that no paging be applied.
+    /// The <see cref="Paging" /> instance that indicates that no paging be applied.
     /// </value>
     public static Paging None => none.Value;
 
     /// <summary>
-    /// Gets the <see cref="Paging"/> instance that indicates that only one value be returned from the top of the sequence.
+    /// Gets the <see cref="Paging" /> instance that indicates that only one value be returned from the top of the sequence.
     /// </summary>
     /// <value>
-    /// The <see cref="Paging"/> instance that indicates that only one value be returned from the top of the sequence.
+    /// The <see cref="Paging" /> instance that indicates that only one value be returned from the top of the sequence.
     /// </value>
     public static Paging One => one.Value;
 
@@ -79,7 +79,7 @@ public sealed class Paging
     public bool IsNone => this == None;
 
     /// <summary>
-    /// Gets the requested page number, starting from <see cref="FirstPage"/>.
+    /// Gets the requested page number, starting from <see cref="FirstPage" />.
     /// </summary>
     /// <value>
     /// The requested page number.
@@ -103,21 +103,21 @@ public sealed class Paging
     public int Skip => (Page - FirstPage) * Size;
 
     /// <summary>
-    /// Implicitly converts a <see cref="ushort"/> value to a <see cref="Paging"/> instance that requests the first page of a sequence with
-    /// a <see cref="Size"/> matching the value specified or <see cref="MinimumSize"/> if a zero value is provided.
+    /// Implicitly converts a <see cref="ushort" /> value to a <see cref="Paging" /> instance that requests the first page of a sequence with
+    /// a <see cref="Size" /> matching the value specified or <see cref="MinimumSize" /> if a zero value is provided.
     /// </summary>
     /// <param name="size">The size associated with a page.</param>
-    /// <returns>A new <see cref="Paging"/> instance that requests the first page of a sequence sized at the value specified.</returns>
+    /// <returns>A new <see cref="Paging" /> instance that requests the first page of a sequence sized at the value specified.</returns>
     public static implicit operator Paging(ushort size)
     {
         return (FirstPage, size);
     }
 
     /// <summary>
-    /// Implicitly converts a tuple of <see cref="ushort"/> values to a <see cref="Paging"/> instance.
+    /// Implicitly converts a tuple of <see cref="ushort" /> values to a <see cref="Paging" /> instance.
     /// </summary>
     /// <param name="paging">A tuple containing the page number and number of items per page.</param>
-    /// <returns>A new <see cref="Paging"/> instance with the specified page number and number of items per page.</returns>
+    /// <returns>A new <see cref="Paging" /> instance with the specified page number and number of items per page.</returns>
     public static implicit operator Paging((ushort Page, ushort Size) paging)
     {
         Paging? result = default;
@@ -137,10 +137,10 @@ public sealed class Paging
     }
 
     /// <summary>
-    /// Returns a new <see cref="Paging"/> instance representing the next page in the sequence or query.
+    /// Returns a new <see cref="Paging" /> instance representing the next page in the sequence or query.
     /// </summary>
     /// <returns>
-    /// A new <see cref="Paging"/> instance representing the next page in the sequence or query.
+    /// A new <see cref="Paging" /> instance representing the next page in the sequence or query.
     /// </returns>
     public Paging Next()
     {
@@ -153,10 +153,10 @@ public sealed class Paging
     }
 
     /// <summary>
-    /// Returns a new <see cref="Paging"/> instance representing the previous page in the sequence or query.
+    /// Returns a new <see cref="Paging" /> instance representing the previous page in the sequence or query.
     /// </summary>
     /// <returns>
-    /// A new <see cref="Paging"/> instance representing the previous page in the sequence or query.
+    /// A new <see cref="Paging" /> instance representing the previous page in the sequence or query.
     /// </returns>
     public Paging Previous()
     {

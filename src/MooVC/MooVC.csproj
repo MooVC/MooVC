@@ -31,6 +31,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StreamExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Linq\EnumerableExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EnumerableExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Linq\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -73,6 +78,10 @@
     <EmbeddedResource Update="IO\StreamExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StreamExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Linq\EnumerableExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Linq\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

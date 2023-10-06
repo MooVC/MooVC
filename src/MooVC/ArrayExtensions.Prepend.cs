@@ -1,7 +1,7 @@
 ﻿namespace MooVC;
 
 /// <summary>
-/// Provides extensions relating to <see cref="Array"/>.
+/// Provides extensions relating to <see cref="Array" />.
 /// </summary>
 public static partial class ArrayExtensions
 {
@@ -16,7 +16,7 @@ public static partial class ArrayExtensions
     {
         if (source is null)
         {
-            return other.AsArray();
+            return other.ToArray();
         }
 
         var destination = new T[source.Length + 1];

@@ -15,20 +15,25 @@ Features within MooVC that were intended to address shortcomings within the .NET
 ## Enhancements
 
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
-- Added reference to Ardalis.GuardClauses.
+- Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
+- Added Linq.EnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
 - Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.Aggregate to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.Process to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.ProcessAll to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync to return IReadOnlyList<T> instead of IEnumerable<T>.
+- Changed Linq.EnumerableExtensions.IsEmpty extension so that it no longer accepts a null (**Breaking Change**).
 - Changed Linq.PagedResult<T> so that now implements IReadOnlyList<T> (**Breaking Change**).
 - Changed Linq.Paging so that it can no longer be extended (**Breaking Change**).
 - Changed methods accepting a CancellationToken so that it is no longer an optional parameter (**Breaking Change**).
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Changed Threading.ICoordinatable<T> so that it no longer accepts a generic type (**Breaking Change**).
-- Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.AsArray (**Breaking Change**).
+- Moved Collections.Generic.EnumerableExtensions to Linq.EnumerableExtensions (**Breaking Change**).
+- Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.ToArray (**Breaking Change**).
+- Moved Collections.Generic.ObjectExtensions.AsEnumerable to Linq.ObjectExtensions.ToEnumerable (**Breaking Change**).
+- Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
-- Removed Ensure (**Breaking Change**).
+- Removed Ensure class (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).
 - Removed Persistence.IEventStore (**Breaking Change**).
 - Removed Persistence.SynchronousEventStore<T, TIndex> (**Breaking Change**).

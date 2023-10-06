@@ -2,9 +2,10 @@
 
 using System.Linq;
 using MooVC.Collections.Generic;
+using MooVC.Linq;
 
 /// <summary>
-/// Provides extensions relating to <see cref="Array"/>.
+/// Provides extensions relating to <see cref="Array" />.
 /// </summary>
 public static partial class ArrayExtensions
 {
@@ -17,6 +18,6 @@ public static partial class ArrayExtensions
     /// <returns>An array containing the original elements of the source array, with the other element appended at the end.</returns>
     public static T[] Append<T>(this T[]? source, T other)
     {
-        return source.Combine(other).ToArray();
+        return Enumerable.ToArray(source.Combine<T>(other));
     }
 }

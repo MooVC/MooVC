@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 /// <summary>
-/// Faciliates implementation of a synchronous implementation of the <see cref="ICloner"/> contract for cloning objects.
+/// Faciliates implementation of a synchronous implementation of the <see cref="ICloner" /> contract for cloning objects.
 /// </summary>
 public abstract class SynchronousCloner
     : ICloner
@@ -16,7 +16,7 @@ public abstract class SynchronousCloner
     /// <param name="original">The original object to clone.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the asynchronous clone operation.
+    /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
     public Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)

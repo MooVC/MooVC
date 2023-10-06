@@ -15,7 +15,7 @@ internal sealed class CoordinationContext<T>
     private TimeSpan? disposal;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CoordinationContext{T}"/> class.
+    /// Initializes a new instance of the <see cref="CoordinationContext{T}" /> class.
     /// </summary>
     /// <param name="context">The instance on which coordination has been applied.</param>
     /// <param name="semaphore">The semaphore used to apply coordination.</param>
@@ -50,7 +50,7 @@ internal sealed class CoordinationContext<T>
     public DateTimeOffset TimeStamp { get; } = DateTimeOffset.UtcNow;
 
     /// <summary>
-    /// Releases coordination on the <see cref="Context"/> and sets the final <see cref="Duration"/> for which it was held.
+    /// Releases coordination on the <see cref="Context" /> and sets the final <see cref="Duration" /> for which it was held.
     /// </summary>
     public void Dispose()
     {

@@ -81,9 +81,9 @@ public sealed class WhenInitializeAsyncIsCalled
         var initializer = new Initializer<object>(Initializer);
 
         // Act
-        Task<object>[] tasks = Enumerable.Range(0, 10)
+        Task<object>[] tasks = Enumerable.ToArray(Enumerable.Range(0, 10)
             .Select(_ => initializer.InitializeAsync(CancellationToken.None))
-            .ToArray();
+);
 
         _ = await Task.WhenAll(tasks);
 
