@@ -84,7 +84,7 @@ public static partial class EnumerableExtensions
 
         _ = Guard.Against.Null(transform, parameterName: nameof(transform), message: EnumerableExtensionsProcessTransformRequired);
 
-        source = source.Snapshot();
+        source = source.ToArrayOrEmpty();
 
         initialize();
         enumerator(source, item => add(item, transform(item)));

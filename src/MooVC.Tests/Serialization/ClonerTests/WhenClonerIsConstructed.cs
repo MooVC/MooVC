@@ -1,11 +1,11 @@
-﻿namespace MooVC.Serialization.DefaultClonerTests;
+﻿namespace MooVC.Serialization.ClonerTests;
 
 using System;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-public sealed class WhenDefaultClonerIsConstructed
+public sealed class WhenClonerIsConstructed
 {
     [Fact]
     public void GivenASerializerThenAnInstanceIsReturned()
@@ -14,7 +14,7 @@ public sealed class WhenDefaultClonerIsConstructed
         ISerializer serializer = Substitute.For<ISerializer>();
 
         // Act
-        var cloner = new DefaultCloner(serializer);
+        var cloner = new Cloner(serializer);
 
         // Assert
         _ = cloner.Should().NotBeNull();
@@ -27,7 +27,7 @@ public sealed class WhenDefaultClonerIsConstructed
         ISerializer? serializer = default;
 
         // Act
-        Func<ICloner> act = () => new DefaultCloner(serializer!);
+        Func<ICloner> act = () => new Cloner(serializer!);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()

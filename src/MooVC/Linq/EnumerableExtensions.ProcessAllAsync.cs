@@ -86,7 +86,7 @@ public static partial class EnumerableExtensions
 
         var transforms = new ConcurrentDictionary<TSource, IEnumerable<TResult>>();
 
-        source = source.Snapshot();
+        source = source.ToArrayOrEmpty();
 
         await source
             .ForAllAsync(async item =>

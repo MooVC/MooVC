@@ -61,8 +61,7 @@ public sealed class WhenApplyAsyncIsCalled
             async () =>
             {
                 ICoordinationContext<string> coordination = await coordinator
-                    .ApplyAsync(context, CancellationToken.None)
-                    .ConfigureAwait(false);
+                    .ApplyAsync(context, CancellationToken.None);
 
                 using (coordination)
                 {
@@ -116,8 +115,7 @@ public sealed class WhenApplyAsyncIsCalled
 
         // Act
         ICoordinationContext<ITestCoordinatable> coordination = await coordinator
-            .ApplyAsync(context, CancellationToken.None)
-            .ConfigureAwait(false);
+            .ApplyAsync(context, CancellationToken.None);
 
         // Assert
         using (coordination)
@@ -135,8 +133,7 @@ public sealed class WhenApplyAsyncIsCalled
 
         // Act
         ICoordinationContext<object> coordination = await coordinator
-            .ApplyAsync(context, CancellationToken.None)
-            .ConfigureAwait(false);
+            .ApplyAsync(context, CancellationToken.None);
 
         using (coordination)
         {

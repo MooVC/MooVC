@@ -85,7 +85,7 @@ public sealed class PagedResult<T>
     }
 
     private PagedResult(Paging request, Func<ulong> total, IEnumerable<T> values)
-        : this(request, total, () => values.Snapshot())
+        : this(request, total, () => values.ToArrayOrEmpty())
     {
     }
 

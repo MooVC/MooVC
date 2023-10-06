@@ -1,4 +1,4 @@
-﻿namespace MooVC.Serialization.DefaultClonerTests;
+﻿namespace MooVC.Serialization.ClonerTests;
 
 using System.Collections.Generic;
 using System.Threading;
@@ -15,7 +15,7 @@ public sealed class WhenCloneAsyncIsCalled
         // Arrange
         WhenCloneAsyncIsCalled instance = this;
         ISerializer serializer = Substitute.For<ISerializer>();
-        var cloner = new DefaultCloner(serializer);
+        var cloner = new Cloner(serializer);
         IEnumerable<byte> binary = new byte[] { 1, 2, 3 };
 
         _ = serializer
@@ -42,7 +42,7 @@ public sealed class WhenCloneAsyncIsCalled
         // Arrange
         WhenCloneAsyncIsCalled original = default!;
         ISerializer serializer = Substitute.For<ISerializer>();
-        var cloner = new DefaultCloner(serializer);
+        var cloner = new Cloner(serializer);
 
         // Act
         Func<Task> act = async () => await cloner.CloneAsync(original, CancellationToken.None);

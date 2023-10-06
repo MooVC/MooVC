@@ -20,7 +20,7 @@ public static partial class ArrayExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot.</returns>
-    public static T[] Snapshot<T>(this T[]? values, Func<T, bool>? predicate = default)
+    public static T[] ToCopyOrEmpty<T>(this T[]? values, Func<T, bool>? predicate = default)
     {
         if (values is null || values.Length == 0)
         {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
-public sealed class WhenSnapshotIsCalled
+public sealed class WhenToCopyOrEmptyIsCalled
 {
     public static readonly IEnumerable<object[]> GivenAnArrayThenAMatchingArrayIsReturnedData = new[]
     {
@@ -33,7 +33,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
         // Act
-        int[] result = source.Snapshot();
+        int[] result = source.ToCopyOrEmpty();
 
         // Assert
         _ = result.Should().Equal(source);
@@ -44,7 +44,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
         // Act
-        int[] result = original.Snapshot(predicate: value => value != 2);
+        int[] result = original.ToCopyOrEmpty(predicate: value => value != 2);
 
         // Assert
         _ = result.Should().Equal(expected);
@@ -55,7 +55,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
-        string[] result = source.Snapshot();
+        string[] result = source.ToCopyOrEmpty();
 
         // Assert
         _ = result.Should().BeEmpty();
@@ -66,7 +66,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
-        string[] result = source.Snapshot(predicate: value => value != "Aarrgh!");
+        string[] result = source.ToCopyOrEmpty(predicate: value => value != "Aarrgh!");
 
         // Assert
         _ = result.Should().BeEmpty();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
-public sealed class WhenSnapshotIsCalled
+public sealed class WhenToNewOrCopyIsCalled
 {
     [Fact]
     public void GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
@@ -13,7 +13,7 @@ public sealed class WhenSnapshotIsCalled
         IDictionary<string, object>? original = default;
 
         // Act
-        IDictionary<string, object>? snapshot = original.Snapshot();
+        IDictionary<string, object>? snapshot = original.ToNewOrCopy();
 
         // Assert
         _ = snapshot.Should().NotBeNull();
@@ -31,7 +31,7 @@ public sealed class WhenSnapshotIsCalled
         };
 
         // Act
-        IDictionary<string, int>? snapshot = original.Snapshot();
+        IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
         _ = snapshot.Should().NotBeSameAs(original);
@@ -45,7 +45,7 @@ public sealed class WhenSnapshotIsCalled
         IDictionary<string, int>? original = new Dictionary<string, int>();
 
         // Act
-        IDictionary<string, int>? snapshot = original.Snapshot();
+        IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
         _ = snapshot.Should().NotBeSameAs(original);

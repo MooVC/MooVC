@@ -130,7 +130,7 @@ public sealed class WhenWhereIfIsCalled
 
         IEnumerable<int>? result = invocation(enumeration, Predicate);
 
-        _ = result.Snapshot();
+        _ = result.ToArrayOrEmpty();
 
         return wasInvoked;
     }

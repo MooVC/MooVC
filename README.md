@@ -29,9 +29,13 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Changed Threading.ICoordinatable<T> so that it no longer accepts a generic type (**Breaking Change**).
 - Moved Collections.Generic.EnumerableExtensions to Linq.EnumerableExtensions (**Breaking Change**).
+- Moved Collections.Generic.EnumerableExtensions.Snapshot to Linq.EnumerableExtensions.ToArrayOrEmpty (**Breaking Change**).
 - Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.ToArray (**Breaking Change**).
 - Moved Collections.Generic.ObjectExtensions.AsEnumerable to Linq.ObjectExtensions.ToEnumerable (**Breaking Change**).
+- Renamed ArrayExtensions.Snapshot to ToCopyOrEmpty (**Breaking Change**).
+- Renaned Collections.Generic.DictionaryExtensions.Snapshot extension to ToNewOrCopy (**Breaking Change**).
 - Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
+- Renamed Serialization.DefaultCloner to Cloner (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
 - Removed Ensure class (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).

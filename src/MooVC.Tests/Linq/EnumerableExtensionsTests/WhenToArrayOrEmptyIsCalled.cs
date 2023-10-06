@@ -6,7 +6,7 @@ using System.Linq;
 using FluentAssertions;
 using Xunit;
 
-public sealed class WhenSnapshotIsCalled
+public sealed class WhenToArrayOrEmptyIsCalled
 {
     public static readonly IEnumerable<object[]> EnumerablePredicateOrderTestData = new[]
     {
@@ -44,7 +44,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.Snapshot(element => element);
+        int[] result = original.ToArrayOrEmpty(element => element);
 
         // Assert
         _ = result.Should().Equal(expected);
@@ -57,7 +57,7 @@ public sealed class WhenSnapshotIsCalled
         IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.Snapshot(element => element, predicate: value => value != 2);
+        int[] result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
         _ = result.Should().Equal(expected);
@@ -71,7 +71,7 @@ public sealed class WhenSnapshotIsCalled
         Func<int, int>? order = default;
 
         // Act
-        Action act = () => enumerable.Snapshot(order!);
+        Action act = () => enumerable.ToArrayOrEmpty(order!);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()
@@ -86,7 +86,7 @@ public sealed class WhenSnapshotIsCalled
         int[] expected = enumerable.ToArray();
 
         // Act
-        int[] result = enumerable.Snapshot();
+        int[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
         _ = result.Should().Equal(expected);
@@ -97,7 +97,7 @@ public sealed class WhenSnapshotIsCalled
     public void GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.Snapshot(predicate: value => value != 2);
+        int[] result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
         _ = result.Should().Equal(expected);
@@ -110,7 +110,7 @@ public sealed class WhenSnapshotIsCalled
         IEnumerable<string>? enumerable = default;
 
         // Act
-        string[] result = enumerable.Snapshot(element => element);
+        string[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
         _ = result.Should().BeEquivalentTo(Array.Empty<string>());
@@ -123,7 +123,7 @@ public sealed class WhenSnapshotIsCalled
         IEnumerable<string>? enumerable = default;
 
         // Act
-        string[] result = enumerable.Snapshot();
+        string[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
         _ = result.Should().BeEquivalentTo(Array.Empty<string>());
@@ -136,7 +136,7 @@ public sealed class WhenSnapshotIsCalled
         IEnumerable<int> enumerable = new int[] { 1, 2, 3 };
 
         // Act
-        int[] result = enumerable.Snapshot(predicate: value => false);
+        int[] result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
         _ = result.Should().BeEquivalentTo(Array.Empty<int>());

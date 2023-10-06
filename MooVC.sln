@@ -34,6 +34,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{
 		analyzers\stylecop.tests.ruleset = analyzers\stylecop.tests.ruleset
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{722D825D-92CB-4C60-AA2A-B97C3CB9F047}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\cd.yml = .github\workflows\cd.yml
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\workflows\codeql.yml = .github\workflows\codeql.yml
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
