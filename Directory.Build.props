@@ -18,9 +18,6 @@
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
     <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Benchmarks'))">
-    <IsBenchmarkProject>true</IsBenchmarkProject>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(CODESPACES)' == 'true'">
     <IsCodespace>true</IsCodespace>
   </PropertyGroup>
@@ -33,7 +30,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Condition="'$(IsBenchmarkProject)' == 'true'" Project="build/benchmarks.props" />
-  <Import Condition="'$(IsBenchmarkProject)' != 'true' And '$(IsTestProject)' != 'true'" Project="build/libraries.props" />
+  <Import Condition="''$(IsTestProject)' != 'true'" Project="build/libraries.props" />
   <Import Condition="'$(IsTestProject)' == 'true'" Project="build/tests.props" />
 </Project>
