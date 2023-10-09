@@ -21,7 +21,7 @@ public sealed class Cloner
     /// <exception cref="ArgumentNullException">The <paramref name="serializer" /> is <see langword="null" />.</exception>
     public Cloner(ISerializer serializer)
     {
-        this.serializer = Guard.Against.Null(serializer, parameterName: nameof(serializer), message: DefaultClonerSerializerRequired);
+        this.serializer = Guard.Against.Null(serializer, parameterName: nameof(serializer), message: SerializerRequired);
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public sealed class Cloner
     public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(original, nameof(original), message: DefaultClonerCloneAsyncOriginalRequired);
+        _ = Guard.Against.Null(original, nameof(original), message: CloneAsyncOriginalRequired);
 
         IEnumerable<byte> data = await serializer
             .SerializeAsync(original, cancellationToken)

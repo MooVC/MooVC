@@ -4,7 +4,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-public sealed class WhenToArrayIsCalled
+public sealed class WhenToTypedArrayIsCalled
 {
     [Fact]
     public void GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
@@ -13,7 +13,7 @@ public sealed class WhenToArrayIsCalled
         var expected = TimeSpan.FromHours(1);
 
         // Act
-        TimeSpan[] value = expected.ToArray();
+        TimeSpan[] value = expected.ToTypedArray();
 
         // Assert
         _ = value.Should().HaveCount(1);
@@ -27,7 +27,7 @@ public sealed class WhenToArrayIsCalled
         TimeSpan? expected = default;
 
         // Act
-        TimeSpan?[] value = expected.ToArray();
+        TimeSpan?[] value = expected.ToTypedArray();
 
         // Assert
         _ = value.Should().HaveCount(1);
@@ -41,7 +41,7 @@ public sealed class WhenToArrayIsCalled
         object expected = new();
 
         // Act
-        object[] value = expected.ToArray();
+        object[] value = expected.ToTypedArray();
 
         // Assert
         _ = value.Should().HaveCount(1);
@@ -55,7 +55,7 @@ public sealed class WhenToArrayIsCalled
         object? expected = default;
 
         // Act
-        object?[] value = expected.ToArray();
+        object?[] value = expected.ToTypedArray();
 
         // Assert
         _ = value.Should().HaveCount(1);

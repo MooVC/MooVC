@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ardalis.GuardClauses;
-using MooVC.Collections.Generic;
 using static MooVC.Linq.PagedResult_Resources;
 
 /// <summary>
@@ -91,7 +90,7 @@ public sealed class PagedResult<T>
 
     private PagedResult(Paging request, Func<ulong> total, Func<IReadOnlyList<T>> values)
     {
-        Request = Guard.Against.Null(request, parameterName: nameof(request), message: PagedResultRequestRequired);
+        Request = Guard.Against.Null(request, parameterName: nameof(request), message: RequestRequired);
         Total = total();
         this.values = values();
     }

@@ -11,6 +11,11 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ArrayExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArrayExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Collections\Generic\CollectionExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -78,6 +83,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="ArrayExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ArrayExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Collections\Generic\CollectionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CollectionExtensions.Resources.Designer.cs</LastGenOutput>

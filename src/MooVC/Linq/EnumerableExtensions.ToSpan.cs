@@ -28,7 +28,7 @@ public static partial class EnumerableExtensions
             return ReadOnlySpan<T>.Empty;
         }
 
-        T[] elements = Enumerable.ToArray(items);
+        T[] elements = items.ToArray();
 
         return new ReadOnlySpan<T>(elements);
     }

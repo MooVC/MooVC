@@ -1,6 +1,10 @@
 namespace MooVC;
 
 using System;
+using System.Linq;
+using Ardalis.GuardClauses;
+using MooVC.Linq;
+using static MooVC.ArrayExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
@@ -17,13 +21,26 @@ public static partial class ArrayExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot.</returns>
-    public static T[] ToCopyOrEmpty<T>(this T[]? values, Func<T, bool>? predicate = default)
+    public static T[] ToCopy<T>(this T[] values, Func<T, bool>? predicate = default)
     {
-        if (values is null)
+        _ = Guard.Against.Null(values, parameterName: nameof(values), message: ToCopyArrayRequired);
+
+        if (values.Length == 0)
         {
             return Array.Empty<T>();
         }
 
-        return values.ToCopy(predicate: predicate);
+        if (predicate is null)
+        {
+            var snapshot = new T[values.Length];
+
+            Array.Copy(values, snapshot, values.Length);
+
+            return snapshot;
+        }
+
+        return values
+            .WhereIf(predicate is not null, predicate!)
+            .ToArray();
     }
 }

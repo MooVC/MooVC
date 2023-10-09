@@ -2,6 +2,7 @@ namespace MooVC.Linq;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Ardalis.GuardClauses;
@@ -38,7 +39,7 @@ public static partial class EnumerableExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
     {
-        T[] elements = Enumerable.ToArray(items);
+        T[] elements = items.ToArray();
         ref T source = ref MemoryMarshal.GetArrayDataReference(elements);
 
         for (int index = 0; index < elements.Length; index++)

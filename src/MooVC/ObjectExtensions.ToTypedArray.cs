@@ -11,7 +11,7 @@ public static partial class ObjectExtensions
     /// <typeparam name="T">The type of the value to be returned in the array.</typeparam>
     /// <param name="value">The value to be returned in the array.</param>
     /// <returns>An array containing the single specified value.</returns>
-    public static T[] ToArray<T>(this T value)
+    public static T[] ToTypedArray<T>(this T value)
     {
         return new[] { value };
     }

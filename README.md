@@ -17,6 +17,8 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
 - Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
 - Added Linq.EnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
+- Changed ArrayExtensions.Append to accept a params array for the elements to be apended to the source array.
+- Changed ArrayExtensions.Prepend to accept a params array for the elements to be apended to the source array.
 - Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.Aggregate to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Collections.Generic.EnumerableExtensions.Process to return IReadOnlyList<T> instead of IEnumerable<T>.
@@ -35,7 +37,9 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Renamed ArrayExtensions.Snapshot to ToCopyOrEmpty (**Breaking Change**).
 - Renaned Collections.Generic.DictionaryExtensions.Snapshot extension to ToNewOrCopy (**Breaking Change**).
 - Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
+- Renamed ObjectExtensions.AsArray to ToTypedArray (**Breaking Change**).
 - Renamed Serialization.DefaultCloner to Cloner (**Breaking Change**).
+- Removed ArrayExtensions.Extend in favor of ArrayExtensions.Append (**Breaking Change**)..
 - Removed Diagnostics (**Breaking Change**).
 - Removed Ensure class (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).
