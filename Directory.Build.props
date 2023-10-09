@@ -30,6 +30,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Condition="''$(IsTestProject)' != 'true'" Project="build/libraries.props" />
+  <Import Condition="'$(IsTestProject)' != 'true'" Project="build/libraries.props" />
   <Import Condition="'$(IsTestProject)' == 'true'" Project="build/tests.props" />
 </Project>
