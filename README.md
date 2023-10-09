@@ -39,7 +39,7 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
 - Renamed ObjectExtensions.AsArray to ToTypedArray (**Breaking Change**).
 - Renamed Serialization.DefaultCloner to Cloner (**Breaking Change**).
-- Removed ArrayExtensions.Extend in favor of ArrayExtensions.Append (**Breaking Change**)..
+- Removed ArrayExtensions.Extend in favor of ArrayExtensions.Append (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
 - Removed Ensure class (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).
