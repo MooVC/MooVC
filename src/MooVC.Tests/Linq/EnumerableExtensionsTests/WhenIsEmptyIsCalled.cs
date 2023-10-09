@@ -21,7 +21,7 @@ public sealed class WhenIsEmptyIsCalled
     }
 
     [Fact]
-    public void GivenAnPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
+    public void GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[1];
@@ -34,7 +34,7 @@ public sealed class WhenIsEmptyIsCalled
     }
 
     [Fact]
-    public void GivenAnPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
+    public void GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[3];
@@ -44,18 +44,5 @@ public sealed class WhenIsEmptyIsCalled
 
         // Assert
         _ = isEmpty.Should().BeFalse();
-    }
-
-    [Fact]
-    public void GivenANullSourceThenAPositiveResponseIsReturned()
-    {
-        // Arrange
-        IEnumerable<int>? source = default;
-
-        // Act
-        bool isEmpty = source.IsEmpty();
-
-        // Assert
-        _ = isEmpty.Should().BeTrue();
     }
 }

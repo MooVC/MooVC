@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Compression.SynchronousCompressorTests;
 
 using System.Collections.Generic;
-using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FluentAssertions;

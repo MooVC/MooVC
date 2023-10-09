@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
-using static MooVC.Threading.Resources;
+using static MooVC.Threading.Initializer_Resources;
 
 /// <summary>
 /// Provides support for asynchronous lazy initialization of a resource.
@@ -19,12 +19,12 @@ public sealed class Initializer<T>
     private int waiting;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Initializer{T}"/> class.
+    /// Initializes a new instance of the <see cref="Initializer{T}" /> class.
     /// </summary>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerInitializerRequired);
+        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerRequired);
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public sealed class Initializer<T>
     /// </summary>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the asynchronous operation.
+    /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is the initialized resource.
     /// </returns>
     public async Task<T> InitializeAsync(CancellationToken cancellationToken)
@@ -83,7 +83,7 @@ public sealed class Initializer<T>
 
             if (resource is null)
             {
-                throw new InvalidOperationException(InitializerInitializeAsyncResourceRequired);
+                throw new InvalidOperationException(InitializeAsyncResourceRequired);
             }
 
             IsInitialized = true;

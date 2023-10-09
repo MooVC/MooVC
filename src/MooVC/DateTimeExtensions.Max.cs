@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Provides the Max extension for <see cref="DateTime"/>.
+/// Provides the Max extension for <see cref="DateTime" />.
 /// </summary>
 public static partial class DateTimeExtensions
 {

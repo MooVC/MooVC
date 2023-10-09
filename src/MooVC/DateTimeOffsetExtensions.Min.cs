@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Provides the Min extension for <see cref="DateTimeOffset"/>.
+/// Provides the Min extension for <see cref="DateTimeOffset" />.
 /// </summary>
 public static partial class DateTimeOffsetExtensions
 {

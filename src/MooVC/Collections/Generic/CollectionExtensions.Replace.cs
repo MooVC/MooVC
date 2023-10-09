@@ -3,10 +3,10 @@ namespace MooVC.Collections.Generic;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
-using static MooVC.Collections.Generic.Resources;
+using static MooVC.Collections.Generic.CollectionExtensions_Resources;
 
 /// <summary>
-/// Provides extensions relating to <see cref="ICollection{T}"/>.
+/// Provides extensions relating to <see cref="ICollection{T}" />.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class CollectionExtensions
@@ -22,7 +22,7 @@ public static partial class CollectionExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
     {
-        _ = Guard.Against.Null(target, parameterName: nameof(target), message: CollectionExtensionsReplaceTargetRequired);
+        _ = Guard.Against.Null(target, parameterName: nameof(target), message: ReplaceTargetRequired);
 
         target.Clear();
 

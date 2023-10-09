@@ -3,8 +3,16 @@
   "root": true,
   "dependentFileProviders": {
     "add": {
-      "pathSegment": { "add": { ".*": [ ".cs" ] } },
-      "fileSuffixToExtension": { "add": { ".Resources.resx": [ ".cs" ] } }
+      "pathSegment": {
+        "add": {
+          ".*": [ ".cs" ]
+        }
+      },
+      "fileSuffixToExtension": {
+        "add": {
+          ".Resources.resx": [ ".cs" ]
+        }
+      }
     }
   }
 }

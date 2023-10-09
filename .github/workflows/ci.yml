@@ -15,6 +15,7 @@ on:
 
 env:
   configuration: 'Debug'
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
   solution: 'MooVC.sln'
 
 jobs:
@@ -36,9 +37,9 @@ jobs:
           7.0.x
 
     - name: Cache NuGet Packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
+        path: ${{ github.workspace }}/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-

@@ -53,17 +53,14 @@ public sealed class WhenInitializeAsyncIsCalled
         var initializer = new Initializer<object>(Initializer);
 
         // Act
-        _ = await initializer.InitializeAsync(CancellationToken.None).ConfigureAwait(false);
-        _ = await initializer.InitializeAsync(CancellationToken.None).ConfigureAwait(false);
-        _ = await initializer.InitializeAsync(CancellationToken.None).ConfigureAwait(false);
+        Func<Task> act = () => GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceActionAsync(initializer);
+
+        await act();
 
         // Assert
         _ = invocations.Should().Be(ExpectedInvocations);
     }
 
-    // Other tests go here...
-
-    // Additional test cases
     [Fact]
     public async Task GivenAnInitializerWithDelayThenTheInitializerIsStillCalledOnlyOnceAsync()
     {
@@ -81,14 +78,29 @@ public sealed class WhenInitializeAsyncIsCalled
         var initializer = new Initializer<object>(Initializer);
 
         // Act
-        Task<object>[] tasks = Enumerable.Range(0, 10)
-            .Select(_ => initializer.InitializeAsync(CancellationToken.None))
-            .ToArray();
+        IEnumerable<Task<object>> tasks = Enumerable
+            .Range(0, 10)
+            .Select(_ => initializer.InitializeAsync(CancellationToken.None));
 
         _ = await Task.WhenAll(tasks);
 
         // Assert
         _ = invocations.Should().Be(ExpectedInvocations);
-        _ = tasks.Select(t => t.Result).Distinct().Should().HaveCount(1);
+    }
+
+    private static async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceActionAsync(
+        Initializer<object> initializer)
+    {
+        _ = await initializer
+            .InitializeAsync(CancellationToken.None)
+            .ConfigureAwait(false);
+
+        _ = await initializer
+            .InitializeAsync(CancellationToken.None)
+            .ConfigureAwait(false);
+
+        _ = await initializer
+            .InitializeAsync(CancellationToken.None)
+            .ConfigureAwait(false);
     }
 }

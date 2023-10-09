@@ -6,7 +6,7 @@ using Ardalis.GuardClauses;
 using static MooVC.IO.StreamExtensions_Resources;
 
 /// <summary>
-/// Provides extensions relating to <see cref="Stream"/>.
+/// Provides extensions relating to <see cref="Stream" />.
 /// </summary>
 public static partial class StreamExtensions
 {

@@ -5,11 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ardalis.GuardClauses;
-using MooVC.Collections.Generic;
-using static MooVC.Linq.Resources;
+using static MooVC.Linq.PagedResult_Resources;
 
 /// <summary>
-/// Represents the result of a request to page a sequence of type <see cref="T"/>.
+/// Represents the result of a request to page a sequence of type <see cref="T" />.
 /// </summary>
 /// <typeparam name="T">The type of the elements paged.</typeparam>
 public sealed class PagedResult<T>
@@ -18,11 +17,11 @@ public sealed class PagedResult<T>
     private readonly IReadOnlyList<T> values;
 
     /// <summary>
-    /// Initializes a new, empty instance, of the <see cref="PagedResult{T}"/> class.
+    /// Initializes a new, empty instance, of the <see cref="PagedResult{T}" /> class.
     /// </summary>
     /// <param name="request">The request that was used to page the sequence.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="request"/> is <see langword="null" />.
+    /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request)
         : this(request, () => 0, () => Array.Empty<T>())
@@ -30,12 +29,12 @@ public sealed class PagedResult<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedResult{T}"/> class with the values paged from the sequence.
+    /// Initializes a new instance of the <see cref="PagedResult{T}" /> class with the values paged from the sequence.
     /// </summary>
     /// <param name="request">The request that was used to page the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="request"/> is <see langword="null" />.
+    /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request, IEnumerable<T> values)
         : this(request, () => (ulong)values.LongCount(), values)
@@ -43,13 +42,13 @@ public sealed class PagedResult<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedResult{T}"/> class with the values paged from the sequence.
+    /// Initializes a new instance of the <see cref="PagedResult{T}" /> class with the values paged from the sequence.
     /// </summary>
     /// <param name="request">The request that was used to page the sequence.</param>
     /// <param name="total">The total number of elements in the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="request"/> is <see langword="null" />.
+    /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request, int total, IEnumerable<T> values)
         : this(request, () => (ulong)total, values)
@@ -57,13 +56,13 @@ public sealed class PagedResult<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedResult{T}"/> class with the values paged from the sequence.
+    /// Initializes a new instance of the <see cref="PagedResult{T}" /> class with the values paged from the sequence.
     /// </summary>
     /// <param name="request">The request that was used to page the sequence.</param>
     /// <param name="total">The total number of elements in the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="request"/> is <see langword="null" />.
+    /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request, long total, IEnumerable<T> values)
         : this(request, () => (ulong)total, values)
@@ -71,13 +70,13 @@ public sealed class PagedResult<T>
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PagedResult{T}"/> class with the values paged from the sequence.
+    /// Initializes a new instance of the <see cref="PagedResult{T}" /> class with the values paged from the sequence.
     /// </summary>
     /// <param name="request">The request that was used to page the sequence.</param>
     /// <param name="total">The total number of elements in the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="request"/> is <see langword="null" />.
+    /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request, ulong total, IEnumerable<T> values)
         : this(request, () => total, values)
@@ -85,13 +84,13 @@ public sealed class PagedResult<T>
     }
 
     private PagedResult(Paging request, Func<ulong> total, IEnumerable<T> values)
-        : this(request, total, () => values.Snapshot())
+        : this(request, total, () => values.ToArrayOrEmpty())
     {
     }
 
     private PagedResult(Paging request, Func<ulong> total, Func<IReadOnlyList<T>> values)
     {
-        Request = Guard.Against.Null(request, parameterName: nameof(request), message: PagedResultRequestRequired);
+        Request = Guard.Against.Null(request, parameterName: nameof(request), message: RequestRequired);
         Total = total();
         this.values = values();
     }

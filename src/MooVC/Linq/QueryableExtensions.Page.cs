@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 /// <summary>
-/// Provides extensions relating to <see cref="IQueryable{T}"/>.
+/// Provides extensions relating to <see cref="IQueryable{T}" />.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the sequence.</typeparam>
 public static partial class QueryableExtensions
