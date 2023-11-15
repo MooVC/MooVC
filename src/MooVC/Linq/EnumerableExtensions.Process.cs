@@ -69,7 +69,7 @@ public static partial class EnumerableExtensions
             transform);
     }
 
-    private static IReadOnlyList<TResult> Process<TResult, TSource>(
+    private static TResult[] Process<TResult, TSource>(
         this IEnumerable<TSource>? source,
         Action<TSource, IEnumerable<TResult>> add,
         Func<IDictionary<TSource, IEnumerable<TResult>>> commit,

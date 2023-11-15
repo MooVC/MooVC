@@ -16,6 +16,7 @@ Features within MooVC that were intended to address shortcomings within the .NET
 
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
 - Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
+- Added support for .NET 8.0.
 - Added Linq.EnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
 - Changed ArrayExtensions.Append to accept a params array for the elements to be apended to the source array.
 - Changed ArrayExtensions.Prepend to accept a params array for the elements to be apended to the source array.

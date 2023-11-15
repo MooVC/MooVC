@@ -16,7 +16,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
-    <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(CODESPACES)' == 'true'">
     <IsCodespace>true</IsCodespace>
