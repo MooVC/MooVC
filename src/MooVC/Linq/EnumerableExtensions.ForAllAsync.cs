@@ -52,7 +52,7 @@ public static partial class EnumerableExtensions
                 .WhenAll(operations)
                 .ConfigureAwait(false);
 
-            if (exceptions.Any())
+            if (!exceptions.IsEmpty)
             {
                 throw new AggregateException(exceptions);
             }
