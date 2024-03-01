@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Serialization.ClonerTests;
 
-using System;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenClonerIsConstructed
 {
     [Fact]

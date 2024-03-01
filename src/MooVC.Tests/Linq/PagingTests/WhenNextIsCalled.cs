@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Linq.PagingTests;
 
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenNextIsCalled
 {
     [Theory]

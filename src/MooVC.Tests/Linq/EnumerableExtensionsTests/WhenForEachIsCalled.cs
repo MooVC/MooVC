@@ -1,10 +1,6 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
 using FluentAssertions.Specialized;
-using Xunit;
 
 public sealed class WhenForEachIsCalled
 {
@@ -12,7 +8,7 @@ public sealed class WhenForEachIsCalled
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         var invocations = new List<int>();
 
         void Action(int value)
@@ -31,7 +27,7 @@ public sealed class WhenForEachIsCalled
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         Action<int>? action = default;
 
         // Act

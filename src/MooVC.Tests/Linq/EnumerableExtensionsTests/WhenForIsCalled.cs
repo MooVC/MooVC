@@ -1,10 +1,5 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenForIsCalled
 {
     [Fact]
@@ -43,7 +38,7 @@ public sealed class WhenForIsCalled
     public void GivenAnEnumerationThenTheCorrectIndexIsPassedToTheActionForEachEnumerationMember()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         var indexes = new List<int>();
 
         void Action(int index, int value)
@@ -62,7 +57,7 @@ public sealed class WhenForIsCalled
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         var invocations = new List<int>();
         int expected = 0;
 
@@ -83,7 +78,7 @@ public sealed class WhenForIsCalled
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         Action<int, int>? action = default;
 
         // Act

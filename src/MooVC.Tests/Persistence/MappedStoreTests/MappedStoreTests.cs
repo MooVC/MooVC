@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
-using System;
-using NSubstitute;
-
 public abstract class MappedStoreTests
 {
     protected MappedStoreTests()

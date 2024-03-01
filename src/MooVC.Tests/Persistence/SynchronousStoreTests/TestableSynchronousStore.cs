@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Persistence.SynchronousStoreTests;
 
-using System;
 using MooVC.Linq;
 
 public sealed class TestableSynchronousStore

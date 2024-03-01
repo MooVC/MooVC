@@ -1,9 +1,5 @@
 ﻿namespace MooVC.ObjectExtensionsTests;
 
-using System;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToTypedArrayIsCalled
 {
     [Fact]

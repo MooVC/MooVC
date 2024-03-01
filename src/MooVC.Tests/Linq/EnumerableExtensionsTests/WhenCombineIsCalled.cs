@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenCombineIsCalled
 {
     [Fact]
@@ -12,7 +8,7 @@ public sealed class WhenCombineIsCalled
         // Arrange
         const int ExpectedValue = 9;
         const int ExpectedCount = 4;
-        int[] source = new[] { 1, 2, 3 };
+        int[] source = [1, 2, 3];
 
         // Act
         IEnumerable<int> actual = source.Combine(ExpectedValue);
@@ -56,8 +52,8 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         const int ExpectedCount = 6;
-        IEnumerable<int>? source = new[] { 1, 2, 3 };
-        IEnumerable<int>? expected = new[] { 4, 5, 6 };
+        IEnumerable<int>? source = [1, 2, 3];
+        IEnumerable<int>? expected = [4, 5, 6];
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);
@@ -73,7 +69,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         IEnumerable<int>? source = default;
-        IEnumerable<int>? expected = new[] { 4, 5, 6 };
+        IEnumerable<int>? expected = [4, 5, 6];
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);

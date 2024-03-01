@@ -1,11 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToSpanIsCalled
 {
     [Theory]
@@ -54,7 +48,7 @@ public sealed class WhenToSpanIsCalled
     public void GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
     {
         // Arrange
-        IEnumerable<int> enumerable = new[] { 1, 2, 3, 4 };
+        IEnumerable<int> enumerable = [1, 2, 3, 4];
 
         // Act
         ReadOnlySpan<int> actual = enumerable.ToSpan();

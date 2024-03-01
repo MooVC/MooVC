@@ -1,16 +1,10 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
-using System;
-using System.Threading;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenDeleteAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
+    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
     {
         bool wasInvoked = false;
         string? expectedInnerKey = default;
@@ -39,7 +33,7 @@ public sealed class WhenDeleteAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenAnItemThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenAnItemThenTheInnerStoreIsInvokedAsync()
     {
         // Arrange
         object item = new();

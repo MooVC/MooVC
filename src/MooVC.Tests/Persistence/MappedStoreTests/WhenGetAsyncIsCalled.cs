@@ -1,17 +1,12 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
-using System;
-using System.Threading;
-using FluentAssertions;
 using MooVC.Linq;
-using NSubstitute;
-using Xunit;
 
 public sealed class WhenGetAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async void GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
+    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
     {
         bool wasInvoked = false;
         string? expectedInnerKey = default;
@@ -46,7 +41,7 @@ public sealed class WhenGetAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenPagingThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenPagingThenTheInnerStoreIsInvokedAsync()
     {
         // Arrange
         var paging = new Paging();
@@ -61,12 +56,10 @@ public sealed class WhenGetAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenANonExistingKeyThenNullShouldBeReturnedAsync()
+    public async Task GivenANonExistingKeyThenNullShouldBeReturnedAsync()
     {
         // Arrange
         var outterKey = Guid.NewGuid();
-        object expectedItem = new();
-
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act

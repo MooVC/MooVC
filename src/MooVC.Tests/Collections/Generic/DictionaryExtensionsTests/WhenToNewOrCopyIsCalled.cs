@@ -1,9 +1,5 @@
 namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
 
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToNewOrCopyIsCalled
 {
     [Fact]

@@ -1,12 +1,10 @@
 ﻿namespace MooVC.Threading;
 
-using System;
-
 /// <summary>
 /// Represents the context in which coordination has been applied.
 /// </summary>
 /// <typeparam name="T">The type in which the coordination context applies.</typeparam>
-public interface ICoordinationContext<T>
+public interface ICoordinationContext<out T>
     : IDisposable
     where T : notnull
 {

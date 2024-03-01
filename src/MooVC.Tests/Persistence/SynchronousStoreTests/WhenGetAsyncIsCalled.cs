@@ -1,10 +1,6 @@
 ﻿namespace MooVC.Persistence.SynchronousStoreTests;
 
-using System;
-using System.Threading.Tasks;
-using FluentAssertions;
 using MooVC.Linq;
-using Xunit;
 
 public sealed class WhenGetAsyncIsCalled
 {
@@ -34,7 +30,7 @@ public sealed class WhenGetAsyncIsCalled
     {
         // Arrange
         var expectedPaging = new Paging();
-        string[] expectedResults = new[] { "Something", "Dark", "Side" };
+        string[] expectedResults = ["Something", "Dark", "Side"];
 
         var store = new TestableSynchronousStore(getAll: actualPaging =>
         {

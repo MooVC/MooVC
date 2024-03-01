@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Linq.QueryableExtensionsTests;
 
-using System.Linq;
-using Bogus;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenPageIsCalled
 {
     [Fact]

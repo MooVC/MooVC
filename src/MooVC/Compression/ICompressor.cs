@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Compression;
 
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-
 /// <summary>
 /// Represents a compressor that can compress and decompress data.
 /// </summary>

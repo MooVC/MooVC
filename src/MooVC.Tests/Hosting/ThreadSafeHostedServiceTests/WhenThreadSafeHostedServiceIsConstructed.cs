@@ -1,11 +1,7 @@
 ﻿namespace MooVC.Hosting.ThreadSafeHostedServiceTests;
 
-using System;
-using FluentAssertions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NSubstitute;
-using Xunit;
 
 public sealed class WhenThreadSafeHostedServiceIsConstructed
 {
@@ -17,7 +13,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         IHostedService service = Substitute.For<IHostedService>();
 
         // Act
-        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, new[] { service });
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
 
         // Assert
         _ = act.Should().NotThrow();
@@ -28,7 +24,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
     {
         // Arrange
         ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
-        IHostedService[] services = Array.Empty<IHostedService>();
+        IHostedService[] services = [];
 
         // Act
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services);
@@ -60,7 +56,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         IHostedService service = Substitute.For<IHostedService>();
 
         // Act
-        Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, new[] { service });
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, [service]);
 
         // Assert
         _ = act.Should().Throw<ArgumentNullException>()

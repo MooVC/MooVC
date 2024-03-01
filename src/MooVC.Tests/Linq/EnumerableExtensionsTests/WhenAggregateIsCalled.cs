@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenAggregateIsCalled
 {
     [Fact]
@@ -37,7 +32,7 @@ public sealed class WhenAggregateIsCalled
     public void GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
-        IEnumerable<int> items = new[] { 1, 2, 3 };
+        IEnumerable<int> items = [1, 2, 3];
 
         // Act
         IEnumerable<string> results = items.Aggregate<int, string>(default);
@@ -50,7 +45,7 @@ public sealed class WhenAggregateIsCalled
     public void GivenAListThenResultsMatchingEachKeyAreReturned()
     {
         // Arrange
-        IEnumerable<int> items = new[] { 1, 2, 3 };
+        IEnumerable<int> items = [1, 2, 3];
         IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
 
         // Act
@@ -70,7 +65,7 @@ public sealed class WhenAggregateIsCalled
         _ = items.Remove(2);
         items.Add(4);
 
-        IEnumerable<string> expected = new[] { "1", "3" };
+        IEnumerable<string> expected = ["1", "3"];
 
         // Act
         IEnumerable<string> results = items.Aggregate(source);

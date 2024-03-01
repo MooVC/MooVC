@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Persistence.SynchronousStoreTests;
 
-using System;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenDeleteAsyncIsCalled
 {
     [Fact]

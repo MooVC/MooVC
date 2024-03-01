@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Collections.Concurrent;
 
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 /// <summary>
 /// Provides extensions relating to IProducerConsumerCollection{T}.
@@ -20,7 +19,7 @@ public static partial class ProducerConsumerCollectionExtensions
     {
         if (source is null || source.Count == 0)
         {
-            return Array.Empty<T>();
+            return [];
         }
 
         int total = source.Count;

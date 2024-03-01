@@ -1,9 +1,5 @@
 ﻿namespace MooVC.ArrayExtensionsTests;
 
-using System;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenAppendIsCalled
 {
     [Fact]
@@ -36,7 +32,7 @@ public sealed class WhenAppendIsCalled
     public void GivenNoValueWhenTheSourceIsEmptyThenAnEmptyArrayIsReturned()
     {
         // Arrange
-        int[]? original = Array.Empty<int>();
+        int[]? original = [];
 
         // Act
         int[] result = original.Append();
@@ -50,7 +46,7 @@ public sealed class WhenAppendIsCalled
     public void GivenNoValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheOriginalElementsWithin()
     {
         // Arrange
-        int[]? original = new[] { 1, 2, 3, 4, 5 };
+        int[]? original = [1, 2, 3, 4, 5];
 
         // Act
         int[] result = original.Append();
@@ -79,7 +75,7 @@ public sealed class WhenAppendIsCalled
     public void GivenASingleValueWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementWithin()
     {
         // Arrange
-        int[] original = Array.Empty<int>();
+        int[] original = [];
         int expected = 1;
 
         // Act
@@ -94,8 +90,8 @@ public sealed class WhenAppendIsCalled
     public void GivenASingleValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementAtTheEnd()
     {
         // Arrange
-        int[] original = new[] { 1, 2, 3 };
-        int[] expected = new[] { 1, 2, 3, 4 };
+        int[] original = [1, 2, 3];
+        int[] expected = [1, 2, 3, 4];
         int value = 4;
 
         // Act
@@ -109,8 +105,8 @@ public sealed class WhenAppendIsCalled
     public void GivenASingleValueWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementAtTheEnd()
     {
         // Arrange
-        int[] original = new[] { 1, 1, 1 };
-        int[] expected = new[] { 1, 1, 1, 1 };
+        int[] original = [1, 1, 1];
+        int[] expected = [1, 1, 1, 1];
         int value = 1;
 
         // Act
@@ -125,7 +121,7 @@ public sealed class WhenAppendIsCalled
     {
         // Arrange
         int[]? original = default;
-        int[] expected = new[] { 5, 6, 7 };
+        int[] expected = [5, 6, 7];
 
         // Act
         int[] result = original.Append(expected);
@@ -138,8 +134,8 @@ public sealed class WhenAppendIsCalled
     public void GivenMultipleValuesWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementsWithin()
     {
         // Arrange
-        int[] original = Array.Empty<int>();
-        int[] expected = new[] { 3, 5, 7 };
+        int[] original = [];
+        int[] expected = [3, 5, 7];
 
         // Act
         int[] result = original.Append(expected);
@@ -152,9 +148,9 @@ public sealed class WhenAppendIsCalled
     public void GivenMultipleValuesWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementsAtTheEnd()
     {
         // Arrange
-        int[] original = new[] { 1, 2, 3 };
-        int[] others = new[] { 4, 5, 6 };
-        int[] expected = new[] { 1, 2, 3, 4, 5, 6 };
+        int[] original = [1, 2, 3];
+        int[] others = [4, 5, 6];
+        int[] expected = [1, 2, 3, 4, 5, 6];
 
         // Act
         int[] actual = original.Append(others);
@@ -167,9 +163,9 @@ public sealed class WhenAppendIsCalled
     public void GivenMultipleValuesWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementsAtTheEnd()
     {
         // Arrange
-        int[] original = new[] { 1, 2, 1 };
-        int[] others = new[] { 1, 2, 1 };
-        int[] expected = new[] { 1, 2, 1, 1, 2, 1 };
+        int[] original = [1, 2, 1];
+        int[] others = [1, 2, 1];
+        int[] expected = [1, 2, 1, 1, 2, 1];
 
         // Act
         int[] actual = original.Append(others);
@@ -182,8 +178,8 @@ public sealed class WhenAppendIsCalled
     public void GivenTheSameValuesAsTheSourceWhenTheSourceHasMultipleElementsThenAnArrayIsReturnedWithTheSourceDuplicated()
     {
         // Arrange
-        int[] original = new[] { 2, 1, 2 };
-        int[] expected = new[] { 2, 1, 2, 2, 1, 2 };
+        int[] original = [2, 1, 2];
+        int[] expected = [2, 1, 2, 2, 1, 2];
 
         // Act
         int[] actual = original.Append(original);

@@ -1,12 +1,7 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
 using FluentAssertions.Specialized;
-using Xunit;
 
 public sealed class WhenForAllIsCalled
 {
@@ -39,7 +34,7 @@ public sealed class WhenForAllIsCalled
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        List<int> enumeration = [1, 2, 3];
         var invocations = new ConcurrentBag<int>();
 
         void Action(int value)
@@ -51,15 +46,15 @@ public sealed class WhenForAllIsCalled
         enumeration.ForAll(Action);
 
         // Assert
-        _ = enumeration.All(value => invocations.Contains(value)).Should().BeTrue();
-        _ = invocations.Should().HaveCount(enumeration.Length);
+        _ = enumeration.TrueForAll(value => invocations.Contains(value)).Should().BeTrue();
+        _ = invocations.Should().HaveCount(enumeration.Count);
     }
 
     [Fact]
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         Action<int>? action = default;
 
         // Act

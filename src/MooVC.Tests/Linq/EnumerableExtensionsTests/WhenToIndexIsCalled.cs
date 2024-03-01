@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToIndexIsCalled
 {
     [Fact]
@@ -12,7 +7,7 @@ public sealed class WhenToIndexIsCalled
     {
         // Arrange
         Func<int, string>? selector = default;
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
 
         // Act
         Action act = () => source.ToIndex(selector!);
@@ -41,7 +36,7 @@ public sealed class WhenToIndexIsCalled
     {
         // Arrange
         Func<int, string>? transform = default;
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
 
         // Act
         Action act = () => source.ToIndex(value => value, transform!);
@@ -55,7 +50,7 @@ public sealed class WhenToIndexIsCalled
     public void GivenASourceThenAMatchingDictionaryIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
 
         // Act
         IDictionary<int, int> index = source.ToIndex(value => value);
@@ -70,7 +65,7 @@ public sealed class WhenToIndexIsCalled
     public void GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, string> transform = value => value.ToString();
 
         // Act
@@ -86,7 +81,7 @@ public sealed class WhenToIndexIsCalled
     public void GivenASourceWithDuplicatesThenAnArgumentExceptionIsThrown()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 1, 2 };
+        IEnumerable<int> source = [1, 1, 2];
 
         // Act
         Action act = () => source.ToIndex(value => value);

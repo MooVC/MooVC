@@ -1,13 +1,7 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
 using FluentAssertions.Specialized;
-using Xunit;
 
 public sealed class WhenForAllAsyncIsCalled
 {
@@ -42,7 +36,7 @@ public sealed class WhenForAllAsyncIsCalled
     public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMemberTask()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        List<int> enumeration = [1, 2, 3];
         var invocations = new ConcurrentBag<int>();
 
         async Task Operation(int value)
@@ -56,15 +50,15 @@ public sealed class WhenForAllAsyncIsCalled
         await enumeration.ForAllAsync(Operation);
 
         // Assert
-        _ = enumeration.All(value => invocations.Contains(value)).Should().BeTrue();
-        _ = invocations.Should().HaveCount(enumeration.Length);
+        _ = enumeration.TrueForAll(value => invocations.Contains(value)).Should().BeTrue();
+        _ = invocations.Should().HaveCount(enumeration.Count);
     }
 
     [Fact]
     public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrownAsync()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         Func<int, Task>? operation = default;
 
         // Act

@@ -1,12 +1,5 @@
 ﻿namespace MooVC.Threading.CoordinatorTests;
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenApplyAsyncIsCalled
     : IDisposable
 {
@@ -109,12 +102,12 @@ public sealed class WhenApplyAsyncIsCalled
         // Arrange
         string expected = Guid.NewGuid().ToString();
         ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
-        var coordinator = new Coordinator<ITestCoordinatable>();
+        var subject = new Coordinator<ITestCoordinatable>();
 
         _ = context.GetKey().Returns(expected);
 
         // Act
-        ICoordinationContext<ITestCoordinatable> coordination = await coordinator
+        ICoordinationContext<ITestCoordinatable> coordination = await subject
             .ApplyAsync(context, CancellationToken.None);
 
         // Assert
@@ -129,10 +122,10 @@ public sealed class WhenApplyAsyncIsCalled
     {
         // Arrange
         object context = Substitute.For<object>();
-        var coordinator = new Coordinator<object>();
+        var subject = new Coordinator<object>();
 
         // Act
-        ICoordinationContext<object> coordination = await coordinator
+        ICoordinationContext<object> coordination = await subject
             .ApplyAsync(context, CancellationToken.None);
 
         using (coordination)
@@ -150,6 +143,6 @@ public sealed class WhenApplyAsyncIsCalled
             tasks.Add(operation());
         }
 
-        return tasks.ToArray();
+        return [.. tasks];
     }
 }

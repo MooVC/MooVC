@@ -1,17 +1,12 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenIndexOfIsCalled
 {
     [Fact]
     public void GivenAListWhenAPredicateThatYeildsNoMatchingEntryThenNegativeOneIsReturned()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
 
         // Act
         int actualIndex = enumeration.IndexOf(item => item == 4);
@@ -53,7 +48,7 @@ public sealed class WhenIndexOfIsCalled
     public void GivenAListWhenNoPredicateIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
         Func<int, bool>? predicate = default;
 
         // Act
@@ -94,7 +89,7 @@ public sealed class WhenIndexOfIsCalled
     public void GivenAListContainingNullsWhenAPredicateForNullIsProvidedThenTheIndexOfTheFirstNullIsReturned()
     {
         // Arrange
-        int?[] enumeration = new int?[] { 1, null, 3 };
+        int?[] enumeration = [1, null, 3];
 
         // Act
         int actualIndex = enumeration.IndexOf(item => item == null);

@@ -1,12 +1,5 @@
 ﻿namespace MooVC.Serialization.ClonerTests;
 
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenCloneAsyncIsCalled
 {
     [Fact]
@@ -16,7 +9,7 @@ public sealed class WhenCloneAsyncIsCalled
         WhenCloneAsyncIsCalled instance = this;
         ISerializer serializer = Substitute.For<ISerializer>();
         var cloner = new Cloner(serializer);
-        IEnumerable<byte> binary = new byte[] { 1, 2, 3 };
+        IEnumerable<byte> binary = [1, 2, 3];
 
         _ = serializer
             .SerializeAsync(instance, Arg.Any<CancellationToken>())

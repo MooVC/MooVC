@@ -1,10 +1,5 @@
 ﻿namespace MooVC.Threading.InitializerTests;
 
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenInitializeAsyncIsCalled
 {
     [Fact]

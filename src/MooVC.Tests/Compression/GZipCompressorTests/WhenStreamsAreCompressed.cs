@@ -3,10 +3,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
 using MooVC.IO;
-using Xunit;
 
 public sealed class WhenStreamsAreCompressed
 {
@@ -41,7 +38,7 @@ public sealed class WhenStreamsAreCompressed
     public async Task GivenAnEmptyStreamThenTheResultMatchesAsync()
     {
         // Arrange
-        byte[] expected = Array.Empty<byte>();
+        byte[] expected = [];
 
         var compressor = new GZipCompressor();
         using var stream = new MemoryStream(expected);

@@ -7,7 +7,7 @@
     <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
     <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
     <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
-    <NoWarn>CA1861</NoWarn>
+    <NoWarn>CA1859;CA1861</NoWarn>
     <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
     <TargetFrameworks Condition="'$(IsCodespace)' == 'true'">net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(IsCodespace)' != 'true'">net48;net6.0;net7.0;net8.0</TargetFrameworks>
@@ -29,5 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Bogus"/>
+    <Using Include="FluentAssertions"/>
+    <Using Include="NSubstitute"/>
+    <Using Include="Xunit"/>
   </ItemGroup>
 </Project>

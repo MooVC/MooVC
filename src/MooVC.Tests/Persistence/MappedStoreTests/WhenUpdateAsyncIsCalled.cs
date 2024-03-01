@@ -1,16 +1,10 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
-using System;
-using System.Threading;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenUpdateAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async void GivenAnItemThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenAnItemThenTheInnerStoreIsInvokedAsync()
     {
         // Arrange
         object expectedItem = new();

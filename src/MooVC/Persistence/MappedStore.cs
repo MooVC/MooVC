@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Persistence;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using MooVC.Linq;
 using static MooVC.Persistence.MappedStore_Resources;
@@ -35,9 +32,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// </exception>
     public MappedStore(Func<TOutterKey, TInnerKey> innerMapping, Func<T, TInnerKey, TOutterKey> outterMapping, IStore<T, TInnerKey> store)
     {
-        this.innerMapping = Guard.Against.Null(innerMapping, parameterName: nameof(innerMapping), message: InnerMappingRequired);
-        this.outterMapping = Guard.Against.Null(outterMapping, parameterName: nameof(outterMapping), message: OutterMappingRequired);
-        this.store = Guard.Against.Null(store, parameterName: nameof(store), message: StoreRequired);
+        this.innerMapping = Guard.Against.Null(innerMapping, message: InnerMappingRequired);
+        this.outterMapping = Guard.Against.Null(outterMapping, message: OutterMappingRequired);
+        this.store = Guard.Against.Null(store, message: StoreRequired);
     }
 
     /// <summary>
@@ -72,12 +69,12 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <summary>
     /// Asynchronously deletes an item from the store.
     /// </summary>
-    /// <param name="outterKey">The external key that identifies the item to delete.</param>
+    /// <param name="key">The external key that identifies the item to delete.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
-    public Task DeleteAsync(TOutterKey outterKey, CancellationToken cancellationToken)
+    public Task DeleteAsync(TOutterKey key, CancellationToken cancellationToken)
     {
-        TInnerKey innerKey = innerMapping(outterKey);
+        TInnerKey innerKey = innerMapping(key);
 
         return store.DeleteAsync(innerKey, cancellationToken);
     }
@@ -85,15 +82,15 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <summary>
     /// Asynchronously retrieves an item from the store.
     /// </summary>
-    /// <param name="outterKey">The external key that identifies the item to retrieve.</param>
+    /// <param name="key">The external key that identifies the item to retrieve.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>
     /// A <see cref="Task" /> that represents the asynchronous operation.
-    /// The task result contains the item with the specified <paramref name="outterKey" />, or null if no such item exists.
+    /// The task result contains the item with the specified <paramref name="key" />, or null if no such item exists.
     /// </returns>
-    public Task<T?> GetAsync(TOutterKey outterKey, CancellationToken cancellationToken)
+    public Task<T?> GetAsync(TOutterKey key, CancellationToken cancellationToken)
     {
-        TInnerKey innerKey = innerMapping(outterKey);
+        TInnerKey innerKey = innerMapping(key);
 
         return store.GetAsync(innerKey, cancellationToken);
     }

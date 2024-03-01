@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Serialization.SynchronousSerializerTests;
 
-using System;
 using System.IO;
 using MooVC.Compression;
 

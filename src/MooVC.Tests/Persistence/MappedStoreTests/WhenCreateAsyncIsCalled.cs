@@ -1,16 +1,10 @@
 ﻿namespace MooVC.Persistence.MappedStoreTests;
 
-using System;
-using System.Threading;
-using FluentAssertions;
-using NSubstitute;
-using Xunit;
-
 public sealed class WhenCreateAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async void GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturnedAsync()
+    public async Task GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturnedAsync()
     {
         bool wasInvoked = false;
 

@@ -20,8 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{51E8218E
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
-		build\libraries.props = build\libraries.props
-		build\tests.props = build\tests.props
+		build\Libraries.props = build\Libraries.props
+		build\Roslyn.props = build\Roslyn.props
+		build\Tests.props = build\Tests.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{7755FACA-C000-4C6F-8047-56E0112603FF}"
@@ -39,6 +40,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{722D
 		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Generators", "src\MooVC.Generators\MooVC.Generators.csproj", "{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Console", "src\MooVC.Console\MooVC.Console.csproj", "{52E978C7-0169-463A-958B-BCA66BF0F6EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +58,14 @@ Global
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E978C7-0169-463A-958B-BCA66BF0F6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E978C7-0169-463A-958B-BCA66BF0F6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E978C7-0169-463A-958B-BCA66BF0F6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E978C7-0169-463A-958B-BCA66BF0F6EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

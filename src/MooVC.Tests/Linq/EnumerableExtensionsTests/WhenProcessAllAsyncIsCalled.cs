@@ -1,13 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
-using static System.String;
-
 public sealed class WhenProcessAllAsyncIsCalled
 {
     [Fact]
@@ -18,7 +10,7 @@ public sealed class WhenProcessAllAsyncIsCalled
 
         static Task<IEnumerable<int>> Transform(int value)
         {
-            return Task.FromResult(new[] { value }.AsEnumerable());
+            return Task.FromResult(Enumerable.AsEnumerable(new[] { value }));
         }
 
         // Act
@@ -78,12 +70,12 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
-        IEnumerable<int> expected = new[] { 1, 4, 9 };
+        IEnumerable<int> source = [1, 2, 3];
+        IEnumerable<int> expected = [1, 4, 9];
 
         static Task<IEnumerable<int>> Transform(int value)
         {
-            return Task.FromResult(new[] { value * value }.AsEnumerable());
+            return Task.FromResult(Enumerable.AsEnumerable(new[] { value * value }));
         }
 
         // Act
@@ -97,7 +89,7 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
+        IEnumerable<int> source = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
         IEnumerable<int> expected = Enumerable.Range(0, 60);
 
         static Task<IEnumerable<int>> Transform(int value)
@@ -116,8 +108,8 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
-        IEnumerable<int> expected = new[] { 1, 4, 9 };
+        IEnumerable<int> source = [1, 2, 3];
+        IEnumerable<int> expected = [1, 4, 9];
 
         static Task<int> Transform(int value)
         {
@@ -155,7 +147,7 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenNoEnumerableResultTransformIsProvidedThenAnArgumentExceptionIsThrownAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<IEnumerable<int>>>? transform = default;
 
         // Act
@@ -170,7 +162,7 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenNoTransformIsProvidedThenAnArgumentExceptionIsThrownAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<int>>? transform = default;
 
         // Act
@@ -204,7 +196,7 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWhenATransformThatThrowsIsProvidedThenExceptionIsPropagatedAsync()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<int>> transform = _ => throw new InvalidOperationException();
 
         // Act
@@ -218,19 +210,19 @@ public sealed class WhenProcessAllAsyncIsCalled
     public async Task GivenASourceWithComplexObjectsWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
     {
         // Arrange
-        IEnumerable<ComplexObject> source = new[]
-        {
+        IEnumerable<ComplexObject> source =
+        [
             new ComplexObject { Id = 1, Value = "First" },
             new ComplexObject { Id = 2, Value = "Second" },
             new ComplexObject { Id = 3, Value = "Third" },
-        };
+        ];
 
-        IEnumerable<ComplexObject> expected = new[]
-        {
+        IEnumerable<ComplexObject> expected =
+        [
             new ComplexObject { Id = 1, Value = "FirstFirst" },
             new ComplexObject { Id = 2, Value = "SecondSecond" },
             new ComplexObject { Id = 3, Value = "ThirdThird" },
-        };
+        ];
 
         static Task<ComplexObject> Transform(ComplexObject value)
         {
@@ -248,6 +240,6 @@ public sealed class WhenProcessAllAsyncIsCalled
     {
         public int Id { get; set; }
 
-        public string Value { get; set; } = Empty;
+        public string Value { get; set; } = string.Empty;
     }
 }

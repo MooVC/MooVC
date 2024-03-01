@@ -1,42 +1,36 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToArrayOrEmptyIsCalled
 {
-    public static readonly IEnumerable<object[]> EnumerablePredicateOrderTestData = new[]
+    public static readonly TheoryData<int[], int[]> EnumerablePredicateOrderTestData = new()
     {
-        new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 3 } },
-        new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 3 } },
-        new object[] { new int[] { 1 }, new int[] { 1 } },
-        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+        { [3, 1, 2], [1, 3] },
+        { [3, 2, 1], [1, 3] },
+        { [1], [1] },
+        { [], [] },
     };
 
-    public static readonly IEnumerable<object[]> EnumerableOrderTestData = new[]
+    public static readonly TheoryData<int[], int[]> EnumerableOrderTestData = new()
     {
-        new object[] { new int[] { 3, 1, 2 }, new int[] { 1, 2, 3 } },
-        new object[] { new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 } },
-        new object[] { new int[] { 1 }, new int[] { 1 } },
-        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+        { [3, 1, 2], [1, 2, 3] },
+        { [3, 2, 1], [1, 2, 3] },
+        { [1], [1] },
+        { [], [] },
     };
 
-    public static readonly IEnumerable<object[]> EnumerableTestData = new[]
+    public static readonly TheoryData<int[]> EnumerableTestData = new()
     {
-        new object[] { new int[] { 1, 2 } },
-        new object[] { new int[] { 1 } },
-        new object[] { Array.Empty<int>() },
+        { [1, 2] },
+        { [1] },
+        { [] },
     };
 
-    public static readonly IEnumerable<object[]> EnumerablePredicateTestData = new[]
+    public static readonly TheoryData<int[], int[]> EnumerablePredicateTestData = new()
     {
-        new object[] { new int[] { 3, 1, 2 }, new int[] { 3, 1 } },
-        new object[] { new int[] { 1, 2, 3 }, new int[] { 1, 3 } },
-        new object[] { new int[] { 1 }, new int[] { 1 } },
-        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+        { [3, 1, 2], [3, 1] },
+        { [1, 2, 3], [1, 3] },
+        { [1], [1] },
+        { [], [] },
     };
 
     [Theory]
@@ -67,7 +61,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
     public void GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
-        IEnumerable<int> enumerable = new int[] { 1 };
+        IEnumerable<int> enumerable = [1];
         Func<int, int>? order = default;
 
         // Act
@@ -113,7 +107,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(Array.Empty<string>());
+        _ = result.Should().BeEquivalentTo();
     }
 
     [Fact]
@@ -126,14 +120,14 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        _ = result.Should().BeEquivalentTo(Array.Empty<string>());
+        _ = result.Should().BeEquivalentTo();
     }
 
     [Fact]
     public void GivenAnEnumerableWhenAPredicateReturnsFalseThenEmptyArrayIsReturned()
     {
         // Arrange
-        IEnumerable<int> enumerable = new int[] { 1, 2, 3 };
+        IEnumerable<int> enumerable = [1, 2, 3];
 
         // Act
         int[] result = enumerable.ToArrayOrEmpty(predicate: value => false);

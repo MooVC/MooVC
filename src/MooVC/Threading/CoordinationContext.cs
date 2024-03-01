@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Threading;
 
-using System;
-using System.Threading;
-
 /// <summary>
 /// Represents the context in which coordination has been applied.
 /// </summary>

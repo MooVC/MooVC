@@ -1,11 +1,8 @@
 ﻿#if NET6_0_OR_GREATER
 namespace MooVC.Compression.BrotliCompressorTests;
 
-using System;
 using System.ComponentModel;
 using System.IO.Compression;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenBrotliCompressorIsConstructed
 {

@@ -1,6 +1,5 @@
 ﻿namespace MooVC;
 
-using System;
 using Ardalis.GuardClauses;
 using MooVC.Linq;
 using static MooVC.ExceptionExtensions_Resources;
@@ -18,7 +17,7 @@ public static class ExceptionExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="handler" /> parameter is <see langword="null" />.</exception>
     public static void Explode(this Exception? exception, Action<Exception> handler)
     {
-        _ = Guard.Against.Null(handler, parameterName: nameof(handler), message: ExplodeHandlerRequired);
+        _ = Guard.Against.Null(handler, message: ExplodeHandlerRequired);
 
         exception.PerformExplode(handler);
     }

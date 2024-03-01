@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Hosting;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -39,8 +35,8 @@ public sealed class ThreadSafeHostedService
     /// </param>
     public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
     {
-        this.logger = Guard.Against.Null(logger, parameterName: nameof(logger), message: LoggerRequired);
-        this.services = Guard.Against.Null(services, parameterName: nameof(services), message: ServicesRequired);
+        this.logger = Guard.Against.Null(logger, message: LoggerRequired);
+        this.services = Guard.Against.Null(services, message: ServicesRequired);
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
 ﻿namespace MooVC;
+
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
 /// </summary>

@@ -1,7 +1,5 @@
 ﻿namespace MooVC.IO;
 
-using System.Collections.Generic;
-using System.IO;
 using Ardalis.GuardClauses;
 using static MooVC.IO.StreamExtensions_Resources;
 
@@ -17,7 +15,7 @@ public static partial class StreamExtensions
     /// <returns>An enumerable sequence of bytes representing the data in the source stream.</returns>
     public static IEnumerable<byte> GetBytes(this Stream source)
     {
-        _ = Guard.Against.Null(source, parameterName: nameof(source), message: GetBytesSourceRequired);
+        _ = Guard.Against.Null(source, message: GetBytesSourceRequired);
 
         using var target = new MemoryStream();
 

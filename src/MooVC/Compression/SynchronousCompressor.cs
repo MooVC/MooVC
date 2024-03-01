@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Compression;
 
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-
 /// <summary>
 /// Abstract base class for implementing a synchronous data compressor.
 /// </summary>

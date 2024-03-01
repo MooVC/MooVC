@@ -1,17 +1,12 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenIsNullOrEmptyIsCalled
 {
     [Fact]
     public void GivenAnEmptySourceThenAPositiveResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = Array.Empty<int>();
+        IEnumerable<int> source = [];
 
         // Act
         bool isEmpty = source.IsNullOrEmpty();

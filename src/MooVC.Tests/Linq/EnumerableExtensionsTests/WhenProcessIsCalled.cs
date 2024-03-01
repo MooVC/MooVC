@@ -1,11 +1,5 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenProcessIsCalled
 {
     [Fact]
@@ -35,7 +29,7 @@ public sealed class WhenProcessIsCalled
 
         static IEnumerable<int> Transform(int value)
         {
-            return new[] { value };
+            return [value];
         }
 
         // Act
@@ -80,12 +74,12 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenAnEnumerableResultTransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
-        IEnumerable<int> expected = new[] { 1, 4, 9 };
+        IEnumerable<int> source = [1, 2, 3];
+        IEnumerable<int> expected = [1, 4, 9];
 
         static IEnumerable<int> Transform(int value)
         {
-            return new[] { value * value };
+            return [value * value];
         }
 
         // Act
@@ -99,8 +93,8 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenATransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
-        IEnumerable<int> expected = new[] { 1, 4, 9 };
+        IEnumerable<int> source = [1, 2, 3];
+        IEnumerable<int> expected = [1, 4, 9];
 
         static int Transform(int value)
         {
@@ -138,7 +132,7 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenNoEnumerableResultTransformIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, IEnumerable<int>>? transform = default;
 
         // Act
@@ -153,7 +147,7 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenNoTransformIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
         Func<int, int>? transform = default;
 
         // Act
@@ -168,7 +162,7 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
+        IEnumerable<int> source = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
         IEnumerable<int> expected = Enumerable.Range(0, 60);
 
         static IEnumerable<int> Transform(int value)
@@ -187,7 +181,7 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenATransformIsProvidedThatReturnsANullResponseThenResultsReturnedAreEmpty()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
 
         static object Transform(int value)
         {
@@ -207,7 +201,7 @@ public sealed class WhenProcessIsCalled
     public void GivenASourceWhenATransformIsProvidedThatChangesTypeThenResultsAreOfChangedType()
     {
         // Arrange
-        IEnumerable<int> source = new[] { 1, 2, 3 };
+        IEnumerable<int> source = [1, 2, 3];
 
         static string Transform(int value)
         {
@@ -218,6 +212,6 @@ public sealed class WhenProcessIsCalled
         IEnumerable<string> results = source.Process(Transform);
 
         // Assert
-        _ = results.All(result => result.GetType() == typeof(string)).Should().BeTrue();
+        _ = results.All(result => result is not null).Should().BeTrue();
     }
 }

@@ -1,14 +1,10 @@
 namespace MooVC.Dynamic.ExpandoObjectExtensionsTests;
 
-using System;
-using System.Collections.Generic;
 using System.Dynamic;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenCloneIsCalled
 {
-    public static IEnumerable<object[]> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
+    public static TheoryData<ExpandoObject> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
     {
         dynamic first = new ExpandoObject();
         dynamic second = new ExpandoObject();
@@ -23,9 +19,7 @@ public sealed class WhenCloneIsCalled
         third.Alpha = 1.0;
         third.Beta = new object();
 
-        yield return new object[] { first };
-        yield return new object[] { second };
-        yield return new object[] { third };
+        return [first, second, third];
     }
 
     [Theory]

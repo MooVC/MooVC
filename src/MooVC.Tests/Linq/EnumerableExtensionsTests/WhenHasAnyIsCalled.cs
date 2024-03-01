@@ -1,17 +1,12 @@
 ﻿namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenHasAnyIsCalled
 {
     [Fact]
     public void GivenAnEmptySourceThenANegativeResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = Enumerable.Empty<int>();
+        IEnumerable<int> source = [];
 
         // Act
         bool hasAny = source.HasAny();
@@ -24,7 +19,7 @@ public sealed class WhenHasAnyIsCalled
     public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = Enumerable.Empty<int>();
+        IEnumerable<int> source = [];
 
         // Act
         bool hasAny = source.HasAny(predicate => true);

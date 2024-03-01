@@ -1,19 +1,13 @@
 ﻿namespace MooVC.DateTimeOffsetExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using MooVC;
-using Xunit;
-
 public sealed class WhenMaxIsCalled
 {
-    public static readonly IEnumerable<object[]> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData = new[]
+    public static readonly TheoryData<DateTime, DateTime> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData = new()
     {
-        new object[] { new DateTime(2019, 1, 1), new DateTime(2019, 12, 31) },
-        new object[] { new DateTime(2019, 1, 31), new DateTime(2019, 12, 1) },
-        new object[] { new DateTime(2018, 12, 1), new DateTime(2019, 1, 31) },
-        new object[] { new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) },
+        { new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
     };
 
     [Theory]
@@ -50,7 +44,7 @@ public sealed class WhenMaxIsCalled
     public void GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange
-        var sameDate = new DateTimeOffset(new DateTime(2019, 1, 1));
+        var sameDate = new DateTimeOffset(new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc));
 
         // Act
         DateTimeOffset selected = sameDate.Max(sameDate);

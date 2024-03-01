@@ -1,12 +1,7 @@
 ﻿namespace MooVC.Serialization.SynchronousSerializerTests;
 
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
 using MooVC.Compression;
-using NSubstitute;
-using Xunit;
 
 public sealed class WhenDeserializeAsyncIsCalled
 {
@@ -37,7 +32,7 @@ public sealed class WhenDeserializeAsyncIsCalled
     public async Task GivenDataThenDataDeserializationIsRequestedAsync()
     {
         // Arrange
-        byte[] expected = { 1, 2, 3 };
+        byte[] expected = [1, 2, 3];
         string instance = "Something something dark side...";
         bool wasInvoked = false;
 
@@ -61,7 +56,7 @@ public sealed class WhenDeserializeAsyncIsCalled
     public async Task GivenAStreamThenStreamDeserializationIsRequestedAsync()
     {
         // Arrange
-        byte[] expected = { 1, 2, 3 };
+        byte[] expected = [1, 2, 3];
         string instance = "Something something dark side...";
         bool wasInvoked = false;
 

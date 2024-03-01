@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Threading;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using static MooVC.Threading.Initializer_Resources;
 
@@ -24,7 +21,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerRequired);
+        this.initializer = Guard.Against.Null(initializer, message: InitializerRequired);
     }
 
     /// <summary>

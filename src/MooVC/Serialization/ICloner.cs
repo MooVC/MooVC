@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Serialization;
 
-using System.Threading;
-using System.Threading.Tasks;
-
 /// <summary>
 /// Defines a contract for cloning objects.
 /// </summary>

@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
-    <NoWarn>CS0809</NoWarn>
-    <UserSecretsId>fcf2c8d5-271a-432b-990b-f2e61b4aaa8d</UserSecretsId>
+    <NoWarn>CS0809;S3236</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
@@ -11,20 +10,41 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MooVC.Generators\MooVC.Generators.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(OutputPath)..\..\..\MooVC.Generators\bin\$(Configuration)\**\*.dll"
+        Pack="true"
+        PackagePath="analyzers\dotnet\cs"
+        Visible="false" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="ArrayExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ArrayExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Collections\Generic\CollectionExtensions.Resources.Designer.cs">
+    <Compile Update="Collections\Generic\ICollectionExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CollectionExtensions.Resources.resx</DependentUpon>
+      <DependentUpon>ICollectionExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Compression\StreamCompressor.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StreamCompressor.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Data\IFeatureExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IFeatureExtensions.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Data\IFeaturesExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IFeaturesExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="ExceptionExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -41,10 +61,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StreamExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Linq\EnumerableExtensions.Resources.Designer.cs">
+    <Compile Update="Linq\IEnumerableExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EnumerableExtensions.Resources.resx</DependentUpon>
+      <DependentUpon>IEnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Linq\PagedResult.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -87,13 +107,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ArrayExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Collections\Generic\CollectionExtensions.Resources.resx">
+    <EmbeddedResource Update="Collections\Generic\ICollectionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CollectionExtensions.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ICollectionExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Compression\StreamCompressor.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StreamCompressor.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Data\IFeatureExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IFeatureExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Data\IFeaturesExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IFeaturesExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ExceptionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -107,9 +135,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StreamExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Linq\EnumerableExtensions.Resources.resx">
+    <EmbeddedResource Update="Linq\IEnumerableExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EnumerableExtensions.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>IEnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Linq\PagedResult.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

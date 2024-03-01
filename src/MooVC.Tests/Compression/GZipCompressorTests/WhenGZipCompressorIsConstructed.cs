@@ -1,10 +1,7 @@
 ﻿namespace MooVC.Compression.GZipCompressorTests;
 
-using System;
 using System.ComponentModel;
 using System.IO.Compression;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenGZipCompressorIsConstructed
 {

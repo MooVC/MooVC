@@ -1,11 +1,7 @@
 ﻿namespace MooVC.Compression.GZipCompressorTests;
 
-using System.Collections.Generic;
 using System.IO.Compression;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenBytesAreCompressed
 {
@@ -36,7 +32,7 @@ public sealed class WhenBytesAreCompressed
     public async Task GivenNoBytesThenTheResultMatchesAsync()
     {
         // Arrange
-        byte[] expected = Array.Empty<byte>();
+        byte[] expected = [];
 
         var compressor = new GZipCompressor(level: CompressionLevel.Fastest);
 

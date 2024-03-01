@@ -1,10 +1,5 @@
 namespace MooVC.Linq.EnumerableExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenWhereIfIsCalled
 {
     [Fact]
@@ -84,7 +79,7 @@ public sealed class WhenWhereIfIsCalled
     public void GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3, 4, 5 };
+        int[] enumeration = [1, 2, 3, 4, 5];
 
         static bool Predicate(int value)
         {
@@ -102,7 +97,7 @@ public sealed class WhenWhereIfIsCalled
     public void GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
     {
         // Arrange
-        int[] enumeration = new[] { 1, 2, 3, 4, 5 };
+        int[] enumeration = [1, 2, 3, 4, 5];
 
         static bool Predicate(int value)
         {
@@ -119,7 +114,7 @@ public sealed class WhenWhereIfIsCalled
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)
     {
         bool wasInvoked = false;
-        int[] enumeration = new[] { 1, 2, 3 };
+        int[] enumeration = [1, 2, 3];
 
         bool Predicate(int value)
         {

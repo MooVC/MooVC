@@ -1,9 +1,6 @@
 ﻿namespace MooVC.Compression;
 
-using System.IO;
 using System.IO.Compression;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using static MooVC.Compression.StreamCompressor_Resources;
 
@@ -28,8 +25,8 @@ public abstract class StreamCompressor
     /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
     protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: BufferSizeRequired);
-        this.level = Guard.Against.EnumOutOfRange(level, parameterName: nameof(level), message: LevelRequired);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
+        this.level = Guard.Against.EnumOutOfRange(level, message: LevelRequired);
     }
 
     /// <summary>
