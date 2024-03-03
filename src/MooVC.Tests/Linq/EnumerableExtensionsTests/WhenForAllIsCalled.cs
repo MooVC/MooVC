@@ -88,10 +88,11 @@ public sealed class WhenForAllIsCalled
     public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
+        Action<int>? action = default;
         IEnumerable<int>? enumeration = default;
 
         // Act
-        Action act = () => enumeration.ForAll(default!);
+        Action act = () => enumeration.ForAll(action!);
 
         // Assert
         _ = act.Should().NotThrow<ArgumentNullException>();

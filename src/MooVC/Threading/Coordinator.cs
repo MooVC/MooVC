@@ -40,7 +40,7 @@ public sealed class Coordinator<T>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is metadata relating to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
-    public async Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken cancellationToken, TimeSpan? timeout = default)
+    public async Task<ICoordinationContext<T>> Apply(T context, CancellationToken cancellationToken, TimeSpan? timeout = default)
     {
         if (isDisposed)
         {

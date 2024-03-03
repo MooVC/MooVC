@@ -3,14 +3,18 @@
 using System;
 
 /// <summary>
-/// Contains the definition of the <see cref="Feature"/> type, which is used to capture information specific to the class
+/// Contains the definition of the <see cref="Subject"/> type, which is used to capture information specific to the class
 /// that implements the specific feature.
 /// </summary>
-public partial class FeatureGenerator
+public partial class AttributeGenerator
 {
-    private sealed class Feature
-        : IEquatable<Feature>
+    public sealed class Subject
+        : IEquatable<Subject>
     {
+        internal Subject()
+        {
+        }
+
         public Attribute Attribute { get; set; } = new Attribute();
 
         public bool HasProperty { get; set; }
@@ -21,24 +25,24 @@ public partial class FeatureGenerator
 
         public string Type { get; set; } = string.Empty;
 
-        public static bool operator ==(Feature? left, Feature? right)
+        public static bool operator ==(Subject? left, Subject? right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Feature? left, Feature? right)
+        public static bool operator !=(Subject? left, Subject? right)
         {
             return !(left == right);
         }
 
-        public bool Equals(Feature? other)
+        public bool Equals(Subject? other)
         {
             return Equals(this, other);
         }
 
         public override bool Equals(object? obj)
         {
-            return Equals(obj as Feature);
+            return Equals(obj as Subject);
         }
 
         public override int GetHashCode()
@@ -57,7 +61,7 @@ public partial class FeatureGenerator
             }
         }
 
-        private static bool Equals(Feature? left, Feature? right)
+        private static bool Equals(Subject? left, Subject? right)
         {
             if (left is null || right is null)
             {

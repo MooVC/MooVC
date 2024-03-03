@@ -15,7 +15,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAStartedHostThenTheServiceStopsAsync()
+    public async Task GivenAStartedHostThenTheServiceStops()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -29,7 +29,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAStoppedHostThenTheServiceIsNotStoppedAsync()
+    public async Task GivenAStoppedHostThenTheServiceIsNotStopped()
     {
         // Act
         await host.StopAsync(CancellationToken.None);
@@ -39,7 +39,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenARestartThenTheServiceIsStoppedTheSecondTimeAsync()
+    public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);

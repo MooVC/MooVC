@@ -6,14 +6,14 @@ using MooVC.Compression;
 public sealed class WhenSerializeAsyncIsCalled
 {
     [Fact]
-    public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
+    public async Task GivenACompressorThenCompressAsyncIsInvoked()
     {
         // Arrange
         string instance = "Something something dark side...";
         ICompressor compressor = Substitute.For<ICompressor>();
 
         _ = compressor
-            .CompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
+            .Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
             .Returns(info => info.Arg<Stream>());
 
         var serializer = new TestableSynchronousSerializer(
@@ -21,14 +21,14 @@ public sealed class WhenSerializeAsyncIsCalled
             onSerialize: (_, _) => { });
 
         // Act
-        _ = await serializer.SerializeAsync(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        _ = await compressor.Received().CompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
+        _ = await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task GivenAnInstanceThenDataSerializationIsRequestedAsync()
+    public async Task GivenAnInstanceThenDataSerializationIsRequested()
     {
         // Arrange
         using var stream = new MemoryStream();
@@ -46,14 +46,14 @@ public sealed class WhenSerializeAsyncIsCalled
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        _ = await serializer.SerializeAsync(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenAStreamThenStreamSerializationIsRequestedAsync()
+    public async Task GivenAStreamThenStreamSerializationIsRequested()
     {
         // Arrange
         using var stream = new MemoryStream();
@@ -71,14 +71,14 @@ public sealed class WhenSerializeAsyncIsCalled
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        await serializer.SerializeAsync(instance, stream, CancellationToken.None);
+        await serializer.Serialize(instance, stream, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenNullInstanceThenDataSerializationIsRequestedAsync()
+    public async Task GivenNullInstanceThenDataSerializationIsRequested()
     {
         // Arrange
         using var stream = new MemoryStream();
@@ -96,14 +96,14 @@ public sealed class WhenSerializeAsyncIsCalled
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        _ = await serializer.SerializeAsync(instance!, CancellationToken.None);
+        _ = await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenNullStreamThenThrowsArgumentNullExceptionAsync()
+    public async Task GivenNullStreamThenThrowsArgumentNullException()
     {
         // Arrange
         string instance = "Something something dark side...";
@@ -111,7 +111,7 @@ public sealed class WhenSerializeAsyncIsCalled
         Stream? target = default;
 
         // Act
-        Func<Task> act = async () => await serializer.SerializeAsync(instance, target!, CancellationToken.None);
+        Func<Task> act = async () => await serializer.Serialize(instance, target!, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()

@@ -3,7 +3,7 @@
 public sealed class WhenCreateAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnItemThenTheExpectedKeyIsReturnedAsync()
+    public async Task GivenAnItemThenTheExpectedKeyIsReturned()
     {
         // Arrange
         const string ExpectedItem = "Something something dark side...";
@@ -17,20 +17,20 @@ public sealed class WhenCreateAsyncIsCalled
         });
 
         // Act
-        int actualKey = await store.CreateAsync(ExpectedItem, CancellationToken.None);
+        int actualKey = await store.Create(ExpectedItem, CancellationToken.None);
 
         // Assert
         _ = actualKey.Should().Be(ExpectedKey);
     }
 
     [Fact]
-    public async Task GivenAnExceptionThenTheExceptionIsThrownAsync()
+    public async Task GivenAnExceptionThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.CreateAsync("Irrelevant Test Data", CancellationToken.None);
+        Func<Task> act = async () => await store.Create("Irrelevant Test Data", CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();

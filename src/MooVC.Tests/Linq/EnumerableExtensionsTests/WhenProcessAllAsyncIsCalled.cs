@@ -3,7 +3,7 @@
 public sealed class WhenProcessAllAsyncIsCalled
 {
     [Fact]
-    public async Task GivenANullSourceWhenAnEnumerableResultTransformIsProvidedThenAnEmptySetOfResultsIsReturnedAsync()
+    public async Task GivenANullSourceWhenAnEnumerableResultTransformIsProvidedThenAnEmptySetOfResultsIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -14,14 +14,14 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().BeEmpty();
     }
 
     [Fact]
-    public async Task GivenANullSourceWhenATransformIsProvidedThenAnEmptySetOfResultsIsReturnedAsync()
+    public async Task GivenANullSourceWhenATransformIsProvidedThenAnEmptySetOfResultsIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -32,42 +32,42 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().BeEmpty();
     }
 
     [Fact]
-    public async Task GivenANullSourceWhenNoEnumerableResultTransformIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
+    public async Task GivenANullSourceWhenNoEnumerableResultTransformIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int>? source = default;
         Func<int, Task<IEnumerable<int>>>? transform = default;
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(transform!);
+        IEnumerable<int> results = await source.ProcessAll(transform!);
 
         // Assert
         _ = results.Should().BeEmpty();
     }
 
     [Fact]
-    public async Task GivenANullSourceWhenNoTransformIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
+    public async Task GivenANullSourceWhenNoTransformIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int>? source = default;
         Func<int, Task<int>>? transform = default;
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(transform!);
+        IEnumerable<int> results = await source.ProcessAll(transform!);
 
         // Assert
         _ = results.Should().BeEmpty();
     }
 
     [Fact]
-    public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
+    public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
@@ -79,14 +79,14 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
+    public async Task GivenASourceWhenAnEnumerableResultTransformIsProvidedThenTheSetOfResultsIsOrderedAsReturned()
     {
         // Arrange
         IEnumerable<int> source = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -98,14 +98,14 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> actual = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> actual = await source.ProcessAll(Transform);
 
         // Assert
         _ = actual.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenASourceWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
+    public async Task GivenASourceWhenATransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
@@ -117,14 +117,14 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenASourceWhenATransformIsProvidedThenTheSetOfResultsIsOrderedAsReturnedAsync()
+    public async Task GivenASourceWhenATransformIsProvidedThenTheSetOfResultsIsOrderedAsReturned()
     {
         // Arrange
         const int Maximum = 60;
@@ -137,21 +137,21 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> actual = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> actual = await source.ProcessAll(Transform);
 
         // Assert
         _ = actual.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenASourceWhenNoEnumerableResultTransformIsProvidedThenAnArgumentExceptionIsThrownAsync()
+    public async Task GivenASourceWhenNoEnumerableResultTransformIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<IEnumerable<int>>>? transform = default;
 
         // Act
-        Func<Task> act = () => source.ProcessAllAsync(transform!);
+        Func<Task> act = () => source.ProcessAll(transform!);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()
@@ -159,14 +159,14 @@ public sealed class WhenProcessAllAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenASourceWhenNoTransformIsProvidedThenAnArgumentExceptionIsThrownAsync()
+    public async Task GivenASourceWhenNoTransformIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<int>>? transform = default;
 
         // Act
-        Func<Task> act = () => source.ProcessAllAsync(transform!);
+        Func<Task> act = () => source.ProcessAll(transform!);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()
@@ -174,7 +174,7 @@ public sealed class WhenProcessAllAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenALargeSourceWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
+    public async Task GivenALargeSourceWhenATransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
         IEnumerable<int> source = Enumerable.Range(1, 10000);
@@ -186,28 +186,28 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<int> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<int> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenASourceWhenATransformThatThrowsIsProvidedThenExceptionIsPropagatedAsync()
+    public async Task GivenASourceWhenATransformThatThrowsIsProvidedThenExceptionIsPropagated()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
         Func<int, Task<int>> transform = _ => throw new InvalidOperationException();
 
         // Act
-        Func<Task> act = () => source.ProcessAllAsync(transform);
+        Func<Task> act = () => source.ProcessAll(transform);
 
         // Assert
         _ = await act.Should().ThrowAsync<InvalidOperationException>();
     }
 
     [Fact]
-    public async Task GivenASourceWithComplexObjectsWhenATransformIsProvidedThenResultsForThatSourceAreReturnedAsync()
+    public async Task GivenASourceWithComplexObjectsWhenATransformIsProvidedThenResultsForThatSourceAreReturned()
     {
         // Arrange
         IEnumerable<ComplexObject> source =
@@ -230,7 +230,7 @@ public sealed class WhenProcessAllAsyncIsCalled
         }
 
         // Act
-        IEnumerable<ComplexObject> results = await source.ProcessAllAsync(Transform);
+        IEnumerable<ComplexObject> results = await source.ProcessAll(Transform);
 
         // Assert
         _ = results.Should().BeEquivalentTo(expected);

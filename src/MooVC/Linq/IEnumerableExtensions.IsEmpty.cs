@@ -17,7 +17,6 @@ public static partial class IEnumerableExtensions
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
     /// <returns>True if the enumerable sequence has no elements, or false if it is populated with at least one element.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="source" /> is null.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsEmpty<T>(this IEnumerable<T> source)
     {
         _ = Guard.Against.Null(source, message: IsEmptySourceRequired);

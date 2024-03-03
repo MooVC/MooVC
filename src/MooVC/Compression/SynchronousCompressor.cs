@@ -15,7 +15,7 @@ public abstract class SynchronousCompressor
     /// A <see cref="Task{TResult}" /> that represents the asynchronous compression operation.
     /// The task result contains the compressed data as a stream.
     /// </returns>
-    public override Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken)
+    public override Task<Stream> Compress(Stream source, CancellationToken cancellationToken)
     {
         return Task.FromResult(PerformCompress(source));
     }
@@ -29,7 +29,7 @@ public abstract class SynchronousCompressor
     /// A <see cref="Task{TResult}" /> that represents the asynchronous decompression operation.
     /// The task result contains the decompressed data as a stream.
     /// </returns>
-    public override Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken)
+    public override Task<Stream> Decompress(Stream source, CancellationToken cancellationToken)
     {
         return Task.FromResult(PerformDecompress(source));
     }

@@ -25,7 +25,7 @@ public sealed class WhenForAllAsyncIsCalled
         }
 
         // Act
-        Func<Task> act = async () => await enumeration.ForAllAsync(Operation);
+        Func<Task> act = async () => await enumeration.ForAll(Operation);
 
         // Assert
         ExceptionAssertions<AggregateException> exception = await act.Should().ThrowAsync<AggregateException>();
@@ -47,7 +47,7 @@ public sealed class WhenForAllAsyncIsCalled
         }
 
         // Act
-        await enumeration.ForAllAsync(Operation);
+        await enumeration.ForAll(Operation);
 
         // Assert
         _ = enumeration.TrueForAll(value => invocations.Contains(value)).Should().BeTrue();
@@ -55,14 +55,14 @@ public sealed class WhenForAllAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrownAsync()
+    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
         Func<int, Task>? operation = default;
 
         // Act
-        Func<Task> act = async () => await enumeration.ForAllAsync(operation!);
+        Func<Task> act = async () => await enumeration.ForAll(operation!);
 
         // Assert
         ExceptionAssertions<ArgumentNullException> exception = await act.Should().ThrowAsync<ArgumentNullException>();
@@ -70,7 +70,7 @@ public sealed class WhenForAllAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnoredAsync()
+    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
@@ -84,20 +84,20 @@ public sealed class WhenForAllAsyncIsCalled
         }
 
         // Act
-        await enumeration.ForAllAsync(Operation);
+        await enumeration.ForAll(Operation);
 
         // Assert
         _ = wasInvoked.Should().BeFalse();
     }
 
     [Fact]
-    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrownAsync()
+    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
 
         // Act
-        Func<Task> act = async () => await enumeration.ForAllAsync(default!);
+        Func<Task> act = async () => await enumeration.ForAll(default!);
 
         // Assert
         _ = await act.Should().NotThrowAsync<ArgumentNullException>();

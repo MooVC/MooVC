@@ -3,6 +3,7 @@
 using MooVC.Data;
 
 public sealed partial record Person
-    : IFeature<Name>
+    : IFeature<Name>,
+      IFeatures<Name>
 {
 }

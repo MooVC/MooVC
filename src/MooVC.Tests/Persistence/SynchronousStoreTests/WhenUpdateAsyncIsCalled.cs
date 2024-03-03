@@ -8,7 +8,7 @@ using Xunit;
 public sealed class WhenUpdateAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnItemThenTheUpdateIsInvokedWithTheKeyAsync()
+    public async Task GivenAnItemThenTheUpdateIsInvokedWithTheKey()
     {
         // Arrange
         const string ExpectedItem = "Something something dark side...";
@@ -21,20 +21,20 @@ public sealed class WhenUpdateAsyncIsCalled
         });
 
         // Act
-        await store.UpdateAsync(ExpectedItem, CancellationToken.None);
+        await store.Update(ExpectedItem, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenAnItemWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenAnItemWhenAnExceptionOccursThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.UpdateAsync("Something Irrelevant", CancellationToken.None);
+        Func<Task> act = async () => await store.Update("Something Irrelevant", CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();

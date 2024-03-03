@@ -5,7 +5,7 @@ using MooVC.Linq;
 public sealed class WhenGetAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAKeyThenTheExpectedItemIsReturnedAsync()
+    public async Task GivenAKeyThenTheExpectedItemIsReturned()
     {
         // Arrange
         const string ExpectedItem = "Something something dark side...";
@@ -19,14 +19,14 @@ public sealed class WhenGetAsyncIsCalled
         });
 
         // Act
-        string? actualItem = await store.GetAsync(ExpectedKey, CancellationToken.None);
+        string? actualItem = await store.Get(ExpectedKey, CancellationToken.None);
 
         // Assert
         _ = actualItem.Should().Be(ExpectedItem);
     }
 
     [Fact]
-    public async Task GivenPagingThenTheExpectedItemsAreReturnedAsync()
+    public async Task GivenPagingThenTheExpectedItemsAreReturned()
     {
         // Arrange
         var expectedPaging = new Paging();
@@ -40,33 +40,33 @@ public sealed class WhenGetAsyncIsCalled
         });
 
         // Act
-        PagedResult<string> actual = await store.GetAsync(paging: expectedPaging);
+        PagedResult<string> actual = await store.Get(paging: expectedPaging);
 
         // Assert
         _ = actual.Should().BeEquivalentTo(expectedResults);
     }
 
     [Fact]
-    public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.GetAsync(3);
+        Func<Task> act = async () => await store.Get(3);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();
     }
 
     [Fact]
-    public async Task GivenPagingWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenPagingWhenAnExceptionOccursThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.GetAsync(paging: Paging.Default);
+        Func<Task> act = async () => await store.Get(paging: Paging.Default);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();

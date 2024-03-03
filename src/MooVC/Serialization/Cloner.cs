@@ -31,17 +31,17 @@ public sealed class Cloner
     /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    public async Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
+    public async Task<T> Clone<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
         _ = Guard.Against.Null(original,  message: CloneAsyncOriginalRequired);
 
         IEnumerable<byte> data = await serializer
-            .SerializeAsync(original, cancellationToken)
+            .Serialize(original, cancellationToken)
             .ConfigureAwait(false);
 
         return await serializer
-            .DeserializeAsync<T>(data, cancellationToken)
+            .Deserialize<T>(data, cancellationToken)
             .ConfigureAwait(false);
     }
 }

@@ -61,7 +61,16 @@ namespace MooVC.Data {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Attributes of type &apos;{0}&apos; that are to be applied to Subject &apos;{1}&apos; must be provided..
+        ///   Looks up a localized string similar to The Attribute of type &apos;{0}&apos; to be included within Subject &apos;{1}&apos; must be provided..
+        /// </summary>
+        internal static string IncludesAttributeRequired {
+            get {
+                return ResourceManager.GetString("IncludesAttributeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Attributes of type &apos;{0}&apos; that are to be included within Subject &apos;{1}&apos; must be provided..
         /// </summary>
         internal static string IncludesAttributesRequired {
             get {

@@ -6,11 +6,15 @@ using System;
 /// Contains the definition of the <see cref="Attribute"/> type, which is used to capture information specific to the attribute
 /// that forms the subject of the feature.
 /// </summary>
-public partial class FeatureGenerator
+public partial class AttributeGenerator
 {
-    private sealed class Attribute
+    public sealed class Attribute
         : IEquatable<Attribute>
     {
+        internal Attribute()
+        {
+        }
+
         public string Name { get; set; } = string.Empty;
 
         public string Namespace { get; set; } = string.Empty;

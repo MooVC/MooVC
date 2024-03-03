@@ -6,13 +6,13 @@ using MooVC.Compression;
 public sealed class WhenDeserializeAsyncIsCalled
 {
     [Fact]
-    public async Task GivenACompressorThenCompressAsyncIsInvokedAsync()
+    public async Task GivenACompressorThenCompressAsyncIsInvoked()
     {
         // Arrange
         ICompressor compressor = Substitute.For<ICompressor>();
 
         _ = compressor
-            .DecompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
+            .Decompress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
             .Returns(info => info.Arg<Stream>());
 
         var serializer = new TestableSynchronousSerializer(
@@ -22,14 +22,14 @@ public sealed class WhenDeserializeAsyncIsCalled
         using var source = new MemoryStream();
 
         // Act
-        _ = await serializer.DeserializeAsync<string>(source, CancellationToken.None);
+        _ = await serializer.Deserialize<string>(source, CancellationToken.None);
 
         // Assert
-        _ = await compressor.Received(1).DecompressAsync(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
+        _ = await compressor.Received(1).Decompress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task GivenDataThenDataDeserializationIsRequestedAsync()
+    public async Task GivenDataThenDataDeserializationIsRequested()
     {
         // Arrange
         byte[] expected = [1, 2, 3];
@@ -45,7 +45,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
 
         // Act
-        string deserialized = await serializer.DeserializeAsync<string>(expected, CancellationToken.None);
+        string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
@@ -53,7 +53,7 @@ public sealed class WhenDeserializeAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAStreamThenStreamDeserializationIsRequestedAsync()
+    public async Task GivenAStreamThenStreamDeserializationIsRequested()
     {
         // Arrange
         byte[] expected = [1, 2, 3];
@@ -70,7 +70,7 @@ public sealed class WhenDeserializeAsyncIsCalled
         using var stream = new MemoryStream(expected);
 
         // Act
-        string deserialized = await serializer.DeserializeAsync<string>(stream, CancellationToken.None);
+        string deserialized = await serializer.Deserialize<string>(stream, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();

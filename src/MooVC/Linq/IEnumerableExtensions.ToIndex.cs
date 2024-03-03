@@ -19,7 +19,6 @@ public static partial class IEnumerableExtensions
     /// <param name="source">The source enumerable.</param>
     /// <param name="selector">A function that returns the value for each key in the dictionary.</param>
     /// <returns>A dictionary that contains the keys and values returned by the selector function.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IDictionary<TSubject, TValue> ToIndex<TSubject, TValue>(this IEnumerable<TSubject>? source, Func<TSubject, TValue> selector)
         where TSubject : notnull
     {
@@ -36,7 +35,6 @@ public static partial class IEnumerableExtensions
     /// <param name="selector">A function that maps each element of the input sequence to a value.</param>
     /// <param name="transform">A function that maps the result of the selector function to a value of the resulting dictionary.</param>
     /// <returns>A dictionary containing the results of applying the selector and transform functions to the input sequence.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IDictionary<TSubject, TTransform> ToIndex<TSubject, TTransform, TValue>(
         this IEnumerable<TSubject>? source,
         Func<TSubject, TValue> selector,

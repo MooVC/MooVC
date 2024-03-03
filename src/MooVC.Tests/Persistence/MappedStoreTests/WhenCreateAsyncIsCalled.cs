@@ -4,7 +4,7 @@ public sealed class WhenCreateAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async Task GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturnedAsync()
+    public async Task GivenAnItemThenTheOutterMappingAndInnerStoreAreInvokedAndTheResultFromTheStoreIsReturned()
     {
         bool wasInvoked = false;
 
@@ -22,18 +22,18 @@ public sealed class WhenCreateAsyncIsCalled
         object item = new();
 
         _ = Store
-            .CreateAsync(item, Arg.Any<CancellationToken>())
+            .Create(item, Arg.Any<CancellationToken>())
             .Returns(expectedInnerKey);
 
         var store = new MappedStore<object, Guid, string>(InnerMapping, LocalOutterMapping, Store);
 
         // Act
-        Guid actualOutterKey = await store.CreateAsync(item, CancellationToken.None);
+        Guid actualOutterKey = await store.Create(item, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
         _ = actualOutterKey.Should().Be(expectedOutterKey);
 
-        _ = await Store.Received(1).CreateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>());
+        _ = await Store.Received(1).Create(Arg.Any<object>(), Arg.Any<CancellationToken>());
     }
 }

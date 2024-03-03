@@ -8,7 +8,7 @@ using MooVC.IO;
 public sealed class WhenStreamsAreCompressed
 {
     [Fact]
-    public async Task GivenAStreamThenTheResultMatchesAsync()
+    public async Task GivenAStreamThenTheResultMatches()
     {
         // Arrange
         byte[] expected = new byte[32768];
@@ -19,7 +19,7 @@ public sealed class WhenStreamsAreCompressed
         using var stream = new MemoryStream(expected);
 
         // Act
-        using Stream compressed = await compressor.CompressAsync(stream, CancellationToken.None);
+        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
 
         // Assert
         IEnumerable<byte> compressedBytes = compressed.GetBytes();
@@ -27,7 +27,7 @@ public sealed class WhenStreamsAreCompressed
 
         // Act
         compressed.Position = 0;
-        using Stream decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
         IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
@@ -35,7 +35,7 @@ public sealed class WhenStreamsAreCompressed
     }
 
     [Fact]
-    public async Task GivenAnEmptyStreamThenTheResultMatchesAsync()
+    public async Task GivenAnEmptyStreamThenTheResultMatches()
     {
         // Arrange
         byte[] expected = [];
@@ -44,11 +44,11 @@ public sealed class WhenStreamsAreCompressed
         using var stream = new MemoryStream(expected);
 
         // Act
-        using Stream compressed = await compressor.CompressAsync(stream, CancellationToken.None);
+        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
 
         compressed.Position = 0;
 
-        using Stream decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
         IEnumerable<byte> decompressedBytes = decompressed.GetBytes();

@@ -30,7 +30,7 @@ public abstract class SynchronousSerializer
     /// A <see cref="Task{TResult}" /> that represents the asynchronous deserialization operation.
     /// The result of the task is the instance deserialized from the stream that represented the object.
     /// </returns>
-    protected override Task<T> PerformDeserializeAsync<T>(Stream source, CancellationToken cancellationToken)
+    protected override Task<T> PerformDeserialize<T>(Stream source, CancellationToken cancellationToken)
     {
         return Task.FromResult(PerformDeserialize<T>(source));
     }
@@ -43,7 +43,7 @@ public abstract class SynchronousSerializer
     /// <param name="target">The target stream to which to serialize the object.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous serialization operation.</returns>
-    protected override Task PerformSerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken)
+    protected override Task PerformSerialize<T>(T instance, Stream target, CancellationToken cancellationToken)
     {
         PerformSerialize(instance, target);
 

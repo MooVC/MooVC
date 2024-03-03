@@ -22,7 +22,6 @@ public static partial class IEnumerableExtensions
     /// <param name="action">The action to be called for each element of the enumeration.</param>
     /// <exception cref="AggregateException">One or more elements resulted in an exception being thrown by <paramref name="action" />.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="action" /> is <see langword="null" />.</exception>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
     {
         if (items is not null)
@@ -44,6 +43,49 @@ public static partial class IEnumerableExtensions
                         exceptions.Enqueue(ex);
                     }
                 });
+
+            if (!exceptions.IsEmpty)
+            {
+                throw new AggregateException(exceptions);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Executes an asynchronous operation for each element in an enumerable sequence.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of <paramref name="items" />.</typeparam>
+    /// <param name="items">The sequence of elements to iterate over.</param>
+    /// <param name="operation">The asynchronous operation to execute for each element.</param>
+    /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="operation" /> is <see langword="null" />.</exception>
+    /// <exception cref="AggregateException">At least one of the executed operations threw an exception.</exception>
+    public static async Task ForAll<T>(this IEnumerable<T>? items, Func<T, Task> operation)
+    {
+        if (items is not null)
+        {
+            _ = Guard.Against.Null(operation, message: ForAllAsyncOperationRequired);
+
+            var exceptions = new ConcurrentQueue<Exception>();
+
+            IEnumerable<Task> operations = items
+                .Select(async item =>
+                {
+                    try
+                    {
+                        await operation(item)
+                            .ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Enqueue(ex);
+                    }
+                })
+                .ToArray();
+
+            await Task
+                .WhenAll(operations)
+                .ConfigureAwait(false);
 
             if (!exceptions.IsEmpty)
             {

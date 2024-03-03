@@ -3,7 +3,7 @@
 public sealed class WhenInitializeAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnInitializerThenTheInitializerIsOnlyCalledOnceAndTheInstanceIsAlwaysTheSameAsync()
+    public async Task GivenAnInitializerThenTheInitializerIsOnlyCalledOnceAndTheInstanceIsAlwaysTheSame()
     {
         // Arrange
         const int ExpectedInvocations = 1;
@@ -19,9 +19,9 @@ public sealed class WhenInitializeAsyncIsCalled
         var initializer = new Initializer<object>(Initializer);
 
         // Act
-        object? first = await initializer.InitializeAsync(CancellationToken.None);
-        object? second = await initializer.InitializeAsync(CancellationToken.None);
-        object? third = await initializer.InitializeAsync(CancellationToken.None);
+        object? first = await initializer.Initialize(CancellationToken.None);
+        object? second = await initializer.Initialize(CancellationToken.None);
+        object? third = await initializer.Initialize(CancellationToken.None);
 
         // Assert
         _ = invocations.Should().Be(ExpectedInvocations);
@@ -32,7 +32,7 @@ public sealed class WhenInitializeAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceAsync()
+    public async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnce()
     {
         // Arrange
         const int ExpectedInvocations = 1;
@@ -57,7 +57,7 @@ public sealed class WhenInitializeAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAnInitializerWithDelayThenTheInitializerIsStillCalledOnlyOnceAsync()
+    public async Task GivenAnInitializerWithDelayThenTheInitializerIsStillCalledOnlyOnce()
     {
         // Arrange
         const int ExpectedInvocations = 1;
@@ -75,7 +75,7 @@ public sealed class WhenInitializeAsyncIsCalled
         // Act
         IEnumerable<Task<object>> tasks = Enumerable
             .Range(0, 10)
-            .Select(_ => initializer.InitializeAsync(CancellationToken.None));
+            .Select(_ => initializer.Initialize(CancellationToken.None));
 
         _ = await Task.WhenAll(tasks);
 
@@ -87,15 +87,15 @@ public sealed class WhenInitializeAsyncIsCalled
         Initializer<object> initializer)
     {
         _ = await initializer
-            .InitializeAsync(CancellationToken.None)
+            .Initialize(CancellationToken.None)
             .ConfigureAwait(false);
 
         _ = await initializer
-            .InitializeAsync(CancellationToken.None)
+            .Initialize(CancellationToken.None)
             .ConfigureAwait(false);
 
         _ = await initializer
-            .InitializeAsync(CancellationToken.None)
+            .Initialize(CancellationToken.None)
             .ConfigureAwait(false);
     }
 }

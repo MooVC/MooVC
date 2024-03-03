@@ -26,7 +26,6 @@ public static partial class IEnumerableExtensions
 #if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, bool isApplicable, Func<T, bool> predicate)
     {
         if (enumeration is null || !isApplicable)
@@ -54,7 +53,6 @@ public static partial class IEnumerableExtensions
 #if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T>? WhereIf<T>(this IEnumerable<T>? enumeration, Func<bool> condition, Func<T, bool> predicate)
     {
         if (enumeration is null)

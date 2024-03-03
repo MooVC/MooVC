@@ -6,7 +6,7 @@ public sealed class WhenGetAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
+    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvoked()
     {
         bool wasInvoked = false;
         string? expectedInnerKey = default;
@@ -25,23 +25,23 @@ public sealed class WhenGetAsyncIsCalled
         object expectedItem = new();
 
         _ = Store
-            .GetAsync(Arg.Is<string>(parameter => parameter == expectedInnerKey), Arg.Any<CancellationToken>())
+            .Get(Arg.Is<string>(parameter => parameter == expectedInnerKey), Arg.Any<CancellationToken>())
             .Returns(expectedItem);
 
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store);
 
         // Act
-        object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
+        object? actualItem = await store.Get(outterKey, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
         _ = actualItem.Should().Be(expectedItem);
 
-        _ = await Store.Received(1).GetAsync(Arg.Any<string>(), Arg.Any<CancellationToken>());
+        _ = await Store.Received(1).Get(Arg.Any<string>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task GivenPagingThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenPagingThenTheInnerStoreIsInvoked()
     {
         // Arrange
         var paging = new Paging();
@@ -49,21 +49,21 @@ public sealed class WhenGetAsyncIsCalled
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
-        _ = await store.GetAsync(paging: paging);
+        _ = await store.Get(paging: paging);
 
         // Assert
-        _ = await Store.Received(1).GetAsync(paging, Arg.Any<CancellationToken>());
+        _ = await Store.Received(1).Get(paging, Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task GivenANonExistingKeyThenNullShouldBeReturnedAsync()
+    public async Task GivenANonExistingKeyThenNullShouldBeReturned()
     {
         // Arrange
         var outterKey = Guid.NewGuid();
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
-        object? actualItem = await store.GetAsync(outterKey, CancellationToken.None);
+        object? actualItem = await store.Get(outterKey, CancellationToken.None);
 
         // Assert
         _ = actualItem.Should().BeNull();

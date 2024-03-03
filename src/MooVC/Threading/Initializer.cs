@@ -42,7 +42,7 @@ public sealed class Initializer<T>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is the initialized resource.
     /// </returns>
-    public async Task<T> InitializeAsync(CancellationToken cancellationToken)
+    public async Task<T> Initialize(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {
@@ -53,7 +53,7 @@ public sealed class Initializer<T>
             try
             {
                 await Mutex.WaitAsync(cancellationToken);
-                await PerformInitializeAsync(cancellationToken);
+                await PerformInitialize(cancellationToken);
             }
             finally
             {
@@ -71,7 +71,7 @@ public sealed class Initializer<T>
         return resource!;
     }
 
-    private async Task PerformInitializeAsync(CancellationToken cancellationToken)
+    private async Task PerformInitialize(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {

@@ -4,18 +4,18 @@ public sealed class WhenUpdateAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async Task GivenAnItemThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenAnItemThenTheInnerStoreIsInvoked()
     {
         // Arrange
         object expectedItem = new();
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
-        Func<Task> act = async () => await store.UpdateAsync(expectedItem, CancellationToken.None);
+        Func<Task> act = async () => await store.Update(expectedItem, CancellationToken.None);
 
         // Assert
         _ = await act.Should().NotThrowAsync();
 
-        await Store.Received(1).UpdateAsync(Arg.Is<object>(parameter => parameter == expectedItem), Arg.Any<CancellationToken>());
+        await Store.Received(1).Update(Arg.Is<object>(parameter => parameter == expectedItem), Arg.Any<CancellationToken>());
     }
 }

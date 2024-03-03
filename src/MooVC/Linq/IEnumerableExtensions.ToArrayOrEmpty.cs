@@ -20,7 +20,6 @@ public static partial class IEnumerableExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] ToArrayOrEmpty<T>(this IEnumerable<T>? enumerable, Func<T, bool>? predicate = default)
     {
         if (enumerable is null)
@@ -45,7 +44,6 @@ public static partial class IEnumerableExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot, ordered by the given key.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] ToArrayOrEmpty<T, TKey>(this IEnumerable<T>? enumerable, Func<T, TKey> order, Func<T, bool>? predicate = default)
     {
         _ = Guard.Against.Null(order, message: ToArrayOrEmptyOrderRequired);

@@ -35,7 +35,7 @@ public abstract class StreamCompressor
     /// <param name="source">The stream to compress.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous operation, containing the compressed stream as the result.</returns>
-    public override async Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken)
+    public override async Task<Stream> Compress(Stream source, CancellationToken cancellationToken)
     {
         var compressed = new MemoryStream();
 
@@ -56,7 +56,7 @@ public abstract class StreamCompressor
     /// <returns>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation, containing the decompressed stream as the result.
     /// </returns>
-    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken)
+    public override async Task<Stream> Decompress(Stream source, CancellationToken cancellationToken)
     {
         var decompressed = new MemoryStream();
 

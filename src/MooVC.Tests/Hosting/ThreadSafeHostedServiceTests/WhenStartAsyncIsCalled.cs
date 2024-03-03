@@ -15,7 +15,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAStoppedHostThenTheServiceStartsAsync()
+    public async Task GivenAStoppedHostThenTheServiceStarts()
     {
         // Act
         await host.StartAsync(CancellationToken.None);
@@ -25,7 +25,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAStartedHostThenTheServiceIsNotStartedASecondTimeAsync()
+    public async Task GivenAStartedHostThenTheServiceIsNotStartedASecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -38,7 +38,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenARestartThenTheServiceIsStartedTheSecondTimeAsync()
+    public async Task GivenARestartThenTheServiceIsStartedTheSecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -60,7 +60,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStoppedAsync()
+    public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStopped()
     {
         // Arrange
         var expected = new InvalidOperationException("Service failed to start.");
@@ -75,7 +75,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStoppedAsync()
+    public async Task GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStopped()
     {
         // Arrange
         var start = new InvalidOperationException("Service failed to start.");

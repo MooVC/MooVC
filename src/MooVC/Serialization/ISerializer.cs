@@ -17,7 +17,7 @@ public interface ISerializer
     /// A <see cref="Task{TResult}" /> that represents the asynchronous serialization operation.
     /// The result of the task is a sequence of bytes representing the serialized object.
     /// </returns>
-    Task<IEnumerable<byte>> SerializeAsync<T>(T instance, CancellationToken cancellationToken)
+    Task<IEnumerable<byte>> Serialize<T>(T instance, CancellationToken cancellationToken)
         where T : notnull;
 
     /// <summary>
@@ -28,7 +28,7 @@ public interface ISerializer
     /// <param name="target">The target stream to which to serialize the object.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous serialization operation.</returns>
-    Task SerializeAsync<T>(T instance, Stream target, CancellationToken cancellationToken)
+    Task Serialize<T>(T instance, Stream target, CancellationToken cancellationToken)
         where T : notnull;
 
     /// <summary>
@@ -41,7 +41,7 @@ public interface ISerializer
     /// A <see cref="Task{TResult}" /> that represents the asynchronous serialization operation.
     /// The result of the task is the instance deserialized from the sequence of bytes that represented the object.
     /// </returns>
-    Task<T> DeserializeAsync<T>(IEnumerable<byte> data, CancellationToken cancellationToken)
+    Task<T> Deserialize<T>(IEnumerable<byte> data, CancellationToken cancellationToken)
         where T : notnull;
 
     /// <summary>
@@ -54,6 +54,6 @@ public interface ISerializer
     /// A <see cref="Task{TResult}" /> that represents the asynchronous serialization operation.
     /// The result of the task is the instance deserialized from the stream that represented the object.
     /// </returns>
-    Task<T> DeserializeAsync<T>(Stream source, CancellationToken cancellationToken)
+    Task<T> Deserialize<T>(Stream source, CancellationToken cancellationToken)
         where T : notnull;
 }

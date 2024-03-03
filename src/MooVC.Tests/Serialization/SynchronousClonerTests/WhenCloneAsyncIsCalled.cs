@@ -3,7 +3,7 @@
 public sealed class WhenCloneAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnInstanceThenInstanceCloningIsRequestedAsync()
+    public async Task GivenAnInstanceThenInstanceCloningIsRequested()
     {
         // Arrange
         bool wasInvoked = false;
@@ -18,7 +18,7 @@ public sealed class WhenCloneAsyncIsCalled
         var cloner = new TestableSynchronousCloner(Cloner);
 
         // Act
-        string clone = await cloner.CloneAsync(instance, CancellationToken.None);
+        string clone = await cloner.Clone(instance, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();

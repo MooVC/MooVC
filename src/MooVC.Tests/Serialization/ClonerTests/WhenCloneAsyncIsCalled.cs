@@ -3,7 +3,7 @@
 public sealed class WhenCloneAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAnInstanceThenTheSerializerIsInvokedAsync()
+    public async Task GivenAnInstanceThenTheSerializerIsInvoked()
     {
         // Arrange
         WhenCloneAsyncIsCalled instance = this;
@@ -12,25 +12,25 @@ public sealed class WhenCloneAsyncIsCalled
         IEnumerable<byte> binary = [1, 2, 3];
 
         _ = serializer
-            .SerializeAsync(instance, Arg.Any<CancellationToken>())
+            .Serialize(instance, Arg.Any<CancellationToken>())
             .Returns(binary);
 
         _ = serializer
-            .DeserializeAsync<WhenCloneAsyncIsCalled>(binary, Arg.Any<CancellationToken>())
+            .Deserialize<WhenCloneAsyncIsCalled>(binary, Arg.Any<CancellationToken>())
             .Returns(this);
 
         // Act
-        WhenCloneAsyncIsCalled clone = await cloner.CloneAsync(instance, CancellationToken.None);
+        WhenCloneAsyncIsCalled clone = await cloner.Clone(instance, CancellationToken.None);
 
         // Assert
-        _ = await serializer.Received(1).SerializeAsync(instance, Arg.Any<CancellationToken>());
-        _ = await serializer.Received(1).DeserializeAsync<WhenCloneAsyncIsCalled>(binary, Arg.Any<CancellationToken>());
+        _ = await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
+        _ = await serializer.Received(1).Deserialize<WhenCloneAsyncIsCalled>(binary, Arg.Any<CancellationToken>());
 
         _ = clone.Should().Be(instance);
     }
 
     [Fact]
-    public async Task GivenNullInstanceThenArgumentNullExceptionIsThrownAsync()
+    public async Task GivenNullInstanceThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         WhenCloneAsyncIsCalled original = default!;
@@ -38,7 +38,7 @@ public sealed class WhenCloneAsyncIsCalled
         var cloner = new Cloner(serializer);
 
         // Act
-        Func<Task> act = async () => await cloner.CloneAsync(original, CancellationToken.None);
+        Func<Task> act = async () => await cloner.Clone(original, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()

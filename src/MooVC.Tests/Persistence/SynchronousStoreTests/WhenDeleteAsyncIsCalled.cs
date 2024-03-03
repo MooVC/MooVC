@@ -3,7 +3,7 @@
 public sealed class WhenDeleteAsyncIsCalled
 {
     [Fact]
-    public async Task GivenAKeyThenTheDeleteIsInvokedWithTheKeyAsync()
+    public async Task GivenAKeyThenTheDeleteIsInvokedWithTheKey()
     {
         // Arrange
         const int ExpectedKey = 1;
@@ -16,14 +16,14 @@ public sealed class WhenDeleteAsyncIsCalled
         });
 
         // Act
-        await store.DeleteAsync(ExpectedKey, CancellationToken.None);
+        await store.Delete(ExpectedKey, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenAnItemThenTheDeleteIsInvokedWithTheKeyAsync()
+    public async Task GivenAnItemThenTheDeleteIsInvokedWithTheKey()
     {
         // Arrange
         const string ExpectedItem = "Something something dark side...";
@@ -36,33 +36,33 @@ public sealed class WhenDeleteAsyncIsCalled
         });
 
         // Act
-        await store.DeleteAsync(ExpectedItem, CancellationToken.None);
+        await store.Delete(ExpectedItem, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
     }
 
     [Fact]
-    public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenAKeyWhenAnExceptionOccursThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.DeleteAsync(2, CancellationToken.None);
+        Func<Task> act = async () => await store.Delete(2, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();
     }
 
     [Fact]
-    public async Task GivenAnItemWhenAnExceptionOccursThenTheExceptionIsThrownAsync()
+    public async Task GivenAnItemWhenAnExceptionOccursThenTheExceptionIsThrown()
     {
         // Arrange
         var store = new TestableSynchronousStore();
 
         // Act
-        Func<Task> act = async () => await store.DeleteAsync("Something Irrelevant", CancellationToken.None);
+        Func<Task> act = async () => await store.Delete("Something Irrelevant", CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<NotImplementedException>();

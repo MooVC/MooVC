@@ -46,10 +46,10 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// A <see cref="Task" /> that represents the asynchronous operation.
     /// The task result contains the mapped key of the newly created item.
     /// </returns>
-    public async Task<TOutterKey> CreateAsync(T item, CancellationToken cancellationToken)
+    public async Task<TOutterKey> Create(T item, CancellationToken cancellationToken)
     {
         TInnerKey innerKey = await store
-            .CreateAsync(item, cancellationToken)
+            .Create(item, cancellationToken)
             .ConfigureAwait(false);
 
         return outterMapping(item, innerKey);
@@ -61,9 +61,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <param name="item">The item to delete.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
-    public Task DeleteAsync(T item, CancellationToken cancellationToken)
+    public Task Delete(T item, CancellationToken cancellationToken)
     {
-        return store.DeleteAsync(item, cancellationToken);
+        return store.Delete(item, cancellationToken);
     }
 
     /// <summary>
@@ -72,11 +72,11 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <param name="key">The external key that identifies the item to delete.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
-    public Task DeleteAsync(TOutterKey key, CancellationToken cancellationToken)
+    public Task Delete(TOutterKey key, CancellationToken cancellationToken)
     {
         TInnerKey innerKey = innerMapping(key);
 
-        return store.DeleteAsync(innerKey, cancellationToken);
+        return store.Delete(innerKey, cancellationToken);
     }
 
     /// <summary>
@@ -88,11 +88,11 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// A <see cref="Task" /> that represents the asynchronous operation.
     /// The task result contains the item with the specified <paramref name="key" />, or null if no such item exists.
     /// </returns>
-    public Task<T?> GetAsync(TOutterKey key, CancellationToken cancellationToken)
+    public Task<T?> Get(TOutterKey key, CancellationToken cancellationToken)
     {
         TInnerKey innerKey = innerMapping(key);
 
-        return store.GetAsync(innerKey, cancellationToken);
+        return store.Get(innerKey, cancellationToken);
     }
 
     /// <summary>
@@ -104,9 +104,9 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// A <see cref="Task" /> that represents the asynchronous operation.
     /// The task result contains paging instructions for the matching items.
     /// </returns>
-    public Task<PagedResult<T>> GetAsync(Paging? paging = default, CancellationToken cancellationToken = default)
+    public Task<PagedResult<T>> Get(Paging? paging = default, CancellationToken cancellationToken = default)
     {
-        return store.GetAsync(paging: paging, cancellationToken);
+        return store.Get(paging: paging, cancellationToken);
     }
 
     /// <summary>
@@ -115,8 +115,8 @@ public sealed class MappedStore<T, TOutterKey, TInnerKey>
     /// <param name="item">The item to update.</param>
     /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
-    public Task UpdateAsync(T item, CancellationToken cancellationToken)
+    public Task Update(T item, CancellationToken cancellationToken)
     {
-        return store.UpdateAsync(item, cancellationToken);
+        return store.Update(item, cancellationToken);
     }
 }

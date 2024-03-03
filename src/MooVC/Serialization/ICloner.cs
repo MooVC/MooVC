@@ -15,6 +15,6 @@ public interface ICloner
     /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
+    Task<T> Clone<T>(T original, CancellationToken cancellationToken)
         where T : notnull;
 }

@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Console;
 
+using MooVC.Console.Data;
+using MooVC.Data;
 using static System.Console;
 
 /// <summary>

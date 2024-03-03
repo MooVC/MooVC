@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="IncludesAttributeRequired" xml:space="preserve">
+    <value>The Attribute of type '{0}' to be included within Subject '{1}' must be provided.</value>
+  </data>
   <data name="IncludesAttributesRequired" xml:space="preserve">
-    <value>The Attributes of type '{0}' that are to be applied to Subject '{1}' must be provided.</value>
+    <value>The Attributes of type '{0}' that are to be included within Subject '{1}' must be provided.</value>
   </data>
   <data name="IncludesSubjectRequired" xml:space="preserve">
     <value>The Subject of type '{0}' to which the Attributes of type '{1]' are to be applied must be provided.</value>

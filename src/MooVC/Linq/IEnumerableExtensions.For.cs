@@ -33,7 +33,6 @@ public static partial class IEnumerableExtensions
     }
 
 #if NET6_0_OR_GREATER
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
     {
         T[] elements = items.ToArray();
@@ -47,7 +46,6 @@ public static partial class IEnumerableExtensions
         }
     }
 #else
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void PerformFor<T>(this IEnumerable<T> items, Action<int, T> action)
     {
         int index = 0;

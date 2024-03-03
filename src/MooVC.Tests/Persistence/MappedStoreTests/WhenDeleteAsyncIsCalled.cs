@@ -4,7 +4,7 @@ public sealed class WhenDeleteAsyncIsCalled
     : MappedStoreTests
 {
     [Fact]
-    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvokedAsync()
+    public async Task GivenAKeyThenTheInnerMappingAndInnerStoreAreInvoked()
     {
         bool wasInvoked = false;
         string? expectedInnerKey = default;
@@ -24,16 +24,16 @@ public sealed class WhenDeleteAsyncIsCalled
         var store = new MappedStore<object, Guid, string>(LocalInnerMapping, OutterMapping, Store);
 
         // Act
-        await store.DeleteAsync(key, CancellationToken.None);
+        await store.Delete(key, CancellationToken.None);
 
         // Assert
         _ = wasInvoked.Should().BeTrue();
 
-        await Store.Received(1).DeleteAsync(Arg.Is<string>(key => key == expectedInnerKey), Arg.Any<CancellationToken>());
+        await Store.Received(1).Delete(Arg.Is<string>(key => key == expectedInnerKey), Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task GivenAnItemThenTheInnerStoreIsInvokedAsync()
+    public async Task GivenAnItemThenTheInnerStoreIsInvoked()
     {
         // Arrange
         object item = new();
@@ -41,9 +41,9 @@ public sealed class WhenDeleteAsyncIsCalled
         var store = new MappedStore<object, Guid, string>(InnerMapping, OutterMapping, Store);
 
         // Act
-        await store.DeleteAsync(item, CancellationToken.None);
+        await store.Delete(item, CancellationToken.None);
 
         // Assert
-        await Store.Received(1).DeleteAsync(item, Arg.Any<CancellationToken>());
+        await Store.Received(1).Delete(item, Arg.Any<CancellationToken>());
     }
 }

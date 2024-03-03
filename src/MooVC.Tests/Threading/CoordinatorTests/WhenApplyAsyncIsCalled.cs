@@ -16,13 +16,13 @@ public sealed class WhenApplyAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrownAsync()
+    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         string? context = default;
 
         // Act
-        Func<Task> act = async () => await coordinator.ApplyAsync(context!, CancellationToken.None);
+        Func<Task> act = async () => await coordinator.Apply(context!, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()
@@ -30,20 +30,20 @@ public sealed class WhenApplyAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrownAsync()
+    public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrown()
     {
         // Arrange
         coordinator.Dispose();
 
         // Act
-        Func<Task> act = async () => await coordinator.ApplyAsync("N/A", CancellationToken.None);
+        Func<Task> act = async () => await coordinator.Apply("N/A", CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ObjectDisposedException>();
     }
 
     [Fact]
-    public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrownAsync()
+    public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrown()
     {
         // Arrange
         const int ExpectedCount = 5;
@@ -54,7 +54,7 @@ public sealed class WhenApplyAsyncIsCalled
             async () =>
             {
                 ICoordinationContext<string> coordination = await coordinator
-                    .ApplyAsync(context, CancellationToken.None);
+                    .Apply(context, CancellationToken.None);
 
                 using (coordination)
                 {
@@ -71,7 +71,7 @@ public sealed class WhenApplyAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrownAsync()
+    public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrown()
     {
         // Arrange
         string context = "Test";
@@ -80,7 +80,7 @@ public sealed class WhenApplyAsyncIsCalled
         // Act
         _ = Task.Run(async () =>
         {
-            using (await coordinator.ApplyAsync(context, CancellationToken.None))
+            using (await coordinator.Apply(context, CancellationToken.None))
             {
                 _ = semaphore.Release();
                 await Task.Delay(TimeSpan.FromSeconds(10));
@@ -90,14 +90,14 @@ public sealed class WhenApplyAsyncIsCalled
         await semaphore.WaitAsync();
 
         // Act
-        Func<Task> act = async () => await coordinator.ApplyAsync(context, CancellationToken.None, TimeSpan.FromMilliseconds(250));
+        Func<Task> act = async () => await coordinator.Apply(context, CancellationToken.None, TimeSpan.FromMilliseconds(250));
 
         // Assert
         _ = await act.Should().ThrowAsync<TimeoutException>();
     }
 
     [Fact]
-    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordinationAsync()
+    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
     {
         // Arrange
         string expected = Guid.NewGuid().ToString();
@@ -108,7 +108,7 @@ public sealed class WhenApplyAsyncIsCalled
 
         // Act
         ICoordinationContext<ITestCoordinatable> coordination = await subject
-            .ApplyAsync(context, CancellationToken.None);
+            .Apply(context, CancellationToken.None);
 
         // Assert
         using (coordination)
@@ -118,7 +118,7 @@ public sealed class WhenApplyAsyncIsCalled
     }
 
     [Fact]
-    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordinationAsync()
+    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
     {
         // Arrange
         object context = Substitute.For<object>();
@@ -126,7 +126,7 @@ public sealed class WhenApplyAsyncIsCalled
 
         // Act
         ICoordinationContext<object> coordination = await subject
-            .ApplyAsync(context, CancellationToken.None);
+            .Apply(context, CancellationToken.None);
 
         using (coordination)
         {
