@@ -50,7 +50,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4.1.1
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -71,6 +71,14 @@ jobs:
           6.0.x
           7.0.x
           8.0.x
+
+    - name: Cache NuGet Packages
+      uses: actions/cache@v4.0.1
+      with:
+        path: ${{ github.workspace }}/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
 
     - name: Restore Nuget Packages for Solution
       run: dotnet restore ${{ env.solution }}
