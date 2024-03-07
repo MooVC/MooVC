@@ -36,13 +36,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{722D
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\cd.yml = .github\workflows\cd.yml
 		.github\workflows\ci.yml = .github\workflows\ci.yml
-		.github\workflows\codeql.yml = .github\workflows\codeql.yml
 		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Generators", "src\MooVC.Generators\MooVC.Generators.csproj", "{A3B3936D-9C6E-4B8A-B203-8156157FB9FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Console", "src\MooVC.Console\MooVC.Console.csproj", "{52E978C7-0169-463A-958B-BCA66BF0F6EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Console", "src\MooVC.Console\MooVC.Console.csproj", "{52E978C7-0169-463A-958B-BCA66BF0F6EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
