@@ -124,6 +124,6 @@
     <value>The Attributes of type '{0}' that are to be included within Subject '{1}' must be provided.</value>
   </data>
   <data name="IncludesSubjectRequired" xml:space="preserve">
-    <value>The Subject of type '{0}' to which the Attributes of type '{1]' are to be applied must be provided.</value>
+    <value>The Subject of type '{0}' to which the Attributes of type '{1}' are to be applied must be provided.</value>
   </data>
 </root>

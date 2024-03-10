@@ -79,7 +79,7 @@ namespace MooVC.Data {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Subject of type &apos;{0}&apos; to which the Attributes of type &apos;{1]&apos; are to be applied must be provided..
+        ///   Looks up a localized string similar to The Subject of type &apos;{0}&apos; to which the Attributes of type &apos;{1}&apos; are to be applied must be provided..
         /// </summary>
         internal static string IncludesSubjectRequired {
             get {
