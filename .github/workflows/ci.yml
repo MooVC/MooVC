@@ -30,9 +30,9 @@ jobs:
         fetch-depth: 0
         
     - name: Use .NET SDKs
-      uses: Cysharp/Actions/.github/actions/setup-dotnet@main
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
+        dotnet-version: | 
           6.0.x
           7.0.x
           8.0.x
