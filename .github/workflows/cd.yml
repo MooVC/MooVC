@@ -24,13 +24,13 @@ jobs:
         fetch-depth: 0
         
     - name: Use .NET SDKs
-      uses: Cysharp/Actions/.github/actions/setup-dotnet@main
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
+        dotnet-version: | 
           6.0.x
           7.0.x
           8.0.x
-
+    
     - name: Cache NuGet Packages
       uses: actions/cache@v4.0.1
       with:
@@ -67,7 +67,7 @@ jobs:
     - name: Upload Code Coverage
       uses: codecov/codecov-action@v4.1.0
       with:
-        fail_ci_if_error: true
+        token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Pack Solution
       run: dotnet pack ${{ env.solution }} --configuration ${{ env.configuration }} --no-build --output ./artifacts -p:Version=${{ env.semantic }}
