@@ -1,17 +1,12 @@
 namespace MooVC.Collections.Generic.CollectionExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenAddRangeIsCalled
 {
     [Fact]
     public void GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
-        ICollection<int> target = new List<int>();
+        ICollection<int> target = [];
         IEnumerable<int>? items = default;
 
         // Act
@@ -26,7 +21,7 @@ public sealed class WhenAddRangeIsCalled
     {
         // Arrange
         ICollection<int>? target = default;
-        int[] items = new[] { 1, 2, 3 };
+        int[] items = [1, 2, 3];
 
         // Act
         Action act = () => target!.AddRange(items);
@@ -39,8 +34,8 @@ public sealed class WhenAddRangeIsCalled
     public void GivenItemsWhenTheTargetIsEmptyThenTheItemsAreAddedToTheTarget()
     {
         // Arrange
-        ICollection<int> actual = new List<int>();
-        int[] expected = new[] { 1, 2, 3 };
+        ICollection<int> actual = [];
+        int[] expected = [1, 2, 3];
 
         // Act
         actual.AddRange(expected);
@@ -53,9 +48,9 @@ public sealed class WhenAddRangeIsCalled
     public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetWithoutRemovingTheExistingEntries()
     {
         // Arrange
-        ICollection<int> actual = new List<int> { 1, 2, 3 };
-        int[] items = new[] { 4, 5, 6 };
-        IEnumerable<int> expected = new List<int> { 1, 2, 3, 4, 5, 6 };
+        ICollection<int> actual = [1, 2, 3];
+        int[] items = [4, 5, 6];
+        IEnumerable<int> expected = [1, 2, 3, 4, 5, 6];
 
         // Act
         actual.AddRange(items);
@@ -68,8 +63,8 @@ public sealed class WhenAddRangeIsCalled
     public void GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
     {
         // Arrange
-        ICollection<int> actual = new List<int>();
-        int[] items = Array.Empty<int>();
+        ICollection<int> actual = [];
+        int[] items = [];
 
         // Act
         actual.AddRange(items);
@@ -82,13 +77,13 @@ public sealed class WhenAddRangeIsCalled
     public void GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
     {
         // Arrange
-        ICollection<int> actual = new List<int> { 1, 2, 3 };
-        int[] items = Array.Empty<int>();
+        ICollection<int> actual = [1, 2, 3];
+        int[] items = [];
 
         // Act
         actual.AddRange(items);
 
         // Assert
-        _ = actual.Should().Equal(new[] { 1, 2, 3 });
+        _ = actual.Should().Equal(1, 2, 3);
     }
 }

@@ -1,31 +1,26 @@
 namespace MooVC.ArrayExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToCopyOrEmptyIsCalled
 {
-    public static readonly IEnumerable<object[]> GivenAnArrayThenAMatchingArrayIsReturnedData = new[]
+    public static readonly TheoryData<int[]> GivenAnArrayThenAMatchingArrayIsReturnedData = new()
     {
-        new object[] { new int[] { 1, 2 } },
-        new object[] { new int[] { 1 } },
-        new object[] { Array.Empty<int>() },
+        { [1, 2] },
+        { [1] },
+        { [] },
     };
 
-    public static readonly IEnumerable<object[]> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData = new[]
+    public static readonly TheoryData<int[], int[]> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData = new()
     {
-        new object[] { new int[] { 3, 1, 2 }, new int[] { 3, 1 } },
-        new object[] { new int[] { 1, 2, 3 }, new int[] { 1, 3 } },
-        new object[] { new int[] { 1 }, new int[] { 1 } },
-        new object[] { Array.Empty<int>(), Array.Empty<int>() },
+        { [3, 1, 2], [3, 1] },
+        { [1, 2, 3], [1, 3] },
+        { [1], [1] },
+        { [], [] },
     };
 
-    public static readonly IEnumerable<object?[]> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData = new[]
+    public static readonly TheoryData<string[]?> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData = new()
     {
-        new object?[] { Array.Empty<string>() },
-        new object?[] { default },
+        { [] },
+        { default },
     };
 
     [Theory]

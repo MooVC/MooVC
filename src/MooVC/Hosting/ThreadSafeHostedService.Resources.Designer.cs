@@ -81,9 +81,9 @@ namespace MooVC.Hosting {
         /// <summary>
         ///   Looks up a localized string similar to An unexpected failure has prevented an attempt to stop one or more services..
         /// </summary>
-        internal static string TryStopAsyncFailure {
+        internal static string TryStopFailure {
             get {
-                return ResourceManager.GetString("TryStopAsyncFailure", resourceCulture);
+                return ResourceManager.GetString("TryStopFailure", resourceCulture);
             }
         }
     }

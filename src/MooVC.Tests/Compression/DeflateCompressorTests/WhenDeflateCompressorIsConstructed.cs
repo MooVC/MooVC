@@ -1,10 +1,7 @@
 ﻿namespace MooVC.Compression.DeflateCompressorTests;
 
-using System;
 using System.ComponentModel;
 using System.IO.Compression;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenDeflateCompressorIsConstructed
 {

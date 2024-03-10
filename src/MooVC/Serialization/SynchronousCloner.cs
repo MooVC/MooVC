@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Serialization;
 
-using System.Threading;
-using System.Threading.Tasks;
-
 /// <summary>
 /// Faciliates implementation of a synchronous implementation of the <see cref="ICloner" /> contract for cloning objects.
 /// </summary>
@@ -19,7 +16,7 @@ public abstract class SynchronousCloner
     /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
     /// The task result contains the cloned object.
     /// </returns>
-    public Task<T> CloneAsync<T>(T original, CancellationToken cancellationToken)
+    public Task<T> Clone<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
         return Task.FromResult(PerformClone(original));

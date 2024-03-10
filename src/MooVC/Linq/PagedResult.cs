@@ -1,9 +1,6 @@
 ﻿namespace MooVC.Linq;
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Ardalis.GuardClauses;
 using static MooVC.Linq.PagedResult_Resources;
 
@@ -24,7 +21,7 @@ public sealed class PagedResult<T>
     /// <paramref name="request" /> is <see langword="null" />.
     /// </exception>
     public PagedResult(Paging request)
-        : this(request, () => 0, () => Array.Empty<T>())
+        : this(request, () => 0, () => [])
     {
     }
 
@@ -90,7 +87,7 @@ public sealed class PagedResult<T>
 
     private PagedResult(Paging request, Func<ulong> total, Func<IReadOnlyList<T>> values)
     {
-        Request = Guard.Against.Null(request, parameterName: nameof(request), message: RequestRequired);
+        Request = Guard.Against.Null(request, message: RequestRequired);
         Total = total();
         this.values = values();
     }
@@ -143,7 +140,7 @@ public sealed class PagedResult<T>
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="index" /> is outside the bounds of the sequence.
     /// </exception>
-    public T this[int index] => values.ElementAt(index);
+    public T this[int index] => values[index];
 
     /// <summary>
     /// Returns an enumerator that iterates through the elements in the result set.

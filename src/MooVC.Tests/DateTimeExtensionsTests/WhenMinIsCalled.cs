@@ -1,18 +1,13 @@
 ﻿namespace MooVC.DateTimeExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenMinIsCalled
 {
-    public static readonly IEnumerable<object[]> GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData = new[]
+    public static readonly TheoryData<DateTime, DateTime> GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData = new()
     {
-        new object[] { new DateTime(2019, 1, 1), new DateTime(2019, 12, 31) },
-        new object[] { new DateTime(2019, 1, 31), new DateTime(2019, 12, 1) },
-        new object[] { new DateTime(2018, 12, 1), new DateTime(2019, 1, 31) },
-        new object[] { new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) },
+        { new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
+        { new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
     };
 
     [Theory]
@@ -41,7 +36,7 @@ public sealed class WhenMinIsCalled
     public void GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange
-        var sameDate = new DateTime(2019, 1, 1);
+        var sameDate = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         // Act
         DateTime selected = sameDate.Min(sameDate);

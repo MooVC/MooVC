@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Linq.PagedResultTests;
 
-using System;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenPagedResultIsConstructed
 {
     [Theory]
@@ -81,13 +77,13 @@ public sealed class WhenPagedResultIsConstructed
     [Theory]
     [InlineData(new int[0])]
     [InlineData(default(int[]))]
-    public void GivenEmptyValuesThenEmptyValuesAreSet(int[] values)
+    public void GivenEmptyValuesThenEmptyValuesAreSet(int[]? values)
     {
         // Arrange
         var request = new Paging(page: 1, size: 120);
 
         // Act
-        var result = new PagedResult<int>(request, 5, values);
+        var result = new PagedResult<int>(request, 5, values!);
 
         // Assert
         _ = result.HasResults.Should().BeFalse();
@@ -102,7 +98,7 @@ public sealed class WhenPagedResultIsConstructed
         Paging? request = default;
 
         // Act
-        Func<PagedResult<int>> construct = () => new PagedResult<int>(request!, 5, new[] { 1 });
+        Func<PagedResult<int>> construct = () => new PagedResult<int>(request!, 5, [1]);
 
         // Assert
         _ = construct.Should().Throw<ArgumentNullException>()

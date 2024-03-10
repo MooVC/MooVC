@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Linq.QueryableExtensionsTests;
 
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenToResultIsCalled
 {
     [Theory]

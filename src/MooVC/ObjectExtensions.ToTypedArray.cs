@@ -13,6 +13,6 @@ public static partial class ObjectExtensions
     /// <returns>An array containing the single specified value.</returns>
     public static T[] ToTypedArray<T>(this T value)
     {
-        return new[] { value };
+        return [value];
     }
 }

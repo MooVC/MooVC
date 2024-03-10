@@ -1,10 +1,7 @@
 ﻿namespace MooVC.Hosting.ThreadSafeHostedServiceTests;
 
-using System.Threading;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NSubstitute;
-using Xunit;
 
 public sealed class WhenStopAsyncIsCalled
 {
@@ -14,11 +11,11 @@ public sealed class WhenStopAsyncIsCalled
     public WhenStopAsyncIsCalled()
     {
         service = Substitute.For<IHostedService>();
-        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), new[] { service });
+        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), [service]);
     }
 
     [Fact]
-    public async void GivenAStartedHostThenTheServiceStopsAsync()
+    public async Task GivenAStartedHostThenTheServiceStops()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -32,7 +29,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenAStoppedHostThenTheServiceIsNotStoppedAsync()
+    public async Task GivenAStoppedHostThenTheServiceIsNotStopped()
     {
         // Act
         await host.StopAsync(CancellationToken.None);
@@ -42,7 +39,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenARestartThenTheServiceIsStoppedTheSecondTimeAsync()
+    public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -58,7 +55,7 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenMultipleStartsAndStopsThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
+    public async Task GivenMultipleStartsAndStopsThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);

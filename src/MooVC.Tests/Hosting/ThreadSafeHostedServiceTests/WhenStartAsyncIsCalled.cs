@@ -1,11 +1,7 @@
 ﻿namespace MooVC.Hosting.ThreadSafeHostedServiceTests;
 
-using System.Threading;
-using FluentAssertions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NSubstitute;
-using Xunit;
 
 public sealed class WhenStartAsyncIsCalled
 {
@@ -15,11 +11,11 @@ public sealed class WhenStartAsyncIsCalled
     public WhenStartAsyncIsCalled()
     {
         service = Substitute.For<IHostedService>();
-        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), new[] { service });
+        host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), [service]);
     }
 
     [Fact]
-    public async void GivenAStoppedHostThenTheServiceStartsAsync()
+    public async Task GivenAStoppedHostThenTheServiceStarts()
     {
         // Act
         await host.StartAsync(CancellationToken.None);
@@ -29,7 +25,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenAStartedHostThenTheServiceIsNotStartedASecondTimeAsync()
+    public async Task GivenAStartedHostThenTheServiceIsNotStartedASecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -42,7 +38,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenARestartThenTheServiceIsStartedTheSecondTimeAsync()
+    public async Task GivenARestartThenTheServiceIsStartedTheSecondTime()
     {
         // Arrange
         await host.StartAsync(CancellationToken.None);
@@ -64,7 +60,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenServiceStartAsyncThrowsExceptionThenHostIsStoppedAsync()
+    public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStopped()
     {
         // Arrange
         var expected = new InvalidOperationException("Service failed to start.");
@@ -79,7 +75,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Fact]
-    public async void GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStoppedAsync()
+    public async Task GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStopped()
     {
         // Arrange
         var start = new InvalidOperationException("Service failed to start.");

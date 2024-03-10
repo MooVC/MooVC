@@ -16,20 +16,30 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MooVC/moovc.git</RepositoryUrl>
-    <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(CODESPACES)' == 'true'">
     <IsCodespace>true</IsCodespace>
   </PropertyGroup>
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Analyzers')) OR $(MSBuildProjectName.EndsWith('.Generators'))">
+    <IsRoslynProject>true</IsRoslynProject>
+  </PropertyGroup>
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(IsRoslynProject)' != 'true' AND '$(IsTestProject)' != 'true'">
+    <IsLibraryProject>true</IsLibraryProject>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.507">
+    <PackageReference Include="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Condition="'$(IsTestProject)' != 'true'" Project="build/libraries.props" />
-  <Import Condition="'$(IsTestProject)' == 'true'" Project="build/tests.props" />
+  <Import Condition="'$(IsLibraryProject)' == 'true'" Project="build/Libraries.props" />
+  <Import Condition="'$(IsRoslynProject)' == 'true'" Project="build/Roslyn.props" />
+  <Import Condition="'$(IsTestProject)' == 'true'" Project="build/Tests.props" />
 </Project>

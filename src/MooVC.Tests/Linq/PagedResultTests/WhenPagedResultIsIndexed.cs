@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Linq.PagedResultTests;
 
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenPagedResultIsIndexed
 {
     [Theory]
@@ -32,7 +29,7 @@ public sealed class WhenPagedResultIsIndexed
         var result = new PagedResult<int>(request, values);
 
         // Act
-        Action act = () => { int value = result[index]; };
+        Action act = () => _ = result[index];
 
         // Assert
         _ = act.Should().Throw<ArgumentOutOfRangeException>();

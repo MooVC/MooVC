@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Threading;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using static MooVC.Threading.Initializer_Resources;
 
@@ -24,7 +21,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = Guard.Against.Null(initializer, parameterName: nameof(initializer), message: InitializerRequired);
+        this.initializer = Guard.Against.Null(initializer, message: InitializerRequired);
     }
 
     /// <summary>
@@ -45,7 +42,7 @@ public sealed class Initializer<T>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is the initialized resource.
     /// </returns>
-    public async Task<T> InitializeAsync(CancellationToken cancellationToken)
+    public async Task<T> Initialize(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {
@@ -56,7 +53,7 @@ public sealed class Initializer<T>
             try
             {
                 await Mutex.WaitAsync(cancellationToken);
-                await PerformInitializeAsync(cancellationToken);
+                await PerformInitialize(cancellationToken);
             }
             finally
             {
@@ -74,7 +71,7 @@ public sealed class Initializer<T>
         return resource!;
     }
 
-    private async Task PerformInitializeAsync(CancellationToken cancellationToken)
+    private async Task PerformInitialize(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {

@@ -14,10 +14,12 @@ Features within MooVC that were intended to address shortcomings within the .NET
 
 ## Enhancements
 
+- Added Composition.IExtension<TContainer> to support extensibility via IoC.
+- Added Data.IFeature<T> and Data.IFeatures<T> to facilitate creation of rich fluent APIs with support of MooVC.Generators assembly.
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
 - Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
 - Added support for .NET 8.0.
-- Added Linq.EnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
+- Added Linq.IEnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
 - Changed ArrayExtensions.Append to accept a params array for the elements to be apended to the source array.
 - Changed ArrayExtensions.Prepend to accept a params array for the elements to be apended to the source array.
 - Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
@@ -31,16 +33,17 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Changed methods accepting a CancellationToken so that it is no longer an optional parameter (**Breaking Change**).
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Changed Threading.ICoordinatable<T> so that it no longer accepts a generic type (**Breaking Change**).
-- Moved Collections.Generic.EnumerableExtensions to Linq.EnumerableExtensions (**Breaking Change**).
-- Moved Collections.Generic.EnumerableExtensions.Snapshot to Linq.EnumerableExtensions.ToArrayOrEmpty (**Breaking Change**).
+- Moved Collections.Generic.EnumerableExtensions to Linq.IEnumerableExtensions (**Breaking Change**).
+- Moved Collections.Generic.EnumerableExtensions.Snapshot to Linq.IEnumerableExtensions.ToArrayOrEmpty (**Breaking Change**).
 - Moved Collections.Generic.ObjectExtensions.AsArray to ObjectExtensions.ToArray (**Breaking Change**).
-- Moved Collections.Generic.ObjectExtensions.AsEnumerable to Linq.ObjectExtensions.ToEnumerable (**Breaking Change**).
+- Moved Collections.Generic.ObjectExtensions.AsEnumerable to Linq.ObjectExtensions.AsEnumerable (**Breaking Change**).
 - Renamed ArrayExtensions.Snapshot to ToCopyOrEmpty (**Breaking Change**).
 - Renaned Collections.Generic.DictionaryExtensions.Snapshot extension to ToNewOrCopy (**Breaking Change**).
 - Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
 - Renamed ObjectExtensions.AsArray to ToTypedArray (**Breaking Change**).
 - Renamed Serialization.DefaultCloner to Cloner (**Breaking Change**).
 - Removed ArrayExtensions.Extend in favor of ArrayExtensions.Append (**Breaking Change**).
+- Removed Async keyword from all methods (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
 - Removed Ensure class (**Breaking Change**).
 - Removed Linq.Paging.Apply (**Breaking Change**).

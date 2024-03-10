@@ -123,7 +123,7 @@
   <data name="ServicesRequired" xml:space="preserve">
     <value>The services that are to be subject of thread safety must be provided.</value>
   </data>
-  <data name="TryStopAsyncFailure" xml:space="preserve">
+  <data name="TryStopFailure" xml:space="preserve">
     <value>An unexpected failure has prevented an attempt to stop one or more services.</value>
   </data>
 </root>

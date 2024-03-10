@@ -1,7 +1,5 @@
 ﻿namespace MooVC;
 
-using System;
-
 /// <summary>
 /// Provides the Max extension for <see cref="DateTimeOffset" />.
 /// </summary>

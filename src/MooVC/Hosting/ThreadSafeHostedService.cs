@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Hosting;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,10 +15,10 @@ public sealed class ThreadSafeHostedService
     private const int Started = 1;
     private const int Stopped = 0;
 
-    private static readonly Action<ILogger, Exception> logTryStopAsyncFailure = LoggerMessage.Define(
+    private static readonly Action<ILogger, Exception> logTryStopFailure = LoggerMessage.Define(
         LogLevel.Warning,
-        new EventId(1, name: nameof(TryStopAsync)),
-        TryStopAsyncFailure);
+        new EventId(1, name: nameof(TryStop)),
+        TryStopFailure);
 
     private readonly ILogger<ThreadSafeHostedService> logger;
     private readonly IEnumerable<IHostedService> services;
@@ -39,8 +35,8 @@ public sealed class ThreadSafeHostedService
     /// </param>
     public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
     {
-        this.logger = Guard.Against.Null(logger, parameterName: nameof(logger), message: LoggerRequired);
-        this.services = Guard.Against.Null(services, parameterName: nameof(services), message: ServicesRequired);
+        this.logger = Guard.Against.Null(logger, message: LoggerRequired);
+        this.services = Guard.Against.Null(services, message: ServicesRequired);
     }
 
     /// <summary>
@@ -54,12 +50,12 @@ public sealed class ThreadSafeHostedService
         {
             try
             {
-                await PerformStartAsync(cancellationToken)
+                await PerformStart(cancellationToken)
                     .ConfigureAwait(false);
             }
             catch
             {
-                await TryStopAsync(cancellationToken)
+                await TryStop(cancellationToken)
                     .ConfigureAwait(false);
 
                 _ = Interlocked.Exchange(ref state, Stopped);
@@ -80,7 +76,7 @@ public sealed class ThreadSafeHostedService
         {
             try
             {
-                await PerformStopAsync(cancellationToken)
+                await PerformStop(cancellationToken)
                     .ConfigureAwait(false);
             }
             catch
@@ -92,26 +88,26 @@ public sealed class ThreadSafeHostedService
         }
     }
 
-    private Task PerformStartAsync(CancellationToken cancellationToken)
+    private Task PerformStart(CancellationToken cancellationToken)
     {
-        return services.ForAllAsync(service => service.StartAsync(cancellationToken));
+        return services.ForAll(service => service.StartAsync(cancellationToken));
     }
 
-    private Task PerformStopAsync(CancellationToken cancellationToken)
+    private Task PerformStop(CancellationToken cancellationToken)
     {
-        return services.ForAllAsync(service => service.StopAsync(cancellationToken));
+        return services.ForAll(service => service.StopAsync(cancellationToken));
     }
 
-    private async Task TryStopAsync(CancellationToken cancellationToken)
+    private async Task TryStop(CancellationToken cancellationToken)
     {
         try
         {
-            await PerformStopAsync(cancellationToken)
+            await PerformStop(cancellationToken)
                 .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            logTryStopAsyncFailure(logger, ex);
+            logTryStopFailure(logger, ex);
         }
     }
 }

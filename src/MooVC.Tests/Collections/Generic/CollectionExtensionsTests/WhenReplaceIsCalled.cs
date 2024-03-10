@@ -1,17 +1,12 @@
 namespace MooVC.Collections.Generic.CollectionExtensionsTests;
 
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenReplaceIsCalled
 {
     [Fact]
     public void GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
-        ICollection<int> target = new List<int>();
+        ICollection<int> target = [];
         IEnumerable<int>? items = default;
 
         // Act
@@ -26,7 +21,7 @@ public sealed class WhenReplaceIsCalled
     {
         // Arrange
         ICollection<int>? target = default;
-        int[] items = new[] { 1, 2, 3 };
+        int[] items = [1, 2, 3];
 
         // Act
         Action act = () => target!.Replace(items);
@@ -39,8 +34,8 @@ public sealed class WhenReplaceIsCalled
     public void GivenItemsWhenTheTargetIsEmptyThenTheItemsAreAddedToTheTarget()
     {
         // Arrange
-        ICollection<int> actual = new List<int>();
-        int[] expected = new[] { 1, 2, 3 };
+        ICollection<int> actual = [];
+        int[] expected = [1, 2, 3];
 
         // Act
         actual.Replace(expected);
@@ -53,8 +48,8 @@ public sealed class WhenReplaceIsCalled
     public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetAndTheExistingEntriesAreRemoved()
     {
         // Arrange
-        ICollection<int> actual = new List<int> { 1, 2, 3 };
-        int[] expected = new[] { 4, 5, 6 };
+        ICollection<int> actual = [1, 2, 3];
+        int[] expected = [4, 5, 6];
 
         // Act
         actual.Replace(expected);
@@ -67,8 +62,8 @@ public sealed class WhenReplaceIsCalled
     public void GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
     {
         // Arrange
-        ICollection<int> actual = new List<int>();
-        int[] items = Array.Empty<int>();
+        ICollection<int> actual = [];
+        int[] items = [];
 
         // Act
         actual.Replace(items);
@@ -81,8 +76,8 @@ public sealed class WhenReplaceIsCalled
     public void GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetBecomesEmpty()
     {
         // Arrange
-        ICollection<int> actual = new List<int> { 1, 2, 3 };
-        int[] items = Array.Empty<int>();
+        ICollection<int> actual = [1, 2, 3];
+        int[] items = [];
 
         // Act
         actual.Replace(items);

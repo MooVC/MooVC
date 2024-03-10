@@ -1,9 +1,6 @@
 ﻿namespace MooVC.Compression;
 
-using System.IO;
 using System.IO.Compression;
-using System.Threading;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using static MooVC.Compression.StreamCompressor_Resources;
 
@@ -28,8 +25,8 @@ public abstract class StreamCompressor
     /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
     protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, parameterName: nameof(bufferSize), message: BufferSizeRequired);
-        this.level = Guard.Against.EnumOutOfRange(level, parameterName: nameof(level), message: LevelRequired);
+        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
+        this.level = Guard.Against.EnumOutOfRange(level, message: LevelRequired);
     }
 
     /// <summary>
@@ -38,7 +35,7 @@ public abstract class StreamCompressor
     /// <param name="source">The stream to compress.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A <see cref="Task{TResult}" /> that represents the asynchronous operation, containing the compressed stream as the result.</returns>
-    public override async Task<Stream> CompressAsync(Stream source, CancellationToken cancellationToken)
+    public override async Task<Stream> Compress(Stream source, CancellationToken cancellationToken)
     {
         var compressed = new MemoryStream();
 
@@ -59,7 +56,7 @@ public abstract class StreamCompressor
     /// <returns>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation, containing the decompressed stream as the result.
     /// </returns>
-    public override async Task<Stream> DecompressAsync(Stream source, CancellationToken cancellationToken)
+    public override async Task<Stream> Decompress(Stream source, CancellationToken cancellationToken)
     {
         var decompressed = new MemoryStream();
 

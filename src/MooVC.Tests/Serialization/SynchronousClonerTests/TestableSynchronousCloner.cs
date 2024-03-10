@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Serialization.SynchronousClonerTests;
 
-using System;
-
 public sealed class TestableSynchronousCloner
     : SynchronousCloner
 {

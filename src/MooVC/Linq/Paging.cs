@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Linq;
 
-using System;
 using static System.Math;
 
 /// <summary>
@@ -84,7 +83,7 @@ public sealed class Paging
     /// <value>
     /// The requested page number.
     /// </value>
-    public ushort Page { get; } = FirstPage;
+    public ushort Page { get; }
 
     /// <summary>
     /// Gets the size associated with a page.
@@ -92,7 +91,7 @@ public sealed class Paging
     /// <value>
     /// The size associated with a page.
     /// </value>
-    public ushort Size { get; } = DefaultSize;
+    public ushort Size { get; }
 
     /// <summary>
     /// Gets the number of entries in the sequence to be skipped to read the beginning of the desired page.

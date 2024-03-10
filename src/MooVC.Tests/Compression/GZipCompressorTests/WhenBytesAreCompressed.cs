@@ -1,16 +1,12 @@
 ﻿namespace MooVC.Compression.GZipCompressorTests;
 
-using System.Collections.Generic;
 using System.IO.Compression;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenBytesAreCompressed
 {
     [Fact]
-    public async Task GivenBytesThenTheResultMatchesAsync()
+    public async Task GivenBytesThenTheResultMatches()
     {
         // Arrange
         byte[] expected = new byte[32768];
@@ -20,29 +16,29 @@ public sealed class WhenBytesAreCompressed
         var compressor = new GZipCompressor(level: CompressionLevel.Fastest);
 
         // Act
-        IEnumerable<byte> compressed = await compressor.CompressAsync(expected, CancellationToken.None);
+        IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
 
         // Assert
         _ = compressed.Should().NotEqual(expected);
 
         // Act
-        IEnumerable<byte> decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+        IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
         _ = decompressed.Should().Equal(expected);
     }
 
     [Fact]
-    public async Task GivenNoBytesThenTheResultMatchesAsync()
+    public async Task GivenNoBytesThenTheResultMatches()
     {
         // Arrange
-        byte[] expected = Array.Empty<byte>();
+        byte[] expected = [];
 
         var compressor = new GZipCompressor(level: CompressionLevel.Fastest);
 
         // Act
-        IEnumerable<byte> compressed = await compressor.CompressAsync(expected, CancellationToken.None);
-        IEnumerable<byte> decompressed = await compressor.DecompressAsync(compressed, CancellationToken.None);
+        IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
+        IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
         _ = decompressed.Should().Equal(expected);

@@ -1,7 +1,5 @@
 namespace MooVC;
 
-using System;
-
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
 /// </summary>
@@ -21,7 +19,7 @@ public static partial class ArrayExtensions
     {
         if (values is null)
         {
-            return Array.Empty<T>();
+            return [];
         }
 
         return values.ToCopy(predicate: predicate);

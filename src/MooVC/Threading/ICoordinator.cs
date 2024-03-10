@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Threading;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 /// <summary>
 /// Represents a coordinator, which is a component that is responsible for managing access to resources based on context specific metadata.
 /// Coordination reduces contention by ensuring mutual exclusivity is only applied by type specific context metadata, rather than by type.
@@ -24,5 +20,5 @@ public interface ICoordinator<T>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is metadata relating to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
-    Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken cancellationToken, TimeSpan? timeout = default);
+    Task<ICoordinationContext<T>> Apply(T context, CancellationToken cancellationToken, TimeSpan? timeout = default);
 }

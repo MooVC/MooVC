@@ -1,12 +1,7 @@
 ﻿namespace MooVC.Threading;
 
-using System;
 using System.Collections.Concurrent;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using MooVC.Linq;
-using static System.String;
 using static MooVC.Threading.Coordinator_Resources;
 
 /// <summary>
@@ -15,8 +10,7 @@ using static MooVC.Threading.Coordinator_Resources;
 /// </summary>
 /// <typeparam name="T">The type to which the context applies.</typeparam>
 public sealed class Coordinator<T>
-    : ICoordinator<T>,
-      IDisposable
+    : ICoordinator<T>
     where T : notnull
 {
     private const string NumberFormat = "X";
@@ -46,7 +40,7 @@ public sealed class Coordinator<T>
     /// A <see cref="Task{TResult}" /> that represents the asynchronous operation.
     /// The result of the task is metadata relating to the mutual exclusive access granted by the coordinator in the specified context.
     /// </returns>
-    public async Task<ICoordinationContext<T>> ApplyAsync(T context, CancellationToken cancellationToken, TimeSpan? timeout = default)
+    public async Task<ICoordinationContext<T>> Apply(T context, CancellationToken cancellationToken, TimeSpan? timeout = default)
     {
         if (isDisposed)
         {
@@ -65,7 +59,7 @@ public sealed class Coordinator<T>
 
         if (!isSuccessful)
         {
-            throw new TimeoutException(Format(ApplyAsyncTimeout, context));
+            throw new TimeoutException(ApplyAsyncTimeout.Format(context));
         }
 
         return new CoordinationContext<T>(context, semaphore);
@@ -90,7 +84,7 @@ public sealed class Coordinator<T>
             key = coordinatable.GetKey();
         }
 
-        if (IsNullOrWhiteSpace(key))
+        if (string.IsNullOrWhiteSpace(key))
         {
             return context
                 .GetHashCode()

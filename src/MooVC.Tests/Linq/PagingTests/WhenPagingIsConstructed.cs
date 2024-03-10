@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Linq.PagingTests;
 
-using System;
-using FluentAssertions;
-using Xunit;
-
 public sealed class WhenPagingIsConstructed
 {
     [Theory]

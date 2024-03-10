@@ -1,10 +1,7 @@
 ﻿namespace MooVC.IO.StreamExtensionsTests;
 
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using FluentAssertions;
-using Xunit;
 
 public sealed class WhenGetBytesIsCalled
 {
@@ -12,7 +9,7 @@ public sealed class WhenGetBytesIsCalled
     public void GivenAStreamThenTheBytesWithinTheStreamAreReturned()
     {
         // Arrange
-        byte[] expected = new byte[] { 1, 2, 3 };
+        byte[] expected = [1, 2, 3];
         using var stream = new MemoryStream(expected);
 
         // Act
@@ -26,7 +23,7 @@ public sealed class WhenGetBytesIsCalled
     public void GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
     {
         // Arrange
-        byte[] expected = Array.Empty<byte>();
+        byte[] expected = [];
         using var stream = new MemoryStream(expected);
 
         // Act

@@ -1,8 +1,5 @@
 ﻿namespace MooVC;
 
-using System.Linq;
-using MooVC.Linq;
-
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
 /// </summary>
