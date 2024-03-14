@@ -144,11 +144,7 @@ public sealed class Paging
             };
         }
 
-        var x = result;
-
-        var y = result ?? new Paging(page: paging.Page, size: paging.Size);
-
-        return y;
+        return result ?? new Paging(page: paging.Page, size: paging.Size);
     }
 
     /// <summary>
