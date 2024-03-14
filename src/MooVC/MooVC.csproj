@@ -10,15 +10,10 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MooVC.Generators\MooVC.Generators.csproj"
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\MooVC.Generators\MooVC.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(OutputPath)..\..\..\MooVC.Generators\bin\$(Configuration)\**\*.dll"
-        Pack="true"
-        PackagePath="analyzers\dotnet\cs"
-        Visible="false" />
+    <None Include="$(OutputPath)..\..\..\MooVC.Generators\bin\$(Configuration)\**\*.dll" Pack="true" PackagePath="analyzers\dotnet\cs" Visible="false" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ArrayExtensions.Resources.Designer.cs">
@@ -91,7 +86,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Serializer.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Threading\Coordinator.Resources.Designer.cs">
+    <Compile Update="Threading\Coordination\Coordinator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Coordinator.Resources.resx</DependentUpon>
@@ -159,7 +154,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Threading\Coordinator.Resources.resx">
+    <EmbeddedResource Update="Threading\Coordination\Coordinator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Coordinator.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

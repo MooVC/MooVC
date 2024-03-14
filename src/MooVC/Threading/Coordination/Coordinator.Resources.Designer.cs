@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Threading {
+namespace MooVC.Threading.Coordination {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MooVC.Threading {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Threading.Coordinator.Resources", typeof(Coordinator_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Threading.Coordination.Coordinator.Resources", typeof(Coordinator_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

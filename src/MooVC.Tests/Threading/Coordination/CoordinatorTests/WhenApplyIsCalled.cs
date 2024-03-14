@@ -1,4 +1,6 @@
-﻿namespace MooVC.Threading.CoordinatorTests;
+﻿namespace MooVC.Threading.Coordination.CoordinatorTests;
+
+using MooVC.Threading.Coordination;
 
 public sealed class WhenApplyIsCalled
     : IDisposable
@@ -19,14 +21,14 @@ public sealed class WhenApplyIsCalled
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        string? context = default;
+        string? subject = default;
 
         // Act
-        Func<Task> act = async () => await coordinator.Apply(context!, CancellationToken.None);
+        Func<Task> act = async () => await coordinator.Apply(subject!, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()
-            .WithParameterName(nameof(context));
+            .WithParameterName(nameof(subject));
     }
 
     [Fact]
@@ -48,13 +50,13 @@ public sealed class WhenApplyIsCalled
         // Arrange
         const int ExpectedCount = 5;
         int counter = 0;
-        string context = "Test";
+        string subject = "Test";
 
         Task[] tasks = CreateTasks(
             async () =>
             {
-                ICoordinationContext<string> coordination = await coordinator
-                    .Apply(context, CancellationToken.None);
+                IContext<string> coordination = await coordinator
+                    .Apply(subject, CancellationToken.None);
 
                 using (coordination)
                 {
@@ -74,13 +76,13 @@ public sealed class WhenApplyIsCalled
     public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrown()
     {
         // Arrange
-        string context = "Test";
+        string subject = "Test";
         using var semaphore = new SemaphoreSlim(0, 1);
 
         // Act
         _ = Task.Run(async () =>
         {
-            using (await coordinator.Apply(context, CancellationToken.None))
+            using (await coordinator.Apply(subject, CancellationToken.None))
             {
                 _ = semaphore.Release();
                 await Task.Delay(TimeSpan.FromSeconds(10));
@@ -90,7 +92,7 @@ public sealed class WhenApplyIsCalled
         await semaphore.WaitAsync();
 
         // Act
-        Func<Task> act = async () => await coordinator.Apply(context, CancellationToken.None, TimeSpan.FromMilliseconds(250));
+        Func<Task> act = async () => await coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
 
         // Assert
         _ = await act.Should().ThrowAsync<TimeoutException>();
@@ -107,7 +109,7 @@ public sealed class WhenApplyIsCalled
         _ = context.GetKey().Returns(expected);
 
         // Act
-        ICoordinationContext<ITestCoordinatable> coordination = await subject
+        IContext<ITestCoordinatable> coordination = await subject
             .Apply(context, CancellationToken.None);
 
         // Assert
@@ -125,7 +127,7 @@ public sealed class WhenApplyIsCalled
         var subject = new Coordinator<object>();
 
         // Act
-        ICoordinationContext<object> coordination = await subject
+        IContext<object> coordination = await subject
             .Apply(context, CancellationToken.None);
 
         using (coordination)
