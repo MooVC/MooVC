@@ -3,7 +3,7 @@
 using Microsoft.CodeAnalysis;
 
 /// <summary>
-/// Generates implementation elements for IFeature within an class or record that declares that it is an implementation.
+/// Generates implementation elements for IFeatures within an class or record that declares that it is an implementation.
 /// Also generates an extension that supports consumption of the Feature through the prefix "With".
 /// </summary>
 [Generator(LanguageNames.CSharp)]
@@ -12,11 +12,15 @@ public sealed partial class FeaturesGenerator
 {
     private const string TypeName = "IFeatures";
 
+    /// <summary>
+    /// Creates an instance of the generator which is used to expand upon the IFeatures definition to facilitate ease of consumption.
+    /// </summary>
     public FeaturesGenerator()
         : base("Includes", TypeName)
     {
     }
 
+    /// <inheritdoc/>
     protected override string GenerateInstanceExtension(Attribute attribute)
     {
         return $$"""
@@ -28,6 +32,7 @@ public sealed partial class FeaturesGenerator
             """;
     }
 
+    /// <inheritdoc/>
     protected override string GenerateMutatorExtension(Attribute attribute)
     {
         return $$"""
@@ -39,6 +44,7 @@ public sealed partial class FeaturesGenerator
             """;
     }
 
+    /// <inheritdoc/>
     protected override string GenerateProperty(Subject subject)
     {
         return $$"""

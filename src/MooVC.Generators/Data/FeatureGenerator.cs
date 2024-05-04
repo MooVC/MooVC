@@ -12,11 +12,15 @@ public sealed partial class FeatureGenerator
 {
     private const string TypeName = "IFeature";
 
+    /// <summary>
+    /// Creates an instance of the generator which is used to expand upon the IFeature definition to facilitate ease of consumption.
+    /// </summary>
     public FeatureGenerator()
         : base("With", TypeName)
     {
     }
 
+    /// <inheritdoc/>
     protected override string GenerateInstanceExtension(Attribute attribute)
     {
         return $$"""
@@ -28,6 +32,7 @@ public sealed partial class FeatureGenerator
             """;
     }
 
+    /// <inheritdoc/>
     protected override string GenerateMutatorExtension(Attribute attribute)
     {
         return $$"""
@@ -39,6 +44,7 @@ public sealed partial class FeatureGenerator
             """;
     }
 
+    /// <inheritdoc/>
     protected override string GenerateProperty(Subject subject)
     {
         return $$"""

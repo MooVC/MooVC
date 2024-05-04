@@ -17,9 +17,11 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Added Composition.IExtension<TContainer> to support extensibility via IoC.
 - Added Data.IFeature<T> and Data.IFeatures<T> to facilitate creation of rich fluent APIs with support of MooVC.Generators assembly.
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
+- Added Linq.IEnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
+- Added Linq.IEnumeratorExtensions.ToArray extension to enumerate an enumerator, returning the values as an array.
 - Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
 - Added support for .NET 8.0.
-- Added Linq.IEnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
+- Added support for System.Text.Json serializaton through Serialization.Json.Serializer.
 - Changed ArrayExtensions.Append to accept a params array for the elements to be apended to the source array.
 - Changed ArrayExtensions.Prepend to accept a params array for the elements to be apended to the source array.
 - Changed Collections.Concurrent.ProducerConsumerCollectionExtensions.Extract to return IReadOnlyList<T> instead of IEnumerable<T>.
@@ -29,7 +31,9 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Changed Collections.Generic.EnumerableExtensions.ProcessAllAsync to return IReadOnlyList<T> instead of IEnumerable<T>.
 - Changed Linq.EnumerableExtensions.IsEmpty extension so that it no longer accepts a null (**Breaking Change**).
 - Changed Linq.PagedResult<T> so that now implements IReadOnlyList<T> (**Breaking Change**).
+- Changed Linq.PagedResult<T> so that it behaves like a value type. 
 - Changed Linq.Paging so that it can no longer be extended (**Breaking Change**).
+- Changed Linq.Paging so that it behaves like a value type.
 - Changed methods accepting a CancellationToken so that it is no longer an optional parameter (**Breaking Change**).
 - Changed the default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Changed Threading.ICoordinatable<T> so that it no longer accepts a generic type (**Breaking Change**).

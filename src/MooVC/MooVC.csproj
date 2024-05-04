@@ -26,6 +26,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ICollectionExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Linq\IEnumeratorExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IEnumeratorExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Compression\StreamCompressor.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -66,6 +71,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PagedResult.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Linq\Serialization\PagedResultConverter.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PagedResultConverter.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Persistence\MappedStore.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -75,6 +85,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Cloner.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Serialization\Json\Serializer.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Serializer.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -105,6 +120,10 @@
     <EmbeddedResource Update="Collections\Generic\ICollectionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ICollectionExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Linq\IEnumeratorExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IEnumeratorExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Compression\StreamCompressor.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +157,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PagedResult.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Linq\Serialization\PagedResultConverter.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PagedResultConverter.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Persistence\MappedStore.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MappedStore.Resources.Designer.cs</LastGenOutput>
@@ -145,6 +168,10 @@
     <EmbeddedResource Update="Serialization\Cloner.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Cloner.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Serialization\Json\Serializer.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

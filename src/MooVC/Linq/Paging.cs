@@ -155,11 +155,6 @@ public sealed class Paging
     /// <returns>true if <paramref name="left"/> and <paramref name="right"/> represent the same value; otherwise, false.</returns>
     public static bool operator ==(Paging? left, Paging? right)
     {
-        if (ReferenceEquals(left, right))
-        {
-            return true;
-        }
-
         if (left is null || right is null)
         {
             return false;
@@ -215,7 +210,7 @@ public sealed class Paging
     /// </remarks>
     public bool Equals(Paging? other)
     {
-        return other is not null && Page == other.Page && Size == other.Size;
+        return other is not null && (ReferenceEquals(this, other) || (Page == other.Page && Size == other.Size));
     }
 
     /// <summary>
