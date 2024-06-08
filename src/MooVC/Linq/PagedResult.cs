@@ -1,6 +1,10 @@
 ﻿namespace MooVC.Linq;
 
 using System.Collections;
+#if NET6_0_OR_GREATER
+using System.Text.Json.Serialization;
+using MooVC.Linq.Serialization;
+#endif
 using Ardalis.GuardClauses;
 using static MooVC.Linq.PagedResult_Resources;
 
@@ -8,8 +12,12 @@ using static MooVC.Linq.PagedResult_Resources;
 /// Represents the result of a request to page a sequence of type <see cref="T" />.
 /// </summary>
 /// <typeparam name="T">The type of the elements paged.</typeparam>
+#if NET6_0_OR_GREATER
+[JsonConverter(typeof(PagedResultConverter))]
+#endif
 public sealed class PagedResult<T>
-    : IReadOnlyList<T>
+    : IReadOnlyList<T>,
+      IEquatable<PagedResult<T>>
 {
     private readonly IReadOnlyList<T> values;
 
@@ -143,12 +151,91 @@ public sealed class PagedResult<T>
     public T this[int index] => values[index];
 
     /// <summary>
+    /// Determines whether two specified instances of <see cref="PagedResult{T}"/> are equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns>true if <paramref name="left"/> and <paramref name="right"/> represent the same value; otherwise, false.</returns>
+    public static bool operator ==(PagedResult<T>? left, PagedResult<T>? right)
+    {
+        if (left is null || right is null)
+        {
+            return false;
+        }
+
+        return left.Equals(right);
+    }
+
+    /// <summary>
+    /// Determines whether two specified instances of <see cref="PagedResult{T}"/> are not equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns>true if <paramref name="left"/> and <paramref name="right"/> do not represent the same value; otherwise, false.</returns>
+    public static bool operator !=(PagedResult<T>? left, PagedResult<T>? right)
+    {
+        return !(left == right);
+    }
+
+    /// <summary>
+    /// Determines whether the specified object is equal to the current <see cref="PagedResult{T}"/> instance.
+    /// </summary>
+    /// <param name="obj">The object to compare with the current instance.</param>
+    /// <returns>true if the specified object is equal to the current instance; otherwise, false.</returns>
+    /// <remarks>
+    /// This method overrides <see cref="object.Equals(object)"/> to provide a way to compare two <see cref="PagedResult{T}"/> instances.
+    /// </remarks>
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as PagedResult<T>);
+    }
+
+    /// <summary>
+    /// Indicates whether the current <see cref="PagedResult{T}"/> instance is equal to another <see cref="PagedResult{T}"/> instance.
+    /// </summary>
+    /// <param name="other">An instance of <see cref="PagedResult{T}"/> to compare with this instance.</param>
+    /// <returns>true if the current instance is equal to the <paramref name="other"/> parameter; otherwise, false.</returns>
+    /// <remarks>
+    /// This method implements the <see cref="IEquatable{T}"/> interface and provides a type-safe way to compare two <see cref="PagedResult{T}"/> instances.
+    /// </remarks>
+    public bool Equals(PagedResult<T>? other)
+    {
+        return other is not null
+            && (ReferenceEquals(this, other) || (Request.Equals(other.Request) && Total == other.Total && values.SequenceEqual(other.values)));
+    }
+
+    /// <summary>
     /// Returns an enumerator that iterates through the elements in the result set.
     /// </summary>
     /// <returns>An enumerator for the elements in the result set.</returns>
     public IEnumerator<T> GetEnumerator()
     {
         return values.GetEnumerator();
+    }
+
+    /// <summary>
+    /// Serves as the default hash function.
+    /// </summary>
+    /// <returns>A hash code for the current <see cref="PagedResult{T}"/> instance.</returns>
+    /// <remarks>
+    /// The hash code is calculated based on the values, including the <see cref="Request"/> and <see cref="Total"/> properties.
+    /// This implementation is suitable for use in hashing algorithms and data structures like a hash table.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hashCode = Request.GetHashCode();
+
+            hashCode = (hashCode * 397) ^ Total.GetHashCode();
+
+            foreach (T element in values)
+            {
+                hashCode = (hashCode * 397) ^ (element?.GetHashCode() ?? 0);
+            }
+
+            return hashCode;
+        }
     }
 
     /// <summary>

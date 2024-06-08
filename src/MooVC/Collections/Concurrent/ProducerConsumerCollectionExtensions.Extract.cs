@@ -3,7 +3,7 @@
 using System.Collections.Concurrent;
 
 /// <summary>
-/// Provides extensions relating to IProducerConsumerCollection{T}.
+/// Provides extensions relating to <see cref="IProducerConsumerCollection{T}"/>.
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
 public static partial class ProducerConsumerCollectionExtensions
