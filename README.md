@@ -14,8 +14,6 @@ Features within MooVC that were intended to address shortcomings within the .NET
 
 ## Enhancements
 
-- Added Composition.IExtension<TContainer> to support extensibility via IoC.
-- Added Data.IFeature<T> and Data.IFeatures<T> to facilitate creation of rich fluent APIs with support of MooVC.Generators assembly.
 - Added Hosting.ThreadSafeHostedService to provide similar functionality as that provided by Processing to Microsoft.Extensions.Hosting.IHostedService.
 - Added Linq.IEnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
 - Added Linq.IEnumeratorExtensions.ToArray extension to enumerate an enumerator, returning the values as an array.

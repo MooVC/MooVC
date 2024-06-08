@@ -10,9 +10,6 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MooVC.Generators\MooVC.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="$(OutputPath)..\..\..\MooVC.Generators\bin\$(Configuration)\**\*.dll" Pack="true" PackagePath="analyzers\dotnet\cs" Visible="false" />
   </ItemGroup>
   <ItemGroup>
@@ -35,16 +32,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StreamCompressor.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Data\IFeatureExtensions.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IFeatureExtensions.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Data\IFeaturesExtensions.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IFeaturesExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="ExceptionExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -128,14 +115,6 @@
     <EmbeddedResource Update="Compression\StreamCompressor.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StreamCompressor.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Data\IFeatureExtensions.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>IFeatureExtensions.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Data\IFeaturesExtensions.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>IFeaturesExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ExceptionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
