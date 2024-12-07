@@ -29,7 +29,7 @@ public sealed class WhenDeserializeIsCalled
         var serializer = new Serializer();
         byte[] sequence = [1, 2, 3, 4];
         using var cancellationTokenSource = new CancellationTokenSource();
-        cancellationTokenSource.Cancel();
+        await cancellationTokenSource.CancelAsync();
 
         // Act
         Func<Task> act = async () => await serializer.Deserialize<TestClass>(sequence, cancellationTokenSource.Token);
@@ -64,7 +64,7 @@ public sealed class WhenDeserializeIsCalled
         var serializer = new Serializer();
         using var stream = new MemoryStream([1, 2, 3, 4]);
         using var cancellationTokenSource = new CancellationTokenSource();
-        cancellationTokenSource.Cancel();
+        await cancellationTokenSource.CancelAsync();
 
         // Act
         Func<Task> act = async () => await serializer.Deserialize<TestClass>(stream, cancellationTokenSource.Token);

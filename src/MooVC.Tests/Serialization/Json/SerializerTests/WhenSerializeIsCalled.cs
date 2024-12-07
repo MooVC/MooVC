@@ -27,7 +27,7 @@ public sealed class WhenSerializeIsCalled
         var serializer = new Serializer();
         var instance = new TestClass { Property = "Test" };
         using var cancellationTokenSource = new CancellationTokenSource();
-        cancellationTokenSource.Cancel();
+        await cancellationTokenSource.CancelAsync();
 
         // Act
         Func<Task> act = async () => await serializer.Serialize(instance, cancellationTokenSource.Token);
@@ -60,7 +60,7 @@ public sealed class WhenSerializeIsCalled
         var instance = new TestClass { Property = "Test" };
         using var stream = new MemoryStream();
         using var cancellationTokenSource = new CancellationTokenSource();
-        cancellationTokenSource.Cancel();
+        await cancellationTokenSource.CancelAsync();
 
         // Act
         Func<Task> act = async () => await serializer.Serialize(instance, stream, cancellationTokenSource.Token);
