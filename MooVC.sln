@@ -28,8 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{7755FACA-C000-4C6F-8047-56E0112603FF}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		analyzers\stylecop.code.ruleset = analyzers\stylecop.code.ruleset
-		analyzers\stylecop.tests.ruleset = analyzers\stylecop.tests.ruleset
+		analyzers\code.ruleset = analyzers\code.ruleset
+		analyzers\tests.ruleset = analyzers\tests.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{722D825D-92CB-4C60-AA2A-B97C3CB9F047}"

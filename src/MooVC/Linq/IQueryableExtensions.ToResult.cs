@@ -27,7 +27,7 @@ public static partial class IQueryableExtensions
         {
             total = (ulong)queryable.LongCount();
             queryable = queryable.Page(paging);
-            values = queryable.ToArray();
+            values = [.. queryable];
         }
 
         return new PagedResult<T>(paging, total, values);

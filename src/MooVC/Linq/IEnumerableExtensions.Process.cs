@@ -54,13 +54,13 @@ public static partial class IEnumerableExtensions
     public static IReadOnlyList<TResult> Process<TResult, TSource>(this IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> transform)
         where TSource : notnull
     {
-        IDictionary<TSource, IEnumerable<TResult>>? transforms = default;
+        Dictionary<TSource, IEnumerable<TResult>>? transforms = default;
 
         return source.Process(
             (item, results) => transforms![item] = results,
             () => transforms!,
             ForEach,
-            () => transforms = new Dictionary<TSource, IEnumerable<TResult>>(),
+            () => transforms = [],
             transform);
     }
 

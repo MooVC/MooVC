@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../analyzers/stylecop.tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../analyzers/tests.ruleset</CodeAnalysisRuleSet>
     <CollectCoverage>true</CollectCoverage>
     <CoverletOutputFormat>cobertura</CoverletOutputFormat>
     <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
@@ -9,8 +9,8 @@
     <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
     <NoWarn>CA1859;CA1861</NoWarn>
     <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
-    <TargetFrameworks Condition="'$(IsCodespace)' == 'true'">net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
-    <TargetFrameworks Condition="'$(IsCodespace)' != 'true'">net48;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(IsCodespace)' == 'true'">net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(IsCodespace)' != 'true'">net48;net8.0;net9.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" />
