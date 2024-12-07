@@ -8,8 +8,9 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v7.3.0
+# Release v8.0.0
 
 ## Enhancements
 
-- Added ArrayExtensions.Snapshot to facilitate array copy with an optional predicate.
+- Added support for .NET 8 and .NET 9.
+- Removed support for .NET 6 and .NET 7.
