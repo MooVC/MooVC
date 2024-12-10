@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition="'$(IsCodespace)' != 'true'">net48;net8.0;net9.0</TargetFrameworks>
   </PropertyGroup>

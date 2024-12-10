@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <NoWarn>CA1720</NoWarn>
+  </PropertyGroup>
+</Project>

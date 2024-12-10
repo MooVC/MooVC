@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A library designed to encapsulate the K4os.Compression.LZ4 implementation through the standardized MooVC.Compression interpretation, facilitating ease of consumption within inner layers without direct coupling to infrastructural concerns.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="K4os.Compression.LZ4.Streams" />
+    <ProjectReference Include="..\MooVC\MooVC.csproj" />
+  </ItemGroup>
+</Project>

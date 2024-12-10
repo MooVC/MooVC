@@ -39,6 +39,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{722D
 		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{FCF5778F-FB30-4E42-AF90-B4B1958BFA93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Compression.LZ4", "src\MooVC.Infrastructure.Compression.LZ4\MooVC.Infrastructure.Compression.LZ4.csproj", "{CE096AFF-8F42-4AED-905A-210BD677DFAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Compression.LZ4.Tests", "src\MooVC.Infrastructure.Compression.LZ4.Tests\MooVC.Infrastructure.Compression.LZ4.Tests.csproj", "{811BA58E-723E-4BDC-847C-1DC4FD0442B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7F180F7C-0FA8-4ADF-9363-E4339C7E6022}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compression", "Compression", "{73CB01C1-F805-4CDF-9035-314C25036D23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{27DAD4DD-383B-40B4-9805-EF7D51CAB75F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Apex", "src\MooVC.Infrastructure.Serialization.Apex\MooVC.Infrastructure.Serialization.Apex.csproj", "{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Apex.Tests", "src\MooVC.Infrastructure.Serialization.Apex.Tests\MooVC.Infrastructure.Serialization.Apex.Tests.csproj", "{3AF01625-0607-4CA1-84E5-568F01692814}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Bson.Newtonsoft", "src\MooVC.Infrastructure.Serialization.Bson.Newtonsoft\MooVC.Infrastructure.Serialization.Bson.Newtonsoft.csproj", "{18C6B752-74A3-4E8E-9073-8B6913B07346}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests", "src\MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests\MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests.csproj", "{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Json.Newtonsoft", "src\MooVC.Infrastructure.Serialization.Json.Newtonsoft\MooVC.Infrastructure.Serialization.Json.Newtonsoft.csproj", "{5A2E864A-B7FD-424D-AF56-C0E378DE2115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests", "src\MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests\MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests.csproj", "{B677AF98-8A8D-4328-86DB-B6C218ABBACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.MessagePack", "src\MooVC.Infrastructure.Serialization.MessagePack\MooVC.Infrastructure.Serialization.MessagePack.csproj", "{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.MessagePack.Tests", "src\MooVC.Infrastructure.Serialization.MessagePack.Tests\MooVC.Infrastructure.Serialization.MessagePack.Tests.csproj", "{A8491874-C325-444E-A941-48C5EE7D66E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,9 +81,66 @@ Global
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE096AFF-8F42-4AED-905A-210BD677DFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE096AFF-8F42-4AED-905A-210BD677DFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE096AFF-8F42-4AED-905A-210BD677DFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE096AFF-8F42-4AED-905A-210BD677DFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811BA58E-723E-4BDC-847C-1DC4FD0442B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811BA58E-723E-4BDC-847C-1DC4FD0442B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811BA58E-723E-4BDC-847C-1DC4FD0442B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811BA58E-723E-4BDC-847C-1DC4FD0442B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF01625-0607-4CA1-84E5-568F01692814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF01625-0607-4CA1-84E5-568F01692814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF01625-0607-4CA1-84E5-568F01692814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF01625-0607-4CA1-84E5-568F01692814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C6B752-74A3-4E8E-9073-8B6913B07346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C6B752-74A3-4E8E-9073-8B6913B07346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C6B752-74A3-4E8E-9073-8B6913B07346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C6B752-74A3-4E8E-9073-8B6913B07346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2E864A-B7FD-424D-AF56-C0E378DE2115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2E864A-B7FD-424D-AF56-C0E378DE2115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2E864A-B7FD-424D-AF56-C0E378DE2115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2E864A-B7FD-424D-AF56-C0E378DE2115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B677AF98-8A8D-4328-86DB-B6C218ABBACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B677AF98-8A8D-4328-86DB-B6C218ABBACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B677AF98-8A8D-4328-86DB-B6C218ABBACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B677AF98-8A8D-4328-86DB-B6C218ABBACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8491874-C325-444E-A941-48C5EE7D66E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8491874-C325-444E-A941-48C5EE7D66E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8491874-C325-444E-A941-48C5EE7D66E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8491874-C325-444E-A941-48C5EE7D66E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23EF98F1-FD69-4C34-885F-EC7D378DB6E5} = {FCF5778F-FB30-4E42-AF90-B4B1958BFA93}
+		{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4} = {FCF5778F-FB30-4E42-AF90-B4B1958BFA93}
+		{CE096AFF-8F42-4AED-905A-210BD677DFAE} = {73CB01C1-F805-4CDF-9035-314C25036D23}
+		{811BA58E-723E-4BDC-847C-1DC4FD0442B3} = {73CB01C1-F805-4CDF-9035-314C25036D23}
+		{7F180F7C-0FA8-4ADF-9363-E4339C7E6022} = {FCF5778F-FB30-4E42-AF90-B4B1958BFA93}
+		{73CB01C1-F805-4CDF-9035-314C25036D23} = {7F180F7C-0FA8-4ADF-9363-E4339C7E6022}
+		{27DAD4DD-383B-40B4-9805-EF7D51CAB75F} = {7F180F7C-0FA8-4ADF-9363-E4339C7E6022}
+		{8430FEBC-CF11-4136-8BD7-57BB3E8E9F5C} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{3AF01625-0607-4CA1-84E5-568F01692814} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{18C6B752-74A3-4E8E-9073-8B6913B07346} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{92B4B9B8-3D8A-41D0-80CD-F54B26AF30FC} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{5A2E864A-B7FD-424D-AF56-C0E378DE2115} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{B677AF98-8A8D-4328-86DB-B6C218ABBACE} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{1EA75B23-10BF-4561-8AC8-1908B36EB1C7} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
+		{A8491874-C325-444E-A941-48C5EE7D66E3} = {27DAD4DD-383B-40B4-9805-EF7D51CAB75F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3D6A73C-05FC-4854-AA9D-8A0A190525E3}

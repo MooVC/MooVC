@@ -8,7 +8,7 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-# Release v8.0.0
+# Release v9.0.0
 
 Features within MooVC that were intended to address shortcomings within the .NET Framework have now been removed in favour of the standardized offering or accepted best practice.
 
@@ -18,7 +18,6 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Added Linq.IEnumerableExtensions.IsNullOrEmpty extension for checking if an enumerable is null or has no elements.
 - Added Linq.IEnumeratorExtensions.ToArray extension to enumerate an enumerator, returning the values as an array.
 - Added reference to Ardalis.GuardClauses, replacing the Ensure guard centric class.
-- Added support for .NET 8.0 and .NET 9.0.
 - Added support for System.Text.Json serializaton through Serialization.Json.Serializer.
 - Changed ArrayExtensions.Append to accept a params array for the elements to be apended to the source array.
 - Changed ArrayExtensions.Prepend to accept a params array for the elements to be apended to the source array.
@@ -44,7 +43,6 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Renamed Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
 - Renamed ObjectExtensions.AsArray to ToTypedArray (**Breaking Change**).
 - Renamed Serialization.DefaultCloner to Cloner (**Breaking Change**).
-- Removed support for .NET 6 and .NET 7.
 - Removed ArrayExtensions.Extend in favor of ArrayExtensions.Append (**Breaking Change**).
 - Removed Async keyword from all methods (**Breaking Change**).
 - Removed Diagnostics (**Breaking Change**).
