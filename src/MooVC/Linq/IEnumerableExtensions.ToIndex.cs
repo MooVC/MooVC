@@ -19,6 +19,7 @@ public static partial class IEnumerableExtensions
     /// <param name="source">The source enumerable.</param>
     /// <param name="selector">A function that returns the value for each key in the dictionary.</param>
     /// <returns>A dictionary that contains the keys and values returned by the selector function.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IDictionary<TSubject, TValue> ToIndex<TSubject, TValue>(this IEnumerable<TSubject>? source, Func<TSubject, TValue> selector)
         where TSubject : notnull
     {

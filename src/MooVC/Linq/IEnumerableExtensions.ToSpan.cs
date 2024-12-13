@@ -18,6 +18,7 @@ public static partial class IEnumerableExtensions
     /// If <paramref name="items" /> is null or empty, an empty <see cref="ReadOnlySpan{T}" /> is returned.
     /// Otherwise, the input sequence is first converted to an array, and then the array is wrapped in a <see cref="ReadOnlySpan{T}" />.
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ReadOnlySpan<T> ToSpan<T>(this IEnumerable<T>? items)
     {
         if (items is null)

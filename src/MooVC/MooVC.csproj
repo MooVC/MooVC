@@ -64,11 +64,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PagedResultConverter.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Persistence\MappedStore.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MappedStore.Resources.resx</DependentUpon>
-    </Compile>
     <Compile Update="Serialization\Cloner.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -78,11 +73,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Serializer.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Serialization\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Serializer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -141,10 +131,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PagedResultConverter.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Persistence\MappedStore.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MappedStore.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Cloner.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Cloner.Resources.Designer.cs</LastGenOutput>
@@ -152,10 +138,6 @@
     <EmbeddedResource Update="Serialization\Json\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Serialization\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
