@@ -1,33 +1,34 @@
 ﻿#if NET6_0_OR_GREATER
-namespace MooVC.Linq.Serialization;
+namespace MooVC.Paging.Serialization;
 
 using System.Collections;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static MooVC.Linq.Serialization.PagedResultConverter_Resources;
+using MooVC.Linq;
+using static MooVC.Paging.Serialization.PageConverter_Resources;
 
 /// <summary>
-/// Provides serialization support for <see cref="PagedResult{T}"/>.
+/// Provides serialization support for <see cref="Page{T}"/>.
 /// </summary>
-public sealed class PagedResultConverter
+public sealed class PageConverter
     : JsonConverter<object>
 {
-    private const string RequestKey = nameof(PagedResult<object>.Request);
-    private const string TotalKey = nameof(PagedResult<object>.Total);
+    private const string DirectiveKey = nameof(Page<object>.Directive);
+    private const string TotalKey = nameof(Page<object>.Total);
     private const string ValuesKey = "$values";
 
     /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(PagedResult<>);
+        return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Page<>);
     }
 
     /// <inheritdoc/>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        ulong total = default;
-        Paging? request = default;
+        ulong? total = default;
+        Directive directive = default;
         object? values = default;
         Type type = typeToConvert.GetGenericArguments()[0];
 
@@ -45,12 +46,12 @@ public sealed class PagedResultConverter
 
                 switch (name)
                 {
-                    case TotalKey:
-                        total = reader.GetUInt64();
+                    case DirectiveKey:
+                        directive = JsonSerializer.Deserialize<Directive>(ref reader, options);
                         break;
 
-                    case RequestKey:
-                        request = JsonSerializer.Deserialize<Paging>(ref reader, options);
+                    case TotalKey:
+                        total = reader.GetUInt64();
                         break;
 
                     case ValuesKey:
@@ -60,25 +61,28 @@ public sealed class PagedResultConverter
             }
         }
 
-        return Activator.CreateInstance(typeToConvert, request, total, values)!;
+        return Activator.CreateInstance(typeToConvert, directive, total, values)!;
     }
 
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         Type type = value.GetType();
-        ulong total = GetValue<ulong>(TotalKey, type, value);
-        Paging request = GetValue<Paging>(RequestKey, type, value);
+        Directive directive = GetValue<Directive>(DirectiveKey, type, value);
+        ulong? total = GetValue<ulong?>(TotalKey, type, value);
         IEnumerator enumerator = ((IEnumerable)value).GetEnumerator();
         object[] values = enumerator.ToArray();
 
         writer.WriteStartObject();
 
-        writer.WritePropertyName(TotalKey);
-        writer.WriteNumberValue(total);
+        writer.WritePropertyName(DirectiveKey);
+        JsonSerializer.Serialize(writer, directive, options);
 
-        writer.WritePropertyName(RequestKey);
-        JsonSerializer.Serialize(writer, request, options);
+        if (total.HasValue)
+        {
+            writer.WritePropertyName(TotalKey);
+            writer.WriteNumberValue(total.Value);
+        }
 
         writer.WritePropertyName(ValuesKey);
         JsonSerializer.Serialize(writer, values, options);

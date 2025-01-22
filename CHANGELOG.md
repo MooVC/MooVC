@@ -32,14 +32,11 @@ Features within MooVC that were intended to address shortcomings within the .NET
 - Collections.Generic.ObjectExtensions.AsEnumerable extension to Linq.ObjectExtensions.AsEnumerable (**Breaking Change**).
 - Linq.EnumerableExtensions.IsEmpty extension so that it no longer accepts a null (**Breaking Change**).
 - Linq.EnumerableExtensions.SafeAny extension to Linq.EnumerableExtensions.HasAny (**Breaking Change**).
+- Linq.Paging to Paging.Directive (**Breaking Change**).
+- Linq.PagedResult<T> to Paging.Page<T> (**Breaking Change**).
 - Serialization.DefaultCloner to Cloner (**Breaking Change**).
 - The default CompressionLevel on each Compression implementation from SmallestSize to Optimal (**Breaking Change**).
 - Threading.ICoordinatable<T> so that it no longer accepts a generic type argument (**Breaking Change**).
-
-- Linq.PagedResult<T> so that now implements IReadOnlyList<T> (**Breaking Change**).
-- Linq.PagedResult<T> so that it behaves like a value type. 
-- Linq.Paging so that it can no longer be extended (**Breaking Change**).
-- Linq.Paging so that it behaves like a value type.
  
 ## Removed
 

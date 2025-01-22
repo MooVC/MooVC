@@ -54,15 +54,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IEnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Linq\PagedResult.Resources.Designer.cs">
+    <Compile Update="Paging\Serialization\PageConverter.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PagedResult.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Linq\Serialization\PagedResultConverter.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PagedResultConverter.Resources.resx</DependentUpon>
+      <DependentUpon>PageConverter.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Cloner.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -123,13 +118,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Linq\PagedResult.Resources.resx">
+    <EmbeddedResource Update="Paging\Serialization\PageConverter.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PagedResult.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Linq\Serialization\PagedResultConverter.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PagedResultConverter.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>PageConverter.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Cloner.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,5 +142,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Initializer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Linq {
+namespace MooVC.Paging.Serialization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Linq {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PagedResult_Resources {
+    internal class PageConverter_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PagedResult_Resources() {
+        internal PageConverter_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Linq {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Linq.PagedResult.Resources", typeof(PagedResult_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Paging.Serialization.PageConverter.Resources", typeof(PageConverter_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace MooVC.Linq {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The paging request that triggered the result must be provided..
+        ///   Looks up a localized string similar to The value for {0} on instance of type {1} could not be retrieved..
         /// </summary>
-        internal static string RequestRequired {
+        internal static string GetValueFailure {
             get {
-                return ResourceManager.GetString("RequestRequired", resourceCulture);
+                return ResourceManager.GetString("GetValueFailure", resourceCulture);
             }
         }
     }
