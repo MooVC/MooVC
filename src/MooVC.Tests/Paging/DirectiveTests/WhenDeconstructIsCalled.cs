@@ -4,67 +4,67 @@ namespace MooVC.Paging.DirectiveTests;
 public sealed class WhenDeconstructIsCalled
 {
     [Fact]
-    public void GivenDefaultDirectiveThenFirstPageAndDefaultSizeAreReturned()
+    public void GivenDefaultDirectiveThenFirstPageAndMinimumLimitAreReturned()
     {
         // Arrange
+        const ushort expectedLimit = Directive.MinimumLimit;
         const ushort expectedPage = Directive.FirstPage;
-        const ushort expectedSize = Directive.DefaultSize;
         Directive directive = default;
 
         // Act
-        (ushort page, ushort size) = directive;
+        (ushort limit, ushort page) = directive;
 
         // Assert
+        _ = limit.Should().Be(expectedLimit);
         _ = page.Should().Be(expectedPage);
-        _ = size.Should().Be(expectedSize);
     }
 
     [Fact]
     public void GivenDirectiveWithCustomValuesThenThoseValuesAreReturned()
     {
         // Arrange
+        const ushort expectedLimit = 15;
         const ushort expectedPage = 5;
-        const ushort expectedSize = 15;
-        var directive = new Directive(expectedPage, expectedSize);
+        Directive directive = new(Limit: expectedLimit, Page: expectedPage);
 
         // Act
-        (ushort page, ushort size) = directive;
+        (ushort limit, ushort page) = directive;
 
         // Assert
+        _ = limit.Should().Be(expectedLimit);
         _ = page.Should().Be(expectedPage);
-        _ = size.Should().Be(expectedSize);
     }
 
     [Fact]
     public void GivenDirectiveWithMaximumValuesThenThoseValuesAreReturned()
     {
         // Arrange
+        const ushort expectedLimit = ushort.MaxValue;
         const ushort expectedPage = ushort.MaxValue;
-        const ushort expectedSize = ushort.MaxValue;
-        var directive = new Directive(expectedPage, expectedSize);
+        Directive directive = new(Limit: expectedLimit, Page: expectedPage);
 
         // Act
-        (ushort page, ushort size) = directive;
+        (ushort limit, ushort page) = directive;
 
         // Assert
+        _ = limit.Should().Be(expectedLimit);
         _ = page.Should().Be(expectedPage);
-        _ = size.Should().Be(expectedSize);
     }
 
     [Fact]
     public void GivenDirectiveWithMinimumValuesThenFirstPageAndMinimumSizeAreReturned()
     {
         // Arrange
+        const ushort expectedLimit = Directive.MinimumLimit;
         const ushort expectedPage = Directive.FirstPage;
-        const ushort expectedSize = Directive.MinimumSize;
-        var directive = new Directive(0, 0);
+        Directive directive = new(Limit: ushort.MinValue, Page: ushort.MinValue);
 
         // Act
         (ushort page, ushort size) = directive;
 
         // Assert
         _ = page.Should().Be(expectedPage);
-        _ = size.Should().Be(expectedSize);
+        _ = size.Should().Be(expectedLimit);
     }
 }
 #endif

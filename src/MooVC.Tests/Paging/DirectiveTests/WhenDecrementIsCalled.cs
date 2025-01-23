@@ -7,26 +7,26 @@ public sealed class WhenDecrementIsCalled
     [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
     [InlineData(2, 1, 1)]
     [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, ushort.MinValue, 5)]
-    public void GivenADirectiveWhenPostDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort size)
+    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    public void GivenADirectiveWhenPostDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
-        var directive = new Directive(page: current, size: size);
+        Directive directive = new(Limit: limit, Page: current);
 
         // Act
         directive--;
 
         // Assert
+        _ = directive.Limit.Should().Be(limit);
         _ = directive.Page.Should().Be(expected);
-        _ = directive.Size.Should().Be(size);
     }
 
     [Fact]
     public void GivenADirectiveAtMinWhenPostDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
-        var expected = new Directive(page: ushort.MinValue, size: 10);
-        var actual = new Directive(page: ushort.MinValue, size: 10);
+        Directive expected = new(Limit: 10, Page: ushort.MinValue);
+        Directive actual = new(Limit: 10, Page: ushort.MinValue);
 
         // Act
         actual--;
@@ -39,26 +39,26 @@ public sealed class WhenDecrementIsCalled
     [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
     [InlineData(2, 1, 1)]
     [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, ushort.MinValue, 5)]
-    public void GivenADirectiveWhenPreDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort size)
+    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    public void GivenADirectiveWhenPreDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
-        var directive = new Directive(page: current, size: size);
+        Directive directive = new(Limit: limit, Page: current);
 
         // Act
         --directive;
 
         // Assert
+        _ = directive.Limit.Should().Be(limit);
         _ = directive.Page.Should().Be(expected);
-        _ = directive.Size.Should().Be(size);
     }
 
     [Fact]
     public void GivenADirectiveAtMinWhenPreDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
-        var expected = new Directive(page: ushort.MinValue, size: 10);
-        var actual = new Directive(page: ushort.MinValue, size: 10);
+        Directive expected = new(Limit: 10, Page: ushort.MinValue);
+        Directive actual = new(Limit: 10, Page: ushort.MinValue);
 
         // Act
         --actual;
@@ -68,20 +68,20 @@ public sealed class WhenDecrementIsCalled
     }
 
     [Theory]
-    [InlineData(2, 1, 2, 25)]
+    [InlineData(2, 0, 2, 25)]
     [InlineData(3, 1, 2, 1)]
     [InlineData(9, 4, 5, 10)]
-    public void GivenADirectiveWhenDecrementedThenDirectiveIsDecrementedByTheAmount(ushort current, ushort expected, ushort increment, ushort size)
+    public void GivenADirectiveWhenDecrementedThenDirectiveIsDecrementedByTheAmount(ushort current, ushort expected, ushort decrement, ushort limit)
     {
         // Arrange
-        var original = new Directive(page: current, size: size);
+        Directive original = new(Limit: limit, Page: current);
 
         // Act
-        Directive actual = original - increment;
+        Directive actual = original - decrement;
 
         // Assert
         _ = actual.Page.Should().Be(expected);
-        _ = original.Size.Should().Be(size);
+        _ = original.Limit.Should().Be(limit);
     }
 
     [Theory]
@@ -92,7 +92,7 @@ public sealed class WhenDecrementIsCalled
     public void GivenADirectiveAtMinWhenDecrementedThenDirectiveIsNotDecremented(ushort decrement)
     {
         // Arrange
-        var expected = new Directive(page: ushort.MinValue, size: 10);
+        Directive expected = new(Limit: 10, Page: ushort.MinValue);
 
         // Act
         Directive actual = expected - decrement;

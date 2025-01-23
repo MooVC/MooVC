@@ -17,10 +17,23 @@ public sealed class WhenIsAllIsCalled
     }
 
     [Fact]
+    public void GivenADefaultDirectiveThenAPositiveResponseIsReturned()
+    {
+        // Arrange
+        Directive directive = default;
+
+        // Act
+        bool isAll = directive.IsAll;
+
+        // Assert
+        _ = isAll.Should().BeTrue();
+    }
+
+    [Fact]
     public void GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
     {
         // Arrange
-        var directive = new Directive(size: ushort.MaxValue);
+        Directive directive = new(Limit: Directive.MinimumLimit, Page: Directive.FirstPage);
 
         // Act
         bool isAll = directive.IsAll;
@@ -33,7 +46,7 @@ public sealed class WhenIsAllIsCalled
     public void GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
     {
         // Arrange
-        var directive = new Directive(page: 2, size: 5);
+        Directive directive = new(Limit: 5, Page: 2);
 
         // Act
         bool isAll = directive.IsAll;

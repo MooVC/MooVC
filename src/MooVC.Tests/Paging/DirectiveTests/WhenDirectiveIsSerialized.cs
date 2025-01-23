@@ -11,7 +11,7 @@ public sealed class WhenDirectiveIsSerialized
     {
         // Arrange
         var cloner = new Cloner(new Serializer());
-        Directive original = (Page: 2, Size: 25);
+        Directive original = new(Limit: 25, Page: 2);
 
         // Act
         Directive cloned = await cloner.Clone(original, CancellationToken.None);

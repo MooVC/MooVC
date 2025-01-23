@@ -42,14 +42,14 @@ public sealed class WhenPageIsCalled
     {
         // Arrange
         var faker = new Faker();
-        var directive = new Directive(page: 5, size: 20);
+        Directive directive = new(Limit: 20, Page: 5);
 
         IEnumerable<int> set = faker.Random.Digits(1000);
         IQueryable<int> queryable = set.AsQueryable();
 
         IEnumerable<int> expected = set
             .Skip(directive.Skip)
-            .Take(directive.Size);
+            .Take(directive.Limit);
 
         // Act
         IQueryable<int>? actual = queryable.Page(directive);

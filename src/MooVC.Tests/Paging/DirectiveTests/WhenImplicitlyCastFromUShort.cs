@@ -4,37 +4,17 @@ namespace MooVC.Paging.DirectiveTests;
 public sealed class WhenImplicitlyCastFromUShort
 {
     [Theory]
-    [InlineData(Directive.MinimumSize, ushort.MinValue)]
+    [InlineData(Directive.MinimumLimit, ushort.MinValue)]
     [InlineData(5, 5)]
     [InlineData(ushort.MaxValue, ushort.MaxValue)]
-    public void GivenAValueThenAnInstanceIsReturnedWithTheExpectedSize(ushort expected, ushort size)
+    public void GivenAValueThenAnInstanceIsReturnedWithTheExpectedPage(ushort expected, ushort page)
     {
         // Act
-        Directive directive = size;
+        Directive directive = page;
 
         // Assert
-        _ = directive.Page.Should().Be(Directive.FirstPage);
-        _ = directive.Size.Should().Be(expected);
-    }
-
-    [Fact]
-    public void GivenASizeOfDefaultThenDefaultIsReturned()
-    {
-        // Act
-        Directive directive = Directive.DefaultSize;
-
-        // Assert
-        _ = directive.Should().Be(default);
-    }
-
-    [Fact]
-    public void GivenSizeOfMaxThenAllIsReturned()
-    {
-        // Act
-        Directive directive = ushort.MaxValue;
-
-        // Assert
-        _ = directive.Should().Be(Directive.All);
+        _ = directive.Limit.Should().Be(Directive.DefaultLimit);
+        _ = directive.Page.Should().Be(expected);
     }
 }
 #endif

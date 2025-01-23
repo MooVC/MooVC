@@ -61,7 +61,7 @@ public sealed class PageConverter
             }
         }
 
-        return Activator.CreateInstance(typeToConvert, directive, total, values)!;
+        return Activator.CreateInstance(typeToConvert, directive, values, total)!;
     }
 
     /// <inheritdoc/>

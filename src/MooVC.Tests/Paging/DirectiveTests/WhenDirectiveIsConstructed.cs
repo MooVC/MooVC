@@ -1,38 +1,43 @@
 ﻿#if NET6_0_OR_GREATER
 namespace MooVC.Paging.DirectiveTests;
 
+using System.Collections.Generic;
+
 public sealed class WhenDirectiveIsConstructed
 {
     [Theory]
-    [InlineData(Directive.FirstPage, Directive.MinimumSize)]
-    [InlineData(Directive.FirstPage + 5, Directive.MinimumSize + 10)]
+    [InlineData(Directive.FirstPage, Directive.MinimumLimit)]
+    [InlineData(Directive.FirstPage + 5, Directive.MinimumLimit + 10)]
     [InlineData(Directive.FirstPage, ushort.MaxValue)]
-    [InlineData(ushort.MaxValue, Directive.MinimumSize)]
-    public void GivenAValidPageAndSizeThenThePropertiesAreSetToMatch(ushort page, ushort size)
+    [InlineData(ushort.MaxValue, Directive.MinimumLimit)]
+    public void GivenAValidPageAndSizeThenThePropertiesAreSetToMatch(ushort page, ushort limit)
     {
         // Act
-        var directive = new Directive(page: page, size: size);
+        Directive directive = new(Limit: limit, Page: page);
 
         // Assert
+        _ = directive.Limit.Should().Be(limit);
         _ = directive.Page.Should().Be(page);
-        _ = directive.Size.Should().Be(size);
     }
 
     [Theory]
-    [InlineData(Directive.MinimumSize)]
-    [InlineData(Directive.MinimumSize + 10)]
+    [InlineData(Directive.MinimumLimit)]
+    [InlineData(Directive.MinimumLimit + 10)]
     [InlineData(ushort.MaxValue)]
-    public void GivenAnInvalidPageAndAValidSizeThenThePageIsSetToTheFirstPageAndTheSizeIsSetToTheConfigured(ushort size)
+    public void GivenAnInvalidPageAndAValidSizeThenThePageIsSetToTheFirstPageAndTheSizeIsSetToTheConfigured(ushort limit)
     {
-        // Arrange
-        ushort page = Math.Min((ushort)(Directive.FirstPage - 1), ushort.MinValue);
+        unchecked
+        {
+            // Arrange
+            ushort page = Math.Min((ushort)(Directive.FirstPage - 1), ushort.MinValue);
 
-        // Act
-        var directive = new Directive(page: page, size: size);
+            // Act
+            Directive directive = new(Limit: limit, Page: page);
 
-        // Assert
-        _ = directive.Page.Should().Be(Directive.FirstPage);
-        _ = directive.Size.Should().Be(size);
+            // Assert
+            _ = directive.Limit.Should().Be(limit);
+            _ = directive.Page.Should().Be(Directive.FirstPage);
+        }
     }
 
     [Theory]
@@ -41,30 +46,36 @@ public sealed class WhenDirectiveIsConstructed
     [InlineData(ushort.MaxValue)]
     public void GivenAnValidPageAndAnInvalidSizeThenThePageIsSetToTheConfiguredAndTheSizeIsSetToTheMinimum(ushort page)
     {
-        // Arrange
-        ushort size = Math.Min((ushort)(Directive.MinimumSize - 1), ushort.MinValue);
+        unchecked
+        {
+            // Arrange
+            ushort limit = Math.Min((ushort)(Directive.MinimumLimit - 1), ushort.MinValue);
 
-        // Act
-        var directive = new Directive(page: page, size: size);
+            // Act
+            Directive directive = new(Limit: limit, Page: page);
 
-        // Assert
-        _ = directive.Page.Should().Be(page);
-        _ = directive.Size.Should().Be(Directive.MinimumSize);
+            // Assert
+            _ = directive.Limit.Should().Be(Directive.MinimumLimit);
+            _ = directive.Page.Should().Be(page);
+        }
     }
 
     [Fact]
     public void GivenBothInvalidPageAndSizeThenBothAreSetToTheirDefaultValues()
     {
-        // Arrange
-        ushort page = Math.Min((ushort)(Directive.FirstPage - 1), ushort.MinValue);
-        ushort size = Math.Min((ushort)(Directive.MinimumSize - 1), ushort.MinValue);
+        unchecked
+        {
+            // Arrange
+            ushort limit = Math.Min((ushort)(Directive.MinimumLimit - 1), ushort.MinValue);
+            ushort page = Math.Min((ushort)(Directive.FirstPage - 1), ushort.MinValue);
 
-        // Act
-        var directive = new Directive(page: page, size: size);
+            // Act
+            Directive directive = new(Limit: limit, Page: page);
 
-        // Assert
-        _ = directive.Page.Should().Be(Directive.FirstPage);
-        _ = directive.Size.Should().Be(Directive.MinimumSize);
+            // Assert
+            _ = directive.Limit.Should().Be(Directive.MinimumLimit);
+            _ = directive.Page.Should().Be(Directive.FirstPage);
+        }
     }
 }
 #endif

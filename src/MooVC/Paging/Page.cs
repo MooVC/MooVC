@@ -68,7 +68,7 @@ public sealed record Page<T>
     /// </summary>
     /// <param name="index">The zero-based index of the element to get.</param>
     /// <returns>The element at the specified index in the result set.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">
+    /// <exception cref="IndexOutOfRangeException">
     /// <paramref name="index" /> is outside the bounds of the sequence.
     /// </exception>
     public T this[int index] => values[index];

@@ -23,7 +23,7 @@ public sealed class WhenPageIsIndexed
     [Theory]
     [InlineData(-1, new[] { 1, 2, 3 })]
     [InlineData(3, new[] { 1, 2, 3 })]
-    public void GivenAnInvalidIndexThenArgumentOutOfRangeExceptionIsThrown(int index, int[] values)
+    public void GivenAnInvalidIndexThenIndexOutOfRangeExceptionIsThrown(int index, int[] values)
     {
         // Arrange
         Directive directive = default;
@@ -33,7 +33,7 @@ public sealed class WhenPageIsIndexed
         Action act = () => _ = result[index];
 
         // Assert
-        _ = act.Should().Throw<ArgumentOutOfRangeException>();
+        _ = act.Should().Throw<IndexOutOfRangeException>();
     }
 }
 #endif

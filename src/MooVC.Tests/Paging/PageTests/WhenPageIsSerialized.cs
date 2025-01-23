@@ -11,7 +11,7 @@ public sealed class WhenPageIsSerialized
     {
         // Arrange
         var cloner = new Cloner(new Serializer());
-        Directive directive = (Page: 2, Size: 25);
+        Directive directive = new(Limit: 25, Page: 2);
         ulong total = 5;
         int[] values = [1, 2, 3, 4];
         Page<int> original = new(directive, values, total: total);

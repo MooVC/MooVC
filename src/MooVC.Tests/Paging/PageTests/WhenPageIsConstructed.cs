@@ -7,10 +7,10 @@ public sealed class WhenPageIsConstructed
     [InlineData(1, 10)]
     [InlineData(5, 0)]
     [InlineData(0, 100)]
-    public void GivenNoValuesThenAllPropertiesAreSetToDefaults(ushort page, ushort size)
+    public void GivenNoValuesThenAllPropertiesAreSetToDefaults(ushort page, ushort limit)
     {
         // Arrange
-        var directive = new Directive(page: page, size: size);
+        Directive directive = new(Limit: limit, Page: page);
 
         // Act
         var result = new Page<int>(directive, []);
@@ -27,10 +27,10 @@ public sealed class WhenPageIsConstructed
     [InlineData(1, 10, new[] { 1, 2, 3, 4 })]
     [InlineData(5, 0, new int[0])]
     [InlineData(0, 100, new[] { 1 })]
-    public void GivenValuesAndNoTotalThenAllPropertiesAreSet(ushort page, ushort size, int[] values)
+    public void GivenValuesAndNoTotalThenAllPropertiesAreSet(ushort page, ushort limit, int[] values)
     {
         // Arrange
-        var directive = new Directive(page: page, size: size);
+        Directive directive = new(Limit: limit, Page: page);
 
         // Act
         var result = new Page<int>(directive, values);
@@ -47,10 +47,10 @@ public sealed class WhenPageIsConstructed
     [InlineData(1, 10, 50, new[] { 1, 2, 3, 4 })]
     [InlineData(5, 0, 20, new int[0])]
     [InlineData(0, 100, 0, new[] { 1 })]
-    public void GivenValuesAndAnIntTotalThenAllPropertiesAreSet(ushort page, ushort size, ulong total, int[] values)
+    public void GivenValuesAndAnIntTotalThenAllPropertiesAreSet(ushort page, ushort limit, ulong total, int[] values)
     {
         // Arrange
-        var directive = new Directive(page: page, size: size);
+        Directive directive = new(Limit: limit, Page: page);
 
         // Act
         var result = new Page<int>(directive, values, total: total);
@@ -67,7 +67,7 @@ public sealed class WhenPageIsConstructed
     public void GivenNullValuesThenEmptyValuesAreSet()
     {
         // Arrange
-        var directive = new Directive(page: 1, size: 120);
+        Directive directive = new(Limit: 120, Page: 1);
         int[]? values = null;
         ulong total = 5;
 

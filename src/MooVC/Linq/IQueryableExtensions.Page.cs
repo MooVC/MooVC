@@ -29,7 +29,7 @@ public static partial class IQueryableExtensions
 
         return queryable
             .Skip(directive.Skip)
-            .Take(directive.Size);
+            .Take(directive.Take);
     }
 }
 #endif

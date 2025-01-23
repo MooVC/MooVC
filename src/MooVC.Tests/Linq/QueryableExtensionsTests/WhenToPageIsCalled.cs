@@ -23,13 +23,13 @@ public sealed class WhenToPageIsCalled
     }
 
     [Theory]
-    [InlineData(new[] { 1, 2, 3 }, 1, 3, 6, new[] { 1, 2, 3, 4, 5, 6 })]
-    [InlineData(new[] { 3, 4 }, 2, 2, 6, new[] { 1, 2, 3, 4, 5, 6 })]
-    [InlineData(new int[0], 3, 2, 4, new[] { 1, 2, 3, 4 })]
-    public void GivenADirectiveThenTheExpectedPageIsReturned(int[] expected, ushort page, ushort size, ulong total, int[] values)
+    [InlineData(new[] { 1, 2, 3 }, 0, 3, 6, new[] { 1, 2, 3, 4, 5, 6 })]
+    [InlineData(new[] { 3, 4 }, 1, 2, 6, new[] { 1, 2, 3, 4, 5, 6 })]
+    [InlineData(new int[0], 2, 2, 4, new[] { 1, 2, 3, 4 })]
+    public void GivenADirectiveThenTheExpectedPageIsReturned(int[] expected, ushort page, ushort limit, ulong total, int[] values)
     {
         // Arrange
-        var directive = new Directive(page: page, size: size);
+        Directive directive = new(Limit: limit, Page: page);
         IQueryable<int> query = values.AsQueryable();
 
         // Act
@@ -46,14 +46,14 @@ public sealed class WhenToPageIsCalled
     {
         // Arrange
         IQueryable<int>? query = default;
-        var directive = new Directive(page: 1, size: 1);
+        Directive directive = new(Limit: 1, Page: 1);
 
         // Act
         var result = query.ToPage(directive);
 
         // Assert
         _ = result.Directive.Should().Be(directive);
-        _ = result.Total.Should().Be(ulong.MinValue);
+        _ = result.Total.Should().Be(default(ulong?));
     }
 }
 #endif
