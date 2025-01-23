@@ -8,14 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Tests", "src\MooVC.Tests\MooVC.Tests.csproj", "{8CE945D5-F3B9-42EA-95AA-6C72BD001EB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF41C794-0E91-44A2-8299-B7031DEF80C7}"
-	ProjectSection(SolutionItems) = preProject
-		.filenesting.json = .filenesting.json
-		.gitignore = .gitignore
-		.runsettings = .runsettings
-		CHANGELOG.md = CHANGELOG.md
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{51E8218E-BACE-4FEA-B951-35DFD32FCA7E}"
 	ProjectSection(SolutionItems) = preProject
@@ -67,6 +59,33 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.MessagePack", "src\MooVC.Infrastructure.Serialization.MessagePack\MooVC.Infrastructure.Serialization.MessagePack.csproj", "{1EA75B23-10BF-4561-8AC8-1908B36EB1C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooVC.Infrastructure.Serialization.MessagePack.Tests", "src\MooVC.Infrastructure.Serialization.MessagePack.Tests\MooVC.Infrastructure.Serialization.MessagePack.Tests.csproj", "{A8491874-C325-444E-A941-48C5EE7D66E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{A1E5A003-9478-4375-AEC9-839DCCAA8253}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
+		.github\pull_request_template.md = .github\pull_request_template.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DE0FCA15-EE24-4F3F-BDB3-51EAAE34217C}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		.github\CODE_OF_CONDUCT.md = .github\CODE_OF_CONDUCT.md
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+		.github\SECURITY.md = .github\SECURITY.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{22F92847-67F7-44A0-BC38-1477ADE4E319}"
+	ProjectSection(SolutionItems) = preProject
+		.filenesting.json = .filenesting.json
+		.gitignore = .gitignore
+		.runsettings = .runsettings
+		codecov.yml = codecov.yml
+		.github\CODEOWNERS = .github\CODEOWNERS
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
