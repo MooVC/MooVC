@@ -1,5 +1,7 @@
 namespace MooVC;
 
+using System.Runtime.CompilerServices;
+
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
 /// </summary>
@@ -15,6 +17,7 @@ public static partial class ArrayExtensions
     /// If provided, only elements that satisfy the condition will be included in the snapshot.
     /// </param>
     /// <returns>An array that contains the elements of the snapshot.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] ToCopyOrEmpty<T>(this T[]? values, Func<T, bool>? predicate = default)
     {
         if (values is null)

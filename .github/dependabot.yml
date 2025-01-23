@@ -10,9 +10,9 @@ updates:
           - "*"
           
   - package-ecosystem: "github-actions"
-    directory: ".github/workflows" # Location of your GitHub Actions workflows
+    directory: ".github/workflows"
     schedule:
-      interval: "weekly" # Check for updates weekly
+      interval: "weekly"
     commit-message:
       prefix: "deps"
     open-pull-requests-limit: 10

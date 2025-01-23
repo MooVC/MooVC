@@ -7,7 +7,7 @@ using static MooVC.ExceptionExtensions_Resources;
 /// <summary>
 /// Provides extensions relating to <see cref="Exception" />.
 /// </summary>
-public static class ExceptionExtensions
+public static partial class ExceptionExtensions
 {
     /// <summary>
     /// Performs an action on the given <see cref="Exception" /> and any of its inner exceptions, recursively.
@@ -35,7 +35,7 @@ public static class ExceptionExtensions
 
             if (exception is AggregateException aggregate)
             {
-                aggregate.InnerExceptions.ForEach(ex => ex.PerformExplode(handler));
+                aggregate.InnerExceptions.ForEach(inner => inner.PerformExplode(handler));
             }
             else
             {

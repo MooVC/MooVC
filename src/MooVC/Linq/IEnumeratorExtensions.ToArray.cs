@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Linq;
 
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
 using static MooVC.Linq.IEnumeratorExtensions_Resources;
 
@@ -14,6 +15,7 @@ public static partial class IEnumeratorExtensions
     /// </summary>
     /// <param name="enumerator">The <see cref="IEnumerator"/> to enumerate.</param>
     /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static object[] ToArray(this IEnumerator enumerator)
     {
         return enumerator.PerformToArray(enumerator => enumerator.Current);
@@ -25,6 +27,7 @@ public static partial class IEnumeratorExtensions
     /// <param name="enumerator">The <see cref="IEnumerator{T}"/> to enumerate.</param>
     /// <typeparam name="T">The type of the elements contained within the <paramref name="enumerator"/>.</typeparam>
     /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] ToArray<T>(this IEnumerator<T> enumerator)
     {
         return enumerator.PerformToArray(enumerator => enumerator.Current);

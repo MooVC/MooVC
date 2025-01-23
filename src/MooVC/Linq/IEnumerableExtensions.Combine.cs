@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Linq;
 
+using System.Runtime.CompilerServices;
+
 /// <summary>
 /// Provides extensions relating to <see cref="IEnumerable{T}" />.
 /// </summary>
@@ -16,6 +18,7 @@ public static partial class IEnumerableExtensions
     /// An enumerable containing the contents of <paramref name="source" /> with <paramref name="instance" /> appended.
     /// When <paramref name="source" /> is null, an enumeration containing the <paramref name="instance" /> element is returned.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T> Combine<T>(this IEnumerable<T>? source, T instance)
     {
         if (source is null)

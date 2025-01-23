@@ -1,5 +1,7 @@
 ﻿namespace MooVC;
 
+using System.Runtime.CompilerServices;
+
 /// <summary>
 /// Provides extensions relating to <see cref="Array" />.
 /// </summary>
@@ -12,6 +14,7 @@ public static partial class ArrayExtensions
     /// <param name="source">The array to prepend to.</param>
     /// <param name="others">The elements to prepend to the array.</param>
     /// <returns>An array containing the original elements of the source array, with the other elements prepended at the beginning.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] Prepend<T>(this T[]? source, params T[]? others)
     {
         return others.Append(source);

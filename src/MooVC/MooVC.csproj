@@ -2,6 +2,7 @@
   <PropertyGroup>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <NoWarn>CS0809;S3236</NoWarn>
+    <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
@@ -53,20 +54,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IEnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Linq\PagedResult.Resources.Designer.cs">
+    <Compile Update="Paging\Serialization\PageConverter.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PagedResult.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Linq\Serialization\PagedResultConverter.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PagedResultConverter.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Persistence\MappedStore.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MappedStore.Resources.resx</DependentUpon>
+      <DependentUpon>PageConverter.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Cloner.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -77,11 +68,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Serializer.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Serialization\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Serialization\Serializer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -132,17 +118,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Linq\PagedResult.Resources.resx">
+    <EmbeddedResource Update="Paging\Serialization\PageConverter.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PagedResult.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Linq\Serialization\PagedResultConverter.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PagedResultConverter.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Persistence\MappedStore.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MappedStore.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>PageConverter.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Cloner.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,10 +129,6 @@
     <EmbeddedResource Update="Serialization\Json\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Serialization\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Serialization\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -168,5 +142,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Initializer.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

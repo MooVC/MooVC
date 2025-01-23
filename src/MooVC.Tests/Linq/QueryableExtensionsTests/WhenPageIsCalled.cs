@@ -1,4 +1,7 @@
-﻿namespace MooVC.Linq.QueryableExtensionsTests;
+﻿#if NET6_0_OR_GREATER
+namespace MooVC.Linq.QueryableExtensionsTests;
+
+using MooVC.Paging;
 
 public sealed class WhenPageIsCalled
 {
@@ -7,17 +10,17 @@ public sealed class WhenPageIsCalled
     {
         // Arrange
         IQueryable<int>? queryable = default;
-        var paging = new Paging();
+        Directive directive = default;
 
         // Act
-        IQueryable<int>? actual = queryable.Page(paging);
+        IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
         _ = actual.Should().BeNull();
     }
 
     [Fact]
-    public void GivenNoPagingThenTheQueryAbleIsReturned()
+    public void GivenAnAllDirectiveThenTheQueryAbleIsReturned()
     {
         // Arrange
         var faker = new Faker();
@@ -28,27 +31,31 @@ public sealed class WhenPageIsCalled
             .AsQueryable();
 
         // Act
-        IQueryable<int>? actual = expected.Page(default);
+        IQueryable<int>? actual = expected.Page(Directive.All);
 
         // Assert
         _ = actual.Should().Equal(expected);
     }
 
     [Fact]
-    public void GivenPagingThenTheSetIsFilteredIsCalled()
+    public void GivenADirectiveThenTheSetIsFilteredIsCalled()
     {
         // Arrange
         var faker = new Faker();
-        var paging = new Paging(page: 5, size: 20);
+        Directive directive = new(Limit: 20, Page: 5);
 
         IEnumerable<int> set = faker.Random.Digits(1000);
         IQueryable<int> queryable = set.AsQueryable();
-        IEnumerable<int> expected = set.Skip(paging.Skip).Take(paging.Size);
+
+        IEnumerable<int> expected = set
+            .Skip(directive.Skip)
+            .Take(directive.Limit);
 
         // Act
-        IQueryable<int>? actual = queryable.Page(paging);
+        IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
         _ = actual.Should().Equal(expected);
     }
 }
+#endif

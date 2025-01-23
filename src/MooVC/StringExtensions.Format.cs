@@ -1,6 +1,7 @@
 ﻿namespace MooVC;
 
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides extensions relating to object.
@@ -15,6 +16,7 @@ public static partial class StringExtensions
     /// <returns>
     /// A copy of format in which the format items have been replaced by the string representation of the corresponding objects in args.
     /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(this string value, params object[] arguments)
     {
         return string.Format(CultureInfo.CurrentCulture, value, arguments);
