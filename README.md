@@ -1,6 +1,5 @@
-# moovc
+# MooVC [![NuGet](https://img.shields.io/nuget/v/MooVC?logo=nuget)](https://www.nuget.org/packages/MooVC/) [![GitHub](https://img.shields.io/github/license/MooVC/MooVC)](LICENSE.md)
 
-![Nuget](https://img.shields.io/nuget/v/moovc?style=plastic)![Nuget](https://img.shields.io/nuget/dt/moovc?style=plastic)![Azure DevOps builds](https://img.shields.io/azure-devops/build/vmartinspaul/MooVC/2?style=plastic)![Azure DevOps tests](https://img.shields.io/azure-devops/tests/vmartinspaul/MooVC/2?style=plastic)
 
 The MooVC library contains a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.
 

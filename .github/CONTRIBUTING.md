@@ -266,7 +266,7 @@ To ensure consistency and maintainability across the MooVC codebase, we follow a
   - Create a method for each test using the naming convention `Given{Condition}When{State}Then{Expectation}`.
 
 - **Assertions**:
-  - Use `FluentAssertions` for readable and expressive assertions.
+  - Use `AwesomeAssertions` for readable and expressive assertions.
   - Use `NSubstitute` for mocking dependencies in tests.
   - When asserting exceptions, especially `ArgumentExceptions`, check for the parameter name using `nameof`.
 
