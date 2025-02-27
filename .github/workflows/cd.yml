@@ -35,7 +35,7 @@ jobs:
           9.0.x
 
     - name: Cache NuGet Packages
-      uses: actions/cache@v4.2.1
+      uses: actions/cache@v4.2.2
       with:
         path: ${{ github.workspace }}/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
@@ -68,7 +68,7 @@ jobs:
       run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
     - name: Upload Code Coverage
-      uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3
+      uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
