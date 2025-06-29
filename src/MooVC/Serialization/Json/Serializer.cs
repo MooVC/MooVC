@@ -11,7 +11,7 @@ using Base = MooVC.Serialization.Serializer;
 public sealed class Serializer
     : Base
 {
-    private readonly JsonSerializerOptions options;
+    private readonly JsonSerializerOptions _options;
 
     /// <summary>
     /// Constructs a new instance of <see cref="Serializer"/>.
@@ -20,9 +20,9 @@ public sealed class Serializer
     public Serializer(JsonSerializerOptions? options = default)
     {
 #if NET7_0_OR_GREATER
-        this.options = options ?? JsonSerializerOptions.Default;
+        _options = options ?? JsonSerializerOptions.Default;
 #else
-        this.options = options ?? new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        _options = options ?? new JsonSerializerOptions(JsonSerializerDefaults.Web);
 #endif
     }
 
@@ -30,21 +30,16 @@ public sealed class Serializer
     protected override async Task<T> PerformDeserialize<T>(Stream source, CancellationToken cancellationToken)
     {
         T? instance = await JsonSerializer
-            .DeserializeAsync<T>(source, options: options, cancellationToken: cancellationToken)
+            .DeserializeAsync<T>(source, options: _options, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
-        if (instance is null)
-        {
-            throw new JsonException(PerformDeserializeFailed.Format(typeof(T)));
-        }
-
-        return instance;
+        return instance ?? throw new JsonException(PerformDeserializeFailed.Format(typeof(T)));
     }
 
     /// <inheritdoc/>
     protected override Task PerformSerialize<T>(T instance, Stream target, CancellationToken cancellationToken)
     {
-        return JsonSerializer.SerializeAsync<T>(target, instance, options: options, cancellationToken: cancellationToken);
+        return JsonSerializer.SerializeAsync(target, instance, options: _options, cancellationToken: cancellationToken);
     }
 }
 #endif

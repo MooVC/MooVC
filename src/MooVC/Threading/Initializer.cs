@@ -10,10 +10,10 @@ using static MooVC.Threading.Initializer_Resources;
 public sealed class Initializer<T>
     where T : notnull
 {
-    private readonly Func<CancellationToken, Task<T>> initializer;
-    private readonly Lazy<SemaphoreSlim> mutex = new(() => new(1, 1));
-    private T? resource;
-    private int waiting;
+    private readonly Func<CancellationToken, Task<T>> _initializer;
+    private readonly Lazy<SemaphoreSlim> _mutex = new(() => new(1, 1));
+    private T? _resource;
+    private int _waiting;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Initializer{T}" /> class.
@@ -21,7 +21,7 @@ public sealed class Initializer<T>
     /// <param name="initializer">A function that initializes the resource.</param>
     public Initializer(Func<CancellationToken, Task<T>> initializer)
     {
-        this.initializer = Guard.Against.Null(initializer, message: InitializerRequired);
+        _initializer = Guard.Against.Null(initializer, message: InitializerRequired);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public sealed class Initializer<T>
     /// </value>
     public bool IsInitialized { get; private set; }
 
-    private SemaphoreSlim Mutex => mutex.Value;
+    private SemaphoreSlim Mutex => _mutex.Value;
 
     /// <summary>
     /// Asynchronously initializes the resource and coordinates access to it.
@@ -48,7 +48,7 @@ public sealed class Initializer<T>
         {
             int remaining;
 
-            _ = Interlocked.Increment(ref waiting);
+            _ = Interlocked.Increment(ref _waiting);
 
             try
             {
@@ -57,7 +57,7 @@ public sealed class Initializer<T>
             }
             finally
             {
-                remaining = Interlocked.Decrement(ref waiting);
+                remaining = Interlocked.Decrement(ref _waiting);
 
                 _ = Mutex.Release();
             }
@@ -68,17 +68,17 @@ public sealed class Initializer<T>
             }
         }
 
-        return resource!;
+        return _resource!;
     }
 
     private async Task PerformInitialize(CancellationToken cancellationToken)
     {
         if (!IsInitialized)
         {
-            resource = await initializer(cancellationToken)
+            _resource = await _initializer(cancellationToken)
                 .ConfigureAwait(false);
 
-            if (resource is null)
+            if (_resource is null)
             {
                 throw new InvalidOperationException(InitializeAsyncResourceRequired);
             }

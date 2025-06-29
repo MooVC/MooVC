@@ -15,7 +15,7 @@ using MooVC.Paging.Serialization;
 public sealed record Page<T>
     : IReadOnlyList<T>
 {
-    private readonly T[] values;
+    private readonly T[] _values;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Page{T}" /> class with the values paged from the sequence.
@@ -27,7 +27,7 @@ public sealed record Page<T>
     {
         Directive = directive;
         Total = total;
-        this.values = values.ToArrayOrEmpty();
+        _values = values.ToArrayOrEmpty();
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public sealed record Page<T>
     /// <value>
     /// The number of elements in this result.
     /// </value>
-    public int Count => values.Length;
+    public int Count => _values.Length;
 
     /// <summary>
     /// Gets the request that was used to generate this result.
@@ -71,7 +71,7 @@ public sealed record Page<T>
     /// <exception cref="IndexOutOfRangeException">
     /// <paramref name="index" /> is outside the bounds of the sequence.
     /// </exception>
-    public T this[int index] => values[index];
+    public T this[int index] => _values[index];
 
     /// <summary>
     /// Deconstructs the <see cref="Page{T}" /> into its constituent parts.
@@ -83,7 +83,7 @@ public sealed record Page<T>
     {
         directive = Directive;
         total = Total;
-        values = this.values;
+        values = _values;
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public sealed record Page<T>
     /// </returns>
     public IEnumerator<T> GetEnumerator()
     {
-        return ((IEnumerable<T>)values).GetEnumerator();
+        return ((IEnumerable<T>)_values).GetEnumerator();
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public sealed record Page<T>
     /// </returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return values.GetEnumerator();
+        return _values.GetEnumerator();
     }
 }
 #endif

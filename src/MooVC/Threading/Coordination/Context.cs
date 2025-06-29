@@ -8,8 +8,8 @@ internal sealed class Context<T>
     : IContext<T>
     where T : notnull
 {
-    private readonly SemaphoreSlim semaphore;
-    private TimeSpan? disposal;
+    private readonly SemaphoreSlim _semaphore;
+    private TimeSpan? _disposal;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Context{T}" /> class.
@@ -18,7 +18,7 @@ internal sealed class Context<T>
     /// <param name="semaphore">The semaphore used to apply coordination.</param>
     public Context(SemaphoreSlim semaphore, T subject)
     {
-        this.semaphore = semaphore;
+        _semaphore = semaphore;
         Subject = subject;
     }
 
@@ -28,7 +28,7 @@ internal sealed class Context<T>
     /// <value>
     /// The duration for which coordination has been applied.
     /// </value>
-    public TimeSpan Duration => disposal ?? DateTimeOffset.UtcNow.Subtract(TimeStamp);
+    public TimeSpan Duration => _disposal ?? DateTimeOffset.UtcNow.Subtract(TimeStamp);
 
     /// <summary>
     /// Gets the instance on which coordination has been applied.
@@ -58,14 +58,14 @@ internal sealed class Context<T>
 
     private void Dispose(bool disposing)
     {
-        if (!disposal.HasValue)
+        if (!_disposal.HasValue)
         {
             if (disposing)
             {
-                _ = semaphore.Release();
+                _ = _semaphore.Release();
             }
 
-            disposal = Duration;
+            _disposal = Duration;
         }
     }
 }

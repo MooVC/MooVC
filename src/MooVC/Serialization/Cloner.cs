@@ -9,7 +9,7 @@ using static MooVC.Serialization.Cloner_Resources;
 public sealed class Cloner
     : ICloner
 {
-    private readonly ISerializer serializer;
+    private readonly ISerializer _serializer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Cloner" /> class with the specified <see cref="ISerializer" />.
@@ -18,7 +18,7 @@ public sealed class Cloner
     /// <exception cref="ArgumentNullException">The <paramref name="serializer" /> is <see langword="null" />.</exception>
     public Cloner(ISerializer serializer)
     {
-        this.serializer = Guard.Against.Null(serializer, message: SerializerRequired);
+        _serializer = Guard.Against.Null(serializer, message: SerializerRequired);
     }
 
     /// <summary>
@@ -36,11 +36,11 @@ public sealed class Cloner
     {
         _ = Guard.Against.Null(original,  message: CloneAsyncOriginalRequired);
 
-        IEnumerable<byte> data = await serializer
+        IEnumerable<byte> data = await _serializer
             .Serialize(original, cancellationToken)
             .ConfigureAwait(false);
 
-        return await serializer
+        return await _serializer
             .Deserialize<T>(data, cancellationToken)
             .ConfigureAwait(false);
     }

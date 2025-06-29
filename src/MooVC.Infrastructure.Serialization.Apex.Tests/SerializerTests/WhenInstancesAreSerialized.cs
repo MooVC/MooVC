@@ -7,15 +7,15 @@ using Serializer = MooVC.Infrastructure.Serialization.Apex.Serializer;
 public sealed class WhenInstancesAreSerialized
     : IDisposable
 {
-    private readonly ISerializer serializer;
-    private bool isDisposed;
+    private readonly ISerializer _serializer;
+    private bool _isDisposed;
 
     public WhenInstancesAreSerialized()
     {
         Settings settings = new Settings()
             .MarkSerializable(type => true);
 
-        serializer = new Serializer(settings: settings);
+        _serializer = new Serializer(settings: settings);
     }
 
     public void Dispose()
@@ -37,8 +37,8 @@ public sealed class WhenInstancesAreSerialized
         };
 
         // Act
-        IEnumerable<byte> stream = await serializer.Serialize(original, CancellationToken.None);
-        SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
+        IEnumerable<byte> stream = await _serializer.Serialize(original, CancellationToken.None);
+        SerializableClass deserialized = await _serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -59,11 +59,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(original, stream, CancellationToken.None);
+        await _serializer.Serialize(original, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
+        SerializableClass deserialized = await _serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -85,11 +85,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
+        await _serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
+        ISerializableInstance deserialized = await _serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -109,11 +109,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(original, stream, CancellationToken.None);
+        await _serializer.Serialize(original, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
+        SerializableRecord deserialized = await _serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -131,8 +131,8 @@ public sealed class WhenInstancesAreSerialized
             "Something something dark side...");
 
         // Act
-        IEnumerable<byte> stream = await serializer.Serialize(original, CancellationToken.None);
-        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
+        IEnumerable<byte> stream = await _serializer.Serialize(original, CancellationToken.None);
+        SerializableRecord deserialized = await _serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -156,11 +156,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
+        await _serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
+        ISerializableInstance deserialized = await _serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().NotBe(original);
@@ -188,8 +188,8 @@ public sealed class WhenInstancesAreSerialized
         ];
 
         // Act
-        IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
-        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
+        IEnumerable<byte> stream = await _serializer.Serialize(originals, CancellationToken.None);
+        IEnumerable<SerializableClass> deserialized = await _serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().BeEquivalentTo(originals);
@@ -218,11 +218,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
+        await _serializer.Serialize(originals, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
+        IEnumerable<SerializableClass> deserialized = await _serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().BeEquivalentTo(originals);
@@ -253,11 +253,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
+        await _serializer.Serialize(originals, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        IEnumerable<ISerializableInstance> deserialized = await serializer
+        IEnumerable<ISerializableInstance> deserialized = await _serializer
             .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
@@ -285,11 +285,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
+        await _serializer.Serialize(originals, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
+        IEnumerable<SerializableRecord> deserialized = await _serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().BeEquivalentTo(originals);
@@ -314,9 +314,9 @@ public sealed class WhenInstancesAreSerialized
         ];
 
         // Act
-        IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
+        IEnumerable<byte> stream = await _serializer.Serialize(originals, CancellationToken.None);
 
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
+        IEnumerable<SerializableRecord> deserialized = await _serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
         _ = deserialized.Should().BeEquivalentTo(originals);
@@ -351,11 +351,11 @@ public sealed class WhenInstancesAreSerialized
         using var stream = new MemoryStream();
 
         // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
+        await _serializer.Serialize(originals, stream, CancellationToken.None);
 
         stream.Position = 0;
 
-        IEnumerable<ISerializableInstance> deserialized = await serializer
+        IEnumerable<ISerializableInstance> deserialized = await _serializer
             .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
@@ -364,14 +364,14 @@ public sealed class WhenInstancesAreSerialized
 
     private void Dispose(bool isDisposing)
     {
-        if (!isDisposed)
+        if (!_isDisposed)
         {
             if (isDisposing)
             {
-                ((IDisposable)serializer).Dispose();
+                ((IDisposable)_serializer).Dispose();
             }
 
-            isDisposed = true;
+            _isDisposed = true;
         }
     }
 }

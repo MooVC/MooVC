@@ -20,9 +20,9 @@ public sealed class ThreadSafeHostedService
         new EventId(1, name: nameof(TryStop)),
         TryStopFailure);
 
-    private readonly ILogger<ThreadSafeHostedService> logger;
-    private readonly IEnumerable<IHostedService> services;
-    private int state = Stopped;
+    private readonly ILogger<ThreadSafeHostedService> _logger;
+    private readonly IEnumerable<IHostedService> _services;
+    private int _state = Stopped;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ThreadSafeHostedService" /> class.
@@ -35,8 +35,8 @@ public sealed class ThreadSafeHostedService
     /// </param>
     public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
     {
-        this.logger = Guard.Against.Null(logger, message: LoggerRequired);
-        this.services = Guard.Against.Null(services, message: ServicesRequired);
+        _logger = Guard.Against.Null(logger, message: LoggerRequired);
+        _services = Guard.Against.Null(services, message: ServicesRequired);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public sealed class ThreadSafeHostedService
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        if (Interlocked.CompareExchange(ref state, Started, Stopped) == Stopped)
+        if (Interlocked.CompareExchange(ref _state, Started, Stopped) == Stopped)
         {
             try
             {
@@ -58,7 +58,7 @@ public sealed class ThreadSafeHostedService
                 await TryStop(cancellationToken)
                     .ConfigureAwait(false);
 
-                _ = Interlocked.Exchange(ref state, Stopped);
+                _ = Interlocked.Exchange(ref _state, Stopped);
 
                 throw;
             }
@@ -72,7 +72,7 @@ public sealed class ThreadSafeHostedService
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
-        if (Interlocked.CompareExchange(ref state, Stopped, Started) == Started)
+        if (Interlocked.CompareExchange(ref _state, Stopped, Started) == Started)
         {
             try
             {
@@ -81,7 +81,7 @@ public sealed class ThreadSafeHostedService
             }
             catch
             {
-                _ = Interlocked.Exchange(ref state, Started);
+                _ = Interlocked.Exchange(ref _state, Started);
 
                 throw;
             }
@@ -90,12 +90,12 @@ public sealed class ThreadSafeHostedService
 
     private Task PerformStart(CancellationToken cancellationToken)
     {
-        return services.ForAll(service => service.StartAsync(cancellationToken));
+        return _services.ForAll(service => service.StartAsync(cancellationToken));
     }
 
     private Task PerformStop(CancellationToken cancellationToken)
     {
-        return services.ForAll(service => service.StopAsync(cancellationToken));
+        return _services.ForAll(service => service.StopAsync(cancellationToken));
     }
 
     private async Task TryStop(CancellationToken cancellationToken)
@@ -107,7 +107,7 @@ public sealed class ThreadSafeHostedService
         }
         catch (Exception ex)
         {
-            logTryStopFailure(logger, ex);
+            logTryStopFailure(_logger, ex);
         }
     }
 }

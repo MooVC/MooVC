@@ -1,7 +1,7 @@
 namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 using System.Collections.Concurrent;
-using FluentAssertions.Specialized;
+using AwesomeAssertions.Specialized;
 
 public sealed class WhenForAllIsCalled
 {

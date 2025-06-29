@@ -9,15 +9,15 @@ public sealed class Serializer
     : SynchronousSerializer,
       IDisposable
 {
-    private readonly IBinary binary;
-    private bool isDisposed;
+    private readonly IBinary _binary;
+    private bool _isDisposed;
 
     public Serializer(ICompressor? compressor = default, Settings? settings = default)
         : base(compressor: compressor)
     {
         settings ??= new Settings();
 
-        binary = Create(settings);
+        _binary = Create(settings);
     }
 
     public void Dispose()
@@ -29,24 +29,24 @@ public sealed class Serializer
 
     protected override T PerformDeserialize<T>(Stream source)
     {
-        return binary.Read<T>(source);
+        return _binary.Read<T>(source);
     }
 
     protected override void PerformSerialize<T>(T instance, Stream target)
     {
-        binary.Write(instance, target);
+        _binary.Write(instance, target);
     }
 
     private void Dispose(bool isDisposing)
     {
-        if (!isDisposed)
+        if (!_isDisposed)
         {
             if (isDisposing)
             {
-                binary.Dispose();
+                _binary.Dispose();
             }
 
-            isDisposed = true;
+            _isDisposed = true;
         }
     }
 }

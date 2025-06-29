@@ -16,9 +16,9 @@ public sealed class Coordinator<T>
 {
     private const string NumberFormat = "X";
 
-    private readonly ConcurrentDictionary<string, SemaphoreSlim> contexts = new();
-    private readonly TimeSpan? @default;
-    private bool isDisposed;
+    private readonly ConcurrentDictionary<string, SemaphoreSlim> _contexts = new();
+    private readonly TimeSpan? _default;
+    private bool _isDisposed;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Coordinator{T}" /> class.
@@ -28,7 +28,7 @@ public sealed class Coordinator<T>
     /// </param>
     public Coordinator(TimeSpan? @default = default)
     {
-        this.@default = @default;
+        _default = @default;
     }
 
     /// <summary>
@@ -43,16 +43,16 @@ public sealed class Coordinator<T>
     /// </returns>
     public async Task<IContext<T>> Apply(T subject, CancellationToken cancellationToken, TimeSpan? timeout = default)
     {
-        if (isDisposed)
+        if (_isDisposed)
         {
             throw new ObjectDisposedException(GetType().FullName);
         }
 
         subject = subject ?? throw new ArgumentNullException(nameof(subject), ApplyAsyncContextRequired);
-        timeout ??= @default;
+        timeout ??= _default;
 
         string key = GetKey(subject);
-        SemaphoreSlim semaphore = contexts.GetOrAdd(key, _ => new SemaphoreSlim(1, 1));
+        SemaphoreSlim semaphore = _contexts.GetOrAdd(key, _ => new SemaphoreSlim(1, 1));
 
         timeout ??= Timeout.InfiniteTimeSpan;
 
@@ -97,14 +97,14 @@ public sealed class Coordinator<T>
 
     private void Dispose(bool isDisposing)
     {
-        if (!isDisposed)
+        if (!_isDisposed)
         {
             if (isDisposing)
             {
-                contexts.Values.ForAll(semaphore => semaphore.Dispose());
+                _contexts.Values.ForAll(semaphore => semaphore.Dispose());
             }
 
-            isDisposed = true;
+            _isDisposed = true;
         }
     }
 }
