@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-using FluentAssertions.Specialized;
+using AwesomeAssertions.Specialized;
 
 public sealed class WhenForEachIsCalled
 {

@@ -15,8 +15,8 @@ public abstract class StreamCompressor
     /// </summary>
     public const int DefaultBufferSize = 81920;
 
-    private readonly int bufferSize;
-    private readonly CompressionLevel level;
+    private readonly int _bufferSize;
+    private readonly CompressionLevel _level;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BrotliCompressor" /> class.
@@ -25,8 +25,8 @@ public abstract class StreamCompressor
     /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
     protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
-        this.level = Guard.Against.EnumOutOfRange(level, message: LevelRequired);
+        _bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
+        _level = Guard.Against.EnumOutOfRange(level, message: LevelRequired);
     }
 
     /// <summary>
@@ -39,10 +39,10 @@ public abstract class StreamCompressor
     {
         var compressed = new MemoryStream();
 
-        using Stream compressor = CreateCompressor(level, compressed);
+        using Stream compressor = CreateCompressor(_level, compressed);
 
         await source
-            .CopyToAsync(compressor, bufferSize, cancellationToken)
+            .CopyToAsync(compressor, _bufferSize, cancellationToken)
             .ConfigureAwait(false);
 
         return compressed;
@@ -60,10 +60,10 @@ public abstract class StreamCompressor
     {
         var decompressed = new MemoryStream();
 
-        using Stream decompressor = CreateDecompressor(level, source);
+        using Stream decompressor = CreateDecompressor(_level, source);
 
         await decompressor
-            .CopyToAsync(decompressed, bufferSize, cancellationToken)
+            .CopyToAsync(decompressed, _bufferSize, cancellationToken)
             .ConfigureAwait(false);
 
         return decompressed;

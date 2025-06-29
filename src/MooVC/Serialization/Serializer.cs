@@ -15,8 +15,8 @@ public abstract class Serializer
     /// </summary>
     public const int DefaultBufferSize = 81920;
 
-    private readonly int bufferSize;
-    private readonly ICompressor? compressor;
+    private readonly int _bufferSize;
+    private readonly ICompressor? _compressor;
 
     /// <summary>
     /// Facilitates the Initialization of new instance based on the <see cref="Serializer" /> class.
@@ -28,8 +28,8 @@ public abstract class Serializer
     /// </param>
     protected Serializer(int bufferSize = DefaultBufferSize, ICompressor? compressor = default)
     {
-        this.bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
-        this.compressor = compressor;
+        _bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
+        _compressor = compressor;
     }
 
     /// <summary>
@@ -135,22 +135,22 @@ public abstract class Serializer
     /// <returns>A <see cref="Task" /> that represents the asynchronous serialization operation.</returns>
     protected async Task Compress(Stream source, Stream target, CancellationToken cancellationToken)
     {
-        if (compressor is null)
+        if (_compressor is null)
         {
             await source
-                .CopyToAsync(target, bufferSize, cancellationToken)
+                .CopyToAsync(target, _bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
-            using Stream compressed = await compressor
+            using Stream compressed = await _compressor
                 .Compress(source, cancellationToken)
                 .ConfigureAwait(false);
 
             compressed.Position = 0;
 
             await compressed
-                .CopyToAsync(target, bufferSize, cancellationToken)
+                .CopyToAsync(target, _bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
     }
@@ -166,22 +166,22 @@ public abstract class Serializer
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     protected async Task Decompress(Stream source, Stream target, CancellationToken cancellationToken)
     {
-        if (compressor is null)
+        if (_compressor is null)
         {
             await source
-                .CopyToAsync(target, bufferSize, cancellationToken)
+                .CopyToAsync(target, _bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
         else
         {
-            using Stream decompressed = await compressor
+            using Stream decompressed = await _compressor
                 .Decompress(source, cancellationToken)
                 .ConfigureAwait(false);
 
             decompressed.Position = 0;
 
             await decompressed
-                .CopyToAsync(target, bufferSize, cancellationToken)
+                .CopyToAsync(target, _bufferSize, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

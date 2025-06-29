@@ -6,8 +6,8 @@ using MooVC.Compression;
 public sealed class TestableSynchronousSerializer
     : SynchronousSerializer
 {
-    private readonly Func<object, object>? onDeserialize;
-    private readonly Action<object, Stream>? onSerialize;
+    private readonly Func<object, object>? _onDeserialize;
+    private readonly Action<object, Stream>? _onSerialize;
 
     public TestableSynchronousSerializer(
         ICompressor? compressor = default,
@@ -15,17 +15,17 @@ public sealed class TestableSynchronousSerializer
         Action<object, Stream>? onSerialize = default)
         : base(compressor: compressor)
     {
-        this.onDeserialize = onDeserialize;
-        this.onSerialize = onSerialize;
+        _onDeserialize = onDeserialize;
+        _onSerialize = onSerialize;
     }
 
     protected override T PerformDeserialize<T>(Stream source)
     {
-        return (T)onDeserialize!.Invoke(source);
+        return (T)_onDeserialize!.Invoke(source);
     }
 
     protected override void PerformSerialize<T>(T instance, Stream target)
     {
-        onSerialize!.Invoke(instance, target);
+        _onSerialize!.Invoke(instance, target);
     }
 }

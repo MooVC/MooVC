@@ -3,15 +3,15 @@
 public sealed class TestableSynchronousCloner
     : SynchronousCloner
 {
-    private readonly Func<object, object> onClone;
+    private readonly Func<object, object> _onClone;
 
     public TestableSynchronousCloner(Func<object, object> onClone)
     {
-        this.onClone = onClone;
+        _onClone = onClone;
     }
 
     protected override T PerformClone<T>(T original)
     {
-        return (T)onClone(original);
+        return (T)_onClone(original);
     }
 }

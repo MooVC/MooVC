@@ -4,7 +4,16 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# [9.0.0] - Unreleased
+# [9.1.0] - 2025-06-29
+
+## Changed
+
+- Apex.Serialization to Version 6.0.0 for .NET 9 only.
+- MessagePack to Version 3.1.4.
+- Microsoft.Extensions.Hosting.Abstractions to Version 9.0.6.
+- Microsoft.Extensions.Logging.Abstractions to Version 9.0.6.
+
+# [9.0.0] - 2025-03-19
 
 Features within MooVC that were intended to address shortcomings within the .NET Framework have now been removed in favour of the standardized offering or accepted best practice.
 

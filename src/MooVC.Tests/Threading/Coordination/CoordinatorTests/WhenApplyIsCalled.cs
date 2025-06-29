@@ -5,16 +5,16 @@ using MooVC.Threading.Coordination;
 public sealed class WhenApplyIsCalled
     : IDisposable
 {
-    private readonly ICoordinator<string> coordinator;
+    private readonly ICoordinator<string> _coordinator;
 
     public WhenApplyIsCalled()
     {
-        coordinator = new Coordinator<string>();
+        _coordinator = new Coordinator<string>();
     }
 
     public void Dispose()
     {
-        coordinator.Dispose();
+        _coordinator.Dispose();
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public sealed class WhenApplyIsCalled
         string? subject = default;
 
         // Act
-        Func<Task> act = async () => await coordinator.Apply(subject!, CancellationToken.None);
+        Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ArgumentNullException>()
@@ -35,10 +35,10 @@ public sealed class WhenApplyIsCalled
     public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrown()
     {
         // Arrange
-        coordinator.Dispose();
+        _coordinator.Dispose();
 
         // Act
-        Func<Task> act = async () => await coordinator.Apply("N/A", CancellationToken.None);
+        Func<Task> act = async () => await _coordinator.Apply("N/A", CancellationToken.None);
 
         // Assert
         _ = await act.Should().ThrowAsync<ObjectDisposedException>();
@@ -55,7 +55,7 @@ public sealed class WhenApplyIsCalled
         Task[] tasks = CreateTasks(
             async () =>
             {
-                IContext<string> coordination = await coordinator
+                IContext<string> coordination = await _coordinator
                     .Apply(subject, CancellationToken.None);
 
                 using (coordination)
@@ -82,7 +82,7 @@ public sealed class WhenApplyIsCalled
         // Act
         _ = Task.Run(async () =>
         {
-            using (await coordinator.Apply(subject, CancellationToken.None))
+            using (await _coordinator.Apply(subject, CancellationToken.None))
             {
                 _ = semaphore.Release();
                 await Task.Delay(TimeSpan.FromSeconds(10));
@@ -92,7 +92,7 @@ public sealed class WhenApplyIsCalled
         await semaphore.WaitAsync();
 
         // Act
-        Func<Task> act = async () => await coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
+        Func<Task> act = async () => await _coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
 
         // Assert
         _ = await act.Should().ThrowAsync<TimeoutException>();
