@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MessagePack to Version 3.1.4.
 - Microsoft.Extensions.Hosting.Abstractions to Version 9.0.6.
 - Microsoft.Extensions.Logging.Abstractions to Version 9.0.6.
+- Introduced Shouldly for assertions.
 
 # [9.0.0] - 2025-03-19
 

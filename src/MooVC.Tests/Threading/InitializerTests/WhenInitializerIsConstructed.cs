@@ -15,7 +15,7 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -28,8 +28,8 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(initializer));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(initializer));
     }
 
     // Additional test cases
@@ -46,7 +46,7 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -62,6 +62,6 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 }

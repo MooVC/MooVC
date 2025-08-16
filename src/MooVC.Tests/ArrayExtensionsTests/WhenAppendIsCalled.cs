@@ -12,7 +12,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(default);
 
         // Assert
-        _ = result.Should().BeEmpty();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        _ = result.Should().BeEmpty();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -38,8 +38,8 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        _ = result.Should().NotBeSameAs(original);
-        _ = result.Should().BeEmpty();
+        result.ShouldNotBeSameAs(original);
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -52,8 +52,8 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        _ = result.Should().NotBeSameAs(original);
-        _ = result.Should().BeEquivalentTo(original);
+        result.ShouldNotBeSameAs(original);
+        result.ShouldBe(original);
     }
 
     [Fact]
@@ -67,8 +67,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        _ = result.Should().ContainSingle()
-            .Which.Should().Be(expected);
+        result.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
     [Fact]
@@ -82,8 +81,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        _ = result.Should().ContainSingle()
-            .Which.Should().Be(expected);
+        result.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
     [Fact]
@@ -98,7 +96,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -113,7 +111,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -127,7 +125,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -141,7 +139,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -156,7 +154,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        _ = actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -171,7 +169,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        _ = actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -185,6 +183,6 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(original);
 
         // Assert
-        _ = actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBe(expected);
     }
 }

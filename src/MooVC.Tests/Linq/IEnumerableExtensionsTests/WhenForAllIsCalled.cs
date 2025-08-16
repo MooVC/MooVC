@@ -1,7 +1,7 @@
 namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 using System.Collections.Concurrent;
-using AwesomeAssertions.Specialized;
+using Shouldly;
 
 public sealed class WhenForAllIsCalled
 {
@@ -26,8 +26,8 @@ public sealed class WhenForAllIsCalled
         Action act = () => enumeration.ForAll(Action);
 
         // Assert
-        ExceptionAssertions<AggregateException> exception = act.Should().Throw<AggregateException>();
-        _ = exception.Which.InnerExceptions.Count.Should().Be(range / mod);
+        AggregateException exception = Should.Throw<AggregateException>(act);
+        exception.InnerExceptions.Count.ShouldBe(range / mod);
     }
 
     [Fact]
@@ -46,8 +46,8 @@ public sealed class WhenForAllIsCalled
         enumeration.ForAll(Action);
 
         // Assert
-        _ = enumeration.TrueForAll(value => invocations.Contains(value)).Should().BeTrue();
-        _ = invocations.Should().HaveCount(enumeration.Count);
+        enumeration.TrueForAll(value => invocations.Contains(value)).ShouldBeTrue();
+        invocations.Count.ShouldBe(enumeration.Count);
     }
 
     [Fact]
@@ -61,8 +61,8 @@ public sealed class WhenForAllIsCalled
         Action act = () => enumeration.ForAll(action!);
 
         // Assert
-        ExceptionAssertions<ArgumentNullException> exception = act.Should().Throw<ArgumentNullException>();
-        _ = exception.Which.ParamName.Should().Be(nameof(action));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(action));
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public sealed class WhenForAllIsCalled
         enumeration.ForAll(Action);
 
         // Assert
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public sealed class WhenForAllIsCalled
         Action act = () => enumeration.ForAll(action!);
 
         // Assert
-        _ = act.Should().NotThrow<ArgumentNullException>();
+        Should.NotThrow(act);
     }
 
     [Theory]
@@ -121,8 +121,8 @@ public sealed class WhenForAllIsCalled
         Func<Task> act = async () => await enumeration.ForAll(Operation);
 
         // Assert
-        ExceptionAssertions<AggregateException> exception = await act.Should().ThrowAsync<AggregateException>();
-        _ = exception.Which.InnerExceptions.Count.Should().Be(range / mod);
+        AggregateException exception = await Should.ThrowAsync<AggregateException>(act);
+        exception.InnerExceptions.Count.ShouldBe(range / mod);
     }
 
     [Fact]
@@ -143,8 +143,8 @@ public sealed class WhenForAllIsCalled
         await enumeration.ForAll(Operation);
 
         // Assert
-        _ = enumeration.TrueForAll(value => invocations.Contains(value)).Should().BeTrue();
-        _ = invocations.Should().HaveCount(enumeration.Count);
+        enumeration.TrueForAll(value => invocations.Contains(value)).ShouldBeTrue();
+        invocations.Count.ShouldBe(enumeration.Count);
     }
 
     [Fact]
@@ -158,8 +158,8 @@ public sealed class WhenForAllIsCalled
         Func<Task> act = async () => await enumeration.ForAll(operation!);
 
         // Assert
-        ExceptionAssertions<ArgumentNullException> exception = await act.Should().ThrowAsync<ArgumentNullException>();
-        _ = exception.Which.ParamName.Should().Be(nameof(operation));
+        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(operation));
     }
 
     [Fact]
@@ -180,7 +180,7 @@ public sealed class WhenForAllIsCalled
         await enumeration.ForAll(Operation);
 
         // Assert
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -193,6 +193,6 @@ public sealed class WhenForAllIsCalled
         Func<Task> act = async () => await enumeration.ForAll(default!);
 
         // Assert
-        _ = await act.Should().NotThrowAsync<ArgumentNullException>();
+        await Should.NotThrowAsync(act);
     }
 }

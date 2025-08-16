@@ -17,9 +17,7 @@ public sealed class WhenDirectiveIsSerialized
         Directive cloned = await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        _ = cloned.Should().NotBeNull();
-        _ = cloned.Should().NotBeSameAs(original);
-        _ = cloned.Should().BeEquivalentTo(original);
+        cloned.ShouldBe(original);
     }
 }
 #endif

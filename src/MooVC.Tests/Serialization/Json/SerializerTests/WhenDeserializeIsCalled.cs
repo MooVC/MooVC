@@ -18,8 +18,8 @@ public sealed class WhenDeserializeIsCalled
         TestClass result = await serializer.Deserialize<TestClass>(sequence, cancellationToken);
 
         // Assert
-        _ = result.Should().NotBeNull();
-        _ = result.Property.Should().Be(instance.Property);
+        result.ShouldNotBeNull();
+        result.Property.ShouldBe(instance.Property);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public sealed class WhenDeserializeIsCalled
         Func<Task> act = async () => await serializer.Deserialize<TestClass>(sequence, cancellationTokenSource.Token);
 
         // Assert
-        _ = await act.Should().ThrowAsync<OperationCanceledException>();
+        await Should.ThrowAsync<OperationCanceledException>(act);
     }
 
     [Fact]
@@ -53,8 +53,8 @@ public sealed class WhenDeserializeIsCalled
         TestClass result = await serializer.Deserialize<TestClass>(stream, cancellationToken);
 
         // Assert
-        _ = result.Should().NotBeNull();
-        _ = result.Property.Should().Be(instance.Property);
+        result.ShouldNotBeNull();
+        result.Property.ShouldBe(instance.Property);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public sealed class WhenDeserializeIsCalled
         Func<Task> act = async () => await serializer.Deserialize<TestClass>(stream, cancellationTokenSource.Token);
 
         // Assert
-        _ = await act.Should().ThrowAsync<OperationCanceledException>();
+        await Should.ThrowAsync<OperationCanceledException>(act);
     }
 }
 #endif

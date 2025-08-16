@@ -12,7 +12,7 @@ public sealed class WhenGZipCompressorIsConstructed
         Func<ICompressor> act = () => new GZipCompressor();
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Theory]
@@ -25,7 +25,7 @@ public sealed class WhenGZipCompressorIsConstructed
         Func<ICompressor> act = () => new GZipCompressor(level: level);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Theory]
@@ -37,6 +37,6 @@ public sealed class WhenGZipCompressorIsConstructed
         Func<ICompressor> act = () => new GZipCompressor(level: level);
 
         // Assert
-        _ = act.Should().Throw<InvalidEnumArgumentException>();
+        Should.Throw<InvalidEnumArgumentException>(act);
     }
 }

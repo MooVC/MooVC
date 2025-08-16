@@ -16,7 +16,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services);
 
         // Assert
-        _ = act.Should().NotThrow();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -44,8 +44,8 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(services));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(services));
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, [service]);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(logger));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(logger));
     }
 }

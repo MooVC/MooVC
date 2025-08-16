@@ -15,8 +15,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        _ = limit.Should().Be(expectedLimit);
-        _ = page.Should().Be(expectedPage);
+        limit.ShouldBe(expectedLimit);
+        page.ShouldBe(expectedPage);
     }
 
     [Fact]
@@ -31,8 +31,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        _ = limit.Should().Be(expectedLimit);
-        _ = page.Should().Be(expectedPage);
+        limit.ShouldBe(expectedLimit);
+        page.ShouldBe(expectedPage);
     }
 
     [Fact]
@@ -47,8 +47,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        _ = limit.Should().Be(expectedLimit);
-        _ = page.Should().Be(expectedPage);
+        limit.ShouldBe(expectedLimit);
+        page.ShouldBe(expectedPage);
     }
 
     [Fact]
@@ -63,8 +63,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort page, ushort size) = directive;
 
         // Assert
-        _ = page.Should().Be(expectedPage);
-        _ = size.Should().Be(expectedLimit);
+        page.ShouldBe(expectedPage);
+        size.ShouldBe(expectedLimit);
     }
 }
 #endif

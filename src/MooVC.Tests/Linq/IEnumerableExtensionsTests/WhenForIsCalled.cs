@@ -18,7 +18,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public sealed class WhenForIsCalled
         Action act = () => enumeration.For(default!);
 
         // Assert
-        _ = act.Should().NotThrow<ArgumentNullException>();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        _ = indexes.Should().Equal(0, 1, 2);
+        indexes.ShouldBe([0, 1, 2]);
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public sealed class WhenForIsCalled
 
         void Action(int index, int value)
         {
-            _ = index.Should().Be(expected++);
+            index.ShouldBe(expected++);
             invocations.Add(value);
         }
 
@@ -71,7 +71,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        _ = invocations.Should().Equal(enumeration);
+        invocations.ShouldBe(enumeration);
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public sealed class WhenForIsCalled
         Action act = () => enumeration.For(action!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .Which.ParamName.Should().Be(nameof(action));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(action));
     }
 }

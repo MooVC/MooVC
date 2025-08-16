@@ -12,7 +12,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == 4);
 
         // Assert
-        _ = actualIndex.Should().Be(-1);
+        actualIndex.ShouldBe(-1);
     }
 
     [Theory]
@@ -25,7 +25,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == target);
 
         // Assert
-        _ = actualIndex.Should().Be(expectedIndex);
+        actualIndex.ShouldBe(expectedIndex);
     }
 
     [Theory]
@@ -41,7 +41,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == target);
 
         // Assert
-        _ = actualIndex.Should().Be(expectedIndex);
+        actualIndex.ShouldBe(expectedIndex);
     }
 
     [Fact]
@@ -55,8 +55,8 @@ public sealed class WhenIndexOfIsCalled
         Action act = () => enumeration.IndexOf(predicate!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .Which.ParamName.Should().Be(nameof(predicate));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(predicate));
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == 4);
 
         // Assert
-        _ = actualIndex.Should().Be(-1);
+        actualIndex.ShouldBe(-1);
     }
 
     [Fact]
@@ -82,7 +82,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(default!);
 
         // Assert
-        _ = actualIndex.Should().Be(-1);
+        actualIndex.ShouldBe(-1);
     }
 
     [Fact]
@@ -95,6 +95,6 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == null);
 
         // Assert
-        _ = actualIndex.Should().Be(1);
+        actualIndex.ShouldBe(1);
     }
 }

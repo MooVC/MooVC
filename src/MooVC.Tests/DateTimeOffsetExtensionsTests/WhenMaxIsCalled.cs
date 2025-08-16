@@ -22,7 +22,7 @@ public sealed class WhenMaxIsCalled
         DateTimeOffset selected = first.Max(second);
 
         // Assert
-        _ = selected.Should().Be(second);
+        selected.ShouldBe(second);
     }
 
     [Theory]
@@ -37,7 +37,7 @@ public sealed class WhenMaxIsCalled
         DateTimeOffset selected = first.Max(second);
 
         // Assert
-        _ = selected.Should().Be(first);
+        selected.ShouldBe(first);
     }
 
     [Fact]
@@ -50,6 +50,6 @@ public sealed class WhenMaxIsCalled
         DateTimeOffset selected = sameDate.Max(sameDate);
 
         // Assert
-        _ = selected.Should().Be(sameDate);
+        selected.ShouldBe(sameDate);
     }
 }

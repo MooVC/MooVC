@@ -17,7 +17,7 @@ public sealed class WhenPageIsIndexed
         int actual = result[index];
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Theory]
@@ -33,7 +33,7 @@ public sealed class WhenPageIsIndexed
         Action act = () => _ = result[index];
 
         // Assert
-        _ = act.Should().Throw<IndexOutOfRangeException>();
+        Should.Throw<IndexOutOfRangeException>(act);
     }
 }
 #endif

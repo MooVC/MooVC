@@ -22,7 +22,7 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = first.Min(second);
 
         // Assert
-        _ = selected.Should().Be(first);
+        selected.ShouldBe(first);
     }
 
     [Theory]
@@ -37,7 +37,7 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = first.Min(second);
 
         // Assert
-        _ = selected.Should().Be(second);
+        selected.ShouldBe(second);
     }
 
     [Fact]
@@ -50,6 +50,6 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = sameDate.Min(sameDate);
 
         // Assert
-        _ = selected.Should().Be(sameDate);
+        selected.ShouldBe(sameDate);
     }
 }

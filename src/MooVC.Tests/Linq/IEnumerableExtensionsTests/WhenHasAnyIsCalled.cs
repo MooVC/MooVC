@@ -12,7 +12,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        _ = hasAny.Should().BeFalse();
+        hasAny.ShouldBeFalse();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        _ = hasAny.Should().BeFalse();
+        hasAny.ShouldBeFalse();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        _ = hasAny.Should().BeTrue();
+        hasAny.ShouldBeTrue();
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        _ = hasAny.Should().BeTrue();
+        hasAny.ShouldBeTrue();
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => false);
 
         // Assert
-        _ = hasAny.Should().BeFalse();
+        hasAny.ShouldBeFalse();
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        _ = hasAny.Should().BeTrue();
+        hasAny.ShouldBeTrue();
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        _ = hasAny.Should().BeFalse();
+        hasAny.ShouldBeFalse();
     }
 
     [Fact]
@@ -103,6 +103,6 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        _ = hasAny.Should().BeFalse();
+        hasAny.ShouldBeFalse();
     }
 }

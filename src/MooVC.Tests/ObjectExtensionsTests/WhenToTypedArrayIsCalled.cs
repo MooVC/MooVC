@@ -12,8 +12,8 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan[] value = expected.ToTypedArray();
 
         // Assert
-        _ = value.Should().HaveCount(1);
-        _ = value.Single().Should().Be(expected);
+        value.Count().ShouldBe(1);
+        value.Single().ShouldBe(expected);
     }
 
     [Fact]
@@ -26,8 +26,8 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan?[] value = expected.ToTypedArray();
 
         // Assert
-        _ = value.Should().HaveCount(1);
-        _ = value.Single().Should().BeNull();
+        value.Count().ShouldBe(1);
+        value.Single().ShouldBeNull();
     }
 
     [Fact]
@@ -40,8 +40,8 @@ public sealed class WhenToTypedArrayIsCalled
         object[] value = expected.ToTypedArray();
 
         // Assert
-        _ = value.Should().HaveCount(1);
-        _ = value.Single().Should().BeSameAs(expected);
+        value.Count().ShouldBe(1);
+        value.Single().ShouldBeSameAs(expected);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class WhenToTypedArrayIsCalled
         object?[] value = expected.ToTypedArray();
 
         // Assert
-        _ = value.Should().HaveCount(1);
-        _ = value.Single().Should().BeNull();
+        value.Count().ShouldBe(1);
+        value.Single().ShouldBeNull();
     }
 }

@@ -16,7 +16,7 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public sealed class WhenGetBytesIsCalled
         Action act = () => source!.GetBytes();
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(source));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(source));
     }
 }

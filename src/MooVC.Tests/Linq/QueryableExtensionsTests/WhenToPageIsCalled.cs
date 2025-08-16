@@ -17,9 +17,9 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(Directive.All);
 
         // Assert
-        _ = result.Directive.Should().Be(Directive.All);
-        _ = result.Total.Should().Be((ulong)expected.LongLength);
-        _ = result.Should().BeEquivalentTo(expected);
+        result.Directive.ShouldBe(Directive.All);
+        result.Total.ShouldBe((ulong)expected.LongLength);
+        result.ShouldBe(expected);
     }
 
     [Theory]
@@ -36,9 +36,9 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        _ = result.Directive.Should().Be(directive);
-        _ = result.Total.Should().Be(total);
-        _ = result.Should().BeEquivalentTo(expected);
+        result.Directive.ShouldBe(directive);
+        result.Total.ShouldBe(total);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -52,8 +52,8 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        _ = result.Directive.Should().Be(directive);
-        _ = result.Total.Should().Be(default(ulong?));
+        result.Directive.ShouldBe(directive);
+        result.Total.ShouldBe(default(ulong?));
     }
 }
 #endif

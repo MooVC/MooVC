@@ -21,7 +21,7 @@ public sealed class WhenCloneIsCalled
         string clone = await cloner.Clone(instance, CancellationToken.None);
 
         // Assert
-        _ = wasInvoked.Should().BeTrue();
-        _ = clone.Should().Be(instance);
+        wasInvoked.ShouldBeTrue();
+        clone.ShouldBe(instance);
     }
 }

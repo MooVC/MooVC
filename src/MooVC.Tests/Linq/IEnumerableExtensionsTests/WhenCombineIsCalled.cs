@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using System.Linq;
+
 public sealed class WhenCombineIsCalled
 {
     [Fact]
@@ -14,8 +16,8 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        _ = actual.Should().HaveCount(ExpectedCount);
-        _ = actual.Should().Contain(ExpectedValue);
+        actual.Count().ShouldBe(ExpectedCount);
+        actual.ShouldContain(ExpectedValue);
     }
 
     [Fact]
@@ -29,8 +31,7 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        _ = actual.Should().ContainSingle()
-            .Which.Should().Be(ExpectedValue);
+        actual.ShouldHaveSingleItem().ShouldBe(ExpectedValue);
     }
 
     [Fact]
@@ -44,7 +45,7 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -59,9 +60,8 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        _ = actual.Should().HaveCount(ExpectedCount);
-        _ = actual.Should().Contain(source);
-        _ = actual.Should().Contain(expected);
+        actual.Count().ShouldBe(ExpectedCount);
+        actual.ShouldBe(source!.Concat(expected!));
     }
 
     [Fact]
@@ -75,6 +75,6 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 }

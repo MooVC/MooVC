@@ -7,7 +7,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(false);
 
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -29,8 +29,8 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(Condition, Predicate);
 
-        _ = result.Should().BeNull();
-        _ = wasEvaluated.Should().BeFalse();
+        result.ShouldBeNull();
+        wasEvaluated.ShouldBeFalse();
     }
 
     [Fact]
@@ -47,8 +47,8 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(true, Predicate);
 
-        _ = result.Should().BeNull();
-        _ = wasEvaluated.Should().BeFalse();
+        result.ShouldBeNull();
+        wasEvaluated.ShouldBeFalse();
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(true);
 
-        _ = wasInvoked.Should().BeTrue();
+        wasInvoked.ShouldBeTrue();
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(false);
 
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public sealed class WhenWhereIfIsCalled
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
 
-        _ = wasInvoked.Should().BeTrue();
+        wasInvoked.ShouldBeTrue();
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
 
         // Assert
-        _ = result.Should().Equal(2, 4);
+        result.ShouldBe([2, 4]);
     }
 
     [Fact]
@@ -108,7 +108,7 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
 
         // Assert
-        _ = result.Should().Equal(1, 2, 3, 4, 5);
+        result.ShouldBe([1, 2, 3, 4, 5]);
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)

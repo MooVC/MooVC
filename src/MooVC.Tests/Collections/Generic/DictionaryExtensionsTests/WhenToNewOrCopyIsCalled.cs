@@ -12,8 +12,8 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, object>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = snapshot.Should().NotBeNull();
-        _ = snapshot.Should().BeEmpty();
+        snapshot.ShouldNotBeNull();
+        snapshot.ShouldBeEmpty();
     }
 
     [Fact]
@@ -30,8 +30,8 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = snapshot.Should().NotBeSameAs(original);
-        _ = snapshot.Should().Equal(original);
+        snapshot.ShouldNotBeSameAs(original);
+        snapshot.ShouldBe(original);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = snapshot.Should().NotBeSameAs(original);
-        _ = snapshot.Should().Equal(original);
+        snapshot.ShouldNotBeSameAs(original);
+        snapshot.ShouldBe(original);
     }
 }

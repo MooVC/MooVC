@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Collections.Concurrent.ProducerConsumerCollectionExtensionsTests;
 
 using System.Collections.Concurrent;
+using System.Linq;
 
 public sealed class WhenExtractIsCalled
 {
@@ -17,8 +18,8 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        _ = actual.Should().Equal(expected);
-        _ = source.Should().BeEmpty();
+        actual.ShouldBe(expected);
+        source.ShouldBeEmpty();
     }
 
     [Theory]
@@ -39,9 +40,9 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        _ = source.Should().NotContain(actual);
-        _ = source.Count.Should().Be(Total - (int)count);
-        _ = actual.Count().Should().Be((int)count);
+        source.Intersect(actual).ShouldBeEmpty();
+        source.Count.ShouldBe(Total - (int)count);
+        actual.Count().ShouldBe((int)count);
     }
 
     [Fact]
@@ -54,7 +55,7 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract(count: 50);
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -67,6 +68,6 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract();
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 }

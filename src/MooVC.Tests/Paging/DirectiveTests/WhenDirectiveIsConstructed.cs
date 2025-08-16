@@ -16,8 +16,8 @@ public sealed class WhenDirectiveIsConstructed
         Directive directive = new(Limit: limit, Page: page);
 
         // Assert
-        _ = directive.Limit.Should().Be(limit);
-        _ = directive.Page.Should().Be(page);
+        directive.Limit.ShouldBe(limit);
+        directive.Page.ShouldBe(page);
     }
 
     [Theory]
@@ -35,8 +35,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            _ = directive.Limit.Should().Be(limit);
-            _ = directive.Page.Should().Be(Directive.FirstPage);
+            directive.Limit.ShouldBe(limit);
+            directive.Page.ShouldBe(Directive.FirstPage);
         }
     }
 
@@ -55,8 +55,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            _ = directive.Limit.Should().Be(Directive.MinimumLimit);
-            _ = directive.Page.Should().Be(page);
+            directive.Limit.ShouldBe(Directive.MinimumLimit);
+            directive.Page.ShouldBe(page);
         }
     }
 
@@ -73,8 +73,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            _ = directive.Limit.Should().Be(Directive.MinimumLimit);
-            _ = directive.Page.Should().Be(Directive.FirstPage);
+            directive.Limit.ShouldBe(Directive.MinimumLimit);
+            directive.Page.ShouldBe(Directive.FirstPage);
         }
     }
 }

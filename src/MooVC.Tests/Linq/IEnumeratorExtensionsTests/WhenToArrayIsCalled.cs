@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 public sealed class WhenToArrayIsCalled
 {
@@ -9,15 +10,16 @@ public sealed class WhenToArrayIsCalled
     public void GivenANonGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
-        int[] expected = [1, 2, 3];
-        var list = new List<int>(expected);
+        int[] values = [1, 2, 3];
+        object[] expected = values.Cast<object>().ToArray();
+        var list = new List<int>(values);
         IEnumerator enumerator = list.GetEnumerator();
 
         // Act
         object[] actual = enumerator.ToArray();
 
         // Assert
-        _ = actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -32,7 +34,7 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        _ = actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -45,8 +47,8 @@ public sealed class WhenToArrayIsCalled
         Action act = () => enumerator!.ToArray();
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(enumerator));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(enumerator));
     }
 
     [Fact]
@@ -59,8 +61,8 @@ public sealed class WhenToArrayIsCalled
         Action act = () => enumerator!.ToArray();
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(enumerator));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(enumerator));
     }
 
     [Fact]
@@ -75,7 +77,7 @@ public sealed class WhenToArrayIsCalled
         object[] actual = enumerator.ToArray();
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -90,6 +92,6 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 }

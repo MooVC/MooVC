@@ -19,8 +19,8 @@ public sealed class WhenIncrementIsCalled
         directive++;
 
         // Assert
-        _ = directive.Limit.Should().Be(limit);
-        _ = directive.Page.Should().Be(expected);
+        directive.Limit.ShouldBe(limit);
+        directive.Page.ShouldBe(expected);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public sealed class WhenIncrementIsCalled
         actual++;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Theory]
@@ -51,8 +51,8 @@ public sealed class WhenIncrementIsCalled
         ++directive;
 
         // Assert
-        _ = directive.Limit.Should().Be(limit);
-        _ = directive.Page.Should().Be(expected);
+        directive.Limit.ShouldBe(limit);
+        directive.Page.ShouldBe(expected);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public sealed class WhenIncrementIsCalled
         ++actual;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Theory]
@@ -82,8 +82,8 @@ public sealed class WhenIncrementIsCalled
         Directive actual = original + increment;
 
         // Assert
-        _ = original.Limit.Should().Be(limit);
-        _ = actual.Page.Should().Be(expected);
+        original.Limit.ShouldBe(limit);
+        actual.Page.ShouldBe(expected);
     }
 
     [Theory]
@@ -100,7 +100,7 @@ public sealed class WhenIncrementIsCalled
         Directive actual = expected + increment;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 }
 #endif

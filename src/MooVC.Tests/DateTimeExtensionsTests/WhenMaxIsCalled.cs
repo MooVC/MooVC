@@ -18,7 +18,7 @@ public sealed class WhenMaxIsCalled
         DateTime selected = oldest.Max(newest);
 
         // Assert
-        _ = selected.Should().Be(newest);
+        selected.ShouldBe(newest);
     }
 
     [Theory]
@@ -31,7 +31,7 @@ public sealed class WhenMaxIsCalled
         DateTime selected = newest.Max(oldest);
 
         // Assert
-        _ = selected.Should().Be(newest);
+        selected.ShouldBe(newest);
     }
 
     [Fact]
@@ -44,6 +44,6 @@ public sealed class WhenMaxIsCalled
         DateTime selected = sameDate.Max(sameDate);
 
         // Assert
-        _ = selected.Should().Be(sameDate);
+        selected.ShouldBe(sameDate);
     }
 }

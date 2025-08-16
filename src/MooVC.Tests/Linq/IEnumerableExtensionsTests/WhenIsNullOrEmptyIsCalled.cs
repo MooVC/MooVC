@@ -12,7 +12,7 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeTrue();
+        isEmpty.ShouldBeTrue();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeFalse();
+        isEmpty.ShouldBeFalse();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeFalse();
+        isEmpty.ShouldBeFalse();
     }
 
     [Fact]
@@ -51,6 +51,6 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeTrue();
+        isEmpty.ShouldBeTrue();
     }
 }

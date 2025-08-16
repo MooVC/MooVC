@@ -13,8 +13,8 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(selector!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-           .WithParameterName(nameof(selector));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(selector));
     }
 
     [Fact]
@@ -27,8 +27,8 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        _ = index.Should().NotBeNull()
-            .And.BeEmpty();
+        index.ShouldNotBeNull();
+        index.ShouldBeEmpty();
     }
 
     [Fact]
@@ -42,8 +42,8 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value, transform!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-           .WithParameterName(nameof(transform));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(transform));
     }
 
     [Fact]
@@ -56,9 +56,9 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        _ = index.Should().NotBeNull();
-        _ = index.Keys.Should().Equal(source);
-        _ = index.Values.Should().Equal(source);
+        index.ShouldNotBeNull();
+        index.Keys.ShouldBe(source);
+        index.Values.ShouldBe(source);
     }
 
     [Fact]
@@ -72,9 +72,9 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, string> index = source.ToIndex(value => value, transform);
 
         // Assert
-        _ = index.Should().NotBeNull();
-        _ = index.Keys.Should().Equal(source);
-        _ = index.All(element => element.Value == transform(element.Key)).Should().BeTrue();
+        index.ShouldNotBeNull();
+        index.Keys.ShouldBe(source);
+        index.All(element => element.Value == transform(element.Key)).ShouldBeTrue();
     }
 
     [Fact]
@@ -87,6 +87,6 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value);
 
         // Assert
-        _ = act.Should().Throw<ArgumentException>();
+        Should.Throw<ArgumentException>(act);
     }
 }
