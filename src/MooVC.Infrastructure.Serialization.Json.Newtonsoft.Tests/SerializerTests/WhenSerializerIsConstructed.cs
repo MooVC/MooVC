@@ -76,19 +76,19 @@ public sealed class WhenSerializerIsConstructed
 
     private static void AssertEqual(int bufferSize, Encoding encoding, Serializer serializer, JsonSerializerSettings settings)
     {
-        _ = serializer.BufferSize.Should().Be(bufferSize);
-        _ = serializer.Encoding.Should().Be(encoding);
-        _ = serializer.Json.DateTimeZoneHandling.Should().Be(settings.DateTimeZoneHandling);
+        serializer.BufferSize.ShouldBe(bufferSize);
+        serializer.Encoding.ShouldBe(encoding);
+        serializer.Json.DateTimeZoneHandling.ShouldBe(settings.DateTimeZoneHandling);
 
         AssertEqual(settings, serializer);
     }
 
     private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
-        _ = serializer.Json.DefaultValueHandling.Should().Be(expected.DefaultValueHandling);
-        _ = serializer.Json.NullValueHandling.Should().Be(expected.NullValueHandling);
-        _ = serializer.Json.ReferenceLoopHandling.Should().Be(expected.ReferenceLoopHandling);
-        _ = serializer.Json.TypeNameHandling.Should().Be(expected.TypeNameHandling);
-        _ = serializer.Json.TypeNameAssemblyFormatHandling.Should().Be(expected.TypeNameAssemblyFormatHandling);
+        serializer.Json.DefaultValueHandling.ShouldBe(expected.DefaultValueHandling);
+        serializer.Json.NullValueHandling.ShouldBe(expected.NullValueHandling);
+        serializer.Json.ReferenceLoopHandling.ShouldBe(expected.ReferenceLoopHandling);
+        serializer.Json.TypeNameHandling.ShouldBe(expected.TypeNameHandling);
+        serializer.Json.TypeNameAssemblyFormatHandling.ShouldBe(expected.TypeNameAssemblyFormatHandling);
     }
 }

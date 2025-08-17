@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Infrastructure.Serialization.MessagePack.SerializerTests;
 
+using global::Newtonsoft.Json;
+
 public sealed class WhenInstancesAreSerialized
 {
     [Fact]
@@ -20,8 +22,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -46,8 +48,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -74,8 +76,8 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -105,7 +107,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 
     [Fact]
@@ -139,7 +141,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 
     [Fact]
@@ -170,7 +172,7 @@ public sealed class WhenInstancesAreSerialized
             .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 
 #if NET5_0_OR_GREATER
@@ -195,8 +197,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -216,8 +218,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -246,8 +248,8 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().NotBe(original);
-        _ = deserialized.Should().BeEquivalentTo(original);
+        deserialized.ShouldNotBeSameAs(original);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(original));
     }
 
     [Fact]
@@ -275,7 +277,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 
     [Fact]
@@ -307,7 +309,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 
     [Fact]
@@ -348,7 +350,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
-        _ = deserialized.Should().BeEquivalentTo(originals);
+        JsonConvert.SerializeObject(deserialized).ShouldBe(JsonConvert.SerializeObject(originals));
     }
 #endif
 }

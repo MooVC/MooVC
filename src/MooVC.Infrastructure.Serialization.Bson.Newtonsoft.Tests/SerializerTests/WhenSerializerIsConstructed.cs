@@ -65,19 +65,19 @@ public sealed class WhenSerializerIsConstructed
 
     private static void AssertEqual(Encoding encoding, DateTimeKind kind, Serializer serializer, JsonSerializerSettings settings)
     {
-        _ = serializer.Encoding.Should().Be(encoding);
-        _ = serializer.Kind.Should().Be(kind);
-        _ = serializer.Json.DateFormatHandling.Should().Be(settings.DateFormatHandling);
+        serializer.Encoding.ShouldBe(encoding);
+        serializer.Kind.ShouldBe(kind);
+        serializer.Json.DateFormatHandling.ShouldBe(settings.DateFormatHandling);
 
         AssertEqual(settings, serializer);
     }
 
     private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
-        _ = serializer.Json.DefaultValueHandling.Should().Be(expected.DefaultValueHandling);
-        _ = serializer.Json.NullValueHandling.Should().Be(expected.NullValueHandling);
-        _ = serializer.Json.ReferenceLoopHandling.Should().Be(expected.ReferenceLoopHandling);
-        _ = serializer.Json.TypeNameHandling.Should().Be(expected.TypeNameHandling);
-        _ = serializer.Json.TypeNameAssemblyFormatHandling.Should().Be(expected.TypeNameAssemblyFormatHandling);
+        serializer.Json.DefaultValueHandling.ShouldBe(expected.DefaultValueHandling);
+        serializer.Json.NullValueHandling.ShouldBe(expected.NullValueHandling);
+        serializer.Json.ReferenceLoopHandling.ShouldBe(expected.ReferenceLoopHandling);
+        serializer.Json.TypeNameHandling.ShouldBe(expected.TypeNameHandling);
+        serializer.Json.TypeNameAssemblyFormatHandling.ShouldBe(expected.TypeNameAssemblyFormatHandling);
     }
 }
