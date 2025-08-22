@@ -3,7 +3,7 @@
 internal sealed class SerializableClass
     : ISerializableInstance
 {
-    public IEnumerable<ulong>? Array { get; set; }
+    public ulong[]? Array { get; set; }
 
     public int? Integer { get; set; }
 

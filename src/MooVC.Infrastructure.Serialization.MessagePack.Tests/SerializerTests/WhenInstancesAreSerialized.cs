@@ -102,7 +102,7 @@ public sealed class WhenInstancesAreSerialized
 
         // Act
         IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
-        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
+        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<SerializableClass[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);
@@ -136,7 +136,7 @@ public sealed class WhenInstancesAreSerialized
 
         stream.Position = 0;
 
-        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
+        IEnumerable<SerializableClass> deserialized = await serializer.Deserialize<SerializableClass[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);
@@ -166,8 +166,7 @@ public sealed class WhenInstancesAreSerialized
 
         stream.Position = 0;
 
-        IEnumerable<ISerializableInstance> deserialized = await serializer
-            .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
+        IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<ISerializableInstance[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);
@@ -272,7 +271,7 @@ public sealed class WhenInstancesAreSerialized
 
         // Act
         IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
+        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);
@@ -304,7 +303,7 @@ public sealed class WhenInstancesAreSerialized
 
         stream.Position = 0;
 
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
+        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);
@@ -345,7 +344,7 @@ public sealed class WhenInstancesAreSerialized
 
         stream.Position = 0;
 
-        IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
+        IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<ISerializableInstance[]>(stream, CancellationToken.None);
 
         // Assert
         deserialized.ShouldBeEquivalentTo(originals);

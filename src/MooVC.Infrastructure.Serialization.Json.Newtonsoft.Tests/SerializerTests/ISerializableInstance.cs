@@ -2,7 +2,7 @@
 
 internal interface ISerializableInstance
 {
-    IEnumerable<ulong>? Array { get; }
+    ulong[]? Array { get; }
 
     int? Integer { get; }
 
