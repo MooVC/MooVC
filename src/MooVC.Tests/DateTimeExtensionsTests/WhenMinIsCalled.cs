@@ -18,7 +18,7 @@ public sealed class WhenMinIsCalled
         DateTime selected = oldest.Min(newest);
 
         // Assert
-        _ = selected.Should().Be(oldest);
+        selected.ShouldBe(oldest);
     }
 
     [Theory]
@@ -29,7 +29,7 @@ public sealed class WhenMinIsCalled
         DateTime selected = newest.Min(oldest);
 
         // Assert
-        _ = selected.Should().Be(oldest);
+        selected.ShouldBe(oldest);
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public sealed class WhenMinIsCalled
         DateTime selected = sameDate.Min(sameDate);
 
         // Assert
-        _ = selected.Should().Be(sameDate);
+        selected.ShouldBe(sameDate);
     }
 }

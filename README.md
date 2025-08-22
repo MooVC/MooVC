@@ -1,6 +1,5 @@
 # MooVC [![NuGet](https://img.shields.io/nuget/v/MooVC?logo=nuget)](https://www.nuget.org/packages/MooVC/) [![GitHub](https://img.shields.io/github/license/MooVC/MooVC)](LICENSE.md)
 
-
 The MooVC library contains a collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.
 
 MooVC was originally created as a PHP based framework back in 2009, intended to support the rapid development of object-oriented web applications based on the Model-View-Controller design pattern that were to be rendered in well-formed XHTML.  It is from this that MooVC gets its name - the **M**odel-**o**bject-**o**riented-**V**iew-**C**ontroller.

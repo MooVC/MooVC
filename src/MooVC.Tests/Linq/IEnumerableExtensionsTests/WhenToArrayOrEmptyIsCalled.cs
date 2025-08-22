@@ -41,7 +41,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = original.ToArrayOrEmpty(element => element);
 
         // Assert
-        _ = result.Should().Equal(expected);
+        result.ShouldBe(expected);
     }
 
     [Theory]
@@ -54,7 +54,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
-        _ = result.Should().Equal(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -68,8 +68,8 @@ public sealed class WhenToArrayOrEmptyIsCalled
         Action act = () => enumerable.ToArrayOrEmpty(order!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-           .WithParameterName(nameof(order));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(order));
     }
 
     [Theory]
@@ -83,7 +83,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        _ = result.Should().Equal(expected);
+        result.ShouldBe(expected);
     }
 
     [Theory]
@@ -94,7 +94,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
-        _ = result.Should().Equal(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
-        _ = result.Should().BeEquivalentTo();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        _ = result.Should().BeEquivalentTo();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -133,6 +133,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(Array.Empty<int>());
+        result.ShouldBe(Array.Empty<int>());
     }
 }

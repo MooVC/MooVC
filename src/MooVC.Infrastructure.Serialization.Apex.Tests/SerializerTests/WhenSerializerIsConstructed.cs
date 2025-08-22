@@ -11,7 +11,7 @@ public sealed class WhenSerializerIsConstructed
         using var serializer = new Serializer();
 
         // Assert
-        _ = serializer.Should().NotBeNull();
+        serializer.ShouldNotBeNull();
     }
 
     [Fact]
@@ -32,6 +32,6 @@ public sealed class WhenSerializerIsConstructed
         using var serializer = new Serializer(settings: settings);
 
         // Assert
-        _ = serializer.Should().NotBeNull();
+        serializer.ShouldNotBeNull();
     }
 }

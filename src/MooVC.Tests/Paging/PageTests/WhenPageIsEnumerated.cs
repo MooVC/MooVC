@@ -16,7 +16,7 @@ public sealed class WhenPageIsEnumerated
 
         foreach (int value in result)
         {
-            _ = value.Should().Be(values[index++]);
+            value.ShouldBe(values[index++]);
         }
     }
 }

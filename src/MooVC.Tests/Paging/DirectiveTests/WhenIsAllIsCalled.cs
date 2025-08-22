@@ -13,7 +13,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        _ = isAll.Should().BeTrue();
+        isAll.ShouldBeTrue();
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        _ = isAll.Should().BeTrue();
+        isAll.ShouldBeTrue();
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        _ = isAll.Should().BeTrue();
+        isAll.ShouldBeTrue();
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        _ = isAll.Should().BeFalse();
+        isAll.ShouldBeFalse();
     }
 }
 #endif

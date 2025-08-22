@@ -30,8 +30,8 @@ public sealed class WhenCloneIsCalled
         ExpandoObject clone = original.Clone();
 
         // Assert
-        _ = clone.Should().NotBeSameAs(original);
-        _ = clone.Should().BeEquivalentTo(original);
+        clone.ShouldNotBeSameAs(original);
+        clone.ShouldBe(original);
     }
 
     [Fact]
@@ -48,9 +48,9 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        _ = ((ExpandoObject)clone).Should().NotBeSameAs(parent);
-        _ = ((ExpandoObject)clone.Child).Should().NotBeSameAs(parent.Child);
-        _ = ((ExpandoObject)clone.Child).Should().BeEquivalentTo(parent.Child);
+        ((ExpandoObject)clone).ShouldNotBeSameAs((ExpandoObject)parent);
+        ((ExpandoObject)clone.Child).ShouldNotBeSameAs((ExpandoObject)parent.Child);
+        ((ExpandoObject)clone.Child).ShouldBe((ExpandoObject)parent.Child);
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public sealed class WhenCloneIsCalled
         Action act = () => source.Clone(defaultIfNull: false);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>();
+        Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]
@@ -76,8 +76,8 @@ public sealed class WhenCloneIsCalled
         ExpandoObject value = source.Clone(defaultIfNull: true);
 
         // Assert
-        _ = value.Should().NotBeNull();
-        _ = value.Should().BeEmpty();
+        value.ShouldNotBeNull();
+        value.ShouldBeEmpty();
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        _ = ((ExpandoObject)clone).Should().NotBeSameAs(parent);
-        _ = ((object)clone.Child).Should().BeSameAs(parent.Child);
+        ((ExpandoObject)clone).ShouldNotBeSameAs((ExpandoObject)parent);
+        ((object)clone.Child).ShouldBeSameAs((object)parent.Child);
     }
 }

@@ -13,7 +13,7 @@ public sealed class WhenReplaceIsCalled
         Action act = () => target.Replace(items);
 
         // Assert
-        _ = act.Should().NotThrow<ArgumentNullException>();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public sealed class WhenReplaceIsCalled
         Action act = () => target!.Replace(items);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>();
+        Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(items);
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -83,6 +83,6 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(items);
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 }

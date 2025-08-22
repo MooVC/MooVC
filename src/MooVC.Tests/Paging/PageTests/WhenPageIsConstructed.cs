@@ -16,11 +16,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, []);
 
         // Assert
-        _ = result.Should().BeEmpty();
-        _ = result.Count.Should().Be(0);
-        _ = result.Directive.Should().Be(directive);
-        _ = result.HasTotal.Should().BeFalse();
-        _ = result.Total.Should().BeNull();
+        result.ShouldBeEmpty();
+        result.Count.ShouldBe(0);
+        result.Directive.ShouldBe(directive);
+        result.HasTotal.ShouldBeFalse();
+        result.Total.ShouldBeNull();
     }
 
     [Theory]
@@ -36,11 +36,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(values);
-        _ = result.Count.Should().Be(values.Length);
-        _ = result.Directive.Should().Be(directive);
-        _ = result.HasTotal.Should().BeFalse();
-        _ = result.Total.Should().BeNull();
+        result.ShouldBe(values);
+        result.Count.ShouldBe(values.Length);
+        result.Directive.ShouldBe(directive);
+        result.HasTotal.ShouldBeFalse();
+        result.Total.ShouldBeNull();
     }
 
     [Theory]
@@ -56,11 +56,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values, total: total);
 
         // Assert
-        _ = result.Should().BeEquivalentTo(values);
-        _ = result.Count.Should().Be(values.Length);
-        _ = result.Directive.Should().Be(directive);
-        _ = result.HasTotal.Should().BeTrue();
-        _ = result.Total.Should().Be(total);
+        result.ShouldBe(values);
+        result.Count.ShouldBe(values.Length);
+        result.Directive.ShouldBe(directive);
+        result.HasTotal.ShouldBeTrue();
+        result.Total.ShouldBe(total);
     }
 
     [Fact]
@@ -75,11 +75,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values!, total: total);
 
         // Assert
-        _ = result.Should().BeEmpty();
-        _ = result.Count.Should().Be(0);
-        _ = result.Directive.Should().Be(directive);
-        _ = result.HasTotal.Should().BeTrue();
-        _ = result.Total.Should().Be(total);
+        result.ShouldBeEmpty();
+        result.Count.ShouldBe(0);
+        result.Directive.ShouldBe(directive);
+        result.HasTotal.ShouldBeTrue();
+        result.Total.ShouldBe(total);
     }
 }
 #endif

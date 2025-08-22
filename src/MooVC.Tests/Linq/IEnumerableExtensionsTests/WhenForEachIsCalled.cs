@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-using AwesomeAssertions.Specialized;
+using Shouldly;
 
 public sealed class WhenForEachIsCalled
 {
@@ -20,7 +20,7 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        _ = invocations.Should().Equal(enumeration);
+        invocations.ShouldBe(enumeration);
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(action!);
 
         // Assert
-        ExceptionAssertions<ArgumentNullException> exception = act.Should().Throw<ArgumentNullException>();
-        _ = exception.Which.ParamName.Should().Be(nameof(action));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(action));
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -67,6 +67,6 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(default!);
 
         // Assert
-        _ = act.Should().NotThrow<ArgumentNullException>();
+        Should.NotThrow(act);
     }
 }

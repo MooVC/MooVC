@@ -12,7 +12,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        _ = results.Should().BeEmpty();
+        results.ShouldBeEmpty();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
 
         // Assert
-        _ = results.Should().BeEmpty();
+        results.ShouldBeEmpty();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        _ = results.Should().BeEmpty();
+        results.ShouldBeEmpty();
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        _ = results.Should().Equal(source.Values);
+        results.ShouldBe(source.Values);
     }
 
     [Fact]
@@ -71,6 +71,6 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        _ = results.Should().Equal(expected);
+        results.ShouldBe(expected);
     }
 }

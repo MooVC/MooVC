@@ -18,10 +18,10 @@ public sealed class WhenBytesAreCompressed
         // Act & Assert
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
 
-        _ = compressed.Should().NotBeEquivalentTo(expected);
+        compressed.ShouldNotBe(expected);
 
         IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
-        _ = expected.Should().BeEquivalentTo(decompressed);
+        decompressed.ShouldBe(expected);
     }
 }

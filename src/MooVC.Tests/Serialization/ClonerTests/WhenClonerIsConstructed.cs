@@ -12,7 +12,7 @@ public sealed class WhenClonerIsConstructed
         var cloner = new Cloner(serializer);
 
         // Assert
-        _ = cloner.Should().NotBeNull();
+        cloner.ShouldNotBeNull();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenClonerIsConstructed
         Func<ICloner> act = () => new Cloner(serializer!);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>()
-            .WithParameterName(nameof(serializer));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(serializer));
     }
 }

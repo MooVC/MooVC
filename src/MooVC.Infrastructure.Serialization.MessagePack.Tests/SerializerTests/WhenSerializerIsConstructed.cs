@@ -11,7 +11,7 @@ public sealed class WhenSerializerIsConstructed
         var serializer = new Serializer();
 
         // Assert
-        _ = serializer.Options.Should().BeEquivalentTo(MessagePackSerializerOptions.Standard);
+        serializer.Options.ShouldBeEquivalentTo(MessagePackSerializerOptions.Standard);
     }
 
     [Fact]
@@ -26,6 +26,6 @@ public sealed class WhenSerializerIsConstructed
         var serializer = new Serializer(options: options);
 
         // Assert
-        _ = serializer.Options.Should().BeEquivalentTo(serializer.Options);
+        serializer.Options.ShouldBeEquivalentTo(serializer.Options);
     }
 }

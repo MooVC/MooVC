@@ -12,7 +12,7 @@ public sealed class WhenIsEmptyIsCalled
         bool isEmpty = source.IsEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeTrue();
+        isEmpty.ShouldBeTrue();
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public sealed class WhenIsEmptyIsCalled
         bool isEmpty = source.IsEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeFalse();
+        isEmpty.ShouldBeFalse();
     }
 
     [Fact]
@@ -38,6 +38,6 @@ public sealed class WhenIsEmptyIsCalled
         bool isEmpty = source.IsEmpty();
 
         // Assert
-        _ = isEmpty.Should().BeFalse();
+        isEmpty.ShouldBeFalse();
     }
 }

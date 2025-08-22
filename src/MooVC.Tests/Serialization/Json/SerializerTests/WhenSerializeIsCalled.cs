@@ -17,7 +17,7 @@ public sealed class WhenSerializeIsCalled
         IEnumerable<byte> result = await serializer.Serialize(instance, cancellationToken);
 
         // Assert
-        _ = result.Should().NotBeEmpty();
+        result.ShouldNotBeEmpty();
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, cancellationTokenSource.Token);
 
         // Assert
-        _ = await act.Should().ThrowAsync<OperationCanceledException>();
+        await Should.ThrowAsync<OperationCanceledException>(act);
     }
 
     [Fact]
@@ -49,7 +49,7 @@ public sealed class WhenSerializeIsCalled
         await serializer.Serialize(instance, stream, cancellationToken);
 
         // Assert
-        _ = stream.Length.Should().BeGreaterThan(0);
+        stream.Length.ShouldBeGreaterThan(0);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, stream, cancellationTokenSource.Token);
 
         // Assert
-        _ = await act.Should().ThrowAsync<OperationCanceledException>();
+        await Should.ThrowAsync<OperationCanceledException>(act);
     }
 }
 #endif

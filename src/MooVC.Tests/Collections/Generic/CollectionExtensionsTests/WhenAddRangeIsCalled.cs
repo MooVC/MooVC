@@ -13,7 +13,7 @@ public sealed class WhenAddRangeIsCalled
         Action act = () => target.AddRange(items);
 
         // Assert
-        _ = act.Should().NotThrow<ArgumentNullException>();
+        Should.NotThrow(act);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public sealed class WhenAddRangeIsCalled
         Action act = () => target!.AddRange(items);
 
         // Assert
-        _ = act.Should().Throw<ArgumentNullException>();
+        Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(expected);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        _ = actual.Should().Equal(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        _ = actual.Should().BeEmpty();
+        actual.ShouldBeEmpty();
     }
 
     [Fact]
@@ -84,6 +84,6 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        _ = actual.Should().Equal(1, 2, 3);
+        actual.ShouldBe([1, 2, 3]);
     }
 }

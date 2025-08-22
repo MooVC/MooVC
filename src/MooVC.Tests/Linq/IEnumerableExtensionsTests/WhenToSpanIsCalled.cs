@@ -11,7 +11,7 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        _ = actual.IsEmpty.Should().BeTrue();
+        actual.IsEmpty.ShouldBeTrue();
     }
 
     [Theory]
@@ -27,7 +27,7 @@ public sealed class WhenToSpanIsCalled
         // Assert
         for (int index = 0; index < expected.Count(); index++)
         {
-            _ = actual[index].Should().Be(expected.ElementAt(index));
+            actual[index].ShouldBe(expected.ElementAt(index));
         }
     }
 
@@ -41,7 +41,7 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        _ = actual.IsEmpty.Should().BeTrue();
+        actual.IsEmpty.ShouldBeTrue();
     }
 
     [Fact]
@@ -54,6 +54,6 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        _ = actual.Length.Should().Be(enumerable.Count());
+        actual.Length.ShouldBe(enumerable.Count());
     }
 }

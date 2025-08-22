@@ -13,8 +13,8 @@ public sealed class WhenImplicitlyCastFromUShort
         Directive directive = page;
 
         // Assert
-        _ = directive.Limit.Should().Be(Directive.DefaultLimit);
-        _ = directive.Page.Should().Be(expected);
+        directive.Limit.ShouldBe(Directive.DefaultLimit);
+        directive.Page.ShouldBe(expected);
     }
 }
 #endif

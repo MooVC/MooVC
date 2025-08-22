@@ -17,8 +17,8 @@ public sealed class WhenDecrementIsCalled
         directive--;
 
         // Assert
-        _ = directive.Limit.Should().Be(limit);
-        _ = directive.Page.Should().Be(expected);
+        directive.Limit.ShouldBe(limit);
+        directive.Page.ShouldBe(expected);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public sealed class WhenDecrementIsCalled
         actual--;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Theory]
@@ -49,8 +49,8 @@ public sealed class WhenDecrementIsCalled
         --directive;
 
         // Assert
-        _ = directive.Limit.Should().Be(limit);
-        _ = directive.Page.Should().Be(expected);
+        directive.Limit.ShouldBe(limit);
+        directive.Page.ShouldBe(expected);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public sealed class WhenDecrementIsCalled
         --actual;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Theory]
@@ -80,8 +80,8 @@ public sealed class WhenDecrementIsCalled
         Directive actual = original - decrement;
 
         // Assert
-        _ = actual.Page.Should().Be(expected);
-        _ = original.Limit.Should().Be(limit);
+        actual.Page.ShouldBe(expected);
+        original.Limit.ShouldBe(limit);
     }
 
     [Theory]
@@ -98,7 +98,7 @@ public sealed class WhenDecrementIsCalled
         Directive actual = expected - decrement;
 
         // Assert
-        _ = actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 }
 #endif

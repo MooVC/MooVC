@@ -23,10 +23,10 @@ public sealed class WhenCloneIsCalled
         WhenCloneIsCalled clone = await cloner.Clone(instance, CancellationToken.None);
 
         // Assert
-        _ = await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
-        _ = await serializer.Received(1).Deserialize<WhenCloneIsCalled>(binary, Arg.Any<CancellationToken>());
+        await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
+        await serializer.Received(1).Deserialize<WhenCloneIsCalled>(binary, Arg.Any<CancellationToken>());
 
-        _ = clone.Should().Be(instance);
+        clone.ShouldBe(instance);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public sealed class WhenCloneIsCalled
         Func<Task> act = async () => await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        _ = await act.Should().ThrowAsync<ArgumentNullException>()
-            .WithParameterName(nameof(original));
+        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
+        exception.ParamName.ShouldBe(nameof(original));
     }
 }

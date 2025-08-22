@@ -16,8 +16,8 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor();
 
         // Assert
-        _ = compressor.Decoder.Should().BeEquivalentTo(decoder);
-        _ = compressor.Encoder.Should().BeEquivalentTo(encoder);
+        compressor.Decoder.ShouldBeEquivalentTo(decoder);
+        compressor.Encoder.ShouldBeEquivalentTo(encoder);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor(decoder: decoder, encoder: encoder);
 
         // Assert
-        _ = compressor.Decoder.Should().BeEquivalentTo(decoder);
-        _ = compressor.Encoder.Should().BeEquivalentTo(encoder);
+        compressor.Decoder.ShouldBeEquivalentTo(decoder);
+        compressor.Encoder.ShouldBeEquivalentTo(encoder);
     }
 }

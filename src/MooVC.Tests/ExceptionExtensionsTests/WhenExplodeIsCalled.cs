@@ -18,7 +18,7 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        _ = wasInvoked.Should().BeFalse();
+        wasInvoked.ShouldBeFalse();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        _ = invocationCount.Should().Be(ExpectedInvocationCount);
+        invocationCount.ShouldBe(ExpectedInvocationCount);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        _ = invocationCount.Should().Be(ExpectedInvocationCount);
+        invocationCount.ShouldBe(ExpectedInvocationCount);
     }
 
     [Fact]
@@ -86,6 +86,6 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        _ = actualOrder.Should().Equal(expectedOrder);
+        actualOrder.ShouldBe(expectedOrder);
     }
 }

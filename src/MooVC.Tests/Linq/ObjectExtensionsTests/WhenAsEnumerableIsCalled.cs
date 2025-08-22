@@ -12,8 +12,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan> value = expected.AsEnumerable();
 
         // Assert
-        _ = value.Should().ContainSingle()
-            .Which.Should().Be(expected);
+        value.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
     [Fact]
@@ -26,8 +25,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan?> value = expected.AsEnumerable();
 
         // Assert
-        _ = value.Should().ContainSingle()
-            .Which.Should().BeNull();
+        value.ShouldHaveSingleItem().ShouldBeNull();
     }
 
     [Fact]
@@ -40,8 +38,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object> value = expected.AsEnumerable();
 
         // Assert
-        _ = value.Should().ContainSingle()
-            .Which.Should().Be(expected);
+        value.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
     [Fact]
@@ -54,7 +51,6 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object?> value = expected.AsEnumerable();
 
         // Assert
-        _ = value.Should().ContainSingle()
-            .Which.Should().BeNull();
+        value.ShouldHaveSingleItem().ShouldBeNull();
     }
 }
