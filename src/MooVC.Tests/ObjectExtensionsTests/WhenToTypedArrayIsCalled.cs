@@ -12,7 +12,7 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan[] value = expected.ToTypedArray();
 
         // Assert
-        value.Count().ShouldBe(1);
+        value.Length.ShouldBe(1);
         value.Single().ShouldBe(expected);
     }
 
@@ -26,7 +26,7 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan?[] value = expected.ToTypedArray();
 
         // Assert
-        value.Count().ShouldBe(1);
+        value.Length.ShouldBe(1);
         value.Single().ShouldBeNull();
     }
 
@@ -40,7 +40,7 @@ public sealed class WhenToTypedArrayIsCalled
         object[] value = expected.ToTypedArray();
 
         // Assert
-        value.Count().ShouldBe(1);
+        value.Length.ShouldBe(1);
         value.Single().ShouldBeSameAs(expected);
     }
 
@@ -54,7 +54,20 @@ public sealed class WhenToTypedArrayIsCalled
         object?[] value = expected.ToTypedArray();
 
         // Assert
-        value.Count().ShouldBe(1);
+        value.Length.ShouldBe(1);
         value.Single().ShouldBeNull();
+    }
+
+    [Fact]
+    public void GivenAnArrayThenTheSameArrayIsReturned()
+    {
+        // Arrange
+        int[] expected = { 1, 2, 3 };
+
+        // Act
+        int[] value = expected.ToTypedArray();
+
+        // Assert
+        value.ShouldBeSameAs(expected);
     }
 }
