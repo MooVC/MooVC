@@ -1,5 +1,6 @@
 ﻿namespace MooVC;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 /// <summary>
@@ -24,9 +25,13 @@ public static partial class ObjectExtensions
     /// </summary>
     /// <typeparam name="T">The element type of the array.</typeparam>
     /// <param name="values">The array to be returned.</param>
-    /// <returns>The same array provided in <paramref name="values"/>.</returns>
+    /// <returns>
+    /// The same array provided in <paramref name="values"/>.
+    /// If <paramref name="values"/> is <see langword="null"/> then <see langword="null"/> is returned.
+    /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T[] ToTypedArray<T>(this T[] values)
+    [return: NotNullIfNotNull(nameof(values))]
+    public static T[]? ToTypedArray<T>(this T[]? values)
     {
         return values;
     }

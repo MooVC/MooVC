@@ -70,4 +70,17 @@ public sealed class WhenToTypedArrayIsCalled
         // Assert
         value.ShouldBeSameAs(expected);
     }
+
+    [Fact]
+    public void GivenANullArrayThenNullIsReturned()
+    {
+        // Arrange
+        int[]? expected = default;
+
+        // Act
+        int[]? value = expected.ToTypedArray();
+
+        // Assert
+        value.ShouldBeNull();
+    }
 }
