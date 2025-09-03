@@ -1,6 +1,8 @@
 ﻿namespace MooVC;
 
+#if !NETSTANDARD2_0
 using System.Diagnostics.CodeAnalysis;
+#endif
 using System.Runtime.CompilerServices;
 
 /// <summary>
@@ -30,7 +32,9 @@ public static partial class ObjectExtensions
     /// If <paramref name="values"/> is <see langword="null"/> then <see langword="null"/> is returned.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if !NETSTANDARD2_0
     [return: NotNullIfNotNull(nameof(values))]
+#endif
     public static T[]? ToTypedArray<T>(this T[]? values)
     {
         return values;
