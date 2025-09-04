@@ -99,22 +99,189 @@ Provided in the core library; no additional packages required.
 
 ### LINQ and Collection Extensions
 
-LINQ and collection extensions keep queries expressive and succinct:
+LINQ and collection extensions keep queries expressive and succinct. Each extension below targets a common scenario and includes an API-style summary for quick reference.
 
-* `WhereIf` enhances your code by allowing conditional application of filters using LINQ.
-* `ForAll` enhances your code by performing parallel operations across sequences.
-* `Combine` enhances your code by merging two sequences into tuples.
-* `ToIndex` enhances your code by creating lookups keyed by a selector.
-* `AddRange` and `Replace` enhance your code by extending `ICollection` without loops.
+#### WhereIf
 
-#### Usage
+Conditionally apply a predicate only when a supplied condition is met.
+
+##### Signature
 
 ```csharp
-IDictionary<Guid, Order> orderLookup = allOrders.ToIndex(currentOrder => currentOrder.Id);
+public static IEnumerable<T>? WhereIf<T>(
+    this IEnumerable<T>? enumeration,
+    bool isApplicable,
+    Func<T, bool> predicate)
 
-IEnumerable<Order> activeOrders = allOrders.WhereIf(includeOnlyActive, currentOrder => currentOrder.IsActive);
+public static IEnumerable<T>? WhereIf<T>(
+    this IEnumerable<T>? enumeration,
+    Func<bool> condition,
+    Func<T, bool> predicate)
+```
 
-await activeOrders.ForAll(async currentOrder => await ProcessOrderAsync(currentOrder));
+##### Parameters
+
+* `enumeration` – The sequence to filter.
+* `isApplicable` / `condition` – Determines whether the filter is applied.
+* `predicate` – The condition used to filter items.
+
+##### Returns
+
+* The filtered sequence if the condition is satisfied; otherwise, the original sequence.
+
+##### Example
+
+```csharp
+IEnumerable<Order> activeOrders =
+    allOrders.WhereIf(includeOnlyActive, order => order.IsActive);
+```
+
+#### ForAll
+
+Execute an action for every element in the sequence, synchronously or asynchronously.
+
+##### Signature
+
+```csharp
+public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
+
+public static Task ForAll<T>(
+    this IEnumerable<T>? items,
+    Func<T, Task> operation)
+```
+
+##### Parameters
+
+* `items` – The sequence of items to iterate.
+* `action` / `operation` – The delegate executed for each item.
+
+##### Returns
+
+* A `Task` representing completion for the asynchronous overload; otherwise, nothing.
+
+##### Example
+
+```csharp
+await activeOrders.ForAll(async order => await ProcessOrderAsync(order));
+```
+
+#### Combine
+
+Append additional items to an existing sequence without creating temporary collections.
+
+##### Signature
+
+```csharp
+public static IEnumerable<T> Combine<T>(this IEnumerable<T>? source, T instance)
+
+public static IEnumerable<T> Combine<T>(
+    this IEnumerable<T>? source,
+    IEnumerable<T>? instances)
+```
+
+##### Parameters
+
+* `source` – The original sequence.
+* `instance` / `instances` – Items to append to the sequence.
+
+##### Returns
+
+* A sequence containing the original elements followed by the appended items.
+
+##### Example
+
+```csharp
+IEnumerable<int> combinedValues = existingValues.Combine(new[] { 4, 5 });
+```
+
+#### ToIndex
+
+Create a dictionary keyed by values selected from each element.
+
+##### Signature
+
+```csharp
+public static IDictionary<TSubject, TValue> ToIndex<TSubject, TValue>(
+    this IEnumerable<TSubject>? source,
+    Func<TSubject, TValue> selector)
+
+public static IDictionary<TSubject, TTransform> ToIndex<TSubject, TTransform, TValue>(
+    this IEnumerable<TSubject>? source,
+    Func<TSubject, TValue> selector,
+    Func<TValue, TTransform> transform)
+```
+
+##### Parameters
+
+* `source` – The sequence to index.
+* `selector` – Projects each element into a key.
+* `transform` – Converts the selected value before insertion.
+
+##### Returns
+
+* A dictionary containing keys and values generated from the sequence.
+
+##### Example
+
+```csharp
+IDictionary<Guid, Order> orderLookup =
+    allOrders.ToIndex(order => order.Id);
+```
+
+#### AddRange
+
+Insert multiple items into an `ICollection<T>` without manual loops.
+
+##### Signature
+
+```csharp
+public static void AddRange<T>(
+    this ICollection<T> target,
+    IEnumerable<T>? items)
+```
+
+##### Parameters
+
+* `target` – The collection receiving new items.
+* `items` – The elements to add to the collection.
+
+##### Returns
+
+* Nothing. The `target` collection is updated in place.
+
+##### Example
+
+```csharp
+ICollection<Order> pendingOrders = new List<Order>();
+pendingOrders.AddRange(newOrders);
+```
+
+#### Replace
+
+Clear an `ICollection<T>` and populate it with a replacement sequence.
+
+##### Signature
+
+```csharp
+public static void Replace<T>(
+    this ICollection<T> target,
+    IEnumerable<T>? replacements)
+```
+
+##### Parameters
+
+* `target` – The collection whose contents are to be replaced.
+* `replacements` – The new elements for the collection.
+
+##### Returns
+
+* Nothing. The `target` collection is overwritten with `replacements`.
+
+##### Example
+
+```csharp
+ICollection<Order> processedOrders = GetExistingOrders();
+processedOrders.Replace(latestOrders);
 ```
 
 #### Infrastructure Options
