@@ -7,6 +7,18 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
 
+## Table of Contents
+- [Getting Started](#getting-started)
+- [Capabilities](#capabilities)
+  - [Compression](#compression)
+  - [Serialization and Cloning](#serialization-and-cloning)
+  - [Paging](#paging)
+  - [Threading](#threading)
+  - [Hosting](#hosting)
+  - [LINQ and Collection Extensions](#linq-and-collection-extensions)
+  - [Dynamic and I/O Helpers](#dynamic-and-io-helpers)
+- [Why Use MooVC?](#why-use-moovc)
+
 ## Getting Started
 
 Install the core package:
@@ -73,25 +85,44 @@ Page<Customer> customerPage = customerQuery.ToPage(pagingRequest);
 #### Infrastructure Options
 Provided in the core library; no additional packages required.
 
-### Threading and Hosting
+### Threading
 
-Threading and hosting helpers coordinate asynchronous initialization and exclusive access to shared resources, reducing concurrency errors.
+Threading helpers coordinate asynchronous initialization and exclusive access to shared resources, reducing concurrency errors.
 
 Helpers include:
 
 * `Initializer<T>` for asynchronous lazy initialization
 * `Coordinator<T>` for mutual exclusion by context
-* `ThreadSafeHostedService` to safely start and stop multiple hosted services
 
 #### Usage
 
 ```csharp
-var configInitializer = new Initializer<Configuration>(_ => LoadConfigAsync());
-Configuration configuration = await configInitializer.Initialize(CancellationToken.None);
+var configurationInitializer = new Initializer<Configuration>(_ => LoadConfigAsync());
+Configuration configuration = await configurationInitializer.Initialize(CancellationToken.None);
 
 var orderCoordinator = new Coordinator<string>();
 using IContext<string> orderContext = await orderCoordinator.Apply("orders", CancellationToken.None);
 // exclusive work
+```
+
+#### Infrastructure Options
+Provided in the core library; no additional packages required.
+
+### Hosting
+
+Hosting helpers safely start and stop long-running services across threads.
+
+Helpers include:
+
+* `ThreadSafeHostedService` to coordinate multiple hosted services
+
+#### Usage
+
+```csharp
+var hostedService = new ThreadSafeHostedService(exampleService, logger);
+await hostedService.StartAsync(CancellationToken.None);
+// ...
+await hostedService.StopAsync(CancellationToken.None);
 ```
 
 #### Infrastructure Options
