@@ -6,7 +6,6 @@ MooVC was originally created as a PHP based framework back in 2009, intended to 
 
 While the original MooVC PHP based framework has long since been deprecated, many of the lessons learned from it have formed the basis of solutions the author has since developed.  This library, and those related to it, are all intended to support the rapid development of high quality software that addresses a variety of use-cases.
 
-
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Capabilities](#capabilities)
@@ -41,9 +40,9 @@ Compression enhances your code by shrinking payloads and eliminating boilerplate
 Compress or decompress streams and byte arrays with a single call.
 
 ```csharp
-ICompressor compressionProvider = new GZipCompressor();
-IEnumerable<byte> compressedData = await compressionProvider.Compress(originalData, CancellationToken.None);
-IEnumerable<byte> restoredData = await compressionProvider.Decompress(compressedData, CancellationToken.None);
+ICompressor provider = new GZipCompressor();
+IEnumerable<byte> compressed = await provider.Compress(original, CancellationToken.None);
+IEnumerable<byte> restored = await provider.Decompress(compressed, CancellationToken.None);
 ```
 
 #### Infrastructure Options
@@ -58,9 +57,9 @@ Serialization and cloning streamline the persistence and duplication of complex 
 Serialize or deserialize objects and create deep clones with a single call.
 
 ```csharp
-var jsonSerializer = new MooVC.Serialization.Json.Serializer();
-IEnumerable<byte> serializedOrder = await jsonSerializer.Serialize(purchaseOrder, CancellationToken.None);
-Order clonedOrder = await jsonSerializer.Deserialize<Order>(serializedOrder, CancellationToken.None);
+var serializer = new MooVC.Serialization.Json.Serializer();
+IEnumerable<byte> serializedOrder = await serializer.Serialize(purchaseOrder, CancellationToken.None);
+Order clonedOrder = await serializer.Deserialize<Order>(serializedOrder, CancellationToken.None);
 ```
 
 #### Infrastructure Options
@@ -78,8 +77,8 @@ Paging slices large data sets into predictable chunks using `Directive` and `Pag
 Construct a directive and turn queries into pages.
 
 ```csharp
-Directive pagingRequest = new(limit: 25, page: 1);
-Page<Customer> customerPage = customerQuery.ToPage(pagingRequest);
+Directive request = new(limit: 25, page: 1);
+Page<Customer> customerPage = customerQuery.ToPage(request);
 ```
 
 #### Infrastructure Options
@@ -97,11 +96,11 @@ Helpers include:
 #### Usage
 
 ```csharp
-var configurationInitializer = new Initializer<Configuration>(_ => LoadConfigAsync());
-Configuration configuration = await configurationInitializer.Initialize(CancellationToken.None);
+var initializer = new Initializer<Configuration>(_ => LoadConfigAsync());
+Configuration configuration = await initializer.Initialize(CancellationToken.None);
 
-var orderCoordinator = new Coordinator<string>();
-using IContext<string> orderContext = await orderCoordinator.Apply("orders", CancellationToken.None);
+var coordinator = new Coordinator<string>();
+using IContext<string> context = await coordinator.Apply("orders", CancellationToken.None);
 // exclusive work
 ```
 
@@ -119,10 +118,10 @@ Helpers include:
 #### Usage
 
 ```csharp
-var hostedService = new ThreadSafeHostedService(exampleService, logger);
-await hostedService.StartAsync(CancellationToken.None);
+var service = new ThreadSafeHostedService(example, logger);
+await service.StartAsync(CancellationToken.None);
 // ...
-await hostedService.StopAsync(CancellationToken.None);
+await service.StopAsync(CancellationToken.None);
 ```
 
 #### Infrastructure Options
@@ -163,8 +162,9 @@ public static IEnumerable<T>? WhereIf<T>(
 ##### Example
 
 ```csharp
-IEnumerable<Order> activeOrders =
-    allOrders.WhereIf(includeOnlyActive, order => order.IsActive);
+IEnumerable<Order> activeOrders = allOrders.WhereIf(
+    includeOnlyActive,
+    order => order.IsActive);
 ```
 
 #### ForAll
@@ -176,9 +176,7 @@ Execute an action for every element in the sequence, synchronously or asynchrono
 ```csharp
 public static void ForAll<T>(this IEnumerable<T>? items, Action<T> action)
 
-public static Task ForAll<T>(
-    this IEnumerable<T>? items,
-    Func<T, Task> operation)
+public static Task ForAll<T>(this IEnumerable<T>? items, Func<T, Task> operation)
 ```
 
 ##### Parameters
@@ -193,7 +191,7 @@ public static Task ForAll<T>(
 ##### Example
 
 ```csharp
-await activeOrders.ForAll(async order => await ProcessOrderAsync(order));
+await activeOrders.ForAll(ProcessOrderAsync);
 ```
 
 #### Combine
@@ -205,9 +203,7 @@ Append additional items to an existing sequence without creating temporary colle
 ```csharp
 public static IEnumerable<T> Combine<T>(this IEnumerable<T>? source, T instance)
 
-public static IEnumerable<T> Combine<T>(
-    this IEnumerable<T>? source,
-    IEnumerable<T>? instances)
+public static IEnumerable<T> Combine<T>(this IEnumerable<T>? source, IEnumerable<T>? instances)
 ```
 
 ##### Parameters
@@ -222,7 +218,7 @@ public static IEnumerable<T> Combine<T>(
 ##### Example
 
 ```csharp
-IEnumerable<int> combinedValues = existingValues.Combine(new[] { 4, 5 });
+IEnumerable<int> combined = existing.Combine(new[] { 4, 5 });
 ```
 
 #### ToIndex
@@ -255,8 +251,8 @@ public static IDictionary<TSubject, TTransform> ToIndex<TSubject, TTransform, TV
 ##### Example
 
 ```csharp
-IDictionary<Guid, Order> orderLookup =
-    allOrders.ToIndex(order => order.Id);
+IDictionary<Guid, Order> orderLookup = allOrders
+    .ToIndex(order => order.Id);
 ```
 
 #### AddRange
@@ -266,9 +262,7 @@ Insert multiple items into an `ICollection<T>` without manual loops.
 ##### Signature
 
 ```csharp
-public static void AddRange<T>(
-    this ICollection<T> target,
-    IEnumerable<T>? items)
+public static void AddRange<T>(this ICollection<T> target, IEnumerable<T>? items)
 ```
 
 ##### Parameters
@@ -283,8 +277,8 @@ public static void AddRange<T>(
 ##### Example
 
 ```csharp
-ICollection<Order> pendingOrders = new List<Order>();
-pendingOrders.AddRange(newOrders);
+ICollection<Order> pending = new List<Order>();
+pending.AddRange(@new);
 ```
 
 #### Replace
@@ -294,9 +288,7 @@ Clear an `ICollection<T>` and populate it with a replacement sequence.
 ##### Signature
 
 ```csharp
-public static void Replace<T>(
-    this ICollection<T> target,
-    IEnumerable<T>? replacements)
+public static void Replace<T>(this ICollection<T> target, IEnumerable<T>? replacements)
 ```
 
 ##### Parameters
@@ -311,8 +303,8 @@ public static void Replace<T>(
 ##### Example
 
 ```csharp
-ICollection<Order> processedOrders = GetExistingOrders();
-processedOrders.Replace(latestOrders);
+ICollection<Order> processed = GetExistingOrders();
+processed.Replace(latest);
 ```
 
 #### Infrastructure Options
@@ -326,7 +318,7 @@ Dynamic and I/O helpers reduce repetitive plumbing when working with dynamic obj
 Utilities for cloning `ExpandoObject`, navigating exception trees, working with streams, and more.
 
 ```csharp
-dynamic clonedObject = originalObject.Clone();
+dynamic cloned = original.Clone();
 ```
 
 #### Infrastructure Options
