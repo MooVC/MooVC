@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp {
+namespace MooVC.Syntax.CSharp.Constructs {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Member.Resources", typeof(Member_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Constructs.Member.Resources", typeof(Member_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

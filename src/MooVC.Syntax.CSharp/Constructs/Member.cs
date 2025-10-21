@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+﻿namespace MooVC.Syntax.CSharp.Constructs
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using System.Text.RegularExpressions;
     using Ardalis.GuardClauses;
     using Monify;
-    using static MooVC.Syntax.CSharp.Member_Resources;
+    using static MooVC.Syntax.CSharp.Constructs.Member_Resources;
 
     [Monify(Type = typeof(string))]
     public sealed partial class Member
