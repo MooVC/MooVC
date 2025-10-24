@@ -5,13 +5,13 @@
     partial class Member
     {
         [Fluentify]
-        public sealed partial class Options
+        public sealed class Options
         {
             public static readonly Options Default = new Options();
 
-            public Casing Casing { get; } = Casing.Camel;
+            public Casing Casing { get; set; } = Casing.Camel;
 
-            public bool UseUnderscores { get; }
+            public bool UseUnderscores { get; set; }
         }
     }
 }

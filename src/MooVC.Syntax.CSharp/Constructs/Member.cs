@@ -13,7 +13,7 @@
     public sealed partial class Member
         : IValidatableObject
     {
-        private static readonly Regex rule = new Regex(@"^(?:[\p{Lu}\p{Lt}][\p{Ll}\p{Nd}]*)+$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         private static readonly Dictionary<Casing, Func<string, string>> casingStrategies = new Dictionary<Casing, Func<string, string>>
         {
@@ -53,7 +53,7 @@
         {
             const int Empty = 0;
 
-            if (_value.Length == Empty || rule.IsMatch(_value))
+            if (_value is null || _value.Length == Empty || !rule.IsMatch(_value))
             {
                 yield return new ValidationResult(ValidateIdentifierRequired.Format(_value, nameof(Member)), new[] { nameof(Member) });
             }
