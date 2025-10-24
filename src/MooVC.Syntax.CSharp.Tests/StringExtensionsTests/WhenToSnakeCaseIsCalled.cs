@@ -73,6 +73,19 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe(expected);
     }
 
+    [Theory]
+    [InlineData("A", "a")]
+    [InlineData("ABC", "abc")]
+    [InlineData("XMLHttpRequest", "xml_http_request")]
+    public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
     [Fact]
     public void GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
     {
@@ -112,11 +125,37 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe("part3_revision");
     }
 
+    [Theory]
+    [InlineData("__", "")]
+    [InlineData("---", "")]
+    [InlineData("___---___", "")]
+    public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("123", "123")]
+    [InlineData("9lives", "9lives")]
+    [InlineData("Version2Alpha3", "version2_alpha3")]
+    public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
     [Fact]
     public void GivenUnicodeUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
-        CultureInfo previous = CultureInfo.CurrentCulture;
+        CultureInfo originalCulture = CultureInfo.CurrentCulture;
         string value = "IstanbulCity";
 
         // Act
@@ -129,7 +168,7 @@ public sealed class WhenToSnakeCaseIsCalled
         }
         finally
         {
-            CultureInfo.CurrentCulture = previous;
+            CultureInfo.CurrentCulture = originalCulture;
         }
 
         // Assert
@@ -144,7 +183,7 @@ public sealed class WhenToSnakeCaseIsCalled
         const int firstCharacterIndex = 0;
         const int remainingCharactersOffset = 1;
 
-        static string ToPascal(string word, int firstIndex, int remainingOffset)
+        static string ToPascalCase(string word, int firstIndex, int remainingOffset)
         {
             if (string.IsNullOrWhiteSpace(word))
             {
@@ -165,17 +204,28 @@ public sealed class WhenToSnakeCaseIsCalled
         string[] words = Enumerable
             .Range(0, wordCount)
             .Select(_ => generator.Lorem.Word())
-            .Select(w => ToPascal(w, firstCharacterIndex, remainingCharactersOffset))
+            .Select(word => ToPascalCase(word, firstCharacterIndex, remainingCharactersOffset))
             .ToArray();
 
         // Act & Assert
         foreach (string word in words)
         {
-            string once = word.ToSnakeCase();
-            string twice = once.ToSnakeCase();
-
-            // Assert
-            twice.ShouldBe(once);
+            string firstResult = word.ToSnakeCase();
+            string secondResult = firstResult.ToSnakeCase();
+            secondResult.ShouldBe(firstResult);
         }
+    }
+
+    [Fact]
+    public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
+    {
+        // Arrange
+        string value = new string('A', 16_384);
+
+        // Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        result.ShouldBe(new string('a', 16_384));
     }
 }

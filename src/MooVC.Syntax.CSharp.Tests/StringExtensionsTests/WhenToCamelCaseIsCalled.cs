@@ -57,6 +57,7 @@ public sealed class WhenToCamelCaseIsCalled
     [InlineData("UpperCaseValue", "upperCaseValue")]
     [InlineData("Éclair", "éclair")]
     [InlineData("Σigma", "σigma")]
+    [InlineData("A1b2", "a1b2")]
     public void GivenValidValuesThenFirstCharacterIsLowercased(string value, string expected)
     {
         // Arrange & Act
@@ -71,6 +72,7 @@ public sealed class WhenToCamelCaseIsCalled
     [InlineData("_Example")]
     [InlineData("-Example")]
     [InlineData("😀Example")]
+    [InlineData(".Example")]
     public void GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
     {
         // Arrange & Act
@@ -84,7 +86,7 @@ public sealed class WhenToCamelCaseIsCalled
     public void GivenTurkishCultureIsActiveThenInvariantLowercasingIsUsed()
     {
         // Arrange
-        CultureInfo current = CultureInfo.CurrentCulture;
+        CultureInfo originalCulture = CultureInfo.CurrentCulture;
         string value = "Istanbul";
 
         // Act
@@ -97,7 +99,7 @@ public sealed class WhenToCamelCaseIsCalled
         }
         finally
         {
-            CultureInfo.CurrentCulture = current;
+            CultureInfo.CurrentCulture = originalCulture;
         }
 
         // Assert
@@ -142,7 +144,6 @@ public sealed class WhenToCamelCaseIsCalled
             string first = word.ToCamelCase();
             string second = first.ToCamelCase();
 
-            // Assert
             second.ShouldBe(first);
         }
     }
@@ -158,5 +159,59 @@ public sealed class WhenToCamelCaseIsCalled
 
         // Assert
         result.ShouldBe("hello World");
+    }
+
+    [Fact]
+    public void GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
+    {
+        // Arrange
+        string value = " Hello";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        result.ShouldBe(value);
+    }
+
+    [Fact]
+    public void GivenAlreadyCamelCaseThenResultIsUnchanged()
+    {
+        // Arrange
+        string value = "alreadyCamel";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        result.ShouldBe(value);
+    }
+
+    [Fact]
+    public void GivenVeryLongValueThenOnlyFirstCharacterIsLowercased()
+    {
+        // Arrange
+        string value = new string('A', 10_000);
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        result[0].ShouldBe('a');
+        result.Length.ShouldBe(value.Length);
+        result.Skip(1).All(character => character == 'A').ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
+    {
+        // Arrange
+        string value = "X.Foo";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        result.ShouldBe("x.Foo");
     }
 }

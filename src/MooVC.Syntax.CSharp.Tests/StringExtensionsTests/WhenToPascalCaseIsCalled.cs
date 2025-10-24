@@ -57,6 +57,7 @@ public sealed class WhenToPascalCaseIsCalled
     [InlineData("upperCaseValue", "UpperCaseValue")]
     [InlineData("éclair", "Éclair")]
     [InlineData("σigma", "Σigma")]
+    [InlineData("a1b2", "A1b2")]
     public void GivenValidValuesThenFirstCharacterIsUppercased(string value, string expected)
     {
         // Arrange & Act
@@ -71,6 +72,7 @@ public sealed class WhenToPascalCaseIsCalled
     [InlineData("_Example")]
     [InlineData("-Example")]
     [InlineData("😀Example")]
+    [InlineData(".example")]
     public void GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
     {
         // Arrange & Act
@@ -84,7 +86,7 @@ public sealed class WhenToPascalCaseIsCalled
     public void GivenTurkishCultureIsActiveThenInvariantUppercasingIsUsed()
     {
         // Arrange
-        CultureInfo current = CultureInfo.CurrentCulture;
+        CultureInfo originalCulture = CultureInfo.CurrentCulture;
         string value = "istanbul";
 
         // Act
@@ -97,7 +99,7 @@ public sealed class WhenToPascalCaseIsCalled
         }
         finally
         {
-            CultureInfo.CurrentCulture = current;
+            CultureInfo.CurrentCulture = originalCulture;
         }
 
         // Assert
@@ -137,5 +139,59 @@ public sealed class WhenToPascalCaseIsCalled
 
         // Assert
         result.ShouldBe("Hello World");
+    }
+
+    [Fact]
+    public void GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
+    {
+        // Arrange
+        string value = " hello";
+
+        // Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        result.ShouldBe(value);
+    }
+
+    [Fact]
+    public void GivenAlreadyPascalCaseThenResultIsUnchanged()
+    {
+        // Arrange
+        string value = "AlreadyPascal";
+
+        // Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        result.ShouldBe(value);
+    }
+
+    [Fact]
+    public void GivenVeryLongValueThenOnlyFirstCharacterIsUppercased()
+    {
+        // Arrange
+        string value = new string('a', 10_000);
+
+        // Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        result[0].ShouldBe('A');
+        result.Length.ShouldBe(value.Length);
+        result.Skip(1).All(character => character == 'a').ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
+    {
+        // Arrange
+        string value = "x.Foo";
+
+        // Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        result.ShouldBe("X.Foo");
     }
 }

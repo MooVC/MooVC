@@ -41,8 +41,7 @@ public sealed class WhenToKebabCaseIsCalled
     [InlineData("   ")]
     public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
-        // Arrange
-        // Act
+        // Arrange & Act
         Action action = () => value.ToKebabCase();
 
         // Assert
@@ -68,8 +67,20 @@ public sealed class WhenToKebabCaseIsCalled
     [InlineData("ΣigmaValue", "σigma-value")]
     public void GivenValuesThenExpectedKebabCaseIsReturned(string value, string expected)
     {
-        // Arrange
-        // Act
+        // Arrange & Act
+        string result = value.ToKebabCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("A", "a")]
+    [InlineData("ABC", "abc")]
+    [InlineData("XMLHttpRequest", "xml-http-request")]
+    public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
+    {
+        // Arrange & Act
         string result = value.ToKebabCase();
 
         // Assert
@@ -115,11 +126,37 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe("part3-revision");
     }
 
+    [Theory]
+    [InlineData("__", "")]
+    [InlineData("---", "")]
+    [InlineData("___---___", "")]
+    public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToKebabCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("123", "123")]
+    [InlineData("9lives", "9lives")]
+    [InlineData("Version2Alpha3", "version2-alpha3")]
+    public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToKebabCase();
+
+        // Assert
+        result.ShouldBe(expected);
+    }
+
     [Fact]
     public void GivenInternationalUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
-        CultureInfo previous = CultureInfo.CurrentCulture;
+        CultureInfo originalCulture = CultureInfo.CurrentCulture;
         string value = "IstanbulCity";
 
         // Act
@@ -132,7 +169,7 @@ public sealed class WhenToKebabCaseIsCalled
         }
         finally
         {
-            CultureInfo.CurrentCulture = previous;
+            CultureInfo.CurrentCulture = originalCulture;
         }
 
         // Assert
@@ -143,11 +180,11 @@ public sealed class WhenToKebabCaseIsCalled
     public void GivenWordsTwiceThenResultIsIdempotent()
     {
         // Arrange
-        const int wordCount = 10;
-        const int firstCharacterIndex = 0;
-        const int remainingCharactersOffset = 1;
+        const int WordCount = 10;
+        const int FirstCharacterIndex = 0;
+        const int RemainingCharactersOffset = 1;
 
-        static string ToPascal(string word, int firstIndex, int remainingOffset)
+        static string ToPascalCase(string word, int firstIndex, int remainingOffset)
         {
             if (string.IsNullOrWhiteSpace(word))
             {
@@ -166,19 +203,30 @@ public sealed class WhenToKebabCaseIsCalled
         }
 
         string[] words = Enumerable
-            .Range(0, wordCount)
+            .Range(0, WordCount)
             .Select(_ => generator.Lorem.Word())
-            .Select(w => ToPascal(w, firstCharacterIndex, remainingCharactersOffset))
+            .Select(word => ToPascalCase(word, FirstCharacterIndex, RemainingCharactersOffset))
             .ToArray();
 
         // Act & Assert
         foreach (string word in words)
         {
-            string once = word.ToKebabCase();
-            string twice = once.ToKebabCase();
-
-            // Assert
-            twice.ShouldBe(once);
+            string firstResult = word.ToKebabCase();
+            string secondResult = firstResult.ToKebabCase();
+            secondResult.ShouldBe(firstResult);
         }
+    }
+
+    [Fact]
+    public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
+    {
+        // Arrange
+        string value = new string('A', 16_384);
+
+        // Act
+        string result = value.ToKebabCase();
+
+        // Assert
+        result.ShouldBe(new string('a', 16_384));
     }
 }
