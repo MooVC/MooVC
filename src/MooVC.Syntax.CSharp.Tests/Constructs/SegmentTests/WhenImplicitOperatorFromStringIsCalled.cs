@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Constructs.MemberTests;
+namespace MooVC.Syntax.CSharp.Constructs.SegmentTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -13,7 +13,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Member)value);
+        _ = Should.NotThrow(() => _ = (Segment)value);
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act
-        Member subject = value;
+        Segment subject = value;
         string result = subject;
 
         // Assert
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Empty;
 
         // Act
-        Member subject = value;
+        Segment subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -51,7 +51,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Space;
 
         // Act
-        Member subject = value;
+        Segment subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -65,7 +65,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Member subject = value;
+        Segment subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -79,7 +79,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = new('x', 64_000);
 
         // Act
-        Member subject = value;
+        Segment subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -93,7 +93,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Member subject = value;
+        Segment subject = value;
         string result = subject;
 
         // Assert
@@ -107,8 +107,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Member first = value;
-        Member second = value;
+        Segment first = value;
+        Segment second = value;
 
         // Assert
         ReferenceEquals(first, second).ShouldBeFalse();

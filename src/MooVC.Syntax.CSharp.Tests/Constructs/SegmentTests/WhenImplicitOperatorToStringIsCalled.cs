@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Constructs.MemberTests;
+namespace MooVC.Syntax.CSharp.Constructs.SegmentTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
@@ -11,7 +11,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Member? subject = default;
+        Segment? subject = default;
 
         // Act
         Func<string> act = () => (string)subject;
@@ -22,10 +22,10 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenMemberWithNullValueThenResultIsNull()
+    public void GivenSegmentWithNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Member(default);
+        var subject = new Segment(default);
 
         // Act
         string result = subject;
@@ -38,7 +38,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Member(Empty);
+        var subject = new Segment(Empty);
 
         // Act
         string result = subject;
@@ -51,7 +51,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var subject = new Member(Space);
+        var subject = new Segment(Space);
 
         // Act
         string result = subject;
@@ -64,7 +64,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Member(Alpha);
+        var subject = new Segment(Alpha);
 
         // Act
         string result = subject;
@@ -77,7 +77,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
-        var subject = new Member(Unicode);
+        var subject = new Segment(Unicode);
 
         // Act
         string result = subject;
@@ -91,7 +91,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Member(value);
+        var subject = new Segment(value);
 
         // Act
         string result = subject;

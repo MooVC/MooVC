@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Constructs.MemberTests;
+namespace MooVC.Syntax.CSharp.Constructs.SegmentTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -11,7 +11,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenNullThenThrows()
     {
         // Arrange
-        var subject = new Member(default);
+        var subject = new Segment(default);
 
         // Act & Assert
         _ = Should.Throw<NullReferenceException>(() => _ = subject.GetHashCode());
@@ -21,7 +21,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEmptyThenMatchesStringHashCode()
     {
         // Arrange
-        var subject = new Member(Empty);
+        var subject = new Segment(Empty);
 
         // Act
         int result = subject.GetHashCode();
@@ -34,7 +34,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenWhitespaceThenMatchesStringHashCode()
     {
         // Arrange
-        var subject = new Member(Space);
+        var subject = new Segment(Space);
 
         // Act
         int result = subject.GetHashCode();
@@ -47,7 +47,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenAsciiThenMatchesStringHashCode()
     {
         // Arrange
-        var subject = new Member(Alpha);
+        var subject = new Segment(Alpha);
 
         // Act
         int result = subject.GetHashCode();
@@ -60,7 +60,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenUnicodeThenMatchesStringHashCode()
     {
         // Arrange
-        var subject = new Member(Unicode);
+        var subject = new Segment(Unicode);
 
         // Act
         int result = subject.GetHashCode();
@@ -74,7 +74,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Member(value);
+        var subject = new Segment(value);
 
         // Act
         int result = subject.GetHashCode();
@@ -87,8 +87,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
-        var first = new Member(Alpha);
-        var second = new Member(Alpha);
+        var first = new Segment(Alpha);
+        var second = new Segment(Alpha);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -102,7 +102,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Member(Alpha);
+        var subject = new Segment(Alpha);
 
         // Act
         int first = subject.GetHashCode();

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Constructs.MemberTests;
+namespace MooVC.Syntax.CSharp.Constructs.SegmentTests;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Member(default));
+        _ = Should.NotThrow(() => _ = new Segment(default));
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         string value = string.Empty;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Member(value));
+        _ = Should.NotThrow(() => _ = new Segment(value));
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         string value = "   ";
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Member(value));
+        _ = Should.NotThrow(() => _ = new Segment(value));
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         string value = new Faker().Random.AlphaNumeric(32);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Member(value));
+        _ = Should.NotThrow(() => _ = new Segment(value));
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class WhenConstructorIsCalled
         string value = new('x', 64_000);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Member(value));
+        _ = Should.NotThrow(() => _ = new Segment(value));
     }
 
     [Fact]
@@ -56,8 +56,8 @@ public sealed class WhenConstructorIsCalled
         const string value = "Value";
 
         // Act
-        var first = new Member(value);
-        var second = new Member(value);
+        var first = new Segment(value);
+        var second = new Segment(value);
 
         // Assert
         first.Equals(second).ShouldBeTrue();
@@ -73,8 +73,8 @@ public sealed class WhenConstructorIsCalled
         const string right = "Second";
 
         // Act
-        var first = new Member(left);
-        var second = new Member(right);
+        var first = new Segment(left);
+        var second = new Segment(right);
 
         // Assert
         first.Equals(second).ShouldBeFalse();
