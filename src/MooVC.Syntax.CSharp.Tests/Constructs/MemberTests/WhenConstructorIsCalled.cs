@@ -43,7 +43,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenVeryLongThenInstanceIsCreated()
     {
         // Arrange
-        string value = new string('x', 64_000);
+        string value = new('x', 64_000);
 
         // Act & Assert
         _ = Should.NotThrow(() => _ = new Member(value));

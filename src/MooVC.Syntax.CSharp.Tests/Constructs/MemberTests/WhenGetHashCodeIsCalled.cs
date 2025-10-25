@@ -73,7 +73,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenVeryLongThenMatchesStringHashCode()
     {
         // Arrange
-        string value = new string('x', 64_000);
+        string value = new('x', 64_000);
         var subject = new Member(value);
 
         // Act

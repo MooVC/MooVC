@@ -90,7 +90,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenVeryLongThenMatchesValue()
     {
         // Arrange
-        string value = new string('x', 64_000);
+        string value = new('x', 64_000);
         var subject = new Member(value);
 
         // Act

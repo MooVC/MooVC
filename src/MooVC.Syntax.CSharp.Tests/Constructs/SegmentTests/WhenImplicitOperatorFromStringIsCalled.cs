@@ -76,7 +76,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenVeryLongThenEqualsString()
     {
         // Arrange
-        string value = new string('x', 64_000);
+        string value = new('x', 64_000);
 
         // Act
         Segment subject = value;
