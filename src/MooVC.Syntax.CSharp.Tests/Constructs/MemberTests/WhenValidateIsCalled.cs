@@ -13,7 +13,7 @@ public sealed class WhenValidateIsCalled
     private const string UnicodePascal = "Álpha";
 
     [Fact]
-    public void GivenNullValueWhenValidatedThenValidationErrorReturned()
+    public void GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Member(default);
@@ -31,7 +31,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenEmptyWhenValidatedThenValidationErrorReturned()
+    public void GivenEmptyThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Member(Empty);
@@ -49,7 +49,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenPascalCaseWhenValidatedThenNoValidationErrorReturned()
+    public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Member(Pascal);
@@ -65,7 +65,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenUnicodeTitleCaseWhenValidatedThenValidationErrorReturned()
+    public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Member(UnicodePascal);
@@ -83,7 +83,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenCamelCaseWhenValidatedThenValidationErrorsReturned()
+    public void GivenCamelCaseThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Member(Camel);
@@ -101,7 +101,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenSnakeCaseWhenValidatedThenNoValidationErrorsReturned()
+    public void GivenSnakeCaseThenNoValidationErrorsReturned()
     {
         // Arrange
         var subject = new Member(Snake);
@@ -119,7 +119,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenKebabCaseWhenValidatedThenValidationErrorsReturned()
+    public void GivenKebabCaseThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Member(Kebab);
@@ -137,7 +137,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenNumericOnlyWhenValidatedThenValidationErrorReturned()
+    public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Member(Numeric);
@@ -160,7 +160,7 @@ public sealed class WhenValidateIsCalled
     [InlineData("Alpha Beta")]
     [InlineData("Alpha\tBeta")]
     [InlineData("Alpha\nBeta")]
-    public void GivenWhitespacePresentWhenValidatedThenValidationErrorReturned(string value)
+    public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange
         var subject = new Member(value);

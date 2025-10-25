@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Unicode = "Álpha";
 
     [Fact]
-    public void GivenNullWhenCalledThenThrows()
+    public void GivenNullThenThrows()
     {
         // Arrange
         var subject = new Member(default);
@@ -18,7 +18,7 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
-    public void GivenEmptyWhenCalledThenMatchesStringHashCode()
+    public void GivenEmptyThenMatchesStringHashCode()
     {
         // Arrange
         var subject = new Member(Empty);
@@ -31,7 +31,7 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceWhenCalledThenMatchesStringHashCode()
+    public void GivenWhitespaceThenMatchesStringHashCode()
     {
         // Arrange
         var subject = new Member(Space);
@@ -44,7 +44,7 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
-    public void GivenAsciiWhenCalledThenMatchesStringHashCode()
+    public void GivenAsciiThenMatchesStringHashCode()
     {
         // Arrange
         var subject = new Member(Alpha);
@@ -57,7 +57,7 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
-    public void GivenUnicodeWhenCalledThenMatchesStringHashCode()
+    public void GivenUnicodeThenMatchesStringHashCode()
     {
         // Arrange
         var subject = new Member(Unicode);
@@ -70,7 +70,7 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
-    public void GivenVeryLongWhenCalledThenMatchesStringHashCode()
+    public void GivenVeryLongThenMatchesStringHashCode()
     {
         // Arrange
         string value = new string('x', 64_000);

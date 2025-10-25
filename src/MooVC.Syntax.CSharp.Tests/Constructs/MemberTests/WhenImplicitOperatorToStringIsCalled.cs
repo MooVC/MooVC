@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Unicode = "Álpha";
 
     [Fact]
-    public void GivenNullSubjectWhenConvertedThenArgumentNullExceptionIsThrown()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Member? subject = default;
@@ -22,7 +22,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenMemberWithNullValueWhenConvertedThenResultIsNull()
+    public void GivenMemberWithNullValueThenResultIsNull()
     {
         // Arrange
         var subject = new Member(default);
@@ -35,7 +35,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenEmptyWhenConvertedThenMatchesValue()
+    public void GivenEmptyThenMatchesValue()
     {
         // Arrange
         var subject = new Member(Empty);
@@ -48,7 +48,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceWhenConvertedThenMatchesValue()
+    public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
         var subject = new Member(Space);
@@ -61,7 +61,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenAsciiWhenConvertedThenMatchesValue()
+    public void GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Member(Alpha);
@@ -74,7 +74,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenUnicodeWhenConvertedThenMatchesValue()
+    public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
         var subject = new Member(Unicode);
@@ -87,7 +87,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenVeryLongWhenConvertedThenMatchesValue()
+    public void GivenVeryLongThenMatchesValue()
     {
         // Arrange
         string value = new string('x', 64_000);

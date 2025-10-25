@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     private const string MultiWord = "MyValue";
 
     [Fact]
-    public void GivenDefaultOptionsWhenCalledThenUsesCamelCase()
+    public void GivenDefaultOptionsThenUsesCamelCase()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithPascalCasingWhenCalledThenReturnsPascalCasedValue()
+    public void GivenOptionsWithPascalCasingThenReturnsPascalCasedValue()
     {
         // Arrange
         var subject = new Member(Mixed);
@@ -37,7 +37,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithCamelCasingWhenCalledThenReturnsCamelCasedValue()
+    public void GivenOptionsWithCamelCasingThenReturnsCamelCasedValue()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -53,7 +53,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithSnakeCasingWhenCalledThenReturnsSnakeCasedValue()
+    public void GivenOptionsWithSnakeCasingThenReturnsSnakeCasedValue()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -69,7 +69,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithKebabCasingWhenCalledThenReturnsKebabCasedValue()
+    public void GivenOptionsWithKebabCasingThenReturnsKebabCasedValue()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -85,7 +85,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithUnderscoreWhenCalledThenResultIsPrefixed()
+    public void GivenOptionsWithUnderscoreThenResultIsPrefixed()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -101,8 +101,31 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe("_myValue");
     }
 
+    [Theory]
+    [InlineData(Casing.Camel)]
+    [InlineData(Casing.Kebab)]
+    [InlineData(Casing.Snake)]
+    public void GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(Casing casing)
+    {
+        // Arrange
+        int element = Random.Shared.Next(Keywords.Reserved.Count);
+        string keyword = Keywords.Reserved.ElementAt(element);
+        var subject = new Member(keyword);
+        string expected = keyword.ToCamelCase();
+
+        Options options = new Options()
+            .WithCasing(casing)
+            .UseUnderscores(false);
+
+        // Act
+        string result = subject.ToString(options);
+
+        // Assert
+        result.ShouldBe($"@{expected}");
+    }
+
     [Fact]
-    public void GivenUnsupportedCasingWhenCalledThenThrows()
+    public void GivenUnsupportedCasingThenThrows()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -118,7 +141,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenNullOptionsWhenCalledThenThrows()
+    public void GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Member(MultiWord);
@@ -132,7 +155,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenCalledThenDifferentResultsAreReturned()
+    public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
         var left = new Member("MyName");
@@ -147,7 +170,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenRepeatedCallsWhenCalledThenResultIsStable()
+    public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
         var subject = new Member(MultiWord);

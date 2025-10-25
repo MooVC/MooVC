@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string Different = "Beta";
 
     [Fact]
-    public void GivenNullWhenComparedThenFalse()
+    public void GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Member(Same);
@@ -20,7 +20,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenSameReferenceWhenComparedThenTrue()
+    public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var subject = new Member(Same);
@@ -34,7 +34,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenEqualValuesWhenComparedThenTrue()
+    public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Member(Same);
@@ -48,7 +48,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenComparedThenFalse()
+    public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Member(Same);
@@ -62,7 +62,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenNonMemberWhenComparedThenInvalidCastIsThrown()
+    public void GivenNonMemberThenInvalidCastIsThrown()
     {
         // Arrange
         var subject = new Member(Same);
@@ -73,7 +73,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenEqualValuesWhenComparedFromBothSidesThenResultsAreSymmetric()
+    public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
         var left = new Member(Same);
@@ -91,7 +91,7 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenComparedFromBothSidesThenResultsAreSymmetric()
+    public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
         var left = new Member(Same);

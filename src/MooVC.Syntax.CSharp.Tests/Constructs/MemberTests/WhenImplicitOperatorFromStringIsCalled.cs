@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Alpha = "Alpha";
 
     [Fact]
-    public void GivenNullWhenConvertedThenInstanceIsCreated()
+    public void GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
@@ -31,7 +31,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenEmptyWhenConvertedThenEqualsString()
+    public void GivenEmptyThenEqualsString()
     {
         // Arrange
         string value = Empty;
@@ -45,7 +45,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceWhenConvertedThenEqualsString()
+    public void GivenWhitespaceThenEqualsString()
     {
         // Arrange
         string value = Space;
@@ -59,7 +59,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenValueWhenConvertedThenEqualsString()
+    public void GivenValueThenEqualsString()
     {
         // Arrange
         string value = Alpha;
@@ -73,7 +73,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenVeryLongWhenConvertedThenEqualsString()
+    public void GivenVeryLongThenEqualsString()
     {
         // Arrange
         string value = new string('x', 64_000);
@@ -101,7 +101,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenSameValueWhenConvertedTwiceThenInstancesAreEqualButNotSameReference()
+    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         string value = Alpha;

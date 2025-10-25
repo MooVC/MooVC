@@ -6,7 +6,7 @@ public sealed class WhenEqualsMemberIsCalled
     private const string Different = "Beta";
 
     [Fact]
-    public void GivenLeftValueRightNullWhenComparedThenFalse()
+    public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         var left = new Member(Same);
@@ -20,7 +20,7 @@ public sealed class WhenEqualsMemberIsCalled
     }
 
     [Fact]
-    public void GivenSameReferenceWhenComparedThenTrue()
+    public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var first = new Member(Same);
@@ -34,7 +34,7 @@ public sealed class WhenEqualsMemberIsCalled
     }
 
     [Fact]
-    public void GivenEqualValuesWhenComparedThenTrue()
+    public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Member(Same);
@@ -50,7 +50,7 @@ public sealed class WhenEqualsMemberIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenComparedThenFalse()
+    public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Member(Same);

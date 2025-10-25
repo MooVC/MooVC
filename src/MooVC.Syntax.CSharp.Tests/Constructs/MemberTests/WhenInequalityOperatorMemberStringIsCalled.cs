@@ -6,7 +6,7 @@ public sealed class WhenInequalityOperatorMemberStringIsCalled
     private const string Different = "Beta";
 
     [Fact]
-    public void GivenBothNullWhenComparedThenFalse()
+    public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Member? left = default;
@@ -20,7 +20,7 @@ public sealed class WhenInequalityOperatorMemberStringIsCalled
     }
 
     [Fact]
-    public void GivenLeftNullRightValueWhenComparedThenTrue()
+    public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Member? left = default;
@@ -34,7 +34,7 @@ public sealed class WhenInequalityOperatorMemberStringIsCalled
     }
 
     [Fact]
-    public void GivenLeftValueRightNullWhenComparedThenTrue()
+    public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         var left = new Member(Same);
@@ -48,7 +48,7 @@ public sealed class WhenInequalityOperatorMemberStringIsCalled
     }
 
     [Fact]
-    public void GivenEqualValuesWhenComparedThenFalse()
+    public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Member(Same);
@@ -62,7 +62,7 @@ public sealed class WhenInequalityOperatorMemberStringIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenComparedThenTrue()
+    public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Member(Same);

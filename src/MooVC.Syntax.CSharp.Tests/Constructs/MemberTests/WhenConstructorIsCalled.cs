@@ -3,14 +3,14 @@
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
-    public void GivenNullWhenInstantiatedThenInstanceIsCreated()
+    public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
         _ = Should.NotThrow(() => _ = new Member(default));
     }
 
     [Fact]
-    public void GivenEmptyWhenInstantiatedThenInstanceIsCreated()
+    public void GivenEmptyThenInstanceIsCreated()
     {
         // Arrange
         string value = string.Empty;
@@ -20,7 +20,7 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceWhenInstantiatedThenInstanceIsCreated()
+    public void GivenWhitespaceThenInstanceIsCreated()
     {
         // Arrange
         string value = "   ";
@@ -30,7 +30,7 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Fact]
-    public void GivenAlphaNumericWhenInstantiatedThenInstanceIsCreated()
+    public void GivenAlphaNumericThenInstanceIsCreated()
     {
         // Arrange
         string value = new Faker().Random.AlphaNumeric(32);
@@ -40,7 +40,7 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Fact]
-    public void GivenVeryLongWhenInstantiatedThenInstanceIsCreated()
+    public void GivenVeryLongThenInstanceIsCreated()
     {
         // Arrange
         string value = new string('x', 64_000);
@@ -50,7 +50,7 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Fact]
-    public void GivenSameValueWhenInstantiatedTwiceThenInstancesAreEqual()
+    public void GivenSameValueTwiceThenInstancesAreEqual()
     {
         // Arrange
         const string value = "Value";
@@ -66,7 +66,7 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Fact]
-    public void GivenDifferentValuesWhenInstantiatedTwiceThenInstancesAreNotEqual()
+    public void GivenDifferentValuesTwiceThenInstancesAreNotEqual()
     {
         // Arrange
         const string left = "First";

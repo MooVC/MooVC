@@ -32,6 +32,7 @@
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Member)));
 
+            const char ReservationPrefix = '@';
             const char UnderscorePrefix = '_';
 
             if (!casingStrategies.TryGetValue(options.Casing, out Func<string, string> transform))
@@ -45,6 +46,10 @@
             {
                 identifier = identifier.Prepend(UnderscorePrefix);
             }
+            else if (options.Casing != Casing.Pascal && identifier.IsReserved())
+            {
+                identifier = identifier.Prepend(ReservationPrefix);
+            }
 
             return identifier.ToString();
         }
@@ -55,7 +60,7 @@
 
             if (_value is null || _value.Length == Empty || !rule.IsMatch(_value))
             {
-                yield return new ValidationResult(ValidateIdentifierRequired.Format(_value, nameof(Member)), new[] { nameof(Member) });
+                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Member)), new[] { nameof(Member) });
             }
         }
     }
