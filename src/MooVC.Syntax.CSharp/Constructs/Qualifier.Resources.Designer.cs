@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Constructs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Namespace_Resources {
+    internal class Qualifier_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Namespace_Resources() {
+        internal Qualifier_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Constructs {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Constructs.Namespace.Resources", typeof(Namespace_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Constructs.Qualifier.Resources", typeof(Qualifier_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace MooVC.Syntax.CSharp.Constructs {
         /// <summary>
         ///   Looks up a localized string similar to The `{0}` to convert to an array of `{1}` must be provided..
         /// </summary>
-        internal static string NamespaceRequired {
+        internal static string QualifierRequired {
             get {
-                return ResourceManager.GetString("NamespaceRequired", resourceCulture);
+                return ResourceManager.GetString("QualifierRequired", resourceCulture);
             }
         }
         

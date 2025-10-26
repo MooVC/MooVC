@@ -31,10 +31,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Member.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Constructs\Namespace.Resources.Designer.cs">
+    <Compile Update="Constructs\Qualifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Namespace.Resources.resx</DependentUpon>
+      <DependentUpon>Qualifier.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Constructs\Segment.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -53,9 +53,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Member.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Constructs\Namespace.Resources.resx">
+    <EmbeddedResource Update="Constructs\Qualifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Namespace.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Qualifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Constructs\Segment.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
