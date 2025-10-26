@@ -1,13 +1,13 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
-public sealed class WhenEqualsNamespaceIsCalled
+public sealed class WhenEqualsQualifierIsCalled
 {
     [Fact]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        Namespace? right = default;
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        Qualifier? right = default;
 
         // Act
         bool result = left.Equals(right);
@@ -20,8 +20,8 @@ public sealed class WhenEqualsNamespaceIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Namespace(CreateSegments("Alpha", "Beta"));
-        Namespace second = first;
+        var first = new Qualifier(CreateSegments("Alpha", "Beta"));
+        Qualifier second = first;
 
         // Act
         bool result = first.Equals(second);
@@ -34,8 +34,8 @@ public sealed class WhenEqualsNamespaceIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        var right = new Qualifier(CreateSegments("Alpha", "Beta"));
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -50,8 +50,8 @@ public sealed class WhenEqualsNamespaceIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Gamma"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        var right = new Qualifier(CreateSegments("Alpha", "Gamma"));
 
         // Act
         bool resultLeftRight = left.Equals(right);

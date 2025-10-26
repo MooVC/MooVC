@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenEqualsSegmentArrayIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsSegmentArrayIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
         Segment[]? right = default;
 
         // Act
@@ -20,7 +20,7 @@ public sealed class WhenEqualsSegmentArrayIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
         Segment[] right = CreateSegments("Alpha", "Beta");
 
         // Act
@@ -34,7 +34,7 @@ public sealed class WhenEqualsSegmentArrayIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
         Segment[] right = CreateSegments("Alpha", "Gamma");
 
         // Act

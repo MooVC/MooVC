@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenNullThenThrows()
     {
         // Arrange
-        var subject = new Namespace(default);
+        var subject = new Qualifier(default);
 
         // Act & Assert
         _ = Should.Throw<NullReferenceException>(() => _ = subject.GetHashCode());
@@ -16,8 +16,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEmptyThenHashesAreEqualAcrossInstances()
     {
         // Arrange
-        var first = new Namespace(Array.Empty<Segment>());
-        var second = new Namespace(new Segment[0]);
+        var first = new Qualifier(Array.Empty<Segment>());
+        var second = new Qualifier(new Segment[0]);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -43,8 +43,8 @@ public sealed class WhenGetHashCodeIsCalled
             new Segment("Beta"),
         };
 
-        var first = new Namespace(firstValue);
-        var second = new Namespace(secondValue);
+        var first = new Qualifier(firstValue);
+        var second = new Qualifier(secondValue);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -58,8 +58,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashesAreDifferent()
     {
         // Arrange
-        var first = new Namespace(new[] { new Segment("Alpha") });
-        var second = new Namespace(new[] { new Segment("Beta") });
+        var first = new Qualifier(new[] { new Segment("Alpha") });
+        var second = new Qualifier(new[] { new Segment("Beta") });
 
         // Act
         int firstHash = first.GetHashCode();
@@ -73,7 +73,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Namespace(new[] { new Segment("Alpha"), new Segment("Beta") });
+        var subject = new Qualifier(new[] { new Segment("Alpha"), new Segment("Beta") });
 
         // Act
         int first = subject.GetHashCode();

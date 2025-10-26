@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     public void GivenNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Namespace(default);
+        var subject = new Qualifier(default);
 
         // Act
         Segment[]? result = subject;
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     {
         // Arrange
         Segment[] value = Array.Empty<Segment>();
-        var subject = new Namespace(value);
+        var subject = new Qualifier(value);
 
         // Act
         Segment[]? result = subject;
@@ -35,7 +35,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     {
         // Arrange
         Segment[] value = CreateSegments("Alpha", "Beta");
-        var subject = new Namespace(value);
+        var subject = new Qualifier(value);
 
         // Act
         Segment[]? result = subject;
@@ -50,7 +50,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     {
         // Arrange
         Segment[] value = CreateSegments("Alpha", "Beta", "Gamma", "Delta");
-        var subject = new Namespace(value);
+        var subject = new Qualifier(value);
 
         // Act
         Segment[]? result = subject;
@@ -65,7 +65,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     {
         // Arrange
         Segment[] value = CreateSegments("Alpha", "Beta");
-        var subject = new Namespace(value);
+        var subject = new Qualifier(value);
 
         // Act
         Segment[]? first = subject;

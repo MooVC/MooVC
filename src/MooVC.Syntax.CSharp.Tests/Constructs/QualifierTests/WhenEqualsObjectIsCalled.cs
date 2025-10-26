@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Namespace(CreateSegments("Alpha", "Beta"));
+        var subject = new Qualifier(CreateSegments("Alpha", "Beta"));
         object? other = default;
 
         // Act
@@ -20,7 +20,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Namespace(CreateSegments("Alpha", "Beta"));
+        var subject = new Qualifier(CreateSegments("Alpha", "Beta"));
         object other = subject;
 
         // Act
@@ -34,8 +34,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        object right = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        object right = new Qualifier(CreateSegments("Alpha", "Beta"));
 
         // Act
         bool result = left.Equals(right);
@@ -48,8 +48,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        object right = new Namespace(CreateSegments("Alpha", "Gamma"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        object right = new Qualifier(CreateSegments("Alpha", "Gamma"));
 
         // Act
         bool result = left.Equals(right);
@@ -59,10 +59,10 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenNonNamespaceThenInvalidCastIsThrown()
+    public void GivenNonQualifierThenInvalidCastIsThrown()
     {
         // Arrange
-        var subject = new Namespace(CreateSegments("Alpha", "Beta"));
+        var subject = new Qualifier(CreateSegments("Alpha", "Beta"));
         object other = CreateSegments("Alpha", "Beta");
 
         // Act & Assert
@@ -73,8 +73,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        var right = new Qualifier(CreateSegments("Alpha", "Beta"));
         object leftObject = left;
         object rightObject = right;
 
@@ -91,8 +91,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Gamma"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        var right = new Qualifier(CreateSegments("Alpha", "Gamma"));
         object leftObject = left;
         object rightObject = right;
 

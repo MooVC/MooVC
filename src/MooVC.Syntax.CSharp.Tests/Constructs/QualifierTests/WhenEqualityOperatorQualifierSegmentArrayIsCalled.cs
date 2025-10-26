@@ -1,13 +1,13 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
-public sealed class WhenEqualityOperatorNamespaceNamespaceIsCalled
+public sealed class WhenEqualityOperatorQualifierSegmentArrayIsCalled
 {
     [Fact]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Namespace? left = default;
-        Namespace? right = default;
+        Qualifier? left = default;
+        Segment[]? right = default;
 
         // Act
         bool result = left == right;
@@ -20,8 +20,8 @@ public sealed class WhenEqualityOperatorNamespaceNamespaceIsCalled
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Namespace? left = default;
-        var right = new Namespace(CreateSegments("Alpha", "Beta"));
+        Qualifier? left = default;
+        Segment[] right = CreateSegments("Alpha", "Beta");
 
         // Act
         bool result = left == right;
@@ -34,8 +34,8 @@ public sealed class WhenEqualityOperatorNamespaceNamespaceIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        Namespace? right = default;
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        Segment[]? right = default;
 
         // Act
         bool result = left == right;
@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorNamespaceNamespaceIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Beta"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        Segment[] right = CreateSegments("Alpha", "Beta");
 
         // Act
         bool result = left == right;
@@ -62,8 +62,8 @@ public sealed class WhenEqualityOperatorNamespaceNamespaceIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Namespace(CreateSegments("Alpha", "Beta"));
-        var right = new Namespace(CreateSegments("Alpha", "Gamma"));
+        var left = new Qualifier(CreateSegments("Alpha", "Beta"));
+        Segment[] right = CreateSegments("Alpha", "Gamma");
 
         // Act
         bool result = left == right;

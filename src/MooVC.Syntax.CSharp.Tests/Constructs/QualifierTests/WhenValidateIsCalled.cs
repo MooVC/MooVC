@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Namespace(default);
+        var subject = new Qualifier(default);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -18,7 +18,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Namespace));
+        results[0].MemberNames.ShouldContain(nameof(Qualifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -26,7 +26,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Namespace(Array.Empty<Segment>());
+        var subject = new Qualifier(Array.Empty<Segment>());
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Namespace));
+        results[0].MemberNames.ShouldContain(nameof(Qualifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenValidSegmentsThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Namespace(new[] { new Segment("Alpha"), new Segment("Beta") });
+        var subject = new Qualifier(new[] { new Segment("Alpha"), new Segment("Beta") });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullSegmentThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Namespace(new[] { new Segment("Alpha"), null! });
+        var subject = new Qualifier(new[] { new Segment("Alpha"), null! });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -70,7 +70,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Namespace));
+        results[0].MemberNames.ShouldContain(nameof(Qualifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -78,7 +78,7 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidSegmentThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Namespace(new[] { new Segment("Alpha"), new Segment("beta") });
+        var subject = new Qualifier(new[] { new Segment("Alpha"), new Segment("beta") });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -88,7 +88,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Namespace));
+        results[0].MemberNames.ShouldContain(nameof(Qualifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -101,7 +101,7 @@ public sealed class WhenValidateIsCalled
     public void GivenWhitespaceInSegmentThenValidationErrorReturned(string value)
     {
         // Arrange
-        var subject = new Namespace(new[] { new Segment("Alpha"), new Segment(value) });
+        var subject = new Qualifier(new[] { new Segment("Alpha"), new Segment(value) });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -111,7 +111,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Namespace));
+        results[0].MemberNames.ShouldContain(nameof(Qualifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 }

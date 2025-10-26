@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
@@ -9,7 +9,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[]? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Namespace)value);
+        _ = Should.NotThrow(() => _ = (Qualifier)value);
     }
 
     [Fact]
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[]? value = default;
 
         // Act
-        Namespace subject = value;
+        Qualifier subject = value;
         Segment[]? result = subject;
 
         // Assert
@@ -33,7 +33,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[] value = Array.Empty<Segment>();
 
         // Act
-        Namespace subject = value;
+        Qualifier subject = value;
 
         // Assert
         subject.Equals(value).ShouldBeTrue();
@@ -47,7 +47,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[] value = CreateSegments("Alpha", "Beta");
 
         // Act
-        Namespace subject = value;
+        Qualifier subject = value;
 
         // Assert
         subject.Equals(value).ShouldBeTrue();
@@ -61,7 +61,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[] value = CreateSegments("Alpha", "Beta", "Gamma");
 
         // Act
-        Namespace subject = value;
+        Qualifier subject = value;
         Segment[]? result = subject;
 
         // Assert
@@ -76,8 +76,8 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Segment[] value = CreateSegments("Alpha", "Beta");
 
         // Act
-        Namespace first = value;
-        Namespace second = value;
+        Qualifier first = value;
+        Qualifier second = value;
 
         // Assert
         ReferenceEquals(first, second).ShouldBeFalse();

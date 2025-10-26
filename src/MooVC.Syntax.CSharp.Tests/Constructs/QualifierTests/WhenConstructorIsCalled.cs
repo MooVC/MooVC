@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Constructs.NamespaceTests;
+namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Namespace(default));
+        _ = Should.NotThrow(() => _ = new Qualifier(default));
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         Segment[] value = Array.Empty<Segment>();
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Namespace(value));
+        _ = Should.NotThrow(() => _ = new Qualifier(value));
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         Segment[] value = { new Segment("Alpha") };
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Namespace(value));
+        _ = Should.NotThrow(() => _ = new Qualifier(value));
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Namespace(value));
+        _ = Should.NotThrow(() => _ = new Qualifier(value));
     }
 
     [Fact]
@@ -61,8 +61,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Act
-        var first = new Namespace(firstValue);
-        var second = new Namespace(secondValue);
+        var first = new Qualifier(firstValue);
+        var second = new Qualifier(secondValue);
 
         // Assert
         first.Equals(second).ShouldBeTrue();
@@ -87,8 +87,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Act
-        var first = new Namespace(left);
-        var second = new Namespace(right);
+        var first = new Qualifier(left);
+        var second = new Qualifier(right);
 
         // Assert
         first.Equals(second).ShouldBeFalse();
