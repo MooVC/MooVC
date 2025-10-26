@@ -6,26 +6,26 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Monify;
-    using static MooVC.Syntax.CSharp.Constructs.Namespace_Resources;
+    using static MooVC.Syntax.CSharp.Constructs.Qualifier_Resources;
 
     [Monify(Type = typeof(ImmutableArray<Segment>))]
-    public partial class Namespace
+    public partial class Qualifier
         : IValidatableObject
     {
         private const string Separator = ".";
 
-        public static implicit operator Namespace(Segment[] values)
+        public static implicit operator Qualifier(Segment[] values)
         {
-            _ = Guard.Against.Null(values, message: ValuesRequired.Format(nameof(Segment), nameof(Namespace)));
+            _ = Guard.Against.Null(values, message: ValuesRequired.Format(nameof(Segment), nameof(Qualifier)));
 
             return ImmutableArray.Create(values);
         }
 
-        public static implicit operator Segment[](Namespace @namespace)
+        public static implicit operator Segment[](Qualifier qualifier)
         {
-            _ = Guard.Against.Null(@namespace, message: NamespaceRequired.Format(nameof(Namespace), nameof(Segment)));
+            _ = Guard.Against.Null(qualifier, message: QualifierRequired.Format(nameof(Qualifier), nameof(Segment)));
 
-            return @namespace._value.ToArray();
+            return qualifier._value.ToArray();
         }
 
         public override string ToString()
@@ -39,7 +39,7 @@
 
             if (_value.Length == Empty)
             {
-                yield return new ValidationResult(ValidateValueRequired.Format(nameof(Namespace), nameof(Segment)), new[] { nameof(Namespace) });
+                yield return new ValidationResult(ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)), new[] { nameof(Qualifier) });
             }
 
             var segments = new List<Segment>();
@@ -53,8 +53,8 @@
                     string preceding = string.Join(Separator, segments);
 
                     yield return new ValidationResult(
-                        ValidateSegmentRequired.Format(index, nameof(Namespace), preceding),
-                        new[] { $"{nameof(Namespace)}[{index}]" });
+                        ValidateSegmentRequired.Format(index, nameof(Qualifier), preceding),
+                        new[] { $"{nameof(Qualifier)}[{index}]" });
                 }
 
                 segments.Add(value);
