@@ -4,14 +4,14 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<Segment> Same = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"));
-    private static readonly ImmutableArray<Segment> Different = ImmutableArray.Create(new Segment("Gamma"));
+    private static readonly ImmutableArray<Segment> different = ["Gamma"];
+    private static readonly ImmutableArray<Segment> same = ["Alpha", "Beta"];
 
     [Fact]
     public void GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(Same);
+        var left = new Qualifier(same);
         ImmutableArray<Segment> right = default;
 
         // Act
@@ -27,8 +27,8 @@ public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        ImmutableArray<Segment> right = Same;
+        var left = new Qualifier(same);
+        ImmutableArray<Segment> right = same;
 
         // Act
         bool resultLeftRight = left == right;
@@ -43,8 +43,8 @@ public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        ImmutableArray<Segment> right = Different;
+        var left = new Qualifier(same);
+        ImmutableArray<Segment> right = different;
 
         // Act
         bool resultLeftRight = left == right;

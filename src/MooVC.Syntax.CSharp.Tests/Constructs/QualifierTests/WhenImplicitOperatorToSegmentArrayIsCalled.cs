@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
 {
-    private static readonly Segment Alpha = new("Alpha");
-    private static readonly Segment Beta = new("Beta");
+    private static readonly Segment alpha = new("Alpha");
+    private static readonly Segment beta = new("Beta");
 
     [Fact]
     public void GivenNullQualifierThenArgumentNullExceptionIsThrown()
@@ -24,13 +24,13 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     public void GivenQualifierThenSegmentsAreReturned()
     {
         // Arrange
-        ImmutableArray<Segment> value = ImmutableArray.Create(Alpha, Beta);
+        ImmutableArray<Segment> value = [alpha, beta];
         var qualifier = new Qualifier(value);
 
         // Act
         Segment[] result = qualifier;
 
         // Assert
-        result.ShouldBe(value.ToArray());
+        result.ShouldBe([.. value]);
     }
 }

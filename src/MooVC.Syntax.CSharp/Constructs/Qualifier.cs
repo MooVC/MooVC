@@ -35,29 +35,39 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            const int Empty = 0;
-
-            if (_value.Length == Empty)
+            if (_value.IsDefaultOrEmpty)
             {
-                yield return new ValidationResult(ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)), new[] { nameof(Qualifier) });
+                return new[]
+                {
+                    new ValidationResult(ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)), new[] { nameof(Qualifier) }),
+                };
             }
 
-            var segments = new List<Segment>();
+            return Validate(_value);
+        }
 
-            for (int index = 0; index < _value.Length; index++)
+        private static IEnumerable<ValidationResult> Validate(ImmutableArray<Segment> segments)
+        {
+            var processed = new List<Segment>();
+
+            for (int index = 0; index < segments.Length; index++)
             {
-                Segment value = _value[index];
+                Segment value = segments[index];
 
                 if (value is null)
                 {
-                    string preceding = string.Join(Separator, segments);
+                    string preceding = string.Join(Separator, processed);
 
                     yield return new ValidationResult(
                         ValidateSegmentRequired.Format(index, nameof(Qualifier), preceding),
                         new[] { $"{nameof(Qualifier)}[{index}]" });
                 }
+                else
+                {
+                    value = "{Undefined}";
+                }
 
-                segments.Add(value);
+                processed.Add(value);
             }
         }
     }

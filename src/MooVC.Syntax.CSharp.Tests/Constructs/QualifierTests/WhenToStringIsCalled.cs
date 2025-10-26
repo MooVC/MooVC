@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     public void GivenEmptyValueThenReturnsEmptyString()
     {
         // Arrange
-        var qualifier = new Qualifier(ImmutableArray<Segment>.Empty);
+        var qualifier = new Qualifier([]);
 
         // Act
         string result = qualifier.ToString();
@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
     public void GivenSegmentsThenReturnsPeriodSeparatedValue()
     {
         // Arrange
-        ImmutableArray<Segment> value = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"), new Segment("Gamma"));
+        ImmutableArray<Segment> value = ["Alpha", "Beta", "Gamma"];
         var qualifier = new Qualifier(value);
 
         // Act

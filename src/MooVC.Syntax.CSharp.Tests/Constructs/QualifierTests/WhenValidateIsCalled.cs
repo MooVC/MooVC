@@ -28,7 +28,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyArrayThenValidationErrorReturned()
     {
         // Arrange
-        var qualifier = new Qualifier(ImmutableArray<Segment>.Empty);
+        var qualifier = new Qualifier([]);
         var context = new ValidationContext(qualifier);
         var results = new List<ValidationResult>();
 
@@ -46,7 +46,7 @@ public sealed class WhenValidateIsCalled
     public void GivenSegmentsThenNoValidationErrorReturned()
     {
         // Arrange
-        ImmutableArray<Segment> value = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"));
+        ImmutableArray<Segment> value = ["Alpha", "Beta"];
         var qualifier = new Qualifier(value);
         var context = new ValidationContext(qualifier);
         var results = new List<ValidationResult>();
@@ -63,11 +63,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullSegmentThenValidationErrorReturned()
     {
         // Arrange
-        Segment[] values = new Segment[]
-        {
-            new("Alpha"),
-            null!,
-        };
+        Segment[] values = [new("Alpha"), default!];
 
         Qualifier qualifier = values;
         var context = new ValidationContext(qualifier);

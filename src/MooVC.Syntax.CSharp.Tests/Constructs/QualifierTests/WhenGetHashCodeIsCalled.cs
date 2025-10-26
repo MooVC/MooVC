@@ -4,15 +4,15 @@ using System.Collections.Immutable;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    private static readonly ImmutableArray<Segment> First = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"));
-    private static readonly ImmutableArray<Segment> Second = ImmutableArray.Create(new Segment("Gamma"), new Segment("Delta"));
+    private static readonly ImmutableArray<Segment> first = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Segment> second = ["Gamma", "Delta"];
 
     [Fact]
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
-        var left = new Qualifier(First);
-        var right = new Qualifier(First);
+        var left = new Qualifier(first);
+        var right = new Qualifier(first);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -26,8 +26,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashesAreNotEqual()
     {
         // Arrange
-        var left = new Qualifier(First);
-        var right = new Qualifier(Second);
+        var left = new Qualifier(first);
+        var right = new Qualifier(second);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -41,7 +41,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Qualifier(First);
+        var subject = new Qualifier(WhenGetHashCodeIsCalled.first);
 
         // Act
         int first = subject.GetHashCode();

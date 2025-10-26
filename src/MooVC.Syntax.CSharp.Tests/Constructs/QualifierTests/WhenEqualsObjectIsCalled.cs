@@ -4,14 +4,14 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    private static readonly ImmutableArray<Segment> Same = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"));
-    private static readonly ImmutableArray<Segment> Different = ImmutableArray.Create(new Segment("Gamma"));
+    private static readonly ImmutableArray<Segment> different = ["Gamma"];
+    private static readonly ImmutableArray<Segment> same = ["Alpha", "Beta"];
 
     [Fact]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Qualifier(Same);
+        var subject = new Qualifier(same);
         object? other = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Qualifier(Same);
+        var subject = new Qualifier(same);
         object other = subject;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        object right = new Qualifier(Same);
+        var left = new Qualifier(same);
+        object right = new Qualifier(same);
 
         // Act
         bool result = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        object right = new Qualifier(Different);
+        var left = new Qualifier(same);
+        object right = new Qualifier(different);
 
         // Act
         bool result = left.Equals(right);
@@ -67,8 +67,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonQualifierThenInvalidCastIsThrown()
     {
         // Arrange
-        var subject = new Qualifier(Same);
-        object other = Same;
+        var subject = new Qualifier(same);
+        object other = same;
 
         // Act & Assert
         _ = Should.Throw<InvalidCastException>(() => subject.Equals(other));
@@ -78,8 +78,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        var right = new Qualifier(Same);
+        var left = new Qualifier(same);
+        var right = new Qualifier(same);
         object leftObject = left;
         object rightObject = right;
 
@@ -96,8 +96,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        var right = new Qualifier(Different);
+        var left = new Qualifier(same);
+        var right = new Qualifier(different);
         object leftObject = left;
         object rightObject = right;
 

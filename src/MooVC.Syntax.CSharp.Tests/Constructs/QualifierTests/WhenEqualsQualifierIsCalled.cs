@@ -4,14 +4,14 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualsQualifierIsCalled
 {
-    private static readonly ImmutableArray<Segment> Same = ImmutableArray.Create(new Segment("Alpha"), new Segment("Beta"));
-    private static readonly ImmutableArray<Segment> Different = ImmutableArray.Create(new Segment("Gamma"));
+    private static readonly ImmutableArray<Segment> different = ["Gamma"];
+    private static readonly ImmutableArray<Segment> same = ["Alpha", "Beta"];
 
     [Fact]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(Same);
+        var left = new Qualifier(same);
         Qualifier? right = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsQualifierIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Qualifier(Same);
+        var first = new Qualifier(same);
         Qualifier second = first;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenEqualsQualifierIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        var right = new Qualifier(Same);
+        var left = new Qualifier(same);
+        var right = new Qualifier(same);
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -55,8 +55,8 @@ public sealed class WhenEqualsQualifierIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(Same);
-        var right = new Qualifier(Different);
+        var left = new Qualifier(same);
+        var right = new Qualifier(different);
 
         // Act
         bool resultLeftRight = left.Equals(right);

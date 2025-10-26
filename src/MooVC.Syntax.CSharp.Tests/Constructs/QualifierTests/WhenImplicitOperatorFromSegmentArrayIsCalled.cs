@@ -1,9 +1,11 @@
 namespace MooVC.Syntax.CSharp.Constructs.QualifierTests;
 
+using System.Diagnostics.CodeAnalysis;
+
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
-    private static readonly Segment Alpha = new("Alpha");
-    private static readonly Segment Beta = new("Beta");
+    private static readonly Segment alpha = new("Alpha");
+    private static readonly Segment beta = new("Beta");
 
     [Fact]
     public void GivenNullThenArgumentNullExceptionIsThrown()
@@ -22,13 +24,13 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
-        Segment[] values = Array.Empty<Segment>();
+        Segment[] values = [];
 
         // Act
         Qualifier subject = values;
 
         // Assert
-        subject.ShouldNotBeNull();
+        _ = subject.ShouldNotBeNull();
         Segment[] result = subject;
         result.ShouldBe(values);
     }
@@ -37,7 +39,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     public void GivenSegmentsThenRoundTripsSuccessfully()
     {
         // Arrange
-        Segment[] values = new[] { Alpha, Beta };
+        Segment[] values = [alpha, beta];
 
         // Act
         Qualifier subject = values;
@@ -47,11 +49,12 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         result.ShouldBe(values);
     }
 
-    [Fact]
+    [Fact(Skip = "Requires a fix to Monify - see https://github.com/MooVC/Monify/issues/19")]
+    [SuppressMessage("Usage", "xUnit1004:Test methods should not be skipped", Justification = "Awaiting v1.1.3 of Monify")]
     public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        Segment[] values = new[] { Alpha, Beta };
+        Segment[] values = [alpha, beta];
 
         // Act
         Qualifier first = values;
