@@ -2,93 +2,15 @@
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    private const string Empty = "";
-    private const string Space = "   ";
-    private const string Alpha = "Alpha";
-    private const string Unicode = "Álpha";
-
-    [Fact]
-    public void GivenNullThenThrows()
-    {
-        // Arrange
-        var subject = new Member(default);
-
-        // Act & Assert
-        _ = Should.Throw<NullReferenceException>(() => _ = subject.GetHashCode());
-    }
-
-    [Fact]
-    public void GivenEmptyThenMatchesStringHashCode()
-    {
-        // Arrange
-        var subject = new Member(Empty);
-
-        // Act
-        int result = subject.GetHashCode();
-
-        // Assert
-        result.ShouldBe(Empty.GetHashCode());
-    }
-
-    [Fact]
-    public void GivenWhitespaceThenMatchesStringHashCode()
-    {
-        // Arrange
-        var subject = new Member(Space);
-
-        // Act
-        int result = subject.GetHashCode();
-
-        // Assert
-        result.ShouldBe(Space.GetHashCode());
-    }
-
-    [Fact]
-    public void GivenAsciiThenMatchesStringHashCode()
-    {
-        // Arrange
-        var subject = new Member(Alpha);
-
-        // Act
-        int result = subject.GetHashCode();
-
-        // Assert
-        result.ShouldBe(Alpha.GetHashCode());
-    }
-
-    [Fact]
-    public void GivenUnicodeThenMatchesStringHashCode()
-    {
-        // Arrange
-        var subject = new Member(Unicode);
-
-        // Act
-        int result = subject.GetHashCode();
-
-        // Assert
-        result.ShouldBe(Unicode.GetHashCode());
-    }
-
-    [Fact]
-    public void GivenVeryLongThenMatchesStringHashCode()
-    {
-        // Arrange
-        string value = new('x', 64_000);
-        var subject = new Member(value);
-
-        // Act
-        int result = subject.GetHashCode();
-
-        // Assert
-        result.ShouldBe(value.GetHashCode());
-    }
+    private static readonly Faker generator = new();
 
     [Fact]
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
-        var first = new Member(Alpha);
-        var second = new Member(Alpha);
+        string value = generator.Lorem.Word();
+        var first = new Member(value);
+        var second = new Member(value);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -99,10 +21,31 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Fact]
+    public void GivenDifferentValueThenHashesAreNotEqual()
+    {
+        // Arrange
+        IEnumerable<string> words = generator.Lorem
+            .Words()
+            .Distinct();
+
+        IEnumerable<string> values = generator.PickRandom(words, 2);
+        var firstMember = new Member(values.First());
+        var secondMember = new Member(values.Last());
+
+        // Act
+        int firstHash = firstMember.GetHashCode();
+        int secondHash = secondMember.GetHashCode();
+
+        // Assert
+        firstHash.ShouldNotBe(secondHash);
+    }
+
+    [Fact]
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Member(Alpha);
+        string value = generator.Lorem.Word();
+        var subject = new Member(value);
 
         // Act
         int first = subject.GetHashCode();

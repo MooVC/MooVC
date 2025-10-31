@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Constructs
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Text;
 
