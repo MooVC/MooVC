@@ -26,17 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Constructs\Member.Resources.Designer.cs">
+    <Compile Update="Members\Identifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Member.Resources.resx</DependentUpon>
+      <DependentUpon>Identifier.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Constructs\Qualifier.Resources.Designer.cs">
+    <Compile Update="Members\Qualifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Qualifier.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Constructs\Segment.Resources.Designer.cs">
+    <Compile Update="Members\Segment.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Segment.Resources.resx</DependentUpon>
@@ -49,15 +49,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Constructs\Member.Resources.resx">
+    <EmbeddedResource Update="Members\Identifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Member.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Constructs\Qualifier.Resources.resx">
+    <EmbeddedResource Update="Members\Qualifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Qualifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Constructs\Segment.Resources.resx">
+    <EmbeddedResource Update="Members\Segment.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Segment.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

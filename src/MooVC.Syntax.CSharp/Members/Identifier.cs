@@ -1,0 +1,68 @@
+﻿namespace MooVC.Syntax.CSharp.Members
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using Ardalis.GuardClauses;
+    using Monify;
+    using MooVC.Syntax.CSharp;
+    using static MooVC.Syntax.CSharp.Members.Identifier_Resources;
+
+    [Monify(Type = typeof(string))]
+    public sealed partial class Identifier
+        : IValidatableObject
+    {
+        private static readonly Regex rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        private static readonly Dictionary<Casing, Func<string, string>> casingStrategies = new Dictionary<Casing, Func<string, string>>
+        {
+            { Casing.Pascal, StringExtensions.ToPascalCase },
+            { Casing.Camel, StringExtensions.ToCamelCase },
+            { Casing.Snake, StringExtensions.ToSnakeCase },
+            { Casing.Kebab, StringExtensions.ToKebabCase },
+        };
+
+        public override string ToString()
+        {
+            return ToString(Options.Default);
+        }
+
+        public string ToString(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Identifier)));
+
+            const char ReservationPrefix = '@';
+            const char UnderscorePrefix = '_';
+
+            if (!casingStrategies.TryGetValue(options.Casing, out Func<string, string> transform))
+            {
+                throw new NotSupportedException(ToStringCasingNotSupported.Format(options.Casing, nameof(Identifier)));
+            }
+
+            var identifier = new StringBuilder(transform(_value));
+
+            if (options.UseUnderscores)
+            {
+                identifier = identifier.Prepend(UnderscorePrefix);
+            }
+            else if (options.Casing != Casing.Pascal && identifier.IsReserved())
+            {
+                identifier = identifier.Prepend(ReservationPrefix);
+            }
+
+            return identifier.ToString();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            const int Empty = 0;
+
+            if (_value is null || _value.Length == Empty || !rule.IsMatch(_value))
+            {
+                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Identifier)), new[] { nameof(Identifier) });
+            }
+        }
+    }
+}
