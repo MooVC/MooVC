@@ -49,8 +49,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         result.ShouldBe(values);
     }
 
-    [Fact(Skip = "Requires a fix to Monify - see https://github.com/MooVC/Monify/issues/19")]
-    [SuppressMessage("Usage", "xUnit1004:Test methods should not be skipped", Justification = "Awaiting v1.1.3 of Monify")]
+    [Fact]
     public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

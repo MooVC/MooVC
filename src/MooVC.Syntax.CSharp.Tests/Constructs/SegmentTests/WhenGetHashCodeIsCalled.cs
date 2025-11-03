@@ -24,13 +24,15 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValueThenHashesAreNotEqual()
     {
         // Arrange
-        IEnumerable<string> words = generator.Lorem
-            .Words()
-            .Distinct();
+        string[] words = generator
+            .Random
+            .WordsArray(100)
+            .Distinct()
+            .OrderBy(_ => Random.Shared.Next())
+            .ToArray();
 
-        IEnumerable<string> values = generator.PickRandom(words, 2);
-        var firstMember = new Member(values.First());
-        var secondMember = new Member(values.Last());
+        var firstMember = new Member(words[0]);
+        var secondMember = new Member(words[^1]);
 
         // Act
         int firstHash = firstMember.GetHashCode();
