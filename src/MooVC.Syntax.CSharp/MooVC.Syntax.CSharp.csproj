@@ -26,6 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Containers\Definition.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Definition.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Containers\Directive.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Directive.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Identifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -46,9 +56,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StringExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ValidationContextExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationContextExtensions.Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Containers\Definition.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Containers\Directive.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Directive.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Members\Identifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
@@ -64,6 +87,10 @@
     <EmbeddedResource Update="StringExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ValidationContextExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationContextExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

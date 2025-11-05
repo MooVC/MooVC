@@ -12,7 +12,11 @@
     public partial class Qualifier
         : IValidatableObject
     {
+        public static readonly Qualifier Unqualified = ImmutableArray<Segment>.Empty;
+
         private const string Separator = ".";
+
+        public bool IsUnqualified => this == Unqualified;
 
         public static implicit operator Qualifier(Segment[] values)
         {
@@ -35,6 +39,11 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (IsUnqualified)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
             if (_value.IsDefaultOrEmpty)
             {
                 return new[]

@@ -10,7 +10,11 @@
     public sealed partial class Segment
         : IValidatableObject
     {
+        public static readonly Segment Empty = string.Empty;
+
         private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        public bool IsEmpty => this == Empty;
 
         public override string ToString()
         {
@@ -19,9 +23,14 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            const int Empty = 0;
+            if (IsEmpty)
+            {
+                yield break;
+            }
 
-            if (_value is null || _value.Length == Empty || !rule.IsMatch(_value))
+            const int Unspecified = 0;
+
+            if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
                 yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Segment)), new[] { nameof(Segment) });
             }

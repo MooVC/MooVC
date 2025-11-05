@@ -14,6 +14,8 @@
     public sealed partial class Identifier
         : IValidatableObject
     {
+        public static readonly Identifier Unnamed = string.Empty;
+
         private static readonly Regex rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         private static readonly Dictionary<Casing, Func<string, string>> casingStrategies = new Dictionary<Casing, Func<string, string>>
@@ -23,6 +25,8 @@
             { Casing.Snake, StringExtensions.ToSnakeCase },
             { Casing.Kebab, StringExtensions.ToKebabCase },
         };
+
+        public bool IsUnnamed => this == Unnamed;
 
         public override string ToString()
         {
@@ -57,9 +61,14 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            const int Empty = 0;
+            if (IsUnnamed)
+            {
+                yield break;
+            }
 
-            if (_value is null || _value.Length == Empty || !rule.IsMatch(_value))
+            const int Unspecified = 0;
+
+            if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
                 yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Identifier)), new[] { nameof(Identifier) });
             }
