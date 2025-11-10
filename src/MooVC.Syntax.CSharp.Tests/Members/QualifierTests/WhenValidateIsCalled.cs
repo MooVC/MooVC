@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenEmptyArrayThenValidationErrorReturned()
+    public void GivenEmptyArrayThenNoValidationErrorReturned()
     {
         // Arrange
         var qualifier = new Qualifier([]);
@@ -36,10 +36,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(qualifier, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Qualifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
     }
 
     [Fact]

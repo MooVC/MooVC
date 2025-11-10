@@ -21,6 +21,7 @@
 
         public bool IsEmpty => this == Empty;
 
+        [SkipAutoInstantiation]
         public Qualifier Namespace { get; set; } = Qualifier.Unqualified;
 
         public ImmutableArray<Directive> Usings { get; set; } = ImmutableArray<Directive>.Empty;

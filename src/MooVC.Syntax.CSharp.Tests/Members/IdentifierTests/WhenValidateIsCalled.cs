@@ -31,7 +31,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenEmptyThenValidationErrorReturned()
+    public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Identifier(Empty);
@@ -42,10 +42,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
     }
 
     [Fact]

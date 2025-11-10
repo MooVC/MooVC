@@ -15,12 +15,14 @@
     {
         public static readonly Directive Undefined = new Directive();
 
+        [SkipAutoInstantiation]
         public Identifier Alias { get; set; } = Identifier.Unnamed;
 
         public bool IsUndefined => this == Undefined;
 
         public bool IsStatic { get; set; }
 
+        [SkipAutoInstantiation]
         public Qualifier Qualifier { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
