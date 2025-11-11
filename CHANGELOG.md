@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+# [9.2.0] - 2025-11-11
+
+## Added
+
+- Targeting for .NET 10.0 across libraries and supporting test projects.
+
 ## Fixed
 
 - ObjectExtensions.ToTypedArray returns arrays unchanged, avoiding unintended nested arrays.
