@@ -2,12 +2,15 @@
   <PropertyGroup>
     <Description>A library designed to encapsulate the Apex.Serialization implementation through the standardized MooVC.Serialization interpretation, facilitating ease of consumption within inner layers without direct coupling to infrastructural concerns.</Description>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Apex.Serialization" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Apex.Serialization" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="Apex.Serialization" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
