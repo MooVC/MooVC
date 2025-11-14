@@ -1,6 +1,5 @@
 namespace MooVC;
 
-using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
 using MooVC.Linq;
 using static MooVC.ArrayExtensions_Resources;

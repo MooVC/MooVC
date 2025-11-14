@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.QualifierTests;
 
-using System.Diagnostics.CodeAnalysis;
-
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
     private static readonly Segment alpha = new("Alpha");
