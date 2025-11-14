@@ -28,6 +28,10 @@ dotnet add package MooVC
 
 Add optional infrastructure packages as needed; each capability below lists extensions that provide additional implementations.
 
+### Target Frameworks
+
+MooVC libraries target .NET Standard 2.0, .NET 8.0, .NET 9.0, and .NET 10.0, ensuring compatibility across current and long-term supported platforms.
+
 ## Capabilities
 
 MooVC packages a set of reusable building blocks.
