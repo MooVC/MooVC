@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ValidateStaticAliasInvalid" xml:space="preserve">
-    <value>`{1}` `{0}` cannot be applied to a Static Using for `{3}` `{2}`.</value>
+  <data name="ValidateValueRequired" xml:space="preserve">
+    <value>The `{1}` constraint requires that `{0}` begin with an I, be PascalCase with a leading uppercase letter, consisting only of letters or digits, and avoid underscores, spaces, or reserved keywords. When specifying generic arguments, ensure each argument is either a valid PascalCase type name or begins with T in PascalCase form, using only letters or digits.</value>
   </data>
 </root>

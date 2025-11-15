@@ -8,53 +8,59 @@
 
     internal static partial class ValidationContextExtensions
     {
-        public static IEnumerable<ValidationResult> Include(this ValidationContext validationContext, IValidatableObject validatable)
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include(
+            this ValidationContext validationContext,
+            IValidatableObject validatable)
         {
             return validationContext.Include(validatable, Enumerable.Empty<ValidationResult>());
         }
 
-        public static IEnumerable<ValidationResult> Include(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include(
             this ValidationContext validationContext,
-            IValidatableObject validatable,
-            IEnumerable<ValidationResult> results)
+            IEnumerable<ValidationResult> results,
+            IValidatableObject validatable)
         {
-            _ = Guard.Against.Null(validationContext, message: IncludeValidationContextRequired);
-            _ = Guard.Against.Null(validatable, message: IncludeValidatableRequired);
             _ = Guard.Against.Null(results, message: IncludeResultsRequired);
+            _ = Guard.Against.Null(validatable, message: IncludeValidatableRequired);
+            _ = Guard.Against.Null(validationContext, message: IncludeValidationContextRequired);
 
             return validationContext.Validate(validatable, results);
         }
 
-        public static IEnumerable<ValidationResult> Include(this ValidationContext validationContext, IEnumerable<IValidatableObject> validatables)
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include(
+            this ValidationContext validationContext,
+            IEnumerable<IValidatableObject> validatables)
         {
-            return validationContext.Include(validatables, Enumerable.Empty<ValidationResult>());
+            return validationContext.Include(Enumerable.Empty<ValidationResult>(), validatables);
         }
 
-        public static IEnumerable<ValidationResult> Include(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include(
             this ValidationContext validationContext,
-            IEnumerable<IValidatableObject> validatables,
-            IEnumerable<ValidationResult> results)
+            IEnumerable<ValidationResult> results,
+            IEnumerable<IValidatableObject> validatables)
         {
-            _ = Guard.Against.Null(validationContext, message: IncludeValidationContextRequired);
-            _ = Guard.Against.Null(validatables, message: IncludeValidatablesRequired);
             _ = Guard.Against.Null(results, message: IncludeResultsRequired);
+            _ = Guard.Against.Null(validatables, message: IncludeValidatablesRequired);
+            _ = Guard.Against.Null(validationContext, message: IncludeValidationContextRequired);
 
             foreach (IValidatableObject validatable in validatables)
             {
-                results = validationContext.Validate(validatable, results);
+                results = validationContext
+                    .Validate(results, validatable)
+                    .Results;
             }
 
-            return results;
+            return (results, validationContext);
         }
 
-        private static IEnumerable<ValidationResult> Validate(
+        private static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Validate(
             this ValidationContext validationContext,
-            IValidatableObject validatable,
-            IEnumerable<ValidationResult> results)
+            IEnumerable<ValidationResult> results,
+            IValidatableObject validatable)
         {
             IEnumerable<ValidationResult> inclusions = validatable.Validate(validationContext);
 
-            return results.Concat(inclusions);
+            return (results.Concat(inclusions), validationContext);
         }
     }
 }

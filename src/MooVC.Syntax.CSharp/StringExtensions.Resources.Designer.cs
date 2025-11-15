@@ -19,7 +19,7 @@ namespace MooVC.Syntax.CSharp {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class StringExtensions_Resources {
@@ -57,6 +57,24 @@ namespace MooVC.Syntax.CSharp {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The separator to be applied to the elements must be provided..
+        /// </summary>
+        internal static string CombineSeparatorRequired {
+            get {
+                return ResourceManager.GetString("CombineSeparatorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The elements to which separator `{0}` is to be applied must be provided..
+        /// </summary>
+        internal static string CombineValuesRequired {
+            get {
+                return ResourceManager.GetString("CombineValuesRequired", resourceCulture);
             }
         }
         

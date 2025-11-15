@@ -121,7 +121,7 @@
     <value>The `{0}` to convert to an array of `{1}` must be provided.</value>
   </data>
   <data name="ValidateSegmentRequired" xml:space="preserve">
-    <value>Segment `{0}` for `{1}` with a preceding value of `{2}` is not defined.</value>
+    <value>`{1}` `{0}` for `{2}` with a preceding value of `{3}` is not defined.</value>
   </data>
   <data name="ValidateValueRequired" xml:space="preserve">
     <value>A `{0}` requires at least one `{1}`.</value>

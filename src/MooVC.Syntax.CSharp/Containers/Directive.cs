@@ -14,16 +14,28 @@
         : IValidatableObject
     {
         public static readonly Directive Undefined = new Directive();
+        private const string Separator = " ";
 
-        [SkipAutoInstantiation]
         public Identifier Alias { get; set; } = Identifier.Unnamed;
 
         public bool IsUndefined => this == Undefined;
 
         public bool IsStatic { get; set; }
 
-        [SkipAutoInstantiation]
         public Qualifier Qualifier { get; set; }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            string prefix = GetPrefix();
+            string qualifier = Qualifier.ToString();
+
+            return Separator.Combine("using", prefix, qualifier);
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -36,12 +48,30 @@
 
             if (IsStatic && !Alias.IsUnnamed)
             {
-                results = results.Append(new ValidationResult(ValidateStaticAliasInvalid.Format(Alias, Qualifier), new[] { nameof(Alias) }));
+                results = results.Append(new ValidationResult(
+                    ValidateStaticAliasInvalid.Format(Alias, nameof(Alias), Qualifier, nameof(Qualifier)),
+                    new[] { nameof(Alias) }));
             }
 
-            return results
-                .And(validationContext, Alias)
-                .And(validationContext, Qualifier);
+            return validationContext
+                .Include(results, Alias)
+                .And(Qualifier)
+                .Results;
+        }
+
+        private string GetPrefix()
+        {
+            if (IsStatic)
+            {
+                return "static";
+            }
+
+            if (!Alias.IsUnnamed)
+            {
+                return $"{Alias} = ";
+            }
+
+            return string.Empty;
         }
     }
 }

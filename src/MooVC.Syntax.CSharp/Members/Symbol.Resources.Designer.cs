@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp.Containers {
+namespace MooVC.Syntax.CSharp.Members {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Containers {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Definition_Resources {
+    internal class Symbol_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Definition_Resources() {
+        internal Symbol_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Containers {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Containers.Definition.Resources", typeof(Definition_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Symbol.Resources", typeof(Symbol_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace MooVC.Syntax.CSharp.Containers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{1}` belonging to `{0}` must be provided..
+        ///   Looks up a localized string similar to When providing a `{0}` for `{1}`, the value must be specified..
         /// </summary>
-        internal static string ValidateConstructInvalid {
+        internal static string ValidateArgumentsInvalid {
             get {
-                return ResourceManager.GetString("ValidateConstructInvalid", resourceCulture);
+                return ResourceManager.GetString("ValidateArgumentsInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
+        ///   Looks up a localized string similar to The `{0}` of the `{1}` must be provided..
         /// </summary>
-        internal static string ValidateNamespaceRequired {
+        internal static string ValidateNameRequired {
             get {
-                return ResourceManager.GetString("ValidateNamespaceRequired", resourceCulture);
+                return ResourceManager.GetString("ValidateNameRequired", resourceCulture);
             }
         }
     }

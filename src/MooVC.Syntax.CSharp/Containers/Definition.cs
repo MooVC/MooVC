@@ -21,7 +21,6 @@
 
         public bool IsEmpty => this == Empty;
 
-        [SkipAutoInstantiation]
         public Qualifier Namespace { get; set; } = Qualifier.Unqualified;
 
         public ImmutableArray<Directive> Usings { get; set; } = ImmutableArray<Directive>.Empty;
@@ -37,15 +36,19 @@
 
             if (Namespace.IsUnqualified)
             {
-                results = results.Append(new ValidationResult(ValidateNamespaceRequired, new[] { nameof(Namespace) }));
+                results = results.Append(new ValidationResult(ValidateNamespaceRequired.Format(nameof(Namespace), nameof(Construct)), new[] { nameof(Namespace) }));
             }
 
             if (!Construct.IsUndefined)
             {
-                results = results.Append(new ValidationResult(ValidateConstructInvalid.Format(Namespace), new[] { nameof(Construct) }));
+                results = results.Append(new ValidationResult(ValidateConstructInvalid.Format(Namespace, nameof(Construct)), new[] { nameof(Construct) }));
             }
 
-            return results.And(validationContext, Usings);
+            return validationContext
+                .Include(results, Construct)
+                .And(Namespace)
+                .And(Usings)
+                .Results;
         }
     }
 }

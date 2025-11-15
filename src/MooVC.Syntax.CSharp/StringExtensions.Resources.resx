@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CombineSeparatorRequired" xml:space="preserve">
+    <value>The separator to be applied to the elements must be provided.</value>
+  </data>
+  <data name="CombineValuesRequired" xml:space="preserve">
+    <value>The elements to which separator `{0}` is to be applied must be provided.</value>
+  </data>
   <data name="ToCamelCaseValueRequired" xml:space="preserve">
     <value>The value to be rendered in camel case must be provided.</value>
   </data>

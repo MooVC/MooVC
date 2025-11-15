@@ -5,20 +5,18 @@
 
     internal static partial class ValidationResultExtensions
     {
-        public static IEnumerable<ValidationResult> And(
-            this IEnumerable<ValidationResult> results,
-            ValidationContext validationContext,
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             IValidatableObject validatable)
         {
-            return validationContext.Include(validatable, results);
+            return preceding.ValidationContext.Include(preceding.Results, validatable);
         }
 
-        public static IEnumerable<ValidationResult> And(
-            this IEnumerable<ValidationResult> results,
-            ValidationContext validationContext,
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             IEnumerable<IValidatableObject> validatables)
         {
-            return validationContext.Include(validatables, results);
+            return preceding.ValidationContext.Include(preceding.Results, validatables);
         }
     }
 }

@@ -6,11 +6,13 @@
     using System.Text;
     using System.Text.RegularExpressions;
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp;
     using static MooVC.Syntax.CSharp.Members.Identifier_Resources;
 
     [Monify(Type = typeof(string))]
+    [SkipAutoInstantiation]
     public sealed partial class Identifier
         : IValidatableObject
     {

@@ -1,22 +1,19 @@
-﻿namespace MooVC.Syntax.CSharp.Members
+﻿namespace MooVC.Syntax.CSharp.Generics
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
-    using Fluentify;
     using Monify;
-    using static MooVC.Syntax.CSharp.Members.Segment_Resources;
+    using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
-    public sealed partial class Segment
+    public sealed partial class Identifier
         : IValidatableObject
     {
-        public static readonly Segment Empty = string.Empty;
+        public static readonly Identifier Unnamed = string.Empty;
+        private static readonly Regex rule = new Regex(@"^T(?:[A-Z][A-Za-z0-9]*)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-        private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
-
-        public bool IsEmpty => this == Empty;
+        public bool IsUnnamed => this == Unnamed;
 
         public override string ToString()
         {
@@ -25,7 +22,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsEmpty)
+            if (IsUnnamed)
             {
                 yield break;
             }
@@ -34,7 +31,7 @@
 
             if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
-                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Segment)), new[] { nameof(Segment) });
+                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Identifier)), new[] { nameof(Identifier) });
             }
         }
     }
