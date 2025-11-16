@@ -1,8 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using Fluentify;
     using Monify;
 
     [Monify(Type = typeof(string))]
+    [SkipAutoInstantiation]
     public sealed partial class Scope
     {
         public static readonly Scope File = "file";

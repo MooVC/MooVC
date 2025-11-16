@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Fluentify;
     using Monify;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Members;
     using static MooVC.Syntax.CSharp.Generics.Constraints.Interface_Resources;
 
     [Monify(Type = typeof(Declaration))]
+    [SkipAutoInstantiation]
     public sealed partial class Interface
         : IValidatableObject
     {
@@ -19,7 +21,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            string name = _value;
+            string name = _value.ToString();
 
             const int MinimumRequired = 1;
 

@@ -3,10 +3,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
+    using Fluentify;
     using Monify;
     using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 
     [Monify(Type = typeof(string))]
+    [SkipAutoInstantiation]
     public sealed partial class Identifier
         : IValidatableObject
     {

@@ -3,10 +3,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp.Members;
 
     [Monify(Type = typeof(Symbol))]
+    [SkipAutoInstantiation]
     public sealed partial class Base
         : IValidatableObject
     {

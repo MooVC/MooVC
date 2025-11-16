@@ -11,7 +11,7 @@
     public sealed partial class Interface
         : Construct
     {
-        public static Interface Undefined { get; } = new Interface();
+        public static readonly Interface Undefined = new Interface();
 
         public override bool IsUndefined => this == Undefined;
 

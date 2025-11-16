@@ -1,9 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics.Constraints
 {
-    using System.ComponentModel.DataAnnotations;
+    using Fluentify;
     using Monify;
 
     [Monify(Type = typeof(string))]
+    [SkipAutoInstantiation]
     public sealed partial class Nature
     {
         public static readonly Nature Class = "class";

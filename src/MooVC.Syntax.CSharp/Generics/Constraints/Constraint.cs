@@ -32,7 +32,7 @@
                 return string.Empty;
             }
 
-            string @base = Base;
+            string @base = Base.ToString();
             string nature = Nature;
             string @new = New;
 

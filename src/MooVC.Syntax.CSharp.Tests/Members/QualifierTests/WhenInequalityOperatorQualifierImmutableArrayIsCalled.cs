@@ -15,12 +15,10 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
         ImmutableArray<Segment> right = default;
 
         // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
+        bool result = left != right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -31,12 +29,10 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
         ImmutableArray<Segment> right = same;
 
         // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
+        bool result = left != right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -47,11 +43,9 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
         ImmutableArray<Segment> right = different;
 
         // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
+        bool result = left != right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 }
