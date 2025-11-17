@@ -32,7 +32,7 @@ public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]

@@ -64,14 +64,17 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenNonQualifierThenInvalidCastIsThrown()
+    public void GivenNonQualifierThenReturnsFalse()
     {
         // Arrange
         var subject = new Qualifier(same);
         object other = same;
 
-        // Act & Assert
-        _ = Should.Throw<InvalidCastException>(() => subject.Equals(other));
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        result.ShouldBeFalse();
     }
 
     [Fact]

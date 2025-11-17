@@ -62,14 +62,17 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenNonMemberThenInvalidCastIsThrown()
+    public void GivenNonMemberThenReturnsFalse()
     {
         // Arrange
         var subject = new Identifier(Same);
         object other = Same;
 
-        // Act & Assert
-        _ = Should.Throw<InvalidCastException>(() => subject.Equals(other));
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        result.ShouldBeFalse();
     }
 
     [Fact]

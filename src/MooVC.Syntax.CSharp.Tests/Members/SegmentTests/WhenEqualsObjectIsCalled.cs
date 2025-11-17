@@ -62,14 +62,17 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Fact]
-    public void GivenNonSegmentThenInvalidCastIsThrown()
+    public void GivenNonSegmentThenReturnsFalse()
     {
         // Arrange
         var subject = new Segment(Same);
         object other = Same;
 
-        // Act & Assert
-        _ = Should.Throw<InvalidCastException>(() => subject.Equals(other));
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        result.ShouldBeFalse();
     }
 
     [Fact]
