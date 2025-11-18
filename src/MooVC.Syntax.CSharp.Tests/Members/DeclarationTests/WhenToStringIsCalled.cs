@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Generics;
 
 public sealed class WhenToStringIsCalled
@@ -28,7 +27,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Declaration
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         // Act
@@ -44,10 +43,12 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Declaration
         {
-            Name = new Identifier(Name),
-            Parameters = ImmutableArray.Create(
+            Name = Name,
+            Parameters =
+            [
                 new Parameter { Name = new Identifier(FirstParameterName) },
-                new Parameter { Name = new Identifier(SecondParameterName) }),
+                new Parameter { Name = new Identifier(SecondParameterName) },
+            ],
         };
 
         // Act

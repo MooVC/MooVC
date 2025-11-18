@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Generics;
+using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
 
 public sealed class WhenValidateIsCalled
 {
@@ -38,7 +39,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        results.ShouldHaveSingleItem();
+        _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Declaration.Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
@@ -50,7 +51,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = new Identifier(Name),
-            Parameters = ImmutableArray.Create(new Parameter()),
+            Parameters = [new Parameter()],
         };
 
         var context = new ValidationContext(declaration);
@@ -61,7 +62,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        results.ShouldHaveSingleItem();
+        _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Parameter.Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
@@ -73,7 +74,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = new Identifier(Name),
-            Parameters = ImmutableArray.Create(new Parameter { Name = new Identifier("T") }),
+            Parameters = [new Parameter { Name = "T" }],
         };
 
         var context = new ValidationContext(declaration);

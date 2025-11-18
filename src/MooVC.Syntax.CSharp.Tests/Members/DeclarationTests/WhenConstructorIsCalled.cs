@@ -1,7 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Generics;
+using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -23,13 +23,13 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var parameter = new Parameter { Name = new Identifier(ParameterName) };
+        var parameter = new Parameter { Name = ParameterName };
 
         // Act
         var subject = new Declaration
         {
             Name = new Identifier(DeclarationTestsData.DefaultName),
-            Parameters = ImmutableArray.Create(parameter),
+            Parameters = [parameter],
         };
 
         // Assert

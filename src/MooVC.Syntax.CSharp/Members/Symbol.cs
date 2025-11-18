@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Symbol_Resources;
 

@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Generics;
@@ -15,14 +14,12 @@ internal static class DeclarationTestsData
 
         if (!string.IsNullOrEmpty(name))
         {
-            declaration.Name = new Identifier(name);
+            declaration.Name = name;
         }
 
         if (parameterNames?.Length > 0)
         {
-            declaration.Parameters = parameterNames
-                .Select(parameter => new Parameter { Name = new Identifier(parameter) })
-                .ToImmutableArray();
+            declaration.Parameters = [.. parameterNames.Select(parameter => new Parameter { Name = parameter })];
         }
 
         return declaration;
