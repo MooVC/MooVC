@@ -1,9 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.ScopeTests;
 
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-
 public sealed class WhenToStringIsCalled
 {
     public static TheoryData<Scope, string> Data => new()
