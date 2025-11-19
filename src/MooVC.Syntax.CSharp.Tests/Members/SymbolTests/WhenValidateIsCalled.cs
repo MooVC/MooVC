@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.SymbolTests;
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenValidateIsCalled

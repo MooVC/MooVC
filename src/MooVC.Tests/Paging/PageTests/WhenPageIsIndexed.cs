@@ -33,7 +33,7 @@ public sealed class WhenPageIsIndexed
         Action act = () => _ = result[index];
 
         // Assert
-        Should.Throw<IndexOutOfRangeException>(act);
+        _ = Should.Throw<IndexOutOfRangeException>(act);
     }
 }
 #endif

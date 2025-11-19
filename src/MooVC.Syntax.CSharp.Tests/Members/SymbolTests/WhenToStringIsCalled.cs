@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.SymbolTests;
 
-using System.Collections.Immutable;
-
 public sealed class WhenToStringIsCalled
 {
     private const string Name = "Result";

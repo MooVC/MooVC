@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.StringExtensionsTests;
 public sealed class WhenCombineIsCalled
 {
     private const string Separator = ",";
-    private static readonly string[] SampleValues = new[] { "first", "second", "third" };
+    private static readonly string[] samples = ["first", "second", "third"];
 
     [Fact]
     public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
@@ -12,7 +12,7 @@ public sealed class WhenCombineIsCalled
         string? separator = default;
 
         // Act
-        Action action = () => separator!.Combine(SampleValues);
+        Action action = () => separator!.Combine(samples);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
@@ -26,7 +26,7 @@ public sealed class WhenCombineIsCalled
         string separator = string.Empty;
 
         // Act
-        Action action = () => separator.Combine(SampleValues);
+        Action action = () => separator.Combine(samples);
 
         // Assert
         ArgumentException exception = Should.Throw<ArgumentException>(action);
@@ -66,7 +66,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        string value = SampleValues[0];
+        string value = samples[0];
 
         // Act
         string result = separator.Combine(value);
@@ -82,9 +82,9 @@ public sealed class WhenCombineIsCalled
         string separator = Separator;
 
         // Act
-        string result = separator.Combine(SampleValues);
+        string result = separator.Combine(samples);
 
         // Assert
-        result.ShouldBe(string.Join(separator, SampleValues));
+        result.ShouldBe(string.Join(separator, samples));
     }
 }
