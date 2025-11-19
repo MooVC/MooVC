@@ -5,9 +5,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Symbol_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -19,6 +19,7 @@
 
         public ImmutableArray<Symbol> Arguments { get; set; } = ImmutableArray<Symbol>.Empty;
 
+        [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
@@ -32,7 +33,7 @@
 
             string signature = Name;
 
-            if (Arguments.Length > 0)
+            if (!Arguments.IsDefaultOrEmpty)
             {
                 string arguments = GetArgumentDeclarations();
 
@@ -56,13 +57,13 @@
                 results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Symbol)), new[] { nameof(Name) }));
             }
 
-            if (Arguments.Any(argument => argument.IsUnspecified))
+            if (!Arguments.IsDefaultOrEmpty && Arguments.Any(argument => argument.IsUnspecified))
             {
                 results = results.Append(new ValidationResult(ValidateArgumentsInvalid.Format(nameof(Symbol), nameof(Arguments)), new[] { nameof(Arguments) }));
             }
 
             return validationContext
-                .Include(results, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, results, Arguments)
                 .And(Name)
                 .Results;
         }

@@ -28,6 +28,7 @@
             { Casing.Kebab, StringExtensions.ToKebabCase },
         };
 
+        [Ignore]
         public bool IsUnnamed => this == Unnamed;
 
         public override string ToString()

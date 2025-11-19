@@ -29,7 +29,7 @@
             }
 
             return validationContext
-                .Include(results, Constraints)
+                .IncludeIf(!Constraints.IsDefaultOrEmpty, results, Constraints)
                 .And(Name)
                 .Results;
         }
