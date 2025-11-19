@@ -11,15 +11,15 @@ public sealed class WhenIncludeIsCalled
     public void GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        ValidationContext? context = default;
+        ValidationContext? validationContext = default;
         var validatable = new StubValidatable();
 
         // Act
-        Action action = () => context!.Include(validatable);
+        Action action = () => validationContext!.Include(validatable);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(context));
+        exception.ParamName.ShouldBe(nameof(validationContext));
     }
 
     [Fact]
@@ -51,15 +51,15 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(target));
+        exception.ParamName.ShouldBe(nameof(validatable));
     }
 
     [Fact]
     public void GivenValidatablesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        var validatable = new StubValidatable();
-        var context = new ValidationContext(validatable);
+        IValidatableObject[] validatables = [new StubValidatable()];
+        var context = new ValidationContext(validatables);
         IEnumerable<IValidatableObject>? targets = default;
 
         // Act
@@ -67,7 +67,7 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(targets));
+        exception.ParamName.ShouldBe(nameof(validatables));
     }
 
     [Fact]
