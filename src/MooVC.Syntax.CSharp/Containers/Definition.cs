@@ -47,7 +47,7 @@
             return validationContext
                 .Include(results, Construct)
                 .And(Namespace)
-                .And(Usings)
+                .AndIf(!Usings.IsDefaultOrEmpty, Usings)
                 .Results;
         }
     }

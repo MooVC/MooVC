@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.SymbolTests;
 
-using System.Collections.Immutable;
-
 public sealed class WhenConstructorIsCalled
 {
     private const string ArgumentName = "Inner";
@@ -28,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Symbol
         {
             Name = new Identifier(SymbolTestsData.DefaultName),
-            Arguments = ImmutableArray.Create(argument),
+            Arguments = [argument],
         };
 
         // Assert

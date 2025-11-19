@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.SymbolTests;
 public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
 {
     private const string AlternativeName = "Alternate";
-    private static readonly string[] Arguments = new[] { "Inner", "Outer" };
+    private static readonly string[] arguments = ["Inner", "Outer"];
 
     [Fact]
     public void GivenBothNullThenReturnsTrue()
@@ -24,7 +24,7 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     {
         // Arrange
         Symbol? left = default;
-        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
+        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
 
         // Act
         bool result = left == right;
@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
         Symbol? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Symbol first = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
+        Symbol first = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
         Symbol second = first;
 
         // Act
@@ -65,8 +65,8 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
-        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
+        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
 
         // Act
         bool resultLeftRight = left == right;
@@ -81,8 +81,8 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     public void GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
-        Symbol right = SymbolTestsData.CreateWithArgumentNames(AlternativeName, Arguments);
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
+        Symbol right = SymbolTestsData.CreateWithArgumentNames(AlternativeName, arguments);
 
         // Act
         bool result = left == right;
@@ -95,8 +95,8 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     public void GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: Arguments);
-        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { Arguments[0] });
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
+        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments[0]);
 
         // Act
         bool resultLeftRight = left == right;

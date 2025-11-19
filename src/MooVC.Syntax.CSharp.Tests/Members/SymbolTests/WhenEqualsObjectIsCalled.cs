@@ -34,8 +34,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
-        object right = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
+        object right = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
 
         // Act
         bool result = left.Equals(right);
@@ -48,8 +48,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
-        object right = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Other" });
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
+        object right = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Other");
 
         // Act
         bool result = left.Equals(right);

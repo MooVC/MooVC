@@ -36,8 +36,11 @@
             string nature = Nature;
             string @new = New;
 
-            string[] constraints = Interfaces
-                .Select(@interface => @interface.ToString())
+            IEnumerable<string> interfaces = Interfaces.IsDefaultOrEmpty
+                ? Enumerable.Empty<string>()
+                : Interfaces.Select(@interface => @interface.ToString());
+
+            string[] constraints = interfaces
                 .Prepend(@base)
                 .Prepend(nature)
                 .Append(@new)
@@ -55,7 +58,7 @@
 
             return validationContext
                 .Include(Base)
-                .And(Interfaces)
+                .AndIf(!Interfaces.IsDefaultOrEmpty, Interfaces)
                 .Results;
         }
     }

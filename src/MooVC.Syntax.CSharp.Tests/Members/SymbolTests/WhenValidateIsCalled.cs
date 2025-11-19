@@ -29,7 +29,11 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedSymbolThenValidationErrorReturned()
     {
         // Arrange
-        var symbol = new Symbol();
+        var symbol = new Symbol
+        {
+            Arguments = [new Symbol { Name = "Test" }],
+        };
+
         var context = new ValidationContext(symbol);
         var results = new List<ValidationResult>();
 
@@ -38,7 +42,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        results.ShouldHaveSingleItem();
+        _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Symbol.Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
@@ -50,7 +54,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Name = new Identifier(Name),
-            Arguments = ImmutableArray.Create(Symbol.Unspecified),
+            Arguments = [Symbol.Unspecified],
         };
 
         var context = new ValidationContext(symbol);
@@ -61,7 +65,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        results.ShouldHaveSingleItem();
+        _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Symbol.Arguments));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
@@ -70,15 +74,10 @@ public sealed class WhenValidateIsCalled
     public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
-        var invalidArgument = new Symbol
-        {
-            Arguments = ImmutableArray.Create(Symbol.Unspecified),
-        };
-
         var symbol = new Symbol
         {
             Name = new Identifier(Name),
-            Arguments = ImmutableArray.Create(invalidArgument),
+            Arguments = [Symbol.Unspecified],
         };
 
         var context = new ValidationContext(symbol);
@@ -89,8 +88,8 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Name));
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Arguments));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -101,7 +100,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Name = new Identifier(Name),
-            Arguments = ImmutableArray.Create(new Symbol { Name = new Identifier(ArgumentName) }),
+            Arguments = [new Symbol { Name = new Identifier(ArgumentName) }],
         };
 
         var context = new ValidationContext(symbol);

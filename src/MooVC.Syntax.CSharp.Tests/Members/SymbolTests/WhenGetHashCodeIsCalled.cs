@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
-        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
+        Symbol right = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
 
         // Act
         int leftHash = left.GetHashCode();
@@ -21,7 +21,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
-        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: new[] { "Inner" });
+        Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
         Symbol right = SymbolTestsData.CreateWithArgumentNames("Alternate", "Inner");
 
         // Act

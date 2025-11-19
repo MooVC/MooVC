@@ -15,6 +15,7 @@
         public static readonly Declaration Unspecified = new Declaration();
         private const string Separator = ", ";
 
+        [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
@@ -30,7 +31,7 @@
 
             string signature = Name;
 
-            if (Parameters.Length > 0)
+            if (!Parameters.IsDefaultOrEmpty)
             {
                 string parameters = GetParameterDeclarations();
 
@@ -55,7 +56,7 @@
             }
 
             return validationContext
-                .Include(results, Parameters)
+                .IncludeIf(!Parameters.IsDefaultOrEmpty, results, Parameters)
                 .And(Name)
                 .Results;
         }

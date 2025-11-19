@@ -36,6 +36,11 @@
 
         public override string ToString()
         {
+            if (IsUnqualified)
+            {
+                return string.Empty;
+            }
+
             string[] segments = _value
                 .Where(segment => !segment.IsEmpty)
                 .Select(segment => segment.ToString())

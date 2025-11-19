@@ -1,19 +1,21 @@
 namespace MooVC.Syntax.CSharp.Members.ScopeTests;
 
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 public sealed class WhenToStringIsCalled
 {
-    public static IEnumerable<object[]> Data => new[]
+    public static TheoryData<Scope, string> Data => new()
     {
-        new object[] { Scope.File, "file" },
-        new object[] { Scope.Internal, "internal" },
-        new object[] { Scope.Public, "public" },
-        new object[] { Scope.Private, "private" },
-        new object[] { Scope.PrivateProtected, "private protected" },
-        new object[] { Scope.Protected, "protected" },
-        new object[] { Scope.ProtectedInternal, "protected internal" },
-        new object[] { Scope.Unspecified, string.Empty },
+        { Scope.File, "file" },
+        { Scope.Internal, "internal" },
+        { Scope.Public, "public" },
+        { Scope.Private, "private" },
+        { Scope.PrivateProtected, "private protected" },
+        { Scope.Protected, "protected" },
+        { Scope.ProtectedInternal, "protected internal" },
+        { Scope.Unspecified, string.Empty },
     };
 
     [Theory]

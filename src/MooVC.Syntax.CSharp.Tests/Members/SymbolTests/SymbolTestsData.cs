@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.SymbolTests;
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -19,7 +18,7 @@ internal static class SymbolTestsData
 
         if (arguments?.Length > 0)
         {
-            symbol.Arguments = arguments.ToImmutableArray();
+            symbol.Arguments = [.. arguments];
         }
 
         return symbol;

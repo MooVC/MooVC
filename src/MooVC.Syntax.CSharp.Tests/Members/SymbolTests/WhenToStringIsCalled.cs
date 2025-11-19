@@ -43,10 +43,12 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Symbol
         {
-            Name = new Identifier(Name),
-            Arguments = ImmutableArray.Create(
+            Arguments =
+            [
                 new Symbol { Name = new Identifier(FirstArgumentName) },
-                new Symbol { Name = new Identifier(SecondArgumentName) }),
+                new Symbol { Name = new Identifier(SecondArgumentName) },
+            ],
+            Name = new Identifier(Name),
         };
 
         // Act

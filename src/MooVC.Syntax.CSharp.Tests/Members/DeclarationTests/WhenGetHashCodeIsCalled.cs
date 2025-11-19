@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Declaration left = DeclarationTestsData.Create(parameterNames: new[] { "T" });
-        Declaration right = DeclarationTestsData.Create(parameterNames: new[] { "T" });
+        Declaration left = DeclarationTestsData.Create(parameterNames: "T");
+        Declaration right = DeclarationTestsData.Create(parameterNames: "T");
 
         // Act
         int leftHash = left.GetHashCode();

@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
 {
     private const string AlternativeName = "Alternate";
-    private static readonly string[] ParameterNames = new[] { "TFirst", "TSecond" };
+    private static readonly string[] parameterNames = ["TFirst", "TSecond"];
 
     [Fact]
     public void GivenBothNullThenReturnsTrue()
@@ -65,8 +65,8 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Declaration left = DeclarationTestsData.Create(parameterNames: ParameterNames);
-        Declaration right = DeclarationTestsData.Create(parameterNames: ParameterNames);
+        Declaration left = DeclarationTestsData.Create(parameterNames: parameterNames);
+        Declaration right = DeclarationTestsData.Create(parameterNames: parameterNames);
 
         // Act
         bool resultLeftRight = left == right;
@@ -95,8 +95,8 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
     public void GivenDifferentParametersThenReturnsFalse()
     {
         // Arrange
-        Declaration left = DeclarationTestsData.Create(parameterNames: ParameterNames);
-        Declaration right = DeclarationTestsData.Create(parameterNames: new[] { ParameterNames[0] });
+        Declaration left = DeclarationTestsData.Create(parameterNames: parameterNames);
+        Declaration right = DeclarationTestsData.Create(parameterNames: parameterNames[0]);
 
         // Act
         bool resultLeftRight = left == right;

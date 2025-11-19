@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Generics;
 

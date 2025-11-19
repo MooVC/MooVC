@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Generics;
 using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
@@ -30,7 +29,11 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedDeclarationThenValidationErrorReturned()
     {
         // Arrange
-        var declaration = new Declaration();
+        var declaration = new Declaration
+        {
+            Parameters = [new Parameter { Name = "T" }],
+        };
+
         var context = new ValidationContext(declaration);
         var results = new List<ValidationResult>();
 
