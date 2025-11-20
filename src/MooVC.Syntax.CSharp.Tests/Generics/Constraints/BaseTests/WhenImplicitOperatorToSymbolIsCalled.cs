@@ -10,12 +10,13 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
     public void GivenBaseThenReturnsSymbol()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Name) };
+        var name = new Identifier(Name);
+        Base subject = new Symbol { Name = name };
 
         // Act
         Symbol value = subject;
 
         // Assert
-        value.Name.ToString().ShouldBe(Name);
+        value.Name.ShouldBe(name);
     }
 }

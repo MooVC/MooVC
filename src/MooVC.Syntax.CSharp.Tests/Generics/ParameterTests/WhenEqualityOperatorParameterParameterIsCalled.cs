@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.CSharp.Members.SymbolTests;
 
 public sealed class WhenEqualityOperatorParameterParameterIsCalled
 {
@@ -107,7 +108,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    private static Parameter Create(string name = DefaultName, Constraint? constraint = null)
+    private static Parameter Create(string name = DefaultName, Constraint? constraint = default)
     {
         return new Parameter
         {

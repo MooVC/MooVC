@@ -3,20 +3,20 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
     private const string ValidInterfaceName = "IValid";
-    private const string InvalidInterfaceName = "Invalid";
+    private const string InvalidInterfaceName = "Invalid Name";
 
     [Fact]
     public void GivenValidInterfaceThenNoValidationErrorsReturned()
     {
         // Arrange
-        Interface subject = new Members.Declaration
+        Interface subject = new Declaration
         {
-            Name = new MemberIdentifier(ValidInterfaceName),
+            Name = ValidInterfaceName,
         };
 
         var context = new ValidationContext(subject);
@@ -34,9 +34,9 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange
-        Interface subject = new Members.Declaration
+        Interface subject = new Declaration
         {
-            Name = new MemberIdentifier(InvalidInterfaceName),
+            Name = InvalidInterfaceName,
         };
 
         var context = new ValidationContext(subject);
@@ -58,7 +58,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         Interface subject = new Members.Declaration
         {
-            Name = new MemberIdentifier("I"),
+            Name = "I",
         };
 
         var context = new ValidationContext(subject);

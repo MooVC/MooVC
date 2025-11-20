@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Generics.Constraints;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
@@ -35,12 +35,12 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new MemberIdentifier(InvalidInterfaceName)],
+            Interfaces = [new Interface(new Declaration { Name = InvalidInterfaceName })],
         };
 
         var subject = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = Name,
             Constraints = [constraint],
         };
 
@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Constraints));
+        results[0].MemberNames.ShouldContain(nameof(Interface));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -63,7 +63,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         var context = new ValidationContext(subject);
@@ -83,14 +83,14 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol { Name = new MemberIdentifier("Base") },
-            Interfaces = [new MemberIdentifier(InterfaceName)],
+            Base = new Symbol { Name = new Identifier("Base") },
+            Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
 
         var subject = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = Name,
             Constraints = [constraint],
         };
 

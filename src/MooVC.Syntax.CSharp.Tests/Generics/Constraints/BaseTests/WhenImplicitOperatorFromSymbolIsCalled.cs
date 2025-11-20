@@ -14,8 +14,10 @@ public sealed class WhenImplicitOperatorFromSymbolIsCalled
 
         // Act
         Base @base = symbol;
+        bool areEqual = @base == symbol;
 
         // Assert
-        @base.ShouldBe(symbol);
+        _ = @base.ShouldNotBeNull();
+        areEqual.ShouldBeTrue();
     }
 }

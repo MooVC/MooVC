@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
-using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
@@ -22,7 +21,7 @@ public sealed class WhenIsUnspecifiedIsCalled
     public void GivenSpecifiedBaseThenReturnsFalse()
     {
         // Arrange
-        Base subject = new Symbol { Name = new MemberIdentifier("Base") };
+        Base subject = new Symbol { Name = new Identifier("Base") };
 
         // Act
         bool result = subject.IsUnspecified;

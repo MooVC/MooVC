@@ -28,7 +28,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     {
         // Arrange
         Interface left = new Declaration { Name = new Identifier(Same) };
-        Declaration right = new Declaration { Name = new Identifier(Same) };
+        var right = new Declaration { Name = new Identifier(Same) };
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -44,7 +44,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     {
         // Arrange
         Interface left = new Declaration { Name = new Identifier(Same) };
-        Declaration right = new Declaration { Name = new Identifier(Different) };
+        var right = new Declaration { Name = new Identifier(Different) };
 
         // Act
         bool resultLeftRight = left.Equals(right);

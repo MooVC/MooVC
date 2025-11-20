@@ -3,14 +3,14 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
     private const string BaseName = "Result";
     private const string InterfaceName = "IValid";
-    private const string InvalidInterfaceName = "Invalid";
+    private const string InvalidInterfaceName = "Invalid Interface";
+    private const string InvalidName = "Invalid Name";
 
     [Fact]
     public void GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
@@ -34,7 +34,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new MemberIdentifier(InvalidInterfaceName)],
+            Interfaces = [new Interface(new Declaration { Name = InvalidInterfaceName })],
         };
 
         var context = new ValidationContext(constraint);
@@ -46,7 +46,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Constraint.Interfaces));
+        results[0].MemberNames.ShouldContain(nameof(Interface));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -56,7 +56,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol(),
+            Base = new Symbol { Name = InvalidName },
         };
 
         var context = new ValidationContext(constraint);
@@ -68,7 +68,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Constraint.Base));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -79,8 +79,8 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = new MemberIdentifier(BaseName) },
-            Interfaces = [new MemberIdentifier(InterfaceName)],
+            Base = new Symbol { Name = new Identifier(BaseName) },
+            Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
 
@@ -101,8 +101,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol(),
-            Interfaces = [new MemberIdentifier(InvalidInterfaceName)],
+            Base = new Symbol { Name = InvalidName },
+            Interfaces = [new Interface(new Declaration { Name = InvalidInterfaceName })],
         };
 
         var context = new ValidationContext(constraint);
@@ -114,7 +114,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Constraint.Base)));
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Constraint.Interfaces)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Identifier)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Interface)));
     }
 }

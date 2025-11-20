@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.CSharp.Members.SymbolTests;
 
 public sealed class WhenInequalityOperatorParameterParameterIsCalled
 {

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
+using MooVC.Syntax.CSharp.Members.SymbolTests;
+
 public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
 {
     [Fact]
@@ -21,7 +23,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     {
         // Arrange
         Constraint? left = default;
-        Constraint right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
 
         // Act
         bool result = left == right;
@@ -34,7 +36,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        Constraint left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
         Constraint? right = default;
 
         // Act
@@ -48,7 +50,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Constraint first = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var first = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
         Constraint second = first;
 
         // Act
@@ -62,8 +64,8 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Constraint left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-        Constraint right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
 
         // Act
         bool result = left == right;
@@ -76,8 +78,8 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Constraint left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
-        Constraint right = new Constraint { Nature = Nature.Class };
+        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
+        var right = new Constraint { Nature = Nature.Class };
 
         // Act
         bool result = left == right;

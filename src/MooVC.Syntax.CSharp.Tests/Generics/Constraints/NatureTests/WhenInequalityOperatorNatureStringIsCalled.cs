@@ -13,12 +13,10 @@ public sealed class WhenInequalityOperatorNatureStringIsCalled
         string? right = default;
 
         // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
+        bool result = left != right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]

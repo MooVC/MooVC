@@ -6,6 +6,7 @@
     using System.Linq;
     using Fluentify;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -19,6 +20,7 @@
 
         public ImmutableArray<Interface> Interfaces { get; set; } = ImmutableArray<Interface>.Empty;
 
+        [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         public Nature Nature { get; set; } = Nature.Unspecified;

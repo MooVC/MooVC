@@ -2,8 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
@@ -29,7 +28,7 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Base();
+        var subject = new Base(new Symbol { Name = "Invalid Symbol Name" });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -39,7 +38,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Base));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -47,7 +46,7 @@ public sealed class WhenValidateIsCalled
     public void GivenValidBaseThenNoValidationErrorsReturned()
     {
         // Arrange
-        Base subject = new Symbol { Name = new MemberIdentifier(BaseName) };
+        Base subject = new Symbol { Name = new Identifier(BaseName) };
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

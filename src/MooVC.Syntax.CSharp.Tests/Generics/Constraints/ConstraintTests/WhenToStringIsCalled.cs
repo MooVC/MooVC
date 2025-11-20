@@ -1,7 +1,8 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
+using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
 
 public sealed class WhenToStringIsCalled
 {
@@ -28,8 +29,8 @@ public sealed class WhenToStringIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Class,
-            Base = new Symbol { Name = new MemberIdentifier(BaseName) },
-            Interfaces = [new MemberIdentifier(InterfaceName)],
+            Base = new Symbol { Name = new Identifier(BaseName) },
+            Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
 
@@ -49,11 +50,11 @@ public sealed class WhenToStringIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = new MemberIdentifier(BaseName) },
+            Base = new Symbol { Name = new Identifier(BaseName) },
             Interfaces =
             [
-                new MemberIdentifier(InterfaceName),
-                new MemberIdentifier(AdditionalInterfaceName),
+                new Interface(new Declaration { Name = InterfaceName }),
+                new Interface(new Declaration { Name = AdditionalInterfaceName }),
             ],
         };
 

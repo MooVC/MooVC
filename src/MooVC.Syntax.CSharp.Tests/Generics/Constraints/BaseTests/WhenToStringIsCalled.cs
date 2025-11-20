@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
-using MooVC.Syntax.CSharp.Generics;
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToStringIsCalled
 {
@@ -24,7 +23,7 @@ public sealed class WhenToStringIsCalled
     public void GivenSpecifiedBaseThenReturnsName()
     {
         // Arrange
-        Base subject = new Symbol { Name = new MemberIdentifier(BaseName) };
+        Base subject = new Symbol { Name = new Identifier(BaseName) };
 
         // Act
         string result = subject.ToString();

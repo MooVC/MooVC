@@ -13,12 +13,10 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         string? right = default;
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left == right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]

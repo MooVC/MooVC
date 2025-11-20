@@ -41,7 +41,7 @@ public sealed class WhenEqualsSymbolIsCalled
     {
         // Arrange
         Base subject = new Symbol { Name = new Identifier(Same) };
-        Symbol other = new Symbol { Name = new Identifier(Same) };
+        var other = new Symbol { Name = new Identifier(Same) };
 
         // Act
         bool result = subject.Equals(other);
@@ -55,7 +55,7 @@ public sealed class WhenEqualsSymbolIsCalled
     {
         // Arrange
         Base subject = new Symbol { Name = new Identifier(Same) };
-        Symbol other = new Symbol { Name = new Identifier(Different) };
+        var other = new Symbol { Name = new Identifier(Different) };
 
         // Act
         bool result = subject.Equals(other);

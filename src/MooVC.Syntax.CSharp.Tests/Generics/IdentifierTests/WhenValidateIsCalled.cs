@@ -64,7 +64,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyNameThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Identifier(string.Empty);
+        var subject = new Identifier(" ");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

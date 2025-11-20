@@ -15,12 +15,10 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         Declaration? right = default;
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left == right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -31,12 +29,10 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         Declaration? right = default;
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left == right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -44,15 +40,13 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
     {
         // Arrange
         Interface left = new Declaration { Name = new Identifier(Same) };
-        Declaration right = new Declaration { Name = new Identifier(Same) };
+        var right = new Declaration { Name = new Identifier(Same) };
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left == right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -60,14 +54,12 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
     {
         // Arrange
         Interface left = new Declaration { Name = new Identifier(Same) };
-        Declaration right = new Declaration { Name = new Identifier(Different) };
+        var right = new Declaration { Name = new Identifier(Different) };
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left == right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 }

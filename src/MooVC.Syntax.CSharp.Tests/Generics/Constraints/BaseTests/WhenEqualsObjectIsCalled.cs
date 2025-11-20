@@ -40,7 +40,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Base left = new Symbol { Name = new Identifier(Same) };
-        object right = new Symbol { Name = new Identifier(Same) };
+        object right = new Base(new Symbol { Name = new Identifier(Same) });
 
         // Act
         bool result = left.Equals(right);
