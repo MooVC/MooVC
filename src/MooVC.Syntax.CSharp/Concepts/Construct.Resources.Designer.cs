@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp.Containers {
+namespace MooVC.Syntax.CSharp.Concepts {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Containers {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Containers.Construct.Resources", typeof(Construct_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Concepts.Construct.Resources", typeof(Construct_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
