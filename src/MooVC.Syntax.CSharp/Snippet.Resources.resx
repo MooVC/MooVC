@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BlockMarkersRequired" xml:space="preserve">
+    <value>The boundary Markers for the Block must be provided.</value>
+  </data>
   <data name="BlockOptionsRequired" xml:space="preserve">
     <value>The options required to format the block.</value>
+  </data>
+  <data name="BoundaryClosingRequired" xml:space="preserve">
+    <value>The Opening Marker for the Boundary of the Block must be provided.</value>
+  </data>
+  <data name="BoundaryOpeningRequired" xml:space="preserve">
+    <value>The Closing Marker for the Boundary of the Block must be provided.</value>
   </data>
   <data name="FromOptionsRequired" xml:space="preserve">
     <value>The `{0}` for parsing the `{1}` must be provided.</value>
   </data>
   <data name="FromValueRequired" xml:space="preserve">
     <value>The `{0}` must be provided.</value>
+  </data>
+  <data name="OptionsBlockRequired" xml:space="preserve">
+    <value>The Block configuration must be provided.</value>
   </data>
   <data name="OptionsMaxLengthOutOfRange" xml:space="preserve">
     <value>The maximum length of a single line must be within the acceptable range.</value>

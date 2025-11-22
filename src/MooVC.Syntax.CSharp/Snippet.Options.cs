@@ -15,10 +15,11 @@
         {
             public static readonly Options Default = new Options();
 
+            [Required(ErrorMessageResourceName = nameof(OptionsBlockRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
+            public BlockOptions Block { get; set; } = new BlockOptions();
+
             [Ignore]
             public bool IsDefault => this == Default;
-
-            public BlockStyle BlockStyle { get; set; } = BlockStyle.Allman;
 
             [Range(120, 255, ErrorMessageResourceName = nameof(OptionsMaxLengthOutOfRange), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public byte MaxLength { get; set; } = 155;

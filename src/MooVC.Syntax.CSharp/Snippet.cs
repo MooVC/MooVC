@@ -44,13 +44,13 @@
 
             blocked[index] = _value[index];
 
-            if (options.BlockStyle == BlockStyle.KAndR)
+            if (options.Block.Style == BlockOptions.StyleType.KAndR)
             {
-                blocked[index] = string.Concat(_value[index], " {");
+                blocked[index] = string.Concat(_value[index], $" {options.Block.Markers.Opening}");
             }
             else
             {
-                blocked[++index] = "{";
+                blocked[++index] = options.Block.Markers.Opening;
             }
 
             for (int line = 1; line < _value.Length; line++)
@@ -58,7 +58,7 @@
                 blocked[++index] = string.Concat(options.Whitespace, _value[line]);
             }
 
-            blocked[++index] = "}";
+            blocked[++index] = options.Block.Markers.Closing;
 
             return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }

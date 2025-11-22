@@ -61,11 +61,38 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The boundary Markers for the Block must be provided..
+        /// </summary>
+        internal static string BlockMarkersRequired {
+            get {
+                return ResourceManager.GetString("BlockMarkersRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The options required to format the block..
         /// </summary>
         internal static string BlockOptionsRequired {
             get {
                 return ResourceManager.GetString("BlockOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Opening Marker for the Boundary of the Block must be provided..
+        /// </summary>
+        internal static string BoundaryClosingRequired {
+            get {
+                return ResourceManager.GetString("BoundaryClosingRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Closing Marker for the Boundary of the Block must be provided..
+        /// </summary>
+        internal static string BoundaryOpeningRequired {
+            get {
+                return ResourceManager.GetString("BoundaryOpeningRequired", resourceCulture);
             }
         }
         
@@ -84,6 +111,15 @@ namespace MooVC.Syntax.CSharp {
         internal static string FromValueRequired {
             get {
                 return ResourceManager.GetString("FromValueRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Block configuration must be provided..
+        /// </summary>
+        internal static string OptionsBlockRequired {
+            get {
+                return ResourceManager.GetString("OptionsBlockRequired", resourceCulture);
             }
         }
         
