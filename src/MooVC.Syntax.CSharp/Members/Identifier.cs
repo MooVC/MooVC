@@ -33,7 +33,7 @@
 
         public override string ToString()
         {
-            return ToString(Options.Default);
+            return ToString(Options.Camel);
         }
 
         public string ToString(Options options)

@@ -9,6 +9,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
     using static MooVC.Syntax.CSharp.Containers.Construct_Resources;
+    using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
     public abstract class Construct
         : IValidatableObject

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Containers
+﻿namespace MooVC.Syntax.CSharp.Members
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@
 
     [Fluentify]
     [Valuify]
-    public sealed partial class Event
+    public sealed partial class Property
         : IValidatableObject
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

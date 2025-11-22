@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Containers
+﻿namespace MooVC.Syntax.CSharp.Members
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
