@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Containers
+﻿namespace MooVC.Syntax.CSharp.Members
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Containers.Directive_Resources;
+    using static MooVC.Syntax.CSharp.Members.Directive_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]

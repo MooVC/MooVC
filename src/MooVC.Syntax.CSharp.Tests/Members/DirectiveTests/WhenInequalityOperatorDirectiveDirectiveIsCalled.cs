@@ -1,122 +1,122 @@
-namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
+namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
-using MooVC.Syntax.CSharp.Members;
-
-public sealed class WhenEqualsDirectiveIsCalled
+public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";
     private const string Alias = "Alias";
 
     [Fact]
-    public void GivenBothNullThenReturnsTrue()
+    public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Directive? left = default;
         Directive? right = default;
 
         // Act
-        bool result = left?.Equals(right) ?? (right is null);
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Directive? left = default;
         Directive right = Create();
 
         // Act
-        bool result = left?.Equals(right) ?? false;
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
         Directive? right = default;
 
         // Act
-        bool result = left.Equals(right);
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenSameReferenceThenReturnsTrue()
+    public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         Directive first = Create();
         Directive second = first;
 
         // Act
-        bool result = first.Equals(second);
+        bool result = first != second;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenEqualValuesThenReturnsTrue()
+    public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create();
 
         // Act
-        bool result = left.Equals(right);
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenDifferentAliasesThenReturnsFalse()
+    public void GivenDifferentAliasesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(alias: AlternativeAlias);
 
         // Act
-        bool result = left.Equals(right);
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
 
         // Assert
-        result.ShouldBeFalse();
+        resultLeftRight.ShouldBeTrue();
+        resultRightLeft.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenDifferentQualifiersThenReturnsFalse()
+    public void GivenDifferentQualifiersThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(qualifier: new Qualifier(["MooVC", "Alternate"]));
 
         // Act
-        bool result = left.Equals(right);
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenDifferentStaticStatesThenReturnsFalse()
+    public void GivenDifferentStaticStatesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(isStatic: true);
 
         // Act
-        bool result = left.Equals(right);
+        bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     private static Directive Create(

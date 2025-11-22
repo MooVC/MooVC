@@ -1,8 +1,6 @@
-namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
+namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
-using MooVC.Syntax.CSharp.Members;
-
-public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
+public sealed class WhenEqualsDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";
     private const string Alias = "Alias";
@@ -15,7 +13,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive? right = default;
 
         // Act
-        bool result = left == right;
+        bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
         result.ShouldBeTrue();
@@ -29,7 +27,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive right = Create();
 
         // Act
-        bool result = left == right;
+        bool result = left?.Equals(right) ?? false;
 
         // Assert
         result.ShouldBeFalse();
@@ -43,7 +41,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive? right = default;
 
         // Act
-        bool result = left == right;
+        bool result = left.Equals(right);
 
         // Assert
         result.ShouldBeFalse();
@@ -57,7 +55,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive second = first;
 
         // Act
-        bool result = first == second;
+        bool result = first.Equals(second);
 
         // Assert
         result.ShouldBeTrue();
@@ -71,7 +69,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive right = Create();
 
         // Act
-        bool result = left == right;
+        bool result = left.Equals(right);
 
         // Assert
         result.ShouldBeTrue();
@@ -85,12 +83,10 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive right = Create(alias: AlternativeAlias);
 
         // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
+        bool result = left.Equals(right);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -101,7 +97,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive right = Create(qualifier: new Qualifier(["MooVC", "Alternate"]));
 
         // Act
-        bool result = left == right;
+        bool result = left.Equals(right);
 
         // Assert
         result.ShouldBeFalse();
@@ -115,13 +111,16 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         Directive right = Create(isStatic: true);
 
         // Act
-        bool result = left == right;
+        bool result = left.Equals(right);
 
         // Assert
         result.ShouldBeFalse();
     }
 
-    private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)
+    private static Directive Create(
+        string alias = Alias,
+        Qualifier? qualifier = default,
+        bool isStatic = false)
     {
         return new Directive
         {

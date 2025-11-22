@@ -1,130 +1,125 @@
-namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
+namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
-using MooVC.Syntax.CSharp.Members;
-
-public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
+public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";
     private const string Alias = "Alias";
 
     [Fact]
-    public void GivenBothNullThenReturnsFalse()
+    public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Directive? left = default;
         Directive? right = default;
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Directive? left = default;
         Directive right = Create();
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
         Directive? right = default;
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenSameReferenceThenReturnsFalse()
+    public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Directive first = Create();
         Directive second = first;
 
         // Act
-        bool result = first != second;
+        bool result = first == second;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenEqualValuesThenReturnsFalse()
+    public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create();
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 
     [Fact]
-    public void GivenDifferentAliasesThenReturnsTrue()
+    public void GivenDifferentAliasesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(alias: AlternativeAlias);
 
         // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenDifferentQualifiersThenReturnsTrue()
+    public void GivenDifferentQualifiersThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(qualifier: new Qualifier(["MooVC", "Alternate"]));
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
     [Fact]
-    public void GivenDifferentStaticStatesThenReturnsTrue()
+    public void GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
         Directive right = Create(isStatic: true);
 
         // Act
-        bool result = left != right;
+        bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        result.ShouldBeFalse();
     }
 
-    private static Directive Create(
-        string alias = Alias,
-        Qualifier? qualifier = default,
-        bool isStatic = false)
+    private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)
     {
         return new Directive
         {

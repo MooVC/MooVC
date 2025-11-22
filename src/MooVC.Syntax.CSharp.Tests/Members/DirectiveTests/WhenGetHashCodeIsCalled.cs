@@ -1,6 +1,4 @@
-namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
-
-using MooVC.Syntax.CSharp.Members;
+namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {

@@ -1,5 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Containers
+﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Fluentify;
@@ -7,12 +8,12 @@
 
     [Fluentify]
     [Valuify]
-    public sealed partial class Property
+    public sealed partial class Attribute
         : IValidatableObject
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
