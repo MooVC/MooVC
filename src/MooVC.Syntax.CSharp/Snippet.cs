@@ -60,7 +60,7 @@
 
             blocked[++index] = "}";
 
-            return new Snippet(ImmutableArray.Create(blocked, 0, index));
+            return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
 
         public Snippet Shift(Options options)
