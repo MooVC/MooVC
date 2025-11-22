@@ -25,7 +25,7 @@
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Containers\Construct.Resources.Designer.cs">
+    <Compile Update="Concepts\Construct.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Construct.Resources.resx</DependentUpon>
@@ -35,7 +35,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Interface.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Containers\Definition.Resources.Designer.cs">
+    <Compile Update="Concepts\Definition.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Definition.Resources.resx</DependentUpon>
@@ -80,6 +80,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Symbol.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Snippet.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Snippet.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="StringExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -92,7 +97,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Containers\Construct.Resources.resx">
+    <EmbeddedResource Update="Concepts\Construct.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -100,7 +105,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Interface.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Containers\Definition.Resources.resx">
+    <EmbeddedResource Update="Concepts\Definition.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -135,6 +140,10 @@
     <EmbeddedResource Update="Members\Symbol.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Symbol.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Snippet.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Snippet.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="StringExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
