@@ -11,14 +11,15 @@ public sealed class WhenWithConstraintsIsCalled
     public void GivenAdditionalConstraintsThenReturnsNewInstanceWithCombinedValues()
     {
         // Arrange
-        Constraint originalConstraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-        Parameter original = new Parameter
+        var originalConstraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+
+        var original = new Parameter
         {
             Name = new Identifier(Name),
             Constraints = [originalConstraint],
         };
 
-        Constraint additionalConstraint = new Constraint { New = New.Required };
+        var additionalConstraint = new Constraint { New = New.Required };
 
         // Act
         Parameter result = original.WithConstraints(additionalConstraint);

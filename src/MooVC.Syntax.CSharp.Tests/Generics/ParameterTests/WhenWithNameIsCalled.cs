@@ -12,8 +12,9 @@ public sealed class WhenWithNameIsCalled
     public void GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
-        Constraint constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-        Parameter original = new Parameter
+        var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+
+        var original = new Parameter
         {
             Name = new Identifier(DefaultName),
             Constraints = [constraint],

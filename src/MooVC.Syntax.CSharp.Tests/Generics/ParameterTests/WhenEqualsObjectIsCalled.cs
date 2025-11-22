@@ -12,7 +12,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonParameterThenReturnsFalse()
     {
         // Arrange
-        object other = new object();
+        object other = new();
         Parameter subject = Create();
 
         // Act
