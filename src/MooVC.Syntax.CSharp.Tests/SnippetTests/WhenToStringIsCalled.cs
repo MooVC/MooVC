@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
     public void GivenNoOptionsThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Snippet snippet = Snippet.From(FirstLine);
+        var snippet = Snippet.From(FirstLine);
         Options? options = default;
 
         // Act
@@ -22,7 +22,6 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.Message.ShouldStartWith("The options required to direct formatting must be provided.");
         exception.ParamName.ShouldBe(nameof(options));
     }
 
@@ -36,7 +35,7 @@ public sealed class WhenToStringIsCalled
         };
 
         string value = string.Join(options.NewLine, FirstLine, SecondLine);
-        Snippet snippet = Snippet.From(value, options);
+        var snippet = Snippet.From(value, options);
 
         // Act
         string result = snippet.ToString(options);

@@ -10,7 +10,7 @@ public sealed class WhenShiftIsCalled
     private const string FirstLine = "public class Example";
     private const string SecondLine = "{ }";
 
-    private static readonly Options CreationOptions = new()
+    private static readonly Options options = new()
     {
         NewLine = "\n",
     };
@@ -38,7 +38,7 @@ public sealed class WhenShiftIsCalled
         Snippet snippet = Snippet.Empty;
         var options = new Options
         {
-            NewLine = CreationOptions.NewLine,
+            NewLine = WhenShiftIsCalled.options.NewLine,
             Whitespace = "--",
         };
 
@@ -57,7 +57,7 @@ public sealed class WhenShiftIsCalled
         Snippet snippet = CreateSnippet();
         var options = new Options
         {
-            NewLine = CreationOptions.NewLine,
+            NewLine = WhenShiftIsCalled.options.NewLine,
             Whitespace = "    ",
         };
 
@@ -75,7 +75,7 @@ public sealed class WhenShiftIsCalled
     private static Snippet CreateSnippet()
     {
         return Snippet.From(
-            string.Join(CreationOptions.NewLine, FirstLine, SecondLine),
-            CreationOptions);
+            string.Join(options.NewLine, FirstLine, SecondLine),
+            options);
     }
 }

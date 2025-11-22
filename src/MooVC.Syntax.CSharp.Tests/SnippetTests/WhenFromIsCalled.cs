@@ -58,7 +58,7 @@ public sealed class WhenFromIsCalled
     public void GivenEmptyOrWhitespaceThenReturnsEmptySnippet(string value)
     {
         // Arrange & Act
-        Snippet result = Snippet.From(value);
+        var result = Snippet.From(value);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -77,7 +77,7 @@ public sealed class WhenFromIsCalled
         string value = string.Join(options.NewLine, FirstLine, SecondLine);
 
         // Act
-        Snippet result = Snippet.From(value, options);
+        var result = Snippet.From(value, options);
 
         // Assert
         result.IsEmpty.ShouldBeFalse();

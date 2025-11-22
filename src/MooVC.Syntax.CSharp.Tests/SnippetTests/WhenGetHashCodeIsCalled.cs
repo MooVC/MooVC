@@ -43,7 +43,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Snippet(WhenGetHashCodeIsCalled.first);
+        var subject = new Snippet(first);
 
         // Act
         int firstHash = subject.GetHashCode();

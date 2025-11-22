@@ -11,7 +11,7 @@ public sealed class WhenBlockIsCalled
     private const string Condition = "if (value)";
     private const string Statement = "return value;";
 
-    private static readonly Options CreationOptions = new()
+    private static readonly Options options = new()
     {
         NewLine = "\n",
     };
@@ -39,7 +39,7 @@ public sealed class WhenBlockIsCalled
         var options = new Options
         {
             BlockStyle = BlockStyle.Allman,
-            NewLine = CreationOptions.NewLine,
+            NewLine = WhenBlockIsCalled.options.NewLine,
         };
 
         Snippet snippet = CreateSnippet();
@@ -64,7 +64,7 @@ public sealed class WhenBlockIsCalled
         var options = new Options
         {
             BlockStyle = BlockStyle.KAndR,
-            NewLine = CreationOptions.NewLine,
+            NewLine = WhenBlockIsCalled.options.NewLine,
         };
 
         Snippet snippet = CreateSnippet();
@@ -84,7 +84,7 @@ public sealed class WhenBlockIsCalled
     private static Snippet CreateSnippet()
     {
         return Snippet.From(
-            string.Join(CreationOptions.NewLine, Condition, Statement),
-            CreationOptions);
+            string.Join(options.NewLine, Condition, Statement),
+            options);
     }
 }

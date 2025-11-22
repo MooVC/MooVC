@@ -55,7 +55,7 @@
 
             for (int line = 1; line < _value.Length; line++)
             {
-                blocked[++index] = _value[line];
+                blocked[++index] = string.Concat(options.Whitespace, _value[line]);
             }
 
             blocked[++index] = "}";
