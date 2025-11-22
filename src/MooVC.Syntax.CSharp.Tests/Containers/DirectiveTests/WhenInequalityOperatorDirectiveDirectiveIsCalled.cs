@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenEqualsObjectIsCalled
 {
     private const string Alias = "Alias";
@@ -66,7 +68,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Directive subject = Create();
-        var comparison = new object();
+        object comparison = new object();
 
         // Act
         bool result = subject.Equals(comparison);

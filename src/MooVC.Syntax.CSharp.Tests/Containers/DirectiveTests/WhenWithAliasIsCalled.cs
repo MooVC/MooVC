@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenWithAliasIsCalled
 {
     private const string Alias = "Alias";

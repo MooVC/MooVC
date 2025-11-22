@@ -1,6 +1,8 @@
 namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
 
-public sealed class WhenWithIsStaticIsCalled
+using MooVC.Syntax.CSharp.Members;
+
+public sealed class WhenIsStaticIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsNewInstanceWithUpdatedStaticState()
@@ -12,7 +14,7 @@ public sealed class WhenWithIsStaticIsCalled
         };
 
         // Act
-        Directive result = original.WithIsStatic(true);
+        Directive result = original.IsStatic(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);

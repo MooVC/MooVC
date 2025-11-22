@@ -7,6 +7,7 @@
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using static MooVC.Syntax.CSharp.Containers.Directive_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -18,6 +19,7 @@
 
         public Identifier Alias { get; set; } = Identifier.Unnamed;
 
+        [Ignore]
         public bool IsUndefined => this == Undefined;
 
         public bool IsStatic { get; set; }
@@ -68,7 +70,7 @@
 
             if (!Alias.IsUnnamed)
             {
-                return $"{Alias} = ";
+                return $"{Alias.ToString(Identifier.Options.Pascal)} = ";
             }
 
             return string.Empty;

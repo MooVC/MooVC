@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Containers.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenEqualsDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";
@@ -13,7 +15,7 @@ public sealed class WhenEqualsDirectiveIsCalled
         Directive? right = default;
 
         // Act
-        bool result = left?.Equals(right) ?? right is null;
+        bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
         result.ShouldBeTrue();
