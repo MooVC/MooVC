@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using MooVC.Syntax.CSharp.Generics;
-
 public sealed class WhenWithNameIsCalled
 {
     private const string NewName = "Outcome";
