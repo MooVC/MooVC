@@ -126,4 +126,10 @@
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided.</value>
   </data>
+  <data name="ValidateValueInvalid" xml:space="preserve">
+    <value>The `{0}` for `{1}` cannot contain more than one line.</value>
+  </data>
+  <data name="ValidateValueRequired" xml:space="preserve">
+    <value>The `{0}` for `{1}` must be provided.</value>
+  </data>
 </root>

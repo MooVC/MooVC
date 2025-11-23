@@ -86,5 +86,23 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` for `{1}` cannot contain more than one line..
+        /// </summary>
+        internal static string ValidateValueInvalid {
+            get {
+                return ResourceManager.GetString("ValidateValueInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` for `{1}` must be provided..
+        /// </summary>
+        internal static string ValidateValueRequired {
+            get {
+                return ResourceManager.GetString("ValidateValueRequired", resourceCulture);
+            }
+        }
     }
 }

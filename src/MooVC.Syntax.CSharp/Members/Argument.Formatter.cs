@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using Monify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument
     {
@@ -14,6 +15,12 @@
             {
                 _value = value;
             }
+
+            [Ignore]
+            public bool IsCall => this == Call;
+
+            [Ignore]
+            public bool IsDeclaration => this == Declaration;
         }
     }
 }

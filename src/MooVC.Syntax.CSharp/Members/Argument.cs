@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
-    using Ignore = Valuify.IgnoreAttribute;
     using static MooVC.Syntax.CSharp.Members.Argument_Resources;
-    using Microsoft.Extensions.Options;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -18,6 +18,8 @@
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
+
+        public Mode Modifier { get; set; } = Mode.None;
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
@@ -43,13 +45,38 @@
             }
 
             string name = Name.ToString(options.Naming);
+            string value = Value.ToString();
 
-            return string.Format(options.Formatter, name, Value);
+            if (!Modifier.IsNone)
+            {
+                value = $"{Modifier} {value}";
+            }
+
+            return string.Format(options.Formatter, name, value);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new System.NotImplementedException();
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (Value.IsEmpty)
+            {
+                results = results.Append(new ValidationResult(ValidateValueRequired.Format(nameof(Value), nameof(Argument)), new[] { nameof(Value) }));
+            }
+
+            if (!Value.IsSingleLine)
+            {
+                results = results.Append(new ValidationResult(ValidateValueInvalid.Format(nameof(Value), nameof(Argument)), new[] { nameof(Value) }));
+            }
+
+            return validationContext
+                .Include(nameof(Name), results, Name)
+                .Results;
         }
     }
 }
