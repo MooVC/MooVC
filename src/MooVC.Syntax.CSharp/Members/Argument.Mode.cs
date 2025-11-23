@@ -29,6 +29,11 @@
 
             [Ignore]
             public bool IsRef => this == Ref;
+
+            public override string ToString()
+            {
+                return _value;
+            }
         }
     }
 }

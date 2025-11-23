@@ -64,14 +64,13 @@
 
             IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
 
-            if (Value.IsEmpty)
-            {
-                results = results.Append(new ValidationResult(ValidateValueRequired.Format(nameof(Value), nameof(Argument)), new[] { nameof(Value) }));
-            }
-
             if (!Value.IsSingleLine)
             {
-                results = results.Append(new ValidationResult(ValidateValueInvalid.Format(nameof(Value), nameof(Argument)), new[] { nameof(Value) }));
+                string message = Value.IsEmpty
+                    ? ValidateValueRequired
+                    : ValidateValueInvalid;
+
+                results = results.Append(new ValidationResult(message.Format(nameof(Value), nameof(Argument)), new[] { nameof(Value) }));
             }
 
             return validationContext
