@@ -65,6 +65,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Parameter.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Event.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Event.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Identifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -138,6 +143,10 @@
     <EmbeddedResource Update="Generics\Parameter.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Parameter.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Event.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Event.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Identifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

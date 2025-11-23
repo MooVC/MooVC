@@ -1,10 +1,15 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Immutable;
+    using System.Data;
+    using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Linq;
     using static MooVC.Syntax.CSharp.Snippet_Resources;
 
     [Monify(Type = typeof(ImmutableArray<string>))]
@@ -16,7 +21,11 @@
 
         public bool IsEmpty => this == Empty;
 
+        public bool IsMultiLine => !_value.IsDefaultOrEmpty && _value.Length > SingleLine;
+
         public bool IsSingleLine => !_value.IsDefaultOrEmpty && _value.Length == SingleLine;
+
+        public int Lines => _value.Length;
 
         public static Snippet From(string value)
         {
@@ -36,6 +45,21 @@
             string[] lines = value.Split(new[] { options.NewLine }, StringSplitOptions.None);
 
             return new Snippet(ImmutableArray.Create(lines));
+        }
+
+        public Snippet Append(params string[] values)
+        {
+            return Append(Options.Default, values);
+        }
+
+        public Snippet Append(Options options, params string[] values)
+        {
+            return Combine(options, _value, values, (original, appended) => original.Concat(appended));
+        }
+
+        public Snippet Append(params Snippet[] values)
+        {
+            return Combine(_value, values, (original, appended) => original.Concat(appended));
         }
 
         public Snippet Block(Options options)
@@ -68,6 +92,21 @@
             return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
 
+        public Snippet Prepend(params string[] values)
+        {
+            return Prepend(Options.Default, values);
+        }
+
+        public Snippet Prepend(Options options, params string[] values)
+        {
+            return Combine(options, _value, values, (original, prepended) => prepended.Concat(original));
+        }
+
+        public Snippet Prepend(params Snippet[] values)
+        {
+            return Combine(_value, values, (original, prepended) => prepended.Concat(original));
+        }
+
         public Snippet Shift(Options options)
         {
             _ = Guard.Against.Null(options, message: ShiftOptionsRequired);
@@ -92,6 +131,33 @@
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired);
 
             return string.Join(options.NewLine, _value);
+        }
+
+        private static ImmutableArray<string> Combine(
+            Options options,
+            Snippet original,
+            string[] values,
+            Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
+        {
+            var snippets = new Snippet[values.Length];
+
+            for (int index = 0; index < values.Length; index++)
+            {
+                snippets[index] = From(values[index], options);
+            }
+
+            return Combine(original, snippets, combine);
+        }
+
+        private static ImmutableArray<string> Combine(
+            Snippet original,
+            Snippet[] values,
+            Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
+        {
+            IEnumerable<string> first = original._value.Select(value => value);
+            IEnumerable<string> second = values.SelectMany(snippet => snippet._value.Select(value => value));
+
+            return combine(first, second).ToImmutableArray();
         }
     }
 }

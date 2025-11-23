@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Members {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Symbol_Resources {
+    internal class Event_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Symbol_Resources() {
+        internal Event_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Symbol.Resources", typeof(Symbol_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Event.Resources", typeof(Event_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to convert must be provided..
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
-        internal static string ConvertToStringSymbolRequired {
+        internal static string MethodsToStringOptionsRequired {
             get {
-                return ResourceManager.GetString("ConvertToStringSymbolRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to When providing a `{0}` for `{1}`, the value must be specified..
-        /// </summary>
-        internal static string ValidateArgumentsInvalid {
-            get {
-                return ResourceManager.GetString("ValidateArgumentsInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` of the `{1}` must be provided..
-        /// </summary>
-        internal static string ValidateNameRequired {
-            get {
-                return ResourceManager.GetString("ValidateNameRequired", resourceCulture);
+                return ResourceManager.GetString("MethodsToStringOptionsRequired", resourceCulture);
             }
         }
     }
