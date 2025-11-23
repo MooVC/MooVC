@@ -52,7 +52,14 @@ public sealed class WhenValidateIsCalled
         var attribute = new Attribute
         {
             Name = new Symbol { Name = new Identifier(AttributeTestsData.DefaultName) },
-            Arguments = [new Argument { Name = new Identifier(ArgumentName), Value = Snippet.From("alpha\nbeta") }],
+            Arguments =
+            [
+                new Argument
+                {
+                    Name = new Identifier(ArgumentName),
+                    Value = Snippet.From($"alpha{Environment.NewLine}beta"),
+                }
+            ],
         };
 
         var context = new ValidationContext(attribute);
@@ -64,7 +71,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Attribute.Arguments));
+        results[0].MemberNames.ShouldContain(nameof(Argument.Value));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -72,7 +79,7 @@ public sealed class WhenValidateIsCalled
     public void GivenValidAttributeThenNoValidationErrorsReturned()
     {
         // Arrange
-        var attribute = AttributeTestsData.Create(arguments: new Argument
+        Attribute attribute = AttributeTestsData.Create(arguments: new Argument
         {
             Name = new Identifier(ArgumentName),
             Value = Snippet.From("value"),

@@ -20,7 +20,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonMatchingTypeThenReturnsFalse()
     {
         // Arrange
-        object value = new object();
+        object value = new();
         Attribute subject = AttributeTestsData.Create();
 
         // Act

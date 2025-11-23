@@ -11,7 +11,7 @@ public sealed class WhenWithNameIsCalled
         Attribute original = AttributeTestsData.Create();
 
         // Act
-        Attribute result = original.WithName(NewName);
+        Attribute result = original.WithName(new Symbol { Name = new Identifier(NewName) });
 
         // Assert
         result.ShouldNotBeSameAs(original);

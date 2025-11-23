@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
+using System.Diagnostics.CodeAnalysis;
+
 public sealed class WhenEqualsStringIsCalled
 {
     private const string Same = "assembly";
@@ -20,6 +22,7 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Fact]
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion would defeat the purpose of the test.")]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -36,6 +39,7 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Fact]
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion would defeat the purpose of the test.")]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

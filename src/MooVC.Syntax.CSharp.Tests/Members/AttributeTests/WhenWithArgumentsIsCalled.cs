@@ -6,7 +6,12 @@ public sealed class WhenWithArgumentsIsCalled
     public void GivenArgumentsThenReturnsNewInstanceWithUpdatedArguments()
     {
         // Arrange
-        Attribute original = AttributeTestsData.Create(arguments: new Argument { Name = new Identifier("Original"), Value = Snippet.From("alpha") });
+        Attribute original = AttributeTestsData.Create(arguments: new Argument
+        {
+            Name = new Identifier("Original"),
+            Value = Snippet.From("alpha"),
+        });
+
         Argument[] additional = [new Argument { Name = new Identifier("Updated"), Value = Snippet.From("beta") }];
 
         // Act
@@ -14,7 +19,8 @@ public sealed class WhenWithArgumentsIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Arguments.ShouldBe(additional);
+        result.Arguments.Length.ShouldBe(2);
+        result.Arguments.ShouldBe(original.Arguments.Concat(additional));
         result.Name.ShouldBe(original.Name);
         result.Target.ShouldBe(original.Target);
     }
