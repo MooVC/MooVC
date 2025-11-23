@@ -45,6 +45,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Argument.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Attribute.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Attribute.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Directive.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -117,6 +122,10 @@
     <EmbeddedResource Update="Members\Argument.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Argument.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Attribute.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Attribute.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Directive.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
