@@ -10,8 +10,11 @@
     public sealed partial class Snippet
     {
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
+        private const int SingleLine = 1;
 
         public bool IsEmpty => this == Empty;
+
+        public bool IsSingleLine => !_value.IsDefaultOrEmpty && _value.Length == SingleLine;
 
         public static Snippet From(string value)
         {

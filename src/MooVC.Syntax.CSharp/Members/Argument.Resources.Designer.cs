@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp {
+namespace MooVC.Syntax.CSharp.Members {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StringExtensions_Resources {
+    internal class Argument_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal StringExtensions_Resources() {
+        internal Argument_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.StringExtensions.Resources", typeof(StringExtensions_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Argument.Resources", typeof(Argument_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,29 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The formatter to be applied to the elements must be provided..
+        ///   Looks up a localized string similar to The Formatting options must be provided..
         /// </summary>
-        internal static string CombineFormatterRequired {
+        internal static string OptionsFormatterRequired {
             get {
-                return ResourceManager.GetString("CombineFormatterRequired", resourceCulture);
+                return ResourceManager.GetString("OptionsFormatterRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The separator to be applied to the elements must be provided..
+        ///   Looks up a localized string similar to The Naming options must be provided..
         /// </summary>
-        internal static string CombineSeparatorRequired {
+        internal static string OptionsNamingRequired {
             get {
-                return ResourceManager.GetString("CombineSeparatorRequired", resourceCulture);
+                return ResourceManager.GetString("OptionsNamingRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The elements to which separator `{0}` is to be applied must be provided..
+        ///   Looks up a localized string similar to The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided..
         /// </summary>
-        internal static string CombineValuesRequired {
+        internal static string ToStringOptionsRequired {
             get {
-                return ResourceManager.GetString("CombineValuesRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value to be rendered in camel case must be provided..
-        /// </summary>
-        internal static string ToCamelCaseValueRequired {
-            get {
-                return ResourceManager.GetString("ToCamelCaseValueRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value to be rendered in kebab case must be provided..
-        /// </summary>
-        internal static string ToKebabCaseValueRequired {
-            get {
-                return ResourceManager.GetString("ToKebabCaseValueRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value to be rendered in pascal case must be provided..
-        /// </summary>
-        internal static string ToPascalCaseValueRequired {
-            get {
-                return ResourceManager.GetString("ToPascalCaseValueRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value to be rendered in snake case must be provided..
-        /// </summary>
-        internal static string ToSnakeCaseValueRequired {
-            get {
-                return ResourceManager.GetString("ToSnakeCaseValueRequired", resourceCulture);
+                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
     }
