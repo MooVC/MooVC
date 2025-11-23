@@ -96,7 +96,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        ImmutableArray<string> elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(samples);
         Func<string, string>? formatter = default;
 
         // Act
@@ -126,7 +126,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        ImmutableArray<string> elements = ImmutableArray<string>.Empty;
+        ImmutableArray<string> elements = [];
 
         // Act
         string result = separator.Combine(elements, value => value);
@@ -140,7 +140,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string? separator = default;
-        ImmutableArray<string> elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(samples);
 
         // Act
         Action action = () => separator!.Combine(elements, value => value);
@@ -155,7 +155,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = string.Empty;
-        ImmutableArray<string> elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(samples);
 
         // Act
         Action action = () => separator.Combine(elements, value => value);
@@ -170,7 +170,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        ImmutableArray<string> elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(samples);
 
         // Act
         string result = separator.Combine(elements, value => value.ToUpperInvariant());
