@@ -33,8 +33,8 @@
             }
 
             return validationContext
-                .IncludeIf(!Constraints.IsDefaultOrEmpty, results, Constraints)
-                .And(Name)
+                .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), results, Constraints)
+                .And(nameof(Name), Name)
                 .Results;
         }
     }

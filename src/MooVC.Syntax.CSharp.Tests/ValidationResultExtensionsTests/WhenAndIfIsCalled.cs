@@ -13,10 +13,16 @@ public sealed class WhenAndIfIsCalled
         var initial = new ValidationResult(Message);
         var validatable = new TrackingValidatable(initial);
         var context = new ValidationContext(validatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(validatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(preceding),
+            validatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(false, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            false,
+            nameof(validatable),
+            validatable);
 
         // Assert
         actual.ShouldBe(preceding);
@@ -31,16 +37,22 @@ public sealed class WhenAndIfIsCalled
         var precedingValidatable = new TrackingValidatable(initial);
         var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(true, additionalValidatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            true,
+            nameof(additionalValidatable),
+            additionalValidatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { initial, additionalValidatable.Results.Single() });
+        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
         precedingValidatable.Calls.ShouldBe(1);
         additionalValidatable.Calls.ShouldBe(1);
     }
@@ -54,10 +66,16 @@ public sealed class WhenAndIfIsCalled
         var firstAdditional = new TrackingValidatable(new ValidationResult("First"));
         var secondAdditional = new TrackingValidatable(new ValidationResult("Second"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(false, new[] { firstAdditional, secondAdditional });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            false,
+            nameof(firstAdditional),
+            [firstAdditional, secondAdditional]);
 
         // Assert
         actual.ShouldBe(preceding);
@@ -75,16 +93,22 @@ public sealed class WhenAndIfIsCalled
         var firstAdditional = new TrackingValidatable(new ValidationResult("First"));
         var secondAdditional = new TrackingValidatable(new ValidationResult("Second"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(true, new[] { firstAdditional, secondAdditional });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            true,
+            nameof(firstAdditional),
+            [firstAdditional, secondAdditional]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { initial, firstAdditional.Results.Single(), secondAdditional.Results.Single() });
+        results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
         precedingValidatable.Calls.ShouldBe(1);
         firstAdditional.Calls.ShouldBe(1);
         secondAdditional.Calls.ShouldBe(1);
@@ -98,16 +122,22 @@ public sealed class WhenAndIfIsCalled
         var precedingValidatable = new TrackingValidatable(initial);
         var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(() => true, additionalValidatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            () => true,
+            nameof(additionalValidatable),
+            additionalValidatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { initial, additionalValidatable.Results.Single() });
+        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
         precedingValidatable.Calls.ShouldBe(1);
         additionalValidatable.Calls.ShouldBe(1);
     }
@@ -120,10 +150,16 @@ public sealed class WhenAndIfIsCalled
         var precedingValidatable = new TrackingValidatable(initial);
         var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(() => false, new[] { additionalValidatable });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            () => false,
+            nameof(additionalValidatable),
+            [additionalValidatable]);
 
         // Assert
         actual.ShouldBe(preceding);

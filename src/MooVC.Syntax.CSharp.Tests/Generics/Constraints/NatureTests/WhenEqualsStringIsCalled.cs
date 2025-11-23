@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
+using System.Diagnostics.CodeAnalysis;
+
 public sealed class WhenEqualsStringIsCalled
 {
     private const string Same = "class";
@@ -22,6 +24,7 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Fact]
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -38,6 +41,7 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Fact]
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

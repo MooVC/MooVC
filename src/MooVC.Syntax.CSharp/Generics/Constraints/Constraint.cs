@@ -59,8 +59,8 @@
             }
 
             return validationContext
-                .Include(Base)
-                .AndIf(!Interfaces.IsDefaultOrEmpty, Interfaces)
+                .Include(nameof(Base), Base)
+                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), Interfaces)
                 .Results;
         }
     }

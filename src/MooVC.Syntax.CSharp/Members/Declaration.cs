@@ -56,8 +56,8 @@
             }
 
             return validationContext
-                .IncludeIf(!Parameters.IsDefaultOrEmpty, results, Parameters)
-                .And(Name)
+                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), results, Parameters)
+                .And(nameof(Name), Name)
                 .Results;
         }
 

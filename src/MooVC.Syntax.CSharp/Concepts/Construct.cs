@@ -51,12 +51,12 @@
             }
 
             return validationContext
-                .IncludeIf(!Attributes.IsDefaultOrEmpty, results, Attributes)
-                .AndIf(!Events.IsDefaultOrEmpty, Events)
-                .AndIf(!Indexers.IsDefaultOrEmpty, Indexers)
-                .AndIf(!Methods.IsDefaultOrEmpty, Methods)
-                .And(Name)
-                .AndIf(!Properties.IsDefaultOrEmpty, Properties)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), results, Attributes)
+                .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), Events)
+                .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), Indexers)
+                .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), Methods)
+                .And(nameof(Name), Name)
+                .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), Properties)
                 .Results;
         }
     }

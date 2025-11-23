@@ -65,7 +65,7 @@ public sealed class WhenToTypedArrayIsCalled
         int[] expected = [1, 2, 3];
 
         // Act
-        int[] value = expected.ToTypedArray();
+        int[]? value = expected.ToTypedArray();
 
         // Assert
         value.ShouldBeSameAs(expected);

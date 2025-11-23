@@ -15,7 +15,7 @@ public sealed class WhenIncludeIsCalled
         var validatable = new StubValidatable();
 
         // Act
-        Action action = () => validationContext!.Include(validatable);
+        Action action = () => validationContext!.Include(nameof(validatable), validatable);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
@@ -31,7 +31,7 @@ public sealed class WhenIncludeIsCalled
         IEnumerable<ValidationResult>? results = default;
 
         // Act
-        Action action = () => context.Include(results!, validatable);
+        Action action = () => context.Include(nameof(validatable), results!, validatable);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
@@ -47,7 +47,7 @@ public sealed class WhenIncludeIsCalled
         IValidatableObject? target = default;
 
         // Act
-        Action action = () => context.Include(target!);
+        Action action = () => context.Include(nameof(validatable), target!);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
@@ -63,7 +63,7 @@ public sealed class WhenIncludeIsCalled
         IEnumerable<IValidatableObject>? targets = default;
 
         // Act
-        Action action = () => context.Include(targets!);
+        Action action = () => context.Include(nameof(validatables), targets!);
 
         // Assert
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
@@ -78,13 +78,15 @@ public sealed class WhenIncludeIsCalled
         var context = new ValidationContext(validatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(validatable),
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { validatable.Results.Single() });
+        results.ShouldBe([validatable.Results.Single()]);
     }
 
     [Fact]
@@ -94,16 +96,19 @@ public sealed class WhenIncludeIsCalled
         var initial = new ValidationResult(FirstMessage);
         var validatable = new StubValidatable(new ValidationResult(SecondMessage));
         var context = new ValidationContext(validatable);
-        IEnumerable<ValidationResult> results = new[] { initial };
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(results, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(validatable),
+            results,
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe(new[] { initial, validatable.Results.Single() });
+        combined.ShouldBe([initial, validatable.Results.Single()]);
     }
 
     [Fact]
@@ -115,13 +120,15 @@ public sealed class WhenIncludeIsCalled
         var context = new ValidationContext(first);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(new[] { first, second });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(first),
+            [first, second]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { first.Results.Single(), second.Results.Single() });
+        results.ShouldBe([first.Results.Single(), second.Results.Single()]);
     }
 
     [Fact]
@@ -132,16 +139,19 @@ public sealed class WhenIncludeIsCalled
         var first = new StubValidatable(new ValidationResult(SecondMessage));
         var second = new StubValidatable(new ValidationResult("Third"));
         var context = new ValidationContext(first);
-        IEnumerable<ValidationResult> results = new[] { initial };
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(results, new[] { first, second });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(first),
+            results,
+            [first, second]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe(new[] { initial, first.Results.Single(), second.Results.Single() });
+        combined.ShouldBe([initial, first.Results.Single(), second.Results.Single()]);
     }
 
     private sealed class StubValidatable : IValidatableObject

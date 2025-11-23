@@ -7,16 +7,18 @@
     {
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            string memberName,
             IValidatableObject validatable)
         {
-            return preceding.ValidationContext.Include(preceding.Results, validatable);
+            return preceding.ValidationContext.Include(memberName, preceding.Results, validatable);
         }
 
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            string memberName,
             IEnumerable<IValidatableObject> validatables)
         {
-            return preceding.ValidationContext.Include(preceding.Results, validatables);
+            return preceding.ValidationContext.Include(memberName, preceding.Results, validatables);
         }
     }
 }

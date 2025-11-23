@@ -15,16 +15,21 @@ public sealed class WhenAndIsCalled
         var precedingValidatable = new StubValidatable(initial);
         var additionalValidatable = new StubValidatable(new ValidationResult(SecondMessage));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(additionalValidatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
+            nameof(additionalValidatable),
+            additionalValidatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { initial, additionalValidatable.Results.Single() });
+        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
     }
 
     [Fact]
@@ -36,16 +41,21 @@ public sealed class WhenAndIsCalled
         var firstAdditional = new StubValidatable(new ValidationResult(SecondMessage));
         var secondAdditional = new StubValidatable(new ValidationResult("Third"));
         var context = new ValidationContext(precedingValidatable);
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(new[] { firstAdditional, secondAdditional });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
+            nameof(firstAdditional),
+            [firstAdditional, secondAdditional]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { initial, firstAdditional.Results.Single(), secondAdditional.Results.Single() });
+        results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
     private sealed class StubValidatable : IValidatableObject

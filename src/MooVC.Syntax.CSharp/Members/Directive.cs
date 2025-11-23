@@ -56,8 +56,8 @@
             }
 
             return validationContext
-                .Include(results, Alias)
-                .And(Qualifier)
+                .Include(nameof(Alias), results, Alias)
+                .And(nameof(Qualifier), Qualifier)
                 .Results;
         }
 

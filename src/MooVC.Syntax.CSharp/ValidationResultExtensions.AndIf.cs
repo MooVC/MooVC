@@ -9,11 +9,12 @@
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
+            string memberName,
             IValidatableObject validatable)
         {
             if (isSatisified)
             {
-                return preceding.ValidationContext.Include(preceding.Results, validatable);
+                return preceding.ValidationContext.Include(memberName, preceding.Results, validatable);
             }
 
             return preceding;
@@ -22,11 +23,12 @@
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
+            string memberName,
             IEnumerable<IValidatableObject> validatables)
         {
             if (isSatisified)
             {
-                return preceding.ValidationContext.Include(preceding.Results, validatables);
+                return preceding.ValidationContext.Include(memberName, preceding.Results, validatables);
             }
 
             return preceding;
@@ -35,17 +37,19 @@
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
+            string memberName,
             IValidatableObject validatable)
         {
-            return preceding.AndIf(condition(), validatable);
+            return preceding.AndIf(condition(), memberName, validatable);
         }
 
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
+            string memberName,
             IEnumerable<IValidatableObject> validatables)
         {
-            return preceding.AndIf(condition(), validatables);
+            return preceding.AndIf(condition(), memberName, validatables);
         }
     }
 }

@@ -14,7 +14,10 @@ public sealed class WhenIncludeIfIsCalled
         var context = new ValidationContext(validatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(false, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            false,
+            nameof(validatable),
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
@@ -30,13 +33,16 @@ public sealed class WhenIncludeIfIsCalled
         var context = new ValidationContext(validatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(true, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            true,
+            nameof(validatable),
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { validatable.Results.Single() });
+        results.ShouldBe([validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
 
@@ -47,16 +53,20 @@ public sealed class WhenIncludeIfIsCalled
         var validatable = new TrackingValidatable(new ValidationResult(Message));
         var context = new ValidationContext(validatable);
         var initial = new ValidationResult("Initial");
-        IEnumerable<ValidationResult> results = new[] { initial };
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(false, results, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            false,
+            nameof(validatable),
+            results,
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe(new[] { initial });
+        combined.ShouldBe([initial]);
         validatable.Calls.ShouldBe(0);
     }
 
@@ -67,16 +77,20 @@ public sealed class WhenIncludeIfIsCalled
         var validatable = new TrackingValidatable(new ValidationResult(Message));
         var context = new ValidationContext(validatable);
         var initial = new ValidationResult("Initial");
-        IEnumerable<ValidationResult> results = new[] { initial };
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(true, results, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            true,
+            nameof(validatable),
+            results,
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe(new[] { initial, validatable.Results.Single() });
+        combined.ShouldBe([initial, validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
 
@@ -89,7 +103,10 @@ public sealed class WhenIncludeIfIsCalled
         var context = new ValidationContext(first);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(false, new[] { first, second });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            false,
+            nameof(first),
+            [first, second]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
@@ -107,13 +124,16 @@ public sealed class WhenIncludeIfIsCalled
         var context = new ValidationContext(first);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(true, new[] { first, second });
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            true,
+            nameof(first),
+            [first, second]);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { first.Results.Single(), second.Results.Single() });
+        results.ShouldBe([first.Results.Single(), second.Results.Single()]);
         first.Calls.ShouldBe(1);
         second.Calls.ShouldBe(1);
     }
@@ -126,13 +146,16 @@ public sealed class WhenIncludeIfIsCalled
         var context = new ValidationContext(validatable);
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(() => true, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            () => true,
+            nameof(validatable),
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe(new[] { validatable.Results.Single() });
+        results.ShouldBe([validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
 
@@ -143,16 +166,20 @@ public sealed class WhenIncludeIfIsCalled
         var validatable = new TrackingValidatable(new ValidationResult(Message));
         var context = new ValidationContext(validatable);
         var initial = new ValidationResult("Initial");
-        IEnumerable<ValidationResult> results = new[] { initial };
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(() => false, results, validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            () => false,
+            nameof(validatable),
+            results,
+            validatable);
 
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe(new[] { initial });
+        combined.ShouldBe([initial]);
         validatable.Calls.ShouldBe(0);
     }
 

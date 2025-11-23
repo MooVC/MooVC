@@ -45,9 +45,9 @@
             }
 
             return validationContext
-                .Include(results, Construct)
-                .And(Namespace)
-                .AndIf(!Usings.IsDefaultOrEmpty, Usings)
+                .Include(nameof(Construct), results, Construct)
+                .And(nameof(Namespace), Namespace)
+                .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), Usings)
                 .Results;
         }
     }
