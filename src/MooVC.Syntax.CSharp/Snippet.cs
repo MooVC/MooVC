@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Immutable;
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using static MooVC.Syntax.CSharp.Snippet_Resources;
 
     [Monify(Type = typeof(ImmutableArray<string>))]
+    [SkipAutoInstantiation]
     public sealed partial class Snippet
     {
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
