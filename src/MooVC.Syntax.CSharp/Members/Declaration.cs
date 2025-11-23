@@ -21,9 +21,9 @@
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
-        public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
-
         public Identifier Name { get; set; } = Identifier.Unnamed;
+
+        public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
 
         public override string ToString()
         {
