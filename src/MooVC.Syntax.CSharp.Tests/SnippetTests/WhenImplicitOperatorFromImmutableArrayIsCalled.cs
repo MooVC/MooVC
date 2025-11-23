@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         // Assert
         _ = subject.ShouldNotBeNull();
         ImmutableArray<string> result = subject;
-        result.ShouldBe(provided);
+        result.IsDefault.ShouldBeTrue();
     }
 
     [Fact]

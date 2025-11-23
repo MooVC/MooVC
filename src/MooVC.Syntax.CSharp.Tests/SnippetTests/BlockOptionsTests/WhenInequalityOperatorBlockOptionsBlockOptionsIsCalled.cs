@@ -79,7 +79,8 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
     {
         // Arrange
         var left = new Snippet.BlockOptions();
-        var right = new Snippet.BlockOptions()
+
+        Snippet.BlockOptions right = new Snippet.BlockOptions()
             .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
 
         // Act

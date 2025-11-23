@@ -42,19 +42,17 @@ public sealed class WhenToStringIsCalled
     public void GivenCustomNewLineThenUsesCustomSeparator()
     {
         // Arrange
+        const string expected = "if (condition)|return true;";
+
         var subject = new Snippet(lines);
-        var options = new Snippet.Options()
-            .WithNewLine("\n");
+
+        Snippet.Options options = new Snippet.Options()
+            .WithNewLine("|");
 
         // Act
         string result = subject.ToString(options);
 
         // Assert
-        result.ShouldBe(
-            """
-            if (condition)
-            return true;
-            """
-                .Trim());
+        result.ShouldBe(expected);
     }
 }

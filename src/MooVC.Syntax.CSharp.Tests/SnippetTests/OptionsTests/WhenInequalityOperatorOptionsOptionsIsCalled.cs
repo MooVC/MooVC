@@ -79,7 +79,8 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
     {
         // Arrange
         var left = new Snippet.Options();
-        var right = new Snippet.Options()
+
+        Snippet.Options right = new Snippet.Options()
             .WithWhitespace("\t");
 
         // Act

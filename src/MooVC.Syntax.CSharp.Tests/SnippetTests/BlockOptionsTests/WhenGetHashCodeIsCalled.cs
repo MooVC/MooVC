@@ -22,7 +22,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         var first = new Snippet.BlockOptions();
-        var second = new Snippet.BlockOptions()
+
+        Snippet.BlockOptions second = new Snippet.BlockOptions()
             .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
 
         // Act

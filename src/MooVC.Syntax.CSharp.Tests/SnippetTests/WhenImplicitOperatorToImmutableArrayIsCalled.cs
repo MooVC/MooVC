@@ -10,13 +10,13 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
     public void GivenEmptySnippetThenCreatesDefaultArray()
     {
         // Arrange
-        var subject = Snippet.Empty;
+        Snippet subject = Snippet.Empty;
 
         // Act
         ImmutableArray<string> result = subject;
 
         // Assert
-        result.ShouldBe(ImmutableArray<string>.Empty);
+        result.ShouldBe([]);
     }
 
     [Fact]

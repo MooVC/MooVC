@@ -24,11 +24,16 @@ public sealed class WhenShiftIsCalled
     public void GivenOptionsThenLinesAreShifted()
     {
         // Arrange
+        const string expected = """
+            	if (condition)
+            	return true;
+            """;
+
         const string whitespace = "\t";
         var subject = new Snippet(lines);
 
-        var options = new Snippet.Options()
-            .WithNewLine("\n")
+        Snippet.Options options = new Snippet.Options()
+            .WithNewLine(Environment.NewLine)
             .WithWhitespace(whitespace);
 
         // Act
@@ -36,11 +41,6 @@ public sealed class WhenShiftIsCalled
 
         // Assert
         string text = result.ToString(options);
-        text.ShouldBe(
-            """
-            \tif (condition)
-            \treturn true;
-            """
-                .Trim());
+        text.ShouldBe(expected);
     }
 }

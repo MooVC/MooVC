@@ -24,49 +24,48 @@ public sealed class WhenBlockIsCalled
     public void GivenAllmanStyleThenBlockIsExpanded()
     {
         // Arrange
+        const string expected = """
+            if (condition)
+            {
+                return true;
+            }
+            """;
+
         var subject = new Snippet(lines);
-        var options = new Snippet.Options()
-            .WithNewLine("\n");
+
+        Snippet.Options options = new Snippet.Options()
+            .WithNewLine(Environment.NewLine);
 
         // Act
         Snippet result = subject.Block(options);
 
         // Assert
         string text = result.ToString(options);
-        text.ShouldBe(
-            """
-            if (condition)
-            {
-                return true;
-            }
-            """
-                .Trim());
+        text.ShouldBe(expected);
     }
 
     [Fact]
     public void GivenKAndRStyleThenBlockIsInline()
     {
         // Arrange
+        const string expected = """
+            if (condition) {
+                return true;
+            }
+            """;
+
         var subject = new Snippet(lines);
+
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
-
-        Snippet.BlockOptions blockOptions = options.Block
-            .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
-
-        options = options.WithBlock(blockOptions);
+            .WithNewLine(Environment.NewLine)
+            .WithBlock(block => block.WithStyle(Snippet.BlockOptions.StyleType.KAndR));
 
         // Act
         Snippet result = subject.Block(options);
 
         // Assert
         string text = result.ToString(options);
-        text.ShouldBe(
-            """
-            if (condition) {
-                return true;
-            }
-            """
-                .Trim());
+
+        text.ShouldBe(expected);
     }
 }

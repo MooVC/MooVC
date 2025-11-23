@@ -79,7 +79,8 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     {
         // Arrange
         var left = new Snippet.BoundaryOptions();
-        var right = new Snippet.BoundaryOptions()
+
+        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
             .WithClosing("]");
 
         // Act

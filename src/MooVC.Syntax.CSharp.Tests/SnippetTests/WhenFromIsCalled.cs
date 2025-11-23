@@ -38,7 +38,7 @@ public sealed class WhenFromIsCalled
         const string value = "   ";
 
         // Act
-        Snippet result = Snippet.From(value);
+        var result = Snippet.From(value);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -54,14 +54,14 @@ public sealed class WhenFromIsCalled
         const string newLine = "\n";
         string value = string.Join(newLine, first, second);
 
-        var options = new Snippet.Options()
+        Snippet.Options options = new Snippet.Options()
             .WithNewLine(newLine);
 
         // Act
-        Snippet result = Snippet.From(value, options);
+        var result = Snippet.From(value, options);
         ImmutableArray<string> converted = result;
 
         // Assert
-        converted.ShouldBe(ImmutableArray.Create(first, second));
+        converted.ShouldBe([first, second]);
     }
 }

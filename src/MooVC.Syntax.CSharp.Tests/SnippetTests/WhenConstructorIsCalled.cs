@@ -8,7 +8,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
-        ImmutableArray<string> values = ImmutableArray<string>.Empty;
+        ImmutableArray<string> values = [];
 
         // Act & Assert
         _ = Should.NotThrow(() => _ = new Snippet(values));
@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenInstanceIsCreated()
     {
         // Arrange
-        ImmutableArray<string> values = ["alpha", "beta"];    
+        ImmutableArray<string> values = ["alpha", "beta"];
 
         // Act & Assert
         _ = Should.NotThrow(() => _ = new Snippet(values));

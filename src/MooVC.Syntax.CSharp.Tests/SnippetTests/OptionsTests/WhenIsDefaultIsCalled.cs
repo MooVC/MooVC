@@ -19,7 +19,7 @@ public sealed class WhenIsDefaultIsCalled
     public void GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange
-        var options = new Snippet.Options()
+        Snippet.Options options = new Snippet.Options()
             .WithWhitespace("\t");
 
         // Act

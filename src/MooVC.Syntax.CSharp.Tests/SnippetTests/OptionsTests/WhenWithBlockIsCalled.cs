@@ -7,6 +7,7 @@ public sealed class WhenWithBlockIsCalled
     {
         // Arrange
         var options = new Snippet.Options();
+
         Snippet.BlockOptions block = options.Block
             .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
 

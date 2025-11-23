@@ -7,6 +7,7 @@ public sealed class WhenWithMarkersIsCalled
     {
         // Arrange
         var options = new Snippet.BlockOptions();
+
         Snippet.BoundaryOptions markers = options.Markers
             .WithOpening("[")
             .WithClosing("]");

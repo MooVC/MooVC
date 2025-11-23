@@ -22,7 +22,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         var first = new Snippet.BoundaryOptions();
-        var second = new Snippet.BoundaryOptions()
+
+        Snippet.BoundaryOptions second = new Snippet.BoundaryOptions()
             .WithClosing("]");
 
         // Act
