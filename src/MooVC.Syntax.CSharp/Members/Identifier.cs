@@ -40,6 +40,11 @@
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Identifier)));
 
+            if (IsUnnamed)
+            {
+                return string.Empty;
+            }
+
             const char ReservationPrefix = '@';
             const char UnderscorePrefix = '_';
 

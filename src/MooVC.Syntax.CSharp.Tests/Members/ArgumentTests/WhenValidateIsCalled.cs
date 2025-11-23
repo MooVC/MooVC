@@ -54,7 +54,7 @@ public sealed class WhenValidateIsCalled
         var subject = new Argument
         {
             Name = new Identifier(Name),
-            Value = Snippet.From("line1\nline2"),
+            Value = Snippet.From($"line1{Environment.NewLine}line2"),
         };
 
         var context = new ValidationContext(subject);

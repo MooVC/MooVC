@@ -12,7 +12,7 @@ public sealed class WhenToStringIsCalled
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Argument();
+        var subject = new Argument { Name = "Value" };
         Argument.Options? options = default;
 
         // Act

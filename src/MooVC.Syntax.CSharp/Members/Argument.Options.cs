@@ -1,10 +1,14 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using System.ComponentModel.DataAnnotations;
+    using Fluentify;
+    using Valuify;
     using static MooVC.Syntax.CSharp.Members.Argument_Resources;
 
     public partial class Argument
     {
+        [Fluentify]
+        [Valuify]
         public sealed partial class Options
         {
             public static readonly Options Call = new Options();
