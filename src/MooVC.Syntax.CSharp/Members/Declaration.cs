@@ -4,10 +4,13 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Fluentify;
     using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
+    [Fluentify]
     [Valuify]
     public sealed partial class Declaration
         : IValidatableObject

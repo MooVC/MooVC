@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Directive_Resources;
     using Ignore = Valuify.IgnoreAttribute;
