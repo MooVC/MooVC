@@ -62,32 +62,37 @@
             return Combine(_value, values, (original, appended) => original.Concat(appended));
         }
 
-        public Snippet Block(Options options)
+        public Snippet Block(Options options, Snippet? opening = default)
         {
             _ = Guard.Against.Null(options, message: BlockOptionsRequired);
 
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
-            string[] blocked = new string[_value.Length + MaximumAdditionalLinesRequiredForBlock];
+            int openingLines = opening?.Lines ?? 0;
+
+            string[] blocked = new string[_value.Length + openingLines + MaximumAdditionalLinesRequiredForBlock];
             int index = 0;
 
-            blocked[index] = _value[index];
-
-            if (options.Block.Style == BlockOptions.StyleType.KAndR)
+            for (; index < openingLines; index++)
             {
-                blocked[index] = string.Concat(_value[index], $" {options.Block.Markers.Opening}");
+                blocked[index] = opening!._value[index];
+            }
+
+            if (options.Block.Style == BlockOptions.StyleType.KAndR && openingLines > 0)
+            {
+                blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
             }
             else
             {
-                blocked[++index] = options.Block.Markers.Opening;
+                blocked[index++] = options.Block.Markers.Opening;
             }
 
-            for (int line = 1; line < _value.Length; line++)
+            for (int line = 0; line < _value.Length; line++)
             {
-                blocked[++index] = string.Concat(options.Whitespace, _value[line]);
+                blocked[index++] = string.Concat(options.Whitespace, _value[line]);
             }
 
-            blocked[++index] = options.Block.Markers.Closing;
+            blocked[index] = options.Block.Markers.Closing;
 
             return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
