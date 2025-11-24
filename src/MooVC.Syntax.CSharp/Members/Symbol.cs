@@ -26,6 +26,8 @@
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
+        public Qualifier Qualifier { get; set; } = Qualifier.Unqualified;
+
         public static implicit operator string(Symbol symbol)
         {
             if (symbol is null)
@@ -82,6 +84,7 @@
             return validationContext
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
                 .And(nameof(Name), Name)
+                .And(nameof(Qualifier), Qualifier)
                 .Results;
         }
 

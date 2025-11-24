@@ -1,7 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
@@ -14,10 +17,15 @@
         : IValidatableObject
     {
         public static readonly Event Undefined = new Event();
+        private const string Separator = " ";
 
         public Methods Behaviours { get; set; } = Methods.Default;
 
-        public Symbol Handler { get; set; } = Symbol.Unspecified;
+        public Symbol Handler { get; set; } = new Symbol
+        {
+            Name = nameof(EventHandler),
+            Qualifier = ImmutableArray.Create<Segment>(nameof(System)),
+        };
 
         [Ignore]
         public bool IsUndefind => this == Undefined;
@@ -60,7 +68,8 @@
             string handler = Handler;
             string name = Name;
             string scope = Scope;
-            string signature = $"{scope} event {handler} {name}";
+            string @static = IsStatic ? "static" : string.Empty;
+            string signature = Separator.Combine(scope, @static, "event", handler, name);
 
             Snippet methods = Behaviours;
 
@@ -81,7 +90,27 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new System.NotImplementedException();
+            if (IsUndefind)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (Handler.IsUnspecified)
+            {
+                results = results.Append(new ValidationResult(ValidateHandlerRequired.Format(nameof(Handler), nameof(Event)), new[] { nameof(Handler) }));
+            }
+
+            if (Name.IsUnnamed)
+            {
+                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Event)), new[] { nameof(Name) }));
+            }
+
+            return validationContext
+                .Include(nameof(Handler), results, Handler)
+                .And(nameof(Name), Name)
+                .Results;
         }
     }
 }
