@@ -10,6 +10,7 @@ public sealed class WhenGetHashCodeIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var second = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -31,6 +32,7 @@ public sealed class WhenGetHashCodeIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var second = new Event.Methods
         {
             Remove = Snippet.From("value"),

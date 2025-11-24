@@ -7,6 +7,7 @@ public sealed class WhenWithBehavioursIsCalled
     {
         // Arrange
         Event original = EventTestsData.Create();
+
         var behaviours = new Event.Methods
         {
             Add = Snippet.From("add => value"),

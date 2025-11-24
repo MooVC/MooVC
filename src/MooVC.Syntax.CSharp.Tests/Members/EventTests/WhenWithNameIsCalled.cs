@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Event original = EventTestsData.Create();
-        var name = new Identifier(Name);
+        Identifier name = Name;
 
         // Act
         Event result = original.WithName(name);

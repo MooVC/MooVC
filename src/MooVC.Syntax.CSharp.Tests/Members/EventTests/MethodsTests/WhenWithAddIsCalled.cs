@@ -10,7 +10,8 @@ public sealed class WhenWithAddIsCalled
         {
             Remove = Snippet.From("value"),
         };
-        Snippet add = Snippet.From("result");
+
+        var add = Snippet.From("result");
 
         // Act
         Event.Methods result = original.WithAdd(add);

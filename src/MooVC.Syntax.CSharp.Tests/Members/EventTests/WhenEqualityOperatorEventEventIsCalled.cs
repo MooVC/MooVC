@@ -6,8 +6,8 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Event? left = default!;
-        Event? right = default!;
+        Event? left = default;
+        Event? right = default;
 
         // Act
         bool result = left == right;
@@ -20,7 +20,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Event? left = default!;
+        Event? left = default;
         Event right = EventTestsData.Create();
 
         // Act
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
     {
         // Arrange
         Event left = EventTestsData.Create();
-        Event? right = default!;
+        Event? right = default;
 
         // Act
         bool result = left == right;

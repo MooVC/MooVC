@@ -6,7 +6,7 @@ public sealed class WhenEqualsEventIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Event? subject = default!;
+        Event? subject = default;
         Event target = EventTestsData.Create();
 
         // Act

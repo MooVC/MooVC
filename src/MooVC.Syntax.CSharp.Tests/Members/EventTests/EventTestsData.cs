@@ -8,13 +8,13 @@ internal static class EventTestsData
     public static Event Create(
         string handler = DefaultHandler,
         string name = DefaultName,
-        Event.Methods? behaviours = null,
-        Scope? scope = null)
+        Event.Methods? behaviours = default,
+        Scope? scope = default)
     {
         var subject = new Event
         {
             Handler = new Symbol { Name = handler },
-            Name = new Identifier(name),
+            Name = name,
         };
 
         if (behaviours is not null)

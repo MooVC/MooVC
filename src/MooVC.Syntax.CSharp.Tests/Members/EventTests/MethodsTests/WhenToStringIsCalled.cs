@@ -25,7 +25,8 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        string expected = Snippet.From("add;")
+        string expected = Snippet
+            .From("add;")
             .Append(Snippet.Options.Default, Environment.NewLine)
             .Append("remove;")
             .ToString();
@@ -58,7 +59,8 @@ public sealed class WhenToStringIsCalled
     public void GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange
-        Snippet add = Snippet.From($"first{Environment.NewLine}second");
+        var add = Snippet.From($"first{Environment.NewLine}second");
+
         var subject = new Event.Methods
         {
             Add = add,

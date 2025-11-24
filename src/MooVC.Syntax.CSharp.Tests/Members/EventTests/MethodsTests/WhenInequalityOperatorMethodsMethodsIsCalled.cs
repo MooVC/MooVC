@@ -6,8 +6,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Event.Methods? left = default!;
-        Event.Methods? right = default!;
+        Event.Methods? left = default;
+        Event.Methods? right = default;
 
         // Act
         bool result = left != right;
@@ -20,7 +20,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Event.Methods? left = default!;
+        Event.Methods? left = default;
+
         var right = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -41,7 +42,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
-        Event.Methods? right = default!;
+
+        Event.Methods? right = default;
 
         // Act
         bool result = left != right;
@@ -58,6 +60,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         Event.Methods second = first;
 
         // Act
@@ -75,6 +78,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var right = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -97,6 +101,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var right = new Event.Methods
         {
             Remove = Snippet.From("value"),

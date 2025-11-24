@@ -6,7 +6,8 @@ public sealed class WhenEqualsMethodsIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Event.Methods? subject = default!;
+        Event.Methods? subject = default;
+
         var target = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -27,6 +28,7 @@ public sealed class WhenEqualsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         Event.Methods target = subject;
 
         // Act
@@ -44,6 +46,7 @@ public sealed class WhenEqualsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var target = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -64,6 +67,7 @@ public sealed class WhenEqualsMethodsIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         var target = new Event.Methods
         {
             Remove = Snippet.From("value"),

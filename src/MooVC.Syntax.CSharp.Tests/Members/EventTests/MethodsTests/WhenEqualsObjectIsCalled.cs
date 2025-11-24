@@ -10,6 +10,7 @@ public sealed class WhenEqualsObjectIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         object? target = default;
 
         // Act
@@ -27,6 +28,7 @@ public sealed class WhenEqualsObjectIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         object target = subject;
 
         // Act
@@ -44,6 +46,7 @@ public sealed class WhenEqualsObjectIsCalled
         {
             Add = Snippet.From("value"),
         };
+
         object target = new Event.Methods
         {
             Add = Snippet.From("value"),
@@ -64,7 +67,8 @@ public sealed class WhenEqualsObjectIsCalled
         {
             Add = Snippet.From("value"),
         };
-        var target = new object();
+
+        object target = new();
 
         // Act
         bool result = subject.Equals(target);
