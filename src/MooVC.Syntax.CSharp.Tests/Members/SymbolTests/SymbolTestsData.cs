@@ -6,13 +6,18 @@ internal static class SymbolTestsData
 {
     public const string DefaultName = "Result";
 
-    public static Symbol Create(string? name = DefaultName, params Symbol[] arguments)
+    public static Symbol Create(string? name = DefaultName, Qualifier? qualifier = null, params Symbol[] arguments)
     {
         var symbol = new Symbol();
 
         if (!string.IsNullOrEmpty(name))
         {
             symbol.Name = new Identifier(name);
+        }
+
+        if (qualifier is not null)
+        {
+            symbol.Qualifier = qualifier;
         }
 
         if (arguments?.Length > 0)

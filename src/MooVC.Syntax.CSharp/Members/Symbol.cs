@@ -26,6 +26,8 @@
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
+        public Qualifier Qualifier { get; set; } = Qualifier.Unqualified;
+
         public static implicit operator string(Symbol symbol)
         {
             if (symbol is null)
@@ -49,6 +51,11 @@
             }
 
             string signature = Name.ToString(Identifier.Options.Pascal);
+
+            if (!Qualifier.IsUnqualified)
+            {
+                signature = $"{Qualifier}.{signature}";
+            }
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -80,6 +87,7 @@
             }
 
             return validationContext
+                .And(nameof(Qualifier), Qualifier)
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
                 .And(nameof(Name), Name)
                 .Results;
