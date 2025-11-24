@@ -16,6 +16,21 @@
 
         public bool IsUnspecified => this == Unspecified;
 
+        public static implicit operator string(Base @base)
+        {
+            if (@base is null)
+            {
+                @base = Unspecified;
+            }
+
+            return @base.ToString();
+        }
+
+        public static implicit operator Snippet(Base @base)
+        {
+            return Snippet.From(@base);
+        }
+
         public override string ToString()
         {
             return _value.ToString();

@@ -14,9 +14,28 @@
     public sealed partial class Parameter
         : IValidatableObject
     {
+        public static readonly Parameter Undefined = new Parameter();
+
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
         public ImmutableArray<Constraint> Constraints { get; set; } = ImmutableArray<Constraint>.Empty;
+
+        public bool IsUndefined => this == Undefined;
+
+        public static implicit operator string(Parameter parameter)
+        {
+            if (parameter is null)
+            {
+                parameter = Undefined;
+            }
+
+            return parameter.ToString();
+        }
+
+        public static implicit operator Snippet(Parameter parameter)
+        {
+            return Snippet.From(parameter);
+        }
 
         public override string ToString()
         {

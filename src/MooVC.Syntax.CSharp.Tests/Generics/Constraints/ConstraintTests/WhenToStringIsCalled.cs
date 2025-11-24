@@ -1,12 +1,11 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
-using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.CSharp.Members;
 using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
 
 public sealed class WhenToStringIsCalled
 {
-    private const string BaseName = "result";
+    private const string BaseName = "Result";
     private const string InterfaceName = "IExample";
 
     [Fact]

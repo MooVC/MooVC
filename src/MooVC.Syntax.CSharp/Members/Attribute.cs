@@ -29,6 +29,21 @@
 
         public Specifier Target { get; set; } = Specifier.None;
 
+        public static implicit operator string(Attribute attribute)
+        {
+            if (attribute is null)
+            {
+                attribute = Unspecified;
+            }
+
+            return attribute.ToString();
+        }
+
+        public static implicit operator Snippet(Attribute attribute)
+        {
+            return Snippet.From(attribute);
+        }
+
         public override string ToString()
         {
             if (Name.IsUnspecified)

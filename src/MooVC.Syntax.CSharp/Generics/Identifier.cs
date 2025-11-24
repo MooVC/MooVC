@@ -5,6 +5,7 @@
     using System.Text.RegularExpressions;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 
     [Monify(Type = typeof(string))]
@@ -16,6 +17,21 @@
         private static readonly Regex rule = new Regex(@"^T(?:[A-Z][A-Za-z0-9]*)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         public bool IsUnnamed => this == Unnamed;
+
+        public static implicit operator string(Identifier identifier)
+        {
+            if (identifier is null)
+            {
+                identifier = Unnamed;
+            }
+
+            return identifier.ToString();
+        }
+
+        public static implicit operator Snippet(Identifier identifier)
+        {
+            return Snippet.From(identifier);
+        }
 
         public override string ToString()
         {

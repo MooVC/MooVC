@@ -68,5 +68,14 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("MethodsToStringOptionsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
+        /// </summary>
+        internal static string ToStringOptionsRequired {
+            get {
+                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
+            }
+        }
     }
 }

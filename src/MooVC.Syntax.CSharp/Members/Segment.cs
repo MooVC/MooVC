@@ -18,6 +18,21 @@
 
         public bool IsEmpty => this == Empty;
 
+        public static implicit operator string(Segment segment)
+        {
+            if (segment is null)
+            {
+                segment = Empty;
+            }
+
+            return segment.ToString();
+        }
+
+        public static implicit operator Snippet(Segment segment)
+        {
+            return Snippet.From(segment);
+        }
+
         public override string ToString()
         {
             return _value;

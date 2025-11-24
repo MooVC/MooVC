@@ -3,26 +3,24 @@
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Empty = "";
-    private const string Space = "   ";
     private const string Alpha = "Alpha";
     private const string Unicode = "Álpha";
 
     [Fact]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public void GivenNullSubjectThenEmptyIsReturned()
     {
         // Arrange
         Identifier? subject = default;
 
         // Act
-        Func<string> act = () => (string)subject;
+        string result = subject;
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(subject));
+        result.ShouldBeEmpty();
     }
 
     [Fact]
-    public void GivenMemberWithNullValueThenResultIsNull()
+    public void GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
         var subject = new Identifier(default);
@@ -31,7 +29,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -48,42 +46,31 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceThenMatchesValue()
-    {
-        // Arrange
-        var subject = new Identifier(Space);
-
-        // Act
-        string result = subject;
-
-        // Assert
-        result.ShouldBe(Space);
-    }
-
-    [Fact]
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Identifier(Alpha);
+        string expected = Alpha.ToCamelCase();
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(Alpha);
+        result.ShouldBe(expected);
     }
 
     [Fact]
-    public void GivenUnicodeThenMatchesValue()
+    public void GivenUnicodeThenMatchesValueInCamelCase()
     {
         // Arrange
         var subject = new Identifier(Unicode);
+        string expected = Unicode.ToCamelCase();
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(Unicode);
+        result.ShouldBe(expected);
     }
 
     [Fact]

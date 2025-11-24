@@ -61,15 +61,6 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to convert to an array of `{1}` must be provided..
-        /// </summary>
-        internal static string QualifierRequired {
-            get {
-                return ResourceManager.GetString("QualifierRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to `{1}` `{0}` for `{2}` with a preceding value of `{3}` is not defined..
         /// </summary>
         internal static string ValidateSegmentRequired {
@@ -84,15 +75,6 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static string ValidateValueRequired {
             get {
                 return ResourceManager.GetString("ValidateValueRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The array of `{0}` to convert to `{1}` must be provided..
-        /// </summary>
-        internal static string ValuesRequired {
-            get {
-                return ResourceManager.GetString("ValuesRequired", resourceCulture);
             }
         }
     }

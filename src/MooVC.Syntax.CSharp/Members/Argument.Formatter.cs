@@ -21,6 +21,26 @@
 
             [Ignore]
             public bool IsDeclaration => this == Declaration;
+
+            public static implicit operator string(Formatter formatter)
+            {
+                if (formatter is null)
+                {
+                    formatter = Call;
+                }
+
+                return formatter.ToString();
+            }
+
+            public static implicit operator Snippet(Formatter formatter)
+            {
+                return Snippet.From(formatter);
+            }
+
+            public override string ToString()
+            {
+                return _value;
+            }
         }
     }
 }

@@ -21,12 +21,12 @@ public sealed class WhenBlockIsCalled
     }
 
     [Fact]
-    public void GivenAllmanStyleThenBlockIsExpanded()
+    public void GivenNoOpeningThenTheWholeSnippetIsBlocked()
     {
         // Arrange
         const string expected = """
-            if (condition)
             {
+                if (condition)
                 return true;
             }
             """;
@@ -45,7 +45,33 @@ public sealed class WhenBlockIsCalled
     }
 
     [Fact]
-    public void GivenKAndRStyleThenBlockIsInline()
+    public void GivenAllmanStyleAndOpeningThenBlockIsExpanded()
+    {
+        // Arrange
+        const string expected = """
+            if (condition)
+            {
+                return true;
+            }
+            """;
+
+        var subject = Snippet.From("return true;");
+        var opening = Snippet.From("if (condition)");
+
+        Snippet.Options options = new Snippet.Options()
+            .WithNewLine(Environment.NewLine);
+
+        // Act
+        Snippet result = subject.Block(options, opening);
+
+        // Assert
+        string text = result.ToString(options);
+
+        text.ShouldBe(expected);
+    }
+
+    [Fact]
+    public void GivenKAndRStyleAndOpeningThenBlockIsInline()
     {
         // Arrange
         const string expected = """
@@ -54,14 +80,15 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = new Snippet(lines);
+        var subject = Snippet.From("return true;");
+        var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
             .WithNewLine(Environment.NewLine)
             .WithBlock(block => block.WithStyle(Snippet.BlockOptions.StyleType.KAndR));
 
         // Act
-        Snippet result = subject.Block(options);
+        Snippet result = subject.Block(options, opening);
 
         // Assert
         string text = result.ToString(options);
