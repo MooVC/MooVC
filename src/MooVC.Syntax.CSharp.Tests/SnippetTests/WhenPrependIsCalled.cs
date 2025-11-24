@@ -11,7 +11,7 @@ public sealed class WhenPrependIsCalled
     public void GivenNullOptionsAndValuesThenThrows()
     {
         // Arrange
-        Snippet subject = Snippet.From(Alpha);
+        var subject = Snippet.From(Alpha);
         Snippet.Options? options = default;
 
         // Act
@@ -27,8 +27,7 @@ public sealed class WhenPrependIsCalled
     {
         // Arrange
         string expected = string.Join(Environment.NewLine, Beta, Gamma, Alpha);
-
-        Snippet subject = Snippet.From(Alpha);
+        var subject = Snippet.From(Alpha);
 
         // Act
         Snippet result = subject.Prepend(Beta, Gamma);
@@ -46,8 +45,7 @@ public sealed class WhenPrependIsCalled
             .WithNewLine("\n");
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
-
-        Snippet subject = Snippet.From(Alpha, options);
+        var subject = Snippet.From(Alpha, options);
 
         // Act
         Snippet result = subject.Prepend(options, $"{Beta}\n{Phi}", Gamma);
@@ -66,9 +64,9 @@ public sealed class WhenPrependIsCalled
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
 
-        Snippet subject = Snippet.From(Alpha, options);
-        Snippet first = Snippet.From($"{Beta}\n{Phi}", options);
-        Snippet second = Snippet.From(Gamma, options);
+        var subject = Snippet.From(Alpha, options);
+        var first = Snippet.From($"{Beta}\n{Phi}", options);
+        var second = Snippet.From(Gamma, options);
 
         // Act
         Snippet result = subject.Prepend(first, second);

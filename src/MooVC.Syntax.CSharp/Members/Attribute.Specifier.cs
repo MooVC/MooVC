@@ -31,6 +31,21 @@
                 _value = value;
             }
 
+            public static implicit operator string(Specifier specifier)
+            {
+                if (specifier is null)
+                {
+                    specifier = None;
+                }
+
+                return specifier.ToString();
+            }
+
+            public static implicit operator Snippet(Specifier specifier)
+            {
+                return Snippet.From(specifier);
+            }
+
             public override string ToString()
             {
                 return _value;

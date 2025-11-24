@@ -62,20 +62,25 @@
             return Combine(_value, values, (original, appended) => original.Concat(appended));
         }
 
-        public Snippet Block(Options options, Snippet? opening = default)
+        public Snippet Block(Options options)
+        {
+            return Block(options, Empty);
+        }
+
+        public Snippet Block(Options options, Snippet opening)
         {
             _ = Guard.Against.Null(options, message: BlockOptionsRequired);
+            _ = Guard.Against.Null(options, message: BlockOpeningRequired);
 
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
-            int openingLines = opening?.Lines ?? 0;
-
+            int openingLines = opening.Lines;
             string[] blocked = new string[_value.Length + openingLines + MaximumAdditionalLinesRequiredForBlock];
             int index = 0;
 
             for (; index < openingLines; index++)
             {
-                blocked[index] = opening!._value[index];
+                blocked[index] = opening._value[index];
             }
 
             if (options.Block.Style == BlockOptions.StyleType.KAndR && openingLines > 0)

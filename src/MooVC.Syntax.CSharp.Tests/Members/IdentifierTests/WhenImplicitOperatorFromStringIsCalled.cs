@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenNullWhenRoundTrippedThenResultIsNull()
+    public void GivenNullWhenRoundTrippedThenResultIsEmpty()
     {
         // Arrange
         string? value = default;
@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        result.ShouldBeEmpty();
     }
 
     [Fact]
@@ -87,17 +87,18 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public void GivenValueWhenRoundTrippedThenMatchesOriginalInCamelCase()
     {
         // Arrange
         string value = Alpha;
+        string expected = value.ToCamelCase();
 
         // Act
         Identifier subject = value;
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        result.ShouldBe(expected);
     }
 
     [Fact]

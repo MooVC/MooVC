@@ -13,7 +13,7 @@ public sealed class WhenValidateIsCalled
     private const string UnicodePascal = "Álpha";
 
     [Fact]
-    public void GivenNullValueThenValidationErrorReturned()
+    public void GivenNullValueThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Identifier(default);
@@ -24,10 +24,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
     }
 
     [Fact]

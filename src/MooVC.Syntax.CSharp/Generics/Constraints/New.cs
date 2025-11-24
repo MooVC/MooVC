@@ -15,6 +15,25 @@
             _value = value;
         }
 
+        public bool IsRequired => this == Required;
+
+        public bool IsNotRequired => this == NotRequired;
+
+        public static implicit operator string(New @new)
+        {
+            if (@new is null)
+            {
+                @new = NotRequired;
+            }
+
+            return @new.ToString();
+        }
+
+        public static implicit operator Snippet(New @new)
+        {
+            return Snippet.From(@new);
+        }
+
         public override string ToString()
         {
             return _value;

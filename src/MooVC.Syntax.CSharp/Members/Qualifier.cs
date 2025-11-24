@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -22,16 +23,37 @@
 
         public static implicit operator Qualifier(Segment[] values)
         {
-            _ = Guard.Against.Null(values, message: ValuesRequired.Format(nameof(Segment), nameof(Qualifier)));
+            if (values is null || values.Length == 0)
+            {
+                return Unqualified;
+            }
 
             return ImmutableArray.Create(values);
         }
 
         public static implicit operator Segment[](Qualifier qualifier)
         {
-            _ = Guard.Against.Null(qualifier, message: QualifierRequired.Format(nameof(Qualifier), nameof(Segment)));
+            if (qualifier is null)
+            {
+                return Array.Empty<Segment>();
+            }
 
             return qualifier._value.ToArray();
+        }
+
+        public static implicit operator string(Qualifier qualifier)
+        {
+            if (qualifier is null)
+            {
+                qualifier = Unqualified;
+            }
+
+            return qualifier.ToString();
+        }
+
+        public static implicit operator Snippet(Qualifier qualifier)
+        {
+            return Snippet.From(qualifier);
         }
 
         public override string ToString()

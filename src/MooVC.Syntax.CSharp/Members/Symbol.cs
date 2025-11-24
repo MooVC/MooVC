@@ -6,6 +6,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Symbol_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -27,9 +28,17 @@
 
         public static implicit operator string(Symbol symbol)
         {
-            _ = Guard.Against.Null(symbol, message: ConvertToStringSymbolRequired.Format(nameof(Symbol));
+            if (symbol is null)
+            {
+                symbol = Unspecified;
+            }
 
             return symbol.ToString();
+        }
+
+        public static implicit operator Snippet(Symbol symbol)
+        {
+            return Snippet.From(symbol);
         }
 
         public override string ToString()
@@ -39,7 +48,7 @@
                 return string.Empty;
             }
 
-            string signature = Name;
+            string signature = Name.ToString(Identifier.Options.Pascal);
 
             if (!Arguments.IsDefaultOrEmpty)
             {

@@ -22,14 +22,29 @@
 
             public Snippet Remove { get; set; } = Snippet.Empty;
 
+            public static implicit operator string(Methods methods)
+            {
+                if (methods is null)
+                {
+                    methods = Default;
+                }
+
+                return methods.ToString();
+            }
+
+            public static implicit operator Snippet(Methods methods)
+            {
+                return Snippet.From(methods);
+            }
+
             public override string ToString()
             {
-                return this.ToString(Snippet.Options.Default);
+                return ToString(Snippet.Options.Default);
             }
 
             public string ToString(Snippet.Options options)
             {
-                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
                 if (IsDefault)
                 {

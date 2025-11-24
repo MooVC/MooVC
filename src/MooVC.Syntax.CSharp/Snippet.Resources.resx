@@ -120,6 +120,9 @@
   <data name="BlockMarkersRequired" xml:space="preserve">
     <value>The boundary Markers for the Block must be provided.</value>
   </data>
+  <data name="BlockOpeningRequired" xml:space="preserve">
+    <value>The snippet to combine with the block must be provided.</value>
+  </data>
   <data name="BlockOptionsRequired" xml:space="preserve">
     <value>The options required to format the block.</value>
   </data>

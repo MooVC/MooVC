@@ -11,7 +11,7 @@ public sealed class WhenAppendIsCalled
     public void GivenNullOptionsAndValuesThenThrows()
     {
         // Arrange
-        Snippet subject = Snippet.From(Alpha);
+        var subject = Snippet.From(Alpha);
         Snippet.Options? options = default;
 
         // Act
@@ -27,8 +27,7 @@ public sealed class WhenAppendIsCalled
     {
         // Arrange
         string expected = string.Join(Environment.NewLine, Alpha, Beta, Gamma);
-
-        Snippet subject = Snippet.From(Alpha);
+        var subject = Snippet.From(Alpha);
 
         // Act
         Snippet result = subject.Append(Beta, Gamma);
@@ -47,7 +46,7 @@ public sealed class WhenAppendIsCalled
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
-        Snippet subject = Snippet.From(Alpha, options);
+        var subject = Snippet.From(Alpha, options);
 
         // Act
         Snippet result = subject.Append(options, $"{Beta}\n{Phi}", Gamma);
@@ -66,9 +65,9 @@ public sealed class WhenAppendIsCalled
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
-        Snippet subject = Snippet.From(Alpha, options);
-        Snippet first = Snippet.From($"{Beta}\n{Phi}", options);
-        Snippet second = Snippet.From(Gamma, options);
+        var subject = Snippet.From(Alpha, options);
+        var first = Snippet.From($"{Beta}\n{Phi}", options);
+        var second = Snippet.From(Gamma, options);
 
         // Act
         Snippet result = subject.Append(first, second);

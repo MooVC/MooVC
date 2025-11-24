@@ -25,6 +25,21 @@
 
         public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
 
+        public static implicit operator string(Declaration declaration)
+        {
+            if (declaration is null)
+            {
+                declaration = Unspecified;
+            }
+
+            return declaration.ToString();
+        }
+
+        public static implicit operator Snippet(Declaration declaration)
+        {
+            return Snippet.From(declaration);
+        }
+
         public override string ToString()
         {
             if (IsUnspecified)
@@ -32,7 +47,7 @@
                 return string.Empty;
             }
 
-            string signature = Name;
+            string signature = Name.ToString(Identifier.Options.Pascal);
 
             if (!Parameters.IsDefaultOrEmpty)
             {

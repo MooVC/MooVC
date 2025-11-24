@@ -20,6 +20,21 @@
 
         public bool IsUnspecified => this == Unspecified;
 
+        public static implicit operator string(Nature nature)
+        {
+            if (nature is null)
+            {
+                nature = Unspecified;
+            }
+
+            return nature.ToString();
+        }
+
+        public static implicit operator Snippet(Nature nature)
+        {
+            return Snippet.From(nature);
+        }
+
         public override string ToString()
         {
             return _value;

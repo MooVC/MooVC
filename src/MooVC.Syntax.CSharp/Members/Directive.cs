@@ -25,6 +25,21 @@
 
         public Qualifier Qualifier { get; set; }
 
+        public static implicit operator string(Directive directive)
+        {
+            if (directive is null)
+            {
+                directive = Undefined;
+            }
+
+            return directive.ToString();
+        }
+
+        public static implicit operator Snippet(Directive directive)
+        {
+            return Snippet.From(directive);
+        }
+
         public override string ToString()
         {
             if (IsUndefined)

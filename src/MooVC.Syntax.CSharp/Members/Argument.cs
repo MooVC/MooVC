@@ -5,6 +5,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Argument_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -24,6 +25,21 @@
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
         public Snippet Value { get; set; } = Snippet.Empty;
+
+        public static implicit operator string(Argument argument)
+        {
+            if (argument is null)
+            {
+                argument = Undefined;
+            }
+
+            return argument.ToString();
+        }
+
+        public static implicit operator Snippet(Argument argument)
+        {
+            return Snippet.From(argument);
+        }
 
         public override string ToString()
         {

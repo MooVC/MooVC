@@ -28,8 +28,28 @@
             { Casing.Kebab, StringExtensions.ToKebabCase },
         };
 
+        public Identifier(string value)
+        {
+            _value = value ?? string.Empty;
+        }
+
         [Ignore]
         public bool IsUnnamed => this == Unnamed;
+
+        public static implicit operator string(Identifier identifier)
+        {
+            if (identifier is null)
+            {
+                identifier = Unnamed;
+            }
+
+            return identifier.ToString();
+        }
+
+        public static implicit operator Snippet(Identifier identifier)
+        {
+            return Snippet.From(identifier);
+        }
 
         public override string ToString()
         {

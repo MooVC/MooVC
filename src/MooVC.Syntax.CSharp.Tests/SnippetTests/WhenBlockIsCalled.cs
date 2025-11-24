@@ -56,7 +56,7 @@ public sealed class WhenBlockIsCalled
             """;
 
         var subject = Snippet.From("return true;");
-        Snippet opening = Snippet.From("if (condition)");
+        var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
             .WithNewLine(Environment.NewLine);
@@ -81,7 +81,7 @@ public sealed class WhenBlockIsCalled
             """;
 
         var subject = Snippet.From("return true;");
-        Snippet opening = Snippet.From("if (condition)");
+        var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
             .WithNewLine(Environment.NewLine)

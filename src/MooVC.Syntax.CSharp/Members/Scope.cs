@@ -37,6 +37,21 @@
 
         public bool IsUnspecified => this == Unspecified;
 
+        public static implicit operator string(Scope scope)
+        {
+            if (scope is null)
+            {
+                scope = Unspecified;
+            }
+
+            return scope.ToString();
+        }
+
+        public static implicit operator Snippet(Scope scope)
+        {
+            return Snippet.From(scope);
+        }
+
         public override string ToString()
         {
             return _value;

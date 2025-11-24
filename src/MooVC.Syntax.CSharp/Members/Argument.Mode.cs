@@ -30,6 +30,21 @@
             [Ignore]
             public bool IsRef => this == Ref;
 
+            public static implicit operator string(Mode mode)
+            {
+                if (mode is null)
+                {
+                    mode = None;
+                }
+
+                return mode.ToString();
+            }
+
+            public static implicit operator Snippet(Mode mode)
+            {
+                return Snippet.From(mode);
+            }
+
             public override string ToString()
             {
                 return _value;

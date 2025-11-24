@@ -14,6 +14,25 @@
     public sealed partial class Interface
         : IValidatableObject
     {
+        public static readonly Interface Undefined = Declaration.Unspecified;
+
+        public bool IsUndefined => this == Undefined;
+
+        public static implicit operator string(Interface @interface)
+        {
+            if (@interface is null)
+            {
+                @interface = Undefined;
+            }
+
+            return @interface.ToString();
+        }
+
+        public static implicit operator Snippet(Interface @interface)
+        {
+            return Snippet.From(@interface);
+        }
+
         public override string ToString()
         {
             return _value.ToString();

@@ -27,6 +27,21 @@
 
         public New New { get; set; } = New.NotRequired;
 
+        public static implicit operator string(Constraint constraint)
+        {
+            if (constraint is null)
+            {
+                constraint = Unspecified;
+            }
+
+            return constraint.ToString();
+        }
+
+        public static implicit operator Snippet(Constraint constraint)
+        {
+            return Snippet.From(constraint);
+        }
+
         public override string ToString()
         {
             if (IsUnspecified)
@@ -34,7 +49,7 @@
                 return string.Empty;
             }
 
-            string @base = Base.ToString();
+            string @base = Base;
             string nature = Nature;
             string @new = New;
 

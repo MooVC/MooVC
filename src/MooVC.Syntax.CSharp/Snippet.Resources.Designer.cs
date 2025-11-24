@@ -70,6 +70,15 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The snippet to combine with the block must be provided..
+        /// </summary>
+        internal static string BlockOpeningRequired {
+            get {
+                return ResourceManager.GetString("BlockOpeningRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The options required to format the block..
         /// </summary>
         internal static string BlockOptionsRequired {

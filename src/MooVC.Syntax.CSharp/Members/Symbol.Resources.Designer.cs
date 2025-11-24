@@ -61,15 +61,6 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to convert must be provided..
-        /// </summary>
-        internal static string ConvertToStringSymbolRequired {
-            get {
-                return ResourceManager.GetString("ConvertToStringSymbolRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to When providing a `{0}` for `{1}`, the value must be specified..
         /// </summary>
         internal static string ValidateArgumentsInvalid {
