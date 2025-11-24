@@ -1,0 +1,38 @@
+namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+
+using System.Collections.Immutable;
+
+public sealed class WhenImplicitOperatorToSnippetIsCalled
+{
+    private const string Alias = "System";
+
+    [Fact]
+    public void GivenNullSubjectThenEmptyIsReturned()
+    {
+        // Arrange
+        Directive? subject = default;
+
+        // Act
+        Snippet result = subject;
+
+        // Assert
+        result.ShouldBe(Snippet.Empty);
+    }
+
+    [Fact]
+    public void GivenDirectiveThenSnippetMatchesStringRepresentation()
+    {
+        // Arrange
+        var subject = new Directive
+        {
+            Alias = Alias,
+            Qualifier = ImmutableArray.Create(new Segment("Collections")),
+        };
+
+        // Act
+        Snippet result = subject;
+
+        // Assert
+        result.ShouldBe(Snippet.From(subject.ToString()));
+    }
+}
