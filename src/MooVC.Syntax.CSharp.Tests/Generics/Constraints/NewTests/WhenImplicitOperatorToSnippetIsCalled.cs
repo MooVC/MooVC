@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenConstraintThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        New subject = New.Specified;
+        New subject = New.Required;
 
         // Act
         Snippet result = subject;

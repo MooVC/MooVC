@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
+using System.Collections.Immutable;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Alias = "System";
@@ -23,8 +25,8 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Identifier(Alias),
-            Qualifier = new Segment("Collections"),
+            Alias = Alias,
+            Qualifier = ImmutableArray.Create(new Segment("Collections")),
         };
 
         // Act

@@ -21,7 +21,10 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenSymbolThenStringMatchesToString()
     {
         // Arrange
-        var subject = new Symbol(Value);
+        var subject = new Symbol
+        {
+            Name = Value,
+        };
 
         // Act
         string result = subject;

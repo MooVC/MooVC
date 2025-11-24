@@ -2,11 +2,10 @@ namespace MooVC.Syntax.CSharp.Members.ArgumentTests.FormatterTests;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
-    private const string Name = "value";
     private const string Format = "{0}={1}";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenCallIsReturned()
     {
         // Arrange
         Argument.Formatter? subject = default;
@@ -15,7 +14,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        result.ShouldBe(Snippet.From(Argument.Formatter.Call));
     }
 
     [Fact]
@@ -23,12 +22,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     {
         // Arrange
         Argument.Formatter subject = Format;
-        var name = new Identifier(Name);
 
         // Act
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString(name, Snippet.Empty)));
+        result.ShouldBe(Snippet.From(Format));
     }
 }

@@ -21,7 +21,10 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenSymbolThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        var subject = new Symbol(Value);
+        var subject = new Symbol
+        {
+            Name = Value,
+        };
 
         // Act
         Snippet result = subject;

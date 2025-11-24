@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Name = "IDisposable";
@@ -21,12 +23,9 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenInterfaceThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        var subject = new Interface
+        Interface subject = new Declaration
         {
-            Declaration = new Declaration
-            {
-                Name = new Identifier(Name),
-            },
+            Name = Name,
         };
 
         // Act

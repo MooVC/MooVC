@@ -24,8 +24,8 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol(Handler),
-            Name = new Identifier(Name),
+            Handler = new Symbol { Name = Handler },
+            Name = Name,
         };
 
         // Act

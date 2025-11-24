@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Value = "BaseClass";
@@ -21,12 +23,9 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenBaseThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        var subject = new Base
+        Base subject = new Symbol
         {
-            Type = new Declaration
-            {
-                Name = new Identifier(Value),
-            },
+            Name = Value,
         };
 
         // Act
