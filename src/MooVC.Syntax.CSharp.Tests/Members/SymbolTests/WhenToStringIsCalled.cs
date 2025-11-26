@@ -55,4 +55,17 @@ public sealed class WhenToStringIsCalled
         // Assert
         representation.ShouldBe($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
     }
+
+    [Fact]
+    public void GivenQualifierThenQualifierPrefixedToName()
+    {
+        // Arrange
+        var subject = SymbolTestsData.Create(qualifier: new Qualifier(["MooVC", "Syntax"]));
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        representation.ShouldBe($"MooVC.Syntax.{Name}");
+    }
 }

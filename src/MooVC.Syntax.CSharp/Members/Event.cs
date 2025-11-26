@@ -58,7 +58,7 @@
             }
 
             string handler = Handler;
-            string name = Name;
+            string name = Name.ToString(Identifier.Options.Pascal);
             string scope = Scope;
             string signature = $"{scope} event {handler} {name}";
 
