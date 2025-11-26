@@ -85,8 +85,8 @@
             }
 
             return validationContext
-                .And(nameof(Qualifier), Qualifier)
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
+                .And(nameof(Qualifier), Qualifier)
                 .And(nameof(Name), Name)
                 .Results;
         }

@@ -42,7 +42,7 @@ public sealed class WhenToStringIsCalled
         var methods = new Event.Methods
         {
             Add = Snippet.From("value"),
-            Remove = Snippet.From("Console.WriteLine(value);"),
+            Remove = Snippet.From("Console.WriteLine(value)"),
         };
 
         Event subject = EventTestsData.Create(behaviours: methods);
@@ -51,9 +51,13 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        Snippet expected = methods.Block(
-            Snippet.Options.Default,
-            Snippet.From($"public event {Handler} {Name}", Snippet.Options.Default));
+        string expected = """
+            public event Handler Occurred
+            {
+                add => value;
+                remove => Console.WriteLine(value);
+            }
+            """;
 
         representation.ShouldBe(expected.ToString());
     }

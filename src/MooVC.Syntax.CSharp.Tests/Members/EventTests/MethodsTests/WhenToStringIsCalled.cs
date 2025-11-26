@@ -16,7 +16,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenAutoImplementedMembersThenReturnsSignatures()
+    public void GivenAutoImplementedMembersThenReturnsEmpty()
     {
         // Arrange
         var subject = new Event.Methods();
@@ -25,13 +25,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        string expected = Snippet
-            .From("add;")
-            .Append(Snippet.Options.Default, Environment.NewLine)
-            .Append("remove;")
-            .ToString();
-
-        representation.ShouldBe(expected);
+        representation.ShouldBeEmpty();
     }
 
     [Fact]
@@ -47,7 +41,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        string expected = Snippet.From($"add => {subject.Add}")
+        string expected = Snippet.From($"add => {subject.Add};")
             .Append(Snippet.Options.Default, Environment.NewLine)
             .Append("remove;")
             .ToString();

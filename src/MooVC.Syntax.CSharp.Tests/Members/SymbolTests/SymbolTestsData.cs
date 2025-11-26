@@ -34,6 +34,6 @@ internal static class SymbolTestsData
             .Select(argument => new Symbol { Name = new Identifier(argument) })
             .ToArray();
 
-        return Create(name, arguments);
+        return Create(name, arguments: arguments);
     }
 }
