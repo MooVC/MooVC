@@ -93,6 +93,29 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
+    public void GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Name = new Identifier(Name),
+            Qualifier = new Segment[] { Segment.Empty },
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain($"{nameof(Symbol.Qualifier)}[0]");
+        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
     public void GivenValidSymbolThenNoValidationErrorsReturned()
     {
         // Arrange

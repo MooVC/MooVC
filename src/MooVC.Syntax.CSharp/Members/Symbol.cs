@@ -4,9 +4,7 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Symbol_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -25,6 +23,8 @@
         public bool IsUnspecified => this == Unspecified;
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
+
+        public Qualifier Qualifier { get; set; } = Qualifier.Unqualified;
 
         public static implicit operator string(Symbol symbol)
         {
@@ -49,6 +49,11 @@
             }
 
             string signature = Name.ToString(Identifier.Options.Pascal);
+
+            if (!Qualifier.IsUnqualified)
+            {
+                signature = $"{Qualifier}.{signature}";
+            }
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -81,6 +86,7 @@
 
             return validationContext
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
+                .And(nameof(Qualifier), Qualifier)
                 .And(nameof(Name), Name)
                 .Results;
         }
