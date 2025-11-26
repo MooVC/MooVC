@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
@@ -81,7 +82,22 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new System.NotImplementedException();
+            if (IsUndefind)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (Name.IsUnnamed)
+            {
+                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Event)), new[] { nameof(Name) }));
+            }
+
+            return validationContext
+                .Include(nameof(Handler), results, Handler)
+                .And(nameof(Name), Name)
+                .Results;
         }
     }
 }

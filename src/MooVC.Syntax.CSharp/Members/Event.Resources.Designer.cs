@@ -77,5 +77,14 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` of the `{1}` must be provided..
+        /// </summary>
+        internal static string ValidateNameRequired {
+            get {
+                return ResourceManager.GetString("ValidateNameRequired", resourceCulture);
+            }
+        }
     }
 }
