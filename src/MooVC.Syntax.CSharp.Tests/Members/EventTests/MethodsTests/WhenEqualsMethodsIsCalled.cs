@@ -79,4 +79,46 @@ public sealed class WhenEqualsMethodsIsCalled
         // Assert
         result.ShouldBeFalse();
     }
+
+    [Fact]
+    public void GivenDifferentAddValuesThenReturnsFalse()
+    {
+        // Arrange
+        var subject = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var target = new Event.Methods
+        {
+            Add = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentRemoveValuesThenReturnsFalse()
+    {
+        // Arrange
+        var subject = new Event.Methods
+        {
+            Remove = Snippet.From("value"),
+        };
+
+        var target = new Event.Methods
+        {
+            Remove = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
 }
