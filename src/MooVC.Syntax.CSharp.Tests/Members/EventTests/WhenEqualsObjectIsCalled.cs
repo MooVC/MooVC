@@ -57,4 +57,18 @@ public sealed class WhenEqualsObjectIsCalled
         // Assert
         result.ShouldBeFalse();
     }
+
+    [Fact]
+    public void GivenDifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        object target = EventTestsData.Create(handler: "Result");
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
 }

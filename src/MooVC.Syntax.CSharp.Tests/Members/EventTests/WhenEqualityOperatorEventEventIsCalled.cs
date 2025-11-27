@@ -89,4 +89,75 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultLeftRight.ShouldBeFalse();
         resultRightLeft.ShouldBeFalse();
     }
+
+    [Fact]
+    public void GivenDifferentBehavioursThenReturnsFalse()
+    {
+        // Arrange
+        Event left = EventTestsData.Create();
+
+        Event right = EventTestsData.Create(
+            behaviours: new Event.Methods
+            {
+                Add = Snippet.From("value"),
+            });
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentHandlersThenReturnsFalse()
+    {
+        // Arrange
+        Event left = EventTestsData.Create();
+        Event right = EventTestsData.Create(handler: "Result");
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentStaticStatesThenReturnsFalse()
+    {
+        // Arrange
+        Event left = EventTestsData.Create();
+
+        Event right = EventTestsData.Create();
+        right.IsStatic = true;
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentScopesThenReturnsFalse()
+    {
+        // Arrange
+        Event left = EventTestsData.Create();
+        Event right = EventTestsData.Create(scope: Scope.Internal);
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
 }

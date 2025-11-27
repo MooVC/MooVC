@@ -76,4 +76,25 @@ public sealed class WhenEqualsObjectIsCalled
         // Assert
         result.ShouldBeFalse();
     }
+
+    [Fact]
+    public void GivenDifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        var subject = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        object target = new Event.Methods
+        {
+            Add = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
 }

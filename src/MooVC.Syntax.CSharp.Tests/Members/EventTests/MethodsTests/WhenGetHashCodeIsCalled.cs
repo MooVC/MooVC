@@ -45,4 +45,48 @@ public sealed class WhenGetHashCodeIsCalled
         // Assert
         firstHash.ShouldNotBe(secondHash);
     }
+
+    [Fact]
+    public void GivenDifferentAddValuesThenHashesDiffer()
+    {
+        // Arrange
+        var first = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var second = new Event.Methods
+        {
+            Add = Snippet.From("alternative"),
+        };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        firstHash.ShouldNotBe(secondHash);
+    }
+
+    [Fact]
+    public void GivenDifferentRemoveValuesThenHashesDiffer()
+    {
+        // Arrange
+        var first = new Event.Methods
+        {
+            Remove = Snippet.From("value"),
+        };
+
+        var second = new Event.Methods
+        {
+            Remove = Snippet.From("alternative"),
+        };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        firstHash.ShouldNotBe(secondHash);
+    }
 }

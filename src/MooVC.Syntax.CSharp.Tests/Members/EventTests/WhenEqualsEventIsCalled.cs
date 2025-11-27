@@ -2,6 +2,10 @@ namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 public sealed class WhenEqualsEventIsCalled
 {
+    private const string AlternativeHandler = "Result";
+    private const string AlternativeName = "Ended";
+    private const string Behaviour = "value";
+
     [Fact]
     public void GivenNullThenReturnsFalse()
     {
@@ -49,7 +53,70 @@ public sealed class WhenEqualsEventIsCalled
     {
         // Arrange
         Event subject = EventTestsData.Create();
-        Event target = EventTestsData.Create(name: "Ended");
+        Event target = EventTestsData.Create(name: AlternativeName);
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentBehavioursThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+
+        Event target = EventTestsData.Create(
+            behaviours: new Event.Methods
+            {
+                Add = Snippet.From(Behaviour),
+            });
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentHandlersThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        Event target = EventTestsData.Create(handler: AlternativeHandler);
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentStaticStatesThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+
+        Event target = EventTestsData.Create();
+        target.IsStatic = true;
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentScopesThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        Event target = EventTestsData.Create(scope: Scope.Internal);
 
         // Act
         bool result = target.Equals(subject);

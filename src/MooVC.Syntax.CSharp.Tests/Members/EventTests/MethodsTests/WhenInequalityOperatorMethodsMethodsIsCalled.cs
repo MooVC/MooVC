@@ -115,4 +115,50 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         resultLeftRight.ShouldBeTrue();
         resultRightLeft.ShouldBeTrue();
     }
+
+    [Fact]
+    public void GivenDifferentAddValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var right = new Event.Methods
+        {
+            Add = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        resultLeftRight.ShouldBeTrue();
+        resultRightLeft.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenDifferentRemoveValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Event.Methods
+        {
+            Remove = Snippet.From("value"),
+        };
+
+        var right = new Event.Methods
+        {
+            Remove = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        resultLeftRight.ShouldBeTrue();
+        resultRightLeft.ShouldBeTrue();
+    }
 }

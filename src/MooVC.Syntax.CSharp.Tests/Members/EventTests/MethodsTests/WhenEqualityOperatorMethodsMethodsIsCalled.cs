@@ -115,4 +115,50 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         resultLeftRight.ShouldBeFalse();
         resultRightLeft.ShouldBeFalse();
     }
+
+    [Fact]
+    public void GivenDifferentAddValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var right = new Event.Methods
+        {
+            Add = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void GivenDifferentRemoveValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Event.Methods
+        {
+            Remove = Snippet.From("value"),
+        };
+
+        var right = new Event.Methods
+        {
+            Remove = Snippet.From("alternative"),
+        };
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        resultLeftRight.ShouldBeFalse();
+        resultRightLeft.ShouldBeFalse();
+    }
 }
