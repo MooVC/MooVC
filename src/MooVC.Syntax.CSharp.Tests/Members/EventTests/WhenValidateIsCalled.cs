@@ -49,7 +49,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol(),
+            Handler = new Symbol { Name = "Invalid Handler Name" },
             Name = new Identifier(EventTestsData.DefaultName),
         };
 
@@ -62,7 +62,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Name));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
