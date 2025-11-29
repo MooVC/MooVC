@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics.Constraints
 {
+    using System.Data;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
 
@@ -21,16 +23,15 @@
 
         public static implicit operator string(New @new)
         {
-            if (@new is null)
-            {
-                @new = NotRequired;
-            }
+            Guard.Against.Conversion<New, string>(@new);
 
             return @new.ToString();
         }
 
         public static implicit operator Snippet(New @new)
         {
+            Guard.Against.Conversion<New, Snippet>(@new);
+
             return Snippet.From(@new);
         }
 

@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Directive_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -27,16 +29,15 @@
 
         public static implicit operator string(Directive directive)
         {
-            if (directive is null)
-            {
-                directive = Undefined;
-            }
+            Guard.Against.Conversion<Directive, string>(directive);
 
             return directive.ToString();
         }
 
         public static implicit operator Snippet(Directive directive)
         {
+            Guard.Against.Conversion<Directive, Snippet>(directive);
+
             return Snippet.From(directive);
         }
 

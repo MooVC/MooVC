@@ -8,16 +8,16 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Second = "Collections";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Qualifier? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

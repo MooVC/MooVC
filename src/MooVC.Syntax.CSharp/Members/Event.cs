@@ -5,6 +5,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -31,16 +32,15 @@
 
         public static implicit operator string(Event @event)
         {
-            if (@event is null)
-            {
-                @event = Undefined;
-            }
+            Guard.Against.Conversion<Event, string>(@event);
 
             return @event.ToString();
         }
 
         public static implicit operator Snippet(Event @event)
         {
+            Guard.Against.Conversion<Event, Snippet>(@event);
+
             return Snippet.From(@event);
         }
 

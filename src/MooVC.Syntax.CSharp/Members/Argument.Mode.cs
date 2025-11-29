@@ -1,6 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument
@@ -12,6 +14,7 @@
             public static readonly Mode Out = "out";
             public static readonly Mode None = string.Empty;
             public static readonly Mode Ref = "ref";
+            public static readonly Mode RefReadonly = "ref readonly";
 
             internal Mode(string value)
             {
@@ -32,16 +35,15 @@
 
             public static implicit operator string(Mode mode)
             {
-                if (mode is null)
-                {
-                    mode = None;
-                }
+                Guard.Against.Conversion<Mode, string>(mode);
 
                 return mode.ToString();
             }
 
             public static implicit operator Snippet(Mode mode)
             {
+                Guard.Against.Conversion<Mode, Snippet>(mode);
+
                 return Snippet.From(mode);
             }
 

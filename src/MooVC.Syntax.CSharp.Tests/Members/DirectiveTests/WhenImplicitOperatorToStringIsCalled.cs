@@ -7,16 +7,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Alias = "System";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Directive? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

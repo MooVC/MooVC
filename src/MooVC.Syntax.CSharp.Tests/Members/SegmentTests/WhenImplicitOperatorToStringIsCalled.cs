@@ -8,16 +8,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Unicode = "Álpha";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyShouldBeReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Segment? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

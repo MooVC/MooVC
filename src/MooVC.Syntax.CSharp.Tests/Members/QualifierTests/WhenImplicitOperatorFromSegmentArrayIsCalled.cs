@@ -6,16 +6,16 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     private static readonly Segment beta = new("Beta");
 
     [Fact]
-    public void GivenNullThenUnqualifiedReturned()
+    public void GivenNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Segment[]? values = default;
 
         // Act
-        Qualifier result = values;
+        Func<Qualifier> result = () => values;
 
         // Assert
-        result.ShouldBe(Qualifier.Unqualified);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

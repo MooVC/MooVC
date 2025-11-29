@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp.Members {
+namespace MooVC.Syntax.CSharp {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Members {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Identifier_Resources {
+    internal class IGuardClauseExtensions_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Identifier_Resources() {
+        internal IGuardClauseExtensions_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Identifier.Resources", typeof(Identifier_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.IGuardClauseExtensions.Resources", typeof(IGuardClauseExtensions_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The casing type `{0:G}` is not supported by `{1}`..
+        ///   Looks up a localized string similar to The `{0}` to convert to type `{1}` must be provided..
         /// </summary>
-        internal static string ToStringCasingNotSupported {
+        internal static string ConvertToIdentifierRequired {
             get {
-                return ResourceManager.GetString("ToStringCasingNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
-        /// </summary>
-        internal static string ToStringOptionsRequired {
-            get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value `{0}` is not valid for `{1}`. Please use PascalCase, starting with an uppercase letter, containing only letters or digits, and excluding underscores, spaces, or reserved keywords..
-        /// </summary>
-        internal static string ValidateValueRequired {
-            get {
-                return ResourceManager.GetString("ValidateValueRequired", resourceCulture);
+                return ResourceManager.GetString("ConvertToIdentifierRequired", resourceCulture);
             }
         }
     }

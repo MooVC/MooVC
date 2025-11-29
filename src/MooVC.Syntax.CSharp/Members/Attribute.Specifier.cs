@@ -1,6 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
 
     public partial class Attribute
     {
@@ -33,16 +35,15 @@
 
             public static implicit operator string(Specifier specifier)
             {
-                if (specifier is null)
-                {
-                    specifier = None;
-                }
+                Guard.Against.Conversion<Specifier, string>(specifier);
 
                 return specifier.ToString();
             }
 
             public static implicit operator Snippet(Specifier specifier)
             {
+                Guard.Against.Conversion<Specifier, Snippet>(specifier);
+
                 return Snippet.From(specifier);
             }
 

@@ -3,16 +3,16 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Constraint? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

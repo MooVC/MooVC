@@ -4,7 +4,9 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -29,16 +31,15 @@
 
         public static implicit operator string(Constraint constraint)
         {
-            if (constraint is null)
-            {
-                constraint = Unspecified;
-            }
+            Guard.Against.Conversion<Constraint, string>(constraint);
 
             return constraint.ToString();
         }
 
         public static implicit operator Snippet(Constraint constraint)
         {
+            Guard.Against.Conversion<Constraint, Snippet>(constraint);
+
             return Snippet.From(constraint);
         }
 

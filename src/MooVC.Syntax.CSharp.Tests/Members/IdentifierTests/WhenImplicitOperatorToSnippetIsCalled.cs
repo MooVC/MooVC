@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string IdentifierName = "Identifier";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Identifier? subject = default;
+        Identifier? identifier = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => identifier;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

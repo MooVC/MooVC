@@ -3,16 +3,16 @@ namespace MooVC.Syntax.CSharp.Members.ArgumentTests.ModeTests;
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument.Mode? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

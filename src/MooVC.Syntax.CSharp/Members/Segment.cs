@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
     using static MooVC.Syntax.CSharp.Members.Segment_Resources;
@@ -20,16 +21,15 @@
 
         public static implicit operator string(Segment segment)
         {
-            if (segment is null)
-            {
-                segment = Empty;
-            }
+            Guard.Against.Conversion<Segment, string>(segment);
 
             return segment.ToString();
         }
 
         public static implicit operator Snippet(Segment segment)
         {
+            Guard.Against.Conversion<Segment, Snippet>(segment);
+
             return Snippet.From(segment);
         }
 

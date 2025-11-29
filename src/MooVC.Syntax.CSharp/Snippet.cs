@@ -1,15 +1,12 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
-    using System.Data;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Linq;
     using static MooVC.Syntax.CSharp.Snippet_Resources;
 
     [Monify(Type = typeof(ImmutableArray<string>))]

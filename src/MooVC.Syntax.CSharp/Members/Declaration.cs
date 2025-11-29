@@ -4,8 +4,10 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Generics;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -27,16 +29,15 @@
 
         public static implicit operator string(Declaration declaration)
         {
-            if (declaration is null)
-            {
-                declaration = Unspecified;
-            }
+            Guard.Against.Conversion<Declaration, string>(declaration);
 
             return declaration.ToString();
         }
 
         public static implicit operator Snippet(Declaration declaration)
         {
+            Guard.Against.Conversion<Declaration, Snippet>(declaration);
+
             return Snippet.From(declaration);
         }
 

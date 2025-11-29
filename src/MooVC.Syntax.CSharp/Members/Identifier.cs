@@ -38,17 +38,23 @@
 
         public static implicit operator string(Identifier identifier)
         {
-            if (identifier is null)
-            {
-                identifier = Unnamed;
-            }
+            Guard.Against.Conversion<Identifier, string>(identifier);
 
             return identifier.ToString();
         }
 
         public static implicit operator Snippet(Identifier identifier)
         {
+            Guard.Against.Conversion<Identifier, Snippet>(identifier);
+
             return Snippet.From(identifier);
+        }
+
+        public static implicit operator Identifier(Type type)
+        {
+            Guard.Against.Conversion<Type, Identifier>(type);
+
+            return type.GetIdentifier();
         }
 
         public override string ToString()

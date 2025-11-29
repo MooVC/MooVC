@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Format = "{0}={1}";
 
     [Fact]
-    public void GivenNullSubjectThenCallIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument.Formatter? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(Argument.Formatter.Call));
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

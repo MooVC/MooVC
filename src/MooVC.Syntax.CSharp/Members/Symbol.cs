@@ -1,9 +1,11 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Symbol_Resources;
@@ -28,17 +30,25 @@
 
         public static implicit operator string(Symbol symbol)
         {
-            if (symbol is null)
-            {
-                symbol = Unspecified;
-            }
+            Guard.Against.Conversion<Symbol, string>(symbol);
 
             return symbol.ToString();
         }
 
         public static implicit operator Snippet(Symbol symbol)
         {
+            Guard.Against.Conversion<Symbol, Snippet>(symbol);
+
             return Snippet.From(symbol);
+        }
+
+        public static implicit operator Symbol(Type type)
+        {
+            Guard.Against.Conversion<Type, Symbol>(type);
+
+            return new Symbol()
+                .WithName(type)
+                .WithQualifier(type);
         }
 
         public override string ToString()

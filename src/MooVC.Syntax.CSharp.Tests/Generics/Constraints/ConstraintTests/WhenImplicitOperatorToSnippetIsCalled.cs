@@ -1,18 +1,20 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
+using Shouldly;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Constraint? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
 
@@ -39,16 +40,15 @@
 
         public static implicit operator string(Scope scope)
         {
-            if (scope is null)
-            {
-                scope = Unspecified;
-            }
+            Guard.Against.Conversion<Scope, string>(scope);
 
             return scope.ToString();
         }
 
         public static implicit operator Snippet(Scope scope)
         {
+            Guard.Against.Conversion<Scope, Snippet>(scope);
+
             return Snippet.From(scope);
         }
 

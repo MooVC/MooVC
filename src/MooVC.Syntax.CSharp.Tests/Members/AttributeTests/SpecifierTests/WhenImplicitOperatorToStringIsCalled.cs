@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Method = "method";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyStringIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Attribute.Specifier? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

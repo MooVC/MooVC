@@ -2,21 +2,20 @@
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    private const string Empty = "";
     private const string Alpha = "Alpha";
     private const string Unicode = "Álpha";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Identifier? subject = default;
+        Identifier? identifier = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => identifier;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]
@@ -36,13 +35,13 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Identifier(Empty);
+        var subject = new Identifier(string.Empty);
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(Empty);
+        result.ShouldBe(string.Empty);
     }
 
     [Fact]

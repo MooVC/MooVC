@@ -6,16 +6,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Content = "argument";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

@@ -5,7 +5,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Argument_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -28,16 +28,15 @@
 
         public static implicit operator string(Argument argument)
         {
-            if (argument is null)
-            {
-                argument = Undefined;
-            }
+            Guard.Against.Conversion<Argument, string>(argument);
 
             return argument.ToString();
         }
 
         public static implicit operator Snippet(Argument argument)
         {
+            Guard.Against.Conversion<Argument, Snippet>(argument);
+
             return Snippet.From(argument);
         }
 

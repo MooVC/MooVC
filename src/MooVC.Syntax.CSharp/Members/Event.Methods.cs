@@ -3,6 +3,7 @@
     using System;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -24,16 +25,15 @@
 
             public static implicit operator string(Methods methods)
             {
-                if (methods is null)
-                {
-                    methods = Default;
-                }
+                Guard.Against.Conversion<Methods, string>(methods);
 
                 return methods.ToString();
             }
 
             public static implicit operator Snippet(Methods methods)
             {
+                Guard.Against.Conversion<Methods, Snippet>(methods);
+
                 return Snippet.From(methods);
             }
 

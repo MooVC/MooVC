@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "TParameter";
 
     [Fact]
-    public void GivenNullSubjectThenReturnsEmpty()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Parameter? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

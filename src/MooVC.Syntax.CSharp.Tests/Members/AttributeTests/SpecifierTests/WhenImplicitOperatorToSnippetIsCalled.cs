@@ -3,16 +3,16 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Attribute.Specifier? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

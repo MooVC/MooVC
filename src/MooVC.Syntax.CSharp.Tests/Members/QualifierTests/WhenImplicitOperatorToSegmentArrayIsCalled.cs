@@ -8,17 +8,16 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     private static readonly Segment beta = new("Beta");
 
     [Fact]
-    public void GivenNullQualifierThenEmptySegmentsReturned()
+    public void GivenNullQualifierThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Qualifier? qualifier = default;
 
         // Act
-        Segment[] result = qualifier;
+        Func<Segment[]> result = () => qualifier;
 
         // Assert
-        _ = result.ShouldNotBeNull();
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

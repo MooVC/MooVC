@@ -40,6 +40,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Definition.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="IGuardClauseExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IGuardClauseExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Argument.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -80,6 +85,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Qualifier.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Result.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Result.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Segment.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -105,6 +115,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StringExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="TypeExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TypeExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="ValidationContextExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -123,6 +138,10 @@
     <EmbeddedResource Update="Concepts\Definition.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="IGuardClauseExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IGuardClauseExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Argument.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -156,6 +175,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Qualifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Members\Result.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Result.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Members\Segment.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Segment.Resources.Designer.cs</LastGenOutput>
@@ -175,6 +198,10 @@
     <EmbeddedResource Update="StringExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TypeExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TypeExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ValidationContextExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

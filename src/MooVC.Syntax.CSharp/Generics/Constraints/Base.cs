@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp.Members;
@@ -18,16 +19,15 @@
 
         public static implicit operator string(Base @base)
         {
-            if (@base is null)
-            {
-                @base = Unspecified;
-            }
+            Guard.Against.Conversion<Base, string>(@base);
 
             return @base.ToString();
         }
 
         public static implicit operator Snippet(Base @base)
         {
+            Guard.Against.Conversion<Base, Snippet>(@base);
+
             return Snippet.From(@base);
         }
 

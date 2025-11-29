@@ -1,6 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument
@@ -24,16 +26,15 @@
 
             public static implicit operator string(Formatter formatter)
             {
-                if (formatter is null)
-                {
-                    formatter = Call;
-                }
+                Guard.Against.Conversion<Formatter, string>(formatter);
 
                 return formatter.ToString();
             }
 
             public static implicit operator Snippet(Formatter formatter)
             {
+                Guard.Against.Conversion<Formatter, Snippet>(formatter);
+
                 return Snippet.From(formatter);
             }
 

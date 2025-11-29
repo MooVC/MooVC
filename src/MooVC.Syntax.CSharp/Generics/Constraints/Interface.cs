@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
     using MooVC.Linq;
@@ -20,16 +22,15 @@
 
         public static implicit operator string(Interface @interface)
         {
-            if (@interface is null)
-            {
-                @interface = Undefined;
-            }
+            Guard.Against.Conversion<Interface, Snippet>(@interface);
 
             return @interface.ToString();
         }
 
         public static implicit operator Snippet(Interface @interface)
         {
+            Guard.Against.Conversion<Interface, Snippet>(@interface);
+
             return Snippet.From(@interface);
         }
 

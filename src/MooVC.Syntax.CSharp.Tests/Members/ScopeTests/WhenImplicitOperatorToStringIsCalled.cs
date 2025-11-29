@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Value = "private";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyStringReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Scope? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

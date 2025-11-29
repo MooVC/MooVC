@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 
     [Monify(Type = typeof(string))]
@@ -20,16 +21,15 @@
 
         public static implicit operator string(Identifier identifier)
         {
-            if (identifier is null)
-            {
-                identifier = Unnamed;
-            }
+            Guard.Against.Conversion<Identifier, string>(identifier);
 
             return identifier.ToString();
         }
 
         public static implicit operator Snippet(Identifier identifier)
         {
+            Guard.Against.Conversion<Identifier, Snippet>(identifier);
+
             return Snippet.From(identifier);
         }
 

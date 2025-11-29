@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using static MooVC.Syntax.CSharp.Members.Qualifier_Resources;
 
     [Monify(Type = typeof(ImmutableArray<Segment>))]
@@ -21,9 +22,28 @@
 
         public bool IsUnqualified => this == Unqualified;
 
+        public static implicit operator Qualifier(Type type)
+        {
+            Guard.Against.Conversion<Type, Qualifier>(type);
+
+            return type.Namespace;
+        }
+
+        public static implicit operator Qualifier(string value)
+        {
+            Guard.Against.Conversion<Qualifier, string>(value);
+
+            return value
+                .Split(new string[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(segment => new Segment(value))
+                .ToImmutableArray();
+        }
+
         public static implicit operator Qualifier(Segment[] values)
         {
-            if (values is null || values.Length == 0)
+            Guard.Against.Conversion<Segment[], Qualifier>(values);
+
+            if (values.Length == 0)
             {
                 return Unqualified;
             }
@@ -33,26 +53,22 @@
 
         public static implicit operator Segment[](Qualifier qualifier)
         {
-            if (qualifier is null)
-            {
-                return Array.Empty<Segment>();
-            }
+            Guard.Against.Conversion<Qualifier, Segment[]>(qualifier);
 
             return qualifier._value.ToArray();
         }
 
         public static implicit operator string(Qualifier qualifier)
         {
-            if (qualifier is null)
-            {
-                qualifier = Unqualified;
-            }
+            Guard.Against.Conversion<Qualifier, string>(qualifier);
 
             return qualifier.ToString();
         }
 
         public static implicit operator Snippet(Qualifier qualifier)
         {
+            Guard.Against.Conversion<Qualifier, Snippet>(qualifier);
+
             return Snippet.From(qualifier);
         }
 

@@ -1,22 +1,23 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Members;
+using Shouldly;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Value = "BaseClass";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Base? subject = default;
+        Base? @base = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => @base;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

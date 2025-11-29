@@ -5,16 +5,16 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Value = "Symbol";
 
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Symbol? subject = default;
 
         // Act
-        string result = subject;
+        Func<string> result = () => subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

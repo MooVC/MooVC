@@ -3,16 +3,16 @@ namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]
-    public void GivenNullSubjectThenEmptyIsReturned()
+    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Event.Methods? subject = default;
 
         // Act
-        Snippet result = subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Immutable;
-    using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.CSharp.StringExtensions_Resources;

@@ -5,8 +5,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Linq;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -31,16 +33,15 @@
 
         public static implicit operator string(Attribute attribute)
         {
-            if (attribute is null)
-            {
-                attribute = Unspecified;
-            }
+            Guard.Against.Conversion<Attribute, string>(attribute);
 
             return attribute.ToString();
         }
 
         public static implicit operator Snippet(Attribute attribute)
         {
+            Guard.Against.Conversion<Attribute, Snippet>(attribute);
+
             return Snippet.From(attribute);
         }
 

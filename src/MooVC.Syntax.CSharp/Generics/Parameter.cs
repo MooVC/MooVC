@@ -4,6 +4,7 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
@@ -24,16 +25,15 @@
 
         public static implicit operator string(Parameter parameter)
         {
-            if (parameter is null)
-            {
-                parameter = Undefined;
-            }
+            Guard.Against.Conversion<Parameter, string>(parameter);
 
             return parameter.ToString();
         }
 
         public static implicit operator Snippet(Parameter parameter)
         {
+            Guard.Against.Conversion<Parameter, Snippet>(parameter);
+
             return Snippet.From(parameter);
         }
 
