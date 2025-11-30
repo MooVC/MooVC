@@ -2,7 +2,6 @@
 {
     using Ardalis.GuardClauses;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Parameter
@@ -15,6 +14,8 @@
             public static readonly Mode None = string.Empty;
             public static readonly Mode Ref = "ref";
             public static readonly Mode RefReadonly = "ref readonly";
+            public static readonly Mode Scoped = "scoped";
+            public static readonly Mode This = "this";
 
             internal Mode(string value)
             {
@@ -32,6 +33,15 @@
 
             [Ignore]
             public bool IsRef => this == Ref;
+
+            [Ignore]
+            public bool IsRefReadonly => this == RefReadonly;
+
+            [Ignore]
+            public bool IsScoped => this == Scoped;
+
+            [Ignore]
+            public bool IsThis => this == This;
 
             public static implicit operator string(Mode mode)
             {
