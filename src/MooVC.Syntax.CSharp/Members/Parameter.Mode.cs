@@ -3,7 +3,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Parameter
@@ -33,13 +32,10 @@
 
             public bool IsRef => this == Ref;
 
-            [Ignore]
             public bool IsRefReadonly => this == RefReadonly;
 
-            [Ignore]
             public bool IsScoped => this == Scoped;
 
-            [Ignore]
             public bool IsThis => this == This;
 
             public static implicit operator string(Mode mode)
