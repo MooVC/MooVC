@@ -15,7 +15,6 @@
             public static readonly Mode None = string.Empty;
             public static readonly Mode Params = "params";
             public static readonly Mode Ref = "ref";
-            public static readonly Mode RefReadonly = "ref readonly";
 
             internal Mode(string value)
             {
