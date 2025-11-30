@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.ParameterTests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenValidateIsCalled
 {
@@ -80,7 +81,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Attribute.Name));
+        results[0].MemberNames.ShouldContain(nameof(parameter.Attributes));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

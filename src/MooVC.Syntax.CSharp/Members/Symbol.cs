@@ -55,6 +55,13 @@
 
         public override string ToString()
         {
+            return ToString(Options.Default);
+        }
+
+        public string ToString(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
+
             if (IsUnspecified)
             {
                 return string.Empty;
@@ -62,14 +69,11 @@
 
             string signature = Name.ToString(Identifier.Options.Pascal);
 
-            if (!Qualifier.IsUnqualified)
-            {
-                signature = $"{Qualifier}.{signature}";
-            }
+            signature = GetQualifiedSignature(options, signature);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
-                string arguments = GetArgumentDeclarations();
+                string arguments = GetArgumentDeclarations(options);
 
                 signature = $"{signature}<{arguments}>";
             }
@@ -102,19 +106,36 @@
             }
 
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, results, Arguments)
                 .And(nameof(Qualifier), Qualifier)
                 .And(nameof(Name), Name)
                 .Results;
         }
 
-        private string GetArgumentDeclarations()
+        private string GetArgumentDeclarations(Options options)
         {
             string[] arguments = Arguments
-                .Select(argument => argument.ToString())
+                .Select(argument => argument.ToString(options))
                 .ToArray();
 
             return Separator.Combine(arguments);
+        }
+
+        private string GetQualifiedSignature(Options options, string signature)
+        {
+            if (Qualifier.IsUnqualified || options.Qualification == Qualification.Minimum)
+            {
+                return signature;
+            }
+
+            signature = $"{Qualifier}.{signature}";
+
+            if (options.Qualification == Qualification.Global)
+            {
+                return $"global::{signature}";
+            }
+
+            return signature;
         }
     }
 }

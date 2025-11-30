@@ -1,24 +1,29 @@
 namespace MooVC.Syntax.CSharp.Members.ParameterTests;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenWithTypeIsCalled
 {
-    private const string NewName = "other";
-
     [Fact]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedName()
+    public void GivenValueThenReturnsNewInstanceWithUpdatedType()
     {
         // Arrange
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
 
+        var type = new Symbol
+        {
+            Name = "Foo",
+            Qualifier = "Bar",
+        };
+
         // Act
-        Parameter result = original.WithName(new Identifier(NewName));
+        Parameter result = original.WithType(type);
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Identifier(NewName));
         result.Attributes.ShouldBe(original.Attributes);
         result.Default.ShouldBe(original.Default);
         result.Modifier.ShouldBe(original.Modifier);
+        result.Name.ShouldBe(original.Name);
+        result.Type.ShouldBe(type);
         original.Name.ShouldBe(new Identifier(ParameterTestsData.DefaultName));
     }
 }

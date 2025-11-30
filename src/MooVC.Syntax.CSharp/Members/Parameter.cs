@@ -28,18 +28,20 @@
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
-        public static implicit operator string(Parameter argument)
-        {
-            Guard.Against.Conversion<Parameter, string>(argument);
+        public Symbol Type { get; set; } = Symbol.Unspecified;
 
-            return argument.ToString();
+        public static implicit operator string(Parameter parameter)
+        {
+            Guard.Against.Conversion<Parameter, string>(parameter);
+
+            return parameter.ToString();
         }
 
-        public static implicit operator Snippet(Parameter argument)
+        public static implicit operator Snippet(Parameter parameter)
         {
-            Guard.Against.Conversion<Parameter, Snippet>(argument);
+            Guard.Against.Conversion<Parameter, Snippet>(parameter);
 
-            return Snippet.From(argument);
+            return Snippet.From(parameter);
         }
 
         public override string ToString()
@@ -62,8 +64,9 @@
             string @default = GetDefault();
             string modifier = Modifier;
             string name = Name.ToString(options.Naming);
+            string type = Type.ToString(options.Types);
 
-            return separator.Combine(attributes, modifier, name, @default);
+            return separator.Combine(attributes, modifier, type, name, @default);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -77,17 +80,29 @@
 
             if (Name.IsUnnamed)
             {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Parameter)), new[] { nameof(Name) }));
+                results = results.Append(new ValidationResult(
+                    ValidateNameRequired.Format(nameof(Name), nameof(Parameter)),
+                    new[] { nameof(Name) }));
+            }
+
+            if (Type.IsUnspecified)
+            {
+                results = results.Append(new ValidationResult(
+                    ValidateTypeRequired.Format(nameof(Name), nameof(Parameter), nameof(Name), Name),
+                    new[] { nameof(Name) }));
             }
 
             if (Default.IsMultiLine)
             {
-                results = results.Append(new ValidationResult(ValidateDefaultInvalid.Format(nameof(Default), nameof(Parameter)), new[] { nameof(Default) }));
+                results = results.Append(new ValidationResult(
+                    ValidateDefaultInvalid.Format(nameof(Default), nameof(Parameter), nameof(Type), Type, nameof(Name), Name),
+                    new[] { nameof(Default) }));
             }
 
             return validationContext
-                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), results, Attributes)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
                 .And(nameof(Name), Name)
+                .And(nameof(Type), Type)
                 .Results;
         }
 
@@ -108,7 +123,7 @@
         private string GetDefault()
         {
             return Default.IsSingleLine
-                ? $" = {Default}"
+                ? $"= {Default}"
                 : string.Empty;
         }
     }

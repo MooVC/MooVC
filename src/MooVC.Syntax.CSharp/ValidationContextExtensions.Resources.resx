@@ -118,18 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IncludeMemberNameRequired" xml:space="preserve">
-    <value>The name of the member to validate must be provided.</value>
+    <value>The name of the member of type `{0}` to validate must be provided.</value>
+  </data>
+  <data name="IncludePredicateRequired" xml:space="preserve">
+    <value>The Predicate for `{0}` of type `{1}` must be provided.</value>
   </data>
   <data name="IncludeResultsRequired" xml:space="preserve">
-    <value>The preceding results must be provided.</value>
+    <value>The preceding results `{0}` of type `{1}` must be provided.</value>
   </data>
   <data name="IncludeValidatableRequired" xml:space="preserve">
-    <value>The subject for validation must be provided.</value>
+    <value>The subject `{0}` of type `{1}`  for validation must be provided.</value>
   </data>
   <data name="IncludeValidatablesRequired" xml:space="preserve">
-    <value>The subjects for validation must be provided.</value>
+    <value>The subjects `{0}` of type `{1}` for validation must be provided.</value>
   </data>
   <data name="IncludeValidationContextRequired" xml:space="preserve">
-    <value>The context within which the validation is being performed must be provided.</value>
+    <value>The context within which the validation of `{0}` of type `{1}`  is being performed must be provided.</value>
+  </data>
+  <data name="ValidateConditionNotSatisified" xml:space="preserve">
+    <value>The condition for `{0}` of type `{1}` was not met.</value>
   </data>
 </root>

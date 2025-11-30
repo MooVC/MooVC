@@ -24,7 +24,9 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         var left = new Parameter.Options();
-        var right = new Parameter.Options().WithNaming(Identifier.Options.Pascal);
+
+        Parameter.Options right = new Parameter.Options()
+            .WithNaming(Identifier.Options.Pascal);
 
         // Act
         int leftHash = left.GetHashCode();

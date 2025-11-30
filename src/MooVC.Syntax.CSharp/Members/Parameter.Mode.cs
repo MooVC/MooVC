@@ -1,13 +1,13 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
-    using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Parameter
     {
         [Monify(Type = typeof(string))]
+        [SkipAutoInstantiation]
         public sealed partial class Mode
         {
             public static readonly Mode In = "in";
@@ -21,16 +21,12 @@
                 _value = value;
             }
 
-            [Ignore]
             public bool IsIn => this == In;
 
-            [Ignore]
             public bool IsOut => this == Out;
 
-            [Ignore]
             public bool IsNone => this == None;
 
-            [Ignore]
             public bool IsRef => this == Ref;
 
             public static implicit operator string(Mode mode)

@@ -6,7 +6,6 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -76,7 +75,7 @@
 
             return validationContext
                 .Include(nameof(Base), Base)
-                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), Interfaces)
+                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUndefined, Interfaces)
                 .Results;
         }
     }

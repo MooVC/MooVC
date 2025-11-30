@@ -31,7 +31,7 @@
 
         public static implicit operator Qualifier(string value)
         {
-            Guard.Against.Conversion<Qualifier, string>(value);
+            Guard.Against.Conversion<string, Qualifier>(value);
 
             return value
                 .Split(new string[] { Separator }, StringSplitOptions.RemoveEmptyEntries)

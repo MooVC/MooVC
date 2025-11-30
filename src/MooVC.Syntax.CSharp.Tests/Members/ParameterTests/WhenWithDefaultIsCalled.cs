@@ -7,7 +7,7 @@ public sealed class WhenWithDefaultIsCalled
     {
         // Arrange
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
-        Snippet @default = Snippet.From("value");
+        var @default = Snippet.From("value");
 
         // Act
         Parameter result = original.WithDefault(@default);

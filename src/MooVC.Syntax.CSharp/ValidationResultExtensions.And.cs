@@ -1,24 +1,47 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     internal static partial class ValidationResultExtensions
     {
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,
-            IValidatableObject validatable)
+            T validatable)
+            where T : IValidatableObject
         {
             return preceding.ValidationContext.Include(memberName, preceding.Results, validatable);
         }
 
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,
-            IEnumerable<IValidatableObject> validatables)
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
         {
             return preceding.ValidationContext.Include(memberName, preceding.Results, validatables);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            string memberName,
+            Predicate<T> predicate,
+            T validatable)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.Include(memberName, predicate, preceding.Results, validatable);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            string memberName,
+            Predicate<T> predicate,
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.Include(memberName, predicate, preceding.Results, validatables);
         }
     }
 }

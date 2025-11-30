@@ -51,12 +51,12 @@
             }
 
             return validationContext
-                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), results, Attributes)
-                .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), Events)
-                .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), Indexers)
-                .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), Methods)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), @event => !@event.IsUndefind, Events)
+                .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), indexer => indexer.IsUndefined, Indexers)
+                .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), method => method.IsUndefined, Methods)
                 .And(nameof(Name), Name)
-                .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), Properties)
+                .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => property.IsUndefined, Properties)
                 .Results;
         }
     }

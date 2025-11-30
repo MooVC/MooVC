@@ -9,7 +9,7 @@ public sealed class WhenEqualsObjectIsCalled
         Parameter subject = ParameterTestsData.Create();
 
         // Act
-        bool result = subject.Equals(null);
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

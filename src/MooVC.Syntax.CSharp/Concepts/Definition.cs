@@ -47,7 +47,7 @@
             return validationContext
                 .Include(nameof(Construct), results, Construct)
                 .And(nameof(Namespace), Namespace)
-                .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), Usings)
+                .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), @using => !@using.IsUndefined, Usings)
                 .Results;
         }
     }

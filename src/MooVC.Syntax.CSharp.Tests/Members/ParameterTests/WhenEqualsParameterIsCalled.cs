@@ -12,7 +12,7 @@ public sealed class WhenEqualsParameterIsCalled
         Parameter? right = default;
 
         // Act
-        bool result = left?.Equals(right) ?? right is null;
+        bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
         result.ShouldBeTrue();

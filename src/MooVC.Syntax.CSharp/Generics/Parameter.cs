@@ -52,7 +52,7 @@
             }
 
             return validationContext
-                .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), results, Constraints)
+                .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), constraint => !constraint.IsUnspecified, results, Constraints)
                 .And(nameof(Name), Name)
                 .Results;
         }

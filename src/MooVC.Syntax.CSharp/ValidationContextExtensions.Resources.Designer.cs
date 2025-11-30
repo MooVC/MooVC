@@ -61,7 +61,7 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name of the member to validate must be provided..
+        ///   Looks up a localized string similar to The name of the member of type `{0}` to validate must be provided..
         /// </summary>
         internal static string IncludeMemberNameRequired {
             get {
@@ -70,7 +70,16 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The preceding results must be provided..
+        ///   Looks up a localized string similar to The Predicate for `{0}` of type `{1}` must be provided..
+        /// </summary>
+        internal static string IncludePredicateRequired {
+            get {
+                return ResourceManager.GetString("IncludePredicateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The preceding results `{0}` of type `{1}` must be provided..
         /// </summary>
         internal static string IncludeResultsRequired {
             get {
@@ -79,7 +88,7 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The subject for validation must be provided..
+        ///   Looks up a localized string similar to The subject `{0}` of type `{1}`  for validation must be provided..
         /// </summary>
         internal static string IncludeValidatableRequired {
             get {
@@ -88,7 +97,7 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The subjects for validation must be provided..
+        ///   Looks up a localized string similar to The subjects `{0}` of type `{1}` for validation must be provided..
         /// </summary>
         internal static string IncludeValidatablesRequired {
             get {
@@ -97,11 +106,20 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The context within which the validation is being performed must be provided..
+        ///   Looks up a localized string similar to The context within which the validation of `{0}` of type `{1}`  is being performed must be provided..
         /// </summary>
         internal static string IncludeValidationContextRequired {
             get {
                 return ResourceManager.GetString("IncludeValidationContextRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The condition for `{0}` of type `{1}` was not met..
+        /// </summary>
+        internal static string ValidateConditionNotSatisified {
+            get {
+                return ResourceManager.GetString("ValidateConditionNotSatisified", resourceCulture);
             }
         }
     }

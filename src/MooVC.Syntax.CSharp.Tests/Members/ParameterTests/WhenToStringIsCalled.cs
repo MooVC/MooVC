@@ -25,7 +25,7 @@ public sealed class WhenToStringIsCalled
         Parameter parameter = ParameterTestsData.Create();
 
         // Act
-        Func<string> action = () => parameter.ToString(options: null!);
+        Func<string> action = () => parameter.ToString(options: default);
 
         // Assert
         _ = action.ShouldThrow<ArgumentNullException>();
@@ -43,21 +43,25 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        result.ShouldBe(" ".Combine(string.Empty, Parameter.Mode.Ref, ParameterTestsData.DefaultName, " = 42"));
+        result.ShouldBe($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
     }
 
     [Fact]
     public void GivenOptionsThenReturnsParameterStringUsingNaming()
     {
         // Arrange
-        Parameter parameter = ParameterTestsData.Create(name: "value");
-        var options = new Parameter.Options { Naming = Identifier.Options.Pascal };
+        Parameter parameter = ParameterTestsData.Create(name: "Value", type: typeof(string));
+
+        var options = new Parameter.Options
+        {
+            Naming = Identifier.Options.Camel,
+        };
 
         // Act
         string result = parameter.ToString(options);
 
         // Assert
-        result.ShouldBe(" ".Combine(string.Empty, Parameter.Mode.None, new Identifier("value").ToString(options.Naming), string.Empty));
+        result.ShouldBe("string value");
     }
 
     [Fact]

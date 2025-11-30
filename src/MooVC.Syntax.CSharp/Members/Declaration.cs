@@ -74,7 +74,7 @@
             }
 
             return validationContext
-                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), results, Parameters)
+                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, results, Parameters)
                 .And(nameof(Name), Name)
                 .Results;
         }

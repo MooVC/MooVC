@@ -70,6 +70,15 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Type options must be provided..
+        /// </summary>
+        internal static string OptionsTypesRequired {
+            get {
+                return ResourceManager.GetString("OptionsTypesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided..
         /// </summary>
         internal static string ToStringOptionsRequired {
@@ -79,7 +88,7 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` for `{1}` cannot contain more than one line..
+        ///   Looks up a localized string similar to The `{0}` for `{1}` with a `{2}` of `{3}` and a `{4}` of `{5}` cannot contain more than one line..
         /// </summary>
         internal static string ValidateDefaultInvalid {
             get {
@@ -93,6 +102,15 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static string ValidateNameRequired {
             get {
                 return ResourceManager.GetString("ValidateNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` of the `{1}` with `{2}` of `{3}` must be provided..
+        /// </summary>
+        internal static string ValidateTypeRequired {
+            get {
+                return ResourceManager.GetString("ValidateTypeRequired", resourceCulture);
             }
         }
     }
