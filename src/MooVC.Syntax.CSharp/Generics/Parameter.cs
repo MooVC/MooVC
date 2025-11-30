@@ -9,6 +9,7 @@
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Generics.Parameter_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -21,6 +22,7 @@
 
         public ImmutableArray<Constraint> Constraints { get; set; } = ImmutableArray<Constraint>.Empty;
 
+        [Ignore]
         public bool IsUndefined => this == Undefined;
 
         public static implicit operator string(Parameter parameter)
