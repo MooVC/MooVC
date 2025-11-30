@@ -8,7 +8,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Linq;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;

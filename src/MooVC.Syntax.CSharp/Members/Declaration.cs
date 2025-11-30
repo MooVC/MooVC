@@ -6,10 +6,9 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
+    using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -25,7 +24,7 @@
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
-        public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
+        public ImmutableArray<Generic> Parameters { get; set; } = ImmutableArray<Generic>.Empty;
 
         public static implicit operator string(Declaration declaration)
         {

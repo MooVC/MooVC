@@ -24,6 +24,13 @@
 
         public int Lines => _value.Length;
 
+        public static implicit operator string(Snippet snippet)
+        {
+            Guard.Against.Conversion<Snippet, string>(snippet);
+
+            return snippet.ToString();
+        }
+
         public static Snippet From(string value)
         {
             return From(value, Options.Default);

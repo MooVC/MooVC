@@ -24,6 +24,8 @@
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
+        public bool IsNullable { get; set; }
+
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
         public Qualifier Qualifier { get; set; } = Qualifier.Unqualified;
@@ -70,6 +72,11 @@
                 string arguments = GetArgumentDeclarations();
 
                 signature = $"{signature}<{arguments}>";
+            }
+
+            if (IsNullable)
+            {
+                return string.Concat(signature, "?");
             }
 
             return signature;

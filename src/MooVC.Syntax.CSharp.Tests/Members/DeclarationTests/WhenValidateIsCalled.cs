@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Generics;
 using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
+using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenValidateIsCalled
 {

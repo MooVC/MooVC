@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.CSharp.Generics;
+using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenWithParametersIsCalled
 {

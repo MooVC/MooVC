@@ -2,9 +2,10 @@
 {
     using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
-    public partial class Argument
+    public partial class Parameter
     {
         [Monify(Type = typeof(string))]
         public sealed partial class Mode
@@ -12,7 +13,6 @@
             public static readonly Mode In = "in";
             public static readonly Mode Out = "out";
             public static readonly Mode None = string.Empty;
-            public static readonly Mode Params = "params";
             public static readonly Mode Ref = "ref";
             public static readonly Mode RefReadonly = "ref readonly";
 

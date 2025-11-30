@@ -18,10 +18,10 @@
         public static readonly Indexer Undefined = new Indexer();
         private const string Separator = " ";
 
-        public Argument Argument { get; set; } = Argument.Undefined;
-
         [Ignore]
         public bool IsUndefined => this == Undefined;
+
+        public Parameter Parameter { get; set; } = Parameter.Undefined;
 
         public Result Result { get; set; } = Result.Void;
 
@@ -48,11 +48,11 @@
                 return string.Empty;
             }
 
-            string argument = Argument;
+            string parameter = Parameter;
             string result = Result;
             string scope = Scope;
 
-            return Separator.Combine(scope, argument, result);
+            return Separator.Combine(scope, parameter, result);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
