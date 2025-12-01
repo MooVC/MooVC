@@ -61,6 +61,6 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        result.ShouldBe($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}, ");
+        result.ShouldBe($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
     }
 }

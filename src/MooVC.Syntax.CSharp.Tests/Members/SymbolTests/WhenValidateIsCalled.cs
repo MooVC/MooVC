@@ -75,8 +75,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
+            Arguments = [new Symbol { Name = "Invalid Name" }],
             Name = new Identifier(Name),
-            Arguments = [Symbol.Unspecified],
         };
 
         var context = new ValidationContext(symbol);
@@ -88,7 +88,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Arguments));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

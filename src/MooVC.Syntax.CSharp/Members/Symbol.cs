@@ -106,7 +106,7 @@
             }
 
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, results, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
                 .And(nameof(Qualifier), Qualifier)
                 .And(nameof(Name), Name)
                 .Results;
