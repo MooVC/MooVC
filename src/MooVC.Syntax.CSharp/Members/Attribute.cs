@@ -9,7 +9,6 @@
     using Fluentify;
     using MooVC.Linq;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Members.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -79,16 +78,9 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnspecified)
-            {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Attribute)), new[] { nameof(Name) }));
-            }
-
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, results, Arguments)
-                .And(nameof(Name), Name)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
+                .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .Results;
         }
     }

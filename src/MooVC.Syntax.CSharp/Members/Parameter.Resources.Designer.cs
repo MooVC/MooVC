@@ -95,23 +95,5 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("ValidateDefaultInvalid", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` of the `{1}` must be provided..
-        /// </summary>
-        internal static string ValidateNameRequired {
-            get {
-                return ResourceManager.GetString("ValidateNameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` of the `{1}` with `{2}` of `{3}` must be provided..
-        /// </summary>
-        internal static string ValidateTypeRequired {
-            get {
-                return ResourceManager.GetString("ValidateTypeRequired", resourceCulture);
-            }
-        }
     }
 }

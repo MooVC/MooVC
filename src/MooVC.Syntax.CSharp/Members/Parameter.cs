@@ -78,20 +78,6 @@
 
             IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
 
-            if (Name.IsUnnamed)
-            {
-                results = results.Append(new ValidationResult(
-                    ValidateNameRequired.Format(nameof(Name), nameof(Parameter)),
-                    new[] { nameof(Name) }));
-            }
-
-            if (Type.IsUnspecified)
-            {
-                results = results.Append(new ValidationResult(
-                    ValidateTypeRequired.Format(nameof(Name), nameof(Parameter), nameof(Name), Name),
-                    new[] { nameof(Name) }));
-            }
-
             if (Default.IsMultiLine)
             {
                 results = results.Append(new ValidationResult(
@@ -101,8 +87,8 @@
 
             return validationContext
                 .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
-                .And(nameof(Name), Name)
-                .And(nameof(Type), Type)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .And(nameof(Type), _ => !Type.IsUnspecified, Type)
                 .Results;
         }
 

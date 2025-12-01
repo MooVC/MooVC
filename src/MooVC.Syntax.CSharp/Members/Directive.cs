@@ -5,7 +5,6 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Directive_Resources;
     using Ignore = Valuify.IgnoreAttribute;

@@ -120,10 +120,4 @@
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The formatting options for type `{0}` must be provided.</value>
   </data>
-  <data name="ValidateArgumentsInvalid" xml:space="preserve">
-    <value>When providing a `{0}` for `{1}`, the value must be specified.</value>
-  </data>
-  <data name="ValidateNameRequired" xml:space="preserve">
-    <value>The `{0}` of the `{1}` must be provided.</value>
-  </data>
 </root>

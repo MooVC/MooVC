@@ -55,7 +55,9 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            throw new NotImplementedException();
+            return validationContext
+                .Include(nameof(Type), _ => !Type.IsUnspecified, Type)
+                .Results;
         }
     }
 }

@@ -7,7 +7,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
     using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -66,16 +65,9 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnnamed)
-            {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Declaration)), new[] { nameof(Name) }));
-            }
-
             return validationContext
-                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, results, Parameters)
-                .And(nameof(Name), Name)
+                .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;
         }
 

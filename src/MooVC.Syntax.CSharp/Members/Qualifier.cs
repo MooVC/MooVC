@@ -8,7 +8,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using static MooVC.Syntax.CSharp.Members.Qualifier_Resources;
 
     [Monify(Type = typeof(ImmutableArray<Segment>))]
@@ -98,7 +97,9 @@
             {
                 return new[]
                 {
-                    new ValidationResult(ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)), new[] { nameof(Qualifier) }),
+                    new ValidationResult(
+                        ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)),
+                        new[] { nameof(Qualifier) }),
                 };
             }
 

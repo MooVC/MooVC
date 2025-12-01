@@ -16,7 +16,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedParameterThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Parameter();
+        var subject = new Parameter { Constraints = [new() { New = New.Required }] };
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

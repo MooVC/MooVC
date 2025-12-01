@@ -49,7 +49,9 @@
 
             if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
-                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Segment)), new[] { nameof(Segment) });
+                yield return new ValidationResult(
+                    ValidateValueRequired.Format(_value, nameof(Segment)),
+                    new[] { nameof(Segment) });
             }
         }
     }

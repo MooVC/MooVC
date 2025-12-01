@@ -123,7 +123,4 @@
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>
-  <data name="ValidateNameRequired" xml:space="preserve">
-    <value>The `{0}` of the `{1}` must be provided.</value>
-  </data>
 </root>

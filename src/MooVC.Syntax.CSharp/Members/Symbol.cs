@@ -93,22 +93,10 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnnamed)
-            {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Symbol)), new[] { nameof(Name) }));
-            }
-
-            if (!Arguments.IsDefaultOrEmpty && Arguments.Any(argument => argument.IsUnspecified))
-            {
-                results = results.Append(new ValidationResult(ValidateArgumentsInvalid.Format(nameof(Symbol), nameof(Arguments)), new[] { nameof(Arguments) }));
-            }
-
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), results, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, Arguments)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Qualifier), Qualifier)
-                .And(nameof(Name), Name)
                 .Results;
         }
 

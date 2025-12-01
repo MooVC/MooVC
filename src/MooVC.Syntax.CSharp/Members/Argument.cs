@@ -90,7 +90,7 @@
             }
 
             return validationContext
-                .Include(nameof(Name), results, Name)
+                .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
                 .Results;
         }
     }

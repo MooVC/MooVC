@@ -3,7 +3,6 @@
     using System;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -44,7 +43,12 @@
 
             public string ToString(Snippet.Options options)
             {
-                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
+                _ = Guard.Against.Null(
+                    options,
+                    message: MethodsToStringOptionsRequired.Format(
+                        nameof(Snippet.Options),
+                        nameof(Snippet),
+                        nameof(Methods)));
 
                 if (IsDefault)
                 {

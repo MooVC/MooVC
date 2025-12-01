@@ -8,7 +8,6 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Generics.Parameter_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -46,18 +45,14 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnnamed)
+            if (IsUndefined)
             {
-                results = results.Append(new ValidationResult(
-                    ValidateNameRequired.Format(nameof(Name), nameof(Parameter)),
-                    new[] { nameof(Name) }));
+                return Enumerable.Empty<ValidationResult>();
             }
 
             return validationContext
-                .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), constraint => !constraint.IsUnspecified, results, Constraints)
-                .And(nameof(Name), Name)
+                .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), constraint => !constraint.IsUnspecified, Constraints)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }
     }

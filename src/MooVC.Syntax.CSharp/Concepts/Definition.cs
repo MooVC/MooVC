@@ -7,7 +7,6 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Concepts.Definition_Resources;
 
     [Fluentify]
     [Valuify]
@@ -32,21 +31,9 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Namespace.IsUnqualified)
-            {
-                results = results.Append(new ValidationResult(ValidateNamespaceRequired.Format(nameof(Namespace), nameof(Construct)), new[] { nameof(Namespace) }));
-            }
-
-            if (!Construct.IsUndefined)
-            {
-                results = results.Append(new ValidationResult(ValidateConstructInvalid.Format(Namespace, nameof(Construct)), new[] { nameof(Construct) }));
-            }
-
             return validationContext
-                .Include(nameof(Construct), results, Construct)
-                .And(nameof(Namespace), Namespace)
+                .Include(nameof(Construct), _ => !Construct.IsUndefined, Construct)
+                .And(nameof(Namespace), _ => !Namespace.IsUnqualified, Namespace)
                 .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), @using => !@using.IsUndefined, Usings)
                 .Results;
         }

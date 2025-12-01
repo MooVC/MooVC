@@ -5,10 +5,8 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
-    using static MooVC.Syntax.CSharp.Concepts.Construct_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
     public abstract class Construct
@@ -43,21 +41,12 @@
                 return Array.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnspecified)
-            {
-                results = results.Append(new ValidationResult(
-                    ValidateNameRequired.Format(nameof(Name), nameof(Construct)),
-                    new[] { nameof(Name) }));
-            }
-
             return validationContext
-                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, Attributes)
                 .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), @event => !@event.IsUndefind, Events)
                 .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), indexer => indexer.IsUndefined, Indexers)
                 .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), method => method.IsUndefined, Methods)
-                .And(nameof(Name), Name)
+                .And(nameof(Name), _ => !Name.IsUnspecified,  Name)
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => property.IsUndefined, Properties)
                 .Results;
         }

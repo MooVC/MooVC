@@ -5,7 +5,6 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -87,16 +86,9 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
-
-            if (Name.IsUnnamed)
-            {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Event)), new[] { nameof(Name) }));
-            }
-
             return validationContext
-                .Include(nameof(Handler), results, Handler)
-                .And(nameof(Name), Name)
+                .Include(nameof(Handler), Handler)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }
     }
