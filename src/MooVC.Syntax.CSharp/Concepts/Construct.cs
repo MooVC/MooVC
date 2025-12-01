@@ -47,7 +47,9 @@
 
             if (Name.IsUnspecified)
             {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Construct)), new[] { nameof(Name) }));
+                results = results.Append(new ValidationResult(
+                    ValidateNameRequired.Format(nameof(Name), nameof(Construct)),
+                    new[] { nameof(Name) }));
             }
 
             return validationContext

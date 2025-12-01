@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -49,7 +48,9 @@
 
             if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
-                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Identifier)), new[] { nameof(Identifier) });
+                yield return new ValidationResult(
+                    ValidateValueRequired.Format(_value, nameof(Identifier)),
+                    new[] { nameof(Identifier) });
             }
         }
     }
