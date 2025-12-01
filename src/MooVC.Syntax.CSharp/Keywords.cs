@@ -28,10 +28,12 @@
                 "explicit",
                 "extern",
                 "false",
+                "file",
                 "finally",
                 "fixed",
                 "for",
                 "foreach",
+                "global",
                 "goto",
                 "if",
                 "implicit",
@@ -52,8 +54,9 @@
                 "public",
                 "readonly",
                 "ref",
+                "required",
                 "return",
-                "sbyte",
+                "scoped",
                 "sealed",
                 "sizeof",
                 "stackalloc",
@@ -71,11 +74,7 @@
                 "virtual",
                 "void",
                 "volatile",
-                "while",
-                "file",
-                "global",
-                "required",
-                "scoped");
+                "while");
 
         public static bool IsReserved(this string value)
         {
