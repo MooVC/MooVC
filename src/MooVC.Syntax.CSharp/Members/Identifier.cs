@@ -71,7 +71,7 @@
                 return string.Empty;
             }
 
-            if (_value.IsSystemAlias())
+            if (Aliases.IsSystem(_value))
             {
                 return _value.ToCamelCase();
             }
@@ -107,7 +107,7 @@
 
             const int Unspecified = 0;
 
-            if (_value is null || _value.Length == Unspecified || !(rule.IsMatch(_value) || _value.IsSystemAlias()))
+            if (_value is null || _value.Length == Unspecified || !(rule.IsMatch(_value) || Aliases.IsSystem(_value)))
             {
                 yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Identifier)), new[] { nameof(Identifier) });
             }

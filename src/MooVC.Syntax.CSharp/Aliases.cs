@@ -3,9 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
-    internal static partial class StringExtensions
+    internal static class Aliases
     {
         private static readonly HashSet<string> aliases = new HashSet<string>
         {
@@ -29,7 +28,7 @@
             "ushort",
         };
 
-        public static bool IsSystemAlias(this string type)
+        public static bool IsSystem(string type)
         {
             return aliases.Contains(type, StringComparer.OrdinalIgnoreCase);
         }
