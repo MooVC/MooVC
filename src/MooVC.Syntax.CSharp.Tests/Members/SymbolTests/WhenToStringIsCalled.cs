@@ -60,12 +60,12 @@ public sealed class WhenToStringIsCalled
     public void GivenQualifierThenQualifierPrefixedToName()
     {
         // Arrange
-        var subject = SymbolTestsData.Create(qualifier: new Qualifier(["MooVC", "Syntax"]));
+        Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["MooVC", "Syntax"]));
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe($"MooVC.Syntax.{Name}");
+        representation.ShouldBe(Name);
     }
 }

@@ -6,50 +6,88 @@
 
     internal static partial class ValidationResultExtensions
     {
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
             string memberName,
-            IValidatableObject validatable)
+            T validatable)
+            where T : IValidatableObject
         {
-            if (isSatisified)
-            {
-                return preceding.ValidationContext.Include(memberName, preceding.Results, validatable);
-            }
-
-            return preceding;
+            return preceding.AndIf(isSatisified, memberName, _ => true, validatable);
         }
 
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
             string memberName,
-            IEnumerable<IValidatableObject> validatables)
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
         {
-            if (isSatisified)
-            {
-                return preceding.ValidationContext.Include(memberName, preceding.Results, validatables);
-            }
-
-            return preceding;
+            return preceding.AndIf(isSatisified, memberName, _ => true, validatables);
         }
 
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
             string memberName,
-            IValidatableObject validatable)
+            T validatable)
+            where T : IValidatableObject
         {
-            return preceding.AndIf(condition(), memberName, validatable);
+            return preceding.AndIf(condition, memberName, _ => true, validatable);
         }
 
-        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf(
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
             string memberName,
-            IEnumerable<IValidatableObject> validatables)
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
         {
-            return preceding.AndIf(condition(), memberName, validatables);
+            return preceding.AndIf(condition, memberName, _ => true, validatables);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            bool isSatisified,
+            string memberName,
+            Predicate<T> predicate,
+            T validatable)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.IncludeIf(isSatisified, memberName, predicate, preceding.Results, validatable);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            bool isSatisified,
+            string memberName,
+            Predicate<T> predicate,
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.IncludeIf(isSatisified, memberName, predicate, preceding.Results, validatables);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            Func<bool> condition,
+            string memberName,
+            Predicate<T> predicate,
+            T validatable)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.IncludeIf(condition, memberName, predicate, preceding.Results, validatable);
+        }
+
+        public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
+            this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
+            Func<bool> condition,
+            string memberName,
+            Predicate<T> predicate,
+            IEnumerable<T> validatables)
+            where T : IValidatableObject
+        {
+            return preceding.ValidationContext.IncludeIf(condition, memberName, predicate, preceding.Results, validatables);
         }
     }
 }

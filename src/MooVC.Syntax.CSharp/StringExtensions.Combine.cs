@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Immutable;
+    using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.CSharp.StringExtensions_Resources;
@@ -14,19 +15,27 @@
             _ = Guard.Against.Null(values, message: CombineValuesRequired.Format(separator));
 
             var builder = new StringBuilder();
+
+            values = values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .ToArray();
+
             int lastIndex = values.Length - 1;
 
             for (int index = 0; index < values.Length; index++)
             {
-                builder = builder.Append(values[index]);
+                string value = values[index];
+                builder = builder.Append(value);
 
-                if (index < lastIndex)
+                if (index < lastIndex && !string.IsNullOrEmpty(value))
                 {
                     builder = builder.Append(separator);
                 }
             }
 
-            return builder.ToString();
+            return builder
+                .ToString()
+                .Trim();
         }
 
         public static string Combine<T>(this string separator, ImmutableArray<T> elements, Func<T, string> formatter)

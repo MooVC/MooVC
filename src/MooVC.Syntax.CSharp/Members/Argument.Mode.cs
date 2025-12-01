@@ -1,12 +1,13 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
-    using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument
     {
         [Monify(Type = typeof(string))]
+        [SkipAutoInstantiation]
         public sealed partial class Mode
         {
             public static readonly Mode In = "in";

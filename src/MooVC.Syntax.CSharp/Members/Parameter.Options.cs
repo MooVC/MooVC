@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Fluentify;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Members.Argument_Resources;
+    using static MooVC.Syntax.CSharp.Members.Parameter_Resources;
 
     public partial class Parameter
     {
@@ -20,6 +20,9 @@
 
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Identifier.Options Naming { get; set; } = Identifier.Options.Camel;
+
+            [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Symbol.Options Types { get; set; } = Symbol.Options.Default;
         }
     }
 }

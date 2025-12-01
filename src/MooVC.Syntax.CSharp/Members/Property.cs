@@ -10,6 +10,10 @@
     public sealed partial class Property
         : IValidatableObject
     {
+        public static readonly Property Undefined = new Property();
+
+        public bool IsUndefined => this == Undefined;
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             throw new System.NotImplementedException();

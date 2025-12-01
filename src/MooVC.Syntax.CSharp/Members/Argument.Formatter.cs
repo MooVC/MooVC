@@ -1,12 +1,14 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument
     {
         [Monify(Type = typeof(string))]
+        [SkipAutoInstantiation]
         public sealed partial class Formatter
         {
             public static readonly Formatter Call = new Formatter("{0}: {1}");
@@ -17,10 +19,8 @@
                 _value = value;
             }
 
-            [Ignore]
             public bool IsCall => this == Call;
 
-            [Ignore]
             public bool IsDeclaration => this == Declaration;
 
             public static implicit operator string(Formatter formatter)

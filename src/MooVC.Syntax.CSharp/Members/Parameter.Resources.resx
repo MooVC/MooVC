@@ -120,13 +120,19 @@
   <data name="OptionsNamingRequired" xml:space="preserve">
     <value>The Naming options must be provided.</value>
   </data>
+  <data name="OptionsTypesRequired" xml:space="preserve">
+    <value>The Type options must be provided.</value>
+  </data>
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided.</value>
   </data>
   <data name="ValidateDefaultInvalid" xml:space="preserve">
-    <value>The `{0}` for `{1}` cannot contain more than one line.</value>
+    <value>The `{0}` for `{1}` with a `{2}` of `{3}` and a `{4}` of `{5}` cannot contain more than one line.</value>
   </data>
   <data name="ValidateNameRequired" xml:space="preserve">
     <value>The `{0}` of the `{1}` must be provided.</value>
+  </data>
+  <data name="ValidateTypeRequired" xml:space="preserve">
+    <value>The `{0}` of the `{1}` with `{2}` of `{3}` must be provided.</value>
   </data>
 </root>

@@ -55,7 +55,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = new Identifier(Name),
-            Parameters = [new Parameter()],
+            Parameters = [new Parameter { Name = "Invalid Name" }],
         };
 
         var context = new ValidationContext(declaration);
@@ -67,7 +67,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Name));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
