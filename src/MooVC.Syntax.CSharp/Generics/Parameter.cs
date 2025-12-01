@@ -48,7 +48,9 @@
 
             if (Name.IsUnnamed)
             {
-                results = results.Append(new ValidationResult(ValidateNameRequired.Format(nameof(Name), nameof(Parameter)), new[] { nameof(Name) }));
+                results = results.Append(new ValidationResult(
+                    ValidateNameRequired.Format(nameof(Name), nameof(Parameter)),
+                    new[] { nameof(Name) }));
             }
 
             return validationContext

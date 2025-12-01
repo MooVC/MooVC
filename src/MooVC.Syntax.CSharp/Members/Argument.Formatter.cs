@@ -2,7 +2,6 @@
 {
     using Ardalis.GuardClauses;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Argument

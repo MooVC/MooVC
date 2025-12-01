@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics.Constraints
 {
-    using System.Data;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
