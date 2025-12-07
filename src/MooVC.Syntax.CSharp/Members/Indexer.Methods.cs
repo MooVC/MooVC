@@ -5,10 +5,10 @@
     using Fluentify;
     using MooVC.Syntax.CSharp;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Members.Event_Resources;
+    using static MooVC.Syntax.CSharp.Members.Indexer_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
-    public partial class Event
+    public partial class Indexer
     {
         [Fluentify]
         [Valuify]
@@ -16,12 +16,12 @@
         {
             public static readonly Methods Default = new Methods();
 
-            public Snippet Add { get; set; } = Snippet.Empty;
+            public Snippet Get { get; set; } = Snippet.Empty;
 
             [Ignore]
             public bool IsDefault => this == Default;
 
-            public Snippet Remove { get; set; } = Snippet.Empty;
+            public Snippet Set { get; set; } = Snippet.Empty;
 
             public static implicit operator string(Methods methods)
             {
@@ -56,8 +56,8 @@
                     return string.Empty;
                 }
 
-                Snippet add = Format("add", options, Add);
-                Snippet remove = Format("remove", options, Remove);
+                Snippet add = Format("get", options, Get);
+                Snippet remove = Format("set", options, Set);
 
                 return add
                     .Append(options, options.NewLine)

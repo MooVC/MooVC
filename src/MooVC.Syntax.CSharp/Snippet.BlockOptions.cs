@@ -11,9 +11,13 @@
         [Valuify]
         public sealed partial class BlockOptions
         {
-            [Required(ErrorMessageResourceName = nameof(BlockMarkersRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
+            [Required(ErrorMessageResourceName = nameof(BlockOptionsMarkersRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public BoundaryOptions Markers { get; set; } = new BoundaryOptions();
 
+            [Required(ErrorMessageResourceName = nameof(BlockOptionsInlineRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
+            public InlineStyle Inline { get; set; } = InlineStyle.Lambda;
+
+            [Required(ErrorMessageResourceName = nameof(BlockOptionsStyleRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public StyleType Style { get; set; } = StyleType.Allman;
         }
     }

@@ -19,6 +19,10 @@
 
         private const string Separator = " ";
 
+        public bool IsTask => this == Task;
+
+        public bool IsVoid => this == Void;
+
         public Kind Modifier { get; set; } = Kind.None;
 
         public Modality Mode { get; set; } = Modality.Asynchronous;
