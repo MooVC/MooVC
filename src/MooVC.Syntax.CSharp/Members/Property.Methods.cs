@@ -3,10 +3,8 @@ namespace MooVC.Syntax.CSharp.Members
     using System;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using Monify;
     using MooVC.Syntax.CSharp;
     using Valuify;
-    using static MooVC.Syntax.CSharp.Members.Property;
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -60,10 +58,9 @@ namespace MooVC.Syntax.CSharp.Members
                     return get.ToString(options);
                 }
 
-                if (Set.Scope == scope)
-                {
-                    scope = Set.Scope;
-                }
+                scope = Set.Scope == scope
+                    ? default
+                    : Set.Scope;
 
                 Snippet set = Format(Set.Mode.ToString(), options, Set.Behaviour, scope: scope);
 
@@ -84,56 +81,6 @@ namespace MooVC.Syntax.CSharp.Members
                     : $"{scope} {keyword}";
 
                 return snippet.Block(options, opening: Snippet.From(keyword));
-            }
-        }
-
-        [Fluentify]
-        [Valuify]
-        public sealed partial class Setter
-        {
-            public static readonly Setter Default = new Setter();
-
-            public Snippet Behaviour { get; set; } = Snippet.Empty;
-
-            [Ignore]
-            public bool IsDefault => this == Default;
-
-            public Mode Mode { get; set; } = Mode.Set;
-
-            public Scope Scope { get; set; }
-        }
-
-        [Monify(Type = typeof(int))]
-        public sealed partial class Mode
-        {
-            public static readonly Mode Init = 2;
-            public static readonly Mode ReadOnly = 1;
-            public static readonly Mode Set = 0;
-
-            internal Mode(int value)
-            {
-                _value = value;
-            }
-
-            public bool IsInit => this == Init;
-
-            public bool IsReadOnly => this == ReadOnly;
-
-            public bool IsSet => this == Set;
-
-            public override string ToString()
-            {
-                if (IsInit)
-                {
-                    return "init";
-                }
-
-                if (IsSet)
-                {
-                    return "set";
-                }
-
-                return string.Empty;
             }
         }
     }

@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEquivalentInstancesThenHashCodesAreEqual()
     {
         // Arrange
-        Property.Setter first = new Property.Setter { Behaviour = Snippet.From("value") };
-        Property.Setter second = new Property.Setter { Behaviour = Snippet.From("value") };
+        var first = new Property.Setter { Behaviour = Snippet.From("value") };
+        var second = new Property.Setter { Behaviour = Snippet.From("value") };
 
         // Act
         int firstHash = first.GetHashCode();
@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentInstancesThenHashCodesAreNotEqual()
     {
         // Arrange
-        Property.Setter first = new Property.Setter { Behaviour = Snippet.From("value") };
-        Property.Setter second = new Property.Setter { Behaviour = Snippet.From("alternative") };
+        var first = new Property.Setter { Behaviour = Snippet.From("value") };
+        var second = new Property.Setter { Behaviour = Snippet.From("alternative") };
 
         // Act
         int firstHash = first.GetHashCode();

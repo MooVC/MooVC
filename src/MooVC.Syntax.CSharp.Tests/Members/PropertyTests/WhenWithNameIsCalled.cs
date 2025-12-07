@@ -20,6 +20,6 @@ public sealed class WhenWithNameIsCalled
         result.Scope.ShouldBe(original.Scope);
         result.Type.ShouldBe(original.Type);
 
-        original.Name.ShouldBe(PropertyTestsData.DefaultName);
+        original.Name.ShouldBe((Identifier)PropertyTestsData.DefaultName);
     }
 }

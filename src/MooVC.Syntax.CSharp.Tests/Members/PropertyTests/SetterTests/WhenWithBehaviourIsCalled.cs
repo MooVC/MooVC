@@ -6,8 +6,8 @@ public sealed class WhenWithBehaviourIsCalled
     public void GivenBehaviourThenReturnsUpdatedInstance()
     {
         // Arrange
-        Property.Setter original = new Property.Setter();
-        Snippet behaviour = Snippet.From("value = input");
+        var original = new Property.Setter();
+        var behaviour = Snippet.From("value = input");
 
         // Act
         Property.Setter result = original.WithBehaviour(behaviour);

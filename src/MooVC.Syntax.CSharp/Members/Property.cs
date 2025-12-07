@@ -62,16 +62,17 @@
             }
 
             Snippet signature = GetSignature();
-            var methods = Snippet.From(Behaviours.ToString(options, Scope));
 
-            if (Default.IsEmpty)
+            signature = Snippet
+                .From(Behaviours.ToString(options, Scope))
+                .Block(options, signature);
+
+            if (!Default.IsEmpty)
             {
-                methods = methods.Append(options, $" = {Default}");
+                signature = signature.Append(options, $" = {Default}");
             }
 
-            return methods
-                .Block(options, signature)
-                .ToString();
+            return signature.ToString();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

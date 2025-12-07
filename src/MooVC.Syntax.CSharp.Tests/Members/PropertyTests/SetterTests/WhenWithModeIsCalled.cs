@@ -6,7 +6,7 @@ public sealed class WhenWithModeIsCalled
     public void GivenModeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Property.Setter original = new Property.Setter { Mode = Property.Mode.Set };
+        var original = new Property.Setter { Mode = Property.Mode.Set };
 
         // Act
         Property.Setter result = original.WithMode(Property.Mode.Init);

@@ -53,7 +53,7 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Property.Mode left = Property.Mode.Init;
+        Property.Mode left = Property.Mode.ReadOnly;
         const int right = Same;
 
         // Act

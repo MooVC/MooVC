@@ -6,7 +6,7 @@ public sealed class WhenEqualsMethodsIsCalled
     public void GivenNullThenFalseIsReturned()
     {
         // Arrange
-        Property.Methods? subject = new Property.Methods { Get = Snippet.From("value") };
+        var subject = new Property.Methods { Get = Snippet.From("value") };
         Property.Methods? target = default!;
 
         // Act

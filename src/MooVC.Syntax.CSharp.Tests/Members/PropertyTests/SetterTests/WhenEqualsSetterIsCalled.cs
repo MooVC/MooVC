@@ -6,7 +6,7 @@ public sealed class WhenEqualsSetterIsCalled
     public void GivenNullThenFalseIsReturned()
     {
         // Arrange
-        Property.Setter subject = new Property.Setter { Behaviour = Snippet.From("value") };
+        var subject = new Property.Setter { Behaviour = Snippet.From("value") };
         Property.Setter? target = default!;
 
         // Act
@@ -20,7 +20,7 @@ public sealed class WhenEqualsSetterIsCalled
     public void GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
-        Property.Setter subject = new Property.Setter { Behaviour = Snippet.From("value") };
+        var subject = new Property.Setter { Behaviour = Snippet.From("value") };
         Property.Setter target = subject;
 
         // Act
@@ -34,14 +34,14 @@ public sealed class WhenEqualsSetterIsCalled
     public void GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
-        Property.Setter subject = new Property.Setter
+        var subject = new Property.Setter
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Mode.Init,
             Scope = Scope.Internal,
         };
 
-        Property.Setter target = new Property.Setter
+        var target = new Property.Setter
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Mode.Init,
@@ -61,8 +61,8 @@ public sealed class WhenEqualsSetterIsCalled
     public void GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange
-        Property.Setter subject = new Property.Setter { Behaviour = Snippet.From("value") };
-        Property.Setter target = new Property.Setter { Behaviour = Snippet.From("alternative") };
+        var subject = new Property.Setter { Behaviour = Snippet.From("value") };
+        var target = new Property.Setter { Behaviour = Snippet.From("alternative") };
 
         // Act
         bool resultSubjectTarget = subject.Equals(target);

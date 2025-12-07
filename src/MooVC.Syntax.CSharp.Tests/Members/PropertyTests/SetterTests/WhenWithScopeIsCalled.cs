@@ -6,7 +6,7 @@ public sealed class WhenWithScopeIsCalled
     public void GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Property.Setter original = new Property.Setter { Scope = Scope.Internal };
+        var original = new Property.Setter { Scope = Scope.Internal };
 
         // Act
         Property.Setter result = original.WithScope(Scope.Private);
