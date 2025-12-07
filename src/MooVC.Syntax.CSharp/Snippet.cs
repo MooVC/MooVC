@@ -87,7 +87,7 @@
                 blocked[index] = opening._value[index];
             }
 
-            if (options.Block.Style == BlockOptions.StyleType.KAndR && openingLines > 0)
+            if (options.Block.Style.IsKAndR && openingLines > 0)
             {
                 blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
             }

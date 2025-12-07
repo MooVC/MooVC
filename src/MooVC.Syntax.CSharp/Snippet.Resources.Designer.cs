@@ -61,15 +61,6 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The boundary Markers for the Block must be provided..
-        /// </summary>
-        internal static string BlockMarkersRequired {
-            get {
-                return ResourceManager.GetString("BlockMarkersRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The snippet to combine with the block must be provided..
         /// </summary>
         internal static string BlockOpeningRequired {
@@ -79,11 +70,38 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The style to use for Inline statements must be provided..
+        /// </summary>
+        internal static string BlockOptionsInlineRequired {
+            get {
+                return ResourceManager.GetString("BlockOptionsInlineRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The boundary Markers for the Block must be provided..
+        /// </summary>
+        internal static string BlockOptionsMarkersRequired {
+            get {
+                return ResourceManager.GetString("BlockOptionsMarkersRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The options required to format the block..
         /// </summary>
         internal static string BlockOptionsRequired {
             get {
                 return ResourceManager.GetString("BlockOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bracing style must be provided..
+        /// </summary>
+        internal static string BlockOptionsStyleRequired {
+            get {
+                return ResourceManager.GetString("BlockOptionsStyleRequired", resourceCulture);
             }
         }
         
