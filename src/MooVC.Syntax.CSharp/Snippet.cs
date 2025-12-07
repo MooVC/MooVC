@@ -87,6 +87,20 @@
                 blocked[index] = opening._value[index];
             }
 
+            if (IsSingleLine && !options.Block.Inline.IsMultiLineBraces)
+            {
+                if (options.Block.Inline.IsLambda)
+                {
+                    blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
+                }
+                else if (options.Block.Inline.IsSingleLineBraces)
+                {
+                    blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
+                }
+
+                return new Snippet(ImmutableArray.Create(blocked, 0, index));
+            }
+
             if (options.Block.Style.IsKAndR && openingLines > 0)
             {
                 blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");

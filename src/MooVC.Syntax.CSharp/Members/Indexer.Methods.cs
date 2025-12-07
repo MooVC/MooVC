@@ -57,24 +57,24 @@
                 }
 
                 Snippet add = Format("get", options, Get);
-                Snippet remove = Format("set", options, Set);
 
-                return add
-                    .Append(options, options.NewLine)
-                    .Append(remove)
-                    .ToString(options);
+                if (!Set.IsEmpty)
+                {
+                    Snippet remove = Format("set", options, Set);
+
+                    add = add
+                        .Append(options, options.NewLine)
+                        .Append(remove);
+                }
+
+                return add.ToString(options);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)
             {
                 if (snippet.IsEmpty)
                 {
-                    return Snippet.From($"{keyword};");
-                }
-
-                if (snippet.IsSingleLine)
-                {
-                    return Snippet.From($"{keyword} => {snippet};");
+                    return Snippet.Empty;
                 }
 
                 return snippet.Block(options, opening: Snippet.From(keyword));

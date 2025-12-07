@@ -59,7 +59,10 @@ public sealed class WhenBlockIsCalled
         var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine);
+            .WithNewLine(Environment.NewLine)
+            .WithBlock(block => block
+                .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
+                .WithStyle(Snippet.BlockOptions.StyleType.Allman));
 
         // Act
         Snippet result = subject.Block(options, opening);
@@ -85,7 +88,9 @@ public sealed class WhenBlockIsCalled
 
         Snippet.Options options = new Snippet.Options()
             .WithNewLine(Environment.NewLine)
-            .WithBlock(block => block.WithStyle(Snippet.BlockOptions.StyleType.KAndR));
+            .WithBlock(block => block
+                .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
+                .WithStyle(Snippet.BlockOptions.StyleType.KAndR));
 
         // Act
         Snippet result = subject.Block(options, opening);

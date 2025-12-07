@@ -69,11 +69,6 @@
                 return string.Concat(signature, ";");
             }
 
-            if (methods.IsSingleLine)
-            {
-                return $"{signature} {{ {methods} }}";
-            }
-
             return methods
                 .Block(options, Snippet.From(signature, options))
                 .ToString();
