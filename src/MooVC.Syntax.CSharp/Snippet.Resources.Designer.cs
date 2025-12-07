@@ -187,6 +187,24 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The options required to direct the stack must be provided..
+        /// </summary>
+        internal static string StackOptionsRequired {
+            get {
+                return ResourceManager.GetString("StackOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to `{1}`  upon the current `{0}` must be provided..
+        /// </summary>
+        internal static string StackTopRequired {
+            get {
+                return ResourceManager.GetString("StackTopRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The options required to direct formatting must be provided..
         /// </summary>
         internal static string ToStringOptionsRequired {

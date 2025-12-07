@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,55 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BlockOptionsMarkersRequired" xml:space="preserve">
-    <value>The boundary Markers for the Block must be provided.</value>
-  </data>
-  <data name="BlockOpeningRequired" xml:space="preserve">
-    <value>The snippet to combine with the block must be provided.</value>
-  </data>
-  <data name="BlockOptionsRequired" xml:space="preserve">
-    <value>The options required to format the block.</value>
-  </data>
-  <data name="BoundaryClosingRequired" xml:space="preserve">
-    <value>The Opening Marker for the Boundary of the Block must be provided.</value>
-  </data>
-  <data name="BoundaryOpeningRequired" xml:space="preserve">
-    <value>The Closing Marker for the Boundary of the Block must be provided.</value>
-  </data>
-  <data name="FromOptionsRequired" xml:space="preserve">
-    <value>The `{0}` for parsing the `{1}` must be provided.</value>
-  </data>
-  <data name="FromValueRequired" xml:space="preserve">
-    <value>The `{0}` must be provided.</value>
-  </data>
-  <data name="OptionsBlockRequired" xml:space="preserve">
-    <value>The Block configuration must be provided.</value>
-  </data>
-  <data name="OptionsMaxLengthOutOfRange" xml:space="preserve">
-    <value>The maximum length of a single line must be within the acceptable range.</value>
-  </data>
-  <data name="OptionsNewLineRequired" xml:space="preserve">
-    <value>The character(s) to mark a new line must be provided.</value>
-  </data>
-  <data name="OptionsWhitespaceRequired" xml:space="preserve">
-    <value>The whitespace to be applied must be provided.</value>
-  </data>
-  <data name="ShiftOptionsRequired" xml:space="preserve">
-    <value>The options required to direct the shift must be provided.</value>
+  <data name="MethodsToStringOptionsRequired" xml:space="preserve">
+    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>
   <data name="ToStringOptionsRequired" xml:space="preserve">
-    <value>The options required to direct formatting must be provided.</value>
+    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>
-  <data name="BlockOptionsInlineRequired" xml:space="preserve">
-    <value>The style to use for Inline statements must be provided.</value>
-  </data>
-  <data name="BlockOptionsStyleRequired" xml:space="preserve">
-    <value>The bracing style must be provided.</value>
-  </data>
-  <data name="StackOptionsRequired" xml:space="preserve">
-    <value>The options required to direct the stack must be provided.</value>
-  </data>
-  <data name="StackTopRequired" xml:space="preserve">
-    <value>The `{0}` to `{1}`  upon the current `{0}` must be provided.</value>
+  <data name="ValidateDefaultRequired" xml:space="preserve">
+    <value>The `{0}` value for the `{1}` cannot be more than one line in length.</value>
   </data>
 </root>

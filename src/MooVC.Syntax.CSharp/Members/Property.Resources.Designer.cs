@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Members {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Indexer_Resources {
+    internal class Property_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Indexer_Resources() {
+        internal Property_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Indexer.Resources", typeof(Indexer_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Property.Resources", typeof(Property_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,20 +79,11 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` associated with the `{1}` must define for `{2}` at a minimum..
+        ///   Looks up a localized string similar to The `{0}` value for the `{1}` cannot be more than one line in length..
         /// </summary>
-        internal static string ValidateBehavioursRequired {
+        internal static string ValidateDefaultRequired {
             get {
-                return ResourceManager.GetString("ValidateBehavioursRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` provided by the `{1}` must be provided..
-        /// </summary>
-        internal static string ValidateResultRequired {
-            get {
-                return ResourceManager.GetString("ValidateResultRequired", resourceCulture);
+                return ResourceManager.GetString("ValidateDefaultRequired", resourceCulture);
             }
         }
     }
