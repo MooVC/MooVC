@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System;
     using Monify;
 
     public partial class Snippet

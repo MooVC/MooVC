@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -19,8 +20,10 @@
 
         private const string Separator = " ";
 
+        [Ignore]
         public bool IsTask => this == Task;
 
+        [Ignore]
         public bool IsVoid => this == Void;
 
         public Kind Modifier { get; set; } = Kind.None;

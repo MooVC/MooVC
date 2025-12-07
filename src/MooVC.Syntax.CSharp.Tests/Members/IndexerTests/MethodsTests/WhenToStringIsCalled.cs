@@ -34,19 +34,15 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
-            Set = Snippet.Empty,
+            Get = Snippet.From("value;"),
         };
+
+        string expected = "get => value;";
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        string expected = Snippet.From($"get => {subject.Get};")
-            .Append(Snippet.Options.Default, Environment.NewLine)
-            .Append("set;")
-            .ToString();
-
         representation.ShouldBe(expected);
     }
 
@@ -61,16 +57,18 @@ public sealed class WhenToStringIsCalled
             Get = get,
         };
 
+        string expected = """
+            get
+            {
+                first
+                second
+            }
+            """;
+
         // Act
         string representation = subject.ToString();
 
         // Assert
-        string expected = get
-            .Block(Snippet.Options.Default, opening: Snippet.From("get"))
-            .Append(Snippet.Options.Default, Environment.NewLine)
-            .Append("set;")
-            .ToString();
-
         representation.ShouldBe(expected);
     }
 }

@@ -53,16 +53,16 @@
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
 
-            if (IsUndefined)
+            if (IsUndefined || Behaviours.IsDefault || Behaviours.Get.IsEmpty)
             {
                 return string.Empty;
             }
 
             Snippet signature = GetSignature();
-            Snippet methods = Behaviours;
+            var methods = Snippet.From(Behaviours.ToString(options));
 
-            return signature
-                .Block(options, methods)
+            return methods
+                .Block(options, signature)
                 .ToString();
         }
 
@@ -99,7 +99,7 @@
             string parameter = Parameter;
             string result = Result;
             string scope = Scope;
-            string signature = Separator.Combine(scope, result, $"[{parameter}]");
+            string signature = Separator.Combine(scope, result, $"this[{parameter}]");
 
             return Snippet.From(signature);
         }

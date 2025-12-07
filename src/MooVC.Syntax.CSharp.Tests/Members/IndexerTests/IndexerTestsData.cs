@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 internal static class IndexerTestsData
 {
-    public const string DefaultParameterName = "index";
+    public const string DefaultParameterName = "Index";
     public const string DefaultParameterType = "int";
     public const string DefaultResultType = "string";
 

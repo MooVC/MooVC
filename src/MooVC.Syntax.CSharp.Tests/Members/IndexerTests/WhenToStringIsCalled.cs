@@ -2,9 +2,6 @@ namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 public sealed class WhenToStringIsCalled
 {
-    private const string GetBody = "value";
-    private const string SetBody = "value = input";
-
     [Fact]
     public void GivenUndefinedIndexerThenEmptyReturned()
     {
@@ -19,7 +16,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenDefaultBehavioursThenSignatureIsBlocked()
+    public void GivenDefaultBehavioursThenEmptyReturned()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -28,9 +25,83 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
+        representation.ShouldBe(string.Empty);
+    }
+
+    [Fact]
+    public void GivenBehavioursWhenInlineIsLambdaThenBodyIsRendered()
+    {
+        // Arrange
+        var methods = new Indexer.Methods
+        {
+            Get = Snippet.From("value;"),
+        };
+
+        Indexer subject = IndexerTestsData.Create(behaviours: methods);
+
+        Snippet.Options options = Snippet.Options.Default
+            .WithBlock(block => block
+            .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+
+        // Act
+        string representation = subject.ToString(options);
+
+        // Assert
+        string expected = "public string this[int index] => get => value;";
+
+        representation.ShouldBe(expected);
+    }
+
+    [Fact]
+    public void GivenBehavioursWhenInlineIsSingleLineBracesThenBodyIsRendered()
+    {
+        // Arrange
+        var methods = new Indexer.Methods
+        {
+            Get = Snippet.From("return value;"),
+        };
+
+        Indexer subject = IndexerTestsData.Create(behaviours: methods);
+
+        Snippet.Options options = Snippet.Options.Default
+            .WithBlock(block => block
+            .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+
+        // Act
+        string representation = subject.ToString(options);
+
+        // Assert
+        string expected = "public string this[int index] { get { return value; } }";
+
+        representation.ShouldBe(expected);
+    }
+
+    [Fact]
+    public void GivenBehavioursWhenInlineIsMutipleLineBracesThenBodyIsRendered()
+    {
+        // Arrange
+        var methods = new Indexer.Methods
+        {
+            Get = Snippet.From("return value;"),
+        };
+
+        Indexer subject = IndexerTestsData.Create(behaviours: methods);
+
+        Snippet.Options options = Snippet.Options.Default
+            .WithBlock(block => block
+            .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+
+        // Act
+        string representation = subject.ToString(options);
+
+        // Assert
         string expected = """
+            public string this[int index]
             {
-                public string [int index]
+                get
+                {
+                    return value;
+                }
             }
             """;
 
@@ -38,13 +109,13 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenBehavioursThenBodyIsRendered()
+    public void GivenBehavioursWhenGetAndSetThenBodyIsRendered()
     {
         // Arrange
         var methods = new Indexer.Methods
         {
-            Get = Snippet.From(GetBody),
-            Set = Snippet.From(SetBody),
+            Get = Snippet.From("value;"),
+            Set = Snippet.From("_value[index] = value;"),
         };
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
@@ -54,10 +125,10 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         string expected = """
-            get => value;
-            set => value = input;
+            public string this[int index]
             {
-                public string [int index]
+                get => value;
+                set => _value[index] = value;
             }
             """;
 
