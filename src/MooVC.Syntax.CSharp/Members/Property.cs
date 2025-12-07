@@ -20,16 +20,18 @@
 
         private const string Separator = " ";
 
+        public Methods Behaviours { get; set; } = Methods.Default;
+
+        public Snippet Default { get; set; } = Snippet.Empty;
+
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Methods Behaviours { get; set; } = Methods.Default;
-
         public Identifier Name { get; set; } = Identifier.Unnamed;
 
-        public Result Result { get; set; } = Result.Void;
-
         public Scope Scope { get; set; } = Scope.Public;
+
+        public Symbol Type { get; set; } = Symbol.Unspecified;
 
         public static implicit operator string(Property property)
         {
@@ -52,17 +54,20 @@
 
         public string ToString(Snippet.Options options)
         {
-            _ = Guard.Against.Null(
-                options,
-                message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Property)));
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Property)));
 
-            if (IsUndefined || Behaviours.IsDefault || Behaviours.Get.IsEmpty)
+            if (IsUndefined)
             {
                 return string.Empty;
             }
 
             Snippet signature = GetSignature();
-            Snippet methods = Behaviours;
+            var methods = Snippet.From(Behaviours.ToString(options, Scope));
+
+            if (Default.IsEmpty)
+            {
+                methods = methods.Append(options, $" = {Default}");
+            }
 
             return methods
                 .Block(options, signature)
@@ -78,38 +83,25 @@
 
             IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
 
-            if (Behaviours.IsDefault || Behaviours.Get.IsEmpty)
+            if (Default.IsMultiLine)
             {
                 results = results.Append(new ValidationResult(
-                    PropertyValidateBehavioursRequired.Format(nameof(Behaviours), nameof(Property), nameof(Methods.Get)),
-                    new[] { nameof(Behaviours) }));
-            }
-
-            if (Result.IsVoid)
-            {
-                results = results.Append(new ValidationResult(
-                    PropertyValidateResultRequired.Format(nameof(Result), nameof(Property)),
-                    new[] { nameof(Result) }));
-            }
-
-            if (Name.IsUnnamed)
-            {
-                results = results.Append(new ValidationResult(
-                    PropertyValidateNameRequired.Format(nameof(Name), nameof(Property)),
-                    new[] { nameof(Name) }));
+                    ValidateDefaultRequired.Format(nameof(Default), nameof(Property)),
+                    new[] { nameof(Default) }));
             }
 
             return validationContext
                 .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
+                .And(nameof(Type), _ => !Type.IsUnspecified, Type)
                 .Results;
         }
 
         private Snippet GetSignature()
         {
             string name = Name.ToString(Identifier.Options.Pascal);
-            string result = Result;
             string scope = Scope;
-            string signature = Separator.Combine(scope, result, name);
+            string type = Type;
+            string signature = Separator.Combine(scope, type, name);
 
             return Snippet.From(signature);
         }

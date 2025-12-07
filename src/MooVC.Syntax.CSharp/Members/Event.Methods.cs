@@ -59,9 +59,8 @@
                 Snippet add = Format("add", options, Add);
                 Snippet remove = Format("remove", options, Remove);
 
-                return add
-                    .Append(options, options.NewLine)
-                    .Append(remove)
+                return remove
+                    .Stack(options, add)
                     .ToString(options);
             }
 

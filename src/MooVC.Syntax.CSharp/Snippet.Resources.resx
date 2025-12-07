@@ -162,4 +162,10 @@
   <data name="BlockOptionsStyleRequired" xml:space="preserve">
     <value>The bracing style must be provided.</value>
   </data>
+  <data name="StackOptionsRequired" xml:space="preserve">
+    <value>The options required to direct the stack must be provided.</value>
+  </data>
+  <data name="StackTopRequired" xml:space="preserve">
+    <value>The `{0}` to `{1}`  upon the current `{0}` must be provided.</value>
+  </data>
 </root>

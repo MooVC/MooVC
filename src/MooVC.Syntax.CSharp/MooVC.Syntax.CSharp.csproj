@@ -70,6 +70,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Identifier.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Property.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Property.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Qualifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -147,6 +152,10 @@
     <EmbeddedResource Update="Members\Identifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Property.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Property.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Qualifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

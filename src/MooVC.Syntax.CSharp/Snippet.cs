@@ -15,6 +15,7 @@
     {
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
         private const int SingleLine = 1;
+        private const string Separator = " ";
 
         public bool IsEmpty => this == Empty;
 
@@ -147,6 +148,19 @@
             }
 
             return new Snippet(ImmutableArray.Create(shifted));
+        }
+
+        public Snippet Stack(Options options, Snippet top)
+        {
+            _ = Guard.Against.Null(options, message: StackOptionsRequired);
+            _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
+
+            string separator = IsSingleLine && top.IsSingleLine
+                ? options.NewLine
+                : Separator;
+
+            return Prepend(options, separator)
+                .Prepend(options, top);
         }
 
         public override string ToString()

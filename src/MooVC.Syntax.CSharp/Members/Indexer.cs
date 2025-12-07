@@ -78,14 +78,14 @@
             if (Behaviours.IsDefault || Behaviours.Get.IsEmpty)
             {
                 results = results.Append(new ValidationResult(
-                    IndexerValidateBehavioursRequired.Format(nameof(Behaviours), nameof(Indexer), nameof(Methods.Get)),
+                    ValidateBehavioursRequired.Format(nameof(Behaviours), nameof(Indexer), nameof(Methods.Get)),
                     new[] { nameof(Behaviours) }));
             }
 
             if (Result.IsVoid)
             {
                 results = results.Append(new ValidationResult(
-                    IndexerValidateResultRequired.Format(nameof(Result), nameof(Indexer)),
+                    ValidateResultRequired.Format(nameof(Result), nameof(Indexer)),
                     new[] { nameof(Result) }));
             }
 

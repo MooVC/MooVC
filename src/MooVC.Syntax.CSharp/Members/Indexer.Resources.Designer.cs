@@ -61,24 +61,6 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` associated with the `{1}` must define for `{2}` at a minimum..
-        /// </summary>
-        internal static string IndexerValidateBehavioursRequired {
-            get {
-                return ResourceManager.GetString("IndexerValidateBehavioursRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` provided by the `{1}` must be provided..
-        /// </summary>
-        internal static string IndexerValidateResultRequired {
-            get {
-                return ResourceManager.GetString("IndexerValidateResultRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
         internal static string MethodsToStringOptionsRequired {
@@ -93,6 +75,24 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static string ToStringOptionsRequired {
             get {
                 return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` associated with the `{1}` must define for `{2}` at a minimum..
+        /// </summary>
+        internal static string ValidateBehavioursRequired {
+            get {
+                return ResourceManager.GetString("ValidateBehavioursRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` provided by the `{1}` must be provided..
+        /// </summary>
+        internal static string ValidateResultRequired {
+            get {
+                return ResourceManager.GetString("ValidateResultRequired", resourceCulture);
             }
         }
     }
