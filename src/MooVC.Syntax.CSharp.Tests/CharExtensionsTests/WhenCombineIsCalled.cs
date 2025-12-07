@@ -6,7 +6,7 @@ using System.Linq;
 public sealed class WhenCombineIsCalled
 {
     private const char Separator = ',';
-    private static readonly string[] Samples = ["first", "second", "third"];
+    private static readonly string[] samples = ["first", "second", "third"];
 
     [Fact]
     public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
@@ -25,7 +25,7 @@ public sealed class WhenCombineIsCalled
     public void GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
-        string value = Samples[0];
+        string value = samples[0];
 
         // Act
         string result = Separator.Combine(value);
@@ -38,19 +38,20 @@ public sealed class WhenCombineIsCalled
     public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
+        string expected = string.Join(Separator, samples);
 
         // Act
-        string result = Separator.Combine(Samples);
+        string result = Separator.Combine(samples);
 
         // Assert
-        result.ShouldBe(string.Join(Separator, Samples));
+        result.ShouldBe(expected);
     }
 
     [Fact]
     public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        var elements = ImmutableArray.Create(Samples);
+        var elements = ImmutableArray.Create(samples);
         Func<string, string>? formatter = default;
 
         // Act
@@ -64,12 +65,13 @@ public sealed class WhenCombineIsCalled
     public void GivenElementsThenTheyAreFormattedAndCombined()
     {
         // Arrange
-        var elements = ImmutableArray.Create(Samples);
+        var elements = ImmutableArray.Create(samples);
+        string expected = string.Join(Separator, samples.Select(value => value.ToUpperInvariant()));
 
         // Act
         string result = Separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        result.ShouldBe(string.Join(Separator, Samples.Select(value => value.ToUpperInvariant())));
+        result.ShouldBe(expected);
     }
 }

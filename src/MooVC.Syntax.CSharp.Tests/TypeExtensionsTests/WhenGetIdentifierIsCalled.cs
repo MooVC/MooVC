@@ -1,5 +1,8 @@
 namespace MooVC.Syntax.CSharp.TypeExtensionsTests;
 
+using System.Diagnostics.CodeAnalysis;
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenGetIdentifierIsCalled
 {
     [Fact]
@@ -25,7 +28,7 @@ public sealed class WhenGetIdentifierIsCalled
         string result = type.GetIdentifier();
 
         // Assert
-        result.ShouldBe(type.Name);
+        result.ShouldBe("string");
     }
 
     [Fact]
@@ -35,13 +38,13 @@ public sealed class WhenGetIdentifierIsCalled
         Type type = typeof(GenericSample<int>);
 
         // Act
-        string result = type.GetIdentifier();
+        Identifier identifier = type.GetIdentifier();
+        string result = identifier.ToString(Identifier.Options.Pascal);
 
         // Assert
         result.ShouldBe("GenericSample");
     }
 
-    private sealed class GenericSample<T>
-    {
-    }
+    [SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Not neccessary for testing purposes.")]
+    private sealed class GenericSample<T>;
 }

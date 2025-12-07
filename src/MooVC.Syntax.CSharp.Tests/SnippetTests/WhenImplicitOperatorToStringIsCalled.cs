@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenSnippetThenReturnsStringRepresentation()
     {
         // Arrange
-        Snippet subject = Snippet.From("value");
+        var subject = Snippet.From("value");
 
         // Act
         string result = subject;
