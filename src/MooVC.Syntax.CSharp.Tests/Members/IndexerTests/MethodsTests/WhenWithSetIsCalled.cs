@@ -11,7 +11,7 @@ public sealed class WhenWithSetIsCalled
             Get = Snippet.From("value"),
         };
 
-        Snippet set = Snippet.From("result");
+        var set = Snippet.From("result");
 
         // Act
         Indexer.Methods result = original.WithSet(set);

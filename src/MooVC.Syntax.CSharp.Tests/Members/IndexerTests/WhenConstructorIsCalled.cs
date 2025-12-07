@@ -50,16 +50,19 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Behaviours.ShouldBe(behaviours);
         subject.IsUndefined.ShouldBeFalse();
+
         subject.Parameter.ShouldBe(new Parameter
         {
             Name = ParameterName,
             Type = new Symbol { Name = ParameterType },
         });
+
         subject.Result.ShouldBe(new Result
         {
             Mode = Result.Modality.Synchronous,
             Type = new Symbol { Name = ResultType },
         });
+
         subject.Scope.ShouldBe(Scope.Private);
     }
 }

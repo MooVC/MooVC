@@ -34,7 +34,7 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected.ToString());
+        representation.ShouldBe(expected);
     }
 
     [Fact]
@@ -61,6 +61,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected.ToString());
+        representation.ShouldBe(expected);
     }
 }

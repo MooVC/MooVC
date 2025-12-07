@@ -20,11 +20,12 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
+        string expected = subject.ToString();
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(expected);
     }
 }

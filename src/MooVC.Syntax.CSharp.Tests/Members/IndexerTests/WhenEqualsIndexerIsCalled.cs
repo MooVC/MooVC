@@ -82,6 +82,7 @@ public sealed class WhenEqualsIndexerIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
+
         Indexer target = IndexerTestsData.Create(
             result: new Result
             {

@@ -116,6 +116,7 @@ public sealed class WhenInequalityOperatorIndexerIndexerIsCalled
     {
         // Arrange
         Indexer left = IndexerTestsData.Create();
+
         Indexer right = IndexerTestsData.Create(
             result: new Result
             {

@@ -21,6 +21,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     {
         // Arrange
         Indexer.Methods? left = default;
+
         var right = new Indexer.Methods
         {
             Get = Snippet.From("value"),

@@ -57,6 +57,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Indexer first = IndexerTestsData.Create();
+
         Indexer second = IndexerTestsData.Create(
             result: new Result
             {

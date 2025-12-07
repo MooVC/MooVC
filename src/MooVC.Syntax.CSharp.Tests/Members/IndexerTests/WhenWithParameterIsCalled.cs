@@ -9,6 +9,7 @@ public sealed class WhenWithParameterIsCalled
     {
         // Arrange
         Indexer original = IndexerTestsData.Create();
+
         var parameter = new Parameter
         {
             Name = ParameterName,

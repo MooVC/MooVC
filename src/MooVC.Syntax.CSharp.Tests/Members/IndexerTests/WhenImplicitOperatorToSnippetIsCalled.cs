@@ -20,11 +20,12 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
+        var expected = Snippet.From(subject.ToString());
 
         // Act
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        result.ShouldBe(expected);
     }
 }
