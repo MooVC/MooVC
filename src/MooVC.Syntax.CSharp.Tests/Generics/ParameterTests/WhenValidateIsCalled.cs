@@ -105,4 +105,20 @@ public sealed class WhenValidateIsCalled
         valid.ShouldBeTrue();
         results.ShouldBeEmpty();
     }
+
+    [Fact]
+    public void GivenUndefinedParameterThenValidationIsSkipped()
+    {
+        // Arrange
+        Parameter subject = Parameter.Undefined;
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
+    }
 }

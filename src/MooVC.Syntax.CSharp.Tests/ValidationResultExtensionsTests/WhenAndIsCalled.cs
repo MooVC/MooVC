@@ -58,6 +58,32 @@ public sealed class WhenAndIsCalled
         results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
+    [Fact]
+    public void GivenPredicateThenPredicateResultIsAppended()
+    {
+        // Arrange
+        var initial = new ValidationResult(FirstMessage);
+        var precedingValidatable = new StubValidatable(initial);
+        var additionalValidatable = new StubValidatable();
+        var context = new ValidationContext(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
+            nameof(additionalValidatable),
+            _ => false,
+            additionalValidatable);
+
+        // Assert
+        ValidationResult[] results = actual.Results.ToArray();
+        results.Length.ShouldBe(2);
+        results.ShouldContain(initial);
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(additionalValidatable)));
+    }
+
     private sealed class StubValidatable : IValidatableObject
     {
         public StubValidatable(params ValidationResult[] results)

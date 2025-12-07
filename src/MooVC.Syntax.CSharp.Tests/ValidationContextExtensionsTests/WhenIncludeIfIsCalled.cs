@@ -183,6 +183,56 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(0);
     }
 
+    [Fact]
+    public void GivenPredicateAndTrueConditionThenPredicateOutcomeAffectsResults()
+    {
+        // Arrange
+        const string memberName = "member";
+        var validatable = new TrackingValidatable();
+        var context = new ValidationContext(validatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            true,
+            memberName,
+            _ => false,
+            validatable);
+
+        // Assert
+        actual.ValidationContext.ShouldBeSameAs(context);
+
+        ValidationResult[] results = actual.Results.ToArray();
+        results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(memberName);
+        validatable.Calls.ShouldBe(1);
+    }
+
+    [Fact]
+    public void GivenPredicateAndFalseConditionThenValidationIsSkipped()
+    {
+        // Arrange
+        const string memberName = "member";
+        var validatable = new TrackingValidatable(new ValidationResult(Message));
+        var context = new ValidationContext(validatable);
+        var initial = new ValidationResult("Initial");
+        IEnumerable<ValidationResult> results = [initial];
+        bool predicateInvoked = false;
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            false,
+            memberName,
+            _ => predicateInvoked = true,
+            results,
+            validatable);
+
+        // Assert
+        predicateInvoked.ShouldBeFalse();
+        validatable.Calls.ShouldBe(0);
+        actual.ValidationContext.ShouldBeSameAs(context);
+        actual.Results.ShouldBe(results);
+    }
+
     private sealed class TrackingValidatable : IValidatableObject
     {
         public TrackingValidatable(params ValidationResult[] results)
