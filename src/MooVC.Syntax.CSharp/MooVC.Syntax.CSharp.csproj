@@ -25,6 +25,11 @@
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Generics\Constraints\ConstraintExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ConstraintExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Generics\Constraints\Interface.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -122,6 +127,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Generics\Constraints\ConstraintExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConstraintExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Generics\Constraints\Interface.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Interface.Resources.Designer.cs</LastGenOutput>

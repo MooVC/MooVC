@@ -7,8 +7,11 @@ namespace MooVC.Syntax.CSharp.Members
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.CSharp.Generics;
+    using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Method_Resources;
+    using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -18,15 +21,14 @@ namespace MooVC.Syntax.CSharp.Members
     {
         public static readonly Method Undefined = new Method();
 
-        private const string ParameterSeparator = ", ";
-        private const string SignatureSeparator = " ";
+        private const string Separator = " ";
 
         public Snippet Body { get; set; } = Snippet.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        public Declaration Name { get; set; } = Declaration.Unspecified;
 
         public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
 
@@ -73,13 +75,6 @@ namespace MooVC.Syntax.CSharp.Members
                     .ToString();
             }
 
-            if (Body.IsSingleLine)
-            {
-                return signature
-                    .Append(options, $" => {Body};")
-                    .ToString();
-            }
-
             return Body
                 .Block(options, signature)
                 .ToString();
@@ -94,22 +89,29 @@ namespace MooVC.Syntax.CSharp.Members
 
             return validationContext
                 .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
-                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .And(nameof(Result), Result)
                 .Results;
         }
 
         private Snippet GetSignature(Snippet.Options options)
         {
-            string name = Name.ToString(Identifier.Options.Pascal);
-            string parameters = ParameterSeparator.Combine(
-                Parameters,
-                parameter => parameter.ToString(Parameter.Options.Camel));
+            string name = Name;
+            var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string result = Result;
             string scope = Scope;
-            string signature = SignatureSeparator.Combine(scope, result, $"{name}({parameters})");
+            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options));
+            string signature = Separator.Combine(scope, result, $"{name}({parameters})");
 
-            return Snippet.From(signature, options);
+            if (!clauses.IsEmpty)
+            {
+                return clauses
+                    .Shift(options)
+                    .Prepend(options, options.NewLine)
+                    .Prepend(options, signature);
+            }
+
+            return Snippet.From(options, signature);
         }
     }
 }

@@ -12,7 +12,7 @@ public sealed class WhenFromIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(value, options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(options!, value));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
@@ -58,7 +58,7 @@ public sealed class WhenFromIsCalled
             .WithNewLine(newLine);
 
         // Act
-        var result = Snippet.From(value, options);
+        var result = Snippet.From(options, value);
         ImmutableArray<string> converted = result;
 
         // Assert

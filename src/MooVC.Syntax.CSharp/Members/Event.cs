@@ -70,7 +70,7 @@
             }
 
             return methods
-                .Block(options, Snippet.From(signature, options))
+                .Block(options, Snippet.From(options, signature))
                 .ToString();
         }
 

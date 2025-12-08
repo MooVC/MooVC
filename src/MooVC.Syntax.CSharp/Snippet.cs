@@ -34,10 +34,10 @@
 
         public static Snippet From(string value)
         {
-            return From(value, Options.Default);
+            return From(Options.Default, value);
         }
 
-        public static Snippet From(string value, Options options)
+        public static Snippet From(Options options, string value)
         {
             _ = Guard.Against.Null(options, message: FromOptionsRequired.Format(nameof(Options), nameof(value)));
             _ = Guard.Against.Null(value, message: FromValueRequired.Format(nameof(value)));
@@ -185,7 +185,7 @@
 
             for (int index = 0; index < values.Length; index++)
             {
-                snippets[index] = From(values[index], options);
+                snippets[index] = From(options, values[index]);
             }
 
             return Combine(original, snippets, combine);

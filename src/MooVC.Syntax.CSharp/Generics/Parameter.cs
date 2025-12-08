@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,7 @@
         : IValidatableObject
     {
         public static readonly Parameter Undefined = new Parameter();
+        public static readonly Func<Parameter, string> Names = parameter => parameter.Name;
 
         public Identifier Name { get; set; } = Identifier.Unnamed;
 

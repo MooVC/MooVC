@@ -6,6 +6,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
     using Ignore = Valuify.IgnoreAttribute;
@@ -16,7 +17,6 @@
         : IValidatableObject
     {
         public static readonly Declaration Unspecified = new Declaration();
-        private const string Separator = ", ";
 
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
@@ -50,7 +50,7 @@
 
             if (!Parameters.IsDefaultOrEmpty)
             {
-                string parameters = GetParameterDeclarations();
+                var parameters = Parameters.ToSnippet(Generic.Names);
 
                 signature = $"{signature}<{parameters}>";
             }
@@ -69,15 +69,6 @@
                 .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;
-        }
-
-        private string GetParameterDeclarations()
-        {
-            string[] parameters = Parameters
-                .Select(parameter => parameter.Name.ToString())
-                .ToArray();
-
-            return Separator.Combine(parameters);
         }
     }
 }
