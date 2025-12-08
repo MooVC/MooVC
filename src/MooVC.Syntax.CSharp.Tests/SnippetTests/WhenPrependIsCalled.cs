@@ -45,7 +45,7 @@ public sealed class WhenPrependIsCalled
             .WithNewLine("\n");
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
-        var subject = Snippet.From(Alpha, options);
+        var subject = Snippet.From(options, Alpha);
 
         // Act
         Snippet result = subject.Prepend(options, $"{Beta}\n{Phi}", Gamma);
@@ -64,9 +64,9 @@ public sealed class WhenPrependIsCalled
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
 
-        var subject = Snippet.From(Alpha, options);
-        var first = Snippet.From($"{Beta}\n{Phi}", options);
-        var second = Snippet.From(Gamma, options);
+        var subject = Snippet.From(options, Alpha);
+        var first = Snippet.From(options, $"{Beta}\n{Phi}");
+        var second = Snippet.From(options, Gamma);
 
         // Act
         Snippet result = subject.Prepend(first, second);

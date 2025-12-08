@@ -46,7 +46,7 @@ public sealed class WhenAppendIsCalled
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
-        var subject = Snippet.From(Alpha, options);
+        var subject = Snippet.From(options, Alpha);
 
         // Act
         Snippet result = subject.Append(options, $"{Beta}\n{Phi}", Gamma);
@@ -65,9 +65,9 @@ public sealed class WhenAppendIsCalled
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
-        var subject = Snippet.From(Alpha, options);
-        var first = Snippet.From($"{Beta}\n{Phi}", options);
-        var second = Snippet.From(Gamma, options);
+        var subject = Snippet.From(options, Alpha);
+        var first = Snippet.From(options, $"{Beta}\n{Phi}");
+        var second = Snippet.From(options, Gamma);
 
         // Act
         Snippet result = subject.Append(first, second);
