@@ -71,7 +71,7 @@ namespace MooVC.Syntax.CSharp.Members
             if (Body.IsEmpty)
             {
                 return signature
-                    .Append(options, ";")
+                    .Append(';')
                     .ToString();
             }
 

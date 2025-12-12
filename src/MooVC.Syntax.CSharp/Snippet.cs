@@ -52,6 +52,21 @@
             return new Snippet(ImmutableArray.Create(lines));
         }
 
+        public Snippet Append(char value)
+        {
+            ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>();
+            int last = _value.Length - 1;
+
+            for (int index = 0; index < last; index++)
+            {
+                builder.Add(_value[index]);
+            }
+
+            builder.Add(string.Concat(_value[last], value));
+
+            return builder.ToImmutable();
+        }
+
         public Snippet Append(params string[] values)
         {
             return Append(Options.Default, values);
