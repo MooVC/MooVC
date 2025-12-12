@@ -34,7 +34,7 @@ public sealed class Cloner
     public async Task<T> Clone<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(original,  message: CloneAsyncOriginalRequired);
+        _ = Guard.Against.Null(original, message: CloneAsyncOriginalRequired);
 
         IEnumerable<byte> data = await _serializer
             .Serialize(original, cancellationToken)
