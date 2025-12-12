@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using System.Collections.Immutable;
+
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
@@ -12,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         subject.Body.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
         subject.Name.ShouldBe(Declaration.Unspecified);
-        subject.Parameters.ShouldBe(ImmutableArray<Parameter>.Empty);
+        subject.Parameters.ShouldBe([]);
         subject.Result.ShouldBe(Result.Task);
         subject.Scope.ShouldBe(Scope.Public);
     }
@@ -21,8 +23,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var parameters = new[]
-        {
+        ImmutableArray<Parameter> parameters =
+        [
             new Parameter
             {
                 Name = new Identifier(MethodTestsData.DefaultParameterName),
@@ -33,7 +35,7 @@ public sealed class WhenConstructorIsCalled
                 Name = new Identifier("other"),
                 Type = new Symbol { Name = "bool" },
             },
-        }.ToImmutableArray();
+        ];
 
         var result = new Result
         {

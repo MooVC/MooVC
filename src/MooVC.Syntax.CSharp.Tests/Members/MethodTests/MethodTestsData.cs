@@ -2,12 +2,12 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Generics;
+using System.Diagnostics.CodeAnalysis;
 
 internal static class MethodTestsData
 {
     public const string DefaultName = "Perform";
-    public const string DefaultParameterName = "value";
+    public const string DefaultParameterName = "Value";
     public const string DefaultParameterType = "int";
     public const string DefaultResultType = "string";
 
@@ -20,22 +20,14 @@ internal static class MethodTestsData
     {
         var subject = new Method
         {
-            Name = name ?? new Declaration { Name = new Identifier(DefaultName) },
+            Name = name ?? new Declaration { Name = DefaultName },
             Result = result ?? new Result
             {
                 Mode = Result.Modality.Synchronous,
                 Type = new Symbol { Name = DefaultResultType },
             },
+            Parameters = Create(parameters),
         };
-
-        subject.Parameters = (parameters ?? new[]
-        {
-            new Parameter
-            {
-                Name = DefaultParameterName,
-                Type = new Symbol { Name = DefaultParameterType },
-            },
-        }).ToImmutableArray();
 
         if (body is not null)
         {
@@ -48,5 +40,23 @@ internal static class MethodTestsData
         }
 
         return subject;
+    }
+
+    [SuppressMessage("Style", "IDE0074:Use compound assignment", Justification = "Suggested approach is less readable.")]
+    private static ImmutableArray<Parameter> Create(IEnumerable<Parameter>? parameters)
+    {
+        if (parameters is null)
+        {
+            parameters =
+            [
+                new Parameter
+                {
+                    Name = DefaultParameterName,
+                    Type = new Symbol { Name = DefaultParameterType },
+                },
+            ];
+        }
+
+        return parameters.ToImmutableArray();
     }
 }

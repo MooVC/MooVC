@@ -43,15 +43,15 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
-        Method subject = MethodTestsData.Create(parameters: new[]
-        {
+        Method subject = MethodTestsData.Create(parameters:
+        [
             new Parameter
             {
                 Default = Snippet.From($"first{Environment.NewLine}second"),
                 Name = MethodTestsData.DefaultParameterName,
                 Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
             },
-        });
+        ]);
 
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
@@ -88,14 +88,16 @@ public sealed class WhenValidateIsCalled
     public void GivenValidMethodThenNoValidationErrorsReturned()
     {
         // Arrange
-        Method subject = MethodTestsData.Create(parameters: new[]
-        {
-            new Parameter
-            {
-                Name = MethodTestsData.DefaultParameterName,
-                Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
-            },
-        }, body: Snippet.From("return value;"));
+        Method subject = MethodTestsData.Create(
+            parameters:
+            [
+                new Parameter
+                {
+                    Name = MethodTestsData.DefaultParameterName,
+                    Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
+                },
+            ],
+            body: Snippet.From("return value;"));
 
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
