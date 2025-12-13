@@ -11,6 +11,10 @@
         [Valuify]
         public sealed partial class BoundaryOptions
         {
+            internal BoundaryOptions()
+            {
+            }
+
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(BoundaryClosingRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public string Closing { get; set; } = "}";
 

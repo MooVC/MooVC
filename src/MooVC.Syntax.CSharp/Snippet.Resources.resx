@@ -168,4 +168,10 @@
   <data name="StackTopRequired" xml:space="preserve">
     <value>The `{0}` to `{1}`  upon the current `{0}` must be provided.</value>
   </data>
+  <data name="CombineSnippetsRequired" xml:space="preserve">
+    <value>The snippets to combine must be provided.</value>
+  </data>
+  <data name="CombineOptionsRequired" xml:space="preserve">
+    <value>The options to apply when combining the snippets must be provided.</value>
+  </data>
 </root>

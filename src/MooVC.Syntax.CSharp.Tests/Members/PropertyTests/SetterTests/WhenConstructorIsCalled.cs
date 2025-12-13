@@ -12,7 +12,7 @@ public sealed class WhenConstructorIsCalled
         subject.Behaviour.ShouldBe(Snippet.Empty);
         subject.IsDefault.ShouldBeTrue();
         subject.Mode.ShouldBe(Property.Mode.Set);
-        subject.Scope.ShouldBeNull();
+        subject.Scope.ShouldBe(Scope.Unspecified);
     }
 
     [Fact]

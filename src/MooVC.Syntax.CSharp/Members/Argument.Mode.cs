@@ -16,7 +16,7 @@
             public static readonly Mode Params = "params";
             public static readonly Mode Ref = "ref";
 
-            internal Mode(string value)
+            private Mode(string value)
             {
                 _value = value;
             }

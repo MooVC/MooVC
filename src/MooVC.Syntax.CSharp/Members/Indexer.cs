@@ -19,16 +19,22 @@
         public static readonly Indexer Undefined = new Indexer();
         private const string Separator = " ";
 
+        internal Indexer()
+        {
+        }
+
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Methods Behaviours { get; set; } = Methods.Default;
+        public Methods Behaviours { get; internal set; } = Methods.Default;
 
-        public Parameter Parameter { get; set; } = Parameter.Undefined;
+        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
-        public Result Result { get; set; } = Result.Void;
+        public Parameter Parameter { get; internal set; } = Parameter.Undefined;
 
-        public Scope Scope { get; set; } = Scope.Public;
+        public Result Result { get; internal set; } = Result.Void;
+
+        public Scope Scope { get; internal set; } = Scope.Public;
 
         public static implicit operator string(Indexer indexer)
         {
@@ -96,10 +102,11 @@
 
         private Snippet GetSignature()
         {
+            string extensibility = Extensibility;
             string parameter = Parameter;
             string result = Result;
             string scope = Scope;
-            string signature = Separator.Combine(scope, result, $"this[{parameter}]");
+            string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 
             return Snippet.From(signature);
         }

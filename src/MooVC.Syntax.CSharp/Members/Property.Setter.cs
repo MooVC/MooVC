@@ -13,14 +13,18 @@ namespace MooVC.Syntax.CSharp.Members
         {
             public static readonly Setter Default = new Setter();
 
-            public Snippet Behaviour { get; set; } = Snippet.Empty;
+            internal Setter()
+            {
+            }
+
+            public Snippet Behaviour { get; internal set; } = Snippet.Empty;
 
             [Ignore]
             public bool IsDefault => this == Default;
 
-            public Mode Mode { get; set; } = Mode.Set;
+            public Mode Mode { get; internal set; } = Mode.Set;
 
-            public Scope Scope { get; set; }
+            public Scope Scope { get; internal set; } = Scope.Unspecified;
         }
     }
 }

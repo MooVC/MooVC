@@ -5,8 +5,10 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
+    using static MooVC.Syntax.CSharp.Concepts.Construct_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
     public abstract class Construct
@@ -16,23 +18,40 @@
         {
         }
 
-        public ImmutableArray<Attribute> Attributes { get; set; } = ImmutableArray<Attribute>.Empty;
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
-        public ImmutableArray<Event> Events { get; set; } = ImmutableArray<Event>.Empty;
+        public ImmutableArray<Event> Events { get; internal set; } = ImmutableArray<Event>.Empty;
 
-        public ImmutableArray<Indexer> Indexers { get; set; } = ImmutableArray<Indexer>.Empty;
+        public ImmutableArray<Indexer> Indexers { get; internal set; } = ImmutableArray<Indexer>.Empty;
 
         public abstract bool IsUndefined { get; }
 
-        public ImmutableArray<Method> Methods { get; set; } = ImmutableArray<Method>.Empty;
+        public ImmutableArray<Method> Methods { get; internal set; } = ImmutableArray<Method>.Empty;
 
         [Descriptor("Named")]
         [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The base class will be annotated with it.")]
-        public Declaration Name { get; set; } = Declaration.Unspecified;
+        public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
-        public ImmutableArray<Property> Properties { get; set; } = ImmutableArray<Property>.Empty;
+        public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
-        public Scope Scope { get; set; } = Scope.Public;
+        public Scope Scope { get; internal set; } = Scope.Public;
+
+        public override string ToString()
+        {
+            return ToString(Snippet.Options.Default);
+        }
+
+        public string ToString(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(GetType().Name));
+
+            if (IsUndefined)
+            {
+                return Snippet.Empty;
+            }
+
+            return ToSnippet(options);
+        }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -50,5 +69,7 @@
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => property.IsUndefined, Properties)
                 .Results;
         }
+
+        protected abstract Snippet ToSnippet(Snippet.Options options);
     }
 }

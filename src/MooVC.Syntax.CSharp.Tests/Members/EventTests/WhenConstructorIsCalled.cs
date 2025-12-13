@@ -14,7 +14,6 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Behaviours.ShouldBe(Event.Methods.Default);
         subject.Handler.ShouldBe(Symbol.Unspecified);
-        subject.IsStatic.ShouldBeFalse();
         subject.IsUndefind.ShouldBeTrue();
         subject.Name.ShouldBe(Identifier.Unnamed);
         subject.Scope.ShouldBe(Scope.Public);
@@ -34,7 +33,6 @@ public sealed class WhenConstructorIsCalled
         {
             Behaviours = behaviours,
             Handler = new Symbol { Name = Handler },
-            IsStatic = true,
             Name = new Identifier(Name),
             Scope = Scope.Private,
         };
@@ -42,7 +40,6 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Behaviours.ShouldBe(behaviours);
         subject.Handler.ShouldBe(new Symbol { Name = Handler });
-        subject.IsStatic.ShouldBeTrue();
         subject.IsUndefind.ShouldBeFalse();
         subject.Name.ShouldBe(new Identifier(Name));
         subject.Scope.ShouldBe(Scope.Private);

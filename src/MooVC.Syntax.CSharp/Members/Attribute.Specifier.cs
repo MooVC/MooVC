@@ -2,7 +2,6 @@
 {
     using Ardalis.GuardClauses;
     using Monify;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
 
     public partial class Attribute
     {
@@ -28,7 +27,7 @@
             public static readonly Specifier Type = "type";
             public static readonly Specifier Typevar = "typevar";
 
-            internal Specifier(string value)
+            private Specifier(string value)
             {
                 _value = value;
             }

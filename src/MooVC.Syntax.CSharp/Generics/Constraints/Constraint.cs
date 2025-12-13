@@ -17,16 +17,20 @@
         public static readonly Constraint Unspecified = new Constraint();
         private const string Separator = ", ";
 
-        public Base Base { get; set; } = Base.Unspecified;
+        internal Constraint()
+        {
+        }
 
-        public ImmutableArray<Interface> Interfaces { get; set; } = ImmutableArray<Interface>.Empty;
+        public Base Base { get; internal set; } = Base.Unspecified;
+
+        public ImmutableArray<Interface> Interfaces { get; internal set; } = ImmutableArray<Interface>.Empty;
 
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
-        public Nature Nature { get; set; } = Nature.Unspecified;
+        public Nature Nature { get; internal set; } = Nature.Unspecified;
 
-        public New New { get; set; } = New.NotRequired;
+        public New New { get; internal set; } = New.NotRequired;
 
         public static implicit operator string(Constraint constraint)
         {

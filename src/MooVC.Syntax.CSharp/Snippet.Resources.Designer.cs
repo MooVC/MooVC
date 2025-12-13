@@ -124,6 +124,24 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The options to apply when combining the snippets must be provided..
+        /// </summary>
+        internal static string CombineOptionsRequired {
+            get {
+                return ResourceManager.GetString("CombineOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The snippets to combine must be provided..
+        /// </summary>
+        internal static string CombineSnippetsRequired {
+            get {
+                return ResourceManager.GetString("CombineSnippetsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` for parsing the `{1}` must be provided..
         /// </summary>
         internal static string FromOptionsRequired {

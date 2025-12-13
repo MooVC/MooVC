@@ -20,18 +20,24 @@
 
         private const string Separator = " ";
 
-        public Methods Behaviours { get; set; } = Methods.Default;
+        internal Property()
+        {
+        }
 
-        public Snippet Default { get; set; } = Snippet.Empty;
+        public Methods Behaviours { get; internal set; } = Methods.Default;
+
+        public Snippet Default { get; internal set; } = Snippet.Empty;
+
+        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Scope Scope { get; set; } = Scope.Public;
+        public Scope Scope { get; internal set; } = Scope.Public;
 
-        public Symbol Type { get; set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Unspecified;
 
         public static implicit operator string(Property property)
         {
@@ -99,10 +105,11 @@
 
         private Snippet GetSignature()
         {
+            string extensibility = Extensibility;
             string name = Name.ToString(Identifier.Options.Pascal);
             string scope = Scope;
             string type = Type;
-            string signature = Separator.Combine(scope, type, name);
+            string signature = Separator.Combine(scope, extensibility, type, name);
 
             return Snippet.From(signature);
         }

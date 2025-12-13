@@ -12,7 +12,7 @@
             public static readonly Modality Asynchronous = "async";
             public static readonly Modality Synchronous = string.Empty;
 
-            internal Modality(string value)
+            private Modality(string value)
             {
                 _value = value;
             }

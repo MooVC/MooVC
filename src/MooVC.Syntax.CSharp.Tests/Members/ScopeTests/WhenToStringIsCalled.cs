@@ -8,9 +8,9 @@ public sealed class WhenToStringIsCalled
         { Scope.Internal, "internal" },
         { Scope.Public, "public" },
         { Scope.Private, "private" },
-        { Scope.PrivateProtected, "private protected" },
+        { Scope.Private + Scope.Protected, "private protected" },
         { Scope.Protected, "protected" },
-        { Scope.ProtectedInternal, "protected internal" },
+        { Scope.Protected + Scope.Internal, "protected internal" },
         { Scope.Unspecified, string.Empty },
     };
 

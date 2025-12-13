@@ -11,7 +11,6 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Method_Resources;
-    using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -23,18 +22,24 @@ namespace MooVC.Syntax.CSharp.Members
 
         private const string Separator = " ";
 
-        public Snippet Body { get; set; } = Snippet.Empty;
+        internal Method()
+        {
+        }
+
+        public Snippet Body { get; internal set; } = Snippet.Empty;
+
+        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Declaration Name { get; set; } = Declaration.Unspecified;
+        public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
-        public ImmutableArray<Parameter> Parameters { get; set; } = ImmutableArray<Parameter>.Empty;
+        public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
-        public Result Result { get; set; } = Result.Task;
+        public Result Result { get; internal set; } = Result.Task;
 
-        public Scope Scope { get; set; } = Scope.Public;
+        public Scope Scope { get; internal set; } = Scope.Public;
 
         public static implicit operator string(Method method)
         {
@@ -96,12 +101,13 @@ namespace MooVC.Syntax.CSharp.Members
 
         private Snippet GetSignature(Snippet.Options options)
         {
+            string extensibility = Extensibility;
             string name = Name;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string result = Result;
             string scope = Scope;
-            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options));
-            string signature = Separator.Combine(scope, result, $"{name}({parameters})");
+            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
             if (!clauses.IsEmpty)
             {

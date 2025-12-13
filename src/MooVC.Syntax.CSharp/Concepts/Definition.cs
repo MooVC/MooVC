@@ -1,12 +1,17 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Linq;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Concepts.Definition_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -16,13 +21,64 @@
     {
         public static readonly Definition<T> Empty = new Definition<T>();
 
-        public T Construct { get; set; } = new T();
+        internal Definition()
+        {
+        }
 
+        public T Construct { get; internal set; } = new T();
+
+        [Ignore]
         public bool IsEmpty => this == Empty;
 
-        public Qualifier Namespace { get; set; } = Qualifier.Unqualified;
+        public Qualifier Namespace { get; internal set; } = Qualifier.Unqualified;
 
-        public ImmutableArray<Directive> Usings { get; set; } = ImmutableArray<Directive>.Empty;
+        public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;
+
+        public override string ToString()
+        {
+            return ToString(Options.Default);
+        }
+
+        public string ToString(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Definition<T>)));
+
+            if (IsEmpty)
+            {
+                return string.Empty;
+            }
+
+            Snippet @namespace = Namespace;
+            var usings = Usings.ToSnippet(options.Snippets);
+            string construct = Construct.ToString(options.Snippets);
+
+            if (string.IsNullOrEmpty(construct))
+            {
+                return string.Empty;
+            }
+
+            Snippet definition = Snippet.Empty;
+
+            if (!usings.IsEmpty)
+            {
+                definition = usings
+                    .Append(options.Snippets.NewLine)
+                    .Append(options.Snippets);
+            }
+
+            if (options.Namespace.IsBlock)
+            {
+                definition = definition.Block(options.Snippets, @namespace);
+            }
+            else
+            {
+                definition = definition
+                    .Prepend(options.Snippets.NewLine)
+                    .Prepend(@namespace);
+            }
+
+            return definition.Prepend(@namespace);
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

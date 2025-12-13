@@ -102,7 +102,7 @@ public sealed class WhenEqualsEventIsCalled
         Event subject = EventTestsData.Create();
 
         Event target = EventTestsData.Create();
-        target.IsStatic = true;
+        target.Extensibility = Extensibility.Static;
 
         // Act
         bool result = target.Equals(subject);

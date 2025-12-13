@@ -13,7 +13,7 @@
                 public static readonly InlineStyle SingleLineBraces = 1;
                 public static readonly InlineStyle MultiLineBraces = 2;
 
-                internal InlineStyle(byte value)
+                private InlineStyle(int value)
                 {
                     _value = value;
                 }

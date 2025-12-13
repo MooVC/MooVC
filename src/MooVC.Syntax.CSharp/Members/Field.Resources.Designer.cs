@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp.Generics.Constraints {
+namespace MooVC.Syntax.CSharp.Members {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ConstraintExtensions_Resources {
+    internal class Field_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ConstraintExtensions_Resources() {
+        internal Field_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Generics.Constraints.ConstraintExtensions.Resources", typeof(ConstraintExtensions_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Field.Resources", typeof(Field_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided..
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
-        internal static string ToSnippetOptionsRequired {
+        internal static string ToStringOptionsRequired {
             get {
-                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` value for the `{1}` cannot be more than one line in length..
+        /// </summary>
+        internal static string ValidateDefaultRequired {
+            get {
+                return ResourceManager.GetString("ValidateDefaultRequired", resourceCulture);
             }
         }
     }

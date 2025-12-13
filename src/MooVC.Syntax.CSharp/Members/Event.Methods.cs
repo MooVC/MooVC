@@ -16,12 +16,16 @@
         {
             public static readonly Methods Default = new Methods();
 
-            public Snippet Add { get; set; } = Snippet.Empty;
+            internal Methods()
+            {
+            }
+
+            public Snippet Add { get; internal set; } = Snippet.Empty;
 
             [Ignore]
             public bool IsDefault => this == Default;
 
-            public Snippet Remove { get; set; } = Snippet.Empty;
+            public Snippet Remove { get; internal set; } = Snippet.Empty;
 
             public static implicit operator string(Methods methods)
             {

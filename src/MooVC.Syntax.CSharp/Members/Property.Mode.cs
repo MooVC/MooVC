@@ -11,7 +11,7 @@ namespace MooVC.Syntax.CSharp.Members
             public static readonly Mode ReadOnly = 1;
             public static readonly Mode Set = 0;
 
-            internal Mode(int value)
+            private Mode(int value)
             {
                 _value = value;
             }

@@ -17,18 +17,22 @@
     {
         public static readonly Parameter Undefined = new Parameter();
 
-        public ImmutableArray<Attribute> Attributes { get; set; } = ImmutableArray<Attribute>.Empty;
+        internal Parameter()
+        {
+        }
 
-        public Snippet Default { get; set; } = Snippet.Empty;
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
+
+        public Snippet Default { get; internal set; } = Snippet.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Mode Modifier { get; set; } = Mode.None;
+        public Mode Modifier { get; internal set; } = Mode.None;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Symbol Type { get; set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Unspecified;
 
         public static implicit operator string(Parameter parameter)
         {

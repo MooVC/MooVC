@@ -25,10 +25,20 @@
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Generics\Constraints\ConstraintExtensions.Resources.Designer.cs">
+    <Compile Update="Concepts\Construct.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ConstraintExtensions.Resources.resx</DependentUpon>
+      <DependentUpon>Construct.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Concepts\Definition.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Definition.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Concepts\Struct.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Struct.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Generics\Constraints\Interface.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -40,10 +50,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IGuardClauseExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Declaration.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Declaration.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Members\Extensibility.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Extensibility.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Members\Field.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Field.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Indexer.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Indexer.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Members\Constructor.Resources.Designer.cs">
+      <DependentUpon>Constructor.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Members\Parameter.Resources.Designer.cs">
       <DependentUpon>Parameter.Resources.resx</DependentUpon>
@@ -95,6 +125,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Result.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Members\Scope.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Scope.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Members\Segment.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -127,9 +162,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Generics\Constraints\ConstraintExtensions.Resources.resx">
+    <EmbeddedResource Update="Concepts\Construct.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConstraintExtensions.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Concepts\Definition.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Concepts\Struct.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Struct.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Generics\Constraints\Interface.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -139,9 +182,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IGuardClauseExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Members\Declaration.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Declaration.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Extensibility.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Extensibility.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Field.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Field.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Members\Indexer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Indexer.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Constructor.Resources.resx">
+      <LastGenOutput>Constructor.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Parameter.Resources.resx">
       <LastGenOutput>Parameter.Resources.Designer.cs</LastGenOutput>
@@ -182,6 +241,10 @@
     <EmbeddedResource Update="Members\Result.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Result.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Members\Scope.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Scope.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Members\Segment.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,16 +19,20 @@
         public static readonly Symbol Unspecified = new Symbol();
         private const string Separator = ", ";
 
-        public ImmutableArray<Symbol> Arguments { get; set; } = ImmutableArray<Symbol>.Empty;
+        internal Symbol()
+        {
+        }
+
+        public ImmutableArray<Symbol> Arguments { get; internal set; } = ImmutableArray<Symbol>.Empty;
 
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
-        public bool IsNullable { get; set; }
+        public bool IsNullable { get; internal set; }
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Qualifier Qualifier { get; set; } = Qualifier.Unqualified;
+        public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
         public static implicit operator string(Symbol symbol)
         {

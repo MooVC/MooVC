@@ -134,7 +134,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         Event left = EventTestsData.Create();
 
         Event right = EventTestsData.Create();
-        right.IsStatic = true;
+        right.Extensibility = Extensibility.Static;
 
         // Act
         bool resultLeftRight = left != right;

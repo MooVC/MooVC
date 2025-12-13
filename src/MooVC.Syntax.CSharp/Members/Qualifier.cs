@@ -21,6 +21,10 @@
 
         public bool IsUnqualified => this == Unqualified;
 
+        public int Length => _value.Length;
+
+        public Segment this[int index] => _value[index];
+
         public static implicit operator Qualifier(Type type)
         {
             Guard.Against.Conversion<Type, Qualifier>(type);

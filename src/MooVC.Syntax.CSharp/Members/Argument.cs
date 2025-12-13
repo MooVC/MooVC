@@ -16,14 +16,18 @@
     {
         public static readonly Argument Undefined = new Argument();
 
+        internal Argument()
+        {
+        }
+
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Mode Modifier { get; set; } = Mode.None;
+        public Mode Modifier { get; internal set; } = Mode.None;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Snippet Value { get; set; } = Snippet.Empty;
+        public Snippet Value { get; internal set; } = Snippet.Empty;
 
         public static implicit operator string(Argument argument)
         {

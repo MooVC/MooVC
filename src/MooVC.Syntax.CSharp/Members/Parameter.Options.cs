@@ -19,10 +19,10 @@
             };
 
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Identifier.Options Naming { get; set; } = Identifier.Options.Camel;
+            public Identifier.Options Naming { get; internal set; } = Identifier.Options.Camel;
 
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Types { get; set; } = Symbol.Options.Default;
+            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
         }
     }
 }

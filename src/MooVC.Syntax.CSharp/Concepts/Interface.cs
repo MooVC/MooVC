@@ -1,10 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using Fluentify;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -13,16 +11,16 @@
     {
         public static readonly Interface Undefined = new Interface();
 
+        internal Interface()
+        {
+        }
+
+        [Ignore]
         public override bool IsUndefined => this == Undefined;
 
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        protected override Snippet ToSnippet(Snippet.Options options)
         {
-            if (IsUndefined)
-            {
-                return Enumerable.Empty<ValidationResult>();
-            }
-
-            return base.Validate(validationContext);
+            throw new System.NotImplementedException();
         }
     }
 }

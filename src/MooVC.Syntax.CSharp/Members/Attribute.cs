@@ -20,14 +20,18 @@
 
         private const string Separator = ", ";
 
-        public ImmutableArray<Argument> Arguments { get; set; } = ImmutableArray<Argument>.Empty;
+        internal Attribute()
+        {
+        }
+
+        public ImmutableArray<Argument> Arguments { get; internal set; } = ImmutableArray<Argument>.Empty;
 
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
-        public Symbol Name { get; set; } = Symbol.Unspecified;
+        public Symbol Name { get; internal set; } = Symbol.Unspecified;
 
-        public Specifier Target { get; set; } = Specifier.None;
+        public Specifier Target { get; internal set; } = Specifier.None;
 
         public static implicit operator string(Attribute attribute)
         {

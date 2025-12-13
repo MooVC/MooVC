@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Buffers;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
@@ -23,7 +24,7 @@
 
         public bool IsSingleLine => !_value.IsDefaultOrEmpty && _value.Length == SingleLine;
 
-        public int Lines => _value.Length;
+        public int Lines => _value.IsDefaultOrEmpty ? 0 : _value.Length;
 
         public static implicit operator string(Snippet snippet)
         {
@@ -54,6 +55,11 @@
 
         public Snippet Append(char value)
         {
+            if (IsEmpty)
+            {
+                return From(value.ToString());
+            }
+
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>();
             int last = _value.Length - 1;
 
@@ -90,7 +96,7 @@
         public Snippet Block(Options options, Snippet opening)
         {
             _ = Guard.Against.Null(options, message: BlockOptionsRequired);
-            _ = Guard.Against.Null(options, message: BlockOpeningRequired);
+            _ = Guard.Against.Null(opening, message: BlockOpeningRequired);
 
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
@@ -136,6 +142,47 @@
             return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
 
+        public Snippet Combine(params string[] values)
+        {
+            return Combine(Options.Default, values);
+        }
+
+        public Snippet Combine(Options options, params string[] values)
+        {
+            _ = Guard.Against.Null(options, message: CombineOptionsRequired);
+            _ = Guard.Against.Null(values, message: CombineSnippetsRequired);
+
+            string[] combined = ArrayPool<string>.Shared.Rent(values.Length * 2);
+
+            try
+            {
+                int total = Combine(values, combined);
+
+                if (total == 0)
+                {
+                    return Empty;
+                }
+
+                string first = combined[0];
+
+                if (total == 1)
+                {
+                    return From(options, first);
+                }
+
+                values = combined
+                    .Skip(1)
+                    .Take(total - 1)
+                    .ToArray();
+
+                return Empty.Append(options, values);
+            }
+            finally
+            {
+                ArrayPool<string>.Shared.Return(combined);
+            }
+        }
+
         public Snippet Prepend(params string[] values)
         {
             return Prepend(Options.Default, values);
@@ -155,14 +202,21 @@
         {
             _ = Guard.Against.Null(options, message: ShiftOptionsRequired);
 
-            string[] shifted = new string[_value.Length];
+            string[] shifted = ArrayPool<string>.Shared.Rent(_value.Length);
 
-            for (int index = 0; index < _value.Length; index++)
+            try
             {
-                shifted[index] = string.Concat(options.Whitespace, _value[index]);
-            }
+                for (int index = 0; index < _value.Length; index++)
+                {
+                    shifted[index] = string.Concat(options.Whitespace, _value[index]);
+                }
 
-            return new Snippet(ImmutableArray.Create(shifted));
+                return new Snippet(ImmutableArray.Create(shifted, 0, _value.Length));
+            }
+            finally
+            {
+                ArrayPool<string>.Shared.Return(shifted);
+            }
         }
 
         public Snippet Stack(Options options, Snippet top)
@@ -196,25 +250,56 @@
             string[] values,
             Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
         {
-            var snippets = new Snippet[values.Length];
+            Snippet[] snippets = ArrayPool<Snippet>.Shared.Rent(values.Length);
 
-            for (int index = 0; index < values.Length; index++)
+            try
             {
-                snippets[index] = From(options, values[index]);
-            }
+                for (int index = 0; index < values.Length; index++)
+                {
+                    snippets[index] = From(options, values[index]);
+                }
 
-            return Combine(original, snippets, combine);
+                return Combine(original, snippets.Take(values.Length), combine);
+            }
+            finally
+            {
+                ArrayPool<Snippet>.Shared.Return(snippets);
+            }
         }
 
         private static ImmutableArray<string> Combine(
             Snippet original,
-            Snippet[] values,
+            IEnumerable<Snippet> values,
             Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
         {
             IEnumerable<string> first = original._value.Select(value => value);
             IEnumerable<string> second = values.SelectMany(snippet => snippet._value.Select(value => value));
 
             return combine(first, second).ToImmutableArray();
+        }
+
+        private int Combine(string[] values, string[] combined)
+        {
+            string separator = this;
+            int last = values.Length - 1;
+            int total = 0;
+
+            for (int index = 0; index <= last; index++)
+            {
+                string value = values[index];
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    combined[total++] = value;
+
+                    if (index != last)
+                    {
+                        combined[total++] = separator;
+                    }
+                }
+            }
+
+            return total;
         }
     }
 }

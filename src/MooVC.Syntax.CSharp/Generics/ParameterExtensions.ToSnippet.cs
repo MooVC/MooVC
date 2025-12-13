@@ -7,7 +7,7 @@
     {
         private const string Separator = ", ";
 
-        public static Snippet ToSnippet(this ImmutableArray<Parameter> parameters, Func<Parameter, string> formatter)
+        internal static Snippet ToSnippet(this ImmutableArray<Parameter> parameters, Func<Parameter, string> formatter, Snippet.Options options)
         {
             if (parameters.IsDefaultOrEmpty)
             {
@@ -16,7 +16,7 @@
 
             string snippet = Separator.Combine(parameters, formatter);
 
-            return Snippet.From(snippet);
+            return Snippet.From(options, snippet);
         }
     }
 }

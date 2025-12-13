@@ -14,7 +14,7 @@
         public static readonly Nature NotNull = "notnull";
         public static readonly Nature Unspecified = string.Empty;
 
-        internal Nature(string value)
+        private Nature(string value)
         {
             _value = value;
         }

@@ -17,14 +17,21 @@
         public static readonly Directive Undefined = new Directive();
         private const string Separator = " ";
 
-        public Identifier Alias { get; set; } = Identifier.Unnamed;
+        internal Directive()
+        {
+        }
+
+        public Identifier Alias { get; internal set; } = Identifier.Unnamed;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public bool IsStatic { get; set; }
+        public bool IsStatic { get; internal set; }
 
-        public Qualifier Qualifier { get; set; }
+        [Ignore]
+        public bool IsSystem => Qualifier.Length > 0 && Qualifier[0] == nameof(System);
+
+        public Qualifier Qualifier { get; internal set; }
 
         public static implicit operator string(Directive directive)
         {

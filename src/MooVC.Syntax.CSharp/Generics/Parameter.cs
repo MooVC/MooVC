@@ -19,9 +19,13 @@
         public static readonly Parameter Undefined = new Parameter();
         public static readonly Func<Parameter, string> Names = parameter => parameter.Name;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
+        internal Parameter()
+        {
+        }
 
-        public ImmutableArray<Constraint> Constraints { get; set; } = ImmutableArray<Constraint>.Empty;
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+
+        public ImmutableArray<Constraint> Constraints { get; internal set; } = ImmutableArray<Constraint>.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;

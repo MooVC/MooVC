@@ -7,7 +7,7 @@
     {
         private const string Separator = ", ";
 
-        public static Snippet ToSnippet(this ImmutableArray<Parameter> parameters, Parameter.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Parameter> parameters, Parameter.Options options)
         {
             if (parameters.IsDefaultOrEmpty)
             {

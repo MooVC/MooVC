@@ -78,7 +78,7 @@ public sealed class WhenGetHashCodeIsCalled
         Event first = EventTestsData.Create();
 
         Event second = EventTestsData.Create();
-        second.IsStatic = true;
+        second.Extensibility = Extensibility.Static;
 
         // Act
         int firstHash = first.GetHashCode();

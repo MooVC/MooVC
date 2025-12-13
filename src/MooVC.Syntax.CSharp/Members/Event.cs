@@ -15,19 +15,24 @@
         : IValidatableObject
     {
         public static readonly Event Undefined = new Event();
+        private const string Separator = " ";
 
-        public Methods Behaviours { get; set; } = Methods.Default;
+        internal Event()
+        {
+        }
 
-        public Symbol Handler { get; set; } = Symbol.Unspecified;
+        public Methods Behaviours { get; internal set; } = Methods.Default;
+
+        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
+
+        public Symbol Handler { get; internal set; } = Symbol.Unspecified;
 
         [Ignore]
         public bool IsUndefind => this == Undefined;
 
-        public bool IsStatic { get; set; }
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Identifier Name { get; set; } = Identifier.Unnamed;
-
-        public Scope Scope { get; set; } = Scope.Public;
+        public Scope Scope { get; internal set; } = Scope.Public;
 
         public static implicit operator string(Event @event)
         {
@@ -57,10 +62,11 @@
                 return string.Empty;
             }
 
+            string extensibility = Extensibility;
             string handler = Handler;
             string name = Name.ToString(Identifier.Options.Pascal);
             string scope = Scope;
-            string signature = $"{scope} event {handler} {name}";
+            string signature = Separator.Combine(scope, extensibility, "event", handler, name);
 
             Snippet methods = Behaviours;
 

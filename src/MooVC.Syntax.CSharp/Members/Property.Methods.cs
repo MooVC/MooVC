@@ -16,12 +16,16 @@ namespace MooVC.Syntax.CSharp.Members
         {
             public static readonly Methods Default = new Methods();
 
-            public Snippet Get { get; set; } = Snippet.Empty;
+            internal Methods()
+            {
+            }
+
+            public Snippet Get { get; internal set; } = Snippet.Empty;
 
             [Ignore]
             public bool IsDefault => this == Default;
 
-            public Setter Set { get; set; } = Setter.Default;
+            public Setter Set { get; internal set; } = Setter.Default;
 
             public static implicit operator string(Methods methods)
             {
@@ -76,7 +80,7 @@ namespace MooVC.Syntax.CSharp.Members
                     return Snippet.From($"{keyword};");
                 }
 
-                keyword = scope is null
+                keyword = scope is null || scope == Scope.Unspecified
                     ? keyword
                     : $"{scope} {keyword}";
 

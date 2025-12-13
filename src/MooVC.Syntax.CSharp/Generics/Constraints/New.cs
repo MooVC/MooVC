@@ -11,7 +11,7 @@
         public static readonly New Required = "new()";
         public static readonly New NotRequired = string.Empty;
 
-        internal New(string value)
+        private New(string value)
         {
             _value = value;
         }

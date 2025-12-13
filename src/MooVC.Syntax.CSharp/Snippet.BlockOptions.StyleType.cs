@@ -13,7 +13,7 @@
                 public static readonly StyleType Allman = 0;
                 public static readonly StyleType KAndR = 1;
 
-                internal StyleType(int value)
+                private StyleType(int value)
                 {
                     _value = value;
                 }

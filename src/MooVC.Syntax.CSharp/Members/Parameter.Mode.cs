@@ -3,7 +3,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using Ignore = Valuify.IgnoreAttribute;
 
     public partial class Parameter
     {
@@ -19,7 +18,7 @@
             public static readonly Mode Scoped = "scoped";
             public static readonly Mode This = "this";
 
-            internal Mode(string value)
+            private Mode(string value)
             {
                 _value = value;
             }

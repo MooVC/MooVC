@@ -20,17 +20,21 @@
 
         private const string Separator = " ";
 
+        internal Result()
+        {
+        }
+
         [Ignore]
         public bool IsTask => this == Task;
 
         [Ignore]
         public bool IsVoid => this == Void;
 
-        public Kind Modifier { get; set; } = Kind.None;
+        public Kind Modifier { get; internal set; } = Kind.None;
 
-        public Modality Mode { get; set; } = Modality.Asynchronous;
+        public Modality Mode { get; internal set; } = Modality.Asynchronous;
 
-        public Symbol Type { get; set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Unspecified;
 
         public static implicit operator string(Result result)
         {

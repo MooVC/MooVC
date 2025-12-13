@@ -14,7 +14,7 @@
             public static readonly Kind RefReadOnly = "ref readonly";
             public static readonly Kind Unsafe = "unsafe";
 
-            internal Kind(string value)
+            private Kind(string value)
             {
                 _value = value;
             }
