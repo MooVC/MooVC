@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenInequalityOperatorConversionConversionIsCalled
 {
     [Fact]
@@ -21,7 +23,7 @@ public sealed class WhenInequalityOperatorConversionConversionIsCalled
     {
         // Arrange
         Conversion first = ConversionTestsData.Create();
-        Conversion second = ConversionTestsData.Create(subject: Symbol.From("Other"));
+        Conversion second = ConversionTestsData.Create(subject: new Symbol { Name = "SomethingElse" });
 
         // Act
         bool result = first != second;

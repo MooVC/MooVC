@@ -34,7 +34,7 @@
 
         public Modality Mode { get; internal set; } = Modality.Asynchronous;
 
-        public Symbol Type { get; internal set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator string(Result result)
         {
@@ -61,13 +61,13 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Modifier == Kind.None && Type == Symbol.Unspecified)
+            if (Modifier == Kind.None && Type == Symbol.Undefined)
             {
                 return Enumerable.Empty<ValidationResult>();
             }
 
             return validationContext
-                .Include(nameof(Type), _ => !Type.IsUnspecified, Type)
+                .Include(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
         }
     }

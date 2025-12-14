@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenWithSubjectIsCalled
 {
     [Fact]
@@ -7,7 +9,7 @@ public sealed class WhenWithSubjectIsCalled
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
-        Symbol replacement = Symbol.From("Other");
+        var replacement = new Symbol { Name = "Other" };
 
         // Act
         Conversion result = original.WithSubject(replacement);

@@ -7,7 +7,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Binary original = BinaryTestsData.Create();
-        Snippet body = Snippet.From("return left * right;");
+        var body = Snippet.From("return left * right;");
 
         // Act
         Binary result = original.WithBody(body);

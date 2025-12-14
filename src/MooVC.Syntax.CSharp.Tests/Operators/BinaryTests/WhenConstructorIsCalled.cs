@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenConstructorIsCalled
 {
     [Fact]

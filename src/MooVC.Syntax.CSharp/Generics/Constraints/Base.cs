@@ -13,7 +13,7 @@
     public sealed partial class Base
         : IValidatableObject
     {
-        public static readonly Base Unspecified = Symbol.Unspecified;
+        public static readonly Base Unspecified = Symbol.Undefined;
 
         public bool IsUnspecified => this == Unspecified;
 

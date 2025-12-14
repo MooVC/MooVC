@@ -25,7 +25,7 @@
 
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
-        public Symbol Handler { get; internal set; } = Symbol.Unspecified;
+        public Symbol Handler { get; internal set; } = Symbol.Undefined;
 
         [Ignore]
         public bool IsUndefind => this == Undefined;

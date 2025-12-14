@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
@@ -14,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
         subject.Mode.ShouldBe(Conversion.Type.Implicit);
         subject.Scope.ShouldBe(Scope.Public);
-        subject.Subject.ShouldBe(Symbol.Unspecified);
+        subject.Subject.ShouldBe(Symbol.Undefined);
     }
 
     [Fact]

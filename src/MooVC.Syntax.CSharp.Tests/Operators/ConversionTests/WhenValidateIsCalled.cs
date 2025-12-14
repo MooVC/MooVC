@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
@@ -42,7 +43,7 @@ public sealed class WhenValidateIsCalled
     public void GivenMissingSubjectThenValidationFails()
     {
         // Arrange
-        Conversion subject = ConversionTestsData.Create(subject: Symbol.Unspecified);
+        Conversion subject = ConversionTestsData.Create(subject: Symbol.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

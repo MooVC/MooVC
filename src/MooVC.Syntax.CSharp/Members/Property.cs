@@ -37,7 +37,7 @@
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
-        public Symbol Type { get; internal set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator string(Property property)
         {
@@ -111,7 +111,7 @@
 
             return validationContext
                 .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
-                .And(nameof(Type), _ => !Type.IsUnspecified, Type)
+                .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
         }
 

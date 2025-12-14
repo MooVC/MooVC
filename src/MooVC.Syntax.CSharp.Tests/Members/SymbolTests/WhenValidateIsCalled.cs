@@ -12,7 +12,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnspecifiedSymbolThenNoValidationErrorsReturned()
     {
         // Arrange
-        Symbol symbol = Symbol.Unspecified;
+        Symbol symbol = Symbol.Undefined;
         var context = new ValidationContext(symbol);
         var results = new List<ValidationResult>();
 
@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Name = new Identifier(Name),
-            Arguments = [Symbol.Unspecified],
+            Arguments = [Symbol.Undefined],
         };
 
         var context = new ValidationContext(symbol);

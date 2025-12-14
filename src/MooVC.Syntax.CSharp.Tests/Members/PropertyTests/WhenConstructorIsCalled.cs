@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
         subject.Name.ShouldBe(Identifier.Unnamed);
         subject.Scope.ShouldBe(Scope.Public);
-        subject.Type.ShouldBe(Symbol.Unspecified);
+        subject.Type.ShouldBe(Symbol.Undefined);
     }
 
     [Fact]
