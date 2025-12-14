@@ -30,7 +30,7 @@
                 return new Extensibility($"{left} {right}");
             }
 
-            throw new InvalidOperationException(PlusOperatorNotSupported);
+            throw new InvalidOperationException(PlusOperatorNotSupported.Format(left, right));
         }
 
         public bool IsPermitted(params Extensibility[] permissable)
@@ -50,7 +50,7 @@
 
         private static bool IsOverride(Extensibility left, Extensibility right)
         {
-            return left == Override && (right == Sealed || right == Abstract);
+            return (left == Sealed || left == Abstract) && right == Override;
         }
     }
 }
