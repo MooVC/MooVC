@@ -2,10 +2,10 @@
 {
     internal static partial class BoolExtensions
     {
-        public static string Abstract(this bool value)
+        public static string Partial(this bool value)
         {
             return value
-                ? "abstract"
+                ? "partial"
                 : string.Empty;
         }
     }

@@ -24,6 +24,8 @@
 
         public ImmutableArray<Indexer> Indexers { get; internal set; } = ImmutableArray<Indexer>.Empty;
 
+        public bool IsPartial { get; internal set; }
+
         public abstract bool IsUndefined { get; }
 
         public ImmutableArray<Method> Methods { get; internal set; } = ImmutableArray<Method>.Empty;

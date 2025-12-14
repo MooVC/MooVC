@@ -16,6 +16,18 @@
         {
         }
 
+        public bool IsStatic { get; internal set; }
+
         public override bool IsUndefined => this == Undefined;
+
+        protected override string GetSignature(string extensibility, string partial, string name, string scope)
+        {
+            if (IsStatic)
+            {
+                extensibility = "static";
+            }
+
+            return base.GetSignature(extensibility, partial, name, scope);
+        }
     }
 }

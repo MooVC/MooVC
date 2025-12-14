@@ -8,6 +8,8 @@
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Syntax;
+    using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
     using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
 
     public abstract partial class Reference
@@ -31,11 +33,6 @@
 
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
-        public override string ToString()
-        {
-            return ToString(Snippet.Options.Default);
-        }
-
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -45,11 +42,23 @@
 
             IEnumerable<ValidationResult> results = base.Validate(validationContext);
 
+            if (!Extensibility.IsPermitted(Extensibility.Abstract, Extensibility.Implicit, Extensibility.Sealed))
+            {
+                results = results.Append(new ValidationResult(
+                    ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, GetType().Name),
+                    new[] { nameof(Extensibility) }));
+            }
+
             return validationContext
                 .IncludeIf(!Constructors.IsDefaultOrEmpty, nameof(Constructors), results, Constructors)
                 .AndIf(!Fields.IsDefaultOrEmpty, nameof(Fields), Fields)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), Parameters)
                 .Results;
+        }
+
+        protected virtual string GetSignature(string extensibility, string partial, string name, string scope)
+        {
+            return Separator.Combine(scope, extensibility, partial, _type, $"{name}");
         }
 
         protected override Snippet ToSnippet(Snippet.Options options)
@@ -73,8 +82,9 @@
             string extensibility = Extensibility;
             string name = Name;
             var parameters = Parameters.ToSnippet(_options);
+            string partial = IsPartial.Partial();
             string scope = Scope;
-            string signature = Separator.Combine(scope, extensibility, _type, $"{name}");
+            string signature = GetSignature(extensibility, partial, name, scope);
 
             if (!parameters.IsEmpty)
             {

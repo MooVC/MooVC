@@ -33,6 +33,11 @@
             throw new InvalidOperationException(PlusOperatorNotSupported);
         }
 
+        public bool IsPermitted(params Extensibility[] permissable)
+        {
+            return Array.Exists(permissable, extensibility => extensibility == this);
+        }
+
         public override string ToString()
         {
             return _value;
