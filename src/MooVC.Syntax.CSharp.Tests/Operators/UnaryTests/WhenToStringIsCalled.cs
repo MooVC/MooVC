@@ -33,7 +33,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenSignatureIsRendered()
     {
         // Arrange
-        Unary subject = UnaryTestsData.Create(body: Snippet.Empty, @operator: Unary.Type.Unspecified);
+        Unary subject = UnaryTestsData.Create();
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         Snippet.Options options = Snippet.Options.Default
