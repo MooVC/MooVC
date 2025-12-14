@@ -145,6 +145,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Symbol.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Operators\Comparison.Resources.Designer.cs">
+      <DependentUpon>Comparison.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Operators\Binary.Resources.Designer.cs">
+      <DependentUpon>Binary.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Operators\Conversion.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Conversion.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Operators\Unary.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Unary.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Snippet.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -262,6 +282,22 @@
     <EmbeddedResource Update="Members\Symbol.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Symbol.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Operators\Comparison.Resources.resx">
+      <LastGenOutput>Comparison.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Operators\Binary.Resources.resx">
+      <LastGenOutput>Binary.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Operators\Conversion.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Conversion.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Operators\Unary.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Unary.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Snippet.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
