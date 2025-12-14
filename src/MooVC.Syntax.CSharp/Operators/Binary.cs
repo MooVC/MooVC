@@ -65,7 +65,7 @@
 
             string @operator = Operator;
             string scope = Scope;
-            string type = declaration.Name;
+            string type = declaration.Name.ToString(Identifier.Options.Pascal);
             var signature = Snippet.From($"{scope} static {type} operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);

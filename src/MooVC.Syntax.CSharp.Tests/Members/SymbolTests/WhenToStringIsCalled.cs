@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenUnspecifiedSymbolThenEmptyReturned()
     {
         // Arrange
-        Symbol subject = Symbol.Unspecified;
+        Symbol subject = Symbol.Undefined;
 
         // Act
         string representation = subject.ToString();

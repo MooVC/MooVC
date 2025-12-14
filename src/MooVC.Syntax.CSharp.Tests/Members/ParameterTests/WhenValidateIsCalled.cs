@@ -69,7 +69,7 @@ public sealed class WhenValidateIsCalled
             name: ParameterTestsData.DefaultName,
             attributes: new Attribute
             {
-                Name = Symbol.Unspecified,
+                Name = Symbol.Undefined,
             });
 
         var context = new ValidationContext(parameter);

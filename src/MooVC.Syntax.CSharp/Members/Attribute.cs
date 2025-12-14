@@ -29,7 +29,7 @@
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
-        public Symbol Name { get; internal set; } = Symbol.Unspecified;
+        public Symbol Name { get; internal set; } = Symbol.Undefined;
 
         public Specifier Target { get; internal set; } = Specifier.None;
 
@@ -49,7 +49,7 @@
 
         public override string ToString()
         {
-            if (Name.IsUnspecified)
+            if (Name.IsUndefined)
             {
                 return string.Empty;
             }
@@ -84,7 +84,7 @@
 
             return validationContext
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
-                .And(nameof(Name), _ => !Name.IsUnspecified, Name)
+                .And(nameof(Name), _ => !Name.IsUndefined, Name)
                 .Results;
         }
     }

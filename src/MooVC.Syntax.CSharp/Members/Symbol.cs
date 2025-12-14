@@ -16,7 +16,7 @@
     public sealed partial class Symbol
         : IValidatableObject
     {
-        public static readonly Symbol Unspecified = new Symbol();
+        public static readonly Symbol Undefined = new Symbol();
         private const string Separator = ", ";
 
         internal Symbol()
@@ -26,7 +26,7 @@
         public ImmutableArray<Symbol> Arguments { get; internal set; } = ImmutableArray<Symbol>.Empty;
 
         [Ignore]
-        public bool IsUnspecified => this == Unspecified;
+        public bool IsUndefined => this == Undefined;
 
         public bool IsNullable { get; internal set; }
 
@@ -66,7 +66,7 @@
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
 
-            if (IsUnspecified)
+            if (IsUndefined)
             {
                 return string.Empty;
             }
@@ -92,13 +92,13 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsUnspecified)
+            if (IsUndefined)
             {
                 return Enumerable.Empty<ValidationResult>();
             }
 
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Qualifier), Qualifier)
                 .Results;

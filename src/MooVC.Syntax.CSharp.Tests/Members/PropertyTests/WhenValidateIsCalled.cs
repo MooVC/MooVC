@@ -62,7 +62,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnspecifiedTypeThenValidationErrorReturned()
     {
         // Arrange
-        Property subject = PropertyTestsData.Create(type: Symbol.Unspecified);
+        Property subject = PropertyTestsData.Create(type: Symbol.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

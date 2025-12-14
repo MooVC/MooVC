@@ -32,7 +32,7 @@
 
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public Symbol Type { get; internal set; } = Symbol.Unspecified;
+        public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator string(Parameter parameter)
         {
@@ -92,7 +92,7 @@
             return validationContext
                 .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
-                .And(nameof(Type), _ => !Type.IsUnspecified, Type)
+                .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
         }
 

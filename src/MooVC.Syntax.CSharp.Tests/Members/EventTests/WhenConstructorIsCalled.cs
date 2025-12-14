@@ -13,7 +13,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Behaviours.ShouldBe(Event.Methods.Default);
-        subject.Handler.ShouldBe(Symbol.Unspecified);
+        subject.Handler.ShouldBe(Symbol.Undefined);
         subject.IsUndefind.ShouldBeTrue();
         subject.Name.ShouldBe(Identifier.Unnamed);
         subject.Scope.ShouldBe(Scope.Public);

@@ -13,7 +13,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Name.ShouldBe(Identifier.Unnamed);
         subject.Arguments.ShouldBeEmpty();
-        subject.IsUnspecified.ShouldBeTrue();
+        subject.IsUndefined.ShouldBeTrue();
     }
 
     [Fact]
@@ -32,6 +32,6 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Name.ShouldBe(new Identifier(SymbolTestsData.DefaultName));
         subject.Arguments.ShouldBe(new[] { argument });
-        subject.IsUnspecified.ShouldBeFalse();
+        subject.IsUndefined.ShouldBeFalse();
     }
 }

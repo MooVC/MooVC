@@ -33,7 +33,7 @@
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
-        public Symbol Subject { get; internal set; } = Symbol.Unspecified;
+        public Symbol Subject { get; internal set; } = Symbol.Undefined;
 
         public override string ToString()
         {
@@ -67,7 +67,7 @@
                 results = results.Append(new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Conversion)), new[] { nameof(Body) }));
             }
 
-            if (Subject.IsUnspecified)
+            if (Subject.IsUndefined)
             {
                 results = results.Append(new ValidationResult(ValidateSubjectRequired.Format(nameof(Subject), nameof(Conversion)), new[] { nameof(Subject) }));
             }
