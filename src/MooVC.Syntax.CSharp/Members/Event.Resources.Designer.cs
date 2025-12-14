@@ -77,5 +77,14 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to `{0}` of type `{1}` is not permitted for `{2}`..
+        /// </summary>
+        internal static string ValidateExtensibilityInvalid {
+            get {
+                return ResourceManager.GetString("ValidateExtensibilityInvalid", resourceCulture);
+            }
+        }
     }
 }

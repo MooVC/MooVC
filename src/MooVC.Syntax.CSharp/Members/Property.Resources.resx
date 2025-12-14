@@ -126,4 +126,7 @@
   <data name="ValidateDefaultRequired" xml:space="preserve">
     <value>The `{0}` value for the `{1}` cannot be more than one line in length.</value>
   </data>
+  <data name="ValidateExtensibilityInvalid" xml:space="preserve">
+    <value>`{0}` of type `{1}` is not permitted for `{2}`.</value>
+  </data>
 </root>

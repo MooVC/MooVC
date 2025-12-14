@@ -92,8 +92,22 @@ namespace MooVC.Syntax.CSharp.Members
                 return Enumerable.Empty<ValidationResult>();
             }
 
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (!Extensibility.IsPermitted(
+                Extensibility.Abstract,
+                Extensibility.Implicit,
+                Extensibility.Override,
+                Extensibility.Sealed + Extensibility.Override,
+                Extensibility.Virtual))
+            {
+                results = results.Append(new ValidationResult(
+                    ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, nameof(Event)),
+                    new[] { nameof(Extensibility) }));
+            }
+
             return validationContext
-                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
+                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, results, Parameters)
                 .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .And(nameof(Result), Result)
                 .Results;

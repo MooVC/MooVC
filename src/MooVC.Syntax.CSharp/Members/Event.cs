@@ -87,8 +87,22 @@
                 return Enumerable.Empty<ValidationResult>();
             }
 
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (!Extensibility.IsPermitted(
+                Extensibility.Abstract,
+                Extensibility.Implicit,
+                Extensibility.Override,
+                Extensibility.Sealed + Extensibility.Override,
+                Extensibility.Virtual))
+            {
+                results = results.Append(new ValidationResult(
+                    ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, nameof(Event)),
+                    new[] { nameof(Extensibility) }));
+            }
+
             return validationContext
-                .Include(nameof(Handler), Handler)
+                .Include(nameof(Handler), results, Handler)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }

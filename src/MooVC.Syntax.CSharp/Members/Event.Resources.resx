@@ -123,4 +123,7 @@
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>
+  <data name="ValidateExtensibilityInvalid" xml:space="preserve">
+    <value>`{0}` of type `{1}` is not permitted for `{2}`.</value>
+  </data>
 </root>

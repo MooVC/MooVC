@@ -88,6 +88,15 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to `{0}` of type `{1}` is not permitted for `{2}`..
+        /// </summary>
+        internal static string ValidateExtensibilityInvalid {
+            get {
+                return ResourceManager.GetString("ValidateExtensibilityInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` provided by the `{1}` must be provided..
         /// </summary>
         internal static string ValidateResultRequired {
