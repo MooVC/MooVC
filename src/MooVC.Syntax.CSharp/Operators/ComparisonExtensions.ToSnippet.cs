@@ -1,0 +1,28 @@
+﻿namespace MooVC.Syntax.CSharp.Operators
+{
+    using System;
+    using System.Collections.Immutable;
+    using System.Linq;
+    using MooVC.Linq;
+    using MooVC.Syntax.CSharp.Concepts;
+
+    public static partial class ComparisonExtensions
+    {
+        internal static Snippet ToSnippet(this ImmutableArray<Comparison> comparisons, Construct construct, Snippet.Options options)
+        {
+            if (comparisons.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            string[] content = comparisons
+                .OrderBy(comparison => comparison)
+                .Select(comparison => comparison.ToString(construct, options))
+                .ToArray();
+
+            string snippet = options.BlankSpace.Combine(content);
+
+            return Snippet.From(options, snippet);
+        }
+    }
+}

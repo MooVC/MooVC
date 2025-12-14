@@ -15,6 +15,7 @@
             }
 
             string[] content = indexers
+                .OrderBy(indexer => indexer)
                 .Select(indexer => indexer.ToString(options))
                 .ToArray();
 

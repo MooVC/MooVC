@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Immutable;
+    using System.Linq;
 
     public static partial class ParameterExtensions
     {
@@ -14,7 +15,11 @@
                 return Snippet.Empty;
             }
 
-            string snippet = Separator.Combine(parameters, formatter);
+            var ordered = parameters
+                .OrderBy(parameter => parameter)
+                .ToImmutableArray();
+
+            string snippet = Separator.Combine(ordered, formatter);
 
             return Snippet.From(options, snippet);
         }

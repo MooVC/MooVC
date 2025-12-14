@@ -15,6 +15,7 @@
             }
 
             string[] content = attributes
+                .OrderBy(attribute => attribute)
                 .Select(attribute => attribute.ToString())
                 .ToArray();
 

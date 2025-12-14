@@ -15,6 +15,7 @@
             }
 
             string[] content = methods
+                .OrderBy(method => method)
                 .Select(method => method.ToString(options))
                 .ToArray();
 

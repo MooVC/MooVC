@@ -14,6 +14,7 @@
             }
 
             string[] values = usings
+                .OrderBy(@using => @using)
                 .Select(@using => @using.ToString())
                 .ToArray();
 

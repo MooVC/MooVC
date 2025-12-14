@@ -12,6 +12,8 @@
                 .OrderBy(directive => directive.IsStatic)
                 .ThenBy(directive => directive.IsSystem)
                 .ThenBy(directive => directive.Alias.IsUnnamed)
+                .ThenBy(directive => directive.Alias)
+                .ThenBy(directive => directive.Qualifier)
                 .Select(directive => directive.ToString())
                 .ToArray();
 

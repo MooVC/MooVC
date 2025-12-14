@@ -15,6 +15,7 @@
             }
 
             string[] content = events
+                .OrderBy(@event => @event)
                 .Select(@event => @event.ToString(options))
                 .ToArray();
 

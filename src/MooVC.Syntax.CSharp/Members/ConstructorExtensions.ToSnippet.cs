@@ -16,6 +16,7 @@
             }
 
             string[] content = constructors
+                .OrderBy(constructor => constructor)
                 .Select(method => method.ToString(construct, options))
                 .ToArray();
 

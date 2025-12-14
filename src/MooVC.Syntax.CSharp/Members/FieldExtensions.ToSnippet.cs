@@ -15,6 +15,7 @@
             }
 
             string[] content = fields
+                .OrderBy(field => field)
                 .Select(field => field.ToString())
                 .ToArray();
 
