@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Immutable;
-    using System.Linq;
     using MooVC.Linq;
 
     public static partial class ConstraintExtensions
@@ -14,11 +13,7 @@
                 return Snippet.Empty;
             }
 
-            var ordered = constraints
-                .OrderBy(constraint => constraint)
-                .ToImmutableArray();
-
-            string snippet = options.NewLine.Combine(ordered, constraint => constraint.ToString());
+            string snippet = options.NewLine.Combine(constraints, constraint => constraint.ToString());
 
             return Snippet.From(options, snippet);
         }

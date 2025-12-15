@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Declaration
-        : IValidatableObject
+        : IComparable<Declaration>,
+          IValidatableObject
     {
         public static readonly Declaration Unspecified = new Declaration();
 
@@ -42,6 +44,43 @@
             Guard.Against.Conversion<Declaration, Snippet>(declaration);
 
             return Snippet.From(declaration);
+        }
+
+        public static bool operator <(Declaration left, Declaration right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Declaration left, Declaration right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Declaration left, Declaration right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Declaration left, Declaration right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Declaration other)
+        {
+            return other is null
+                ? 1
+                : Name.CompareTo(other.Name);
         }
 
         public override string ToString()

@@ -13,6 +13,7 @@
             public static readonly Mode In = "in";
             public static readonly Mode Out = "out";
             public static readonly Mode None = string.Empty;
+            public static readonly Mode Params = "params";
             public static readonly Mode Ref = "ref";
             public static readonly Mode RefReadonly = "ref readonly";
             public static readonly Mode Scoped = "scoped";
@@ -28,6 +29,8 @@
             public bool IsOut => this == Out;
 
             public bool IsNone => this == None;
+
+            public bool IsParams => this == Params;
 
             public bool IsRef => this == Ref;
 

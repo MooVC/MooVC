@@ -9,12 +9,18 @@
         internal static Snippet ToSnippet(this ImmutableArray<Directive> directives, Snippet.Options options)
         {
             string[] statements = directives
-                .OrderBy(directive => directive.IsStatic)
-                .ThenBy(directive => directive.IsSystem)
-                .ThenBy(directive => directive.Alias.IsUnnamed)
-                .ThenBy(directive => directive.Alias)
-                .ThenBy(directive => directive.Qualifier)
-                .Select(directive => directive.ToString())
+                .Select(directive => new
+                {
+                    Rendering = directive.ToString(),
+                    Value = directive,
+                })
+                .OrderBy(directive => directive.Value.IsStatic)
+                .ThenBy(directive => directive.Value.IsSystem)
+                .ThenBy(directive => directive.Value.Alias.IsUnnamed)
+                .ThenBy(directive => directive.Value.Alias)
+                .ThenBy(directive => directive.Value.Qualifier)
+                .ThenBy(directive => directive.Rendering)
+                .Select(directive => directive.Rendering)
                 .ToArray();
 
             string snippet = options.NewLine.Combine(statements);

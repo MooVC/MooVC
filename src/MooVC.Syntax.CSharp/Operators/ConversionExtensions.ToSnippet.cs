@@ -5,7 +5,6 @@
     using System.Linq;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.CSharp.Operators;
 
     public static partial class ConversionExtensions
     {
@@ -17,7 +16,9 @@
             }
 
             string[] content = conversions
-                .OrderBy(conversion => conversion)
+                .OrderByDescending(conversion => conversion.Scope)
+                .ThenBy(conversion => conversion.Subject)
+                .ThenBy(conversion => conversion.Direction)
                 .Select(conversion => conversion.ToString(construct, options))
                 .ToArray();
 

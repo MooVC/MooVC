@@ -14,7 +14,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Symbol
-        : IValidatableObject
+        : IComparable<Symbol>,
+          IValidatableObject
     {
         public static readonly Symbol Undefined = new Symbol();
         private const string Separator = ", ";
@@ -55,6 +56,43 @@
             return new Symbol()
                 .WithName(type)
                 .WithQualifier(type);
+        }
+
+        public static bool operator <(Symbol left, Symbol right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Symbol left, Symbol right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Symbol left, Symbol right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Symbol left, Symbol right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Symbol other)
+        {
+            return other is null
+                ? 1
+                : Name.CompareTo(other.Name);
         }
 
         public override string ToString()

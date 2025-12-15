@@ -15,7 +15,10 @@
             }
 
             string[] content = methods
-                .OrderBy(method => method)
+                .OrderByDescending(property => property.Extensibility == Extensibility.Static)
+                .ThenByDescending(method => method.Scope)
+                .ThenByDescending(method => method.Extensibility)
+                .ThenBy(method => method.Name)
                 .Select(method => method.ToString(options))
                 .ToArray();
 

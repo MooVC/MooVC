@@ -9,6 +9,7 @@
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Scope
+        : IComparable<Scope>
     {
         public static readonly Scope File = "file";
         public static readonly Scope Internal = "internal";
@@ -49,19 +50,92 @@
             throw new InvalidOperationException(PlusOperatorNotSupported);
         }
 
+        public static bool operator <(Scope left, Scope right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Scope left, Scope right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Scope left, Scope right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Scope left, Scope right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Scope other)
+        {
+            if (other is null)
+            {
+                return 1;
+            }
+
+            int left = GetAccessibilityRank(_value);
+            int right = GetAccessibilityRank(other._value);
+
+            return left.CompareTo(right);
+        }
+
         public override string ToString()
         {
             return _value;
         }
 
+        private static int GetAccessibilityRank(string value)
+        {
+            switch (value)
+            {
+                case "public":
+                    return 7;
+
+                case "internal":
+                    return 6;
+
+                case "protected internal":
+                    return 5;
+
+                case "protected":
+                    return 4;
+
+                case "file":
+                    return 3;
+
+                case "private protected":
+                    return 2;
+
+                case "private":
+                    return 1;
+
+                default:
+                    return 0;
+            }
+        }
+
         private static bool IsPrivateProtected(Scope left, Scope right)
         {
-            return left == Private && right == Protected;
+            return left._value == Private._value && right._value == Protected._value;
         }
 
         private static bool IsProtectedInternal(Scope left, Scope right)
         {
-            return left == Protected && right == Internal;
+            return left._value == Protected._value && right._value == Internal._value;
         }
     }
 }

@@ -13,7 +13,8 @@
     [Monify(Type = typeof(ImmutableArray<Segment>))]
     [SkipAutoInstantiation]
     public partial class Qualifier
-        : IValidatableObject
+        : IComparable<Qualifier>,
+          IValidatableObject
     {
         public static readonly Qualifier Unqualified = ImmutableArray<Segment>.Empty;
 
@@ -37,8 +38,8 @@
             Guard.Against.Conversion<string, Qualifier>(value);
 
             return value
-                .Split(new string[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(segment => new Segment(value))
+                .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(segment => new Segment(segment))
                 .ToImmutableArray();
         }
 
@@ -73,6 +74,60 @@
             Guard.Against.Conversion<Qualifier, Snippet>(qualifier);
 
             return Snippet.From(qualifier);
+        }
+
+        public static bool operator <(Qualifier left, Qualifier right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Qualifier left, Qualifier right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Qualifier left, Qualifier right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Qualifier left, Qualifier right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Qualifier other)
+        {
+            if (other is null)
+            {
+                return 1;
+            }
+
+            int unqualified = CompareUnqualified(other);
+
+            if (unqualified != 0)
+            {
+                return unqualified;
+            }
+
+            int system = CompareSystemFirst(other);
+
+            if (system != 0)
+            {
+                return system;
+            }
+
+            return CompareSegments(other);
         }
 
         public override string ToString()
@@ -110,6 +165,11 @@
             return Validate(_value, validationContext);
         }
 
+        private static bool IsSystemFirst(ImmutableArray<Segment> value)
+        {
+            return !value.IsDefaultOrEmpty && value.Length > 0 && value[0].ToString() == "System";
+        }
+
         private static IEnumerable<ValidationResult> Validate(ImmutableArray<Segment> segments, ValidationContext validationContext)
         {
             var processed = new List<Segment>();
@@ -138,6 +198,51 @@
             }
 
             return results;
+        }
+
+        private int CompareUnqualified(Qualifier other)
+        {
+            if (IsUnqualified)
+            {
+                return other.IsUnqualified ? 0 : -1;
+            }
+
+            return other.IsUnqualified ? 1 : 0;
+        }
+
+        private int CompareSystemFirst(Qualifier other)
+        {
+            bool left = IsSystemFirst(_value);
+            bool right = IsSystemFirst(other._value);
+
+            if (left == right)
+            {
+                return 0;
+            }
+
+            return left ? -1 : 1;
+        }
+
+        private int CompareSegments(Qualifier other)
+        {
+            int length = _value.Length.CompareTo(other._value.Length);
+
+            if (length != 0)
+            {
+                return length;
+            }
+
+            for (int index = 0; index < _value.Length; index++)
+            {
+                int segment = _value[index].CompareTo(other._value[index]);
+
+                if (segment != 0)
+                {
+                    return segment;
+                }
+            }
+
+            return 0;
         }
     }
 }

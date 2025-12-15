@@ -16,7 +16,8 @@
             }
 
             string[] content = binaries
-                .OrderBy(binary => binary)
+                .OrderByDescending(binary => binary.Scope)
+                .ThenBy(binary => binary.Operator)
                 .Select(binary => binary.ToString(construct, options))
                 .ToArray();
 

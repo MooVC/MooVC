@@ -16,7 +16,8 @@
             }
 
             string[] content = constructors
-                .OrderBy(constructor => constructor)
+                .OrderByDescending(scope => scope.Scope)
+                .ThenBy(constructor => constructor.Parameters.Length)
                 .Select(method => method.ToString(construct, options))
                 .ToArray();
 

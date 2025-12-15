@@ -15,7 +15,9 @@
             }
 
             string[] content = events
-                .OrderBy(@event => @event)
+                .OrderByDescending(@event => @event.Scope)
+                .ThenByDescending(@event => @event.Extensibility)
+                .ThenBy(@event => @event.Name)
                 .Select(@event => @event.ToString(options))
                 .ToArray();
 

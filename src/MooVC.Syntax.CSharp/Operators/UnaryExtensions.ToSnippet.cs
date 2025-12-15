@@ -16,7 +16,8 @@
             }
 
             string[] content = unaries
-                .OrderBy(unary => unary)
+                .OrderByDescending(unary => unary.Scope)
+                .ThenBy(unary => unary.Operator)
                 .Select(unary => unary.ToString(construct, options))
                 .ToArray();
 

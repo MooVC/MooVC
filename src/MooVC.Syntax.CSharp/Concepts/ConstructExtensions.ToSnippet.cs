@@ -18,7 +18,7 @@
             }
 
             string[] content = constructs
-                .OrderBy(construct => construct)
+                .OrderBy(construct => construct.Name)
                 .Select(construct => construct.ToString(options))
                 .ToArray();
 

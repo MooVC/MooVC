@@ -16,7 +16,8 @@
             }
 
             string[] content = comparisons
-                .OrderBy(comparison => comparison)
+                .OrderByDescending(comparison => comparison.Scope)
+                .ThenBy(comparison => comparison.Operator)
                 .Select(comparison => comparison.ToString(construct, options))
                 .ToArray();
 

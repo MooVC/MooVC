@@ -16,7 +16,9 @@
             }
 
             var ordered = parameters
-                .OrderBy(parameter => parameter)
+                .OrderByDescending(parameter => parameter.Default.IsEmpty)
+                .ThenBy(parameter => parameter.Modifier.IsParams)
+                .ThenBy(parameter => parameter.Name)
                 .ToImmutableArray();
 
             string snippet = Separator.Combine(ordered, parameter => parameter.ToString(options));
