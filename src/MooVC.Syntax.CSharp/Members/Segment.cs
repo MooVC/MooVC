@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
@@ -11,10 +12,10 @@
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Segment
-        : IValidatableObject
+        : IComparable<Segment>,
+          IValidatableObject
     {
         public static readonly Segment Empty = string.Empty;
-
         private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         public bool IsEmpty => this == Empty;
@@ -31,6 +32,43 @@
             Guard.Against.Conversion<Segment, Snippet>(segment);
 
             return Snippet.From(segment);
+        }
+
+        public static bool operator <(Segment left, Segment right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Segment left, Segment right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Segment left, Segment right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Segment left, Segment right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Segment other)
+        {
+            return other is null
+                ? 1
+                : string.CompareOrdinal(_value, other._value);
         }
 
         public override string ToString()

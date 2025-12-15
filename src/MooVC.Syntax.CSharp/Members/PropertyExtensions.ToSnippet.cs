@@ -15,6 +15,10 @@
             }
 
             string[] content = properties
+                .OrderByDescending(property => property.Extensibility == Extensibility.Static)
+                .ThenByDescending(property => property.Scope)
+                .ThenByDescending(property => property.Extensibility)
+                .ThenBy(property => property.Name)
                 .Select(property => property.ToString())
                 .ToArray();
 

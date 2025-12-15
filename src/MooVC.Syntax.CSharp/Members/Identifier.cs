@@ -14,7 +14,8 @@
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Identifier
-        : IValidatableObject
+        : IComparable<Identifier>,
+          IValidatableObject
     {
         public static readonly Identifier Unnamed = string.Empty;
 
@@ -55,6 +56,43 @@
             Guard.Against.Conversion<Type, Identifier>(type);
 
             return type.GetIdentifier();
+        }
+
+        public static bool operator <(Identifier left, Identifier right)
+        {
+            if (left is null)
+            {
+                return right is object;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >(Identifier left, Identifier right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <=(Identifier left, Identifier right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Identifier left, Identifier right)
+        {
+            return !(left < right);
+        }
+
+        public int CompareTo(Identifier other)
+        {
+            return other is null
+                ? 1
+                : string.CompareOrdinal(_value, other._value);
         }
 
         public override string ToString()

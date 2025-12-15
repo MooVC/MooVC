@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Operators;
     using static MooVC.Syntax.CSharp.Concepts.Construct_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
@@ -33,6 +34,8 @@
         [Descriptor("Named")]
         [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The base class will be annotated with it.")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
+
+        public Operators Operators { get; internal set; } = new Operators();
 
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 

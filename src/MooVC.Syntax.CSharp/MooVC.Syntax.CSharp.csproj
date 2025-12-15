@@ -160,6 +160,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Conversion.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Operators\Operators.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Operators.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Operators\Unary.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -294,6 +299,10 @@
     <EmbeddedResource Update="Operators\Conversion.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Conversion.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Operators\Operators.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Operators.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Operators\Unary.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Immutable;
+    using MooVC.Linq;
 
     public static partial class ConstraintExtensions
     {

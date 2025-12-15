@@ -15,6 +15,10 @@
             }
 
             string[] content = indexers
+                .OrderByDescending(@event => @event.Scope)
+                .ThenByDescending(@event => @event.Extensibility)
+                .ThenBy(indexer => indexer.Parameter.Name)
+                .ThenBy(indexer => indexer.Result.Type)
                 .Select(indexer => indexer.ToString(options))
                 .ToArray();
 

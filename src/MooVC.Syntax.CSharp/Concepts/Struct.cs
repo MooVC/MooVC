@@ -61,9 +61,10 @@
             var events = Events.ToSnippet(options);
             var fields = Fields.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
+            string operators = Operators.ToString(this, options);
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
-            Snippet body = options.BlankSpace.Combine(options, fields, constructors, events, indexers, properties, methods);
+            Snippet body = options.BlankSpace.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
 
             return body.Block(options, signature);
         }

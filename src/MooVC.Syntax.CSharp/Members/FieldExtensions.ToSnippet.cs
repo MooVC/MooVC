@@ -15,6 +15,10 @@
             }
 
             string[] content = fields
+                .OrderByDescending(field => field.IsStatic)
+                .ThenByDescending(field => field.IsReadOnly)
+                .ThenByDescending(field => field.Scope)
+                .ThenBy(field => field.Name)
                 .Select(field => field.ToString())
                 .ToArray();
 
