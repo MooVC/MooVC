@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Members;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithNameIsCalled
         Record original = RecordTestsData.Create();
 
         // Act
-        Record result = original.WithName(newName);
+        Record result = original.Named(newName);
 
         // Assert
         result.ShouldNotBeSameAs(original);

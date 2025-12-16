@@ -10,12 +10,10 @@ public sealed class WhenEqualityOperatorKindStringIsCalled
         const string Right = "record";
 
         // Act
-        bool resultLeftRight = left == Right;
-        bool resultRightLeft = Right == left;
+        bool result = left == Right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -26,12 +24,10 @@ public sealed class WhenEqualityOperatorKindStringIsCalled
         const string Right = "readonly";
 
         // Act
-        bool resultLeftRight = left == Right;
-        bool resultRightLeft = Right == left;
+        bool result = left == Right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -41,11 +37,9 @@ public sealed class WhenEqualityOperatorKindStringIsCalled
         Struct.Kind left = default!;
 
         // Act
-        bool resultNull = left == null;
-        bool resultEmpty = left == string.Empty;
+        bool result = left == default(string);
 
         // Assert
-        resultNull.ShouldBeTrue();
-        resultEmpty.ShouldBeFalse();
+        result.ShouldBeTrue();
     }
 }

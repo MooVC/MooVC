@@ -6,11 +6,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
-    using Fluentify;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Operators;
     using static MooVC.Syntax.CSharp.Concepts.Construct_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
+    using Descriptor = Fluentify.DescriptorAttribute;
+    using Ignore = Valuify.IgnoreAttribute;
 
     public abstract class Construct
         : IValidatableObject
@@ -27,6 +28,7 @@
 
         public bool IsPartial { get; internal set; }
 
+        [Ignore]
         public abstract bool IsUndefined { get; }
 
         public ImmutableArray<Method> Methods { get; internal set; } = ImmutableArray<Method>.Empty;

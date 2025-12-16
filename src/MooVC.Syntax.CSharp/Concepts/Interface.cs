@@ -7,6 +7,7 @@
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -21,6 +22,7 @@
         {
         }
 
+        [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         protected override Snippet ToSnippet(Snippet.Options options)

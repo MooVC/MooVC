@@ -12,12 +12,12 @@ public sealed class WhenWithConstructorsIsCalled
         // Arrange
         Constructor[] existing =
         [
-            new Constructor(),
+            new Constructor { Scope = Scope.Internal },
         ];
 
         Constructor[] additional =
         [
-            new Constructor (),
+            new Constructor { Scope = Scope.Protected },
         ];
 
         Class original = ClassTestsData.Create(constructors: existing.ToImmutableArray());

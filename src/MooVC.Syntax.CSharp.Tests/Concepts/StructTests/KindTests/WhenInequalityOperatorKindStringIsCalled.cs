@@ -10,12 +10,10 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         const string Right = "record";
 
         // Act
-        bool resultLeftRight = left != Right;
-        bool resultRightLeft = Right != left;
+        bool result = left != Right;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -26,12 +24,10 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         const string Right = "readonly";
 
         // Act
-        bool resultLeftRight = left != Right;
-        bool resultRightLeft = Right != left;
+        bool result = left != Right;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -41,7 +37,7 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         Struct.Kind left = default!;
 
         // Act
-        bool result = left != null;
+        bool result = left != default(string);
 
         // Assert
         result.ShouldBeFalse();

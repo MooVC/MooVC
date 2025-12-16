@@ -36,11 +36,11 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = new Identifier(AttributeName) } };
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(StructTestsData.DefaultName) } };
+        var constructor = new Constructor { Scope = Scope.Private };
         var @event = new Event { Name = new Identifier("Created") };
         var field = new Field { Name = new Identifier("_value"), Type = typeof(int) };
-        var indexer = new Indexer { Name = new Identifier("Item") };
-        var method = new Method { Name = new Identifier("Execute") };
+        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
+        var method = new Method { Name = new Declaration { Name = "Execute" } };
         var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
 
         // Act
@@ -54,7 +54,7 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = new Identifier(StructTestsData.DefaultName) },
-            operators: new Operators { Conversions = [new Conversion { Destination = Symbol.Undefined }] },
+            operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
             parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(string) }],
             properties: [property],
             scope: Scope.Internal);
@@ -70,7 +70,7 @@ public sealed class WhenConstructorIsCalled
         subject.Methods.ShouldBe(new[] { method });
         subject.Name.ShouldBe(new Declaration { Name = new Identifier(StructTestsData.DefaultName) });
         subject.Operators.Conversions.ShouldNotBeEmpty();
-        subject.Parameters.ShouldHaveSingleItem();
+        _ = subject.Parameters.ShouldHaveSingleItem();
         subject.Properties.ShouldBe(new[] { property });
         subject.Scope.ShouldBe(Scope.Internal);
         subject.IsUndefined.ShouldBeFalse();

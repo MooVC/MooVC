@@ -2,6 +2,7 @@
 {
     using Fluentify;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
 
     [Fluentify]
@@ -18,6 +19,7 @@
 
         public bool IsStatic { get; internal set; }
 
+        [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         protected override string GetSignature(string extensibility, string partial, string name, string scope)

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Members;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithNameIsCalled
         var newName = new Declaration { Name = new Identifier("Other") };
 
         // Act
-        Class result = original.WithName(newName);
+        Class result = original.Named(newName);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -8,9 +8,10 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Operators_Resources;
+
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -29,6 +30,7 @@
 
         public ImmutableArray<Conversion> Conversions { get; internal set; } = ImmutableArray<Conversion>.Empty;
 
+        [Ignore]
         public bool IsUndefined => this == Undefined;
 
         public ImmutableArray<Unary> Unaries { get; internal set; } = ImmutableArray<Unary>.Empty;
