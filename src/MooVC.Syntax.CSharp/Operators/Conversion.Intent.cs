@@ -57,6 +57,16 @@
                     ? 1
                     : _value.CompareTo(other._value);
             }
+
+            public override string ToString()
+            {
+                if (_value == From._value)
+                {
+                    return nameof(From);
+                }
+
+                return nameof(To);
+            }
         }
     }
 }
