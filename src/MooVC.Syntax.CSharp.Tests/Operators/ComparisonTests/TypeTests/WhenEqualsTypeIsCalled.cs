@@ -9,7 +9,7 @@ public sealed class WhenEqualsTypeIsCalled
         Comparison.Type type = Comparison.Type.Equality;
 
         // Act
-        bool result = type.Equals(null as Comparison.Type);
+        bool result = type.Equals(default(Comparison.Type));
 
         // Assert
         result.ShouldBeFalse();

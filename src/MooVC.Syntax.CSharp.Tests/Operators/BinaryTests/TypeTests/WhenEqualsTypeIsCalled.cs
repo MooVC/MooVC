@@ -9,7 +9,7 @@ public sealed class WhenEqualsTypeIsCalled
         Binary.Type type = Binary.Type.Add;
 
         // Act
-        bool result = type.Equals(null as Binary.Type);
+        bool result = type.Equals(default(Binary.Type));
 
         // Assert
         result.ShouldBeFalse();

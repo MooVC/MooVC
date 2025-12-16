@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = intent.ToString();
 
         // Assert
-        result.ShouldBe("1");
+        result.ShouldBe(nameof(Conversion.Intent.From));
     }
 }

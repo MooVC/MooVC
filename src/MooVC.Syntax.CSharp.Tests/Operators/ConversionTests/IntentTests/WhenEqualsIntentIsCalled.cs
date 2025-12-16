@@ -9,7 +9,7 @@ public sealed class WhenEqualsIntentIsCalled
         Conversion.Intent intent = Conversion.Intent.From;
 
         // Act
-        bool result = intent.Equals(null as Conversion.Intent);
+        bool result = intent.Equals(default(Conversion.Intent));
 
         // Assert
         result.ShouldBeFalse();

@@ -12,7 +12,7 @@ public sealed class WhenEqualsIntIsCalled
         Conversion.Intent intent = Conversion.Intent.From;
 
         // Act
-        bool result = intent.Equals(null as int?);
+        bool result = intent.Equals(default(int?));
 
         // Assert
         result.ShouldBeFalse();
