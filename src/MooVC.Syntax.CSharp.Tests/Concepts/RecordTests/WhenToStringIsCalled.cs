@@ -1,0 +1,57 @@
+namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+
+using System;
+using MooVC.Syntax.CSharp.Members;
+
+public sealed class WhenToStringIsCalled
+{
+    [Fact]
+    public void GivenUndefinedRecordThenReturnsEmpty()
+    {
+        // Arrange
+        Record subject = Record.Undefined;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        result.ShouldBe(string.Empty);
+    }
+
+    [Fact]
+    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Record subject = RecordTestsData.Create();
+
+        // Act
+        Func<string> action = () => subject.ToString(options: default);
+
+        // Assert
+        _ = action.ShouldThrow<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void GivenValuesThenReturnsRecordSignature()
+    {
+        // Arrange
+        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(RecordTestsData.DefaultName) } };
+        Record subject = RecordTestsData.Create(
+            constructors: [constructor],
+            extensibility: Extensibility.Abstract,
+            isPartial: true,
+            name: new Declaration { Name = new Identifier(RecordTestsData.DefaultName) },
+            parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(int) }],
+            scope: Scope.Internal);
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        result.ShouldContain("internal abstract partial record");
+        result.ShouldContain(RecordTestsData.DefaultName);
+        result.ShouldContain(constructor.Name.Name);
+        result.ShouldContain("(");
+        result.ShouldContain(")");
+    }
+}
