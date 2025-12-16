@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
+using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenWithOperatorsIsCalled
@@ -8,16 +9,16 @@ public sealed class WhenWithOperatorsIsCalled
     public void GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Operators originalOperators = new Operators { Equality = [new Equality { Target = typeof(string) }] };
-        Operators updated = new Operators { Arithmetic = [new Arithmetic { Target = typeof(int), Type = Arithmetic.Types.Addition }], Equality = originalOperators.Equality };
-        Record original = RecordTestsData.Create(operators: originalOperators);
+        var original = new Operators { Binaries = [new Binary { Scope = Scope.Public }] };
+        var updated = new Operators { Unaries = [new Unary { Scope = Scope.Internal } };
+        Record record = RecordTestsData.Create(operators: original);
 
         // Act
-        Record result = original.WithOperators(updated);
+        Record result = record.WithOperators(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
+        result.ShouldNotBeSameAs(record);
         result.Operators.ShouldBe(updated);
-        original.Operators.ShouldBe(originalOperators);
+        record.Operators.ShouldBe(original);
     }
 }

@@ -1,6 +1,6 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
-public sealed class WhenGetHashCodeIsCalledForKind
+public sealed class WhenGetHashCodeIsCalled
 {
     [Fact]
     public void GivenEqualValuesThenReturnsSameHash()

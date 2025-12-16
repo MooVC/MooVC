@@ -35,7 +35,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsRecordSignature()
     {
         // Arrange
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(RecordTestsData.DefaultName) } };
+        var constructor = new Constructor();
         Record subject = RecordTestsData.Create(
             constructors: [constructor],
             extensibility: Extensibility.Abstract,
@@ -50,7 +50,6 @@ public sealed class WhenToStringIsCalled
         // Assert
         result.ShouldContain("internal abstract partial record");
         result.ShouldContain(RecordTestsData.DefaultName);
-        result.ShouldContain(constructor.Name.Name);
         result.ShouldContain("(");
         result.ShouldContain(")");
     }

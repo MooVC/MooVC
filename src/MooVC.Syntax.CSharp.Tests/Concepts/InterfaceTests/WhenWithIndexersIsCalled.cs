@@ -8,7 +8,7 @@ public sealed class WhenWithIndexersIsCalled
     public void GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var indexer = new Indexer { Name = new Identifier("Item") };
+        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         Interface original = InterfaceTestsData.Create();
 
         // Act

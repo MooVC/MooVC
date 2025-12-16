@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
+using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,7 +20,7 @@ public sealed class WhenWithAttributesIsCalled
             new Attribute { Name = new Symbol { Name = new Identifier("Additional") } },
         ];
 
-        Record original = RecordTestsData.Create(attributes: existing);
+        Record original = RecordTestsData.Create(attributes: existing.ToImmutableArray());
 
         // Act
         Record result = original.WithAttributes(additional);

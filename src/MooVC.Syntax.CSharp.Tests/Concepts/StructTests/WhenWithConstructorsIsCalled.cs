@@ -8,7 +8,7 @@ public sealed class WhenWithConstructorsIsCalled
     public void GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier("Constructor") } };
+        var constructor = new Constructor { Scope = Scope.Protected };
         Struct original = StructTestsData.Create();
 
         // Act

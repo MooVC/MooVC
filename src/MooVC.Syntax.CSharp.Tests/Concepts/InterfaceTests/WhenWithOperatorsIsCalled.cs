@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
+using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenWithOperatorsIsCalled
@@ -8,7 +9,7 @@ public sealed class WhenWithOperatorsIsCalled
     public void GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var operators = new Operators { Conversions = [new Conversion { Destination = Symbol.Undefined }] };
+        var operators = new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] };
         Interface original = InterfaceTestsData.Create();
 
         // Act

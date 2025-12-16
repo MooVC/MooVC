@@ -35,7 +35,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsClassSignature()
     {
         // Arrange
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(ClassTestsData.DefaultName) } };
+        var constructor = new Constructor();
         Class subject = ClassTestsData.Create(
             constructors: [constructor],
             extensibility: Extensibility.Abstract,
@@ -49,7 +49,6 @@ public sealed class WhenToStringIsCalled
         // Assert
         result.ShouldContain("internal abstract partial class");
         result.ShouldContain(ClassTestsData.DefaultName);
-        result.ShouldContain(constructor.Name.Name);
         result.ShouldContain("{");
         result.ShouldContain("}");
     }

@@ -35,7 +35,8 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsStructSignature()
     {
         // Arrange
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(StructTestsData.DefaultName) } };
+        var constructor = new Constructor();
+
         Struct subject = StructTestsData.Create(
             behavior: Struct.Kind.Ref,
             constructors: [constructor],
@@ -50,7 +51,6 @@ public sealed class WhenToStringIsCalled
         // Assert
         result.ShouldContain("internal ref partial struct");
         result.ShouldContain(StructTestsData.DefaultName);
-        result.ShouldContain(constructor.Name.Name);
         result.ShouldContain("(");
         result.ShouldContain(")");
     }

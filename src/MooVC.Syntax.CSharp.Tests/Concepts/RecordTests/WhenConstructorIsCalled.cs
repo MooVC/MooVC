@@ -15,18 +15,18 @@ public sealed class WhenConstructorIsCalled
         var subject = new Record();
 
         // Assert
-        subject.Attributes.ShouldBe(ImmutableArray<Attribute>.Empty);
-        subject.Constructors.ShouldBe(ImmutableArray<Constructor>.Empty);
-        subject.Events.ShouldBe(ImmutableArray<Event>.Empty);
+        subject.Attributes.ShouldBe([]);
+        subject.Constructors.ShouldBe([]);
+        subject.Events.ShouldBe([]);
         subject.Extensibility.ShouldBe(Extensibility.Sealed);
-        subject.Fields.ShouldBe(ImmutableArray<Field>.Empty);
-        subject.Indexers.ShouldBe(ImmutableArray<Indexer>.Empty);
+        subject.Fields.ShouldBe([]);
+        subject.Indexers.ShouldBe([]);
         subject.IsPartial.ShouldBeFalse();
-        subject.Methods.ShouldBe(ImmutableArray<Method>.Empty);
+        subject.Methods.ShouldBe([]);
         subject.Name.ShouldBe(Declaration.Unspecified);
         subject.Operators.ShouldBe(new Operators());
-        subject.Parameters.ShouldBe(ImmutableArray<Parameter>.Empty);
-        subject.Properties.ShouldBe(ImmutableArray<Property>.Empty);
+        subject.Parameters.ShouldBe([]);
+        subject.Properties.ShouldBe([]);
         subject.Scope.ShouldBe(Scope.Public);
         subject.IsUndefined.ShouldBeTrue();
     }
@@ -36,11 +36,11 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = new Identifier(AttributeName) } };
-        var constructor = new Constructor { Name = new Declaration { Name = new Identifier(RecordTestsData.DefaultName) } };
+        var constructor = new Constructor();
         var @event = new Event { Name = new Identifier("Created") };
         var field = new Field { Name = new Identifier("_value"), Type = typeof(int) };
-        var indexer = new Indexer { Name = new Identifier("Item") };
-        var method = new Method { Name = new Identifier("Execute") };
+        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
+        var method = new Method { Name = new Declaration { Name = "Execute" } };
         var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
 
         // Act
@@ -54,7 +54,7 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = new Identifier(RecordTestsData.DefaultName) },
-            operators: new Operators { Conversions = [new Conversion { Destination = Symbol.Undefined }] },
+            operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
             parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(string) }],
             properties: [property],
             scope: Scope.Internal);
@@ -70,7 +70,7 @@ public sealed class WhenConstructorIsCalled
         subject.Methods.ShouldBe(new[] { method });
         subject.Name.ShouldBe(new Declaration { Name = new Identifier(RecordTestsData.DefaultName) });
         subject.Operators.Conversions.ShouldNotBeEmpty();
-        subject.Parameters.ShouldHaveSingleItem();
+        _ = subject.Parameters.ShouldHaveSingleItem();
         subject.Properties.ShouldBe(new[] { property });
         subject.Scope.ShouldBe(Scope.Internal);
         subject.IsUndefined.ShouldBeFalse();

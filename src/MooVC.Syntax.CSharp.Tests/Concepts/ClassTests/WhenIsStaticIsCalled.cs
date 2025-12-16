@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-public sealed class WhenWithIsStaticIsCalled
+public sealed class WhenIsStaticIsCalled
 {
     [Fact]
     public void GivenIsStaticThenReturnsUpdatedInstance()
@@ -9,7 +9,7 @@ public sealed class WhenWithIsStaticIsCalled
         Class original = ClassTestsData.Create(isStatic: false);
 
         // Act
-        Class result = original.WithIsStatic(true);
+        Class result = original.IsStatic(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);

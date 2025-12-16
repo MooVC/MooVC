@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
-using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.CSharp.Members;
 using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
 

@@ -8,7 +8,7 @@ public sealed class WhenWithMethodsIsCalled
     public void GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var method = new Method { Name = new Identifier("Execute") };
+        var method = new Method { Name = new Declaration { Name = "Execute" } };
         Interface original = InterfaceTestsData.Create();
 
         // Act

@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
-using MooVC.Syntax.CSharp.Members;
-
 public sealed class WhenGetHashCodeIsCalled
 {
     [Fact]

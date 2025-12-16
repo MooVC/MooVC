@@ -9,7 +9,7 @@ public sealed class WhenWithIsPartialIsCalled
         Record original = RecordTestsData.Create(isPartial: true);
 
         // Act
-        Record result = original.WithIsPartial(false);
+        Record result = original.IsPartial(false);
 
         // Assert
         result.ShouldNotBeSameAs(original);

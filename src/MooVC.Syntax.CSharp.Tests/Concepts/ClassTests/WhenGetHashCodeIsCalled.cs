@@ -8,8 +8,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Class left = ClassTestsData.Create(extensibility: Members.Extensibility.Implicit);
-        Class right = ClassTestsData.Create(extensibility: Members.Extensibility.Implicit);
+        Class left = ClassTestsData.Create(extensibility: Extensibility.Implicit);
+        Class right = ClassTestsData.Create(extensibility: Extensibility.Implicit);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -23,8 +23,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
-        Class left = ClassTestsData.Create(scope: Members.Scope.Internal);
-        Class right = ClassTestsData.Create(scope: Members.Scope.Private);
+        Class left = ClassTestsData.Create(scope: Scope.Internal);
+        Class right = ClassTestsData.Create(scope: Scope.Private);
 
         // Act
         int leftHash = left.GetHashCode();

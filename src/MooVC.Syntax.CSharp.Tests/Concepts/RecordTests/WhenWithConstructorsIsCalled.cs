@@ -8,8 +8,8 @@ public sealed class WhenWithConstructorsIsCalled
     public void GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var originalConstructor = new Constructor { Name = new Declaration { Name = new Identifier(RecordTestsData.DefaultName) } };
-        var updated = new Constructor { Name = new Declaration { Name = new Identifier("Other") } };
+        var originalConstructor = new Constructor();
+        var updated = new Constructor { Scope = Scope.Protected };
         Record original = RecordTestsData.Create(constructors: [originalConstructor]);
 
         // Act

@@ -1,15 +1,15 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-public sealed class WhenWithIsPartialIsCalled
+public sealed class WhenIsPartialIsCalled
 {
     [Fact]
     public void GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange
-        Interface original = InterfaceTestsData.Create(isPartial: false);
+        Class original = ClassTestsData.Create(isPartial: false);
 
         // Act
-        Interface result = original.WithIsPartial(true);
+        Class result = original.IsPartial(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -8,8 +8,8 @@ public sealed class WhenWithIndexersIsCalled
     public void GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Indexer { Name = new Identifier("Item") };
-        var appended = new Indexer { Name = new Identifier("Other") };
+        var existing = new Indexer { Parameter = new Parameter { Name = "Item" } };
+        var appended = new Indexer { Parameter = new Parameter { Name = "Other" } };
         Record original = RecordTestsData.Create(indexers: [existing]);
 
         // Act

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenEqualsObjectIsCalled
 {
     [Fact]
@@ -20,7 +22,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
-        var other = new object();
+        object other = new object();
         Struct subject = StructTestsData.Create();
 
         // Act

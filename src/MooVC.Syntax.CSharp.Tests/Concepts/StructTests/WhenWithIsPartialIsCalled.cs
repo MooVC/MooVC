@@ -9,7 +9,7 @@ public sealed class WhenWithIsPartialIsCalled
         Struct original = StructTestsData.Create(isPartial: false);
 
         // Act
-        Struct result = original.WithIsPartial(true);
+        Struct result = original.IsPartial(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);

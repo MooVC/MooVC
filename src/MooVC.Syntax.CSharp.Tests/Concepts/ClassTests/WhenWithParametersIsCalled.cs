@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
+using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
@@ -11,7 +12,7 @@ public sealed class WhenWithParametersIsCalled
         // Arrange
         Parameter[] existing = [new Parameter { Name = new Identifier("value"), Type = typeof(int) }];
         Parameter[] additional = [new Parameter { Name = new Identifier("text"), Type = typeof(string) }];
-        Class original = ClassTestsData.Create(parameters: existing);
+        Class original = ClassTestsData.Create(parameters: existing.ToImmutableArray());
 
         // Act
         Class result = original.WithParameters(additional);

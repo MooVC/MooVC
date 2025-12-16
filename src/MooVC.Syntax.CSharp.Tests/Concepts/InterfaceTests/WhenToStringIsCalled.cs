@@ -37,7 +37,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var @event = new Event { Name = new Identifier("Created") };
         var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
-        var method = new Method { Name = new Identifier("Execute") };
+        var method = new Method { Name = new Declaration { Name = "Execute" } };
 
         Interface subject = InterfaceTestsData.Create(
             events: [@event],
@@ -54,9 +54,9 @@ public sealed class WhenToStringIsCalled
         // Assert
         result.ShouldContain("internal partial interface");
         result.ShouldContain(InterfaceTestsData.DefaultName);
-        result.ShouldContain(@event.Name.Name);
+        result.ShouldContain(@event.Name);
         result.ShouldContain("this");
-        result.ShouldContain(property.Name.Name);
+        result.ShouldContain(property.Name);
         result.ShouldContain(method.Name.Name);
     }
 }

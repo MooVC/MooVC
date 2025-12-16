@@ -11,7 +11,7 @@ public sealed class WhenEqualsRecordIsCalled
         Record subject = RecordTestsData.Create();
 
         // Act
-        bool result = subject.Equals(value: default);
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();
@@ -21,7 +21,7 @@ public sealed class WhenEqualsRecordIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(methods: [new Method { Name = new Identifier("Execute") }]);
+        Record subject = RecordTestsData.Create(methods: [new Method { Name = new Declaration { Name = "Execute" } }]);
 
         // Act
         bool result = subject.Equals(subject);

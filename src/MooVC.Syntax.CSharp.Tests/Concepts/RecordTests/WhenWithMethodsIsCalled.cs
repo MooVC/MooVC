@@ -8,8 +8,8 @@ public sealed class WhenWithMethodsIsCalled
     public void GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var execute = new Method { Name = new Identifier("Execute") };
-        var undo = new Method { Name = new Identifier("Undo") };
+        var execute = new Method { Name = new Declaration { Name = "Execute" } };
+        var undo = new Method { Name = new Declaration { Name = "Undo" } };
         Record original = RecordTestsData.Create(methods: [execute]);
 
         // Act

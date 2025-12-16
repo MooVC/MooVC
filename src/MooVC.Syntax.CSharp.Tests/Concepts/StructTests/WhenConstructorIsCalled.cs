@@ -15,18 +15,18 @@ public sealed class WhenConstructorIsCalled
         var subject = new Struct();
 
         // Assert
-        subject.Attributes.ShouldBe(ImmutableArray<Attribute>.Empty);
-        subject.Constructors.ShouldBe(ImmutableArray<Constructor>.Empty);
-        subject.Events.ShouldBe(ImmutableArray<Event>.Empty);
-        subject.Fields.ShouldBe(ImmutableArray<Field>.Empty);
-        subject.Indexers.ShouldBe(ImmutableArray<Indexer>.Empty);
+        subject.Attributes.ShouldBe([]);
+        subject.Constructors.ShouldBe([]);
+        subject.Events.ShouldBe([]);
+        subject.Fields.ShouldBe([]);
+        subject.Indexers.ShouldBe([]);
         subject.Behavior.ShouldBe(Struct.Kind.Default);
         subject.IsPartial.ShouldBeFalse();
-        subject.Methods.ShouldBe(ImmutableArray<Method>.Empty);
+        subject.Methods.ShouldBe([]);
         subject.Name.ShouldBe(Declaration.Unspecified);
         subject.Operators.ShouldBe(new Operators());
-        subject.Parameters.ShouldBe(ImmutableArray<Parameter>.Empty);
-        subject.Properties.ShouldBe(ImmutableArray<Property>.Empty);
+        subject.Parameters.ShouldBe([]);
+        subject.Properties.ShouldBe([]);
         subject.Scope.ShouldBe(Scope.Public);
         subject.IsUndefined.ShouldBeTrue();
     }

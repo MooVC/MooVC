@@ -1,6 +1,6 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
-public sealed class WhenToStringIsCalledForKind
+public sealed class WhenToStringIsCalled
 {
     [Fact]
     public void GivenKindThenReturnsUnderlyingValue()

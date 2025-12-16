@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
+using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,7 +20,7 @@ public sealed class WhenWithAttributesIsCalled
             new Attribute { Name = new Symbol { Name = new Identifier("Additional") } },
         ];
 
-        Interface original = InterfaceTestsData.Create(attributes: existing);
+        Interface original = InterfaceTestsData.Create(attributes: existing.ToImmutableArray());
 
         // Act
         Interface result = original.WithAttributes(additional);

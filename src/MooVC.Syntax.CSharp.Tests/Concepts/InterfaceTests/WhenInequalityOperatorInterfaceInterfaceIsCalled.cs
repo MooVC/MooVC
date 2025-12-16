@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
+using MooVC.Syntax.CSharp.Members;
+
 public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
 {
     [Fact]

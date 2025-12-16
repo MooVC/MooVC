@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
+using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,7 +20,7 @@ public sealed class WhenWithAttributesIsCalled
             new Attribute { Name = new Symbol { Name = new Identifier("Additional") } },
         ];
 
-        Struct original = StructTestsData.Create(attributes: existing);
+        Struct original = StructTestsData.Create(attributes: existing.ToImmutableArray());
 
         // Act
         Struct result = original.WithAttributes(additional);

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 using System;
 using System.Reflection;
 
-public sealed class WhenConstructorIsCalledForKind
+public sealed class WhenConstructorIsCalled
 {
     [Fact]
     public void GivenValueThenKindIsCreated()
@@ -13,7 +13,7 @@ public sealed class WhenConstructorIsCalledForKind
             typeof(Struct.Kind),
             BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,
-            args: new object[] { "readonly" },
+            args: ["readonly"],
             culture: null)!;
 
         // Assert

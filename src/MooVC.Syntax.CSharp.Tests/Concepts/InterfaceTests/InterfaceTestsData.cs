@@ -9,26 +9,26 @@ public static class InterfaceTestsData
     public const string DefaultName = "Sample";
 
     public static Interface Create(
-        bool? isPartial = null,
-        Scope? scope = null,
-        Operators? operators = null,
-        Declaration? name = null,
-        ImmutableArray<Attribute>? attributes = null,
-        ImmutableArray<Event>? events = null,
-        ImmutableArray<Indexer>? indexers = null,
-        ImmutableArray<Method>? methods = null,
-        ImmutableArray<Property>? properties = null)
+        bool? isPartial = default,
+        Scope? scope = default,
+        Operators? operators = default,
+        Declaration? name = default,
+        ImmutableArray<Attribute>? attributes = default,
+        ImmutableArray<Event>? events = default,
+        ImmutableArray<Indexer>? indexers = default,
+        ImmutableArray<Method>? methods = default,
+        ImmutableArray<Property>? properties = default)
     {
         return new Interface
         {
-            Attributes = attributes ?? ImmutableArray<Attribute>.Empty,
-            Events = events ?? ImmutableArray<Event>.Empty,
-            Indexers = indexers ?? ImmutableArray<Indexer>.Empty,
+            Attributes = attributes ?? [],
+            Events = events ?? [],
+            Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,
-            Methods = methods ?? ImmutableArray<Method>.Empty,
+            Methods = methods ?? [],
             Name = name ?? new Declaration { Name = new Identifier(DefaultName) },
             Operators = operators ?? new Operators(),
-            Properties = properties ?? ImmutableArray<Property>.Empty,
+            Properties = properties ?? [],
             Scope = scope ?? Scope.Public,
         };
     }

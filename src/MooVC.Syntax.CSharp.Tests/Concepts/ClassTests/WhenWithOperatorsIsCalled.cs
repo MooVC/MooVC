@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
+using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenWithOperatorsIsCalled
@@ -11,7 +12,7 @@ public sealed class WhenWithOperatorsIsCalled
         Class original = ClassTestsData.Create();
         var operators = new Operators
         {
-            Conversions = [new Conversion { Destination = Symbol.Undefined }],
+            Conversions = [new Conversion { Subject = Symbol.Undefined }],
         };
 
         // Act

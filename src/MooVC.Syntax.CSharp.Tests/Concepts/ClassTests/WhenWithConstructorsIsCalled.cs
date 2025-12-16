@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
+using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
@@ -11,15 +12,15 @@ public sealed class WhenWithConstructorsIsCalled
         // Arrange
         Constructor[] existing =
         [
-            new Constructor { Name = new Declaration { Name = new Identifier("First") } },
+            new Constructor(),
         ];
 
         Constructor[] additional =
         [
-            new Constructor { Name = new Declaration { Name = new Identifier("Second") } },
+            new Constructor (),
         ];
 
-        Class original = ClassTestsData.Create(constructors: existing);
+        Class original = ClassTestsData.Create(constructors: existing.ToImmutableArray());
 
         // Act
         Class result = original.WithConstructors(additional);
