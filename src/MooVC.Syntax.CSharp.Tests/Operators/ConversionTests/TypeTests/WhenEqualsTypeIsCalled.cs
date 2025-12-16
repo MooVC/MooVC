@@ -9,7 +9,7 @@ public sealed class WhenEqualsTypeIsCalled
         Conversion.Type type = Conversion.Type.Explicit;
 
         // Act
-        bool result = type.Equals(null as Conversion.Type);
+        bool result = type.Equals(default(Conversion.Type));
 
         // Assert
         result.ShouldBeFalse();
