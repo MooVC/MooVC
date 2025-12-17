@@ -14,12 +14,12 @@
                 return Snippet.Empty;
             }
 
-            string[] content = events
+            var content = events
                 .OrderByDescending(@event => @event.Scope)
                 .ThenByDescending(@event => @event.Extensibility)
                 .ThenBy(@event => @event.Name)
                 .Select(@event => @event.ToString(options))
-                .ToArray();
+                .ToSnippet();
 
             return options.BlankSpace.Combine(options, content);
         }

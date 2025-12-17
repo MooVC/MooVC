@@ -15,11 +15,11 @@
                 return Snippet.Empty;
             }
 
-            string[] content = unaries
+            var content = unaries
                 .OrderByDescending(unary => unary.Scope)
                 .ThenBy(unary => unary.Operator)
                 .Select(unary => unary.ToString(construct, options))
-                .ToArray();
+                .ToSnippet();
 
             string snippet = options.BlankSpace.Combine(content);
 

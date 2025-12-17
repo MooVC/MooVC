@@ -36,6 +36,13 @@
 
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
+        public static implicit operator Result(Type type)
+        {
+            Guard.Against.Conversion<Type, Result>(type);
+
+            return new Result { Type = type };
+        }
+
         public static implicit operator string(Result result)
         {
             Guard.Against.Conversion<Result, string>(result);

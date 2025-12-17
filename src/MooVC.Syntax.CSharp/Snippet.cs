@@ -18,6 +18,16 @@
         private const int SingleLine = 1;
         private const string Separator = " ";
 
+        internal Snippet(ImmutableArray<string> value)
+        {
+            if (value.IsDefault)
+            {
+                value = ImmutableArray<string>.Empty;
+            }
+
+            _value = value;
+        }
+
         public bool IsEmpty => this == Empty;
 
         public bool IsMultiLine => !_value.IsDefaultOrEmpty && _value.Length > SingleLine;
@@ -142,45 +152,31 @@
             return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
 
-        public Snippet Combine(params string[] values)
+        public Snippet Combine(params Snippet[] values)
         {
             return Combine(Options.Default, values);
         }
 
-        public Snippet Combine(Options options, params string[] values)
+        public Snippet Combine(Options options, params Snippet[] values)
         {
             _ = Guard.Against.Null(options, message: CombineOptionsRequired);
             _ = Guard.Against.Null(values, message: CombineSnippetsRequired);
 
-            string[] combined = ArrayPool<string>.Shared.Rent(values.Length * 2);
+            values = StripEmptySnippets(values);
 
-            try
+            if (values.Length == 0)
             {
-                int total = Combine(values, combined);
-
-                if (total == 0)
-                {
-                    return Empty;
-                }
-
-                string first = combined[0];
-
-                if (total == 1)
-                {
-                    return From(options, first);
-                }
-
-                values = combined
-                    .Skip(1)
-                    .Take(total - 1)
-                    .ToArray();
-
-                return Empty.Append(options, values);
+                return Empty;
             }
-            finally
+
+            if (values.Length == 1)
             {
-                ArrayPool<string>.Shared.Return(combined);
+                return values[0];
             }
+
+            string[] combined = AllocateWorkingMemoryForCombine(values);
+
+            return Combine(combined, values);
         }
 
         public Snippet Prepend(params string[] values)
@@ -244,6 +240,14 @@
             return string.Join(options.NewLine, _value);
         }
 
+        private static void Combine(string[] combined, ref int index, Snippet snippet)
+        {
+            for (int line = 0; line < snippet._value.Length; line++)
+            {
+                combined[index++] = snippet._value[line];
+            }
+        }
+
         private static ImmutableArray<string> Combine(
             Options options,
             Snippet original,
@@ -278,28 +282,54 @@
             return combine(first, second).ToImmutableArray();
         }
 
-        private int Combine(string[] values, string[] combined)
+        private static Snippet[] StripEmptySnippets(Snippet[] values)
         {
-            string separator = this;
-            int last = values.Length - 1;
-            int total = 0;
+            return values
+                .Where(snippet => !snippet.IsEmpty)
+                .ToArray();
+        }
 
-            for (int index = 0; index <= last; index++)
+        private string[] AllocateWorkingMemoryForCombine(Snippet[] values)
+        {
+            int separators = (values.Length - 1) * _value.Length;
+            int length = values.Sum(snippet => snippet._value.Length) + separators;
+            string[] combined = ArrayPool<string>.Shared.Rent(length);
+
+            return combined;
+        }
+
+        private Snippet Combine(string[] combined, Snippet[] values)
+        {
+            try
             {
-                string value = values[index];
+                int index = 0;
+                int last = values.Length - 1;
 
-                if (!string.IsNullOrEmpty(value))
+                for (int current = 0; current < values.Length; current++)
                 {
-                    combined[total++] = value;
+                    Snippet snippet = values[current];
 
-                    if (index != last)
+                    if (snippet.IsEmpty)
                     {
-                        combined[total++] = separator;
+                        continue;
+                    }
+
+                    Combine(combined, ref index, snippet);
+
+                    if (current != last)
+                    {
+                        Combine(combined, ref index, this);
                     }
                 }
-            }
 
-            return total;
+                return combined
+                    .Take(index)
+                    .ToImmutableArray();
+            }
+            finally
+            {
+                ArrayPool<string>.Shared.Return(combined);
+            }
         }
     }
 }

@@ -15,12 +15,12 @@
                 return Snippet.Empty;
             }
 
-            string[] content = conversions
+            var content = conversions
                 .OrderByDescending(conversion => conversion.Scope)
                 .ThenBy(conversion => conversion.Subject)
                 .ThenBy(conversion => conversion.Direction)
                 .Select(conversion => conversion.ToString(construct, options))
-                .ToArray();
+                .ToSnippet();
 
             string snippet = options.BlankSpace.Combine(content);
 

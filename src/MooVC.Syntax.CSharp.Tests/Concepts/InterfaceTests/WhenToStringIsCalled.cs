@@ -41,7 +41,7 @@ public sealed class WhenToStringIsCalled
 
         Interface subject = InterfaceTestsData.Create(
             events: [@event],
-            indexers: [new Indexer { Parameter = new Parameter { Name = new Identifier("item"), Type = typeof(string) } }],
+            indexers: [new Indexer { Parameter = new Parameter { Name = new Identifier("item"), Type = typeof(string) }, Result = typeof(int) }],
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = new Identifier(InterfaceTestsData.DefaultName) },

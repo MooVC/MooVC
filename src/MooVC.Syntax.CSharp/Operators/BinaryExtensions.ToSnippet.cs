@@ -15,11 +15,11 @@
                 return Snippet.Empty;
             }
 
-            string[] content = binaries
+            var content = binaries
                 .OrderByDescending(binary => binary.Scope)
                 .ThenBy(binary => binary.Operator)
                 .Select(binary => binary.ToString(construct, options))
-                .ToArray();
+                .ToSnippet();
 
             string snippet = options.BlankSpace.Combine(content);
 

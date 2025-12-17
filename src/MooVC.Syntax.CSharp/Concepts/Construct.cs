@@ -43,14 +43,14 @@
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
-        public override string ToString()
+        public sealed override string ToString()
         {
             return ToString(Snippet.Options.Default);
         }
 
         public string ToString(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(GetType().Name));
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), GetType().Name));
 
             if (IsUndefined)
             {

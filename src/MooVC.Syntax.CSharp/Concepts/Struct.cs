@@ -32,11 +32,6 @@
 
         public Kind Behavior { get; internal set; }
 
-        public override string ToString()
-        {
-            return ToString(Snippet.Options.Default);
-        }
-
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -61,7 +56,7 @@
             var events = Events.ToSnippet(options);
             var fields = Fields.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
-            string operators = Operators.ToString(this, options);
+            var operators = Snippet.From(Operators.ToString(this, options));
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
             Snippet body = options.BlankSpace.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
