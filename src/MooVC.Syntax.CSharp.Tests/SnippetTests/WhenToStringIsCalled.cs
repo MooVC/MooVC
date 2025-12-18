@@ -1,31 +1,16 @@
 namespace MooVC.Syntax.CSharp.SnippetTests;
 
 using System;
-using System.Collections.Immutable;
 
 public sealed class WhenToStringIsCalled
 {
-    private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
-
-    [Fact]
-    public void GivenNullOptionsThenThrows()
-    {
-        // Arrange
-        var subject = new Snippet(lines);
-        Snippet.Options? options = default;
-
-        // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToString(options!));
-
-        // Assert
-        exception.ParamName.ShouldBe(nameof(options));
-    }
+    private static readonly string[] lines = ["if (condition)", "return true;"];
 
     [Fact]
     public void GivenDefaultOptionsThenReturnsJoinedLines()
     {
         // Arrange
-        var subject = new Snippet(lines);
+        var subject = Snippet.From(lines);
 
         // Act
         string result = subject.ToString();
@@ -44,13 +29,13 @@ public sealed class WhenToStringIsCalled
         // Arrange
         const string expected = "if (condition)|return true;";
 
-        var subject = new Snippet(lines);
-
         Snippet.Options options = new Snippet.Options()
             .WithNewLine("|");
 
+        Snippet subject = Snippet.From(options, lines);
+
         // Act
-        string result = subject.ToString(options);
+        string result = subject.ToString();
 
         // Assert
         result.ShouldBe(expected);

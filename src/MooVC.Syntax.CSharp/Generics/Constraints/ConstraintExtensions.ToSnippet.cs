@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Immutable;
-    using MooVC.Linq;
+    using System.Linq;
 
     public static partial class ConstraintExtensions
     {
@@ -13,9 +13,11 @@
                 return Snippet.Empty;
             }
 
-            string snippet = options.NewLine.Combine(constraints, constraint => constraint.ToString());
+            string[] clauses = constraints
+                .Select(constraint => constraint.ToString())
+                .ToArray();
 
-            return Snippet.From(options, snippet);
+            return Snippet.From(options, clauses);
         }
     }
 }

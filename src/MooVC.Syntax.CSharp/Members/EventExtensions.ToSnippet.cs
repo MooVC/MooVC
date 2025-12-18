@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Linq;
 
     public static partial class EventExtensions
     {
@@ -21,7 +20,7 @@
                 .Select(@event => @event.ToString(options))
                 .ToSnippet();
 
-            return options.BlankSpace.Combine(options, content);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

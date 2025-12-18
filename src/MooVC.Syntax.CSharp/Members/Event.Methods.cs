@@ -65,7 +65,7 @@
 
                 return remove
                     .Stack(options, add)
-                    .ToString(options);
+                    .ToString();
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)

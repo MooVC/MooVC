@@ -51,7 +51,7 @@ public sealed class WhenPrependIsCalled
         Snippet result = subject.Prepend(options, $"{Beta}\n{Phi}", Gamma);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 
@@ -72,7 +72,7 @@ public sealed class WhenPrependIsCalled
         Snippet result = subject.Prepend(first, second);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 }

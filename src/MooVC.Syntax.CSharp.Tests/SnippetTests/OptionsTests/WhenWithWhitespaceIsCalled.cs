@@ -7,7 +7,7 @@ public sealed class WhenWithWhitespaceIsCalled
     {
         // Arrange
         var options = new Snippet.Options();
-        const string value = "\t";
+        Snippet value = "\t";
 
         // Act
         Snippet.Options result = options.WithWhitespace(value);

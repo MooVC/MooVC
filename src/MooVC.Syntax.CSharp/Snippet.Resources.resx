@@ -153,9 +153,6 @@
   <data name="ShiftOptionsRequired" xml:space="preserve">
     <value>The options required to direct the shift must be provided.</value>
   </data>
-  <data name="ToStringOptionsRequired" xml:space="preserve">
-    <value>The options required to direct formatting must be provided.</value>
-  </data>
   <data name="BlockOptionsInlineRequired" xml:space="preserve">
     <value>The style to use for Inline statements must be provided.</value>
   </data>

@@ -40,7 +40,7 @@ public sealed class WhenShiftIsCalled
         Snippet result = subject.Shift(options);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 }

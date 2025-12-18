@@ -14,15 +14,15 @@
                 return Snippet.Empty;
             }
 
-            string[] content = properties
+            Snippet[] content = properties
                 .OrderByDescending(property => property.Extensibility == Extensibility.Static)
                 .ThenByDescending(property => property.Scope)
                 .ThenByDescending(property => property.Extensibility)
                 .ThenBy(property => property.Name)
-                .Select(property => property.ToString())
+                .Select(property => Snippet.From(property))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(content);
+            string snippet = options.NewLine.Combine(options, content);
 
             return Snippet.From(options, snippet);
         }

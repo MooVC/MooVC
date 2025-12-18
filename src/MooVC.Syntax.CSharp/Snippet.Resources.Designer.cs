@@ -221,14 +221,5 @@ namespace MooVC.Syntax.CSharp {
                 return ResourceManager.GetString("StackTopRequired", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The options required to direct formatting must be provided..
-        /// </summary>
-        internal static string ToStringOptionsRequired {
-            get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
-            }
-        }
     }
 }

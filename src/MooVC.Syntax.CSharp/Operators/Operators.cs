@@ -55,7 +55,7 @@
             var conversions = Conversions.ToSnippet(construct, options);
             var unaries = Unaries.ToSnippet(construct, options);
 
-            return options.BlankSpace.Combine(options, binaries, comparisons, conversions, unaries);
+            return options.NewLine.Combine(options, binaries, comparisons, conversions, unaries);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

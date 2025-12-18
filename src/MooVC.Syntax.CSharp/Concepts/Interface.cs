@@ -33,7 +33,7 @@
             var indexers = Indexers.ToSnippet(options);
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
-            Snippet body = options.BlankSpace.Combine(options, events, indexers, properties, methods);
+            Snippet body = options.NewLine.Combine(options, events, indexers, properties, methods);
 
             return body.Block(options, signature);
         }

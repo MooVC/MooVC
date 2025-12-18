@@ -7,7 +7,7 @@ public sealed class WhenWithNewLineIsCalled
     {
         // Arrange
         var options = new Snippet.Options();
-        const string value = "\n";
+        Snippet value = "\n";
 
         // Act
         Snippet.Options result = options.WithNewLine(value);

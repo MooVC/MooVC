@@ -59,7 +59,7 @@ namespace MooVC.Syntax.CSharp.Members
 
                 if (Set.Mode.IsReadOnly)
                 {
-                    return get.ToString(options);
+                    return get.ToString();
                 }
 
                 scope = Set.Scope == scope
@@ -70,7 +70,7 @@ namespace MooVC.Syntax.CSharp.Members
 
                 return set
                     .Stack(options, get)
-                    .ToString(options);
+                    .ToString();
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scope scope = default)

@@ -69,7 +69,7 @@
                     add = remove.Stack(options, add);
                 }
 
-                return add.ToString(options);
+                return add.ToString();
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)

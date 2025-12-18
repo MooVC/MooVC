@@ -40,7 +40,7 @@ public sealed class WhenBlockIsCalled
         Snippet result = subject.Block(options);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 
@@ -68,7 +68,7 @@ public sealed class WhenBlockIsCalled
         Snippet result = subject.Block(options, opening);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
 
         text.ShouldBe(expected);
     }
@@ -96,7 +96,7 @@ public sealed class WhenBlockIsCalled
         Snippet result = subject.Block(options, opening);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
 
         text.ShouldBe(expected);
     }

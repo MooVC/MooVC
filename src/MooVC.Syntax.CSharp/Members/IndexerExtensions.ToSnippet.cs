@@ -21,7 +21,7 @@
                 .Select(indexer => indexer.ToString(options))
                 .ToSnippet();
 
-            return options.BlankSpace.Combine(options, content);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

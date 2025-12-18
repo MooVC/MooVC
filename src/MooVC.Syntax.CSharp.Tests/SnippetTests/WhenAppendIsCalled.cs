@@ -52,7 +52,7 @@ public sealed class WhenAppendIsCalled
         Snippet result = subject.Append(options, $"{Beta}\n{Phi}", Gamma);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 
@@ -73,7 +73,7 @@ public sealed class WhenAppendIsCalled
         Snippet result = subject.Append(first, second);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 }

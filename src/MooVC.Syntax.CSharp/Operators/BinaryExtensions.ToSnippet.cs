@@ -21,7 +21,7 @@
                 .Select(binary => binary.ToString(construct, options))
                 .ToSnippet();
 
-            string snippet = options.BlankSpace.Combine(content);
+            string snippet = options.NewLine.Combine(content);
 
             return Snippet.From(options, snippet);
         }

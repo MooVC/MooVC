@@ -72,7 +72,7 @@
             var operators = Snippet.From(Operators.ToString(this, options));
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
-            Snippet body = options.BlankSpace.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
+            Snippet body = options.NewLine.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
 
             return body.Block(options, signature);
         }

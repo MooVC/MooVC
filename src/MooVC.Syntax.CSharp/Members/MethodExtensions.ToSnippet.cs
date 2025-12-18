@@ -22,7 +22,7 @@
                 .Select(method => method.ToString(options))
                 .ToSnippet();
 
-            return options.BlankSpace.Combine(options, content);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

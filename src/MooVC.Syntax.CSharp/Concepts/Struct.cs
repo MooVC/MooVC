@@ -9,6 +9,7 @@
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Syntax;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
@@ -21,6 +22,8 @@
         public static readonly Struct Undefined = new Struct();
         private const string Separator = " ";
 
+        public Kind Behavior { get; internal set; } = Kind.Default;
+
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
@@ -29,8 +32,6 @@
 
         [Ignore]
         public override bool IsUndefined => this == Undefined;
-
-        public Kind Behavior { get; internal set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -59,7 +60,7 @@
             var operators = Snippet.From(Operators.ToString(this, options));
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
-            Snippet body = options.BlankSpace.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
+            Snippet body = options.NewLine.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
 
             return body.Block(options, signature);
         }
@@ -68,10 +69,11 @@
         {
             Kind behavior = Behavior;
             var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            string partial = IsPartial.Partial();
             string name = Name;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);
             string scope = Scope;
-            string signature = Separator.Combine(scope, behavior, "struct", $"{name}");
+            string signature = Separator.Combine(scope, behavior, partial, "struct", $"{name}");
 
             if (!parameters.IsEmpty)
             {
