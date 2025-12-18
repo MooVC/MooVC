@@ -68,10 +68,16 @@
             }
 
             Snippet signature = GetSignature();
+            var behaviours = Snippet.From(Behaviours.ToString(options, Scope));
+            Snippet.Options body = options;
 
-            signature = Snippet
-                .From(Behaviours.ToString(options, Scope))
-                .Block(options, signature);
+            if (behaviours.IsSingleLine && options.Block.Inline.IsLambda && !Behaviours.Set.Mode.IsReadOnly)
+            {
+                body = options.WithBlock(block => block
+                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+            }
+
+            signature = behaviours.Block(body, signature);
 
             if (!Default.IsEmpty)
             {

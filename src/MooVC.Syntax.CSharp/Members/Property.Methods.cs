@@ -55,18 +55,23 @@ namespace MooVC.Syntax.CSharp.Members
                         nameof(Snippet),
                         nameof(Methods)));
 
-                Snippet get = Format("get", options, Get);
-
                 if (Set.Mode.IsReadOnly)
                 {
-                    return get.ToString();
+                    return Get.ToString();
                 }
+
+                Snippet get = Format("get", options, Get);
 
                 scope = Set.Scope == scope
                     ? default
                     : Set.Scope;
 
                 Snippet set = Format(Set.Mode.ToString(), options, Set.Behaviour, scope: scope);
+
+                if (Get.IsEmpty && Set.Behaviour.IsEmpty && get.IsSingleLine && set.IsSingleLine)
+                {
+                    return $"{get} {set}";
+                }
 
                 return set
                     .Stack(options, get)

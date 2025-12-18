@@ -35,28 +35,46 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
-        var @event = new Event { Name = new Identifier("Created") };
-        var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
-        var method = new Method { Name = new Declaration { Name = "Execute" } };
+        var created = new Event { Name = "Created" };
+        var execute = new Method { Name = new Declaration { Name = "Execute" } };
+        var indexer = new Indexer { Parameter = new Parameter { Name = "item", Type = typeof(string) }, Result = typeof(int) };
+        var valueA = new Property { Name = "ValueA", Type = typeof(string) };
+
+        var valueB = new Property
+        {
+            Behaviours = new Property.Methods { Get = "int.Parse(ValueA);", Set = new Property.Setter { Mode = Property.Mode.ReadOnly } },
+            Name = "ValueB",
+            Type = typeof(int),
+        };
+
+        const string expected = """
+            internal partial interface Sample
+            {
+                public event Created;
+
+                public string ValueA { get; set; }
+
+                public int ValueB => int.Parse(ValueA);
+
+                public int this[string item] { get; }
+
+                public Task Execute();
+            }
+            """;
 
         Interface subject = InterfaceTestsData.Create(
-            events: [@event],
-            indexers: [new Indexer { Parameter = new Parameter { Name = new Identifier("item"), Type = typeof(string) }, Result = typeof(int) }],
+            events: [created],
+            indexers: [indexer],
             isPartial: true,
-            methods: [method],
-            name: new Declaration { Name = new Identifier(InterfaceTestsData.DefaultName) },
-            properties: [property],
+            methods: [execute],
+            name: new Declaration { Name = InterfaceTestsData.DefaultName },
+            properties: [valueA, valueB],
             scope: Scope.Internal);
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        result.ShouldContain("internal partial interface");
-        result.ShouldContain(InterfaceTestsData.DefaultName);
-        result.ShouldContain(@event.Name);
-        result.ShouldContain("this");
-        result.ShouldContain(property.Name);
-        result.ShouldContain(method.Name.Name);
+        result.ShouldBe(expected);
     }
 }

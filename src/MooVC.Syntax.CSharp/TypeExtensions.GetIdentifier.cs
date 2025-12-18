@@ -13,6 +13,11 @@
         {
             _ = Guard.Against.Null(type, message: GetIdentifierTypeRequired.Format(typeof(Type), typeof(Identifier)));
 
+            if (Aliases.TryGet(type, out string alias))
+            {
+                return alias;
+            }
+
             string name = type.Name;
 
             if (type.IsGenericType)

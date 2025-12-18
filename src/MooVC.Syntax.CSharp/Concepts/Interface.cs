@@ -1,6 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using System;
+    using System.Collections.Immutable;
+    using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -32,7 +34,12 @@
             var events = Events.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
             var properties = Properties.ToSnippet(options);
-            var methods = Methods.ToSnippet(options);
+
+            var methods = Methods
+                .Select(method => method.WithResult(result => result.WithMode(Result.Modality.Synchronous)))
+                .ToImmutableArray()
+                .ToSnippet(options);
+
             Snippet body = options.NewLine.Combine(options, events, indexers, properties, methods);
 
             return body.Block(options, signature);
