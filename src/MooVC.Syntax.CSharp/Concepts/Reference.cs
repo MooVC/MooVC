@@ -69,10 +69,10 @@
             var events = Events.ToSnippet(options);
             var fields = Fields.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
-            var operators = Snippet.From(Operators.ToString(this, options));
+            var operators = Operators.ToSnippet(this, options);
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
-            Snippet body = options.NewLine.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
+            Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, properties, indexers, operators, methods);
 
             return body.Block(options, signature);
         }
@@ -96,7 +96,7 @@
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, options.NewLine)
+                    .Prepend(options, Environment.NewLine)
                     .Prepend(options, signature);
             }
 

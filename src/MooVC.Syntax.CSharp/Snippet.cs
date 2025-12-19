@@ -15,9 +15,9 @@
     [SkipAutoInstantiation]
     public sealed partial class Snippet
     {
+        public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
         private const int SingleLine = 1;
-        private static readonly Snippet separator = StringExtensions.ToSnippet(" ");
 
         internal Snippet(ImmutableArray<string> value)
         {
@@ -67,11 +67,10 @@
             }
 
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(values.Length);
-            string separator = options.Separator;
 
             foreach (string value in values)
             {
-                string[] lines = value.Split(new[] { separator }, StringSplitOptions.None);
+                string[] lines = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
                 foreach (string line in lines)
                 {
@@ -251,12 +250,7 @@
             _ = Guard.Against.Null(options, message: StackOptionsRequired);
             _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
 
-            Snippet stack = IsSingleLine && top.IsSingleLine
-                ? separator
-                : Empty;
-
-            return Prepend(options, stack)
-                .Prepend(options, top);
+            return Prepend(options, top);
         }
 
         public override string ToString()

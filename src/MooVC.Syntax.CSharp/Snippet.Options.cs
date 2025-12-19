@@ -23,17 +23,8 @@
             [Range(120, 255, ErrorMessageResourceName = nameof(OptionsMaxLengthOutOfRange), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public byte MaxLength { get; internal set; } = 155;
 
-            [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(OptionsNewLineRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public Snippet NewLine { get; internal set; } = StringExtensions.ToSnippet(string.Empty);
-
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(OptionsWhitespaceRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public Snippet Whitespace { get; internal set; } = StringExtensions.ToSnippet("    ");
-
-            internal bool IsStandard => NewLine.IsEmpty || NewLine == Environment.NewLine;
-
-            internal string Separator => IsStandard
-                ? string.Empty
-                : NewLine.ToString();
         }
     }
 }

@@ -21,7 +21,7 @@
                 .Select(method => method.ToSnippet(construct, options))
                 .ToArray();
 
-            return options.NewLine.Combine(options, content);
+            return Snippet.Blank.Combine(options, content);
         }
     }
 }

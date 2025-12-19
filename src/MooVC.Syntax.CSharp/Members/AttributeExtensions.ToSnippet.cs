@@ -19,7 +19,7 @@
                 .Select(attribute => Snippet.From(options, attribute))
                 .ToArray();
 
-            return options.NewLine.Combine(content);
+            return Snippet.Blank.Combine(content);
         }
     }
 }

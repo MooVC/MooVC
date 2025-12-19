@@ -61,7 +61,7 @@
             if (!usings.IsEmpty)
             {
                 definition = usings
-                    .Append(options.Snippets.NewLine)
+                    .Append(Environment.NewLine)
                     .Append(options.Snippets);
             }
 
@@ -72,7 +72,7 @@
             else
             {
                 definition = definition
-                    .Prepend(options.Snippets.NewLine)
+                    .Prepend(Environment.NewLine)
                     .Prepend(@namespace);
             }
 

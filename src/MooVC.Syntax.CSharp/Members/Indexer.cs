@@ -59,13 +59,19 @@
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
 
-            if (IsUndefined || Behaviours.IsDefault || Behaviours.Get.IsEmpty)
+            if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
             Snippet signature = GetSignature();
             var methods = Behaviours.ToSnippet(options);
+
+            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                options = options.WithBlock(block => block
+                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+            }
 
             return methods.Block(options, signature);
         }
@@ -114,7 +120,7 @@
         {
             string extensibility = Extensibility;
             string parameter = Parameter;
-            string result = Result;
+            string result = Result.WithMode(Result.Modality.Synchronous);
             string scope = Scope;
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 

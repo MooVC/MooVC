@@ -75,6 +75,12 @@
                 return string.Concat(signature, ";");
             }
 
+            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                options = options.WithBlock(block => block
+                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+            }
+
             return methods.Block(options, Snippet.From(options, signature));
         }
 

@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -121,7 +122,7 @@ namespace MooVC.Syntax.CSharp.Members
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, options.NewLine)
+                    .Prepend(options, Environment.NewLine)
                     .Prepend(options, signature);
             }
 

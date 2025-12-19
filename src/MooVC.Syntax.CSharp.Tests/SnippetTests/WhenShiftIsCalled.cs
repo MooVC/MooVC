@@ -33,7 +33,6 @@ public sealed class WhenShiftIsCalled
         var subject = new Snippet(lines);
 
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine)
             .WithWhitespace(whitespace);
 
         // Act

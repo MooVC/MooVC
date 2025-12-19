@@ -22,9 +22,7 @@
                 .Select(conversion => conversion.ToString(construct, options))
                 .ToSnippet();
 
-            string snippet = options.NewLine.Combine(content);
-
-            return Snippet.From(options, snippet);
+            return Snippet.Blank.Combine(options, content);
         }
     }
 }

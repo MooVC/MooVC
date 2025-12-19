@@ -48,14 +48,10 @@ public sealed class WhenFromIsCalled
         // Arrange
         const string first = "alpha";
         const string second = "beta";
-        const string newLine = "\n";
-        string value = string.Join(newLine, first, second);
-
-        Snippet.Options options = new Snippet.Options()
-            .WithNewLine(newLine);
+        string value = string.Join(Environment.NewLine, first, second);
 
         // Act
-        var result = Snippet.From(options, value);
+        var result = Snippet.From(value);
         ImmutableArray<string> converted = result;
 
         // Assert

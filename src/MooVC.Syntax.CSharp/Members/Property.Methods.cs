@@ -50,12 +50,12 @@ namespace MooVC.Syntax.CSharp.Members
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
-                if (Set.Mode.IsReadOnly)
-                {
-                    return Get;
-                }
-
                 Snippet get = Format("get", options, Get);
+
+                if (Set.Mode.IsReadOnly && Get.IsEmpty)
+                {
+                    return get;
+                }
 
                 scope = Set.Scope == scope
                     ? default
@@ -63,7 +63,7 @@ namespace MooVC.Syntax.CSharp.Members
 
                 Snippet set = Format(Set.Mode.ToString(), options, Set.Behaviour, scope: scope);
 
-                if (Get.IsEmpty && Set.Behaviour.IsEmpty && get.IsSingleLine && set.IsSingleLine)
+                if (Get.IsEmpty && Set.Behaviour.IsEmpty)
                 {
                     return Snippet.From(options, $"{get} {set}");
                 }

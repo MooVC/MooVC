@@ -40,7 +40,7 @@
                 .ToImmutableArray()
                 .ToSnippet(options);
 
-            Snippet body = options.NewLine.Combine(options, events, indexers, properties, methods);
+            Snippet body = Snippet.Blank.Combine(options, events, properties, indexers, methods);
 
             return body.Block(options, signature);
         }
@@ -57,7 +57,7 @@
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, options.NewLine)
+                    .Prepend(options, Environment.NewLine)
                     .Prepend(options, signature);
             }
 

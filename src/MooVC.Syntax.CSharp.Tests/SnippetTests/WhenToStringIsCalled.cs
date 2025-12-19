@@ -23,22 +23,4 @@ public sealed class WhenToStringIsCalled
         // Assert
         result.ShouldBe(expected);
     }
-
-    [Fact]
-    public void GivenCustomNewLineThenUsesCustomSeparator()
-    {
-        // Arrange
-        const string expected = "if (condition)|return true;";
-
-        Snippet.Options options = new Snippet.Options()
-            .WithNewLine("|");
-
-        var subject = Snippet.From(options, lines);
-
-        // Act
-        string result = subject.ToString();
-
-        // Assert
-        result.ShouldBe(expected);
-    }
 }

@@ -23,7 +23,7 @@
                 .Select(directive => Snippet.From(options, directive.Rendering))
                 .ToArray();
 
-            return options.NewLine.Combine(options, statements);
+            return Snippet.Blank.Combine(options, statements);
         }
     }
 }

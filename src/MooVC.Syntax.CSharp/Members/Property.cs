@@ -71,7 +71,7 @@
             var behaviours = Behaviours.ToSnippet(options, Scope);
             Snippet.Options body = options;
 
-            if (behaviours.IsSingleLine && options.Block.Inline.IsLambda && !Behaviours.Set.Mode.IsReadOnly)
+            if (behaviours.IsSingleLine && options.Block.Inline.IsLambda && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly))
             {
                 body = options.WithBlock(block => block
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));

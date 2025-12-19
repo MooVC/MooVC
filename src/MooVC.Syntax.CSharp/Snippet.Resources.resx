@@ -144,9 +144,6 @@
   <data name="OptionsMaxLengthOutOfRange" xml:space="preserve">
     <value>The maximum length of a single line must be within the acceptable range.</value>
   </data>
-  <data name="OptionsNewLineRequired" xml:space="preserve">
-    <value>The character(s) to mark a new line must be provided.</value>
-  </data>
   <data name="OptionsWhitespaceRequired" xml:space="preserve">
     <value>The whitespace to be applied must be provided.</value>
   </data>
