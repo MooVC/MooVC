@@ -30,6 +30,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("get => value;");
+        representation.ShouldBe("value;");
     }
 }

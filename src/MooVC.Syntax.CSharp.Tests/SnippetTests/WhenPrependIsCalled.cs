@@ -42,13 +42,13 @@ public sealed class WhenPrependIsCalled
     {
         // Arrange
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
+            .WithNewLine(Environment.NewLine);
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
         var subject = Snippet.From(options, Alpha);
 
         // Act
-        Snippet result = subject.Prepend(options, $"{Beta}\n{Phi}", Gamma);
+        Snippet result = subject.Prepend(options, $"{Beta}{Environment.NewLine}{Phi}", Gamma);
 
         // Assert
         string text = result.ToString();
@@ -60,12 +60,12 @@ public sealed class WhenPrependIsCalled
     {
         // Arrange
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
+            .WithNewLine(Environment.NewLine);
 
         string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
 
         var subject = Snippet.From(options, Alpha);
-        var first = Snippet.From(options, $"{Beta}\n{Phi}");
+        var first = Snippet.From(options, $"{Beta}{Environment.NewLine}{Phi}");
         var second = Snippet.From(options, Gamma);
 
         // Act

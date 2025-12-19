@@ -97,35 +97,12 @@
 
         public override string ToString()
         {
-            return ToSnippet(Options.Default);
+            return ToString(Options.Default);
         }
 
         public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Symbol)));
-
-            if (IsUndefined)
-            {
-                return Snippet.Empty;
-            }
-
-            var signature = Name.ToSnippet(Identifier.Options.Pascal);
-
-            signature = GetQualifiedSignature(options, signature);
-
-            if (!Arguments.IsDefaultOrEmpty)
-            {
-                Snippet arguments = GetArgumentDeclarations(options);
-
-                signature = $"{signature}<{arguments}>";
-            }
-
-            if (IsNullable)
-            {
-                return signature.Append('?');
-            }
-
-            return signature;
+            return ToString(options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -142,11 +119,38 @@
                 .Results;
         }
 
-        private Snippet GetArgumentDeclarations(Options options)
+        private string ToString(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
+
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            var signature = Name.ToSnippet(Identifier.Options.Pascal);
+
+            signature = GetQualifiedSignature(options, signature);
+
+            if (!Arguments.IsDefaultOrEmpty)
+            {
+                string arguments = GetArgumentDeclarations(options);
+
+                signature = $"{signature}<{arguments}>";
+            }
+
+            if (IsNullable)
+            {
+                return signature.Append('?');
+            }
+
+            return signature;
+        }
+
+        private string GetArgumentDeclarations(Options options)
         {
             string[] arguments = Arguments
-                .Select(argument => argument.ToSnippet(options))
-                .Cast<string>()
+                .Select(argument => (string)argument.ToSnippet(options))
                 .ToArray();
 
             return Separator.Combine(arguments);

@@ -22,23 +22,20 @@ public sealed class WhenFromIsCalled
     public void GivenNullValueThenThrows()
     {
         // Arrange
-        string? value = default;
+        string[]? values = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(value!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(values!));
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(value));
+        exception.ParamName.ShouldBe(nameof(values));
     }
 
     [Fact]
-    public void GivenWhitespaceThenReturnsEmpty()
+    public void GivenEmptyThenReturnsEmpty()
     {
-        // Arrange
-        const string value = "   ";
-
-        // Act
-        var result = Snippet.From(value);
+        // Arrange & Act
+        var result = Snippet.From(string.Empty);
 
         // Assert
         result.ShouldBe(Snippet.Empty);

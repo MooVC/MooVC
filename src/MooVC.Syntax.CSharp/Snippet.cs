@@ -67,7 +67,7 @@
             }
 
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(values.Length);
-            string separator = options.NewLine.ToString();
+            string separator = options.Separator;
 
             foreach (string value in values)
             {
@@ -252,8 +252,8 @@
             _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
 
             Snippet stack = IsSingleLine && top.IsSingleLine
-                ? options.NewLine
-                : separator;
+                ? separator
+                : Empty;
 
             return Prepend(options, stack)
                 .Prepend(options, top);
@@ -272,11 +272,14 @@
             }
 
             var builder = new StringBuilder();
+            int last = Lines - 1;
 
-            foreach (string line in _value)
+            for (int index = 0; index < last; index++)
             {
-                builder = builder.AppendLine(line);
+                builder = builder.AppendLine(_value[index]);
             }
+
+            builder = builder.Append(_value[last]);
 
             return builder.ToString();
         }

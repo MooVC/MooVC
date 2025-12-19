@@ -42,14 +42,14 @@ public sealed class WhenAppendIsCalled
     {
         // Arrange
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
+            .WithNewLine(Environment.NewLine);
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
         var subject = Snippet.From(options, Alpha);
 
         // Act
-        Snippet result = subject.Append(options, $"{Beta}\n{Phi}", Gamma);
+        Snippet result = subject.Append(options, $"{Beta}{Environment.NewLine}{Phi}", Gamma);
 
         // Assert
         string text = result.ToString();
@@ -61,12 +61,12 @@ public sealed class WhenAppendIsCalled
     {
         // Arrange
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
+            .WithNewLine(Environment.NewLine);
 
         string expected = string.Join(options.NewLine, Alpha, Beta, Phi, Gamma);
 
         var subject = Snippet.From(options, Alpha);
-        var first = Snippet.From(options, $"{Beta}\n{Phi}");
+        var first = Snippet.From(options, $"{Beta}{Environment.NewLine}{Phi}");
         var second = Snippet.From(options, Gamma);
 
         // Act

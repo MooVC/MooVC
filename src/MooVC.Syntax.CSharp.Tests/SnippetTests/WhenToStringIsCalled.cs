@@ -12,15 +12,16 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = Snippet.From(lines);
 
+        const string expected = """
+            if (condition)
+            return true;
+            """;
+
         // Act
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(
-            """
-            if (condition)
-            return true;
-            """.ReplaceLineEndings(Environment.NewLine).Trim());
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -32,7 +33,7 @@ public sealed class WhenToStringIsCalled
         Snippet.Options options = new Snippet.Options()
             .WithNewLine("|");
 
-        Snippet subject = Snippet.From(options, lines);
+        var subject = Snippet.From(options, lines);
 
         // Act
         string result = subject.ToString();

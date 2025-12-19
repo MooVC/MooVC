@@ -63,9 +63,9 @@ namespace MooVC.Syntax.CSharp.Members {
         /// <summary>
         ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
         /// </summary>
-        internal static string ToSnippetOptionsRequired {
+        internal static string ToStringOptionsRequired {
             get {
-                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
     }
