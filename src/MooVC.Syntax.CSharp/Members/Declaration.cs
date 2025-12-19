@@ -85,19 +85,19 @@
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Declaration)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Declaration)));
 
             if (IsUnspecified)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
-            string signature = Name.ToString(Identifier.Options.Pascal);
+            string signature = Name.ToSnippet(Identifier.Options.Pascal);
 
             if (!Parameters.IsDefaultOrEmpty)
             {
@@ -106,7 +106,7 @@
                 signature = $"{signature}<{parameters}>";
             }
 
-            return signature;
+            return Snippet.From(options, signature);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

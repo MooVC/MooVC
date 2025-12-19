@@ -55,20 +55,20 @@
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Property)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Property)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             Snippet signature = GetSignature();
-            var behaviours = Snippet.From(Behaviours.ToString(options, Scope));
+            var behaviours = Behaviours.ToSnippet(options, Scope);
             Snippet.Options body = options;
 
             if (behaviours.IsSingleLine && options.Block.Inline.IsLambda && !Behaviours.Set.Mode.IsReadOnly)
@@ -84,7 +84,7 @@
                 signature = signature.Append(options, $" = {Default}");
             }
 
-            return signature.ToString();
+            return signature;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -124,7 +124,7 @@
         private Snippet GetSignature()
         {
             string extensibility = Extensibility;
-            string name = Name.ToString(Identifier.Options.Pascal);
+            var name = Name.ToSnippet(Identifier.Options.Pascal);
             string scope = Scope;
             string type = Type;
             string signature = Separator.Combine(scope, extensibility, type, name);

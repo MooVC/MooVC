@@ -45,19 +45,19 @@
 
         public sealed override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), GetType().Name));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), GetType().Name));
 
             if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
-            return ToSnippet(options);
+            return PerformToSnippet(options);
         }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -77,6 +77,6 @@
                 .Results;
         }
 
-        protected abstract Snippet ToSnippet(Snippet.Options options);
+        protected abstract Snippet PerformToSnippet(Snippet.Options options);
     }
 }

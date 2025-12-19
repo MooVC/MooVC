@@ -19,12 +19,10 @@
                 .ThenByDescending(property => property.Scope)
                 .ThenByDescending(property => property.Extensibility)
                 .ThenBy(property => property.Name)
-                .Select(property => Snippet.From(property))
+                .Select(property => property.ToSnippet(options))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(options, content);
-
-            return Snippet.From(options, snippet);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

@@ -14,13 +14,13 @@
                 return Snippet.Empty;
             }
 
-            var content = methods
+            Snippet[] content = methods
                 .OrderByDescending(property => property.Extensibility == Extensibility.Static)
                 .ThenByDescending(method => method.Scope)
                 .ThenByDescending(method => method.Extensibility)
                 .ThenBy(method => method.Name)
-                .Select(method => method.ToString(options))
-                .ToSnippet();
+                .Select(method => method.ToSnippet(options))
+                .ToArray();
 
             return options.NewLine.Combine(options, content);
         }

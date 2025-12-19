@@ -43,21 +43,16 @@ namespace MooVC.Syntax.CSharp.Members
 
             public override string ToString()
             {
-                return ToString(Snippet.Options.Default, Scope.Public);
+                return ToSnippet(Snippet.Options.Default, Scope.Public);
             }
 
-            public string ToString(Snippet.Options options, Scope scope)
+            public Snippet ToSnippet(Snippet.Options options, Scope scope)
             {
-                _ = Guard.Against.Null(
-                    options,
-                    message: MethodsToStringOptionsRequired.Format(
-                        nameof(Snippet.Options),
-                        nameof(Snippet),
-                        nameof(Methods)));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
                 if (Set.Mode.IsReadOnly)
                 {
-                    return Get.ToString();
+                    return Get;
                 }
 
                 Snippet get = Format("get", options, Get);
@@ -70,12 +65,10 @@ namespace MooVC.Syntax.CSharp.Members
 
                 if (Get.IsEmpty && Set.Behaviour.IsEmpty && get.IsSingleLine && set.IsSingleLine)
                 {
-                    return $"{get} {set}";
+                    return Snippet.From(options, $"{get} {set}");
                 }
 
-                return set
-                    .Stack(options, get)
-                    .ToString();
+                return set.Stack(options, get);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scope scope = default)

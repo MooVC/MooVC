@@ -43,21 +43,16 @@
 
             public override string ToString()
             {
-                return ToString(Snippet.Options.Default);
+                return ToSnippet(Snippet.Options.Default);
             }
 
-            public string ToString(Snippet.Options options)
+            public Snippet ToSnippet(Snippet.Options options)
             {
-                _ = Guard.Against.Null(
-                    options,
-                    message: MethodsToStringOptionsRequired.Format(
-                        nameof(Snippet.Options),
-                        nameof(Snippet),
-                        nameof(Methods)));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
                 if (IsDefault)
                 {
-                    return string.Empty;
+                    return Snippet.Empty;
                 }
 
                 Snippet add = Format("get", options, Get);
@@ -69,7 +64,7 @@
                     add = remove.Stack(options, add);
                 }
 
-                return add.ToString();
+                return add;
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)

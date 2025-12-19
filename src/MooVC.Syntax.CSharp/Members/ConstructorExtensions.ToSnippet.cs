@@ -15,11 +15,11 @@
                 return Snippet.Empty;
             }
 
-            var content = constructors
+            Snippet[] content = constructors
                 .OrderByDescending(scope => scope.Scope)
                 .ThenBy(constructor => constructor.Parameters.Length)
-                .Select(method => method.ToString(construct, options))
-                .ToSnippet();
+                .Select(method => method.ToSnippet(construct, options))
+                .ToArray();
 
             return options.NewLine.Combine(options, content);
         }

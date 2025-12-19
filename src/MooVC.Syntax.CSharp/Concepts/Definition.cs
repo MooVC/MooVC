@@ -35,10 +35,10 @@
 
         public override string ToString()
         {
-            return ToString(Options.Default);
+            return ToSnippet(Options.Default);
         }
 
-        public string ToString(Options options)
+        public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Definition<T>)));
 
@@ -49,11 +49,11 @@
 
             Snippet @namespace = Namespace;
             var usings = Usings.ToSnippet(options.Snippets);
-            string construct = Construct.ToString(options.Snippets);
+            Snippet construct = Construct.ToSnippet(options.Snippets);
 
-            if (string.IsNullOrEmpty(construct))
+            if (construct.IsEmpty)
             {
-                return string.Empty;
+                return construct;
             }
 
             Snippet definition = Snippet.Empty;

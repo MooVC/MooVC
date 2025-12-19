@@ -8,8 +8,6 @@
 
     public static partial class ConstructExtensions
     {
-        private const string Separator = ", ";
-
         internal static Snippet ToSnippet(this ImmutableArray<Construct> constructs, Snippet.Options options)
         {
             if (constructs.IsDefaultOrEmpty)
@@ -17,14 +15,12 @@
                 return Snippet.Empty;
             }
 
-            string[] content = constructs
+            Snippet[] content = constructs
                 .OrderBy(construct => construct.Name)
-                .Select(construct => construct.ToString(options))
+                .Select(construct => construct.ToSnippet(options))
                 .ToArray();
 
-            string snippet = Separator.Combine(content);
-
-            return Snippet.From(options, snippet);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

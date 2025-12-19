@@ -79,11 +79,20 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Snippet options must be provided..
+        /// </summary>
+        internal static string OptionsSnippetRequired {
+            get {
+                return ResourceManager.GetString("OptionsSnippetRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided..
         /// </summary>
-        internal static string ToStringOptionsRequired {
+        internal static string ToSnippetOptionsRequired {
             get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
             }
         }
         

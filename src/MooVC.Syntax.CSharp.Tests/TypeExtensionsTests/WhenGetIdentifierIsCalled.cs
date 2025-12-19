@@ -39,7 +39,7 @@ public sealed class WhenGetIdentifierIsCalled
 
         // Act
         Identifier identifier = type.GetIdentifier();
-        string result = identifier.ToString(Identifier.Options.Pascal);
+        string result = identifier.ToSnippet(Identifier.Options.Pascal);
 
         // Assert
         result.ShouldBe("GenericSample");

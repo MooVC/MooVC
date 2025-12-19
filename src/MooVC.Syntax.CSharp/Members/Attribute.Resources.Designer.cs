@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Members {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Declaration_Resources {
+    internal class Attribute_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Declaration_Resources() {
+        internal Attribute_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Members {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Declaration.Resources", typeof(Declaration_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Members.Attribute.Resources", typeof(Attribute_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
         internal static string ToSnippetOptionsRequired {
             get {

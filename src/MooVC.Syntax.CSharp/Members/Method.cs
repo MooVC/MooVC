@@ -57,32 +57,26 @@ namespace MooVC.Syntax.CSharp.Members
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(
-                options,
-                message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Method)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Method)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             Snippet signature = GetSignature(options);
 
             if (Body.IsEmpty)
             {
-                return signature
-                    .Append(';')
-                    .ToString();
+                return signature.Append(';');
             }
 
-            return Body
-                .Block(options, signature)
-                .ToString();
+            return Body.Block(options, signature);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

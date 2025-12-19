@@ -61,20 +61,20 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
+        /// </summary>
+        internal static string ToSnippetOptionsRequired {
+            get {
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The casing type `{0:G}` is not supported by `{1}`..
         /// </summary>
         internal static string ToStringCasingNotSupported {
             get {
                 return ResourceManager.GetString("ToStringCasingNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
-        /// </summary>
-        internal static string ToStringOptionsRequired {
-            get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
         

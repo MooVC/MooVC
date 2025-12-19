@@ -21,7 +21,7 @@
                 .ThenBy(parameter => parameter.Name)
                 .ToImmutableArray();
 
-            string snippet = Separator.Combine(ordered, parameter => parameter.ToString(options));
+            string snippet = Separator.Combine(ordered, parameter => parameter.ToSnippet(options));
 
             return Snippet.From(snippet);
         }

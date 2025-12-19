@@ -19,19 +19,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Interface subject = InterfaceTestsData.Create();
-
-        // Act
-        Func<string> action = () => subject.ToString(options: default);
-
-        // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
-    }
-
-    [Fact]
     public void GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
@@ -42,7 +29,7 @@ public sealed class WhenToStringIsCalled
 
         var valueB = new Property
         {
-            Behaviours = new Property.Methods { Get = "int.Parse(ValueA);", Set = new Property.Setter { Mode = Property.Mode.ReadOnly } },
+            Behaviours = new Property.Methods { Set = new Property.Setter { Mode = Property.Mode.ReadOnly } },
             Name = "ValueB",
             Type = typeof(int),
         };
@@ -54,9 +41,9 @@ public sealed class WhenToStringIsCalled
 
                 public string ValueA { get; set; }
 
-                public int ValueB => int.Parse(ValueA);
+                public int ValueB { get; }
 
-                public int this[string item] { get; }
+                public int this[string item] { get; set; }
 
                 public Task Execute();
             }

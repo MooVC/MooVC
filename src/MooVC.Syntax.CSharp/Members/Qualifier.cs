@@ -145,6 +145,18 @@
             return Separator.Combine(segments);
         }
 
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Declaration)));
+
+            if (IsUnqualified)
+            {
+                return Snippet.Empty;
+            }
+
+            return Snippet.From(options, ToString());
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnqualified)

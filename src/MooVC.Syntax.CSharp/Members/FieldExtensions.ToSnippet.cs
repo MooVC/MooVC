@@ -19,12 +19,10 @@
                 .ThenByDescending(field => field.IsReadOnly)
                 .ThenByDescending(field => field.Scope)
                 .ThenBy(field => field.Name)
-                .Select(field => Snippet.From(field))
+                .Select(field => field.ToSnippet(options))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(options, content);
-
-            return Snippet.From(options, snippet);
+            return options.NewLine.Combine(options, content);
         }
     }
 }

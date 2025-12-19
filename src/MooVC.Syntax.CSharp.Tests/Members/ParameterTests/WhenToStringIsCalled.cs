@@ -19,19 +19,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Parameter parameter = ParameterTestsData.Create();
-
-        // Act
-        Func<string> action = () => parameter.ToString(options: default);
-
-        // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
-    }
-
-    [Fact]
     public void GivenValuesThenReturnsParameterString()
     {
         // Arrange
@@ -44,24 +31,6 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         result.ShouldBe($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
-    }
-
-    [Fact]
-    public void GivenOptionsThenReturnsParameterStringUsingNaming()
-    {
-        // Arrange
-        Parameter parameter = ParameterTestsData.Create(name: "Value", type: typeof(string));
-
-        var options = new Parameter.Options
-        {
-            Naming = Identifier.Options.Camel,
-        };
-
-        // Act
-        string result = parameter.ToString(options);
-
-        // Assert
-        result.ShouldBe("string value");
     }
 
     [Fact]

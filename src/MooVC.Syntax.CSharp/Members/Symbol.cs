@@ -97,32 +97,32 @@
 
         public override string ToString()
         {
-            return ToString(Options.Default);
+            return ToSnippet(Options.Default);
         }
 
-        public string ToString(Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Symbol)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
-            string signature = Name.ToString(Identifier.Options.Pascal);
+            var signature = Name.ToSnippet(Identifier.Options.Pascal);
 
             signature = GetQualifiedSignature(options, signature);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
-                string arguments = GetArgumentDeclarations(options);
+                Snippet arguments = GetArgumentDeclarations(options);
 
                 signature = $"{signature}<{arguments}>";
             }
 
             if (IsNullable)
             {
-                return string.Concat(signature, "?");
+                return signature.Append('?');
             }
 
             return signature;
@@ -142,16 +142,17 @@
                 .Results;
         }
 
-        private string GetArgumentDeclarations(Options options)
+        private Snippet GetArgumentDeclarations(Options options)
         {
             string[] arguments = Arguments
-                .Select(argument => argument.ToString(options))
+                .Select(argument => argument.ToSnippet(options))
+                .Cast<string>()
                 .ToArray();
 
             return Separator.Combine(arguments);
         }
 
-        private string GetQualifiedSignature(Options options, string signature)
+        private Snippet GetQualifiedSignature(Options options, Snippet signature)
         {
             if (Qualifier.IsUnqualified || options.Qualification == Qualification.Minimum)
             {

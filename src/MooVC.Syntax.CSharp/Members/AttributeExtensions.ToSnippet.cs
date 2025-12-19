@@ -19,9 +19,7 @@
                 .Select(attribute => Snippet.From(options, attribute))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(content);
-
-            return Snippet.From(options, snippet);
+            return options.NewLine.Combine(content);
         }
     }
 }

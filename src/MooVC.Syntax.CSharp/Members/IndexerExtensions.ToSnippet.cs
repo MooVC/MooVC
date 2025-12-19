@@ -13,13 +13,13 @@
                 return Snippet.Empty;
             }
 
-            var content = indexers
+            Snippet[] content = indexers
                 .OrderByDescending(@event => @event.Scope)
                 .ThenByDescending(@event => @event.Extensibility)
                 .ThenBy(indexer => indexer.Parameter.Name)
                 .ThenBy(indexer => indexer.Result.Type)
-                .Select(indexer => indexer.ToString(options))
-                .ToSnippet();
+                .Select(indexer => indexer.ToSnippet(options))
+                .ToArray();
 
             return options.NewLine.Combine(options, content);
         }

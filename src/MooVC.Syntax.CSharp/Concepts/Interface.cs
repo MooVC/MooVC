@@ -27,7 +27,7 @@
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
-        protected override Snippet ToSnippet(Snippet.Options options)
+        protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);
 

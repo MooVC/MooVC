@@ -61,6 +61,15 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
+        /// </summary>
+        internal static string ToSnippetOptionsRequired {
+            get {
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to `{1}` `{0}` for `{2}` with a preceding value of `{3}` is not defined..
         /// </summary>
         internal static string ValidateSegmentRequired {

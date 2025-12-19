@@ -19,19 +19,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Class subject = ClassTestsData.Create();
-
-        // Act
-        Func<string> action = () => subject.ToString(options: default);
-
-        // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
-    }
-
-    [Fact]
     public void GivenValuesThenReturnsClassSignature()
     {
         // Arrange

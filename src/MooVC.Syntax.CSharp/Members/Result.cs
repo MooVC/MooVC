@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Members.Result_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -16,6 +17,7 @@
         : IValidatableObject
     {
         public static readonly Result Task = new Result { Type = typeof(Task) };
+        public static readonly Result Undefined = new Result();
         public static readonly Result Void = new Result { Mode = Modality.Synchronous };
 
         private const string Separator = " ";
@@ -26,6 +28,9 @@
 
         [Ignore]
         public bool IsTask => this == Task;
+
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
 
         [Ignore]
         public bool IsVoid => this == Void;
@@ -59,11 +64,28 @@
 
         public override string ToString()
         {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
             string modifier = Modifier;
             string mode = Mode;
             string type = Type;
 
             return Separator.Combine(mode, modifier, type);
+        }
+
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Result)));
+
+            if (IsUndefined)
+            {
+                return Snippet.Empty;
+            }
+
+            return Snippet.From(options, ToString());
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

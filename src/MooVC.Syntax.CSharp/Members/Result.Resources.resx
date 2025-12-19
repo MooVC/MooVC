@@ -120,4 +120,7 @@
   <data name="AsWrapperRequired" xml:space="preserve">
     <value>The `{0}` to be applied to `{1}` must be provided.</value>
   </data>
+  <data name="ToSnippetOptionsRequired" xml:space="preserve">
+    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
+  </data>
 </root>

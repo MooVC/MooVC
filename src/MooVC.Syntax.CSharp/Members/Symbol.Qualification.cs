@@ -15,6 +15,12 @@
             {
                 _value = value;
             }
+
+            public bool IsFull => this == Full;
+
+            public bool IsMinimum => this == Minimum;
+
+            public bool IsGlobal => this == Global;
         }
     }
 }

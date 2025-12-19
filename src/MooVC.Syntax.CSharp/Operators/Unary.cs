@@ -64,10 +64,10 @@
             }
 
             string @operator = Operator;
-            string name = declaration.Name.ToString(Identifier.Options.Camel);
+            var name = declaration.Name.ToSnippet(Identifier.Options.Camel);
             string scope = Scope;
-            string type = declaration.Name.ToString(Identifier.Options.Pascal);
-            var signature = Snippet.From($"{scope} static {type} operator {@operator}({type} {name})");
+            var type = declaration.Name.ToSnippet(Identifier.Options.Pascal);
+            var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} {name})");
 
             return Body.Block(options, signature);
         }
