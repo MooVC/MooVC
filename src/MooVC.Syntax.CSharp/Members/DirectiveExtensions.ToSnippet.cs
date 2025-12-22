@@ -8,7 +8,7 @@
     {
         internal static Snippet ToSnippet(this ImmutableArray<Directive> directives, Snippet.Options options)
         {
-            string[] statements = directives
+            Snippet[] statements = directives
                 .Select(directive => new
                 {
                     Rendering = directive.ToString(),
@@ -20,12 +20,10 @@
                 .ThenBy(directive => directive.Value.Alias)
                 .ThenBy(directive => directive.Value.Qualifier)
                 .ThenBy(directive => directive.Rendering)
-                .Select(directive => directive.Rendering)
+                .Select(directive => Snippet.From(options, directive.Rendering))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(statements);
-
-            return Snippet.From(options, snippet);
+            return Snippet.Blank.Combine(options, statements);
         }
     }
 }

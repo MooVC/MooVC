@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests;
 
-public sealed class WhenToStringWithOptionsIsCalled
+public sealed class WhenToSnippetIsCalled
 {
     [Fact]
     public void GivenNullOptionsThenThrows()
@@ -10,7 +10,7 @@ public sealed class WhenToStringWithOptionsIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToString(options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));

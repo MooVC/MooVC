@@ -33,14 +33,11 @@ public sealed class WhenBlockIsCalled
 
         var subject = new Snippet(lines);
 
-        Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine);
-
         // Act
-        Snippet result = subject.Block(options);
+        Snippet result = subject.Block(Snippet.Options.Default);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 
@@ -59,7 +56,6 @@ public sealed class WhenBlockIsCalled
         var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine)
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.Allman));
@@ -68,7 +64,7 @@ public sealed class WhenBlockIsCalled
         Snippet result = subject.Block(options, opening);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
 
         text.ShouldBe(expected);
     }
@@ -87,7 +83,6 @@ public sealed class WhenBlockIsCalled
         var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine)
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.KAndR));
@@ -96,7 +91,7 @@ public sealed class WhenBlockIsCalled
         Snippet result = subject.Block(options, opening);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
 
         text.ShouldBe(expected);
     }

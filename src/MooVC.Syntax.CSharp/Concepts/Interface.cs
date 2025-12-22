@@ -1,12 +1,15 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using System;
+    using System.Collections.Immutable;
+    using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -21,17 +24,23 @@
         {
         }
 
+        [Ignore]
         public override bool IsUndefined => this == Undefined;
 
-        protected override Snippet ToSnippet(Snippet.Options options)
+        protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);
 
             var events = Events.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
             var properties = Properties.ToSnippet(options);
-            var methods = Methods.ToSnippet(options);
-            Snippet body = options.BlankSpace.Combine(options, events, indexers, properties, methods);
+
+            var methods = Methods
+                .Select(method => method.WithResult(result => result.WithMode(Result.Modality.Synchronous)))
+                .ToImmutableArray()
+                .ToSnippet(options);
+
+            Snippet body = Snippet.Blank.Combine(options, events, properties, indexers, methods);
 
             return body.Block(options, signature);
         }
@@ -48,7 +57,7 @@
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, options.NewLine)
+                    .Prepend(options, Environment.NewLine)
                     .Prepend(options, signature);
             }
 

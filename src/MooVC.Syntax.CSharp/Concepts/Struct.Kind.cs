@@ -15,7 +15,7 @@
             public static readonly Kind Record = "record";
             public static readonly Kind Ref = "ref";
 
-            internal Kind(string value)
+            private Kind(string value)
             {
                 _value = value;
             }

@@ -52,24 +52,14 @@ namespace MooVC.Syntax.CSharp.Members
 
         public override string ToString()
         {
-            return ToString(Identifier.Unnamed, Snippet.Options.Default);
+            return ToSnippet(Identifier.Unnamed, Snippet.Options.Default);
         }
 
-        public string ToString(Construct construct, Snippet.Options options)
+        public Snippet ToSnippet(Construct construct, Snippet.Options options)
         {
             _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Constructor)));
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Constructor)));
 
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            Snippet signature = GetSignature(construct.Name.Name, options);
-
-            return Body
-                .Block(options, signature)
-                .ToString();
+            return ToSnippet(construct.Name.Name, options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -94,20 +84,18 @@ namespace MooVC.Syntax.CSharp.Members
             return Snippet.From(options, signature);
         }
 
-        private string ToString(Identifier name, Snippet.Options options)
+        private string ToSnippet(Identifier name, Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Constructor)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Constructor)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             Snippet signature = GetSignature(name, options);
 
-            return Body
-                .Block(options, signature)
-                .ToString();
+            return Body.Block(options, signature);
         }
     }
 }

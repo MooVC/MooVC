@@ -41,17 +41,14 @@ public sealed class WhenPrependIsCalled
     public void GivenMultiLineValuesThenTheLinesArePrepended()
     {
         // Arrange
-        Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
-
-        string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
-        var subject = Snippet.From(options, Alpha);
+        string expected = string.Join(Environment.NewLine, Beta, Phi, Gamma, Alpha);
+        var subject = Snippet.From(Alpha);
 
         // Act
-        Snippet result = subject.Prepend(options, $"{Beta}\n{Phi}", Gamma);
+        Snippet result = subject.Prepend($"{Beta}{Environment.NewLine}{Phi}", Gamma);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 
@@ -59,20 +56,17 @@ public sealed class WhenPrependIsCalled
     public void GivenSnippetsThenTheyArePrepended()
     {
         // Arrange
-        Snippet.Options options = new Snippet.Options()
-            .WithNewLine("\n");
+        string expected = string.Join(Environment.NewLine, Beta, Phi, Gamma, Alpha);
 
-        string expected = string.Join(options.NewLine, Beta, Phi, Gamma, Alpha);
-
-        var subject = Snippet.From(options, Alpha);
-        var first = Snippet.From(options, $"{Beta}\n{Phi}");
-        var second = Snippet.From(options, Gamma);
+        var subject = Snippet.From(Alpha);
+        var first = Snippet.From($"{Beta}{Environment.NewLine}{Phi}");
+        var second = Snippet.From(Gamma);
 
         // Act
         Snippet result = subject.Prepend(first, second);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 }

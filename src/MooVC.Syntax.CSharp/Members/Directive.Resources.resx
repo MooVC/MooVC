@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ToSnippetOptionsRequired" xml:space="preserve">
+    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
+  </data>
   <data name="ValidateStaticAliasInvalid" xml:space="preserve">
     <value>`{1}` `{0}` cannot be applied to a Static Using for `{3}` `{2}`.</value>
   </data>

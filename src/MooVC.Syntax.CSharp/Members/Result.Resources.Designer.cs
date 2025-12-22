@@ -68,5 +68,14 @@ namespace MooVC.Syntax.CSharp.Members {
                 return ResourceManager.GetString("AsWrapperRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
+        /// </summary>
+        internal static string ToSnippetOptionsRequired {
+            get {
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+            }
+        }
     }
 }

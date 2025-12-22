@@ -3,29 +3,31 @@ namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 public sealed class WhenToStringIsCalled
 {
     [Fact]
-    public void GivenDefaultInstanceThenReturnsEmpty()
+    public void GivenDefaultInstanceThenReturnsReadOnlyProperty()
     {
         // Arrange
         Indexer.Methods subject = Indexer.Methods.Default;
+        const string expected = "get;";
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        representation.ShouldBe(expected);
     }
 
     [Fact]
-    public void GivenAutoImplementedMembersThenReturnsEmpty()
+    public void GivenAutoImplementedMembersThenReturnsReadOnlyProperty()
     {
         // Arrange
         var subject = new Indexer.Methods();
+        const string expected = "get;";
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBeEmpty();
+        representation.ShouldBe(expected);
     }
 
     [Fact]

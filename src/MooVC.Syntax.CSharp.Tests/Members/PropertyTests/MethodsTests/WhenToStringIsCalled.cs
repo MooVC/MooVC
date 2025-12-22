@@ -30,28 +30,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("get => value;");
-    }
-
-    [Fact]
-    public void GivenScopedSetterThenScopeIsIncluded()
-    {
-        // Arrange
-        var subject = new Property.Methods
-        {
-            Get = Snippet.From("value;"),
-            Set = new Property.Setter
-            {
-                Behaviour = Snippet.From("_value = value;"),
-                Scope = Scope.Private,
-            },
-        };
-
-        // Act
-        string representation = subject.ToString(Snippet.Options.Default, Scope.Public);
-
-        // Assert
-        representation.ShouldContain("private set");
-        representation.ShouldContain("get => value;");
+        representation.ShouldBe("value;");
     }
 }

@@ -40,17 +40,17 @@
         {
             Guard.Against.Conversion<Argument, Snippet>(argument);
 
-            return Snippet.From(argument);
+            return argument.ToSnippet(Options.Call);
         }
 
         public override string ToString()
         {
-            return ToString(Options.Call);
+            return ToSnippet(Options.Call);
         }
 
-        public string ToString(Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Options), nameof(Argument), nameof(Name), Name));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Argument), nameof(Name), Name));
 
             if (IsUndefined)
             {
@@ -62,7 +62,7 @@
                 return $"{Value}";
             }
 
-            string name = Name.ToString(options.Naming);
+            var name = Name.ToSnippet(options.Naming);
             string value = Value.ToString();
 
             if (!Modifier.IsNone)
@@ -70,7 +70,7 @@
                 value = $"{Modifier} {value}";
             }
 
-            return string.Format(options.Formatter, name, value);
+            return Snippet.From(options.Snippet, string.Format(options.Formatter, name, value));
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

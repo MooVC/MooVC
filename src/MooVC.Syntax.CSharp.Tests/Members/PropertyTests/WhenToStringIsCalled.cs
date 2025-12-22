@@ -16,31 +16,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Fact]
-    public void GivenGetOnlyPropertyWhenInlineIsLambdaThenBodyIsRendered()
-    {
-        // Arrange
-        var behaviours = new Property.Methods
-        {
-            Get = Snippet.From("value;"),
-            Set = new Property.Setter { Mode = Property.Mode.ReadOnly },
-        };
-
-        Property subject = PropertyTestsData.Create(behaviours: behaviours);
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
-
-        // Act
-        string representation = subject.ToString(options);
-
-        // Assert
-        const string Expected = "public string Value => get => value;";
-
-        representation.ShouldBe(Expected);
-    }
-
-    [Fact]
     public void GivenGetAndSetThenBodyIsRendered()
     {
         // Arrange

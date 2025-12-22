@@ -144,17 +144,11 @@
   <data name="OptionsMaxLengthOutOfRange" xml:space="preserve">
     <value>The maximum length of a single line must be within the acceptable range.</value>
   </data>
-  <data name="OptionsNewLineRequired" xml:space="preserve">
-    <value>The character(s) to mark a new line must be provided.</value>
-  </data>
   <data name="OptionsWhitespaceRequired" xml:space="preserve">
     <value>The whitespace to be applied must be provided.</value>
   </data>
   <data name="ShiftOptionsRequired" xml:space="preserve">
     <value>The options required to direct the shift must be provided.</value>
-  </data>
-  <data name="ToStringOptionsRequired" xml:space="preserve">
-    <value>The options required to direct formatting must be provided.</value>
   </data>
   <data name="BlockOptionsInlineRequired" xml:space="preserve">
     <value>The style to use for Inline statements must be provided.</value>

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Linq;
 
     public static partial class EventExtensions
     {
@@ -14,14 +13,14 @@
                 return Snippet.Empty;
             }
 
-            string[] content = events
+            Snippet[] content = events
                 .OrderByDescending(@event => @event.Scope)
                 .ThenByDescending(@event => @event.Extensibility)
                 .ThenBy(@event => @event.Name)
-                .Select(@event => @event.ToString(options))
+                .Select(@event => @event.ToSnippet(options))
                 .ToArray();
 
-            return options.BlankSpace.Combine(options, content);
+            return Snippet.Blank.Combine(options, content);
         }
     }
 }

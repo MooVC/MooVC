@@ -50,16 +50,16 @@
 
         public override string ToString()
         {
-            return ToString(Options.Camel);
+            return ToSnippet(Options.Camel);
         }
 
-        public string ToString(Options options)
+        public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Options), nameof(Parameter), nameof(Name), Name));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             const string separator = " ";
@@ -67,8 +67,8 @@
             string attributes = GetAttributes();
             string @default = GetDefault();
             string modifier = Modifier;
-            string name = Name.ToString(options.Naming);
-            string type = Type.ToString(options.Types);
+            var name = Name.ToSnippet(options.Naming);
+            string type = Type.ToSnippet(options.Types);
 
             return separator.Combine(attributes, modifier, type, name, @default);
         }

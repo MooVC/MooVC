@@ -14,17 +14,15 @@
                 return Snippet.Empty;
             }
 
-            string[] content = fields
+            Snippet[] content = fields
                 .OrderByDescending(field => field.IsStatic)
                 .ThenByDescending(field => field.IsReadOnly)
                 .ThenByDescending(field => field.Scope)
                 .ThenBy(field => field.Name)
-                .Select(field => field.ToString())
+                .Select(field => field.ToSnippet(options))
                 .ToArray();
 
-            string snippet = options.NewLine.Combine(content);
-
-            return Snippet.From(options, snippet);
+            return Snippet.Blank.Combine(options, content);
         }
     }
 }

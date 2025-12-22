@@ -33,14 +33,13 @@ public sealed class WhenShiftIsCalled
         var subject = new Snippet(lines);
 
         Snippet.Options options = new Snippet.Options()
-            .WithNewLine(Environment.NewLine)
             .WithWhitespace(whitespace);
 
         // Act
         Snippet result = subject.Shift(options);
 
         // Assert
-        string text = result.ToString(options);
+        string text = result.ToString();
         text.ShouldBe(expected);
     }
 }

@@ -123,7 +123,10 @@
   <data name="OptionsNamingRequired" xml:space="preserve">
     <value>The Naming options must be provided.</value>
   </data>
-  <data name="ToStringOptionsRequired" xml:space="preserve">
+  <data name="OptionsSnippetRequired" xml:space="preserve">
+    <value>The Snippet options must be provided.</value>
+  </data>
+  <data name="ToSnippetOptionsRequired" xml:space="preserve">
     <value>The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided.</value>
   </data>
   <data name="ValidateValueInvalid" xml:space="preserve">

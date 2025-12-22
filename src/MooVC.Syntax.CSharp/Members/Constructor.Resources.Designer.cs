@@ -61,20 +61,20 @@ namespace MooVC.Syntax.CSharp.Members {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
+        /// </summary>
+        internal static string ToSnippetOptionsRequired {
+            get {
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
         /// </summary>
         internal static string ToStringConsructRequired {
             get {
                 return ResourceManager.GetString("ToStringConsructRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
-        /// </summary>
-        internal static string ToStringOptionsRequired {
-            get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
     }

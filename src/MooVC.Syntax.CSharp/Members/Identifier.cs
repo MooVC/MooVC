@@ -97,16 +97,16 @@
 
         public override string ToString()
         {
-            return ToString(Options.Camel);
+            return ToSnippet(Options.Camel);
         }
 
-        public string ToString(Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Identifier)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Identifier)));
 
             if (IsUnnamed)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             if (Aliases.IsSystem(_value))

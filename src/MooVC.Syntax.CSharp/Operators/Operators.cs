@@ -8,9 +8,10 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Operators_Resources;
+
+    using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
     [Valuify]
@@ -29,23 +30,24 @@
 
         public ImmutableArray<Conversion> Conversions { get; internal set; } = ImmutableArray<Conversion>.Empty;
 
+        [Ignore]
         public bool IsUndefined => this == Undefined;
 
         public ImmutableArray<Unary> Unaries { get; internal set; } = ImmutableArray<Unary>.Empty;
 
         public override string ToString()
         {
-            return ToString(Class.Undefined, Snippet.Options.Default);
+            return ToSnippet(Class.Undefined, Snippet.Options.Default);
         }
 
-        public string ToString(Construct construct, Snippet.Options options)
+        public Snippet ToSnippet(Construct construct, Snippet.Options options)
         {
             _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Binary)));
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Operators)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             var binaries = Binaries.ToSnippet(construct, options);
@@ -53,7 +55,7 @@
             var conversions = Conversions.ToSnippet(construct, options);
             var unaries = Unaries.ToSnippet(construct, options);
 
-            return options.BlankSpace.Combine(options, binaries, comparisons, conversions, unaries);
+            return Snippet.Blank.Combine(options, binaries, comparisons, conversions, unaries);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

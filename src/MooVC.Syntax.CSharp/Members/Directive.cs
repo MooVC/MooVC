@@ -60,6 +60,18 @@
             return Separator.Combine("using", prefix, qualifier);
         }
 
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Qualifier), nameof(Directive)));
+
+            if (IsUndefined)
+            {
+                return Snippet.Empty;
+            }
+
+            return Snippet.From(options, ToString());
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -91,7 +103,7 @@
 
             if (!Alias.IsUnnamed)
             {
-                return $"{Alias.ToString(Identifier.Options.Pascal)} = ";
+                return $"{Alias.ToSnippet(Identifier.Options.Pascal)} = ";
             }
 
             return string.Empty;

@@ -56,28 +56,28 @@
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Field)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Field)));
 
             if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
-            Snippet signature = GetSignature();
+            string signature = GetSignature();
 
             if (!Default.IsEmpty)
             {
-                signature = signature.Append(options, $" = {Default}");
+                signature = $"{signature} = {Default}";
             }
 
-            return signature
-                .Append(';')
-                .ToString();
+            signature = string.Concat(signature, ';');
+
+            return Snippet.From(options, signature);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -102,16 +102,15 @@
                 .Results;
         }
 
-        private Snippet GetSignature()
+        private string GetSignature()
         {
-            string name = Name.ToString(Identifier.Options.Pascal);
+            var name = Name.ToSnippet(Identifier.Options.Pascal);
             string scope = Scope;
             string type = Type;
             string @static = IsStatic.Static();
             string @readonly = IsReadOnly.ReadOnly();
-            string signature = Separator.Combine(scope, @static, @readonly, type, name);
 
-            return Snippet.From(signature);
+            return Separator.Combine(scope, @static, @readonly, type, name);
         }
     }
 }

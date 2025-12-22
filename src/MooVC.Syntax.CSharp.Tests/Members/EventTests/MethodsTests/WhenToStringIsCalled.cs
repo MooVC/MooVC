@@ -41,10 +41,10 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        string expected = Snippet.From($"add => {subject.Add};")
-            .Append(Snippet.Options.Default, Environment.NewLine)
-            .Append("remove;")
-            .ToString();
+        const string expected = """
+            add => value;
+            remove;
+            """;
 
         representation.ShouldBe(expected);
     }
@@ -64,11 +64,14 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        string expected = add
-            .Block(Snippet.Options.Default, opening: Snippet.From("add"))
-            .Append(Snippet.Options.Default, Environment.NewLine)
-            .Append("remove;")
-            .ToString();
+        const string expected = """
+            add
+            {
+                first
+                second
+            }
+            remove;
+            """;
 
         representation.ShouldBe(expected);
     }

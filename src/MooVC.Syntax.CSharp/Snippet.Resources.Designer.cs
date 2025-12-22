@@ -178,15 +178,6 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The character(s) to mark a new line must be provided..
-        /// </summary>
-        internal static string OptionsNewLineRequired {
-            get {
-                return ResourceManager.GetString("OptionsNewLineRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The whitespace to be applied must be provided..
         /// </summary>
         internal static string OptionsWhitespaceRequired {
@@ -219,15 +210,6 @@ namespace MooVC.Syntax.CSharp {
         internal static string StackTopRequired {
             get {
                 return ResourceManager.GetString("StackTopRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The options required to direct formatting must be provided..
-        /// </summary>
-        internal static string ToStringOptionsRequired {
-            get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
             }
         }
     }

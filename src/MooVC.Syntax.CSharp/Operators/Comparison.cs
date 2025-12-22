@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using Microsoft.Extensions.Options;
     using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
@@ -65,8 +66,8 @@
 
             string @operator = Operator;
             string scope = Scope;
-            string type = declaration.Name.ToString(Identifier.Options.Pascal);
-            var signature = Snippet.From($"{scope} static bool operator {@operator}({type} left, {type} right)");
+            var type = declaration.Name.ToSnippet(Identifier.Options.Pascal);
+            var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);
         }

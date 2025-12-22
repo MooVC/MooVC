@@ -52,24 +52,28 @@
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
 
-            if (IsUndefined || Behaviours.IsDefault || Behaviours.Get.IsEmpty)
+            if (IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             Snippet signature = GetSignature();
-            var methods = Snippet.From(Behaviours.ToString(options));
+            var methods = Behaviours.ToSnippet(options);
 
-            return methods
-                .Block(options, signature)
-                .ToString();
+            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                options = options.WithBlock(block => block
+                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+            }
+
+            return methods.Block(options, signature);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -116,7 +120,7 @@
         {
             string extensibility = Extensibility;
             string parameter = Parameter;
-            string result = Result;
+            string result = Result.WithMode(Result.Modality.Synchronous);
             string scope = Scope;
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 

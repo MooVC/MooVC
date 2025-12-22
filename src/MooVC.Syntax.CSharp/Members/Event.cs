@@ -50,21 +50,21 @@
 
         public override string ToString()
         {
-            return ToString(Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default);
         }
 
-        public string ToString(Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Event)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Event)));
 
             if (IsUndefind)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             string extensibility = Extensibility;
             string handler = Handler;
-            string name = Name.ToString(Identifier.Options.Pascal);
+            var name = Name.ToSnippet(Identifier.Options.Pascal);
             string scope = Scope;
             string signature = Separator.Combine(scope, extensibility, "event", handler, name);
 
@@ -75,9 +75,13 @@
                 return string.Concat(signature, ";");
             }
 
-            return methods
-                .Block(options, Snippet.From(options, signature))
-                .ToString();
+            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                options = options.WithBlock(block => block
+                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+            }
+
+            return methods.Block(options, Snippet.From(options, signature));
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

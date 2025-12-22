@@ -9,6 +9,7 @@
     using Fluentify;
     using MooVC.Linq;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Members.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -17,8 +18,7 @@
         : IValidatableObject
     {
         public static readonly Attribute Unspecified = new Attribute();
-
-        private const string Separator = ", ";
+        private static readonly Snippet separator = Snippet.From(", ");
 
         internal Attribute()
         {
@@ -44,14 +44,21 @@
         {
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
 
-            return Snippet.From(attribute);
+            return attribute.ToSnippet(Snippet.Options.Default);
         }
 
         public override string ToString()
         {
+            return ToSnippet(Snippet.Options.Default);
+        }
+
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Arguments), nameof(Attribute)));
+
             if (Name.IsUndefined)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             var value = new StringBuilder();
@@ -63,16 +70,12 @@
 
             value = value.Append(Name);
 
-            string arguments = string.Empty;
-
             if (!Arguments.IsDefaultOrEmpty)
             {
-                arguments = Separator.Combine(Arguments, argument => argument.ToString(Argument.Options.Declaration));
-
-                value = value.Append($"({arguments})");
+                value = AppendArguments(options, value);
             }
 
-            return $"[{value}]";
+            return Snippet.From(options, $"[{value}]");
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -86,6 +89,19 @@
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
                 .And(nameof(Name), _ => !Name.IsUndefined, Name)
                 .Results;
+        }
+
+        private StringBuilder AppendArguments(Snippet.Options options, StringBuilder value)
+        {
+            Argument.Options declaration = Argument.Options.Declaration.WithSnippet(options);
+
+            Snippet[] arguments = Arguments
+                .Select(argument => argument.ToSnippet(declaration))
+                .ToArray();
+
+            Snippet syntax = separator.Combine(options, arguments);
+
+            return value.Append($"({syntax})");
         }
     }
 }

@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
+    using System.Text;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -14,17 +15,34 @@
     [SkipAutoInstantiation]
     public sealed partial class Snippet
     {
+        public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
         private const int SingleLine = 1;
-        private const string Separator = " ";
+
+        internal Snippet(ImmutableArray<string> value)
+        {
+            if (value.IsDefault)
+            {
+                value = ImmutableArray<string>.Empty;
+            }
+
+            _value = value;
+        }
 
         public bool IsEmpty => this == Empty;
 
-        public bool IsMultiLine => !_value.IsDefaultOrEmpty && _value.Length > SingleLine;
+        public bool IsMultiLine => !_value.IsDefaultOrEmpty && Lines > SingleLine;
 
-        public bool IsSingleLine => !_value.IsDefaultOrEmpty && _value.Length == SingleLine;
+        public bool IsSingleLine => !_value.IsDefaultOrEmpty && Lines == SingleLine;
 
         public int Lines => _value.IsDefaultOrEmpty ? 0 : _value.Length;
+
+        public static implicit operator Snippet(string snippet)
+        {
+            Guard.Against.Conversion<string, Snippet>(snippet);
+
+            return From(snippet);
+        }
 
         public static implicit operator string(Snippet snippet)
         {
@@ -33,24 +51,34 @@
             return snippet.ToString();
         }
 
-        public static Snippet From(string value)
+        public static Snippet From(params string[] values)
         {
-            return From(Options.Default, value);
+            return From(Options.Default, values);
         }
 
-        public static Snippet From(Options options, string value)
+        public static Snippet From(Options options, params string[] values)
         {
-            _ = Guard.Against.Null(options, message: FromOptionsRequired.Format(nameof(Options), nameof(value)));
-            _ = Guard.Against.Null(value, message: FromValueRequired.Format(nameof(value)));
+            _ = Guard.Against.Null(options, message: FromOptionsRequired.Format(nameof(Options), nameof(values)));
+            _ = Guard.Against.Null(values, message: FromValueRequired.Format(nameof(values)));
 
-            if (string.IsNullOrWhiteSpace(value))
+            if (values.Length == 0 || (values.Length == 1 && string.IsNullOrEmpty(values[0])))
             {
                 return Empty;
             }
 
-            string[] lines = value.Split(new[] { options.NewLine }, StringSplitOptions.None);
+            ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(values.Length);
 
-            return new Snippet(ImmutableArray.Create(lines));
+            foreach (string value in values)
+            {
+                string[] lines = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+                foreach (string line in lines)
+                {
+                    builder.Add(line);
+                }
+            }
+
+            return builder.ToImmutable();
         }
 
         public Snippet Append(char value)
@@ -61,7 +89,7 @@
             }
 
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>();
-            int last = _value.Length - 1;
+            int last = Lines - 1;
 
             for (int index = 0; index < last; index++)
             {
@@ -101,86 +129,89 @@
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
             int openingLines = opening.Lines;
-            string[] blocked = new string[_value.Length + openingLines + MaximumAdditionalLinesRequiredForBlock];
-            int index = 0;
+            string[] blocked = ArrayPool<string>.Shared.Rent(Lines + openingLines + MaximumAdditionalLinesRequiredForBlock);
 
-            for (; index < openingLines; index++)
+            try
             {
-                blocked[index] = opening._value[index];
-            }
+                int index = 0;
 
-            if (IsSingleLine && !options.Block.Inline.IsMultiLineBraces)
-            {
-                if (options.Block.Inline.IsLambda)
+                for (; index < openingLines; index++)
                 {
-                    blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
-                }
-                else if (options.Block.Inline.IsSingleLineBraces)
-                {
-                    blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
+                    blocked[index] = opening._value[index];
                 }
 
-                return new Snippet(ImmutableArray.Create(blocked, 0, index));
-            }
+                if (IsSingleLine && !options.Block.Inline.IsMultiLineBraces)
+                {
+                    if (options.Block.Inline.IsLambda)
+                    {
+                        blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
+                    }
+                    else if (options.Block.Inline.IsSingleLineBraces)
+                    {
+                        blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
+                    }
 
-            if (options.Block.Style.IsKAndR && openingLines > 0)
+                    return new Snippet(ImmutableArray.Create(blocked, 0, index));
+                }
+
+                if (options.Block.Style.IsKAndR && openingLines > 0)
+                {
+                    blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
+                }
+                else
+                {
+                    blocked[index++] = options.Block.Markers.Opening;
+                }
+
+                string whitespace = options.Whitespace;
+
+                for (int line = 0; line < Lines; line++)
+                {
+                    string current = _value[line];
+
+                    if (!string.IsNullOrEmpty(current))
+                    {
+                        current = string.Concat(whitespace, _value[line]);
+                    }
+
+                    blocked[index++] = current;
+                }
+
+                blocked[index] = options.Block.Markers.Closing;
+
+                return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
+            }
+            finally
             {
-                blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
+                ArrayPool<string>.Shared.Return(blocked);
             }
-            else
-            {
-                blocked[index++] = options.Block.Markers.Opening;
-            }
-
-            for (int line = 0; line < _value.Length; line++)
-            {
-                blocked[index++] = string.Concat(options.Whitespace, _value[line]);
-            }
-
-            blocked[index] = options.Block.Markers.Closing;
-
-            return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
         }
 
-        public Snippet Combine(params string[] values)
+        public Snippet Combine(params Snippet[] values)
         {
             return Combine(Options.Default, values);
         }
 
-        public Snippet Combine(Options options, params string[] values)
+        public Snippet Combine(Options options, params Snippet[] values)
         {
             _ = Guard.Against.Null(options, message: CombineOptionsRequired);
             _ = Guard.Against.Null(values, message: CombineSnippetsRequired);
 
-            string[] combined = ArrayPool<string>.Shared.Rent(values.Length * 2);
+            values = StripEmptySnippets(values);
 
-            try
+            if (values.Length == 0)
             {
-                int total = Combine(values, combined);
-
-                if (total == 0)
-                {
-                    return Empty;
-                }
-
-                string first = combined[0];
-
-                if (total == 1)
-                {
-                    return From(options, first);
-                }
-
-                values = combined
-                    .Skip(1)
-                    .Take(total - 1)
-                    .ToArray();
-
-                return Empty.Append(options, values);
+                return Empty;
             }
-            finally
+
+            if (values.Length == 1)
             {
-                ArrayPool<string>.Shared.Return(combined);
+                return values[0];
             }
+
+            string[] combined = AllocateWorkingMemoryForCombine(values);
+
+            return Combine(combined, values);
         }
 
         public Snippet Prepend(params string[] values)
@@ -202,16 +233,25 @@
         {
             _ = Guard.Against.Null(options, message: ShiftOptionsRequired);
 
-            string[] shifted = ArrayPool<string>.Shared.Rent(_value.Length);
+            string[] shifted = ArrayPool<string>.Shared.Rent(Lines);
 
             try
             {
-                for (int index = 0; index < _value.Length; index++)
+                string whitespace = options.Whitespace;
+
+                for (int index = 0; index < Lines; index++)
                 {
-                    shifted[index] = string.Concat(options.Whitespace, _value[index]);
+                    string current = _value[index];
+
+                    if (!string.IsNullOrEmpty(current))
+                    {
+                        current = string.Concat(whitespace, _value[index]);
+                    }
+
+                    shifted[index] = current;
                 }
 
-                return new Snippet(ImmutableArray.Create(shifted, 0, _value.Length));
+                return new Snippet(ImmutableArray.Create(shifted, 0, Lines));
             }
             finally
             {
@@ -224,24 +264,40 @@
             _ = Guard.Against.Null(options, message: StackOptionsRequired);
             _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
 
-            string separator = IsSingleLine && top.IsSingleLine
-                ? options.NewLine
-                : Separator;
-
-            return Prepend(options, separator)
-                .Prepend(options, top);
+            return Prepend(options, top);
         }
 
         public override string ToString()
         {
-            return ToString(Options.Default);
+            if (Lines == 0)
+            {
+                return string.Empty;
+            }
+
+            if (Lines == 1)
+            {
+                return _value[0];
+            }
+
+            var builder = new StringBuilder();
+            int last = Lines - 1;
+
+            for (int index = 0; index < last; index++)
+            {
+                builder = builder.AppendLine(_value[index]);
+            }
+
+            builder = builder.Append(_value[last]);
+
+            return builder.ToString();
         }
 
-        public string ToString(Options options)
+        private static void Combine(string[] combined, ref int index, Snippet snippet)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired);
-
-            return string.Join(options.NewLine, _value);
+            for (int line = 0; line < snippet.Lines; line++)
+            {
+                combined[index++] = snippet._value[line];
+            }
         }
 
         private static ImmutableArray<string> Combine(
@@ -278,28 +334,54 @@
             return combine(first, second).ToImmutableArray();
         }
 
-        private int Combine(string[] values, string[] combined)
+        private static Snippet[] StripEmptySnippets(Snippet[] values)
         {
-            string separator = this;
-            int last = values.Length - 1;
-            int total = 0;
+            return values
+                .Where(snippet => !snippet.IsEmpty)
+                .ToArray();
+        }
 
-            for (int index = 0; index <= last; index++)
+        private string[] AllocateWorkingMemoryForCombine(Snippet[] values)
+        {
+            int separators = (values.Length - 1) * Lines;
+            int length = values.Sum(snippet => snippet.Lines) + separators;
+            string[] combined = ArrayPool<string>.Shared.Rent(length);
+
+            return combined;
+        }
+
+        private Snippet Combine(string[] combined, Snippet[] values)
+        {
+            try
             {
-                string value = values[index];
+                int index = 0;
+                int last = values.Length - 1;
 
-                if (!string.IsNullOrEmpty(value))
+                for (int current = 0; current < values.Length; current++)
                 {
-                    combined[total++] = value;
+                    Snippet snippet = values[current];
 
-                    if (index != last)
+                    if (snippet.IsEmpty)
                     {
-                        combined[total++] = separator;
+                        continue;
+                    }
+
+                    Combine(combined, ref index, snippet);
+
+                    if (current != last)
+                    {
+                        Combine(combined, ref index, this);
                     }
                 }
-            }
 
-            return total;
+                return combined
+                    .Take(index)
+                    .ToImmutableArray();
+            }
+            finally
+            {
+                ArrayPool<string>.Shared.Return(combined);
+            }
         }
     }
 }
