@@ -167,7 +167,14 @@
 
                 for (int line = 0; line < Lines; line++)
                 {
-                    blocked[index++] = string.Concat(whitespace, _value[line]);
+                    string current = _value[line];
+
+                    if (!string.IsNullOrEmpty(current))
+                    {
+                        current = string.Concat(whitespace, _value[line]);
+                    }
+
+                    blocked[index++] = current;
                 }
 
                 blocked[index] = options.Block.Markers.Closing;
@@ -234,7 +241,14 @@
 
                 for (int index = 0; index < Lines; index++)
                 {
-                    shifted[index] = string.Concat(whitespace, _value[index]);
+                    string current = _value[index];
+
+                    if (!string.IsNullOrEmpty(current))
+                    {
+                        current = string.Concat(whitespace, _value[index]);
+                    }
+
+                    shifted[index] = current;
                 }
 
                 return new Snippet(ImmutableArray.Create(shifted, 0, Lines));
