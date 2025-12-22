@@ -37,20 +37,20 @@
 
         public override string ToString()
         {
-            return ToString(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
         public string ToString(Construct construct, Snippet.Options options)
         {
-            _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Conversion)));
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
+            return ToSnippet(construct, options);
+        }
 
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
+        public Snippet ToSnippet(Construct construct, Snippet.Options options)
+        {
+            _ = Guard.Against.Null(construct, message: ToSnippetConsructRequired.Format(nameof(Construct), nameof(Conversion)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
 
-            return ToString(construct.Name, options);
+            return ToSnippet(construct.Name, options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -77,22 +77,6 @@
                 .Results;
         }
 
-        private string ToString(Declaration declaration, Snippet.Options options)
-        {
-            if (declaration.IsUnspecified)
-            {
-                return string.Empty;
-            }
-
-            GetInputAndResult(declaration, out string input, out string result);
-
-            string mode = Mode;
-            string scope = Scope;
-            var signature = Snippet.From($"{scope} static {mode} operator {result}({input} subject)");
-
-            return Body.Block(options, signature);
-        }
-
         private void GetInputAndResult(Declaration declaration, out string input, out string result)
         {
             if (Direction == Intent.To)
@@ -105,6 +89,22 @@
                 input = Subject;
                 result = declaration;
             }
+        }
+
+        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
+        {
+            if (IsUndefined || declaration.IsUnspecified)
+            {
+                return Snippet.Empty;
+            }
+
+            GetInputAndResult(declaration, out string input, out string result);
+
+            string mode = Mode;
+            string scope = Scope;
+            var signature = Snippet.From($"{scope} static {mode} operator {result}({input} subject)");
+
+            return Body.Block(options, signature);
         }
     }
 }

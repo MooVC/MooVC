@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Linq;
     using MooVC.Syntax.CSharp.Concepts;
 
     public static partial class ComparisonExtensions
@@ -18,8 +17,8 @@
             var content = comparisons
                 .OrderByDescending(comparison => comparison.Scope)
                 .ThenBy(comparison => comparison.Operator)
-                .Select(comparison => comparison.ToString(construct, options))
-                .ToSnippet();
+                .Select(comparison => comparison.ToSnippet(construct, options))
+                .ToArray();
 
             return Snippet.Blank.Combine(options, content);
         }

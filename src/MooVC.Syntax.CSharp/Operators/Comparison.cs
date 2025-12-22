@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.Contracts;
+    using System.Xml.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using Microsoft.Extensions.Options;
     using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
@@ -33,20 +34,20 @@
 
         public override string ToString()
         {
-            return ToString(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
         public string ToString(Construct construct, Snippet.Options options)
         {
-            _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Comparison)));
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Comparison)));
+            return ToSnippet(construct, options);
+        }
 
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
+        public Snippet ToSnippet(Construct construct, Snippet.Options options)
+        {
+            _ = Guard.Against.Null(construct, message: ToSnippetConsructRequired.Format(nameof(Construct), nameof(Comparison)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Comparison)));
 
-            return ToString(construct.Name, options);
+            return ToSnippet(construct.Name, options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -57,11 +58,11 @@
             }
         }
 
-        private string ToString(Declaration declaration, Snippet.Options options)
+        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
         {
-            if (declaration.IsUnspecified)
+            if (IsUndefined || declaration.IsUnspecified)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             string @operator = Operator;

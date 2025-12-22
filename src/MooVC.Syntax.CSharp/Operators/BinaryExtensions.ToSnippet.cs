@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Linq;
     using MooVC.Syntax.CSharp.Concepts;
 
     public static partial class BinaryExtensions
@@ -18,8 +17,8 @@
             var content = binaries
                 .OrderByDescending(binary => binary.Scope)
                 .ThenBy(binary => binary.Operator)
-                .Select(binary => binary.ToString(construct, options))
-                .ToSnippet();
+                .Select(binary => binary.ToSnippet(construct, options))
+                .ToArray();
 
             return Snippet.Blank.Combine(options, content);
         }

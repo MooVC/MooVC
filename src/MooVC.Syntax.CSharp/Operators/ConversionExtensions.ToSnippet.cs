@@ -19,8 +19,8 @@
                 .OrderByDescending(conversion => conversion.Scope)
                 .ThenBy(conversion => conversion.Subject)
                 .ThenBy(conversion => conversion.Direction)
-                .Select(conversion => conversion.ToString(construct, options))
-                .ToSnippet();
+                .Select(conversion => conversion.ToSnippet(construct, options))
+                .ToArray();
 
             return Snippet.Blank.Combine(options, content);
         }
