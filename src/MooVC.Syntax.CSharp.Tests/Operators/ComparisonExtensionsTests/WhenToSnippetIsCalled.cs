@@ -3,9 +3,27 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 public sealed class WhenToSnippetIsCalled
 {
+    private const string GivenValuesThenAnOrderedSnippetIsReturnedExpected = """
+        public static bool operator <(Value left, Value right)
+        {
+            return left == right;
+        }
+
+        public static bool operator ==(Value left, Value right)
+        {
+            return left == right;
+        }
+
+        protected static bool operator >(Value left, Value right)
+        {
+            return left == right;
+        }
+        """;
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -14,12 +32,12 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Comparison> comparisons = isDefault
             ? default
-            : ImmutableArray<Comparison>.Empty;
+            : [];
 
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         // Act
-        Snippet result = comparisons.ToSnippet(construct, Snippet.Options.Default);
+        var result = comparisons.ToSnippet(construct, Snippet.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -29,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Comparison> comparisons = ImmutableArray.Create(ComparisonTestsData.Create());
+        ImmutableArray<Comparison> comparisons = [ComparisonTestsData.Create()];
         OperatorsTestsData.TestConstruct? construct = default;
 
         // Act
@@ -43,7 +61,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Comparison> comparisons = ImmutableArray.Create(ComparisonTestsData.Create());
+        ImmutableArray<Comparison> comparisons = [ComparisonTestsData.Create()];
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
         Snippet.Options? options = default;
 
@@ -67,19 +85,12 @@ public sealed class WhenToSnippetIsCalled
         Comparison publicLessThan = ComparisonTestsData.Create(@operator: Comparison.Type.LessThan, scope: Scope.Public);
         Comparison protectedGreaterThan = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan, scope: Scope.Protected);
 
-        ImmutableArray<Comparison> comparisons = ImmutableArray.Create(publicLessThan, protectedGreaterThan, publicEquality);
+        ImmutableArray<Comparison> comparisons = [publicLessThan, protectedGreaterThan, publicEquality];
 
         // Act
-        Snippet snippet = comparisons.ToSnippet(construct, options);
+        var snippet = comparisons.ToSnippet(construct, options);
 
         // Assert
-        string[] expected =
-        {
-            publicEquality.ToString(construct, options),
-            publicLessThan.ToString(construct, options),
-            protectedGreaterThan.ToString(construct, options),
-        };
-
-        snippet.ToString().ShouldBe(string.Join(Environment.NewLine, expected));
+        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

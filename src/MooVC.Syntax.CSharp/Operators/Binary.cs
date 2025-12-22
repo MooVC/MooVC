@@ -32,35 +32,27 @@
 
         public override string ToString()
         {
-            return ToString(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
         public string ToString(Construct construct, Snippet.Options options)
         {
-            _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Binary)));
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Binary)));
-
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToString(construct.Name, options);
+            return ToSnippet(construct, options);
         }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public Snippet ToSnippet(Construct construct, Snippet.Options options)
         {
-            if (Body.IsEmpty)
-            {
-                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Binary)), new[] { nameof(Body) });
-            }
+            _ = Guard.Against.Null(construct, message: ToSnippetConsructRequired.Format(nameof(Construct), nameof(Binary)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Binary)));
+
+            return ToSnippet(construct.Name, options);
         }
 
-        private string ToString(Declaration declaration, Snippet.Options options)
+        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
         {
-            if (declaration.IsUnspecified)
+            if (IsUndefined || declaration.IsUnspecified)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             string @operator = Operator;
@@ -69,6 +61,14 @@
             var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Body.IsEmpty)
+            {
+                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Binary)), new[] { nameof(Body) });
+            }
         }
     }
 }

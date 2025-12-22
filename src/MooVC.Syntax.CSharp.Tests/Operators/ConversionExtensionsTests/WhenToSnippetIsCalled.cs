@@ -3,9 +3,27 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenToSnippetIsCalled
 {
+    private const string GivenValuesThenAnOrderedSnippetIsReturnedExpected = """
+        public static implicit operator Alpha(Value subject)
+        {
+            return new Value();
+        }
+
+        public static implicit operator Value(Alpha subject)
+        {
+            return new Value();
+        }
+
+        protected static implicit operator Beta(Value subject)
+        {
+            return new Value();
+        }
+        """;
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -19,7 +37,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         // Act
-        Snippet result = conversions.ToSnippet(construct, Snippet.Options.Default);
+        var result = conversions.ToSnippet(construct, Snippet.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -29,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Conversion> conversions = ImmutableArray.Create(ConversionTestsData.Create());
+        ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
         OperatorsTestsData.TestConstruct? construct = default;
 
         // Act
@@ -43,7 +61,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Conversion> conversions = ImmutableArray.Create(ConversionTestsData.Create());
+        ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
         Snippet.Options? options = default;
 
@@ -67,19 +85,12 @@ public sealed class WhenToSnippetIsCalled
         Conversion publicAlphaFrom = ConversionTestsData.Create(direction: Conversion.Intent.From, scope: Scope.Public, subject: new Symbol { Name = "Alpha" });
         Conversion protectedBetaTo = ConversionTestsData.Create(scope: Scope.Protected, subject: new Symbol { Name = "Beta" });
 
-        ImmutableArray<Conversion> conversions = ImmutableArray.Create(protectedBetaTo, publicAlphaFrom, publicAlphaTo);
+        ImmutableArray<Conversion> conversions = [protectedBetaTo, publicAlphaFrom, publicAlphaTo];
 
         // Act
-        Snippet snippet = conversions.ToSnippet(construct, options);
+        var snippet = conversions.ToSnippet(construct, options);
 
         // Assert
-        string[] expected =
-        {
-            publicAlphaTo.ToString(construct, options),
-            publicAlphaFrom.ToString(construct, options),
-            protectedBetaTo.ToString(construct, options),
-        };
-
-        snippet.ToString().ShouldBe(string.Join(Environment.NewLine, expected));
+        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

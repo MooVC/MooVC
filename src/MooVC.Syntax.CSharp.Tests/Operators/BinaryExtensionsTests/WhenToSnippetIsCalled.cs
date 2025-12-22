@@ -3,9 +3,27 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenToSnippetIsCalled
 {
+    private const string GivenValuesThenAnOrderedSnippetIsReturnedExpected = """
+        public static Value operator +(Value left, Value right)
+        {
+            return left + right;
+        }
+
+        public static Value operator -(Value left, Value right)
+        {
+            return left + right;
+        }
+
+        protected static Value operator *(Value left, Value right)
+        {
+            return left + right;
+        }
+        """;
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -14,12 +32,12 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Binary> binaries = isDefault
             ? default
-            : ImmutableArray<Binary>.Empty;
+            : [];
 
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         // Act
-        Snippet result = binaries.ToSnippet(construct, Snippet.Options.Default);
+        var result = binaries.ToSnippet(construct, Snippet.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -29,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Binary> binaries = ImmutableArray.Create(BinaryTestsData.Create());
+        ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
         OperatorsTestsData.TestConstruct? construct = default;
 
         // Act
@@ -43,7 +61,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Binary> binaries = ImmutableArray.Create(BinaryTestsData.Create());
+        ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
         Snippet.Options? options = default;
 
@@ -67,19 +85,12 @@ public sealed class WhenToSnippetIsCalled
         Binary publicSubtract = BinaryTestsData.Create(@operator: Binary.Type.Subtract, scope: Scope.Public);
         Binary protectedMultiply = BinaryTestsData.Create(@operator: Binary.Type.Multiply, scope: Scope.Protected);
 
-        ImmutableArray<Binary> binaries = ImmutableArray.Create(publicSubtract, protectedMultiply, publicAdd);
+        ImmutableArray<Binary> binaries = [publicSubtract, protectedMultiply, publicAdd];
 
         // Act
-        Snippet snippet = binaries.ToSnippet(construct, options);
+        var snippet = binaries.ToSnippet(construct, options);
 
         // Assert
-        string[] expected =
-        {
-            publicAdd.ToString(construct, options),
-            publicSubtract.ToString(construct, options),
-            protectedMultiply.ToString(construct, options),
-        };
-
-        snippet.ToString().ShouldBe(string.Join(Environment.NewLine, expected));
+        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

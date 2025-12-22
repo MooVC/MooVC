@@ -3,9 +3,27 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenToSnippetIsCalled
 {
+    private const string GivenValuesThenAnOrderedSnippetIsReturnedExpected = """
+        public static Value operator ++(Value value)
+        {
+            return +value;
+        }
+
+        public static Value operator --(Value value)
+        {
+            return +value;
+        }
+
+        protected static Value operator !(Value value)
+        {
+            return +value;
+        }
+        """;
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -14,12 +32,12 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Unary> unaries = isDefault
             ? default
-            : ImmutableArray<Unary>.Empty;
+            : [];
 
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         // Act
-        Snippet result = unaries.ToSnippet(construct, Snippet.Options.Default);
+        var result = unaries.ToSnippet(construct, Snippet.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -29,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Unary> unaries = ImmutableArray.Create(UnaryTestsData.Create());
+        ImmutableArray<Unary> unaries = [UnaryTestsData.Create()];
         OperatorsTestsData.TestConstruct? construct = default;
 
         // Act
@@ -43,7 +61,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Unary> unaries = ImmutableArray.Create(UnaryTestsData.Create());
+        ImmutableArray<Unary> unaries = [UnaryTestsData.Create()];
         OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
         Snippet.Options? options = default;
 
@@ -65,21 +83,14 @@ public sealed class WhenToSnippetIsCalled
 
         Unary publicIncrement = UnaryTestsData.Create(@operator: Unary.Type.Increment, scope: Scope.Public);
         Unary publicDecrement = UnaryTestsData.Create(@operator: Unary.Type.Decrement, scope: Scope.Public);
-        Unary protectedNegate = UnaryTestsData.Create(@operator: Unary.Type.Negate, scope: Scope.Protected);
+        Unary protectedNegate = UnaryTestsData.Create(@operator: Unary.Type.Not, scope: Scope.Protected);
 
-        ImmutableArray<Unary> unaries = ImmutableArray.Create(publicDecrement, protectedNegate, publicIncrement);
+        ImmutableArray<Unary> unaries = [publicDecrement, protectedNegate, publicIncrement];
 
         // Act
-        Snippet snippet = unaries.ToSnippet(construct, options);
+        var snippet = unaries.ToSnippet(construct, options);
 
         // Assert
-        string[] expected =
-        {
-            publicIncrement.ToString(construct, options),
-            publicDecrement.ToString(construct, options),
-            protectedNegate.ToString(construct, options),
-        };
-
-        snippet.ToString().ShouldBe(string.Join(Environment.NewLine, expected));
+        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }
