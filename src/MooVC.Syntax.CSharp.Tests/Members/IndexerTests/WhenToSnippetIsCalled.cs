@@ -35,7 +35,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(options);
 
         // Assert
-        string expected = "public string this[int index] => get => value;";
+        string expected = "public string this[int index] { get => value; }";
 
         representation.ShouldBe(expected);
     }

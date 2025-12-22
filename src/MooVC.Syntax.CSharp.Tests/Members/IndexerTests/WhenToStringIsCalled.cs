@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
     public void GivenDefaultBehavioursThenEmptyReturned()
     {
         // Arrange
-        Indexer subject = IndexerTestsData.Create();
+        Indexer subject = Indexer.Undefined;
 
         // Act
         string representation = subject.ToString();

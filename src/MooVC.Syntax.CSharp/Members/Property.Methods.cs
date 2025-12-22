@@ -50,9 +50,14 @@ namespace MooVC.Syntax.CSharp.Members
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
+                if (options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
+                {
+                    return Get;
+                }
+
                 Snippet get = Format("get", options, Get);
 
-                if (Set.Mode.IsReadOnly && Get.IsEmpty)
+                if (Set.Mode.IsReadOnly)
                 {
                     return get;
                 }
