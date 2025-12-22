@@ -50,11 +50,6 @@
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
-                if (IsDefault)
-                {
-                    return Snippet.Empty;
-                }
-
                 Snippet add = Format("get", options, Get);
 
                 if (!Set.IsEmpty)
