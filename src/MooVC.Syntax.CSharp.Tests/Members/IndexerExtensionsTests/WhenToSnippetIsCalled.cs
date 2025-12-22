@@ -17,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = indexers.ToSnippet(Snippet.Options.Default);
+        var snippet = indexers.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -41,13 +41,21 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenTheyAreOrderedByScopeExtensibilityParameterAndResult()
     {
         // Arrange
-        Indexer publicVirtual = IndexerTestsData.Create(parameter: new Parameter { Name = "Beta" }, result: new Result { Type = new Symbol { Name = "int" } });
+        Indexer publicVirtual = IndexerTestsData.Create(
+            parameter: new Parameter { Name = "Beta" },
+            result: new Result { Type = new Symbol { Name = "int" } });
+
+        Indexer publicStatic = IndexerTestsData.Create(
+            parameter: new Parameter { Name = "Alpha" },
+            result: new Result { Type = new Symbol { Name = "string" } });
+
+        Indexer protectedVirtual = IndexerTestsData.Create(
+            parameter: new Parameter { Name = "Gamma" },
+            result: new Result { Type = new Symbol { Name = "int" } },
+            scope: Scope.Protected);
+
         publicVirtual.Extensibility = Extensibility.Virtual;
-
-        Indexer publicStatic = IndexerTestsData.Create(parameter: new Parameter { Name = "Alpha" }, result: new Result { Type = new Symbol { Name = "string" } });
         publicStatic.Extensibility = Extensibility.Static;
-
-        Indexer protectedVirtual = IndexerTestsData.Create(parameter: new Parameter { Name = "Gamma" }, result: new Result { Type = new Symbol { Name = "int" } }, scope: Scope.Protected);
         protectedVirtual.Extensibility = Extensibility.Virtual;
 
         ImmutableArray<Indexer> indexers =
@@ -81,7 +89,7 @@ public sealed class WhenToSnippetIsCalled
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        Snippet snippet = indexers.ToSnippet(options);
+        var snippet = indexers.ToSnippet(options);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

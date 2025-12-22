@@ -22,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = parameters.ToSnippet(Parameter.Options.Camel);
+        var snippet = parameters.ToSnippet(Parameter.Options.Camel);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -53,10 +53,10 @@ public sealed class WhenToSnippetIsCalled
 
         ImmutableArray<Parameter> parameters = [withDefault, @params, later, noDefault];
 
-        const string expected = "Version bravo, Version charlie, params Version delta, Version alpha = 42";
+        const string expected = "Version bravo, Version charlie, Version alpha = 42, params Version[] delta";
 
         // Act
-        Snippet snippet = parameters.ToSnippet(Parameter.Options.Camel);
+        var snippet = parameters.ToSnippet(Parameter.Options.Camel);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

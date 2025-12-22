@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = qualifiers.ToSnippet(Snippet.Options.Default);
+        var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -51,7 +51,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        Snippet snippet = qualifiers.ToSnippet(Snippet.Options.Default);
+        var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

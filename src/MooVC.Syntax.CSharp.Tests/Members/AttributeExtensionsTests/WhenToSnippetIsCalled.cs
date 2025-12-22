@@ -1,7 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeExtensionsTests;
 
-using System;
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Members.AttributeTests;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = attributes.ToSnippet(Snippet.Options.Default);
+        var snippet = attributes.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -50,12 +50,11 @@ public sealed class WhenToSnippetIsCalled
 
         const string expected = """
             [Alpha]
-
             [Beta]
             """;
 
         // Act
-        Snippet snippet = attributes.ToSnippet(Snippet.Options.Default);
+        var snippet = attributes.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

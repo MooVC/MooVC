@@ -17,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = properties.ToSnippet(Snippet.Options.Default);
+        var snippet = properties.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -42,12 +42,11 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Property staticProperty = PropertyTestsData.Create(name: "Beta", scope: Scope.Public, type: typeof(int));
-        staticProperty.Extensibility = Extensibility.Static;
-
         Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scope.Public, type: typeof(void));
-        publicVirtual.Extensibility = Extensibility.Virtual;
-
         Property protectedVirtual = PropertyTestsData.Create(name: "Gamma", scope: Scope.Protected, type: typeof(string));
+
+        staticProperty.Extensibility = Extensibility.Static;
+        publicVirtual.Extensibility = Extensibility.Virtual;
         protectedVirtual.Extensibility = Extensibility.Virtual;
 
         ImmutableArray<Property> properties =
@@ -87,7 +86,7 @@ public sealed class WhenToSnippetIsCalled
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        Snippet snippet = properties.ToSnippet(options);
+        var snippet = properties.ToSnippet(options);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

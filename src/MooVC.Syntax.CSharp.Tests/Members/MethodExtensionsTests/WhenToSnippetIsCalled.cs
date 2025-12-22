@@ -17,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = methods.ToSnippet(Snippet.Options.Default);
+        var snippet = methods.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -41,13 +41,25 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenTheyAreOrderedByStaticScopeExtensibilityAndName()
     {
         // Arrange
-        Method staticMethod = MethodTestsData.Create(name: new Declaration { Name = "Beta" }, scope: Scope.Public, result: new Result { Type = typeof(int) }, body: Snippet.From("return 1;"));
+        Method staticMethod = MethodTestsData.Create(
+            name: new Declaration { Name = "Beta" },
+            scope: Scope.Public,
+            result: new Result { Type = typeof(int) },
+            body: Snippet.From("return 1;"));
+
+        Method publicVirtual = MethodTestsData.Create(
+            name: new Declaration { Name = "Alpha" },
+            scope: Scope.Public,
+            result: new Result { Type = typeof(void) },
+            body: Snippet.From("return;"));
+
+        Method protectedVirtual = MethodTestsData.Create(
+            name: new Declaration { Name = "Gamma" },
+            scope: Scope.Protected,
+            body: Snippet.From("return 3;"));
+
         staticMethod.Extensibility = Extensibility.Static;
-
-        Method publicVirtual = MethodTestsData.Create(name: new Declaration { Name = "Alpha" }, scope: Scope.Public, result: new Result { Type = typeof(void) }, body: Snippet.From("return;"));
         publicVirtual.Extensibility = Extensibility.Virtual;
-
-        Method protectedVirtual = MethodTestsData.Create(name: new Declaration { Name = "Gamma" }, scope: Scope.Protected, body: Snippet.From("return 3;"));
         protectedVirtual.Extensibility = Extensibility.Virtual;
 
         ImmutableArray<Method> methods =
@@ -78,7 +90,7 @@ public sealed class WhenToSnippetIsCalled
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        Snippet snippet = methods.ToSnippet(options);
+        var snippet = methods.ToSnippet(options);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

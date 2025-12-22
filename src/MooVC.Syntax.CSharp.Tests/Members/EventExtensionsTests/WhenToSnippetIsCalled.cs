@@ -17,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = events.ToSnippet(Snippet.Options.Default);
+        var snippet = events.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -42,8 +42,13 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Event @public = EventTestsData.Create(name: "Alpha", behaviours: new Event.Methods { Add = Snippet.From("a+=1;") });
-        Event @protected = EventTestsData.Create(name: "Beta", scope: Scope.Protected, behaviours: new Event.Methods { Remove = Snippet.From("b-=1;") });
-        Event @virtual = EventTestsData.Create(name: "Gamma", behaviours: new Event.Methods { Invoke = Snippet.From("g();") });
+
+        Event @protected = EventTestsData.Create(
+            name: "Beta",
+            scope: Scope.Protected,
+            behaviours: new Event.Methods { Remove = Snippet.From("b-=1;") });
+
+        Event @virtual = EventTestsData.Create(name: "Gamma", behaviours: new Event.Methods { Remove = Snippet.From("g();") });
 
         @virtual.Extensibility = Extensibility.Virtual;
 
@@ -55,19 +60,31 @@ public sealed class WhenToSnippetIsCalled
         ];
 
         const string expected = """
-            public virtual event Handler Gamma
-            {
-                g();
-            }
-
             public event Handler Alpha
             {
-                a+=1;
+                add
+                {
+                    a+=1;
+                }
+                remove;
+            }
+
+            public virtual event Handler Gamma
+            {
+                add;
+                remove
+                {
+                    g();
+                }
             }
 
             protected event Handler Beta
             {
-                b-=1;
+                add;
+                remove
+                {
+                    b-=1;
+                }
             }
             """;
 
@@ -75,7 +92,7 @@ public sealed class WhenToSnippetIsCalled
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        Snippet snippet = events.ToSnippet(options);
+        var snippet = events.ToSnippet(options);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

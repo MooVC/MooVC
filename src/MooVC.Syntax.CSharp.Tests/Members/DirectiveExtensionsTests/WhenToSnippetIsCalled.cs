@@ -20,7 +20,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = directives.ToSnippet(Snippet.Options.Default);
+        var snippet = directives.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -52,14 +52,14 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Directive> directives = [@static, system, @using, alias];
 
         const string expected = """
-            using Collections = MooVC.Syntax;
-            using MooVC.Syntax;
             using System;
+            using MooVC.Syntax;
+            using Collections = MooVC.Syntax;
             using static System.Console;
             """;
 
         // Act
-        Snippet snippet = directives.ToSnippet(Snippet.Options.Default);
+        var snippet = directives.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

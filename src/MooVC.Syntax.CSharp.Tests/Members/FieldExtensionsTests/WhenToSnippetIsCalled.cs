@@ -20,7 +20,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        Snippet snippet = fields.ToSnippet(Snippet.Options.Default);
+        var snippet = fields.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -57,14 +57,12 @@ public sealed class WhenToSnippetIsCalled
 
         const string expected = """
             public static readonly string Gamma;
-
             private static string Beta;
-
             public readonly string Alpha;
             """;
 
         // Act
-        Snippet snippet = fields.ToSnippet(Snippet.Options.Default);
+        var snippet = fields.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

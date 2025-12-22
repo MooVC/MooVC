@@ -19,7 +19,19 @@
                 .Select(attribute => Snippet.From(options, attribute))
                 .ToArray();
 
-            return Snippet.Blank.Combine(content);
+            if (content.Length == 1)
+            {
+                return content[0];
+            }
+
+            Snippet stacked = content[0];
+
+            for (int index = 1; index < content.Length; index++)
+            {
+                stacked = content[index].Stack(options, stacked);
+            }
+
+            return stacked;
         }
     }
 }
