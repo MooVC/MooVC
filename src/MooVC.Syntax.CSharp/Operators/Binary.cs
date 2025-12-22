@@ -48,6 +48,14 @@
             return ToSnippet(construct.Name, options);
         }
 
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Body.IsEmpty)
+            {
+                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Binary)), new[] { nameof(Body) });
+            }
+        }
+
         private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
         {
             if (IsUndefined || declaration.IsUnspecified)
@@ -61,14 +69,6 @@
             var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Body.IsEmpty)
-            {
-                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Binary)), new[] { nameof(Body) });
-            }
         }
     }
 }
