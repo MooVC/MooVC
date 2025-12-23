@@ -15,7 +15,6 @@
 
             Snippet[] content = events
                 .OrderByDescending(@event => @event.Scope)
-                .ThenByDescending(@event => @event.Extensibility)
                 .ThenBy(@event => @event.Name)
                 .Select(@event => @event.ToSnippet(options))
                 .ToArray();

@@ -44,13 +44,13 @@ public sealed class WhenToSnippetIsCalled
         Method staticMethod = MethodTestsData.Create(
             name: new Declaration { Name = "Beta" },
             scope: Scope.Public,
-            result: new Result { Type = typeof(int) },
+            result: new Result { Type = typeof(int) }.AsTask(),
             body: Snippet.From("return 1;"));
 
         Method publicVirtual = MethodTestsData.Create(
             name: new Declaration { Name = "Alpha" },
             scope: Scope.Public,
-            result: new Result { Type = typeof(void) },
+            result: Result.Void,
             body: Snippet.From("return;"));
 
         Method protectedVirtual = MethodTestsData.Create(
@@ -70,7 +70,7 @@ public sealed class WhenToSnippetIsCalled
         ];
 
         const string expected = """
-            public static int Beta(int value)
+            public static async Task<int> Beta(int value)
             {
                 return 1;
             }

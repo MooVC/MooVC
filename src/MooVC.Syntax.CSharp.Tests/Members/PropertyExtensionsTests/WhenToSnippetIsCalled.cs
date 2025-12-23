@@ -42,7 +42,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Property staticProperty = PropertyTestsData.Create(name: "Beta", scope: Scope.Public, type: typeof(int));
-        Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scope.Public, type: typeof(void));
+        Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scope.Public, type: typeof(Version));
         Property protectedVirtual = PropertyTestsData.Create(name: "Gamma", scope: Scope.Protected, type: typeof(string));
 
         staticProperty.Extensibility = Extensibility.Static;
@@ -63,14 +63,16 @@ public sealed class WhenToSnippetIsCalled
                 {
                     value;
                 }
+                set;
             }
 
-            public virtual void Alpha
+            public virtual Version Alpha
             {
                 get
                 {
                     value;
                 }
+                set;
             }
 
             protected virtual string Gamma
@@ -79,6 +81,7 @@ public sealed class WhenToSnippetIsCalled
                 {
                     value;
                 }
+                set;
             }
             """;
 

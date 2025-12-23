@@ -42,15 +42,15 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Indexer publicVirtual = IndexerTestsData.Create(
-            parameter: new Parameter { Name = "Beta" },
+            parameter: new Parameter { Name = "Beta", Type = typeof(Version) },
             result: new Result { Type = new Symbol { Name = "int" } });
 
         Indexer publicStatic = IndexerTestsData.Create(
-            parameter: new Parameter { Name = "Alpha" },
+            parameter: new Parameter { Name = "Alpha", Type = typeof(Version) },
             result: new Result { Type = new Symbol { Name = "string" } });
 
         Indexer protectedVirtual = IndexerTestsData.Create(
-            parameter: new Parameter { Name = "Gamma" },
+            parameter: new Parameter { Name = "Gamma", Type = typeof(Version) },
             result: new Result { Type = new Symbol { Name = "int" } },
             scope: Scope.Protected);
 
@@ -69,19 +69,16 @@ public sealed class WhenToSnippetIsCalled
             public static string this[Version alpha]
             {
                 get;
-                set;
             }
 
             public virtual int this[Version beta]
             {
                 get;
-                set;
             }
 
             protected virtual int this[Version gamma]
             {
                 get;
-                set;
             }
             """;
 

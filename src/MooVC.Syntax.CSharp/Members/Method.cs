@@ -113,7 +113,7 @@ namespace MooVC.Syntax.CSharp.Members
             string extensibility = Extensibility;
             string name = Name;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
-            string result = Result;
+            string result = Result.IsVoid ? "void" : Result;
             string scope = Scope;
             var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");

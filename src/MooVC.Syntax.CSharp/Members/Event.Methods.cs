@@ -78,11 +78,6 @@
                     return Snippet.From($"{keyword};");
                 }
 
-                if (snippet.IsSingleLine)
-                {
-                    return Snippet.From($"{keyword} => {snippet};");
-                }
-
                 return snippet.Block(options, opening: Snippet.From(keyword));
             }
         }

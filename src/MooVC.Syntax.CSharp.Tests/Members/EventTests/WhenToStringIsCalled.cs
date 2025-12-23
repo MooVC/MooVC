@@ -41,8 +41,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var methods = new Event.Methods
         {
-            Add = Snippet.From("value"),
-            Remove = Snippet.From("Console.WriteLine(value)"),
+            Add = Snippet.From("value;"),
+            Remove = Snippet.From("Console.WriteLine(value);"),
         };
 
         Event subject = EventTestsData.Create(behaviours: methods);

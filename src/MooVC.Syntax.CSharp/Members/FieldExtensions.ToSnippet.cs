@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Linq;
 
     public static partial class FieldExtensions
     {
@@ -14,15 +13,14 @@
                 return Snippet.Empty;
             }
 
-            Snippet[] content = fields
+            return fields
                 .OrderByDescending(field => field.IsStatic)
                 .ThenByDescending(field => field.IsReadOnly)
                 .ThenByDescending(field => field.Scope)
                 .ThenBy(field => field.Name)
                 .Select(field => field.ToSnippet(options))
-                .ToArray();
-
-            return Snippet.Blank.Combine(options, content);
+                .ToImmutableArray()
+                .Stack(options);
         }
     }
 }

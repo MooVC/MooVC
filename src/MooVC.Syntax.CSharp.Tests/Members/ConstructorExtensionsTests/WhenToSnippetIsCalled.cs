@@ -63,7 +63,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
-        Construct construct = OperatorsTestsData.CreateConstruct();
+        Construct construct = OperatorsTestsData.CreateConstruct(name: "Test");
 
         Constructor publicMinimal = Create(parameters: []);
         Constructor publicWithParameter = Create(parameters: [ParameterTestsData.Create()]);
@@ -71,6 +71,7 @@ public sealed class WhenToSnippetIsCalled
         Constructor protectedWithMultipleParameters = Create(
             parameters: [
                 ParameterTestsData.Create(name: "Second"),
+                ParameterTestsData.Create(name: "Third", modifier: Parameter.Mode.Params, type: typeof(Version[])),
                 ParameterTestsData.Create(name: "First"),
             ],
             scope: Scope.Protected);
@@ -83,17 +84,17 @@ public sealed class WhenToSnippetIsCalled
         ];
 
         const string expected = """
-            public First()
+            public Test()
             {
                 return default;
             }
 
-            public Second(Version value)
+            public Test(Version value)
             {
                 return default;
             }
 
-            protected Third(Version second, Version first)
+            protected Test(Version first, Version second, params Version[] third)
             {
                 return default;
             }

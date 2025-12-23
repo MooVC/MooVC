@@ -31,7 +31,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("using static System.Console");
+        result.ShouldBe("using static System.Console;");
     }
 
     [Fact]
@@ -48,6 +48,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("using Alias =  MooVC.Syntax");
+        result.ShouldBe("using Alias = MooVC.Syntax;");
     }
 }

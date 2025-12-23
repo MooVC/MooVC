@@ -15,7 +15,7 @@
                 return Snippet.Empty;
             }
 
-            var content = conversions
+            Snippet[] content = conversions
                 .OrderByDescending(conversion => conversion.Scope)
                 .ThenBy(conversion => conversion.Subject)
                 .ThenBy(conversion => conversion.Direction)
