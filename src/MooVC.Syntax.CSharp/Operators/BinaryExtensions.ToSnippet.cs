@@ -14,7 +14,7 @@
                 return Snippet.Empty;
             }
 
-            var content = binaries
+            Snippet[] content = binaries
                 .OrderByDescending(binary => binary.Scope)
                 .ThenBy(binary => binary.Operator)
                 .Select(binary => binary.ToSnippet(construct, options))

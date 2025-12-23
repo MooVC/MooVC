@@ -34,7 +34,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = Snippet.From("value;"),
         };
 
         // Act

@@ -14,12 +14,11 @@
                 return Snippet.Empty;
             }
 
-            Snippet[] content = attributes
+            return attributes
                 .OrderBy(attribute => attribute.Name)
                 .Select(attribute => Snippet.From(options, attribute))
-                .ToArray();
-
-            return Snippet.Blank.Combine(content);
+                .ToImmutableArray()
+                .Stack(options);
         }
     }
 }

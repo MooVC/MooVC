@@ -56,8 +56,9 @@
 
             string prefix = GetPrefix();
             string qualifier = Qualifier.ToString();
+            string combined = Separator.Combine("using", prefix, qualifier);
 
-            return Separator.Combine("using", prefix, qualifier);
+            return string.Concat(combined, ";");
         }
 
         public Snippet ToSnippet(Snippet.Options options)
@@ -103,7 +104,7 @@
 
             if (!Alias.IsUnnamed)
             {
-                return $"{Alias.ToSnippet(Identifier.Options.Pascal)} = ";
+                return $"{Alias.ToSnippet(Identifier.Options.Pascal)} =";
             }
 
             return string.Empty;

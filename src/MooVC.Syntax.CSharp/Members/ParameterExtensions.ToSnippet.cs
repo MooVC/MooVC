@@ -16,8 +16,8 @@
             }
 
             var ordered = parameters
-                .OrderByDescending(parameter => parameter.Default.IsEmpty)
-                .ThenBy(parameter => parameter.Modifier.IsParams)
+                .OrderBy(parameter => parameter.Modifier.IsParams)
+                .ThenByDescending(parameter => parameter.Default.IsEmpty)
                 .ThenBy(parameter => parameter.Name)
                 .ToImmutableArray();
 

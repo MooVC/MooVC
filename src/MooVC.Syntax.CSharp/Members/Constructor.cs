@@ -76,10 +76,11 @@ namespace MooVC.Syntax.CSharp.Members
 
         private Snippet GetSignature(Identifier name, Snippet.Options options)
         {
+            string construct = name.ToSnippet(Identifier.Options.Pascal);
             string extensibility = Extensibility;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string scope = Scope;
-            string signature = Separator.Combine(scope, extensibility, $"{name}({parameters})");
+            string signature = Separator.Combine(scope, extensibility, $"{construct}({parameters})");
 
             return Snippet.From(options, signature);
         }

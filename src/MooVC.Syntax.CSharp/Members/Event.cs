@@ -67,8 +67,7 @@
             var name = Name.ToSnippet(Identifier.Options.Pascal);
             string scope = Scope;
             string signature = Separator.Combine(scope, extensibility, "event", handler, name);
-
-            Snippet methods = Behaviours;
+            var methods = Behaviours.ToSnippet(options);
 
             if (methods.IsEmpty)
             {

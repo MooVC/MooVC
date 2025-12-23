@@ -14,7 +14,7 @@
                 return Snippet.Empty;
             }
 
-            var content = comparisons
+            Snippet[] content = comparisons
                 .OrderByDescending(comparison => comparison.Scope)
                 .ThenBy(comparison => comparison.Operator)
                 .Select(comparison => comparison.ToSnippet(construct, options))
