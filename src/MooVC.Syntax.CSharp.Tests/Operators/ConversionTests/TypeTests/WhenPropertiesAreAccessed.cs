@@ -2,17 +2,13 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static IEnumerable<object[]> Expectations()
+    public static TheoryData<ConversionTypeExpectation> Expectations()
     {
-        yield return new object[]
-        {
-            new ConversionTypeExpectation(Conversion.Type.Explicit, "explicit", true, false),
-        };
-
-        yield return new object[]
-        {
-            new ConversionTypeExpectation(Conversion.Type.Implicit, "implicit", false, true),
-        };
+        return
+        [
+            new(Conversion.Type.Explicit, "explicit", true, false),
+            new(Conversion.Type.Implicit, "implicit", false, true),
+        ];
     }
 
     [Theory]

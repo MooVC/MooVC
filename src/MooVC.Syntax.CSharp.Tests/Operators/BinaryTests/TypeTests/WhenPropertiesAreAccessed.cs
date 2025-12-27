@@ -2,205 +2,22 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static IEnumerable<object[]> Expectations()
+    public static TheoryData<BinaryTypeExpectation> Expectations()
     {
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Add,
-                "+",
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.And,
-                "&",
-                false,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Divide,
-                "/",
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Left,
-                "<<",
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Modulus,
-                "%",
-                false,
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Multiply,
-                "*",
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Or,
-                "|",
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Right,
-                ">>",
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Subtract,
-                "-",
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.Unspecified,
-                string.Empty,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new BinaryTypeExpectation(
-                Binary.Type.XOR,
-                "^",
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true),
-        };
+        return
+        [
+            new(Binary.Type.Add, "+", true, false, false, false, false, false, false, false, false, false, false),
+            new(Binary.Type.And, "&", false, true, false, false, false, false, false, false, false, false, false),
+            new(Binary.Type.Divide, "/", false, false, true, false, false, false, false, false, false, false, false),
+            new(Binary.Type.Left, "<<", false, false, false, true, false, false, false, false, false, false, false),
+            new(Binary.Type.Modulus, "%", false, false, false, false, true, false, false, false, false, false, false),
+            new(Binary.Type.Multiply, "*", false, false, false, false, false, true, false, false, false, false, false),
+            new(Binary.Type.Or, "|", false, false, false, false, false, false, true, false, false, false, false),
+            new(Binary.Type.Right, ">>", false, false, false, false, false, false, false, true, false, false, false),
+            new(Binary.Type.Subtract, "-", false, false, false, false, false, false, false, false, true, false, false),
+            new(Binary.Type.Unspecified, string.Empty, false, false, false, false, false, false, false, false, false, true, false),
+            new(Binary.Type.XOR, "^", false, false, false, false, false, false, false, false, false, false, true),
+        ];
     }
 
     [Theory]
