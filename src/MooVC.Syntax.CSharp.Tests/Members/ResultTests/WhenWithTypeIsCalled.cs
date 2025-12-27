@@ -7,7 +7,7 @@ public sealed class WhenWithTypeIsCalled
     {
         // Arrange
         Result original = ResultTestsData.Create();
-        Symbol type = new Symbol { Name = new Identifier("Updated") };
+        var type = new Symbol { Name = new Identifier("Updated") };
 
         // Act
         Result result = original.WithType(type);

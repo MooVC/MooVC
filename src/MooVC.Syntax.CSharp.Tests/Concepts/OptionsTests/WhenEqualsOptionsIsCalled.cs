@@ -8,7 +8,7 @@ public sealed class WhenEqualsOptionsIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Options subject = new Options();
+        var subject = new Options();
         Options? other = default;
 
         // Act
@@ -22,8 +22,8 @@ public sealed class WhenEqualsOptionsIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Options subject = new Options();
-        Options other = new Options();
+        var subject = new Options();
+        var other = new Options();
 
         // Act
         bool result = subject.Equals(other);
@@ -36,7 +36,7 @@ public sealed class WhenEqualsOptionsIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Options subject = new Options();
+        var subject = new Options();
         Options other = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act

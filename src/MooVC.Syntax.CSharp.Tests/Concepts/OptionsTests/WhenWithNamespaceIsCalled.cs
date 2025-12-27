@@ -8,7 +8,7 @@ public sealed class WhenWithNamespaceIsCalled
     public void GivenNamespaceThenReturnsUpdatedInstance()
     {
         // Arrange
-        Options original = new Options();
+        var original = new Options();
 
         // Act
         Options result = original.WithNamespace(Qualifier.Options.Block);

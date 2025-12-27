@@ -50,7 +50,9 @@ public sealed class WhenToSnippetIsCalled
 
         const string expected = """
             Alpha
+
             Beta
+
             Gamma
             """;
 

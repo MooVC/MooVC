@@ -8,8 +8,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualOptionsThenHashCodesMatch()
     {
         // Arrange
-        Options left = new Options();
-        Options right = new Options();
+        var left = new Options();
+        var right = new Options();
 
         // Act
         int leftHash = left.GetHashCode();
@@ -23,7 +23,7 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentOptionsThenHashCodesDiffer()
     {
         // Arrange
-        Options left = new Options();
+        var left = new Options();
         Options right = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act

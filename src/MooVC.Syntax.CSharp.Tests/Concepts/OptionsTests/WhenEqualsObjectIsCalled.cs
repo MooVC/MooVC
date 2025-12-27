@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonOptionsObjectThenReturnsFalse()
     {
         // Arrange
-        Options subject = new Options();
+        var subject = new Options();
 
         // Act
         bool result = subject.Equals(new object());
@@ -19,7 +19,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenOptionsObjectThenReturnsTrue()
     {
         // Arrange
-        Options subject = new Options();
+        var subject = new Options();
         object other = new Options();
 
         // Act

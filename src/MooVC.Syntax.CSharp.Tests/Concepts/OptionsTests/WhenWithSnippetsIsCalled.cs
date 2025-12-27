@@ -6,7 +6,7 @@ public sealed class WhenWithSnippetsIsCalled
     public void GivenSnippetsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Options original = new Options();
+        var original = new Options();
         Snippet.Options replacement = new Snippet.Options().WithWhitespace("	");
 
         // Act

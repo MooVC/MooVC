@@ -8,8 +8,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenEquivalentOptionsThenReturnsTrue()
     {
         // Arrange
-        Options left = new Options();
-        Options right = new Options();
+        var left = new Options();
+        var right = new Options();
 
         // Act
         bool result = left == right;
@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenDifferentOptionsThenReturnsFalse()
     {
         // Arrange
-        Options left = new Options();
+        var left = new Options();
         Options right = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act
