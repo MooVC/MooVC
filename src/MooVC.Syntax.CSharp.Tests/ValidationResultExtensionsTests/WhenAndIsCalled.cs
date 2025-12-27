@@ -28,7 +28,7 @@ public sealed class WhenAndIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.ShouldBe([initial, additionalValidatable.Results.Single()]);
     }
 
@@ -54,7 +54,7 @@ public sealed class WhenAndIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
@@ -78,7 +78,7 @@ public sealed class WhenAndIsCalled
             additionalValidatable);
 
         // Assert
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.Length.ShouldBe(2);
         results.ShouldContain(initial);
         results.ShouldContain(result => result.MemberNames.Contains(nameof(additionalValidatable)));
@@ -105,7 +105,7 @@ public sealed class WhenAndIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.Length.ShouldBe(2);
         results.ShouldContain(initial);
         results.ShouldContain(result => result.MemberNames.Contains(nameof(firstAdditional)));

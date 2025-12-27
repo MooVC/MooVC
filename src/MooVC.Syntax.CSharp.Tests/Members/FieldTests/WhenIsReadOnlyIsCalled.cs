@@ -1,25 +1,25 @@
 namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
-public sealed class WhenWithIsStaticIsCalled
+public sealed class WhenIsReadOnlyIsCalled
 {
     [Fact]
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange
-        Field original = FieldTestsData.Create(isStatic: false);
+        Field original = FieldTestsData.Create(isReadOnly: true);
 
         // Act
-        Field result = original.WithIsStatic(true);
+        Field result = original.IsReadOnly(false);
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Default.ShouldBe(original.Default);
-        result.IsReadOnly.ShouldBe(original.IsReadOnly);
-        result.IsStatic.ShouldBeTrue();
+        result.IsReadOnly.ShouldBeFalse();
+        result.IsStatic.ShouldBe(original.IsStatic);
         result.Name.ShouldBe(original.Name);
         result.Scope.ShouldBe(original.Scope);
         result.Type.ShouldBe(original.Type);
 
-        original.IsStatic.ShouldBeFalse();
+        original.IsReadOnly.ShouldBeTrue();
     }
 }

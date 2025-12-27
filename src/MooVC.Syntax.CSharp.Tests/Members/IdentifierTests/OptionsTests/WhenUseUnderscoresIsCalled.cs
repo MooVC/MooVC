@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.IdentifierTests.OptionsTests;
 
-public sealed class WhenWithUseUnderscoresIsCalled
+public sealed class WhenUseUnderscoresIsCalled
 {
     [Fact]
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
@@ -9,7 +9,7 @@ public sealed class WhenWithUseUnderscoresIsCalled
         var original = new Identifier.Options();
 
         // Act
-        Identifier.Options result = original.WithUseUnderscores(true);
+        Identifier.Options result = original.UseUnderscores(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);
