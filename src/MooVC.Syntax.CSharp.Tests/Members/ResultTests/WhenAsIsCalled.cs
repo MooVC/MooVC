@@ -8,7 +8,7 @@ public sealed class WhenAsIsCalled
     public void GivenNullWrapperThenThrows()
     {
         // Arrange
-        Result subject = new Result();
+        var subject = new Result();
         Type? wrapper = default;
 
         // Act

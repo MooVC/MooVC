@@ -7,7 +7,7 @@ public sealed class WhenCompareToIsCalled
     {
         // Arrange
         Qualifier left = Qualifier.Unqualified;
-        Qualifier right = new Qualifier(["MooVC", "Syntax"]);
+        var right = new Qualifier(["MooVC", "Syntax"]);
 
         // Act
         int result = left.CompareTo(right);
@@ -20,8 +20,8 @@ public sealed class WhenCompareToIsCalled
     public void GivenSystemQualifierThenSystemComesFirst()
     {
         // Arrange
-        Qualifier left = new Qualifier(["System", "Text"]);
-        Qualifier right = new Qualifier(["MooVC", "Syntax"]);
+        var left = new Qualifier(["System", "Text"]);
+        var right = new Qualifier(["MooVC", "Syntax"]);
 
         // Act
         bool result = left < right;

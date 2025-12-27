@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -98,9 +99,9 @@ public sealed class WhenToSnippetIsCalled
             New = New.Required,
         };
 
-        var generic = new MooVC.Syntax.CSharp.Generics.Parameter
+        var generic = new Parameter
         {
-            Name = new Identifier("T"),
+            Name = "T",
             Constraints = [constraints],
         };
 
