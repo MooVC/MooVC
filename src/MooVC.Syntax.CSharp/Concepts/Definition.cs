@@ -47,8 +47,6 @@
                 return string.Empty;
             }
 
-            Snippet @namespace = Namespace;
-            var usings = Usings.ToSnippet(options.Snippets);
             Snippet construct = Construct.ToSnippet(options.Snippets);
 
             if (construct.IsEmpty)
@@ -56,27 +54,26 @@
                 return construct;
             }
 
-            Snippet definition = Snippet.Empty;
+            Snippet @namespace = $"namespace {Namespace}";
+            var usings = Usings.ToSnippet(options.Snippets);
 
             if (!usings.IsEmpty)
             {
-                definition = usings
-                    .Append(Environment.NewLine)
-                    .Append(options.Snippets);
+                construct = construct
+                    .Prepend(options.Snippets, Environment.NewLine)
+                    .Prepend(options.Snippets, usings);
             }
 
             if (options.Namespace.IsBlock)
             {
-                definition = definition.Block(options.Snippets, @namespace);
-            }
-            else
-            {
-                definition = definition
-                    .Prepend(Environment.NewLine)
-                    .Prepend(@namespace);
+                return construct.Block(options.Snippets, @namespace);
             }
 
-            return definition.Prepend(@namespace);
+            @namespace = @namespace
+                .Append(';')
+                .Append(Environment.NewLine);
+
+            return construct.Stack(options.Snippets, @namespace);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

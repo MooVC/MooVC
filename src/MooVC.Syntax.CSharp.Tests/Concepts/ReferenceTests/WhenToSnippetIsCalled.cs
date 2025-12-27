@@ -1,6 +1,5 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
-using System;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
@@ -9,26 +8,13 @@ using MemberParameter = MooVC.Syntax.CSharp.Members.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
-    private const string ConstraintInterfaceName = "IComponent";
+    private const string ConstraintInterfaceName = "IWidget";
     private const string GenericName = "T";
     private const string ParameterName = "value";
-    private const string StructName = "Payload";
+    private const string TypeName = "Widget";
 
     [Fact]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Struct subject = StructTestsData.Create();
-
-        // Act
-        Func<string> action = () => subject.ToSnippet(options: default);
-
-        // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
-    }
-
-    [Fact]
-    public void GivenReadOnlyStructWithParametersThenIncludesSignatureDetails()
+    public void GivenParametersAndConstraintsThenReturnsSignatureWithClauses()
     {
         // Arrange
         var constraint = new Constraint
@@ -38,6 +24,7 @@ public sealed class WhenToSnippetIsCalled
                 new Declaration { Name = new Identifier(ConstraintInterfaceName) },
             ],
         };
+
         var genericParameter = new GenericParameter
         {
             Name = GenericName,
@@ -46,12 +33,13 @@ public sealed class WhenToSnippetIsCalled
                 constraint,
             ],
         };
-        var subject = new Struct
+
+        var subject = new TestReference
         {
-            Behavior = Struct.Kind.ReadOnly,
+            IsUndefinedValue = false,
             Name = new Declaration
             {
-                Name = new Identifier(StructName),
+                Name = new Identifier(TypeName),
                 Parameters =
                 [
                     genericParameter,
@@ -67,8 +55,9 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldContain($"{Struct.Kind.ReadOnly} struct {StructName}");
+        result.ShouldContain(TypeName);
         result.ShouldContain(ParameterName);
         result.ShouldContain("where");
+        result.ShouldContain("widget");
     }
 }
