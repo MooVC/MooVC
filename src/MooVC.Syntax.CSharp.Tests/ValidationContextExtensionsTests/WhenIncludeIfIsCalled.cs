@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenIncludeIfIsCalled
 {
+    private const string InitialMessage = "Initial";
     private const string Message = "Validated";
 
     [Fact]
@@ -214,7 +215,7 @@ public sealed class WhenIncludeIfIsCalled
         const string memberName = "member";
         var validatable = new TrackingValidatable(new ValidationResult(Message));
         var context = new ValidationContext(validatable);
-        var initial = new ValidationResult("Initial");
+        var initial = new ValidationResult(InitialMessage);
         IEnumerable<ValidationResult> results = [initial];
         bool predicateInvoked = false;
 
@@ -227,6 +228,68 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
+        predicateInvoked.ShouldBeFalse();
+        validatable.Calls.ShouldBe(0);
+        actual.ValidationContext.ShouldBeSameAs(context);
+        actual.Results.ShouldBe(results);
+    }
+
+    [Fact]
+    public void GivenPredicateAndMultipleValidatablesWhenConditionTrueThenPredicateResultsAreIncluded()
+    {
+        // Arrange
+        const string memberName = "member";
+        var first = new TrackingValidatable();
+        var second = new TrackingValidatable();
+        var context = new ValidationContext(first);
+        var initial = new ValidationResult(InitialMessage);
+        IEnumerable<ValidationResult> results = [initial];
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            true,
+            memberName,
+            validatable => validatable == first,
+            results,
+            [first, second]);
+
+        // Assert
+        actual.ValidationContext.ShouldBeSameAs(context);
+
+        ValidationResult[] combined = actual.Results.ToArray();
+        combined.Length.ShouldBe(2);
+        combined.ShouldContain(initial);
+        combined.ShouldContain(result => result.MemberNames.Contains(memberName));
+        first.Calls.ShouldBe(1);
+        second.Calls.ShouldBe(1);
+    }
+
+    [Fact]
+    public void GivenFunctionConditionWithPredicateWhenFalseThenValidationIsSkipped()
+    {
+        // Arrange
+        const string memberName = "member";
+        var validatable = new TrackingValidatable(new ValidationResult(Message));
+        var context = new ValidationContext(validatable);
+        var initial = new ValidationResult(InitialMessage);
+        IEnumerable<ValidationResult> results = [initial];
+        bool predicateInvoked = false;
+        bool conditionInvoked = false;
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.IncludeIf(
+            () =>
+            {
+                conditionInvoked = true;
+                return false;
+            },
+            memberName,
+            _ => predicateInvoked = true,
+            results,
+            validatable);
+
+        // Assert
+        conditionInvoked.ShouldBeTrue();
         predicateInvoked.ShouldBeFalse();
         validatable.Calls.ShouldBe(0);
         actual.ValidationContext.ShouldBeSameAs(context);
