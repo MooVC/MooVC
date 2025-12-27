@@ -20,7 +20,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenWrongTypeThenReturnsFalse()
     {
         // Arrange
-        object subject = new object();
+        object subject = new();
         Operators target = OperatorsSubjectData.Create();
 
         // Act

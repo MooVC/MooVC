@@ -22,7 +22,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
-        object other = new object();
+        object other = new();
         Struct subject = StructTestsData.Create();
 
         // Act

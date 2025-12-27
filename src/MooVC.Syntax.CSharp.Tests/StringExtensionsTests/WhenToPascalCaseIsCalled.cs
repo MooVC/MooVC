@@ -171,7 +171,7 @@ public sealed class WhenToPascalCaseIsCalled
     public void GivenVeryLongValueThenOnlyFirstCharacterIsUppercased()
     {
         // Arrange
-        string value = new string('a', 10_000);
+        string value = new('a', 10_000);
 
         // Act
         string result = value.ToPascalCase();

@@ -52,10 +52,10 @@ public sealed class WhenToSnippetIsCalled
     public void GivenBodyThenBlockIsRendered()
     {
         // Arrange
-        var parameters = new[]
-        {
+        Parameter[] parameters =
+        [
             ParameterTestsData.Create(),
-        };
+        ];
 
         Constructor subject = ConstructorTestsData.Create(
             body: Snippet.From("Initialize();"),

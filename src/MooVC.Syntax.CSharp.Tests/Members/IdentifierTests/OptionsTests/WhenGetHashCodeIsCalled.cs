@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualOptionsThenHashCodesAreEqual()
     {
         // Arrange
-        Identifier.Options first = new Identifier.Options();
-        Identifier.Options second = new Identifier.Options();
+        var first = new Identifier.Options();
+        var second = new Identifier.Options();
 
         // Act
         int firstHash = first.GetHashCode();
@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange
-        Identifier.Options first = new Identifier.Options();
-        Identifier.Options second = new Identifier.Options { UseUnderscores = true };
+        var first = new Identifier.Options();
+        var second = new Identifier.Options { UseUnderscores = true };
 
         // Act
         int firstHash = first.GetHashCode();

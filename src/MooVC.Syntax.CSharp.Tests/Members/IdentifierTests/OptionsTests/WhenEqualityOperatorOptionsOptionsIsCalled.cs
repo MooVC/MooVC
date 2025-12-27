@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     {
         // Arrange
         Identifier.Options? left = default;
-        Identifier.Options right = new Identifier.Options();
+        var right = new Identifier.Options();
 
         // Act
         bool result = left == right;
@@ -34,8 +34,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Identifier.Options left = new Identifier.Options();
-        Identifier.Options right = new Identifier.Options();
+        var left = new Identifier.Options();
+        var right = new Identifier.Options();
 
         // Act
         bool result = left == right;
@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Identifier.Options left = new Identifier.Options();
-        Identifier.Options right = new Identifier.Options { UseUnderscores = true };
+        var left = new Identifier.Options();
+        var right = new Identifier.Options { UseUnderscores = true };
 
         // Act
         bool result = left == right;

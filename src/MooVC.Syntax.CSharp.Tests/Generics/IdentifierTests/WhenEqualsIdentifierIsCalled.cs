@@ -13,7 +13,7 @@ public sealed class WhenEqualsIdentifierIsCalled
         Identifier? right = default;
 
         // Act
-        bool result = left?.Equals(right) ?? right is null;
+        bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
         result.ShouldBeTrue();

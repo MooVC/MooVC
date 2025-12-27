@@ -26,7 +26,7 @@ public sealed class WhenValidateIsCalled
     public void GivenMultilineDefaultThenValidationErrorReturned()
     {
         // Arrange
-        Snippet multiLine = Snippet.From("first", "second");
+        var multiLine = Snippet.From("first", "second");
         Field subject = FieldTestsData.Create(@default: multiLine, name: "Value", type: SymbolTestsData.Create("Result"));
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
