@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
-using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 

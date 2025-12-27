@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.SnippetTests;
 
-using System;
-
 public sealed class WhenToStringIsCalled
 {
     private static readonly string[] lines = ["if (condition)", "return true;"];

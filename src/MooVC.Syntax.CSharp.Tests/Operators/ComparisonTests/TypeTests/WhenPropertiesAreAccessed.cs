@@ -2,60 +2,18 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static IEnumerable<object[]> Expectations()
+    public static TheoryData<ComparisonTypeExpectation> Expectations()
     {
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(Comparison.Type.Equality, "==", true, false, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(Comparison.Type.GreaterThan, ">", false, true, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(Comparison.Type.GreaterThanOrEqual, ">=", false, false, true, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(Comparison.Type.Inequality, "!=", false, false, false, true, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(Comparison.Type.LessThan, "<", false, false, false, false, true, false, false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                Comparison.Type.LessThanOrEqual,
-                "<=",
-                false,
-                false,
-                false,
-                false,
-                false,
-                true,
-                false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                Comparison.Type.Unspecified,
-                string.Empty,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                true),
-        };
+        return
+        [
+            new(Comparison.Type.Equality, "==", true, false, false, false, false, false, false),
+            new(Comparison.Type.GreaterThan, ">", false, true, false, false, false, false, false),
+            new(Comparison.Type.GreaterThanOrEqual, ">=", false, false, true, false, false, false, false),
+            new(Comparison.Type.Inequality, "!=", false, false, false, true, false, false, false),
+            new(Comparison.Type.LessThan, "<", false, false, false, false, true, false, false),
+            new(Comparison.Type.LessThanOrEqual, "<=", false, false, false, false, false, true, false),
+            new(Comparison.Type.Unspecified, string.Empty, false, false, false, false, false, false, true),
+        ];
     }
 
     [Theory]

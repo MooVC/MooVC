@@ -2,52 +2,20 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static IEnumerable<object[]> Expectations()
+    public static TheoryData<UnaryTypeExpectation> Expectations()
     {
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Complement, "~", true, false, false, false, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Decrement, "--", false, true, false, false, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.False, "false", false, false, true, false, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Increment, "++", false, false, false, true, false, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Minus, "-", false, false, false, false, true, false, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Not, "!", false, false, false, false, false, true, false, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Plus, "+", false, false, false, false, false, false, true, false, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.True, "true", false, false, false, false, false, false, false, true, false),
-        };
-
-        yield return new object[]
-        {
-            new UnaryTypeExpectation(Unary.Type.Unspecified, string.Empty, false, false, false, false, false, false, false, false, true),
-        };
+        return
+        [
+            new(Unary.Type.Complement, "~", true, false, false, false, false, false, false, false, false),
+            new(Unary.Type.Decrement, "--", false, true, false, false, false, false, false, false, false),
+            new(Unary.Type.False, "false", false, false, true, false, false, false, false, false, false),
+            new(Unary.Type.Increment, "++", false, false, false, true, false, false, false, false, false),
+            new(Unary.Type.Minus, "-", false, false, false, false, true, false, false, false, false),
+            new(Unary.Type.Not, "!", false, false, false, false, false, true, false, false, false),
+            new(Unary.Type.Plus, "+", false, false, false, false, false, false, true, false, false),
+            new(Unary.Type.True, "true", false, false, false, false, false, false, false, true, false),
+            new(Unary.Type.Unspecified, string.Empty, false, false, false, false, false, false, false, false, true),
+        ];
     }
 
     [Theory]

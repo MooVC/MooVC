@@ -203,7 +203,7 @@ public sealed class WhenIncludeIfIsCalled
         actual.ValidationContext.ShouldBeSameAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldHaveSingleItem();
+        _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(memberName);
         validatable.Calls.ShouldBe(1);
     }

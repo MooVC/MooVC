@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.ArgumentTests;
 
-using System;
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToStringIsCalled

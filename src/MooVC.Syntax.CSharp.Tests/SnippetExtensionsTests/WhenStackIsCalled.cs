@@ -13,7 +13,7 @@ public sealed class WhenStackIsCalled
     {
         // Arrange
         var snippet = Snippet.From(FirstLine);
-        ImmutableArray<Snippet> snippets = ImmutableArray.Create(snippet);
+        var snippets = ImmutableArray.Create(snippet);
 
         // Act
         Snippet result = snippets.Stack(Snippet.Options.Default);
@@ -29,7 +29,7 @@ public sealed class WhenStackIsCalled
         var first = Snippet.From(FirstLine);
         var second = Snippet.From(SecondLine);
         var third = Snippet.From(ThirdLine);
-        ImmutableArray<Snippet> snippets = ImmutableArray.Create(first, second, third);
+        var snippets = ImmutableArray.Create(first, second, third);
         string expected = string.Join(Environment.NewLine, FirstLine, SecondLine, ThirdLine);
 
         // Act

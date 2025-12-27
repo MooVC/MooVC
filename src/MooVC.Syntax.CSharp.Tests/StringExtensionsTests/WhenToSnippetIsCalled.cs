@@ -39,19 +39,20 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesWithNullOrEmptyThenTheyAreFiltered()
     {
         // Arrange
-        IEnumerable<string> values = new string?[]
-        {
+        string?[] nullable =
+        [
             FirstLine,
             string.Empty,
-            null,
+            default,
             WhitespaceLine,
             SecondLine,
-        }!;
+        ];
 
+        IEnumerable<string> values = nullable!;
         string expected = string.Join(Environment.NewLine, FirstLine, WhitespaceLine, SecondLine);
 
         // Act
-        Snippet result = values.ToSnippet();
+        var result = values.ToSnippet();
 
         // Assert
         result.Lines.ShouldBe(3);
@@ -62,14 +63,16 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
     {
         // Arrange
-        IEnumerable<string> values = new string?[]
-        {
+        string?[] nullable =
+        [
             string.Empty,
-            null,
-        }!;
+            default,
+        ];
+
+        IEnumerable<string> values = nullable!;
 
         // Act
-        Snippet result = values.ToSnippet();
+        var result = values.ToSnippet();
 
         // Assert
         result.ShouldBe(Snippet.Empty);

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.BuilderTests;
 
+using MooVC.Syntax.CSharp.Concepts;
+
 public sealed class WhenNewIsCalled
 {
     [Fact]
@@ -7,18 +9,18 @@ public sealed class WhenNewIsCalled
     {
         // Arrange
         // Act
-        var first = Builder.New<TestConstruct>();
-        var second = Builder.New<TestConstruct>();
+        TestConstruct first = Builder.New<TestConstruct>();
+        TestConstruct second = Builder.New<TestConstruct>();
 
         // Assert
-        first.ShouldNotBeNull();
-        second.ShouldNotBeNull();
-        first.ShouldBeOfType<TestConstruct>();
-        second.ShouldBeOfType<TestConstruct>();
+        _ = first.ShouldNotBeNull();
+        _ = second.ShouldNotBeNull();
+        _ = first.ShouldBeOfType<TestConstruct>();
+        _ = second.ShouldBeOfType<TestConstruct>();
         first.ShouldNotBeSameAs(second);
     }
 
-    private sealed class TestConstruct : Concepts.Construct
+    private sealed class TestConstruct : Construct
     {
         public override bool IsUndefined => false;
 
