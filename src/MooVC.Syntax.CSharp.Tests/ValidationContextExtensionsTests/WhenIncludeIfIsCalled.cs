@@ -42,7 +42,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.ShouldBe([validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
@@ -66,7 +66,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] combined = actual.Results.ToArray();
+        ValidationResult[] combined = [.. actual.Results];
         combined.ShouldBe([initial]);
         validatable.Calls.ShouldBe(0);
     }
@@ -90,7 +90,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] combined = actual.Results.ToArray();
+        ValidationResult[] combined = [.. actual.Results];
         combined.ShouldBe([initial, validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
@@ -133,7 +133,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.ShouldBe([first.Results.Single(), second.Results.Single()]);
         first.Calls.ShouldBe(1);
         second.Calls.ShouldBe(1);
@@ -155,7 +155,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         results.ShouldBe([validatable.Results.Single()]);
         validatable.Calls.ShouldBe(1);
     }
@@ -179,7 +179,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] combined = actual.Results.ToArray();
+        ValidationResult[] combined = [.. actual.Results];
         combined.ShouldBe([initial]);
         validatable.Calls.ShouldBe(0);
     }
@@ -202,7 +202,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
+        ValidationResult[] results = [.. actual.Results];
         _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(memberName);
         validatable.Calls.ShouldBe(1);
@@ -256,7 +256,7 @@ public sealed class WhenIncludeIfIsCalled
         // Assert
         actual.ValidationContext.ShouldBeSameAs(context);
 
-        ValidationResult[] combined = actual.Results.ToArray();
+        ValidationResult[] combined = [.. actual.Results];
         combined.Length.ShouldBe(2);
         combined.ShouldContain(initial);
         combined.ShouldContain(result => result.MemberNames.Contains(memberName));

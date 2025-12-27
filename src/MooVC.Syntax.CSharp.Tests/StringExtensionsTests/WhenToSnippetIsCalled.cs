@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
         const string value = FirstLine;
 
         // Act
-        Snippet result = value.ToSnippet();
+        var result = value.ToSnippet();
 
         // Assert
         result.Lines.ShouldBe(1);
@@ -27,7 +27,7 @@ public sealed class WhenToSnippetIsCalled
         string value = string.Empty;
 
         // Act
-        Snippet result = value.ToSnippet();
+        var result = value.ToSnippet();
 
         // Assert
         result.IsEmpty.ShouldBeFalse();
