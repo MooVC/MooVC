@@ -1,32 +1,20 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
-using System;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
 using GenericParameter = MooVC.Syntax.CSharp.Generics.Parameter;
+using MemberParameter = MooVC.Syntax.CSharp.Members.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
-    private const string ConstraintInterfaceName = "IService";
+    private const string ConstraintInterfaceName = "IWidget";
     private const string GenericName = "T";
-    private const string InterfaceName = "IHandler";
+    private const string ParameterName = "value";
+    private const string TypeName = "Widget";
 
     [Fact]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Interface subject = InterfaceTestsData.Create();
-
-        // Act
-        Func<string> action = () => subject.ToSnippet(options: default);
-
-        // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
-    }
-
-    [Fact]
-    public void GivenGenericInterfaceWithConstraintsThenIncludesClause()
+    public void GivenParametersAndConstraintsThenReturnsSignatureWithClauses()
     {
         // Arrange
         var constraint = new Constraint
@@ -44,23 +32,30 @@ public sealed class WhenToSnippetIsCalled
                 constraint,
             ],
         };
-        var subject = new Interface
+        var subject = new TestReference
         {
+            IsUndefinedValue = false,
             Name = new Declaration
             {
-                Name = new Identifier(InterfaceName),
+                Name = new Identifier(TypeName),
                 Parameters =
                 [
                     genericParameter,
                 ],
             },
+            Parameters =
+            [
+                new MemberParameter { Name = new Identifier(ParameterName), Type = typeof(int) },
+            ],
         };
 
         // Act
         string result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldContain(InterfaceName);
+        result.ShouldContain(TypeName);
+        result.ShouldContain(ParameterName);
         result.ShouldContain("where");
+        result.ShouldContain("widget");
     }
 }
