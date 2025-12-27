@@ -43,4 +43,32 @@ public sealed class WhenPlusOperatorIsCalled
         // Assert
         _ = result.ShouldThrow<InvalidOperationException>();
     }
+
+    [Fact]
+    public void GivenNullLeftThenThrows()
+    {
+        // Arrange
+        Extensibility? left = default;
+        Extensibility right = Extensibility.Abstract;
+
+        // Act
+        Func<Extensibility> result = () => left! + right;
+
+        // Assert
+        _ = result.ShouldThrow<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void GivenNullRightThenThrows()
+    {
+        // Arrange
+        Extensibility left = Extensibility.Static;
+        Extensibility? right = default;
+
+        // Act
+        Func<Extensibility> result = () => left + right!;
+
+        // Assert
+        _ = result.ShouldThrow<ArgumentNullException>();
+    }
 }

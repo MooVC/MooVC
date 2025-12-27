@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using MooVC.Syntax.CSharp.Generics.Constraints;
+
 public sealed class WhenToSnippetIsCalled
 {
     [Fact]
@@ -84,5 +86,37 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         representation.ShouldBe(expected);
+    }
+
+    [Fact]
+    public void GivenGenericConstraintsThenWhereClauseIsIncluded()
+    {
+        // Arrange
+        var constraints = new Constraint
+        {
+            Nature = Nature.Class,
+            New = New.Required,
+        };
+
+        var generic = new MooVC.Syntax.CSharp.Generics.Parameter
+        {
+            Name = new Identifier("T"),
+            Constraints = [constraints],
+        };
+
+        var declaration = new Declaration
+        {
+            Name = "Perform",
+            Parameters = [generic],
+        };
+
+        Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);
+
+        // Act
+        string representation = subject.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        representation.ShouldContain("Perform<T>");
+        representation.ShouldContain("where class, new()");
     }
 }
