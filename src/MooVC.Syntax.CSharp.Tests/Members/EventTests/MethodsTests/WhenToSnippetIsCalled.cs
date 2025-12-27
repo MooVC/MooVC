@@ -19,4 +19,25 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
     }
+
+    [Fact]
+    public void GivenRemoveBodyThenAddStubIsPrepended()
+    {
+        // Arrange
+        var subject = new Event.Methods
+        {
+            Remove = Snippet.From("value;"),
+        };
+
+        // Act
+        string representation = subject.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        const string expected = """
+            add;
+            remove => value;
+            """;
+
+        representation.ShouldBe(expected);
+    }
 }

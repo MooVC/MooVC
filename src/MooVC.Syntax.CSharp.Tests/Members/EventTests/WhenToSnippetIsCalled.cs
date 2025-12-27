@@ -15,4 +15,17 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
     }
+
+    [Fact]
+    public void GivenDefaultBehavioursThenSignatureIsTerminated()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+
+        // Act
+        string representation = subject.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        representation.ShouldBe("public event Handler Occurred;");
+    }
 }

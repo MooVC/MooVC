@@ -95,4 +95,48 @@ public sealed class WhenBlockIsCalled
 
         text.ShouldBe(expected);
     }
+
+    [Fact]
+    public void GivenLambdaInlineThenSingleLineValueIsAppended()
+    {
+        // Arrange
+        const string expected = "get => value;";
+
+        var subject = Snippet.From("value;");
+        var opening = Snippet.From("get");
+
+        Snippet.Options options = new Snippet.Options()
+            .WithBlock(block => block
+                .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+
+        // Act
+        Snippet result = subject.Block(options, opening);
+
+        // Assert
+        string text = result.ToString();
+
+        text.ShouldBe(expected);
+    }
+
+    [Fact]
+    public void GivenSingleLineBracesThenSingleLineValueIsWrapped()
+    {
+        // Arrange
+        const string expected = "get { value; }";
+
+        var subject = Snippet.From("value;");
+        var opening = Snippet.From("get");
+
+        Snippet.Options options = new Snippet.Options()
+            .WithBlock(block => block
+                .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+
+        // Act
+        Snippet result = subject.Block(options, opening);
+
+        // Assert
+        string text = result.ToString();
+
+        text.ShouldBe(expected);
+    }
 }
