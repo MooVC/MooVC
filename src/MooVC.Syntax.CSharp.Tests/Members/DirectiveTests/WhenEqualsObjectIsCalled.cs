@@ -66,7 +66,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Directive subject = Create();
-        object comparison = new object();
+        object comparison = new();
 
         // Act
         bool result = subject.Equals(comparison);

@@ -191,7 +191,7 @@ public sealed class WhenToCamelCaseIsCalled
     public void GivenVeryLongValueThenOnlyFirstCharacterIsLowercased()
     {
         // Arrange
-        string value = new string('A', 10_000);
+        string value = new('A', 10_000);
 
         // Act
         string result = value.ToCamelCase();

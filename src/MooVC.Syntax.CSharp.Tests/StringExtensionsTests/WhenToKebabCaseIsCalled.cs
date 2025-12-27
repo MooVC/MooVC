@@ -221,7 +221,7 @@ public sealed class WhenToKebabCaseIsCalled
     public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
     {
         // Arrange
-        string value = new string('A', 16_384);
+        string value = new('A', 16_384);
 
         // Act
         string result = value.ToKebabCase();
