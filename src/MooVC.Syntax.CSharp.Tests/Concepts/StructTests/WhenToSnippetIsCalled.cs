@@ -40,7 +40,7 @@ public sealed class WhenToSnippetIsCalled
         };
         var genericParameter = new GenericParameter
         {
-            Name = new Identifier(GenericName),
+            Name = GenericName,
             Constraints =
             [
                 constraint,

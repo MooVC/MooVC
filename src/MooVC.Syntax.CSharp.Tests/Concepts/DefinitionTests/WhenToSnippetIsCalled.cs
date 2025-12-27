@@ -28,7 +28,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenEmptyDefinitionThenReturnsEmptyString()
     {
         // Arrange
-        var subject = Definition<Class>.Empty;
+        Definition<Class> subject = Definition<Class>.Empty;
 
         // Act
         string result = subject.ToSnippet(Options.Default);
@@ -57,7 +57,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenBlockNamespaceThenBuildsNamespaceBlock()
     {
         // Arrange
-        var subject = CreateDefinition();
+        Definition<Class> subject = CreateDefinition();
         Options options = Options.Default.WithNamespace(Qualifier.Options.Block);
 
         // Act
@@ -73,7 +73,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenFileNamespaceThenReturnsFileScopedDefinition()
     {
         // Arrange
-        var subject = CreateDefinition();
+        Definition<Class> subject = CreateDefinition();
         Options options = Options.Default.WithNamespace(Qualifier.Options.File);
 
         // Act
@@ -98,5 +98,18 @@ public sealed class WhenToSnippetIsCalled
                 Name = new Declaration { Name = new Identifier(TypeName) },
             },
         };
+    }
+
+    private sealed class Class
+        : Construct
+    {
+        public static readonly Class Undefined = new Class();
+
+        public override bool IsUndefined => ReferenceEquals(this, Undefined);
+
+        protected override Snippet PerformToSnippet(Snippet.Options options)
+        {
+            return TypeName;
+        }
     }
 }

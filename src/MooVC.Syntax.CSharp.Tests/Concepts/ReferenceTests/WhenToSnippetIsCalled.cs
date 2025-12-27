@@ -24,14 +24,16 @@ public sealed class WhenToSnippetIsCalled
                 new Declaration { Name = new Identifier(ConstraintInterfaceName) },
             ],
         };
+
         var genericParameter = new GenericParameter
         {
-            Name = new Identifier(GenericName),
+            Name = GenericName,
             Constraints =
             [
                 constraint,
             ],
         };
+
         var subject = new TestReference
         {
             IsUndefinedValue = false,

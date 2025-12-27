@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.DefinitionTests;
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Concepts;
@@ -11,11 +12,11 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyDefinitionThenReturnsEmptyResults()
     {
         // Arrange
-        var subject = Definition<Class>.Empty;
+        Definition<Class> subject = Definition<Class>.Empty;
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext);
+        IEnumerable<ValidationResult> results = subject.Validate(validationContext);
 
         // Assert
         results.ShouldBeEmpty();
@@ -33,10 +34,23 @@ public sealed class WhenValidateIsCalled
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Definition<Class>.Construct)));
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Definition<Class>.Namespace)));
+    }
+
+    private sealed class Class
+        : Construct
+    {
+        public static readonly Class Undefined = new Class();
+
+        public override bool IsUndefined => ReferenceEquals(this, Undefined);
+
+        protected override Snippet PerformToSnippet(Snippet.Options options)
+        {
+            return "Class";
+        }
     }
 }

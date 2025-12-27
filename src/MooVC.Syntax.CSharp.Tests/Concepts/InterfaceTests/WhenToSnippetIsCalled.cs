@@ -2,9 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using System;
 using MooVC.Syntax.CSharp;
-using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
-using GenericParameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -26,41 +24,49 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Fact]
-    public void GivenGenericInterfaceWithConstraintsThenIncludesClause()
+    public void GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
-        var constraint = new Constraint
+        var created = new Event { Name = "Created" };
+        var execute = new Method { Name = new Declaration { Name = "Execute" } };
+        var indexer = new Indexer { Parameter = new Parameter { Name = "item", Type = typeof(string) }, Result = typeof(int) };
+        var valueA = new Property { Name = "ValueA", Type = typeof(string) };
+
+        var valueB = new Property
         {
-            Interfaces =
-            [
-                new Declaration { Name = new Identifier(ConstraintInterfaceName) },
-            ],
+            Behaviours = new Property.Methods { Set = new Property.Setter { Mode = Property.Mode.ReadOnly } },
+            Name = "ValueB",
+            Type = typeof(int),
         };
-        var genericParameter = new GenericParameter
-        {
-            Name = new Identifier(GenericName),
-            Constraints =
-            [
-                constraint,
-            ],
-        };
-        var subject = new Interface
-        {
-            Name = new Declaration
+
+        Snippet expected = """
+            internal partial interface Sample
             {
-                Name = new Identifier(InterfaceName),
-                Parameters =
-                [
-                    genericParameter,
-                ],
-            },
-        };
+                public event Created;
+
+                public string ValueA { get; set; }
+
+                public int ValueB { get; }
+
+                public int this[string item] { get; }
+
+                public Task Execute();
+            }
+            """;
+
+        Interface subject = InterfaceTestsData.Create(
+            events: [created],
+            indexers: [indexer],
+            isPartial: true,
+            methods: [execute],
+            name: new Declaration { Name = InterfaceTestsData.DefaultName },
+            properties: [valueA, valueB],
+            scope: Scope.Internal);
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        var result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldContain(InterfaceName);
-        result.ShouldContain("where");
+        result.ShouldBeEquivalentTo(expected);
     }
 }
