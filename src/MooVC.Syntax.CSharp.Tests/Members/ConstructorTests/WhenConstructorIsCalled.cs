@@ -15,7 +15,7 @@ public sealed class WhenConstructorIsCalled
         subject.Body.ShouldBe(Snippet.Empty);
         subject.Extensibility.ShouldBe(Extensibility.Implicit);
         subject.IsUndefined.ShouldBeTrue();
-        subject.Parameters.ShouldBe(ImmutableArray<Parameter>.Empty);
+        subject.Parameters.ShouldBe([]);
         subject.Scope.ShouldBe(Scope.Public);
     }
 

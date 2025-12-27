@@ -19,7 +19,7 @@ internal static class ConstructorTestsData
             Body = body ?? Snippet.From(DefaultBody),
             Extensibility = extensibility ?? Extensibility.Implicit,
             Parameters = parameters.IsDefault
-                ? ImmutableArray<Parameter>.Empty
+                ? []
                 : parameters,
             Scope = scope ?? Scope.Public,
         };

@@ -7,7 +7,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
-        Snippet body = Snippet.From("Shutdown();");
+        var body = Snippet.From("Shutdown();");
 
         // Act
         Constructor result = original.WithBody(body);

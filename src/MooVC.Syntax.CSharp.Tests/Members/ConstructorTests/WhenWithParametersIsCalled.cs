@@ -9,10 +9,11 @@ public sealed class WhenWithParametersIsCalled
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
-        var parameters = new[]
-        {
+
+        Parameter[] parameters =
+        [
             ParameterTestsData.Create(name: "other"),
-        };
+        ];
 
         // Act
         Constructor result = original.WithParameters([.. parameters]);
