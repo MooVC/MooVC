@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators.BinaryTests;
 using MooVC.Syntax.CSharp.Operators.ComparisonTests;
 using MooVC.Syntax.CSharp.Operators.ConversionTests;
@@ -36,11 +35,10 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Operators subject = Operators.Undefined;
-        MooVC.Syntax.CSharp.Operators.OperatorsTestsData.TestConstruct construct =
-            MooVC.Syntax.CSharp.Operators.OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         // Act
-        Snippet snippet = subject.ToSnippet(construct, Snippet.Options.Default);
+        var snippet = subject.ToSnippet(construct, Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -50,8 +48,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenSnippetReturned()
     {
         // Arrange
-        MooVC.Syntax.CSharp.Operators.OperatorsTestsData.TestConstruct construct =
-            MooVC.Syntax.CSharp.Operators.OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
@@ -68,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
             unaries: unaries);
 
         // Act
-        Snippet snippet = subject.ToSnippet(construct, options);
+        var snippet = subject.ToSnippet(construct, options);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenSnippetReturnedExpected);

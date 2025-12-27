@@ -12,10 +12,10 @@ internal static class OperatorsSubjectData
     {
         return new Operators
         {
-            Binaries = binaries ?? ImmutableArray<Binary>.Empty,
-            Comparisons = comparisons ?? ImmutableArray<Comparison>.Empty,
-            Conversions = conversions ?? ImmutableArray<Conversion>.Empty,
-            Unaries = unaries ?? ImmutableArray<Unary>.Empty,
+            Binaries = binaries ?? [],
+            Comparisons = comparisons ?? [],
+            Conversions = conversions ?? [],
+            Unaries = unaries ?? [],
         };
     }
 }

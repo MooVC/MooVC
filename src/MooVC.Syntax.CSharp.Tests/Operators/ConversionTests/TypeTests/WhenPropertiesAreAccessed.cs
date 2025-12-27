@@ -6,20 +6,12 @@ public sealed class WhenPropertiesAreAccessed
     {
         yield return new object[]
         {
-            new ConversionTypeExpectation(
-                operatorType: Conversion.Type.Explicit,
-                expectedString: "explicit",
-                isExplicit: true,
-                isImplicit: false),
+            new ConversionTypeExpectation(Conversion.Type.Explicit, "explicit", true, false),
         };
 
         yield return new object[]
         {
-            new ConversionTypeExpectation(
-                operatorType: Conversion.Type.Implicit,
-                expectedString: "implicit",
-                isExplicit: false,
-                isImplicit: true),
+            new ConversionTypeExpectation(Conversion.Type.Implicit, "implicit", false, true),
         };
     }
 

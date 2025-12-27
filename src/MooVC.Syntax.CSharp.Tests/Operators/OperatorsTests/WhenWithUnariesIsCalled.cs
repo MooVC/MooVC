@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Operators.UnaryTests;
 
@@ -11,7 +12,8 @@ public sealed class WhenWithUnariesIsCalled
         // Arrange
         ImmutableArray<Unary> originalUnaries = [UnaryTestsData.Create()];
         Operators original = OperatorsSubjectData.Create(unaries: originalUnaries);
-        ImmutableArray<Unary> updatedUnaries = [UnaryTestsData.Create(@operator: Unary.Type.Minus)];
+        Unary[] updatedUnaries = [UnaryTestsData.Create(@operator: Unary.Type.Minus)];
+        IEnumerable<Unary> expectedUnaries = originalUnaries.Union(updatedUnaries);
 
         // Act
         Operators result = original.WithUnaries(updatedUnaries);
@@ -21,7 +23,7 @@ public sealed class WhenWithUnariesIsCalled
         result.Binaries.ShouldBe(original.Binaries);
         result.Comparisons.ShouldBe(original.Comparisons);
         result.Conversions.ShouldBe(original.Conversions);
-        result.Unaries.ShouldBe(updatedUnaries);
+        result.Unaries.ShouldBe(expectedUnaries);
         original.Unaries.ShouldBe(originalUnaries);
     }
 }

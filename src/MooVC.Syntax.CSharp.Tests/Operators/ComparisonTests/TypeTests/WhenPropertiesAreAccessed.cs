@@ -6,100 +6,55 @@ public sealed class WhenPropertiesAreAccessed
     {
         yield return new object[]
         {
-            new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.Equality,
-                expectedString: "==",
-                isEquality: true,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: false,
-                isInequality: false,
-                isLessThan: false,
-                isLessThanOrEqual: false,
-                isUnspecified: false),
+            new ComparisonTypeExpectation(Comparison.Type.Equality, "==", true, false, false, false, false, false, false),
+        };
+
+        yield return new object[]
+        {
+            new ComparisonTypeExpectation(Comparison.Type.GreaterThan, ">", false, true, false, false, false, false, false),
+        };
+
+        yield return new object[]
+        {
+            new ComparisonTypeExpectation(Comparison.Type.GreaterThanOrEqual, ">=", false, false, true, false, false, false, false),
+        };
+
+        yield return new object[]
+        {
+            new ComparisonTypeExpectation(Comparison.Type.Inequality, "!=", false, false, false, true, false, false, false),
+        };
+
+        yield return new object[]
+        {
+            new ComparisonTypeExpectation(Comparison.Type.LessThan, "<", false, false, false, false, true, false, false),
         };
 
         yield return new object[]
         {
             new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.GreaterThan,
-                expectedString: ">",
-                isEquality: false,
-                isGreaterThan: true,
-                isGreaterThanOrEqual: false,
-                isInequality: false,
-                isLessThan: false,
-                isLessThanOrEqual: false,
-                isUnspecified: false),
+                Comparison.Type.LessThanOrEqual,
+                "<=",
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                false),
         };
 
         yield return new object[]
         {
             new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.GreaterThanOrEqual,
-                expectedString: ">=",
-                isEquality: false,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: true,
-                isInequality: false,
-                isLessThan: false,
-                isLessThanOrEqual: false,
-                isUnspecified: false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.Inequality,
-                expectedString: "!=",
-                isEquality: false,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: false,
-                isInequality: true,
-                isLessThan: false,
-                isLessThanOrEqual: false,
-                isUnspecified: false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.LessThan,
-                expectedString: "<",
-                isEquality: false,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: false,
-                isInequality: false,
-                isLessThan: true,
-                isLessThanOrEqual: false,
-                isUnspecified: false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.LessThanOrEqual,
-                expectedString: "<=",
-                isEquality: false,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: false,
-                isInequality: false,
-                isLessThan: false,
-                isLessThanOrEqual: true,
-                isUnspecified: false),
-        };
-
-        yield return new object[]
-        {
-            new ComparisonTypeExpectation(
-                operatorType: Comparison.Type.Unspecified,
-                expectedString: string.Empty,
-                isEquality: false,
-                isGreaterThan: false,
-                isGreaterThanOrEqual: false,
-                isInequality: false,
-                isLessThan: false,
-                isLessThanOrEqual: false,
-                isUnspecified: true),
+                Comparison.Type.Unspecified,
+                string.Empty,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true),
         };
     }
 
