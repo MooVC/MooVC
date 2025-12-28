@@ -1,9 +1,8 @@
-namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp.Elements
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp.Elements;
 
     internal static partial class IdentifierExtensions
     {
@@ -11,7 +10,7 @@ namespace MooVC.Syntax.CSharp
         {
             if (value.IsUnnamed)
             {
-                return Array.Empty<object>();
+                return Enumerable.Empty<object>();
             }
 
             return new object[] { new XAttribute(name, value.ToSnippet(Identifier.Options.Pascal).ToString()) };

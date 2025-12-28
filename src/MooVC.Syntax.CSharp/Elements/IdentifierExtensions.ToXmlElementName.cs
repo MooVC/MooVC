@@ -1,6 +1,5 @@
-namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp.Elements
 {
-    using MooVC.Syntax.CSharp.Elements;
 
     internal static partial class IdentifierExtensions
     {

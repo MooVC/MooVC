@@ -1,9 +1,8 @@
-namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp.Attributes.Project
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp.Attributes.Project;
 
     internal static class TargetTaskOptionsExtensions
     {
@@ -11,7 +10,7 @@ namespace MooVC.Syntax.CSharp
         {
             if (value == TargetTask.Options.ErrorAndStop)
             {
-                return Array.Empty<object>();
+                return Enumerable.Empty<object>();
             }
 
             return new object[] { new XAttribute(name, value.ToString()) };
