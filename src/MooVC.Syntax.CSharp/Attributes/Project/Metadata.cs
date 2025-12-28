@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
@@ -39,6 +40,24 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            return new XElement(
+                Name.ToXmlElementName(nameof(Metadata)),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Value.IsEmpty ? null : Value.ToString());
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

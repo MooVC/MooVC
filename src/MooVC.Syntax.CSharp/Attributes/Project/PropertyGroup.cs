@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -40,6 +41,29 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .And(nameof(Label), _ => !Label.IsMultiLine, Label)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            var properties = Properties
+                .Where(property => !property.IsUndefined)
+                .Select(property => property.ToFragment());
+
+            return new XElement(
+                nameof(PropertyGroup),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Label.ToXmlAttribute(nameof(Label)),
+                properties);
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
@@ -61,6 +62,36 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .And(nameof(RemoveMetadata), _ => !RemoveMetadata.IsMultiLine, RemoveMetadata)
                 .And(nameof(Update), _ => !Update.IsMultiLine, Update)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            var metadata = Metadata
+                .Where(entry => !entry.IsUndefined)
+                .Select(entry => entry.ToFragment());
+
+            return new XElement(
+                nameof(Item),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Exclude.ToXmlAttribute(nameof(Exclude)),
+                Include.ToXmlAttribute(nameof(Include)),
+                KeepDuplicates.ToXmlAttribute(nameof(KeepDuplicates)),
+                MatchOnMetadata.ToXmlAttribute(nameof(MatchOnMetadata)),
+                MatchOnMetadataOptions.ToXmlAttribute(nameof(MatchOnMetadataOptions)),
+                Remove.ToXmlAttribute(nameof(Remove)),
+                RemoveMetadata.ToXmlAttribute(nameof(RemoveMetadata)),
+                Update.ToXmlAttribute(nameof(Update)),
+                metadata);
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

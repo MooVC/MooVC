@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
@@ -64,6 +65,37 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .And(nameof(Returns), _ => !Returns.IsMultiLine, Returns)
                 .AndIf(!Tasks.IsDefaultOrEmpty, nameof(Tasks), task => !task.IsUndefined, Tasks)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            var tasks = Tasks
+                .Where(task => !task.IsUndefined)
+                .Select(task => task.ToFragment());
+
+            return new XElement(
+                nameof(Target),
+                AfterTargets.ToXmlAttribute(nameof(AfterTargets)),
+                BeforeTargets.ToXmlAttribute(nameof(BeforeTargets)),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                DependsOnTargets.ToXmlAttribute(nameof(DependsOnTargets)),
+                Inputs.ToXmlAttribute(nameof(Inputs)),
+                KeepDuplicateOutputs.ToXmlAttribute(nameof(KeepDuplicateOutputs)),
+                Label.ToXmlAttribute(nameof(Label)),
+                Name.ToXmlAttribute(nameof(Name)),
+                Outputs.ToXmlAttribute(nameof(Outputs)),
+                Returns.ToXmlAttribute(nameof(Returns)),
+                tasks);
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

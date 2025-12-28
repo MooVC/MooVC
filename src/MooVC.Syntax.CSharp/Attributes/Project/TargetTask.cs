@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp.Elements;
@@ -47,6 +48,34 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!Outputs.IsDefaultOrEmpty, nameof(Outputs), output => !output.IsUndefined, Outputs)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            var attributes = Parameters
+                .Where(parameter => !parameter.IsUndefined && !parameter.Value.IsEmpty)
+                .Select(parameter => new XAttribute(parameter.Name.ToXmlElementName(nameof(TaskParameter)), parameter.Value.ToString()));
+
+            var outputs = Outputs
+                .Where(output => !output.IsUndefined)
+                .Select(output => output.ToFragment());
+
+            return new XElement(
+                Name.ToXmlElementName(nameof(TargetTask)),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                ContinueOnError.ToXmlAttribute(nameof(ContinueOnError)),
+                attributes,
+                outputs);
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

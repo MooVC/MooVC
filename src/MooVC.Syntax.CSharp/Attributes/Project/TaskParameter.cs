@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
@@ -37,6 +38,24 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Value), _ => !Value.IsMultiLine, Value)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            return new XElement(
+                "Parameter",
+                Name.ToXmlAttribute(nameof(Name)),
+                Value.IsEmpty ? null : Value.ToString());
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }

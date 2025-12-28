@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
@@ -44,6 +45,26 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!PropertyName.IsUnnamed, nameof(PropertyName), PropertyName)
                 .AndIf(!TaskParameter.IsUnnamed, nameof(TaskParameter), TaskParameter)
                 .Results;
+        }
+
+        public XElement ToFragment()
+        {
+            return new XElement(
+                "Output",
+                Condition.ToXmlAttribute(nameof(Condition)),
+                ItemName.ToXmlAttribute(nameof(ItemName)),
+                PropertyName.ToXmlAttribute(nameof(PropertyName)),
+                TaskParameter.ToXmlAttribute(nameof(TaskParameter)));
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragment().ToString();
         }
     }
 }
