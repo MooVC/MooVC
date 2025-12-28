@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));

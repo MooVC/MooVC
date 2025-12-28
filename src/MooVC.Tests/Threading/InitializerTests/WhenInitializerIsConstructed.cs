@@ -15,7 +15,7 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Fact]
@@ -62,6 +62,6 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 }

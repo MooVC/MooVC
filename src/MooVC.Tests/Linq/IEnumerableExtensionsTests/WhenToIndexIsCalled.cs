@@ -27,7 +27,7 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        index.ShouldNotBeNull();
+        _ = index.ShouldNotBeNull();
         index.ShouldBeEmpty();
     }
 
@@ -56,7 +56,7 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        index.ShouldNotBeNull();
+        _ = index.ShouldNotBeNull();
         index.Keys.ShouldBe(source);
         index.Values.ShouldBe(source);
     }
@@ -72,7 +72,7 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, string> index = source.ToIndex(value => value, transform);
 
         // Assert
-        index.ShouldNotBeNull();
+        _ = index.ShouldNotBeNull();
         index.Keys.ShouldBe(source);
         index.All(element => element.Value == transform(element.Key)).ShouldBeTrue();
     }
@@ -87,6 +87,6 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value);
 
         // Assert
-        Should.Throw<ArgumentException>(act);
+        _ = Should.Throw<ArgumentException>(act);
     }
 }

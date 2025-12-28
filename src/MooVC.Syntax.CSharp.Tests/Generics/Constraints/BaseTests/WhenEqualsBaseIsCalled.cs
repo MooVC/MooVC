@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsBaseIsCalled
 {

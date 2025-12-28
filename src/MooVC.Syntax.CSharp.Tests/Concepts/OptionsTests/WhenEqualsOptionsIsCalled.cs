@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsOptionsIsCalled
 {

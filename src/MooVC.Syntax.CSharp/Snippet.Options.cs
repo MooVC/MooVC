@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
     using Fluentify;
     using Valuify;

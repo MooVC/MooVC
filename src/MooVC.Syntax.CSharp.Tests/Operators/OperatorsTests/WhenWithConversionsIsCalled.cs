@@ -3,7 +3,6 @@ namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenWithConversionsIsCalled

@@ -69,7 +69,7 @@
                 .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), @event => !@event.IsUndefind, Events)
                 .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), indexer => indexer.IsUndefined, Indexers)
                 .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), method => method.IsUndefined, Methods)
-                .And(nameof(Name), _ => !Name.IsUnspecified,  Name)
+                .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => property.IsUndefined, Properties)
                 .Results;
         }

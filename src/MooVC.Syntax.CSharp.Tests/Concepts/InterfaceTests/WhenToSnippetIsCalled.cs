@@ -7,9 +7,6 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToSnippetIsCalled
 {
-    private const string ConstraintInterfaceName = "IService";
-    private const string GenericName = "T";
-    private const string InterfaceName = "IHandler";
 
     [Fact]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()

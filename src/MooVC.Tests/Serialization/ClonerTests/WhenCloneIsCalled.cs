@@ -23,8 +23,8 @@ public sealed class WhenCloneIsCalled
         WhenCloneIsCalled clone = await cloner.Clone(instance, CancellationToken.None);
 
         // Assert
-        await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
-        await serializer.Received(1).Deserialize<WhenCloneIsCalled>(binary, Arg.Any<CancellationToken>());
+        _ = await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
+        _ = await serializer.Received(1).Deserialize<WhenCloneIsCalled>(binary, Arg.Any<CancellationToken>());
 
         clone.ShouldBe(instance);
     }

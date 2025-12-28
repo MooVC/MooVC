@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Ardalis.GuardClauses;
-    using MooVC.Syntax.CSharp.Members;
     using static MooVC.Syntax.CSharp.ValidationContextExtensions_Resources;
 
     internal static partial class ValidationContextExtensions

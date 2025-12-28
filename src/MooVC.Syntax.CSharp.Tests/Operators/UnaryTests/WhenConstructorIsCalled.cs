@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenConstructorIsCalled
 {

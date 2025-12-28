@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 
 internal static class ConversionTestsData
 {

@@ -103,7 +103,7 @@ public sealed class WhenToSnippetIsCalled
     private sealed class Class
         : Type
     {
-        public static readonly Class Undefined = new Class();
+        public static readonly Class Undefined = new();
 
         public override bool IsUndefined => ReferenceEquals(this, Undefined);
 

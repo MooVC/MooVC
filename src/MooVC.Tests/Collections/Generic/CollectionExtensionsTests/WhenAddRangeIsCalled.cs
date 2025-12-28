@@ -27,7 +27,7 @@ public sealed class WhenAddRangeIsCalled
         Action act = () => target!.AddRange(items);
 
         // Assert
-        Should.Throw<ArgumentNullException>(act);
+        _ = Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]
