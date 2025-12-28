@@ -4,7 +4,9 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -27,6 +29,39 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
+
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XElement[] properties = Properties
+                .Where(property => !property.IsUndefined)
+                .SelectMany(property => property.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(PropertyGroup),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Label.ToXmlAttribute(nameof(Label)),
+                properties));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

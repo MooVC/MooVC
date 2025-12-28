@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Attributes.Project;
     using Valuify;
@@ -47,6 +49,61 @@
                 .AndIf(!Sdks.IsDefaultOrEmpty, nameof(Sdks), sdk => !sdk.IsUnspecified, Sdks)
                 .AndIf(!Targets.IsDefaultOrEmpty, nameof(Targets), target => !target.IsUndefined, Targets)
                 .Results;
+        }
+
+        public XDocument ToDocument()
+        {
+            if (IsUndefined)
+            {
+                return new XDocument();
+            }
+
+            XElement[] imports = Imports
+                .Where(import => !import.IsUndefined)
+                .SelectMany(import => import.ToFragments())
+                .ToArray();
+
+            XElement[] itemGroups = ItemGroups
+                .Where(group => !group.IsUndefined)
+                .SelectMany(group => group.ToFragments())
+                .ToArray();
+
+            XElement[] propertyGroups = PropertyGroups
+                .Where(group => !group.IsUndefined)
+                .SelectMany(group => group.ToFragments())
+                .ToArray();
+
+            XElement[] sdks = Sdks
+                .Where(sdk => !sdk.IsUnspecified)
+                .SelectMany(sdk => sdk.ToFragments())
+                .ToArray();
+
+            XElement[] targets = Targets
+                .Where(target => !target.IsUndefined)
+                .SelectMany(target => target.ToFragments())
+                .ToArray();
+
+            var declaration = new XDeclaration("1.0", "utf-8", "yes");
+
+            var project = new XElement(
+                nameof(Project),
+                imports,
+                itemGroups,
+                propertyGroups,
+                sdks,
+                targets);
+
+            return new XDocument(declaration, project);
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToDocument().ToString();
         }
     }
 }

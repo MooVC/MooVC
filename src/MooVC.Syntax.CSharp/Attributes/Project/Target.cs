@@ -4,7 +4,9 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -44,6 +46,47 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
         public Snippet Returns { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<TargetTask> Tasks { get; internal set; } = ImmutableArray<TargetTask>.Empty;
+
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XElement[] tasks = Tasks
+                .Where(task => !task.IsUndefined)
+                .SelectMany(task => task.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(Target),
+                AfterTargets.ToXmlAttribute(nameof(AfterTargets)),
+                BeforeTargets.ToXmlAttribute(nameof(BeforeTargets)),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                DependsOnTargets.ToXmlAttribute(nameof(DependsOnTargets)),
+                Inputs.ToXmlAttribute(nameof(Inputs)),
+                KeepDuplicateOutputs.ToXmlAttribute(nameof(KeepDuplicateOutputs)),
+                Label.ToXmlAttribute(nameof(Label)),
+                Name.ToXmlAttribute(nameof(Name)),
+                Outputs.ToXmlAttribute(nameof(Outputs)),
+                Returns.ToXmlAttribute(nameof(Returns)),
+                tasks));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
