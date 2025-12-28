@@ -1,19 +1,21 @@
 namespace MooVC.Syntax.CSharp.Elements
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Xml.Linq;
 
-    internal static class QualifierExtensions
+    internal static partial class QualifierExtensions
     {
-        internal static IEnumerable<object> ToXmlAttribute(this Qualifier value, string name)
+        public static IEnumerable<XAttribute> ToXmlAttribute(this Qualifier value, string name)
         {
             if (value.IsUnqualified)
             {
-                return Enumerable.Empty<object>();
+                return XAttribute.EmptySequence;
             }
 
-            return new object[] { new XAttribute(name, value.ToString()) };
+            return new XAttribute[]
+            {
+                new XAttribute(name, value.ToString()),
+            };
         }
     }
 }

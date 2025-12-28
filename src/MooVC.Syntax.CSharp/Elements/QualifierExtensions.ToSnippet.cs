@@ -4,9 +4,9 @@
     using System.Collections.Immutable;
     using System.Linq;
 
-    public static partial class QualifierExtensions
+    internal static partial class QualifierExtensions
     {
-        internal static Snippet ToSnippet(this ImmutableArray<Qualifier> usings, Snippet.Options options)
+        public static Snippet ToSnippet(this ImmutableArray<Qualifier> usings, Snippet.Options options)
         {
             if (usings.IsDefaultOrEmpty)
             {

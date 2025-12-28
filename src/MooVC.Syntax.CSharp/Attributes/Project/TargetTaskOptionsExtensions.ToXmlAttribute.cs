@@ -1,19 +1,21 @@
 namespace MooVC.Syntax.CSharp.Attributes.Project
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Xml.Linq;
 
     internal static class TargetTaskOptionsExtensions
     {
-        internal static IEnumerable<object> ToXmlAttribute(this TargetTask.Options value, string name)
+        public static IEnumerable<XAttribute> ToXmlAttribute(this TargetTask.Options value)
         {
             if (value == TargetTask.Options.ErrorAndStop)
             {
-                return Enumerable.Empty<object>();
+                return XAttribute.EmptySequence;
             }
 
-            return new object[] { new XAttribute(name, value.ToString()) };
+            return new XAttribute[]
+            {
+                new XAttribute("ContinueOnError", value.ToString()),
+            };
         }
     }
 }

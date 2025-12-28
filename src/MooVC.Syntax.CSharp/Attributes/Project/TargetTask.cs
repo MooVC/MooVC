@@ -5,9 +5,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp;
     using Fluentify;
-    using Monify;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -36,6 +35,45 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
 
         public ImmutableArray<TaskParameter> Parameters { get; internal set; } = ImmutableArray<TaskParameter>.Empty;
 
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XAttribute[] attributes = Parameters
+                .Where(parameter => !parameter.IsUndefined)
+                .Select(parameter => new XAttribute(parameter.Name.ToXmlElementName(), parameter.Value.ToString()))
+                .ToArray();
+
+            XElement[] outputs = Outputs
+                .Where(output => !output.IsUndefined)
+                .SelectMany(output => output.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                Name.ToXmlElementName(),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                ContinueOnError.ToXmlAttribute(),
+                attributes,
+                outputs));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -49,34 +87,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!Outputs.IsDefaultOrEmpty, nameof(Outputs), output => !output.IsUndefined, Outputs)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;
-        }
-
-        public XElement ToFragment()
-        {
-            var attributes = Parameters
-                .Where(parameter => !parameter.IsUndefined && !parameter.Value.IsEmpty)
-                .Select(parameter => new XAttribute(parameter.Name.ToXmlElementName(nameof(TaskParameter)), parameter.Value.ToString()));
-
-            var outputs = Outputs
-                .Where(output => !output.IsUndefined)
-                .Select(output => output.ToFragment());
-
-            return new XElement(
-                Name.ToXmlElementName(nameof(TargetTask)),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                ContinueOnError.ToXmlAttribute(nameof(ContinueOnError)),
-                attributes,
-                outputs);
-        }
-
-        public override string ToString()
-        {
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToFragment().ToString();
         }
     }
 }

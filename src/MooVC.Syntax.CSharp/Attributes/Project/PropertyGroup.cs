@@ -5,8 +5,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -30,6 +30,39 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
 
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XElement[] properties = Properties
+                .Where(property => !property.IsUndefined)
+                .SelectMany(property => property.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(PropertyGroup),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Label.ToXmlAttribute(nameof(Label)),
+                properties));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -42,29 +75,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .And(nameof(Label), _ => !Label.IsMultiLine, Label)
                 .Results;
-        }
-
-        public XElement ToFragment()
-        {
-            var properties = Properties
-                .Where(property => !property.IsUndefined)
-                .Select(property => property.ToFragment());
-
-            return new XElement(
-                nameof(PropertyGroup),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                Label.ToXmlAttribute(nameof(Label)),
-                properties);
-        }
-
-        public override string ToString()
-        {
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToFragment().ToString();
         }
     }
 }

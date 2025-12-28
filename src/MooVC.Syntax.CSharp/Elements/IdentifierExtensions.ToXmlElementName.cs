@@ -1,13 +1,14 @@
 namespace MooVC.Syntax.CSharp.Elements
 {
+    using System;
 
     internal static partial class IdentifierExtensions
     {
-        internal static string ToXmlElementName(this Identifier value, string fallback)
+        public static string ToXmlElementName(this Identifier value)
         {
             if (value.IsUnnamed)
             {
-                return fallback;
+                throw new NotSupportedException();
             }
 
             return value.ToSnippet(Identifier.Options.Pascal).ToString();

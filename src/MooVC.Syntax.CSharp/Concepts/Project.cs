@@ -58,25 +58,32 @@
                 return new XDocument();
             }
 
-            var imports = Imports
+            XElement[] imports = Imports
                 .Where(import => !import.IsUndefined)
-                .Select(import => import.ToFragment());
+                .SelectMany(import => import.ToFragments())
+                .ToArray();
 
-            var itemGroups = ItemGroups
+            XElement[] itemGroups = ItemGroups
                 .Where(group => !group.IsUndefined)
-                .Select(group => group.ToFragment());
+                .SelectMany(group => group.ToFragments())
+                .ToArray();
 
-            var propertyGroups = PropertyGroups
+            XElement[] propertyGroups = PropertyGroups
                 .Where(group => !group.IsUndefined)
-                .Select(group => group.ToFragment());
+                .SelectMany(group => group.ToFragments())
+                .ToArray();
 
-            var sdks = Sdks
+            XElement[] sdks = Sdks
                 .Where(sdk => !sdk.IsUnspecified)
-                .Select(sdk => sdk.ToFragment());
+                .SelectMany(sdk => sdk.ToFragments())
+                .ToArray();
 
-            var targets = Targets
+            XElement[] targets = Targets
                 .Where(target => !target.IsUndefined)
-                .Select(target => target.ToFragment());
+                .SelectMany(target => target.ToFragments())
+                .ToArray();
+
+            var declaration = new XDeclaration("1.0", "utf-8", "yes");
 
             var project = new XElement(
                 nameof(Project),
@@ -86,7 +93,7 @@
                 sdks,
                 targets);
 
-            return new XDocument(project);
+            return new XDocument(declaration, project);
         }
 
         public override string ToString()

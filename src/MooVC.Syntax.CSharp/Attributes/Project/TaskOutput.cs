@@ -1,11 +1,12 @@
 namespace MooVC.Syntax.CSharp.Attributes.Project
 {
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -32,6 +33,35 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
 
         public Identifier TaskParameter { get; internal set; } = Identifier.Unnamed;
 
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                "Output",
+                Condition.ToXmlAttribute(nameof(Condition)),
+                ItemName.ToXmlAttribute(nameof(ItemName)),
+                PropertyName.ToXmlAttribute(nameof(PropertyName)),
+                TaskParameter.ToXmlAttribute(nameof(TaskParameter))));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -46,26 +76,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!PropertyName.IsUnnamed, nameof(PropertyName), PropertyName)
                 .AndIf(!TaskParameter.IsUnnamed, nameof(TaskParameter), TaskParameter)
                 .Results;
-        }
-
-        public XElement ToFragment()
-        {
-            return new XElement(
-                "Output",
-                Condition.ToXmlAttribute(nameof(Condition)),
-                ItemName.ToXmlAttribute(nameof(ItemName)),
-                PropertyName.ToXmlAttribute(nameof(PropertyName)),
-                TaskParameter.ToXmlAttribute(nameof(TaskParameter)));
-        }
-
-        public override string ToString()
-        {
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToFragment().ToString();
         }
     }
 }

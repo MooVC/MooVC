@@ -6,14 +6,17 @@ namespace MooVC.Syntax.CSharp
 
     internal static class BooleanExtensions
     {
-        internal static IEnumerable<object> ToXmlAttribute(this bool value, string name)
+        public static IEnumerable<XAttribute> ToXmlAttribute(this bool value, string name)
         {
             if (!value)
             {
-                return Enumerable.Empty<object>();
+                return XAttribute.EmptySequence;
             }
 
-            return new object[] { new XAttribute(name, value.ToString().ToLowerInvariant()) };
+            return new XAttribute[]
+            {
+                new XAttribute(name, value.ToString().ToLowerInvariant()),
+            };
         }
     }
 }

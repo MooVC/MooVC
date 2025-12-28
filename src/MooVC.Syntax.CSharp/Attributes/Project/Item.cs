@@ -5,8 +5,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -45,6 +45,46 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
 
         public Snippet Update { get; internal set; } = Snippet.Empty;
 
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XElement[] metadata = Metadata
+                .Where(entry => !entry.IsUndefined)
+                .SelectMany(entry => entry.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(Item),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Exclude.ToXmlAttribute(nameof(Exclude)),
+                Include.ToXmlAttribute(nameof(Include)),
+                KeepDuplicates.ToXmlAttribute(nameof(KeepDuplicates)),
+                MatchOnMetadata.ToXmlAttribute(nameof(MatchOnMetadata)),
+                MatchOnMetadataOptions.ToXmlAttribute(nameof(MatchOnMetadataOptions)),
+                Remove.ToXmlAttribute(nameof(Remove)),
+                RemoveMetadata.ToXmlAttribute(nameof(RemoveMetadata)),
+                Update.ToXmlAttribute(nameof(Update)),
+                metadata));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -63,36 +103,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .And(nameof(RemoveMetadata), _ => !RemoveMetadata.IsMultiLine, RemoveMetadata)
                 .And(nameof(Update), _ => !Update.IsMultiLine, Update)
                 .Results;
-        }
-
-        public XElement ToFragment()
-        {
-            var metadata = Metadata
-                .Where(entry => !entry.IsUndefined)
-                .Select(entry => entry.ToFragment());
-
-            return new XElement(
-                nameof(Item),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                Exclude.ToXmlAttribute(nameof(Exclude)),
-                Include.ToXmlAttribute(nameof(Include)),
-                KeepDuplicates.ToXmlAttribute(nameof(KeepDuplicates)),
-                MatchOnMetadata.ToXmlAttribute(nameof(MatchOnMetadata)),
-                MatchOnMetadataOptions.ToXmlAttribute(nameof(MatchOnMetadataOptions)),
-                Remove.ToXmlAttribute(nameof(Remove)),
-                RemoveMetadata.ToXmlAttribute(nameof(RemoveMetadata)),
-                Update.ToXmlAttribute(nameof(Update)),
-                metadata);
-        }
-
-        public override string ToString()
-        {
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToFragment().ToString();
         }
     }
 }

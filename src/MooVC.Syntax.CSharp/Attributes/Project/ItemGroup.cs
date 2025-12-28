@@ -5,8 +5,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
-    using MooVC.Syntax.CSharp;
     using Fluentify;
+    using MooVC.Syntax.CSharp;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -30,6 +30,39 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
 
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            XElement[] items = Items
+                .Where(item => !item.IsUndefined)
+                .SelectMany(item => item.ToFragments())
+                .ToArray();
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(ItemGroup),
+                Condition.ToXmlAttribute(nameof(Condition)),
+                Label.ToXmlAttribute(nameof(Label)),
+                items));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -42,29 +75,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
                 .And(nameof(Label), _ => !Label.IsMultiLine, Label)
                 .Results;
-        }
-
-        public XElement ToFragment()
-        {
-            var items = Items
-                .Where(item => !item.IsUndefined)
-                .Select(item => item.ToFragment());
-
-            return new XElement(
-                nameof(ItemGroup),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                Label.ToXmlAttribute(nameof(Label)),
-                items);
-        }
-
-        public override string ToString()
-        {
-            if (IsUndefined)
-            {
-                return string.Empty;
-            }
-
-            return ToFragment().ToString();
         }
     }
 }
