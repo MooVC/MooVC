@@ -4,6 +4,7 @@
     using System.Buffers;
     using System.Collections.Generic;
     using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
@@ -14,6 +15,7 @@
     [Monify(Type = typeof(ImmutableArray<string>))]
     [SkipAutoInstantiation]
     public sealed partial class Snippet
+        : IValidatableObject
     {
         public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
@@ -290,6 +292,17 @@
             builder = builder.Append(_value[last]);
 
             return builder.ToString();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (validationContext.Items.TryGetValue(nameof(Lines), out object value) && value is int lines)
+            {
+                if (Lines != lines)
+                {
+                    yield return new ValidationResult(ValidateLinesMismatch.Format(nameof(Lines), Lines, lines), new[] { nameof(Lines) });
+                }
+            }
         }
 
         private static void Combine(string[] combined, ref int index, Snippet snippet)

@@ -29,13 +29,17 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Identifier ItemType { get; internal set; } = Identifier.Unnamed;
+        public bool KeepDuplicates { get; internal set; }
 
-        public Snippet Label { get; internal set; } = Snippet.Empty;
+        public Snippet MatchOnMetadata { get; internal set; } = Snippet.Empty;
+
+        public Snippet MatchOnMetadataOptions { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
         public Snippet Remove { get; internal set; } = Snippet.Empty;
+
+        public Snippet RemoveMetadata { get; internal set; } = Snippet.Empty;
 
         public Snippet Update { get; internal set; } = Snippet.Empty;
 
@@ -47,8 +51,15 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .Include(nameof(ItemType), _ => !ItemType.IsUnnamed, ItemType)
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .And(nameof(Exclude), _ => !Exclude.IsMultiLine, Exclude)
+                .And(nameof(Include), _ => !Include.IsMultiLine, Include)
+                .And(nameof(MatchOnMetadata), _ => !MatchOnMetadata.IsMultiLine, MatchOnMetadata)
+                .And(nameof(MatchOnMetadataOptions), _ => !MatchOnMetadataOptions.IsMultiLine, MatchOnMetadataOptions)
                 .AndIf(!Metadata.IsDefaultOrEmpty, nameof(Metadata), metadata => !metadata.IsUndefined, Metadata)
+                .And(nameof(Remove), _ => !Remove.IsMultiLine, Remove)
+                .And(nameof(RemoveMetadata), _ => !RemoveMetadata.IsMultiLine, RemoveMetadata)
+                .And(nameof(Update), _ => !Update.IsMultiLine, Update)
                 .Results;
         }
     }

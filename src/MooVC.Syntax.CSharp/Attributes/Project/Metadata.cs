@@ -36,7 +36,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }
     }

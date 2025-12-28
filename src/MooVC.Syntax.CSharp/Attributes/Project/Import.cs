@@ -36,7 +36,12 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
                 return Enumerable.Empty<ValidationResult>();
             }
 
-            return Enumerable.Empty<ValidationResult>();
+            return validationContext
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .And(nameof(Label), _ => !Label.IsMultiLine, Label)
+                .And(nameof(Project), _ => !Project.IsSingleLine, Project)
+                .And(nameof(Sdk), _ => !Sdk.IsMultiLine, Sdk)
+                .Results;
         }
     }
 }

@@ -36,7 +36,9 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsUnqualified, Name)
+                .Include(nameof(MinimumVersion), _ => !MinimumVersion.IsMultiLine, MinimumVersion)
+                .And(nameof(Name), _ => !Name.IsUnqualified, Name)
+                .And(nameof(Version), _ => !Version.IsMultiLine, Version)
                 .Results;
         }
     }

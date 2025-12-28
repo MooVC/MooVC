@@ -212,5 +212,14 @@ namespace MooVC.Syntax.CSharp {
                 return ResourceManager.GetString("StackTopRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of `{0}` totaling `{1}` does not match the required amount of `{2}`..
+        /// </summary>
+        internal static string ValidateLinesMismatch {
+            get {
+                return ResourceManager.GetString("ValidateLinesMismatch", resourceCulture);
+            }
+        }
     }
 }

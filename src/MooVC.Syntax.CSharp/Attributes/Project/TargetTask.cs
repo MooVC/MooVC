@@ -5,6 +5,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
+    using Monify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -21,6 +22,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
         }
 
         public Snippet Condition { get; internal set; } = Snippet.Empty;
+
+        public Options ContinueOnError { get; internal set; } = Options.ErrorAndStop;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
@@ -39,7 +42,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .AndIf(!Outputs.IsDefaultOrEmpty, nameof(Outputs), output => !output.IsUndefined, Outputs)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;

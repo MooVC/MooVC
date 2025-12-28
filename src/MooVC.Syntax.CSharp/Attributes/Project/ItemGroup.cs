@@ -36,7 +36,9 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .IncludeIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
+                .And(nameof(Label), _ => !Label.IsMultiLine, Label)
                 .Results;
         }
     }

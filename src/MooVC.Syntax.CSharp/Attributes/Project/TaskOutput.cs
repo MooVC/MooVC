@@ -38,7 +38,9 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .IncludeIf(!ItemName.IsUnnamed, nameof(ItemName), ItemName)
+                .Include(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .AndIf(!PropertyName.IsUnnamed, nameof(ItemName), _ => !ItemName.IsUnnamed, ItemName)
+                .AndIf(!ItemName.IsUnnamed, nameof(PropertyName), _ => !PropertyName.IsUnnamed, PropertyName)
                 .AndIf(!PropertyName.IsUnnamed, nameof(PropertyName), PropertyName)
                 .AndIf(!TaskParameter.IsUnnamed, nameof(TaskParameter), TaskParameter)
                 .Results;

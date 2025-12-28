@@ -168,4 +168,7 @@
   <data name="CombineOptionsRequired" xml:space="preserve">
     <value>The options to apply when combining the snippets must be provided.</value>
   </data>
+  <data name="ValidateLinesMismatch" xml:space="preserve">
+    <value>The number of `{0}` totaling `{1}` does not match the required amount of `{2}`.</value>
+  </data>
 </root>

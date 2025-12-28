@@ -33,11 +33,15 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        public bool KeepDuplicateOutputs { get; internal set; }
+
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         public Snippet Outputs { get; internal set; } = Snippet.Empty;
+
+        public Snippet Returns { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<TargetTask> Tasks { get; internal set; } = ImmutableArray<TargetTask>.Empty;
 
@@ -49,7 +53,15 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .Include(nameof(AfterTargets), _ => !AfterTargets.IsMultiLine, AfterTargets)
+                .And(nameof(BeforeTargets), _ => !BeforeTargets.IsMultiLine, BeforeTargets)
+                .And(nameof(Condition), _ => !Condition.IsMultiLine, Condition)
+                .And(nameof(DependsOnTargets), _ => !DependsOnTargets.IsMultiLine, DependsOnTargets)
+                .And(nameof(Inputs), _ => !Inputs.IsMultiLine, Inputs)
+                .And(nameof(Label), _ => !Label.IsMultiLine, Label)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .And(nameof(Outputs), _ => !Outputs.IsMultiLine, Outputs)
+                .And(nameof(Returns), _ => !Returns.IsMultiLine, Returns)
                 .AndIf(!Tasks.IsDefaultOrEmpty, nameof(Tasks), task => !task.IsUndefined, Tasks)
                 .Results;
         }
