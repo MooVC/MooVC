@@ -14,7 +14,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Interface
-        : Construct
+        : Type
     {
         public static readonly Interface Undefined = new Interface();
 

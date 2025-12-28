@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members.ConstructorExtensionsTests;
 
-using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Members.ParameterTests;
@@ -21,10 +20,10 @@ public sealed class WhenToSnippetIsCalled
             ? default
             : [];
 
-        Construct construct = OperatorsTestsData.CreateConstruct();
+        Type type = OperatorsTestsData.Create();
 
         // Act
-        var snippet = constructors.ToSnippet(construct, options);
+        var snippet = constructors.ToSnippet(options, type);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -35,13 +34,13 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Constructor> constructors = [Create([])];
-        OperatorsTestsData.TestConstruct? construct = default;
+        OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(construct!, options));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(options, type!));
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(construct));
+        exception.ParamName.ShouldBe(nameof(type));
     }
 
     [Fact]
@@ -49,11 +48,11 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Constructor> constructors = [Create([])];
-        Construct construct = OperatorsTestsData.CreateConstruct();
+        Type type = OperatorsTestsData.Create();
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(construct, options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(options!, type));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
@@ -63,7 +62,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
-        Construct construct = OperatorsTestsData.CreateConstruct(name: "Test");
+        Type type = OperatorsTestsData.Create(name: "Test");
 
         Constructor publicMinimal = Create(parameters: []);
         Constructor publicWithParameter = Create(parameters: [ParameterTestsData.Create()]);
@@ -101,7 +100,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = constructors.ToSnippet(construct, options);
+        var snippet = constructors.ToSnippet(options, type);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

@@ -5,10 +5,10 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Members;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Conversion_Resources;
+    using Concept = MooVC.Syntax.CSharp.Concepts.Type;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -40,17 +40,17 @@
             return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
-        public string ToString(Construct construct, Snippet.Options options)
+        public string ToString(Snippet.Options options, Concept type)
         {
-            return ToSnippet(construct, options);
+            return ToSnippet(options, type);
         }
 
-        public Snippet ToSnippet(Construct construct, Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
-            _ = Guard.Against.Null(construct, message: ToSnippetConsructRequired.Format(nameof(Construct), nameof(Conversion)));
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Conversion)));
 
-            return ToSnippet(construct.Name, options);
+            return ToSnippet(type.Name, options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

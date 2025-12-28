@@ -13,7 +13,7 @@
     using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
 
     public abstract partial class Reference
-        : Construct
+        : Type
     {
         private const string Separator = " ";
         private readonly Parameter.Options _options;
@@ -65,11 +65,11 @@
         {
             Snippet signature = GetSignature(options);
 
-            var constructors = Constructors.ToSnippet(this, options);
+            var constructors = Constructors.ToSnippet(options, this);
             var events = Events.ToSnippet(options);
             var fields = Fields.ToSnippet(options);
             var indexers = Indexers.ToSnippet(options);
-            var operators = Operators.ToSnippet(this, options);
+            var operators = Operators.ToSnippet(options, this);
             var properties = Properties.ToSnippet(options);
             var methods = Methods.ToSnippet(options);
             Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, properties, indexers, operators, methods);

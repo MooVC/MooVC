@@ -25,6 +25,11 @@
     <ProjectReference Include="..\MooVC\MooVC.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Concepts\Type.Resources.Designer.cs">
+      <DependentUpon>Type.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Concepts\Construct.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -197,6 +202,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Concepts\Type.Resources.resx">
+      <LastGenOutput>Type.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Concepts\Construct.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>
@@ -333,5 +342,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationContextExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\Solution\" />
+    <Folder Include="Attributes\Project\" />
   </ItemGroup>
 </Project>

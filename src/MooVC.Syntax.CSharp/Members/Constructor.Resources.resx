@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ToStringConsructRequired" xml:space="preserve">
+  <data name="ToStringTypeRequired" xml:space="preserve">
     <value>The `{0}` to which the `{1}` belongs must be provided.</value>
   </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">

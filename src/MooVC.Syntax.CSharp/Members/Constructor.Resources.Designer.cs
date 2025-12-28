@@ -72,9 +72,9 @@ namespace MooVC.Syntax.CSharp.Members {
         /// <summary>
         ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
         /// </summary>
-        internal static string ToStringConsructRequired {
+        internal static string ToStringTypeRequired {
             get {
-                return ResourceManager.GetString("ToStringConsructRequired", resourceCulture);
+                return ResourceManager.GetString("ToStringTypeRequired", resourceCulture);
             }
         }
     }

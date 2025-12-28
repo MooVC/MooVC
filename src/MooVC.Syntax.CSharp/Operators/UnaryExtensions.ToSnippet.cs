@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
@@ -8,7 +7,7 @@
 
     public static partial class UnaryExtensions
     {
-        internal static Snippet ToSnippet(this ImmutableArray<Unary> unaries, Construct construct, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Unary> unaries, Snippet.Options options, Type type)
         {
             if (unaries.IsDefaultOrEmpty)
             {
@@ -18,7 +17,7 @@
             Snippet[] content = unaries
                 .OrderByDescending(unary => unary.Scope)
                 .ThenBy(unary => unary.Operator)
-                .Select(unary => unary.ToSnippet(construct, options))
+                .Select(unary => unary.ToSnippet(options, type))
                 .ToArray();
 
             return Snippet.Blank.Combine(options, content);

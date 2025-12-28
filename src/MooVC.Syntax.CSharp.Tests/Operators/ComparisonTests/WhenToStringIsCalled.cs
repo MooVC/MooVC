@@ -20,13 +20,13 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         Comparison subject = ComparisonTestsData.Create(body: Snippet.Empty, @operator: Comparison.Type.Unspecified);
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct(isUndefined: true);
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        string representation = subject.ToString(construct, options);
+        string representation = subject.ToString(options, type);
 
         // Assert
         representation.ShouldBe(string.Empty);
@@ -37,13 +37,13 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         Comparison subject = ComparisonTestsData.Create();
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        string representation = subject.ToString(construct, options);
+        string representation = subject.ToString(options, type);
 
         // Assert
         string expected = """

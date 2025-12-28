@@ -35,10 +35,10 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Operators subject = Operators.Undefined;
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var snippet = subject.ToSnippet(construct, Snippet.Options.Default);
+        var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -48,7 +48,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenSnippetReturned()
     {
         // Arrange
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
@@ -65,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
             unaries: unaries);
 
         // Act
-        var snippet = subject.ToSnippet(construct, options);
+        var snippet = subject.ToSnippet(options, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenSnippetReturnedExpected);

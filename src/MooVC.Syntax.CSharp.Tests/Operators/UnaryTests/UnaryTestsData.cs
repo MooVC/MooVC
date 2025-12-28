@@ -6,10 +6,7 @@ internal static class UnaryTestsData
 {
     public const string DefaultBody = "return +value;";
 
-    public static Unary Create(
-        Snippet? body = default,
-        Unary.Type? @operator = default,
-        Scope? scope = default)
+    public static Unary Create(Snippet? body = default, Unary.Type? @operator = default, Scope? scope = default)
     {
         var subject = new Unary
         {

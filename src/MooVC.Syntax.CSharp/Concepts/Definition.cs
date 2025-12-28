@@ -16,7 +16,7 @@
     [Valuify]
     public sealed partial class Definition<T>
         : IValidatableObject
-        where T : Construct, new()
+        where T : Type, new()
     {
         public static readonly Definition<T> Empty = new Definition<T>();
 
@@ -24,12 +24,12 @@
         {
         }
 
-        public T Construct { get; internal set; } = new T();
-
         [Ignore]
         public bool IsEmpty => this == Empty;
 
         public Qualifier Namespace { get; internal set; } = Qualifier.Unqualified;
+
+        public T Type { get; internal set; } = new T();
 
         public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;
 
@@ -47,11 +47,11 @@
                 return string.Empty;
             }
 
-            Snippet construct = Construct.ToSnippet(options.Snippets);
+            Snippet type = Type.ToSnippet(options.Snippets);
 
-            if (construct.IsEmpty)
+            if (type.IsEmpty)
             {
-                return construct;
+                return type;
             }
 
             Snippet @namespace = $"namespace {Namespace}";
@@ -59,21 +59,21 @@
 
             if (!usings.IsEmpty)
             {
-                construct = construct
+                type = type
                     .Prepend(options.Snippets, Environment.NewLine)
                     .Prepend(options.Snippets, usings);
             }
 
             if (options.Namespace.IsBlock)
             {
-                return construct.Block(options.Snippets, @namespace);
+                return type.Block(options.Snippets, @namespace);
             }
 
             @namespace = @namespace
                 .Append(';')
                 .Append(Environment.NewLine);
 
-            return construct.Stack(options.Snippets, @namespace);
+            return type.Stack(options.Snippets, @namespace);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -84,7 +84,7 @@
             }
 
             return validationContext
-                .Include(nameof(Construct), _ => !Construct.IsUndefined, Construct)
+                .Include(nameof(Type), _ => !Type.IsUndefined, Type)
                 .And(nameof(Namespace), _ => !Namespace.IsUnqualified, Namespace)
                 .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), @using => !@using.IsUndefined, Usings)
                 .Results;

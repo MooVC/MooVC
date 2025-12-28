@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
@@ -8,7 +7,7 @@
 
     public static partial class ConversionExtensions
     {
-        internal static Snippet ToSnippet(this ImmutableArray<Conversion> conversions, Construct construct, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Conversion> conversions, Snippet.Options options, Type type)
         {
             if (conversions.IsDefaultOrEmpty)
             {
@@ -19,7 +18,7 @@
                 .OrderByDescending(conversion => conversion.Scope)
                 .ThenBy(conversion => conversion.Subject)
                 .ThenBy(conversion => conversion.Direction)
-                .Select(conversion => conversion.ToSnippet(construct, options))
+                .Select(conversion => conversion.ToSnippet(options, type))
                 .ToArray();
 
             return Snippet.Blank.Combine(options, content);

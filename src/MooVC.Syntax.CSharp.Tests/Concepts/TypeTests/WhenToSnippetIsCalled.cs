@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ConstructTests;
+namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
 using System;
 using MooVC.Syntax.CSharp;
@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        var subject = new TestConstruct();
+        var subject = new TestType();
 
         // Act
         Func<Snippet> action = () => subject.ToSnippet(options: default);
@@ -22,10 +22,10 @@ public sealed class WhenToSnippetIsCalled
     public void GivenUndefinedThenReturnsEmptySnippet()
     {
         // Arrange
-        var subject = new TestConstruct { IsUndefinedValue = true };
+        var subject = new TestType { IsUndefinedValue = true };
 
         // Act
-        Snippet result = subject.ToSnippet(Snippet.Options.Default);
+        var result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);

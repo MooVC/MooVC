@@ -1,7 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.ConstructExtensionsTests;
+namespace MooVC.Syntax.CSharp.Concepts.TypeExtensionsTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
+using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenToSnippetIsCalled
@@ -12,12 +14,12 @@ public sealed class WhenToSnippetIsCalled
     public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
-        ImmutableArray<Construct> constructs = isDefault
+        ImmutableArray<Type> types = isDefault
             ? default
             : [];
 
         // Act
-        var snippet = constructs.ToSnippet(Snippet.Options.Default);
+        var snippet = types.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -27,11 +29,11 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
-        ImmutableArray<Construct> constructs = [OperatorsTestsData.CreateConstruct("Alpha")];
+        ImmutableArray<Type> types = [OperatorsTestsData.Create("Alpha")];
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructs.ToSnippet(options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = types.ToSnippet(options!));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
@@ -41,11 +43,11 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenOrderedSnippetReturned()
     {
         // Arrange
-        ImmutableArray<Construct> constructs =
+        ImmutableArray<Type> types =
         [
-            OperatorsTestsData.CreateConstruct("Gamma"),
-            OperatorsTestsData.CreateConstruct("Alpha"),
-            OperatorsTestsData.CreateConstruct("Beta"),
+            OperatorsTestsData.Create("Gamma"),
+            OperatorsTestsData.Create("Alpha"),
+            OperatorsTestsData.Create("Beta"),
         ];
 
         const string expected = """
@@ -57,7 +59,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = constructs.ToSnippet(Snippet.Options.Default);
+        var snippet = types.ToSnippet(Snippet.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

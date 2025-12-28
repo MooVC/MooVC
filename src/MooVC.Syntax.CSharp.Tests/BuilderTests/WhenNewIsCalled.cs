@@ -9,18 +9,19 @@ public sealed class WhenNewIsCalled
     {
         // Arrange
         // Act
-        TestConstruct first = Builder.New<TestConstruct>();
-        TestConstruct second = Builder.New<TestConstruct>();
+        TestType first = Builder.New<TestType>();
+        TestType second = Builder.New<TestType>();
 
         // Assert
         _ = first.ShouldNotBeNull();
         _ = second.ShouldNotBeNull();
-        _ = first.ShouldBeOfType<TestConstruct>();
-        _ = second.ShouldBeOfType<TestConstruct>();
+        _ = first.ShouldBeOfType<TestType>();
+        _ = second.ShouldBeOfType<TestType>();
         first.ShouldNotBeSameAs(second);
     }
 
-    private sealed class TestConstruct : Construct
+    private sealed class TestType
+        : Type
     {
         public override bool IsUndefined => false;
 

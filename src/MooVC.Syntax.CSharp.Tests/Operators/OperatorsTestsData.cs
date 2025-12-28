@@ -9,15 +9,15 @@ internal static class OperatorsTestsData
 
     public static readonly Snippet DefaultBody = Snippet.From("return default;");
 
-    public static TestConstruct CreateConstruct(string? name = default, bool isUndefined = false)
+    public static TestType Create(string? name = default, bool isUndefined = false)
     {
-        return new TestConstruct(name ?? DefaultDeclarationName, isUndefined);
+        return new TestType(name ?? DefaultDeclarationName, isUndefined);
     }
 
-    internal sealed class TestConstruct
-        : Construct
+    internal sealed class TestType
+        : Type
     {
-        public TestConstruct(string name, bool isUndefined)
+        public TestType(string name, bool isUndefined)
         {
             Name = new Declaration { Name = name };
             IsUndefined = isUndefined;

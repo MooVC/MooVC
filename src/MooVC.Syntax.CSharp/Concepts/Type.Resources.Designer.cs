@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC.Syntax.CSharp.Operators {
+namespace MooVC.Syntax.CSharp.Concepts {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp.Operators {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Conversion_Resources {
+    internal class Type_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Conversion_Resources() {
+        internal Type_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp.Operators {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Operators.Conversion.Resources", typeof(Conversion_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Concepts.Type.Resources", typeof(Type_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,33 +66,6 @@ namespace MooVC.Syntax.CSharp.Operators {
         internal static string ToSnippetOptionsRequired {
             get {
                 return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
-        /// </summary>
-        internal static string ToSnippetTypeRequired {
-            get {
-                return ResourceManager.GetString("ToSnippetTypeRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A `{0}` is required for a `{1}` operator..
-        /// </summary>
-        internal static string ValidateBodyRequired {
-            get {
-                return ResourceManager.GetString("ValidateBodyRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` of the `{1}` must be provided..
-        /// </summary>
-        internal static string ValidateSubjectRequired {
-            get {
-                return ResourceManager.GetString("ValidateSubjectRequired", resourceCulture);
             }
         }
     }

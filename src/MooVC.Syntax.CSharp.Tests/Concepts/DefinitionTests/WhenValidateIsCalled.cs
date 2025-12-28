@@ -28,8 +28,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Definition<Class>
         {
-            Construct = Class.Undefined,
             Namespace = Qualifier.Unqualified,
+            Type = Class.Undefined,
         };
         var validationContext = new ValidationContext(subject);
 
@@ -37,12 +37,12 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Definition<Class>.Construct)));
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Definition<Class>.Namespace)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Definition<Class>.Type)));
     }
 
     private sealed class Class
-        : Construct
+        : Type
     {
         public static readonly Class Undefined = new Class();
 

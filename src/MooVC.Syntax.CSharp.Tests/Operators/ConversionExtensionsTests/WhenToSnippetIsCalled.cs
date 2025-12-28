@@ -32,12 +32,12 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Conversion> conversions = isDefault
             ? default
-            : ImmutableArray<Conversion>.Empty;
+            : [];
 
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var result = conversions.ToSnippet(construct, Snippet.Options.Default);
+        var result = conversions.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -48,13 +48,13 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
-        OperatorsTestsData.TestConstruct? construct = default;
+        OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = conversions.ToSnippet(construct!, Snippet.Options.Default));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = conversions.ToSnippet(Snippet.Options.Default, type!));
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(construct));
+        exception.ParamName.ShouldBe(nameof(type));
     }
 
     [Fact]
@@ -62,11 +62,11 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = conversions.ToSnippet(construct, options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = conversions.ToSnippet(options!, type));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
@@ -76,7 +76,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
-        OperatorsTestsData.TestConstruct construct = OperatorsTestsData.CreateConstruct();
+        OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
@@ -88,7 +88,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Conversion> conversions = [protectedBetaTo, publicAlphaFrom, publicAlphaTo];
 
         // Act
-        var snippet = conversions.ToSnippet(construct, options);
+        var snippet = conversions.ToSnippet(options, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

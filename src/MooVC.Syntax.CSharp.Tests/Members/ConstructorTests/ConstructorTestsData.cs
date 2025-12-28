@@ -25,7 +25,7 @@ internal static class ConstructorTestsData
         };
     }
 
-    public static Class CreateConstruct(string? name = DefaultName)
+    public static Class CreateType(string? name = DefaultName)
     {
         return new Class
         {

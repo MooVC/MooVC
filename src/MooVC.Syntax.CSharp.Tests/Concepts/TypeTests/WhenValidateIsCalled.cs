@@ -1,5 +1,6 @@
-namespace MooVC.Syntax.CSharp.Concepts.ConstructTests;
+namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Concepts;
@@ -11,11 +12,11 @@ public sealed class WhenValidateIsCalled
     public void GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
-        var subject = new TestConstruct { IsUndefinedValue = true };
+        var subject = new TestType { IsUndefinedValue = true };
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext);
+        IEnumerable<ValidationResult> results = subject.Validate(validationContext);
 
         // Assert
         results.ShouldBeEmpty();
@@ -25,17 +26,18 @@ public sealed class WhenValidateIsCalled
     public void GivenUnspecifiedNameThenReturnsValidationResults()
     {
         // Arrange
-        var subject = new TestConstruct
+        var subject = new TestType
         {
             IsUndefinedValue = false,
             Name = Declaration.Unspecified,
         };
+
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Construct.Name)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Type.Name)));
     }
 }

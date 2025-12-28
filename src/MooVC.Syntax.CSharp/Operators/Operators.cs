@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -37,23 +36,23 @@
 
         public override string ToString()
         {
-            return ToSnippet(Class.Undefined, Snippet.Options.Default);
+            return ToSnippet(Snippet.Options.Default, Class.Undefined);
         }
 
-        public Snippet ToSnippet(Construct construct, Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options, Type type)
         {
-            _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Binary)));
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Operators)));
+            _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Construct), nameof(Binary)));
 
             if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
-            var binaries = Binaries.ToSnippet(construct, options);
-            var comparisons = Comparisons.ToSnippet(construct, options);
-            var conversions = Conversions.ToSnippet(construct, options);
-            var unaries = Unaries.ToSnippet(construct, options);
+            var binaries = Binaries.ToSnippet(options, type);
+            var comparisons = Comparisons.ToSnippet(options, type);
+            var conversions = Conversions.ToSnippet(options, type);
+            var unaries = Unaries.ToSnippet(options, type);
 
             return Snippet.Blank.Combine(options, binaries, comparisons, conversions, unaries);
         }

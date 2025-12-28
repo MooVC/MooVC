@@ -61,20 +61,20 @@ namespace MooVC.Syntax.CSharp.Operators {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
-        /// </summary>
-        internal static string ToSnippetConsructRequired {
-            get {
-                return ResourceManager.GetString("ToSnippetConsructRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
         internal static string ToSnippetOptionsRequired {
             get {
                 return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to which the `{1}` belongs must be provided..
+        /// </summary>
+        internal static string ToSnippetTypeRequired {
+            get {
+                return ResourceManager.GetString("ToSnippetTypeRequired", resourceCulture);
             }
         }
         

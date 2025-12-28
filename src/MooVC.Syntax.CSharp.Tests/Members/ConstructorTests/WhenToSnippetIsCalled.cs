@@ -10,13 +10,13 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create();
-        Construct? construct = default;
+        Type? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(construct!, Snippet.Options.Default));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(Snippet.Options.Default, type!));
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(construct));
+        exception.ParamName.ShouldBe(nameof(type));
     }
 
     [Fact]
@@ -24,11 +24,11 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create();
-        Construct construct = ConstructorTestsData.CreateConstruct();
+        Type type = ConstructorTestsData.CreateType();
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(construct, options!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!, type));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(options));
@@ -39,10 +39,10 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Constructor subject = Constructor.Undefined;
-        Construct construct = ConstructorTestsData.CreateConstruct();
+        Type type = ConstructorTestsData.CreateType();
 
         // Act
-        string result = subject.ToSnippet(construct, Snippet.Options.Default);
+        string result = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         result.ShouldBeEmpty();
@@ -61,13 +61,13 @@ public sealed class WhenToSnippetIsCalled
             body: Snippet.From("Initialize();"),
             parameters: [.. parameters]);
 
-        Construct construct = ConstructorTestsData.CreateConstruct();
+        Type type = ConstructorTestsData.CreateType();
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
 
         // Act
-        string representation = subject.ToSnippet(construct, options);
+        string representation = subject.ToSnippet(options, type);
 
         // Assert
         string expected = """

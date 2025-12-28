@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.DefinitionTests;
 
-using System;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Members;
@@ -43,7 +42,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Definition<Class>
         {
-            Construct = Class.Undefined,
+            Type = Class.Undefined,
         };
 
         // Act
@@ -89,19 +88,19 @@ public sealed class WhenToSnippetIsCalled
         return new Definition<Class>
         {
             Namespace = NamespaceValue,
+            Type = new Class
+            {
+                Name = new Declaration { Name = new Identifier(TypeName) },
+            },
             Usings =
             [
                 new Directive { Qualifier = UsingQualifier },
             ],
-            Construct = new Class
-            {
-                Name = new Declaration { Name = new Identifier(TypeName) },
-            },
         };
     }
 
     private sealed class Class
-        : Construct
+        : Type
     {
         public static readonly Class Undefined = new Class();
 

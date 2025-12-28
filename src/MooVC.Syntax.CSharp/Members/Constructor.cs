@@ -55,11 +55,11 @@ namespace MooVC.Syntax.CSharp.Members
             return ToSnippet(Identifier.Unnamed, Snippet.Options.Default);
         }
 
-        public Snippet ToSnippet(Construct construct, Snippet.Options options)
+        public Snippet ToSnippet(Snippet.Options options, Type type)
         {
-            _ = Guard.Against.Null(construct, message: ToStringConsructRequired.Format(nameof(Construct), nameof(Constructor)));
+            _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Type), nameof(Constructor)));
 
-            return ToSnippet(construct.Name.Name, options);
+            return ToSnippet(type.Name.Name, options);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
