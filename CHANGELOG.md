@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+## Added
+
+- XML rendering support for C# project concepts via ToDocument/ToFragment and ToString.
+
 # [9.2.0] - 2025-11-14
 
 ## Added
