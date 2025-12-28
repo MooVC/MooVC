@@ -4,11 +4,22 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using Fluentify;
     using MooVC.Syntax.CSharp.Attributes.Project;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
-    public sealed class Project
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Project
         : Construct
     {
+        public static readonly Project Undefined = new Project();
+
+        internal Project()
+        {
+        }
+
         public ImmutableArray<Import> Imports { get; internal set; } = ImmutableArray<Import>.Empty;
 
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
@@ -19,11 +30,8 @@
 
         public ImmutableArray<Target> Targets { get; internal set; } = ImmutableArray<Target>.Empty;
 
-        public override bool IsUndefined => Imports.IsDefaultOrEmpty
-            && ItemGroups.IsDefaultOrEmpty
-            && PropertyGroups.IsDefaultOrEmpty
-            && Sdks.IsDefaultOrEmpty
-            && Targets.IsDefaultOrEmpty;
+        [Ignore]
+        public override bool IsUndefined => this == Undefined;
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

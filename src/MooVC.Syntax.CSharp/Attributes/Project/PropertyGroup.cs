@@ -1,42 +1,43 @@
-namespace MooVC.Syntax.CSharp.Attributes.Project;
-
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Fluentify;
-using Valuify;
-using Ignore = Valuify.IgnoreAttribute;
-
-[Fluentify]
-[Valuify]
-public sealed partial class PropertyGroup
-    : IValidatableObject
+namespace MooVC.Syntax.CSharp.Attributes.Project
 {
-    public static readonly PropertyGroup Undefined = new PropertyGroup();
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using Fluentify;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
-    internal PropertyGroup()
+    [Fluentify]
+    [Valuify]
+    public sealed partial class PropertyGroup
+        : IValidatableObject
     {
-    }
+        public static readonly PropertyGroup Undefined = new PropertyGroup();
 
-    public Snippet Condition { get; internal set; } = Snippet.Empty;
-
-    [Ignore]
-    public bool IsUndefined => this == Undefined;
-
-    public Snippet Label { get; internal set; } = Snippet.Empty;
-
-    public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (IsUndefined)
+        internal PropertyGroup()
         {
-            return Enumerable.Empty<ValidationResult>();
         }
 
-        return validationContext
-            .IncludeIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
-            .Results;
+        public Snippet Condition { get; internal set; } = Snippet.Empty;
+
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
+
+        public Snippet Label { get; internal set; } = Snippet.Empty;
+
+        public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .IncludeIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
+                .Results;
+        }
     }
 }

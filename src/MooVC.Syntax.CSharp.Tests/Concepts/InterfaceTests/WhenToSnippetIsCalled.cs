@@ -7,7 +7,6 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToSnippetIsCalled
 {
-
     [Fact]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {

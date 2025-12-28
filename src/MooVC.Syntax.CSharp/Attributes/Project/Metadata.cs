@@ -1,42 +1,43 @@
-namespace MooVC.Syntax.CSharp.Attributes.Project;
-
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Fluentify;
-using MooVC.Syntax.CSharp.Elements;
-using Valuify;
-using Ignore = Valuify.IgnoreAttribute;
-
-[Fluentify]
-[Valuify]
-public sealed partial class Metadata
-    : IValidatableObject
+namespace MooVC.Syntax.CSharp.Attributes.Project
 {
-    public static readonly Metadata Undefined = new Metadata();
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using Fluentify;
+    using MooVC.Syntax.CSharp.Elements;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
-    internal Metadata()
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Metadata
+        : IValidatableObject
     {
-    }
+        public static readonly Metadata Undefined = new Metadata();
 
-    public Snippet Condition { get; internal set; } = Snippet.Empty;
-
-    [Ignore]
-    public bool IsUndefined => this == Undefined;
-
-    public Identifier Name { get; internal set; } = Identifier.Unnamed;
-
-    public Snippet Value { get; internal set; } = Snippet.Empty;
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (IsUndefined)
+        internal Metadata()
         {
-            return Enumerable.Empty<ValidationResult>();
         }
 
-        return validationContext
-            .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
-            .Results;
+        public Snippet Condition { get; internal set; } = Snippet.Empty;
+
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
+
+        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+
+        public Snippet Value { get; internal set; } = Snippet.Empty;
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .Include(nameof(Name), _ => !Name.IsUnnamed, Name)
+                .Results;
+        }
     }
 }
