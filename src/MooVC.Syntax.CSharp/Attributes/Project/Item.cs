@@ -5,6 +5,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Xml.Linq;
+    using MooVC.Syntax.CSharp;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using Valuify;
