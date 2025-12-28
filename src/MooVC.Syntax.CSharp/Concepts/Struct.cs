@@ -6,13 +6,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
-    using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
+    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
     [Fluentify]
     [Valuify]

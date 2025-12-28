@@ -6,7 +6,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Elements;
 
     [Monify(Type = typeof(Symbol))]
     [SkipAutoInstantiation]

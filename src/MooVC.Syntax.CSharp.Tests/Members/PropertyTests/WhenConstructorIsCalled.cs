@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenConstructorIsCalled
 {
     private const string DefaultValue = "value";

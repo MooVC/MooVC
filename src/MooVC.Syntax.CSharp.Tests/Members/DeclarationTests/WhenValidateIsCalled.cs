@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
+using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenValidateIsCalled

@@ -8,11 +8,13 @@ namespace MooVC.Syntax.CSharp.Members
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Method_Resources;
     using Ignore = Valuify.IgnoreAttribute;
+    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
     [Fluentify]
     [Valuify]

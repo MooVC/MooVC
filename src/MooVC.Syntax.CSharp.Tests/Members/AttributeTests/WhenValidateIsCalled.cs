@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenValidateIsCalled
 {

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithScopeIsCalled
 {
     [Fact]

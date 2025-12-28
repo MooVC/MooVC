@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 internal static class IndexerTestsData
 {
     public const string DefaultParameterName = "Index";

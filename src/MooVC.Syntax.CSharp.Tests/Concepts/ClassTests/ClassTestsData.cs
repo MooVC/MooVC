@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 

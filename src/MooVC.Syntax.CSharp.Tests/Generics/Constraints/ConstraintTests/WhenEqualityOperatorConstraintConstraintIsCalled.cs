@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
-using MooVC.Syntax.CSharp.Members.SymbolTests;
+using MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
 {

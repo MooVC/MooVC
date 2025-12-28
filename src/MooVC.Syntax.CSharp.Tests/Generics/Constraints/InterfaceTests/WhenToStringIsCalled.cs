@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
-using MemberIdentifier = MooVC.Syntax.CSharp.Members.Identifier;
+using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToStringIsCalled
 {
@@ -10,9 +10,9 @@ public sealed class WhenToStringIsCalled
     public void GivenInterfaceDeclarationThenReturnsName()
     {
         // Arrange
-        Interface subject = new Members.Declaration
+        Interface subject = new Declaration
         {
-            Name = new MemberIdentifier(InterfaceName),
+            Name = InterfaceName,
         };
 
         // Act

@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.TypeExtensionsTests;
 
 using System.Diagnostics.CodeAnalysis;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenGetIdentifierIsCalled

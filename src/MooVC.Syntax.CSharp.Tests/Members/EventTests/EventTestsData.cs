@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 internal static class EventTestsData
 {
     public const string DefaultHandler = "Handler";

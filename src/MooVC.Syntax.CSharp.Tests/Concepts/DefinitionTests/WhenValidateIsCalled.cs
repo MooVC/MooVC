@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Concepts;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled

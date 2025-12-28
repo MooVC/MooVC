@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 
@@ -28,7 +29,7 @@ public static class RecordTestsData
             Attributes = attributes ?? [],
             Constructors = constructors ?? [],
             Events = events ?? [],
-            Extensibility = extensibility ?? Members.Extensibility.Sealed,
+            Extensibility = extensibility ?? Extensibility.Sealed,
             Fields = fields ?? [],
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,

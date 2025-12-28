@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithParametersIsCalled
 {
     [Fact]
@@ -7,6 +9,7 @@ public sealed class WhenWithParametersIsCalled
     {
         // Arrange
         Method original = MethodTestsData.Create();
+
         Parameter[] additional =
         [
             new Parameter

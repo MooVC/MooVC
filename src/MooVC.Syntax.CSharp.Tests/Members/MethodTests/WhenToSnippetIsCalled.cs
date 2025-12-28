@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 

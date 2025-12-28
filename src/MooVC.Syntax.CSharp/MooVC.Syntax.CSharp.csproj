@@ -70,7 +70,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Declaration.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Extensibility.Resources.Designer.cs">
+    <Compile Update="Elements\Extensibility.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Extensibility.Resources.resx</DependentUpon>
@@ -90,12 +90,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Members\Parameter.Resources.Designer.cs">
+    <Compile Update="Elements\Parameter.Resources.Designer.cs">
       <DependentUpon>Parameter.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Members\Argument.Resources.Designer.cs">
+    <Compile Update="Elements\Argument.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Argument.Resources.resx</DependentUpon>
@@ -115,7 +115,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Event.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Identifier.Resources.Designer.cs">
+    <Compile Update="Elements\Identifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Identifier.Resources.resx</DependentUpon>
@@ -130,27 +130,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Method.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Qualifier.Resources.Designer.cs">
+    <Compile Update="Elements\Qualifier.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Qualifier.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Result.Resources.Designer.cs">
+    <Compile Update="Elements\Result.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Result.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Scope.Resources.Designer.cs">
+    <Compile Update="Elements\Scope.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Scope.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Segment.Resources.Designer.cs">
+    <Compile Update="Elements\Segment.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Segment.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Members\Symbol.Resources.Designer.cs">
+    <Compile Update="Elements\Symbol.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Symbol.Resources.resx</DependentUpon>
@@ -238,7 +238,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Declaration.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Extensibility.Resources.resx">
+    <EmbeddedResource Update="Elements\Extensibility.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Extensibility.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -254,11 +254,11 @@
       <LastGenOutput>Constructor.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Parameter.Resources.resx">
+    <EmbeddedResource Update="Elements\Parameter.Resources.resx">
       <LastGenOutput>Parameter.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Argument.Resources.resx">
+    <EmbeddedResource Update="Elements\Argument.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Argument.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -274,7 +274,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Event.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Identifier.Resources.resx">
+    <EmbeddedResource Update="Elements\Identifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -286,23 +286,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Method.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Qualifier.Resources.resx">
+    <EmbeddedResource Update="Elements\Qualifier.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Qualifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Result.Resources.resx">
+    <EmbeddedResource Update="Elements\Result.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Result.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Scope.Resources.resx">
+    <EmbeddedResource Update="Elements\Scope.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Scope.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Segment.Resources.resx">
+    <EmbeddedResource Update="Elements\Segment.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Segment.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Members\Symbol.Resources.resx">
+    <EmbeddedResource Update="Elements\Symbol.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Symbol.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

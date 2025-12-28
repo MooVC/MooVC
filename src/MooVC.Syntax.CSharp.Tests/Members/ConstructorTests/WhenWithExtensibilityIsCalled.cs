@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithExtensibilityIsCalled
 {
     [Fact]

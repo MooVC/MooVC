@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenGetHashCodeIsCalled
 {
     private const string AlternativeHandler = "Result";
@@ -76,7 +78,6 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Event first = EventTestsData.Create();
-
         Event second = EventTestsData.Create();
         second.Extensibility = Extensibility.Static;
 

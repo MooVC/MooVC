@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithResultIsCalled
 {
     [Fact]
@@ -7,6 +9,7 @@ public sealed class WhenWithResultIsCalled
     {
         // Arrange
         Indexer original = IndexerTestsData.Create();
+
         var result = new Result
         {
             Mode = Result.Modality.Synchronous,

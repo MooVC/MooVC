@@ -7,6 +7,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Syntax;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Field_Resources;

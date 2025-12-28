@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithHandlerIsCalled
 {
     private const string Handler = "Handled";

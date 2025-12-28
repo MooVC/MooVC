@@ -2,7 +2,7 @@
 {
     using System;
     using Ardalis.GuardClauses;
-    using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Elements;
     using static MooVC.Syntax.CSharp.TypeExtensions_Resources;
 
     internal static partial class TypeExtensions

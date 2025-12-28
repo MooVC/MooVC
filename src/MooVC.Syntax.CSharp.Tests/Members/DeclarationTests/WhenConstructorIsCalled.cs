@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
+using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenConstructorIsCalled

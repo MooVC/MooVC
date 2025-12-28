@@ -25,7 +25,7 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public void GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = new Identifier(Same) };
+        Interface left = new Declaration { Name = Same };
         Interface? right = default;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Interface left = new Declaration { Name = new Identifier(Same) };
-        Interface right = new Declaration { Name = new Identifier(Same) };
+        Interface left = new Declaration { Name = Same };
+        Interface right = new Declaration { Name = Same };
 
         // Act
         bool result = left != right;
@@ -53,8 +53,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = new Identifier(Same) };
-        Interface right = new Declaration { Name = new Identifier(Different) };
+        Interface left = new Declaration { Name = Same };
+        Interface right = new Declaration { Name = Different };
 
         // Act
         bool result = left != right;

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
 {
     private const string AlternativeAlias = "Other";
@@ -119,10 +121,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    private static Directive Create(
-        string alias = Alias,
-        Qualifier? qualifier = default,
-        bool isStatic = false)
+    private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)
     {
         return new Directive
         {

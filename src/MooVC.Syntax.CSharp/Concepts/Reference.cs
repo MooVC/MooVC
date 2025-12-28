@@ -5,12 +5,13 @@
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
-    using Parameter = MooVC.Syntax.CSharp.Members.Parameter;
+    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
     public abstract partial class Reference
         : Type

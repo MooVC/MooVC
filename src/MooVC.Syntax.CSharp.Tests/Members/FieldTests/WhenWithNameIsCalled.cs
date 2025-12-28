@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithNameIsCalled
 {
     private const string NewName = "Other";

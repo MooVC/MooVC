@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {

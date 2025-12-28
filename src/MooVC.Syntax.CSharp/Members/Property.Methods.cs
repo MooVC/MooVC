@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp.Members
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
     using Ignore = Valuify.IgnoreAttribute;

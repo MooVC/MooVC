@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;

@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
-using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenImplicitOperatorToSymbolIsCalled
 {

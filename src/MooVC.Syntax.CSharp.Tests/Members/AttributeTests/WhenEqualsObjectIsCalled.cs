@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenEqualsObjectIsCalled
 {
     [Fact]

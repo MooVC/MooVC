@@ -11,7 +11,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Interface subject = new Declaration { Name = new Identifier(Same) };
+        Interface subject = new Declaration { Name = Same };
         Declaration? other = default;
 
         // Act
@@ -27,8 +27,8 @@ public sealed class WhenEqualsDeclarationIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = new Identifier(Same) };
-        var right = new Declaration { Name = new Identifier(Same) };
+        Interface left = new Declaration { Name = Same };
+        var right = new Declaration { Name = Same };
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -43,8 +43,8 @@ public sealed class WhenEqualsDeclarationIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Interface left = new Declaration { Name = new Identifier(Same) };
-        var right = new Declaration { Name = new Identifier(Different) };
+        Interface left = new Declaration { Name = Same };
+        var right = new Declaration { Name = Different };
 
         // Act
         bool resultLeftRight = left.Equals(right);

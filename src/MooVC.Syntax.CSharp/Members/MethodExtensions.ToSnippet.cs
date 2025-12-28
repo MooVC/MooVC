@@ -4,6 +4,7 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
+    using MooVC.Syntax.CSharp.Elements;
 
     public static partial class MethodExtensions
     {

@@ -1,15 +1,12 @@
 namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
-using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Elements;
 
 internal static class ComparisonTestsData
 {
     public const string DefaultBody = "return left == right;";
 
-    public static Comparison Create(
-        Snippet? body = default,
-        Comparison.Type? @operator = default,
-        Scope? scope = default)
+    public static Comparison Create(Snippet? body = default, Comparison.Type? @operator = default, Scope? scope = default)
     {
         var subject = new Comparison
         {

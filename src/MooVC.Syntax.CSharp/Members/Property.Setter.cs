@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members
 {
     using Fluentify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.CSharp.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 

@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Declaration
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         // Act

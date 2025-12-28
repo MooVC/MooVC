@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenIsDefaultIsCalled
 {
     [Fact]
@@ -20,7 +22,7 @@ public sealed class WhenIsDefaultIsCalled
     {
         // Arrange
         Options subject = new Options()
-            .WithNamespace(Members.Qualifier.Options.Block);
+            .WithNamespace(Qualifier.Options.Block);
 
         // Act
         bool result = subject.IsDefault;

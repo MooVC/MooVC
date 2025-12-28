@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Elements;
 
 public static class AttributeTestsData
 {

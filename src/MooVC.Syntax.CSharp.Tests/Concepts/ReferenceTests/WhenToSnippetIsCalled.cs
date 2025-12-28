@@ -1,10 +1,11 @@
 namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
 using MooVC.Syntax.CSharp;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
+using ElementParameter = MooVC.Syntax.CSharp.Elements.Parameter;
 using GenericParameter = MooVC.Syntax.CSharp.Generics.Parameter;
-using MemberParameter = MooVC.Syntax.CSharp.Members.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -47,7 +48,7 @@ public sealed class WhenToSnippetIsCalled
             },
             Parameters =
             [
-                new MemberParameter { Name = new Identifier(ParameterName), Type = typeof(int) },
+                new ElementParameter { Name = new Identifier(ParameterName), Type = typeof(int) },
             ],
         };
 

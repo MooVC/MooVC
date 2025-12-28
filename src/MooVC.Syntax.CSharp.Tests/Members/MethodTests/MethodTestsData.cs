@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using MooVC.Syntax.CSharp.Elements;
 
 internal static class MethodTestsData
 {

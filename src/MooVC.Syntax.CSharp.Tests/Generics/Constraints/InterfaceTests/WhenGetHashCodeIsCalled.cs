@@ -11,8 +11,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        Interface first = new Declaration { Name = new Identifier(Same) };
-        Interface second = new Declaration { Name = new Identifier(Same) };
+        Interface first = new Declaration { Name = Same };
+        Interface second = new Declaration { Name = Same };
 
         // Act
         int firstHash = first.GetHashCode();
@@ -26,8 +26,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        Interface first = new Declaration { Name = new Identifier(Same) };
-        Interface second = new Declaration { Name = new Identifier(Different) };
+        Interface first = new Declaration { Name = Same };
+        Interface second = new Declaration { Name = Different };
 
         // Act
         int firstHash = first.GetHashCode();

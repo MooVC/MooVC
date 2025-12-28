@@ -1,7 +1,8 @@
 namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Members.ParameterTests;
+using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenConstructorIsCalled
 {

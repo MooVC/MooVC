@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorFromDeclarationIsCalled
     public void GivenDeclarationThenCreatesInterface()
     {
         // Arrange
-        var value = new Declaration { Name = new Identifier("IAlpha") };
+        var value = new Declaration { Name = "IAlpha" };
 
         // Act
         Interface result = value;

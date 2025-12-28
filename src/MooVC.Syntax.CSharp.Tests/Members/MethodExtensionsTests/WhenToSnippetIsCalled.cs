@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members.MethodTests;
 
 public sealed class WhenToSnippetIsCalled

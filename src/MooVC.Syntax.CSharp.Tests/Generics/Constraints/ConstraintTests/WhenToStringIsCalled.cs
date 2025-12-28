@@ -1,7 +1,8 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
-using Identifier = MooVC.Syntax.CSharp.Members.Identifier;
+using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 
 public sealed class WhenToStringIsCalled
 {

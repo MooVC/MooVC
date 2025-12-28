@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenWithQualifierIsCalled
 {
     [Fact]

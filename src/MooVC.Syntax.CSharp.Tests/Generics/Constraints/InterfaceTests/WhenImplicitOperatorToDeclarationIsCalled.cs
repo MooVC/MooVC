@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToDeclarationIsCalled
     public void GivenInterfaceThenReturnsDeclaration()
     {
         // Arrange
-        Interface subject = new Declaration { Name = new Identifier("IAlpha") };
+        Interface subject = new Declaration { Name = "IAlpha" };
 
         // Act
         Declaration result = subject;

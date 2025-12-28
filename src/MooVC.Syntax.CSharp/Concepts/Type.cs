@@ -6,12 +6,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Operators;
     using static MooVC.Syntax.CSharp.Concepts.Type_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
     using Descriptor = Fluentify.DescriptorAttribute;
-    using Ignore = Valuify.IgnoreAttribute;
 
     public abstract class Type
         : Construct

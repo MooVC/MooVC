@@ -7,11 +7,13 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
-    using Generic = MooVC.Syntax.CSharp.Generics.Parameter;
+    using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
+    using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
     [Fluentify]
     [Valuify]
@@ -30,7 +32,7 @@
 
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
-        public ImmutableArray<Generic> Parameters { get; internal set; } = ImmutableArray<Generic>.Empty;
+        public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         public static implicit operator string(Declaration declaration)
         {
@@ -101,7 +103,7 @@
 
             if (!Parameters.IsDefaultOrEmpty)
             {
-                var parameters = Parameters.ToSnippet(Generic.Names, options);
+                var parameters = Parameters.ToSnippet(Parameter.Names, options);
 
                 signature = $"{signature}<{parameters}>";
             }

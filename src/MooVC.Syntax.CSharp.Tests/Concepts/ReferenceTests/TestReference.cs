@@ -1,9 +1,10 @@
 namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
 using MooVC.Syntax.CSharp.Concepts;
-using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.CSharp.Elements;
 
-internal sealed class TestReference : Reference
+internal sealed class TestReference
+    : Reference
 {
     public TestReference()
         : base(Parameter.Options.Camel, "widget")

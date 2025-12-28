@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenInequalityOperatorIndexerIndexerIsCalled
 {
     [Fact]

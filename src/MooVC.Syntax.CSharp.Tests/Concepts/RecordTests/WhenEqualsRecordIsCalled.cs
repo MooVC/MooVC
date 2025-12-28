@@ -34,8 +34,8 @@ public sealed class WhenEqualsRecordIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(events: [new Event { Name = new Identifier("Created") }]);
-        Record other = RecordTestsData.Create(events: [new Event { Name = new Identifier("Created") }]);
+        Record subject = RecordTestsData.Create(events: [new Event { Name = "Created" }]);
+        Record other = RecordTestsData.Create(events: [new Event { Name = "Created" }]);
 
         // Act
         bool result = subject.Equals(other);
@@ -48,8 +48,8 @@ public sealed class WhenEqualsRecordIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(fields: [new Field { Name = new Identifier("Value"), Type = typeof(string) }]);
-        Record other = RecordTestsData.Create(fields: [new Field { Name = new Identifier("Other"), Type = typeof(string) }]);
+        Record subject = RecordTestsData.Create(fields: [new Field { Name = "Value", Type = typeof(string) }]);
+        Record other = RecordTestsData.Create(fields: [new Field { Name = "Other", Type = typeof(string) }]);
 
         // Act
         bool result = subject.Equals(other);
