@@ -8,10 +8,7 @@ internal static class SdkTestsData
     public const string DefaultVersion = "9.9.9";
     public static readonly Qualifier DefaultName = "MooVC.Sdk";
 
-    public static Sdk Create(
-        Snippet? minimumVersion = default,
-        Qualifier? name = default,
-        Snippet? version = default)
+    public static Sdk Create(Snippet? minimumVersion = default, Qualifier? name = default, Snippet? version = default)
     {
         return new Sdk
         {

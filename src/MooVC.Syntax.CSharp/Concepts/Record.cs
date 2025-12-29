@@ -12,7 +12,7 @@
     {
         public static readonly Record Undefined = new Record();
 
-        internal Record()
+        public Record()
             : base(Parameter.Options.Pascal, "record")
         {
         }

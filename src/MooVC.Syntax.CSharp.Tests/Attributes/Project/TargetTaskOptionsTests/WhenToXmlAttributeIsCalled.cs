@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Attributes.Project.TargetTaskOptionsTests;
 
 using System.Linq;
+using System.Xml.Linq;
 
 public sealed class WhenToXmlAttributeIsCalled
 {
@@ -11,7 +12,7 @@ public sealed class WhenToXmlAttributeIsCalled
         TargetTask.Options subject = TargetTask.Options.ErrorAndStop;
 
         // Act
-        var attributes = subject.ToXmlAttribute().ToArray();
+        XAttribute[] attributes = [.. subject.ToXmlAttribute()];
 
         // Assert
         attributes.ShouldBeEmpty();
@@ -24,7 +25,7 @@ public sealed class WhenToXmlAttributeIsCalled
         TargetTask.Options subject = TargetTask.Options.WarnAndContinue;
 
         // Act
-        var attributes = subject.ToXmlAttribute().ToArray();
+        XAttribute[] attributes = [.. subject.ToXmlAttribute()];
 
         // Assert
         _ = attributes.ShouldHaveSingleItem();

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Attributes.Project.TaskOutputTests;
 
+using MooVC.Syntax.CSharp.Elements;
+
 public sealed class WhenEqualsTaskOutputIsCalled
 {
     [Fact]

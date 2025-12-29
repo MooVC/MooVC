@@ -10,7 +10,7 @@ public sealed class WhenWithImportsIsCalled
     {
         // Arrange
         Import existing = ProjectTestsData.CreateImport();
-        Import additional = new Import { Project = Snippet.From("Other"), Sdk = Snippet.Empty };
+        var additional = new Import { Project = Snippet.From("Other"), Sdk = Snippet.Empty };
         Project original = ProjectTestsData.Create(import: existing);
 
         // Act
@@ -18,7 +18,7 @@ public sealed class WhenWithImportsIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Imports.ShouldBe(original.Imports.Concat(new[] { additional }));
+        result.Imports.ShouldBe(original.Imports.Concat([additional]));
         result.ItemGroups.ShouldBe(original.ItemGroups);
     }
 }

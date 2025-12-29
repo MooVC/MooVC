@@ -26,7 +26,7 @@ public sealed class WhenValidateIsCalled
     public void GivenMultiLineConditionThenValidationErrorReturned()
     {
         // Arrange
-        Import subject = ImportTestsData.Create(condition: Snippet.From($"alpha{Environment.NewLine}beta"));
+        Import subject = ImportTestsData.Create(condition: Snippet.From($"alpha{Environment.NewLine}beta"), project: Snippet.From("Project"));
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenSingleLineProjectThenValidationErrorReturned()
+    public void GivenSingleLineProjectThenNoValidationErrorReturned()
     {
         // Arrange
         Import subject = ImportTestsData.Create(project: Snippet.From("Project"));
@@ -51,8 +51,6 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Import.Project));
+        valid.ShouldBeTrue();
     }
 }

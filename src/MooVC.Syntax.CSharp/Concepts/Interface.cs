@@ -21,10 +21,6 @@
 
         private const string Separator = " ";
 
-        internal Interface()
-        {
-        }
-
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 

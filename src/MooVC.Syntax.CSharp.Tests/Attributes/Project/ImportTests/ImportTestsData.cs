@@ -7,11 +7,7 @@ internal static class ImportTestsData
     public const string DefaultProject = "Project";
     public const string DefaultSdk = "Sdk";
 
-    public static Import Create(
-        Snippet? condition = default,
-        Snippet? label = default,
-        Snippet? project = default,
-        Snippet? sdk = default)
+    public static Import Create(Snippet? condition = default, Snippet? label = default, Snippet? project = default, Snippet? sdk = default)
     {
         return new Import
         {

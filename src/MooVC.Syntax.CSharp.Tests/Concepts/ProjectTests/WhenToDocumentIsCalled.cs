@@ -54,9 +54,9 @@ public sealed class WhenToDocumentIsCalled
             new XDeclaration("1.0", "utf-8", "yes"),
             new XElement(
                 nameof(Project),
-                importElement,
-                itemGroupElement,
                 propertyGroupElement,
+                itemGroupElement,
+                importElement,
                 sdkElement,
                 targetElement));
 
@@ -64,10 +64,10 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        result.Declaration.ShouldNotBeNull();
-        result.Declaration!.Version.ShouldBe("1.0");
-        result.Declaration.Encoding.ShouldBe("utf-8");
-        result.Declaration.Standalone.ShouldBe("yes");
+        XDeclaration declaration = result.Declaration.ShouldNotBeNull();
+        declaration.Version.ShouldBe("1.0");
+        declaration.Encoding.ShouldBe("utf-8");
+        declaration.Standalone.ShouldBe("yes");
         XNode.DeepEquals(expected, result).ShouldBeTrue();
     }
 }

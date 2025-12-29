@@ -10,7 +10,8 @@ public sealed class WhenWithMetadataIsCalled
     {
         // Arrange
         Metadata existing = ItemTestsData.CreateMetadata();
-        Metadata additional = new Metadata
+
+        var additional = new Metadata
         {
             Name = new Identifier("Other"),
             Value = Snippet.From("Value"),
@@ -23,7 +24,7 @@ public sealed class WhenWithMetadataIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Metadata.ShouldBe(original.Metadata.Concat(new[] { additional }));
+        result.Metadata.ShouldBe(original.Metadata.Concat([additional]));
         result.Condition.ShouldBe(original.Condition);
         result.Include.ShouldBe(original.Include);
     }

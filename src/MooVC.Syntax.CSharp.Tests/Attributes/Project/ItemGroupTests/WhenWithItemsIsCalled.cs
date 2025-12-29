@@ -9,7 +9,7 @@ public sealed class WhenWithItemsIsCalled
     {
         // Arrange
         Item existing = ItemGroupTestsData.CreateItem();
-        Item additional = new Item { Include = Snippet.From("Extra") };
+        var additional = new Item { Include = Snippet.From("Extra") };
         ItemGroup original = ItemGroupTestsData.Create(item: existing);
 
         // Act
@@ -17,7 +17,7 @@ public sealed class WhenWithItemsIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Items.ShouldBe(original.Items.Concat(new[] { additional }));
+        result.Items.ShouldBe(original.Items.Concat([additional]));
         result.Condition.ShouldBe(original.Condition);
         result.Label.ShouldBe(original.Label);
     }

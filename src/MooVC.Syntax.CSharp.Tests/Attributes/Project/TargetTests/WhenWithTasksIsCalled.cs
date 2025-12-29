@@ -10,7 +10,7 @@ public sealed class WhenWithTasksIsCalled
     {
         // Arrange
         TargetTask existing = TargetTestsData.CreateTask();
-        TargetTask additional = new TargetTask { Name = new Identifier("Other") };
+        var additional = new TargetTask { Name = new Identifier("Other") };
         Target original = TargetTestsData.Create(task: existing);
 
         // Act
@@ -18,7 +18,7 @@ public sealed class WhenWithTasksIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Tasks.ShouldBe(original.Tasks.Concat(new[] { additional }));
+        result.Tasks.ShouldBe(original.Tasks.Concat([additional]));
         result.Name.ShouldBe(original.Name);
         result.Label.ShouldBe(original.Label);
     }

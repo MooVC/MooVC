@@ -10,7 +10,8 @@ public sealed class WhenWithOutputsIsCalled
     {
         // Arrange
         TaskOutput existing = TargetTaskTestsData.CreateOutput();
-        TaskOutput additional = new TaskOutput
+
+        var additional = new TaskOutput
         {
             ItemName = new Identifier("Other"),
             PropertyName = new Identifier("Property"),
@@ -24,7 +25,7 @@ public sealed class WhenWithOutputsIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Outputs.ShouldBe(original.Outputs.Concat(new[] { additional }));
+        result.Outputs.ShouldBe(original.Outputs.Concat([additional]));
         result.Name.ShouldBe(original.Name);
         result.Condition.ShouldBe(original.Condition);
     }

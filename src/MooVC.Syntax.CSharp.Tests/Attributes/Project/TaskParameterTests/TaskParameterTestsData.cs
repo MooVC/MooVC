@@ -7,9 +7,7 @@ internal static class TaskParameterTestsData
     public const string DefaultName = "Parameter";
     public const string DefaultValue = "Value";
 
-    public static TaskParameter Create(
-        Identifier? name = default,
-        Snippet? value = default)
+    public static TaskParameter Create(Identifier? name = default, Snippet? value = default)
     {
         return new TaskParameter
         {

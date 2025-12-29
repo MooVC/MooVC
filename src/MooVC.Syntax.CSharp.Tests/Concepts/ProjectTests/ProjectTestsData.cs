@@ -20,34 +20,37 @@ internal static class ProjectTestsData
         Sdk? sdk = default,
         Target? target = default)
     {
-        var project = new Project();
-
-        if (import is not null)
-        {
-            project = project.WithImports(import);
-        }
-
-        if (itemGroup is not null)
-        {
-            project = project.WithItemGroups(itemGroup);
-        }
-
-        if (propertyGroup is not null)
-        {
-            project = project.WithPropertyGroups(propertyGroup);
-        }
-
-        if (sdk is not null)
-        {
-            project = project.WithSdks(sdk);
-        }
-
-        if (target is not null)
-        {
-            project = project.WithTargets(target);
-        }
-
-        return project;
+        return Builder
+            .New<Project>()
+            .ForkOn(
+                _ => import is null,
+                @true: project => project.WithImports(import => import
+                    .WithProject(DefaultImportProject)),
+                @false: project => project.WithImports(import))
+            .ForkOn(
+                _ => itemGroup is null,
+                @true: project => project.WithItemGroups(group => group
+                    .WithItems(item => item
+                        .WithInclude(DefaultItemInclude))),
+                @false: project => project.WithItemGroups(itemGroup))
+            .ForkOn(
+                _ => propertyGroup is null,
+                @true: project => project.WithPropertyGroups(group => group
+                    .WithProperties(property => property
+                        .WithName(DefaultPropertyName)
+                        .WithValue(DefaultPropertyValue))),
+                @false: project => project.WithPropertyGroups(propertyGroup))
+            .ForkOn(
+                _ => sdk is null,
+                @true: project => project.WithSdks(sdk => sdk
+                    .WithName(DefaultSdkName)
+                    .WithVersion(DefaultSdkVersion)),
+                @false: project => project.WithSdks(sdk))
+            .ForkOn(
+                _ => target is null,
+                @true: project => project.WithTargets(target => target
+                    .WithName(DefaultTargetName)),
+                @false: project => project.WithTargets(target));
     }
 
     public static Import CreateImport()

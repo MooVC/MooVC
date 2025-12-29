@@ -10,7 +10,8 @@ public sealed class WhenWithParametersIsCalled
     {
         // Arrange
         TaskParameter existing = TargetTaskTestsData.CreateParameter();
-        TaskParameter additional = new TaskParameter
+
+        var additional = new TaskParameter
         {
             Name = new Identifier("Other"),
             Value = Snippet.From("Value"),
@@ -23,7 +24,7 @@ public sealed class WhenWithParametersIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Parameters.ShouldBe(original.Parameters.Concat(new[] { additional }));
+        result.Parameters.ShouldBe(original.Parameters.Concat([additional]));
         result.Name.ShouldBe(original.Name);
         result.Condition.ShouldBe(original.Condition);
     }

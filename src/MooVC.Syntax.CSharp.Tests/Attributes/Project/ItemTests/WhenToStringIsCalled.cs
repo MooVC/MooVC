@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Project.ItemTests;
 
 using System;
 using System.Xml.Linq;
+using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenToStringIsCalled
 {
@@ -36,7 +37,8 @@ public sealed class WhenToStringIsCalled
             new XAttribute(nameof(Item.Remove), ItemTestsData.DefaultRemove),
             new XAttribute(nameof(Item.RemoveMetadata), ItemTestsData.DefaultRemoveMetadata),
             new XAttribute(nameof(Item.Update), ItemTestsData.DefaultUpdate),
-            new XElement(metadata.Name.ToXmlElementName(),
+            new XElement(
+                metadata.Name.ToXmlElementName(),
                 new XAttribute(nameof(Metadata.Condition), ItemTestsData.DefaultMetadataCondition),
                 ItemTestsData.DefaultMetadataValue));
 

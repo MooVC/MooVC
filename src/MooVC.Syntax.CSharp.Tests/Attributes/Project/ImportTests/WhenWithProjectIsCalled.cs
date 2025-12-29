@@ -7,7 +7,7 @@ public sealed class WhenWithProjectIsCalled
     {
         // Arrange
         Import original = ImportTestsData.Create();
-        Snippet updated = Snippet.From("Updated");
+        var updated = Snippet.From("Updated");
 
         // Act
         Import result = original.WithProject(updated);

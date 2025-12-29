@@ -9,7 +9,7 @@ public sealed class WhenWithItemNameIsCalled
     {
         // Arrange
         TaskOutput original = TaskOutputTestsData.Create();
-        Identifier updated = new Identifier("Other");
+        var updated = new Identifier("Other");
 
         // Act
         TaskOutput result = original.WithItemName(updated);

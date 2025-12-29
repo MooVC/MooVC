@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        Identifier updated = new Identifier("Other");
+        var updated = new Identifier("Other");
 
         // Act
         Property result = original.WithName(updated);

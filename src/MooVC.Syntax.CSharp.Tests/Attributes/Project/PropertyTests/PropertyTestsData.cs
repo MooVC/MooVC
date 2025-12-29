@@ -8,10 +8,7 @@ internal static class PropertyTestsData
     public const string DefaultName = "Property";
     public const string DefaultValue = "Value";
 
-    public static Property Create(
-        Snippet? condition = default,
-        Identifier? name = default,
-        Snippet? value = default)
+    public static Property Create(Snippet? condition = default, Identifier? name = default, Snippet? value = default)
     {
         return new Property
         {

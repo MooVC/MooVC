@@ -18,10 +18,6 @@
     {
         public static readonly Project Undefined = new Project();
 
-        internal Project()
-        {
-        }
-
         public ImmutableArray<Import> Imports { get; internal set; } = ImmutableArray<Import>.Empty;
 
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
@@ -87,9 +83,9 @@
 
             var project = new XElement(
                 nameof(Project),
-                imports,
-                itemGroups,
                 propertyGroups,
+                itemGroups,
+                imports,
                 sdks,
                 targets);
 

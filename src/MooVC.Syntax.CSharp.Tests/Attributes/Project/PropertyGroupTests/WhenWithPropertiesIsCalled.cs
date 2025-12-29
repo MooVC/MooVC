@@ -10,7 +10,8 @@ public sealed class WhenWithPropertiesIsCalled
     {
         // Arrange
         Property existing = PropertyGroupTestsData.CreateProperty();
-        Property additional = new Property
+
+        var additional = new Property
         {
             Condition = Snippet.From("Extra"),
             Name = new Identifier("Other"),
@@ -24,7 +25,7 @@ public sealed class WhenWithPropertiesIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldBe(original.Properties.Concat(new[] { additional }));
+        result.Properties.ShouldBe(original.Properties.Concat([additional]));
         result.Condition.ShouldBe(original.Condition);
         result.Label.ShouldBe(original.Label);
     }

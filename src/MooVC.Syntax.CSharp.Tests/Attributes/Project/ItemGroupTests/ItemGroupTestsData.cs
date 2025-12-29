@@ -6,10 +6,7 @@ internal static class ItemGroupTestsData
     public const string DefaultInclude = "Include";
     public const string DefaultLabel = "Label";
 
-    public static ItemGroup Create(
-        Snippet? condition = default,
-        Snippet? label = default,
-        Item? item = default)
+    public static ItemGroup Create(Snippet? condition = default, Snippet? label = default, Item? item = default)
     {
         var values = new ItemGroup
         {
