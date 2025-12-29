@@ -10,6 +10,7 @@ namespace MooVC.Syntax.CSharp.Concepts
     using MooVC.Syntax.CSharp.Attributes.Solution;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
+    using ProjectReference = MooVC.Syntax.CSharp.Attributes.Solution.Project;
 
     [Fluentify]
     [Valuify]
@@ -17,10 +18,6 @@ namespace MooVC.Syntax.CSharp.Concepts
         : Construct
     {
         public static readonly Solution Undefined = new Solution();
-
-        internal Solution()
-        {
-        }
 
         public ImmutableArray<Configuration> Configurations { get; internal set; } = ImmutableArray<Configuration>.Empty;
 
@@ -30,7 +27,7 @@ namespace MooVC.Syntax.CSharp.Concepts
 
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
-        public ImmutableArray<Project> Projects { get; internal set; } = ImmutableArray<Project>.Empty;
+        public ImmutableArray<ProjectReference> Projects { get; internal set; } = ImmutableArray<ProjectReference>.Empty;
 
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
@@ -44,72 +41,17 @@ namespace MooVC.Syntax.CSharp.Concepts
                 return new XDocument();
             }
 
+            var elements = new List<XElement>();
+
+            AppendConfiguration(elements);
+            AppendItems(elements);
+            AppendProjects(elements);
+            AppendProperties(elements);
+
             var declaration = new XDeclaration("1.0", "utf-8", "yes");
+            var solution = new XElement(nameof(Solution), elements);
 
-            return new XDocument(declaration, ToFragments());
-        }
-
-        public ImmutableArray<XElement> ToFragments()
-        {
-            if (IsUndefined)
-            {
-                return ImmutableArray<XElement>.Empty;
-            }
-
-            XElement[] configurations = Configurations
-                .Where(configuration => !configuration.IsUndefined)
-                .SelectMany(configuration => configuration.ToFragments())
-                .ToArray();
-
-            XElement[] files = Files
-                .Where(file => !file.IsUndefined)
-                .SelectMany(file => file.ToFragments())
-                .ToArray();
-
-            XElement[] folders = Folders
-                .Where(folder => !folder.IsUndefined)
-                .SelectMany(folder => folder.ToFragments())
-                .ToArray();
-
-            XElement[] items = Items
-                .Where(item => !item.IsUndefined)
-                .SelectMany(item => item.ToFragments())
-                .ToArray();
-
-            XElement[] projects = Projects
-                .Where(project => !project.IsUndefined)
-                .SelectMany(project => project.ToFragments())
-                .ToArray();
-
-            XElement[] properties = Properties
-                .Where(property => !property.IsUndefined)
-                .SelectMany(property => property.ToFragments())
-                .ToArray();
-
-            var configurationsElement = configurations.Length == 0
-                ? null
-                : new XElement("Configurations", configurations);
-
-            var itemsElement = files.Length == 0 && folders.Length == 0 && items.Length == 0
-                ? null
-                : new XElement("Items", files, folders, items);
-
-            var projectsElement = projects.Length == 0
-                ? null
-                : new XElement("Projects", projects);
-
-            var propertiesElement = properties.Length == 0
-                ? null
-                : new XElement("Properties", properties);
-
-            var solution = new XElement(
-                nameof(Solution),
-                configurationsElement,
-                itemsElement,
-                projectsElement,
-                propertiesElement);
-
-            return ImmutableArray.Create(solution);
+            return new XDocument(declaration, solution);
         }
 
         public override string ToString()
@@ -137,6 +79,68 @@ namespace MooVC.Syntax.CSharp.Concepts
                 .AndIf(!Projects.IsDefaultOrEmpty, nameof(Projects), project => !project.IsUndefined, Projects)
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .Results;
+        }
+
+        private static ImmutableArray<XElement> Get<T>(
+            Func<T, ImmutableArray<XElement>> fragments,
+            Predicate<T> isDefined,
+            ImmutableArray<T> subjects)
+            where T : class
+        {
+            if (subjects.IsDefaultOrEmpty)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            return subjects
+                .Where(item => isDefined(item))
+                .SelectMany(item => fragments(item))
+                .ToImmutableArray();
+        }
+
+        private void AppendConfiguration(List<XElement> elements)
+        {
+            ImmutableArray<XElement> configurations = Get(
+                configuration => configuration.ToFragments(),
+                configuration => !configuration.IsUndefined,
+                Configurations);
+
+            if (!configurations.IsDefaultOrEmpty)
+            {
+                elements.Add(new XElement("Configurations", configurations));
+            }
+        }
+
+        private void AppendItems(List<XElement> elements)
+        {
+            ImmutableArray<XElement> files = Get(file => file.ToFragments(), file => !file.IsUndefined, Files);
+            ImmutableArray<XElement> folders = Get(folder => folder.ToFragments(), folder => !folder.IsUndefined, Folders);
+            ImmutableArray<XElement> items = Get(item => item.ToFragments(), item => !item.IsUndefined, Items);
+
+            if (!(files.IsDefaultOrEmpty && folders.IsEmpty && items.IsDefaultOrEmpty))
+            {
+                elements.Add(new XElement("Items", files, folders, items));
+            }
+        }
+
+        private void AppendProperties(List<XElement> elements)
+        {
+            ImmutableArray<XElement> properties = Get(property => property.ToFragments(), property => !property.IsUndefined, Properties);
+
+            if (!properties.IsDefaultOrEmpty)
+            {
+                elements.Add(new XElement("Properties", properties));
+            }
+        }
+
+        private void AppendProjects(List<XElement> elements)
+        {
+            ImmutableArray<XElement> projects = Get(project => project.ToFragments(), project => !project.IsUndefined, Projects);
+
+            if (!projects.IsDefaultOrEmpty)
+            {
+                elements.Add(new XElement("Projects", projects));
+            }
         }
     }
 }
