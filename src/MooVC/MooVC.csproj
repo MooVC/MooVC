@@ -49,6 +49,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IEnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ObjectExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObjectExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Paging\Serialization\PageConverter.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -122,6 +127,10 @@
     <EmbeddedResource Update="Linq\IEnumerableExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ObjectExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObjectExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Paging\Serialization\PageConverter.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

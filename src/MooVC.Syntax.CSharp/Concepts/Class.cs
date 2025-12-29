@@ -12,7 +12,7 @@
     {
         public static readonly Class Undefined = new Class();
 
-        internal Class()
+        public Class()
             : base(Parameter.Options.Camel, "class")
         {
         }
