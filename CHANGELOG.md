@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 
 - XML rendering support for C# project concepts via ToDocument/ToFragment and ToString.
+- XML rendering support for SLNX solution concepts via ToFragments and ToString, including solution items for folders and files.
 
 # [9.2.0] - 2025-11-14
 
