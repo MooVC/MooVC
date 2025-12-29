@@ -1,0 +1,20 @@
+namespace MooVC.Syntax.CSharp.Attributes.Project.MetadataTests;
+
+using MooVC.Syntax.CSharp.Elements;
+
+public sealed class WhenInequalityOperatorMetadataMetadataIsCalled
+{
+    [Fact]
+    public void GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Metadata left = MetadataTestsData.Create();
+        Metadata right = MetadataTestsData.Create(name: new Identifier("Other"));
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        result.ShouldBeTrue();
+    }
+}

@@ -1,0 +1,31 @@
+namespace MooVC.Syntax.CSharp.Attributes.Project.TargetTaskTests;
+
+using System.Linq;
+using MooVC.Syntax.CSharp.Elements;
+
+public sealed class WhenWithOutputsIsCalled
+{
+    [Fact]
+    public void GivenOutputsThenReturnsUpdatedInstance()
+    {
+        // Arrange
+        TaskOutput existing = TargetTaskTestsData.CreateOutput();
+        TaskOutput additional = new TaskOutput
+        {
+            ItemName = new Identifier("Other"),
+            PropertyName = new Identifier("Property"),
+            TaskParameter = new Identifier("Parameter"),
+        };
+
+        TargetTask original = TargetTaskTestsData.Create(output: existing);
+
+        // Act
+        TargetTask result = original.WithOutputs(additional);
+
+        // Assert
+        result.ShouldNotBeSameAs(original);
+        result.Outputs.ShouldBe(original.Outputs.Concat(new[] { additional }));
+        result.Name.ShouldBe(original.Name);
+        result.Condition.ShouldBe(original.Condition);
+    }
+}
