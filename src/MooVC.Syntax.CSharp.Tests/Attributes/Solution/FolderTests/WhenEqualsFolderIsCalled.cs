@@ -11,7 +11,7 @@ public sealed class WhenEqualsFolderIsCalled
         Folder subject = FolderTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Folder));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

@@ -9,7 +9,7 @@ public sealed class WhenWithTypeIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        Snippet updated = Snippet.From("OtherType");
+        var updated = Snippet.From("OtherType");
 
         // Act
         Item result = original.WithType(updated);

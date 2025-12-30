@@ -9,7 +9,7 @@ public sealed class WhenWithPathIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        Snippet updated = Snippet.From("assets/other.txt");
+        var updated = Snippet.From("assets/other.txt");
 
         // Act
         Item result = original.WithPath(updated);

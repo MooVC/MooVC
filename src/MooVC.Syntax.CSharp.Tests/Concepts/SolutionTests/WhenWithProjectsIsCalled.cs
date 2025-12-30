@@ -12,6 +12,7 @@ public sealed class WhenWithProjectsIsCalled
     {
         // Arrange
         ProjectReference existing = SolutionTestsData.CreateProject();
+
         var additional = new ProjectReference
         {
             Id = Snippet.From("OtherId"),
@@ -19,6 +20,7 @@ public sealed class WhenWithProjectsIsCalled
             Path = Snippet.From("src/Other.csproj"),
             Type = Snippet.From("OtherType"),
         };
+
         Solution original = SolutionTestsData.Create(project: existing);
 
         // Act

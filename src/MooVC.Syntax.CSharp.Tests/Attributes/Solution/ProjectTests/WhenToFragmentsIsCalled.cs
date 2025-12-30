@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Attributes.Solution.ProjectTests;
 
+using System.Collections.Immutable;
 using System.Xml.Linq;
 
 public sealed class WhenToFragmentsIsCalled
@@ -11,7 +12,7 @@ public sealed class WhenToFragmentsIsCalled
         Project subject = Project.Undefined;
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
         result.ShouldBeEmpty();
@@ -31,10 +32,10 @@ public sealed class WhenToFragmentsIsCalled
             new XAttribute(nameof(Project.Type), ProjectTestsData.DefaultType));
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        var fragment = result.ShouldHaveSingleItem();
+        XElement fragment = result.ShouldHaveSingleItem();
         XNode.DeepEquals(expected, fragment).ShouldBeTrue();
     }
 }

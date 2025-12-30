@@ -11,6 +11,7 @@ public sealed class WhenWithItemsIsCalled
     {
         // Arrange
         Item existing = SolutionTestsData.CreateItem();
+
         var additional = new Item
         {
             Id = Snippet.From("OtherId"),
@@ -18,6 +19,7 @@ public sealed class WhenWithItemsIsCalled
             Path = Snippet.From("assets/other.txt"),
             Type = Snippet.From("OtherType"),
         };
+
         Solution original = SolutionTestsData.Create(item: existing);
 
         // Act

@@ -11,7 +11,7 @@ public sealed class WhenEqualsFileIsCalled
         File subject = FileTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(File));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

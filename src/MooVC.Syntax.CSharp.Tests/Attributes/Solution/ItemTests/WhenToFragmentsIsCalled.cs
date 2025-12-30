@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Attributes.Solution.ItemTests;
 
+using System.Collections.Immutable;
 using System.Xml.Linq;
 
 public sealed class WhenToFragmentsIsCalled
@@ -11,7 +12,7 @@ public sealed class WhenToFragmentsIsCalled
         Item subject = Item.Undefined;
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
         result.ShouldBeEmpty();
@@ -40,10 +41,10 @@ public sealed class WhenToFragmentsIsCalled
             childElement);
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        var fragment = result.ShouldHaveSingleItem();
+        XElement fragment = result.ShouldHaveSingleItem();
         XNode.DeepEquals(expected, fragment).ShouldBeTrue();
     }
 }

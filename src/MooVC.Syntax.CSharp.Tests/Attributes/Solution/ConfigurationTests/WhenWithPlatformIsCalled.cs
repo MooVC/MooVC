@@ -9,7 +9,7 @@ public sealed class WhenWithPlatformIsCalled
     {
         // Arrange
         Configuration original = ConfigurationTestsData.Create();
-        Snippet updated = Snippet.From("x64");
+        var updated = Snippet.From("x64");
 
         // Act
         Configuration result = original.WithPlatform(updated);

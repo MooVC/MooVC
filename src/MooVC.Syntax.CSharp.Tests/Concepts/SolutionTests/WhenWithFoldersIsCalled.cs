@@ -11,11 +11,13 @@ public sealed class WhenWithFoldersIsCalled
     {
         // Arrange
         Folder existing = SolutionTestsData.CreateFolder();
+
         var additional = new Folder
         {
             Id = Snippet.From("OtherId"),
             Name = Snippet.From("OtherName"),
         };
+
         Solution original = SolutionTestsData.Create(folder: existing);
 
         // Act

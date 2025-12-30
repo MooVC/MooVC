@@ -2,7 +2,6 @@ namespace MooVC.Syntax.CSharp.Concepts.SolutionTests;
 
 using System.Xml.Linq;
 using MooVC.Syntax.CSharp.Attributes.Solution;
-using ProjectReference = MooVC.Syntax.CSharp.Attributes.Solution.Project;
 
 public sealed class WhenToDocumentIsCalled
 {
@@ -54,11 +53,11 @@ public sealed class WhenToDocumentIsCalled
         var itemsElement = new XElement("Items", fileElement, folderElement, itemElement);
 
         var projectElement = new XElement(
-            nameof(ProjectReference),
-            new XAttribute(nameof(ProjectReference.Id), SolutionTestsData.DefaultProjectId),
-            new XAttribute(nameof(ProjectReference.Name), SolutionTestsData.DefaultProjectName),
-            new XAttribute(nameof(ProjectReference.Path), SolutionTestsData.DefaultProjectPath),
-            new XAttribute(nameof(ProjectReference.Type), SolutionTestsData.DefaultProjectType));
+            nameof(Project),
+            new XAttribute(nameof(Project.Id), SolutionTestsData.DefaultProjectId),
+            new XAttribute(nameof(Project.Name), SolutionTestsData.DefaultProjectName),
+            new XAttribute(nameof(Project.Path), SolutionTestsData.DefaultProjectPath),
+            new XAttribute(nameof(Project.Type), SolutionTestsData.DefaultProjectType));
 
         var projectsElement = new XElement("Projects", projectElement);
 

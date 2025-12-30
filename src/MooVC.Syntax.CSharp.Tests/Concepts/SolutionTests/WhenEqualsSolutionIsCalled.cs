@@ -12,7 +12,7 @@ public sealed class WhenEqualsSolutionIsCalled
         Solution subject = SolutionTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Solution));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

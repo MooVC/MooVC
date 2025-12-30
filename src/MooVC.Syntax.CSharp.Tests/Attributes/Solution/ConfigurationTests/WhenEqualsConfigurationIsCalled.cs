@@ -11,7 +11,7 @@ public sealed class WhenEqualsConfigurationIsCalled
         Configuration subject = ConfigurationTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Configuration));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

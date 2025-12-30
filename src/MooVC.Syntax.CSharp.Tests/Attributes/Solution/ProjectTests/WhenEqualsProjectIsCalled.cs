@@ -11,7 +11,7 @@ public sealed class WhenEqualsProjectIsCalled
         Project subject = ProjectTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Project));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

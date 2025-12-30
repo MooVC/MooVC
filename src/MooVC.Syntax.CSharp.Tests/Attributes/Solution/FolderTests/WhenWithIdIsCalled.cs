@@ -9,7 +9,7 @@ public sealed class WhenWithIdIsCalled
     {
         // Arrange
         Folder original = FolderTestsData.Create();
-        Snippet updated = Snippet.From("OtherId");
+        var updated = Snippet.From("OtherId");
 
         // Act
         Folder result = original.WithId(updated);

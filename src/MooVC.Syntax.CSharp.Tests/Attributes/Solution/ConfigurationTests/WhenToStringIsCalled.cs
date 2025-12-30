@@ -2,7 +2,6 @@ namespace MooVC.Syntax.CSharp.Attributes.Solution.ConfigurationTests;
 
 using System;
 using System.Xml.Linq;
-using MooVC.Syntax.CSharp;
 
 public sealed class WhenToStringIsCalled
 {

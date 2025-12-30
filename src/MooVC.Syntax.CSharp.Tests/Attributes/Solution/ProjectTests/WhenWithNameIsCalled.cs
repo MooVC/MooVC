@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Project original = ProjectTestsData.Create();
-        Snippet updated = Snippet.From("OtherName");
+        var updated = Snippet.From("OtherName");
 
         // Act
         Project result = original.WithName(updated);

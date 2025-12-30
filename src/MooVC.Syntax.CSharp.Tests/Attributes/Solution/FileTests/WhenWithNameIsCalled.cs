@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         File original = FileTestsData.Create();
-        Snippet updated = Snippet.From("OtherName");
+        var updated = Snippet.From("OtherName");
 
         // Act
         File result = original.WithName(updated);

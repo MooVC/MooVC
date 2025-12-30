@@ -11,11 +11,13 @@ public sealed class WhenWithPropertiesIsCalled
     {
         // Arrange
         Property existing = SolutionTestsData.CreateProperty();
+
         var additional = new Property
         {
             Name = Snippet.From("OtherName"),
             Value = Snippet.From("OtherValue"),
         };
+
         Solution original = SolutionTestsData.Create(property: existing);
 
         // Act

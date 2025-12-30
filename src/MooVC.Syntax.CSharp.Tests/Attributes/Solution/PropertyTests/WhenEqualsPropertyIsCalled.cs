@@ -11,7 +11,7 @@ public sealed class WhenEqualsPropertyIsCalled
         Property subject = PropertyTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Property));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

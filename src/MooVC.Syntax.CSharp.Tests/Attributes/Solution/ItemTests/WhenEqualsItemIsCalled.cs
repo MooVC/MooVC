@@ -11,7 +11,7 @@ public sealed class WhenEqualsItemIsCalled
         Item subject = ItemTestsData.Create();
 
         // Act
-        bool result = subject.Equals(default(Item));
+        bool result = subject.Equals(default);
 
         // Assert
         result.ShouldBeFalse();

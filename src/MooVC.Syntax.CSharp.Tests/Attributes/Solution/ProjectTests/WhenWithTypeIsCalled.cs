@@ -9,7 +9,7 @@ public sealed class WhenWithTypeIsCalled
     {
         // Arrange
         Project original = ProjectTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
         Project result = original.WithType(updated);

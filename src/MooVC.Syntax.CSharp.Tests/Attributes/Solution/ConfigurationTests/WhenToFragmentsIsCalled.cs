@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Attributes.Solution.ConfigurationTests;
 
+using System.Collections.Immutable;
 using System.Xml.Linq;
 using MooVC.Syntax.CSharp;
 
@@ -12,7 +13,7 @@ public sealed class WhenToFragmentsIsCalled
         Configuration subject = Configuration.Undefined;
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
         result.ShouldBeEmpty();
@@ -30,10 +31,10 @@ public sealed class WhenToFragmentsIsCalled
             new XAttribute(nameof(Configuration.Platform), ConfigurationTestsData.DefaultPlatform));
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        var fragment = result.ShouldHaveSingleItem();
+        XElement fragment = result.ShouldHaveSingleItem();
         XNode.DeepEquals(expected, fragment).ShouldBeTrue();
     }
 }

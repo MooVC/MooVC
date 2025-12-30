@@ -9,7 +9,7 @@ public sealed class WhenWithPathIsCalled
     {
         // Arrange
         Project original = ProjectTestsData.Create();
-        Snippet updated = Snippet.From("src/Other.csproj");
+        var updated = Snippet.From("src/Other.csproj");
 
         // Act
         Project result = original.WithPath(updated);

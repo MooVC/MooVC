@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Configuration original = ConfigurationTestsData.Create();
-        Snippet updated = Snippet.From("Release");
+        var updated = Snippet.From("Release");
 
         // Act
         Configuration result = original.WithName(updated);

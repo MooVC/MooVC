@@ -11,12 +11,14 @@ public sealed class WhenWithFilesIsCalled
     {
         // Arrange
         File existing = SolutionTestsData.CreateFile();
+
         var additional = new File
         {
             Id = Snippet.From("OtherId"),
             Name = Snippet.From("OtherName"),
             Path = Snippet.From("src/other.cs"),
         };
+
         Solution original = SolutionTestsData.Create(file: existing);
 
         // Act

@@ -9,11 +9,7 @@ internal static class ProjectTestsData
     public const string DefaultPath = "src/Project.csproj";
     public const string DefaultType = "CSharp";
 
-    public static Project Create(
-        Snippet? id = default,
-        Snippet? name = default,
-        Snippet? path = default,
-        Snippet? type = default)
+    public static Project Create(Snippet? id = default, Snippet? name = default, Snippet? path = default, Snippet? type = default)
     {
         return new Project
         {

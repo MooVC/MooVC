@@ -9,7 +9,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        Snippet updated = Snippet.From("OtherValue");
+        var updated = Snippet.From("OtherValue");
 
         // Act
         Property result = original.WithValue(updated);
