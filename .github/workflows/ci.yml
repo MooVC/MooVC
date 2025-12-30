@@ -20,7 +20,7 @@ on:
 env:
   configuration: 'Debug'
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-  solution: 'MooVC.sln'
+  solution: 'MooVC.slnx'
 
 permissions:
   contents: read
