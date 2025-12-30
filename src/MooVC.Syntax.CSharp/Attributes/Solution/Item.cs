@@ -80,8 +80,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Solution
                 .Include(nameof(Id), _ => !Id.IsMultiLine, Id)
                 .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
                 .And(nameof(Name), _ => !Name.IsMultiLine, Name)
-                .And(nameof(Path), _ => !Path.IsMultiLine, Path)
-                .And(nameof(Type), _ => !Type.IsMultiLine, Type)
+                .And(nameof(Path), _ => Path.IsSingleLine, Path)
+                .And(nameof(Type), _ => Type.IsSingleLine, Type)
                 .Results;
         }
     }

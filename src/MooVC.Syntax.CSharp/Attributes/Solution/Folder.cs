@@ -91,7 +91,7 @@ namespace MooVC.Syntax.CSharp.Attributes.Solution
                 .AndIf(!Folders.IsDefaultOrEmpty, nameof(Folders), folder => !folder.IsUndefined, Folders)
                 .And(nameof(Id), _ => !Id.IsMultiLine, Id)
                 .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
-                .And(nameof(Name), _ => !Name.IsMultiLine, Name)
+                .And(nameof(Name), _ => Name.IsSingleLine, Name)
                 .Results;
         }
     }

@@ -63,8 +63,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Solution
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsMultiLine, Name)
-                .And(nameof(Platform), _ => !Platform.IsMultiLine, Platform)
+                .Include(nameof(Name), _ => Name.IsSingleLine, Name)
+                .And(nameof(Platform), _ => Platform.IsSingleLine, Platform)
                 .Results;
         }
     }

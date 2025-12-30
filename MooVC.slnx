@@ -1,0 +1,70 @@
+<Solution>
+  <Folder Name="/Actions/">
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/cd.yml" />
+    <File Path=".github/workflows/ci.yml" />
+  </Folder>
+  <Folder Name="/Analyzers/">
+    <File Path=".editorconfig" />
+    <File Path="analyzers/code.ruleset" />
+    <File Path="analyzers/tests.ruleset" />
+  </Folder>
+  <Folder Name="/Build/">
+    <File Path="build/Libraries.props" />
+    <File Path="build/Roslyn.props" />
+    <File Path="build/Tests.props" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Code/">
+    <Project Path="src/MooVC.Syntax.CSharp/MooVC.Syntax.CSharp.csproj" />
+    <Project Path="src/MooVC/MooVC.csproj" />
+  </Folder>
+  <Folder Name="/Code/Infrastructure/" />
+  <Folder Name="/Code/Infrastructure/Compression/">
+    <Project Path="src/MooVC.Infrastructure.Compression.LZ4/MooVC.Infrastructure.Compression.LZ4.csproj" />
+  </Folder>
+  <Folder Name="/Code/Infrastructure/Serialization/">
+    <Project Path="src/MooVC.Infrastructure.Serialization.Apex/MooVC.Infrastructure.Serialization.Apex.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Json.Newtonsoft/MooVC.Infrastructure.Serialization.Json.Newtonsoft.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.MessagePack/MooVC.Infrastructure.Serialization.MessagePack.csproj" />
+  </Folder>
+  <Folder Name="/Configuration/">
+    <File Path=".filenesting.json" />
+    <File Path=".github/CODEOWNERS" />
+    <File Path=".gitignore" />
+    <File Path=".runsettings" />
+    <File Path="codecov.yml" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/Documentation/">
+    <File Path=".github/CODE_OF_CONDUCT.md" />
+    <File Path=".github/CONTRIBUTING.md" />
+    <File Path=".github/SECURITY.md" />
+    <File Path="AGENTS.md" />
+    <File Path="CHANGELOG.md" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/" />
+  <Folder Name="/Templates/">
+    <File Path=".github/ISSUE_TEMPLATE/bug_report.md" />
+    <File Path=".github/ISSUE_TEMPLATE/feature_request.md" />
+    <File Path=".github/pull_request_template.md" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="src/MooVC.Syntax.CSharp.Tests/MooVC.Syntax.CSharp.Tests.csproj" />
+    <Project Path="src/MooVC.Tests/MooVC.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Tests/Infrastructure/" />
+  <Folder Name="/Tests/Infrastructure/Compression/">
+    <Project Path="src/MooVC.Infrastructure.Compression.LZ4.Tests/MooVC.Infrastructure.Compression.LZ4.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Tests/Infrastructure/Serialization/">
+    <Project Path="src/MooVC.Infrastructure.Serialization.Apex.Tests/MooVC.Infrastructure.Serialization.Apex.Tests.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests/MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.MessagePack.Tests/MooVC.Infrastructure.Serialization.MessagePack.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -63,8 +63,8 @@ namespace MooVC.Syntax.CSharp.Attributes.Solution
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsMultiLine, Name)
-                .And(nameof(Value), _ => !Value.IsMultiLine, Value)
+                .Include(nameof(Name), _ => Name.IsSingleLine, Name)
+                .And(nameof(Value), _ => Value.IsSingleLine, Value)
                 .Results;
         }
     }
