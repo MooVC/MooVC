@@ -1,0 +1,36 @@
+namespace MooVC.Syntax.CSharp.Attributes.Solution.FileTests;
+
+using MooVC.Syntax.CSharp;
+
+public sealed class WhenGetHashCodeIsCalled
+{
+    [Fact]
+    public void GivenEqualValuesThenHashCodesMatch()
+    {
+        // Arrange
+        File left = FileTestsData.Create();
+        File right = FileTestsData.Create();
+
+        // Act
+        int leftHash = left.GetHashCode();
+        int rightHash = right.GetHashCode();
+
+        // Assert
+        leftHash.ShouldBe(rightHash);
+    }
+
+    [Fact]
+    public void GivenDifferentValuesThenHashCodesDiffer()
+    {
+        // Arrange
+        File left = FileTestsData.Create();
+        File right = FileTestsData.Create(name: Snippet.From("Other"));
+
+        // Act
+        int leftHash = left.GetHashCode();
+        int rightHash = right.GetHashCode();
+
+        // Assert
+        leftHash.ShouldNotBe(rightHash);
+    }
+}
