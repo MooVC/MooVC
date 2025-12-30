@@ -1,0 +1,79 @@
+namespace MooVC.Syntax.CSharp.Attributes.Solution
+{
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Xml.Linq;
+    using Fluentify;
+    using MooVC.Syntax.CSharp;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
+
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Project
+        : IValidatableObject
+    {
+        public static readonly Project Undefined = new Project();
+
+        internal Project()
+        {
+        }
+
+        public Snippet Id { get; internal set; } = Snippet.Empty;
+
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
+
+        public Snippet Name { get; internal set; } = Snippet.Empty;
+
+        public Snippet Path { get; internal set; } = Snippet.Empty;
+
+        public Snippet Type { get; internal set; } = Snippet.Empty;
+
+        public ImmutableArray<XElement> ToFragments()
+        {
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                nameof(Project),
+                Id.ToXmlAttribute(nameof(Id)),
+                Name.ToXmlAttribute(nameof(Name)),
+                Path.ToXmlAttribute(nameof(Path)),
+                Type.ToXmlAttribute(nameof(Type))));
+
+            return builder.ToImmutable();
+        }
+
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .Include(nameof(Id), _ => !Id.IsMultiLine, Id)
+                .And(nameof(Name), _ => !Name.IsMultiLine, Name)
+                .And(nameof(Path), _ => Path.IsSingleLine, Path)
+                .And(nameof(Type), _ => !Type.IsMultiLine, Type)
+                .Results;
+        }
+    }
+}
