@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenToSnippetIsCalled
 {
     [Fact]

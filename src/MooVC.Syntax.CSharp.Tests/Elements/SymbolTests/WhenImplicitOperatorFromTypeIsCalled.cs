@@ -1,5 +1,8 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
+using System.Text;
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
     [Fact]
@@ -19,13 +22,13 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
     public void GivenTypeThenSymbolUsesNameAndQualifier()
     {
         // Arrange
-        Type value = typeof(System.Text.StringBuilder);
+        Type value = typeof(StringBuilder);
 
         // Act
         Symbol subject = value;
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(nameof(System.Text.StringBuilder)));
+        subject.Name.ShouldBe(new Identifier(nameof(StringBuilder)));
         subject.Qualifier.ShouldBe(new Qualifier(["System", "Text"]));
     }
 }

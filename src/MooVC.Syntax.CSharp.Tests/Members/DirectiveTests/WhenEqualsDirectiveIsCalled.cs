@@ -1,6 +1,8 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.Elements.Identifier;
 
 public sealed class WhenEqualsDirectiveIsCalled
 {
@@ -119,10 +121,7 @@ public sealed class WhenEqualsDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    private static Directive Create(
-        string alias = Alias,
-        Qualifier? qualifier = default,
-        bool isStatic = false)
+    private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)
     {
         return new Directive
         {

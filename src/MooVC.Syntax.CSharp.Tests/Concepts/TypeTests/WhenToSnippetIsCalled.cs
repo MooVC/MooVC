@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
 using System;
 using MooVC.Syntax.CSharp;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenWithDefaultIsCalled
 {
     [Fact]

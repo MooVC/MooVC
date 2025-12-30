@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {

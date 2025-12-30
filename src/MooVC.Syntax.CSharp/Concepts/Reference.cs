@@ -10,6 +10,8 @@
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 

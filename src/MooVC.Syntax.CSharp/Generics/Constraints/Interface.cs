@@ -8,6 +8,8 @@
     using Monify;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Generics.Constraints.Interface_Resources;
 
     [Monify(Type = typeof(Declaration))]

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]

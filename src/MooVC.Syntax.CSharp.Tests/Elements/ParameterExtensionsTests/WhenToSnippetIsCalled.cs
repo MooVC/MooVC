@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements.ParameterTests;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

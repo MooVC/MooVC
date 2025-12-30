@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators;
 
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 internal static class OperatorsTestsData
 {

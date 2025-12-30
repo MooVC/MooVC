@@ -2,6 +2,8 @@ namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.Elements.Identifier;
 
 internal static class PropertyTestsData
 {

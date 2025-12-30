@@ -1,6 +1,8 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Linq;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 
 internal static class SymbolTestsData
 {

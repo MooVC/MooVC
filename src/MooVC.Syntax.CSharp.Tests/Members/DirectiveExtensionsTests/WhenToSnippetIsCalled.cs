@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.DirectiveExtensionsTests;
 using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

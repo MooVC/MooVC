@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Name = "TParameter";
@@ -11,7 +13,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Parameter? subject = default;
 
         // Act
-        Func<Snippet> result = () => subject;
+        Func<WhenImplicitOperatorToSnippetIsCalled> result = () => subject;
 
         // Assert
         _ = result.ShouldThrow<ArgumentNullException>();

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {

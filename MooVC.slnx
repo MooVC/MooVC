@@ -56,6 +56,7 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="src/MooVC.Syntax.CSharp.Tests/MooVC.Syntax.CSharp.Tests.csproj" />
+    <Project Path="src/MooVC.Syntax.Tests/MooVC.Syntax.Tests.csproj" Id="4266ac3d-28e5-443b-b1d2-78193ae07d64" />
     <Project Path="src/MooVC.Tests/MooVC.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/Infrastructure/" />

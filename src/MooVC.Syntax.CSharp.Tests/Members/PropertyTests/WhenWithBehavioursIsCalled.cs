@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenWithBehavioursIsCalled
 {
     [Fact]

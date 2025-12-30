@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenWithValueIsCalled
 {
     private const string Value = "42";

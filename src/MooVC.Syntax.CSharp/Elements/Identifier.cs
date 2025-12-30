@@ -9,6 +9,8 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Identifier_Resources;
 
     [Monify(Type = typeof(string))]

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {

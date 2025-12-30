@@ -2,6 +2,8 @@
 {
     using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
 
     public partial class Attribute
     {

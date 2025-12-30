@@ -4,7 +4,7 @@
     using Fluentify;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Argument_Resources;
-    using Code = MooVC.Syntax.CSharp.Snippet;
+    using Code = MooVC.Syntax.Elements.Snippet;
 
     public partial class Argument
     {

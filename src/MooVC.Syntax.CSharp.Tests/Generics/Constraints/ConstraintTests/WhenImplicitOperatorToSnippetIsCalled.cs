@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
+using MooVC.Syntax.Elements;
 using Shouldly;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled

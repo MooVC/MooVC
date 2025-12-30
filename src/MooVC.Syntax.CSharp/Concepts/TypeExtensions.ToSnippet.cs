@@ -4,6 +4,7 @@
     using System.Linq;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Concepts;
+    using MooVC.Syntax.Elements;
 
     public static partial class TypeExtensions
     {

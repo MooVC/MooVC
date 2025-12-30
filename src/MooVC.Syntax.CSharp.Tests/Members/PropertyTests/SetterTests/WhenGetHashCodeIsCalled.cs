@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenGetHashCodeIsCalled
 {
     [Fact]

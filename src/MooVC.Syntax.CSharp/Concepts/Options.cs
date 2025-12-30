@@ -1,7 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.Elements;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 

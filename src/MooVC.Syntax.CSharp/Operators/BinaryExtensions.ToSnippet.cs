@@ -3,6 +3,7 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.CSharp.Concepts;
+    using MooVC.Syntax.Elements;
 
     public static partial class BinaryExtensions
     {

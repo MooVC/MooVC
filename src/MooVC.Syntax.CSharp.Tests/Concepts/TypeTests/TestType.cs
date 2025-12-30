@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
+using MooVC.Syntax.Elements;
 
 internal sealed class TestType
     : Type

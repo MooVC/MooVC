@@ -3,6 +3,8 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
 
     public partial class Argument
     {

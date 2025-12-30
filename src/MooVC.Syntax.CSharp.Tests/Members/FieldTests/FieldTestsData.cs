@@ -2,6 +2,8 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 
 internal static class FieldTestsData
 {

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]

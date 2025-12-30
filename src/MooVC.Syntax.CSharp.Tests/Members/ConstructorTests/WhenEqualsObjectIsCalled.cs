@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenEqualsObjectIsCalled
 {
     [Fact]

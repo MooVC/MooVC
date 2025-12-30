@@ -5,6 +5,7 @@ using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.CSharp.Operators;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

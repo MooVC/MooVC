@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Immutable;
+    using MooVC.Syntax.Elements;
 
     public static partial class ParameterExtensions
     {

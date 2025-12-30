@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using System;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

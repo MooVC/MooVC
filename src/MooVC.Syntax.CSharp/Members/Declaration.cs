@@ -9,9 +9,11 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
-    using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
+    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 

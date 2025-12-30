@@ -3,6 +3,8 @@ namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.Elements.Identifier;
 
 internal static class ConstructorTestsData
 {

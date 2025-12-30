@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]
