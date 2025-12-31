@@ -9,7 +9,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var name = new Identifier("Alternative");
+        var name = new Variable("Alternative");
 
         // Act
         Property result = original.WithName(name);
@@ -22,6 +22,6 @@ public sealed class WhenWithNameIsCalled
         result.Scope.ShouldBe(original.Scope);
         result.Type.ShouldBe(original.Type);
 
-        original.Name.ShouldBe((Identifier)PropertyTestsData.DefaultName);
+        original.Name.ShouldBe((Variable)PropertyTestsData.DefaultName);
     }
 }

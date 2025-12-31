@@ -43,10 +43,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Struct.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Elements\Identifier.Resources.Designer.cs">
+    <Compile Update="Elements\Variable.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Identifier.Resources.resx</DependentUpon>
+      <DependentUpon>Variable.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Generics\Constraints\Interface.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -181,9 +181,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Struct.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Identifier.Resources.resx">
+    <EmbeddedResource Update="Elements\Variable.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Variable.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Generics\Constraints\Interface.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

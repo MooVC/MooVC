@@ -14,7 +14,7 @@ public sealed class WhenWithParametersIsCalled
         [
             new Parameter
             {
-                Name = new Identifier("other"),
+                Name = new Variable("other"),
                 Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
             },
         ];

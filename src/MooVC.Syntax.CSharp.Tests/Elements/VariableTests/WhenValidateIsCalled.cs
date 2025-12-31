@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -16,7 +16,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullValueThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(default);
+        var subject = new Variable(default);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -32,7 +32,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(Empty);
+        var subject = new Variable(Empty);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -48,7 +48,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(Pascal);
+        var subject = new Variable(Pascal);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -64,7 +64,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(UnicodePascal);
+        var subject = new Variable(UnicodePascal);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -74,7 +74,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -82,7 +82,7 @@ public sealed class WhenValidateIsCalled
     public void GivenCamelCaseThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Identifier(Camel);
+        var subject = new Variable(Camel);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -92,7 +92,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -100,7 +100,7 @@ public sealed class WhenValidateIsCalled
     public void GivenSnakeCaseThenNoValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Identifier(Snake);
+        var subject = new Variable(Snake);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -110,7 +110,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -118,7 +118,7 @@ public sealed class WhenValidateIsCalled
     public void GivenKebabCaseThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Identifier(Kebab);
+        var subject = new Variable(Kebab);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -128,7 +128,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -136,7 +136,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(Numeric);
+        var subject = new Variable(Numeric);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -146,7 +146,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -159,7 +159,7 @@ public sealed class WhenValidateIsCalled
     public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange
-        var subject = new Identifier(value);
+        var subject = new Variable(value);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -169,7 +169,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 }

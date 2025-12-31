@@ -34,7 +34,7 @@ public static class RecordTestsData
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,
             Methods = methods ?? [],
-            Name = name ?? new Declaration { Name = new Identifier(DefaultName) },
+            Name = name ?? new Declaration { Name = new Variable(DefaultName) },
             Operators = operators ?? new Operators(),
             Parameters = parameters ?? [],
             Properties = properties ?? [],

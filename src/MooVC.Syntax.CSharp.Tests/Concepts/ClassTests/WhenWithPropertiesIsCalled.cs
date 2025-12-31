@@ -11,8 +11,8 @@ public sealed class WhenWithPropertiesIsCalled
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        Property[] existing = [new Property { Name = new Identifier("First"), Type = typeof(int) }];
-        Property[] additional = [new Property { Name = new Identifier("Second"), Type = typeof(string) }];
+        Property[] existing = [new Property { Name = new Variable("First"), Type = typeof(int) }];
+        Property[] additional = [new Property { Name = new Variable("Second"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(properties: existing.ToImmutableArray());
 
         // Act

@@ -25,7 +25,7 @@ public sealed class WhenAsIsCalled
         var subject = new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = new Identifier(ValueType) },
+            Type = new Symbol { Name = new Variable(ValueType) },
         };
 
         // Act
@@ -42,7 +42,7 @@ public sealed class WhenAsIsCalled
         var subject = new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = new Identifier(ValueType) },
+            Type = new Symbol { Name = new Variable(ValueType) },
         };
 
         // Act

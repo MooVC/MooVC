@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests.OptionsTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 {
@@ -6,8 +6,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Identifier.Options? left = default;
-        Identifier.Options? right = default;
+        Variable.Options? left = default;
+        Variable.Options? right = default;
 
         // Act
         bool result = left == right;
@@ -20,8 +20,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Identifier.Options? left = default;
-        var right = new Identifier.Options();
+        Variable.Options? left = default;
+        var right = new Variable.Options();
 
         // Act
         bool result = left == right;
@@ -34,8 +34,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier.Options();
-        var right = new Identifier.Options();
+        var left = new Variable.Options();
+        var right = new Variable.Options();
 
         // Act
         bool result = left == right;
@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier.Options();
-        var right = new Identifier.Options { UseUnderscores = true };
+        var left = new Variable.Options();
+        var right = new Variable.Options { UseUnderscore = true };
 
         // Act
         bool result = left == right;

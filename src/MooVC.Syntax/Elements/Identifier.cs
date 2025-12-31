@@ -90,7 +90,7 @@
 
         public override string ToString()
         {
-            return ToSnippet(Options.Camel);
+            return ToSnippet(Options.Pascal);
         }
 
         public Snippet ToSnippet(Options options)
@@ -109,14 +109,7 @@
                 throw new NotSupportedException(ToStringCasingNotSupported.Format(options.Casing, nameof(Identifier)));
             }
 
-            var identifier = new StringBuilder(transform(_value));
-
-            if (options.UseUnderscores)
-            {
-                identifier = identifier.Prepend(UnderscorePrefix);
-            }
-
-            return identifier.ToString();
+            return transform(_value);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

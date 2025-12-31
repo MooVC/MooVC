@@ -17,7 +17,7 @@
             public static readonly Options Declaration = new Options
             {
                 Formatter = Formatter.Declaration,
-                Naming = Identifier.Options.Pascal,
+                Naming = Variable.Options.Pascal,
                 Snippet = Code.Options.Default,
             };
 
@@ -25,7 +25,7 @@
             public Formatter Formatter { get; set; } = Formatter.Call;
 
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Identifier.Options Naming { get; set; } = Identifier.Options.Camel;
+            public Variable.Options Naming { get; set; } = Variable.Options.Camel;
 
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Code.Options Snippet { get; set; } = Code.Options.Default;

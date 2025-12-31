@@ -81,7 +81,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         var left = new Argument.Options();
 
         Argument.Options right = new Argument.Options()
-            .WithNaming(Identifier.Options.Pascal);
+            .WithNaming(Variable.Options.Pascal);
 
         // Act
         bool resultLeftRight = left == right;

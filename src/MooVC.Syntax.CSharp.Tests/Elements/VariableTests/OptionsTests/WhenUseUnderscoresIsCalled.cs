@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests.OptionsTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenUseUnderscoresIsCalled
 {
@@ -6,15 +6,15 @@ public sealed class WhenUseUnderscoresIsCalled
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange
-        var original = new Identifier.Options();
+        var original = new Variable.Options();
 
         // Act
-        Identifier.Options result = original.UseUnderscores(true);
+        Variable.Options result = original.UseUnderscores(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Casing.ShouldBe(original.Casing);
-        result.UseUnderscores.ShouldBeTrue();
-        original.UseUnderscores.ShouldBeFalse();
+        result.UseUnderscore.ShouldBeTrue();
+        original.UseUnderscore.ShouldBeFalse();
     }
 }

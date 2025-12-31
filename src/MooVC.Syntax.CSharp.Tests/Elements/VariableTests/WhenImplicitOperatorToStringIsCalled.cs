@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
@@ -9,10 +9,10 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Identifier? identifier = default;
+        Variable? variable = default;
 
         // Act
-        Func<string> result = () => identifier;
+        Func<string> result = () => variable;
 
         // Assert
         _ = result.ShouldThrow<ArgumentNullException>();
@@ -22,7 +22,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
-        var subject = new Identifier(default);
+        var subject = new Variable(default);
 
         // Act
         string result = subject;
@@ -35,7 +35,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Identifier(string.Empty);
+        var subject = new Variable(string.Empty);
 
         // Act
         string result = subject;
@@ -48,7 +48,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Identifier(Alpha);
+        var subject = new Variable(Alpha);
         string expected = Alpha.ToCamelCase();
 
         // Act
@@ -62,7 +62,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenUnicodeThenMatchesValueInCamelCase()
     {
         // Arrange
-        var subject = new Identifier(Unicode);
+        var subject = new Variable(Unicode);
         string expected = Unicode.ToCamelCase();
 
         // Act
@@ -77,7 +77,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Identifier(value);
+        var subject = new Variable(value);
 
         // Act
         string result = subject;

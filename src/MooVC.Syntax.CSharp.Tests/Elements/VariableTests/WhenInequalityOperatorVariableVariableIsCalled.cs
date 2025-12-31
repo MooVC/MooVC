@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
-public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
+public sealed class WhenInequalityOperatorVariableVariableIsCalled
 {
     private const string Same = "Alpha";
     private const string Different = "Beta";
@@ -9,8 +9,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Identifier? left = default;
-        Identifier? right = default;
+        Variable? left = default;
+        Variable? right = default;
 
         // Act
         bool result = left != right;
@@ -23,8 +23,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Identifier? left = default;
-        var right = new Identifier(Same);
+        Variable? left = default;
+        var right = new Variable(Same);
 
         // Act
         bool result = left != right;
@@ -37,8 +37,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
-        Identifier? right = default;
+        var left = new Variable(Same);
+        Variable? right = default;
 
         // Act
         bool result = left != right;
@@ -51,8 +51,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Identifier(Same);
-        Identifier second = first;
+        var first = new Variable(Same);
+        Variable second = first;
 
         // Act
         bool result = first != second;
@@ -65,8 +65,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Same);
+        var left = new Variable(Same);
+        var right = new Variable(Same);
 
         // Act
         bool resultLeftRight = left != right;
@@ -81,8 +81,8 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Different);
+        var left = new Variable(Same);
+        var right = new Variable(Different);
 
         // Act
         bool resultLeftRight = left != right;

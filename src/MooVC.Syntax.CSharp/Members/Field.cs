@@ -12,7 +12,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Field_Resources;
-    using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     [Fluentify]
@@ -37,7 +36,7 @@
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
@@ -107,7 +106,7 @@
 
         private string GetSignature()
         {
-            var name = Name.ToSnippet(Identifier.Options.Pascal);
+            var name = Name.ToSnippet(Variable.Options.Pascal);
             string scope = Scope;
             string type = Type;
             string @static = IsStatic.Static();

@@ -24,6 +24,6 @@ public sealed class WhenWithTypeIsCalled
         result.Modifier.ShouldBe(original.Modifier);
         result.Name.ShouldBe(original.Name);
         result.Type.ShouldBe(type);
-        original.Name.ShouldBe(new Identifier(ParameterTestsData.DefaultName));
+        original.Name.ShouldBe(new Variable(ParameterTestsData.DefaultName));
     }
 }

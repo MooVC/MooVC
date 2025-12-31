@@ -7,7 +7,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Original");
-        var name = new Identifier("Updated");
+        var name = new Variable("Updated");
 
         // Act
         Symbol result = original.WithName(name);

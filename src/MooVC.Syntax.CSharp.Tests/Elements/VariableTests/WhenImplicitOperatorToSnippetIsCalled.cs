@@ -1,27 +1,29 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests;
+
+using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
-    private const string IdentifierName = "Identifier";
+    private const string VariableName = "Variable";
 
     [Fact]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Identifier? identifier = default;
+        Variable? variable = default;
 
         // Act
-        Func<Snippet> result = () => identifier;
+        Func<Snippet> result = () => variable;
 
         // Assert
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]
-    public void GivenIdentifierThenSnippetMatchesStringRepresentation()
+    public void GivenVariableThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        var subject = new Identifier(IdentifierName);
+        var subject = new Variable(VariableName);
 
         // Act
         Snippet result = subject;

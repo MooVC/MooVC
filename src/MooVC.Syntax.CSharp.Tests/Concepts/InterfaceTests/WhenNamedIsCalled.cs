@@ -9,8 +9,8 @@ public sealed class WhenNamedIsCalled
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
-        Interface original = InterfaceTestsData.Create(name: new Declaration { Name = new Identifier("Original") });
-        var name = new Declaration { Name = new Identifier("Updated") };
+        Interface original = InterfaceTestsData.Create(name: new Declaration { Name = new Variable("Original") });
+        var name = new Declaration { Name = new Variable("Updated") };
 
         // Act
         Interface result = original.Named(name);
@@ -18,6 +18,6 @@ public sealed class WhenNamedIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(name);
-        original.Name.ShouldBe(new Declaration { Name = new Identifier("Original") });
+        original.Name.ShouldBe(new Declaration { Name = new Variable("Original") });
     }
 }

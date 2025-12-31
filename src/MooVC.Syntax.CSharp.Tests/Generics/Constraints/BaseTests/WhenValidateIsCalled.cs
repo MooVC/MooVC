@@ -39,7 +39,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -47,7 +47,7 @@ public sealed class WhenValidateIsCalled
     public void GivenValidBaseThenNoValidationErrorsReturned()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(BaseName) };
+        Base subject = new Symbol { Name = new Variable(BaseName) };
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

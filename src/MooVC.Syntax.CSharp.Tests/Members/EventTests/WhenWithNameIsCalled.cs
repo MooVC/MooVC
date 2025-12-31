@@ -11,7 +11,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Event original = EventTestsData.Create();
-        Identifier name = Name;
+        Variable name = Name;
 
         // Act
         Event result = original.WithName(name);

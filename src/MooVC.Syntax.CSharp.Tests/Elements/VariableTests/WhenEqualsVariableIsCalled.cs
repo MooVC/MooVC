@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
-public sealed class WhenEqualsIdentifierIsCalled
+public sealed class WhenEqualsVariableIsCalled
 {
     private const string Same = "Alpha";
     private const string Different = "Beta";
@@ -9,8 +9,8 @@ public sealed class WhenEqualsIdentifierIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
-        Identifier? right = default;
+        var left = new Variable(Same);
+        Variable? right = default;
 
         // Act
         bool result = left.Equals(right);
@@ -23,8 +23,8 @@ public sealed class WhenEqualsIdentifierIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Identifier(Same);
-        Identifier second = first;
+        var first = new Variable(Same);
+        Variable second = first;
 
         // Act
         bool result = first.Equals(second);
@@ -37,8 +37,8 @@ public sealed class WhenEqualsIdentifierIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Same);
+        var left = new Variable(Same);
+        var right = new Variable(Same);
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsIdentifierIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Different);
+        var left = new Variable(Same);
+        var right = new Variable(Different);
 
         // Act
         bool resultLeftRight = left.Equals(right);

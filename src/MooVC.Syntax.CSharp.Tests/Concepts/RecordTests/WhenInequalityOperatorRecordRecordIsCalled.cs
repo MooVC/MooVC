@@ -65,8 +65,8 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Record left = RecordTestsData.Create(parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(string) }]);
-        Record right = RecordTestsData.Create(parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(string) }]);
+        Record left = RecordTestsData.Create(parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }]);
+        Record right = RecordTestsData.Create(parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }]);
 
         // Act
         bool resultLeftRight = left != right;
@@ -82,7 +82,7 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
     {
         // Arrange
         Record left = RecordTestsData.Create();
-        Record right = RecordTestsData.Create(name: new Declaration { Name = new Identifier("Other") });
+        Record right = RecordTestsData.Create(name: new Declaration { Name = new Variable("Other") });
 
         // Act
         bool result = left != right;

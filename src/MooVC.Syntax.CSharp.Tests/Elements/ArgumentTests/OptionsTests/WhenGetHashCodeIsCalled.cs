@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
         var first = new Argument.Options();
 
         Argument.Options second = new Argument.Options()
-            .WithNaming(Identifier.Options.Pascal);
+            .WithNaming(Variable.Options.Pascal);
 
         // Act
         int firstHash = first.GetHashCode();

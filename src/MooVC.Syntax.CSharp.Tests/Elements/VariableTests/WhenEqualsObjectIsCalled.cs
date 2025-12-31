@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
@@ -9,7 +9,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
+        var subject = new Variable(Same);
         object? other = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Identifier(Same);
+        var subject = new Variable(Same);
         object other = subject;
 
         // Act
@@ -37,8 +37,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
-        object right = new Identifier(Same);
+        var left = new Variable(Same);
+        object right = new Variable(Same);
 
         // Act
         bool result = left.Equals(right);
@@ -51,8 +51,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
-        object right = new Identifier(Different);
+        var left = new Variable(Same);
+        object right = new Variable(Different);
 
         // Act
         bool result = left.Equals(right);
@@ -65,7 +65,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonMemberThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
+        var subject = new Variable(Same);
         object other = Same;
 
         // Act
@@ -79,8 +79,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Same);
+        var left = new Variable(Same);
+        var right = new Variable(Same);
         object leftObject = left;
         object rightObject = right;
 
@@ -97,8 +97,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Identifier(Same);
-        var right = new Identifier(Different);
+        var left = new Variable(Same);
+        var right = new Variable(Different);
         object leftObject = left;
         object rightObject = right;
 

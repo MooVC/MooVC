@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var first = new Identifier(value);
-        var second = new Identifier(value);
+        var first = new Variable(value);
+        var second = new Variable(value);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -31,8 +31,8 @@ public sealed class WhenGetHashCodeIsCalled
             .OrderBy(_ => Random.Shared.Next())
             .ToArray();
 
-        var firstMember = new Identifier(words[0]);
-        var secondMember = new Identifier(words[^1]);
+        var firstMember = new Variable(words[0]);
+        var secondMember = new Variable(words[^1]);
 
         // Act
         int firstHash = firstMember.GetHashCode();
@@ -47,7 +47,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var subject = new Identifier(value);
+        var subject = new Variable(value);
 
         // Act
         int first = subject.GetHashCode();

@@ -11,7 +11,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        var name = new Identifier(NewName);
+        var name = new Variable(NewName);
 
         // Act
         Declaration result = original.WithName(name);
@@ -20,6 +20,6 @@ public sealed class WhenWithNameIsCalled
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(name);
         result.Parameters.ShouldBe(original.Parameters);
-        original.Name.ShouldBe(new Identifier(DeclarationTestsData.DefaultName));
+        original.Name.ShouldBe(new Variable(DeclarationTestsData.DefaultName));
     }
 }

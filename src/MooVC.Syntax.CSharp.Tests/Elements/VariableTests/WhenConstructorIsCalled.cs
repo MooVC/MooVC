@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Identifier(default));
+        _ = Should.NotThrow(() => _ = new Variable(default));
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         string value = string.Empty;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Identifier(value));
+        _ = Should.NotThrow(() => _ = new Variable(value));
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         string value = "   ";
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Identifier(value));
+        _ = Should.NotThrow(() => _ = new Variable(value));
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         string value = new Faker().Random.AlphaNumeric(32);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Identifier(value));
+        _ = Should.NotThrow(() => _ = new Variable(value));
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class WhenConstructorIsCalled
         string value = new('x', 64_000);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Identifier(value));
+        _ = Should.NotThrow(() => _ = new Variable(value));
     }
 
     [Fact]
@@ -56,8 +56,8 @@ public sealed class WhenConstructorIsCalled
         const string value = "Value";
 
         // Act
-        var first = new Identifier(value);
-        var second = new Identifier(value);
+        var first = new Variable(value);
+        var second = new Variable(value);
 
         // Assert
         first.Equals(second).ShouldBeTrue();
@@ -73,8 +73,8 @@ public sealed class WhenConstructorIsCalled
         const string right = "Second";
 
         // Act
-        var first = new Identifier(left);
-        var second = new Identifier(right);
+        var first = new Variable(left);
+        var second = new Variable(right);
 
         // Assert
         first.Equals(second).ShouldBeFalse();

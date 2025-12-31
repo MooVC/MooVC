@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
+using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenConstructorIsCalled
@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Declaration();
 
         // Assert
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Variable.Unnamed);
         subject.Parameters.ShouldBeEmpty();
         subject.IsUnspecified.ShouldBeTrue();
     }
@@ -28,12 +28,12 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Declaration
         {
-            Name = new Identifier(DeclarationTestsData.DefaultName),
+            Name = new Variable(DeclarationTestsData.DefaultName),
             Parameters = [parameter],
         };
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(DeclarationTestsData.DefaultName));
+        subject.Name.ShouldBe(new Variable(DeclarationTestsData.DefaultName));
         subject.Parameters.ShouldBe(new[] { parameter });
         subject.IsUnspecified.ShouldBeFalse();
     }

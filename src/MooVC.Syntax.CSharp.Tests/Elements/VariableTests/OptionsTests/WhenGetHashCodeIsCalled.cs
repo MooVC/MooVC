@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests.OptionsTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenEqualOptionsThenHashCodesAreEqual()
     {
         // Arrange
-        var first = new Identifier.Options();
-        var second = new Identifier.Options();
+        var first = new Variable.Options();
+        var second = new Variable.Options();
 
         // Act
         int firstHash = first.GetHashCode();
@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange
-        var first = new Identifier.Options();
-        var second = new Identifier.Options { UseUnderscores = true };
+        var first = new Variable.Options();
+        var second = new Variable.Options { UseUnderscore = true };
 
         // Act
         int firstHash = first.GetHashCode();

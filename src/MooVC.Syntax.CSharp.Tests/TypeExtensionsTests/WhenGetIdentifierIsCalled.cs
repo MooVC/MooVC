@@ -12,7 +12,7 @@ public sealed class WhenGetIdentifierIsCalled
         Type? type = default;
 
         // Act
-        Action action = () => _ = type!.GetIdentifier();
+        Action action = () => _ = type!.GetName();
 
         // Assert
         _ = action.ShouldThrow<ArgumentNullException>();
@@ -25,7 +25,7 @@ public sealed class WhenGetIdentifierIsCalled
         Type type = typeof(string);
 
         // Act
-        string result = type.GetIdentifier();
+        string result = type.GetName();
 
         // Assert
         result.ShouldBe("string");
@@ -38,8 +38,8 @@ public sealed class WhenGetIdentifierIsCalled
         Type type = typeof(GenericSample<int>);
 
         // Act
-        Identifier identifier = type.GetIdentifier();
-        string result = identifier.ToSnippet(Identifier.Options.Pascal);
+        Variable identifier = type.GetName();
+        string result = identifier.ToSnippet(Variable.Options.Pascal);
 
         // Assert
         result.ShouldBe("GenericSample");

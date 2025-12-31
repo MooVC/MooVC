@@ -9,7 +9,7 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var @event = new Event { Name = new Identifier("Created") };
+        var @event = new Event { Name = new Variable("Created") };
         Interface original = InterfaceTestsData.Create();
 
         // Act

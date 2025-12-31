@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -13,7 +13,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Identifier)value);
+        _ = Should.NotThrow(() => _ = (Variable)value);
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
         string result = subject;
 
         // Assert
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Empty;
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -51,7 +51,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Space;
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -65,7 +65,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -79,7 +79,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = new('x', 64_000);
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -94,7 +94,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string expected = value.ToCamelCase();
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
         string result = subject;
 
         // Assert
@@ -108,8 +108,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Identifier first = value;
-        Identifier second = value;
+        Variable first = value;
+        Variable second = value;
 
         // Assert
         ReferenceEquals(first, second).ShouldBeFalse();

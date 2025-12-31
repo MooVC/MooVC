@@ -11,8 +11,8 @@ public sealed class WhenWithFieldsIsCalled
     public void GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Field[] existing = [new Field { Name = new Identifier("_first"), Type = typeof(int) }];
-        Field[] additional = [new Field { Name = new Identifier("_second"), Type = typeof(string) }];
+        Field[] existing = [new Field { Name = new Variable("_first"), Type = typeof(int) }];
+        Field[] additional = [new Field { Name = new Variable("_second"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(fields: existing.ToImmutableArray());
 
         // Act

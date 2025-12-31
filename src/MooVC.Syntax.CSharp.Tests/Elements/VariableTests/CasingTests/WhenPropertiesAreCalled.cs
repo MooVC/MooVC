@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests.CasingTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests.CasingTests;
 
 public sealed class WhenPropertiesAreCalled
 {
@@ -10,7 +10,7 @@ public sealed class WhenPropertiesAreCalled
     public void GivenCasingThenFlagsMatch(int value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
     {
         // Arrange
-        Identifier.Casing subject = value;
+        Variable.Casing subject = value;
 
         // Act & Assert
         subject.IsPascal.ShouldBe(expectedPascal);
@@ -27,7 +27,7 @@ public sealed class WhenPropertiesAreCalled
     public void GivenCasingThenToStringMatches(int value, string expected)
     {
         // Arrange
-        Identifier.Casing subject = value;
+        Variable.Casing subject = value;
 
         // Act
         string result = subject.ToString();

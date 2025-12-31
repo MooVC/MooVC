@@ -1,7 +1,7 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using MooVC.Syntax.CSharp;
-using static MooVC.Syntax.CSharp.Elements.Identifier;
+using static MooVC.Syntax.CSharp.Elements.Variable;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -12,7 +12,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsWithPascalCasingThenReturnsPascalCasedValue()
     {
         // Arrange
-        var subject = new Identifier(Mixed);
+        var subject = new Variable(Mixed);
 
         Options options = new Options()
             .WithCasing(Casing.Pascal);
@@ -28,7 +28,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsWithCamelCasingThenReturnsCamelCasedValue()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         Options options = new Options()
             .WithCasing(Casing.Camel);
@@ -44,7 +44,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsWithSnakeCasingThenReturnsSnakeCasedValue()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         Options options = new Options()
             .WithCasing(Casing.Snake);
@@ -60,7 +60,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsWithKebabCasingThenReturnsKebabCasedValue()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         Options options = new Options()
             .WithCasing(Casing.Kebab);
@@ -76,7 +76,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenOptionsWithUnderscoreThenResultIsPrefixed()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         Options options = new Options()
             .WithCasing(Casing.Camel)
@@ -98,7 +98,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
         string keyword = Keywords.Reserved.ElementAt(element);
-        var subject = new Identifier(keyword);
+        var subject = new Variable(keyword);
         string expected = keyword.ToCamelCase();
 
         Options options = new Options()
@@ -116,7 +116,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenUnsupportedCasingThenThrows()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         Options options = new Options()
             .WithCasing((Casing)999);
@@ -132,7 +132,7 @@ public sealed class WhenToSnippetIsCalled
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
         Options? options = default;
 
         // Act

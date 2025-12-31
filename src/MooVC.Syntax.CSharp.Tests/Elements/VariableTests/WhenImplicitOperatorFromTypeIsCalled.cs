@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
@@ -9,22 +9,22 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Type? value = default;
 
         // Act
-        Func<Identifier> result = () => value!;
+        Func<Variable> result = () => value!;
 
         // Assert
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]
-    public void GivenTypeThenIdentifierMatchesTypeName()
+    public void GivenTypeThenVariableMatchesTypeName()
     {
         // Arrange
         Type value = typeof(Guid);
 
         // Act
-        Identifier subject = value;
+        Variable subject = value;
 
         // Assert
-        subject.ShouldBe(new Identifier(nameof(Guid)));
+        subject.ShouldBe(new Variable(nameof(Guid)));
     }
 }

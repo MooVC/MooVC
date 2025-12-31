@@ -11,8 +11,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenMatchingBasesThenReturnSameHash()
     {
         // Arrange
-        Base first = new Symbol { Name = new Identifier(Same) };
-        Base second = new Symbol { Name = new Identifier(Same) };
+        Base first = new Symbol { Name = new Variable(Same) };
+        Base second = new Symbol { Name = new Variable(Same) };
 
         // Act
         int firstHash = first.GetHashCode();
@@ -26,8 +26,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentBasesThenReturnDifferentHashes()
     {
         // Arrange
-        Base first = new Symbol { Name = new Identifier(Same) };
-        Base second = new Symbol { Name = new Identifier(Different) };
+        Base first = new Symbol { Name = new Variable(Same) };
+        Base second = new Symbol { Name = new Variable(Different) };
 
         // Act
         int firstHash = first.GetHashCode();

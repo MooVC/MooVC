@@ -110,8 +110,8 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     public void GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Identifier("Left") } });
-        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Identifier("Right") } });
+        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Variable("Left") } });
+        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Variable("Right") } });
 
         // Act
         bool resultLeftRight = left == right;

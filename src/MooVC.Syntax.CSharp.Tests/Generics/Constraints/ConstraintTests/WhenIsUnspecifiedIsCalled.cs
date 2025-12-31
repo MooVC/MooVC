@@ -1,7 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
+using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
@@ -24,7 +24,7 @@ public sealed class WhenIsUnspecifiedIsCalled
         // Arrange
         var subject = new Constraint
         {
-            Base = new Symbol { Name = new Identifier("Result") },
+            Base = new Symbol { Name = new Variable("Result") },
         };
 
         // Act

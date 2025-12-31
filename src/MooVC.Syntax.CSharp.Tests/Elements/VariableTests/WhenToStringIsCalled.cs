@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     public void GivenDefaultOptionsThenUsesCamelCase()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         // Act
         string result = subject.ToString();
@@ -21,8 +21,8 @@ public sealed class WhenToStringIsCalled
     public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
-        var left = new Identifier("MyName");
-        var right = new Identifier("MyOtherName");
+        var left = new Variable("MyName");
+        var right = new Variable("MyOtherName");
 
         // Act
         string leftString = left.ToString();
@@ -36,7 +36,7 @@ public sealed class WhenToStringIsCalled
     public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
-        var subject = new Identifier(MultiWord);
+        var subject = new Variable(MultiWord);
 
         // Act
         string first = subject.ToString();

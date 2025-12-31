@@ -9,8 +9,8 @@ public sealed class WhenWithPropertiesIsCalled
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Property { Name = new Identifier("Value"), Type = typeof(string) };
-        var appended = new Property { Name = new Identifier("Other"), Type = typeof(int) };
+        var existing = new Property { Name = new Variable("Value"), Type = typeof(string) };
+        var appended = new Property { Name = new Variable("Other"), Type = typeof(int) };
         Record original = RecordTestsData.Create(properties: [existing]);
 
         // Act

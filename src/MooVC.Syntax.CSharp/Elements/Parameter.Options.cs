@@ -15,11 +15,11 @@
 
             public static readonly Options Pascal = new Options
             {
-                Naming = Identifier.Options.Pascal,
+                Naming = Variable.Options.Pascal,
             };
 
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Identifier.Options Naming { get; internal set; } = Identifier.Options.Camel;
+            public Variable.Options Naming { get; internal set; } = Variable.Options.Camel;
 
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;

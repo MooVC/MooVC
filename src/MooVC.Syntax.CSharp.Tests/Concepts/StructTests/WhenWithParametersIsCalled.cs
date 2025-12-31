@@ -9,7 +9,7 @@ public sealed class WhenWithParametersIsCalled
     public void GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var parameter = new Parameter { Name = new Identifier("input"), Type = typeof(int) };
+        var parameter = new Parameter { Name = new Variable("input"), Type = typeof(int) };
         Struct original = StructTestsData.Create();
 
         // Act

@@ -27,8 +27,8 @@ public sealed class WhenToStringIsCalled
             constructors: [constructor],
             extensibility: Extensibility.Abstract,
             isPartial: true,
-            name: new Declaration { Name = new Identifier(RecordTestsData.DefaultName) },
-            parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(int) }],
+            name: new Declaration { Name = new Variable(RecordTestsData.DefaultName) },
+            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(int) }],
             scope: Scope.Internal);
 
         // Act

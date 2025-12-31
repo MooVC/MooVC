@@ -33,7 +33,7 @@
 
         public bool IsNullable { get; internal set; }
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
@@ -130,7 +130,7 @@
                 return string.Empty;
             }
 
-            var signature = Name.ToSnippet(Identifier.Options.Pascal);
+            var signature = Name.ToSnippet(Variable.Options.Pascal);
 
             signature = GetQualifiedSignature(options, signature);
 

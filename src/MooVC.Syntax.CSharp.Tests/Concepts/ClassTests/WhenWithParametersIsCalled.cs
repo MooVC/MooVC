@@ -11,8 +11,8 @@ public sealed class WhenWithParametersIsCalled
     public void GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        Parameter[] existing = [new Parameter { Name = new Identifier("value"), Type = typeof(int) }];
-        Parameter[] additional = [new Parameter { Name = new Identifier("text"), Type = typeof(string) }];
+        Parameter[] existing = [new Parameter { Name = new Variable("value"), Type = typeof(int) }];
+        Parameter[] additional = [new Parameter { Name = new Variable("text"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(parameters: existing.ToImmutableArray());
 
         // Act

@@ -9,8 +9,8 @@ public sealed class WhenWithFieldsIsCalled
     public void GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Field { Name = new Identifier("_value"), Type = typeof(int) };
-        var appended = new Field { Name = new Identifier("_other"), Type = typeof(int) };
+        var existing = new Field { Name = new Variable("_value"), Type = typeof(int) };
+        var appended = new Field { Name = new Variable("_other"), Type = typeof(int) };
         Record original = RecordTestsData.Create(fields: [existing]);
 
         // Act

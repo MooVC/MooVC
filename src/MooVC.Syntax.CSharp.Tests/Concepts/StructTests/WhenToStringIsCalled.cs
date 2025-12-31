@@ -28,8 +28,8 @@ public sealed class WhenToStringIsCalled
             behavior: Struct.Kind.Ref,
             constructors: [constructor],
             isPartial: true,
-            name: new Declaration { Name = new Identifier(StructTestsData.DefaultName) },
-            parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(int) }],
+            name: new Declaration { Name = new Variable(StructTestsData.DefaultName) },
+            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(int) }],
             scope: Scope.Internal);
 
         // Act

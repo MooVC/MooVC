@@ -7,7 +7,7 @@ public sealed class WhenWithTypeIsCalled
     {
         // Arrange
         Result original = ResultTestsData.Create();
-        var type = new Symbol { Name = new Identifier("Updated") };
+        var type = new Symbol { Name = new Variable("Updated") };
 
         // Act
         Result result = original.WithType(type);
@@ -17,6 +17,6 @@ public sealed class WhenWithTypeIsCalled
         result.Type.ShouldBe(type);
         result.Modifier.ShouldBe(original.Modifier);
         result.Mode.ShouldBe(original.Mode);
-        original.Type.Name.ShouldBe(new Identifier(ResultTestsData.DefaultTypeName));
+        original.Type.Name.ShouldBe(new Variable(ResultTestsData.DefaultTypeName));
     }
 }

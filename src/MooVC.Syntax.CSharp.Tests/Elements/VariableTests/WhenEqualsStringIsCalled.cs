@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using Shouldly;
 using Xunit;
@@ -12,7 +12,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string? right = default;
 
         // Act
@@ -26,7 +26,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string right = Same;
 
         // Act
@@ -40,7 +40,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string right = Different;
 
         // Act

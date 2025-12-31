@@ -3,7 +3,6 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.Elements;
-using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
 
 internal static class FieldTestsData
 {
@@ -24,8 +23,8 @@ internal static class FieldTestsData
             IsReadOnly = isReadOnly ?? true,
             IsStatic = isStatic ?? false,
             Name = name is null
-                ? Identifier.Unnamed
-                : new Identifier(name),
+                ? Variable.Unnamed
+                : new Variable(name),
             Scope = scope ?? Scope.Public,
             Type = type ?? DefaultType,
         };

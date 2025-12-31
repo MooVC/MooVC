@@ -69,7 +69,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -80,7 +80,7 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = new Identifier(BaseName) },
+            Base = new Symbol { Name = new Variable(BaseName) },
             Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
@@ -115,7 +115,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Identifier)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Variable)));
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Interface)));
     }
 }

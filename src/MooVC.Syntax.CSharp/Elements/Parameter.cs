@@ -33,7 +33,7 @@
 
         public Mode Modifier { get; internal set; } = Mode.None;
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 

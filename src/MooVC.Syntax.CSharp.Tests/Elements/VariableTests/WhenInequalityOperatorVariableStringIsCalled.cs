@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Elements.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
-public sealed class WhenInequalityOperatorIdentifierStringIsCalled
+public sealed class WhenInequalityOperatorVariableStringIsCalled
 {
     private const string Same = "Alpha";
     private const string Different = "Beta";
@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorIdentifierStringIsCalled
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Identifier? left = default;
+        Variable? left = default;
         string? right = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenInequalityOperatorIdentifierStringIsCalled
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Identifier? left = default;
+        Variable? left = default;
         string right = Same;
 
         // Act
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorIdentifierStringIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorIdentifierStringIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string right = Same;
 
         // Act
@@ -65,7 +65,7 @@ public sealed class WhenInequalityOperatorIdentifierStringIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
+        var left = new Variable(Same);
         string right = Different;
 
         // Act

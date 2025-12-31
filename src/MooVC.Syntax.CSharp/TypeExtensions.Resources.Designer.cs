@@ -63,9 +63,9 @@ namespace MooVC.Syntax.CSharp {
         /// <summary>
         ///   Looks up a localized string similar to The `{0}` from which the `{1}` is to be derived must be provided..
         /// </summary>
-        internal static string GetIdentifierTypeRequired {
+        internal static string GetNameTypeRequired {
             get {
-                return ResourceManager.GetString("GetIdentifierTypeRequired", resourceCulture);
+                return ResourceManager.GetString("GetNameTypeRequired", resourceCulture);
             }
         }
     }

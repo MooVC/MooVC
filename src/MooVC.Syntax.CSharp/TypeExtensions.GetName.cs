@@ -9,9 +9,9 @@
     {
         private const char Separator = '`';
 
-        public static Identifier GetIdentifier(this Type type)
+        public static Variable GetName(this Type type)
         {
-            _ = Guard.Against.Null(type, message: GetIdentifierTypeRequired.Format(typeof(Type), typeof(Identifier)));
+            _ = Guard.Against.Null(type, message: GetNameTypeRequired.Format(typeof(Type), typeof(Variable)));
 
             if (Aliases.TryGet(type, out string alias))
             {

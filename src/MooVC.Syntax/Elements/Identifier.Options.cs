@@ -20,8 +20,6 @@
 
             [Ignore]
             public bool IsPascal => Casing == Casing.Pascal;
-
-            public bool UseUnderscores { get; set; }
         }
     }
 }

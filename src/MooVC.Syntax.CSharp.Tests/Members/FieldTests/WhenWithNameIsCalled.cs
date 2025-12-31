@@ -13,17 +13,17 @@ public sealed class WhenWithNameIsCalled
         Field original = FieldTestsData.Create();
 
         // Act
-        Field result = original.WithName(new Identifier(NewName));
+        Field result = original.WithName(new Variable(NewName));
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Default.ShouldBe(original.Default);
         result.IsReadOnly.ShouldBe(original.IsReadOnly);
         result.IsStatic.ShouldBe(original.IsStatic);
-        result.Name.ShouldBe(new Identifier(NewName));
+        result.Name.ShouldBe(new Variable(NewName));
         result.Scope.ShouldBe(original.Scope);
         result.Type.ShouldBe(original.Type);
 
-        original.Name.ShouldBe(new Identifier(FieldTestsData.DefaultName));
+        original.Name.ShouldBe(new Variable(FieldTestsData.DefaultName));
     }
 }
