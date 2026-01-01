@@ -3,26 +3,26 @@
     using Monify;
 
     /// <summary>
-    /// Represents a c# syntax element symbol.
+    /// Represents a C# syntax element symbol.
     /// </summary>
     public partial class Symbol
     {
         /// <summary>
-        /// Represents a c# syntax element qualification.
+        /// Represents a C# syntax element qualification.
         /// </summary>
         [Monify(Type = typeof(byte))]
         public sealed partial class Qualification
         {
             /// <summary>
-            /// Gets the full on the Qualification.
+            /// Represents the full for the Qualification.
             /// </summary>
             public static readonly Qualification Full = 1;
             /// <summary>
-            /// Gets the minimum on the Qualification.
+            /// Represents the minimum for the Qualification.
             /// </summary>
             public static readonly Qualification Minimum = 0;
             /// <summary>
-            /// Gets the global on the Qualification.
+            /// Represents the global for the Qualification.
             /// </summary>
             public static readonly Qualification Global = 2;
 
@@ -34,16 +34,19 @@
             /// <summary>
             /// Gets a value indicating whether the Qualification is full.
             /// </summary>
+            /// <value>A value indicating whether the Qualification is full.</value>
             public bool IsFull => this == Full;
 
             /// <summary>
             /// Gets a value indicating whether the Qualification is minimum.
             /// </summary>
+            /// <value>A value indicating whether the Qualification is minimum.</value>
             public bool IsMinimum => this == Minimum;
 
             /// <summary>
             /// Gets a value indicating whether the Qualification is global.
             /// </summary>
+            /// <value>A value indicating whether the Qualification is global.</value>
             public bool IsGlobal => this == Global;
         }
     }

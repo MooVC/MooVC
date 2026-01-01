@@ -19,11 +19,11 @@
             public sealed partial class StyleType
             {
                 /// <summary>
-                /// Gets the allman on the StyleType.
+                /// Represents the allman for the StyleType.
                 /// </summary>
                 public static readonly StyleType Allman = 0;
                 /// <summary>
-                /// Gets the k and r on the StyleType.
+                /// Represents the k and r for the StyleType.
                 /// </summary>
                 public static readonly StyleType KAndR = 1;
 
@@ -35,11 +35,13 @@
                 /// <summary>
                 /// Gets a value indicating whether the StyleType is allman.
                 /// </summary>
+                /// <value>A value indicating whether the StyleType is allman.</value>
                 public bool IsAllman => this == Allman;
 
                 /// <summary>
                 /// Gets a value indicating whether the StyleType is k and r.
                 /// </summary>
+                /// <value>A value indicating whether the StyleType is k and r.</value>
                 public bool IsKAndR => this == KAndR;
             }
         }

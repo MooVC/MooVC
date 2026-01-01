@@ -6,15 +6,17 @@
     using static MooVC.Syntax.CSharp.TypeExtensions_Resources;
 
     /// <summary>
-    /// Represents a c# syntax type extensions.
+    /// Represents a C# syntax type extensions.
     /// </summary>
     internal static partial class TypeExtensions
     {
         private const char Separator = '`';
 
         /// <summary>
-        /// Performs the Get Name operation for the c# syntax.
+        /// Performs the get name operation for the C# syntax.
         /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The variable.</returns>
         public static Variable GetName(this Type type)
         {
             _ = Guard.Against.Null(type, message: GetNameTypeRequired.Format(typeof(Type), typeof(Variable)));

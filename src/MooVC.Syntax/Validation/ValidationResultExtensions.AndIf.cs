@@ -12,6 +12,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -25,6 +28,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -38,6 +44,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -51,6 +60,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -64,6 +76,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -78,6 +93,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -92,6 +110,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -106,6 +127,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,

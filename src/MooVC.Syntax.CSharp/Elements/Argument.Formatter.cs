@@ -7,23 +7,23 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a c# syntax element argument.
+    /// Represents a C# syntax element argument.
     /// </summary>
     public partial class Argument
     {
         /// <summary>
-        /// Represents a c# syntax element formatter.
+        /// Represents a C# syntax element formatter.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInstantiation]
         public sealed partial class Formatter
         {
             /// <summary>
-            /// Gets the call on the Formatter.
+            /// Represents the call for the Formatter.
             /// </summary>
             public static readonly Formatter Call = new Formatter("{0}: {1}");
             /// <summary>
-            /// Gets the declaration on the Formatter.
+            /// Represents the declaration for the Formatter.
             /// </summary>
             public static readonly Formatter Declaration = new Formatter("{0} = {1}");
 
@@ -35,16 +35,20 @@
             /// <summary>
             /// Gets a value indicating whether the Formatter is call.
             /// </summary>
+            /// <value>A value indicating whether the Formatter is call.</value>
             public bool IsCall => this == Call;
 
             /// <summary>
             /// Gets a value indicating whether the Formatter is declaration.
             /// </summary>
+            /// <value>A value indicating whether the Formatter is declaration.</value>
             public bool IsDeclaration => this == Declaration;
 
             /// <summary>
             /// Defines the string operator for the Formatter.
             /// </summary>
+            /// <param name="formatter">The formatter.</param>
+            /// <returns>The string.</returns>
             public static implicit operator string(Formatter formatter)
             {
                 Guard.Against.Conversion<Formatter, string>(formatter);
@@ -55,6 +59,8 @@
             /// <summary>
             /// Defines the Snippet operator for the Formatter.
             /// </summary>
+            /// <param name="formatter">The formatter.</param>
+            /// <returns>The snippet.</returns>
             public static implicit operator Snippet(Formatter formatter)
             {
                 Guard.Against.Conversion<Formatter, Snippet>(formatter);
@@ -65,6 +71,7 @@
             /// <summary>
             /// Returns the string representation of the Formatter.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 return _value;

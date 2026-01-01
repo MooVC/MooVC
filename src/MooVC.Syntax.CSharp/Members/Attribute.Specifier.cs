@@ -6,86 +6,86 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a c# member syntax attribute.
+    /// Represents a C# member syntax attribute.
     /// </summary>
     public partial class Attribute
     {
         /// <summary>
-        /// Represents a c# member syntax specifier.
+        /// Represents a C# member syntax specifier.
         /// </summary>
         [Monify(Type = typeof(string))]
         public sealed partial class Specifier
         {
             /// <summary>
-            /// Gets the assembly on the Specifier.
+            /// Represents the assembly for the Specifier.
             /// </summary>
             public static readonly Specifier Assembly = "assembly";
             /// <summary>
-            /// Gets the class on the Specifier.
+            /// Represents the class for the Specifier.
             /// </summary>
             public static readonly Specifier Class = "class";
             /// <summary>
-            /// Gets the constructor on the Specifier.
+            /// Represents the constructor for the Specifier.
             /// </summary>
             public static readonly Specifier Constructor = "constructor";
             /// <summary>
-            /// Gets the delegate on the Specifier.
+            /// Represents the delegate for the Specifier.
             /// </summary>
             public static readonly Specifier Delegate = "delegate";
             /// <summary>
-            /// Gets the enum on the Specifier.
+            /// Represents the enum for the Specifier.
             /// </summary>
             public static readonly Specifier Enum = "enum";
             /// <summary>
-            /// Gets the event on the Specifier.
+            /// Represents the event for the Specifier.
             /// </summary>
             public static readonly Specifier Event = "event";
             /// <summary>
-            /// Gets the field on the Specifier.
+            /// Represents the field for the Specifier.
             /// </summary>
             public static readonly Specifier Field = "field";
             /// <summary>
-            /// Gets the interface on the Specifier.
+            /// Represents the interface for the Specifier.
             /// </summary>
             public static readonly Specifier Interface = "interface";
             /// <summary>
-            /// Gets the method on the Specifier.
+            /// Represents the method for the Specifier.
             /// </summary>
             public static readonly Specifier Method = "method";
             /// <summary>
-            /// Gets the module on the Specifier.
+            /// Represents the module for the Specifier.
             /// </summary>
             public static readonly Specifier Module = "module";
             /// <summary>
-            /// Gets the none on the Specifier.
+            /// Gets the absence of a value.
             /// </summary>
             public static readonly Specifier None = string.Empty;
             /// <summary>
-            /// Gets the param on the Specifier.
+            /// Represents the param for the Specifier.
             /// </summary>
             public static readonly Specifier Param = "param";
             /// <summary>
-            /// Gets the property on the Specifier.
+            /// Represents the property for the Specifier.
             /// </summary>
             public static readonly Specifier Property = "property";
             /// <summary>
-            /// Gets the record on the Specifier.
+            /// Represents the record for the Specifier.
             /// </summary>
             public static readonly Specifier Record = "record";
             /// <summary>
-            /// Gets the return on the Specifier.
+            /// Represents the return for the Specifier.
             /// </summary>
             public static readonly Specifier Return = "return";
             /// <summary>
-            /// Gets the struct on the Specifier.
+            /// Represents the struct for the Specifier.
             /// </summary>
             public static readonly Specifier Struct = "struct";
             /// <summary>
-            /// Gets the type on the Specifier.
+            /// Represents the type for the Specifier.
             /// </summary>
             public static readonly Specifier Type = "type";
             /// <summary>
-            /// Gets the typevar on the Specifier.
+            /// Represents the typevar for the Specifier.
             /// </summary>
             public static readonly Specifier Typevar = "typevar";
 
@@ -97,6 +97,8 @@
             /// <summary>
             /// Defines the string operator for the Specifier.
             /// </summary>
+            /// <param name="specifier">The specifier.</param>
+            /// <returns>The string.</returns>
             public static implicit operator string(Specifier specifier)
             {
                 Guard.Against.Conversion<Specifier, string>(specifier);
@@ -107,6 +109,8 @@
             /// <summary>
             /// Defines the Snippet operator for the Specifier.
             /// </summary>
+            /// <param name="specifier">The specifier.</param>
+            /// <returns>The snippet.</returns>
             public static implicit operator Snippet(Specifier specifier)
             {
                 Guard.Against.Conversion<Specifier, Snippet>(specifier);
@@ -117,6 +121,7 @@
             /// <summary>
             /// Returns the string representation of the Specifier.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 return _value;

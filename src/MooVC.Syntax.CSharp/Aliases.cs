@@ -5,7 +5,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a c# syntax aliases.
+    /// Represents a C# syntax aliases.
     /// </summary>
     internal static class Aliases
     {
@@ -29,16 +29,21 @@
         };
 
         /// <summary>
-        /// Performs the Try Get operation for the c# syntax.
+        /// Performs the try get operation for the C# syntax.
         /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="alias">The alias.</param>
+        /// <returns>The bool.</returns>
         public static bool TryGet(Type type, out string alias)
         {
             return aliases.TryGetValue(type, out alias);
         }
 
         /// <summary>
-        /// Performs the Is System operation for the c# syntax.
+        /// Performs the is system operation for the C# syntax.
         /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The bool.</returns>
         public static bool IsSystem(string type)
         {
             return aliases.Values.Contains(type, StringComparer.OrdinalIgnoreCase);

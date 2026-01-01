@@ -7,30 +7,30 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a c# generic syntax nature.
+    /// Represents a C# generic syntax nature.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Nature
     {
         /// <summary>
-        /// Gets the class on the Nature.
+        /// Represents the class for the Nature.
         /// </summary>
         public static readonly Nature Class = "class";
         /// <summary>
-        /// Gets the struct on the Nature.
+        /// Represents the struct for the Nature.
         /// </summary>
         public static readonly Nature Struct = "struct";
         /// <summary>
-        /// Gets the unmanaged on the Nature.
+        /// Represents the unmanaged for the Nature.
         /// </summary>
         public static readonly Nature Unmanaged = "unmanaged";
         /// <summary>
-        /// Gets the not null on the Nature.
+        /// Represents the not null for the Nature.
         /// </summary>
         public static readonly Nature NotNull = "notnull";
         /// <summary>
-        /// Gets the unspecified on the Nature.
+        /// Gets the unspecified instance.
         /// </summary>
         public static readonly Nature Unspecified = string.Empty;
 
@@ -42,11 +42,14 @@
         /// <summary>
         /// Gets a value indicating whether the Nature is unspecified.
         /// </summary>
+        /// <value>A value indicating whether the Nature is unspecified.</value>
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
         /// Defines the string operator for the Nature.
         /// </summary>
+        /// <param name="nature">The nature.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Nature nature)
         {
             Guard.Against.Conversion<Nature, string>(nature);
@@ -57,6 +60,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Nature.
         /// </summary>
+        /// <param name="nature">The nature.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Nature nature)
         {
             Guard.Against.Conversion<Nature, Snippet>(nature);
@@ -67,6 +72,7 @@
         /// <summary>
         /// Returns the string representation of the Nature.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return _value;

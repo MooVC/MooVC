@@ -22,49 +22,57 @@ namespace MooVC.Syntax.Concepts
         : Construct
     {
         /// <summary>
-        /// Gets the undefined on the Solution.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Solution Undefined = new Solution();
 
         /// <summary>
         /// Gets or sets the configurations on the Solution.
         /// </summary>
+        /// <value>The configurations.</value>
         public ImmutableArray<Configuration> Configurations { get; internal set; } = ImmutableArray<Configuration>.Empty;
 
         /// <summary>
         /// Gets or sets the files on the Solution.
         /// </summary>
+        /// <value>The files.</value>
         public ImmutableArray<File> Files { get; internal set; } = ImmutableArray<File>.Empty;
 
         /// <summary>
         /// Gets or sets the folders on the Solution.
         /// </summary>
+        /// <value>The folders.</value>
         public ImmutableArray<Folder> Folders { get; internal set; } = ImmutableArray<Folder>.Empty;
 
         /// <summary>
         /// Gets or sets the items on the Solution.
         /// </summary>
+        /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
         /// <summary>
         /// Gets or sets the projects on the Solution.
         /// </summary>
+        /// <value>The projects.</value>
         public ImmutableArray<ProjectReference> Projects { get; internal set; } = ImmutableArray<ProjectReference>.Empty;
 
         /// <summary>
         /// Gets or sets the properties on the Solution.
         /// </summary>
+        /// <value>The properties.</value>
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Solution is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Solution is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         /// <summary>
         /// Creates an XML document for the Solution.
         /// </summary>
+        /// <returns>The generated XML document.</returns>
         public XDocument ToDocument()
         {
             if (IsUndefined)
@@ -88,6 +96,7 @@ namespace MooVC.Syntax.Concepts
         /// <summary>
         /// Returns the string representation of the Solution.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -99,8 +108,11 @@ namespace MooVC.Syntax.Concepts
         }
 
         /// <summary>
-        /// Validates the Solution and returns validation results.
+        /// Validates the Solution.
         /// </summary>
+        /// <remarks>Required members include: Configurations, Files, Folders, Items, Projects, Properties.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

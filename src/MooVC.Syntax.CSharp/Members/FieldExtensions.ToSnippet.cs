@@ -6,13 +6,16 @@
     using MooVC.Syntax.Elements;
 
     /// <summary>
-    /// Represents a c# member syntax field extensions.
+    /// Represents a C# member syntax field extensions.
     /// </summary>
     public static partial class FieldExtensions
     {
         /// <summary>
-        /// Creates a code snippet representation of the c# member syntax.
+        /// Creates a snippet representation of the C# member syntax.
         /// </summary>
+        /// <param name="fields">The fields.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this ImmutableArray<Field> fields, Snippet.Options options)
         {
             if (fields.IsDefaultOrEmpty)

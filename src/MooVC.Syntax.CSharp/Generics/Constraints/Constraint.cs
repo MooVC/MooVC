@@ -12,7 +12,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a c# generic syntax constraint.
+    /// Represents a C# generic syntax constraint.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -20,7 +20,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the unspecified on the Constraint.
+        /// Gets the unspecified instance.
         /// </summary>
         public static readonly Constraint Unspecified = new Constraint();
         private const string Separator = ", ";
@@ -35,32 +35,39 @@
         /// <summary>
         /// Gets or sets the base on the Constraint.
         /// </summary>
+        /// <value>The base.</value>
         public Base Base { get; internal set; } = Base.Unspecified;
 
         /// <summary>
         /// Gets or sets the interfaces on the Constraint.
         /// </summary>
+        /// <value>The interfaces.</value>
         public ImmutableArray<Interface> Interfaces { get; internal set; } = ImmutableArray<Interface>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Constraint is unspecified.
         /// </summary>
+        /// <value>A value indicating whether the Constraint is unspecified.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
         /// Gets or sets the nature on the Constraint.
         /// </summary>
+        /// <value>The nature.</value>
         public Nature Nature { get; internal set; } = Nature.Unspecified;
 
         /// <summary>
         /// Gets or sets the new on the Constraint.
         /// </summary>
+        /// <value>The new.</value>
         public New New { get; internal set; } = New.NotRequired;
 
         /// <summary>
         /// Defines the string operator for the Constraint.
         /// </summary>
+        /// <param name="constraint">The constraint.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Constraint constraint)
         {
             Guard.Against.Conversion<Constraint, string>(constraint);
@@ -71,6 +78,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Constraint.
         /// </summary>
+        /// <param name="constraint">The constraint.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Constraint constraint)
         {
             Guard.Against.Conversion<Constraint, Snippet>(constraint);
@@ -81,6 +90,7 @@
         /// <summary>
         /// Returns the string representation of the Constraint.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUnspecified)
@@ -106,8 +116,11 @@
         }
 
         /// <summary>
-        /// Validates the Constraint and returns validation results.
+        /// Validates the Constraint.
         /// </summary>
+        /// <remarks>Required members include: Base, Interfaces.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnspecified)

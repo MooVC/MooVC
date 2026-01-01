@@ -6,7 +6,7 @@
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
     /// <summary>
-    /// Represents a c# type syntax record.
+    /// Represents a C# type syntax record.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -14,7 +14,7 @@
         : Reference
     {
         /// <summary>
-        /// Gets the undefined on the Record.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Record Undefined = new Record();
 
@@ -29,6 +29,7 @@
         /// <summary>
         /// Gets a value indicating whether the Record is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Record is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
     }

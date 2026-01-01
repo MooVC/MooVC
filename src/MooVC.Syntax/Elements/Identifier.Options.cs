@@ -14,28 +14,31 @@
         public sealed partial class Options
         {
             /// <summary>
-            /// Gets the camel option for the Identifier syntax element.
+            /// Represents the camel for the Options.
             /// </summary>
             public static readonly Options Camel = new Options();
             /// <summary>
-            /// Gets or sets the pascal option for the Identifier syntax element.
+            /// Represents the pascal for the Options.
             /// </summary>
             public static readonly Options Pascal = new Options { Casing = Casing.Pascal };
 
             /// <summary>
-            /// Gets or sets the casing option for the Identifier syntax element.
+            /// Gets or sets the casing on the Options.
             /// </summary>
+            /// <value>The casing.</value>
             public Casing Casing { get; set; } = Casing.Camel;
 
             /// <summary>
-            /// Gets a value indicating whether the options are camel for the Identifier syntax element.
+            /// Gets a value indicating whether the Options is camel.
             /// </summary>
+            /// <value>A value indicating whether the Options is camel.</value>
             [Ignore]
             public bool IsCamel => Casing == Casing.Pascal;
 
             /// <summary>
-            /// Gets a value indicating whether the options are pascal for the Identifier syntax element.
+            /// Gets a value indicating whether the Options is pascal.
             /// </summary>
+            /// <value>A value indicating whether the Options is pascal.</value>
             [Ignore]
             public bool IsPascal => Casing == Casing.Pascal;
         }

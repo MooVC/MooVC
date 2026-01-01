@@ -11,6 +11,9 @@ namespace MooVC.Syntax
         /// <summary>
         /// Creates XML attributes for the syntax helper.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The XML attributes.</returns>
         public static IEnumerable<XAttribute> ToXmlAttribute(this bool value, string name)
         {
             if (!value)

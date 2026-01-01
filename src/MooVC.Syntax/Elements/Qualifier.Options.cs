@@ -16,11 +16,11 @@
         public sealed partial class Options
         {
             /// <summary>
-            /// Gets the block option for the Qualifier syntax element.
+            /// Represents the block for the Options.
             /// </summary>
             public static readonly Options Block = 1;
             /// <summary>
-            /// Gets the file option for the Qualifier syntax element.
+            /// Represents the file for the Options.
             /// </summary>
             public static readonly Options File = 0;
 
@@ -30,18 +30,21 @@
             }
 
             /// <summary>
-            /// Gets a value indicating whether the options are block for the Qualifier syntax element.
+            /// Gets a value indicating whether the Options is block.
             /// </summary>
+            /// <value>A value indicating whether the Options is block.</value>
             public bool IsBlock => this == Block;
 
             /// <summary>
-            /// Gets a value indicating whether the options are file for the Qualifier syntax element.
+            /// Gets a value indicating whether the Options is file.
             /// </summary>
+            /// <value>A value indicating whether the Options is file.</value>
             public bool IsFile => this == File;
 
             /// <summary>
             /// Returns the string representation of the Options.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 if (IsBlock)

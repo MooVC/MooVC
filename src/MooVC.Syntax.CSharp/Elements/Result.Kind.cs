@@ -4,7 +4,7 @@
     using Monify;
 
     /// <summary>
-    /// Represents a C# result signature for a member.
+    /// Represents a C# member return signature.
     /// </summary>
     public partial class Result
     {
@@ -38,8 +38,9 @@
             }
 
             /// <summary>
-            /// Returns the string representation of the Kind.
+            /// Returns the C# return modifier text.
             /// </summary>
+            /// <returns>The return modifier text.</returns>
             public override string ToString()
             {
                 return _value;

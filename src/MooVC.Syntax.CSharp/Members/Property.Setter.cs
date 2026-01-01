@@ -7,19 +7,19 @@ namespace MooVC.Syntax.CSharp.Members
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a c# member syntax property.
+    /// Represents a C# member syntax property.
     /// </summary>
     public partial class Property
     {
         /// <summary>
-        /// Represents a c# member syntax setter.
+        /// Represents a C# member syntax setter.
         /// </summary>
         [Fluentify]
         [Valuify]
         public sealed partial class Setter
         {
             /// <summary>
-            /// Gets the default on the Setter.
+            /// Gets the default instance.
             /// </summary>
             public static readonly Setter Default = new Setter();
 
@@ -33,22 +33,26 @@ namespace MooVC.Syntax.CSharp.Members
             /// <summary>
             /// Gets or sets the behaviour on the Setter.
             /// </summary>
+            /// <value>The behaviour.</value>
             public Snippet Behaviour { get; internal set; } = Snippet.Empty;
 
             /// <summary>
             /// Gets a value indicating whether the Setter is default.
             /// </summary>
+            /// <value>A value indicating whether the Setter is default.</value>
             [Ignore]
             public bool IsDefault => this == Default;
 
             /// <summary>
             /// Gets or sets the mode on the Setter.
             /// </summary>
+            /// <value>The mode.</value>
             public Mode Mode { get; internal set; } = Mode.Set;
 
             /// <summary>
             /// Gets or sets the scope on the Setter.
             /// </summary>
+            /// <value>The scope.</value>
             public Scope Scope { get; internal set; } = Scope.Unspecified;
         }
     }

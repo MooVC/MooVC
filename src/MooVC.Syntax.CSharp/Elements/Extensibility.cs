@@ -8,34 +8,34 @@
     using static MooVC.Syntax.CSharp.Elements.Extensibility_Resources;
 
     /// <summary>
-    /// Represents a c# syntax element extensibility.
+    /// Represents a C# syntax element extensibility.
     /// </summary>
     [Monify(Type = typeof(string))]
     public sealed partial class Extensibility
         : IComparable<Extensibility>
     {
         /// <summary>
-        /// Gets the abstract on the Extensibility.
+        /// Represents the abstract for the Extensibility.
         /// </summary>
         public static readonly Extensibility Abstract = "abstract";
         /// <summary>
-        /// Gets the implicit on the Extensibility.
+        /// Represents the implicit for the Extensibility.
         /// </summary>
         public static readonly Extensibility Implicit = string.Empty;
         /// <summary>
-        /// Gets the override on the Extensibility.
+        /// Represents the override for the Extensibility.
         /// </summary>
         public static readonly Extensibility Override = "override";
         /// <summary>
-        /// Gets the static on the Extensibility.
+        /// Represents the static for the Extensibility.
         /// </summary>
         public static readonly Extensibility Static = "static";
         /// <summary>
-        /// Gets the sealed on the Extensibility.
+        /// Represents the sealed for the Extensibility.
         /// </summary>
         public static readonly Extensibility Sealed = "sealed";
         /// <summary>
-        /// Gets the virtual on the Extensibility.
+        /// Represents the virtual for the Extensibility.
         /// </summary>
         public static readonly Extensibility Virtual = "virtual";
 
@@ -47,6 +47,8 @@
         /// <summary>
         /// Defines the string operator for the Extensibility.
         /// </summary>
+        /// <param name="extensibility">The extensibility.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Extensibility extensibility)
         {
             Guard.Against.Conversion<Extensibility, string>(extensibility);
@@ -57,6 +59,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Extensibility.
         /// </summary>
+        /// <param name="extensibility">The extensibility.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Extensibility extensibility)
         {
             Guard.Against.Conversion<Extensibility, Snippet>(extensibility);
@@ -67,6 +71,9 @@
         /// <summary>
         /// Defines the < operator for the Extensibility.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Extensibility left, Extensibility right)
         {
             if (left is null)
@@ -80,6 +87,9 @@
         /// <summary>
         /// Defines the > operator for the Extensibility.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Extensibility left, Extensibility right)
         {
             if (left is null)
@@ -93,6 +103,9 @@
         /// <summary>
         /// Defines the <= operator for the Extensibility.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Extensibility left, Extensibility right)
         {
             return !(left > right);
@@ -101,6 +114,9 @@
         /// <summary>
         /// Defines the >= operator for the Extensibility.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Extensibility left, Extensibility right)
         {
             return !(left < right);
@@ -109,6 +125,9 @@
         /// <summary>
         /// Defines the + operator for the Extensibility.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static Extensibility operator +(Extensibility left, Extensibility right)
         {
             _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Extensibility), right));
@@ -125,6 +144,8 @@
         /// <summary>
         /// Compares this Extensibility to another instance.
         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Extensibility other)
         {
             if (other is null)
@@ -143,8 +164,10 @@
         }
 
         /// <summary>
-        /// Performs the Is Permitted operation for the c# syntax element.
+        /// Performs the is permitted operation for the C# syntax element.
         /// </summary>
+        /// <param name="permissable">The permissable.</param>
+        /// <returns>The bool.</returns>
         public bool IsPermitted(params Extensibility[] permissable)
         {
             return Array.Exists(permissable, extensibility => extensibility == this);
@@ -153,6 +176,7 @@
         /// <summary>
         /// Returns the string representation of the Extensibility.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return _value;

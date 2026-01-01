@@ -6,7 +6,7 @@
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
     /// <summary>
-    /// Represents a c# type syntax class.
+    /// Represents a C# type syntax class.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -14,7 +14,7 @@
         : Reference
     {
         /// <summary>
-        /// Gets the undefined on the Class.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Class Undefined = new Class();
 
@@ -29,17 +29,24 @@
         /// <summary>
         /// Gets a value indicating whether the Class is static.
         /// </summary>
+        /// <value>A value indicating whether the Class is static.</value>
         public bool IsStatic { get; internal set; }
 
         /// <summary>
         /// Gets a value indicating whether the Class is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Class is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Performs the Get Signature operation for the c# type syntax.
+        /// Performs the get signature operation for the C# type syntax.
         /// </summary>
+        /// <param name="extensibility">The extensibility.</param>
+        /// <param name="partial">The partial.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="scope">The scope.</param>
+        /// <returns>The string.</returns>
         protected override string GetSignature(string extensibility, string partial, string name, string scope)
         {
             if (IsStatic)

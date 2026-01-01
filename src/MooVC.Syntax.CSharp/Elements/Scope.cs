@@ -9,7 +9,7 @@
     using static MooVC.Syntax.CSharp.Elements.Scope_Resources;
 
     /// <summary>
-    /// Represents a c# syntax element scope.
+    /// Represents a C# syntax element scope.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
@@ -17,27 +17,27 @@
         : IComparable<Scope>
     {
         /// <summary>
-        /// Gets the file on the Scope.
+        /// Represents the file for the Scope.
         /// </summary>
         public static readonly Scope File = "file";
         /// <summary>
-        /// Gets the internal on the Scope.
+        /// Represents the internal for the Scope.
         /// </summary>
         public static readonly Scope Internal = "internal";
         /// <summary>
-        /// Gets the public on the Scope.
+        /// Represents the public for the Scope.
         /// </summary>
         public static readonly Scope Public = "public";
         /// <summary>
-        /// Gets the private on the Scope.
+        /// Represents the private for the Scope.
         /// </summary>
         public static readonly Scope Private = "private";
         /// <summary>
-        /// Gets the protected on the Scope.
+        /// Represents the protected for the Scope.
         /// </summary>
         public static readonly Scope Protected = "protected";
         /// <summary>
-        /// Gets the unspecified on the Scope.
+        /// Gets the unspecified instance.
         /// </summary>
         public static readonly Scope Unspecified = string.Empty;
 
@@ -49,6 +49,8 @@
         /// <summary>
         /// Defines the string operator for the Scope.
         /// </summary>
+        /// <param name="scope">The scope.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Scope scope)
         {
             Guard.Against.Conversion<Scope, string>(scope);
@@ -59,6 +61,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Scope.
         /// </summary>
+        /// <param name="scope">The scope.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Scope scope)
         {
             Guard.Against.Conversion<Scope, Snippet>(scope);
@@ -69,6 +73,9 @@
         /// <summary>
         /// Defines the + operator for the Scope.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static Scope operator +(Scope left, Scope right)
         {
             _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Scope), right));
@@ -85,6 +92,9 @@
         /// <summary>
         /// Defines the < operator for the Scope.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Scope left, Scope right)
         {
             if (left is null)
@@ -98,6 +108,9 @@
         /// <summary>
         /// Defines the > operator for the Scope.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Scope left, Scope right)
         {
             if (left is null)
@@ -111,6 +124,9 @@
         /// <summary>
         /// Defines the <= operator for the Scope.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Scope left, Scope right)
         {
             return !(left > right);
@@ -119,6 +135,9 @@
         /// <summary>
         /// Defines the >= operator for the Scope.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Scope left, Scope right)
         {
             return !(left < right);
@@ -127,6 +146,8 @@
         /// <summary>
         /// Compares this Scope to another instance.
         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Scope other)
         {
             if (other is null)
@@ -143,6 +164,7 @@
         /// <summary>
         /// Returns the string representation of the Scope.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return _value;

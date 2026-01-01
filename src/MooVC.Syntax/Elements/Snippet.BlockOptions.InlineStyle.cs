@@ -19,15 +19,15 @@
             public partial class InlineStyle
             {
                 /// <summary>
-                /// Gets the lambda on the InlineStyle.
+                /// Represents the lambda for the InlineStyle.
                 /// </summary>
                 public static readonly InlineStyle Lambda = 0;
                 /// <summary>
-                /// Gets the single line braces on the InlineStyle.
+                /// Represents the single line braces for the InlineStyle.
                 /// </summary>
                 public static readonly InlineStyle SingleLineBraces = 1;
                 /// <summary>
-                /// Gets the multi line braces on the InlineStyle.
+                /// Represents the multi line braces for the InlineStyle.
                 /// </summary>
                 public static readonly InlineStyle MultiLineBraces = 2;
 
@@ -39,16 +39,19 @@
                 /// <summary>
                 /// Gets a value indicating whether the InlineStyle is lambda.
                 /// </summary>
+                /// <value>A value indicating whether the InlineStyle is lambda.</value>
                 public bool IsLambda => this == Lambda;
 
                 /// <summary>
                 /// Gets a value indicating whether the InlineStyle is single line braces.
                 /// </summary>
+                /// <value>A value indicating whether the InlineStyle is single line braces.</value>
                 public bool IsSingleLineBraces => this == SingleLineBraces;
 
                 /// <summary>
                 /// Gets a value indicating whether the InlineStyle is multi line braces.
                 /// </summary>
+                /// <value>A value indicating whether the InlineStyle is multi line braces.</value>
                 public bool IsMultiLineBraces => this == MultiLineBraces;
             }
         }

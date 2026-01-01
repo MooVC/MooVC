@@ -21,7 +21,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined on the Resource.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Resource Undefined = new Resource();
 
@@ -40,32 +40,38 @@
         /// <summary>
         /// Gets or sets the custom tool namespace on the Resource.
         /// </summary>
+        /// <value>The custom tool namespace.</value>
         public Snippet CustomToolNamespace { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets or sets the designer on the Resource.
         /// </summary>
+        /// <value>The designer.</value>
         public Path Designer { get; internal set; } = Path.Empty;
 
         /// <summary>
         /// Gets or sets the location on the Resource.
         /// </summary>
+        /// <value>The location.</value>
         public Path Location { get; internal set; } = Path.Empty;
 
         /// <summary>
         /// Gets or sets the visibility on the Resource.
         /// </summary>
+        /// <value>The visibility.</value>
         public Scope Visibility { get; internal set; } = Scope.Internal;
 
         /// <summary>
         /// Gets a value indicating whether the Resource is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Resource is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Performs the To Fragments operation for the resource file attribute.
+        /// Performs the to fragments operation for the resource file attribute.
         /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -106,6 +112,7 @@
         /// <summary>
         /// Returns the string representation of the Resource.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -117,8 +124,11 @@
         }
 
         /// <summary>
-        /// Validates the Resource and returns validation results.
+        /// Validates the Resource.
         /// </summary>
+        /// <remarks>Required members include: CustomToolNamespace, Designer, Location.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

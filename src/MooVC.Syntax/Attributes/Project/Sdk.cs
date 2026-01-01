@@ -13,7 +13,7 @@ namespace MooVC.Syntax.Attributes.Project
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a msbuild project attribute sdk.
+    /// Represents a MSBuild project attribute sdk.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -21,7 +21,7 @@ namespace MooVC.Syntax.Attributes.Project
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the unspecified on the Sdk.
+        /// Gets the unspecified instance.
         /// </summary>
         public static readonly Sdk Unspecified = new Sdk();
 
@@ -35,28 +35,33 @@ namespace MooVC.Syntax.Attributes.Project
         /// <summary>
         /// Gets a value indicating whether the Sdk is unspecified.
         /// </summary>
+        /// <value>A value indicating whether the Sdk is unspecified.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
         /// Gets or sets the minimum version on the Sdk.
         /// </summary>
+        /// <value>The minimum version.</value>
         public Snippet MinimumVersion { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets or sets the name on the Sdk.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Qualifier Name { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
         /// Gets or sets the version on the Sdk.
         /// </summary>
+        /// <value>The version.</value>
         public Snippet Version { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// Performs the to fragments operation for the MSBuild project attribute.
         /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUnspecified)
@@ -78,6 +83,7 @@ namespace MooVC.Syntax.Attributes.Project
         /// <summary>
         /// Returns the string representation of the Sdk.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUnspecified)
@@ -89,8 +95,11 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Validates the Sdk and returns validation results.
+        /// Validates the Sdk.
         /// </summary>
+        /// <remarks>Required members include: MinimumVersion, Name, Version.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnspecified)

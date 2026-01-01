@@ -6,13 +6,17 @@
     using MooVC.Syntax.Elements;
 
     /// <summary>
-    /// Represents a c# operator syntax comparison extensions.
+    /// Represents a C# operator syntax comparison extensions.
     /// </summary>
     public static partial class ComparisonExtensions
     {
         /// <summary>
-        /// Creates a code snippet representation of the c# operator syntax.
+        /// Creates a snippet representation of the C# operator syntax.
         /// </summary>
+        /// <param name="comparisons">The comparisons.</param>
+        /// <param name="options">The options.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this ImmutableArray<Comparison> comparisons, Snippet.Options options, Type type)
         {
             if (comparisons.IsDefaultOrEmpty)

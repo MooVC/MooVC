@@ -4,25 +4,26 @@
     using Valuify;
 
     /// <summary>
-    /// Represents a c# syntax element symbol.
+    /// Represents a C# syntax element symbol.
     /// </summary>
     public partial class Symbol
     {
         /// <summary>
-        /// Defines options for the Symbol c# syntax element.
+        /// Defines options for the Symbol C# syntax element.
         /// </summary>
         [Fluentify]
         [Valuify]
         public sealed partial class Options
         {
             /// <summary>
-            /// Gets the default options for the Symbol c# syntax element.
+            /// Gets the default instance.
             /// </summary>
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets or sets the qualification option for the Symbol c# syntax element.
+            /// Gets or sets the qualification on the Options.
             /// </summary>
+            /// <value>The qualification.</value>
             public Qualification Qualification { get; set; } = Qualification.Minimum;
         }
     }

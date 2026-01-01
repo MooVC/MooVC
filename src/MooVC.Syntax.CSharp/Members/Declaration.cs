@@ -18,7 +18,7 @@
     using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
     /// <summary>
-    /// Represents a c# member syntax declaration.
+    /// Represents a C# member syntax declaration.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -27,7 +27,7 @@
           IValidatableObject
     {
         /// <summary>
-        /// Gets the unspecified on the Declaration.
+        /// Gets the unspecified instance.
         /// </summary>
         public static readonly Declaration Unspecified = new Declaration();
 
@@ -41,23 +41,28 @@
         /// <summary>
         /// Gets a value indicating whether the Declaration is unspecified.
         /// </summary>
+        /// <value>A value indicating whether the Declaration is unspecified.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
         /// Gets or sets the name on the Declaration.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
         /// Gets or sets the parameters on the Declaration.
         /// </summary>
+        /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
         /// Defines the string operator for the Declaration.
         /// </summary>
+        /// <param name="declaration">The declaration.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Declaration declaration)
         {
             Guard.Against.Conversion<Declaration, string>(declaration);
@@ -68,6 +73,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Declaration.
         /// </summary>
+        /// <param name="declaration">The declaration.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Declaration declaration)
         {
             Guard.Against.Conversion<Declaration, Snippet>(declaration);
@@ -78,6 +85,9 @@
         /// <summary>
         /// Defines the < operator for the Declaration.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Declaration left, Declaration right)
         {
             if (left is null)
@@ -91,6 +101,9 @@
         /// <summary>
         /// Defines the > operator for the Declaration.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Declaration left, Declaration right)
         {
             if (left is null)
@@ -104,6 +117,9 @@
         /// <summary>
         /// Defines the <= operator for the Declaration.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Declaration left, Declaration right)
         {
             return !(left > right);
@@ -112,6 +128,9 @@
         /// <summary>
         /// Defines the >= operator for the Declaration.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Declaration left, Declaration right)
         {
             return !(left < right);
@@ -120,6 +139,8 @@
         /// <summary>
         /// Compares this Declaration to another instance.
         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Declaration other)
         {
             return other is null
@@ -130,14 +151,17 @@
         /// <summary>
         /// Returns the string representation of the Declaration.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return ToSnippet(Snippet.Options.Default);
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the c# member syntax.
+        /// Creates a snippet representation of the C# member syntax.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Declaration)));
@@ -160,8 +184,11 @@
         }
 
         /// <summary>
-        /// Validates the Declaration and returns validation results.
+        /// Validates the Declaration.
         /// </summary>
+        /// <remarks>Required members include: Name, Parameters.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnspecified)

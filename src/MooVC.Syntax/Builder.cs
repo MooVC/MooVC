@@ -8,8 +8,9 @@
     public static class Builder
     {
         /// <summary>
-        /// Performs the New T operation for the syntax helper.
+        /// Performs the new t operation for the syntax helper.
         /// </summary>
+        /// <returns>The t.</returns>
         public static T New<T>()
             where T : Construct, new()
         {

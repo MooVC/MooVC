@@ -13,6 +13,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -26,6 +29,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -40,6 +46,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -53,6 +62,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -72,6 +84,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -85,6 +100,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -99,6 +117,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -112,6 +133,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -126,6 +150,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -145,6 +172,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -165,6 +195,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -184,6 +217,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -204,6 +240,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -218,6 +257,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -233,6 +275,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -247,6 +292,9 @@
         /// <summary>
         /// Performs the static operation for the validation helper.
         /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,

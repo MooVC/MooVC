@@ -5,12 +5,12 @@
     using System.Text;
 
     /// <summary>
-    /// Represents a c# syntax keywords.
+    /// Represents a C# syntax keywords.
     /// </summary>
     internal static class Keywords
     {
         /// <summary>
-        /// Gets the reserved on the Keywords.
+        /// Represents the reserved for the Keywords.
         /// </summary>
         public static readonly ImmutableHashSet<string> Reserved =
             ImmutableHashSet.Create(
@@ -83,16 +83,20 @@
                 "while");
 
         /// <summary>
-        /// Performs the Is Reserved operation for the c# syntax.
+        /// Performs the is reserved operation for the C# syntax.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The bool.</returns>
         public static bool IsReserved(this string value)
         {
             return !string.IsNullOrWhiteSpace(value) && Reserved.Contains(value);
         }
 
         /// <summary>
-        /// Performs the Is Reserved operation for the c# syntax.
+        /// Performs the is reserved operation for the C# syntax.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The bool.</returns>
         public static bool IsReserved(this StringBuilder value)
         {
             if (value is null)

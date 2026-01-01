@@ -12,7 +12,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a c# syntax element argument.
+    /// Represents a C# syntax element argument.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -20,7 +20,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined on the Argument.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Argument Undefined = new Argument();
 
@@ -34,28 +34,34 @@
         /// <summary>
         /// Gets a value indicating whether the Argument is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Argument is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
         /// Gets or sets the modifier on the Argument.
         /// </summary>
+        /// <value>The modifier.</value>
         public Mode Modifier { get; internal set; } = Mode.None;
 
         /// <summary>
         /// Gets or sets the name on the Argument.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
         /// Gets or sets the value on the Argument.
         /// </summary>
+        /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Defines the string operator for the Argument.
         /// </summary>
+        /// <param name="argument">The argument.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Argument argument)
         {
             Guard.Against.Conversion<Argument, string>(argument);
@@ -66,6 +72,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Argument.
         /// </summary>
+        /// <param name="argument">The argument.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Argument argument)
         {
             Guard.Against.Conversion<Argument, Snippet>(argument);
@@ -76,14 +84,17 @@
         /// <summary>
         /// Returns the string representation of the Argument.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return ToSnippet(Options.Call);
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the c# syntax element.
+        /// Creates a snippet representation of the C# syntax element.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Argument), nameof(Name), Name));
@@ -110,8 +121,11 @@
         }
 
         /// <summary>
-        /// Validates the Argument and returns validation results.
+        /// Validates the Argument.
         /// </summary>
+        /// <remarks>Required members include: Value, Name.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

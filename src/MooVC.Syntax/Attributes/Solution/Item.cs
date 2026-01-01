@@ -13,7 +13,7 @@ namespace MooVC.Syntax.Attributes.Solution
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a msbuild solution attribute item.
+    /// Represents a MSBuild solution attribute item.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -21,7 +21,7 @@ namespace MooVC.Syntax.Attributes.Solution
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined on the Item.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Item Undefined = new Item();
 
@@ -35,40 +35,47 @@ namespace MooVC.Syntax.Attributes.Solution
         /// <summary>
         /// Gets a value indicating whether the Item is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Item is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
         /// Gets or sets the id on the Item.
         /// </summary>
+        /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets or sets the items on the Item.
         /// </summary>
+        /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
         /// <summary>
         /// Gets or sets the name on the Item.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets or sets the path on the Item.
         /// </summary>
+        /// <value>The path.</value>
         [Descriptor("At")]
         public Snippet Path { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets or sets the type on the Item.
         /// </summary>
+        /// <value>The type.</value>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Performs the To Fragments operation for the msbuild solution attribute.
+        /// Performs the to fragments operation for the MSBuild solution attribute.
         /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -97,6 +104,7 @@ namespace MooVC.Syntax.Attributes.Solution
         /// <summary>
         /// Returns the string representation of the Item.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -108,8 +116,11 @@ namespace MooVC.Syntax.Attributes.Solution
         }
 
         /// <summary>
-        /// Validates the Item and returns validation results.
+        /// Validates the Item.
         /// </summary>
+        /// <remarks>Required members include: Id, Items, Name, Path, Type.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

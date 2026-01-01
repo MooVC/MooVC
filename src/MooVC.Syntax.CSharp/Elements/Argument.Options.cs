@@ -7,24 +7,24 @@
     using Code = MooVC.Syntax.Elements.Snippet;
 
     /// <summary>
-    /// Represents a c# syntax element argument.
+    /// Represents a C# syntax element argument.
     /// </summary>
     public partial class Argument
     {
         /// <summary>
-        /// Defines options for the Argument c# syntax element.
+        /// Defines options for the Argument C# syntax element.
         /// </summary>
         [Fluentify]
         [Valuify]
         public sealed partial class Options
         {
             /// <summary>
-            /// Gets the call option for the Argument c# syntax element.
+            /// Represents the call for the Options.
             /// </summary>
             public static readonly Options Call = new Options();
 
             /// <summary>
-            /// Gets the declaration option for the Argument c# syntax element.
+            /// Represents the declaration for the Options.
             /// </summary>
             public static readonly Options Declaration = new Options
             {
@@ -34,20 +34,23 @@
             };
 
             /// <summary>
-            /// Gets or sets the formatter option for the Argument c# syntax element.
+            /// Gets or sets the formatter on the Options.
             /// </summary>
+            /// <value>The formatter.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsFormatterRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Formatter Formatter { get; set; } = Formatter.Call;
 
             /// <summary>
-            /// Gets or sets the naming option for the Argument c# syntax element.
+            /// Gets or sets the naming on the Options.
             /// </summary>
+            /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Variable.Options Naming { get; set; } = Variable.Options.Camel;
 
             /// <summary>
-            /// Gets or sets the snippet option for the Argument c# syntax element.
+            /// Gets or sets the snippet on the Options.
             /// </summary>
+            /// <value>The snippet.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Code.Options Snippet { get; set; } = Code.Options.Default;
         }

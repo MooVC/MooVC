@@ -12,6 +12,8 @@
         /// <summary>
         /// Merges the XML elements into a single string.
         /// </summary>
+        /// <param name="elements">The elements.</param>
+        /// <returns>The string.</returns>
         public static string Merge(this ImmutableArray<XElement> elements)
         {
             if (elements.IsDefaultOrEmpty)

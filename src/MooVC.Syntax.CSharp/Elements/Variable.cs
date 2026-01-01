@@ -14,7 +14,7 @@
     using static MooVC.Syntax.CSharp.Elements.Variable_Resources;
 
     /// <summary>
-    /// Represents a c# syntax element variable.
+    /// Represents a C# syntax element variable.
     /// </summary>
     [Monify(Type = typeof(Identifier))]
     [SkipAutoInstantiation]
@@ -23,13 +23,14 @@
           IValidatableObject
     {
         /// <summary>
-        /// Gets the unnamed on the Variable.
+        /// Represents the unnamed for the Variable.
         /// </summary>
         public static readonly Variable Unnamed = Identifier.Unnamed;
 
         /// <summary>
         /// Initializes a new instance of the Variable class.
         /// </summary>
+        /// <param name="value">The value.</param>
         public Variable(Identifier value)
         {
             _value = value ?? Identifier.Unnamed;
@@ -38,12 +39,15 @@
         /// <summary>
         /// Gets a value indicating whether the Variable is unnamed.
         /// </summary>
+        /// <value>A value indicating whether the Variable is unnamed.</value>
         [Ignore]
         public bool IsUnnamed => this == Unnamed;
 
         /// <summary>
         /// Defines the Variable operator for the Variable.
         /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The variable.</returns>
         public static implicit operator Variable(Type type)
         {
             Guard.Against.Conversion<Type, Variable>(type);
@@ -54,6 +58,8 @@
         /// <summary>
         /// Defines the string operator for the Variable.
         /// </summary>
+        /// <param name="variable">The variable.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Variable variable)
         {
             Guard.Against.Conversion<Variable, string>(variable);
@@ -64,6 +70,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Variable.
         /// </summary>
+        /// <param name="variable">The variable.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Variable variable)
         {
             Guard.Against.Conversion<Variable, Snippet>(variable);
@@ -74,6 +82,9 @@
         /// <summary>
         /// Defines the < operator for the Variable.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Variable left, Variable right)
         {
             if (left is null)
@@ -87,6 +98,9 @@
         /// <summary>
         /// Defines the > operator for the Variable.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Variable left, Variable right)
         {
             if (left is null)
@@ -100,6 +114,9 @@
         /// <summary>
         /// Defines the <= operator for the Variable.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Variable left, Variable right)
         {
             return !(left > right);
@@ -108,6 +125,9 @@
         /// <summary>
         /// Defines the >= operator for the Variable.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Variable left, Variable right)
         {
             return !(left < right);
@@ -116,6 +136,8 @@
         /// <summary>
         /// Compares this Variable to another instance.
         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Variable other)
         {
             return other is null
@@ -126,14 +148,17 @@
         /// <summary>
         /// Returns the string representation of the Variable.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return ToSnippet(Options.Camel);
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the c# syntax element.
+        /// Creates a snippet representation of the C# syntax element.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Variable)));
@@ -163,8 +188,10 @@
         }
 
         /// <summary>
-        /// Validates the Variable and returns validation results.
+        /// Validates the Variable.
         /// </summary>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnnamed || Aliases.IsSystem(_value))

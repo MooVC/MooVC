@@ -6,13 +6,16 @@
     using MooVC.Syntax.Elements;
 
     /// <summary>
-    /// Represents a c# member syntax indexer extensions.
+    /// Represents a C# member syntax indexer extensions.
     /// </summary>
     public static partial class IndexerExtensions
     {
         /// <summary>
-        /// Creates a code snippet representation of the c# member syntax.
+        /// Creates a snippet representation of the C# member syntax.
         /// </summary>
+        /// <param name="indexers">The indexers.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this ImmutableArray<Indexer> indexers, Snippet.Options options)
         {
             if (indexers.IsDefaultOrEmpty)

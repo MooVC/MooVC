@@ -4,23 +4,23 @@
     using Monify;
 
     /// <summary>
-    /// Represents a c# operator syntax conversion.
+    /// Represents a C# operator syntax conversion.
     /// </summary>
     public partial class Conversion
     {
         /// <summary>
-        /// Represents a c# operator syntax intent.
+        /// Represents a C# operator syntax intent.
         /// </summary>
         [Monify(Type = typeof(int))]
         public sealed partial class Intent
             : IComparable<Intent>
         {
             /// <summary>
-            /// Gets the from on the Intent.
+            /// Represents the from for the Intent.
             /// </summary>
             public static readonly Intent From = 1;
             /// <summary>
-            /// Gets the to on the Intent.
+            /// Represents the to for the Intent.
             /// </summary>
             public static readonly Intent To = 0;
 
@@ -32,16 +32,21 @@
             /// <summary>
             /// Gets a value indicating whether the Intent is from.
             /// </summary>
+            /// <value>A value indicating whether the Intent is from.</value>
             public bool IsFrom => this == From;
 
             /// <summary>
             /// Gets a value indicating whether the Intent is to.
             /// </summary>
+            /// <value>A value indicating whether the Intent is to.</value>
             public bool IsTo => this == To;
 
             /// <summary>
             /// Defines the < operator for the Intent.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator <(Intent left, Intent right)
             {
                 if (left is null)
@@ -55,6 +60,9 @@
             /// <summary>
             /// Defines the > operator for the Intent.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator >(Intent left, Intent right)
             {
                 if (left is null)
@@ -68,6 +76,9 @@
             /// <summary>
             /// Defines the <= operator for the Intent.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator <=(Intent left, Intent right)
             {
                 return !(left > right);
@@ -76,6 +87,9 @@
             /// <summary>
             /// Defines the >= operator for the Intent.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator >=(Intent left, Intent right)
             {
                 return !(left < right);
@@ -84,6 +98,8 @@
             /// <summary>
             /// Compares this Intent to another instance.
             /// </summary>
+            /// <param name="other">The other.</param>
+            /// <returns>A signed integer indicating relative order.</returns>
             public int CompareTo(Intent other)
             {
                 return other is null
@@ -94,6 +110,7 @@
             /// <summary>
             /// Returns the string representation of the Intent.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 if (_value == From._value)

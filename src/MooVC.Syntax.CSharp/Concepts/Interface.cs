@@ -14,7 +14,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a c# type syntax interface.
+    /// Represents a C# type syntax interface.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -22,7 +22,7 @@
         : Type
     {
         /// <summary>
-        /// Gets the undefined on the Interface.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Interface Undefined = new Interface();
 
@@ -31,12 +31,15 @@
         /// <summary>
         /// Gets a value indicating whether the Interface is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Interface is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Performs the Perform To Snippet operation for the c# type syntax.
+        /// Performs the perform to snippet operation for the C# type syntax.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The snippet.</returns>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

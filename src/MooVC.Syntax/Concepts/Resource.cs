@@ -21,39 +21,45 @@ namespace MooVC.Syntax.Concepts
         : Construct
     {
         /// <summary>
-        /// Gets the undefined on the Resource.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Resource Undefined = new Resource();
 
         /// <summary>
         /// Gets or sets the assemblies on the Resource.
         /// </summary>
+        /// <value>The assemblies.</value>
         public ImmutableArray<Assembly> Assemblies { get; internal set; } = ImmutableArray<Assembly>.Empty;
 
         /// <summary>
         /// Gets or sets the data on the Resource.
         /// </summary>
+        /// <value>The data.</value>
         public ImmutableArray<Data> Data { get; internal set; } = ImmutableArray<Data>.Empty;
 
         /// <summary>
         /// Gets or sets the headers on the Resource.
         /// </summary>
+        /// <value>The headers.</value>
         public ImmutableArray<Header> Headers { get; internal set; } = ImmutableArray<Header>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Resource is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Resource is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
         /// <summary>
         /// Gets or sets the metadata on the Resource.
         /// </summary>
+        /// <value>The metadata.</value>
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
         /// <summary>
         /// Creates an XML document for the Resource.
         /// </summary>
+        /// <returns>The generated XML document.</returns>
         public XDocument ToDocument()
         {
             if (IsUndefined)
@@ -90,6 +96,7 @@ namespace MooVC.Syntax.Concepts
         /// <summary>
         /// Returns the string representation of the Resource.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -101,8 +108,11 @@ namespace MooVC.Syntax.Concepts
         }
 
         /// <summary>
-        /// Validates the Resource and returns validation results.
+        /// Validates the Resource.
         /// </summary>
+        /// <remarks>Required members include: Assemblies, Data, Metadata, Headers.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

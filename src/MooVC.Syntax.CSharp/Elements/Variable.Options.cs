@@ -10,46 +10,52 @@
     partial class Variable
     {
         /// <summary>
-        /// Defines options for the Variable c# syntax element.
+        /// Defines options for the Variable C# syntax element.
         /// </summary>
         [Fluentify]
         [Valuify]
         public sealed partial class Options
         {
             /// <summary>
-            /// Gets the camel option for the Variable c# syntax element.
+            /// Represents the camel for the Options.
             /// </summary>
             public static readonly Options Camel = new Options();
             /// <summary>
-            /// Gets or sets the pascal option for the Variable c# syntax element.
+            /// Represents the pascal for the Options.
             /// </summary>
             public static readonly Options Pascal = new Options { Casing = Identifier.Casing.Pascal };
 
             /// <summary>
-            /// Gets or sets the casing option for the Variable c# syntax element.
+            /// Gets or sets the casing on the Options.
             /// </summary>
+            /// <value>The casing.</value>
             public Identifier.Casing Casing { get; set; } = Identifier.Casing.Camel;
 
             /// <summary>
-            /// Gets a value indicating whether the options are camel for the Variable c# syntax element.
+            /// Gets a value indicating whether the Options is camel.
             /// </summary>
+            /// <value>A value indicating whether the Options is camel.</value>
             [Ignore]
             public bool IsCamel => Casing == Identifier.Casing.Pascal;
 
             /// <summary>
-            /// Gets a value indicating whether the options are pascal for the Variable c# syntax element.
+            /// Gets a value indicating whether the Options is pascal.
             /// </summary>
+            /// <value>A value indicating whether the Options is pascal.</value>
             [Ignore]
             public bool IsPascal => Casing == Identifier.Casing.Pascal;
 
             /// <summary>
-            /// Gets or sets the use underscore option for the Variable c# syntax element.
+            /// Gets or sets the use underscore on the Options.
             /// </summary>
+            /// <value>The use underscore.</value>
             public bool UseUnderscore { get; set; }
 
             /// <summary>
             /// Defines the Identifier.Options operator for the Options.
             /// </summary>
+            /// <param name="options">The options.</param>
+            /// <returns>The identifier options.</returns>
             public static implicit operator Identifier.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Identifier.Options>(options);

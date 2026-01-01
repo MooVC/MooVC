@@ -6,30 +6,30 @@
     using static MooVC.Syntax.CSharp.Concepts.Struct_Resources;
 
     /// <summary>
-    /// Represents a c# type syntax struct.
+    /// Represents a C# type syntax struct.
     /// </summary>
     public partial class Struct
     {
         /// <summary>
-        /// Represents a c# type syntax kind.
+        /// Represents a C# type syntax kind.
         /// </summary>
         [Monify(Type = typeof(string))]
         public sealed partial class Kind
         {
             /// <summary>
-            /// Gets the default on the Kind.
+            /// Gets the default instance.
             /// </summary>
             public static readonly Kind Default = string.Empty;
             /// <summary>
-            /// Gets the read only on the Kind.
+            /// Represents the read only for the Kind.
             /// </summary>
             public static readonly Kind ReadOnly = "readonly";
             /// <summary>
-            /// Gets the record on the Kind.
+            /// Represents the record for the Kind.
             /// </summary>
             public static readonly Kind Record = "record";
             /// <summary>
-            /// Gets the ref on the Kind.
+            /// Represents the ref for the Kind.
             /// </summary>
             public static readonly Kind Ref = "ref";
 
@@ -41,6 +41,9 @@
             /// <summary>
             /// Defines the + operator for the Kind.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static Kind operator +(Kind left, Kind right)
             {
                 _ = Guard.Against.Null(left, message: KindPlusOperatorLeftRequired.Format(nameof(Kind), right));
@@ -57,6 +60,7 @@
             /// <summary>
             /// Returns the string representation of the Kind.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 return _value;

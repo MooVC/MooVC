@@ -14,7 +14,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a c# member syntax event.
+    /// Represents a C# member syntax event.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -22,7 +22,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined on the Event.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Event Undefined = new Event();
         private const string Separator = " ";
@@ -37,38 +37,46 @@
         /// <summary>
         /// Gets or sets the behaviours on the Event.
         /// </summary>
+        /// <value>The behaviours.</value>
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
         /// <summary>
         /// Gets or sets the extensibility on the Event.
         /// </summary>
+        /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
         /// <summary>
         /// Gets or sets the handler on the Event.
         /// </summary>
+        /// <value>The handler.</value>
         public Symbol Handler { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
         /// Gets a value indicating whether the Event is undefind.
         /// </summary>
+        /// <value>A value indicating whether the Event is undefind.</value>
         [Ignore]
         public bool IsUndefind => this == Undefined;
 
         /// <summary>
         /// Gets or sets the name on the Event.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
         /// Gets or sets the scope on the Event.
         /// </summary>
+        /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
         /// Defines the string operator for the Event.
         /// </summary>
+        /// <param name="@event">The event.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Event @event)
         {
             Guard.Against.Conversion<Event, string>(@event);
@@ -79,6 +87,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Event.
         /// </summary>
+        /// <param name="@event">The event.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Event @event)
         {
             Guard.Against.Conversion<Event, Snippet>(@event);
@@ -89,14 +99,17 @@
         /// <summary>
         /// Returns the string representation of the Event.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return ToSnippet(Snippet.Options.Default);
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the c# member syntax.
+        /// Creates a snippet representation of the C# member syntax.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Event)));
@@ -128,8 +141,11 @@
         }
 
         /// <summary>
-        /// Validates the Event and returns validation results.
+        /// Validates the Event.
         /// </summary>
+        /// <remarks>Required members include: Extensibility, Handler, Name.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefind)

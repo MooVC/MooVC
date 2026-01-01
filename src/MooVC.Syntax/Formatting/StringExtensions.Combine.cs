@@ -13,8 +13,11 @@
     public static partial class StringExtensions
     {
         /// <summary>
-        /// Performs the Combine operation for the formatting helper.
+        /// Performs the combine operation for the formatting helper.
         /// </summary>
+        /// <param name="separator">The separator.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The string.</returns>
         public static string Combine(this string separator, params string[] values)
         {
             _ = Guard.Against.NullOrEmpty(separator, message: CombineSeparatorRequired);
@@ -45,8 +48,12 @@
         }
 
         /// <summary>
-        /// Performs the Combine T operation for the formatting helper.
+        /// Performs the combine t operation for the formatting helper.
         /// </summary>
+        /// <param name="separator">The separator.</param>
+        /// <param name="elements">The elements.</param>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>The string.</returns>
         public static string Combine<T>(this string separator, ImmutableArray<T> elements, Func<T, string> formatter)
         {
             _ = Guard.Against.Null(formatter, message: CombineFormatterRequired);

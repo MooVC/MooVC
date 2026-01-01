@@ -21,7 +21,7 @@
           IValidatableObject
     {
         /// <summary>
-        /// Gets the unqualified on the Qualifier.
+        /// Represents the unqualified for the Qualifier.
         /// </summary>
         public static readonly Qualifier Unqualified = ImmutableArray<Segment>.Empty;
 
@@ -30,21 +30,26 @@
         /// <summary>
         /// Gets a value indicating whether the Qualifier is unqualified.
         /// </summary>
+        /// <value>A value indicating whether the Qualifier is unqualified.</value>
         public bool IsUnqualified => this == Unqualified;
 
         /// <summary>
         /// Gets the length on the Qualifier.
         /// </summary>
+        /// <value>The length.</value>
         public int Length => _value.Length;
 
         /// <summary>
         /// Gets the index on the Qualifier.
         /// </summary>
+        /// <value>The index.</value>
         public Segment this[int index] => _value[index];
 
         /// <summary>
         /// Defines the Qualifier operator for the Qualifier.
         /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(Type type)
         {
             Guard.Against.Conversion<Type, Qualifier>(type);
@@ -55,6 +60,8 @@
         /// <summary>
         /// Defines the Qualifier operator for the Qualifier.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(string value)
         {
             Guard.Against.Conversion<string, Qualifier>(value);
@@ -68,6 +75,8 @@
         /// <summary>
         /// Defines the Qualifier operator for the Qualifier.
         /// </summary>
+        /// <param name="values">The values.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(Segment[] values)
         {
             Guard.Against.Conversion<Segment[], Qualifier>(values);
@@ -83,6 +92,8 @@
         /// <summary>
         /// Defines the Segment[] operator for the Qualifier.
         /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The segment.</returns>
         public static implicit operator Segment[](Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, Segment[]>(qualifier);
@@ -93,6 +104,8 @@
         /// <summary>
         /// Defines the string operator for the Qualifier.
         /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, string>(qualifier);
@@ -103,6 +116,8 @@
         /// <summary>
         /// Defines the Snippet operator for the Qualifier.
         /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, Snippet>(qualifier);
@@ -113,6 +128,9 @@
         /// <summary>
         /// Defines the < operator for the Qualifier.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Qualifier left, Qualifier right)
         {
             if (left is null)
@@ -126,6 +144,9 @@
         /// <summary>
         /// Defines the > operator for the Qualifier.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Qualifier left, Qualifier right)
         {
             if (left is null)
@@ -139,6 +160,9 @@
         /// <summary>
         /// Defines the <= operator for the Qualifier.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Qualifier left, Qualifier right)
         {
             return !(left > right);
@@ -147,6 +171,9 @@
         /// <summary>
         /// Defines the >= operator for the Qualifier.
         /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Qualifier left, Qualifier right)
         {
             return !(left < right);
@@ -155,6 +182,8 @@
         /// <summary>
         /// Compares this Qualifier to another instance.
         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Qualifier other)
         {
             if (other is null)
@@ -182,6 +211,7 @@
         /// <summary>
         /// Returns the string representation of the Qualifier.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUnqualified)
@@ -198,8 +228,10 @@
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the syntax element.
+        /// Creates a snippet representation of the syntax element.
         /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Qualifier)));
@@ -213,8 +245,10 @@
         }
 
         /// <summary>
-        /// Validates the Qualifier and returns validation results.
+        /// Validates the Qualifier.
         /// </summary>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnqualified)

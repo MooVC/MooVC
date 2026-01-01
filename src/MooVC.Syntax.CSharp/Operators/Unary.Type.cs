@@ -4,51 +4,51 @@
     using Monify;
 
     /// <summary>
-    /// Represents a c# operator syntax unary.
+    /// Represents a C# operator syntax unary.
     /// </summary>
     public partial class Unary
     {
         /// <summary>
-        /// Represents a c# operator syntax type.
+        /// Represents a C# operator syntax type.
         /// </summary>
         [Monify(Type = typeof(string))]
         public sealed partial class Type
             : IComparable<Type>
         {
             /// <summary>
-            /// Gets the complement on the Type.
+            /// Represents the complement for the Type.
             /// </summary>
             public static readonly Type Complement = "~";
             /// <summary>
-            /// Gets the decrement on the Type.
+            /// Represents the decrement for the Type.
             /// </summary>
             public static readonly Type Decrement = "--";
             /// <summary>
-            /// Gets the false on the Type.
+            /// Represents the false for the Type.
             /// </summary>
             public static readonly Type False = "false";
             /// <summary>
-            /// Gets the increment on the Type.
+            /// Represents the increment for the Type.
             /// </summary>
             public static readonly Type Increment = "++";
             /// <summary>
-            /// Gets the minus on the Type.
+            /// Represents the minus for the Type.
             /// </summary>
             public static readonly Type Minus = "-";
             /// <summary>
-            /// Gets the not on the Type.
+            /// Represents the not for the Type.
             /// </summary>
             public static readonly Type Not = "!";
             /// <summary>
-            /// Gets the plus on the Type.
+            /// Represents the plus for the Type.
             /// </summary>
             public static readonly Type Plus = "+";
             /// <summary>
-            /// Gets the true on the Type.
+            /// Represents the true for the Type.
             /// </summary>
             public static readonly Type True = "true";
             /// <summary>
-            /// Gets the unspecified on the Type.
+            /// Gets the unspecified instance.
             /// </summary>
             public static readonly Type Unspecified = string.Empty;
 
@@ -60,51 +60,63 @@
             /// <summary>
             /// Gets a value indicating whether the Type is complement.
             /// </summary>
+            /// <value>A value indicating whether the Type is complement.</value>
             public bool IsComplement => this == Complement;
 
             /// <summary>
             /// Gets a value indicating whether the Type is decrement.
             /// </summary>
+            /// <value>A value indicating whether the Type is decrement.</value>
             public bool IsDecrement => this == Decrement;
 
             /// <summary>
             /// Gets a value indicating whether the Type is false.
             /// </summary>
+            /// <value>A value indicating whether the Type is false.</value>
             public bool IsFalse => this == False;
 
             /// <summary>
             /// Gets a value indicating whether the Type is increment.
             /// </summary>
+            /// <value>A value indicating whether the Type is increment.</value>
             public bool IsIncrement => this == Increment;
 
             /// <summary>
             /// Gets a value indicating whether the Type is minus.
             /// </summary>
+            /// <value>A value indicating whether the Type is minus.</value>
             public bool IsMinus => this == Minus;
 
             /// <summary>
             /// Gets a value indicating whether the Type is not.
             /// </summary>
+            /// <value>A value indicating whether the Type is not.</value>
             public bool IsNot => this == Not;
 
             /// <summary>
             /// Gets a value indicating whether the Type is plus.
             /// </summary>
+            /// <value>A value indicating whether the Type is plus.</value>
             public bool IsPlus => this == Plus;
 
             /// <summary>
             /// Gets a value indicating whether the Type is true.
             /// </summary>
+            /// <value>A value indicating whether the Type is true.</value>
             public bool IsTrue => this == True;
 
             /// <summary>
             /// Gets a value indicating whether the Type is unspecified.
             /// </summary>
+            /// <value>A value indicating whether the Type is unspecified.</value>
             public bool IsUnspecified => this == Unspecified;
 
             /// <summary>
             /// Defines the < operator for the Type.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator <(Type left, Type right)
             {
                 if (left is null)
@@ -118,6 +130,9 @@
             /// <summary>
             /// Defines the > operator for the Type.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator >(Type left, Type right)
             {
                 if (left is null)
@@ -131,6 +146,9 @@
             /// <summary>
             /// Defines the <= operator for the Type.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator <=(Type left, Type right)
             {
                 return !(left > right);
@@ -139,6 +157,9 @@
             /// <summary>
             /// Defines the >= operator for the Type.
             /// </summary>
+            /// <param name="left">The left.</param>
+            /// <param name="right">The right.</param>
+            /// <returns>The .</returns>
             public static bool operator >=(Type left, Type right)
             {
                 return !(left < right);
@@ -147,6 +168,8 @@
             /// <summary>
             /// Compares this Type to another instance.
             /// </summary>
+            /// <param name="other">The other.</param>
+            /// <returns>A signed integer indicating relative order.</returns>
             public int CompareTo(Type other)
             {
                 return other is null
@@ -157,6 +180,7 @@
             /// <summary>
             /// Returns the string representation of the Type.
             /// </summary>
+            /// <returns>The string representation.</returns>
             public override string ToString()
             {
                 return _value;

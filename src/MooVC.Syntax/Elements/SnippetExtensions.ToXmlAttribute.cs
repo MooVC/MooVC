@@ -11,6 +11,9 @@ namespace MooVC.Syntax.Elements
         /// <summary>
         /// Creates XML attributes for the syntax element.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The XML attributes.</returns>
         internal static IEnumerable<XAttribute> ToXmlAttribute(this Snippet value, string name)
         {
             if (value.IsEmpty)

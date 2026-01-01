@@ -12,8 +12,10 @@
     public static partial class StringExtensions
     {
         /// <summary>
-        /// Creates a code snippet representation of the formatting helper.
+        /// Creates a snippet representation of the formatting helper.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this string value)
         {
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(1);
@@ -24,8 +26,10 @@
         }
 
         /// <summary>
-        /// Creates a code snippet representation of the formatting helper.
+        /// Creates a snippet representation of the formatting helper.
         /// </summary>
+        /// <param name="values">The values.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this IEnumerable<string> values)
         {
             var lines = values

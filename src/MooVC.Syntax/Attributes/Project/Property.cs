@@ -13,7 +13,7 @@ namespace MooVC.Syntax.Attributes.Project
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a msbuild project attribute property.
+    /// Represents a MSBuild project attribute property.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -21,7 +21,7 @@ namespace MooVC.Syntax.Attributes.Project
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined on the Property.
+        /// Gets the undefined instance.
         /// </summary>
         public static readonly Property Undefined = new Property();
 
@@ -35,29 +35,34 @@ namespace MooVC.Syntax.Attributes.Project
         /// <summary>
         /// Gets or sets the condition on the Property.
         /// </summary>
+        /// <value>The condition.</value>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Property is undefined.
         /// </summary>
+        /// <value>A value indicating whether the Property is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
         /// Gets or sets the name on the Property.
         /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
         /// Gets or sets the value on the Property.
         /// </summary>
+        /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// Performs the to fragments operation for the MSBuild project attribute.
         /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -78,6 +83,7 @@ namespace MooVC.Syntax.Attributes.Project
         /// <summary>
         /// Returns the string representation of the Property.
         /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -89,8 +95,11 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Validates the Property and returns validation results.
+        /// Validates the Property.
         /// </summary>
+        /// <remarks>Required members include: Condition, Name.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

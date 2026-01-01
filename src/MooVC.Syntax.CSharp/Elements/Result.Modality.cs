@@ -4,23 +4,23 @@
     using Monify;
 
     /// <summary>
-    /// Represents a C# result signature for a member.
+    /// Represents a C# member return signature.
     /// </summary>
     public partial class Result
     {
         /// <summary>
-        /// Represents the async/sync modality for a member signature.
+        /// Represents the async/sync modality applied to a member signature.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInstantiation]
         public sealed partial class Modality
         {
             /// <summary>
-            /// Gets the async modifier for an asynchronous method signature.
+            /// Gets the async modifier for an asynchronous member signature.
             /// </summary>
             public static readonly Modality Asynchronous = "async";
             /// <summary>
-            /// Gets the absence of async for a synchronous method signature.
+            /// Gets the absence of async for a synchronous member signature.
             /// </summary>
             public static readonly Modality Synchronous = string.Empty;
 
@@ -30,8 +30,9 @@
             }
 
             /// <summary>
-            /// Returns the string representation of the Modality.
+            /// Returns the C# async modifier text.
             /// </summary>
+            /// <returns>The async modifier text.</returns>
             public override string ToString()
             {
                 return _value;
