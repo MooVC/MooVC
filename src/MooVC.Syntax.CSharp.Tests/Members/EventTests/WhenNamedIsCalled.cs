@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.EventTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string Name = "Handled";
 
@@ -15,7 +15,7 @@ public sealed class WhenWithNameIsCalled
         Identifier name = Name;
 
         // Act
-        Event result = original.WithName(name);
+        Event result = original.Named(name);
 
         // Assert
         result.ShouldNotBeSameAs(original);

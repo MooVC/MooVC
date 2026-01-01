@@ -33,6 +33,7 @@
 
         public bool IsNullable { get; internal set; }
 
+        [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
@@ -56,7 +57,7 @@
             Guard.Against.Conversion<Type, Symbol>(type);
 
             return new Symbol()
-                .WithName(type)
+                .Named(type)
                 .WithQualifier(type);
         }
 

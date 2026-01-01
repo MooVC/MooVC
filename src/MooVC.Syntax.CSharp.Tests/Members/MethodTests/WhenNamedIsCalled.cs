@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string NewName = "Other";
 
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         Method original = MethodTestsData.Create();
 
         // Act
-        Method result = original.WithName(new Declaration { Name = new Variable(NewName) });
+        Method result = original.Named(new Declaration { Name = new Variable(NewName) });
 
         // Assert
         result.ShouldNotBeSameAs(original);

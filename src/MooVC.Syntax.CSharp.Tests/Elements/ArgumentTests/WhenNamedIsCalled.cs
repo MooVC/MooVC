@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.CSharp.Members;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string Name = "Value";
 
@@ -14,7 +14,7 @@ public sealed class WhenWithNameIsCalled
         var name = new Variable(Name);
 
         // Act
-        Argument result = argument.WithName(name);
+        Argument result = argument.Named(name);
 
         // Assert
         result.ShouldNotBeSameAs(argument);

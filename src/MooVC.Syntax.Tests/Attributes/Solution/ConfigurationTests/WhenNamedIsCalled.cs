@@ -3,7 +3,7 @@ namespace MooVC.Syntax.Attributes.Solution.ConfigurationTests;
 using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         var updated = Snippet.From("Release");
 
         // Act
-        Configuration result = original.WithName(updated);
+        Configuration result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

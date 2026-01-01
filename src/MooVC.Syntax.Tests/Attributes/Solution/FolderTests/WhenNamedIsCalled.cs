@@ -3,7 +3,7 @@ namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         var updated = Snippet.From("OtherName");
 
         // Act
-        Folder result = original.WithName(updated);
+        Folder result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

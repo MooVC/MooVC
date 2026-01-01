@@ -1,23 +1,22 @@
-namespace MooVC.Syntax.Attributes.Resource.DataTests;
+namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
-        Data original = DataTestsData.Create();
+        Metadata original = MetadataTestsData.Create();
         var updated = Snippet.From("Other");
 
         // Act
-        Data result = original.WithType(updated);
+        Metadata result = original.OfType(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Type.ShouldBe(updated);
-        result.Comment.ShouldBe(original.Comment);
         result.MimeType.ShouldBe(original.MimeType);
         result.Name.ShouldBe(original.Name);
         result.Value.ShouldBe(original.Value);

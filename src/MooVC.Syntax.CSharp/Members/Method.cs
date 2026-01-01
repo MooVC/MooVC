@@ -38,6 +38,7 @@ namespace MooVC.Syntax.CSharp.Members
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("Named")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;

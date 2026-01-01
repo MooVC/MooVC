@@ -23,11 +23,13 @@ namespace MooVC.Syntax.Attributes.Resource
         {
         }
 
+        [Descriptor("KnownAs")]
         public Snippet Alias { get; internal set; } = Snippet.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<XElement> ToFragments()

@@ -32,6 +32,7 @@
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
+        [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;

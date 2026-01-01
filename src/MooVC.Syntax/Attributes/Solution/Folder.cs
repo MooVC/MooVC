@@ -34,6 +34,7 @@ namespace MooVC.Syntax.Attributes.Solution
 
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<XElement> ToFragments()

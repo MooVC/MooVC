@@ -27,6 +27,7 @@
 
         public Mode Modifier { get; internal set; } = Mode.None;
 
+        [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Snippet Value { get; internal set; } = Snippet.Empty;

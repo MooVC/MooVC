@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string NewName = "other";
 
@@ -11,7 +11,7 @@ public sealed class WhenWithNameIsCalled
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
 
         // Act
-        Parameter result = original.WithName(new Variable(NewName));
+        Parameter result = original.Named(new Variable(NewName));
 
         // Assert
         result.ShouldNotBeSameAs(original);

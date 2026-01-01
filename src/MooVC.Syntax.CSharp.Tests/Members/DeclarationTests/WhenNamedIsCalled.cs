@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string NewName = "Outcome";
 
@@ -15,7 +15,7 @@ public sealed class WhenWithNameIsCalled
         var name = new Identifier(NewName);
 
         // Act
-        Declaration result = original.WithName(name);
+        Declaration result = original.Named(name);
 
         // Assert
         result.ShouldNotBeSameAs(original);

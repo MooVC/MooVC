@@ -30,8 +30,10 @@ namespace MooVC.Syntax.Attributes.Resource
 
         public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
         public Snippet Value { get; internal set; } = Snippet.Empty;

@@ -2,21 +2,21 @@ namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenKnownAsIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Assembly original = AssemblyTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
-        Assembly result = original.WithName(updated);
+        Assembly result = original.KnownAs(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Alias.ShouldBe(original.Alias);
+        result.Alias.ShouldBe(updated);
+        result.Name.ShouldBe(original.Name);
     }
 }

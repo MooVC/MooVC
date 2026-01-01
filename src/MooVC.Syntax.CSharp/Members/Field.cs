@@ -36,6 +36,7 @@
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Scope Scope { get; internal set; } = Scope.Public;

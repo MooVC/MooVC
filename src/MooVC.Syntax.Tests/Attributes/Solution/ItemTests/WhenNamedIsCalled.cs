@@ -1,19 +1,19 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create();
+        Item original = ItemTestsData.Create();
         var updated = Snippet.From("OtherName");
 
         // Act
-        Project result = original.WithName(updated);
+        Item result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
@@ -21,5 +21,6 @@ public sealed class WhenWithNameIsCalled
         result.Id.ShouldBe(original.Id);
         result.Path.ShouldBe(original.Path);
         result.Type.ShouldBe(original.Type);
+        result.Items.ShouldBe(original.Items);
     }
 }

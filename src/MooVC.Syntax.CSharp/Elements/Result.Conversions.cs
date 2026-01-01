@@ -12,7 +12,7 @@
             _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Type), typeof(Result)));
 
             Symbol wrapped = new Symbol()
-                .WithName(wrapper)
+                .Named(wrapper)
                 .WithQualifier(wrapper)
                 .WithArguments(Type);
 

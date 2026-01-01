@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         var name = new Identifier("Alternative");
 
         // Act
-        Property result = original.WithName(name);
+        Property result = original.Named(name);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string NewName = "Other";
 
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         Field original = FieldTestsData.Create();
 
         // Act
-        Field result = original.WithName(new Variable(NewName));
+        Field result = original.Named(new Variable(NewName));
 
         // Assert
         result.ShouldNotBeSameAs(original);

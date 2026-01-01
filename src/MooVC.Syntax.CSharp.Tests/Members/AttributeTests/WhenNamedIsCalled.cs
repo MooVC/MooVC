@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string NewName = "DebuggerStepThrough";
 
@@ -13,7 +13,7 @@ public sealed class WhenWithNameIsCalled
         Attribute original = AttributeTestsData.Create();
 
         // Act
-        Attribute result = original.WithName(new Symbol { Name = new Variable(NewName) });
+        Attribute result = original.Named(new Symbol { Name = new Variable(NewName) });
 
         // Assert
         result.ShouldNotBeSameAs(original);

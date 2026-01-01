@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
@@ -10,7 +10,7 @@ public sealed class WhenWithNameIsCalled
         var name = new Variable("Updated");
 
         // Act
-        Symbol result = original.WithName(name);
+        Symbol result = original.Named(name);
 
         // Assert
         result.ShouldNotBeSameAs(original);

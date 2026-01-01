@@ -26,6 +26,7 @@ namespace MooVC.Syntax.Attributes.Solution
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         public Snippet Value { get; internal set; } = Snippet.Empty;

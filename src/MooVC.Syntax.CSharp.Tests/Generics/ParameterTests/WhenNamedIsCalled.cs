@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     private const string DefaultName = "TValue";
     private const string NewName = "TOther";
@@ -21,7 +21,7 @@ public sealed class WhenWithNameIsCalled
         };
 
         // Act
-        Parameter result = original.WithName(NewName);
+        Parameter result = original.Named(NewName);
 
         // Assert
         result.ShouldNotBeSameAs(original);

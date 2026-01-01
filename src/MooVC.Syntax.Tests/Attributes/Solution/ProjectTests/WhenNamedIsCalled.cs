@@ -1,24 +1,25 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
-        File original = FileTestsData.Create();
+        Project original = ProjectTestsData.Create();
         var updated = Snippet.From("OtherName");
 
         // Act
-        File result = original.WithName(updated);
+        Project result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(updated);
         result.Id.ShouldBe(original.Id);
         result.Path.ShouldBe(original.Path);
+        result.Type.ShouldBe(original.Type);
     }
 }

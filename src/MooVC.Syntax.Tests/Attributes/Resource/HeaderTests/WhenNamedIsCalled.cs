@@ -2,17 +2,17 @@ namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Header original = HeaderTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
-        Header result = original.WithName(updated);
+        Header result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

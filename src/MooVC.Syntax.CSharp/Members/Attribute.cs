@@ -32,6 +32,7 @@
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
+        [Descriptor("Named")]
         public Symbol Name { get; internal set; } = Symbol.Undefined;
 
         public Specifier Target { get; internal set; } = Specifier.None;
