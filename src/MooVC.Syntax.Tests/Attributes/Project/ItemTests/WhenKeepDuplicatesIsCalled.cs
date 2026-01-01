@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
-public sealed class WhenWithKeepDuplicatesIsCalled
+public sealed class WhenKeepDuplicatesIsCalled
 {
     [Fact]
     public void GivenKeepDuplicatesThenReturnsUpdatedInstance()
@@ -10,7 +10,7 @@ public sealed class WhenWithKeepDuplicatesIsCalled
         const bool updated = true;
 
         // Act
-        Item result = original.WithKeepDuplicates(updated);
+        Item result = original.KeepDuplicates(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

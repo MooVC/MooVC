@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
-public sealed class WhenWithKeepDuplicateOutputsIsCalled
+public sealed class WhenKeepDuplicateOutputsIsCalled
 {
     [Fact]
     public void GivenKeepDuplicateOutputsThenReturnsUpdatedInstance()
@@ -10,7 +10,7 @@ public sealed class WhenWithKeepDuplicateOutputsIsCalled
         const bool updated = true;
 
         // Act
-        Target result = original.WithKeepDuplicateOutputs(updated);
+        Target result = original.KeepDuplicateOutputs(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
