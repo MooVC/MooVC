@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
-using System.Linq;
 using System.Xml.Linq;
 
 public sealed class WhenToXmlAttributeIsCalled

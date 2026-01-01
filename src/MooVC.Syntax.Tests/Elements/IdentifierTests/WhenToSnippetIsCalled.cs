@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Elements.IdentifierTests;
 
-using MooVC.Syntax;
 using static MooVC.Syntax.Elements.Identifier;
 
 public sealed class WhenToSnippetIsCalled

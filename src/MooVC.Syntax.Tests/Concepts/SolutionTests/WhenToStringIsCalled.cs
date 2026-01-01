@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using MooVC.Syntax.Attributes.Solution;
-
 public sealed class WhenToStringIsCalled
 {
     [Fact]

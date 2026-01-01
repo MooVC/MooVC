@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled

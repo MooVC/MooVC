@@ -24,7 +24,7 @@ public sealed class WhenToFragmentsIsCalled
     {
         // Arrange
         var location = new Path(ResourceTestsData.DefaultLocationPath);
-        Resource subject = new Resource { Location = location };
+        var subject = new Resource { Location = location };
         Path designer = location.ChangeExtension("Designer.cs");
 
         var expectedCompile = new XElement(
@@ -53,10 +53,10 @@ public sealed class WhenToFragmentsIsCalled
     public void GivenPublicResourceWithNamespaceThenReturnsCustomToolNamespace()
     {
         // Arrange
-        Snippet customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
+        var customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
         var location = new Path(ResourceTestsData.DefaultLocationPath);
         var designer = new Path(ResourceTestsData.DefaultDesignerPath);
-        Resource subject = new Resource
+        var subject = new Resource
         {
             CustomToolNamespace = customToolNamespace,
             Designer = designer,

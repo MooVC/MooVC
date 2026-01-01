@@ -3,7 +3,6 @@ namespace MooVC.Syntax.CSharp.Members
     using System;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;

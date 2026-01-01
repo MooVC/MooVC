@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
-using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorOptionsOptionsIsCalled

@@ -2,7 +2,6 @@ namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.Attributes.Resource;
-using MooVC.Syntax.Concepts.ResourceTests;
 using MooVC.Syntax.Elements;
 using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 

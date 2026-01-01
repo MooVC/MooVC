@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members
 {
     using Fluentify;
-    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
     using Valuify;

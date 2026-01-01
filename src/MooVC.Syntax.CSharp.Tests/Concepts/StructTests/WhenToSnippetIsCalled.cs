@@ -1,8 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using System;
-using MooVC.Syntax.CSharp;
-using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;

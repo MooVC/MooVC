@@ -24,7 +24,7 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         var location = new Path(ResourceTestsData.DefaultLocationPath);
-        Resource subject = new Resource { Location = location };
+        var subject = new Resource { Location = location };
         Path designer = location.ChangeExtension("Designer.cs");
 
         var compileElement = new XElement(

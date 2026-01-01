@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.ConfigurationTests;
 
-using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled

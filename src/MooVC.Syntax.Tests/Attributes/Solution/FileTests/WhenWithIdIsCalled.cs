@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithIdIsCalled

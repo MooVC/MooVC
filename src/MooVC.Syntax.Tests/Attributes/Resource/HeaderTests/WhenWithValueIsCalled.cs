@@ -9,7 +9,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Header original = HeaderTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
         Header result = original.WithValue(updated);

@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        Snippet customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
+        var customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
         var designer = new Path(ResourceTestsData.DefaultDesignerPath);
         var location = new Path(ResourceTestsData.DefaultLocationPath);
 

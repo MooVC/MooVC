@@ -2,7 +2,6 @@ namespace MooVC.Syntax.Attributes.Solution.ConfigurationTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
-using MooVC.Syntax;
 
 public sealed class WhenToFragmentsIsCalled
 {

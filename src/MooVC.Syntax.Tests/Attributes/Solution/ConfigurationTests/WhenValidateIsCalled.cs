@@ -3,7 +3,6 @@ namespace MooVC.Syntax.Attributes.Solution.ConfigurationTests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled

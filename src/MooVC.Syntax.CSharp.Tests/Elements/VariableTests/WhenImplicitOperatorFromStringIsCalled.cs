@@ -3,7 +3,6 @@
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Empty = "";
-    private const string Space = "   ";
     private const string Alpha = "Alpha";
 
     [Fact]

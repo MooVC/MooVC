@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Concepts;
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
@@ -46,7 +44,7 @@ public sealed class WhenValidateIsCalled
     private sealed class Class
         : Type
     {
-        public static readonly Class Undefined = new Class();
+        public static readonly Class Undefined = new();
 
         public override bool IsUndefined => ReferenceEquals(this, Undefined);
 

@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Linq;
-using MooVC.Syntax;
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
 

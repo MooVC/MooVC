@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 using System.Linq;
-using MooVC.Syntax;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithFoldersIsCalled

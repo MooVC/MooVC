@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenWithOperatorsIsCalled

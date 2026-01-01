@@ -22,7 +22,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
-        var other = new object();
+        object other = new();
 
         // Act
         bool result = subject.Equals(other);

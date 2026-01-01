@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Xml.Linq;
-using MooVC.Syntax.Attributes.Resource;
 using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenToDocumentIsCalled
