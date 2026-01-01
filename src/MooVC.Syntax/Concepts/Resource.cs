@@ -23,12 +23,12 @@ public sealed partial class Resource
 
     public ImmutableArray<Data> Data { get; internal set; } = ImmutableArray<Data>.Empty;
 
-    [Ignore]
-    public override bool IsUndefined => this == Undefined;
+    public ImmutableArray<Header> Headers { get; internal set; } = ImmutableArray<Header>.Empty;
 
     public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
-    public ImmutableArray<ResourceHeader> ResourceHeaders { get; internal set; } = ImmutableArray<ResourceHeader>.Empty;
+    [Ignore]
+    public override bool IsUndefined => this == Undefined;
 
     public XDocument ToDocument()
     {
@@ -37,7 +37,7 @@ public sealed partial class Resource
             return new XDocument();
         }
 
-        XElement[] headers = ResourceHeaders
+        XElement[] headers = Headers
             .Where(header => !header.IsUndefined)
             .SelectMany(header => header.ToFragments())
             .ToArray();
@@ -84,7 +84,7 @@ public sealed partial class Resource
             .IncludeIf(!Assemblies.IsDefaultOrEmpty, nameof(Assemblies), assembly => !assembly.IsUndefined, Assemblies)
             .AndIf(!Data.IsDefaultOrEmpty, nameof(Data), entry => !entry.IsUndefined, Data)
             .AndIf(!Metadata.IsDefaultOrEmpty, nameof(Metadata), entry => !entry.IsUndefined, Metadata)
-            .AndIf(!ResourceHeaders.IsDefaultOrEmpty, nameof(ResourceHeaders), header => !header.IsUndefined, ResourceHeaders)
+            .AndIf(!Headers.IsDefaultOrEmpty, nameof(Headers), header => !header.IsUndefined, Headers)
             .Results;
     }
 }

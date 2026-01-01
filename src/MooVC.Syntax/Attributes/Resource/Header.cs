@@ -14,12 +14,12 @@ using Ignore = Valuify.IgnoreAttribute;
 
 [Fluentify]
 [Valuify]
-public sealed partial class ResourceHeader
+public sealed partial class Header
     : IValidatableObject
 {
-    public static readonly ResourceHeader Undefined = new ResourceHeader();
+    public static readonly Header Undefined = new Header();
 
-    internal ResourceHeader()
+    internal Header()
     {
     }
 
