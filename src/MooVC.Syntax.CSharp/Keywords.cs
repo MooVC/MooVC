@@ -4,8 +4,14 @@
     using System.Collections.Immutable;
     using System.Text;
 
+    /// <summary>
+    /// Represents a C# syntax keywords.
+    /// </summary>
     internal static class Keywords
     {
+        /// <summary>
+        /// Represents the reserved for the Keywords.
+        /// </summary>
         public static readonly ImmutableHashSet<string> Reserved =
             ImmutableHashSet.Create(
                 StringComparer.Ordinal,
@@ -76,11 +82,21 @@
                 "volatile",
                 "while");
 
+        /// <summary>
+        /// Performs the is reserved operation for the C# syntax.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The bool.</returns>
         public static bool IsReserved(this string value)
         {
             return !string.IsNullOrWhiteSpace(value) && Reserved.Contains(value);
         }
 
+        /// <summary>
+        /// Performs the is reserved operation for the C# syntax.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The bool.</returns>
         public static bool IsReserved(this StringBuilder value)
         {
             if (value is null)

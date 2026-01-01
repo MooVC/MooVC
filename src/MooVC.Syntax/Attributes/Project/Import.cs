@@ -12,31 +12,64 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a MSBuild project attribute import.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Import
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined instance.
+        /// </summary>
         public static readonly Import Undefined = new Import();
 
+        /// <summary>
+        /// Initializes a new instance of the Import class.
+        /// </summary>
         internal Import()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the Import.
+        /// </summary>
+        /// <value>The condition.</value>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Import is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Import is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the label on the Import.
+        /// </summary>
+        /// <value>The label.</value>
         [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the project on the Import.
+        /// </summary>
+        /// <value>The project.</value>
         [Descriptor("ForProject")]
         public Snippet Project { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the sdk on the Import.
+        /// </summary>
+        /// <value>The sdk.</value>
         public Snippet Sdk { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the to fragments operation for the MSBuild project attribute.
+        /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -56,6 +89,10 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Import.
+        /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -66,6 +103,12 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Import.
+        /// </summary>
+        /// <remarks>Required members include: Condition, Label, Project, Sdk.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

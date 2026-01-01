@@ -22,6 +22,9 @@ namespace MooVC.Syntax.Validation {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    /// <summary>
+    /// Represents the IGuardClauseExtensions_Resources.
+    /// </summary>
     internal class IGuardClauseExtensions_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
@@ -29,6 +32,9 @@ namespace MooVC.Syntax.Validation {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        /// <summary>
+        /// Initializes a new instance of the IGuardClauseExtensions_Resources class.
+        /// </summary>
         internal IGuardClauseExtensions_Resources() {
         }
         

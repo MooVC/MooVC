@@ -7,8 +7,17 @@
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.Validation.ValidationContextExtensions_Resources;
 
+    /// <summary>
+    /// Represents a validation helper validation context extensions.
+    /// </summary>
     public static partial class ValidationContextExtensions
     {
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -18,6 +27,12 @@
             return validationContext.Include(memberName, _ => true, Enumerable.Empty<ValidationResult>(), validatable);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -28,6 +43,12 @@
             return validationContext.Include(memberName, _ => true, results, validatable);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -37,6 +58,12 @@
             return validationContext.Include(memberName, _ => true, validatables);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -47,6 +74,12 @@
             return validationContext.Include(memberName, _ => true, results, validatables);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -57,6 +90,12 @@
             return validationContext.Include(memberName, predicate, Enumerable.Empty<ValidationResult>(), validatable);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -74,6 +113,12 @@
             return validationContext.Validate(memberName, predicate, results, validatable);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -84,6 +129,12 @@
             return validationContext.Include(memberName, predicate, Enumerable.Empty<ValidationResult>(), validatables);
         }
 
+        /// <summary>
+        /// Performs the static operation for the validation helper.
+        /// </summary>
+        /// <param name="Results">The results.</param>
+        /// <param name="ValidationContext">The validation context.</param>
+        /// <returns>The public.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,

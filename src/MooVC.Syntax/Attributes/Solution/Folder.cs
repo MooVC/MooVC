@@ -12,31 +12,68 @@ namespace MooVC.Syntax.Attributes.Solution
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a MSBuild solution attribute folder.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Folder
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined instance.
+        /// </summary>
         public static readonly Folder Undefined = new Folder();
 
+        /// <summary>
+        /// Initializes a new instance of the Folder class.
+        /// </summary>
         internal Folder()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the files on the Folder.
+        /// </summary>
+        /// <value>The files.</value>
         public ImmutableArray<File> Files { get; internal set; } = ImmutableArray<File>.Empty;
 
+        /// <summary>
+        /// Gets or sets the folders on the Folder.
+        /// </summary>
+        /// <value>The folders.</value>
         public ImmutableArray<Folder> Folders { get; internal set; } = ImmutableArray<Folder>.Empty;
 
+        /// <summary>
+        /// Gets or sets the id on the Folder.
+        /// </summary>
+        /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Folder is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Folder is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the items on the Folder.
+        /// </summary>
+        /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        /// <summary>
+        /// Gets or sets the name on the Folder.
+        /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the to fragments operation for the MSBuild solution attribute.
+        /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -72,6 +109,10 @@ namespace MooVC.Syntax.Attributes.Solution
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Folder.
+        /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -82,6 +123,12 @@ namespace MooVC.Syntax.Attributes.Solution
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Folder.
+        /// </summary>
+        /// <remarks>Required members include: Files, Folders, Id, Items, Name.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

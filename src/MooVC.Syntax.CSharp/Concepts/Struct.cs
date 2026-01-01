@@ -17,25 +17,57 @@
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
+    /// <summary>
+    /// Represents a C# type syntax struct.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Struct
         : Type
     {
+        /// <summary>
+        /// Gets the undefined instance.
+        /// </summary>
         public static readonly Struct Undefined = new Struct();
         private const string Separator = " ";
 
+        /// <summary>
+        /// Gets or sets the behavior on the Struct.
+        /// </summary>
+        /// <value>The behavior.</value>
         public Kind Behavior { get; internal set; } = Kind.Default;
 
+        /// <summary>
+        /// Gets or sets the constructors on the Struct.
+        /// </summary>
+        /// <value>The constructors.</value>
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
+        /// <summary>
+        /// Gets or sets the fields on the Struct.
+        /// </summary>
+        /// <value>The fields.</value>
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
 
+        /// <summary>
+        /// Gets or sets the parameters on the Struct.
+        /// </summary>
+        /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Struct is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Struct is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Validates the Struct.
+        /// </summary>
+        /// <remarks>Required members include: Constructors, Fields, Parameters.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -52,6 +84,11 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Performs the perform to snippet operation for the C# type syntax.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The snippet.</returns>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

@@ -3,6 +3,9 @@
     using System;
     using System.Text;
 
+    /// <summary>
+    /// Represents a formatting helper string extensions.
+    /// </summary>
     public static partial class StringExtensions
     {
         private static string ToCased(this string value, Func<char, char> transformFirstCharacter)
