@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
+using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -14,6 +15,7 @@ public sealed class WhenConstructorIsCalled
         subject.Imports.ShouldBeEmpty();
         subject.ItemGroups.ShouldBeEmpty();
         subject.PropertyGroups.ShouldBeEmpty();
+        subject.Resources.ShouldBeEmpty();
         subject.Sdks.ShouldBeEmpty();
         subject.Targets.ShouldBeEmpty();
         subject.IsUndefined.ShouldBeTrue();
@@ -26,6 +28,7 @@ public sealed class WhenConstructorIsCalled
         Import import = ProjectTestsData.CreateImport();
         ItemGroup itemGroup = ProjectTestsData.CreateItemGroup();
         PropertyGroup propertyGroup = ProjectTestsData.CreatePropertyGroup();
+        Resource resource = ProjectTestsData.CreateResource();
         Sdk sdk = ProjectTestsData.CreateSdk();
         Target target = ProjectTestsData.CreateTarget();
 
@@ -35,6 +38,7 @@ public sealed class WhenConstructorIsCalled
             Imports = [import],
             ItemGroups = [itemGroup],
             PropertyGroups = [propertyGroup],
+            Resources = [resource],
             Sdks = [sdk],
             Targets = [target],
         };
@@ -43,6 +47,7 @@ public sealed class WhenConstructorIsCalled
         subject.Imports.ShouldBe(new[] { import });
         subject.ItemGroups.ShouldBe(new[] { itemGroup });
         subject.PropertyGroups.ShouldBe(new[] { propertyGroup });
+        subject.Resources.ShouldBe(new[] { resource });
         subject.Sdks.ShouldBe(new[] { sdk });
         subject.Targets.ShouldBe(new[] { target });
         subject.IsUndefined.ShouldBeFalse();

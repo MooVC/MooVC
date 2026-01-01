@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Resource;
+using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenWithAssembliesIsCalled
 {

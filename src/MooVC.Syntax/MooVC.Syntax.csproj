@@ -35,6 +35,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Elements\Path.Resources.Designer.cs">
+      <DependentUpon>Path.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Elements\Segment.Resources.Designer.cs">
       <DependentUpon>Segment.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -83,6 +88,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Elements\Identifier.Resources.resx">
       <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Elements\Path.Resources.resx">
+      <LastGenOutput>Path.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Elements\Segment.Resources.resx">

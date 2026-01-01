@@ -11,6 +11,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
+    using ResourceReference = MooVC.Syntax.Attributes.Resource.Resource;
 
     [Fluentify]
     [Valuify]
@@ -24,6 +25,8 @@
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
 
         public ImmutableArray<PropertyGroup> PropertyGroups { get; internal set; } = ImmutableArray<PropertyGroup>.Empty;
+
+        public ImmutableArray<ResourceReference> Resources { get; internal set; } = ImmutableArray<ResourceReference>.Empty;
 
         public ImmutableArray<Sdk> Sdks { get; internal set; } = ImmutableArray<Sdk>.Empty;
 
@@ -43,6 +46,7 @@
                 .IncludeIf(!Imports.IsDefaultOrEmpty, nameof(Imports), import => !import.IsUndefined, Imports)
                 .AndIf(!ItemGroups.IsDefaultOrEmpty, nameof(ItemGroups), group => !group.IsUndefined, ItemGroups)
                 .AndIf(!PropertyGroups.IsDefaultOrEmpty, nameof(PropertyGroups), group => !group.IsUndefined, PropertyGroups)
+                .AndIf(!Resources.IsDefaultOrEmpty, nameof(Resources), resource => !resource.IsUndefined, Resources)
                 .AndIf(!Sdks.IsDefaultOrEmpty, nameof(Sdks), sdk => !sdk.IsUnspecified, Sdks)
                 .AndIf(!Targets.IsDefaultOrEmpty, nameof(Targets), target => !target.IsUndefined, Targets)
                 .Results;
@@ -63,6 +67,12 @@
             XElement[] itemGroups = ItemGroups
                 .Where(group => !group.IsUndefined)
                 .SelectMany(group => group.ToFragments())
+                .ToArray();
+
+            XElement[] resourceItemGroups = Resources
+                .Where(resource => !resource.IsUndefined)
+                .SelectMany(resource => resource.ToFragments())
+                .ForkOn(resources => resources.Any(), @true: CreateResourcesGroup, @false: _ => XElement.EmptySequence)
                 .ToArray();
 
             XElement[] propertyGroups = PropertyGroups
@@ -86,6 +96,7 @@
                 nameof(Project),
                 propertyGroups,
                 itemGroups,
+                resourceItemGroups,
                 imports,
                 sdks,
                 targets);
@@ -101,6 +112,11 @@
             }
 
             return ToDocument().ToString();
+        }
+
+        private static IEnumerable<XElement> CreateResourcesGroup(IEnumerable<XElement> resources)
+        {
+            yield return new XElement(nameof(ItemGroup), resources);
         }
     }
 }

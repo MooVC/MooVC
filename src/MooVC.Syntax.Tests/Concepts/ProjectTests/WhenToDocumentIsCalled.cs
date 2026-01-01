@@ -35,6 +35,22 @@ public sealed class WhenToDocumentIsCalled
 
         var itemGroupElement = new XElement(nameof(ItemGroup), itemElement);
 
+        var compileElement = new XElement(
+            "Compile",
+            new XAttribute("Update", ProjectTestsData.DefaultDesignerPath),
+            new XElement("DesignTime", "True"),
+            new XElement("AutoGen", "True"),
+            new XElement("DependentUpon", ProjectTestsData.DefaultLocation));
+
+        var embeddedResourceElement = new XElement(
+            "EmbeddedResource",
+            new XAttribute("Update", ProjectTestsData.DefaultLocation),
+            new XElement("Generator", "ResXFileCodeGenerator"),
+            new XElement("LastGenOutput", ProjectTestsData.DefaultDesignerPath),
+            new XElement("CustomToolNamespace", ProjectTestsData.DefaultResourceToolNamespace));
+
+        var resourceItemGroupElement = new XElement(nameof(ItemGroup), compileElement, embeddedResourceElement);
+
         var propertyElement = new XElement(
             ProjectTestsData.DefaultPropertyName,
             ProjectTestsData.DefaultPropertyValue);
@@ -56,6 +72,7 @@ public sealed class WhenToDocumentIsCalled
                 nameof(Project),
                 propertyGroupElement,
                 itemGroupElement,
+                resourceItemGroupElement,
                 importElement,
                 sdkElement,
                 targetElement));
