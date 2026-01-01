@@ -12,11 +12,11 @@
             _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Type), typeof(Result)));
 
             Symbol wrapped = new Symbol()
+                .From(wrapper)
                 .Named(wrapper)
-                .WithQualifier(wrapper)
                 .WithArguments(Type);
 
-            return this.WithType(wrapped);
+            return this.OfType(wrapped);
         }
 
         public Result AsTask()

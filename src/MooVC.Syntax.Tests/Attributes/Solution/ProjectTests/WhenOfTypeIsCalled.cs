@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenTypeThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithTypeIsCalled
         var updated = Snippet.From("Other");
 
         // Act
-        Project result = original.WithType(updated);
+        Project result = original.OfType(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

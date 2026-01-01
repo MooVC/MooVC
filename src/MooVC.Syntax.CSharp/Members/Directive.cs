@@ -24,6 +24,7 @@
         {
         }
 
+        [Descriptor("KnownAs")]
         public Identifier Alias { get; internal set; } = Identifier.Unnamed;
 
         [Ignore]
@@ -34,6 +35,7 @@
         [Ignore]
         public bool IsSystem => Qualifier.Length > 0 && Qualifier[0] == nameof(System);
 
+        [Descriptor("From")]
         public Qualifier Qualifier { get; internal set; }
 
         public static implicit operator string(Directive directive)

@@ -36,6 +36,7 @@
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
+        [Descriptor("From")]
         public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
         public static implicit operator string(Symbol symbol)
@@ -57,8 +58,8 @@
             Guard.Against.Conversion<Type, Symbol>(type);
 
             return new Symbol()
-                .Named(type)
-                .WithQualifier(type);
+                .From(type)
+                .Named(type);
         }
 
         public static bool operator <(Symbol left, Symbol right)

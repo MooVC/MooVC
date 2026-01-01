@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsNewInstanceWithUpdatedType()
@@ -15,7 +15,7 @@ public sealed class WhenWithTypeIsCalled
         };
 
         // Act
-        Parameter result = original.WithType(type);
+        Parameter result = original.OfType(type);
 
         // Assert
         result.ShouldNotBeSameAs(original);

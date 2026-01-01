@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithAliasIsCalled
+public sealed class WhenKnownAsIsCalled
 {
     private const string Alias = "Alias";
     private const string NewAlias = "NewAlias";
@@ -18,7 +18,7 @@ public sealed class WhenWithAliasIsCalled
         };
 
         // Act
-        Directive result = original.WithAlias(NewAlias);
+        Directive result = original.KnownAs(NewAlias);
 
         // Assert
         result.ShouldNotBeSameAs(original);

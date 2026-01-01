@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithPathIsCalled
+public sealed class WhenAtIsCalled
 {
     [Fact]
     public void GivenPathThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithPathIsCalled
         var updated = Snippet.From("src/Other.csproj");
 
         // Act
-        Project result = original.WithPath(updated);
+        Project result = original.At(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenTypeThenReturnsUpdatedInstance()
@@ -10,7 +10,7 @@ public sealed class WhenWithTypeIsCalled
         var type = new Symbol { Name = new Variable("Updated") };
 
         // Act
-        Result result = original.WithType(type);
+        Result result = original.OfType(type);
 
         // Assert
         result.ShouldNotBeSameAs(original);

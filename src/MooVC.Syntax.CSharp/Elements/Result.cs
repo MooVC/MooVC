@@ -41,6 +41,7 @@
 
         public Modality Mode { get; internal set; } = Modality.Asynchronous;
 
+        [Descriptor("OfType")]
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator Result(Type type)

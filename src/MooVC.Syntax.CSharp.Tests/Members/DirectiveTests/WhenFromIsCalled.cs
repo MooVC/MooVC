@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithQualifierIsCalled
+public sealed class WhenFromIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsNewInstanceWithUpdatedQualifier()
@@ -17,7 +17,7 @@ public sealed class WhenWithQualifierIsCalled
         var qualifier = new Qualifier(["MooVC", "Syntax", "CSharp"]);
 
         // Act
-        Directive result = original.WithQualifier(qualifier);
+        Directive result = original.From(qualifier);
 
         // Assert
         result.ShouldNotBeSameAs(original);

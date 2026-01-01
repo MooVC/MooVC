@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithQualifierIsCalled
+public sealed class WhenFromIsCalled
 {
     [Fact]
     public void GivenQualifierThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithQualifierIsCalled
         var qualifier = new Qualifier(["MooVC", "Syntax"]);
 
         // Act
-        Symbol result = original.WithQualifier(qualifier);
+        Symbol result = original.From(qualifier);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -30,8 +30,10 @@
         [Ignore]
         public bool IsEmpty => this == Empty;
 
+        [Descriptor("From")]
         public Qualifier Namespace { get; internal set; } = Qualifier.Unqualified;
 
+        [Descriptor("OfType")]
         public T Type { get; internal set; } = new T();
 
         public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;

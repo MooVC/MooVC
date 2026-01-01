@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenTypeThenReturnsNewInstanceWithUpdatedType()
@@ -13,7 +13,7 @@ public sealed class WhenWithTypeIsCalled
         Symbol type = SymbolTestsData.Create("Other");
 
         // Act
-        Field result = original.WithType(type);
+        Field result = original.OfType(type);
 
         // Assert
         result.ShouldNotBeSameAs(original);

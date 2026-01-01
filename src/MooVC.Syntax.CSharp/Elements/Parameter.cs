@@ -36,6 +36,7 @@
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
+        [Descriptor("OfType")]
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator string(Parameter parameter)

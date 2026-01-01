@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithTypeIsCalled
+public sealed class WhenOfTypeIsCalled
 {
     [Fact]
     public void GivenTypeThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithTypeIsCalled
         var type = new Symbol { Name = new Variable("int") };
 
         // Act
-        Property result = original.WithType(type);
+        Property result = original.OfType(type);
 
         // Assert
         result.ShouldNotBeSameAs(original);

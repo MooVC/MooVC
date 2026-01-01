@@ -41,6 +41,7 @@
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        [Descriptor("OfType")]
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         public static implicit operator string(Property property)
