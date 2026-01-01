@@ -40,6 +40,44 @@ public sealed class WhenAddIsCalled
         });
     }
 
+
+    [Fact]
+    public void GivenUndefinedResourceThenReturnsOriginal()
+    {
+        // Arrange
+        Resource resource = Resource.Undefined;
+        var project = new Project();
+        Snippet resourcePath = Snippet.From("Resources/Strings.resx");
+        Snippet designerPath = Snippet.From("Resources/Strings.Designer.cs");
+
+        // Act
+        Project result = project.Add(resource, resourcePath, designerPath);
+
+        // Assert
+        result.ShouldBeSameAs(project);
+        result.ItemGroups.ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void GivenExistingItemGroupsThenAppendsNewGroup()
+    {
+        // Arrange
+        Resource resource = ResourceTestsData.Create();
+        var existingGroup = new ItemGroup
+        {
+            Items = [new Item { Include = Snippet.From("Existing.cs") }],
+        };
+        var project = new Project { ItemGroups = [existingGroup] };
+        Snippet resourcePath = Snippet.From("Resources/Strings.resx");
+        Snippet designerPath = Snippet.From("Resources/Strings.Designer.cs");
+
+        // Act
+        Project result = project.Add(resource, resourcePath, designerPath);
+
+        // Assert
+        result.ItemGroups.Length.ShouldBe(2);
+        result.ItemGroups[0].ShouldBe(existingGroup);
+    }
     [Fact]
     public void GivenCustomToolNamespaceThenAddsCustomMetadata()
     {
