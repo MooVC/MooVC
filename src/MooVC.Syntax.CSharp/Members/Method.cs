@@ -40,8 +40,10 @@ namespace MooVC.Syntax.CSharp.Members
         [Descriptor("Named")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
+        [Descriptor("Accepts")]
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Task;
 
         public Scope Scope { get; internal set; } = Scope.Public;

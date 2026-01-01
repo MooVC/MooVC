@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithParameterIsCalled
+public sealed class WhenAcceptsIsCalled
 {
     private const string ParameterName = "value";
 
@@ -19,7 +19,7 @@ public sealed class WhenWithParameterIsCalled
         };
 
         // Act
-        Indexer result = original.WithParameter(parameter);
+        Indexer result = original.Accepts(parameter);
 
         // Assert
         result.ShouldNotBeSameAs(original);

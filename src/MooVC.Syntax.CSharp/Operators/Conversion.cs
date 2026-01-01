@@ -36,6 +36,7 @@
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        [Descriptor("ForType")]
         public Symbol Subject { get; internal set; } = Symbol.Undefined;
 
         public override string ToString()

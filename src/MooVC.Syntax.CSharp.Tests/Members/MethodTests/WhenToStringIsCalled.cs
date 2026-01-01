@@ -36,7 +36,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         Method subject = MethodTestsData
             .Create()
-            .WithResult(result => result
+            .Returns(result => result
                 .As(typeof(Task))
                 .WithMode(Result.Modality.Asynchronous));
 

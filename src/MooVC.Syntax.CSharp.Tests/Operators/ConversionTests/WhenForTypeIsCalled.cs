@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithSubjectIsCalled
+public sealed class WhenForTypeIsCalled
 {
     [Fact]
     public void GivenSubjectThenReturnsNewInstanceWithUpdatedSubject()
@@ -12,7 +12,7 @@ public sealed class WhenWithSubjectIsCalled
         var replacement = new Symbol { Name = "Other" };
 
         // Act
-        Conversion result = original.WithSubject(replacement);
+        Conversion result = original.ForType(replacement);
 
         // Assert
         result.ShouldNotBeSameAs(original);

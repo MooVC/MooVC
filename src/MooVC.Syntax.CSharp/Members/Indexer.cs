@@ -32,8 +32,10 @@
 
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
+        [Descriptor("Accepts")]
         public Parameter Parameter { get; internal set; } = Parameter.Undefined;
 
+        [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Void;
 
         public Scope Scope { get; internal set; } = Scope.Public;

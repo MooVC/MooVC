@@ -34,7 +34,7 @@
             var properties = Properties.ToSnippet(options);
 
             var methods = Methods
-                .Select(method => method.WithResult(result => result.WithMode(Result.Modality.Synchronous)))
+                .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
                 .ToImmutableArray()
                 .ToSnippet(options);
 

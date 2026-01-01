@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ConfigurationTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithPlatformIsCalled
+public sealed class WhenForIsCalled
 {
     [Fact]
     public void GivenPlatformThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithPlatformIsCalled
         var updated = Snippet.From("x64");
 
         // Act
-        Configuration result = original.WithPlatform(updated);
+        Configuration result = original.For(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

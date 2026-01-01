@@ -1,28 +1,28 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithResultIsCalled
+public sealed class WhenReturnsIsCalled
 {
     [Fact]
     public void GivenResultThenReturnsNewInstanceWithUpdatedResult()
     {
         // Arrange
-        Indexer original = IndexerTestsData.Create();
-
+        Method original = MethodTestsData.Create();
         var result = new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = "int" },
+            Type = new Symbol { Name = "bool" },
         };
 
         // Act
-        Indexer updated = original.WithResult(result);
+        Method updated = original.Returns(result);
 
         // Assert
         updated.ShouldNotBeSameAs(original);
-        updated.Behaviours.ShouldBe(original.Behaviours);
-        updated.Parameter.ShouldBe(original.Parameter);
+        updated.Body.ShouldBe(original.Body);
+        updated.Name.ShouldBe(original.Name);
+        updated.Parameters.ShouldBe(original.Parameters);
         updated.Result.ShouldBe(result);
         updated.Scope.ShouldBe(original.Scope);
     }

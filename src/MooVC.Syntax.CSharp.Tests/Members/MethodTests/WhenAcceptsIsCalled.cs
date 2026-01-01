@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
-public sealed class WhenWithParametersIsCalled
+public sealed class WhenAcceptsIsCalled
 {
     [Fact]
     public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
@@ -20,7 +20,7 @@ public sealed class WhenWithParametersIsCalled
         ];
 
         // Act
-        Method result = original.WithParameters(additional);
+        Method result = original.Accepts(additional);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -29,6 +29,7 @@ namespace MooVC.Syntax.Attributes.Solution
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("For")]
         public Snippet Platform { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<XElement> ToFragments()

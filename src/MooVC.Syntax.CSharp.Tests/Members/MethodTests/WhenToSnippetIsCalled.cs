@@ -70,7 +70,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method subject = MethodTestsData
             .Create(body: Snippet.From("return await value;"))
-            .WithResult(result => result
+            .Returns(result => result
                 .As(typeof(Task))
                 .WithMode(Result.Modality.Asynchronous));
 
