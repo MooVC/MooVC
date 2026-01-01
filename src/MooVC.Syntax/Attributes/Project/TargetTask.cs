@@ -23,6 +23,7 @@ namespace MooVC.Syntax.Attributes.Project
         {
         }
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         public Options ContinueOnError { get; internal set; } = Options.ErrorAndStop;
@@ -30,6 +31,7 @@ namespace MooVC.Syntax.Attributes.Project
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         public ImmutableArray<TaskOutput> Outputs { get; internal set; } = ImmutableArray<TaskOutput>.Empty;

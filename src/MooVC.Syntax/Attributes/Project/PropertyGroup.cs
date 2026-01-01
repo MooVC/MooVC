@@ -23,11 +23,13 @@ namespace MooVC.Syntax.Attributes.Project
         {
         }
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;

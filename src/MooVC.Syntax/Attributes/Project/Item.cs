@@ -23,6 +23,7 @@ namespace MooVC.Syntax.Attributes.Project
         {
         }
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         public Snippet Exclude { get; internal set; } = Snippet.Empty;

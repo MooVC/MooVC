@@ -23,13 +23,16 @@ namespace MooVC.Syntax.Attributes.Project
         {
         }
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("ForProject")]
         public Snippet Project { get; internal set; } = Snippet.Empty;
 
         public Snippet Sdk { get; internal set; } = Snippet.Empty;

@@ -27,6 +27,7 @@ namespace MooVC.Syntax.Attributes.Project
 
         public Snippet BeforeTargets { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         public Snippet DependsOnTargets { get; internal set; } = Snippet.Empty;
@@ -38,8 +39,10 @@ namespace MooVC.Syntax.Attributes.Project
 
         public bool KeepDuplicateOutputs { get; internal set; }
 
+        [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         public Snippet Outputs { get; internal set; } = Snippet.Empty;

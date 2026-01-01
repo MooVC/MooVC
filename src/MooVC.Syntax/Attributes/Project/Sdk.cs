@@ -28,6 +28,7 @@ namespace MooVC.Syntax.Attributes.Project
 
         public Snippet MinimumVersion { get; internal set; } = Snippet.Empty;
 
+        [Descriptor("Named")]
         public Qualifier Name { get; internal set; } = Qualifier.Unqualified;
 
         public Snippet Version { get; internal set; } = Snippet.Empty;

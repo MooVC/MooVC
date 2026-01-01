@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithNameIsCalled
         Qualifier updated = "Other.Sdk";
 
         // Act
-        Sdk result = original.WithName(updated);
+        Sdk result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

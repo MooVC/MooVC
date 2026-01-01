@@ -9,7 +9,7 @@ public sealed class WhenDirectoryNameIsCalled
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
-        string expected = SystemPath.GetDirectoryName(PathTestsData.DefaultPath);
+        string? expected = SystemPath.GetDirectoryName(PathTestsData.DefaultPath);
 
         // Act
         string result = subject.DirectoryName;

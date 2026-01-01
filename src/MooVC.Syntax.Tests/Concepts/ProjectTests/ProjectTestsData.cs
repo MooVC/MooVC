@@ -32,7 +32,7 @@ internal static class ProjectTestsData
             .ForkOn(
                 _ => import is null,
                 @true: project => project.WithImports(import => import
-                    .WithProject(DefaultImportProject)),
+                    .ForProject(DefaultImportProject)),
                 @false: project => project.WithImports(import))
             .ForkOn(
                 _ => itemGroup is null,
@@ -44,7 +44,7 @@ internal static class ProjectTestsData
                 _ => propertyGroup is null,
                 @true: project => project.WithPropertyGroups(group => group
                     .WithProperties(property => property
-                        .WithName(DefaultPropertyName)
+                        .Named(DefaultPropertyName)
                         .WithValue(DefaultPropertyValue))),
                 @false: project => project.WithPropertyGroups(propertyGroup))
             .ForkOn(
@@ -56,13 +56,13 @@ internal static class ProjectTestsData
             .ForkOn(
                 _ => sdk is null,
                 @true: project => project.WithSdks(sdk => sdk
-                    .WithName(DefaultSdkName)
+                    .Named(DefaultSdkName)
                     .WithVersion(DefaultSdkVersion)),
                 @false: project => project.WithSdks(sdk))
             .ForkOn(
                 _ => target is null,
                 @true: project => project.WithTargets(target => target
-                    .WithName(DefaultTargetName)),
+                    .Named(DefaultTargetName)),
                 @false: project => project.WithTargets(target));
     }
 

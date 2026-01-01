@@ -1,18 +1,18 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+namespace MooVC.Syntax.Attributes.Project.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
-        Metadata original = MetadataTestsData.Create();
+        Property original = PropertyTestsData.Create();
         var updated = new Identifier("Other");
 
         // Act
-        Metadata result = original.WithName(updated);
+        Property result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithProjectIsCalled
+public sealed class WhenForProjectIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithProjectIsCalled
         var updated = Snippet.From("Updated");
 
         // Act
-        Import result = original.WithProject(updated);
+        Import result = original.ForProject(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

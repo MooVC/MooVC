@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.TaskOutputTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithItemNameIsCalled
+public sealed class WhenForItemIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
@@ -12,7 +12,7 @@ public sealed class WhenWithItemNameIsCalled
         var updated = new Identifier("Other");
 
         // Act
-        TaskOutput result = original.WithItemName(updated);
+        TaskOutput result = original.ForItem(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);

@@ -23,6 +23,7 @@ namespace MooVC.Syntax.Attributes.Project
         {
         }
 
+        [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         [Ignore]
@@ -30,6 +31,7 @@ namespace MooVC.Syntax.Attributes.Project
 
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         public ImmutableArray<XElement> ToFragments()

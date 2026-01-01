@@ -1,22 +1,23 @@
-namespace MooVC.Syntax.Attributes.Project.TaskParameterTests;
+namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
-public sealed class WhenWithNameIsCalled
+public sealed class WhenNamedIsCalled
 {
     [Fact]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
-        TaskParameter original = TaskParameterTestsData.Create();
+        Metadata original = MetadataTestsData.Create();
         var updated = new Identifier("Other");
 
         // Act
-        TaskParameter result = original.WithName(updated);
+        Metadata result = original.Named(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(updated);
+        result.Condition.ShouldBe(original.Condition);
         result.Value.ShouldBe(original.Value);
     }
 }
