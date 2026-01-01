@@ -102,8 +102,6 @@
                 return Snippet.Empty;
             }
 
-            const char UnderscorePrefix = '_';
-
             if (!casingStrategies.TryGetValue(options.Casing, out Func<string, string> transform))
             {
                 throw new NotSupportedException(ToStringCasingNotSupported.Format(options.Casing, nameof(Identifier)));
