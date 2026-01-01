@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
-    using IOPath = System.IO.Path;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.Attributes.Project;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -19,11 +17,6 @@
     public sealed partial class Project
         : Construct
     {
-        private const string AutoGenValue = "True";
-        private const string DesignTimeValue = "True";
-        private const string InternalGeneratorValue = "ResXFileCodeGenerator";
-        private const string PublicGeneratorValue = "PublicResXFileCodeGenerator";
-
         public static readonly Project Undefined = new Project();
 
         public ImmutableArray<Import> Imports { get; internal set; } = ImmutableArray<Import>.Empty;
@@ -77,7 +70,8 @@
 
             XElement[] resourceItemGroups = Resources
                 .Where(resource => !resource.IsUndefined)
-                .Select(resource => CreateResourceItemGroup(resource))
+                .SelectMany(resource => resource.ToFragments())
+                .ForkOn(resources => resources.Any(), @true: CreateResourcesGroup, @false: _ => XElement.EmptySequence)
                 .ToArray();
 
             XElement[] propertyGroups = PropertyGroups
@@ -119,74 +113,9 @@
             return ToDocument().ToString();
         }
 
-        private static XElement CreateResourceItemGroup(ResourceFile resource)
+        private static IEnumerable<XElement> CreateResourcesGroup(IEnumerable<XElement> resources)
         {
-            var resourcePath = resource.ResourcePath.ToString();
-            var designerPath = resource.DesignerPath.IsEmpty
-                ? resource.ResourcePath.ChangeExtension("Designer.cs").ToString()
-                : resource.DesignerPath.ToString();
-
-            var compile = new XElement(
-                "Compile",
-                new XAttribute("Update", designerPath),
-                new XElement("DesignTime", DesignTimeValue),
-                new XElement("AutoGen", AutoGenValue),
-                new XElement("DependentUpon", IOPath.GetFileName(resourcePath)));
-
-            var embeddedResource = new XElement(
-                "EmbeddedResource",
-                new XAttribute("Update", resourcePath),
-                new XElement("Generator", resource.Scope == ResourceScope.Public ? PublicGeneratorValue : InternalGeneratorValue),
-                new XElement("LastGenOutput", IOPath.GetFileName(designerPath)));
-
-            if (!resource.CustomToolNamespace.IsEmpty)
-            {
-                embeddedResource.Add(new XElement("CustomToolNamespace", resource.CustomToolNamespace.ToString()));
-            }
-
-            return new XElement(nameof(ItemGroup), compile, embeddedResource);
-        }
-
-        [Fluentify]
-        [Valuify]
-        public sealed partial class ResourceFile
-            : Construct
-        {
-            public static readonly ResourceFile Undefined = new ResourceFile();
-
-            public Snippet CustomToolNamespace { get; internal set; } = Snippet.Empty;
-
-            public Path DesignerPath { get; internal set; } = Path.Empty;
-
-            public Resource Resource { get; internal set; } = Resource.Undefined;
-
-            public Path ResourcePath { get; internal set; } = Path.Empty;
-
-            public ResourceScope Scope { get; internal set; } = ResourceScope.Internal;
-
-            [Ignore]
-            public override bool IsUndefined => this == Undefined;
-
-            public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-            {
-                if (IsUndefined)
-                {
-                    return Array.Empty<ValidationResult>();
-                }
-
-                return validationContext
-                    .Include(nameof(CustomToolNamespace), _ => !CustomToolNamespace.IsMultiLine, CustomToolNamespace)
-                    .AndIf(!DesignerPath.IsEmpty, nameof(DesignerPath), path => !path.IsEmpty, DesignerPath)
-                    .And(nameof(Resource), resource => !resource.IsUndefined, Resource)
-                    .And(nameof(ResourcePath), path => !path.IsEmpty, ResourcePath)
-                    .Results;
-            }
-        }
-
-        public enum ResourceScope
-        {
-            Internal,
-            Public,
+            yield return new XElement(nameof(ItemGroup), resources);
         }
     }
 }

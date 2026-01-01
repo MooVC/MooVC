@@ -10,8 +10,8 @@ internal static class ProjectTestsData
     public const string DefaultItemInclude = "Include";
     public const string DefaultPropertyName = "Property";
     public const string DefaultPropertyValue = "Value";
-    public const string DefaultResourceDesignerPath = "Resources.Designer.cs";
-    public const string DefaultResourcePath = "Resources.resx";
+    public const string DefaultDesignerPath = "Resources.Designer.cs";
+    public const string DefaultLocation = "Resources.resx";
     public const string DefaultResourceToolNamespace = "MooVC.Resources";
     public const string DefaultSdkVersion = "1.0.0";
     public const string DefaultTargetName = "Build";
@@ -50,7 +50,7 @@ internal static class ProjectTestsData
                 @true: project => project.WithResources(resource => resource
                     .WithCustomToolNamespace(DefaultResourceToolNamespace)
                     .WithResource(ResourceTestsData.Create())
-                    .WithResourcePath(DefaultResourcePath)),
+                    .WithLocation(DefaultLocation)),
                 @false: project => project.WithResources(resourceFile))
             .ForkOn(
                 _ => sdk is null,
@@ -95,7 +95,7 @@ internal static class ProjectTestsData
         {
             CustomToolNamespace = Snippet.From(DefaultResourceToolNamespace),
             Resource = ResourceTestsData.Create(),
-            ResourcePath = DefaultResourcePath,
+            Location = DefaultLocation,
         };
     }
 

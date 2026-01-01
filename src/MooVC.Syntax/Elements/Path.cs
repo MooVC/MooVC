@@ -7,9 +7,8 @@ namespace MooVC.Syntax.Elements
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Validation;
+    using static System.IO.Path;
     using static MooVC.Syntax.Elements.Path_Resources;
-    using IOPath = System.IO.Path;
-    using Ignore = Valuify.IgnoreAttribute;
 
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
@@ -18,15 +17,19 @@ namespace MooVC.Syntax.Elements
     {
         public static readonly Path Empty = string.Empty;
 
-        public string DirectoryName => IOPath.GetDirectoryName(_value);
+        public Path(string value)
+        {
+            _value = value ?? string.Empty;
+        }
 
-        public string Extension => IOPath.GetExtension(_value);
+        public string DirectoryName => GetDirectoryName(_value);
 
-        public string FileName => IOPath.GetFileName(_value);
+        public string Extension => GetExtension(_value);
 
-        public string FileNameWithoutExtension => IOPath.GetFileNameWithoutExtension(_value);
+        public string FileName => GetFileName(_value);
 
-        [Ignore]
+        public string FileNameWithoutExtension => GetFileNameWithoutExtension(_value);
+
         public bool IsEmpty => this == Empty;
 
         public static implicit operator string(Path path)
@@ -38,7 +41,7 @@ namespace MooVC.Syntax.Elements
 
         public Path ChangeExtension(string extension)
         {
-            return IOPath.ChangeExtension(_value, extension) ?? string.Empty;
+            return System.IO.Path.ChangeExtension(_value, extension);
         }
 
         public override string ToString()
@@ -56,22 +59,17 @@ namespace MooVC.Syntax.Elements
             const int Unspecified = 0;
 
             if (string.IsNullOrWhiteSpace(_value)
-                || _value.Length == Unspecified
-                || _value.IndexOfAny(IOPath.GetInvalidPathChars()) >= 0)
+             || _value.Length == Unspecified
+             || _value.IndexOfAny(GetInvalidPathChars()) >= 0)
             {
-                yield return new ValidationResult(
-                    ValidateValueRequired.Format(_value, nameof(Path)),
-                    new[] { nameof(Path) });
-                yield break;
+                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Path)), new[] { nameof(Path) });
             }
 
             string fileName = FileName;
 
-            if (!string.IsNullOrEmpty(fileName) && fileName.IndexOfAny(IOPath.GetInvalidFileNameChars()) >= 0)
+            if (!string.IsNullOrEmpty(fileName) && fileName.IndexOfAny(GetInvalidFileNameChars()) >= 0)
             {
-                yield return new ValidationResult(
-                    ValidateValueRequired.Format(_value, nameof(Path)),
-                    new[] { nameof(Path) });
+                yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Path)), new[] { nameof(Path) });
             }
         }
     }
