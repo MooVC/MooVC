@@ -123,7 +123,4 @@
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
     <value>The formatting options for type `{0}` must be provided.</value>
   </data>
-  <data name="ValidateValueRequired" xml:space="preserve">
-    <value>The value `{0}` is not valid for `{1}`. Please use PascalCase, starting with an uppercase letter, containing only letters or digits, and excluding underscores, spaces, or reserved keywords.</value>
-  </data>
 </root>

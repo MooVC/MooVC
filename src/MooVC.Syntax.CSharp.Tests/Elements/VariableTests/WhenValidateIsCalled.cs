@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -16,7 +17,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullValueThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Variable(default);
+        var subject = new Variable(default(Identifier));
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

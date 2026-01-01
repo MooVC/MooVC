@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier.Options();
-        var right = new Identifier.Options { UseUnderscores = true };
+        var left = new Identifier.Options { Casing = Identifier.Casing.Camel };
+        var right = new Identifier.Options { Casing = Identifier.Casing.Kebab };
 
         // Act
         bool result = left == right;

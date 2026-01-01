@@ -13,7 +13,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Parameter? subject = default;
 
         // Act
-        Func<WhenImplicitOperatorToSnippetIsCalled> result = () => subject;
+        Func<Snippet> result = () => subject;
 
         // Assert
         _ = result.ShouldThrow<ArgumentNullException>();
@@ -25,7 +25,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         // Act

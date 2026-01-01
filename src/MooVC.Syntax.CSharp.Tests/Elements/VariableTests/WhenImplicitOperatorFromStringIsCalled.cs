@@ -45,20 +45,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenWhitespaceThenEqualsString()
-    {
-        // Arrange
-        string value = Space;
-
-        // Act
-        Variable subject = value;
-
-        // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
-    }
-
-    [Fact]
     public void GivenValueThenEqualsString()
     {
         // Arrange
@@ -77,13 +63,14 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
+        string expected = value.ToPascalCase();
 
         // Act
         Variable subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        (subject == expected).ShouldBeTrue();
+        subject.Equals(expected).ShouldBeTrue();
     }
 
     [Fact]

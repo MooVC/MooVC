@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithNameIsCalled
 {
@@ -11,7 +12,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        var name = new Variable(NewName);
+        var name = new Identifier(NewName);
 
         // Act
         Declaration result = original.WithName(name);
@@ -20,6 +21,6 @@ public sealed class WhenWithNameIsCalled
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(name);
         result.Parameters.ShouldBe(original.Parameters);
-        original.Name.ShouldBe(new Variable(DeclarationTestsData.DefaultName));
+        original.Name.ShouldBe(new Identifier(DeclarationTestsData.DefaultName));
     }
 }

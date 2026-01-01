@@ -1,7 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
-using MooVC.Syntax.CSharp;
-using static MooVC.Syntax.CSharp.Elements.Variable;
+using Casing = MooVC.Syntax.Elements.Identifier.Casing;
+using Options = MooVC.Syntax.CSharp.Elements.Variable.Options;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -80,7 +80,7 @@ public sealed class WhenToSnippetIsCalled
 
         Options options = new Options()
             .WithCasing(Casing.Camel)
-            .UseUnderscores(true);
+            .UseUnderscore(true);
 
         // Act
         string result = subject.ToSnippet(options);
@@ -93,7 +93,7 @@ public sealed class WhenToSnippetIsCalled
     [InlineData(1)]
     [InlineData(2)]
     [InlineData(3)]
-    public void GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(Casing casing)
+    public void GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(int casing)
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -103,7 +103,7 @@ public sealed class WhenToSnippetIsCalled
 
         Options options = new Options()
             .WithCasing(casing)
-            .UseUnderscores(false);
+            .UseUnderscore(false);
 
         // Act
         string result = subject.ToSnippet(options);

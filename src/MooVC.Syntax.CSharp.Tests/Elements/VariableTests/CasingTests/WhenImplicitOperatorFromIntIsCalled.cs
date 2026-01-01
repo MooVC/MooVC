@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.VariableTests.CasingTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorFromIntIsCalled
 {
     private const int PascalValue = 0;
@@ -12,7 +14,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int value = CamelValue;
 
         // Act
-        Variable.Casing subject = value;
+        Identifier.Casing subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -26,7 +28,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int value = PascalValue;
 
         // Act
-        Variable.Casing subject = value;
+        Identifier.Casing subject = value;
         int result = subject;
 
         // Assert

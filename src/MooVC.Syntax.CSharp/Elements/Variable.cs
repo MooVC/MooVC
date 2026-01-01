@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -20,6 +22,11 @@
     {
         public static readonly Variable Unnamed = Identifier.Unnamed;
 
+        public Variable(Identifier value)
+        {
+            _value = value ?? Identifier.Unnamed;
+        }
+
         [Ignore]
         public bool IsUnnamed => this == Unnamed;
 
@@ -28,6 +35,20 @@
             Guard.Against.Conversion<Type, Variable>(type);
 
             return type.GetName();
+        }
+
+        public static implicit operator string(Variable variable)
+        {
+            Guard.Against.Conversion<Variable, string>(variable);
+
+            return variable.ToString();
+        }
+
+        public static implicit operator Snippet(Variable variable)
+        {
+            Guard.Against.Conversion<Variable, Snippet>(variable);
+
+            return variable.ToSnippet(Options.Camel);
         }
 
         public static bool operator <(Variable left, Variable right)
@@ -102,16 +123,14 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsUnnamed)
+            if (IsUnnamed || Aliases.IsSystem(_value))
             {
                 yield break;
             }
 
-            if (_value is null || _value.IsUnnamed || !Aliases.IsSystem(_value))
+            foreach (ValidationResult result in _value.Validate(validationContext))
             {
-                yield return new ValidationResult(
-                    ValidateValueRequired.Format(_value, nameof(Variable)),
-                    new[] { nameof(Variable) });
+                yield return new ValidationResult(result.ErrorMessage, new[] { nameof(Variable) });
             }
         }
     }

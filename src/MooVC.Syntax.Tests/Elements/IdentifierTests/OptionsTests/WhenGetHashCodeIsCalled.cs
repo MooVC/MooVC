@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange
-        var first = new Identifier.Options();
-        var second = new Identifier.Options { UseUnderscores = true };
+        var first = new Identifier.Options { Casing = Identifier.Casing.Camel };
+        var second = new Identifier.Options { Casing = Identifier.Casing.Kebab };
 
         // Act
         int firstHash = first.GetHashCode();

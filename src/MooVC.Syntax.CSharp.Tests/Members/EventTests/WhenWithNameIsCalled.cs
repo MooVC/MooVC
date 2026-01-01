@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithNameIsCalled
 {
@@ -11,7 +12,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Event original = EventTestsData.Create();
-        Variable name = Name;
+        Identifier name = Name;
 
         // Act
         Event result = original.WithName(name);

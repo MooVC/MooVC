@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
-public sealed class WhenUseUnderscoresIsCalled
+public sealed class WhenUseUnderscoreIsCalled
 {
     [Fact]
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
@@ -9,7 +9,7 @@ public sealed class WhenUseUnderscoresIsCalled
         var original = new Variable.Options();
 
         // Act
-        Variable.Options result = original.UseUnderscores(true);
+        Variable.Options result = original.UseUnderscore(true);
 
         // Assert
         result.ShouldNotBeSameAs(original);

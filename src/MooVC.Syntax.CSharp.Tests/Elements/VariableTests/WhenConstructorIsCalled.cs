@@ -1,12 +1,14 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Variable(default));
+        _ = Should.NotThrow(() => _ = new Variable(default(Identifier)));
     }
 
     [Fact]

@@ -87,11 +87,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginalInCamelCase()
+    public void GivenValueWhenRoundTrippedThenMatchesOriginalInPascalCase()
     {
         // Arrange
         string value = Alpha;
-        string expected = value.ToCamelCase();
+        string expected = value;
 
         // Act
         Identifier subject = value;

@@ -49,7 +49,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         var subject = new Identifier(Alpha);
-        string expected = Alpha.ToCamelCase();
+        string expected = Alpha;
 
         // Act
         string result = subject;
@@ -59,11 +59,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Fact]
-    public void GivenUnicodeThenMatchesValueInCamelCase()
+    public void GivenUnicodeThenMatchesValueInPascalCase()
     {
         // Arrange
         var subject = new Identifier(Unicode);
-        string expected = Unicode.ToCamelCase();
+        string expected = Unicode;
 
         // Act
         string result = subject;
@@ -78,11 +78,12 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         string value = new('x', 64_000);
         var subject = new Identifier(value);
+        string expected = value.ToPascalCase();
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        result.ShouldBe(expected);
     }
 }

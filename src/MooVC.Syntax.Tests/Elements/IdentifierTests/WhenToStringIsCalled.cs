@@ -5,7 +5,7 @@ public sealed class WhenToStringIsCalled
     private const string MultiWord = "MyValue";
 
     [Fact]
-    public void GivenDefaultOptionsThenUsesCamelCase()
+    public void GivenDefaultOptionsThenUsesPascalCase()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("myValue");
+        result.ShouldBe(MultiWord);
     }
 
     [Fact]

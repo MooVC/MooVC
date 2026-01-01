@@ -77,14 +77,5 @@ namespace MooVC.Syntax.CSharp.Elements {
                 return ResourceManager.GetString("ToStringCasingNotSupported", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value `{0}` is not valid for `{1}`. Please use PascalCase, starting with an uppercase letter, containing only letters or digits, and excluding underscores, spaces, or reserved keywords..
-        /// </summary>
-        internal static string ValidateValueRequired {
-            get {
-                return ResourceManager.GetString("ValidateValueRequired", resourceCulture);
-            }
-        }
     }
 }

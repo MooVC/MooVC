@@ -73,23 +73,6 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Fact]
-    public void GivenOptionsWithUnderscoreThenResultIsPrefixed()
-    {
-        // Arrange
-        var subject = new Identifier(MultiWord);
-
-        Options options = new Options()
-            .WithCasing(Casing.Camel)
-            .UseUnderscores(true);
-
-        // Act
-        string result = subject.ToSnippet(options);
-
-        // Assert
-        result.ShouldBe("_myValue");
-    }
-
-    [Fact]
     public void GivenUnsupportedCasingThenThrows()
     {
         // Arrange

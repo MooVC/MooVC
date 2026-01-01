@@ -24,11 +24,12 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     {
         // Arrange
         var subject = new Variable(VariableName);
+        string expected = VariableName.ToCamelCase();
 
         // Act
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        result.ShouldBe(Snippet.From(expected));
     }
 }

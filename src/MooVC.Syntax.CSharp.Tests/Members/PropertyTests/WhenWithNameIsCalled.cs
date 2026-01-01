@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithNameIsCalled
 {
@@ -9,7 +10,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var name = new Variable("Alternative");
+        var name = new Identifier("Alternative");
 
         // Act
         Property result = original.WithName(name);
@@ -22,6 +23,6 @@ public sealed class WhenWithNameIsCalled
         result.Scope.ShouldBe(original.Scope);
         result.Type.ShouldBe(original.Type);
 
-        original.Name.ShouldBe((Variable)PropertyTestsData.DefaultName);
+        original.Name.ShouldBe((Identifier)PropertyTestsData.DefaultName);
     }
 }

@@ -2,7 +2,8 @@ namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Variable = MooVC.Syntax.CSharp.Elements.Variable;
+using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.CSharp.Generics;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenValidateIsCalled
@@ -66,7 +67,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof((Variable)Elements.Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Identifier));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

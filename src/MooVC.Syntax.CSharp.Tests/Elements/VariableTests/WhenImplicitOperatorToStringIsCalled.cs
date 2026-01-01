@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Alpha = "Alpha";
@@ -22,7 +24,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
-        var subject = new Variable(default);
+        var subject = new Variable(default(Identifier));
 
         // Act
         string result = subject;

@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsReadOnly.ShouldBeTrue();
         subject.IsStatic.ShouldBeFalse();
         subject.IsUndefined.ShouldBeTrue();
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Variable.Unnamed);
         subject.Scope.ShouldBe(Scope.Public);
         subject.Type.ShouldBe(Symbol.Undefined);
     }
@@ -45,7 +45,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsReadOnly.ShouldBeFalse();
         subject.IsStatic.ShouldBeTrue();
         subject.IsUndefined.ShouldBeFalse();
-        subject.Name.ShouldBe(new Identifier(FieldTestsData.DefaultName));
+        subject.Name.ShouldBe(new Variable(FieldTestsData.DefaultName));
         subject.Scope.ShouldBe(Scope.Internal);
         subject.Type.ShouldBe(type);
     }

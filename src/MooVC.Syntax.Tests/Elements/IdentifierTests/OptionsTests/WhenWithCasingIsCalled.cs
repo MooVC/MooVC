@@ -14,7 +14,6 @@ public sealed class WhenWithCasingIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Casing.ShouldBe(Identifier.Casing.Pascal);
-        result.UseUnderscores.ShouldBe(original.UseUnderscores);
         original.Casing.ShouldBe(Identifier.Casing.Camel);
     }
 }

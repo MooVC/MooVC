@@ -1,12 +1,14 @@
 namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenPropertiesAreCalled
 {
     [Fact]
     public void GivenPascalCasingThenFlagsAreTrue()
     {
         // Arrange
-        var subject = new Variable.Options { Casing = Variable.Casing.Pascal };
+        var subject = new Variable.Options { Casing = Identifier.Casing.Pascal };
 
         // Act & Assert
         subject.IsCamel.ShouldBeTrue();
@@ -17,7 +19,7 @@ public sealed class WhenPropertiesAreCalled
     public void GivenCamelCasingThenFlagsAreFalse()
     {
         // Arrange
-        var subject = new Variable.Options { Casing = Variable.Casing.Camel };
+        var subject = new Variable.Options { Casing = Identifier.Casing.Camel };
 
         // Act & Assert
         subject.IsCamel.ShouldBeFalse();
