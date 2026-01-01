@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using MooVC.Syntax.Attributes.Resource;
 using MooVC.Syntax.Elements;
+using Resource = MooVC.Syntax.Concepts.Resource;
 
 internal static class ResourceTestsData
 {

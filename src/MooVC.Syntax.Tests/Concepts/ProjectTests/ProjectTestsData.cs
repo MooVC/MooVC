@@ -1,8 +1,10 @@
 namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
+using MooVC.Syntax.Attributes.Resource;
 using MooVC.Syntax.Concepts.ResourceTests;
 using MooVC.Syntax.Elements;
+using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 
 internal static class ProjectTestsData
 {
@@ -21,7 +23,7 @@ internal static class ProjectTestsData
         Import? import = default,
         ItemGroup? itemGroup = default,
         PropertyGroup? propertyGroup = default,
-        Project.ResourceFile? resourceFile = default,
+        Resource? resource = default,
         Sdk? sdk = default,
         Target? target = default)
     {
@@ -46,12 +48,11 @@ internal static class ProjectTestsData
                         .WithValue(DefaultPropertyValue))),
                 @false: project => project.WithPropertyGroups(propertyGroup))
             .ForkOn(
-                _ => resourceFile is null,
+                _ => resource is null,
                 @true: project => project.WithResources(resource => resource
                     .WithCustomToolNamespace(DefaultResourceToolNamespace)
-                    .WithResource(ResourceTestsData.Create())
                     .WithLocation(DefaultLocation)),
-                @false: project => project.WithResources(resourceFile))
+                @false: project => project.WithResources(resource))
             .ForkOn(
                 _ => sdk is null,
                 @true: project => project.WithSdks(sdk => sdk
@@ -89,12 +90,11 @@ internal static class ProjectTestsData
         };
     }
 
-    public static Project.ResourceFile CreateResourceFile()
+    public static Resource CreateResource()
     {
-        return new Project.ResourceFile
+        return new Resource
         {
             CustomToolNamespace = Snippet.From(DefaultResourceToolNamespace),
-            Resource = ResourceTestsData.Create(),
             Location = DefaultLocation,
         };
     }

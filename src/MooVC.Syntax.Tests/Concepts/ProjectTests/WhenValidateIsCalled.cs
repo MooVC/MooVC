@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Concepts.ProjectTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.Attributes.Project;
+using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 
 public sealed class WhenValidateIsCalled
 {
@@ -60,7 +61,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUndefinedResourceThenValidationErrorReturned()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create(resourceFile: Project.ResourceFile.Undefined);
+        Project subject = ProjectTestsData.Create(resource: Resource.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

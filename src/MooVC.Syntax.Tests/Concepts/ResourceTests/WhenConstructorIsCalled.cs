@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using MooVC.Syntax.Attributes.Resource;
+using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenConstructorIsCalled
 {

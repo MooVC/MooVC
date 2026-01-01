@@ -11,6 +11,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
+    using ResourceReference = MooVC.Syntax.Attributes.Resource.Resource;
 
     [Fluentify]
     [Valuify]
@@ -25,7 +26,7 @@
 
         public ImmutableArray<PropertyGroup> PropertyGroups { get; internal set; } = ImmutableArray<PropertyGroup>.Empty;
 
-        public ImmutableArray<ResourceFile> Resources { get; internal set; } = ImmutableArray<ResourceFile>.Empty;
+        public ImmutableArray<ResourceReference> Resources { get; internal set; } = ImmutableArray<ResourceReference>.Empty;
 
         public ImmutableArray<Sdk> Sdks { get; internal set; } = ImmutableArray<Sdk>.Empty;
 
