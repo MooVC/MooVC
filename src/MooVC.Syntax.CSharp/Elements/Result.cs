@@ -14,7 +14,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member return signature, including modality, modifiers, and return type.
+    /// Represents a C# member return signature, combining async modality, ref modifiers, and the return type symbol.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -22,15 +22,15 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets a default Task-based return signature.
+        /// Gets a default Task-based return signature for asynchronous methods.
         /// </summary>
         public static readonly Result Task = new Result { Type = typeof(Task) };
         /// <summary>
-        /// Gets an unspecified return signature.
+        /// Gets an unspecified return signature that renders as empty.
         /// </summary>
         public static readonly Result Undefined = new Result();
         /// <summary>
-        /// Gets a synchronous void return signature.
+        /// Gets a synchronous void return signature for methods with no value.
         /// </summary>
         public static readonly Result Void = new Result { Mode = Modality.Synchronous };
 
@@ -65,26 +65,26 @@
         public bool IsVoid => this == Void;
 
         /// <summary>
-        /// Gets or sets the return modifier (for example, ref or ref readonly).
+        /// Gets or sets the return modifier that precedes the return type.
         /// </summary>
-        /// <value>The return modifier.</value>
+        /// <value>The return modifier (for example, ref or ref readonly).</value>
         public Kind Modifier { get; internal set; } = Kind.None;
 
         /// <summary>
-        /// Gets or sets the async modality for the return signature.
+        /// Gets or sets the async modality that determines whether async is emitted.
         /// </summary>
-        /// <value>The async modality.</value>
+        /// <value>The async modality (async or synchronous).</value>
         public Modality Mode { get; internal set; } = Modality.Asynchronous;
 
         /// <summary>
-        /// Gets or sets the return type symbol.
+        /// Gets or sets the return type symbol that will be emitted in the signature.
         /// </summary>
         /// <value>The return type symbol.</value>
         [Descriptor("OfType")]
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Creates a return signature from the specified runtime type.
+        /// Creates a return signature from the specified runtime type, using the type name as the return symbol.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The return signature.</returns>
@@ -96,7 +96,7 @@
         }
 
         /// <summary>
-        /// Converts the return signature to its C# source representation.
+        /// Converts the return signature to its C# source representation, including modifiers and type.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>The C# return signature text.</returns>
@@ -108,7 +108,7 @@
         }
 
         /// <summary>
-        /// Converts the return signature to a snippet.
+        /// Converts the return signature to a snippet for composing a method signature.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>The return signature snippet.</returns>
@@ -155,9 +155,11 @@
         }
 
         /// <summary>
-        /// Validates the Result.
+        /// Validates the return signature before it is rendered.
         /// </summary>
-        /// <remarks>Required members include: Type.</remarks>
+        /// <remarks>
+        /// Ensures a return type is provided when a modifier or modality is specified.
+        /// </remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

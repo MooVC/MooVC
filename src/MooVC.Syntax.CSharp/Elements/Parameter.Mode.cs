@@ -7,12 +7,12 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# parameter syntax element.
+    /// Represents a C# parameter syntax element, including its name, type, and modifiers.
     /// </summary>
     public partial class Parameter
     {
         /// <summary>
-        /// Represents the modifier applied to a C# parameter.
+        /// Represents the modifier applied to a C# parameter that changes passing semantics.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInstantiation]

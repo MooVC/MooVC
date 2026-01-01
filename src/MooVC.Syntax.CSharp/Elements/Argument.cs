@@ -12,7 +12,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element argument.
+    /// Represents a C# argument expression, including optional name and modifier.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -20,7 +20,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined instance.
+        /// Gets the undefined argument instance used as a placeholder.
         /// </summary>
         public static readonly Argument Undefined = new Argument();
 
@@ -32,36 +32,36 @@
         }
 
         /// <summary>
-        /// Gets a value indicating whether the Argument is undefined.
+        /// Gets a value indicating whether this argument is the undefined sentinel.
         /// </summary>
-        /// <value>A value indicating whether the Argument is undefined.</value>
+        /// <value>A value indicating whether this instance is the undefined sentinel.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the modifier on the Argument.
+        /// Gets or sets the argument modifier (in, ref, out, or none).
         /// </summary>
-        /// <value>The modifier.</value>
+        /// <value>The modifier that affects how the argument is passed.</value>
         public Mode Modifier { get; internal set; } = Mode.None;
 
         /// <summary>
-        /// Gets or sets the name on the Argument.
+        /// Gets or sets the argument name used for named arguments.
         /// </summary>
-        /// <value>The name.</value>
+        /// <value>The argument name.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the value on the Argument.
+        /// Gets or sets the argument expression value.
         /// </summary>
-        /// <value>The value.</value>
+        /// <value>The expression snippet supplied for the argument.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Defines the string operator for the Argument.
+        /// Converts the argument expression to its C# source representation.
         /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <returns>The string.</returns>
+        /// <param name="argument">The argument to render.</param>
+        /// <returns>The rendered argument text.</returns>
         public static implicit operator string(Argument argument)
         {
             Guard.Against.Conversion<Argument, string>(argument);
@@ -70,10 +70,10 @@
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Argument.
+        /// Converts the argument expression to a snippet for composition.
         /// </summary>
-        /// <param name="argument">The argument.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="argument">The argument to convert.</param>
+        /// <returns>The snippet representing the argument.</returns>
         public static implicit operator Snippet(Argument argument)
         {
             Guard.Against.Conversion<Argument, Snippet>(argument);
@@ -82,19 +82,19 @@
         }
 
         /// <summary>
-        /// Returns the string representation of the Argument.
+        /// Returns the C# source representation of the argument expression.
         /// </summary>
-        /// <returns>The string representation.</returns>
+        /// <returns>The rendered argument text.</returns>
         public override string ToString()
         {
             return ToSnippet(Options.Call);
         }
 
         /// <summary>
-        /// Creates a snippet representation of the C# syntax element.
+        /// Creates a snippet representation of the argument expression.
         /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>The generated snippet.</returns>
+        /// <param name="options">The formatting options for the argument.</param>
+        /// <returns>The argument snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Argument), nameof(Name), Name));
@@ -121,9 +121,11 @@
         }
 
         /// <summary>
-        /// Validates the Argument.
+        /// Validates the argument expression before rendering.
         /// </summary>
-        /// <remarks>Required members include: Value, Name.</remarks>
+        /// <remarks>
+        /// Ensures a value is present and is a single-line expression, and validates named arguments when a name is supplied.
+        /// </remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

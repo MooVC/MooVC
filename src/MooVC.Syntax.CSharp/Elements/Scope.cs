@@ -9,7 +9,7 @@
     using static MooVC.Syntax.CSharp.Elements.Scope_Resources;
 
     /// <summary>
-    /// Represents a C# syntax element scope.
+    /// Represents a C# accessibility scope used to qualify type and member declarations.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
@@ -17,27 +17,27 @@
         : IComparable<Scope>
     {
         /// <summary>
-        /// Represents the file for the Scope.
+        /// Gets the file-scoped accessibility modifier.
         /// </summary>
         public static readonly Scope File = "file";
         /// <summary>
-        /// Represents the internal for the Scope.
+        /// Gets the internal accessibility modifier.
         /// </summary>
         public static readonly Scope Internal = "internal";
         /// <summary>
-        /// Represents the public for the Scope.
+        /// Gets the public accessibility modifier.
         /// </summary>
         public static readonly Scope Public = "public";
         /// <summary>
-        /// Represents the private for the Scope.
+        /// Gets the private accessibility modifier.
         /// </summary>
         public static readonly Scope Private = "private";
         /// <summary>
-        /// Represents the protected for the Scope.
+        /// Gets the protected accessibility modifier.
         /// </summary>
         public static readonly Scope Protected = "protected";
         /// <summary>
-        /// Gets the unspecified instance.
+        /// Gets an unspecified accessibility that renders as empty.
         /// </summary>
         public static readonly Scope Unspecified = string.Empty;
 
@@ -47,10 +47,10 @@
         }
 
         /// <summary>
-        /// Defines the string operator for the Scope.
+        /// Converts the accessibility scope to its C# source representation.
         /// </summary>
-        /// <param name="scope">The scope.</param>
-        /// <returns>The string.</returns>
+        /// <param name="scope">The scope to render.</param>
+        /// <returns>The accessibility modifier text.</returns>
         public static implicit operator string(Scope scope)
         {
             Guard.Against.Conversion<Scope, string>(scope);
@@ -59,10 +59,10 @@
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Scope.
+        /// Converts the accessibility scope to a snippet.
         /// </summary>
-        /// <param name="scope">The scope.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="scope">The scope to convert.</param>
+        /// <returns>The snippet containing the accessibility modifier.</returns>
         public static implicit operator Snippet(Scope scope)
         {
             Guard.Against.Conversion<Scope, Snippet>(scope);
@@ -71,11 +71,11 @@
         }
 
         /// <summary>
-        /// Defines the + operator for the Scope.
+        /// Combines compatible accessibility modifiers (for example, private protected).
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand modifier.</param>
+        /// <param name="right">The right-hand modifier.</param>
+        /// <returns>The combined accessibility modifier.</returns>
         public static Scope operator +(Scope left, Scope right)
         {
             _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Scope), right));
@@ -90,11 +90,11 @@
         }
 
         /// <summary>
-        /// Defines the < operator for the Scope.
+        /// Determines whether the left-hand scope sorts before the right-hand scope.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand scope.</param>
+        /// <param name="right">The right-hand scope.</param>
+        /// <returns>True if the left-hand scope sorts before the right-hand scope.</returns>
         public static bool operator <(Scope left, Scope right)
         {
             if (left is null)
@@ -106,11 +106,11 @@
         }
 
         /// <summary>
-        /// Defines the > operator for the Scope.
+        /// Determines whether the left-hand scope sorts after the right-hand scope.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand scope.</param>
+        /// <param name="right">The right-hand scope.</param>
+        /// <returns>True if the left-hand scope sorts after the right-hand scope.</returns>
         public static bool operator >(Scope left, Scope right)
         {
             if (left is null)
@@ -122,22 +122,22 @@
         }
 
         /// <summary>
-        /// Defines the <= operator for the Scope.
+        /// Determines whether the left-hand scope sorts before or equal to the right-hand scope.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand scope.</param>
+        /// <param name="right">The right-hand scope.</param>
+        /// <returns>True if the left-hand scope sorts before or equal to the right-hand scope.</returns>
         public static bool operator <=(Scope left, Scope right)
         {
             return !(left > right);
         }
 
         /// <summary>
-        /// Defines the >= operator for the Scope.
+        /// Determines whether the left-hand scope sorts after or equal to the right-hand scope.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand scope.</param>
+        /// <param name="right">The right-hand scope.</param>
+        /// <returns>True if the left-hand scope sorts after or equal to the right-hand scope.</returns>
         public static bool operator >=(Scope left, Scope right)
         {
             return !(left < right);

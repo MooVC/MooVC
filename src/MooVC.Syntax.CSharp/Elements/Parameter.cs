@@ -14,7 +14,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element parameter.
+    /// Represents a C# parameter declaration, including modifier, type, name, and default value.
     /// </summary>
     [Fluentify]
     [Valuify]
@@ -22,7 +22,7 @@
         : IValidatableObject
     {
         /// <summary>
-        /// Gets the undefined instance.
+        /// Gets the undefined parameter instance used as a placeholder.
         /// </summary>
         public static readonly Parameter Undefined = new Parameter();
 
@@ -34,49 +34,49 @@
         }
 
         /// <summary>
-        /// Gets or sets the attributes on the Parameter.
+        /// Gets or sets the attribute list applied to the parameter.
         /// </summary>
-        /// <value>The attributes.</value>
+        /// <value>The attributes emitted before the parameter declaration.</value>
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>
-        /// Gets or sets the default on the Parameter.
+        /// Gets or sets the default value snippet for optional parameters.
         /// </summary>
-        /// <value>The default.</value>
+        /// <value>The default value expression snippet.</value>
         public Snippet Default { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets a value indicating whether the Parameter is undefined.
+        /// Gets a value indicating whether this parameter is the undefined sentinel.
         /// </summary>
-        /// <value>A value indicating whether the Parameter is undefined.</value>
+        /// <value>A value indicating whether this instance is the undefined sentinel.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the modifier on the Parameter.
+        /// Gets or sets the parameter modifier (in, ref, out, params, scoped, this).
         /// </summary>
-        /// <value>The modifier.</value>
+        /// <value>The parameter modifier that affects passing semantics.</value>
         public Mode Modifier { get; internal set; } = Mode.None;
 
         /// <summary>
-        /// Gets or sets the name on the Parameter.
+        /// Gets or sets the parameter name.
         /// </summary>
-        /// <value>The name.</value>
+        /// <value>The parameter identifier.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the type on the Parameter.
+        /// Gets or sets the parameter type symbol.
         /// </summary>
-        /// <value>The type.</value>
+        /// <value>The parameter type symbol.</value>
         [Descriptor("OfType")]
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Parameter.
+        /// Converts the parameter declaration to its C# source representation.
         /// </summary>
-        /// <param name="parameter">The parameter.</param>
-        /// <returns>The string.</returns>
+        /// <param name="parameter">The parameter declaration to render.</param>
+        /// <returns>The rendered parameter text.</returns>
         public static implicit operator string(Parameter parameter)
         {
             Guard.Against.Conversion<Parameter, string>(parameter);
@@ -85,10 +85,10 @@
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Parameter.
+        /// Converts the parameter declaration to a snippet for composition.
         /// </summary>
-        /// <param name="parameter">The parameter.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="parameter">The parameter declaration to convert.</param>
+        /// <returns>The snippet representing the parameter declaration.</returns>
         public static implicit operator Snippet(Parameter parameter)
         {
             Guard.Against.Conversion<Parameter, Snippet>(parameter);
@@ -97,19 +97,19 @@
         }
 
         /// <summary>
-        /// Returns the string representation of the Parameter.
+        /// Returns the C# source representation of the parameter declaration.
         /// </summary>
-        /// <returns>The string representation.</returns>
+        /// <returns>The rendered parameter text.</returns>
         public override string ToString()
         {
             return ToSnippet(Options.Camel);
         }
 
         /// <summary>
-        /// Creates a snippet representation of the C# syntax element.
+        /// Creates a snippet representation of the parameter declaration.
         /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>The generated snippet.</returns>
+        /// <param name="options">The formatting options for the parameter.</param>
+        /// <returns>The parameter declaration snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Options), nameof(Parameter), nameof(Name), Name));
@@ -131,9 +131,11 @@
         }
 
         /// <summary>
-        /// Validates the Parameter.
+        /// Validates the parameter declaration before rendering.
         /// </summary>
-        /// <remarks>Required members include: Default, Type, Name, Attributes.</remarks>
+        /// <remarks>
+        /// Ensures the parameter has a name and type, attributes are valid, and the default value is a single-line expression.
+        /// </remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

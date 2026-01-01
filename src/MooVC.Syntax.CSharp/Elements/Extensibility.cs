@@ -8,34 +8,34 @@
     using static MooVC.Syntax.CSharp.Elements.Extensibility_Resources;
 
     /// <summary>
-    /// Represents a C# syntax element extensibility.
+    /// Represents C# extensibility modifiers that describe inheritance and override behavior.
     /// </summary>
     [Monify(Type = typeof(string))]
     public sealed partial class Extensibility
         : IComparable<Extensibility>
     {
         /// <summary>
-        /// Represents the abstract for the Extensibility.
+        /// Gets the abstract modifier for abstract members and types.
         /// </summary>
         public static readonly Extensibility Abstract = "abstract";
         /// <summary>
-        /// Represents the implicit for the Extensibility.
+        /// Gets the absence of an extensibility modifier.
         /// </summary>
         public static readonly Extensibility Implicit = string.Empty;
         /// <summary>
-        /// Represents the override for the Extensibility.
+        /// Gets the override modifier for overridden members.
         /// </summary>
         public static readonly Extensibility Override = "override";
         /// <summary>
-        /// Represents the static for the Extensibility.
+        /// Gets the static modifier for static members.
         /// </summary>
         public static readonly Extensibility Static = "static";
         /// <summary>
-        /// Represents the sealed for the Extensibility.
+        /// Gets the sealed modifier for sealed members or types.
         /// </summary>
         public static readonly Extensibility Sealed = "sealed";
         /// <summary>
-        /// Represents the virtual for the Extensibility.
+        /// Gets the virtual modifier for virtual members.
         /// </summary>
         public static readonly Extensibility Virtual = "virtual";
 
@@ -45,10 +45,10 @@
         }
 
         /// <summary>
-        /// Defines the string operator for the Extensibility.
+        /// Converts the extensibility modifier to its C# source representation.
         /// </summary>
-        /// <param name="extensibility">The extensibility.</param>
-        /// <returns>The string.</returns>
+        /// <param name="extensibility">The extensibility modifier to render.</param>
+        /// <returns>The modifier text.</returns>
         public static implicit operator string(Extensibility extensibility)
         {
             Guard.Against.Conversion<Extensibility, string>(extensibility);
@@ -57,10 +57,10 @@
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Extensibility.
+        /// Converts the extensibility modifier to a snippet.
         /// </summary>
-        /// <param name="extensibility">The extensibility.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="extensibility">The extensibility modifier to convert.</param>
+        /// <returns>The snippet containing the modifier.</returns>
         public static implicit operator Snippet(Extensibility extensibility)
         {
             Guard.Against.Conversion<Extensibility, Snippet>(extensibility);
@@ -69,11 +69,11 @@
         }
 
         /// <summary>
-        /// Defines the < operator for the Extensibility.
+        /// Determines whether the left-hand modifier sorts before the right-hand modifier.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand modifier.</param>
+        /// <param name="right">The right-hand modifier.</param>
+        /// <returns>True if the left-hand modifier sorts before the right-hand modifier.</returns>
         public static bool operator <(Extensibility left, Extensibility right)
         {
             if (left is null)
@@ -85,11 +85,11 @@
         }
 
         /// <summary>
-        /// Defines the > operator for the Extensibility.
+        /// Determines whether the left-hand modifier sorts after the right-hand modifier.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand modifier.</param>
+        /// <param name="right">The right-hand modifier.</param>
+        /// <returns>True if the left-hand modifier sorts after the right-hand modifier.</returns>
         public static bool operator >(Extensibility left, Extensibility right)
         {
             if (left is null)
@@ -101,22 +101,22 @@
         }
 
         /// <summary>
-        /// Defines the <= operator for the Extensibility.
+        /// Determines whether the left-hand modifier sorts before or equal to the right-hand modifier.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand modifier.</param>
+        /// <param name="right">The right-hand modifier.</param>
+        /// <returns>True if the left-hand modifier sorts before or equal to the right-hand modifier.</returns>
         public static bool operator <=(Extensibility left, Extensibility right)
         {
             return !(left > right);
         }
 
         /// <summary>
-        /// Defines the >= operator for the Extensibility.
+        /// Determines whether the left-hand modifier sorts after or equal to the right-hand modifier.
         /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <param name="left">The left-hand modifier.</param>
+        /// <param name="right">The right-hand modifier.</param>
+        /// <returns>True if the left-hand modifier sorts after or equal to the right-hand modifier.</returns>
         public static bool operator >=(Extensibility left, Extensibility right)
         {
             return !(left < right);
