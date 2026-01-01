@@ -13,18 +13,30 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a c# type syntax interface.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Interface
         : Type
     {
+        /// <summary>
+        /// Gets the undefined on the Interface.
+        /// </summary>
         public static readonly Interface Undefined = new Interface();
 
         private const string Separator = " ";
 
+        /// <summary>
+        /// Gets a value indicating whether the Interface is undefined.
+        /// </summary>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Performs the Perform To Snippet operation for the c# type syntax.
+        /// </summary>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

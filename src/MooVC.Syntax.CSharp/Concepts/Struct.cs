@@ -17,25 +17,49 @@
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
+    /// <summary>
+    /// Represents a c# type syntax struct.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Struct
         : Type
     {
+        /// <summary>
+        /// Gets the undefined on the Struct.
+        /// </summary>
         public static readonly Struct Undefined = new Struct();
         private const string Separator = " ";
 
+        /// <summary>
+        /// Gets or sets the behavior on the Struct.
+        /// </summary>
         public Kind Behavior { get; internal set; } = Kind.Default;
 
+        /// <summary>
+        /// Gets or sets the constructors on the Struct.
+        /// </summary>
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
+        /// <summary>
+        /// Gets or sets the fields on the Struct.
+        /// </summary>
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
 
+        /// <summary>
+        /// Gets or sets the parameters on the Struct.
+        /// </summary>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Struct is undefined.
+        /// </summary>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Validates the Struct and returns validation results.
+        /// </summary>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -52,6 +76,9 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Performs the Perform To Snippet operation for the c# type syntax.
+        /// </summary>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

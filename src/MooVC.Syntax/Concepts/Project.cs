@@ -13,28 +13,58 @@
     using Ignore = Valuify.IgnoreAttribute;
     using ResourceReference = MooVC.Syntax.Attributes.Resource.Resource;
 
+    /// <summary>
+    /// Represents a syntax construct project.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Project
         : Construct
     {
+        /// <summary>
+        /// Gets the undefined on the Project.
+        /// </summary>
         public static readonly Project Undefined = new Project();
 
+        /// <summary>
+        /// Gets or sets the imports on the Project.
+        /// </summary>
         public ImmutableArray<Import> Imports { get; internal set; } = ImmutableArray<Import>.Empty;
 
+        /// <summary>
+        /// Gets or sets the item groups on the Project.
+        /// </summary>
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
 
+        /// <summary>
+        /// Gets or sets the property groups on the Project.
+        /// </summary>
         public ImmutableArray<PropertyGroup> PropertyGroups { get; internal set; } = ImmutableArray<PropertyGroup>.Empty;
 
+        /// <summary>
+        /// Gets or sets the resources on the Project.
+        /// </summary>
         public ImmutableArray<ResourceReference> Resources { get; internal set; } = ImmutableArray<ResourceReference>.Empty;
 
+        /// <summary>
+        /// Gets or sets the sdks on the Project.
+        /// </summary>
         public ImmutableArray<Sdk> Sdks { get; internal set; } = ImmutableArray<Sdk>.Empty;
 
+        /// <summary>
+        /// Gets or sets the targets on the Project.
+        /// </summary>
         public ImmutableArray<Target> Targets { get; internal set; } = ImmutableArray<Target>.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Project is undefined.
+        /// </summary>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Validates the Project and returns validation results.
+        /// </summary>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -52,6 +82,9 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Creates an XML document for the Project.
+        /// </summary>
         public XDocument ToDocument()
         {
             if (IsUndefined)
@@ -104,6 +137,9 @@
             return new XDocument(declaration, project);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Project.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)

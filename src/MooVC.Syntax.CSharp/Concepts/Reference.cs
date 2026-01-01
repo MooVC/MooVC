@@ -15,6 +15,9 @@
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
+    /// <summary>
+    /// Represents a c# type syntax reference.
+    /// </summary>
     public abstract partial class Reference
         : Type
     {
@@ -28,14 +31,29 @@
             _type = type;
         }
 
+        /// <summary>
+        /// Gets or sets the constructors on the Reference.
+        /// </summary>
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
+        /// <summary>
+        /// Gets or sets the extensibility on the Reference.
+        /// </summary>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Sealed;
 
+        /// <summary>
+        /// Gets or sets the fields on the Reference.
+        /// </summary>
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
 
+        /// <summary>
+        /// Gets or sets the parameters on the Reference.
+        /// </summary>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Validates the Reference and returns validation results.
+        /// </summary>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -59,11 +77,17 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Performs the Get Signature operation for the c# type syntax.
+        /// </summary>
         protected virtual string GetSignature(string extensibility, string partial, string name, string scope)
         {
             return Separator.Combine(scope, extensibility, partial, _type, $"{name}");
         }
 
+        /// <summary>
+        /// Performs the Perform To Snippet operation for the c# type syntax.
+        /// </summary>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

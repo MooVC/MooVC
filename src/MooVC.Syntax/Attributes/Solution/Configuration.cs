@@ -12,26 +12,47 @@ namespace MooVC.Syntax.Attributes.Solution
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild solution attribute configuration.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Configuration
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Configuration.
+        /// </summary>
         public static readonly Configuration Undefined = new Configuration();
 
+        /// <summary>
+        /// Initializes a new instance of the Configuration class.
+        /// </summary>
         internal Configuration()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Configuration is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the name on the Configuration.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the platform on the Configuration.
+        /// </summary>
         [Descriptor("For")]
         public Snippet Platform { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild solution attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -49,6 +70,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Configuration.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -59,6 +83,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Configuration and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

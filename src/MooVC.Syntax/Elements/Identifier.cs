@@ -10,12 +10,18 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Identifier_Resources;
 
+    /// <summary>
+    /// Represents a syntax element identifier.
+    /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Identifier
         : IComparable<Identifier>,
           IValidatableObject
     {
+        /// <summary>
+        /// Gets the unnamed on the Identifier.
+        /// </summary>
         public static readonly Identifier Unnamed = string.Empty;
 
         private static readonly Regex rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -28,14 +34,23 @@
             { Casing.Kebab, StringExtensions.ToKebabCase },
         };
 
+        /// <summary>
+        /// Initializes a new instance of the Identifier class.
+        /// </summary>
         public Identifier(string value)
         {
             _value = value ?? string.Empty;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Identifier is unnamed.
+        /// </summary>
         [Ignore]
         public bool IsUnnamed => this == Unnamed;
 
+        /// <summary>
+        /// Defines the string operator for the Identifier.
+        /// </summary>
         public static implicit operator string(Identifier identifier)
         {
             Guard.Against.Conversion<Identifier, string>(identifier);
@@ -43,6 +58,9 @@
             return identifier.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Identifier.
+        /// </summary>
         public static implicit operator Snippet(Identifier identifier)
         {
             Guard.Against.Conversion<Identifier, Snippet>(identifier);
@@ -50,6 +68,9 @@
             return Snippet.From(identifier);
         }
 
+        /// <summary>
+        /// Defines the < operator for the Identifier.
+        /// </summary>
         public static bool operator <(Identifier left, Identifier right)
         {
             if (left is null)
@@ -60,6 +81,9 @@
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        /// Defines the > operator for the Identifier.
+        /// </summary>
         public static bool operator >(Identifier left, Identifier right)
         {
             if (left is null)
@@ -70,16 +94,25 @@
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        /// Defines the <= operator for the Identifier.
+        /// </summary>
         public static bool operator <=(Identifier left, Identifier right)
         {
             return !(left > right);
         }
 
+        /// <summary>
+        /// Defines the >= operator for the Identifier.
+        /// </summary>
         public static bool operator >=(Identifier left, Identifier right)
         {
             return !(left < right);
         }
 
+        /// <summary>
+        /// Compares this Identifier to another instance.
+        /// </summary>
         public int CompareTo(Identifier other)
         {
             return other is null
@@ -87,11 +120,17 @@
                 : string.CompareOrdinal(_value, other._value);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Identifier.
+        /// </summary>
         public override string ToString()
         {
             return ToSnippet(Options.Pascal);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the syntax element.
+        /// </summary>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Identifier)));
@@ -109,6 +148,9 @@
             return transform(_value);
         }
 
+        /// <summary>
+        /// Validates the Identifier and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnnamed)

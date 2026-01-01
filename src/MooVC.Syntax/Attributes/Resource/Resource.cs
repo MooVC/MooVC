@@ -12,11 +12,17 @@
     using Ignore = Valuify.IgnoreAttribute;
     using Path = MooVC.Syntax.Elements.Path;
 
+    /// <summary>
+    /// Represents a resource file attribute resource.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Resource
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Resource.
+        /// </summary>
         public static readonly Resource Undefined = new Resource();
 
         private const string AutoGenValue = "True";
@@ -24,21 +30,42 @@
         private const string InternalGeneratorValue = "ResXFileCodeGenerator";
         private const string PublicGeneratorValue = "PublicResXFileCodeGenerator";
 
+        /// <summary>
+        /// Initializes a new instance of the Resource class.
+        /// </summary>
         internal Resource()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the custom tool namespace on the Resource.
+        /// </summary>
         public Snippet CustomToolNamespace { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the designer on the Resource.
+        /// </summary>
         public Path Designer { get; internal set; } = Path.Empty;
 
+        /// <summary>
+        /// Gets or sets the location on the Resource.
+        /// </summary>
         public Path Location { get; internal set; } = Path.Empty;
 
+        /// <summary>
+        /// Gets or sets the visibility on the Resource.
+        /// </summary>
         public Scope Visibility { get; internal set; } = Scope.Internal;
 
+        /// <summary>
+        /// Gets a value indicating whether the Resource is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the resource file attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -76,6 +103,9 @@
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Resource.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -86,6 +116,9 @@
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Resource and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

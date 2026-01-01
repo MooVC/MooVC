@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Represents a c# syntax aliases.
+    /// </summary>
     internal static class Aliases
     {
         private static readonly Dictionary<Type, string> aliases = new Dictionary<Type, string>
@@ -25,11 +28,17 @@
             { typeof(ushort), "ushort" },
         };
 
+        /// <summary>
+        /// Performs the Try Get operation for the c# syntax.
+        /// </summary>
         public static bool TryGet(Type type, out string alias)
         {
             return aliases.TryGetValue(type, out alias);
         }
 
+        /// <summary>
+        /// Performs the Is System operation for the c# syntax.
+        /// </summary>
         public static bool IsSystem(string type)
         {
             return aliases.Values.Contains(type, StringComparer.OrdinalIgnoreCase);

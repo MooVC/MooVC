@@ -5,8 +5,14 @@
     using System.Linq;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a c# member syntax field extensions.
+    /// </summary>
     public static partial class FieldExtensions
     {
+        /// <summary>
+        /// Creates a code snippet representation of the c# member syntax.
+        /// </summary>
         internal static Snippet ToSnippet(this ImmutableArray<Field> fields, Snippet.Options options)
         {
             if (fields.IsDefaultOrEmpty)

@@ -12,25 +12,46 @@ namespace MooVC.Syntax.Attributes.Resource
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a resource file attribute header.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Header
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Header.
+        /// </summary>
         public static readonly Header Undefined = new Header();
 
+        /// <summary>
+        /// Initializes a new instance of the Header class.
+        /// </summary>
         internal Header()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Header is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the name on the Header.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the value on the Header.
+        /// </summary>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the resource file attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -45,6 +66,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Header.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -55,6 +79,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Header and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

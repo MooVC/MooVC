@@ -7,8 +7,14 @@
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a c# member syntax property extensions.
+    /// </summary>
     public static partial class PropertyExtensions
     {
+        /// <summary>
+        /// Creates a code snippet representation of the c# member syntax.
+        /// </summary>
         internal static Snippet ToSnippet(this ImmutableArray<Property> properties, Snippet.Options options)
         {
             if (properties.IsDefaultOrEmpty)

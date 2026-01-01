@@ -12,25 +12,46 @@ namespace MooVC.Syntax.Attributes.Solution
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild solution attribute property.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Property
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Property.
+        /// </summary>
         public static readonly Property Undefined = new Property();
 
+        /// <summary>
+        /// Initializes a new instance of the Property class.
+        /// </summary>
         internal Property()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Property is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the name on the Property.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the value on the Property.
+        /// </summary>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild solution attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -48,6 +69,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Property.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -58,6 +82,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Property and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

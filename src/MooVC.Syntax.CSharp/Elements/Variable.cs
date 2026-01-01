@@ -13,22 +13,37 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Variable_Resources;
 
+    /// <summary>
+    /// Represents a c# syntax element variable.
+    /// </summary>
     [Monify(Type = typeof(Identifier))]
     [SkipAutoInstantiation]
     public sealed partial class Variable
         : IComparable<Variable>,
           IValidatableObject
     {
+        /// <summary>
+        /// Gets the unnamed on the Variable.
+        /// </summary>
         public static readonly Variable Unnamed = Identifier.Unnamed;
 
+        /// <summary>
+        /// Initializes a new instance of the Variable class.
+        /// </summary>
         public Variable(Identifier value)
         {
             _value = value ?? Identifier.Unnamed;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Variable is unnamed.
+        /// </summary>
         [Ignore]
         public bool IsUnnamed => this == Unnamed;
 
+        /// <summary>
+        /// Defines the Variable operator for the Variable.
+        /// </summary>
         public static implicit operator Variable(Type type)
         {
             Guard.Against.Conversion<Type, Variable>(type);
@@ -36,6 +51,9 @@
             return type.GetName();
         }
 
+        /// <summary>
+        /// Defines the string operator for the Variable.
+        /// </summary>
         public static implicit operator string(Variable variable)
         {
             Guard.Against.Conversion<Variable, string>(variable);
@@ -43,6 +61,9 @@
             return variable.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Variable.
+        /// </summary>
         public static implicit operator Snippet(Variable variable)
         {
             Guard.Against.Conversion<Variable, Snippet>(variable);
@@ -50,6 +71,9 @@
             return variable.ToSnippet(Options.Camel);
         }
 
+        /// <summary>
+        /// Defines the < operator for the Variable.
+        /// </summary>
         public static bool operator <(Variable left, Variable right)
         {
             if (left is null)
@@ -60,6 +84,9 @@
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        /// Defines the > operator for the Variable.
+        /// </summary>
         public static bool operator >(Variable left, Variable right)
         {
             if (left is null)
@@ -70,16 +97,25 @@
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        /// Defines the <= operator for the Variable.
+        /// </summary>
         public static bool operator <=(Variable left, Variable right)
         {
             return !(left > right);
         }
 
+        /// <summary>
+        /// Defines the >= operator for the Variable.
+        /// </summary>
         public static bool operator >=(Variable left, Variable right)
         {
             return !(left < right);
         }
 
+        /// <summary>
+        /// Compares this Variable to another instance.
+        /// </summary>
         public int CompareTo(Variable other)
         {
             return other is null
@@ -87,11 +123,17 @@
                 : string.CompareOrdinal(_value, other._value);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Variable.
+        /// </summary>
         public override string ToString()
         {
             return ToSnippet(Options.Camel);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the c# syntax element.
+        /// </summary>
         public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Variable)));
@@ -120,6 +162,9 @@
             return identifier.ToString();
         }
 
+        /// <summary>
+        /// Validates the Variable and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnnamed || Aliases.IsSystem(_value))

@@ -12,32 +12,62 @@ namespace MooVC.Syntax.Attributes.Resource
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a resource file attribute data.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Data
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Data.
+        /// </summary>
         public static readonly Data Undefined = new Data();
 
+        /// <summary>
+        /// Initializes a new instance of the Data class.
+        /// </summary>
         internal Data()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the comment on the Data.
+        /// </summary>
         public Snippet Comment { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Data is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the mime type on the Data.
+        /// </summary>
         public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the name on the Data.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the type on the Data.
+        /// </summary>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the value on the Data.
+        /// </summary>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the resource file attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -64,6 +94,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Data.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -74,6 +107,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Data and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

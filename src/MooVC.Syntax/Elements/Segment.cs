@@ -10,17 +10,29 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Segment_Resources;
 
+    /// <summary>
+    /// Represents a syntax element segment.
+    /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Segment
         : IComparable<Segment>,
           IValidatableObject
     {
+        /// <summary>
+        /// Gets the empty on the Segment.
+        /// </summary>
         public static readonly Segment Empty = string.Empty;
         private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
+        /// <summary>
+        /// Gets a value indicating whether the Segment is empty.
+        /// </summary>
         public bool IsEmpty => this == Empty;
 
+        /// <summary>
+        /// Defines the string operator for the Segment.
+        /// </summary>
         public static implicit operator string(Segment segment)
         {
             Guard.Against.Conversion<Segment, string>(segment);
@@ -28,6 +40,9 @@
             return segment.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Segment.
+        /// </summary>
         public static implicit operator Snippet(Segment segment)
         {
             Guard.Against.Conversion<Segment, Snippet>(segment);
@@ -35,6 +50,9 @@
             return Snippet.From(segment);
         }
 
+        /// <summary>
+        /// Defines the < operator for the Segment.
+        /// </summary>
         public static bool operator <(Segment left, Segment right)
         {
             if (left is null)
@@ -45,6 +63,9 @@
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        /// Defines the > operator for the Segment.
+        /// </summary>
         public static bool operator >(Segment left, Segment right)
         {
             if (left is null)
@@ -55,16 +76,25 @@
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        /// Defines the <= operator for the Segment.
+        /// </summary>
         public static bool operator <=(Segment left, Segment right)
         {
             return !(left > right);
         }
 
+        /// <summary>
+        /// Defines the >= operator for the Segment.
+        /// </summary>
         public static bool operator >=(Segment left, Segment right)
         {
             return !(left < right);
         }
 
+        /// <summary>
+        /// Compares this Segment to another instance.
+        /// </summary>
         public int CompareTo(Segment other)
         {
             return other is null
@@ -72,11 +102,17 @@
                 : string.CompareOrdinal(_value, other._value);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Segment.
+        /// </summary>
         public override string ToString()
         {
             return _value;
         }
 
+        /// <summary>
+        /// Validates the Segment and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsEmpty)

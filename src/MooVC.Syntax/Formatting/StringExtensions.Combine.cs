@@ -7,8 +7,14 @@
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.Formatting.StringExtensions_Resources;
 
+    /// <summary>
+    /// Represents a formatting helper string extensions.
+    /// </summary>
     public static partial class StringExtensions
     {
+        /// <summary>
+        /// Performs the Combine operation for the formatting helper.
+        /// </summary>
         public static string Combine(this string separator, params string[] values)
         {
             _ = Guard.Against.NullOrEmpty(separator, message: CombineSeparatorRequired);
@@ -38,6 +44,9 @@
                 .Trim();
         }
 
+        /// <summary>
+        /// Performs the Combine T operation for the formatting helper.
+        /// </summary>
         public static string Combine<T>(this string separator, ImmutableArray<T> elements, Func<T, string> formatter)
         {
             _ = Guard.Against.Null(formatter, message: CombineFormatterRequired);

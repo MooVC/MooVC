@@ -12,31 +12,58 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild project attribute import.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Import
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Import.
+        /// </summary>
         public static readonly Import Undefined = new Import();
 
+        /// <summary>
+        /// Initializes a new instance of the Import class.
+        /// </summary>
         internal Import()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the Import.
+        /// </summary>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Import is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the label on the Import.
+        /// </summary>
         [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the project on the Import.
+        /// </summary>
         [Descriptor("ForProject")]
         public Snippet Project { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the sdk on the Import.
+        /// </summary>
         public Snippet Sdk { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -56,6 +83,9 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Import.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -66,6 +96,9 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Import and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

@@ -13,36 +13,66 @@
     using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a c# operator syntax comparison.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Comparison
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Comparison.
+        /// </summary>
         public static readonly Comparison Undefined = new Comparison();
 
+        /// <summary>
+        /// Initializes a new instance of the Comparison class.
+        /// </summary>
         internal Comparison()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the body on the Comparison.
+        /// </summary>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Comparison is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the operator on the Comparison.
+        /// </summary>
         public Type Operator { get; internal set; } = Type.Unspecified;
 
+        /// <summary>
+        /// Gets or sets the scope on the Comparison.
+        /// </summary>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Returns the string representation of the Comparison.
+        /// </summary>
         public override string ToString()
         {
             return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Comparison.
+        /// </summary>
         public string ToString(Snippet.Options options, Concept type)
         {
             return ToSnippet(options, type);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the c# operator syntax.
+        /// </summary>
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Comparison)));
@@ -51,6 +81,9 @@
             return ToSnippet(type.Name, options);
         }
 
+        /// <summary>
+        /// Validates the Comparison and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Body.IsEmpty)

@@ -14,41 +14,77 @@
     using Concept = MooVC.Syntax.CSharp.Concepts.Type;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a c# operator syntax conversion.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Conversion
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Conversion.
+        /// </summary>
         public static readonly Conversion Undefined = new Conversion();
 
+        /// <summary>
+        /// Initializes a new instance of the Conversion class.
+        /// </summary>
         internal Conversion()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the body on the Conversion.
+        /// </summary>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the direction on the Conversion.
+        /// </summary>
         public Intent Direction { get; internal set; } = Intent.To;
 
+        /// <summary>
+        /// Gets a value indicating whether the Conversion is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the mode on the Conversion.
+        /// </summary>
         public Type Mode { get; internal set; } = Type.Implicit;
 
+        /// <summary>
+        /// Gets or sets the scope on the Conversion.
+        /// </summary>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Gets or sets the subject on the Conversion.
+        /// </summary>
         [Descriptor("ForType")]
         public Symbol Subject { get; internal set; } = Symbol.Undefined;
 
+        /// <summary>
+        /// Returns the string representation of the Conversion.
+        /// </summary>
         public override string ToString()
         {
             return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Conversion.
+        /// </summary>
         public string ToString(Snippet.Options options, Concept type)
         {
             return ToSnippet(options, type);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the c# operator syntax.
+        /// </summary>
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
@@ -57,6 +93,9 @@
             return ToSnippet(type.Name, options);
         }
 
+        /// <summary>
+        /// Validates the Conversion and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

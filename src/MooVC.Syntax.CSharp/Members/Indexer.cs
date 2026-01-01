@@ -13,33 +13,63 @@
     using static MooVC.Syntax.CSharp.Members.Indexer_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a c# member syntax indexer.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Indexer
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Indexer.
+        /// </summary>
         public static readonly Indexer Undefined = new Indexer();
         private const string Separator = " ";
 
+        /// <summary>
+        /// Initializes a new instance of the Indexer class.
+        /// </summary>
         internal Indexer()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Indexer is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the behaviours on the Indexer.
+        /// </summary>
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
+        /// <summary>
+        /// Gets or sets the extensibility on the Indexer.
+        /// </summary>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
+        /// <summary>
+        /// Gets or sets the parameter on the Indexer.
+        /// </summary>
         [Descriptor("Accepts")]
         public Parameter Parameter { get; internal set; } = Parameter.Undefined;
 
+        /// <summary>
+        /// Gets or sets the result on the Indexer.
+        /// </summary>
         [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Void;
 
+        /// <summary>
+        /// Gets or sets the scope on the Indexer.
+        /// </summary>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Defines the string operator for the Indexer.
+        /// </summary>
         public static implicit operator string(Indexer indexer)
         {
             Guard.Against.Conversion<Indexer, string>(indexer);
@@ -47,6 +77,9 @@
             return indexer.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Indexer.
+        /// </summary>
         public static implicit operator Snippet(Indexer indexer)
         {
             Guard.Against.Conversion<Indexer, Snippet>(indexer);
@@ -54,11 +87,17 @@
             return Snippet.From(indexer);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Indexer.
+        /// </summary>
         public override string ToString()
         {
             return ToSnippet(Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the c# member syntax.
+        /// </summary>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
@@ -80,6 +119,9 @@
             return methods.Block(options, signature);
         }
 
+        /// <summary>
+        /// Validates the Indexer and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

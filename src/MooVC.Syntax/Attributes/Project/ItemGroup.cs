@@ -12,28 +12,52 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild project attribute item group.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class ItemGroup
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the ItemGroup.
+        /// </summary>
         public static readonly ItemGroup Undefined = new ItemGroup();
 
+        /// <summary>
+        /// Initializes a new instance of the ItemGroup class.
+        /// </summary>
         internal ItemGroup()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the ItemGroup.
+        /// </summary>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the ItemGroup is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the items on the ItemGroup.
+        /// </summary>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        /// <summary>
+        /// Gets or sets the label on the ItemGroup.
+        /// </summary>
         [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -57,6 +81,9 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the ItemGroup.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -67,6 +94,9 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the ItemGroup and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

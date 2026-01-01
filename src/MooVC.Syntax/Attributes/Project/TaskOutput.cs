@@ -12,31 +12,58 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild project attribute task output.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class TaskOutput
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the TaskOutput.
+        /// </summary>
         public static readonly TaskOutput Undefined = new TaskOutput();
 
+        /// <summary>
+        /// Initializes a new instance of the TaskOutput class.
+        /// </summary>
         internal TaskOutput()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the TaskOutput.
+        /// </summary>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the TaskOutput is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the item name on the TaskOutput.
+        /// </summary>
         [Descriptor("ForItem")]
         public Identifier ItemName { get; internal set; } = Identifier.Unnamed;
 
+        /// <summary>
+        /// Gets or sets the property name on the TaskOutput.
+        /// </summary>
         [Descriptor("ForProperty")]
         public Identifier PropertyName { get; internal set; } = Identifier.Unnamed;
 
+        /// <summary>
+        /// Gets or sets the task parameter on the TaskOutput.
+        /// </summary>
         public Identifier TaskParameter { get; internal set; } = Identifier.Unnamed;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -56,6 +83,9 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the TaskOutput.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -66,6 +96,9 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the TaskOutput and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

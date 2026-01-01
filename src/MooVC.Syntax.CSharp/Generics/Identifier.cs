@@ -10,16 +10,28 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 
+    /// <summary>
+    /// Represents a c# generic syntax identifier.
+    /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]
     public sealed partial class Identifier
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the unnamed on the Identifier.
+        /// </summary>
         public static readonly Identifier Unnamed = string.Empty;
         private static readonly Regex rule = new Regex(@"^T(?:[A-Z][A-Za-z0-9]*)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
+        /// <summary>
+        /// Gets a value indicating whether the Identifier is unnamed.
+        /// </summary>
         public bool IsUnnamed => this == Unnamed;
 
+        /// <summary>
+        /// Defines the string operator for the Identifier.
+        /// </summary>
         public static implicit operator string(Identifier identifier)
         {
             Guard.Against.Conversion<Identifier, string>(identifier);
@@ -27,6 +39,9 @@
             return identifier.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Identifier.
+        /// </summary>
         public static implicit operator Snippet(Identifier identifier)
         {
             Guard.Against.Conversion<Identifier, Snippet>(identifier);
@@ -34,11 +49,17 @@
             return Snippet.From(identifier);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Identifier.
+        /// </summary>
         public override string ToString()
         {
             return _value;
         }
 
+        /// <summary>
+        /// Validates the Identifier and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnnamed)

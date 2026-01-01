@@ -6,8 +6,14 @@
     using System.Linq;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a formatting helper string extensions.
+    /// </summary>
     public static partial class StringExtensions
     {
+        /// <summary>
+        /// Creates a code snippet representation of the formatting helper.
+        /// </summary>
         internal static Snippet ToSnippet(this string value)
         {
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(1);
@@ -17,6 +23,9 @@
             return new Snippet(builder.ToImmutable());
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the formatting helper.
+        /// </summary>
         internal static Snippet ToSnippet(this IEnumerable<string> values)
         {
             var lines = values

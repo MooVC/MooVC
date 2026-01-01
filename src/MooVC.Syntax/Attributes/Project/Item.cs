@@ -12,41 +12,86 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild project attribute item.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Item
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Item.
+        /// </summary>
         public static readonly Item Undefined = new Item();
 
+        /// <summary>
+        /// Initializes a new instance of the Item class.
+        /// </summary>
         internal Item()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the Item.
+        /// </summary>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the exclude on the Item.
+        /// </summary>
         public Snippet Exclude { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the include on the Item.
+        /// </summary>
         public Snippet Include { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Item is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the keep duplicates on the Item.
+        /// </summary>
         public bool KeepDuplicates { get; internal set; }
 
+        /// <summary>
+        /// Gets or sets the match on metadata on the Item.
+        /// </summary>
         public Snippet MatchOnMetadata { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the match on metadata options on the Item.
+        /// </summary>
         public Snippet MatchOnMetadataOptions { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the metadata on the Item.
+        /// </summary>
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
+        /// <summary>
+        /// Gets or sets the remove on the Item.
+        /// </summary>
         public Snippet Remove { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the remove metadata on the Item.
+        /// </summary>
         public Snippet RemoveMetadata { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the update on the Item.
+        /// </summary>
         public Snippet Update { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -77,6 +122,9 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Item.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -87,6 +135,9 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Item and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

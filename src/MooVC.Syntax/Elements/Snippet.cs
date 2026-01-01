@@ -13,15 +13,27 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Snippet_Resources;
 
+    /// <summary>
+    /// Represents a syntax element snippet.
+    /// </summary>
     [Monify(Type = typeof(ImmutableArray<string>))]
     [SkipAutoInstantiation]
     public sealed partial class Snippet
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the blank on the Snippet.
+        /// </summary>
         public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
+        /// <summary>
+        /// Gets the empty on the Snippet.
+        /// </summary>
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
         private const int SingleLine = 1;
 
+        /// <summary>
+        /// Initializes a new instance of the Snippet class.
+        /// </summary>
         internal Snippet(ImmutableArray<string> value)
         {
             if (value.IsDefault)
@@ -32,14 +44,29 @@
             _value = value;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Snippet is empty.
+        /// </summary>
         public bool IsEmpty => this == Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Snippet is multi line.
+        /// </summary>
         public bool IsMultiLine => !_value.IsDefaultOrEmpty && Lines > SingleLine;
 
+        /// <summary>
+        /// Gets a value indicating whether the Snippet is single line.
+        /// </summary>
         public bool IsSingleLine => !_value.IsDefaultOrEmpty && Lines == SingleLine;
 
+        /// <summary>
+        /// Gets the lines on the Snippet.
+        /// </summary>
         public int Lines => _value.IsDefaultOrEmpty ? 0 : _value.Length;
 
+        /// <summary>
+        /// Defines the Snippet operator for the Snippet.
+        /// </summary>
         public static implicit operator Snippet(string snippet)
         {
             Guard.Against.Conversion<string, Snippet>(snippet);
@@ -47,6 +74,9 @@
             return From(snippet);
         }
 
+        /// <summary>
+        /// Defines the string operator for the Snippet.
+        /// </summary>
         public static implicit operator string(Snippet snippet)
         {
             Guard.Against.Conversion<Snippet, string>(snippet);
@@ -54,11 +84,17 @@
             return snippet.ToString();
         }
 
+        /// <summary>
+        /// Performs the From operation for the syntax element.
+        /// </summary>
         public static Snippet From(params string[] values)
         {
             return From(Options.Default, values);
         }
 
+        /// <summary>
+        /// Performs the From operation for the syntax element.
+        /// </summary>
         public static Snippet From(Options options, params string[] values)
         {
             _ = Guard.Against.Null(options, message: FromOptionsRequired.Format(nameof(Options), nameof(values)));
@@ -84,6 +120,9 @@
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Performs the Append operation for the syntax element.
+        /// </summary>
         public Snippet Append(char value)
         {
             if (IsEmpty)
@@ -104,26 +143,41 @@
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Performs the Append operation for the syntax element.
+        /// </summary>
         public Snippet Append(params string[] values)
         {
             return Append(Options.Default, values);
         }
 
+        /// <summary>
+        /// Performs the Append operation for the syntax element.
+        /// </summary>
         public Snippet Append(Options options, params string[] values)
         {
             return Combine(options, _value, values, (original, appended) => original.Concat(appended));
         }
 
+        /// <summary>
+        /// Performs the Append operation for the syntax element.
+        /// </summary>
         public Snippet Append(params Snippet[] values)
         {
             return Combine(_value, values, (original, appended) => original.Concat(appended));
         }
 
+        /// <summary>
+        /// Performs the Block operation for the syntax element.
+        /// </summary>
         public Snippet Block(Options options)
         {
             return Block(options, Empty);
         }
 
+        /// <summary>
+        /// Performs the Block operation for the syntax element.
+        /// </summary>
         public Snippet Block(Options options, Snippet opening)
         {
             _ = Guard.Against.Null(options, message: BlockOptionsRequired);
@@ -190,11 +244,17 @@
             }
         }
 
+        /// <summary>
+        /// Performs the Combine operation for the syntax element.
+        /// </summary>
         public Snippet Combine(params Snippet[] values)
         {
             return Combine(Options.Default, values);
         }
 
+        /// <summary>
+        /// Performs the Combine operation for the syntax element.
+        /// </summary>
         public Snippet Combine(Options options, params Snippet[] values)
         {
             _ = Guard.Against.Null(options, message: CombineOptionsRequired);
@@ -217,21 +277,33 @@
             return Combine(combined, values);
         }
 
+        /// <summary>
+        /// Performs the Prepend operation for the syntax element.
+        /// </summary>
         public Snippet Prepend(params string[] values)
         {
             return Prepend(Options.Default, values);
         }
 
+        /// <summary>
+        /// Performs the Prepend operation for the syntax element.
+        /// </summary>
         public Snippet Prepend(Options options, params string[] values)
         {
             return Combine(options, _value, values, (original, prepended) => prepended.Concat(original));
         }
 
+        /// <summary>
+        /// Performs the Prepend operation for the syntax element.
+        /// </summary>
         public Snippet Prepend(params Snippet[] values)
         {
             return Combine(_value, values, (original, prepended) => prepended.Concat(original));
         }
 
+        /// <summary>
+        /// Performs the Shift operation for the syntax element.
+        /// </summary>
         public Snippet Shift(Options options)
         {
             _ = Guard.Against.Null(options, message: ShiftOptionsRequired);
@@ -262,6 +334,9 @@
             }
         }
 
+        /// <summary>
+        /// Performs the Stack operation for the syntax element.
+        /// </summary>
         public Snippet Stack(Options options, Snippet top)
         {
             _ = Guard.Against.Null(options, message: StackOptionsRequired);
@@ -270,6 +345,9 @@
             return Prepend(options, top);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Snippet.
+        /// </summary>
         public override string ToString()
         {
             if (Lines == 0)
@@ -295,6 +373,9 @@
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Validates the Snippet and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (validationContext.Items.TryGetValue(nameof(Lines), out object value)

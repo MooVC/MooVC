@@ -10,25 +10,49 @@ namespace MooVC.Syntax.CSharp.Members
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a c# member syntax property.
+    /// </summary>
     public partial class Property
     {
+        /// <summary>
+        /// Represents a c# member syntax methods.
+        /// </summary>
         [Fluentify]
         [Valuify]
         public sealed partial class Methods
         {
+            /// <summary>
+            /// Gets the default on the Methods.
+            /// </summary>
             public static readonly Methods Default = new Methods();
 
+            /// <summary>
+            /// Initializes a new instance of the Methods class.
+            /// </summary>
             internal Methods()
             {
             }
 
+            /// <summary>
+            /// Gets or sets the get on the Methods.
+            /// </summary>
             public Snippet Get { get; internal set; } = Snippet.Empty;
 
+            /// <summary>
+            /// Gets a value indicating whether the Methods is default.
+            /// </summary>
             [Ignore]
             public bool IsDefault => this == Default;
 
+            /// <summary>
+            /// Gets or sets the set on the Methods.
+            /// </summary>
             public Setter Set { get; internal set; } = Setter.Default;
 
+            /// <summary>
+            /// Defines the string operator for the Methods.
+            /// </summary>
             public static implicit operator string(Methods methods)
             {
                 Guard.Against.Conversion<Methods, string>(methods);
@@ -36,6 +60,9 @@ namespace MooVC.Syntax.CSharp.Members
                 return methods.ToString();
             }
 
+            /// <summary>
+            /// Defines the Snippet operator for the Methods.
+            /// </summary>
             public static implicit operator Snippet(Methods methods)
             {
                 Guard.Against.Conversion<Methods, Snippet>(methods);
@@ -43,11 +70,17 @@ namespace MooVC.Syntax.CSharp.Members
                 return Snippet.From(methods);
             }
 
+            /// <summary>
+            /// Returns the string representation of the Methods.
+            /// </summary>
             public override string ToString()
             {
                 return ToSnippet(Snippet.Options.Default, Scope.Public);
             }
 
+            /// <summary>
+            /// Creates a code snippet representation of the c# member syntax.
+            /// </summary>
             public Snippet ToSnippet(Snippet.Options options, Scope scope)
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));

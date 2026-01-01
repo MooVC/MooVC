@@ -12,30 +12,57 @@ namespace MooVC.Syntax.Attributes.Resource
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a resource file attribute metadata.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Metadata
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Metadata.
+        /// </summary>
         public static readonly Metadata Undefined = new Metadata();
 
+        /// <summary>
+        /// Initializes a new instance of the Metadata class.
+        /// </summary>
         internal Metadata()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Metadata is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the mime type on the Metadata.
+        /// </summary>
         public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the name on the Metadata.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the type on the Metadata.
+        /// </summary>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the value on the Metadata.
+        /// </summary>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the resource file attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -55,6 +82,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Metadata.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -65,6 +95,9 @@ namespace MooVC.Syntax.Attributes.Resource
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Metadata and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

@@ -12,33 +12,63 @@ namespace MooVC.Syntax.Attributes.Solution
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild solution attribute item.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Item
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Item.
+        /// </summary>
         public static readonly Item Undefined = new Item();
 
+        /// <summary>
+        /// Initializes a new instance of the Item class.
+        /// </summary>
         internal Item()
         {
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Item is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the id on the Item.
+        /// </summary>
         public Snippet Id { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the items on the Item.
+        /// </summary>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        /// <summary>
+        /// Gets or sets the name on the Item.
+        /// </summary>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the path on the Item.
+        /// </summary>
         [Descriptor("At")]
         public Snippet Path { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the type on the Item.
+        /// </summary>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild solution attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -64,6 +94,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Item.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -74,6 +107,9 @@ namespace MooVC.Syntax.Attributes.Solution
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Item and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

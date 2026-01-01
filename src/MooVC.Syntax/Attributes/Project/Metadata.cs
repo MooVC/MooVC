@@ -12,28 +12,52 @@ namespace MooVC.Syntax.Attributes.Project
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a msbuild project attribute metadata.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Metadata
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined on the Metadata.
+        /// </summary>
         public static readonly Metadata Undefined = new Metadata();
 
+        /// <summary>
+        /// Initializes a new instance of the Metadata class.
+        /// </summary>
         internal Metadata()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the condition on the Metadata.
+        /// </summary>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Metadata is undefined.
+        /// </summary>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the name on the Metadata.
+        /// </summary>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
+        /// <summary>
+        /// Gets or sets the value on the Metadata.
+        /// </summary>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the To Fragments operation for the msbuild project attribute.
+        /// </summary>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -51,6 +75,9 @@ namespace MooVC.Syntax.Attributes.Project
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Metadata.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -61,6 +88,9 @@ namespace MooVC.Syntax.Attributes.Project
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Metadata and returns validation results.
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

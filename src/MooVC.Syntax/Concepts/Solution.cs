@@ -13,28 +13,58 @@ namespace MooVC.Syntax.Concepts
     using Ignore = Valuify.IgnoreAttribute;
     using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
+    /// <summary>
+    /// Represents a syntax construct solution.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Solution
         : Construct
     {
+        /// <summary>
+        /// Gets the undefined on the Solution.
+        /// </summary>
         public static readonly Solution Undefined = new Solution();
 
+        /// <summary>
+        /// Gets or sets the configurations on the Solution.
+        /// </summary>
         public ImmutableArray<Configuration> Configurations { get; internal set; } = ImmutableArray<Configuration>.Empty;
 
+        /// <summary>
+        /// Gets or sets the files on the Solution.
+        /// </summary>
         public ImmutableArray<File> Files { get; internal set; } = ImmutableArray<File>.Empty;
 
+        /// <summary>
+        /// Gets or sets the folders on the Solution.
+        /// </summary>
         public ImmutableArray<Folder> Folders { get; internal set; } = ImmutableArray<Folder>.Empty;
 
+        /// <summary>
+        /// Gets or sets the items on the Solution.
+        /// </summary>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
+        /// <summary>
+        /// Gets or sets the projects on the Solution.
+        /// </summary>
         public ImmutableArray<ProjectReference> Projects { get; internal set; } = ImmutableArray<ProjectReference>.Empty;
 
+        /// <summary>
+        /// Gets or sets the properties on the Solution.
+        /// </summary>
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Solution is undefined.
+        /// </summary>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Creates an XML document for the Solution.
+        /// </summary>
         public XDocument ToDocument()
         {
             if (IsUndefined)
@@ -55,6 +85,9 @@ namespace MooVC.Syntax.Concepts
             return new XDocument(declaration, solution);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Solution.
+        /// </summary>
         public override string ToString()
         {
             if (IsUndefined)
@@ -65,6 +98,9 @@ namespace MooVC.Syntax.Concepts
             return ToDocument().ToString();
         }
 
+        /// <summary>
+        /// Validates the Solution and returns validation results.
+        /// </summary>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

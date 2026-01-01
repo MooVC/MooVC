@@ -4,8 +4,14 @@
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.Elements.SnippetExtensions_Resources;
 
+    /// <summary>
+    /// Represents a syntax element snippet extensions.
+    /// </summary>
     public static partial class SnippetExtensions
     {
+        /// <summary>
+        /// Performs the Stack operation for the syntax element.
+        /// </summary>
         public static Snippet Stack(this ImmutableArray<Snippet> snippets, Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: OptionsRequired.Format(nameof(Snippet.Options), nameof(snippets)));

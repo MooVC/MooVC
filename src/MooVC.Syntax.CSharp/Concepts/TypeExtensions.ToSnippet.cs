@@ -6,8 +6,14 @@
     using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a c# type syntax type extensions.
+    /// </summary>
     public static partial class TypeExtensions
     {
+        /// <summary>
+        /// Creates a code snippet representation of the c# type syntax.
+        /// </summary>
         internal static Snippet ToSnippet(this ImmutableArray<Type> types, Snippet.Options options)
         {
             if (types.IsDefaultOrEmpty)

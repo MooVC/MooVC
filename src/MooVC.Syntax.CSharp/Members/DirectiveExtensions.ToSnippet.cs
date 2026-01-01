@@ -5,8 +5,14 @@
     using System.Linq;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a c# member syntax directive extensions.
+    /// </summary>
     public static partial class DirectiveExtensions
     {
+        /// <summary>
+        /// Creates a code snippet representation of the c# member syntax.
+        /// </summary>
         internal static Snippet ToSnippet(this ImmutableArray<Directive> directives, Snippet.Options options)
         {
             if (directives.IsDefaultOrEmpty)

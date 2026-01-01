@@ -3,8 +3,14 @@ namespace MooVC.Syntax
     using System.Collections.Generic;
     using System.Xml.Linq;
 
+    /// <summary>
+    /// Represents a syntax helper boolean extensions.
+    /// </summary>
     internal static class BooleanExtensions
     {
+        /// <summary>
+        /// Creates XML attributes for the syntax helper.
+        /// </summary>
         public static IEnumerable<XAttribute> ToXmlAttribute(this bool value, string name)
         {
             if (!value)

@@ -16,6 +16,9 @@
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
     using Descriptor = Fluentify.DescriptorAttribute;
 
+    /// <summary>
+    /// Represents a c# type syntax type.
+    /// </summary>
     public abstract class Type
         : Construct
     {
@@ -23,31 +26,64 @@
         {
         }
 
+        /// <summary>
+        /// Gets or sets the attributes on the Type.
+        /// </summary>
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
+        /// <summary>
+        /// Gets or sets the events on the Type.
+        /// </summary>
         public ImmutableArray<Event> Events { get; internal set; } = ImmutableArray<Event>.Empty;
 
+        /// <summary>
+        /// Gets or sets the indexers on the Type.
+        /// </summary>
         public ImmutableArray<Indexer> Indexers { get; internal set; } = ImmutableArray<Indexer>.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is partial.
+        /// </summary>
         public bool IsPartial { get; internal set; }
 
+        /// <summary>
+        /// Gets or sets the methods on the Type.
+        /// </summary>
         public ImmutableArray<Method> Methods { get; internal set; } = ImmutableArray<Method>.Empty;
 
+        /// <summary>
+        /// Gets or sets the name on the will.
+        /// </summary>
         [Descriptor("Named")]
         [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The base class will be annotated with it.")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
+        /// <summary>
+        /// Gets or sets the operators on the will.
+        /// </summary>
         public Operators Operators { get; internal set; } = new Operators();
 
+        /// <summary>
+        /// Gets or sets the properties on the will.
+        /// </summary>
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
+        /// <summary>
+        /// Gets or sets the scope on the will.
+        /// </summary>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Returns the string representation of the will.
+        /// </summary>
         public sealed override string ToString()
         {
             return ToSnippet(Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Creates a code snippet representation of the c# type syntax.
+        /// </summary>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), GetType().Name));
@@ -60,6 +96,9 @@
             return PerformToSnippet(options);
         }
 
+        /// <summary>
+        /// Validates the will and returns validation results.
+        /// </summary>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -77,6 +116,9 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Performs the Perform To Snippet operation for the c# type syntax.
+        /// </summary>
         protected abstract Snippet PerformToSnippet(Snippet.Options options);
     }
 }
