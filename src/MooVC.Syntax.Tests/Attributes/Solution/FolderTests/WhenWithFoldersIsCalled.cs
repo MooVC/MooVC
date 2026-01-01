@@ -10,7 +10,7 @@ public sealed class WhenWithFoldersIsCalled
     {
         // Arrange
         Folder existing = FolderTestsData.CreateChildFolder();
-        Folder additional = FolderTestsData.CreateChildFolder().WithName(Snippet.From("OtherFolder"));
+        Folder additional = FolderTestsData.CreateChildFolder().Named(Snippet.From("OtherFolder"));
         Folder original = FolderTestsData.Create(folder: existing);
 
         // Act

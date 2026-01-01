@@ -10,7 +10,7 @@ public sealed class WhenWithFilesIsCalled
     {
         // Arrange
         File existing = FolderTestsData.CreateFile();
-        File additional = FolderTestsData.CreateFile().WithName(Snippet.From("OtherFile"));
+        File additional = FolderTestsData.CreateFile().Named(Snippet.From("OtherFile"));
         Folder original = FolderTestsData.Create(file: existing);
 
         // Act

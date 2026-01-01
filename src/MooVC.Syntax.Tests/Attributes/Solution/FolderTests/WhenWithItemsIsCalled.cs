@@ -10,7 +10,7 @@ public sealed class WhenWithItemsIsCalled
     {
         // Arrange
         Item existing = FolderTestsData.CreateItem();
-        Item additional = FolderTestsData.CreateItem().WithName(Snippet.From("OtherItem"));
+        Item additional = FolderTestsData.CreateItem().Named(Snippet.From("OtherItem"));
         Folder original = FolderTestsData.Create(item: existing);
 
         // Act
