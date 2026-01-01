@@ -9,7 +9,7 @@ public sealed class WhenWithCommentIsCalled
     {
         // Arrange
         Data original = DataTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
         Data result = original.WithComment(updated);
@@ -21,6 +21,5 @@ public sealed class WhenWithCommentIsCalled
         result.Name.ShouldBe(original.Name);
         result.Type.ShouldBe(original.Type);
         result.Value.ShouldBe(original.Value);
-        result.XmlSpace.ShouldBe(original.XmlSpace);
     }
 }

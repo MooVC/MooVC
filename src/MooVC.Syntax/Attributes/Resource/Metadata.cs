@@ -1,93 +1,80 @@
-namespace MooVC.Syntax.Attributes.Resource;
-
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Xml.Linq;
-using Fluentify;
-using MooVC.Syntax;
-using MooVC.Syntax.Elements;
-using MooVC.Syntax.Validation;
-using Valuify;
-using Ignore = Valuify.IgnoreAttribute;
-
-[Fluentify]
-[Valuify]
-public sealed partial class Metadata
-    : IValidatableObject
+namespace MooVC.Syntax.Attributes.Resource
 {
-    public static readonly Metadata Undefined = new Metadata();
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Xml.Linq;
+    using Fluentify;
+    using MooVC.Syntax;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
 
-    internal Metadata()
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Metadata
+        : IValidatableObject
     {
-    }
+        public static readonly Metadata Undefined = new Metadata();
 
-    [Ignore]
-    public bool IsUndefined => this == Undefined;
-
-    public Snippet MimeType { get; internal set; } = Snippet.Empty;
-
-    public Snippet Name { get; internal set; } = Snippet.Empty;
-
-    public Snippet Type { get; internal set; } = Snippet.Empty;
-
-    public Snippet Value { get; internal set; } = Snippet.Empty;
-
-    public Snippet XmlSpace { get; internal set; } = Snippet.Empty;
-
-    public ImmutableArray<XElement> ToFragments()
-    {
-        if (IsUndefined)
+        internal Metadata()
         {
-            return ImmutableArray<XElement>.Empty;
         }
 
-        var builder = ImmutableArray.CreateBuilder<XElement>(1);
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
 
-        builder.Add(new XElement(
-            "metadata",
-            Name.ToXmlAttribute("name"),
-            Type.ToXmlAttribute("type"),
-            MimeType.ToXmlAttribute("mimetype"),
-            ToXmlSpaceAttribute(XmlSpace),
-            new XElement("value", Value.ToString())));
+        public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
-        return builder.ToImmutable();
-    }
+        public Snippet Name { get; internal set; } = Snippet.Empty;
 
-    public override string ToString()
-    {
-        if (IsUndefined)
+        public Snippet Type { get; internal set; } = Snippet.Empty;
+
+        public Snippet Value { get; internal set; } = Snippet.Empty;
+
+        public ImmutableArray<XElement> ToFragments()
         {
-            return string.Empty;
+            if (IsUndefined)
+            {
+                return ImmutableArray<XElement>.Empty;
+            }
+
+            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
+
+            builder.Add(new XElement(
+                "metadata",
+                Name.ToXmlAttribute("name"),
+                Type.ToXmlAttribute("type"),
+                MimeType.ToXmlAttribute("mimetype"),
+                new XElement("value", Value.ToString())));
+
+            return builder.ToImmutable();
         }
 
-        return ToFragments().Merge();
-    }
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (IsUndefined)
+        public override string ToString()
         {
-            return Enumerable.Empty<ValidationResult>();
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            return ToFragments().Merge();
         }
 
-        return validationContext
-            .Include(nameof(MimeType), _ => !MimeType.IsMultiLine, MimeType)
-            .And(nameof(Name), _ => !Name.IsMultiLine, Name)
-            .And(nameof(Type), _ => !Type.IsMultiLine, Type)
-            .And(nameof(XmlSpace), _ => !XmlSpace.IsMultiLine, XmlSpace)
-            .Results;
-    }
-
-    private static XAttribute ToXmlSpaceAttribute(Snippet xmlSpace)
-    {
-        if (xmlSpace.IsEmpty)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return null;
-        }
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
 
-        return new XAttribute(XNamespace.Xml + "space", xmlSpace.ToString());
+            return validationContext
+                .Include(nameof(MimeType), _ => !MimeType.IsMultiLine, MimeType)
+                .And(nameof(Name), _ => !Name.IsMultiLine, Name)
+                .And(nameof(Type), _ => !Type.IsMultiLine, Type)
+                .Results;
+        }
     }
 }

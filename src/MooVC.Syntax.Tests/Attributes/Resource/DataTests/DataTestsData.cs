@@ -9,15 +9,13 @@ internal static class DataTestsData
     public const string DefaultName = "Greeting";
     public const string DefaultType = "System.String";
     public const string DefaultValue = "Hello";
-    public const string DefaultXmlSpace = "preserve";
 
     public static Data Create(
         Snippet? comment = default,
         Snippet? mimeType = default,
         Snippet? name = default,
         Snippet? type = default,
-        Snippet? value = default,
-        Snippet? xmlSpace = default)
+        Snippet? value = default)
     {
         return new Data
         {
@@ -26,7 +24,6 @@ internal static class DataTestsData
             Name = name ?? Snippet.From(DefaultName),
             Type = type ?? Snippet.From(DefaultType),
             Value = value ?? Snippet.From(DefaultValue),
-            XmlSpace = xmlSpace ?? Snippet.From(DefaultXmlSpace),
         };
     }
 }

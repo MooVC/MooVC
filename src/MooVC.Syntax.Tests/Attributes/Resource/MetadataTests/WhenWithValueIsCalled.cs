@@ -9,7 +9,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        Snippet updated = Snippet.From("Other");
+        var updated = Snippet.From("Other");
 
         // Act
         Metadata result = original.WithValue(updated);
@@ -20,6 +20,5 @@ public sealed class WhenWithValueIsCalled
         result.MimeType.ShouldBe(original.MimeType);
         result.Name.ShouldBe(original.Name);
         result.Type.ShouldBe(original.Type);
-        result.XmlSpace.ShouldBe(original.XmlSpace);
     }
 }

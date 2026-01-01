@@ -15,7 +15,6 @@ public sealed class WhenConstructorIsCalled
         subject.Name.ShouldBe(Snippet.Empty);
         subject.Type.ShouldBe(Snippet.Empty);
         subject.Value.ShouldBe(Snippet.Empty);
-        subject.XmlSpace.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
     }
 
@@ -23,11 +22,10 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        Snippet mimeType = Snippet.From(MetadataTestsData.DefaultMimeType);
-        Snippet name = Snippet.From(MetadataTestsData.DefaultName);
-        Snippet type = Snippet.From(MetadataTestsData.DefaultType);
-        Snippet value = Snippet.From(MetadataTestsData.DefaultValue);
-        Snippet xmlSpace = Snippet.From(MetadataTestsData.DefaultXmlSpace);
+        var mimeType = Snippet.From(MetadataTestsData.DefaultMimeType);
+        var name = Snippet.From(MetadataTestsData.DefaultName);
+        var type = Snippet.From(MetadataTestsData.DefaultType);
+        var value = Snippet.From(MetadataTestsData.DefaultValue);
 
         // Act
         var subject = new Metadata
@@ -36,7 +34,6 @@ public sealed class WhenConstructorIsCalled
             Name = name,
             Type = type,
             Value = value,
-            XmlSpace = xmlSpace,
         };
 
         // Assert
@@ -44,7 +41,6 @@ public sealed class WhenConstructorIsCalled
         subject.Name.ShouldBe(name);
         subject.Type.ShouldBe(type);
         subject.Value.ShouldBe(value);
-        subject.XmlSpace.ShouldBe(xmlSpace);
         subject.IsUndefined.ShouldBeFalse();
     }
 }

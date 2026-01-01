@@ -8,14 +8,8 @@ internal static class MetadataTestsData
     public const string DefaultName = "MetadataKey";
     public const string DefaultType = "System.String";
     public const string DefaultValue = "MetadataValue";
-    public const string DefaultXmlSpace = "preserve";
 
-    public static Metadata Create(
-        Snippet? mimeType = default,
-        Snippet? name = default,
-        Snippet? type = default,
-        Snippet? value = default,
-        Snippet? xmlSpace = default)
+    public static Metadata Create(Snippet? mimeType = default, Snippet? name = default, Snippet? type = default, Snippet? value = default)
     {
         return new Metadata
         {
@@ -23,7 +17,6 @@ internal static class MetadataTestsData
             Name = name ?? Snippet.From(DefaultName),
             Type = type ?? Snippet.From(DefaultType),
             Value = value ?? Snippet.From(DefaultValue),
-            XmlSpace = xmlSpace ?? Snippet.From(DefaultXmlSpace),
         };
     }
 }

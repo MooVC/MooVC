@@ -73,21 +73,4 @@ public sealed class WhenValidateIsCalled
         _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Metadata.Type));
     }
-
-    [Fact]
-    public void GivenMultiLineXmlSpaceThenValidationErrorReturned()
-    {
-        // Arrange
-        Metadata subject = MetadataTestsData.Create(xmlSpace: Snippet.From($"alpha{Environment.NewLine}beta"));
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.XmlSpace));
-    }
 }

@@ -38,7 +38,6 @@ public sealed class WhenToStringIsCalled
             new XAttribute("name", ResourceTestsData.DefaultDataName),
             new XAttribute("type", ResourceTestsData.DefaultDataType),
             new XAttribute("mimetype", ResourceTestsData.DefaultDataMimeType),
-            new XAttribute(XNamespace.Xml + "space", ResourceTestsData.DefaultDataXmlSpace),
             new XElement("value", ResourceTestsData.DefaultDataValue),
             new XElement("comment", ResourceTestsData.DefaultDataComment));
 
@@ -47,7 +46,6 @@ public sealed class WhenToStringIsCalled
             new XAttribute("name", ResourceTestsData.DefaultMetadataName),
             new XAttribute("type", ResourceTestsData.DefaultMetadataType),
             new XAttribute("mimetype", ResourceTestsData.DefaultMetadataMimeType),
-            new XAttribute(XNamespace.Xml + "space", ResourceTestsData.DefaultMetadataXmlSpace),
             new XElement("value", ResourceTestsData.DefaultMetadataValue));
 
         var expected = new XDocument(

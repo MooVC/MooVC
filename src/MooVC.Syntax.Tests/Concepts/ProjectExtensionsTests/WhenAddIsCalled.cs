@@ -12,8 +12,8 @@ public sealed class WhenAddIsCalled
         // Arrange
         Resource resource = ResourceTestsData.Create();
         var project = new Project();
-        Snippet resourcePath = Snippet.From("Resources/Strings.resx");
-        Snippet designerPath = Snippet.From("Resources/Strings.Designer.cs");
+        var resourcePath = Snippet.From("Resources/Strings.resx");
+        var designerPath = Snippet.From("Resources/Strings.Designer.cs");
 
         // Act
         Project result = project.Add(resource, resourcePath, designerPath);
@@ -40,15 +40,14 @@ public sealed class WhenAddIsCalled
         });
     }
 
-
     [Fact]
     public void GivenUndefinedResourceThenReturnsOriginal()
     {
         // Arrange
         Resource resource = Resource.Undefined;
         var project = new Project();
-        Snippet resourcePath = Snippet.From("Resources/Strings.resx");
-        Snippet designerPath = Snippet.From("Resources/Strings.Designer.cs");
+        var resourcePath = Snippet.From("Resources/Strings.resx");
+        var designerPath = Snippet.From("Resources/Strings.Designer.cs");
 
         // Act
         Project result = project.Add(resource, resourcePath, designerPath);
@@ -63,13 +62,15 @@ public sealed class WhenAddIsCalled
     {
         // Arrange
         Resource resource = ResourceTestsData.Create();
+
         var existingGroup = new ItemGroup
         {
             Items = [new Item { Include = Snippet.From("Existing.cs") }],
         };
+
         var project = new Project { ItemGroups = [existingGroup] };
-        Snippet resourcePath = Snippet.From("Resources/Strings.resx");
-        Snippet designerPath = Snippet.From("Resources/Strings.Designer.cs");
+        var resourcePath = Snippet.From("Resources/Strings.resx");
+        var designerPath = Snippet.From("Resources/Strings.Designer.cs");
 
         // Act
         Project result = project.Add(resource, resourcePath, designerPath);
@@ -78,15 +79,16 @@ public sealed class WhenAddIsCalled
         result.ItemGroups.Length.ShouldBe(2);
         result.ItemGroups[0].ShouldBe(existingGroup);
     }
+
     [Fact]
     public void GivenCustomToolNamespaceThenAddsCustomMetadata()
     {
         // Arrange
         Resource resource = ResourceTestsData.Create();
         var project = new Project();
-        Snippet resourcePath = Snippet.From("Resources/Other.resx");
-        Snippet designerPath = Snippet.From("Resources/Other.Designer.cs");
-        Snippet customToolNamespace = Snippet.From("MooVC.Resources");
+        var resourcePath = Snippet.From("Resources/Other.resx");
+        var designerPath = Snippet.From("Resources/Other.Designer.cs");
+        var customToolNamespace = Snippet.From("MooVC.Resources");
 
         // Act
         Project result = project.Add(resource, resourcePath, designerPath, customToolNamespace);

@@ -29,7 +29,6 @@ public sealed class WhenToFragmentsIsCalled
             new XAttribute("name", MetadataTestsData.DefaultName),
             new XAttribute("type", MetadataTestsData.DefaultType),
             new XAttribute("mimetype", MetadataTestsData.DefaultMimeType),
-            new XAttribute(XNamespace.Xml + "space", MetadataTestsData.DefaultXmlSpace),
             new XElement("value", MetadataTestsData.DefaultValue));
 
         // Act

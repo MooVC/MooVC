@@ -7,9 +7,7 @@ internal static class HeaderTestsData
     public const string DefaultName = "resmimetype";
     public const string DefaultValue = "text/microsoft-resx";
 
-    public static Header Create(
-        Snippet? name = default,
-        Snippet? value = default)
+    public static Header Create(Snippet? name = default, Snippet? value = default)
     {
         return new Header
         {

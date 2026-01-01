@@ -1,95 +1,106 @@
-namespace MooVC.Syntax.Concepts;
-
-using System.Collections.Immutable;
-using System.IO;
-using Ardalis.GuardClauses;
-using MooVC.Syntax.Attributes.Project;
-using MooVC.Syntax.Elements;
-
-public static partial class ProjectExtensions
+namespace MooVC.Syntax.Concepts
 {
-    private const string AutoGenValue = "True";
-    private const string DesignTimeValue = "True";
-    private const string GeneratorValue = "ResXFileCodeGenerator";
+    using System.Collections.Immutable;
+    using System.IO;
+    using Ardalis.GuardClauses;
+    using MooVC.Syntax.Attributes.Project;
+    using MooVC.Syntax.Elements;
 
-    public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath)
+    public static partial class ProjectExtensions
     {
-        return project.Add(resource, resourcePath, designerPath, Snippet.Empty);
-    }
+        private const string AutoGenValue = "True";
+        private const string DesignTimeValue = "True";
+        private const string GeneratorValue = "ResXFileCodeGenerator";
 
-    public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath, Snippet customToolNamespace)
-    {
-        _ = Guard.Against.Null(project);
-        _ = Guard.Against.Null(resource);
-        _ = Guard.Against.Null(resourcePath);
-        _ = Guard.Against.Null(designerPath);
-        _ = Guard.Against.Null(customToolNamespace);
-
-        if (resource.IsUndefined)
+        public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath)
         {
-            return project;
+            return project.Add(resource, resourcePath, designerPath, Snippet.Empty);
         }
 
-        string resourcePathValue = resourcePath.ToString();
-        string designerPathValue = designerPath.ToString();
-        string dependentUpon = Path.GetFileName(resourcePathValue);
-
-        ImmutableArray<Metadata> embeddedResourceMetadata = CreateEmbeddedResourceMetadata(designerPathValue, customToolNamespace);
-        ImmutableArray<Metadata> compileMetadata = CreateCompileMetadata(dependentUpon);
-
-        var embeddedResourceItem = new Item
+        public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath, Snippet customToolNamespace)
         {
-            Include = resourcePath,
-            Metadata = embeddedResourceMetadata,
-        };
+            _ = Guard.Against.Null(project);
+            _ = Guard.Against.Null(resource);
+            _ = Guard.Against.Null(resourcePath);
+            _ = Guard.Against.Null(designerPath);
+            _ = Guard.Against.Null(customToolNamespace);
 
-        var compileItem = new Item
+            if (resource.IsUndefined)
+            {
+                return project;
+            }
+
+            string resourcePathValue = resourcePath.ToString();
+            string designerPathValue = designerPath.ToString();
+            string dependentUpon = Path.GetFileName(resourcePathValue);
+
+            ImmutableArray<Metadata> embeddedResourceMetadata = CreateEmbeddedResourceMetadata(designerPathValue, customToolNamespace);
+            ImmutableArray<Metadata> compileMetadata = CreateCompileMetadata(dependentUpon);
+            ItemGroup itemGroup = CreateItemGroup(compileMetadata, designerPath, embeddedResourceMetadata, resourcePath);
+
+            return project.WithItemGroups(itemGroup);
+        }
+
+        private static ItemGroup CreateItemGroup(
+            ImmutableArray<Metadata> compileMetadata,
+            Snippet designerPath,
+            ImmutableArray<Metadata> embeddedResourceMetadata,
+            Snippet resourcePath)
         {
-            Include = designerPath,
-            Metadata = compileMetadata,
-        };
+            ImmutableArray<Item>.Builder builder = ImmutableArray.CreateBuilder<Item>(2);
 
-        var itemGroup = new ItemGroup
+            builder.Add(new Item
+            {
+                Include = resourcePath,
+                Metadata = embeddedResourceMetadata,
+            });
+
+            builder.Add(new Item
+            {
+                Include = designerPath,
+                Metadata = compileMetadata,
+            });
+
+            return new ItemGroup
+            {
+                Items = builder.ToImmutable(),
+            };
+        }
+
+        private static ImmutableArray<Metadata> CreateCompileMetadata(string dependentUpon)
         {
-            Items = [embeddedResourceItem, compileItem],
-        };
+            return ImmutableArray.Create(
+                new Metadata { Name = new Identifier("DependentUpon"), Value = Snippet.From(dependentUpon) },
+                new Metadata { Name = new Identifier("DesignTime"), Value = Snippet.From(DesignTimeValue) },
+                new Metadata { Name = new Identifier("AutoGen"), Value = Snippet.From(AutoGenValue) });
+        }
 
-        return project.WithItemGroups(itemGroup);
-    }
-
-    private static ImmutableArray<Metadata> CreateCompileMetadata(string dependentUpon)
-    {
-        return ImmutableArray.Create(
-            new Metadata { Name = new Identifier("DependentUpon"), Value = Snippet.From(dependentUpon) },
-            new Metadata { Name = new Identifier("DesignTime"), Value = Snippet.From(DesignTimeValue) },
-            new Metadata { Name = new Identifier("AutoGen"), Value = Snippet.From(AutoGenValue) });
-    }
-
-    private static ImmutableArray<Metadata> CreateEmbeddedResourceMetadata(string designerPathValue, Snippet customToolNamespace)
-    {
-        var builder = ImmutableArray.CreateBuilder<Metadata>(3);
-
-        builder.Add(new Metadata
+        private static ImmutableArray<Metadata> CreateEmbeddedResourceMetadata(string designerPathValue, Snippet customToolNamespace)
         {
-            Name = new Identifier("Generator"),
-            Value = Snippet.From(GeneratorValue),
-        });
+            ImmutableArray<Metadata>.Builder builder = ImmutableArray.CreateBuilder<Metadata>(3);
 
-        builder.Add(new Metadata
-        {
-            Name = new Identifier("LastGenOutput"),
-            Value = Snippet.From(Path.GetFileName(designerPathValue)),
-        });
-
-        if (!customToolNamespace.IsEmpty)
-        {
             builder.Add(new Metadata
             {
-                Name = new Identifier("CustomToolNamespace"),
-                Value = customToolNamespace,
+                Name = new Identifier("Generator"),
+                Value = Snippet.From(GeneratorValue),
             });
-        }
 
-        return builder.ToImmutable();
+            builder.Add(new Metadata
+            {
+                Name = new Identifier("LastGenOutput"),
+                Value = Snippet.From(Path.GetFileName(designerPathValue)),
+            });
+
+            if (!customToolNamespace.IsEmpty)
+            {
+                builder.Add(new Metadata
+                {
+                    Name = new Identifier("CustomToolNamespace"),
+                    Value = customToolNamespace,
+                });
+            }
+
+            return builder.ToImmutable();
+        }
     }
 }

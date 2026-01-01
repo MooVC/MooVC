@@ -29,7 +29,6 @@ public sealed class WhenToStringIsCalled
             new XAttribute("name", DataTestsData.DefaultName),
             new XAttribute("type", DataTestsData.DefaultType),
             new XAttribute("mimetype", DataTestsData.DefaultMimeType),
-            new XAttribute(XNamespace.Xml + "space", DataTestsData.DefaultXmlSpace),
             new XElement("value", DataTestsData.DefaultValue),
             new XElement("comment", DataTestsData.DefaultComment));
 

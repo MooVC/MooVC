@@ -54,7 +54,6 @@ internal static class ResourceTestsData
             Name = Snippet.From(DefaultDataName),
             Type = Snippet.From(DefaultDataType),
             Value = Snippet.From(DefaultDataValue),
-            XmlSpace = Snippet.From(DefaultDataXmlSpace),
         };
     }
 
@@ -75,7 +74,6 @@ internal static class ResourceTestsData
             Name = Snippet.From(DefaultMetadataName),
             Type = Snippet.From(DefaultMetadataType),
             Value = Snippet.From(DefaultMetadataValue),
-            XmlSpace = Snippet.From(DefaultMetadataXmlSpace),
         };
     }
 }
