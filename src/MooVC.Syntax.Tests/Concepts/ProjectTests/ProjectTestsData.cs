@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
+using MooVC.Syntax.Concepts.ResourceTests;
 using MooVC.Syntax.Elements;
 
 internal static class ProjectTestsData
@@ -9,6 +10,9 @@ internal static class ProjectTestsData
     public const string DefaultItemInclude = "Include";
     public const string DefaultPropertyName = "Property";
     public const string DefaultPropertyValue = "Value";
+    public const string DefaultResourceDesignerPath = "Resources.Designer.cs";
+    public const string DefaultResourcePath = "Resources.resx";
+    public const string DefaultResourceToolNamespace = "MooVC.Resources";
     public const string DefaultSdkVersion = "1.0.0";
     public const string DefaultTargetName = "Build";
     public static readonly Qualifier DefaultSdkName = "MooVC.Sdk";
@@ -17,6 +21,7 @@ internal static class ProjectTestsData
         Import? import = default,
         ItemGroup? itemGroup = default,
         PropertyGroup? propertyGroup = default,
+        Project.ResourceFile? resourceFile = default,
         Sdk? sdk = default,
         Target? target = default)
     {
@@ -40,6 +45,14 @@ internal static class ProjectTestsData
                         .WithName(DefaultPropertyName)
                         .WithValue(DefaultPropertyValue))),
                 @false: project => project.WithPropertyGroups(propertyGroup))
+            .ForkOn(
+                _ => resourceFile is null,
+                @true: project => project.WithResources(resource => resource
+                    .WithCustomToolNamespace(DefaultResourceToolNamespace)
+                    .WithDesignerPath(DefaultResourceDesignerPath)
+                    .WithResource(ResourceTestsData.Create())
+                    .WithResourcePath(DefaultResourcePath)),
+                @false: project => project.WithResources(resourceFile))
             .ForkOn(
                 _ => sdk is null,
                 @true: project => project.WithSdks(sdk => sdk
@@ -74,6 +87,17 @@ internal static class ProjectTestsData
         return new PropertyGroup
         {
             Properties = [new Property { Name = new Identifier(DefaultPropertyName), Value = Snippet.From(DefaultPropertyValue) }],
+        };
+    }
+
+    public static Project.ResourceFile CreateResourceFile()
+    {
+        return new Project.ResourceFile
+        {
+            CustomToolNamespace = Snippet.From(DefaultResourceToolNamespace),
+            DesignerPath = Snippet.From(DefaultResourceDesignerPath),
+            Resource = ResourceTestsData.Create(),
+            ResourcePath = Snippet.From(DefaultResourcePath),
         };
     }
 

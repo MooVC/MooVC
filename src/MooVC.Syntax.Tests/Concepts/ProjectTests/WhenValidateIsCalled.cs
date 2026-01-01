@@ -55,4 +55,21 @@ public sealed class WhenValidateIsCalled
         _ = results.ShouldHaveSingleItem();
         results[0].MemberNames.ShouldContain(nameof(Project.Sdks));
     }
+
+    [Fact]
+    public void GivenUndefinedResourceThenValidationErrorReturned()
+    {
+        // Arrange
+        Project subject = ProjectTestsData.Create(resourceFile: Project.ResourceFile.Undefined);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Project.Resources));
+    }
 }

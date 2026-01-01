@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
 - Added a Resource concept for representing RESX files.
-- Added ProjectExtensions.Add for wiring RESX resources into project items.
+- Added Project resource entries for emitting RESX compile items in project XML.
 
 # [9.2.0] - 2025-11-14
 

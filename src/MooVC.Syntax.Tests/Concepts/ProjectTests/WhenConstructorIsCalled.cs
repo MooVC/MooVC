@@ -14,6 +14,7 @@ public sealed class WhenConstructorIsCalled
         subject.Imports.ShouldBeEmpty();
         subject.ItemGroups.ShouldBeEmpty();
         subject.PropertyGroups.ShouldBeEmpty();
+        subject.Resources.ShouldBeEmpty();
         subject.Sdks.ShouldBeEmpty();
         subject.Targets.ShouldBeEmpty();
         subject.IsUndefined.ShouldBeTrue();
@@ -26,6 +27,7 @@ public sealed class WhenConstructorIsCalled
         Import import = ProjectTestsData.CreateImport();
         ItemGroup itemGroup = ProjectTestsData.CreateItemGroup();
         PropertyGroup propertyGroup = ProjectTestsData.CreatePropertyGroup();
+        Project.ResourceFile resourceFile = ProjectTestsData.CreateResourceFile();
         Sdk sdk = ProjectTestsData.CreateSdk();
         Target target = ProjectTestsData.CreateTarget();
 
@@ -35,6 +37,7 @@ public sealed class WhenConstructorIsCalled
             Imports = [import],
             ItemGroups = [itemGroup],
             PropertyGroups = [propertyGroup],
+            Resources = [resourceFile],
             Sdks = [sdk],
             Targets = [target],
         };
@@ -43,6 +46,7 @@ public sealed class WhenConstructorIsCalled
         subject.Imports.ShouldBe(new[] { import });
         subject.ItemGroups.ShouldBe(new[] { itemGroup });
         subject.PropertyGroups.ShouldBe(new[] { propertyGroup });
+        subject.Resources.ShouldBe(new[] { resourceFile });
         subject.Sdks.ShouldBe(new[] { sdk });
         subject.Targets.ShouldBe(new[] { target });
         subject.IsUndefined.ShouldBeFalse();
