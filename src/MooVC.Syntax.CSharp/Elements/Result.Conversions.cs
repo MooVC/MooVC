@@ -1,0 +1,32 @@
+﻿namespace MooVC.Syntax.CSharp.Elements
+{
+    using System;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using static MooVC.Syntax.CSharp.Elements.Result_Resources;
+
+    public partial class Result
+    {
+        public Result As(Type wrapper)
+        {
+            _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Type), typeof(Result)));
+
+            Symbol wrapped = new Symbol()
+                .From(wrapper)
+                .Named(wrapper)
+                .WithArguments(Type);
+
+            return this.OfType(wrapped);
+        }
+
+        public Result AsTask()
+        {
+            return As(typeof(Task));
+        }
+
+        public Result AsValueTask()
+        {
+            return As(typeof(ValueTask));
+        }
+    }
+}

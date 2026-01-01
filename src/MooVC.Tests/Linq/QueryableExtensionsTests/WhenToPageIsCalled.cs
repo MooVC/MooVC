@@ -53,7 +53,7 @@ public sealed class WhenToPageIsCalled
 
         // Assert
         result.Directive.ShouldBe(directive);
-        result.Total.ShouldBe(default(ulong?));
+        result.Total.ShouldBe(default);
     }
 }
 #endif

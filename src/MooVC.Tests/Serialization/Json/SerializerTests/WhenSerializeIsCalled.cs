@@ -33,7 +33,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, cancellationTokenSource.Token);
 
         // Assert
-        await Should.ThrowAsync<OperationCanceledException>(act);
+        _ = await Should.ThrowAsync<OperationCanceledException>(act);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, stream, cancellationTokenSource.Token);
 
         // Assert
-        await Should.ThrowAsync<OperationCanceledException>(act);
+        _ = await Should.ThrowAsync<OperationCanceledException>(act);
     }
 }
 #endif

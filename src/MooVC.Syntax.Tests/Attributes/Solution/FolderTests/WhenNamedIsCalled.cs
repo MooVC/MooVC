@@ -1,0 +1,25 @@
+namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+
+using MooVC.Syntax.Elements;
+
+public sealed class WhenNamedIsCalled
+{
+    [Fact]
+    public void GivenNameThenReturnsUpdatedInstance()
+    {
+        // Arrange
+        Folder original = FolderTestsData.Create();
+        var updated = Snippet.From("OtherName");
+
+        // Act
+        Folder result = original.Named(updated);
+
+        // Assert
+        result.ShouldNotBeSameAs(original);
+        result.Name.ShouldBe(updated);
+        result.Id.ShouldBe(original.Id);
+        result.Files.ShouldBe(original.Files);
+        result.Folders.ShouldBe(original.Folders);
+        result.Items.ShouldBe(original.Items);
+    }
+}

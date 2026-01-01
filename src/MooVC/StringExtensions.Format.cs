@@ -2,6 +2,8 @@
 
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using Ardalis.GuardClauses;
+using static MooVC.StringExtensions_Resources;
 
 /// <summary>
 /// Provides extensions relating to object.
@@ -19,6 +21,8 @@ public static partial class StringExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(this string value, params object[] arguments)
     {
+        _ = Guard.Against.Null(value, message: FormatValueRequired);
+
         return string.Format(CultureInfo.CurrentCulture, value, arguments);
     }
 }
