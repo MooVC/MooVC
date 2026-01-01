@@ -5,12 +5,12 @@ namespace MooVC.Syntax.Concepts
 
     public static partial class ProjectExtensions
     {
-        public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath)
+        public static Project Add(this Project project, Resource resource, Path resourcePath, Path designerPath)
         {
             return project.Add(resource, resourcePath, designerPath, Snippet.Empty);
         }
 
-        public static Project Add(this Project project, Resource resource, Snippet resourcePath, Snippet designerPath, Snippet customToolNamespace)
+        public static Project Add(this Project project, Resource resource, Path resourcePath, Path designerPath, Snippet customToolNamespace)
         {
             _ = Guard.Against.Null(project);
             _ = Guard.Against.Null(resource);

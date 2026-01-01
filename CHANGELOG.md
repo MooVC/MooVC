@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
+- Added Elements.Path for representing and validating file paths.
 - Added a Resource concept for representing RESX files.
 - Added Project resource entries for emitting RESX compile items in project XML.
 

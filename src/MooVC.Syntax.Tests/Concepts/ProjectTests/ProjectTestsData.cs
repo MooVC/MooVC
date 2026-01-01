@@ -49,7 +49,6 @@ internal static class ProjectTestsData
                 _ => resourceFile is null,
                 @true: project => project.WithResources(resource => resource
                     .WithCustomToolNamespace(DefaultResourceToolNamespace)
-                    .WithDesignerPath(DefaultResourceDesignerPath)
                     .WithResource(ResourceTestsData.Create())
                     .WithResourcePath(DefaultResourcePath)),
                 @false: project => project.WithResources(resourceFile))
@@ -95,9 +94,8 @@ internal static class ProjectTestsData
         return new Project.ResourceFile
         {
             CustomToolNamespace = Snippet.From(DefaultResourceToolNamespace),
-            DesignerPath = Snippet.From(DefaultResourceDesignerPath),
             Resource = ResourceTestsData.Create(),
-            ResourcePath = Snippet.From(DefaultResourcePath),
+            ResourcePath = DefaultResourcePath,
         };
     }
 

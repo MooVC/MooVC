@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
-    using System.IO;
+    using IOPath = System.IO.Path;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -122,20 +122,22 @@
         private static XElement CreateResourceItemGroup(ResourceFile resource)
         {
             var resourcePath = resource.ResourcePath.ToString();
-            var designerPath = resource.DesignerPath.ToString();
+            var designerPath = resource.DesignerPath.IsEmpty
+                ? resource.ResourcePath.ChangeExtension("Designer.cs").ToString()
+                : resource.DesignerPath.ToString();
 
             var compile = new XElement(
                 "Compile",
                 new XAttribute("Update", designerPath),
                 new XElement("DesignTime", DesignTimeValue),
                 new XElement("AutoGen", AutoGenValue),
-                new XElement("DependentUpon", Path.GetFileName(resourcePath)));
+                new XElement("DependentUpon", IOPath.GetFileName(resourcePath)));
 
             var embeddedResource = new XElement(
                 "EmbeddedResource",
                 new XAttribute("Update", resourcePath),
                 new XElement("Generator", resource.Scope == ResourceScope.Public ? PublicGeneratorValue : InternalGeneratorValue),
-                new XElement("LastGenOutput", Path.GetFileName(designerPath)));
+                new XElement("LastGenOutput", IOPath.GetFileName(designerPath)));
 
             if (!resource.CustomToolNamespace.IsEmpty)
             {
@@ -154,11 +156,11 @@
 
             public Snippet CustomToolNamespace { get; internal set; } = Snippet.Empty;
 
-            public Snippet DesignerPath { get; internal set; } = Snippet.Empty;
+            public Path DesignerPath { get; internal set; } = Path.Empty;
 
             public Resource Resource { get; internal set; } = Resource.Undefined;
 
-            public Snippet ResourcePath { get; internal set; } = Snippet.Empty;
+            public Path ResourcePath { get; internal set; } = Path.Empty;
 
             public ResourceScope Scope { get; internal set; } = ResourceScope.Internal;
 
@@ -174,9 +176,9 @@
 
                 return validationContext
                     .Include(nameof(CustomToolNamespace), _ => !CustomToolNamespace.IsMultiLine, CustomToolNamespace)
-                    .And(nameof(DesignerPath), _ => DesignerPath.IsSingleLine, DesignerPath)
+                    .AndIf(!DesignerPath.IsEmpty, nameof(DesignerPath), path => !path.IsEmpty, DesignerPath)
                     .And(nameof(Resource), resource => !resource.IsUndefined, Resource)
-                    .And(nameof(ResourcePath), _ => ResourcePath.IsSingleLine, ResourcePath)
+                    .And(nameof(ResourcePath), path => !path.IsEmpty, ResourcePath)
                     .Results;
             }
         }
