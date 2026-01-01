@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Format = "{0}={1}";

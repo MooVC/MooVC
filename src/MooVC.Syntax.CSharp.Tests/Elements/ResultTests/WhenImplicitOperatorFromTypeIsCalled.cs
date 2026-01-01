@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Result result = value;
 
         // Assert
-        result.Type.Name.ShouldBe(new Identifier(nameof(Guid)));
+        result.Type.Name.ShouldBe(new Variable(nameof(Guid)));
     }
 }

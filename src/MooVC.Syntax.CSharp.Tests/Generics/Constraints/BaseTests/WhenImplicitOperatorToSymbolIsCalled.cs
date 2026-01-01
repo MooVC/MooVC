@@ -10,7 +10,7 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
     public void GivenBaseThenReturnsSymbol()
     {
         // Arrange
-        var name = new Identifier(Name);
+        var name = new Variable(Name);
         Base subject = new Symbol { Name = name };
 
         // Act

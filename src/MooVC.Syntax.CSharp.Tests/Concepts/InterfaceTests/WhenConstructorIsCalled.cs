@@ -31,11 +31,11 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var attribute = new Attribute { Name = new Symbol { Name = new Identifier(AttributeName) } };
-        var @event = new Event { Name = new Identifier("Created") };
+        var attribute = new Attribute { Name = new Symbol { Name = new Variable(AttributeName) } };
+        var @event = new Event { Name = new Variable("Created") };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
+        var property = new Property { Name = new Variable("Value"), Type = typeof(string) };
 
         // Act
         Interface subject = InterfaceTestsData.Create(
@@ -44,7 +44,7 @@ public sealed class WhenConstructorIsCalled
             indexers: [indexer],
             isPartial: true,
             methods: [method],
-            name: new Declaration { Name = new Identifier(InterfaceTestsData.DefaultName) },
+            name: new Declaration { Name = new Variable(InterfaceTestsData.DefaultName) },
             operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
             properties: [property],
             scope: Scope.Internal);
@@ -55,7 +55,7 @@ public sealed class WhenConstructorIsCalled
         subject.Indexers.ShouldBe(new[] { indexer });
         subject.IsPartial.ShouldBeTrue();
         subject.Methods.ShouldBe(new[] { method });
-        subject.Name.ShouldBe(new Declaration { Name = new Identifier(InterfaceTestsData.DefaultName) });
+        subject.Name.ShouldBe(new Declaration { Name = new Variable(InterfaceTestsData.DefaultName) });
         subject.Operators.Conversions.ShouldNotBeEmpty();
         subject.Properties.ShouldBe(new[] { property });
         subject.Scope.ShouldBe(Scope.Internal);

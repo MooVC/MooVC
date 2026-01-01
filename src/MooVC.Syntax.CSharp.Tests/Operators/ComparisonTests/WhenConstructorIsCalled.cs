@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {

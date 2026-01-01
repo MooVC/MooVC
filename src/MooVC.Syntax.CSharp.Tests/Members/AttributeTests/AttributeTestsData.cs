@@ -19,8 +19,8 @@ public static class AttributeTestsData
             Name = new Symbol
             {
                 Name = name is null
-                    ? Identifier.Unnamed
-                    : new Identifier(name),
+                    ? Variable.Unnamed
+                    : new Variable(name),
             },
             Target = target ?? Attribute.Specifier.None,
         };

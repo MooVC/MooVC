@@ -51,7 +51,7 @@ public sealed class WhenValidateIsCalled
         var subject = new Event
         {
             Handler = new Symbol { Name = "Invalid Handler Name" },
-            Name = new Identifier(EventTestsData.DefaultName),
+            Name = new Variable(EventTestsData.DefaultName),
         };
 
         var context = new ValidationContext(subject);
@@ -63,7 +63,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

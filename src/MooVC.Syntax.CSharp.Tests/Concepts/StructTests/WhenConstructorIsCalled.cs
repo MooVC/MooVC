@@ -35,13 +35,13 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var attribute = new Attribute { Name = new Symbol { Name = new Identifier(AttributeName) } };
+        var attribute = new Attribute { Name = new Symbol { Name = new Variable(AttributeName) } };
         var constructor = new Constructor { Scope = Scope.Private };
-        var @event = new Event { Name = new Identifier("Created") };
-        var field = new Field { Name = new Identifier("_value"), Type = typeof(int) };
+        var @event = new Event { Name = new Variable("Created") };
+        var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Identifier("Value"), Type = typeof(string) };
+        var property = new Property { Name = new Variable("Value"), Type = typeof(string) };
 
         // Act
         Struct subject = StructTestsData.Create(
@@ -53,9 +53,9 @@ public sealed class WhenConstructorIsCalled
             indexers: [indexer],
             isPartial: true,
             methods: [method],
-            name: new Declaration { Name = new Identifier(StructTestsData.DefaultName) },
+            name: new Declaration { Name = new Variable(StructTestsData.DefaultName) },
             operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
-            parameters: [new Parameter { Name = new Identifier("input"), Type = typeof(string) }],
+            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }],
             properties: [property],
             scope: Scope.Internal);
 
@@ -68,7 +68,7 @@ public sealed class WhenConstructorIsCalled
         subject.Behavior.ShouldBe(Struct.Kind.ReadOnly);
         subject.IsPartial.ShouldBeTrue();
         subject.Methods.ShouldBe(new[] { method });
-        subject.Name.ShouldBe(new Declaration { Name = new Identifier(StructTestsData.DefaultName) });
+        subject.Name.ShouldBe(new Declaration { Name = new Variable(StructTestsData.DefaultName) });
         subject.Operators.Conversions.ShouldNotBeEmpty();
         _ = subject.Parameters.ShouldHaveSingleItem();
         subject.Properties.ShouldBe(new[] { property });

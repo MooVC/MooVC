@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 internal static class MethodTestsData
 {

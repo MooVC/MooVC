@@ -1,6 +1,8 @@
 namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
+using Identifier = MooVC.Syntax.Elements.Identifier;
 
 public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
 {

@@ -7,6 +7,8 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
 
     [Monify(Type = typeof(Symbol))]
     [SkipAutoInstantiation]

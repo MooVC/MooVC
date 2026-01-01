@@ -9,7 +9,7 @@ public sealed class WhenWithFieldsIsCalled
     public void GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var field = new Field { Name = new Identifier("_value"), Type = typeof(int) };
+        var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
         Struct original = StructTestsData.Create();
 
         // Act

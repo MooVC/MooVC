@@ -9,6 +9,8 @@
     using Fluentify;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;

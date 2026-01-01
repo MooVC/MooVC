@@ -13,7 +13,7 @@ public sealed class WhenWithAttributesIsCalled
         [
             new Attribute
             {
-                Name = new Symbol { Name = new Identifier("Existing") },
+                Name = new Symbol { Name = new Variable("Existing") },
             },
         ];
 
@@ -21,7 +21,7 @@ public sealed class WhenWithAttributesIsCalled
         [
             new Attribute
             {
-                Name = new Symbol { Name = new Identifier("Additional") },
+                Name = new Symbol { Name = new Variable("Additional") },
             },
         ];
 

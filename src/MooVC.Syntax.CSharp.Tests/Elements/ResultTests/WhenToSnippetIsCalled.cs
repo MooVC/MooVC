@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenToSnippetIsCalled
 {
     [Fact]

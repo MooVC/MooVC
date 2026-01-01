@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {

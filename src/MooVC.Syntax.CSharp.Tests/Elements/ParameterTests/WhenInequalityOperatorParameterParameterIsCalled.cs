@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenInequalityOperatorParameterParameterIsCalled
 {
     [Fact]

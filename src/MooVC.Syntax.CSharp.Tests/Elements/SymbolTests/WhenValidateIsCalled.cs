@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -76,7 +77,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Arguments = [new Symbol { Name = "Invalid Name" }],
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         var context = new ValidationContext(symbol);
@@ -88,7 +89,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Variable));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

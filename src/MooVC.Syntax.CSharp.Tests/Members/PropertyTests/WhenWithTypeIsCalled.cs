@@ -9,7 +9,7 @@ public sealed class WhenWithTypeIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var type = new Symbol { Name = new Identifier("int") };
+        var type = new Symbol { Name = new Variable("int") };
 
         // Act
         Property result = original.WithType(type);

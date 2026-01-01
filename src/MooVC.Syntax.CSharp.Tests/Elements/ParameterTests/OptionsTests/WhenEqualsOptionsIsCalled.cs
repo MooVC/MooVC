@@ -26,8 +26,8 @@ public sealed class WhenEqualsOptionsIsCalled
         var right = new Parameter.Options();
 
         // Act
-        bool resultLeftRight = left.Equals(right.WithNaming(Identifier.Options.Pascal));
-        bool resultRightLeft = right.WithNaming(Identifier.Options.Pascal).Equals(left);
+        bool resultLeftRight = left.Equals(right.WithNaming(Variable.Options.Pascal));
+        bool resultRightLeft = right.WithNaming(Variable.Options.Pascal).Equals(left);
 
         // Assert
         resultLeftRight.ShouldBeFalse();

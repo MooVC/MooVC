@@ -6,9 +6,10 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Syntax;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Field_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -35,7 +36,7 @@
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Scope Scope { get; internal set; } = Scope.Public;
 
@@ -105,7 +106,7 @@
 
         private string GetSignature()
         {
-            var name = Name.ToSnippet(Identifier.Options.Pascal);
+            var name = Name.ToSnippet(Variable.Options.Pascal);
             string scope = Scope;
             string type = Type;
             string @static = IsStatic.Static();

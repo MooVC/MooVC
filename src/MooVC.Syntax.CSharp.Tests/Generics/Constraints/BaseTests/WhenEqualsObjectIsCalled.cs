@@ -11,7 +11,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Same) };
+        Base subject = new Symbol { Name = new Variable(Same) };
         object? other = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Same) };
+        Base subject = new Symbol { Name = new Variable(Same) };
         object other = subject;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Base left = new Symbol { Name = new Identifier(Same) };
-        object right = new Base(new Symbol { Name = new Identifier(Same) });
+        Base left = new Symbol { Name = new Variable(Same) };
+        object right = new Base(new Symbol { Name = new Variable(Same) });
 
         // Act
         bool result = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Base left = new Symbol { Name = new Identifier(Same) };
-        object right = new Symbol { Name = new Identifier(Different) };
+        Base left = new Symbol { Name = new Variable(Same) };
+        object right = new Symbol { Name = new Variable(Different) };
 
         // Act
         bool result = left.Equals(right);
@@ -67,8 +67,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonBaseThenReturnsFalse()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Same) };
-        object other = new Symbol { Name = new Identifier(Same) };
+        Base subject = new Symbol { Name = new Variable(Same) };
+        object other = new Symbol { Name = new Variable(Same) };
 
         // Act
         bool result = subject.Equals(other.ToString());

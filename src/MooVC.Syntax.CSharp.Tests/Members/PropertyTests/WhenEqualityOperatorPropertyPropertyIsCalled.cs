@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
 {

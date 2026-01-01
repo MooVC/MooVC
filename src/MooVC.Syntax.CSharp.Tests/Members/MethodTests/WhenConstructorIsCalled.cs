@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {

@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Value = "public";

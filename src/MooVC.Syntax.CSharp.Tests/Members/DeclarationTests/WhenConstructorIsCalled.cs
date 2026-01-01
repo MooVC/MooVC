@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
+using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenConstructorIsCalled
@@ -28,7 +28,7 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Declaration
         {
-            Name = new Identifier(DeclarationTestsData.DefaultName),
+            Name = DeclarationTestsData.DefaultName,
             Parameters = [parameter],
         };
 

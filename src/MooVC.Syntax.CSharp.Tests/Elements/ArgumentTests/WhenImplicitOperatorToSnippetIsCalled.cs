@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Name = "value";

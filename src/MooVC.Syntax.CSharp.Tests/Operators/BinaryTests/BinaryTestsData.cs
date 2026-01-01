@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 internal static class BinaryTestsData
 {

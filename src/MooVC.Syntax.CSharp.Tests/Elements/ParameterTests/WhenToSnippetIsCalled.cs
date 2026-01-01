@@ -23,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
 
         var options = new Parameter.Options
         {
-            Naming = Identifier.Options.Camel,
+            Naming = Variable.Options.Camel,
         };
 
         // Act

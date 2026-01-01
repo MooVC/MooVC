@@ -11,7 +11,7 @@ public sealed class WhenEqualsBaseIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Same) };
+        Base subject = new Symbol { Name = new Variable(Same) };
         Base? other = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsBaseIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Identifier(Same) };
+        Base subject = new Symbol { Name = new Variable(Same) };
         Base other = subject;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenEqualsBaseIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Base left = new Symbol { Name = new Identifier(Same) };
-        Base right = new Symbol { Name = new Identifier(Same) };
+        Base left = new Symbol { Name = new Variable(Same) };
+        Base right = new Symbol { Name = new Variable(Same) };
 
         // Act
         bool result = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsBaseIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Base left = new Symbol { Name = new Identifier(Same) };
-        Base right = new Symbol { Name = new Identifier(Different) };
+        Base left = new Symbol { Name = new Variable(Same) };
+        Base right = new Symbol { Name = new Variable(Different) };
 
         // Act
         bool result = left.Equals(right);

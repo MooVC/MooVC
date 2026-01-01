@@ -2,7 +2,8 @@ namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Identifier = MooVC.Syntax.CSharp.Elements.Identifier;
+using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.CSharp.Generics;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenValidateIsCalled
@@ -53,7 +54,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var declaration = new Declaration
         {
-            Name = new Identifier(Name),
+            Name = new Variable(Name),
             Parameters = [new Parameter { Name = "Invalid Name" }],
         };
 
@@ -76,7 +77,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var declaration = new Declaration
         {
-            Name = new Identifier(Name),
+            Name = new Variable(Name),
             Parameters = [new Parameter { Name = "T" }],
         };
 

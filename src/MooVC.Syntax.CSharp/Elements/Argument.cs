@@ -5,6 +5,8 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Argument_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -25,7 +27,7 @@
 
         public Mode Modifier { get; internal set; } = Mode.None;
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Snippet Value { get; internal set; } = Snippet.Empty;
 

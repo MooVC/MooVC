@@ -11,7 +11,7 @@ public sealed class WhenWithNameIsCalled
     {
         // Arrange
         var argument = new Argument();
-        var name = new Identifier(Name);
+        var name = new Variable(Name);
 
         // Act
         Argument result = argument.WithName(name);

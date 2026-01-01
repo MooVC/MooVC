@@ -9,8 +9,8 @@ public sealed class WhenWithParametersIsCalled
     public void GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Parameter { Name = new Identifier("first"), Type = typeof(string) };
-        var appended = new Parameter { Name = new Identifier("second"), Type = typeof(int) };
+        var existing = new Parameter { Name = new Variable("first"), Type = typeof(string) };
+        var appended = new Parameter { Name = new Variable("second"), Type = typeof(int) };
         Record original = RecordTestsData.Create(parameters: [existing]);
 
         // Act

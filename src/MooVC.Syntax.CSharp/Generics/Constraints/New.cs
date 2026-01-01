@@ -3,6 +3,8 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
 
     [Monify(Type = typeof(string))]
     [SkipAutoInstantiation]

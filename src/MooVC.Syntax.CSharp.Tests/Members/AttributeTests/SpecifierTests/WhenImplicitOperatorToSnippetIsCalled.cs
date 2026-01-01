@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Fact]

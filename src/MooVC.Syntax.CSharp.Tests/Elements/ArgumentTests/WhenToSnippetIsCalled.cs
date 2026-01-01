@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using System;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -34,7 +35,7 @@ public sealed class WhenToSnippetIsCalled
 
         var options = new Argument.Options
         {
-            Naming = Identifier.Options.Camel,
+            Naming = Variable.Options.Camel,
             Formatter = Argument.Formatter.Call,
         };
 
@@ -58,7 +59,7 @@ public sealed class WhenToSnippetIsCalled
 
         var options = new Argument.Options
         {
-            Naming = Identifier.Options.Camel,
+            Naming = Variable.Options.Camel,
             Formatter = Argument.Formatter.Call,
         };
 

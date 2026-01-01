@@ -4,6 +4,8 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Scope_Resources;
 
     [Monify(Type = typeof(string))]

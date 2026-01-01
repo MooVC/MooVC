@@ -11,7 +11,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Symbol();
 
         // Assert
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Variable.Unnamed);
         subject.Arguments.ShouldBeEmpty();
         subject.IsUndefined.ShouldBeTrue();
     }
@@ -20,17 +20,17 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var argument = new Symbol { Name = new Identifier(ArgumentName) };
+        var argument = new Symbol { Name = new Variable(ArgumentName) };
 
         // Act
         var subject = new Symbol
         {
-            Name = new Identifier(SymbolTestsData.DefaultName),
+            Name = new Variable(SymbolTestsData.DefaultName),
             Arguments = [argument],
         };
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(SymbolTestsData.DefaultName));
+        subject.Name.ShouldBe(new Variable(SymbolTestsData.DefaultName));
         subject.Arguments.ShouldBe(new[] { argument });
         subject.IsUndefined.ShouldBeFalse();
     }

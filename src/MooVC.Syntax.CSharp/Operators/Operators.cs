@@ -6,7 +6,10 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Concepts;
     using MooVC.Syntax.CSharp.Concepts;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Operators_Resources;
 

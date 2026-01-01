@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -30,7 +31,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Argument
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         var context = new ValidationContext(subject);

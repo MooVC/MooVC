@@ -3,6 +3,8 @@
     using System;
     using Ardalis.GuardClauses;
     using Monify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Extensibility_Resources;
 
     [Monify(Type = typeof(string))]

@@ -9,8 +9,8 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var created = new Event { Name = new Identifier("Created") };
-        var updated = new Event { Name = new Identifier("Updated") };
+        var created = new Event { Name = new Variable("Created") };
+        var updated = new Event { Name = new Variable("Updated") };
         Record original = RecordTestsData.Create(events: [created]);
 
         // Act

@@ -7,6 +7,8 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Parameter_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -31,7 +33,7 @@
 
         public Mode Modifier { get; internal set; } = Mode.None;
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 

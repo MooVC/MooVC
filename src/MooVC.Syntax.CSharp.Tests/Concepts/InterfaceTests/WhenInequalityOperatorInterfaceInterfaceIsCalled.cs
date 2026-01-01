@@ -82,7 +82,7 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     {
         // Arrange
         Interface left = InterfaceTestsData.Create();
-        Interface right = InterfaceTestsData.Create(name: new Declaration { Name = new Identifier("Other") });
+        Interface right = InterfaceTestsData.Create(name: new Declaration { Name = new Variable("Other") });
 
         // Act
         bool result = left != right;

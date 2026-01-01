@@ -6,6 +6,7 @@ using System.Linq;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {

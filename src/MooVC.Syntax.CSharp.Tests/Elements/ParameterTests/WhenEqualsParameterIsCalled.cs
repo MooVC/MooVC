@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
+using MooVC.Syntax.Elements;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenEqualsParameterIsCalled

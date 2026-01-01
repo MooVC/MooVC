@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenWithBodyIsCalled
 {
     [Fact]

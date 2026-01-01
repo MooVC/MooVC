@@ -1,7 +1,9 @@
 namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.Elements;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
+using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 
 public static class ParameterTestsData
 {
@@ -25,8 +27,8 @@ public static class ParameterTestsData
             Default = @default ?? Snippet.Empty,
             Modifier = modifier ?? Parameter.Mode.None,
             Name = name is null
-                ? Identifier.Unnamed
-                : new Identifier(name),
+                ? Variable.Unnamed
+                : new Variable(name),
             Type = type ?? DefaultType,
         };
     }

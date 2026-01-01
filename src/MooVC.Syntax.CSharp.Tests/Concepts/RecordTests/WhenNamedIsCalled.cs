@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
-        var newName = new Declaration { Name = new Identifier("Updated") };
+        var newName = new Declaration { Name = new Variable("Updated") };
         Record original = RecordTestsData.Create();
 
         // Act
@@ -18,6 +18,6 @@ public sealed class WhenNamedIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(newName);
-        original.Name.ShouldBe(new Declaration { Name = new Identifier(RecordTestsData.DefaultName) });
+        original.Name.ShouldBe(new Declaration { Name = new Variable(RecordTestsData.DefaultName) });
     }
 }

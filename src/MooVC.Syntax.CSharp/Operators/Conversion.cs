@@ -7,6 +7,8 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Conversion_Resources;
     using Concept = MooVC.Syntax.CSharp.Concepts.Type;

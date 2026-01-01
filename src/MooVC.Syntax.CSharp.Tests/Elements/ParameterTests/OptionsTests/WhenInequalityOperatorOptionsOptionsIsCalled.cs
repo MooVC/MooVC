@@ -67,7 +67,7 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         var left = new Parameter.Options();
 
         Parameter.Options right = new Parameter.Options()
-            .WithNaming(Identifier.Options.Pascal);
+            .WithNaming(Variable.Options.Pascal);
 
         // Act
         bool resultLeftRight = left != right;

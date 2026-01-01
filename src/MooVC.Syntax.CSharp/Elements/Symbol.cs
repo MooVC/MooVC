@@ -7,6 +7,8 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Symbol_Resources;
     using Ignore = Valuify.IgnoreAttribute;
@@ -31,7 +33,7 @@
 
         public bool IsNullable { get; internal set; }
 
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Variable Name { get; internal set; } = Variable.Unnamed;
 
         public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
@@ -128,7 +130,7 @@
                 return string.Empty;
             }
 
-            var signature = Name.ToSnippet(Identifier.Options.Pascal);
+            var signature = Name.ToSnippet(Variable.Options.Pascal);
 
             signature = GetQualifiedSignature(options, signature);
 

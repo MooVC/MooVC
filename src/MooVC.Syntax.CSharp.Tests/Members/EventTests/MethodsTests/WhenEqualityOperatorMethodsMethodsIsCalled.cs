@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
 {
     [Fact]

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenValidateIsCalled

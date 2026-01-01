@@ -7,7 +7,7 @@ public sealed class WhenWithNamingIsCalled
     {
         // Arrange
         var options = new Parameter.Options();
-        Identifier.Options value = Identifier.Options.Pascal;
+        Variable.Options value = Variable.Options.Pascal;
 
         // Act
         Parameter.Options result = options.WithNaming(value);
