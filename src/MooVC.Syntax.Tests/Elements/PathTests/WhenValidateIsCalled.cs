@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidPathCharacterThenValidationErrorReturned()
     {
         // Arrange
-        char invalidPathCharacter = SystemPath.GetInvalidPathChars().First();
+        char invalidPathCharacter = SystemPath.GetInvalidPathChars()[0];
         string value = $"invalid{invalidPathCharacter}path";
         var subject = new Path(value);
         var context = new ValidationContext(subject);

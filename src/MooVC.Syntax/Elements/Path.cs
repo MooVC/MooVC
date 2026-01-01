@@ -63,6 +63,7 @@ namespace MooVC.Syntax.Elements
              || _value.IndexOfAny(GetInvalidPathChars()) >= 0)
             {
                 yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Path)), new[] { nameof(Path) });
+                yield break;
             }
 
             string fileName = FileName;

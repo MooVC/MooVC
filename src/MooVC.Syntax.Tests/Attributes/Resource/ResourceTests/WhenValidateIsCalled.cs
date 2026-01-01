@@ -25,12 +25,12 @@ public sealed class WhenValidateIsCalled
     public void GivenMultiLineCustomToolNamespaceThenValidationErrorReturned()
     {
         // Arrange
-        Resource subject = new Resource
+        var subject = new Resource
         {
-            CustomToolNamespace = Snippet.From("Line1
-Line2"),
+            CustomToolNamespace = Snippet.From($"Line1{Environment.NewLine}Line2"),
             Location = new Path(ResourceTestsData.DefaultLocationPath),
         };
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -47,10 +47,11 @@ Line2"),
     public void GivenEmptyLocationThenValidationErrorReturned()
     {
         // Arrange
-        Resource subject = new Resource
+        var subject = new Resource
         {
             CustomToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace),
         };
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
