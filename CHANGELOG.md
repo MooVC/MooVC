@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a Resource concept for representing RESX files.
 - Added Project resource entries for emitting RESX compile items in project XML.
 
+## Fixed
+
+- Packaged MooVC.Syntax and MooVC.Syntax.CSharp with their referenced assemblies so the NuGet packages work standalone.
+
 # [9.2.0] - 2025-11-14
 
 ## Added
