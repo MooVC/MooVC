@@ -25,6 +25,7 @@
         /// Gets the undefined instance.
         /// </summary>
         public static readonly Parameter Undefined = new Parameter();
+
         /// <summary>
         /// Gets the names on the Parameter.
         /// </summary>
@@ -39,14 +40,14 @@
         }
 
         /// <summary>
-        /// Gets or sets the name on the Parameter.
+        /// Gets the name on the Parameter.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the constraints on the Parameter.
+        /// Gets the constraints on the Parameter.
         /// </summary>
         /// <value>The constraints.</value>
         public ImmutableArray<Constraint> Constraints { get; internal set; } = ImmutableArray<Constraint>.Empty;

@@ -17,10 +17,12 @@ namespace MooVC.Syntax.CSharp.Members
             /// Represents the init for the Mode.
             /// </summary>
             public static readonly Mode Init = 2;
+
             /// <summary>
             /// Represents the read only for the Mode.
             /// </summary>
             public static readonly Mode ReadOnly = 1;
+
             /// <summary>
             /// Represents the set for the Mode.
             /// </summary>

@@ -22,6 +22,7 @@
                 /// Represents the allman for the StyleType.
                 /// </summary>
                 public static readonly StyleType Allman = 0;
+
                 /// <summary>
                 /// Represents the k and r for the StyleType.
                 /// </summary>

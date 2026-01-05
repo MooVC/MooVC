@@ -4,6 +4,9 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a syntax element identifier.
+    /// </summary>
     partial class Identifier
     {
         /// <summary>
@@ -17,6 +20,7 @@
             /// Represents the camel for the Options.
             /// </summary>
             public static readonly Options Camel = new Options();
+
             /// <summary>
             /// Represents the pascal for the Options.
             /// </summary>

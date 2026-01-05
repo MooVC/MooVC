@@ -7,6 +7,9 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a C# syntax element variable.
+    /// </summary>
     partial class Variable
     {
         /// <summary>
@@ -20,6 +23,7 @@
             /// Represents the camel for the Options.
             /// </summary>
             public static readonly Options Camel = new Options();
+
             /// <summary>
             /// Represents the pascal for the Options.
             /// </summary>
@@ -46,10 +50,10 @@
             public bool IsPascal => Casing == Identifier.Casing.Pascal;
 
             /// <summary>
-            /// Gets or sets the use underscore on the Options.
+            /// Gets a value indicating whether or not to use underscore for variabel names.
             /// </summary>
-            /// <value>The use underscore.</value>
-            public bool UseUnderscore { get; set; }
+            /// <value>A value indicating whether or not to use underscore for variabel names.</value>
+            public bool UseUnderscore { get; internal set; }
 
             /// <summary>
             /// Defines the Identifier.Options operator for the Options.

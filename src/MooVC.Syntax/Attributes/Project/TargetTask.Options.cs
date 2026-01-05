@@ -17,9 +17,11 @@ namespace MooVC.Syntax.Attributes.Project
             /// Represents the warn and continue for the Options.
             /// </summary>
             public static readonly Options WarnAndContinue = "WarnAndContinue";
+
             /// <summary>
             /// Represents the error and continue for the Options.
             /// </summary>
+
             public static readonly Options ErrorAndContinue = "ErrorAndContinue";
             /// <summary>
             /// Represents the error and stop for the Options.

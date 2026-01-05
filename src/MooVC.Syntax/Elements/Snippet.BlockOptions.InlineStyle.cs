@@ -22,10 +22,12 @@
                 /// Represents the lambda for the InlineStyle.
                 /// </summary>
                 public static readonly InlineStyle Lambda = 0;
+
                 /// <summary>
                 /// Represents the single line braces for the InlineStyle.
                 /// </summary>
                 public static readonly InlineStyle SingleLineBraces = 1;
+
                 /// <summary>
                 /// Represents the multi line braces for the InlineStyle.
                 /// </summary>

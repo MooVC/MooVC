@@ -39,20 +39,20 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the argument modifier (in, ref, out, or none).
+        /// Gets the argument modifier (in, ref, out, or none).
         /// </summary>
         /// <value>The modifier that affects how the argument is passed.</value>
         public Mode Modifier { get; internal set; } = Mode.None;
 
         /// <summary>
-        /// Gets or sets the argument name used for named arguments.
+        /// Gets the argument name used for named arguments.
         /// </summary>
         /// <value>The argument name.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the argument expression value.
+        /// Gets the argument expression value.
         /// </summary>
         /// <value>The expression snippet supplied for the argument.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;

@@ -22,18 +22,22 @@
             /// Represents the in for the Mode.
             /// </summary>
             public static readonly Mode In = "in";
+
             /// <summary>
             /// Represents the out for the Mode.
             /// </summary>
             public static readonly Mode Out = "out";
+
             /// <summary>
             /// Gets the absence of a value.
             /// </summary>
             public static readonly Mode None = string.Empty;
+
             /// <summary>
             /// Represents the params for the Mode.
             /// </summary>
             public static readonly Mode Params = "params";
+
             /// <summary>
             /// Represents the ref for the Mode.
             /// </summary>

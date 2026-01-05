@@ -20,14 +20,17 @@
             /// Gets the default instance.
             /// </summary>
             public static readonly Kind Default = string.Empty;
+
             /// <summary>
             /// Represents the read only for the Kind.
             /// </summary>
             public static readonly Kind ReadOnly = "readonly";
+
             /// <summary>
             /// Represents the record for the Kind.
             /// </summary>
             public static readonly Kind Record = "record";
+
             /// <summary>
             /// Represents the ref for the Kind.
             /// </summary>

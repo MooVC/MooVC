@@ -22,30 +22,37 @@
             /// Gets the in modifier, indicating a readonly by-ref parameter.
             /// </summary>
             public static readonly Mode In = "in";
+
             /// <summary>
             /// Gets the out modifier, indicating assignment by the callee.
             /// </summary>
             public static readonly Mode Out = "out";
+
             /// <summary>
             /// Gets the absence of a parameter modifier.
             /// </summary>
             public static readonly Mode None = string.Empty;
+
             /// <summary>
             /// Gets the params modifier, indicating a parameter array.
             /// </summary>
             public static readonly Mode Params = "params";
+
             /// <summary>
             /// Gets the ref modifier, indicating a by-ref parameter.
             /// </summary>
             public static readonly Mode Ref = "ref";
+
             /// <summary>
             /// Gets the ref readonly modifier, indicating a readonly by-ref parameter.
             /// </summary>
             public static readonly Mode RefReadonly = "ref readonly";
+
             /// <summary>
             /// Gets the scoped modifier, constraining the lifetime of a by-ref parameter.
             /// </summary>
             public static readonly Mode Scoped = "scoped";
+
             /// <summary>
             /// Gets the this modifier, marking the receiver parameter of an extension method.
             /// </summary>

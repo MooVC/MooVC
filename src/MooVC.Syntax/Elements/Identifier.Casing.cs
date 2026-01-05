@@ -3,6 +3,9 @@
     using Fluentify;
     using Monify;
 
+    /// <summary>
+    /// Represents a syntax element identifier.
+    /// </summary>
     partial class Identifier
     {
         /// <summary>
@@ -16,14 +19,17 @@
             /// Represents the camel for the Casing.
             /// </summary>
             public static readonly Casing Camel = 1;
+
             /// <summary>
             /// Represents the kebab for the Casing.
             /// </summary>
             public static readonly Casing Kebab = 2;
+
             /// <summary>
             /// Represents the pascal for the Casing.
             /// </summary>
             public static readonly Casing Pascal = 0;
+
             /// <summary>
             /// Represents the snake for the Casing.
             /// </summary>

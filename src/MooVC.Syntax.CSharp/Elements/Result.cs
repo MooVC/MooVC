@@ -25,10 +25,12 @@
         /// Gets a default Task-based return signature for asynchronous methods.
         /// </summary>
         public static readonly Result Task = new Result { Type = typeof(Task) };
+
         /// <summary>
         /// Gets an unspecified return signature that renders as empty.
         /// </summary>
         public static readonly Result Undefined = new Result();
+
         /// <summary>
         /// Gets a synchronous void return signature for methods with no value.
         /// </summary>
@@ -65,19 +67,19 @@
         public bool IsVoid => this == Void;
 
         /// <summary>
-        /// Gets or sets the return modifier that precedes the return type.
+        /// Gets the return modifier that precedes the return type.
         /// </summary>
         /// <value>The return modifier (for example, ref or ref readonly).</value>
         public Kind Modifier { get; internal set; } = Kind.None;
 
         /// <summary>
-        /// Gets or sets the async modality that determines whether async is emitted.
+        /// Gets the async modality that determines whether async is emitted.
         /// </summary>
         /// <value>The async modality (async or synchronous).</value>
         public Modality Mode { get; internal set; } = Modality.Asynchronous;
 
         /// <summary>
-        /// Gets or sets the return type symbol that will be emitted in the signature.
+        /// Gets the return type symbol that will be emitted in the signature.
         /// </summary>
         /// <value>The return type symbol.</value>
         [Descriptor("OfType")]

@@ -34,13 +34,13 @@
         }
 
         /// <summary>
-        /// Gets or sets the attribute list applied to the parameter.
+        /// Gets the attribute list applied to the parameter.
         /// </summary>
         /// <value>The attributes emitted before the parameter declaration.</value>
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>
-        /// Gets or sets the default value snippet for optional parameters.
+        /// Gets the default value snippet for optional parameters.
         /// </summary>
         /// <value>The default value expression snippet.</value>
         public Snippet Default { get; internal set; } = Snippet.Empty;
@@ -53,20 +53,20 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the parameter modifier (in, ref, out, params, scoped, this).
+        /// Gets the parameter modifier (in, ref, out, params, scoped, this).
         /// </summary>
         /// <value>The parameter modifier that affects passing semantics.</value>
         public Mode Modifier { get; internal set; } = Mode.None;
 
         /// <summary>
-        /// Gets or sets the parameter name.
+        /// Gets the parameter name.
         /// </summary>
         /// <value>The parameter identifier.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the parameter type symbol.
+        /// Gets the parameter type symbol.
         /// </summary>
         /// <value>The parameter type symbol.</value>
         [Descriptor("OfType")]

@@ -18,22 +18,27 @@
         /// Gets the abstract modifier for abstract members and types.
         /// </summary>
         public static readonly Extensibility Abstract = "abstract";
+
         /// <summary>
         /// Gets the absence of an extensibility modifier.
         /// </summary>
         public static readonly Extensibility Implicit = string.Empty;
+
         /// <summary>
         /// Gets the override modifier for overridden members.
         /// </summary>
         public static readonly Extensibility Override = "override";
+
         /// <summary>
         /// Gets the static modifier for static members.
         /// </summary>
         public static readonly Extensibility Static = "static";
+
         /// <summary>
         /// Gets the sealed modifier for sealed members or types.
         /// </summary>
         public static readonly Extensibility Sealed = "sealed";
+
         /// <summary>
         /// Gets the virtual modifier for virtual members.
         /// </summary>

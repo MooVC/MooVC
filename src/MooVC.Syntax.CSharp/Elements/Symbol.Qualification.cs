@@ -17,10 +17,12 @@
             /// Represents the full for the Qualification.
             /// </summary>
             public static readonly Qualification Full = 1;
+
             /// <summary>
             /// Represents the minimum for the Qualification.
             /// </summary>
             public static readonly Qualification Minimum = 0;
+
             /// <summary>
             /// Represents the global for the Qualification.
             /// </summary>

@@ -19,42 +19,52 @@
             /// Represents the add for the Type.
             /// </summary>
             public static readonly Type Add = "+";
+
             /// <summary>
             /// Represents the and for the Type.
             /// </summary>
             public static readonly Type And = "&";
+
             /// <summary>
             /// Represents the divide for the Type.
             /// </summary>
             public static readonly Type Divide = "/";
+
             /// <summary>
             /// Represents the left for the Type.
             /// </summary>
             public static readonly Type Left = "<<";
+
             /// <summary>
             /// Represents the modulus for the Type.
             /// </summary>
             public static readonly Type Modulus = "%";
+
             /// <summary>
             /// Represents the multiply for the Type.
             /// </summary>
             public static readonly Type Multiply = "*";
+
             /// <summary>
             /// Represents the or for the Type.
             /// </summary>
             public static readonly Type Or = "|";
+
             /// <summary>
             /// Represents the right for the Type.
             /// </summary>
             public static readonly Type Right = ">>";
+
             /// <summary>
             /// Represents the subtract for the Type.
             /// </summary>
             public static readonly Type Subtract = "-";
+
             /// <summary>
             /// Gets the unspecified instance.
             /// </summary>
             public static readonly Type Unspecified = string.Empty;
+
             /// <summary>
             /// Represents the xor for the Type.
             /// </summary>
@@ -132,7 +142,7 @@
             public bool IsXOR => this == XOR;
 
             /// <summary>
-            /// Defines the < operator for the Type.
+            /// Defines the less than operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -148,7 +158,7 @@
             }
 
             /// <summary>
-            /// Defines the > operator for the Type.
+            /// Defines the greater than operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -164,7 +174,7 @@
             }
 
             /// <summary>
-            /// Defines the <= operator for the Type.
+            /// Defines the less than or equal to operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -175,7 +185,7 @@
             }
 
             /// <summary>
-            /// Defines the >= operator for the Type.
+            /// Defines the greater than or equal to operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>

@@ -17,6 +17,7 @@
             /// Represents the explicit for the Type.
             /// </summary>
             public static readonly Type Explicit = "explicit";
+
             /// <summary>
             /// Represents the implicit for the Type.
             /// </summary>

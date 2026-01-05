@@ -107,7 +107,7 @@
         }
 
         /// <summary>
-        /// Defines the < operator for the Symbol.
+        /// Defines the less than operator for the Symbol.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -123,7 +123,7 @@
         }
 
         /// <summary>
-        /// Defines the > operator for the Symbol.
+        /// Defines the greater than operator for the Symbol.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -139,7 +139,7 @@
         }
 
         /// <summary>
-        /// Defines the <= operator for the Symbol.
+        /// Defines the less than or equal to operator for the Symbol.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -150,7 +150,7 @@
         }
 
         /// <summary>
-        /// Defines the >= operator for the Symbol.
+        /// Defines the greater than or equal to operator for the Symbol.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>

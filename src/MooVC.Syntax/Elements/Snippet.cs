@@ -25,10 +25,12 @@
         /// Represents the blank for the Snippet.
         /// </summary>
         public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
+
         /// <summary>
         /// Gets the empty instance.
         /// </summary>
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
+
         private const int SingleLine = 1;
 
         /// <summary>
@@ -73,7 +75,7 @@
         /// Defines the Snippet operator for the Snippet.
         /// </summary>
         /// <param name="snippet">The snippet.</param>
-        /// <returns>The snippet.</returns>
+        /// <returns>The snippet instance.</returns>
         public static implicit operator Snippet(string snippet)
         {
             Guard.Against.Conversion<string, Snippet>(snippet);

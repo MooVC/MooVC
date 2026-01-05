@@ -19,6 +19,7 @@
             /// Gets the async modifier for an asynchronous member signature.
             /// </summary>
             public static readonly Modality Asynchronous = "async";
+
             /// <summary>
             /// Gets the absence of async for a synchronous member signature.
             /// </summary>

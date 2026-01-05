@@ -20,22 +20,27 @@
         /// Gets the file-scoped accessibility modifier.
         /// </summary>
         public static readonly Scope File = "file";
+
         /// <summary>
         /// Gets the internal accessibility modifier.
         /// </summary>
         public static readonly Scope Internal = "internal";
+
         /// <summary>
         /// Gets the public accessibility modifier.
         /// </summary>
         public static readonly Scope Public = "public";
+
         /// <summary>
         /// Gets the private accessibility modifier.
         /// </summary>
         public static readonly Scope Private = "private";
+
         /// <summary>
         /// Gets the protected accessibility modifier.
         /// </summary>
         public static readonly Scope Protected = "protected";
+
         /// <summary>
         /// Gets an unspecified accessibility that renders as empty.
         /// </summary>

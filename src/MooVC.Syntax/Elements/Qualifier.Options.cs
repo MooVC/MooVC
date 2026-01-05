@@ -19,6 +19,7 @@
             /// Represents the block for the Options.
             /// </summary>
             public static readonly Options Block = 1;
+
             /// <summary>
             /// Represents the file for the Options.
             /// </summary>

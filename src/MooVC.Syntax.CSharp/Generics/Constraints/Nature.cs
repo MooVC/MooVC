@@ -17,18 +17,22 @@
         /// Represents the class for the Nature.
         /// </summary>
         public static readonly Nature Class = "class";
+
         /// <summary>
         /// Represents the struct for the Nature.
         /// </summary>
         public static readonly Nature Struct = "struct";
+
         /// <summary>
         /// Represents the unmanaged for the Nature.
         /// </summary>
         public static readonly Nature Unmanaged = "unmanaged";
+
         /// <summary>
         /// Represents the not null for the Nature.
         /// </summary>
         public static readonly Nature NotNull = "notnull";
+
         /// <summary>
         /// Gets the unspecified instance.
         /// </summary>

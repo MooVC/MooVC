@@ -19,34 +19,42 @@
             /// Represents the complement for the Type.
             /// </summary>
             public static readonly Type Complement = "~";
+
             /// <summary>
             /// Represents the decrement for the Type.
             /// </summary>
             public static readonly Type Decrement = "--";
+
             /// <summary>
             /// Represents the false for the Type.
             /// </summary>
             public static readonly Type False = "false";
+
             /// <summary>
             /// Represents the increment for the Type.
             /// </summary>
             public static readonly Type Increment = "++";
+
             /// <summary>
             /// Represents the minus for the Type.
             /// </summary>
             public static readonly Type Minus = "-";
+
             /// <summary>
             /// Represents the not for the Type.
             /// </summary>
             public static readonly Type Not = "!";
+
             /// <summary>
             /// Represents the plus for the Type.
             /// </summary>
             public static readonly Type Plus = "+";
+
             /// <summary>
             /// Represents the true for the Type.
             /// </summary>
             public static readonly Type True = "true";
+
             /// <summary>
             /// Gets the unspecified instance.
             /// </summary>
@@ -112,7 +120,7 @@
             public bool IsUnspecified => this == Unspecified;
 
             /// <summary>
-            /// Defines the < operator for the Type.
+            /// Defines the less than operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -128,7 +136,7 @@
             }
 
             /// <summary>
-            /// Defines the > operator for the Type.
+            /// Defines the greater than operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -144,7 +152,7 @@
             }
 
             /// <summary>
-            /// Defines the <= operator for the Type.
+            /// Defines the less than or equal to operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -155,7 +163,7 @@
             }
 
             /// <summary>
-            /// Defines the >= operator for the Type.
+            /// Defines the greater than or equal to operator for the Type.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>

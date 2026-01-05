@@ -126,7 +126,7 @@
         }
 
         /// <summary>
-        /// Defines the < operator for the Qualifier.
+        /// Defines the less than operator for the Qualifier.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -142,7 +142,7 @@
         }
 
         /// <summary>
-        /// Defines the > operator for the Qualifier.
+        /// Defines the greater than operator for the Qualifier.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -158,7 +158,7 @@
         }
 
         /// <summary>
-        /// Defines the <= operator for the Qualifier.
+        /// Defines the less than or equal to operator for the Qualifier.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -169,7 +169,7 @@
         }
 
         /// <summary>
-        /// Defines the >= operator for the Qualifier.
+        /// Defines the greater than or equal to operator for the Qualifier.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>

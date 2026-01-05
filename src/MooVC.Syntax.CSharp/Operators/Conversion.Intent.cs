@@ -19,6 +19,7 @@
             /// Represents the from for the Intent.
             /// </summary>
             public static readonly Intent From = 1;
+
             /// <summary>
             /// Represents the to for the Intent.
             /// </summary>
@@ -42,7 +43,7 @@
             public bool IsTo => this == To;
 
             /// <summary>
-            /// Defines the < operator for the Intent.
+            /// Defines the less than operator for the Intent.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -58,7 +59,7 @@
             }
 
             /// <summary>
-            /// Defines the > operator for the Intent.
+            /// Defines the greater than operator for the Intent.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -74,7 +75,7 @@
             }
 
             /// <summary>
-            /// Defines the <= operator for the Intent.
+            /// Defines the less than or equal to operator for the Intent.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
@@ -85,7 +86,7 @@
             }
 
             /// <summary>
-            /// Defines the >= operator for the Intent.
+            /// Defines the greater than or equal to operator for the Intent.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>

@@ -17,6 +17,7 @@
         /// Represents the required for the New.
         /// </summary>
         public static readonly New Required = "new()";
+
         /// <summary>
         /// Represents the not required for the New.
         /// </summary>
@@ -42,7 +43,7 @@
         /// <summary>
         /// Defines the string operator for the New.
         /// </summary>
-        /// <param name="@new">The new.</param>
+        /// <param name="new">The new instance.</param>
         /// <returns>The string.</returns>
         public static implicit operator string(New @new)
         {
@@ -54,7 +55,7 @@
         /// <summary>
         /// Defines the Snippet operator for the New.
         /// </summary>
-        /// <param name="@new">The new.</param>
+        /// <param name="new">The new instance.</param>
         /// <returns>The snippet.</returns>
         public static implicit operator Snippet(New @new)
         {

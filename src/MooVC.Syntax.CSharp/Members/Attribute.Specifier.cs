@@ -20,70 +20,87 @@
             /// Represents the assembly for the Specifier.
             /// </summary>
             public static readonly Specifier Assembly = "assembly";
+
             /// <summary>
             /// Represents the class for the Specifier.
             /// </summary>
             public static readonly Specifier Class = "class";
+
             /// <summary>
             /// Represents the constructor for the Specifier.
             /// </summary>
             public static readonly Specifier Constructor = "constructor";
+
             /// <summary>
             /// Represents the delegate for the Specifier.
             /// </summary>
             public static readonly Specifier Delegate = "delegate";
+
             /// <summary>
             /// Represents the enum for the Specifier.
             /// </summary>
             public static readonly Specifier Enum = "enum";
+
             /// <summary>
             /// Represents the event for the Specifier.
             /// </summary>
             public static readonly Specifier Event = "event";
+
             /// <summary>
             /// Represents the field for the Specifier.
             /// </summary>
             public static readonly Specifier Field = "field";
+
             /// <summary>
             /// Represents the interface for the Specifier.
             /// </summary>
             public static readonly Specifier Interface = "interface";
+
             /// <summary>
             /// Represents the method for the Specifier.
             /// </summary>
             public static readonly Specifier Method = "method";
+
             /// <summary>
             /// Represents the module for the Specifier.
             /// </summary>
             public static readonly Specifier Module = "module";
+
             /// <summary>
             /// Gets the absence of a value.
             /// </summary>
             public static readonly Specifier None = string.Empty;
+
             /// <summary>
             /// Represents the param for the Specifier.
             /// </summary>
             public static readonly Specifier Param = "param";
+
             /// <summary>
             /// Represents the property for the Specifier.
             /// </summary>
             public static readonly Specifier Property = "property";
+
             /// <summary>
             /// Represents the record for the Specifier.
             /// </summary>
             public static readonly Specifier Record = "record";
+
             /// <summary>
             /// Represents the return for the Specifier.
             /// </summary>
             public static readonly Specifier Return = "return";
+
             /// <summary>
             /// Represents the struct for the Specifier.
             /// </summary>
             public static readonly Specifier Struct = "struct";
+
             /// <summary>
             /// Represents the type for the Specifier.
             /// </summary>
             public static readonly Specifier Type = "type";
+
             /// <summary>
             /// Represents the typevar for the Specifier.
             /// </summary>

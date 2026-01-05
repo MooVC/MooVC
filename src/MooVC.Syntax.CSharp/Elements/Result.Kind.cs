@@ -19,14 +19,17 @@
             /// Gets the absence of a return modifier.
             /// </summary>
             public static readonly Kind None = string.Empty;
+
             /// <summary>
             /// Gets the ref return modifier.
             /// </summary>
             public static readonly Kind Ref = "ref";
+
             /// <summary>
             /// Gets the ref readonly return modifier.
             /// </summary>
             public static readonly Kind RefReadOnly = "ref readonly";
+
             /// <summary>
             /// Gets the unsafe return modifier.
             /// </summary>

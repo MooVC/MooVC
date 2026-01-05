@@ -22,6 +22,7 @@
             /// Represents the call for the Formatter.
             /// </summary>
             public static readonly Formatter Call = new Formatter("{0}: {1}");
+
             /// <summary>
             /// Represents the declaration for the Formatter.
             /// </summary>

@@ -40,13 +40,13 @@ namespace MooVC.Syntax.CSharp.Members
         }
 
         /// <summary>
-        /// Gets or sets the body snippet emitted after the method signature.
+        /// Gets the body snippet emitted after the method signature.
         /// </summary>
         /// <value>The statement or block content for the method body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the extensibility modifier applied to the method declaration.
+        /// Gets the extensibility modifier applied to the method declaration.
         /// </summary>
         /// <value>The extensibility modifier (abstract, virtual, override, etc.).</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
@@ -59,28 +59,28 @@ namespace MooVC.Syntax.CSharp.Members
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the method name declaration.
+        /// Gets the method name declaration.
         /// </summary>
         /// <value>The declared method identifier.</value>
         [Descriptor("Named")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
         /// <summary>
-        /// Gets or sets the parameter list used to form the method signature.
+        /// Gets the parameter list used to form the method signature.
         /// </summary>
         /// <value>The ordered parameters accepted by the method.</value>
         [Descriptor("Accepts")]
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
-        /// Gets or sets the return signature, including async modality and return type.
+        /// Gets the return signature, including async modality and return type.
         /// </summary>
         /// <value>The return signature that will be emitted in the method declaration.</value>
         [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Task;
 
         /// <summary>
-        /// Gets or sets the accessibility scope applied to the method declaration.
+        /// Gets the accessibility scope applied to the method declaration.
         /// </summary>
         /// <value>The accessibility modifier (public, internal, etc.).</value>
         public Scope Scope { get; internal set; } = Scope.Public;
