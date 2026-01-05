@@ -5,7 +5,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# syntax aliases.
+    /// Provides mappings between CLR primitive types and their C# keyword aliases.
     /// </summary>
     internal static class Aliases
     {
@@ -29,21 +29,21 @@
         };
 
         /// <summary>
-        /// Performs the try get operation for the C# syntax.
+        /// Attempts to get the C# keyword alias for a CLR type.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <param name="alias">The alias.</param>
-        /// <returns>The bool.</returns>
+        /// <param name="type">The CLR type to resolve.</param>
+        /// <param name="alias">When this method returns, contains the C# alias if found.</param>
+        /// <returns><see langword="true"/> if an alias exists; otherwise, <see langword="false"/>.</returns>
         public static bool TryGet(Type type, out string alias)
         {
             return aliases.TryGetValue(type, out alias);
         }
 
         /// <summary>
-        /// Performs the is system operation for the C# syntax.
+        /// Determines whether a type name is a C# keyword alias for a system type.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The bool.</returns>
+        /// <param name="type">The type name to check.</param>
+        /// <returns><see langword="true"/> if the name is a C# alias; otherwise, <see langword="false"/>.</returns>
         public static bool IsSystem(string type)
         {
             return aliases.Values.Contains(type, StringComparer.OrdinalIgnoreCase);
