@@ -6,6 +6,7 @@
     <LangVersion>7.3</LangVersion>
     <Nullable>disable</Nullable>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferenceDependencies</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fluentify">
@@ -24,9 +25,11 @@
   <ItemGroup>
     <ProjectReference Include="..\MooVC.Syntax\MooVC.Syntax.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="@(ReferenceCopyLocalPaths)" Pack="true" PackagePath="lib/netstandard2.0" />
-  </ItemGroup>
+  <Target Name="IncludeReferenceDependencies">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(ReferenceCopyLocalPaths)" Exclude="$(TargetPath)" PackagePath="lib/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <Compile Update="Concepts\Type.Resources.Designer.cs">
       <DependentUpon>Type.Resources.resx</DependentUpon>
