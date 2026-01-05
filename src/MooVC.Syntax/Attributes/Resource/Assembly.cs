@@ -12,26 +12,51 @@ namespace MooVC.Syntax.Attributes.Resource
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a resource file attribute assembly.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Assembly
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined instance.
+        /// </summary>
         public static readonly Assembly Undefined = new Assembly();
 
+        /// <summary>
+        /// Initializes a new instance of the Assembly class.
+        /// </summary>
         internal Assembly()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the alias on the Assembly.
+        /// </summary>
+        /// <value>The alias.</value>
         [Descriptor("KnownAs")]
         public Snippet Alias { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets a value indicating whether the Assembly is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Assembly is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the name on the Assembly.
+        /// </summary>
+        /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Performs the to fragments operation for the resource file attribute.
+        /// </summary>
+        /// <returns>The immutable array x element.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -46,6 +71,10 @@ namespace MooVC.Syntax.Attributes.Resource
             return builder.ToImmutable();
         }
 
+        /// <summary>
+        /// Returns the string representation of the Assembly.
+        /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -56,6 +85,12 @@ namespace MooVC.Syntax.Attributes.Resource
             return ToFragments().Merge();
         }
 
+        /// <summary>
+        /// Validates the Assembly.
+        /// </summary>
+        /// <remarks>Required members include: Alias, Name.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

@@ -5,10 +5,19 @@
     using System.Linq;
     using MooVC.Syntax.Elements;
 
+    /// <summary>
+    /// Represents a C# syntax element parameter extensions.
+    /// </summary>
     public static partial class ParameterExtensions
     {
         private const string Separator = ", ";
 
+        /// <summary>
+        /// Creates a snippet representation of the C# syntax element.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this ImmutableArray<Parameter> parameters, Parameter.Options options)
         {
             if (parameters.IsDefaultOrEmpty)

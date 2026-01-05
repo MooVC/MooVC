@@ -15,6 +15,9 @@
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
+    /// <summary>
+    /// Represents a C# type syntax reference.
+    /// </summary>
     public abstract partial class Reference
         : Type
     {
@@ -28,14 +31,36 @@
             _type = type;
         }
 
+        /// <summary>
+        /// Gets or sets the constructors on the Reference.
+        /// </summary>
+        /// <value>The constructors.</value>
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
+        /// <summary>
+        /// Gets or sets the extensibility on the Reference.
+        /// </summary>
+        /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Sealed;
 
+        /// <summary>
+        /// Gets or sets the fields on the Reference.
+        /// </summary>
+        /// <value>The fields.</value>
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
 
+        /// <summary>
+        /// Gets or sets the parameters on the Reference.
+        /// </summary>
+        /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Validates the Reference.
+        /// </summary>
+        /// <remarks>Required members include: Extensibility, Constructors, Fields, Parameters.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
@@ -59,11 +84,24 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Performs the get signature operation for the C# type syntax.
+        /// </summary>
+        /// <param name="extensibility">The extensibility.</param>
+        /// <param name="partial">The partial.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="scope">The scope.</param>
+        /// <returns>The string.</returns>
         protected virtual string GetSignature(string extensibility, string partial, string name, string scope)
         {
             return Separator.Combine(scope, extensibility, partial, _type, $"{name}");
         }
 
+        /// <summary>
+        /// Performs the perform to snippet operation for the C# type syntax.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The snippet.</returns>
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
             Snippet signature = GetSignature(options);

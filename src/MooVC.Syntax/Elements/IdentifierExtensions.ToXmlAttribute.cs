@@ -3,8 +3,17 @@ namespace MooVC.Syntax.Elements
     using System.Collections.Generic;
     using System.Xml.Linq;
 
+    /// <summary>
+    /// Represents a syntax element identifier extensions.
+    /// </summary>
     internal static partial class IdentifierExtensions
     {
+        /// <summary>
+        /// Creates XML attributes for the syntax element.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The XML attributes.</returns>
         public static IEnumerable<XAttribute> ToXmlAttribute(this Identifier value, string name)
         {
             if (value.IsUnnamed)

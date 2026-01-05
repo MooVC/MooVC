@@ -15,30 +15,64 @@ namespace MooVC.Syntax.CSharp.Members
     using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a C# member syntax constructor.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Constructor
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined instance.
+        /// </summary>
         public static readonly Constructor Undefined = new Constructor();
 
         private const string Separator = " ";
 
+        /// <summary>
+        /// Initializes a new instance of the Constructor class.
+        /// </summary>
         internal Constructor()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the body on the Constructor.
+        /// </summary>
+        /// <value>The body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets or sets the extensibility on the Constructor.
+        /// </summary>
+        /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
+        /// <summary>
+        /// Gets a value indicating whether the Constructor is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Constructor is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets or sets the parameters on the Constructor.
+        /// </summary>
+        /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Gets or sets the scope on the Constructor.
+        /// </summary>
+        /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Defines the string operator for the Constructor.
+        /// </summary>
+        /// <param name="constructor">The constructor.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Constructor constructor)
         {
             Guard.Against.Conversion<Constructor, string>(constructor);
@@ -46,6 +80,11 @@ namespace MooVC.Syntax.CSharp.Members
             return constructor.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Constructor.
+        /// </summary>
+        /// <param name="constructor">The constructor.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Constructor constructor)
         {
             Guard.Against.Conversion<Constructor, Snippet>(constructor);
@@ -53,11 +92,21 @@ namespace MooVC.Syntax.CSharp.Members
             return Snippet.From(constructor);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Constructor.
+        /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             return ToSnippet(Identifier.Unnamed, Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options, Type type)
         {
             _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Type), nameof(Constructor)));
@@ -65,6 +114,12 @@ namespace MooVC.Syntax.CSharp.Members
             return ToSnippet(type.Name.Name, options);
         }
 
+        /// <summary>
+        /// Validates the Constructor.
+        /// </summary>
+        /// <remarks>Required members include: Parameters.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

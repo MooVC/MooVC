@@ -17,37 +17,79 @@ namespace MooVC.Syntax.CSharp.Members
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
+    /// <summary>
+    /// Represents a C# method declaration, including its signature, modifiers, and body.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Method
         : IValidatableObject
     {
+        /// <summary>
+        /// Gets the undefined method declaration, used as a placeholder in builders.
+        /// </summary>
         public static readonly Method Undefined = new Method();
 
         private const string Separator = " ";
 
+        /// <summary>
+        /// Initializes a new instance of the Method class.
+        /// </summary>
         internal Method()
         {
         }
 
+        /// <summary>
+        /// Gets the body snippet emitted after the method signature.
+        /// </summary>
+        /// <value>The statement or block content for the method body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
+        /// <summary>
+        /// Gets the extensibility modifier applied to the method declaration.
+        /// </summary>
+        /// <value>The extensibility modifier (abstract, virtual, override, etc.).</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
+        /// <summary>
+        /// Gets a value indicating whether this method declaration is the undefined sentinel.
+        /// </summary>
+        /// <value>A value indicating whether this instance is the undefined sentinel.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
+        /// <summary>
+        /// Gets the method name declaration.
+        /// </summary>
+        /// <value>The declared method identifier.</value>
         [Descriptor("Named")]
         public Declaration Name { get; internal set; } = Declaration.Unspecified;
 
+        /// <summary>
+        /// Gets the parameter list used to form the method signature.
+        /// </summary>
+        /// <value>The ordered parameters accepted by the method.</value>
         [Descriptor("Accepts")]
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
+        /// <summary>
+        /// Gets the return signature, including async modality and return type.
+        /// </summary>
+        /// <value>The return signature that will be emitted in the method declaration.</value>
         [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Task;
 
+        /// <summary>
+        /// Gets the accessibility scope applied to the method declaration.
+        /// </summary>
+        /// <value>The accessibility modifier (public, internal, etc.).</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
+        /// <summary>
+        /// Converts the method declaration to its C# source representation.
+        /// </summary>
+        /// <param name="method">The method declaration to render.</param>
+        /// <returns>The rendered C# source text.</returns>
         public static implicit operator string(Method method)
         {
             Guard.Against.Conversion<Method, string>(method);
@@ -55,6 +97,11 @@ namespace MooVC.Syntax.CSharp.Members
             return method.ToString();
         }
 
+        /// <summary>
+        /// Converts the method declaration to a snippet for composition.
+        /// </summary>
+        /// <param name="method">The method declaration to convert.</param>
+        /// <returns>The snippet representing the method declaration.</returns>
         public static implicit operator Snippet(Method method)
         {
             Guard.Against.Conversion<Method, Snippet>(method);
@@ -62,11 +109,20 @@ namespace MooVC.Syntax.CSharp.Members
             return Snippet.From(method);
         }
 
+        /// <summary>
+        /// Returns the C# source representation of the method declaration.
+        /// </summary>
+        /// <returns>The rendered method declaration.</returns>
         public override string ToString()
         {
             return ToSnippet(Snippet.Options.Default);
         }
 
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Method)));
@@ -86,6 +142,15 @@ namespace MooVC.Syntax.CSharp.Members
             return Body.Block(options, signature);
         }
 
+        /// <summary>
+        /// Validates the method declaration for a renderable signature.
+        /// </summary>
+        /// <remarks>
+        /// Ensures the extensibility modifier is permitted, the name is specified, the return signature is valid,
+        /// and any provided parameters are defined.
+        /// </remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)

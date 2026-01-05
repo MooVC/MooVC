@@ -11,22 +11,45 @@
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Qualifier_Resources;
 
+    /// <summary>
+    /// Represents a syntax element qualifier.
+    /// </summary>
     [Monify(Type = typeof(ImmutableArray<Segment>))]
     [SkipAutoInstantiation]
     public partial class Qualifier
         : IComparable<Qualifier>,
           IValidatableObject
     {
+        /// <summary>
+        /// Represents the unqualified for the Qualifier.
+        /// </summary>
         public static readonly Qualifier Unqualified = ImmutableArray<Segment>.Empty;
 
         private const string Separator = ".";
 
+        /// <summary>
+        /// Gets a value indicating whether the Qualifier is unqualified.
+        /// </summary>
+        /// <value>A value indicating whether the Qualifier is unqualified.</value>
         public bool IsUnqualified => this == Unqualified;
 
+        /// <summary>
+        /// Gets the length on the Qualifier.
+        /// </summary>
+        /// <value>The length.</value>
         public int Length => _value.Length;
 
+        /// <summary>
+        /// Gets the index on the Qualifier.
+        /// </summary>
+        /// <value>The index.</value>
         public Segment this[int index] => _value[index];
 
+        /// <summary>
+        /// Defines the Qualifier operator for the Qualifier.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(Type type)
         {
             Guard.Against.Conversion<Type, Qualifier>(type);
@@ -34,6 +57,11 @@
             return type.Namespace;
         }
 
+        /// <summary>
+        /// Defines the Qualifier operator for the Qualifier.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(string value)
         {
             Guard.Against.Conversion<string, Qualifier>(value);
@@ -44,6 +72,11 @@
                 .ToImmutableArray();
         }
 
+        /// <summary>
+        /// Defines the Qualifier operator for the Qualifier.
+        /// </summary>
+        /// <param name="values">The values.</param>
+        /// <returns>The qualifier.</returns>
         public static implicit operator Qualifier(Segment[] values)
         {
             Guard.Against.Conversion<Segment[], Qualifier>(values);
@@ -56,6 +89,11 @@
             return ImmutableArray.Create(values);
         }
 
+        /// <summary>
+        /// Defines the Segment[] operator for the Qualifier.
+        /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The segment.</returns>
         public static implicit operator Segment[](Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, Segment[]>(qualifier);
@@ -63,6 +101,11 @@
             return qualifier._value.ToArray();
         }
 
+        /// <summary>
+        /// Defines the string operator for the Qualifier.
+        /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The string.</returns>
         public static implicit operator string(Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, string>(qualifier);
@@ -70,6 +113,11 @@
             return qualifier.ToString();
         }
 
+        /// <summary>
+        /// Defines the Snippet operator for the Qualifier.
+        /// </summary>
+        /// <param name="qualifier">The qualifier.</param>
+        /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, Snippet>(qualifier);
@@ -77,6 +125,12 @@
             return Snippet.From(qualifier);
         }
 
+        /// <summary>
+        /// Defines the less than operator for the Qualifier.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <(Qualifier left, Qualifier right)
         {
             if (left is null)
@@ -87,6 +141,12 @@
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        /// Defines the greater than operator for the Qualifier.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >(Qualifier left, Qualifier right)
         {
             if (left is null)
@@ -97,16 +157,33 @@
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        /// Defines the less than or equal to operator for the Qualifier.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator <=(Qualifier left, Qualifier right)
         {
             return !(left > right);
         }
 
+        /// <summary>
+        /// Defines the greater than or equal to operator for the Qualifier.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The .</returns>
         public static bool operator >=(Qualifier left, Qualifier right)
         {
             return !(left < right);
         }
 
+        /// <summary>
+        /// Compares this Qualifier to another instance.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>A signed integer indicating relative order.</returns>
         public int CompareTo(Qualifier other)
         {
             if (other is null)
@@ -131,6 +208,10 @@
             return CompareSegments(other);
         }
 
+        /// <summary>
+        /// Returns the string representation of the Qualifier.
+        /// </summary>
+        /// <returns>The string representation.</returns>
         public override string ToString()
         {
             if (IsUnqualified)
@@ -146,6 +227,11 @@
             return Separator.Combine(segments);
         }
 
+        /// <summary>
+        /// Creates a snippet representation of the syntax element.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Qualifier)));
@@ -158,6 +244,11 @@
             return Snippet.From(options, ToString());
         }
 
+        /// <summary>
+        /// Validates the Qualifier.
+        /// </summary>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUnqualified)
