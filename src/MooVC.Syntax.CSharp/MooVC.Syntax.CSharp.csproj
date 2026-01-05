@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Description>Allows for the creation of C# components using an API based on the Fluent Builder pattern.</Description>
     <ImplicitUsings>disable</ImplicitUsings>
     <LangVersion>7.3</LangVersion>
     <Nullable>disable</Nullable>

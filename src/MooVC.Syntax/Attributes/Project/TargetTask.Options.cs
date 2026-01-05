@@ -23,6 +23,7 @@ namespace MooVC.Syntax.Attributes.Project
             /// </summary>
 
             public static readonly Options ErrorAndContinue = "ErrorAndContinue";
+
             /// <summary>
             /// Represents the error and stop for the Options.
             /// </summary>
