@@ -13,6 +13,7 @@
         /// <summary>
         /// Defines options for the Parameter C# syntax element.
         /// </summary>
+        [AutoInitiateWith(nameof(Camel))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

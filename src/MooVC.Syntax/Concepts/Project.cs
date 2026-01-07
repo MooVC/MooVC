@@ -8,6 +8,7 @@
     using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.Attributes.Project;
+    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -16,6 +17,7 @@
     /// <summary>
     /// Represents a syntax construct project.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Project
@@ -37,6 +39,13 @@
         /// </summary>
         /// <value>The item groups.</value>
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
+
+        /// <summary>
+        /// Gets or sets the qualifier that serves as the name of the Project.
+        /// </summary>
+        /// <value>the qualifier that serves as the name of the Project..</value>
+        [Descriptor("Named")]
+        public Qualifier Name { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
         /// Gets or sets the property groups on the Project.
@@ -85,6 +94,7 @@
             return validationContext
                 .IncludeIf(!Imports.IsDefaultOrEmpty, nameof(Imports), import => !import.IsUndefined, Imports)
                 .AndIf(!ItemGroups.IsDefaultOrEmpty, nameof(ItemGroups), group => !group.IsUndefined, ItemGroups)
+                .And(nameof(Name), name => !name.IsUnqualified, Name)
                 .AndIf(!PropertyGroups.IsDefaultOrEmpty, nameof(PropertyGroups), group => !group.IsUndefined, PropertyGroups)
                 .AndIf(!Resources.IsDefaultOrEmpty, nameof(Resources), resource => !resource.IsUndefined, Resources)
                 .AndIf(!Sdks.IsDefaultOrEmpty, nameof(Sdks), sdk => !sdk.IsUnspecified, Sdks)

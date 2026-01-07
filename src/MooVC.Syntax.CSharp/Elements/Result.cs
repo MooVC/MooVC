@@ -16,6 +16,7 @@
     /// <summary>
     /// Represents a C# member return signature, combining async modality, ref modifiers, and the return type symbol.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Result

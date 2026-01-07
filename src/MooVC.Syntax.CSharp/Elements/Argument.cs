@@ -14,6 +14,7 @@
     /// <summary>
     /// Represents a C# argument expression, including optional name and modifier.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Argument

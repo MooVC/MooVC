@@ -4,6 +4,7 @@
     using Fluentify;
     using Valuify;
     using static MooVC.Syntax.Elements.Snippet_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
     /// Represents a syntax element snippet.
@@ -13,16 +14,36 @@
         /// <summary>
         /// Represents a syntax element block options.
         /// </summary>
+        [AutoInitiateWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class BlockOptions
         {
+            /// <summary>
+            /// Gets the default set of options for a block operation.
+            /// </summary>
+            /// <remarks>
+            /// Use this instance as a baseline when configuring block operations to ensure
+            /// consistent default behavior. Modifying the properties of this instance does not affect other
+            /// instances.
+            /// </remarks>
+            public static readonly BlockOptions Default = new BlockOptions();
+
             /// <summary>
             /// Initializes a new instance of the BlockOptions class.
             /// </summary>
             internal BlockOptions()
             {
             }
+
+            /// <summary>
+            /// Gets a value indicating whether this instance represents the default value.
+            /// </summary>
+            /// <value>
+            /// A value indicating whether this instance represents the default value.
+            /// </value>
+            [Ignore]
+            public bool IsDefault => this == Default;
 
             /// <summary>
             /// Gets or sets the markers on the BlockOptions.

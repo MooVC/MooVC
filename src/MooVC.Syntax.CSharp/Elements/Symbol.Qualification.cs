@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements
 {
+    using Fluentify;
     using Monify;
 
     /// <summary>
@@ -11,6 +12,7 @@
         /// Represents a C# syntax element qualification.
         /// </summary>
         [Monify(Type = typeof(byte))]
+        [SkipAutoInitialization]
         public sealed partial class Qualification
         {
             /// <summary>

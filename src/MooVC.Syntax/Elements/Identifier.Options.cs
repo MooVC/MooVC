@@ -12,6 +12,7 @@
         /// <summary>
         /// Defines options for the Identifier syntax element.
         /// </summary>
+        [AutoInitiateWith(nameof(Pascal))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

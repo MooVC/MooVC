@@ -12,6 +12,7 @@ internal static class ProjectTestsData
     public const string DefaultPropertyName = "Property";
     public const string DefaultPropertyValue = "Value";
     public const string DefaultDesignerPath = "Resources.Designer.cs";
+    public const string DefaultName = "MooVC.Testing";
     public const string DefaultLocation = "Resources.resx";
     public const string DefaultResourceToolNamespace = "MooVC.Resources";
     public const string DefaultSdkVersion = "1.0.0";
@@ -21,6 +22,7 @@ internal static class ProjectTestsData
     public static Project Create(
         Import? import = default,
         ItemGroup? itemGroup = default,
+        Qualifier? name = default,
         PropertyGroup? propertyGroup = default,
         Resource? resource = default,
         Sdk? sdk = default,
@@ -39,6 +41,10 @@ internal static class ProjectTestsData
                     .WithItems(item => item
                         .WithInclude(DefaultItemInclude))),
                 @false: project => project.WithItemGroups(itemGroup))
+            .ForkOn(
+                _ => name is null,
+                @true: project => project.Named(DefaultName),
+                @false: project => project.Named(name))
             .ForkOn(
                 _ => propertyGroup is null,
                 @true: project => project.WithPropertyGroups(group => group

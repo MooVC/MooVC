@@ -16,6 +16,7 @@
     /// <summary>
     /// Represents a C# member syntax event.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Event

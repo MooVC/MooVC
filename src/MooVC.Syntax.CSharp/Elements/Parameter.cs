@@ -16,6 +16,7 @@
     /// <summary>
     /// Represents a C# parameter declaration, including modifier, type, name, and default value.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Parameter

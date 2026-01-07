@@ -8,6 +8,7 @@
     /// <summary>
     /// Represents a C# type syntax record.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Record

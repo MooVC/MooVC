@@ -20,6 +20,7 @@ namespace MooVC.Syntax.CSharp.Members
     /// <summary>
     /// Represents a C# method declaration, including its signature, modifiers, and body.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Method

@@ -18,6 +18,7 @@
     /// <summary>
     /// Represents a C# member syntax attribute.
     /// </summary>
+    [AutoInitiateWith(nameof(Unspecified))]
     [Fluentify]
     [Valuify]
     public sealed partial class Attribute

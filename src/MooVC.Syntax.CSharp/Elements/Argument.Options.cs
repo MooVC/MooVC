@@ -14,6 +14,7 @@
         /// <summary>
         /// Defines options for the Argument C# syntax element.
         /// </summary>
+        [AutoInitiateWith(nameof(Call))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

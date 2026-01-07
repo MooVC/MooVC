@@ -2,6 +2,7 @@
 {
     using System;
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
@@ -11,6 +12,7 @@
     /// Represents C# extensibility modifiers that describe inheritance and override behavior.
     /// </summary>
     [Monify(Type = typeof(string))]
+    [SkipAutoInitialization]
     public sealed partial class Extensibility
         : IComparable<Extensibility>
     {

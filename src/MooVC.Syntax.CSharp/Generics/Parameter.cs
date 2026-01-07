@@ -16,6 +16,7 @@
     /// <summary>
     /// Represents a C# generic syntax parameter.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Parameter

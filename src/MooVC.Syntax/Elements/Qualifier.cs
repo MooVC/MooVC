@@ -15,7 +15,7 @@
     /// Represents a syntax element qualifier.
     /// </summary>
     [Monify(Type = typeof(ImmutableArray<Segment>))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public partial class Qualifier
         : IComparable<Qualifier>,
           IValidatableObject

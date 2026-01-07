@@ -18,6 +18,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <summary>
         /// Represents a C# member syntax methods.
         /// </summary>
+        [AutoInitiateWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Methods

@@ -13,6 +13,7 @@
         /// <summary>
         /// Defines options for the Snippet syntax element.
         /// </summary>
+        [AutoInitiateWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

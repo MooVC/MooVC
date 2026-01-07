@@ -15,6 +15,7 @@ namespace MooVC.Syntax.Concepts
     /// <summary>
     /// Represents a syntax construct resource.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Resource

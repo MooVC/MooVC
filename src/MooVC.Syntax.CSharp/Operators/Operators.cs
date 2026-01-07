@@ -18,6 +18,7 @@
     /// <summary>
     /// Represents a C# operator syntax operators.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Operators

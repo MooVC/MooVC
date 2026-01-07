@@ -17,6 +17,7 @@
     /// <summary>
     /// Represents a C# operator syntax conversion.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Conversion

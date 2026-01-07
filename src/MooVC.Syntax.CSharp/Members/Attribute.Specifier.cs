@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
@@ -14,6 +15,7 @@
         /// Represents a C# member syntax specifier.
         /// </summary>
         [Monify(Type = typeof(string))]
+        [SkipAutoInitialization]
         public sealed partial class Specifier
         {
             /// <summary>

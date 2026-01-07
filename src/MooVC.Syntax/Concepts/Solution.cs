@@ -16,6 +16,7 @@ namespace MooVC.Syntax.Concepts
     /// <summary>
     /// Represents a syntax construct solution.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Solution

@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Members
 {
+    using Fluentify;
     using Monify;
 
     /// <summary>
@@ -11,6 +12,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// Represents a C# member syntax mode.
         /// </summary>
         [Monify(Type = typeof(int))]
+        [SkipAutoInitialization]
         public sealed partial class Mode
         {
             /// <summary>

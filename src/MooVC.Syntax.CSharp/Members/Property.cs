@@ -17,6 +17,7 @@
     /// <summary>
     /// Represents a C# member syntax property.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Property

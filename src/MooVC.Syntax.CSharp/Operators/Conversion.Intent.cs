@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators
 {
     using System;
+    using Fluentify;
     using Monify;
 
     /// <summary>
@@ -12,6 +13,7 @@
         /// Represents a C# operator syntax intent.
         /// </summary>
         [Monify(Type = typeof(int))]
+        [SkipAutoInitialization]
         public sealed partial class Intent
             : IComparable<Intent>
         {

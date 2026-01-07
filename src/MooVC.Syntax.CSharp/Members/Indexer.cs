@@ -16,6 +16,7 @@
     /// <summary>
     /// Represents a C# member syntax indexer.
     /// </summary>
+    [AutoInitiateWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Indexer
