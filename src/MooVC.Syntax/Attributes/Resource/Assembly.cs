@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Resource
         }
 
         /// <summary>
-        /// Gets or sets the alias on the Assembly.
+        /// Gets the alias on the Assembly.
         /// </summary>
         /// <value>The alias.</value>
         [Descriptor("KnownAs")]
@@ -47,7 +47,7 @@ namespace MooVC.Syntax.Attributes.Resource
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Assembly.
+        /// Gets the name on the Assembly.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
@@ -64,11 +64,10 @@ namespace MooVC.Syntax.Attributes.Resource
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement("assembly", Alias.ToXmlAttribute("alias"), Name.ToXmlAttribute("name")));
-
-            return builder.ToImmutable();
+            return ImmutableArray.Create(new XElement(
+                nameof(Assembly),
+                Alias.ToXmlAttribute(nameof(Alias))
+                .And(Name.ToXmlAttribute(nameof(Name)))));
         }
 
         /// <summary>

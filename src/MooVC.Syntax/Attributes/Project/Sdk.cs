@@ -40,20 +40,20 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Gets or sets the minimum version on the Sdk.
+        /// Gets the minimum version on the Sdk.
         /// </summary>
         /// <value>The minimum version.</value>
         public Snippet MinimumVersion { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the name on the Sdk.
+        /// Gets the name on the Sdk.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Qualifier Name { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
-        /// Gets or sets the version on the Sdk.
+        /// Gets the version on the Sdk.
         /// </summary>
         /// <value>The version.</value>
         public Snippet Version { get; internal set; } = Snippet.Empty;
@@ -69,15 +69,11 @@ namespace MooVC.Syntax.Attributes.Project
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Sdk),
-                Name.ToXmlAttribute(nameof(Name)),
-                Version.ToXmlAttribute(nameof(Version)),
-                MinimumVersion.ToXmlAttribute(nameof(MinimumVersion))));
-
-            return builder.ToImmutable();
+                Name.ToXmlAttribute(nameof(Name))
+                .And(Version.ToXmlAttribute(nameof(Version))
+                .And(MinimumVersion.ToXmlAttribute(nameof(MinimumVersion))))));
         }
 
         /// <summary>

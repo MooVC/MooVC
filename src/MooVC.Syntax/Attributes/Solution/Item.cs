@@ -40,33 +40,33 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the id on the Item.
+        /// Gets the id on the Item.
         /// </summary>
         /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the items on the Item.
+        /// Gets the items on the Item.
         /// </summary>
         /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
         /// <summary>
-        /// Gets or sets the name on the Item.
+        /// Gets the name on the Item.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the path on the Item.
+        /// Gets the path on the Item.
         /// </summary>
         /// <value>The path.</value>
         [Descriptor("At")]
         public Snippet Path { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the type on the Item.
+        /// Gets the type on the Item.
         /// </summary>
         /// <value>The type.</value>
         [Descriptor("OfType")]
@@ -88,17 +88,13 @@ namespace MooVC.Syntax.Attributes.Solution
                 .SelectMany(item => item.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Item),
-                Id.ToXmlAttribute(nameof(Id)),
-                Name.ToXmlAttribute(nameof(Name)),
-                Path.ToXmlAttribute(nameof(Path)),
-                Type.ToXmlAttribute(nameof(Type)),
-                items));
-
-            return builder.ToImmutable();
+                Id.ToXmlAttribute(nameof(Id))
+                .And(Name.ToXmlAttribute(nameof(Name)))
+                .And(Path.ToXmlAttribute(nameof(Path)))
+                .And(Type.ToXmlAttribute(nameof(Type)))
+                .And(items)));
         }
 
         /// <summary>

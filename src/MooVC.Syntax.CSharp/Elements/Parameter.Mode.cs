@@ -15,7 +15,7 @@
         /// Represents the modifier applied to a C# parameter that changes passing semantics.
         /// </summary>
         [Monify(Type = typeof(string))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Mode
         {
             /// <summary>

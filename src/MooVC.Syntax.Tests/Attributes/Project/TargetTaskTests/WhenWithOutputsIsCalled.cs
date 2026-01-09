@@ -9,9 +9,9 @@ public sealed class WhenWithOutputsIsCalled
     public void GivenOutputsThenReturnsUpdatedInstance()
     {
         // Arrange
-        TaskOutput existing = TargetTaskTestsData.CreateOutput();
+        Output existing = TargetTaskTestsData.CreateOutput();
 
-        var additional = new TaskOutput
+        var additional = new Output
         {
             ItemName = new Identifier("Other"),
             PropertyName = new Identifier("Property"),

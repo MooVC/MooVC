@@ -7,6 +7,7 @@
     <Nullable>disable</Nullable>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferenceDependencies</TargetsForTfmSpecificContentInPackage>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fluentify">

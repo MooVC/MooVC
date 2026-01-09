@@ -12,7 +12,7 @@
         /// Represents the async/sync modality applied to a member signature.
         /// </summary>
         [Monify(Type = typeof(string))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Modality
         {
             /// <summary>

@@ -14,7 +14,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <summary>
         /// Represents a C# member syntax setter.
         /// </summary>
-        [AutoInitiateWith(nameof(Default))]
+        [AutoInitializeWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Setter

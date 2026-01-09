@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the condition on the ItemGroup.
+        /// Gets the condition on the ItemGroup.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
@@ -47,13 +47,13 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the items on the ItemGroup.
+        /// Gets the items on the ItemGroup.
         /// </summary>
         /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
         /// <summary>
-        /// Gets or sets the label on the ItemGroup.
+        /// Gets the label on the ItemGroup.
         /// </summary>
         /// <value>The label.</value>
         [Descriptor("KnownAs")]
@@ -75,15 +75,11 @@ namespace MooVC.Syntax.Attributes.Project
                 .SelectMany(item => item.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(ItemGroup),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                Label.ToXmlAttribute(nameof(Label)),
-                items));
-
-            return builder.ToImmutable();
+                Condition.ToXmlAttribute(nameof(Condition))
+                .And(Label.ToXmlAttribute(nameof(Label))
+                .And(items))));
         }
 
         /// <summary>

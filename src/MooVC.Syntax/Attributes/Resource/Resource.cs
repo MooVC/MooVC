@@ -38,25 +38,25 @@
         }
 
         /// <summary>
-        /// Gets or sets the custom tool namespace on the Resource.
+        /// Gets the custom tool namespace on the Resource.
         /// </summary>
         /// <value>The custom tool namespace.</value>
         public Snippet CustomToolNamespace { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the designer on the Resource.
+        /// Gets the designer on the Resource.
         /// </summary>
         /// <value>The designer.</value>
         public Path Designer { get; internal set; } = Path.Empty;
 
         /// <summary>
-        /// Gets or sets the location on the Resource.
+        /// Gets the location on the Resource.
         /// </summary>
         /// <value>The location.</value>
         public Path Location { get; internal set; } = Path.Empty;
 
         /// <summary>
-        /// Gets or sets the visibility on the Resource.
+        /// Gets the visibility on the Resource.
         /// </summary>
         /// <value>The visibility.</value>
         public Scope Visibility { get; internal set; } = Scope.Internal;
@@ -86,27 +86,25 @@
             string locationPath = Location;
             string designerPath = designer;
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(2);
-
-            builder.Add(new XElement(
-                "Compile",
-                new XAttribute("Update", designerPath),
-                new XElement("DesignTime", DesignTimeValue),
-                new XElement("AutoGen", AutoGenValue),
-                new XElement("DependentUpon", Location.FileName)));
-
-            builder.Add(new XElement(
-                "EmbeddedResource",
-                new XAttribute("Update", locationPath),
-                new XElement("Generator", Visibility == Scope.Public ? PublicGeneratorValue : InternalGeneratorValue),
-                new XElement("LastGenOutput", designer.FileName)));
+            var elements = ImmutableArray.Create(
+                new XElement(
+                    "Compile",
+                    new XAttribute("Update", designerPath),
+                    new XElement("DesignTime", DesignTimeValue),
+                    new XElement("AutoGen", AutoGenValue),
+                    new XElement("DependentUpon", Location.FileName)),
+                new XElement(
+                    "EmbeddedResource",
+                    new XAttribute("Update", locationPath),
+                    new XElement("Generator", Visibility == Scope.Public ? PublicGeneratorValue : InternalGeneratorValue),
+                    new XElement("LastGenOutput", designer.FileName)));
 
             if (!CustomToolNamespace.IsEmpty)
             {
-                builder[1].Add(new XElement("CustomToolNamespace", CustomToolNamespace.ToString()));
+                elements[1].Add(new XElement("CustomToolNamespace", CustomToolNamespace.ToString()));
             }
 
-            return builder.ToImmutable();
+            return elements;
         }
 
         /// <summary>

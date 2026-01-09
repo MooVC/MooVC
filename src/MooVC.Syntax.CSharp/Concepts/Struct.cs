@@ -20,7 +20,7 @@
     /// <summary>
     /// Represents a C# type syntax struct.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Struct

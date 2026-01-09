@@ -33,19 +33,19 @@ namespace MooVC.Syntax.Attributes.Solution
         }
 
         /// <summary>
-        /// Gets or sets the files on the Folder.
+        /// Gets the files on the Folder.
         /// </summary>
         /// <value>The files.</value>
         public ImmutableArray<File> Files { get; internal set; } = ImmutableArray<File>.Empty;
 
         /// <summary>
-        /// Gets or sets the folders on the Folder.
+        /// Gets the folders on the Folder.
         /// </summary>
         /// <value>The folders.</value>
         public ImmutableArray<Folder> Folders { get; internal set; } = ImmutableArray<Folder>.Empty;
 
         /// <summary>
-        /// Gets or sets the id on the Folder.
+        /// Gets the id on the Folder.
         /// </summary>
         /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
@@ -58,13 +58,13 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the items on the Folder.
+        /// Gets the items on the Folder.
         /// </summary>
         /// <value>The items.</value>
         public ImmutableArray<Item> Items { get; internal set; } = ImmutableArray<Item>.Empty;
 
         /// <summary>
-        /// Gets or sets the name on the Folder.
+        /// Gets the name on the Folder.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
@@ -96,17 +96,13 @@ namespace MooVC.Syntax.Attributes.Solution
                 .SelectMany(item => item.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Folder),
-                Id.ToXmlAttribute(nameof(Id)),
-                Name.ToXmlAttribute(nameof(Name)),
-                files,
-                folders,
-                items));
-
-            return builder.ToImmutable();
+                Id.ToXmlAttribute(nameof(Id))
+                .And(Name.ToXmlAttribute(nameof(Name)))
+                .And(files)
+                .And(folders)
+                .And(items)));
         }
 
         /// <summary>

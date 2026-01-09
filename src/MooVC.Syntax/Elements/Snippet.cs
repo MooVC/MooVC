@@ -17,7 +17,7 @@
     /// Represents a syntax element snippet.
     /// </summary>
     [Monify(Type = typeof(ImmutableArray<string>))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Snippet
         : IValidatableObject
     {

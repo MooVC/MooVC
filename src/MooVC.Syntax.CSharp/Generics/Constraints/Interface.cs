@@ -16,7 +16,7 @@
     /// Represents a C# generic syntax interface.
     /// </summary>
     [Monify(Type = typeof(Declaration))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Interface
         : IValidatableObject
     {

@@ -23,8 +23,8 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsFragment()
     {
         // Arrange
-        TaskParameter parameter = TargetTaskTestsData.CreateParameter();
-        TaskOutput output = TargetTaskTestsData.CreateOutput();
+        Parameter parameter = TargetTaskTestsData.CreateParameter();
+        Output output = TargetTaskTestsData.CreateOutput();
 
         TargetTask subject = TargetTaskTestsData.Create(
             condition: Snippet.From(TargetTaskTestsData.DefaultCondition),
@@ -34,10 +34,10 @@ public sealed class WhenToStringIsCalled
 
         var outputElement = new XElement(
             "Output",
-            new XAttribute(nameof(TaskOutput.Condition), TargetTaskTestsData.DefaultOutputCondition),
-            new XAttribute(nameof(TaskOutput.ItemName), TargetTaskTestsData.DefaultOutputItemName),
-            new XAttribute(nameof(TaskOutput.PropertyName), TargetTaskTestsData.DefaultOutputPropertyName),
-            new XAttribute(nameof(TaskOutput.TaskParameter), TargetTaskTestsData.DefaultOutputTaskParameter));
+            new XAttribute(nameof(Output.Condition), TargetTaskTestsData.DefaultOutputCondition),
+            new XAttribute(nameof(Output.ItemName), TargetTaskTestsData.DefaultOutputItemName),
+            new XAttribute(nameof(Output.PropertyName), TargetTaskTestsData.DefaultOutputPropertyName),
+            new XAttribute(nameof(Output.TaskParameter), TargetTaskTestsData.DefaultOutputTaskParameter));
 
         var element = new XElement(
             TargetTaskTestsData.DefaultName,

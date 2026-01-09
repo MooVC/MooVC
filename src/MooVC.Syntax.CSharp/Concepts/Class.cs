@@ -8,7 +8,7 @@
     /// <summary>
     /// Represents a C# type syntax class.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Class

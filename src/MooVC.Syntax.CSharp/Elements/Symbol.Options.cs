@@ -11,7 +11,7 @@
         /// <summary>
         /// Defines options for the Symbol C# syntax element.
         /// </summary>
-        [AutoInitiateWith(nameof(Default))]
+        [AutoInitializeWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

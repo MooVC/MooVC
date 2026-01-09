@@ -17,7 +17,7 @@
     /// Represents a C# syntax element variable.
     /// </summary>
     [Monify(Type = typeof(Identifier))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Variable
         : IComparable<Variable>,
           IValidatableObject

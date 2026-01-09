@@ -8,7 +8,7 @@
     /// <summary>
     /// Represents a C# type syntax options.
     /// </summary>
-    [AutoInitiateWith(nameof(Default))]
+    [AutoInitializeWith(nameof(Default))]
     [Fluentify]
     [Valuify]
     public sealed partial class Options

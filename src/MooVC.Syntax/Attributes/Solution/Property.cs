@@ -40,14 +40,14 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Property.
+        /// Gets the name on the Property.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the value on the Property.
+        /// Gets the value on the Property.
         /// </summary>
         /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
@@ -63,14 +63,10 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Property),
-                Name.ToXmlAttribute(nameof(Name)),
-                Value.ToXmlAttribute(nameof(Value))));
-
-            return builder.ToImmutable();
+                Name.ToXmlAttribute(nameof(Name))
+                .And(Value.ToXmlAttribute(nameof(Value)))));
         }
 
         /// <summary>

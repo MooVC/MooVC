@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition="'$(IsCodespace)' != 'true'">net8.0;net9.0;net10.0</TargetFrameworks>
+    <Configurations>Debug;Release;Test</Configurations>
+    <Platforms>AnyCPU;ARM32</Platforms>
   </PropertyGroup>
 </Project>

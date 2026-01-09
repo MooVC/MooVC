@@ -17,7 +17,7 @@
     /// <summary>
     /// Represents a syntax construct project.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Project
@@ -29,44 +29,44 @@
         public static readonly Project Undefined = new Project();
 
         /// <summary>
-        /// Gets or sets the imports on the Project.
+        /// Gets the imports on the Project.
         /// </summary>
         /// <value>The imports.</value>
         public ImmutableArray<Import> Imports { get; internal set; } = ImmutableArray<Import>.Empty;
 
         /// <summary>
-        /// Gets or sets the item groups on the Project.
+        /// Gets the item groups on the Project.
         /// </summary>
         /// <value>The item groups.</value>
         public ImmutableArray<ItemGroup> ItemGroups { get; internal set; } = ImmutableArray<ItemGroup>.Empty;
 
         /// <summary>
-        /// Gets or sets the qualifier that serves as the name of the Project.
+        /// Gets the qualifier that serves as the name of the Project.
         /// </summary>
         /// <value>the qualifier that serves as the name of the Project..</value>
         [Descriptor("Named")]
         public Qualifier Name { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
-        /// Gets or sets the property groups on the Project.
+        /// Gets the property groups on the Project.
         /// </summary>
         /// <value>The property groups.</value>
         public ImmutableArray<PropertyGroup> PropertyGroups { get; internal set; } = ImmutableArray<PropertyGroup>.Empty;
 
         /// <summary>
-        /// Gets or sets the resources on the Project.
+        /// Gets the resources on the Project.
         /// </summary>
         /// <value>The resources.</value>
         public ImmutableArray<ResourceReference> Resources { get; internal set; } = ImmutableArray<ResourceReference>.Empty;
 
         /// <summary>
-        /// Gets or sets the sdks on the Project.
+        /// Gets the sdks on the Project.
         /// </summary>
         /// <value>The sdks.</value>
         public ImmutableArray<Sdk> Sdks { get; internal set; } = ImmutableArray<Sdk>.Empty;
 
         /// <summary>
-        /// Gets or sets the targets on the Project.
+        /// Gets the targets on the Project.
         /// </summary>
         /// <value>The targets.</value>
         public ImmutableArray<Target> Targets { get; internal set; } = ImmutableArray<Target>.Empty;

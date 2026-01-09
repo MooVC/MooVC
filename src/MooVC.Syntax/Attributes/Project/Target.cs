@@ -33,32 +33,32 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the after targets on the Target.
+        /// Gets the after targets on the Target.
         /// </summary>
         /// <value>The after targets.</value>
         public Snippet AfterTargets { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the before targets on the Target.
+        /// Gets the before targets on the Target.
         /// </summary>
         /// <value>The before targets.</value>
         public Snippet BeforeTargets { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the condition on the Target.
+        /// Gets the condition on the Target.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the depends on targets on the Target.
+        /// Gets the depends on targets on the Target.
         /// </summary>
         /// <value>The depends on targets.</value>
         public Snippet DependsOnTargets { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the inputs on the Target.
+        /// Gets the inputs on the Target.
         /// </summary>
         /// <value>The inputs.</value>
         public Snippet Inputs { get; internal set; } = Snippet.Empty;
@@ -71,39 +71,39 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the keep duplicate outputs on the Target.
+        /// Gets the keep duplicate outputs on the Target.
         /// </summary>
         /// <value>The keep duplicate outputs.</value>
         public bool KeepDuplicateOutputs { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the label on the Target.
+        /// Gets the label on the Target.
         /// </summary>
         /// <value>The label.</value>
         [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the name on the Target.
+        /// Gets the name on the Target.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the outputs on the Target.
+        /// Gets the outputs on the Target.
         /// </summary>
         /// <value>The outputs.</value>
         public Snippet Outputs { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the returns on the Target.
+        /// Gets the returns on the Target.
         /// </summary>
         /// <value>The returns.</value>
         public Snippet Returns { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the tasks on the Target.
+        /// Gets the tasks on the Target.
         /// </summary>
         /// <value>The tasks.</value>
         public ImmutableArray<TargetTask> Tasks { get; internal set; } = ImmutableArray<TargetTask>.Empty;
@@ -124,23 +124,19 @@ namespace MooVC.Syntax.Attributes.Project
                 .SelectMany(task => task.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Target),
-                AfterTargets.ToXmlAttribute(nameof(AfterTargets)),
-                BeforeTargets.ToXmlAttribute(nameof(BeforeTargets)),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                DependsOnTargets.ToXmlAttribute(nameof(DependsOnTargets)),
-                Inputs.ToXmlAttribute(nameof(Inputs)),
-                KeepDuplicateOutputs.ToXmlAttribute(nameof(KeepDuplicateOutputs)),
-                Label.ToXmlAttribute(nameof(Label)),
-                Name.ToXmlAttribute(nameof(Name)),
-                Outputs.ToXmlAttribute(nameof(Outputs)),
-                Returns.ToXmlAttribute(nameof(Returns)),
-                tasks));
-
-            return builder.ToImmutable();
+                AfterTargets.ToXmlAttribute(nameof(AfterTargets))
+                .And(BeforeTargets.ToXmlAttribute(nameof(BeforeTargets)))
+                .And(Condition.ToXmlAttribute(nameof(Condition)))
+                .And(DependsOnTargets.ToXmlAttribute(nameof(DependsOnTargets)))
+                .And(Inputs.ToXmlAttribute(nameof(Inputs)))
+                .And(KeepDuplicateOutputs.ToXmlAttribute(nameof(KeepDuplicateOutputs)))
+                .And(Label.ToXmlAttribute(nameof(Label)))
+                .And(Name.ToXmlAttribute(nameof(Name)))
+                .And(Outputs.ToXmlAttribute(nameof(Outputs)))
+                .And(Returns.ToXmlAttribute(nameof(Returns)))
+                .And(tasks)));
         }
 
         /// <summary>

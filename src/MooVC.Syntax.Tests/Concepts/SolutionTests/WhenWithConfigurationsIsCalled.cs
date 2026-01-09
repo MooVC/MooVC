@@ -1,8 +1,6 @@
 namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenWithConfigurationsIsCalled
 {
@@ -10,20 +8,22 @@ public sealed class WhenWithConfigurationsIsCalled
     public void GivenConfigurationsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Configuration existing = SolutionTestsData.CreateConfiguration();
-        var additional = new Configuration
+        Configurations existing = Configurations.Default;
+
+        var updated = new Configurations
         {
-            Name = Snippet.From("Release"),
-            Platform = Snippet.From("x64"),
+            Builds = ["Release"],
+            Platforms = ["x64"],
         };
-        Solution original = SolutionTestsData.Create(configuration: existing);
+
+        Solution original = SolutionTestsData.Create(configurations: existing);
 
         // Act
-        Solution result = original.WithConfigurations(additional);
+        Solution result = original.WithConfigurations(updated);
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Configurations.ShouldBe(original.Configurations.Concat([additional]));
+        result.Configurations.ShouldBe(updated);
         result.Files.ShouldBe(original.Files);
     }
 }

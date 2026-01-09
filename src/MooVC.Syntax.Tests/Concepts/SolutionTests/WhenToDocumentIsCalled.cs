@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Xml.Linq;
 using MooVC.Syntax.Attributes.Solution;
+using static MooVC.Syntax.Attributes.Solution.Configurations;
 
 public sealed class WhenToDocumentIsCalled
 {
@@ -26,9 +27,10 @@ public sealed class WhenToDocumentIsCalled
         Solution subject = SolutionTestsData.Create();
 
         var configurationElement = new XElement(
-            nameof(Configuration),
-            new XAttribute(nameof(Configuration.Name), SolutionTestsData.DefaultConfigurationName),
-            new XAttribute(nameof(Configuration.Platform), SolutionTestsData.DefaultConfigurationPlatform));
+            nameof(Configurations),
+            new XElement(nameof(BuildType), new XAttribute("Name", "Debug")),
+            new XElement(nameof(BuildType), new XAttribute("Name", "Release")),
+            new XElement(nameof(Platform), new XAttribute("Name", "x64")));
 
         var configurationsElement = new XElement("Configurations", configurationElement);
 

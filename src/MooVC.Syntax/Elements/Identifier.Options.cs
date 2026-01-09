@@ -12,7 +12,7 @@
         /// <summary>
         /// Defines options for the Identifier syntax element.
         /// </summary>
-        [AutoInitiateWith(nameof(Pascal))]
+        [AutoInitializeWith(nameof(Pascal))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -28,7 +28,7 @@
             public static readonly Options Pascal = new Options { Casing = Casing.Pascal };
 
             /// <summary>
-            /// Gets or sets the casing on the Options.
+            /// Gets the casing on the Options.
             /// </summary>
             /// <value>The casing.</value>
             public Casing Casing { get; set; } = Casing.Camel;

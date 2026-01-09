@@ -61,7 +61,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUndefinedOutputThenValidationErrorReturned()
     {
         // Arrange
-        TargetTask subject = TargetTaskTestsData.Create(output: TaskOutput.Undefined);
+        TargetTask subject = TargetTaskTestsData.Create(output: Output.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

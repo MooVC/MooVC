@@ -40,14 +40,14 @@ namespace MooVC.Syntax.Attributes.Resource
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Header.
+        /// Gets the name on the Header.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the value on the Header.
+        /// Gets the value on the Header.
         /// </summary>
         /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
@@ -63,11 +63,10 @@ namespace MooVC.Syntax.Attributes.Resource
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement("resheader", Name.ToXmlAttribute("name"), new XElement("value", Value.ToString())));
-
-            return builder.ToImmutable();
+            return ImmutableArray.Create(new XElement(
+                "ResHeader",
+                Name.ToXmlAttribute(nameof(Name))
+                .And(new XElement(nameof(Value), Value.ToString()))));
         }
 
         /// <summary>

@@ -14,7 +14,7 @@
     /// <summary>
     /// Represents a C# generic syntax constraint.
     /// </summary>
-    [AutoInitiateWith(nameof(Unspecified))]
+    [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]
     [Valuify]
     public sealed partial class Constraint

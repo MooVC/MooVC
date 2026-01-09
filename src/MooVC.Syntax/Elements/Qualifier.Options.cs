@@ -12,7 +12,7 @@
         /// Defines options for the Qualifier syntax element.
         /// </summary>
         [Monify(Type = typeof(int))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Options
         {
             /// <summary>

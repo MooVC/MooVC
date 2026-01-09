@@ -33,14 +33,14 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the condition on the TargetTask.
+        /// Gets the condition on the TargetTask.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the continue on error on the TargetTask.
+        /// Gets the continue on error on the TargetTask.
         /// </summary>
         /// <value>The continue on error.</value>
         public Options ContinueOnError { get; internal set; } = Options.ErrorAndStop;
@@ -53,23 +53,23 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the TargetTask.
+        /// Gets the name on the TargetTask.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the outputs on the TargetTask.
+        /// Gets the outputs on the TargetTask.
         /// </summary>
         /// <value>The outputs.</value>
-        public ImmutableArray<TaskOutput> Outputs { get; internal set; } = ImmutableArray<TaskOutput>.Empty;
+        public ImmutableArray<Output> Outputs { get; internal set; } = ImmutableArray<Output>.Empty;
 
         /// <summary>
-        /// Gets or sets the parameters on the TargetTask.
+        /// Gets the parameters on the TargetTask.
         /// </summary>
         /// <value>The parameters.</value>
-        public ImmutableArray<TaskParameter> Parameters { get; internal set; } = ImmutableArray<TaskParameter>.Empty;
+        public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
         /// Performs the to fragments operation for the MSBuild project attribute.
@@ -92,16 +92,12 @@ namespace MooVC.Syntax.Attributes.Project
                 .SelectMany(output => output.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 Name.ToXmlElementName(),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                ContinueOnError.ToXmlAttribute(),
-                attributes,
-                outputs));
-
-            return builder.ToImmutable();
+                Condition.ToXmlAttribute(nameof(Condition))
+                .And(ContinueOnError.ToXmlAttribute())
+                .And(attributes)
+                .And(outputs)));
         }
 
         /// <summary>

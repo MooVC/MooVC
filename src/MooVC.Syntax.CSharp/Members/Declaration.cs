@@ -20,7 +20,7 @@
     /// <summary>
     /// Represents a C# member syntax declaration.
     /// </summary>
-    [AutoInitiateWith(nameof(Unspecified))]
+    [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]
     [Valuify]
     public sealed partial class Declaration

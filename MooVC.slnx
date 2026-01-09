@@ -1,4 +1,11 @@
 <Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <BuildType Name="Test" />
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM32" />
+  </Configurations>
   <Folder Name="/Actions/">
     <File Path=".github/dependabot.yml" />
     <File Path=".github/workflows/cd.yml" />
@@ -26,8 +33,12 @@
     <Project Path="src/MooVC.Infrastructure.Compression.LZ4/MooVC.Infrastructure.Compression.LZ4.csproj" />
   </Folder>
   <Folder Name="/Code/Infrastructure/Serialization/">
-    <Project Path="src/MooVC.Infrastructure.Serialization.Apex/MooVC.Infrastructure.Serialization.Apex.csproj" />
-    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Apex/MooVC.Infrastructure.Serialization.Apex.csproj">
+      <Platform Solution="*|ARM32" Project="ARM32" />
+    </Project>
+    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.csproj">
+      <Build Solution="Test|ARM32" Project="false" />
+    </Project>
     <Project Path="src/MooVC.Infrastructure.Serialization.Json.Newtonsoft/MooVC.Infrastructure.Serialization.Json.Newtonsoft.csproj" />
     <Project Path="src/MooVC.Infrastructure.Serialization.MessagePack/MooVC.Infrastructure.Serialization.MessagePack.csproj" />
   </Folder>
@@ -55,8 +66,12 @@
     <File Path=".github/pull_request_template.md" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="src/MooVC.Syntax.CSharp.Tests/MooVC.Syntax.CSharp.Tests.csproj" />
-    <Project Path="src/MooVC.Syntax.Tests/MooVC.Syntax.Tests.csproj" Id="4266ac3d-28e5-443b-b1d2-78193ae07d64" />
+    <Project Path="src/MooVC.Syntax.CSharp.Tests/MooVC.Syntax.CSharp.Tests.csproj">
+      <Platform Solution="*|ARM32" Project="ARM32" />
+    </Project>
+    <Project Path="src/MooVC.Syntax.Tests/MooVC.Syntax.Tests.csproj" Id="4266ac3d-28e5-443b-b1d2-78193ae07d64">
+      <Platform Solution="*|ARM32" Project="ARM32" />
+    </Project>
     <Project Path="src/MooVC.Tests/MooVC.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/Infrastructure/" />
@@ -64,8 +79,12 @@
     <Project Path="src/MooVC.Infrastructure.Compression.LZ4.Tests/MooVC.Infrastructure.Compression.LZ4.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/Infrastructure/Serialization/">
-    <Project Path="src/MooVC.Infrastructure.Serialization.Apex.Tests/MooVC.Infrastructure.Serialization.Apex.Tests.csproj" />
-    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests.csproj" />
+    <Project Path="src/MooVC.Infrastructure.Serialization.Apex.Tests/MooVC.Infrastructure.Serialization.Apex.Tests.csproj">
+      <Platform Solution="*|ARM32" Project="ARM32" />
+    </Project>
+    <Project Path="src/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests/MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Tests.csproj">
+      <Build Solution="Test|ARM32" Project="false" />
+    </Project>
     <Project Path="src/MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests/MooVC.Infrastructure.Serialization.Json.Newtonsoft.Tests.csproj" />
     <Project Path="src/MooVC.Infrastructure.Serialization.MessagePack.Tests/MooVC.Infrastructure.Serialization.MessagePack.Tests.csproj" />
   </Folder>

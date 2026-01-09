@@ -12,7 +12,7 @@
     /// Represents a C# accessibility scope used to qualify type and member declarations.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Scope
         : IComparable<Scope>
     {

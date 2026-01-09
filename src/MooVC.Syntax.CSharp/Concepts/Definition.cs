@@ -18,7 +18,7 @@
     /// <summary>
     /// Represents a C# type syntax definition.
     /// </summary>
-    [AutoInitiateWith(nameof(Empty))]
+    [AutoInitializeWith(nameof(Empty))]
     [Fluentify]
     [Valuify]
     public sealed partial class Definition<T>

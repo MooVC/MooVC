@@ -16,7 +16,7 @@
     /// <summary>
     /// Represents a C# operator syntax unary.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Unary

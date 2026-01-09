@@ -23,8 +23,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        TaskOutput output = TargetTaskTestsData.CreateOutput();
-        TaskParameter parameter = TargetTaskTestsData.CreateParameter();
+        Output output = TargetTaskTestsData.CreateOutput();
+        Parameter parameter = TargetTaskTestsData.CreateParameter();
 
         // Act
         var subject = new TargetTask

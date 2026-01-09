@@ -15,7 +15,7 @@ namespace MooVC.Syntax.Concepts
     /// <summary>
     /// Represents a syntax construct resource.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Resource
@@ -27,19 +27,19 @@ namespace MooVC.Syntax.Concepts
         public static readonly Resource Undefined = new Resource();
 
         /// <summary>
-        /// Gets or sets the assemblies on the Resource.
+        /// Gets the assemblies on the Resource.
         /// </summary>
         /// <value>The assemblies.</value>
         public ImmutableArray<Assembly> Assemblies { get; internal set; } = ImmutableArray<Assembly>.Empty;
 
         /// <summary>
-        /// Gets or sets the data on the Resource.
+        /// Gets the data on the Resource.
         /// </summary>
         /// <value>The data.</value>
         public ImmutableArray<Data> Data { get; internal set; } = ImmutableArray<Data>.Empty;
 
         /// <summary>
-        /// Gets or sets the headers on the Resource.
+        /// Gets the headers on the Resource.
         /// </summary>
         /// <value>The headers.</value>
         public ImmutableArray<Header> Headers { get; internal set; } = ImmutableArray<Header>.Empty;
@@ -52,7 +52,7 @@ namespace MooVC.Syntax.Concepts
         public override bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the metadata on the Resource.
+        /// Gets the metadata on the Resource.
         /// </summary>
         /// <value>The metadata.</value>
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;

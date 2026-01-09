@@ -14,7 +14,7 @@
         /// <summary>
         /// Represents a syntax element boundary options.
         /// </summary>
-        [AutoInitiateWith(nameof(Default))]
+        [AutoInitializeWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class BoundaryOptions
@@ -36,7 +36,7 @@
             }
 
             /// <summary>
-            /// Gets or sets the closing on the BoundaryOptions.
+            /// Gets the closing on the BoundaryOptions.
             /// </summary>
             /// <value>The closing.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(BoundaryClosingRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
@@ -52,7 +52,7 @@
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the opening on the BoundaryOptions.
+            /// Gets the opening on the BoundaryOptions.
             /// </summary>
             /// <value>The opening.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(BoundaryOpeningRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]

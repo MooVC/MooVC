@@ -12,7 +12,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Solution();
 
         // Assert
-        subject.Configurations.ShouldBeEmpty();
+        subject.Configurations.ShouldBe(Configurations.Default);
         subject.Files.ShouldBeEmpty();
         subject.Folders.ShouldBeEmpty();
         subject.Items.ShouldBeEmpty();
@@ -25,7 +25,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        Configuration configuration = SolutionTestsData.CreateConfiguration();
+        Configurations configurations = Configurations.Default;
         File file = SolutionTestsData.CreateFile();
         Folder folder = SolutionTestsData.CreateFolder();
         Item item = SolutionTestsData.CreateItem();
@@ -35,7 +35,7 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Solution
         {
-            Configurations = [configuration],
+            Configurations = configurations,
             Files = [file],
             Folders = [folder],
             Items = [item],
@@ -44,7 +44,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Configurations.ShouldBe(new[] { configuration });
+        subject.Configurations.ShouldBe(configurations);
         subject.Files.ShouldBe(new[] { file });
         subject.Folders.ShouldBe(new[] { folder });
         subject.Items.ShouldBe(new[] { item });

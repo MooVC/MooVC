@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the condition on the Import.
+        /// Gets the condition on the Import.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
@@ -47,21 +47,21 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the label on the Import.
+        /// Gets the label on the Import.
         /// </summary>
         /// <value>The label.</value>
         [Descriptor("KnownAs")]
         public Snippet Label { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the project on the Import.
+        /// Gets the project on the Import.
         /// </summary>
         /// <value>The project.</value>
         [Descriptor("ForProject")]
         public Snippet Project { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the sdk on the Import.
+        /// Gets the sdk on the Import.
         /// </summary>
         /// <value>The sdk.</value>
         public Snippet Sdk { get; internal set; } = Snippet.Empty;
@@ -77,16 +77,12 @@ namespace MooVC.Syntax.Attributes.Project
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Import),
                 Project.ToXmlAttribute(nameof(Project)),
                 Sdk.ToXmlAttribute(nameof(Sdk)),
                 Condition.ToXmlAttribute(nameof(Condition)),
                 Label.ToXmlAttribute(nameof(Label))));
-
-            return builder.ToImmutable();
         }
 
         /// <summary>

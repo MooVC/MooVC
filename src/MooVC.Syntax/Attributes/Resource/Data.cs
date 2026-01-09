@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Resource
         }
 
         /// <summary>
-        /// Gets or sets the comment on the Data.
+        /// Gets the comment on the Data.
         /// </summary>
         /// <value>The comment.</value>
         public Snippet Comment { get; internal set; } = Snippet.Empty;
@@ -46,27 +46,27 @@ namespace MooVC.Syntax.Attributes.Resource
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the mime type on the Data.
+        /// Gets the mime type on the Data.
         /// </summary>
         /// <value>The mime type.</value>
         public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the name on the Data.
+        /// Gets the name on the Data.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the type on the Data.
+        /// Gets the type on the Data.
         /// </summary>
         /// <value>The type.</value>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the value on the Data.
+        /// Gets the value on the Data.
         /// </summary>
         /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
@@ -82,23 +82,19 @@ namespace MooVC.Syntax.Attributes.Resource
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
             var element = new XElement(
-                "data",
-                Name.ToXmlAttribute("name"),
-                Type.ToXmlAttribute("type"),
-                MimeType.ToXmlAttribute("mimetype"),
-                new XElement("value", Value.ToString()));
+                nameof(Data),
+                Name.ToXmlAttribute(nameof(Name))
+                .And(Type.ToXmlAttribute(nameof(Type)))
+                .And(MimeType.ToXmlAttribute(nameof(MimeType)))
+                .And(new XElement(nameof(Validate), Value.ToString())));
 
             if (!Comment.IsEmpty)
             {
-                element.Add(new XElement("comment", Comment.ToString()));
+                element.Add(new XElement(nameof(Comment), Comment.ToString()));
             }
 
-            builder.Add(element);
-
-            return builder.ToImmutable();
+            return ImmutableArray.Create(element);
         }
 
         /// <summary>

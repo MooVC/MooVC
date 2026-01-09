@@ -15,7 +15,7 @@
     /// <summary>
     /// Represents a C# member syntax directive.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Directive

@@ -14,7 +14,7 @@ namespace MooVC.Syntax.Elements
     /// Represents a syntax element path.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Path
         : IValidatableObject
     {

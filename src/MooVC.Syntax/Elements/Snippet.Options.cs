@@ -13,7 +13,7 @@
         /// <summary>
         /// Defines options for the Snippet syntax element.
         /// </summary>
-        [AutoInitiateWith(nameof(Default))]
+        [AutoInitializeWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -24,7 +24,7 @@
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets or sets the block on the Options.
+            /// Gets the block on the Options.
             /// </summary>
             /// <value>The block.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsBlockRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
@@ -38,14 +38,14 @@
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the max length on the Options.
+            /// Gets the max length on the Options.
             /// </summary>
             /// <value>The max length.</value>
             [Range(120, 255, ErrorMessageResourceName = nameof(OptionsMaxLengthOutOfRange), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public byte MaxLength { get; internal set; } = 155;
 
             /// <summary>
-            /// Gets or sets the whitespace on the Options.
+            /// Gets the whitespace on the Options.
             /// </summary>
             /// <value>The whitespace.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(OptionsWhitespaceRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]

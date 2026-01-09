@@ -14,7 +14,7 @@
     /// Represents a C# generic syntax identifier.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Identifier
         : IValidatableObject
     {

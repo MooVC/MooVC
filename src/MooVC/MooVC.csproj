@@ -2,6 +2,7 @@
   <PropertyGroup>
     <Description>A collection of functionalities common to many applications, gathered to support the rapid development of a wide variety of applications targeting multiple platforms.</Description>
     <NoWarn>CS0809;S3236</NoWarn>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />

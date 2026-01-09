@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the condition on the Property.
+        /// Gets the condition on the Property.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
@@ -47,14 +47,14 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Property.
+        /// Gets the name on the Property.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the value on the Property.
+        /// Gets the value on the Property.
         /// </summary>
         /// <value>The value.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
@@ -70,14 +70,10 @@ namespace MooVC.Syntax.Attributes.Project
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 Name.ToXmlElementName(),
                 Condition.ToXmlAttribute(nameof(Condition)),
                 Value.ToString()));
-
-            return builder.ToImmutable();
         }
 
         /// <summary>

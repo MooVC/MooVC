@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Solution
         }
 
         /// <summary>
-        /// Gets or sets the id on the File.
+        /// Gets the id on the File.
         /// </summary>
         /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
@@ -46,14 +46,14 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the File.
+        /// Gets the name on the File.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the path on the File.
+        /// Gets the path on the File.
         /// </summary>
         /// <value>The path.</value>
         [Descriptor("At")]
@@ -70,15 +70,11 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(File),
-                Id.ToXmlAttribute(nameof(Id)),
-                Name.ToXmlAttribute(nameof(Name)),
-                Path.ToXmlAttribute(nameof(Path))));
-
-            return builder.ToImmutable();
+                Id.ToXmlAttribute(nameof(Id))
+                .And(Name.ToXmlAttribute(nameof(Name))
+                .And(Path.ToXmlAttribute(nameof(Path))))));
         }
 
         /// <summary>

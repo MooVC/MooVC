@@ -9,9 +9,9 @@ public sealed class WhenWithParametersIsCalled
     public void GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        TaskParameter existing = TargetTaskTestsData.CreateParameter();
+        Parameter existing = TargetTaskTestsData.CreateParameter();
 
-        var additional = new TaskParameter
+        var additional = new Parameter
         {
             Name = new Identifier("Other"),
             Value = Snippet.From("Value"),

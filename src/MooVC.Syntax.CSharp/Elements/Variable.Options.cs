@@ -15,7 +15,7 @@
         /// <summary>
         /// Defines options for the Variable C# syntax element.
         /// </summary>
-        [AutoInitiateWith(nameof(Camel))]
+        [AutoInitializeWith(nameof(Camel))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options

@@ -12,7 +12,7 @@
         /// Represents a syntax element casing.
         /// </summary>
         [Monify(Type = typeof(int))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Casing
         {
             /// <summary>

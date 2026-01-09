@@ -16,7 +16,7 @@
     /// <summary>
     /// Represents a C# syntax element symbol.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Symbol

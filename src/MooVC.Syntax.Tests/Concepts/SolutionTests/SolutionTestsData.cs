@@ -25,7 +25,7 @@ internal static class SolutionTestsData
     public const string DefaultPropertyValue = "Value";
 
     public static Solution Create(
-        Configuration? configuration = default,
+        Configurations? configurations = default,
         File? file = default,
         Folder? folder = default,
         Item? item = default,
@@ -34,21 +34,12 @@ internal static class SolutionTestsData
     {
         return new Solution
         {
-            Configurations = configuration is null ? [CreateConfiguration()] : [configuration],
+            Configurations = configurations is null ? Configurations.Default : configurations,
             Files = file is null ? [CreateFile()] : [file],
             Folders = folder is null ? [CreateFolder()] : [folder],
             Items = item is null ? [CreateItem()] : [item],
             Projects = project is null ? [CreateProject()] : [project],
             Properties = property is null ? [CreateProperty()] : [property],
-        };
-    }
-
-    public static Configuration CreateConfiguration()
-    {
-        return new Configuration
-        {
-            Name = Snippet.From(DefaultConfigurationName),
-            Platform = Snippet.From(DefaultConfigurationPlatform),
         };
     }
 

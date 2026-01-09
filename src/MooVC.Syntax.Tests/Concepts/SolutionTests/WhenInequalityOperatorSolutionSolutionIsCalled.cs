@@ -38,7 +38,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
-        Solution right = SolutionTestsData.Create(configuration: new Configuration { Name = Snippet.From("Other") });
+        Solution right = SolutionTestsData.Create(configurations: new Configurations());
 
         // Act
         bool result = left != right;

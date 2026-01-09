@@ -27,7 +27,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUndefinedConfigurationThenValidationErrorReturned()
     {
         // Arrange
-        Solution subject = SolutionTestsData.Create(configuration: Configuration.Undefined);
+        Solution subject = SolutionTestsData.Create(configurations: Configurations.Default);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

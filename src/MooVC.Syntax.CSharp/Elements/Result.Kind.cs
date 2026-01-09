@@ -12,7 +12,7 @@
         /// Represents return modifiers that precede the return type in a C# signature.
         /// </summary>
         [Monify(Type = typeof(string))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Kind
         {
             /// <summary>

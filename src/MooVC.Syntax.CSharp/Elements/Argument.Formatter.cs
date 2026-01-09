@@ -15,7 +15,7 @@
         /// Represents a C# syntax element formatter.
         /// </summary>
         [Monify(Type = typeof(string))]
-        [SkipAutoInstantiation]
+        [SkipAutoInitialization]
         public sealed partial class Formatter
         {
             /// <summary>

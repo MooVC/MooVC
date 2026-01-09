@@ -33,20 +33,20 @@ namespace MooVC.Syntax.Attributes.Project
         }
 
         /// <summary>
-        /// Gets or sets the condition on the Item.
+        /// Gets the condition on the Item.
         /// </summary>
         /// <value>The condition.</value>
         [Descriptor("OnCondition")]
         public Snippet Condition { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the exclude on the Item.
+        /// Gets the exclude on the Item.
         /// </summary>
         /// <value>The exclude.</value>
         public Snippet Exclude { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the include on the Item.
+        /// Gets the include on the Item.
         /// </summary>
         /// <value>The include.</value>
         public Snippet Include { get; internal set; } = Snippet.Empty;
@@ -59,43 +59,43 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the keep duplicates on the Item.
+        /// Gets the keep duplicates on the Item.
         /// </summary>
         /// <value>The keep duplicates.</value>
         public bool KeepDuplicates { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the match on metadata on the Item.
+        /// Gets the match on metadata on the Item.
         /// </summary>
         /// <value>The match on metadata.</value>
         public Snippet MatchOnMetadata { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the match on metadata options on the Item.
+        /// Gets the match on metadata options on the Item.
         /// </summary>
         /// <value>The match on metadata options.</value>
         public Snippet MatchOnMetadataOptions { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the metadata on the Item.
+        /// Gets the metadata on the Item.
         /// </summary>
         /// <value>The metadata.</value>
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
         /// <summary>
-        /// Gets or sets the remove on the Item.
+        /// Gets the remove on the Item.
         /// </summary>
         /// <value>The remove.</value>
         public Snippet Remove { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the remove metadata on the Item.
+        /// Gets the remove metadata on the Item.
         /// </summary>
         /// <value>The remove metadata.</value>
         public Snippet RemoveMetadata { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the update on the Item.
+        /// Gets the update on the Item.
         /// </summary>
         /// <value>The update.</value>
         public Snippet Update { get; internal set; } = Snippet.Empty;
@@ -116,22 +116,18 @@ namespace MooVC.Syntax.Attributes.Project
                 .SelectMany(entry => entry.ToFragments())
                 .ToArray();
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Item),
-                Condition.ToXmlAttribute(nameof(Condition)),
-                Exclude.ToXmlAttribute(nameof(Exclude)),
-                Include.ToXmlAttribute(nameof(Include)),
-                KeepDuplicates.ToXmlAttribute(nameof(KeepDuplicates)),
-                MatchOnMetadata.ToXmlAttribute(nameof(MatchOnMetadata)),
-                MatchOnMetadataOptions.ToXmlAttribute(nameof(MatchOnMetadataOptions)),
-                Remove.ToXmlAttribute(nameof(Remove)),
-                RemoveMetadata.ToXmlAttribute(nameof(RemoveMetadata)),
-                Update.ToXmlAttribute(nameof(Update)),
-                metadata));
-
-            return builder.ToImmutable();
+                Condition.ToXmlAttribute(nameof(Condition))
+                .And(Exclude.ToXmlAttribute(nameof(Exclude)))
+                .And(Include.ToXmlAttribute(nameof(Include)))
+                .And(KeepDuplicates.ToXmlAttribute(nameof(KeepDuplicates)))
+                .And(MatchOnMetadata.ToXmlAttribute(nameof(MatchOnMetadata)))
+                .And(MatchOnMetadataOptions.ToXmlAttribute(nameof(MatchOnMetadataOptions)))
+                .And(Remove.ToXmlAttribute(nameof(Remove)))
+                .And(RemoveMetadata.ToXmlAttribute(nameof(RemoveMetadata)))
+                .And(Update.ToXmlAttribute(nameof(Update)))
+                .And(metadata)));
         }
 
         /// <summary>

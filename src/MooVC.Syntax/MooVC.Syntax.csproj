@@ -7,6 +7,7 @@
     <Nullable>disable</Nullable>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferenceDependencies</TargetsForTfmSpecificContentInPackage>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fluentify">
@@ -33,6 +34,11 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
+    <Compile Update="Attributes\Solution\Configurations.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Configurations.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Concepts\Construct.Resources.Designer.cs">
       <DependentUpon>Construct.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -90,6 +96,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Attributes\Solution\Configurations.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Configurations.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Concepts\Construct.Resources.resx">
       <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

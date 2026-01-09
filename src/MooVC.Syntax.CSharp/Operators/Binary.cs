@@ -16,7 +16,7 @@
     /// <summary>
     /// Represents a C# operator syntax binary.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Binary

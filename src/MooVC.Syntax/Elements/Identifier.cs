@@ -14,7 +14,7 @@
     /// Represents a syntax element identifier.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Identifier
         : IComparable<Identifier>,
           IValidatableObject

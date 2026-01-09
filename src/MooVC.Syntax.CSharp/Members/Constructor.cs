@@ -18,7 +18,7 @@ namespace MooVC.Syntax.CSharp.Members
     /// <summary>
     /// Represents a C# member syntax constructor.
     /// </summary>
-    [AutoInitiateWith(nameof(Undefined))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
     public sealed partial class Constructor

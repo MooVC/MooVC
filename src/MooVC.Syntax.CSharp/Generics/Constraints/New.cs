@@ -10,7 +10,7 @@
     /// Represents a C# generic syntax new.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class New
     {
         /// <summary>

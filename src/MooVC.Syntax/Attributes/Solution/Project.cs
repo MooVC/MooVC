@@ -33,7 +33,7 @@ namespace MooVC.Syntax.Attributes.Solution
         }
 
         /// <summary>
-        /// Gets or sets the id on the Project.
+        /// Gets the id on the Project.
         /// </summary>
         /// <value>The id.</value>
         public Snippet Id { get; internal set; } = Snippet.Empty;
@@ -46,21 +46,21 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Project.
+        /// Gets the name on the Project.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the path on the Project.
+        /// Gets the path on the Project.
         /// </summary>
         /// <value>The path.</value>
         [Descriptor("At")]
         public Snippet Path { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the type on the Project.
+        /// Gets the type on the Project.
         /// </summary>
         /// <value>The type.</value>
         [Descriptor("OfType")]
@@ -77,16 +77,12 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            ImmutableArray<XElement>.Builder builder = ImmutableArray.CreateBuilder<XElement>(1);
-
-            builder.Add(new XElement(
+            return ImmutableArray.Create(new XElement(
                 nameof(Project),
-                Id.ToXmlAttribute(nameof(Id)),
-                Name.ToXmlAttribute(nameof(Name)),
-                Path.ToXmlAttribute(nameof(Path)),
-                Type.ToXmlAttribute(nameof(Type))));
-
-            return builder.ToImmutable();
+                Id.ToXmlAttribute(nameof(Id))
+                .And(Name.ToXmlAttribute(nameof(Name)))
+                .And(Path.ToXmlAttribute(nameof(Path)))
+                .And(Type.ToXmlAttribute(nameof(Type)))));
         }
 
         /// <summary>

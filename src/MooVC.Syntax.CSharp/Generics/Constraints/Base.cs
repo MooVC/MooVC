@@ -14,7 +14,7 @@
     /// Represents a C# generic syntax base.
     /// </summary>
     [Monify(Type = typeof(Symbol))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Base
         : IValidatableObject
     {

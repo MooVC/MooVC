@@ -14,7 +14,7 @@
     /// Represents a syntax element segment.
     /// </summary>
     [Monify(Type = typeof(string))]
-    [SkipAutoInstantiation]
+    [SkipAutoInitialization]
     public sealed partial class Segment
         : IComparable<Segment>,
           IValidatableObject
