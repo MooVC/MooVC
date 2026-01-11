@@ -77,11 +77,11 @@ namespace MooVC.Syntax.Attributes.Resource
             }
 
             return ImmutableArray.Create(new XElement(
-                nameof(Metadata),
-                Name.ToXmlAttribute(nameof(Name))
-                .And(Type.ToXmlAttribute(nameof(Type))
-                .And(MimeType.ToXmlAttribute(nameof(MimeType))
-                .And(new XElement(nameof(Value), Value.ToString()))))));
+                nameof(Metadata).ToLowerInvariant(),
+                Name.ToXmlAttribute(nameof(Name), toLower: true)
+                .And(Type.ToXmlAttribute(nameof(Type), toLower: true)
+                .And(MimeType.ToXmlAttribute(nameof(MimeType), toLower: true)
+                .And(new XElement(nameof(Value).ToLowerInvariant(), Value.ToString()))))));
         }
 
         /// <summary>

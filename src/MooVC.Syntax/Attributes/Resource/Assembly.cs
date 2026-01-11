@@ -65,9 +65,9 @@ namespace MooVC.Syntax.Attributes.Resource
             }
 
             return ImmutableArray.Create(new XElement(
-                nameof(Assembly),
-                Alias.ToXmlAttribute(nameof(Alias))
-                .And(Name.ToXmlAttribute(nameof(Name)))));
+                nameof(Assembly).ToLowerInvariant(),
+                Alias.ToXmlAttribute(nameof(Alias), toLower: true)
+                .And(Name.ToXmlAttribute(nameof(Name), toLower: true))));
         }
 
         /// <summary>

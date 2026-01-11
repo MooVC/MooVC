@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
+using static MooVC.Syntax.Attributes.Solution.Configurations;
 
 public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
 {
@@ -38,7 +39,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
-        Solution right = SolutionTestsData.Create(configurations: new Configurations());
+        Solution right = SolutionTestsData.Create(configurations: new Configurations { Builds = [BuildType.Debug] });
 
         // Act
         bool result = left != right;

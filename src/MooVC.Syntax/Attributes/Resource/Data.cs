@@ -83,15 +83,15 @@ namespace MooVC.Syntax.Attributes.Resource
             }
 
             var element = new XElement(
-                nameof(Data),
-                Name.ToXmlAttribute(nameof(Name))
-                .And(Type.ToXmlAttribute(nameof(Type)))
-                .And(MimeType.ToXmlAttribute(nameof(MimeType)))
-                .And(new XElement(nameof(Validate), Value.ToString())));
+                nameof(Data).ToLowerInvariant(),
+                Name.ToXmlAttribute(nameof(Name), toLower: true)
+                .And(Type.ToXmlAttribute(nameof(Type), toLower: true))
+                .And(MimeType.ToXmlAttribute(nameof(MimeType), toLower: true))
+                .And(new XElement(nameof(Value).ToLowerInvariant(), Value.ToString())));
 
             if (!Comment.IsEmpty)
             {
-                element.Add(new XElement(nameof(Comment), Comment.ToString()));
+                element.Add(new XElement(nameof(Comment).ToLowerInvariant(), Comment.ToString()));
             }
 
             return ImmutableArray.Create(element);

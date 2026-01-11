@@ -24,7 +24,7 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenUndefinedConfigurationThenValidationErrorReturned()
+    public void GivenUndefinedConfigurationThenNoValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(configurations: Configurations.Default);
@@ -35,9 +35,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Configurations));
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
     }
 
     [Fact]

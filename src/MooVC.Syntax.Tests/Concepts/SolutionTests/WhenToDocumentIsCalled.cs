@@ -26,14 +26,6 @@ public sealed class WhenToDocumentIsCalled
         // Arrange
         Solution subject = SolutionTestsData.Create();
 
-        var configurationElement = new XElement(
-            nameof(Configurations),
-            new XElement(nameof(BuildType), new XAttribute("Name", "Debug")),
-            new XElement(nameof(BuildType), new XAttribute("Name", "Release")),
-            new XElement(nameof(Platform), new XAttribute("Name", "x64")));
-
-        var configurationsElement = new XElement("Configurations", configurationElement);
-
         var fileElement = new XElement(
             nameof(File),
             new XAttribute(nameof(File.Id), SolutionTestsData.DefaultFileId),
@@ -74,7 +66,6 @@ public sealed class WhenToDocumentIsCalled
             new XDeclaration("1.0", "utf-8", "yes"),
             new XElement(
                 nameof(Solution),
-                configurationsElement,
                 itemsElement,
                 projectsElement,
                 propertiesElement));

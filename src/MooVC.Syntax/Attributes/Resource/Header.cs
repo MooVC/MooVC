@@ -64,9 +64,9 @@ namespace MooVC.Syntax.Attributes.Resource
             }
 
             return ImmutableArray.Create(new XElement(
-                "ResHeader",
-                Name.ToXmlAttribute(nameof(Name))
-                .And(new XElement(nameof(Value), Value.ToString()))));
+                "resheader",
+                Name.ToXmlAttribute(nameof(Name), toLower: true)
+                .And(new XElement(nameof(Value).ToLowerInvariant(), Value.ToString()))));
         }
 
         /// <summary>
