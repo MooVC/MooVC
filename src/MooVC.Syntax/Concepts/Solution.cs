@@ -141,9 +141,9 @@ namespace MooVC.Syntax.Concepts
 
         private void AppendItems(List<XElement> elements)
         {
-            ImmutableArray<XElement> files = Files.Get(file => file.ToFragments(), file => !file.IsUndefined);
-            ImmutableArray<XElement> folders = Folders.Get(folder => folder.ToFragments(), folder => !folder.IsUndefined);
-            ImmutableArray<XElement> items = Items.Get(item => item.ToFragments(), item => !item.IsUndefined);
+            ImmutableArray<XElement> files = Files.Get(file => !file.IsUndefined);
+            ImmutableArray<XElement> folders = Folders.Get(folder => !folder.IsUndefined);
+            ImmutableArray<XElement> items = Items.Get(item => !item.IsUndefined);
 
             if (!(files.IsDefaultOrEmpty && folders.IsEmpty && items.IsDefaultOrEmpty))
             {
@@ -153,7 +153,7 @@ namespace MooVC.Syntax.Concepts
 
         private void AppendProperties(List<XElement> elements)
         {
-            ImmutableArray<XElement> properties = Properties.Get(property => property.ToFragments(), property => !property.IsUndefined);
+            ImmutableArray<XElement> properties = Properties.Get(property => !property.IsUndefined);
 
             if (!properties.IsDefaultOrEmpty)
             {
@@ -163,7 +163,7 @@ namespace MooVC.Syntax.Concepts
 
         private void AppendProjects(List<XElement> elements)
         {
-            ImmutableArray<XElement> projects = Projects.Get(project => project.ToFragments(), project => !project.IsUndefined);
+            ImmutableArray<XElement> projects = Projects.Get(project => !project.IsUndefined);
 
             if (!projects.IsDefaultOrEmpty)
             {

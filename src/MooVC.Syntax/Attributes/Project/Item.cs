@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Project
     [Fluentify]
     [Valuify]
     public sealed partial class Item
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -59,21 +60,21 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets the keep duplicates on the Item.
+        /// Gets a value indicating whether or not to keep duplicates on the Item.
         /// </summary>
-        /// <value>The keep duplicates.</value>
+        /// <value>A value indicating whether or not to the keep duplicates on the Item.</value>
         public bool KeepDuplicates { get; internal set; }
 
         /// <summary>
-        /// Gets the match on metadata on the Item.
+        /// Gets a value indicating whether or not to match on metadata on the Item.
         /// </summary>
-        /// <value>The match on metadata.</value>
+        /// <value>A value indicating whether or not to match on metadata on the Item.</value>
         public Snippet MatchOnMetadata { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets the match on metadata options on the Item.
+        /// Gets a value indicating whether or not to match on metadata options on the Item.
         /// </summary>
-        /// <value>The match on metadata options.</value>
+        /// <value>A value indicating whether or not to match on metadata options on the Item.</value>
         public Snippet MatchOnMetadataOptions { get; internal set; } = Snippet.Empty;
 
         /// <summary>
@@ -111,10 +112,7 @@ namespace MooVC.Syntax.Attributes.Project
                 return ImmutableArray<XElement>.Empty;
             }
 
-            XElement[] metadata = Metadata
-                .Where(entry => !entry.IsUndefined)
-                .SelectMany(entry => entry.ToFragments())
-                .ToArray();
+            ImmutableArray<XElement> metadata = Metadata.Get(entry => !entry.IsUndefined);
 
             return ImmutableArray.Create(new XElement(
                 nameof(Item),

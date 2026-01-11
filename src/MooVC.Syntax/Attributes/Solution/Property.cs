@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Solution
     [Fluentify]
     [Valuify]
     public sealed partial class Property
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.

@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Project
     [Fluentify]
     [Valuify]
     public sealed partial class Sdk
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the unspecified instance.

@@ -70,10 +70,7 @@ namespace MooVC.Syntax.Attributes.Project
                 return ImmutableArray<XElement>.Empty;
             }
 
-            XElement[] properties = Properties
-                .Where(property => !property.IsUndefined)
-                .SelectMany(property => property.ToFragments())
-                .ToArray();
+            ImmutableArray<XElement> properties = Properties.Get(property => !property.IsUndefined);
 
             return ImmutableArray.Create(new XElement(
                 nameof(PropertyGroup),

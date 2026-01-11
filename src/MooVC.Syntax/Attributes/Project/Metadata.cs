@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Project
     [Fluentify]
     [Valuify]
     public sealed partial class Metadata
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.

@@ -16,10 +16,6 @@
         /// </summary>
         /// <typeparam name="T">The type of elements in the source array. Must be a reference type.</typeparam>
         /// <param name="subjects">The source immutable array of elements to process. Must not be the default value.</param>
-        /// <param name="fragments">
-        /// A function that, given an element of type <typeparamref name="T"/>, returns an immutable array of <see cref="XElement"/>
-        /// fragments to include in the result.
-        /// </param>
         /// <param name="isDefined">
         /// A predicate that determines whether a given element should be included. Only elements for which this returns
         /// <see langword="true"/> are processed.
@@ -36,9 +32,8 @@
         /// </remarks>
         public static ImmutableArray<XElement> Get<T>(
             this ImmutableArray<T> subjects,
-            Func<T, ImmutableArray<XElement>> fragments,
             Predicate<T> isDefined)
-            where T : class
+            where T : IProduceXml
         {
             if (subjects.IsDefaultOrEmpty)
             {
@@ -47,7 +42,7 @@
 
             return subjects
                 .Where(item => isDefined(item))
-                .SelectMany(item => fragments(item))
+                .SelectMany(item => item.ToFragments())
                 .ToImmutableArray();
         }
     }

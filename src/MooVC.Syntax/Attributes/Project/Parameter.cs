@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Project
     [Fluentify]
     [Valuify]
     public sealed partial class Parameter
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.

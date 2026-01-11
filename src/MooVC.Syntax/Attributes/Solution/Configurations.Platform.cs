@@ -21,7 +21,8 @@
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Platform
-            : IValidatableObject
+            : IProduceXml,
+              IValidatableObject
         {
             /// <summary>
             /// Represents an unspecified or unknown platform value.

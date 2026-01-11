@@ -22,7 +22,8 @@
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class BuildType
-            : IValidatableObject
+            : IProduceXml,
+              IValidatableObject
         {
             /// <summary>
             /// Represents a build type with no name specified.

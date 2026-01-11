@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Project
     [Fluentify]
     [Valuify]
     public sealed partial class TargetTask
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -87,10 +88,7 @@ namespace MooVC.Syntax.Attributes.Project
                 .Select(parameter => new XAttribute(parameter.Name.ToXmlElementName(), parameter.Value.ToString()))
                 .ToArray();
 
-            XElement[] outputs = Outputs
-                .Where(output => !output.IsUndefined)
-                .SelectMany(output => output.ToFragments())
-                .ToArray();
+            ImmutableArray<XElement> outputs = Outputs.Get(output => !output.IsUndefined);
 
             return ImmutableArray.Create(new XElement(
                 Name.ToXmlElementName(),

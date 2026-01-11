@@ -18,7 +18,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Resource
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.

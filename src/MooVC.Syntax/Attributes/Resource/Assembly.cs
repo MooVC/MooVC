@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Resource
     [Fluentify]
     [Valuify]
     public sealed partial class Assembly
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.

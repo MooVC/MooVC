@@ -18,7 +18,8 @@ namespace MooVC.Syntax.Attributes.Solution
     [Fluentify]
     [Valuify]
     public sealed partial class Folder
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -71,6 +72,12 @@ namespace MooVC.Syntax.Attributes.Solution
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
+        /// Gets the projects on the Folder.
+        /// </summary>
+        /// <value>The projects.</value>
+        public ImmutableArray<Project> Projects { get; internal set; } = ImmutableArray<Project>.Empty;
+
+        /// <summary>
         /// Performs the to fragments operation for the MSBuild solution attribute.
         /// </summary>
         /// <returns>The immutable array x element.</returns>
@@ -81,20 +88,10 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            XElement[] files = Files
-                .Where(file => !file.IsUndefined)
-                .SelectMany(file => file.ToFragments())
-                .ToArray();
-
-            XElement[] folders = Folders
-                .Where(folder => !folder.IsUndefined)
-                .SelectMany(folder => folder.ToFragments())
-                .ToArray();
-
-            XElement[] items = Items
-                .Where(item => !item.IsUndefined)
-                .SelectMany(item => item.ToFragments())
-                .ToArray();
+            ImmutableArray<XElement> files = Files.Get(file => !file.IsUndefined);
+            ImmutableArray<XElement> folders = Folders.Get(folder => !folder.IsUndefined);
+            ImmutableArray<XElement> items = Items.Get(item => !item.IsUndefined);
+            ImmutableArray<XElement> projects = Projects.Get(project => !project.IsUndefined);
 
             return ImmutableArray.Create(new XElement(
                 nameof(Folder),
@@ -102,7 +99,8 @@ namespace MooVC.Syntax.Attributes.Solution
                 .And(Name.ToXmlAttribute(nameof(Name)))
                 .And(files)
                 .And(folders)
-                .And(items)));
+                .And(items)
+                .And(projects)));
         }
 
         /// <summary>

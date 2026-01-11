@@ -19,7 +19,8 @@ namespace MooVC.Syntax.Attributes.Solution
     [Fluentify]
     [Valuify]
     public sealed partial class Configurations
-        : IValidatableObject
+        : IProduceXml,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -65,15 +66,8 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            XElement[] builds = Builds
-                .Where(build => !build.IsUnnamed)
-                .SelectMany(build => build.ToFragments())
-                .ToArray();
-
-            XElement[] platforms = Platforms
-                .Where(platform => !platform.IsUnspecified)
-                .SelectMany(platform => platform.ToFragments())
-                .ToArray();
+            ImmutableArray<XElement> builds = Builds.Get(build => !build.IsUnnamed);
+            ImmutableArray<XElement> platforms = Platforms.Get(platform => !platform.IsUnspecified);
 
             return ImmutableArray.Create(new XElement(nameof(Configurations), builds.Concat(platforms)));
         }
