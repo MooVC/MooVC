@@ -7,6 +7,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Identifier_Resources;
 

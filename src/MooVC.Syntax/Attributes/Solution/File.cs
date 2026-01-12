@@ -3,20 +3,19 @@ namespace MooVC.Syntax.Attributes.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Xml.Linq;
     using Fluentify;
+    using Monify;
     using MooVC.Syntax;
     using MooVC.Syntax.Elements;
-    using MooVC.Syntax.Validation;
-    using Valuify;
-    using Ignore = Valuify.IgnoreAttribute;
+    using static MooVC.Syntax.Attributes.Solution.File_Resources;
 
     /// <summary>
     /// Represents a MSBuild solution attribute file.
     /// </summary>
-    [Fluentify]
-    [Valuify]
+    [Monify(Type = typeof(string))]
+    [SkipAutoInitialization]
     public sealed partial class File
         : IProduceXml,
           IValidatableObject
@@ -24,41 +23,17 @@ namespace MooVC.Syntax.Attributes.Solution
         /// <summary>
         /// Gets the undefined instance.
         /// </summary>
-        public static readonly File Undefined = new File();
+        public static readonly File Undefined = string.Empty;
 
-        /// <summary>
-        /// Initializes a new instance of the File class.
-        /// </summary>
-        internal File()
-        {
-        }
-
-        /// <summary>
-        /// Gets the id on the File.
-        /// </summary>
-        /// <value>The id.</value>
-        public Snippet Id { get; internal set; } = Snippet.Empty;
+        private static readonly Regex rule = new Regex(
+            @"^(?![\\/])(?![A-Za-z]:)(?!\\\\)(?:(?:[^<>:""|?*\x00-\x1F\\/]+[\\/])*[^<>:""|?*\x00-\x1F\\/]+)$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         /// <summary>
         /// Gets a value indicating whether the File is undefined.
         /// </summary>
         /// <value>A value indicating whether the File is undefined.</value>
-        [Ignore]
         public bool IsUndefined => this == Undefined;
-
-        /// <summary>
-        /// Gets the name on the File.
-        /// </summary>
-        /// <value>The name.</value>
-        [Descriptor("Named")]
-        public Snippet Name { get; internal set; } = Snippet.Empty;
-
-        /// <summary>
-        /// Gets the path on the File.
-        /// </summary>
-        /// <value>The path.</value>
-        [Descriptor("At")]
-        public Snippet Path { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Performs the to fragments operation for the MSBuild solution attribute.
@@ -71,11 +46,7 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
-            return ImmutableArray.Create(new XElement(
-                nameof(File),
-                Id.ToXmlAttribute(nameof(Id))
-                .And(Name.ToXmlAttribute(nameof(Name))
-                .And(Path.ToXmlAttribute(nameof(Path))))));
+            return ImmutableArray.Create(new XElement(nameof(File), _value.ToXmlAttribute(nameof(Path))));
         }
 
         /// <summary>
@@ -102,14 +73,13 @@ namespace MooVC.Syntax.Attributes.Solution
         {
             if (IsUndefined)
             {
-                return Enumerable.Empty<ValidationResult>();
+                yield break;
             }
 
-            return validationContext
-                .Include(nameof(Id), _ => !Id.IsMultiLine, Id)
-                .And(nameof(Name), _ => !Name.IsMultiLine, Name)
-                .And(nameof(Path), _ => Path.IsSingleLine, Path)
-                .Results;
+            if (_value is null || _value.Length == 0 || !rule.IsMatch(_value))
+            {
+                yield return new ValidationResult(ValidateValueInvalid.Format(nameof(Path), nameof(File), _value), new[] { nameof(File) });
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+﻿namespace MooVC.Syntax.Formatting
 {
     using System;
     using System.Collections.Immutable;
@@ -53,6 +53,7 @@
         /// <param name="separator">The separator.</param>
         /// <param name="elements">The elements.</param>
         /// <param name="formatter">The formatter.</param>
+        /// <typeparam name="T">The type of the element to which the formatting is to be applied.</typeparam>
         /// <returns>The string.</returns>
         public static string Combine<T>(this string separator, ImmutableArray<T> elements, Func<T, string> formatter)
         {

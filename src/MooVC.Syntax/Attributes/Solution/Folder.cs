@@ -40,18 +40,6 @@ namespace MooVC.Syntax.Attributes.Solution
         public ImmutableArray<File> Files { get; internal set; } = ImmutableArray<File>.Empty;
 
         /// <summary>
-        /// Gets the folders on the Folder.
-        /// </summary>
-        /// <value>The folders.</value>
-        public ImmutableArray<Folder> Folders { get; internal set; } = ImmutableArray<Folder>.Empty;
-
-        /// <summary>
-        /// Gets the id on the Folder.
-        /// </summary>
-        /// <value>The id.</value>
-        public Snippet Id { get; internal set; } = Snippet.Empty;
-
-        /// <summary>
         /// Gets a value indicating whether the Folder is undefined.
         /// </summary>
         /// <value>A value indicating whether the Folder is undefined.</value>
@@ -69,7 +57,7 @@ namespace MooVC.Syntax.Attributes.Solution
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Snippet Name { get; internal set; } = Snippet.Empty;
+        public Path Name { get; internal set; } = Path.Root;
 
         /// <summary>
         /// Gets the projects on the Folder.
@@ -89,16 +77,13 @@ namespace MooVC.Syntax.Attributes.Solution
             }
 
             ImmutableArray<XElement> files = Files.Get(file => !file.IsUndefined);
-            ImmutableArray<XElement> folders = Folders.Get(folder => !folder.IsUndefined);
             ImmutableArray<XElement> items = Items.Get(item => !item.IsUndefined);
             ImmutableArray<XElement> projects = Projects.Get(project => !project.IsUndefined);
 
             return ImmutableArray.Create(new XElement(
                 nameof(Folder),
-                Id.ToXmlAttribute(nameof(Id))
-                .And(Name.ToXmlAttribute(nameof(Name)))
+                Name.ToXmlAttribute(nameof(Name))
                 .And(files)
-                .And(folders)
                 .And(items)
                 .And(projects)));
         }
@@ -132,10 +117,8 @@ namespace MooVC.Syntax.Attributes.Solution
 
             return validationContext
                 .IncludeIf(!Files.IsDefaultOrEmpty, nameof(Files), file => !file.IsUndefined, Files)
-                .AndIf(!Folders.IsDefaultOrEmpty, nameof(Folders), folder => !folder.IsUndefined, Folders)
-                .And(nameof(Id), _ => !Id.IsMultiLine, Id)
                 .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
-                .And(nameof(Name), _ => Name.IsSingleLine, Name)
+                .And(nameof(Name), Name)
                 .Results;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+﻿namespace MooVC.Syntax.Formatting
 {
     using System.Globalization;
     using Ardalis.GuardClauses;

@@ -27,7 +27,7 @@ public sealed class WhenToFragmentsIsCalled
         var expected = new XElement(
             nameof(Project),
             new XAttribute(nameof(Project.Id), ProjectTestsData.DefaultId),
-            new XAttribute(nameof(Project.Name), ProjectTestsData.DefaultName),
+            new XAttribute(nameof(Project.DisplayName), ProjectTestsData.DefaultName),
             new XAttribute(nameof(Project.Path), ProjectTestsData.DefaultPath),
             new XAttribute(nameof(Project.Type), ProjectTestsData.DefaultType));
 

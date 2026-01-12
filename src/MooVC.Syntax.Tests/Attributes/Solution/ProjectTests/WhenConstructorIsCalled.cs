@@ -12,7 +12,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Id.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Snippet.Empty);
+        subject.DisplayName.ShouldBe(Snippet.Empty);
         subject.Path.ShouldBe(Snippet.Empty);
         subject.Type.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
@@ -25,14 +25,14 @@ public sealed class WhenConstructorIsCalled
         var subject = new Project
         {
             Id = Snippet.From(ProjectTestsData.DefaultId),
-            Name = Snippet.From(ProjectTestsData.DefaultName),
+            DisplayName = Snippet.From(ProjectTestsData.DefaultName),
             Path = Snippet.From(ProjectTestsData.DefaultPath),
             Type = Snippet.From(ProjectTestsData.DefaultType),
         };
 
         // Assert
         subject.Id.ShouldBe(Snippet.From(ProjectTestsData.DefaultId));
-        subject.Name.ShouldBe(Snippet.From(ProjectTestsData.DefaultName));
+        subject.DisplayName.ShouldBe(Snippet.From(ProjectTestsData.DefaultName));
         subject.Path.ShouldBe(Snippet.From(ProjectTestsData.DefaultPath));
         subject.Type.ShouldBe(Snippet.From(ProjectTestsData.DefaultType));
         subject.IsUndefined.ShouldBeFalse();

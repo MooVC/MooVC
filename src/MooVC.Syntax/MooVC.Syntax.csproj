@@ -39,6 +39,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Configurations.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Attributes\Solution\File.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>File.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Attributes\Solution\Folder.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Folder.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Attributes\Solution\Project.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Project.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Concepts\Construct.Resources.Designer.cs">
       <DependentUpon>Construct.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -99,6 +114,18 @@
     <EmbeddedResource Update="Attributes\Solution\Configurations.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Configurations.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Attributes\Solution\File.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>File.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Attributes\Solution\Folder.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Folder.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Attributes\Solution\Project.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Project.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Concepts\Construct.Resources.resx">
       <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>

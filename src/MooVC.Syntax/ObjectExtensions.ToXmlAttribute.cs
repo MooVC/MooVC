@@ -2,12 +2,13 @@ namespace MooVC.Syntax
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Xml.Linq;
 
     /// <summary>
     /// Represents a syntax element snippet extensions.
     /// </summary>
-    internal static partial class StringExtensions
+    internal static partial class ObjectExtensions
     {
         /// <summary>
         /// Creates XML attributes for the syntax element.
@@ -17,22 +18,17 @@ namespace MooVC.Syntax
         /// <param name="include">An optional predicate that determines if the attrbibute should be added.</param>
         /// <param name="toLower">Denotes whether or not the attribute name should be in lower case.</param>
         /// <returns>The XML attributes.</returns>
-        public static IEnumerable<XAttribute> ToXmlAttribute(this string value, string name, Predicate<string> include = default, bool toLower = false)
+        [SuppressMessage("Style", "IDE0041:Use 'is null' check", Justification = "False Positive")]
+        public static IEnumerable<XAttribute> ToXmlAttribute<T>(this T value, string name, Predicate<T> include = default, bool toLower = false)
         {
-            if (string.IsNullOrEmpty(value) || !(include is null || include(value)))
+            if (ReferenceEquals(value, null) || !(include is null || include(value)))
             {
                 return XAttribute.EmptySequence;
             }
 
-            if (toLower)
-            {
-                name = name.ToLowerInvariant();
-            }
-
-            return new XAttribute[]
-            {
-                new XAttribute(name, value),
-            };
+            return value
+                .ToString()
+                .ToXmlAttribute(name, toLower: toLower);
         }
     }
 }

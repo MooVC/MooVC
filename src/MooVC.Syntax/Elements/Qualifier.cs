@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Elements.Qualifier_Resources;
 
@@ -42,6 +43,7 @@
         /// <summary>
         /// Gets the index on the Qualifier.
         /// </summary>
+        /// <param name="index">The element to retrieve from the Qualifier.</param>
         /// <value>The index.</value>
         public Segment this[int index] => _value[index];
 

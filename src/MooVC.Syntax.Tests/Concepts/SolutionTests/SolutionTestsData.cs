@@ -78,7 +78,7 @@ internal static class SolutionTestsData
         return new ProjectReference
         {
             Id = Snippet.From(DefaultProjectId),
-            Name = Snippet.From(DefaultProjectName),
+            DisplayName = Snippet.From(DefaultProjectName),
             Path = Snippet.From(DefaultProjectPath),
             Type = Snippet.From(DefaultProjectType),
         };

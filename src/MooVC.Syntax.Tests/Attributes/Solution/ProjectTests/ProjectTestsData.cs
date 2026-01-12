@@ -14,7 +14,7 @@ internal static class ProjectTestsData
         return new Project
         {
             Id = id ?? Snippet.From(DefaultId),
-            Name = name ?? Snippet.From(DefaultName),
+            DisplayName = name ?? Snippet.From(DefaultName),
             Path = path ?? Snippet.From(DefaultPath),
             Type = type ?? Snippet.From(DefaultType),
         };

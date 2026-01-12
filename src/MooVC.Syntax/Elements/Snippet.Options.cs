@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Fluentify;
+    using MooVC.Syntax.Formatting;
     using Valuify;
     using static MooVC.Syntax.Elements.Snippet_Resources;
 

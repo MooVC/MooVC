@@ -18,7 +18,7 @@ public sealed class WhenAtIsCalled
         result.ShouldNotBeSameAs(original);
         result.Path.ShouldBe(updated);
         result.Id.ShouldBe(original.Id);
-        result.Name.ShouldBe(original.Name);
+        result.DisplayName.ShouldBe(original.DisplayName);
         result.Type.ShouldBe(original.Type);
     }
 }

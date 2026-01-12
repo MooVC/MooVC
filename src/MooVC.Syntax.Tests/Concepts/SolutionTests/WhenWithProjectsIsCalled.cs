@@ -15,7 +15,7 @@ public sealed class WhenWithProjectsIsCalled
         var additional = new ProjectReference
         {
             Id = Snippet.From("OtherId"),
-            Name = Snippet.From("OtherName"),
+            DisplayName = Snippet.From("OtherName"),
             Path = Snippet.From("src/Other.csproj"),
             Type = Snippet.From("OtherType"),
         };

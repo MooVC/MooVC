@@ -54,7 +54,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Name));
+        results[0].MemberNames.ShouldContain(nameof(Project.DisplayName));
     }
 
     [Fact]

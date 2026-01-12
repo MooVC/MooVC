@@ -7,10 +7,8 @@ namespace MooVC.Syntax.Attributes.Solution
     using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
-    using static MooVC.Syntax.Attributes.Solution.Configurations;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -69,7 +67,7 @@ namespace MooVC.Syntax.Attributes.Solution
             ImmutableArray<XElement> builds = Builds.Get(build => !build.IsUnnamed);
             ImmutableArray<XElement> platforms = Platforms.Get(platform => !platform.IsUnspecified);
 
-            return ImmutableArray.Create(new XElement(nameof(Configurations), builds.Concat(platforms)));
+            return ImmutableArray.Create(new XElement(nameof(Configurations), builds.And(platforms)));
         }
 
         /// <summary>

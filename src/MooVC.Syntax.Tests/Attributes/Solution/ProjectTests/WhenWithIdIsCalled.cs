@@ -17,7 +17,7 @@ public sealed class WhenWithIdIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Id.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
+        result.DisplayName.ShouldBe(original.DisplayName);
         result.Path.ShouldBe(original.Path);
         result.Type.ShouldBe(original.Type);
     }

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+﻿namespace MooVC.Syntax.Formatting
 {
     using System;
     using System.Collections.Generic;
@@ -18,11 +18,9 @@
         /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this string value)
         {
-            ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(1);
+            var snippet = ImmutableArray.Create(value);
 
-            builder.Add(value);
-
-            return new Snippet(builder.ToImmutable());
+            return new Snippet(snippet);
         }
 
         /// <summary>

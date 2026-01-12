@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Attributes.Solution
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -37,7 +38,7 @@ namespace MooVC.Syntax.Attributes.Solution
         /// Gets the id on the Project.
         /// </summary>
         /// <value>The id.</value>
-        public Snippet Id { get; internal set; } = Snippet.Empty;
+        public Guid Id { get; internal set; } = Guid.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Project is undefined.
@@ -47,18 +48,34 @@ namespace MooVC.Syntax.Attributes.Solution
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
+        /// Gets the collection of supported builds for the current context.
+        /// </summary>
+        /// <value>
+        /// The collection of supported builds for the current context.
+        /// </value>
+        public ImmutableArray<Build> Builds { get; internal set; } = ImmutableArray<Build>.Empty;
+
+        /// <summary>
         /// Gets the name on the Project.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Snippet Name { get; internal set; } = Snippet.Empty;
+        public Name DisplayName { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the path on the Project.
         /// </summary>
         /// <value>The path.</value>
         [Descriptor("At")]
-        public Snippet Path { get; internal set; } = Snippet.Empty;
+        public RelativePath Path { get; internal set; } = RelativePath.Unspecified;
+
+        /// <summary>
+        /// Gets the collection of supported platforms for the current context.
+        /// </summary>
+        /// <value>
+        /// The collection of supported platforms for the current context.
+        /// </value>
+        public ImmutableArray<Platform> Platforms { get; internal set; } = ImmutableArray<Platform>.Empty;
 
         /// <summary>
         /// Gets the type on the Project.
@@ -78,12 +95,17 @@ namespace MooVC.Syntax.Attributes.Solution
                 return ImmutableArray<XElement>.Empty;
             }
 
+            ImmutableArray<XElement> builds = Builds.Get(build => !build.IsUndefined);
+            ImmutableArray<XElement> platforms = Platforms.Get(platform => !platform.IsUndefined);
+
             return ImmutableArray.Create(new XElement(
                 nameof(Project),
-                Id.ToXmlAttribute(nameof(Id))
-                .And(Name.ToXmlAttribute(nameof(Name)))
+                builds
+                .And(DisplayName.ToXmlAttribute(nameof(DisplayName), include: _ => !DisplayName.IsUnnamed))
+                .And(Id.ToXmlAttribute(nameof(Id), include: _ => Id != Guid.Empty))
                 .And(Path.ToXmlAttribute(nameof(Path)))
-                .And(Type.ToXmlAttribute(nameof(Type)))));
+                .And(platforms)
+                .And(Type.ToXmlAttribute(nameof(Type), include: _ => Type.IsSingleLine))));
         }
 
         /// <summary>
@@ -114,9 +136,10 @@ namespace MooVC.Syntax.Attributes.Solution
             }
 
             return validationContext
-                .Include(nameof(Id), _ => !Id.IsMultiLine, Id)
-                .And(nameof(Name), _ => !Name.IsMultiLine, Name)
-                .And(nameof(Path), _ => Path.IsSingleLine, Path)
+                .IncludeIf(!Builds.IsDefaultOrEmpty, nameof(Builds), build => !build.IsUndefined, Builds)
+                .And(nameof(DisplayName), _ => !DisplayName.IsUnnamed, DisplayName)
+                .And(nameof(Path), _ => !Path.IsUnspecified, Path)
+                .AndIf(!Platforms.IsDefaultOrEmpty, nameof(Platforms), platform => !platform.IsUndefined, Platforms)
                 .And(nameof(Type), _ => !Type.IsMultiLine, Type)
                 .Results;
         }

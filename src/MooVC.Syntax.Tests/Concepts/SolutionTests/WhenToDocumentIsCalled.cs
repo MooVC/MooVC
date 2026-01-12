@@ -49,7 +49,7 @@ public sealed class WhenToDocumentIsCalled
         var projectElement = new XElement(
             nameof(Project),
             new XAttribute(nameof(Project.Id), SolutionTestsData.DefaultProjectId),
-            new XAttribute(nameof(Project.Name), SolutionTestsData.DefaultProjectName),
+            new XAttribute(nameof(Project.DisplayName), SolutionTestsData.DefaultProjectName),
             new XAttribute(nameof(Project.Path), SolutionTestsData.DefaultProjectPath),
             new XAttribute(nameof(Project.Type), SolutionTestsData.DefaultProjectType));
 
