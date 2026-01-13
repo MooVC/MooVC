@@ -25,7 +25,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
-        Solution right = SolutionTestsData.Create(folder: new Folder { Name = Snippet.From("Other") });
+        Solution right = SolutionTestsData.Create(folder: new Folder { Name = "Other" });
 
         // Act
         int leftHash = left.GetHashCode();

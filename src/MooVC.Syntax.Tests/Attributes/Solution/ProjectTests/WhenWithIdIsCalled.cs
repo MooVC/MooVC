@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
-using MooVC.Syntax.Elements;
+using System;
 
 public sealed class WhenWithIdIsCalled
 {
@@ -8,8 +8,10 @@ public sealed class WhenWithIdIsCalled
     public void GivenIdThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create();
-        var updated = Snippet.From("OtherId");
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project original = ProjectTestsData.Create(build: build, platform: platform);
+        var updated = Guid.Parse("D93599B1-587C-450E-9B38-8F04695DB2E1");
 
         // Act
         Project result = original.WithId(updated);
@@ -20,5 +22,7 @@ public sealed class WhenWithIdIsCalled
         result.DisplayName.ShouldBe(original.DisplayName);
         result.Path.ShouldBe(original.Path);
         result.Type.ShouldBe(original.Type);
+        result.Builds.ShouldBe(original.Builds);
+        result.Platforms.ShouldBe(original.Platforms);
     }
 }

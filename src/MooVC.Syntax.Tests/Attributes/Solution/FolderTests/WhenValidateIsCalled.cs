@@ -1,9 +1,7 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -24,10 +22,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenMultiLineIdThenValidationErrorReturned()
+    public void GivenInvalidNameThenValidationErrorReturned()
     {
         // Arrange
-        Folder subject = FolderTestsData.Create(id: Snippet.From($"alpha{Environment.NewLine}beta"));
+        Folder subject = FolderTestsData.Create(name: new Folder.Path("invalid"));
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -37,14 +35,14 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Id));
+        results[0].MemberNames.ShouldContain(nameof(Folder.Path));
     }
 
     [Fact]
-    public void GivenMultiLineNameThenValidationErrorReturned()
+    public void GivenUndefinedFileThenValidationErrorReturned()
     {
         // Arrange
-        Folder subject = FolderTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
+        Folder subject = FolderTestsData.Create(file: File.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -54,6 +52,6 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Name));
+        results[0].MemberNames.ShouldContain(nameof(Folder.Files));
     }
 }

@@ -1,28 +1,24 @@
 namespace MooVC.Syntax.Concepts.SolutionTests;
 
+using System;
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
 using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
 internal static class SolutionTestsData
 {
-    public const string DefaultConfigurationName = "Debug";
-    public const string DefaultConfigurationPlatform = "AnyCPU";
-    public const string DefaultFileId = "FileId";
-    public const string DefaultFileName = "FileName";
     public const string DefaultFilePath = "src/file.cs";
-    public const string DefaultFolderId = "FolderId";
-    public const string DefaultFolderName = "FolderName";
+    public const string DefaultFolderName = "/src/";
     public const string DefaultItemId = "ItemId";
     public const string DefaultItemName = "ItemName";
     public const string DefaultItemPath = "assets/item.txt";
     public const string DefaultItemType = "ItemType";
-    public const string DefaultProjectId = "ProjectId";
     public const string DefaultProjectName = "ProjectName";
     public const string DefaultProjectPath = "src/Project.csproj";
     public const string DefaultProjectType = "CSharp";
     public const string DefaultPropertyName = "Property";
     public const string DefaultPropertyValue = "Value";
+    public static readonly Guid DefaultProjectId = Guid.Parse("6BF8B40B-7457-4B19-B93F-2FE3F68E9BE1");
 
     public static Solution Create(
         Configurations? configurations = default,
@@ -45,20 +41,14 @@ internal static class SolutionTestsData
 
     public static File CreateFile()
     {
-        return new File
-        {
-            Id = Snippet.From(DefaultFileId),
-            Name = Snippet.From(DefaultFileName),
-            Path = Snippet.From(DefaultFilePath),
-        };
+        return new File(DefaultFilePath);
     }
 
     public static Folder CreateFolder()
     {
         return new Folder
         {
-            Id = Snippet.From(DefaultFolderId),
-            Name = Snippet.From(DefaultFolderName),
+            Name = new Folder.Path(DefaultFolderName),
         };
     }
 
@@ -77,9 +67,9 @@ internal static class SolutionTestsData
     {
         return new ProjectReference
         {
-            Id = Snippet.From(DefaultProjectId),
-            DisplayName = Snippet.From(DefaultProjectName),
-            Path = Snippet.From(DefaultProjectPath),
+            Id = DefaultProjectId,
+            DisplayName = new ProjectReference.Name(DefaultProjectName),
+            Path = new ProjectReference.RelativePath(DefaultProjectPath),
             Type = Snippet.From(DefaultProjectType),
         };
     }

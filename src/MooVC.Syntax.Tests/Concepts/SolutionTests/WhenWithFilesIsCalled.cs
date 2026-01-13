@@ -2,7 +2,6 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenWithFilesIsCalled
 {
@@ -12,12 +11,7 @@ public sealed class WhenWithFilesIsCalled
         // Arrange
         File existing = SolutionTestsData.CreateFile();
 
-        var additional = new File
-        {
-            Id = Snippet.From("OtherId"),
-            Name = Snippet.From("OtherName"),
-            Path = Snippet.From("src/other.cs"),
-        };
+        var additional = new File("src/other.cs");
 
         Solution original = SolutionTestsData.Create(file: existing);
 

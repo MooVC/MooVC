@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
-        File subject = FileTestsData.Create();
+        var subject = new File(FileTestsData.DefaultPath);
 
         // Act
         bool result = subject.Equals(new object());
@@ -19,8 +19,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        File subject = FileTestsData.Create();
-        object other = FileTestsData.Create();
+        var subject = new File(FileTestsData.DefaultPath);
+        object other = new File(FileTestsData.DefaultPath);
 
         // Act
         bool result = subject.Equals(other);

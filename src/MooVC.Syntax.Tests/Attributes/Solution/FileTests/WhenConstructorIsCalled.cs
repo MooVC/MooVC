@@ -1,37 +1,42 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
-    public void GivenDefaultsThenFileIsUndefined()
+    public void GivenNullThenInstanceIsCreated()
     {
-        // Act
-        var subject = new File();
+        // Arrange
+        string? value = default;
 
-        // Assert
-        subject.Id.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Path.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        // Act & Assert
+        _ = Should.NotThrow(() => _ = new File(value));
     }
 
     [Fact]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public void GivenEmptyThenFileIsUndefined()
     {
+        // Arrange
+        string value = string.Empty;
+
         // Act
-        var subject = new File
-        {
-            Id = Snippet.From(FileTestsData.DefaultId),
-            Name = Snippet.From(FileTestsData.DefaultName),
-            Path = Snippet.From(FileTestsData.DefaultPath),
-        };
+        var subject = new File(value);
 
         // Assert
-        subject.Id.ShouldBe(Snippet.From(FileTestsData.DefaultId));
-        subject.Name.ShouldBe(Snippet.From(FileTestsData.DefaultName));
-        subject.Path.ShouldBe(Snippet.From(FileTestsData.DefaultPath));
+        subject.IsUndefined.ShouldBeTrue();
+        subject.ToString().ShouldBe(string.Empty);
+    }
+
+    [Fact]
+    public void GivenValueThenFileIsNotUndefined()
+    {
+        // Arrange
+        string value = FileTestsData.DefaultPath;
+
+        // Act
+        var subject = new File(value);
+
+        // Assert
         subject.IsUndefined.ShouldBeFalse();
+        subject.ToFragments().ShouldNotBeEmpty();
     }
 }

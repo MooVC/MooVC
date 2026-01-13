@@ -7,6 +7,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
@@ -36,19 +37,19 @@
         }
 
         /// <summary>
-        /// Gets or sets the behaviours on the Event.
+        /// Gets the behaviours on the Event.
         /// </summary>
         /// <value>The behaviours.</value>
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
         /// <summary>
-        /// Gets or sets the extensibility on the Event.
+        /// Gets the extensibility on the Event.
         /// </summary>
         /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
         /// <summary>
-        /// Gets or sets the handler on the Event.
+        /// Gets the handler on the Event.
         /// </summary>
         /// <value>The handler.</value>
         public Symbol Handler { get; internal set; } = Symbol.Undefined;
@@ -61,14 +62,14 @@
         public bool IsUndefind => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Event.
+        /// Gets the name on the Event.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the scope on the Event.
+        /// Gets the scope on the Event.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
@@ -76,7 +77,7 @@
         /// <summary>
         /// Defines the string operator for the Event.
         /// </summary>
-        /// <param name="@event">The event.</param>
+        /// <param name="event">The event.</param>
         /// <returns>The string.</returns>
         public static implicit operator string(Event @event)
         {
@@ -88,7 +89,7 @@
         /// <summary>
         /// Defines the Snippet operator for the Event.
         /// </summary>
-        /// <param name="@event">The event.</param>
+        /// <param name="event">The event.</param>
         /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Event @event)
         {

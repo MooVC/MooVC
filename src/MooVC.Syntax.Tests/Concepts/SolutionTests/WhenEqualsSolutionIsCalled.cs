@@ -37,7 +37,7 @@ public sealed class WhenEqualsSolutionIsCalled
     {
         // Arrange
         Solution subject = SolutionTestsData.Create();
-        Solution other = SolutionTestsData.Create(file: new File { Path = Snippet.From("other.cs") });
+        Solution other = SolutionTestsData.Create(file: "other.cs");
 
         // Act
         bool result = subject.Equals(other);

@@ -1,15 +1,15 @@
 namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenAtIsCalled
 {
     [Fact]
     public void GivenPathThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create();
-        var updated = Snippet.From("src/Other.csproj");
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project original = ProjectTestsData.Create(build: build, platform: platform);
+        var updated = new Project.RelativePath("src/Other.csproj");
 
         // Act
         Project result = original.At(updated);
@@ -20,5 +20,7 @@ public sealed class WhenAtIsCalled
         result.Id.ShouldBe(original.Id);
         result.DisplayName.ShouldBe(original.DisplayName);
         result.Type.ShouldBe(original.Type);
+        result.Builds.ShouldBe(original.Builds);
+        result.Platforms.ShouldBe(original.Platforms);
     }
 }

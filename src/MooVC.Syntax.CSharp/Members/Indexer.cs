@@ -8,6 +8,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Indexer_Resources;
@@ -43,33 +44,33 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the behaviours on the Indexer.
+        /// Gets the behaviours on the Indexer.
         /// </summary>
         /// <value>The behaviours.</value>
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
         /// <summary>
-        /// Gets or sets the extensibility on the Indexer.
+        /// Gets the extensibility on the Indexer.
         /// </summary>
         /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
 
         /// <summary>
-        /// Gets or sets the parameter on the Indexer.
+        /// Gets the parameter on the Indexer.
         /// </summary>
         /// <value>The parameter.</value>
         [Descriptor("Accepts")]
         public Parameter Parameter { get; internal set; } = Parameter.Undefined;
 
         /// <summary>
-        /// Gets or sets the result on the Indexer.
+        /// Gets the result on the Indexer.
         /// </summary>
         /// <value>The result.</value>
         [Descriptor("Returns")]
         public Result Result { get; internal set; } = Result.Void;
 
         /// <summary>
-        /// Gets or sets the scope on the Indexer.
+        /// Gets the scope on the Indexer.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;

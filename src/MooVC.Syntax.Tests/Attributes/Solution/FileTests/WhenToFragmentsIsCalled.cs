@@ -22,13 +22,11 @@ public sealed class WhenToFragmentsIsCalled
     public void GivenValuesThenReturnsFragment()
     {
         // Arrange
-        File subject = FileTestsData.Create();
+        var subject = new File(FileTestsData.DefaultPath);
 
         var expected = new XElement(
             nameof(File),
-            new XAttribute(nameof(File.Id), FileTestsData.DefaultId),
-            new XAttribute(nameof(File.Name), FileTestsData.DefaultName),
-            new XAttribute(nameof(File.Path), FileTestsData.DefaultPath));
+            new XAttribute("Path", FileTestsData.DefaultPath));
 
         // Act
         ImmutableArray<XElement> result = subject.ToFragments();

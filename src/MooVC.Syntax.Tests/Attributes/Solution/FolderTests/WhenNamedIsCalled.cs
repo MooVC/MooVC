@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenNamedIsCalled
 {
     [Fact]
@@ -9,7 +7,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Folder original = FolderTestsData.Create();
-        var updated = Snippet.From("OtherName");
+        var updated = new Folder.Path("/Other/");
 
         // Act
         Folder result = original.Named(updated);
@@ -17,9 +15,8 @@ public sealed class WhenNamedIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(updated);
-        result.Id.ShouldBe(original.Id);
         result.Files.ShouldBe(original.Files);
-        result.Folders.ShouldBe(original.Folders);
         result.Items.ShouldBe(original.Items);
+        result.Projects.ShouldBe(original.Projects);
     }
 }

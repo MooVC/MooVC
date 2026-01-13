@@ -10,6 +10,7 @@
     using Monify;
     using MooVC.Syntax.CSharp;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Variable_Resources;
 

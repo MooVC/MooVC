@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenConstructorIsCalled
 {
     [Fact]
@@ -12,10 +10,9 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Files.ShouldBeEmpty();
-        subject.Folders.ShouldBeEmpty();
-        subject.Id.ShouldBe(Snippet.Empty);
         subject.Items.ShouldBeEmpty();
-        subject.Name.ShouldBe(Snippet.Empty);
+        subject.Projects.ShouldBeEmpty();
+        subject.Name.ShouldBe(Folder.Path.Root);
         subject.IsUndefined.ShouldBeTrue();
     }
 
@@ -24,25 +21,23 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         File file = FolderTestsData.CreateFile();
-        Folder folder = FolderTestsData.CreateChildFolder();
         Item item = FolderTestsData.CreateItem();
+        Project project = FolderTestsData.CreateProject();
 
         // Act
         var subject = new Folder
         {
             Files = [file],
-            Folders = [folder],
-            Id = Snippet.From(FolderTestsData.DefaultId),
             Items = [item],
-            Name = Snippet.From(FolderTestsData.DefaultName),
+            Name = new Folder.Path(FolderTestsData.DefaultName),
+            Projects = [project],
         };
 
         // Assert
         subject.Files.ShouldBe(new[] { file });
-        subject.Folders.ShouldBe(new[] { folder });
-        subject.Id.ShouldBe(Snippet.From(FolderTestsData.DefaultId));
         subject.Items.ShouldBe(new[] { item });
-        subject.Name.ShouldBe(Snippet.From(FolderTestsData.DefaultName));
+        subject.Name.ShouldBe(new Folder.Path(FolderTestsData.DefaultName));
+        subject.Projects.ShouldBe(new[] { project });
         subject.IsUndefined.ShouldBeFalse();
     }
 }

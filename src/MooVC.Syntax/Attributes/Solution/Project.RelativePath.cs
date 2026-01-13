@@ -38,6 +38,15 @@
             public bool IsUnspecified => this == Unspecified;
 
             /// <summary>
+            /// Returns the path verbatim.
+            /// </summary>
+            /// <returns>The path verbatim.</returns>
+            public override string ToString()
+            {
+                return _value;
+            }
+
+            /// <summary>
             /// Validates the current object and returns a collection of validation results that describe any validation errors.
             /// </summary>
             /// <param name="validationContext">

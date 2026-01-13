@@ -11,6 +11,7 @@
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
@@ -32,25 +33,25 @@
         }
 
         /// <summary>
-        /// Gets or sets the constructors on the Reference.
+        /// Gets the constructors on the Reference.
         /// </summary>
         /// <value>The constructors.</value>
         public ImmutableArray<Constructor> Constructors { get; internal set; } = ImmutableArray<Constructor>.Empty;
 
         /// <summary>
-        /// Gets or sets the extensibility on the Reference.
+        /// Gets the extensibility on the Reference.
         /// </summary>
         /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Sealed;
 
         /// <summary>
-        /// Gets or sets the fields on the Reference.
+        /// Gets the fields on the Reference.
         /// </summary>
         /// <value>The fields.</value>
         public ImmutableArray<Field> Fields { get; internal set; } = ImmutableArray<Field>.Empty;
 
         /// <summary>
-        /// Gets or sets the parameters on the Reference.
+        /// Gets the parameters on the Reference.
         /// </summary>
         /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;

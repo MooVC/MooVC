@@ -21,10 +21,19 @@
             public static readonly Name Unnamed = string.Empty;
 
             private static readonly Regex rule = new Regex(
-                @"^(?!\s*$)(?!.*[\uFFFE\uFFFF])[^\x00-\x08\x0B\x0C\x0E-\x1F""<> &]*$",
+                @"^(?![ .])(?!.*[ .]$)[^\\/:*?""<>|]+$",
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
             public bool IsUnnamed => this == Unnamed;
+
+            /// <summary>
+            /// Returns the name of the project verbatim.
+            /// </summary>
+            /// <returns>The name of the project verbatim.</returns>
+            public override string ToString()
+            {
+                return _value;
+            }
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
@@ -35,7 +44,9 @@
 
                 if (_value is null || !rule.IsMatch(_value))
                 {
-                    yield return new ValidationResult(NameValidateValueInvalid.Format(nameof(DisplayName), nameof(Project), _value), new[] { nameof(Name) });
+                    yield return new ValidationResult(
+                        NameValidateValueInvalid.Format(nameof(DisplayName), nameof(Project), _value),
+                        new[] { nameof(Name) });
                 }
             }
         }

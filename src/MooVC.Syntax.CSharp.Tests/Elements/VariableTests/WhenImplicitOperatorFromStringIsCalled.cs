@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
+using MooVC.Syntax.Formatting;
+
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Empty = "";

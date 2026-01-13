@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Result_Resources;

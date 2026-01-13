@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 using System.Linq;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenWithFilesIsCalled
 {
@@ -10,7 +9,7 @@ public sealed class WhenWithFilesIsCalled
     {
         // Arrange
         File existing = FolderTestsData.CreateFile();
-        File additional = FolderTestsData.CreateFile().Named(Snippet.From("OtherFile"));
+        var additional = new File("src/other.cs");
         Folder original = FolderTestsData.Create(file: existing);
 
         // Act
@@ -19,9 +18,8 @@ public sealed class WhenWithFilesIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Files.ShouldBe(original.Files.Concat([additional]));
-        result.Folders.ShouldBe(original.Folders);
         result.Items.ShouldBe(original.Items);
-        result.Id.ShouldBe(original.Id);
         result.Name.ShouldBe(original.Name);
+        result.Projects.ShouldBe(original.Projects);
     }
 }

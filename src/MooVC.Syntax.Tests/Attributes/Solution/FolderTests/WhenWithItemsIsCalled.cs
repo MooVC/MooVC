@@ -20,8 +20,7 @@ public sealed class WhenWithItemsIsCalled
         result.ShouldNotBeSameAs(original);
         result.Items.ShouldBe(original.Items.Concat([additional]));
         result.Files.ShouldBe(original.Files);
-        result.Folders.ShouldBe(original.Folders);
-        result.Id.ShouldBe(original.Id);
         result.Name.ShouldBe(original.Name);
+        result.Projects.ShouldBe(original.Projects);
     }
 }

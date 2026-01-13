@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
+using MooVC.Syntax.Formatting;
 using Casing = MooVC.Syntax.Elements.Identifier.Casing;
 using Options = MooVC.Syntax.CSharp.Elements.Variable.Options;
 

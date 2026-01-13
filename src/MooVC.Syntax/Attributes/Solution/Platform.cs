@@ -42,7 +42,7 @@
         /// The project configuration mapper (see <see cref="Configurations"/>).
         /// </value>
         [Descriptor("ForProject")]
-        public Snippet Project { get; internal set; }
+        public Snippet Project { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Gets the solution configuration mapper (see <see cref="Configurations"/>).
@@ -51,7 +51,7 @@
         /// The solution configuration mapper (see <see cref="Configurations"/>).
         /// </value>
         [Descriptor("ForSolution")]
-        public Snippet Solution { get; internal set; }
+        public Snippet Solution { get; internal set; } = Snippet.Empty;
 
         /// <summary>
         /// Performs the to fragments operation for the MSBuild build attribute.

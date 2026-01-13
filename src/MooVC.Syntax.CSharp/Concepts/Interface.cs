@@ -10,6 +10,7 @@
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 

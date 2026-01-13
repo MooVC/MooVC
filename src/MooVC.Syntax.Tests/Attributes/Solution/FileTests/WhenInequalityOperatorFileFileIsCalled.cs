@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenInequalityOperatorFileFileIsCalled
 {
     [Fact]
@@ -22,8 +20,8 @@ public sealed class WhenInequalityOperatorFileFileIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        File left = FileTestsData.Create();
-        File right = FileTestsData.Create();
+        var left = new File(FileTestsData.DefaultPath);
+        var right = new File(FileTestsData.DefaultPath);
 
         // Act
         bool result = left != right;
@@ -36,8 +34,8 @@ public sealed class WhenInequalityOperatorFileFileIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        File left = FileTestsData.Create();
-        File right = FileTestsData.Create(id: Snippet.From("Other"));
+        var left = new File(FileTestsData.DefaultPath);
+        var right = new File("assets/other.cs");
 
         // Act
         bool result = left != right;

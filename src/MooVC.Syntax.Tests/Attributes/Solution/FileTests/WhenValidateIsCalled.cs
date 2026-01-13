@@ -1,9 +1,7 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -24,10 +22,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenMultiLineIdThenValidationErrorReturned()
+    public void GivenAbsolutePathThenValidationErrorReturned()
     {
         // Arrange
-        File subject = FileTestsData.Create(id: Snippet.From($"alpha{Environment.NewLine}beta"));
+        var subject = new File("/root/file.cs");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -37,14 +35,14 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(File.Id));
+        results[0].MemberNames.ShouldContain(nameof(File));
     }
 
     [Fact]
-    public void GivenMultiLineNameThenValidationErrorReturned()
+    public void GivenInvalidCharactersThenValidationErrorReturned()
     {
         // Arrange
-        File subject = FileTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
+        var subject = new File("src/file?.cs");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -54,14 +52,14 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(File.Name));
+        results[0].MemberNames.ShouldContain(nameof(File));
     }
 
     [Fact]
-    public void GivenMultiLinePathThenValidationErrorReturned()
+    public void GivenValidPathThenValidationSucceeds()
     {
         // Arrange
-        File subject = FileTestsData.Create(path: Snippet.From($"alpha{Environment.NewLine}beta"));
+        var subject = new File(FileTestsData.DefaultPath);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -69,8 +67,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(File.Path));
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
     }
 }

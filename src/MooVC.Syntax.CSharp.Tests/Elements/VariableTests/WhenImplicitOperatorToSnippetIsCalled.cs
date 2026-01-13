@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using MooVC.Syntax.Elements;
+using MooVC.Syntax.Formatting;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {

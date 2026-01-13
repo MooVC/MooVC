@@ -1,17 +1,15 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenEqualsFileIsCalled
 {
     [Fact]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        File subject = FileTestsData.Create();
+        var subject = new File(FileTestsData.DefaultPath);
 
         // Act
-        bool result = subject.Equals(default);
+        bool result = subject.Equals(default(File));
 
         // Assert
         result.ShouldBeFalse();
@@ -21,8 +19,8 @@ public sealed class WhenEqualsFileIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        File subject = FileTestsData.Create();
-        File other = FileTestsData.Create();
+        var subject = new File(FileTestsData.DefaultPath);
+        var other = new File(FileTestsData.DefaultPath);
 
         // Act
         bool result = subject.Equals(other);
@@ -35,8 +33,8 @@ public sealed class WhenEqualsFileIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        File subject = FileTestsData.Create();
-        File other = FileTestsData.Create(path: Snippet.From("other.cs"));
+        var subject = new File(FileTestsData.DefaultPath);
+        var other = new File("other.cs");
 
         // Act
         bool result = subject.Equals(other);

@@ -7,6 +7,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -34,13 +35,13 @@
         }
 
         /// <summary>
-        /// Gets or sets the base on the Constraint.
+        /// Gets the base on the Constraint.
         /// </summary>
         /// <value>The base.</value>
         public Base Base { get; internal set; } = Base.Unspecified;
 
         /// <summary>
-        /// Gets or sets the interfaces on the Constraint.
+        /// Gets the interfaces on the Constraint.
         /// </summary>
         /// <value>The interfaces.</value>
         public ImmutableArray<Interface> Interfaces { get; internal set; } = ImmutableArray<Interface>.Empty;
@@ -53,13 +54,13 @@
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Gets or sets the nature on the Constraint.
+        /// Gets the nature on the Constraint.
         /// </summary>
         /// <value>The nature.</value>
         public Nature Nature { get; internal set; } = Nature.Unspecified;
 
         /// <summary>
-        /// Gets or sets the new on the Constraint.
+        /// Gets the new on the Constraint.
         /// </summary>
         /// <value>The new.</value>
         public New New { get; internal set; } = New.NotRequired;

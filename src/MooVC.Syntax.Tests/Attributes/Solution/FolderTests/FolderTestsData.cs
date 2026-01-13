@@ -1,45 +1,40 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
+using System;
 using MooVC.Syntax.Elements;
 
 internal static class FolderTestsData
 {
-    public const string DefaultId = "FolderId";
-    public const string DefaultName = "FolderName";
+    public const string DefaultName = "/Folder/";
 
     public static Folder Create(
-        Snippet? id = default,
-        Snippet? name = default,
+        Folder.Path? name = default,
         File? file = default,
-        Folder? folder = default,
-        Item? item = default)
+        Item? item = default,
+        Project? project = default)
     {
         return new Folder
         {
-            Id = id ?? Snippet.From(DefaultId),
-            Name = name ?? Snippet.From(DefaultName),
+            Name = name ?? new Folder.Path(DefaultName),
             Files = file is null ? [] : [file],
-            Folders = folder is null ? [] : [folder],
             Items = item is null ? [] : [item],
+            Projects = project is null ? [] : [project],
         };
     }
 
     public static File CreateFile()
     {
-        return new File
-        {
-            Id = Snippet.From("FileId"),
-            Name = Snippet.From("FileName"),
-            Path = Snippet.From("src/file.cs"),
-        };
+        return new File("src/file.cs");
     }
 
-    public static Folder CreateChildFolder()
+    public static Project CreateProject()
     {
-        return new Folder
+        return new Project
         {
-            Id = Snippet.From("ChildFolderId"),
-            Name = Snippet.From("ChildFolderName"),
+            Id = Guid.Parse("F720AF0F-8F5D-4C77-A4D0-804B9E8BAE89"),
+            DisplayName = new Project.Name("ProjectName"),
+            Path = new Project.RelativePath("src/Project.csproj"),
+            Type = Snippet.From("CSharp"),
         };
     }
 
