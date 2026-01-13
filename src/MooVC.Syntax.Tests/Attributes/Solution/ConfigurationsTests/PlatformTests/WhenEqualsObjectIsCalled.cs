@@ -11,7 +11,7 @@ public sealed class WhenEqualsObjectIsCalled
         var subject = new Configurations.Platform("CustomPlatform");
 
         // Act
-        bool result = subject.Equals(null);
+        bool result = subject.Equals(default(object));
 
         // Assert
         result.ShouldBeFalse();

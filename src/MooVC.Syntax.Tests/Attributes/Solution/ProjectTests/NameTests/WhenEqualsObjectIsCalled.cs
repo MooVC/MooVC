@@ -11,7 +11,7 @@ public sealed class WhenEqualsObjectIsCalled
         var subject = new Project.Name("ProjectName");
 
         // Act
-        bool result = subject.Equals(null);
+        bool result = subject.Equals(default(object));
 
         // Assert
         result.ShouldBeFalse();
