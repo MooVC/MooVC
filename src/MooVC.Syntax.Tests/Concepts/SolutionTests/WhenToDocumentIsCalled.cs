@@ -2,7 +2,6 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Xml.Linq;
 using MooVC.Syntax.Attributes.Solution;
-using static MooVC.Syntax.Attributes.Solution.Configurations;
 
 public sealed class WhenToDocumentIsCalled
 {
@@ -28,13 +27,10 @@ public sealed class WhenToDocumentIsCalled
 
         var fileElement = new XElement(
             nameof(File),
-            new XAttribute(nameof(File.Id), SolutionTestsData.DefaultFileId),
-            new XAttribute(nameof(File.Name), SolutionTestsData.DefaultFileName),
-            new XAttribute(nameof(File.Path), SolutionTestsData.DefaultFilePath));
+            new XAttribute("Path", SolutionTestsData.DefaultFilePath));
 
         var folderElement = new XElement(
             nameof(Folder),
-            new XAttribute(nameof(Folder.Id), SolutionTestsData.DefaultFolderId),
             new XAttribute(nameof(Folder.Name), SolutionTestsData.DefaultFolderName));
 
         var itemElement = new XElement(

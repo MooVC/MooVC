@@ -1,27 +1,25 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 using System.Linq;
-using MooVC.Syntax.Elements;
 
-public sealed class WhenWithFoldersIsCalled
+public sealed class WhenWithProjectsIsCalled
 {
     [Fact]
-    public void GivenFoldersThenReturnsUpdatedInstance()
+    public void GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Folder existing = FolderTestsData.CreateChildFolder();
-        Folder additional = FolderTestsData.CreateChildFolder().Named(Snippet.From("OtherFolder"));
-        Folder original = FolderTestsData.Create(folder: existing);
+        Project existing = FolderTestsData.CreateProject();
+        Project additional = FolderTestsData.CreateProject().Named(new Project.Name("OtherProject"));
+        Folder original = FolderTestsData.Create(project: existing);
 
         // Act
-        Folder result = original.WithFolders(additional);
+        Folder result = original.WithProjects(additional);
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Folders.ShouldBe(original.Folders.Concat([additional]));
+        result.Projects.ShouldBe(original.Projects.Concat([additional]));
         result.Files.ShouldBe(original.Files);
         result.Items.ShouldBe(original.Items);
-        result.Id.ShouldBe(original.Id);
         result.Name.ShouldBe(original.Name);
     }
 }

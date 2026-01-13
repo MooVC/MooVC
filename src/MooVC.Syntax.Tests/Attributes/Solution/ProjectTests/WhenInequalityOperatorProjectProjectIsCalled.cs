@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenInequalityOperatorProjectProjectIsCalled
 {
     [Fact]
@@ -37,7 +35,7 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
     {
         // Arrange
         Project left = ProjectTestsData.Create();
-        Project right = ProjectTestsData.Create(path: Snippet.From("other.csproj"));
+        Project right = ProjectTestsData.Create(path: new Project.RelativePath("other.csproj"));
 
         // Act
         bool result = left != right;

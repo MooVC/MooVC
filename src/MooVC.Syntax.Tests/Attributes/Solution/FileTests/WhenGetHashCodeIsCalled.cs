@@ -1,15 +1,13 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenGetHashCodeIsCalled
 {
     [Fact]
     public void GivenEqualValuesThenHashCodesMatch()
     {
         // Arrange
-        File left = FileTestsData.Create();
-        File right = FileTestsData.Create();
+        var left = new File(FileTestsData.DefaultPath);
+        var right = new File(FileTestsData.DefaultPath);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -23,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashCodesDiffer()
     {
         // Arrange
-        File left = FileTestsData.Create();
-        File right = FileTestsData.Create(name: Snippet.From("Other"));
+        var left = new File(FileTestsData.DefaultPath);
+        var right = new File("assets/other.cs");
 
         // Act
         int leftHash = left.GetHashCode();

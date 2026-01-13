@@ -1,15 +1,16 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectNameTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenValidateIsCalled
 {
     [Fact]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public void GivenUnnamedThenValidationIsSkipped()
     {
         // Arrange
-        Folder subject = Folder.Undefined;
+        Project.Name subject = Project.Name.Unnamed;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -25,7 +26,7 @@ public sealed class WhenValidateIsCalled
     public void GivenInvalidNameThenValidationErrorReturned()
     {
         // Arrange
-        Folder subject = FolderTestsData.Create(name: new Folder.Path("invalid"));
+        var subject = new Project.Name("Invalid Name");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -35,23 +36,6 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Name));
-    }
-
-    [Fact]
-    public void GivenUndefinedFileThenValidationErrorReturned()
-    {
-        // Arrange
-        Folder subject = FolderTestsData.Create(file: File.Undefined);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Files));
+        results[0].MemberNames.ShouldContain(nameof(Project.Name));
     }
 }

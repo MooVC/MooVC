@@ -8,7 +8,9 @@ public sealed class WhenOfTypeIsCalled
     public void GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create();
+        Project original = ProjectTestsData.Create(
+            build: Configurations.BuildType.Debug,
+            platform: Configurations.Platform.AnyCPU);
         var updated = Snippet.From("Other");
 
         // Act
@@ -20,5 +22,7 @@ public sealed class WhenOfTypeIsCalled
         result.Id.ShouldBe(original.Id);
         result.DisplayName.ShouldBe(original.DisplayName);
         result.Path.ShouldBe(original.Path);
+        result.Builds.ShouldBe(original.Builds);
+        result.Platforms.ShouldBe(original.Platforms);
     }
 }

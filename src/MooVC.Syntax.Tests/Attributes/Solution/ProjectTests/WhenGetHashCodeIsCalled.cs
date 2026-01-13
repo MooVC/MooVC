@@ -1,6 +1,6 @@
 namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
-using MooVC.Syntax.Elements;
+using System;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Project left = ProjectTestsData.Create();
-        Project right = ProjectTestsData.Create(id: Snippet.From("Other"));
+        Project right = ProjectTestsData.Create(id: Guid.Parse("F247F4D5-5BC0-4BA2-BF12-9C5D052A3AB5"));
 
         // Act
         int leftHash = left.GetHashCode();

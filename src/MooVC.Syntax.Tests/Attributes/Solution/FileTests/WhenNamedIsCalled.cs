@@ -1,23 +1,17 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
-public sealed class WhenNamedIsCalled
+public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Fact]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public void GivenFileThenReturnsStringValue()
     {
         // Arrange
-        File original = FileTestsData.Create();
-        var updated = Snippet.From("OtherName");
+        var subject = new File(FileTestsData.DefaultPath);
 
         // Act
-        File result = original.Named(updated);
+        string result = subject;
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Id.ShouldBe(original.Id);
-        result.Path.ShouldBe(original.Path);
+        result.ShouldBe(FileTestsData.DefaultPath);
     }
 }

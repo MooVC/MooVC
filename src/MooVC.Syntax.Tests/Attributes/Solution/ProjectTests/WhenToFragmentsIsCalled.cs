@@ -22,13 +22,25 @@ public sealed class WhenToFragmentsIsCalled
     public void GivenValuesThenReturnsFragment()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create();
+        Project subject = ProjectTestsData.Create(
+            build: Configurations.BuildType.Debug,
+            platform: Configurations.Platform.AnyCPU);
+
+        var buildElement = new XElement(
+            nameof(Configurations.BuildType),
+            new XAttribute("Name", "Debug"));
+
+        var platformElement = new XElement(
+            nameof(Configurations.Platform),
+            new XAttribute("Name", "Any CPU"));
 
         var expected = new XElement(
             nameof(Project),
-            new XAttribute(nameof(Project.Id), ProjectTestsData.DefaultId),
+            buildElement,
             new XAttribute(nameof(Project.DisplayName), ProjectTestsData.DefaultName),
+            new XAttribute(nameof(Project.Id), ProjectTestsData.DefaultId),
             new XAttribute(nameof(Project.Path), ProjectTestsData.DefaultPath),
+            platformElement,
             new XAttribute(nameof(Project.Type), ProjectTestsData.DefaultType));
 
         // Act

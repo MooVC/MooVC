@@ -1,4 +1,6 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectNameTests;
+
+using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -6,10 +8,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenValueThenEqualsString()
     {
         // Arrange
-        string value = FileTestsData.DefaultPath;
+        const string value = "ProjectName";
 
         // Act
-        File subject = value;
+        Project.Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();

@@ -1,15 +1,16 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+namespace MooVC.Syntax.Attributes.Solution.ConfigurationsPlatformTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
+using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenToFragmentsIsCalled
 {
     [Fact]
-    public void GivenUndefinedThenReturnsEmpty()
+    public void GivenUnspecifiedThenReturnsEmpty()
     {
         // Arrange
-        File subject = File.Undefined;
+        Configurations.Platform subject = Configurations.Platform.Unspecified;
 
         // Act
         ImmutableArray<XElement> result = subject.ToFragments();
@@ -19,14 +20,12 @@ public sealed class WhenToFragmentsIsCalled
     }
 
     [Fact]
-    public void GivenValuesThenReturnsFragment()
+    public void GivenValueThenReturnsFragment()
     {
         // Arrange
-        var subject = new File(FileTestsData.DefaultPath);
+        Configurations.Platform subject = Configurations.Platform.AnyCPU;
 
-        var expected = new XElement(
-            nameof(File),
-            new XAttribute("Path", FileTestsData.DefaultPath));
+        var expected = new XElement(nameof(Configurations.Platform), new XAttribute("Name", "Any CPU"));
 
         // Act
         ImmutableArray<XElement> result = subject.ToFragments();

@@ -2,7 +2,6 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenWithFoldersIsCalled
 {
@@ -14,8 +13,7 @@ public sealed class WhenWithFoldersIsCalled
 
         var additional = new Folder
         {
-            Id = Snippet.From("OtherId"),
-            Name = Snippet.From("OtherName"),
+            Name = new Folder.Path("/other/"),
         };
 
         Solution original = SolutionTestsData.Create(folder: existing);

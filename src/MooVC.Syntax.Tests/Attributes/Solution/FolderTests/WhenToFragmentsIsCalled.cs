@@ -23,20 +23,13 @@ public sealed class WhenToFragmentsIsCalled
     {
         // Arrange
         File file = FolderTestsData.CreateFile();
-        Folder childFolder = FolderTestsData.CreateChildFolder();
         Item item = FolderTestsData.CreateItem();
-        Folder subject = FolderTestsData.Create(file: file, folder: childFolder, item: item);
+        Project project = FolderTestsData.CreateProject();
+        Folder subject = FolderTestsData.Create(file: file, item: item, project: project);
 
         var fileElement = new XElement(
             nameof(File),
-            new XAttribute(nameof(File.Id), "FileId"),
-            new XAttribute(nameof(File.Name), "FileName"),
-            new XAttribute(nameof(File.Path), "src/file.cs"));
-
-        var folderElement = new XElement(
-            nameof(Folder),
-            new XAttribute(nameof(Folder.Id), "ChildFolderId"),
-            new XAttribute(nameof(Folder.Name), "ChildFolderName"));
+            new XAttribute("Path", "src/file.cs"));
 
         var itemElement = new XElement(
             nameof(Item),
@@ -45,13 +38,19 @@ public sealed class WhenToFragmentsIsCalled
             new XAttribute(nameof(Item.Path), "assets/item.txt"),
             new XAttribute(nameof(Item.Type), "ItemType"));
 
+        var projectElement = new XElement(
+            nameof(Project),
+            new XAttribute(nameof(Project.DisplayName), "ProjectName"),
+            new XAttribute(nameof(Project.Id), project.Id),
+            new XAttribute(nameof(Project.Path), "src/Project.csproj"),
+            new XAttribute(nameof(Project.Type), "CSharp"));
+
         var expected = new XElement(
             nameof(Folder),
-            new XAttribute(nameof(Folder.Id), FolderTestsData.DefaultId),
             new XAttribute(nameof(Folder.Name), FolderTestsData.DefaultName),
             fileElement,
-            folderElement,
-            itemElement);
+            itemElement,
+            projectElement);
 
         // Act
         ImmutableArray<XElement> result = subject.ToFragments();

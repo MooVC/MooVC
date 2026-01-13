@@ -1,25 +1,35 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+namespace MooVC.Syntax.Attributes.Solution.FolderPathTests;
 
-using MooVC.Syntax.Elements;
+using MooVC.Syntax.Attributes.Solution;
 
-public sealed class WhenWithIdIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Fact]
-    public void GivenIdThenReturnsUpdatedInstance()
+    public void GivenRootThenMatchesRootInstance()
     {
         // Arrange
-        Folder original = FolderTestsData.Create();
-        var updated = Snippet.From("OtherId");
+        string value = "/";
 
         // Act
-        Folder result = original.WithId(updated);
+        Folder.Path subject = value;
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Id.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
-        result.Files.ShouldBe(original.Files);
-        result.Folders.ShouldBe(original.Folders);
-        result.Items.ShouldBe(original.Items);
+        subject.IsRoot.ShouldBeTrue();
+        (subject == value).ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenValueThenEqualsString()
+    {
+        // Arrange
+        const string value = "/Folder/";
+
+        // Act
+        Folder.Path subject = value;
+
+        // Assert
+        subject.IsRoot.ShouldBeFalse();
+        (subject == value).ShouldBeTrue();
+        subject.Equals(value).ShouldBeTrue();
     }
 }

@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenEqualsFolderIsCalled
 {
     [Fact]
@@ -36,7 +34,7 @@ public sealed class WhenEqualsFolderIsCalled
     {
         // Arrange
         Folder subject = FolderTestsData.Create();
-        Folder other = FolderTestsData.Create(name: Snippet.From("Other"));
+        Folder other = FolderTestsData.Create(name: new Folder.Path("/Other/"));
 
         // Act
         bool result = subject.Equals(other);

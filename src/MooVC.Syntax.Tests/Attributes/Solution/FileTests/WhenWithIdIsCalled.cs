@@ -1,23 +1,32 @@
 namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
-using MooVC.Syntax.Elements;
-
-public sealed class WhenWithIdIsCalled
+public sealed class WhenEqualityOperatorFileStringIsCalled
 {
     [Fact]
-    public void GivenIdThenReturnsUpdatedInstance()
+    public void GivenSameValueThenReturnsTrue()
     {
         // Arrange
-        File original = FileTestsData.Create();
-        var updated = Snippet.From("OtherId");
+        var left = new File(FileTestsData.DefaultPath);
+        string right = FileTestsData.DefaultPath;
 
         // Act
-        File result = original.WithId(updated);
+        bool result = left == right;
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Id.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
-        result.Path.ShouldBe(original.Path);
+        result.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void GivenDifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        var left = new File(FileTestsData.DefaultPath);
+        const string right = "assets/other.cs";
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        result.ShouldBeFalse();
     }
 }

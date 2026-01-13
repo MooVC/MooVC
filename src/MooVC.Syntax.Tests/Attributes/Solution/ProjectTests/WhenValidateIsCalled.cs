@@ -24,27 +24,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenMultiLineIdThenValidationErrorReturned()
+    public void GivenUnnamedDisplayNameThenValidationErrorReturned()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create(id: Snippet.From($"alpha{Environment.NewLine}beta"));
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Id));
-    }
-
-    [Fact]
-    public void GivenMultiLineNameThenValidationErrorReturned()
-    {
-        // Arrange
-        Project subject = ProjectTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
+        Project subject = ProjectTestsData.Create(name: Project.Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -58,10 +41,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenMultiLinePathThenValidationErrorReturned()
+    public void GivenUnspecifiedPathThenValidationErrorReturned()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create(path: Snippet.From($"alpha{Environment.NewLine}beta"));
+        Project subject = ProjectTestsData.Create(path: Project.RelativePath.Unspecified);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
