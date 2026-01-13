@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectRelativePathTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

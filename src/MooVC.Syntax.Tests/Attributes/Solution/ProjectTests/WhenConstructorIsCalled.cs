@@ -25,14 +25,17 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Act
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+
         var subject = new Project
         {
             Id = ProjectTestsData.DefaultId,
             DisplayName = new Project.Name(ProjectTestsData.DefaultName),
             Path = new Project.RelativePath(ProjectTestsData.DefaultPath),
             Type = Snippet.From(ProjectTestsData.DefaultType),
-            Builds = [Configurations.BuildType.Debug],
-            Platforms = [Configurations.Platform.AnyCPU],
+            Builds = [build],
+            Platforms = [platform],
         };
 
         // Assert
@@ -40,8 +43,8 @@ public sealed class WhenConstructorIsCalled
         subject.DisplayName.ShouldBe(new Project.Name(ProjectTestsData.DefaultName));
         subject.Path.ShouldBe(new Project.RelativePath(ProjectTestsData.DefaultPath));
         subject.Type.ShouldBe(Snippet.From(ProjectTestsData.DefaultType));
-        subject.Builds.ShouldBe([Configurations.BuildType.Debug]);
-        subject.Platforms.ShouldBe([Configurations.Platform.AnyCPU]);
+        subject.Builds.ShouldBe([build]);
+        subject.Platforms.ShouldBe([platform]);
         subject.IsUndefined.ShouldBeFalse();
     }
 }

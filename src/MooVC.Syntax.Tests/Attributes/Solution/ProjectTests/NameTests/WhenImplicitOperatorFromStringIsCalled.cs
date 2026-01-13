@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectRelativePathTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
@@ -8,10 +8,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenValueThenEqualsString()
     {
         // Arrange
-        const string value = "src/Project.csproj";
+        const string value = "ProjectName";
 
         // Act
-        Project.RelativePath subject = value;
+        Project.Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();

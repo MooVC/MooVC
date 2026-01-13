@@ -8,6 +8,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
@@ -38,19 +39,19 @@
         }
 
         /// <summary>
-        /// Gets or sets the behaviours on the Property.
+        /// Gets the behaviours on the Property.
         /// </summary>
         /// <value>The behaviours.</value>
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
         /// <summary>
-        /// Gets or sets the default on the Property.
+        /// Gets the default on the Property.
         /// </summary>
         /// <value>The default.</value>
         public Snippet Default { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the extensibility on the Property.
+        /// Gets the extensibility on the Property.
         /// </summary>
         /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
@@ -63,20 +64,20 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Property.
+        /// Gets the name on the Property.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Identifier Name { get; internal set; } = Identifier.Unnamed;
 
         /// <summary>
-        /// Gets or sets the scope on the Property.
+        /// Gets the scope on the Property.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
-        /// Gets or sets the type on the Property.
+        /// Gets the type on the Property.
         /// </summary>
         /// <value>The type.</value>
         [Descriptor("OfType")]

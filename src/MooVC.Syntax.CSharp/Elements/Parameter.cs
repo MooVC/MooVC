@@ -8,6 +8,7 @@
     using Fluentify;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Parameter_Resources;

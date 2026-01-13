@@ -6,6 +6,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Directive_Resources;
@@ -35,7 +36,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the alias on the Directive.
+        /// Gets the alias on the Directive.
         /// </summary>
         /// <value>The alias.</value>
         [Descriptor("KnownAs")]
@@ -62,7 +63,7 @@
         public bool IsSystem => Qualifier.Length > 0 && Qualifier[0] == nameof(System);
 
         /// <summary>
-        /// Gets or sets the qualifier on the Directive.
+        /// Gets the qualifier on the Directive.
         /// </summary>
         /// <value>The qualifier.</value>
         [Descriptor("From")]

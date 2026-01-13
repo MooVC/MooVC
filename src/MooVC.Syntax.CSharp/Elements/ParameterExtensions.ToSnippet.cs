@@ -4,6 +4,7 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
 
     /// <summary>
     /// Represents a C# syntax element parameter extensions.

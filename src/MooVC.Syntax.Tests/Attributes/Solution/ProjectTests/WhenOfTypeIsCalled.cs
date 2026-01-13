@@ -8,9 +8,9 @@ public sealed class WhenOfTypeIsCalled
     public void GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create(
-            build: Configurations.BuildType.Debug,
-            platform: Configurations.Platform.AnyCPU);
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project original = ProjectTestsData.Create(build: build, platform: platform);
         var updated = Snippet.From("Other");
 
         // Act

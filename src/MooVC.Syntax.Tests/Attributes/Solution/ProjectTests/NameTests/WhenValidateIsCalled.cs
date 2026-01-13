@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderPathTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +7,10 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenValidateIsCalled
 {
     [Fact]
-    public void GivenRootThenValidationIsSkipped()
+    public void GivenUnnamedThenValidationIsSkipped()
     {
         // Arrange
-        Folder.Path subject = Folder.Path.Root;
+        Project.Name subject = Project.Name.Unnamed;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -23,10 +23,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenInvalidPathThenValidationErrorReturned()
+    public void GivenInvalidNameThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Folder.Path("invalid");
+        var subject = new Project.Name("Invalid/Name");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -36,6 +36,6 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Path));
+        results[0].MemberNames.ShouldContain(nameof(Project.Name));
     }
 }

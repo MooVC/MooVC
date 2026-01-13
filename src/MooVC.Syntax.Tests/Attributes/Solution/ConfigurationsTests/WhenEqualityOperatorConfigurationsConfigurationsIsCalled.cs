@@ -13,6 +13,7 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
             Builds = [Configurations.BuildType.Debug],
             Platforms = [Configurations.Platform.AnyCPU],
         };
+
         var right = new Configurations
         {
             Builds = [Configurations.BuildType.Debug],
@@ -35,6 +36,7 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
             Builds = [Configurations.BuildType.Debug],
             Platforms = [Configurations.Platform.AnyCPU],
         };
+
         var right = new Configurations
         {
             Builds = [Configurations.BuildType.Release],

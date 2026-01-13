@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsBuildTypeTests;
+namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
@@ -8,10 +8,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenValueThenEqualsString()
     {
         // Arrange
-        const string value = "Custom";
+        const string value = "src/Project.csproj";
 
         // Act
-        Configurations.BuildType subject = value;
+        Project.RelativePath subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();

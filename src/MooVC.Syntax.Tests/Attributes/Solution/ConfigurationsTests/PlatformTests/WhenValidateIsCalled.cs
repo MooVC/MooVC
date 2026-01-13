@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsPlatformTests;
+namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderPathTests;
+namespace MooVC.Syntax.Attributes.Solution.FolderTests.PathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 

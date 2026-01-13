@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectNameTests;
+namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
@@ -8,10 +8,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenValueThenEqualsString()
     {
         // Arrange
-        const string value = "ProjectName";
+        const string value = "ARM";
 
         // Act
-        Project.Name subject = value;
+        Configurations.Platform subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();

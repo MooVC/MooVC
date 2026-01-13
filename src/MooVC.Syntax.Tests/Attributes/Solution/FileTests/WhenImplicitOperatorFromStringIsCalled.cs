@@ -1,6 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsPlatformTests;
-
-using MooVC.Syntax.Attributes.Solution;
+namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -8,12 +6,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     public void GivenValueThenEqualsString()
     {
         // Arrange
-        const string value = "ARM";
+        string value = FileTestsData.DefaultPath;
 
         // Act
-        Configurations.Platform subject = value;
+        File subject = value;
 
-        // Assert
+        // Asserts
         (subject == value).ShouldBeTrue();
         subject.Equals(value).ShouldBeTrue();
     }

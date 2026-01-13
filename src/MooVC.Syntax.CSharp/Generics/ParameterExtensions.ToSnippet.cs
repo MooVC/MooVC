@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Immutable;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
 
     /// <summary>
     /// Represents a C# generic syntax parameter extensions.

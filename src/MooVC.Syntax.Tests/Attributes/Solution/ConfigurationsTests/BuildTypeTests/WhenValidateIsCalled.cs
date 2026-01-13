@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsBuildTypeTests;
+namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

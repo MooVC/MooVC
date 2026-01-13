@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Symbol_Resources;
@@ -37,7 +38,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the arguments on the Symbol.
+        /// Gets the arguments on the Symbol.
         /// </summary>
         /// <value>The arguments.</value>
         public ImmutableArray<Symbol> Arguments { get; internal set; } = ImmutableArray<Symbol>.Empty;
@@ -56,14 +57,14 @@
         public bool IsNullable { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the name on the Symbol.
+        /// Gets the name on the Symbol.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the qualifier on the Symbol.
+        /// Gets the qualifier on the Symbol.
         /// </summary>
         /// <value>The qualifier.</value>
         [Descriptor("From")]

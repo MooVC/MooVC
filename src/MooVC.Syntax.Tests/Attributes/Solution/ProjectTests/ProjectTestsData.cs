@@ -15,8 +15,8 @@ internal static class ProjectTestsData
         Project.Name? name = default,
         Project.RelativePath? path = default,
         Snippet? type = default,
-        Configurations.BuildType? build = default,
-        Configurations.Platform? platform = default)
+        Build? build = default,
+        Platform? platform = default)
     {
         return new Project
         {

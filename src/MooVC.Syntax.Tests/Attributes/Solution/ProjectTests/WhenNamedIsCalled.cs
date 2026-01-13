@@ -6,9 +6,9 @@ public sealed class WhenNamedIsCalled
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
-        Project original = ProjectTestsData.Create(
-            build: Configurations.BuildType.Debug,
-            platform: Configurations.Platform.AnyCPU);
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project original = ProjectTestsData.Create(build: build, platform: platform);
         var updated = new Project.Name("OtherName");
 
         // Act

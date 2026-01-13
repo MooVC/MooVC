@@ -35,7 +35,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Folder.Name));
+        results[0].MemberNames.ShouldContain(nameof(Folder.Path));
     }
 
     [Fact]

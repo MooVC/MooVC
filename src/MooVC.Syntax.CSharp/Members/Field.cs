@@ -9,6 +9,7 @@
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Syntax;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Field_Resources;
@@ -38,7 +39,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the default on the Field.
+        /// Gets the default on the Field.
         /// </summary>
         /// <value>The default.</value>
         public Snippet Default { get; internal set; } = Snippet.Empty;
@@ -63,20 +64,20 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the name on the Field.
+        /// Gets the name on the Field.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Variable Name { get; internal set; } = Variable.Unnamed;
 
         /// <summary>
-        /// Gets or sets the scope on the Field.
+        /// Gets the scope on the Field.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
-        /// Gets or sets the type on the Field.
+        /// Gets the type on the Field.
         /// </summary>
         /// <value>The type.</value>
         [Descriptor("OfType")]

@@ -9,6 +9,7 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Constructor_Resources;
@@ -39,13 +40,13 @@ namespace MooVC.Syntax.CSharp.Members
         }
 
         /// <summary>
-        /// Gets or sets the body on the Constructor.
+        /// Gets the body on the Constructor.
         /// </summary>
         /// <value>The body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the extensibility on the Constructor.
+        /// Gets the extensibility on the Constructor.
         /// </summary>
         /// <value>The extensibility.</value>
         public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
@@ -58,13 +59,13 @@ namespace MooVC.Syntax.CSharp.Members
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the parameters on the Constructor.
+        /// Gets the parameters on the Constructor.
         /// </summary>
         /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
-        /// Gets or sets the scope on the Constructor.
+        /// Gets the scope on the Constructor.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;

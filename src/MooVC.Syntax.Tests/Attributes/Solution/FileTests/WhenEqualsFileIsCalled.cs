@@ -9,7 +9,7 @@ public sealed class WhenEqualsFileIsCalled
         var subject = new File(FileTestsData.DefaultPath);
 
         // Act
-        bool result = subject.Equals(default);
+        bool result = subject.Equals(default(File));
 
         // Assert
         result.ShouldBeFalse();

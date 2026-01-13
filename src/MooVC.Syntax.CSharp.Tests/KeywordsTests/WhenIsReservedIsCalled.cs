@@ -2,6 +2,7 @@
 
 using System.Text;
 using MooVC.Syntax.CSharp;
+using MooVC.Syntax.Formatting;
 
 public sealed class WhenIsReservedIsCalled
 {

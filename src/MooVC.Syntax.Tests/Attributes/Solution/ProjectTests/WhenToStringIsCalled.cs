@@ -22,17 +22,17 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenReturnsFragment()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create(
-            build: Configurations.BuildType.Debug,
-            platform: Configurations.Platform.AnyCPU);
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project subject = ProjectTestsData.Create(build: build, platform: platform);
 
         var element = new XElement(
             nameof(Project),
-            new XElement(nameof(Configurations.BuildType), new XAttribute("Name", "Debug")),
+            new XElement(nameof(Build), new XAttribute(nameof(Build.Project), nameof(Configurations.BuildType.Debug))),
             new XAttribute(nameof(Project.DisplayName), ProjectTestsData.DefaultName),
             new XAttribute(nameof(Project.Id), ProjectTestsData.DefaultId),
             new XAttribute(nameof(Project.Path), ProjectTestsData.DefaultPath),
-            new XElement(nameof(Configurations.Platform), new XAttribute("Name", "Any CPU")),
+            new XElement(nameof(Platform), new XAttribute(nameof(Platform.Solution), nameof(Configurations.Platform.AnyCPU))),
             new XAttribute(nameof(Project.Type), ProjectTestsData.DefaultType));
 
         string expected = element + Environment.NewLine;

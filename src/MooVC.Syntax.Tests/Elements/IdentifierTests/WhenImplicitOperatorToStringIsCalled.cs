@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.Elements.IdentifierTests;
 
+using MooVC.Syntax.Formatting;
+
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Alpha = "Alpha";
