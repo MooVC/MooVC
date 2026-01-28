@@ -21,6 +21,7 @@
     <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/Code/">
+    <Project Path="src/MooVC.Modelling/MooVC.Modelling.csproj" Id="89aaa82e-52a4-40f4-b589-ce0d7166888c" />
     <Project Path="src/MooVC.Syntax.CSharp/MooVC.Syntax.CSharp.csproj" />
     <Project Path="src/MooVC.Syntax/MooVC.Syntax.csproj" Id="26275ab5-1019-46bb-a54f-d62d1575c21e" />
     <Project Path="src/MooVC/MooVC.csproj" />
