@@ -3,25 +3,20 @@
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
-using Graphify;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
 
 [Fluentify]
-[Graphify]
 [Valuify]
-public sealed partial class Model
+public sealed partial class Unit
     : IValidatableObject
 {
-    public static readonly Model Undefined = new();
+    public static readonly Unit Undefined = new();
 
-    [Descriptor("WithArea")]
-    public ImmutableArray<Area> Areas { get; init; } = ImmutableArray<Area>.Empty;
-
-    [Descriptor("For")]
-    public Identifier Company { get; init; } = Identifier.Unnamed;
+    [Descriptor("AttributedWith")]
+    public ImmutableArray<Attribute> Attributes { get; init; } = ImmutableArray<Attribute>.Empty;
 
     [Ignore]
     public bool IsUndefined => this == Undefined;
@@ -37,8 +32,7 @@ public sealed partial class Model
         }
 
         return validationContext
-            .IncludeIf(!Areas.IsDefaultOrEmpty, nameof(Areas), Areas)
-            .AndIf(!Company.IsUnnamed, nameof(Company), Company)
+            .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), Attributes)
             .And(nameof(Name), Name)
             .Results;
     }
