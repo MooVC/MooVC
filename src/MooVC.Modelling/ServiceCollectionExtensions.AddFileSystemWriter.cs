@@ -10,6 +10,11 @@ public static partial class ServiceCollectionExtensions
 {
     private const string FileSystemServiceKey = "FileSystem";
 
+    /// <summary>
+    /// Adds the file system writer services with default options.
+    /// </summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <returns>The updated service collection.</returns>
     public static IServiceCollection AddFileSystemWriter(this IServiceCollection services)
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
@@ -17,6 +22,12 @@ public static partial class ServiceCollectionExtensions
         return services.PerformAddFileSystemWriter(default);
     }
 
+    /// <summary>
+    /// Adds the file system writer services using the provided configuration.
+    /// </summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <param name="configuration">The configuration to bind options from.</param>
+    /// <returns>The updated service collection.</returns>
     public static IServiceCollection AddFileSystemWriter(this IServiceCollection services, IConfiguration configuration)
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);

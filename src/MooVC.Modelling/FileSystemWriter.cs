@@ -8,9 +8,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
+/// <summary>
+/// Writes modelling files to the local file system.
+/// </summary>
+/// <param name="fileSystem">The file system abstraction to use.</param>
+/// <param name="options">The configured writer options.</param>
 public sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
     : IWriter
 {
+    /// <summary>
+    /// Writes the provided files to the target stream location.
+    /// </summary>
+    /// <param name="files">The files to write.</param>
+    /// <param name="stream">The stream associated with the output location.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous write operation.</returns>
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
     {
         string rootPath = ResolveRootPath(stream);
