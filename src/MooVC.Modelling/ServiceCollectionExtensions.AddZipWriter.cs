@@ -3,6 +3,7 @@
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
 public static partial class ServiceCollectionExtensions
@@ -13,9 +14,7 @@ public static partial class ServiceCollectionExtensions
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
 
-        return services
-            .AddOptions<ZipWriter.Options>()
-            .AddKeyedTransient<IWriter, ZipWriter>(ZipServiceKey);
+        return services.PerformAddZipWriter(default);
     }
 
     public static IServiceCollection AddZipWriter(this IServiceCollection services, IConfiguration configuration)
@@ -23,11 +22,18 @@ public static partial class ServiceCollectionExtensions
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
         _ = Guard.Against.Null(configuration, message: ConfigurationRequired);
 
-        var optionsBuilder = services
-            .AddOptions<ZipWriter.Options>()
-            .Bind(configuration.GetSection(ZipWriter.Options.SectionName));
+        return services.PerformAddZipWriter(configuration);
+    }
 
-        return optionsBuilder.Services
+    private static IServiceCollection PerformAddZipWriter(this IServiceCollection services, IConfiguration? configuration)
+    {
+        return services
+            .AddOptions<ZipWriter.Options>()
+            .ForkOn(
+                _ => configuration is null,
+                builder => builder,
+                builder => builder.Bind(configuration!.GetSection(ZipWriter.Options.SectionName)))
+             .Services
             .AddKeyedTransient<IWriter, ZipWriter>(ZipServiceKey);
     }
 }

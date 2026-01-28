@@ -51,9 +51,11 @@ public sealed class WhenAddFileSystemWriterIsCalled
         {
             { $"{FileSystemWriter.Options.SectionName}:{nameof(FileSystemWriter.Options.BufferSize)}", CustomBufferSize.ToString(CultureInfo.InvariantCulture) },
         };
+
         IConfiguration configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(settings)
             .Build();
+
         ServiceCollection services = new();
 
         // Act
