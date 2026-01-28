@@ -25,6 +25,9 @@
     <Project Path="src/MooVC.Syntax.CSharp/MooVC.Syntax.CSharp.csproj" />
     <Project Path="src/MooVC.Syntax/MooVC.Syntax.csproj" Id="26275ab5-1019-46bb-a54f-d62d1575c21e" />
     <Project Path="src/MooVC/MooVC.csproj" />
+    <Project Path="src/Mu.Modelling/Mu.Modelling.csproj" Id="9fa487c9-ae4e-430b-bf02-0478594e0747" />
+    <Project Path="src/Mu.Sample/Mu.Sample.csproj" />
+    <Project Path="src/Mu/Mu.csproj" />
   </Folder>
   <Folder Name="/Code/Infrastructure/" />
   <Folder Name="/Code/Infrastructure/Compression/">
