@@ -10,6 +10,6 @@ public static partial class ServiceCollectionExtensions
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
 
-        return services.AddSingleton(typeof(IGenerator<>), typeof(Generator<>));
+        return services.AddTransient(typeof(IGenerator<>), typeof(Generator<>));
     }
 }

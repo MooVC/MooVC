@@ -1,49 +1,50 @@
 ﻿namespace MooVC.Modelling;
 
-using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
-internal sealed class ZipWriter
+internal sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> options)
     : IWriter
 {
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
     {
         using var archive = new ZipArchive(stream, ZipArchiveMode.Create, leaveOpen: true);
 
-        await foreach (File file in files.WithCancellation(cancellationToken).ConfigureAwait(false))
+        ConfiguredCancelableAsyncEnumerable<File> enumerable = files
+            .WithCancellation(cancellationToken)
+            .ConfigureAwait(false);
+
+        await foreach (File file in enumerable)
         {
-            await WriteAsync(archive, file, cancellationToken).ConfigureAwait(false);
+            await Write(archive, file, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 
     private static string BuildEntryPath(File file)
     {
-        var extension = string.IsNullOrWhiteSpace(file.Extension)
-            ? string.Empty
-            : file.Extension.StartsWith(".", StringComparison.Ordinal)
-                ? file.Extension
-                : $".{file.Extension}";
-        var fileName = string.Concat(file.Name, extension);
-        var entryPath = string.IsNullOrWhiteSpace(file.Path)
-            ? fileName
-            : Path.Combine(file.Path, fileName);
-
-        return entryPath
+        return file.FilePath
             .Replace(Path.DirectorySeparatorChar, '/')
             .Replace(Path.AltDirectorySeparatorChar, '/');
     }
 
-    private static async Task WriteAsync(ZipArchive archive, File file, CancellationToken cancellationToken)
+    [SuppressMessage("Major Code Smell", "S6966:Awaitable method should be used", Justification = "Option not available in all supported versions.")]
+    private async Task Write(ZipArchive archive, File file, CancellationToken cancellationToken)
     {
-        var entryPath = BuildEntryPath(file);
-        var entry = archive.CreateEntry(entryPath, CompressionLevel.Optimal);
-        var contentBytes = Encoding.UTF8.GetBytes(file.Content);
+        string entryPath = BuildEntryPath(file);
+        ZipArchiveEntry entry = archive.CreateEntry(entryPath, options.Value.Compression);
+        byte[] contentBytes = Encoding.UTF8.GetBytes(file.Content);
 
-        await using var entryStream = entry.Open();
-        await entryStream.WriteAsync(contentBytes, cancellationToken).ConfigureAwait(false);
+        await using Stream stream = entry.Open();
+
+        await stream
+            .WriteAsync(contentBytes, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
