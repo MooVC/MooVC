@@ -62,6 +62,7 @@
     <File Path=".github/pull_request_template.md" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="src/MooVC.Modelling.Tests/MooVC.Modelling.Tests.csproj" />
     <Project Path="src/MooVC.Syntax.CSharp.Tests/MooVC.Syntax.CSharp.Tests.csproj">
       <Platform Solution="*|ARM32" Project="ARM32" />
     </Project>

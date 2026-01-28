@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-internal sealed partial class FileSystemWriter(IOptionsSnapshot<FileSystemWriter.Options> options)
+public sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
     : IWriter
 {
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
@@ -26,11 +26,11 @@ internal sealed partial class FileSystemWriter(IOptionsSnapshot<FileSystemWriter
         }
     }
 
-    private static string ResolveRootPath(Stream stream)
+    private string ResolveRootPath(Stream stream)
     {
         if (stream is FileStream fileStream)
         {
-            string? directoryPath = Path.GetDirectoryName(fileStream.Name);
+            string? directoryPath = fileSystem.GetDirectoryName(fileStream.Name);
 
             if (!string.IsNullOrWhiteSpace(directoryPath))
             {
@@ -38,28 +38,22 @@ internal sealed partial class FileSystemWriter(IOptionsSnapshot<FileSystemWriter
             }
         }
 
-        return Directory.GetCurrentDirectory();
+        return fileSystem.GetCurrentDirectory();
     }
 
     private async Task Write(File file, string rootPath, CancellationToken cancellationToken)
     {
-        string filePath = Path.GetFullPath(Path.Combine(rootPath, file.FilePath));
-        string? directoryPath = Path.GetDirectoryName(filePath);
+        string filePath = fileSystem.GetFullPath(Path.Combine(rootPath, file.FilePath));
+        string? directoryPath = fileSystem.GetDirectoryName(filePath);
 
         if (!string.IsNullOrWhiteSpace(directoryPath))
         {
-            _ = Directory.CreateDirectory(directoryPath);
+            fileSystem.CreateDirectory(directoryPath);
         }
 
         byte[] contentBytes = Encoding.UTF8.GetBytes(file.Content);
 
-        await using var stream = new FileStream(
-            filePath,
-            FileMode.Create,
-            FileAccess.Write,
-            FileShare.None,
-            bufferSize: options.Value.BufferSize,
-            useAsync: true);
+        await using Stream stream = fileSystem.CreateFileStream(filePath, options.Value.BufferSize);
 
         await stream
             .WriteAsync(contentBytes, cancellationToken)
