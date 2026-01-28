@@ -8,6 +8,7 @@ public static partial class ServiceCollectionExtensions
     {
         return services
             .AddGenerator()
+            .AddFileSystemWriter()
             .AddZipWriter();
     }
 }
