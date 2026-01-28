@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
-internal sealed class FileSystemWriter
+internal sealed partial class FileSystemWriter(IOptionsSnapshot<FileSystemWriter.Options> options)
     : IWriter
 {
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
@@ -40,7 +41,7 @@ internal sealed class FileSystemWriter
         return Directory.GetCurrentDirectory();
     }
 
-    private static async Task Write(File file, string rootPath, CancellationToken cancellationToken)
+    private async Task Write(File file, string rootPath, CancellationToken cancellationToken)
     {
         string filePath = Path.GetFullPath(Path.Combine(rootPath, file.FilePath));
         string? directoryPath = Path.GetDirectoryName(filePath);
@@ -57,7 +58,7 @@ internal sealed class FileSystemWriter
             FileMode.Create,
             FileAccess.Write,
             FileShare.None,
-            bufferSize: 4096,
+            bufferSize: options.Value.BufferSize,
             useAsync: true);
 
         await stream
