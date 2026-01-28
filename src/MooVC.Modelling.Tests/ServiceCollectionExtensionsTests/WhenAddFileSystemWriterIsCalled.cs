@@ -32,7 +32,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
         IFileSystem fileSystem = provider.GetRequiredService<IFileSystem>();
 
         // Assert
-        writer.ShouldBeOfType<FileSystemWriter>();
-        fileSystem.ShouldNotBeNull();
+        _ = writer.ShouldBeOfType<FileSystemWriter>();
+        _ = fileSystem.ShouldNotBeNull();
     }
 }

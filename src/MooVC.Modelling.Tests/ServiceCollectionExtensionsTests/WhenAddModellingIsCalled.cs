@@ -1,5 +1,6 @@
 namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
 
+using System.Diagnostics.CodeAnalysis;
 using Graphify;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,12 +25,11 @@ public sealed class WhenAddModellingIsCalled
         IWriter zipWriter = provider.GetRequiredKeyedService<IWriter>(ZipKey);
 
         // Assert
-        generator.ShouldBeOfType<Generator<TestModel>>();
-        fileSystemWriter.ShouldBeOfType<FileSystemWriter>();
-        zipWriter.ShouldBeOfType<ZipWriter>();
+        _ = generator.ShouldBeOfType<Generator<TestModel>>();
+        _ = fileSystemWriter.ShouldBeOfType<FileSystemWriter>();
+        _ = zipWriter.ShouldBeOfType<ZipWriter>();
     }
 
-    private sealed class TestModel
-    {
-    }
+    [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]
+    public sealed class TestModel;
 }

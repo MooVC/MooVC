@@ -7,8 +7,7 @@ public sealed class WhenDefaultIsCalled
     [Fact]
     public void GivenDefaultThenBufferSizeIsSet()
     {
-        // Arrange
-        // Act
+        // Arrange & Act
         FileSystemWriter.Options options = FileSystemWriter.Options.Default;
 
         // Assert

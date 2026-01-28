@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-internal sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> options)
+public sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> options)
     : IWriter
 {
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)

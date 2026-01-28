@@ -31,6 +31,6 @@ public sealed class WhenAddZipWriterIsCalled
         IWriter writer = provider.GetRequiredKeyedService<IWriter>(ZipKey);
 
         // Assert
-        writer.ShouldBeOfType<ZipWriter>();
+        _ = writer.ShouldBeOfType<ZipWriter>();
     }
 }

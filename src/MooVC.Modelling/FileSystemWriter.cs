@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-internal sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
+public sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
     : IWriter
 {
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)

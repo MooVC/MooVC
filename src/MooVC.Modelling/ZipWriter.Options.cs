@@ -2,7 +2,7 @@
 
 using System.IO.Compression;
 
-internal partial class ZipWriter
+public partial class ZipWriter
 {
     public sealed record Options(CompressionLevel Compression)
     {

@@ -1,6 +1,7 @@
 namespace MooVC.Modelling.GeneratorTests;
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Graphify;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,7 @@ public sealed class WhenGenerateIsCalled
         File expectedFile = new(Content, Extension, Name, PathValue);
         IAsyncEnumerable<File> files = CreateFiles(expectedFile);
         INavigator<TestModel> navigator = Substitute.For<INavigator<TestModel>>();
+
         _ = navigator
             .Navigate<File>(model, Arg.Any<CancellationToken>())
             .Returns(files);
@@ -48,7 +50,7 @@ public sealed class WhenGenerateIsCalled
 
     private static async Task<IReadOnlyList<File>> Materialize(IAsyncEnumerable<File> files)
     {
-        List<File> results = new();
+        List<File> results = [];
 
         await foreach (File file in files)
         {
@@ -58,7 +60,6 @@ public sealed class WhenGenerateIsCalled
         return results;
     }
 
-    private sealed class TestModel
-    {
-    }
+    [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]
+    public sealed class TestModel;
 }

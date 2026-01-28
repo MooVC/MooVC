@@ -1,7 +1,5 @@
 namespace MooVC.Modelling.FileTests;
 
-using System.IO;
-
 public sealed class WhenFilePathIsCalled
 {
     private const string Content = "content";

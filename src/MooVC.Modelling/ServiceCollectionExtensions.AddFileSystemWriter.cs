@@ -2,7 +2,6 @@ namespace MooVC.Modelling;
 
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
 public static partial class ServiceCollectionExtensions
@@ -13,8 +12,8 @@ public static partial class ServiceCollectionExtensions
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
 
-        _ = services.TryAddSingleton<IFileSystem, SystemFileSystem>();
-
-        return services.AddKeyedTransient<IWriter, FileSystemWriter>(FileSystemServiceKey);
+        return services
+            .AddSingleton<IFileSystem, FileSystem>()
+            .AddKeyedTransient<IWriter, FileSystemWriter>(FileSystemServiceKey);
     }
 }

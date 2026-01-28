@@ -2,13 +2,13 @@ namespace MooVC.Modelling;
 
 using System.IO;
 
-internal interface IFileSystem
+public interface IFileSystem
 {
+    string GetCurrentDirectory();
+
     void CreateDirectory(string path);
 
     Stream CreateFileStream(string path, int bufferSize);
-
-    string GetCurrentDirectory();
 
     string? GetDirectoryName(string path);
 

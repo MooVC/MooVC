@@ -1,6 +1,6 @@
 namespace MooVC.Modelling;
 
-internal partial class FileSystemWriter
+public partial class FileSystemWriter
 {
     public sealed record Options(int BufferSize)
     {

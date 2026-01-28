@@ -2,9 +2,14 @@ namespace MooVC.Modelling;
 
 using System.IO;
 
-internal sealed class SystemFileSystem
+public sealed class FileSystem
     : IFileSystem
 {
+    public string GetCurrentDirectory()
+    {
+        return Directory.GetCurrentDirectory();
+    }
+
     public void CreateDirectory(string path)
     {
         _ = Directory.CreateDirectory(path);
@@ -19,11 +24,6 @@ internal sealed class SystemFileSystem
             FileShare.None,
             bufferSize: bufferSize,
             useAsync: true);
-    }
-
-    public string GetCurrentDirectory()
-    {
-        return Directory.GetCurrentDirectory();
     }
 
     public string? GetDirectoryName(string path)

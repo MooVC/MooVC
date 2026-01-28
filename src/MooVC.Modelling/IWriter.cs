@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-internal interface IWriter
+public interface IWriter
 {
     Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken);
 }

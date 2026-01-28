@@ -1,6 +1,7 @@
 namespace MooVC.Modelling.ZipWriterTests;
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 using System.Text;
 using Microsoft.Extensions.Options;
@@ -13,6 +14,7 @@ public sealed class WhenWriteIsCalled
     private const string PathValue = "Models";
 
     [Fact]
+    [SuppressMessage("Major Code Smell", "S6966:Awaitable method should be used", Justification = "Feature is not available in all supported versions.")]
     public async Task GivenFilesThenArchiveContainsEntry()
     {
         // Arrange
@@ -20,7 +22,9 @@ public sealed class WhenWriteIsCalled
         IAsyncEnumerable<File> files = CreateFiles(testFile);
         IOptionsSnapshot<ZipWriter.Options> optionsSnapshot = CreateOptionsSnapshot();
         IWriter writer = new ZipWriter(optionsSnapshot);
+
         await using var stream = new MemoryStream();
+
         string expectedEntryPath = testFile.FilePath
             .Replace(Path.DirectorySeparatorChar, '/')
             .Replace(Path.AltDirectorySeparatorChar, '/');
@@ -41,9 +45,11 @@ public sealed class WhenWriteIsCalled
 
     private static IOptionsSnapshot<ZipWriter.Options> CreateOptionsSnapshot()
     {
-        IOptionsSnapshot<ZipWriter.Options> optionsSnapshot = Substitute.For<IOptionsSnapshot<ZipWriter.Options>>();
-        optionsSnapshot.Value.Returns(new ZipWriter.Options(CompressionLevel.NoCompression));
-        return optionsSnapshot;
+        IOptionsSnapshot<ZipWriter.Options> options = Substitute.For<IOptionsSnapshot<ZipWriter.Options>>();
+
+        _ = options.Value.Returns(new ZipWriter.Options(CompressionLevel.NoCompression));
+
+        return options;
     }
 
     private static async IAsyncEnumerable<File> CreateFiles(params File[] files)
@@ -51,6 +57,7 @@ public sealed class WhenWriteIsCalled
         foreach (File file in files)
         {
             yield return file;
+
             await Task.Yield();
         }
     }
