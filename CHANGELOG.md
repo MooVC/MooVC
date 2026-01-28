@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
+- A FileSystemWriter for emitting generated files directly to disk.
 
 # [9.2.0] - 2025-11-14
 
