@@ -1,7 +1,9 @@
 namespace MooVC.Modelling;
 
 using Ardalis.GuardClauses;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
 public static partial class ServiceCollectionExtensions
@@ -12,7 +14,26 @@ public static partial class ServiceCollectionExtensions
     {
         _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
 
+        return services.PerformAddFileSystemWriter(default);
+    }
+
+    public static IServiceCollection AddFileSystemWriter(this IServiceCollection services, IConfiguration configuration)
+    {
+        _ = Guard.Against.Null(services, message: ServiceCollectionRequired);
+        _ = Guard.Against.Null(configuration, message: ConfigurationRequired);
+
+        return services.PerformAddFileSystemWriter(configuration);
+    }
+
+    private static IServiceCollection PerformAddFileSystemWriter(this IServiceCollection services, IConfiguration? configuration)
+    {
         return services
+            .AddOptions<FileSystemWriter.Options>()
+            .ForkOn(
+                _ => configuration is null,
+                builder => builder,
+                builder => builder.Bind(configuration!.GetSection(FileSystemWriter.Options.SectionName)))
+            .Services
             .AddSingleton<IFileSystem, FileSystem>()
             .AddKeyedTransient<IWriter, FileSystemWriter>(FileSystemServiceKey);
     }

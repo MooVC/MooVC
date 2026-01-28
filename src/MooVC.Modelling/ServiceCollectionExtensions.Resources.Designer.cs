@@ -61,6 +61,15 @@ namespace MooVC.Modelling {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The configuration for modelling options must be provided..
+        /// </summary>
+        internal static string ConfigurationRequired {
+            get {
+                return ResourceManager.GetString("ConfigurationRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The collection to which the modelling registrations are to be added must be provided..
         /// </summary>
         internal static string ServiceCollectionRequired {
