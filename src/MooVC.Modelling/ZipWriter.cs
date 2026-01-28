@@ -9,9 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
+/// <summary>
+/// Writes modelling files to a zip archive.
+/// </summary>
+/// <param name="options">The configured writer options.</param>
 public sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> options)
     : IWriter
 {
+    /// <summary>
+    /// Writes the provided files to the target stream as a zip archive.
+    /// </summary>
+    /// <param name="files">The files to write.</param>
+    /// <param name="stream">The target stream.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous write operation.</returns>
     public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
     {
         using var archive = new ZipArchive(stream, ZipArchiveMode.Create, leaveOpen: true);
