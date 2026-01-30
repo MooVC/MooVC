@@ -25,7 +25,7 @@ public sealed class WhenInitializeIsCalled
 
         // Assert
         invocations.ShouldBe(ExpectedInvocations);
-        first.ShouldNotBeNull();
+        _ = first.ShouldNotBeNull();
         first.ShouldBe(second);
         first.ShouldBe(third);
         second.ShouldBe(third);

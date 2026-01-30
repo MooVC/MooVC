@@ -12,7 +12,7 @@ public sealed class WhenDeflateCompressorIsConstructed
         Func<ICompressor> act = () => new DeflateCompressor();
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Theory]
@@ -25,7 +25,7 @@ public sealed class WhenDeflateCompressorIsConstructed
         Func<ICompressor> act = () => new DeflateCompressor(level: level);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Theory]
@@ -37,6 +37,6 @@ public sealed class WhenDeflateCompressorIsConstructed
         Func<ICompressor> act = () => new DeflateCompressor(level: level);
 
         // Assert
-        Should.Throw<InvalidEnumArgumentException>(act);
+        _ = Should.Throw<InvalidEnumArgumentException>(act);
     }
 }

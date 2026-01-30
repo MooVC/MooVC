@@ -12,7 +12,7 @@ public sealed class WhenSerializeIsCalled
         string instance = "Something something dark side...";
         ICompressor compressor = Substitute.For<ICompressor>();
 
-        compressor
+        _ = compressor
             .Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
             .Returns(info => info.Arg<Stream>());
 
@@ -21,10 +21,10 @@ public sealed class WhenSerializeIsCalled
             onSerialize: (_, _) => { });
 
         // Act
-        await serializer.Serialize(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
+        _ = await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class WhenSerializeIsCalled
         void Serializer(object input1, object input2)
         {
             input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
+            _ = input2.ShouldBeAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -46,7 +46,7 @@ public sealed class WhenSerializeIsCalled
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        await serializer.Serialize(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
         wasInvoked.ShouldBeTrue();
@@ -63,7 +63,7 @@ public sealed class WhenSerializeIsCalled
         void Serializer(object input1, object input2)
         {
             input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
+            _ = input2.ShouldBeAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -88,7 +88,7 @@ public sealed class WhenSerializeIsCalled
         void Serializer(object input1, object input2)
         {
             input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
+            _ = input2.ShouldBeAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -96,7 +96,7 @@ public sealed class WhenSerializeIsCalled
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        await serializer.Serialize(instance!, CancellationToken.None);
+        _ = await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
         wasInvoked.ShouldBeTrue();

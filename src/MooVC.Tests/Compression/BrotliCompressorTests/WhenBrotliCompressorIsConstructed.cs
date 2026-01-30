@@ -13,7 +13,7 @@ public sealed class WhenBrotliCompressorIsConstructed
         Func<ICompressor> act = () => new BrotliCompressor();
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Theory]
@@ -27,7 +27,7 @@ public sealed class WhenBrotliCompressorIsConstructed
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Theory]
@@ -39,7 +39,7 @@ public sealed class WhenBrotliCompressorIsConstructed
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        Should.Throw<InvalidEnumArgumentException>(act);
+        _ = Should.Throw<InvalidEnumArgumentException>(act);
     }
 }
 #endif

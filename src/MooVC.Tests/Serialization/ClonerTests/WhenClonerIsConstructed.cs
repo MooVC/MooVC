@@ -12,7 +12,7 @@ public sealed class WhenClonerIsConstructed
         var cloner = new Cloner(serializer);
 
         // Assert
-        cloner.ShouldNotBeNull();
+        _ = cloner.ShouldNotBeNull();
     }
 
     [Fact]

@@ -63,7 +63,7 @@ public sealed class WhenCloneIsCalled
         Action act = () => source.Clone(defaultIfNull: false);
 
         // Assert
-        Should.Throw<ArgumentNullException>(act);
+        _ = Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public sealed class WhenCloneIsCalled
         ExpandoObject value = source.Clone(defaultIfNull: true);
 
         // Assert
-        value.ShouldNotBeNull();
+        _ = value.ShouldNotBeNull();
         value.ShouldBeEmpty();
     }
 
