@@ -114,12 +114,18 @@ jobs:
         name: nuget-packages
         path: ./artifacts
 
+    - name: Download NuGet CLI
+      run: |
+        Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
+      shell: pwsh
+
     - name: Deprecate Previous Versions on NuGet
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: |
         $ErrorActionPreference = 'Stop'
         $currentVersion = '${{ env.semantic }}'
+        $nugetExe = Join-Path $env:GITHUB_WORKSPACE 'nuget.exe'
         $packages = Get-ChildItem -Path ./artifacts -Filter *.nupkg
         if (-not $packages) {
           throw 'No NuGet packages found to determine package IDs.'
@@ -185,6 +191,6 @@ jobs:
 
           $previousVersionText = $previousVersion.ToString()
           Write-Host "Deprecating $packageId $previousVersionText in favor of $currentVersion."
-          dotnet nuget deprecate $packageId $previousVersionText --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --reason Other --message "Deprecated in favor of $currentVersion."
+          & $nugetExe deprecate $packageId $previousVersionText -Source https://api.nuget.org/v3/index.json -ApiKey $env:NUGET_API_KEY -Reason Other -Message "Deprecated in favor of $currentVersion."
         }
       shell: pwsh
