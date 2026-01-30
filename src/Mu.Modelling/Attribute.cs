@@ -16,17 +16,17 @@ public sealed partial class Attribute
 {
     public static readonly Attribute Undefined = new();
 
+    [Descriptor("DefaultedTo")]
+    public Snippet Default { get; internal init; } = Snippet.Empty;
+
     [Ignore]
     public bool IsUndefined => this == Undefined;
 
-    [Descriptor("DefaultedTo")]
-    public Snippet Default { get; init; } = Snippet.Empty;
-
     [Descriptor("Named")]
-    public Identifier Name { get; init; } = Identifier.Unnamed;
+    public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Descriptor("OfType")]
-    public Symbol Type { get; init; } = Symbol.Undefined;
+    public Symbol Type { get; internal init; } = Symbol.Undefined;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

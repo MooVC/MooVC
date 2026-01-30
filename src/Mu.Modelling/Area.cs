@@ -20,20 +20,20 @@ public sealed partial class Area
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
-    public Identifier Name { get; init; } = Identifier.Unnamed;
+    public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Descriptor("ResponsibleFor")]
-    public ImmutableArray<Unit> Units { get; init; } = ImmutableArray<Unit>.Empty;
+    public ImmutableArray<Unit> Units { get; internal init; } = ImmutableArray<Unit>.Empty;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (IsUndefined)
         {
-            return Enumerable.Empty<ValidationResult>();
+            return [];
         }
 
         return validationContext
-            .IncludeIf(!Units.IsDefaultOrEmpty, nameof(Units), Units)
+            .IncludeIf(!Units.IsDefaultOrEmpty, nameof(Units), unit => !unit.IsUndefined, Units)
             .And(nameof(Name), Name)
             .Results;
     }

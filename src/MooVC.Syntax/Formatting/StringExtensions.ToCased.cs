@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.Formatting
 {
     using System;
-    using System.Text;
 
     /// <summary>
     /// Represents a formatting helper string extensions.
@@ -10,22 +9,18 @@
     {
         private static string ToCased(this string value, Func<char, char> transformFirstCharacter)
         {
-            const int FirstCharacterIndex = 0;
-            const int RemainingCharactersOffset = 1;
-
             int length = value.Length;
-            var builder = new StringBuilder(length);
 
-            char firstCharacter = transformFirstCharacter(value[FirstCharacterIndex]);
-
-            builder = builder.Append(firstCharacter);
-
-            if (length > RemainingCharactersOffset)
+            if (length == 0)
             {
-                builder = builder.Append(value, RemainingCharactersOffset, length - RemainingCharactersOffset);
+                return string.Empty;
             }
 
-            return builder.ToString();
+            char[] chars = value.ToCharArray();
+
+            chars[0] = transformFirstCharacter(chars[0]);
+
+            return new string(chars);
         }
     }
 }

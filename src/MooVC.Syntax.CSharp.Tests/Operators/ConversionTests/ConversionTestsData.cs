@@ -20,7 +20,7 @@ internal static class ConversionTestsData
             Body = body ?? Snippet.From(DefaultBody),
             Direction = direction ?? Conversion.Intent.To,
             Mode = mode ?? Conversion.Type.Implicit,
-            Subject = subject ?? new Symbol { Name = DefaultSubject },
+            Target = subject ?? new Symbol { Name = DefaultSubject },
         };
 
         if (scope is not null)

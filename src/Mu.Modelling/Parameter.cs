@@ -1,33 +1,32 @@
 ﻿namespace Mu.Modelling;
 
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
-using Graphify;
+using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
 
 [Fluentify]
-[Graphify]
 [Valuify]
-public sealed partial class Model
+public sealed partial class Parameter
     : IValidatableObject
 {
-    public static readonly Model Undefined = new();
+    public static readonly Parameter Undefined = new();
 
-    [Descriptor("WithArea")]
-    public ImmutableArray<Area> Areas { get; internal init; } = ImmutableArray<Area>.Empty;
-
-    [Descriptor("For")]
-    public Identifier Company { get; internal init; } = Identifier.Unnamed;
+    [Descriptor("DefaultedTo")]
+    public Snippet Default { get; internal init; } = Snippet.Empty;
 
     [Ignore]
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
+
+    [Descriptor("OfType")]
+    public Symbol Type { get; internal init; } = Symbol.Undefined;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -37,9 +36,9 @@ public sealed partial class Model
         }
 
         return validationContext
-            .IncludeIf(!Areas.IsDefaultOrEmpty, nameof(Areas), area => !area.IsUndefined, Areas)
-            .AndIf(!Company.IsUnnamed, nameof(Company), Company)
-            .And(nameof(Name), name => !name.IsUnnamed, Name)
+            .IncludeIf(!Default.IsEmpty, nameof(Default), _ => Default.IsSingleLine, Default)
+            .And(nameof(Name), _ => !Name.IsUnnamed, Name)
+            .And(nameof(Type), _ => !Type.IsUndefined, Type)
             .Results;
     }
 }

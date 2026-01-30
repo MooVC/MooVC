@@ -18,6 +18,6 @@ public sealed class WhenWithDirectionIsCalled
         result.Direction.ShouldBe(replacement);
         result.Mode.ShouldBe(original.Mode);
         result.Scope.ShouldBe(original.Scope);
-        result.Subject.ShouldBe(original.Subject);
+        result.Target.ShouldBe(original.Target);
     }
 }

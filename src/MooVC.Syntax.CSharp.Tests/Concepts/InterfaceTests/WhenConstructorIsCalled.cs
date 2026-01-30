@@ -45,7 +45,7 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = new Variable(InterfaceTestsData.DefaultName) },
-            operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
+            operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
             properties: [property],
             scope: Scope.Internal);
 

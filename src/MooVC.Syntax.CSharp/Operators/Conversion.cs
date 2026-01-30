@@ -67,11 +67,11 @@
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
-        /// Gets or sets the subject on the Conversion.
+        /// Gets or sets the target for the Conversion.
         /// </summary>
-        /// <value>The subject.</value>
+        /// <value>The target for conversion.</value>
         [Descriptor("ForType")]
-        public Symbol Subject { get; internal set; } = Symbol.Undefined;
+        public Symbol Target { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
         /// Returns the string representation of the Conversion.
@@ -127,13 +127,13 @@
                 results = results.Append(new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Conversion)), new[] { nameof(Body) }));
             }
 
-            if (Subject.IsUndefined)
+            if (Target.IsUndefined)
             {
-                results = results.Append(new ValidationResult(ValidateSubjectRequired.Format(nameof(Subject), nameof(Conversion)), new[] { nameof(Subject) }));
+                results = results.Append(new ValidationResult(ValidateSubjectRequired.Format(nameof(Target), nameof(Conversion)), new[] { nameof(Target) }));
             }
 
             return validationContext
-                .Include(nameof(Subject), results, Subject)
+                .Include(nameof(Target), results, Target)
                 .Results;
         }
 
@@ -142,11 +142,11 @@
             if (Direction == Intent.To)
             {
                 input = declaration;
-                result = Subject;
+                result = Target;
             }
             else
             {
-                input = Subject;
+                input = Target;
                 result = declaration;
             }
         }

@@ -9,7 +9,7 @@ public sealed class WhenWithOperatorsIsCalled
     public void GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var operators = new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] };
+        var operators = new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] };
         Interface original = InterfaceTestsData.Create();
 
         // Act

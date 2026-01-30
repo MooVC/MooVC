@@ -12,7 +12,7 @@ public sealed class WhenWithOperatorsIsCalled
         Class original = ClassTestsData.Create();
         var operators = new Operators
         {
-            Conversions = [new Conversion { Subject = Symbol.Undefined }],
+            Conversions = [new Conversion { Target = Symbol.Undefined }],
         };
 
         // Act

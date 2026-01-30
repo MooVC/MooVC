@@ -20,6 +20,6 @@ public sealed class WhenWithBodyIsCalled
         result.Direction.ShouldBe(original.Direction);
         result.Mode.ShouldBe(original.Mode);
         result.Scope.ShouldBe(original.Scope);
-        result.Subject.ShouldBe(original.Subject);
+        result.Target.ShouldBe(original.Target);
     }
 }

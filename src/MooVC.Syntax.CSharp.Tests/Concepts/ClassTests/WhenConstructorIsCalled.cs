@@ -56,7 +56,7 @@ public sealed class WhenConstructorIsCalled
             isStatic: true,
             methods: [method],
             name: new Declaration { Name = new Variable(ClassTestsData.DefaultName) },
-            operators: new Operators { Conversions = [new Conversion { Subject = Symbol.Undefined }] },
+            operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
             parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }],
             properties: [property],
             scope: Scope.Internal);

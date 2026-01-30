@@ -54,7 +54,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Subject)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Target)));
     }
 
     [Fact]

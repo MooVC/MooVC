@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
         subject.Mode.ShouldBe(Conversion.Type.Implicit);
         subject.Scope.ShouldBe(Scope.Public);
-        subject.Subject.ShouldBe(Symbol.Undefined);
+        subject.Target.ShouldBe(Symbol.Undefined);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public sealed class WhenConstructorIsCalled
             Direction = Conversion.Intent.From,
             Mode = Conversion.Type.Explicit,
             Scope = Scope.Private,
-            Subject = subjectSymbol,
+            Target = subjectSymbol,
         };
 
         // Assert
@@ -43,6 +43,6 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeFalse();
         subject.Mode.ShouldBe(Conversion.Type.Explicit);
         subject.Scope.ShouldBe(Scope.Private);
-        subject.Subject.ShouldBe(subjectSymbol);
+        subject.Target.ShouldBe(subjectSymbol);
     }
 }
