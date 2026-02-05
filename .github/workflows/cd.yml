@@ -161,7 +161,7 @@ jobs:
               break
             }
 
-            Write-Host "Waiting for $packageId $currentVersion to appear on NuGet (attempt $attempt of $maxAttempts)."
+            Write-Host "Waiting $delaySeconds seconds for $packageId $currentVersion to appear on NuGet (attempt $attempt of $maxAttempts)."
             Start-Sleep -Seconds $delaySeconds
           }
 
