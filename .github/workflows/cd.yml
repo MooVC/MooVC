@@ -194,6 +194,7 @@ jobs:
             'User-Agent' = 'MooVC-CD'
             'X-NuGet-ApiKey' = $env:NUGET_API_KEY
           }
-          Invoke-RestMethod -Uri "https://www.nuget.org/api/v2/package/$packageId/deprecations" -Method Put -Headers $headers -ContentType 'application/x-www-form-urlencoded' -Body $deprecateBody
+          $deprecateUri = "https://www.nuget.org/api/v2/package/{0}/deprecations" -f $packageId
+          Invoke-RestMethod -Uri $deprecateUri -Method Put -Headers $headers -ContentType 'application/x-www-form-urlencoded' -Body $deprecateBody
         }
       shell: pwsh
