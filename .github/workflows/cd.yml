@@ -191,6 +191,8 @@ jobs:
             message = "Deprecated in favor of $currentVersion."
           }
           $headers = @{
+            'X-NuGet-Client-Version' = 'MooVC-CD/1.0'
+            'X-NuGet-Protocol-Version' = '4.1.0'
             'User-Agent' = 'MooVC-CD'
             'X-NuGet-ApiKey' = $env:NUGET_API_KEY
           }
