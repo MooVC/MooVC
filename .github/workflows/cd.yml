@@ -171,19 +171,17 @@ jobs:
 
           $currentSemanticVersion = [System.Management.Automation.SemanticVersion]::Parse($currentVersion)
           $parsedVersions = $versions | ForEach-Object { [System.Management.Automation.SemanticVersion]::Parse($_) }
-          $sameTypeVersions = if ($currentSemanticVersion.IsPrerelease) {
+          $candidateVersions = if ($currentSemanticVersion.IsPrerelease) {
             $parsedVersions | Where-Object { $_.IsPrerelease }
           } else {
-            $parsedVersions | Where-Object { -not $_.IsPrerelease }
+            $parsedVersions
           }
 
-          $previousVersion = $sameTypeVersions | Where-Object { $_ -ne $currentSemanticVersion } | Sort-Object -Descending | Select-Object -First 1
-          if (-not $previousVersion) {
-            Write-Host "No previous $packageId version of the same type found. Skipping deprecation."
+          $previousVersions = $candidateVersions | Where-Object { $_ -lt $currentSemanticVersion } | Sort-Object -Descending
+          if (-not $previousVersions) {
+            Write-Host "No previous $packageId versions to deprecate. Skipping deprecation."
             continue
           }
-
-          $previousVersionText = $previousVersion.ToString()
           $registrationIndexUrl = "https://api.nuget.org/v3/registration5-gz-semver2/$($packageId.ToLowerInvariant())/index.json"
           $registrationIndex = Invoke-RestMethod -Uri $registrationIndexUrl -Method Get
           $registrationItems = @()
@@ -196,33 +194,36 @@ jobs:
             }
           }
 
-          $previousEntry = $registrationItems | Where-Object { $_.catalogEntry.version -eq $previousVersionText } | Select-Object -First 1
-          if (-not $previousEntry) {
-            Write-Host "Unable to find registration entry for $packageId $previousVersionText. Skipping deprecation."
-            continue
-          }
+          foreach ($previousVersion in $previousVersions) {
+            $previousVersionText = $previousVersion.ToString()
+            $previousEntry = $registrationItems | Where-Object { $_.catalogEntry.version -eq $previousVersionText } | Select-Object -First 1
+            if (-not $previousEntry) {
+              Write-Host "Unable to find registration entry for $packageId $previousVersionText. Skipping deprecation."
+              continue
+            }
 
-          if (-not $previousEntry.listed) {
-            Write-Host "Package $packageId $previousVersionText is unlisted. Skipping deprecation."
-            continue
-          }
+            if (-not $previousEntry.listed) {
+              Write-Host "Package $packageId $previousVersionText is unlisted. Skipping deprecation."
+              continue
+            }
 
-          if ($previousEntry.catalogEntry.deprecation) {
-            Write-Host "Package $packageId $previousVersionText is already deprecated. Skipping deprecation."
-            continue
-          }
+            if ($previousEntry.catalogEntry.deprecation) {
+              Write-Host "Package $packageId $previousVersionText is already deprecated. Skipping deprecation."
+              continue
+            }
 
-          Write-Host "Deprecating $packageId $previousVersionText in favor of $currentVersion."
-          $deprecateBody = @{
-            isOther = $true
-            message = "Deprecated in favor of $currentVersion."
+            Write-Host "Deprecating $packageId $previousVersionText in favor of $currentVersion."
+            $deprecateBody = @{
+              isOther = $true
+              message = "Deprecated in favor of $currentVersion."
+            }
+            $headers = @{
+              'X-NuGet-Client-Version' = 'MooVC-CD/1.0'
+              'X-NuGet-Protocol-Version' = '4.1.0'
+              'X-NuGet-ApiKey' = $env:NUGET_API_KEY
+            }
+            $deprecateUri = "https://www.nuget.org/api/v2/package/{0}/{1}/deprecate" -f $packageId, $previousVersionText
+            Invoke-RestMethod -Uri $deprecateUri -Method Put -Headers $headers -UserAgent 'MooVC-CD' -ContentType 'application/x-www-form-urlencoded' -Body $deprecateBody
           }
-          $headers = @{
-            'X-NuGet-Client-Version' = 'MooVC-CD/1.0'
-            'X-NuGet-Protocol-Version' = '4.1.0'
-            'X-NuGet-ApiKey' = $env:NUGET_API_KEY
-          }
-          $deprecateUri = "https://www.nuget.org/api/v2/package/{0}/{1}/deprecate" -f $packageId, $previousVersionText
-          Invoke-RestMethod -Uri $deprecateUri -Method Put -Headers $headers -UserAgent 'MooVC-CD' -ContentType 'application/x-www-form-urlencoded' -Body $deprecateBody
         }
       shell: pwsh
