@@ -184,6 +184,34 @@ jobs:
           }
 
           $previousVersionText = $previousVersion.ToString()
+          $registrationIndexUrl = "https://api.nuget.org/v3/registration5-gz-semver2/$($packageId.ToLowerInvariant())/index.json"
+          $registrationIndex = Invoke-RestMethod -Uri $registrationIndexUrl -Method Get
+          $registrationItems = @()
+          foreach ($item in $registrationIndex.items) {
+            if ($item.items) {
+              $registrationItems += $item.items
+            } else {
+              $page = Invoke-RestMethod -Uri $item.'@id' -Method Get
+              $registrationItems += $page.items
+            }
+          }
+
+          $previousEntry = $registrationItems | Where-Object { $_.catalogEntry.version -eq $previousVersionText } | Select-Object -First 1
+          if (-not $previousEntry) {
+            Write-Host "Unable to find registration entry for $packageId $previousVersionText. Skipping deprecation."
+            continue
+          }
+
+          if (-not $previousEntry.listed) {
+            Write-Host "Package $packageId $previousVersionText is unlisted. Skipping deprecation."
+            continue
+          }
+
+          if ($previousEntry.catalogEntry.deprecation) {
+            Write-Host "Package $packageId $previousVersionText is already deprecated. Skipping deprecation."
+            continue
+          }
+
           Write-Host "Deprecating $packageId $previousVersionText in favor of $currentVersion."
           $deprecateBody = @{
             isOther = $true
