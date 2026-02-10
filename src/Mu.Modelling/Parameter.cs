@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
+using Graphify;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
