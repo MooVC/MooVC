@@ -1,16 +1,16 @@
 namespace Mu.Modelling.MutationalTests.KindTests;
 
-public sealed class WhenEqualityOperatorKindByteIsCalled
+public sealed class WhenEqualityOperatorKindStringIsCalled
 {
-    private const byte CreationalValue = 0;
-    private const byte TransitionalValue = 1;
+    private const string CreationalValue = "Creational";
+    private const string TransitionalValue = "Transitional";
 
     [Fact]
     public void GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
         Mutational.Kind subject = Mutational.Kind.Creational;
-        byte value = CreationalValue;
+        string value = CreationalValue;
 
         // Act
         bool result = subject == value;
@@ -24,7 +24,7 @@ public sealed class WhenEqualityOperatorKindByteIsCalled
     {
         // Arrange
         Mutational.Kind subject = Mutational.Kind.Creational;
-        byte value = TransitionalValue;
+        string value = TransitionalValue;
 
         // Act
         bool result = subject == value;

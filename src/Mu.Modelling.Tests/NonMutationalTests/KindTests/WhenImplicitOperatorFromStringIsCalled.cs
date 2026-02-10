@@ -1,18 +1,18 @@
 namespace Mu.Modelling.NonMutationalTests.KindTests;
 
-public sealed class WhenImplicitOperatorFromByteIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const byte ReadStoreValue = 0;
+    private const string ReadStoreValue = "ReadStore";
 
     [Fact]
     public void GivenValueThenRoundTripsSuccessfully()
     {
         // Arrange
-        byte value = ReadStoreValue;
+        string value = ReadStoreValue;
 
         // Act
         NonMutational.Kind subject = value;
-        byte result = subject;
+        string result = subject;
 
         // Assert
         result.ShouldBe(value);

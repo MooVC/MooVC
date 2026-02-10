@@ -1,16 +1,16 @@
 namespace Mu.Modelling.FeatureTests.KindTests;
 
-public sealed class WhenInequalityOperatorKindByteIsCalled
+public sealed class WhenInequalityOperatorKindStringIsCalled
 {
-    private const byte MutationalValue = 0;
-    private const byte NonMutationalValue = 1;
+    private const string MutationalValue = "Mutational";
+    private const string NonMutationalValue = "NonMutational";
 
     [Fact]
     public void GivenDifferentValueThenReturnsTrue()
     {
         // Arrange
         Feature.Kind subject = Feature.Kind.Mutational;
-        byte value = NonMutationalValue;
+        string value = NonMutationalValue;
 
         // Act
         bool result = subject != value;
@@ -24,7 +24,7 @@ public sealed class WhenInequalityOperatorKindByteIsCalled
     {
         // Arrange
         Feature.Kind subject = Feature.Kind.Mutational;
-        byte value = MutationalValue;
+        string value = MutationalValue;
 
         // Act
         bool result = subject != value;

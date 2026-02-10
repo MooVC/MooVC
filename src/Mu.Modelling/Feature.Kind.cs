@@ -4,13 +4,13 @@ using Monify;
 
 public partial class Feature
 {
-    [Monify(Type = typeof(byte))]
+    [Monify(Type = typeof(string))]
     public sealed partial class Kind
     {
-        public static readonly Kind Mutational = new(0);
-        public static readonly Kind NonMutational = new(1);
+        public static readonly Kind Mutational = "Mutational";
+        public static readonly Kind NonMutational = "NonMutational";
 
-        private Kind(byte value)
+        private Kind(string value)
         {
             _value = value;
         }
@@ -18,5 +18,10 @@ public partial class Feature
         public bool IsMutational => this == Mutational;
 
         public bool IsNonMutational => this == NonMutational;
+
+        public override string ToString()
+        {
+            return _value;
+        }
     }
 }

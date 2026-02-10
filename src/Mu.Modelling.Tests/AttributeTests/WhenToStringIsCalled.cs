@@ -1,7 +1,7 @@
 namespace Mu.Modelling.AttributeTests;
 
-using ModellingAttribute = Mu.Modelling.Attribute;
 using MooVC.Syntax.Elements;
+using ModellingAttribute = Mu.Modelling.Attribute;
 
 public sealed class WhenToStringIsCalled
 {

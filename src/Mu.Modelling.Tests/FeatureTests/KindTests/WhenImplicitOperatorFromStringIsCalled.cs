@@ -1,18 +1,18 @@
 namespace Mu.Modelling.FeatureTests.KindTests;
 
-public sealed class WhenImplicitOperatorFromByteIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const byte MutationalValue = 0;
+    private const string MutationalValue = "Mutational";
 
     [Fact]
     public void GivenValueThenRoundTripsSuccessfully()
     {
         // Arrange
-        byte value = MutationalValue;
+        string value = MutationalValue;
 
         // Act
         Feature.Kind subject = value;
-        byte result = subject;
+        string result = subject;
 
         // Assert
         result.ShouldBe(value);

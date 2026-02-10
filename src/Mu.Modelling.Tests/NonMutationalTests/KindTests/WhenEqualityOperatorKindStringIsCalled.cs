@@ -1,16 +1,16 @@
 namespace Mu.Modelling.NonMutationalTests.KindTests;
 
-public sealed class WhenEqualityOperatorKindByteIsCalled
+public sealed class WhenEqualityOperatorKindStringIsCalled
 {
-    private const byte ReadStoreValue = 0;
-    private const byte WriteStoreValue = 1;
+    private const string ReadStoreValue = "ReadStore";
+    private const string WriteStoreValue = "WriteStore";
 
     [Fact]
     public void GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
         NonMutational.Kind subject = NonMutational.Kind.ReadStore;
-        byte value = ReadStoreValue;
+        string value = ReadStoreValue;
 
         // Act
         bool result = subject == value;
@@ -24,7 +24,7 @@ public sealed class WhenEqualityOperatorKindByteIsCalled
     {
         // Arrange
         NonMutational.Kind subject = NonMutational.Kind.ReadStore;
-        byte value = WriteStoreValue;
+        string value = WriteStoreValue;
 
         // Act
         bool result = subject == value;

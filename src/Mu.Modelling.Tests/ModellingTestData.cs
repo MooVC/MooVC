@@ -8,37 +8,36 @@ using ModellingAttribute = Mu.Modelling.Attribute;
 
 internal static class ModellingTestData
 {
-    private const string DefaultAreaNameValue = "Area";
-    private const string DefaultAttributeNameValue = "Attribute";
-    private const string DefaultCompanyValue = "Company";
-    private const string DefaultFactValue = "Fact";
-    private const string DefaultFeatureNameValue = "Feature";
-    private const string DefaultModelNameValue = "Model";
-    private const string DefaultParameterNameValue = "Parameter";
-    private const string DefaultQualifierValue = "Mu.Modelling.Fact";
-    private const string DefaultResultNameValue = "Result";
-    private const string DefaultSnippetValue = "Value";
-    private const string DefaultUnitNameValue = "Unit";
-    private const string DefaultViewNameValue = "View";
-    private const string AlternateNameValue = "Alternate";
+    public const string DefaultAreaNameValue = "Area";
+    public const string DefaultAttributeNameValue = "Attribute";
+    public const string DefaultCompanyValue = "Company";
+    public const string DefaultFactValue = "Fact";
+    public const string DefaultFeatureNameValue = "Feature";
+    public const string DefaultModelNameValue = "Model";
+    public const string DefaultParameterNameValue = "Parameter";
+    public const string DefaultQualifierValue = "Mu.Modelling.Fact";
+    public const string DefaultResultNameValue = "Result";
+    public const string DefaultSnippetValue = "Value";
+    public const string DefaultUnitNameValue = "Unit";
+    public const string DefaultViewNameValue = "View";
+    public const string AlternateNameValue = "Alternate";
 
-    private static readonly Identifier DefaultAreaName = new(DefaultAreaNameValue);
-    private static readonly Identifier DefaultAttributeName = new(DefaultAttributeNameValue);
-    private static readonly Identifier DefaultCompanyName = new(DefaultCompanyValue);
-    private static readonly Identifier DefaultFactName = new(DefaultFactValue);
-    private static readonly Identifier DefaultFeatureName = new(DefaultFeatureNameValue);
-    private static readonly Identifier DefaultModelName = new(DefaultModelNameValue);
-    private static readonly Identifier DefaultParameterName = new(DefaultParameterNameValue);
-    private static readonly Identifier DefaultResultName = new(DefaultResultNameValue);
-    private static readonly Identifier DefaultUnitName = new(DefaultUnitNameValue);
-    private static readonly Identifier DefaultViewName = new(DefaultViewNameValue);
-    private static readonly Identifier AlternateName = new(AlternateNameValue);
-
+    public static readonly Identifier DefaultAreaName = new(DefaultAreaNameValue);
+    public static readonly Identifier DefaultAttributeName = new(DefaultAttributeNameValue);
+    public static readonly Identifier DefaultCompanyName = new(DefaultCompanyValue);
+    public static readonly Identifier DefaultFactName = new(DefaultFactValue);
+    public static readonly Identifier DefaultFeatureName = new(DefaultFeatureNameValue);
+    public static readonly Identifier DefaultModelName = new(DefaultModelNameValue);
+    public static readonly Identifier DefaultParameterName = new(DefaultParameterNameValue);
+    public static readonly Identifier DefaultResultName = new(DefaultResultNameValue);
+    public static readonly Identifier DefaultUnitName = new(DefaultUnitNameValue);
+    public static readonly Identifier DefaultViewName = new(DefaultViewNameValue);
+    public static readonly Identifier AlternateName = new(AlternateNameValue);
 
     public static Area CreateArea(Identifier? name = null, params Unit[] units)
     {
         ImmutableArray<Unit> unitArray = units.Length == 0
-            ? ImmutableArray<Unit>.Empty
+            ? []
             : ImmutableArray.Create(units);
 
         return new Area
