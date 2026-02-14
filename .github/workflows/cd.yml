@@ -177,12 +177,11 @@ jobs:
             throw "Package $packageId $currentVersion did not appear on NuGet after $maxAttempts attempts."
           }
 
-          $currentSemanticVersion = [System.Management.Automation.SemanticVersion]::Parse($currentVersion)
-          $parsedVersions = $versions | ForEach-Object { [System.Management.Automation.SemanticVersion]::Parse($_) }
-          $candidateVersions = if ($currentSemanticVersion.IsPrerelease) {
-            $parsedVersions | Where-Object { $_.IsPrerelease -and $_.ToString() -ne $currentVersion }
+          $currentIsPrerelease = $currentVersion -like '*-*'
+          $candidateVersions = if ($currentIsPrerelease) {
+            $versions | Where-Object { $_ -like '*-*' -and $_ -ne $currentVersion }
           } else {
-            $parsedVersions | Where-Object { $_.IsPrerelease }
+            $versions | Where-Object { $_ -like '*-*' }
           }
 
           $previousVersions = $candidateVersions | Sort-Object -Descending -Unique
@@ -202,8 +201,7 @@ jobs:
             }
           }
 
-          foreach ($previousVersion in $previousVersions) {
-            $previousVersionText = $previousVersion.ToString()
+          foreach ($previousVersionText in $previousVersions) {
             $previousEntry = $registrationItems | Where-Object { $_.catalogEntry.version -eq $previousVersionText } | Select-Object -First 1
             if (-not $previousEntry) {
               Write-Host "Unable to find registration entry for $packageId $previousVersionText. Skipping unlisting."
