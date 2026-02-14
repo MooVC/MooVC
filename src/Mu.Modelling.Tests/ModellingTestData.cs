@@ -34,7 +34,7 @@ internal static class ModellingTestData
     public static readonly Identifier DefaultViewName = new(DefaultViewNameValue);
     public static readonly Identifier AlternateName = new(AlternateNameValue);
 
-    public static Area CreateArea(Identifier? name = null, params Unit[] units)
+    public static Area CreateArea(Identifier? name = default, params Unit[] units)
     {
         ImmutableArray<Unit> unitArray = units.Length == 0
             ? []
@@ -47,7 +47,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static ModellingAttribute CreateAttribute(Identifier? name = null, Snippet? defaultValue = null, Symbol? type = null)
+    public static ModellingAttribute CreateAttribute(Identifier? name = default, Snippet? defaultValue = default, Symbol? type = default)
     {
         return new ModellingAttribute
         {
@@ -57,7 +57,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static Feature CreateFeature(Identifier? name = null, Feature.Kind? kind = null, Mutational? mutational = null, NonMutational? nonMutational = null, params Parameter[] parameters)
+    public static Feature CreateFeature(Identifier? name = default, Feature.Kind? kind = default, Mutational? mutational = default, NonMutational? nonMutational = default, params Parameter[] parameters)
     {
         ImmutableArray<Parameter> parameterArray = parameters.Length == 0
             ? ImmutableArray<Parameter>.Empty
@@ -69,7 +69,7 @@ internal static class ModellingTestData
             Name = name ?? DefaultFeatureName,
             NonMutational = nonMutational ?? CreateNonMutational(),
             Parameters = parameterArray,
-            Results = ImmutableArray<Result>.Empty,
+            Results = [],
             Type = kind ?? Feature.Kind.Mutational,
         };
     }
@@ -79,10 +79,10 @@ internal static class ModellingTestData
         return new Identifier(value);
     }
 
-    public static Model CreateModel(Identifier? company = null, Identifier? name = null, params Area[] areas)
+    public static Model CreateModel(Identifier? company = default, Identifier? name = default, params Area[] areas)
     {
         ImmutableArray<Area> areaArray = areas.Length == 0
-            ? ImmutableArray<Area>.Empty
+            ? []
             : ImmutableArray.Create(areas);
 
         return new Model
@@ -93,7 +93,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static Mutational CreateMutational(Identifier? fact = null, Mutational.Kind? kind = null)
+    public static Mutational CreateMutational(Identifier? fact = default, Mutational.Kind? kind = default)
     {
         return new Mutational
         {
@@ -102,7 +102,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static NonMutational CreateNonMutational(Identifier? view = null, NonMutational.Kind? kind = null)
+    public static NonMutational CreateNonMutational(Identifier? view = default, NonMutational.Kind? kind = default)
     {
         return new NonMutational
         {
@@ -111,7 +111,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static Parameter CreateParameter(Identifier? name = null, Snippet? defaultValue = null, Symbol? type = null)
+    public static Parameter CreateParameter(Identifier? name = default, Snippet? defaultValue = default, Symbol? type = default)
     {
         return new Parameter
         {
@@ -126,7 +126,7 @@ internal static class ModellingTestData
         return value;
     }
 
-    public static Result CreateResult(Identifier? name = null, Symbol? type = null)
+    public static Result CreateResult(Identifier? name = default, Symbol? type = default)
     {
         return new Result
         {
@@ -140,7 +140,7 @@ internal static class ModellingTestData
         return type;
     }
 
-    public static Unit CreateUnit(Identifier? name = null, ImmutableArray<ModellingAttribute>? attributes = null, ImmutableArray<Feature>? features = null, ImmutableArray<View>? views = null)
+    public static Unit CreateUnit(Identifier? name = default, ImmutableArray<ModellingAttribute>? attributes = default, ImmutableArray<Feature>? features = default, ImmutableArray<View>? views = default)
     {
         ImmutableArray<ModellingAttribute> attributeArray = attributes ?? ImmutableArray<ModellingAttribute>.Empty;
         ImmutableArray<Feature> featureArray = features ?? ImmutableArray<Feature>.Empty;
@@ -155,7 +155,7 @@ internal static class ModellingTestData
         };
     }
 
-    public static View CreateView(Identifier? name = null, ImmutableArray<ModellingAttribute>? attributes = null, ImmutableArray<Qualifier>? facts = null)
+    public static View CreateView(Identifier? name = default, ImmutableArray<ModellingAttribute>? attributes = default, ImmutableArray<Qualifier>? facts = default)
     {
         ImmutableArray<ModellingAttribute> attributeArray = attributes ?? ImmutableArray<ModellingAttribute>.Empty;
         ImmutableArray<Qualifier> factArray = facts ?? ImmutableArray<Qualifier>.Empty;

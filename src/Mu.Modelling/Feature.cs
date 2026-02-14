@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
+using Graphify;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
@@ -17,31 +18,38 @@ public sealed partial class Feature
     public static readonly Feature Undefined = new();
 
     [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
     [Hide]
+    [Traverse(Scope = TraverseScope.Property)]
     public Mutational Mutational { get; internal init; } = Mutational.Undefined;
 
     [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Hide]
+    [Traverse(Scope = TraverseScope.Property)]
     public NonMutational NonMutational { get; internal init; } = NonMutational.Undefined;
 
     [Descriptor("Using")]
-    public ImmutableArray<Parameter> Parameters { get; internal init; } = ImmutableArray<Parameter>.Empty;
+    [Traverse(Scope = TraverseScope.Property)]
+    public ImmutableArray<Parameter> Parameters { get; internal init; } = [];
 
     [Descriptor("Returning")]
-    public ImmutableArray<Result> Results { get; internal init; } = ImmutableArray<Result>.Empty;
+    [Traverse(Scope = TraverseScope.Property)]
+    public ImmutableArray<Result> Results { get; internal init; } = [];
 
     [Descriptor("OfType")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Kind Type { get; internal init; } = Kind.Mutational;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (IsUndefined)
         {
-            return Enumerable.Empty<ValidationResult>();
+            return [];
         }
 
         return validationContext

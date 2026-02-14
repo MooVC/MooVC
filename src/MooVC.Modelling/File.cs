@@ -14,10 +14,10 @@ public sealed record File(string Content, string Extension, string Name, string 
     /// <summary>
     /// Gets the file name including the extension.
     /// </summary>
-    public string FileName => string.Concat(Name, ".", Extension);
+    public string FullName => string.Concat(Name, ".", Extension);
 
     /// <summary>
     /// Gets the file path including the file name.
     /// </summary>
-    public string FilePath => Combine(Path, FileName);
+    public string FullPath => Combine(Path, FullName);
 }

@@ -22,7 +22,7 @@ public sealed class WhenWriteIsCalled
         IOptionsSnapshot<FileSystemWriter.Options> optionsSnapshot = CreateOptionsSnapshot();
         IWriter writer = new FileSystemWriter(fileSystem, optionsSnapshot);
         await using var stream = new MemoryStream();
-        string expectedPath = fileSystem.GetFullPath(Path.Combine(Environment.CurrentDirectory, testFile.FilePath));
+        string expectedPath = fileSystem.GetFullPath(Path.Combine(Environment.CurrentDirectory, testFile.FullPath));
         string? expectedDirectory = fileSystem.GetDirectoryName(expectedPath);
 
         // Act

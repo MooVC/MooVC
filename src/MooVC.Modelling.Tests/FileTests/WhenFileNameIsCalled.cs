@@ -15,7 +15,7 @@ public sealed class WhenFileNameIsCalled
         string expectedFileName = string.Concat(Name, ".", Extension);
 
         // Act
-        string fileName = file.FileName;
+        string fileName = file.FullName;
 
         // Assert
         fileName.ShouldBe(expectedFileName);

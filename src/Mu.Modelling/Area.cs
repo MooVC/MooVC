@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
+using Graphify;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
@@ -17,13 +18,15 @@ public sealed partial class Area
     public static readonly Area Undefined = new();
 
     [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Descriptor("ResponsibleFor")]
-    public ImmutableArray<Unit> Units { get; internal init; } = ImmutableArray<Unit>.Empty;
+    public ImmutableArray<Unit> Units { get; internal init; } = [];
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

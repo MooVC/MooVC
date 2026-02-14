@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
+using Graphify;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
@@ -17,19 +18,22 @@ public sealed partial class Result
     public static readonly Result Undefined = new();
 
     [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Descriptor("OfType")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Symbol Type { get; internal init; } = Symbol.Undefined;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (IsUndefined)
         {
-            return Enumerable.Empty<ValidationResult>();
+            return [];
         }
 
         return validationContext

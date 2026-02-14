@@ -3,6 +3,7 @@
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
+using Graphify;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
@@ -16,15 +17,18 @@ public sealed partial class Unit
     public static readonly Unit Undefined = new();
 
     [Descriptor("AttributedWith")]
+    [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = ImmutableArray<Attribute>.Empty;
 
     [Descriptor("Featuring")]
     public ImmutableArray<Feature> Features { get; internal init; } = ImmutableArray<Feature>.Empty;
 
     [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
 
     [Descriptor("SeenAs")]
@@ -34,7 +38,7 @@ public sealed partial class Unit
     {
         if (IsUndefined)
         {
-            return Enumerable.Empty<ValidationResult>();
+            return [];
         }
 
         return validationContext

@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -31,6 +33,14 @@
             _options = options;
             _type = type;
         }
+
+        /// <summary>
+        /// Gets the symbol from which the Reference derives.
+        /// </summary>
+        /// <value>The base type.</value>
+        [Descriptor("DerivesFrom")]
+        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
+        public Symbol Base { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
         /// Gets the constructors on the Reference.
@@ -74,12 +84,13 @@
             if (!Extensibility.IsPermitted(Extensibility.Abstract, Extensibility.Implicit, Extensibility.Sealed))
             {
                 results = results.Append(new ValidationResult(
-                    ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, GetType().Name),
+                    ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, GetType()),
                     new[] { nameof(Extensibility) }));
             }
 
             return validationContext
-                .IncludeIf(!Constructors.IsDefaultOrEmpty, nameof(Constructors), results, Constructors)
+                .IncludeIf(!Base.IsUndefined, nameof(Base), results, Base)
+                .AndIf(!Constructors.IsDefaultOrEmpty, nameof(Constructors), Constructors)
                 .AndIf(!Fields.IsDefaultOrEmpty, nameof(Fields), Fields)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), Parameters)
                 .Results;

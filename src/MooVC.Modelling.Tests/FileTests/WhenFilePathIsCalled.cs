@@ -15,7 +15,7 @@ public sealed class WhenFilePathIsCalled
         string expectedFilePath = Path.Combine(PathValue, string.Concat(Name, ".", Extension));
 
         // Act
-        string filePath = file.FilePath;
+        string filePath = file.FullPath;
 
         // Assert
         filePath.ShouldBe(expectedFilePath);

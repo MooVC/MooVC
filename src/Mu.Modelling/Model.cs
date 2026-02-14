@@ -8,6 +8,7 @@ using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
+using Options = MooVC.Syntax.CSharp.Concepts.Options;
 
 [Fluentify]
 [Graphify]
@@ -18,22 +19,28 @@ public sealed partial class Model
     public static readonly Model Undefined = new();
 
     [Descriptor("WithArea")]
-    public ImmutableArray<Area> Areas { get; internal init; } = ImmutableArray<Area>.Empty;
+    public ImmutableArray<Area> Areas { get; internal init; } = [];
 
     [Descriptor("For")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Company { get; internal init; } = Identifier.Unnamed;
 
     [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
     [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
     public Identifier Name { get; internal init; } = Identifier.Unnamed;
+
+    [Traverse(Scope = TraverseScope.None)]
+    public Options Options { get; internal init; } = Options.Default;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (IsUndefined)
         {
-            return Enumerable.Empty<ValidationResult>();
+            return [];
         }
 
         return validationContext

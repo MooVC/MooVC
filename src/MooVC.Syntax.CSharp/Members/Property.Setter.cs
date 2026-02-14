@@ -48,7 +48,7 @@ namespace MooVC.Syntax.CSharp.Members
             /// Gets or sets the mode on the Setter.
             /// </summary>
             /// <value>The mode.</value>
-            public Mode Mode { get; internal set; } = Mode.Set;
+            public Mode Mode { get; internal set; } = Mode.Init;
 
             /// <summary>
             /// Gets or sets the scope on the Setter.

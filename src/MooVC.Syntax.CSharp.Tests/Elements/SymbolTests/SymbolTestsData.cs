@@ -8,7 +8,7 @@ internal static class SymbolTestsData
 {
     public const string DefaultName = "Result";
 
-    public static Symbol Create(string? name = DefaultName, Qualifier? qualifier = null, params Symbol[] arguments)
+    public static Symbol Create(string? name = DefaultName, Qualifier? qualifier = default, params Symbol[] arguments)
     {
         var symbol = new Symbol();
 

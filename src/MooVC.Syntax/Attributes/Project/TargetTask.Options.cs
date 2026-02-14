@@ -27,7 +27,7 @@ namespace MooVC.Syntax.Attributes.Project
             /// <summary>
             /// Represents the error and stop for the Options.
             /// </summary>
-            public static readonly Options ErrorAndStop = "ErrorAndStop ";
+            public static readonly Options ErrorAndStop = "ErrorAndStop";
 
             private Options(string value)
             {

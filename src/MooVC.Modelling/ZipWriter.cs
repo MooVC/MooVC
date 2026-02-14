@@ -40,7 +40,7 @@ public sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> option
 
     private static string BuildEntryPath(File file)
     {
-        return file.FilePath
+        return file.FullPath
             .Replace(Path.DirectorySeparatorChar, '/')
             .Replace(Path.AltDirectorySeparatorChar, '/');
     }

@@ -15,7 +15,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
     public void GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        IServiceCollection services = null!;
+        IServiceCollection services = default!;
 
         // Act
         Action action = () => services.AddFileSystemWriter();

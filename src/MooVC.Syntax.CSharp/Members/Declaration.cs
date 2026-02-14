@@ -60,6 +60,18 @@
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
+        /// Defines the identifier operator for the Declaration.
+        /// </summary>
+        /// <param name="name">The identifier.</param>
+        /// <returns>The declaration.</returns>
+        public static implicit operator Declaration(Identifier name)
+        {
+            Guard.Against.Conversion<Identifier, Declaration>(name);
+
+            return new Declaration { Name = name };
+        }
+
+        /// <summary>
         /// Defines the string operator for the Declaration.
         /// </summary>
         /// <param name="declaration">The declaration.</param>

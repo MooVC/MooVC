@@ -5,6 +5,7 @@
     using MooVC.Syntax.Formatting;
     using Valuify;
     using static MooVC.Syntax.Elements.Snippet_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
     /// Represents a syntax element snippet.
@@ -35,7 +36,7 @@
             /// Gets a value indicating whether the Options is default.
             /// </summary>
             /// <value>A value indicating whether the Options is default.</value>
-            [Valuify.Ignore]
+            [Ignore]
             public bool IsDefault => this == Default;
 
             /// <summary>

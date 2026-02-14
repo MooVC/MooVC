@@ -25,7 +25,7 @@ public sealed class WhenWriteIsCalled
 
         await using var stream = new MemoryStream();
 
-        string expectedEntryPath = testFile.FilePath
+        string expectedEntryPath = testFile.FullPath
             .Replace(Path.DirectorySeparatorChar, '/')
             .Replace(Path.AltDirectorySeparatorChar, '/');
 

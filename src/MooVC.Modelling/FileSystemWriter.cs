@@ -55,7 +55,7 @@ public sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSna
 
     private async Task Write(File file, string rootPath, CancellationToken cancellationToken)
     {
-        string filePath = fileSystem.GetFullPath(Path.Combine(rootPath, file.FilePath));
+        string filePath = fileSystem.GetFullPath(Path.Combine(rootPath, file.FullPath));
         string? directoryPath = fileSystem.GetDirectoryName(filePath);
 
         if (!string.IsNullOrWhiteSpace(directoryPath))

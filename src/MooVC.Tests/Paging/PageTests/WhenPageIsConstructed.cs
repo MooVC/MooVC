@@ -68,7 +68,7 @@ public sealed class WhenPageIsConstructed
     {
         // Arrange
         Directive directive = new(Limit: 120, Page: 1);
-        int[]? values = null;
+        int[]? values = default;
         ulong total = 5;
 
         // Act
