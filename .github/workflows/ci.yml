@@ -10,13 +10,17 @@ on:
       - release/*
       - feature/*
       - hotfix/*
+    paths:
+      - '.github/workflows/**'
+      - 'build/**'
+      - 'src/**'
   schedule:
     - cron: '0 3 * * *'
 
 env:
   configuration: 'Debug'
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-  solution: 'MooVC.sln'
+  solution: 'MooVC.slnx'
 
 permissions:
   contents: read

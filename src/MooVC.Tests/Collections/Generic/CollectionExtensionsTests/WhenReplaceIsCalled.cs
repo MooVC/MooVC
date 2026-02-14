@@ -27,7 +27,7 @@ public sealed class WhenReplaceIsCalled
         Action act = () => target!.Replace(items);
 
         // Assert
-        Should.Throw<ArgumentNullException>(act);
+        _ = Should.Throw<ArgumentNullException>(act);
     }
 
     [Fact]

@@ -1,0 +1,43 @@
+﻿namespace Mu.Modelling;
+
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations;
+using Fluentify;
+using Graphify;
+using MooVC.Syntax.Elements;
+using MooVC.Syntax.Validation;
+using Valuify;
+using Ignore = Valuify.IgnoreAttribute;
+
+[Fluentify]
+[Valuify]
+public sealed partial class Area
+    : IValidatableObject
+{
+    public static readonly Area Undefined = new();
+
+    [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
+    public bool IsUndefined => this == Undefined;
+
+    [Descriptor("Named")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+
+    [Descriptor("ResponsibleFor")]
+    public ImmutableArray<Unit> Units { get; internal init; } = [];
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (IsUndefined)
+        {
+            return [];
+        }
+
+        return validationContext
+            .IncludeIf(!Units.IsDefaultOrEmpty, nameof(Units), unit => !unit.IsUndefined, Units)
+            .And(nameof(Name), Name)
+            .Results;
+    }
+}

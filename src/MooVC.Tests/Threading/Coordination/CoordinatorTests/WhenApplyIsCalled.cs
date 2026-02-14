@@ -41,7 +41,7 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply("N/A", CancellationToken.None);
 
         // Assert
-        await Should.ThrowAsync<ObjectDisposedException>(act);
+        _ = await Should.ThrowAsync<ObjectDisposedException>(act);
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
 
         // Assert
-        await Should.ThrowAsync<TimeoutException>(act);
+        _ = await Should.ThrowAsync<TimeoutException>(act);
     }
 
     [Fact]

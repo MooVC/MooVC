@@ -16,7 +16,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services);
 
         // Assert
-        Should.NotThrow(act);
+        _ = Should.NotThrow(act);
     }
 
     [Fact]

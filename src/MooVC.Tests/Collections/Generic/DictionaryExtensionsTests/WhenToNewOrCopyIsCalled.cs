@@ -12,7 +12,7 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, object>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        snapshot.ShouldNotBeNull();
+        _ = snapshot.ShouldNotBeNull();
         snapshot.ShouldBeEmpty();
     }
 

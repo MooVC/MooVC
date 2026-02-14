@@ -92,7 +92,7 @@ public sealed class WhenIndexOfIsCalled
         int?[] enumeration = [1, null, 3];
 
         // Act
-        int actualIndex = enumeration.IndexOf(item => item == null);
+        int actualIndex = enumeration.IndexOf(item => item == default);
 
         // Assert
         actualIndex.ShouldBe(1);
