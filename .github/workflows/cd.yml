@@ -8,16 +8,8 @@ on:
     inputs:
       deprecate_only:
         default: false
-        description: 'Run only the deprecate job using artifacts from a previous run.'
+        description: 'Run the build without publishing and then run the deprecate job.'
         type: boolean
-      run_id:
-        description: 'Workflow run ID to download artifacts from when deprecate_only is true.'
-        required: false
-        type: string
-      semantic_version:
-        description: 'Package version to deprecate against when deprecate_only is true (e.g., 10.0.0-beta.1).'
-        required: false
-        type: string
 
 env:
   configuration: 'Release'
@@ -34,7 +26,6 @@ jobs:
   build:
     name: Build, Test & Publish
     runs-on: windows-latest
-    if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
 
     steps:
     - name: Checkout
@@ -98,22 +89,23 @@ jobs:
         path: ./artifacts/*.nupkg
 
     - name: Publish Packages to GitHub
+      if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
       run: dotnet nuget push **/MooVC*.nupkg --source "https://nuget.pkg.github.com/MooVC/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Publish Packages to NuGet
+      if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
       run: dotnet nuget push **/MooVC*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
   deprecate:
     name: Deprecate Previous Package Versions
     runs-on: windows-latest
     needs: build
-    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.deprecate_only == 'true') || needs.build.result == 'success' }}
+    if: ${{ needs.build.result == 'success' }}
 
     steps:
     - name: Extract and Format Version from Tag
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
       run: |
         $rawTag = '${{ github.ref_name }}'
         $semantic = $rawTag -replace '^v', '' -replace '(alpha|beta|rc)0+', '$1.' 
@@ -124,37 +116,11 @@ jobs:
         echo "informational=$rawTag" >> $env:GITHUB_ENV
       shell: pwsh
 
-    - name: Set Version from Inputs
-      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deprecate_only == 'true' }}
-      run: |
-        if (-not '${{ inputs.semantic_version }}') {
-          throw 'semantic_version input is required when deprecate_only is true.'
-        }
-
-        $semantic = '${{ inputs.semantic_version }}'
-        $numeric = ($semantic -split "-")[0] + ".0"
-
-        echo "version=$numeric" >> $env:GITHUB_ENV
-        echo "semantic=$semantic" >> $env:GITHUB_ENV
-        echo "informational=$semantic" >> $env:GITHUB_ENV
-      shell: pwsh
-
     - name: Download Packages
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.deprecate_only != 'true' }}
       uses: actions/download-artifact@v4
       with:
         name: nuget-packages
         path: ./artifacts
-
-    - name: Download Packages from Previous Run
-      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deprecate_only == 'true' }}
-      uses: actions/download-artifact@v4
-      with:
-        name: nuget-packages
-        path: ./artifacts
-        run-id: ${{ inputs.run_id }}
-        repository: ${{ github.repository }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Deprecate Previous Versions on NuGet
       env:
