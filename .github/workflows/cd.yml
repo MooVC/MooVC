@@ -180,12 +180,12 @@ jobs:
           $currentSemanticVersion = [System.Management.Automation.SemanticVersion]::Parse($currentVersion)
           $parsedVersions = $versions | ForEach-Object { [System.Management.Automation.SemanticVersion]::Parse($_) }
           $candidateVersions = if ($currentSemanticVersion.IsPrerelease) {
-            $parsedVersions | Where-Object { $_.IsPrerelease -and $_ -lt $currentSemanticVersion }
+            $parsedVersions | Where-Object { $_.IsPrerelease -and $_.ToString() -ne $currentVersion }
           } else {
             $parsedVersions | Where-Object { $_.IsPrerelease }
           }
 
-          $previousVersions = $candidateVersions | Sort-Object -Descending
+          $previousVersions = $candidateVersions | Sort-Object -Descending -Unique
           if (-not $previousVersions) {
             Write-Host "No previous $packageId pre-release versions to unlist. Skipping unlisting."
             continue
