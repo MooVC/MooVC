@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -13,7 +13,7 @@ public sealed class WhenToStringIsCalled
     public void GivenNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Segment(default);
+        var subject = new Name(default);
 
         // Act
         string result = subject.ToString();
@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Empty);
+        var subject = new Name(Empty);
 
         // Act
         string result = subject.ToString();
@@ -39,7 +39,7 @@ public sealed class WhenToStringIsCalled
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Space);
+        var subject = new Name(Space);
 
         // Act
         string result = subject.ToString();
@@ -52,7 +52,7 @@ public sealed class WhenToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Alpha);
+        var subject = new Name(Alpha);
 
         // Act
         string result = subject.ToString();
@@ -65,7 +65,7 @@ public sealed class WhenToStringIsCalled
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Unicode);
+        var subject = new Name(Unicode);
 
         // Act
         string result = subject.ToString();
@@ -78,7 +78,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValueWithUnderscoreThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(WithUnderscore);
+        var subject = new Name(WithUnderscore);
 
         // Act
         string result = subject.ToString();
@@ -91,7 +91,7 @@ public sealed class WhenToStringIsCalled
     public void GivenReservedPrefixThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(WithPrefix);
+        var subject = new Name(WithPrefix);
 
         // Act
         string result = subject.ToString();
@@ -105,7 +105,7 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Segment(value);
+        var subject = new Name(value);
 
         // Act
         string result = subject.ToString();
@@ -118,8 +118,8 @@ public sealed class WhenToStringIsCalled
     public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
-        var left = new Segment("Alpha");
-        var right = new Segment("Beta");
+        var left = new Name("Alpha");
+        var right = new Name("Beta");
 
         // Act
         string leftString = left.ToString();
@@ -133,7 +133,7 @@ public sealed class WhenToStringIsCalled
     public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
-        var subject = new Segment(Alpha);
+        var subject = new Name(Alpha);
 
         // Act
         string first = subject.ToString();

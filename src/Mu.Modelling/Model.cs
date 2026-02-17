@@ -23,7 +23,7 @@ public sealed partial class Model
 
     [Descriptor("For")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Company { get; internal init; } = Identifier.Unnamed;
+    public Name Company { get; internal init; } = Name.Unnamed;
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
@@ -31,7 +31,7 @@ public sealed partial class Model
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Traverse(Scope = TraverseScope.None)]
     public Options Options { get; internal init; } = Options.Default;

@@ -13,15 +13,15 @@ public sealed class WhenNamedIsCalled
         Method original = MethodTestsData.Create();
 
         // Act
-        Method result = original.Named(new Declaration { Name = new Variable(NewName) });
+        Method result = original.Named(new Declaration { Name = NewName });
 
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Body.ShouldBe(original.Body);
-        result.Name.ShouldBe(new Declaration { Name = new Variable(NewName) });
+        result.Name.ShouldBe(new Declaration { Name = NewName });
         result.Parameters.ShouldBe(original.Parameters);
         result.Result.ShouldBe(original.Result);
         result.Scope.ShouldBe(original.Scope);
-        original.Name.ShouldBe(new Declaration { Name = new Variable(MethodTestsData.DefaultName) });
+        original.Name.ShouldBe(new Declaration { Name = MethodTestsData.DefaultName });
     }
 }

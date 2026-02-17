@@ -105,7 +105,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -113,25 +113,26 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Indexer)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Indexer)));
 
             if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
-            Snippet signature = GetSignature();
-            var methods = Behaviours.ToSnippet(options);
+            Snippet signature = GetSignature(options);
+            var methods = Behaviours.ToSnippet(options.Snippets);
+            Snippet.Options snippets = options.Snippets;
 
-            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
             {
-                options = options.WithBlock(block => block
+                snippets = snippets.WithBlock(block => block
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
             }
 
-            return methods.Block(options, signature);
+            return methods.Block(snippets, signature);
         }
 
         /// <summary>
@@ -180,12 +181,12 @@
                 .Results;
         }
 
-        private Snippet GetSignature()
+        private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
             string parameter = Parameter;
             string result = Result.WithMode(Result.Modality.Synchronous);
-            string scope = Scope;
+            string scope = Scope.ToString(options.Implied);
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 
             return Snippet.From(signature);

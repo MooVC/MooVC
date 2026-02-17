@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var view = new Identifier(ViewNameValue);
+        var view = new Name(ViewNameValue);
         NonMutational subject = ModellingTestData.CreateNonMutational(view: view);
 
         // Act

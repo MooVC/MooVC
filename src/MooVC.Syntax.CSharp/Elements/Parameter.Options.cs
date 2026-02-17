@@ -32,14 +32,14 @@
             };
 
             /// <summary>
-            /// Gets or sets the naming on the Options.
+            /// Gets the naming on the Options.
             /// </summary>
             /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Variable.Options Naming { get; internal set; } = Variable.Options.Camel;
 
             /// <summary>
-            /// Gets or sets the types on the Options.
+            /// Gets the types on the Options.
             /// </summary>
             /// <value>The types.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]

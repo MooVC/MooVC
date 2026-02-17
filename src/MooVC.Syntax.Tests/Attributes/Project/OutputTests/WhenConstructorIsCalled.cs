@@ -12,9 +12,9 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Condition.ShouldBe(Snippet.Empty);
-        subject.ItemName.ShouldBe(Identifier.Unnamed);
-        subject.PropertyName.ShouldBe(Identifier.Unnamed);
-        subject.TaskParameter.ShouldBe(Identifier.Unnamed);
+        subject.ItemName.ShouldBe(Name.Unnamed);
+        subject.PropertyName.ShouldBe(Name.Unnamed);
+        subject.TaskParameter.ShouldBe(Name.Unnamed);
         subject.IsUndefined.ShouldBeTrue();
     }
 
@@ -25,16 +25,16 @@ public sealed class WhenConstructorIsCalled
         var subject = new Output
         {
             Condition = Snippet.From(OutputTestsData.DefaultCondition),
-            ItemName = new Identifier(OutputTestsData.DefaultItemName),
-            PropertyName = new Identifier(OutputTestsData.DefaultPropertyName),
-            TaskParameter = new Identifier(OutputTestsData.DefaultTaskParameter),
+            ItemName = OutputTestsData.DefaultItemName,
+            PropertyName = OutputTestsData.DefaultPropertyName,
+            TaskParameter = OutputTestsData.DefaultTaskParameter,
         };
 
         // Assert
         subject.Condition.ShouldBe(Snippet.From(OutputTestsData.DefaultCondition));
-        subject.ItemName.ShouldBe(new Identifier(OutputTestsData.DefaultItemName));
-        subject.PropertyName.ShouldBe(new Identifier(OutputTestsData.DefaultPropertyName));
-        subject.TaskParameter.ShouldBe(new Identifier(OutputTestsData.DefaultTaskParameter));
+        subject.ItemName.ShouldBe(new Name(OutputTestsData.DefaultItemName));
+        subject.PropertyName.ShouldBe(new Name(OutputTestsData.DefaultPropertyName));
+        subject.TaskParameter.ShouldBe(new Name(OutputTestsData.DefaultTaskParameter));
         subject.IsUndefined.ShouldBeFalse();
     }
 }

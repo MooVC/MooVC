@@ -31,7 +31,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Identifier(Alias),
+            Alias = new Name(Alias),
             IsStatic = true,
             Qualifier = new Qualifier(["System", "Console"]),
         };
@@ -55,7 +55,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Identifier(InvalidAlias),
+            Alias = new Name(InvalidAlias),
             Qualifier = new Qualifier(["MooVC", "Syntax"]),
         };
 
@@ -68,7 +68,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -78,7 +78,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier([Segment.Empty, "Syntax"]),
+            Qualifier = new Qualifier([Name.Unnamed, "Syntax"]),
         };
 
         var context = new ValidationContext(subject);

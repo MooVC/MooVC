@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorPropertyPropertyIsCalled
     {
         // Arrange
         Property left = PropertyTestsData.Create();
-        Property right = PropertyTestsData.Create(name: new Identifier("Other"));
+        Property right = PropertyTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = left != right;

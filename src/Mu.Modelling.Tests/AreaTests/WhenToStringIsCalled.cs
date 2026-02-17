@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(AreaNameValue);
+        var name = new Name(AreaNameValue);
         Area subject = ModellingTestData.CreateArea(name: name);
 
         // Act

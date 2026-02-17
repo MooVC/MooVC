@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
@@ -6,8 +6,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public void GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
-        Segment? left = default;
-        Segment right = "Alpha";
+        Name? left = default;
+        Name right = "Alpha";
 
         // Act
         bool lessThan = left < right;
@@ -26,8 +26,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public void GivenAlphabeticalValuesThenOrderingMatchesOrdinalComparison()
     {
         // Arrange
-        Segment left = "Alpha";
-        Segment right = "Beta";
+        Name left = "Alpha";
+        Name right = "Beta";
 
         // Act
         bool lessThan = left < right;

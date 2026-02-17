@@ -31,7 +31,7 @@
             public static readonly Options Pascal = new Options { Casing = Identifier.Casing.Pascal };
 
             /// <summary>
-            /// Gets or sets the casing on the Options.
+            /// Gets the casing on the Options.
             /// </summary>
             /// <value>The casing.</value>
             public Identifier.Casing Casing { get; set; } = Identifier.Casing.Camel;

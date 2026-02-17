@@ -25,8 +25,8 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     {
         // Arrange
         Qualifier subject = ImmutableArray.Create(
-            new Segment(First),
-            new Segment(Second));
+            new Name(First),
+            new Name(Second));
 
         // Act
         Snippet result = subject;

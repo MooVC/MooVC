@@ -124,7 +124,7 @@ public sealed class WhenEqualsDirectiveIsCalled
     {
         return new Directive
         {
-            Alias = new Identifier(alias),
+            Alias = alias,
             IsStatic = isStatic,
             Qualifier = qualifier ?? new Qualifier(["MooVC", "Syntax"]),
         };

@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorMetadataMetadataIsCalled
     {
         // Arrange
         Metadata left = MetadataTestsData.Create();
-        Metadata right = MetadataTestsData.Create(name: new Identifier("Other"));
+        Metadata right = MetadataTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = left != right;

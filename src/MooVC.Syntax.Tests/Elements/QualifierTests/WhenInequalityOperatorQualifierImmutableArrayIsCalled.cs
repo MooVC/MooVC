@@ -4,15 +4,15 @@ using System.Collections.Immutable;
 
 public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<Segment> different = ["Gamma"];
-    private static readonly ImmutableArray<Segment> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> different = ["Gamma"];
+    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
     [Fact]
     public void GivenLeftValueRightDefaultThenReturnsTrue()
     {
         // Arrange
         var left = new Qualifier(same);
-        ImmutableArray<Segment> right = default;
+        ImmutableArray<Name> right = default;
 
         // Act
         bool result = left != right;
@@ -26,7 +26,7 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
     {
         // Arrange
         var left = new Qualifier(same);
-        ImmutableArray<Segment> right = same;
+        ImmutableArray<Name> right = same;
 
         // Act
         bool result = left != right;
@@ -40,7 +40,7 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
     {
         // Arrange
         var left = new Qualifier(same);
-        ImmutableArray<Segment> right = different;
+        ImmutableArray<Name> right = different;
 
         // Act
         bool result = left != right;

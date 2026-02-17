@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -12,7 +11,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -68,7 +66,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the scope on the Property.
@@ -113,7 +111,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -121,22 +119,22 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Property)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Property)));
 
             if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
-            Snippet signature = GetSignature();
-            var behaviours = Behaviours.ToSnippet(options, Scope);
-            Snippet.Options body = options;
+            Snippet signature = GetSignature(options);
+            var behaviours = Behaviours.ToSnippet(options.Snippets, Scope);
+            Snippet.Options body = options.Snippets;
 
-            if (behaviours.IsSingleLine && options.Block.Inline.IsLambda && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly))
+            if (behaviours.IsSingleLine && body.Block.Inline.IsLambda && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly))
             {
-                body = options.WithBlock(block => block
+                body = body.WithBlock(block => block
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
             }
 
@@ -144,7 +142,7 @@
 
             if (!Default.IsEmpty)
             {
-                signature = signature.Append(options, $" = {Default}");
+                signature = signature.Append(body, $" = {Default}");
             }
 
             return signature;
@@ -190,11 +188,11 @@
                 .Results;
         }
 
-        private Snippet GetSignature()
+        private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
-            var name = Name.ToSnippet(Identifier.Options.Pascal);
-            string scope = Scope;
+            string name = Name;
+            string scope = Scope.ToString(options.Implied);
             string type = Type;
             string signature = Separator.Combine(scope, extensibility, type, name);
 

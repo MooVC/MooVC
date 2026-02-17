@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -13,7 +13,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Segment)value);
+        _ = Should.NotThrow(() => _ = (Name)value);
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act
-        Segment subject = value;
+        Name subject = value;
         string result = subject;
 
         // Assert
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Empty;
 
         // Act
-        Segment subject = value;
+        Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -51,7 +51,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Space;
 
         // Act
-        Segment subject = value;
+        Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -65,7 +65,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Segment subject = value;
+        Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -79,7 +79,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = new('x', 64_000);
 
         // Act
-        Segment subject = value;
+        Name subject = value;
 
         // Assert
         (subject == value).ShouldBeTrue();
@@ -93,7 +93,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Segment subject = value;
+        Name subject = value;
         string result = subject;
 
         // Assert
@@ -107,8 +107,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Alpha;
 
         // Act
-        Segment first = value;
-        Segment second = value;
+        Name first = value;
+        Name second = value;
 
         // Assert
         ReferenceEquals(first, second).ShouldBeFalse();

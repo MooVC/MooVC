@@ -18,11 +18,11 @@ public sealed partial class View
 
     [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
-    public ImmutableArray<Attribute> Attributes { get; internal init; } = ImmutableArray<Attribute>.Empty;
+    public ImmutableArray<Attribute> Attributes { get; internal init; } = [];
 
     [Descriptor("RenderedOn")]
     [Traverse(Scope = TraverseScope.Property)]
-    public ImmutableArray<Qualifier> Facts { get; internal init; } = ImmutableArray<Qualifier>.Empty;
+    public ImmutableArray<Qualifier> Facts { get; internal init; } = [];
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
@@ -30,7 +30,7 @@ public sealed partial class View
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

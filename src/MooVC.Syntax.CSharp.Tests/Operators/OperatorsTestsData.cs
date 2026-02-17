@@ -20,7 +20,7 @@ internal static class OperatorsTestsData
     {
         public TestType(string name, bool isUndefined)
         {
-            Name = new Declaration { Name = name };
+            Declaration = new Declaration { Name = name };
             IsUndefined = isUndefined;
         }
 
@@ -28,7 +28,7 @@ internal static class OperatorsTestsData
 
         protected override Snippet PerformToSnippet(Snippet.Options options)
         {
-            return Snippet.From(Name);
+            return Snippet.From(Declaration);
         }
     }
 }

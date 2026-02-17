@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Metadata left = MetadataTestsData.Create();
-        Metadata right = MetadataTestsData.Create(name: new Identifier("Other"));
+        Metadata right = MetadataTestsData.Create(name: new Name("Other"));
 
         // Act
         int leftHash = left.GetHashCode();

@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    private static readonly ImmutableArray<Segment> first = ["Alpha", "Beta"];
-    private static readonly ImmutableArray<Segment> second = ["Gamma", "Delta"];
+    private static readonly ImmutableArray<Name> first = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> second = ["Gamma", "Delta"];
 
     [Fact]
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()

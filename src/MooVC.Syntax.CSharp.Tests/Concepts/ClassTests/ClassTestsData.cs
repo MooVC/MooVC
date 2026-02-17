@@ -36,7 +36,7 @@ public static class ClassTestsData
             IsPartial = isPartial ?? false,
             IsStatic = isStatic ?? false,
             Methods = methods ?? [],
-            Name = name ?? new Declaration { Name = DefaultName },
+            Declaration = name ?? new Declaration { Name = DefaultName },
             Operators = operators ?? new Operators(),
             Parameters = parameters ?? [],
             Properties = properties ?? [],

@@ -7,6 +7,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.Elements;
@@ -18,50 +19,43 @@
     /// <summary>
     /// Represents a C# type syntax definition.
     /// </summary>
-    [AutoInitializeWith(nameof(Empty))]
+    [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
-    public sealed partial class Definition<T>
-        : IValidatableObject
-        where T : Type, new()
+    public sealed partial class Definition
+        : Construct
     {
         /// <summary>
         /// Gets the empty instance.
         /// </summary>
-        public static readonly Definition<T> Empty = new Definition<T>();
-
-        /// <summary>
-        /// Initializes a new instance of the Definition class.
-        /// </summary>
-        internal Definition()
-        {
-        }
+        public static readonly Definition Undefined = new Definition();
 
         /// <summary>
         /// Gets a value indicating whether the Definition is empty.
         /// </summary>
         /// <value>A value indicating whether the Definition is empty.</value>
         [Ignore]
-        public bool IsEmpty => this == Empty;
+        public override bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the namespace on the Definition.
+        /// Gets the namespace on the Definition.
         /// </summary>
         /// <value>The namespace.</value>
         [Descriptor("From")]
         public Qualifier Namespace { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
-        /// Gets or sets the type on the Definition.
+        /// Gets the type on the Definition.
         /// </summary>
         /// <value>The type.</value>
-        [Descriptor("OfType")]
-        public T Type { get; internal set; } = new T();
+        [Hide]
+        public Type Type { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the usings on the Definition.
+        /// Gets the usings on the Definition.
         /// </summary>
         /// <value>The usings.</value>
+        [Descriptor("Referencing")]
         public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;
 
         /// <summary>
@@ -80,14 +74,14 @@
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Definition<T>)));
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Definition)));
 
-            if (IsEmpty)
+            if (IsUndefined)
             {
                 return string.Empty;
             }
 
-            Snippet type = Type.ToSnippet(options.Snippets);
+            var type = Type.ToSnippet(options.Snippets);
 
             if (type.IsEmpty)
             {
@@ -122,9 +116,9 @@
         /// <remarks>Required members include: Type, Namespace, Usings.</remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsEmpty)
+            if (IsUndefined)
             {
                 return Enumerable.Empty<ValidationResult>();
             }

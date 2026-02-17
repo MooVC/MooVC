@@ -18,7 +18,7 @@ public sealed partial class Mutational
 
     [Descriptor("Yields")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Fact { get; internal init; } = Identifier.Unnamed;
+    public Name Fact { get; internal init; } = Name.Unnamed;
 
     [Descriptor("OfType")]
     [Hide]

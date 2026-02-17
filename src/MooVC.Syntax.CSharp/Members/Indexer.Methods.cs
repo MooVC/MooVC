@@ -35,7 +35,7 @@
             }
 
             /// <summary>
-            /// Gets or sets the get on the Methods.
+            /// Gets the get on the Methods.
             /// </summary>
             /// <value>The get.</value>
             public Snippet Get { get; internal set; } = Snippet.Empty;
@@ -48,7 +48,7 @@
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the set on the Methods.
+            /// Gets the set on the Methods.
             /// </summary>
             /// <value>The set.</value>
             public Snippet Set { get; internal set; } = Snippet.Empty;

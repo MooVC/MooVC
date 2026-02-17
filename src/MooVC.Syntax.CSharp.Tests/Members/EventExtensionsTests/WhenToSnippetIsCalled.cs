@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = events.ToSnippet(Snippet.Options.Default);
+        var snippet = events.ToSnippet(Event.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -30,7 +30,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Event> events = [EventTestsData.Create()];
-        Snippet.Options? options = default;
+        Event.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = events.ToSnippet(options!));
@@ -90,8 +90,10 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Event.Options options = Event.Options.Default
+            .WithSnippets(snippet => snippet
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         var snippet = events.ToSnippet(options);

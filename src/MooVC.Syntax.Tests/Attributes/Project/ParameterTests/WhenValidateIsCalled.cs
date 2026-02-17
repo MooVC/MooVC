@@ -27,7 +27,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
-        Parameter subject = ParameterTestsData.Create(name: Identifier.Unnamed);
+        Parameter subject = ParameterTestsData.Create(name: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

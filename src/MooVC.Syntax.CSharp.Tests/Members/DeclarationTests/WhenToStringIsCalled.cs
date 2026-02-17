@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.CSharp.Generics;
+using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenToStringIsCalled
@@ -47,8 +48,8 @@ public sealed class WhenToStringIsCalled
             Name = Name,
             Parameters =
             [
-                new Parameter { Name = new Identifier(FirstParameterName) },
-                new Parameter { Name = new Identifier(SecondParameterName) },
+                new Parameter { Name = new Name(FirstParameterName) },
+                new Parameter { Name = new Name(SecondParameterName) },
             ],
         };
 

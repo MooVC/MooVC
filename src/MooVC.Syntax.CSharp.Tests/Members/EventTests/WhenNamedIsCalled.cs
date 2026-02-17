@@ -12,7 +12,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Event original = EventTestsData.Create();
-        Identifier name = Name;
+        Name name = Name;
 
         // Act
         Event result = original.Named(name);

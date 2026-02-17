@@ -34,7 +34,8 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
+        results.Count.ShouldBe(2);
         results[0].MemberNames.ShouldContain(nameof(Area.Units));
+        results[1].MemberNames.ShouldContain(nameof(Unit.Name));
     }
 }

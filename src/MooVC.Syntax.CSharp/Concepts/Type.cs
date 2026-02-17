@@ -6,7 +6,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
-    using MooVC.Syntax.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Operators;
@@ -15,12 +14,13 @@
     using static MooVC.Syntax.CSharp.Concepts.Type_Resources;
     using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
     using Descriptor = Fluentify.DescriptorAttribute;
+    using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
     /// Represents a C# type syntax type.
     /// </summary>
     public abstract class Type
-        : Construct
+        : IValidatableObject
     {
         private protected Type()
         {
@@ -31,6 +31,14 @@
         /// </summary>
         /// <value>The attributes.</value>
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        [Descriptor("Named")]
+        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
+        public Declaration Declaration { get; internal set; } = Declaration.Unspecified;
 
         /// <summary>
         /// Gets the events on the Type.
@@ -59,33 +67,32 @@
         public bool IsPartial { get; internal set; } = true;
 
         /// <summary>
+        /// Gets a value indicating whether the Construct is undefined.
+        /// </summary>
+        /// <value>A value indicating whether the Construct is undefined.</value>
+        [Ignore]
+        public abstract bool IsUndefined { get; }
+
+        /// <summary>
         /// Gets the methods on the Type.
         /// </summary>
         /// <value>The methods.</value>
         public ImmutableArray<Method> Methods { get; internal set; } = ImmutableArray<Method>.Empty;
 
         /// <summary>
-        /// Gets the name on the will.
-        /// </summary>
-        /// <value>The name.</value>
-        [Descriptor("Named")]
-        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
-        public Declaration Name { get; internal set; } = Declaration.Unspecified;
-
-        /// <summary>
-        /// Gets the operators on the will.
+        /// Gets the operators.
         /// </summary>
         /// <value>The operators.</value>
         public Operators Operators { get; internal set; } = new Operators();
 
         /// <summary>
-        /// Gets the properties on the will.
+        /// Gets the properties.
         /// </summary>
         /// <value>The properties.</value>
         public ImmutableArray<Property> Properties { get; internal set; } = ImmutableArray<Property>.Empty;
 
         /// <summary>
-        /// Gets the scope on the will.
+        /// Gets the scope.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
@@ -122,7 +129,7 @@
         /// <remarks>Required members include: Name, Properties.</remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (IsUndefined)
             {
@@ -135,7 +142,7 @@
                 .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), indexer => !indexer.IsUndefined, Indexers)
                 .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUndefined, Interfaces)
                 .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), method => !method.IsUndefined, Methods)
-                .And(nameof(Name), _ => !Name.IsUnspecified, Name)
+                .And(nameof(Declaration), _ => !Declaration.IsUnspecified, Declaration)
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .Results;
         }

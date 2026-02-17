@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Property left = PropertyTestsData.Create();
-        Property right = PropertyTestsData.Create(name: new Identifier("Other"));
+        Property right = PropertyTestsData.Create(name: new Name("Other"));
 
         // Act
         int leftHash = left.GetHashCode();

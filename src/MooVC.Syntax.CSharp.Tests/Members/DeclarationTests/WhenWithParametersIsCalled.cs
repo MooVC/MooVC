@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.CSharp.Generics;
+using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenWithParametersIsCalled
@@ -10,7 +11,7 @@ public sealed class WhenWithParametersIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        Parameter[] additional = [new Parameter { Name = new Identifier("U") }];
+        Parameter[] additional = [new Parameter { Name = new Name("U") }];
 
         // Act
         Declaration result = original.WithParameters(additional);

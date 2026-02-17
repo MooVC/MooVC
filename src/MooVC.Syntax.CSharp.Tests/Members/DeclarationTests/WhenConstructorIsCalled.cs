@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Declaration();
 
         // Assert
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Parameters.ShouldBeEmpty();
         subject.IsUnspecified.ShouldBeTrue();
     }
@@ -33,7 +33,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(DeclarationTestsData.DefaultName));
+        subject.Name.ShouldBe(new Name(DeclarationTestsData.DefaultName));
         subject.Parameters.ShouldBe(new[] { parameter });
         subject.IsUnspecified.ShouldBeFalse();
     }

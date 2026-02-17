@@ -66,7 +66,7 @@ public sealed class WhenEqualsMethodIsCalled
     {
         // Arrange
         Method subject = MethodTestsData.Create();
-        Method target = MethodTestsData.Create(name: new Declaration { Name = new Identifier("Alternative") });
+        Method target = MethodTestsData.Create(name: new Declaration { Name = "Alternative" });
 
         // Act
         bool result = target.Equals(subject);

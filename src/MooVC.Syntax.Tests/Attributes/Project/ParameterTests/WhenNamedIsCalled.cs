@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Parameter original = ParameterTestsData.Create();
-        var updated = new Identifier("Other");
+        var updated = new Name("Other");
 
         // Act
         Parameter result = original.Named(updated);

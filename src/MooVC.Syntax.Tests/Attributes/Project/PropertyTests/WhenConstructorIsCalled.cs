@@ -12,7 +12,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Condition.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Value.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
     }
@@ -24,13 +24,13 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property
         {
             Condition = Snippet.From(PropertyTestsData.DefaultCondition),
-            Name = new Identifier(PropertyTestsData.DefaultName),
+            Name = PropertyTestsData.DefaultName,
             Value = Snippet.From(PropertyTestsData.DefaultValue),
         };
 
         // Assert
         subject.Condition.ShouldBe(Snippet.From(PropertyTestsData.DefaultCondition));
-        subject.Name.ShouldBe(new Identifier(PropertyTestsData.DefaultName));
+        subject.Name.ShouldBe(new Name(PropertyTestsData.DefaultName));
         subject.Value.ShouldBe(Snippet.From(PropertyTestsData.DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
     }

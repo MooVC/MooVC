@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsObjectIsCalled
 {
@@ -82,7 +83,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         return new Parameter
         {
-            Name = new Identifier(name),
+            Name = new Name(name),
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],
         };
     }

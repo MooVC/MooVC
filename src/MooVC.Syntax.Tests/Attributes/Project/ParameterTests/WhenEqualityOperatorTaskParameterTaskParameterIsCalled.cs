@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorTaskParameterTaskParameterIsCalled
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
-        Parameter right = ParameterTestsData.Create(name: new Identifier("Other"));
+        Parameter right = ParameterTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = left == right;

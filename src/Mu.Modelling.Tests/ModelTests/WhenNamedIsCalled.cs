@@ -11,7 +11,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Model original = ModellingTestData.CreateModel();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedNameValue);
+        Name updated = UpdatedNameValue;
 
         // Act
         Model result = original.Named(updated);

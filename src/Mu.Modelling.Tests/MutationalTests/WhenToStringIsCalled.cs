@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var fact = new Identifier(FactNameValue);
+        var fact = new Name(FactNameValue);
         Mutational subject = ModellingTestData.CreateMutational(fact: fact);
 
         // Act

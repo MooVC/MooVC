@@ -81,7 +81,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         return new Directive
         {
-            Alias = new Identifier(alias),
+            Alias = alias,
             Qualifier = new Qualifier(["MooVC", "Syntax"]),
         };
     }

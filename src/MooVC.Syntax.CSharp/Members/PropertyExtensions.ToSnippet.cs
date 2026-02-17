@@ -18,7 +18,7 @@
         /// <param name="properties">The properties.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Property> properties, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Property> properties, Property.Options options)
         {
             if (properties.IsDefaultOrEmpty)
             {
@@ -33,7 +33,7 @@
                 .Select(property => property.ToSnippet(options))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options, content);
+            return Snippet.Blank.Combine(options.Snippets, content);
         }
     }
 }

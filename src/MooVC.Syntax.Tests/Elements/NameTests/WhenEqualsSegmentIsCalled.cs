@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenEqualsSegmentIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenEqualsSegmentIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Segment(Same);
-        Segment? right = default;
+        var left = new Name(Same);
+        Name? right = default;
 
         // Act
         bool result = left.Equals(right);
@@ -23,8 +23,8 @@ public sealed class WhenEqualsSegmentIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Segment(Same);
-        Segment second = first;
+        var first = new Name(Same);
+        Name second = first;
 
         // Act
         bool result = first.Equals(second);
@@ -37,8 +37,8 @@ public sealed class WhenEqualsSegmentIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Segment(Same);
-        var right = new Segment(Same);
+        var left = new Name(Same);
+        var right = new Name(Same);
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsSegmentIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Segment(Same);
-        var right = new Segment(Different);
+        var left = new Name(Same);
+        var right = new Name(Different);
 
         // Act
         bool resultLeftRight = left.Equals(right);

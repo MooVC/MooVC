@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
         subject.Inputs.ShouldBe(Snippet.Empty);
         subject.KeepDuplicateOutputs.ShouldBeFalse();
         subject.Label.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Outputs.ShouldBe(Snippet.Empty);
         subject.Returns.ShouldBe(Snippet.Empty);
         subject.Tasks.ShouldBeEmpty();
@@ -41,7 +41,7 @@ public sealed class WhenConstructorIsCalled
             Inputs = Snippet.From(TargetTestsData.DefaultInputs),
             KeepDuplicateOutputs = true,
             Label = Snippet.From(TargetTestsData.DefaultLabel),
-            Name = new Identifier(TargetTestsData.DefaultName),
+            Name = TargetTestsData.DefaultName,
             Outputs = Snippet.From(TargetTestsData.DefaultOutputs),
             Returns = Snippet.From(TargetTestsData.DefaultReturns),
             Tasks = [task],
@@ -55,7 +55,7 @@ public sealed class WhenConstructorIsCalled
         subject.Inputs.ShouldBe(Snippet.From(TargetTestsData.DefaultInputs));
         subject.KeepDuplicateOutputs.ShouldBeTrue();
         subject.Label.ShouldBe(Snippet.From(TargetTestsData.DefaultLabel));
-        subject.Name.ShouldBe(new Identifier(TargetTestsData.DefaultName));
+        subject.Name.ShouldBe(new Name(TargetTestsData.DefaultName));
         subject.Outputs.ShouldBe(Snippet.From(TargetTestsData.DefaultOutputs));
         subject.Returns.ShouldBe(Snippet.From(TargetTestsData.DefaultReturns));
         subject.Tasks.ShouldBe(new[] { task });

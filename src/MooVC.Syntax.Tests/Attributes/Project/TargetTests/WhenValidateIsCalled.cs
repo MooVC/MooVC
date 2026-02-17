@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
-        Target subject = TargetTestsData.Create(name: Identifier.Unnamed);
+        Target subject = TargetTestsData.Create(name: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

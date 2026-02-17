@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Event subject = EventTestsData.Create();
-        Snippet.Options? options = default;
+        Event.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
@@ -25,7 +25,7 @@ public sealed class WhenToSnippetIsCalled
         Event subject = EventTestsData.Create();
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default);
+        string representation = subject.ToSnippet(Event.Options.Default);
 
         // Assert
         representation.ShouldBe("public event Handler Occurred;");

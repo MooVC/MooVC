@@ -29,8 +29,9 @@ public sealed class WhenValidateIsCalled
     {
         // Arrange
         View subject = View.Undefined
-            .Named(new Identifier(ViewNameValue))
+            .Named(ViewNameValue)
             .RenderedOn(Qualifier.Unqualified);
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

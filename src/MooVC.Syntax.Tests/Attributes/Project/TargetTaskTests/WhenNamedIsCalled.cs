@@ -11,7 +11,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         TargetTask original = TargetTaskTestsData.Create(output: TargetTaskTestsData.CreateOutput());
-        var updated = new Identifier(UpdatedName);
+        var updated = new Name(UpdatedName);
 
         // Act
         TargetTask result = original.Named(updated);

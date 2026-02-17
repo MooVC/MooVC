@@ -20,11 +20,14 @@ internal sealed class Aggregate
     public async IAsyncEnumerable<File> Observe(Model.Graph.Areas.Area.Units.Unit unit, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var content = Builder
-            .New<Record>()
-            .Named(unit.Value.Name)
-            .DerivesFrom(typeof(Base))
-            .WithProperties(unit.Value.Attributes)
-            .ToSnippet(unit.Root.Options.Snippets);
+            .New<Definition>()
+            .From(unit.Namespace)
+            .For<Record>(record => record
+                .Named(unit.Value.Name)
+                .DerivesFrom(typeof(Base))
+                .WithProperties(unit.Value.Attributes))
+            .Referencing(unit.References)
+            .ToSnippet(unit.Root.Options);
 
         yield return new File(content, Extensions.Code, unit.Value.Name, $"src/{unit.ProjectName}/");
     }

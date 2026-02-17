@@ -8,37 +8,37 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Validation;
-    using static MooVC.Syntax.Elements.Segment_Resources;
+    using static MooVC.Syntax.Elements.Name_Resources;
 
     /// <summary>
     /// Represents a syntax element segment.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
-    public sealed partial class Segment
-        : IComparable<Segment>,
+    public sealed partial class Name
+        : IComparable<Name>,
           IValidatableObject
     {
         /// <summary>
         /// Gets the empty instance.
         /// </summary>
-        public static readonly Segment Empty = string.Empty;
+        public static readonly Name Unnamed = string.Empty;
         private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         /// <summary>
         /// Gets a value indicating whether the Segment is empty.
         /// </summary>
         /// <value>A value indicating whether the Segment is empty.</value>
-        public bool IsEmpty => this == Empty;
+        public bool IsUnnamed => this == Unnamed;
 
         /// <summary>
         /// Defines the string operator for the Segment.
         /// </summary>
         /// <param name="segment">The segment.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Segment segment)
+        public static implicit operator string(Name segment)
         {
-            Guard.Against.Conversion<Segment, string>(segment);
+            Guard.Against.Conversion<Name, string>(segment);
 
             return segment.ToString();
         }
@@ -48,9 +48,9 @@
         /// </summary>
         /// <param name="segment">The segment.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Segment segment)
+        public static implicit operator Snippet(Name segment)
         {
-            Guard.Against.Conversion<Segment, Snippet>(segment);
+            Guard.Against.Conversion<Name, Snippet>(segment);
 
             return Snippet.From(segment);
         }
@@ -61,7 +61,7 @@
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The .</returns>
-        public static bool operator <(Segment left, Segment right)
+        public static bool operator <(Name left, Name right)
         {
             if (left is null)
             {
@@ -77,7 +77,7 @@
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The .</returns>
-        public static bool operator >(Segment left, Segment right)
+        public static bool operator >(Name left, Name right)
         {
             if (left is null)
             {
@@ -93,7 +93,7 @@
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The .</returns>
-        public static bool operator <=(Segment left, Segment right)
+        public static bool operator <=(Name left, Name right)
         {
             return !(left > right);
         }
@@ -104,7 +104,7 @@
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The .</returns>
-        public static bool operator >=(Segment left, Segment right)
+        public static bool operator >=(Name left, Name right)
         {
             return !(left < right);
         }
@@ -114,7 +114,7 @@
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>A signed integer indicating relative order.</returns>
-        public int CompareTo(Segment other)
+        public int CompareTo(Name other)
         {
             return other is null
                 ? 1
@@ -137,7 +137,7 @@
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (IsEmpty)
+            if (IsUnnamed)
             {
                 yield break;
             }
@@ -147,8 +147,8 @@
             if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
             {
                 yield return new ValidationResult(
-                    ValidateValueRequired.Format(_value, nameof(Segment)),
-                    new[] { nameof(Segment) });
+                    ValidateValueRequired.Format(_value, nameof(Name)),
+                    new[] { nameof(Name) });
             }
         }
     }

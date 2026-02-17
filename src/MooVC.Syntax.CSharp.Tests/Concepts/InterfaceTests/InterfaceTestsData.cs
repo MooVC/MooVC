@@ -27,7 +27,7 @@ public static class InterfaceTestsData
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,
             Methods = methods ?? [],
-            Name = name ?? new Declaration { Name = DefaultName },
+            Declaration = name ?? new Declaration { Name = DefaultName },
             Operators = operators ?? new Operators(),
             Properties = properties ?? [],
             Scope = scope ?? Scope.Public,

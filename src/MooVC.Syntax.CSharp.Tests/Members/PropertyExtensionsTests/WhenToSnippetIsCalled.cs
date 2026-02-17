@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = properties.ToSnippet(Snippet.Options.Default);
+        var snippet = properties.ToSnippet(Property.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -30,7 +30,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Property> properties = [PropertyTestsData.Create()];
-        Snippet.Options? options = default;
+        Property.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = properties.ToSnippet(options!));
@@ -65,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
                 {
                     value;
                 }
-                set;
+                init;
             }
 
             public virtual Version Alpha
@@ -74,7 +74,7 @@ public sealed class WhenToSnippetIsCalled
                 {
                     value;
                 }
-                set;
+                init;
             }
 
             protected virtual string Gamma
@@ -83,12 +83,14 @@ public sealed class WhenToSnippetIsCalled
                 {
                     value;
                 }
-                set;
+                init;
             }
             """;
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Property.Options options = Property.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         var snippet = properties.ToSnippet(options);

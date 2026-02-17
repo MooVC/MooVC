@@ -11,7 +11,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -66,7 +65,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the scope on the Event.
@@ -104,7 +103,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -112,9 +111,9 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Event)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Event)));
 
             if (IsUndefind)
             {
@@ -123,23 +122,25 @@
 
             string extensibility = Extensibility;
             string handler = Handler;
-            var name = Name.ToSnippet(Identifier.Options.Pascal);
-            string scope = Scope;
+            string name = Name;
+            string scope = Scope.ToString(options.Implied);
             string signature = Separator.Combine(scope, extensibility, "event", handler, name);
-            var methods = Behaviours.ToSnippet(options);
+            var methods = Behaviours.ToSnippet(options.Snippets);
 
             if (methods.IsEmpty)
             {
                 return string.Concat(signature, ";");
             }
 
-            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            Snippet.Options snippets = options.Snippets;
+
+            if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
             {
-                options = options.WithBlock(block => block
+                snippets = snippets.WithBlock(block => block
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
             }
 
-            return methods.Block(options, Snippet.From(options, signature));
+            return methods.Block(snippets, Snippet.From(snippets, signature));
         }
 
         /// <summary>

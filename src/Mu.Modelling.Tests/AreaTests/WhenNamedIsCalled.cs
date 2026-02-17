@@ -11,7 +11,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Area original = ModellingTestData.CreateArea();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedNameValue);
+        Name updated = UpdatedNameValue;
 
         // Act
         Area result = original.Named(updated);

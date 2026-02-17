@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -14,7 +15,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Parameter();
 
         // Assert
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Constraints.ShouldBeEmpty();
     }
 
@@ -30,12 +31,12 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Parameter
         {
-            Name = new Identifier(ParameterName),
+            Name = new Name(ParameterName),
             Constraints = [constraint],
         };
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(ParameterName));
+        subject.Name.ShouldBe(new Name(ParameterName));
         subject.Constraints.ShouldBe(new[] { constraint });
     }
 }

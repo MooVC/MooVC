@@ -27,7 +27,7 @@ public sealed class WhenToStringIsCalled
             constructors: [constructor],
             extensibility: Extensibility.Abstract,
             isPartial: true,
-            name: new Declaration { Name = new Variable(ClassTestsData.DefaultName) },
+            name: new Declaration { Name = ClassTestsData.DefaultName },
             scope: Scope.Internal);
 
         // Act

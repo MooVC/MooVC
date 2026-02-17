@@ -14,7 +14,7 @@ public sealed class WhenWithPropertiesIsCalled
         var additional = new Property
         {
             Condition = Snippet.From("Extra"),
-            Name = new Identifier("Other"),
+            Name = new Name("Other"),
             Value = Snippet.From("Value"),
         };
 

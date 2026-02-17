@@ -22,7 +22,7 @@
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets or sets the qualification on the Options.
+            /// Gets the qualification on the Options.
             /// </summary>
             /// <value>The qualification.</value>
             public Qualification Qualification { get; set; } = Qualification.Minimum;

@@ -12,7 +12,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         ModellingAttribute original = ModellingTestData.CreateAttribute();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedNameValue);
+        Name updated = UpdatedNameValue;
 
         // Act
         ModellingAttribute result = original.Named(updated);

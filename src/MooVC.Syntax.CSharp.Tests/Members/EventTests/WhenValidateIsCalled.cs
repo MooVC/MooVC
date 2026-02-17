@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Members.EventTests;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -51,7 +52,7 @@ public sealed class WhenValidateIsCalled
         var subject = new Event
         {
             Handler = new Symbol { Name = "Invalid Handler Name" },
-            Name = new Variable(EventTestsData.DefaultName),
+            Name = new Name(EventTestsData.DefaultName),
         };
 
         var context = new ValidationContext(subject);

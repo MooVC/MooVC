@@ -45,7 +45,7 @@ namespace MooVC.Syntax.Attributes.Project
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the value on the TaskParameter.

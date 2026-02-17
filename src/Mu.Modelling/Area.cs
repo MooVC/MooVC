@@ -23,7 +23,7 @@ public sealed partial class Area
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Descriptor("ResponsibleFor")]
     public ImmutableArray<Unit> Units { get; internal init; } = [];
@@ -37,7 +37,7 @@ public sealed partial class Area
 
         return validationContext
             .IncludeIf(!Units.IsDefaultOrEmpty, nameof(Units), unit => !unit.IsUndefined, Units)
-            .And(nameof(Name), Name)
+            .And(nameof(Name), name => !name.IsUnnamed, Name)
             .Results;
     }
 }

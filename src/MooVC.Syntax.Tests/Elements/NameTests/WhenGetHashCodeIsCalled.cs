@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var first = new Segment(value);
-        var second = new Segment(value);
+        var first = new Name(value);
+        var second = new Name(value);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -47,7 +47,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var subject = new Segment(value);
+        var subject = new Name(value);
 
         // Act
         int first = subject.GetHashCode();

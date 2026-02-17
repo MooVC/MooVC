@@ -15,7 +15,7 @@
     /// <summary>
     /// Represents a syntax element qualifier.
     /// </summary>
-    [Monify(Type = typeof(ImmutableArray<Segment>))]
+    [Monify(Type = typeof(ImmutableArray<Name>))]
     [SkipAutoInitialization]
     public partial class Qualifier
         : IComparable<Qualifier>,
@@ -24,7 +24,7 @@
         /// <summary>
         /// Represents the unqualified for the Qualifier.
         /// </summary>
-        public static readonly Qualifier Unqualified = ImmutableArray<Segment>.Empty;
+        public static readonly Qualifier Unqualified = ImmutableArray<Name>.Empty;
 
         private const string Separator = ".";
 
@@ -45,7 +45,7 @@
         /// </summary>
         /// <param name="index">The element to retrieve from the Qualifier.</param>
         /// <value>The index.</value>
-        public Segment this[int index] => _value[index];
+        public Name this[int index] => _value[index];
 
         /// <summary>
         /// Defines the Qualifier operator for the Qualifier.
@@ -70,7 +70,7 @@
 
             return value
                 .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(segment => new Segment(segment))
+                .Select(segment => new Name(segment))
                 .ToImmutableArray();
         }
 
@@ -79,9 +79,9 @@
         /// </summary>
         /// <param name="values">The values.</param>
         /// <returns>The qualifier.</returns>
-        public static implicit operator Qualifier(Segment[] values)
+        public static implicit operator Qualifier(Name[] values)
         {
-            Guard.Against.Conversion<Segment[], Qualifier>(values);
+            Guard.Against.Conversion<Name[], Qualifier>(values);
 
             if (values.Length == 0)
             {
@@ -96,9 +96,9 @@
         /// </summary>
         /// <param name="qualifier">The qualifier.</param>
         /// <returns>The segment.</returns>
-        public static implicit operator Segment[](Qualifier qualifier)
+        public static implicit operator Name[](Qualifier qualifier)
         {
-            Guard.Against.Conversion<Qualifier, Segment[]>(qualifier);
+            Guard.Against.Conversion<Qualifier, Name[]>(qualifier);
 
             return qualifier._value.ToArray();
         }
@@ -222,7 +222,7 @@
             }
 
             string[] segments = _value
-                .Where(segment => !segment.IsEmpty)
+                .Where(segment => !segment.IsUnnamed)
                 .Select(segment => segment.ToString())
                 .ToArray();
 
@@ -263,7 +263,7 @@
                 return new[]
                 {
                     new ValidationResult(
-                        ValidateValueRequired.Format(nameof(Qualifier), nameof(Segment)),
+                        ValidateValueRequired.Format(nameof(Qualifier), nameof(Name)),
                         new[] { nameof(Qualifier) }),
                 };
             }
@@ -271,32 +271,34 @@
             return Validate(_value, validationContext);
         }
 
-        private static bool IsSystemFirst(ImmutableArray<Segment> value)
+        private static bool IsSystemFirst(ImmutableArray<Name> value)
         {
             return !value.IsDefaultOrEmpty && value.Length > 0 && value[0].ToString() == "System";
         }
 
-        private static IEnumerable<ValidationResult> Validate(ImmutableArray<Segment> segments, ValidationContext validationContext)
+        private static IEnumerable<ValidationResult> Validate(ImmutableArray<Name> segments, ValidationContext validationContext)
         {
-            var processed = new List<Segment>();
+            var processed = new List<Name>();
             var results = new List<ValidationResult>();
 
             for (int index = 0; index < segments.Length; index++)
             {
-                Segment value = segments[index];
+                Name value = segments[index];
 
-                if (value is null || value.IsEmpty)
+                if (value is null || value.IsUnnamed)
                 {
                     string preceding = string.Join(Separator, processed);
 
                     results.Add(new ValidationResult(
-                        ValidateSegmentRequired.Format(index, nameof(Segment), nameof(Qualifier), preceding),
+                        ValidateSegmentRequired.Format(index, nameof(Name), nameof(Qualifier), preceding),
                         new[] { $"{nameof(Qualifier)}[{index}]" }));
 
                     value = "{Undefined}";
                 }
                 else
                 {
+                    validationContext.MemberName = $"{nameof(Qualifier)}[{index}]";
+
                     results.AddRange(value.Validate(validationContext));
                 }
 

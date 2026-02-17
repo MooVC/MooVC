@@ -29,7 +29,7 @@ public sealed class WhenValidateIsCalled
         var subject = new TestType
         {
             IsUndefinedValue = false,
-            Name = Declaration.Unspecified,
+            Declaration = Declaration.Unspecified,
         };
 
         var validationContext = new ValidationContext(subject);
@@ -38,6 +38,6 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Type.Name)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Type.Declaration)));
     }
 }

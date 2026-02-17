@@ -82,7 +82,7 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
     {
         // Arrange
         Record left = RecordTestsData.Create();
-        Record right = RecordTestsData.Create(name: new Declaration { Name = new Variable("Other") });
+        Record right = RecordTestsData.Create(name: new Declaration { Name = "Other" });
 
         // Act
         bool result = left == right;

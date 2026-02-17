@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorTargetTaskTargetTaskIsCalled
     {
         // Arrange
         TargetTask left = TargetTaskTestsData.Create();
-        TargetTask right = TargetTaskTestsData.Create(name: new Identifier("Other"));
+        TargetTask right = TargetTaskTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = left != right;

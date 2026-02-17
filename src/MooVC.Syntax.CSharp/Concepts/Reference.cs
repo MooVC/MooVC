@@ -119,12 +119,12 @@
             Snippet signature = GetSignature(options);
 
             var constructors = Constructors.ToSnippet(options, this);
-            var events = Events.ToSnippet(options);
+            var events = Events.ToSnippet(Event.Options.Default.WithSnippets(options));
             var fields = Fields.ToSnippet(options);
-            var indexers = Indexers.ToSnippet(options);
+            var indexers = Indexers.ToSnippet(Indexer.Options.Default.WithSnippets(options));
             var operators = Operators.ToSnippet(options, this);
-            var properties = Properties.ToSnippet(options);
-            var methods = Methods.ToSnippet(options);
+            var properties = Properties.ToSnippet(Property.Options.Default.WithSnippets(options));
+            var methods = Methods.ToSnippet(Method.Options.Default.WithSnippets(options));
             Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, properties, indexers, operators, methods);
 
             return body.Block(options, signature);
@@ -132,9 +132,9 @@
 
         private Snippet GetSignature(Snippet.Options options)
         {
-            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
-            string name = Name;
+            string name = Declaration;
             var parameters = Parameters.ToSnippet(_options);
             string partial = IsPartial.Partial();
             string scope = Scope;

@@ -18,7 +18,7 @@
         /// <param name="methods">The methods.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Method> methods, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Method> methods, Method.Options options)
         {
             if (methods.IsDefaultOrEmpty)
             {
@@ -33,7 +33,7 @@
                 .Select(method => method.ToSnippet(options))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options, content);
+            return Snippet.Blank.Combine(options.Snippets, content);
         }
     }
 }

@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Behaviour.ShouldBe(Snippet.Empty);
         subject.IsDefault.ShouldBeTrue();
-        subject.Mode.ShouldBe(Property.Mode.Set);
+        subject.Mode.ShouldBe(Property.Mode.Init);
         subject.Scope.ShouldBe(Scope.Unspecified);
     }
 

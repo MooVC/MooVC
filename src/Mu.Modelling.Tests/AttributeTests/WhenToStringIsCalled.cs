@@ -11,7 +11,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(AttributeNameValue);
+        var name = new Name(AttributeNameValue);
         ModellingAttribute subject = ModellingTestData.CreateAttribute(name: name);
 
         // Act

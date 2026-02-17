@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
-        Snippet.Options? options = default;
+        Indexer.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
@@ -29,9 +29,10 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+        Indexer.Options options = Indexer.Options.Default
+            .WithSnippets(snippet => snippet
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -53,9 +54,10 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+        Indexer.Options options = Indexer.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -77,9 +79,10 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Indexer.Options options = Indexer.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         string representation = subject.ToSnippet(options);

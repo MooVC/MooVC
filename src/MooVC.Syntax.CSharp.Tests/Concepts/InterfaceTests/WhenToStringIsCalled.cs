@@ -37,15 +37,15 @@ public sealed class WhenToStringIsCalled
         const string expected = """
             internal partial interface Sample
             {
-                public event Created;
+                event Created;
 
-                public string ValueA { get; set; }
+                string ValueA { get; init; }
 
-                public int ValueB { get; }
+                int ValueB { get; }
 
-                public int this[string item] { get; }
+                int this[string item] { get; }
 
-                public Task Execute();
+                Task Execute();
             }
             """;
 

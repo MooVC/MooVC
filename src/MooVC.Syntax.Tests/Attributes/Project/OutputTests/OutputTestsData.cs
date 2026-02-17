@@ -11,16 +11,16 @@ internal static class OutputTestsData
 
     public static Output Create(
         Snippet? condition = default,
-        Identifier? itemName = default,
-        Identifier? propertyName = default,
-        Identifier? taskParameter = default)
+        Name? itemName = default,
+        Name? propertyName = default,
+        Name? taskParameter = default)
     {
         return new Output
         {
             Condition = condition ?? Snippet.From(DefaultCondition),
-            ItemName = itemName ?? new Identifier(DefaultItemName),
-            PropertyName = propertyName ?? new Identifier(DefaultPropertyName),
-            TaskParameter = taskParameter ?? new Identifier(DefaultTaskParameter),
+            ItemName = itemName ?? DefaultItemName,
+            PropertyName = propertyName ?? DefaultPropertyName,
+            TaskParameter = taskParameter ?? DefaultTaskParameter,
         };
     }
 }

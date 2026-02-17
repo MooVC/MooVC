@@ -82,7 +82,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
     {
         // Arrange
         Interface left = InterfaceTestsData.Create();
-        Interface right = InterfaceTestsData.Create(name: new Declaration { Name = new Variable("Other") });
+        Interface right = InterfaceTestsData.Create(name: new Declaration { Name = "Other" });
 
         // Act
         bool result = left == right;

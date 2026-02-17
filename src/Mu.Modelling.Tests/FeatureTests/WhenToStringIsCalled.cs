@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(FeatureNameValue);
+        var name = new Name(FeatureNameValue);
         Feature subject = ModellingTestData.CreateFeature(name: name);
 
         // Act

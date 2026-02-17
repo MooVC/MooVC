@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -21,10 +22,10 @@ public sealed class WhenConstructorIsCalled
         subject.Extensibility.ShouldBe(Extensibility.Sealed);
         subject.Fields.ShouldBe([]);
         subject.Indexers.ShouldBe([]);
-        subject.IsPartial.ShouldBeFalse();
+        subject.IsPartial.ShouldBeTrue();
         subject.IsStatic.ShouldBeFalse();
         subject.Methods.ShouldBe([]);
-        subject.Name.ShouldBe(Declaration.Unspecified);
+        subject.Declaration.ShouldBe(Declaration.Unspecified);
         subject.Operators.ShouldBe(new Operators());
         subject.Parameters.ShouldBe([]);
         subject.Properties.ShouldBe([]);
@@ -38,11 +39,11 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = new Variable(AttributeName) } };
         var constructor = new Constructor();
-        var @event = new Event { Name = new Variable("Created") };
+        var @event = new Event { Name = new Name("Created") };
         var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Variable("Value"), Type = typeof(string) };
+        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
 
         // Act
         Class subject = ClassTestsData.Create(
@@ -55,7 +56,7 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             isStatic: true,
             methods: [method],
-            name: new Declaration { Name = new Variable(ClassTestsData.DefaultName) },
+            name: new Declaration { Name = ClassTestsData.DefaultName },
             operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
             parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }],
             properties: [property],
@@ -71,7 +72,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsPartial.ShouldBeTrue();
         subject.IsStatic.ShouldBeTrue();
         subject.Methods.ShouldBe(new[] { method });
-        subject.Name.ShouldBe(new Declaration { Name = new Variable(ClassTestsData.DefaultName) });
+        subject.Declaration.ShouldBe(new Declaration { Name = ClassTestsData.DefaultName });
         subject.Operators.Conversions.ShouldNotBeEmpty();
         _ = subject.Parameters.ShouldHaveSingleItem();
         subject.Properties.ShouldBe(new[] { property });

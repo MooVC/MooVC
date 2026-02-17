@@ -42,7 +42,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Identifier(Alias),
+            Alias = new Name(Alias),
             Qualifier = new Qualifier(["MooVC", "Syntax"]),
         };
 

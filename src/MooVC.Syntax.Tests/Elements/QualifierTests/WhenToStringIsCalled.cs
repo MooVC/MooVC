@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
     public void GivenSegmentsThenReturnsPeriodSeparatedValue()
     {
         // Arrange
-        ImmutableArray<Segment> value = ["Alpha", "Beta", "Gamma"];
+        ImmutableArray<Name> value = ["Alpha", "Beta", "Gamma"];
         var qualifier = new Qualifier(value);
 
         // Act

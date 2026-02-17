@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenItemWithoutPropertyThenValidationErrorReturned()
     {
         // Arrange
-        Output subject = OutputTestsData.Create(propertyName: Identifier.Unnamed);
+        Output subject = OutputTestsData.Create(propertyName: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -61,7 +61,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPropertyWithoutItemThenValidationErrorReturned()
     {
         // Arrange
-        Output subject = OutputTestsData.Create(itemName: Identifier.Unnamed, propertyName: new Identifier("Property"));
+        Output subject = OutputTestsData.Create(itemName: Name.Unnamed, propertyName: new Name("Property"));
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

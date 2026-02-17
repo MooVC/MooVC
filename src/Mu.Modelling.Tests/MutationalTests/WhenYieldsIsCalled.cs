@@ -11,7 +11,7 @@ public sealed class WhenYieldsIsCalled
     {
         // Arrange
         Mutational original = ModellingTestData.CreateMutational();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedFactValue);
+        Name updated = UpdatedFactValue;
 
         // Act
         Mutational result = original.Yields(updated);

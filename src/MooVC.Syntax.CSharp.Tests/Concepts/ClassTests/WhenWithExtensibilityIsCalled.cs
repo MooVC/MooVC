@@ -17,7 +17,7 @@ public sealed class WhenWithExtensibilityIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Extensibility.ShouldBe(Extensibility.Abstract);
-        result.Name.ShouldBe(original.Name);
+        result.Declaration.ShouldBe(original.Declaration);
         original.Extensibility.ShouldBe(Extensibility.Sealed);
     }
 }

@@ -28,7 +28,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         Unit subject = Unit.Undefined
             .Featuring(ModellingTestData.CreateFeature())
-            .Named(Identifier.Unnamed);
+            .Named(Name.Unnamed);
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

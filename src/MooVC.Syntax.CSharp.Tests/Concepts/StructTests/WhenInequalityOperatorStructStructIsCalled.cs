@@ -82,7 +82,7 @@ public sealed class WhenInequalityOperatorStructStructIsCalled
     {
         // Arrange
         Struct left = StructTestsData.Create();
-        Struct right = StructTestsData.Create(name: new Declaration { Name = new Variable("Other") });
+        Struct right = StructTestsData.Create(name: new Declaration { Name = "Other" });
 
         // Act
         bool result = left != right;

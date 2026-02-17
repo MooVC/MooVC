@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
-        Snippet.Options? options = default;
+        Property.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
@@ -30,9 +30,10 @@ public sealed class WhenToSnippetIsCalled
 
         Property subject = PropertyTestsData.Create(behaviours: behaviours);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+        Property.Options options = Property.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
 
         // Act
         string representation = subject.ToSnippet(options);

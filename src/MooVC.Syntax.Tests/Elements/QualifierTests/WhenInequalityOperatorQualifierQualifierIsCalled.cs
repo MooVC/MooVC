@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
 {
-    private static readonly ImmutableArray<Segment> different = ["Gamma"];
-    private static readonly ImmutableArray<Segment> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> different = ["Gamma"];
+    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
     [Fact]
     public void GivenBothNullThenReturnsFalse()

@@ -11,16 +11,16 @@ public sealed class WhenIsNonMutationalIsCalled
     public void GivenBuilderThenFeatureIsNonMutational()
     {
         // Arrange
-        Feature original = Feature.Undefined.Named(new Identifier(FeatureNameValue));
+        Feature original = Feature.Undefined.Named(FeatureNameValue);
 
         // Act
         Feature result = original.IsNonMutational(nonMutational => nonMutational
             .FromWriteStore()
-            .Using(new Identifier(ViewNameValue)));
+            .Using(ViewNameValue));
 
         // Assert
         result.Type.ShouldBe(Feature.Kind.NonMutational);
-        result.NonMutational.View.ShouldBe(new Identifier(ViewNameValue));
+        result.NonMutational.View.ShouldBe(new Name(ViewNameValue));
         result.Mutational.ShouldBe(Mutational.Undefined);
     }
 }

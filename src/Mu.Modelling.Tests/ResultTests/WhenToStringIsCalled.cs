@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(ResultNameValue);
+        var name = new Name(ResultNameValue);
         Result subject = ModellingTestData.CreateResult(name: name);
 
         // Act

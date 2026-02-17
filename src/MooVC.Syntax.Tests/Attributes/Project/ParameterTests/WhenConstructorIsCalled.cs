@@ -11,7 +11,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Parameter();
 
         // Assert
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Value.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
     }
@@ -22,12 +22,12 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Parameter
         {
-            Name = new Identifier(ParameterTestsData.DefaultName),
+            Name = ParameterTestsData.DefaultName,
             Value = Snippet.From(ParameterTestsData.DefaultValue),
         };
 
         // Assert
-        subject.Name.ShouldBe(new Identifier(ParameterTestsData.DefaultName));
+        subject.Name.ShouldBe(new Name(ParameterTestsData.DefaultName));
         subject.Value.ShouldBe(Snippet.From(ParameterTestsData.DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
     }

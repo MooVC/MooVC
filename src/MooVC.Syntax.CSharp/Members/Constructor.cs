@@ -13,7 +13,6 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Constructor_Resources;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -100,7 +99,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Identifier.Unnamed, Snippet.Options.Default);
+            return ToSnippet(Name.Unnamed, Snippet.Options.Default);
         }
 
         /// <summary>
@@ -113,7 +112,7 @@ namespace MooVC.Syntax.CSharp.Members
         {
             _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Type), nameof(Constructor)));
 
-            return ToSnippet(type.Name.Name, options);
+            return ToSnippet(type.Declaration.Name, options);
         }
 
         /// <summary>
@@ -134,18 +133,17 @@ namespace MooVC.Syntax.CSharp.Members
                 .Results;
         }
 
-        private Snippet GetSignature(Identifier name, Snippet.Options options)
+        private Snippet GetSignature(Name name, Snippet.Options options)
         {
-            string construct = name.ToSnippet(Identifier.Options.Pascal);
             string extensibility = Extensibility;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string scope = Scope;
-            string signature = Separator.Combine(scope, extensibility, $"{construct}({parameters})");
+            string signature = Separator.Combine(scope, extensibility, $"{name}({parameters})");
 
             return Snippet.From(options, signature);
         }
 
-        private string ToSnippet(Identifier name, Snippet.Options options)
+        private string ToSnippet(Name name, Snippet.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Constructor)));
 

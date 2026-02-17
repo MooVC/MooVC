@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
@@ -9,7 +10,7 @@ public sealed class WhenWithPropertiesIsCalled
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        var property = new Property { Name = new Variable("Value"), Type = typeof(string) };
+        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
         Interface original = InterfaceTestsData.Create();
 
         // Act

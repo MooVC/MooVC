@@ -16,7 +16,7 @@
         /// <param name="events">The events.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Event> events, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Event> events, Event.Options options)
         {
             if (events.IsDefaultOrEmpty)
             {
@@ -29,7 +29,7 @@
                 .Select(@event => @event.ToSnippet(options))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options, content);
+            return Snippet.Blank.Combine(options.Snippets, content);
         }
     }
 }

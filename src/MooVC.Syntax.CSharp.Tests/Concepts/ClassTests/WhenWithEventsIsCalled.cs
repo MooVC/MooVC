@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithEventsIsCalled
 {
@@ -11,8 +12,8 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Event[] existing = [new Event { Name = new Variable("Created") }];
-        Event[] additional = [new Event { Name = new Variable("Updated") }];
+        Event[] existing = [new Event { Name = new Name("Created") }];
+        Event[] additional = [new Event { Name = new Name("Updated") }];
         Class original = ClassTestsData.Create(events: existing.ToImmutableArray());
 
         // Act

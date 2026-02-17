@@ -46,14 +46,14 @@
         {
             Snippet signature = GetSignature(options);
 
-            var events = Events.ToSnippet(options);
-            var indexers = Indexers.ToSnippet(options);
-            var properties = Properties.ToSnippet(options);
+            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options });
+            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options });
+            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options });
 
             var methods = Methods
                 .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
                 .ToImmutableArray()
-                .ToSnippet(options);
+                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options });
 
             Snippet body = Snippet.Blank.Combine(options, events, properties, indexers, methods);
 
@@ -62,8 +62,8 @@
 
         private Snippet GetSignature(Snippet.Options options)
         {
-            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
-            string name = Name;
+            var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            string name = Declaration;
             string partial = IsPartial.Partial();
             string scope = Scope;
             string signature = Separator.Combine(scope, partial, $"interface {name}");

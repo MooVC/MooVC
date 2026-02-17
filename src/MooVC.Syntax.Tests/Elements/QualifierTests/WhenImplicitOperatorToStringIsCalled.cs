@@ -25,8 +25,8 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         Qualifier subject = ImmutableArray.Create(
-            new Segment(First),
-            new Segment(Second));
+            new Name(First),
+            new Name(Second));
 
         // Act
         string result = subject;

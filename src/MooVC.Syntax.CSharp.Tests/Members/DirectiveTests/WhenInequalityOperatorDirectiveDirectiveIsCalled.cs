@@ -126,7 +126,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
     {
         return new Directive
         {
-            Alias = new Identifier(alias),
+            Alias = alias,
             IsStatic = isStatic,
             Qualifier = qualifier ?? new Qualifier(["MooVC", "Syntax"]),
         };

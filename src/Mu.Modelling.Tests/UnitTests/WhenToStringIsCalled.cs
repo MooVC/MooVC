@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(UnitNameValue);
+        var name = new Name(UnitNameValue);
         Unit subject = ModellingTestData.CreateUnit(name: name);
 
         // Act

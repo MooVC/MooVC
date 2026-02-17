@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Segment? left = default;
-        Segment? right = default;
+        Name? left = default;
+        Name? right = default;
 
         // Act
         bool result = left == right;
@@ -23,8 +23,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Segment? left = default;
-        var right = new Segment(Same);
+        Name? left = default;
+        var right = new Name(Same);
 
         // Act
         bool result = left == right;
@@ -37,8 +37,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Segment(Same);
-        Segment? right = default;
+        var left = new Name(Same);
+        Name? right = default;
 
         // Act
         bool result = left == right;
@@ -51,8 +51,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Segment(Same);
-        Segment second = first;
+        var first = new Name(Same);
+        Name second = first;
 
         // Act
         bool result = first == second;
@@ -65,8 +65,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Segment(Same);
-        var right = new Segment(Same);
+        var left = new Name(Same);
+        var right = new Name(Same);
 
         // Act
         bool resultLeftRight = left == right;
@@ -81,8 +81,8 @@ public sealed class WhenEqualityOperatorSegmentSegmentIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Segment(Same);
-        var right = new Segment(Different);
+        var left = new Name(Same);
+        var right = new Name(Different);
 
         // Act
         bool resultLeftRight = left == right;

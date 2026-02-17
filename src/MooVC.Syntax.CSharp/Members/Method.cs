@@ -117,7 +117,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <returns>The rendered method declaration.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace MooVC.Syntax.CSharp.Members
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Method)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Method)));
 
             if (IsUndefined)
             {
@@ -141,7 +141,7 @@ namespace MooVC.Syntax.CSharp.Members
                 return signature.Append(';');
             }
 
-            return Body.Block(options, signature);
+            return Body.Block(options.Snippets, signature);
         }
 
         /// <summary>
@@ -181,25 +181,25 @@ namespace MooVC.Syntax.CSharp.Members
                 .Results;
         }
 
-        private Snippet GetSignature(Snippet.Options options)
+        private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
             string name = Name;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string result = Result.IsVoid ? "void" : Result;
-            string scope = Scope;
-            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            string scope = Scope.ToString(options.Implied);
+            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options.Snippets), options.Snippets);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
             if (!clauses.IsEmpty)
             {
                 return clauses
-                    .Shift(options)
-                    .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature);
+                    .Shift(options.Snippets)
+                    .Prepend(options.Snippets, Environment.NewLine)
+                    .Prepend(options.Snippets, signature);
             }
 
-            return Snippet.From(options, signature);
+            return Snippet.From(options.Snippets, signature);
         }
     }
 }

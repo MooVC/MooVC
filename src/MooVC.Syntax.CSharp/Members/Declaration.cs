@@ -13,7 +13,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Declaration_Resources;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
@@ -47,26 +46,26 @@
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Gets or sets the name on the Declaration.
+        /// Gets the name on the Declaration.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Identifier Name { get; internal set; } = Identifier.Unnamed;
+        public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
-        /// Gets or sets the parameters on the Declaration.
+        /// Gets the parameters on the Declaration.
         /// </summary>
         /// <value>The parameters.</value>
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
-        /// Defines the identifier operator for the Declaration.
+        /// Defines the segment operator for the Declaration.
         /// </summary>
-        /// <param name="name">The identifier.</param>
+        /// <param name="name">The segment.</param>
         /// <returns>The declaration.</returns>
-        public static implicit operator Declaration(Identifier name)
+        public static implicit operator Declaration(Name name)
         {
-            Guard.Against.Conversion<Identifier, Declaration>(name);
+            Guard.Against.Conversion<Name, Declaration>(name);
 
             return new Declaration { Name = name };
         }
@@ -184,7 +183,7 @@
                 return Snippet.Empty;
             }
 
-            string signature = Name.ToSnippet(Identifier.Options.Pascal);
+            string signature = Name;
 
             if (!Parameters.IsDefaultOrEmpty)
             {

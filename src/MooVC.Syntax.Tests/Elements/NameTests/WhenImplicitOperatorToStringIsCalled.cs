@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
@@ -11,7 +11,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Segment? subject = default;
+        Name? subject = default;
 
         // Act
         Func<string> result = () => subject;
@@ -24,7 +24,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenSegmentWithNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Segment(default);
+        var subject = new Name(default);
 
         // Act
         string result = subject;
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Empty);
+        var subject = new Name(Empty);
 
         // Act
         string result = subject;
@@ -50,7 +50,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Space);
+        var subject = new Name(Space);
 
         // Act
         string result = subject;
@@ -63,7 +63,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Alpha);
+        var subject = new Name(Alpha);
 
         // Act
         string result = subject;
@@ -76,7 +76,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
-        var subject = new Segment(Unicode);
+        var subject = new Name(Unicode);
 
         // Act
         string result = subject;
@@ -90,7 +90,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Segment(value);
+        var subject = new Name(value);
 
         // Act
         string result = subject;

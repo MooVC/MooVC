@@ -9,7 +9,7 @@ public sealed class WhenWithTaskParameterIsCalled
     {
         // Arrange
         Output original = OutputTestsData.Create();
-        var updated = new Identifier("Other");
+        var updated = new Name("Other");
 
         // Act
         Output result = original.WithTaskParameter(updated);

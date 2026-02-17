@@ -32,7 +32,7 @@ namespace MooVC.Syntax.CSharp.Members
             }
 
             /// <summary>
-            /// Gets or sets the behaviour on the Setter.
+            /// Gets the behaviour on the Setter.
             /// </summary>
             /// <value>The behaviour.</value>
             public Snippet Behaviour { get; internal set; } = Snippet.Empty;
@@ -45,13 +45,13 @@ namespace MooVC.Syntax.CSharp.Members
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the mode on the Setter.
+            /// Gets the mode on the Setter.
             /// </summary>
             /// <value>The mode.</value>
             public Mode Mode { get; internal set; } = Mode.Init;
 
             /// <summary>
-            /// Gets or sets the scope on the Setter.
+            /// Gets the scope on the Setter.
             /// </summary>
             /// <value>The scope.</value>
             public Scope Scope { get; internal set; } = Scope.Unspecified;

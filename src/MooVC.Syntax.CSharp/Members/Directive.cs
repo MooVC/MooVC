@@ -10,7 +10,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Directive_Resources;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -40,7 +39,7 @@
         /// </summary>
         /// <value>The alias.</value>
         [Descriptor("KnownAs")]
-        public Identifier Alias { get; internal set; } = Identifier.Unnamed;
+        public Name Alias { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets a value indicating whether the Directive is undefined.
@@ -91,6 +90,21 @@
             Guard.Against.Conversion<Directive, Snippet>(directive);
 
             return Snippet.From(directive);
+        }
+
+        /// <summary>
+        /// Defines the Qualifier operator for the Directive.
+        /// </summary>
+        /// <param name="qualifier">The qualifer.</param>
+        /// <returns>The directive.</returns>
+        public static implicit operator Directive(Qualifier qualifier)
+        {
+            Guard.Against.Conversion<Qualifier, Directive>(qualifier);
+
+            return new Directive
+            {
+                Qualifier = qualifier,
+            };
         }
 
         /// <summary>
@@ -165,7 +179,7 @@
 
             if (!Alias.IsUnnamed)
             {
-                return $"{Alias.ToSnippet(Identifier.Options.Pascal)} =";
+                return $"{Alias} =";
             }
 
             return string.Empty;

@@ -11,7 +11,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Feature original = ModellingTestData.CreateFeature();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedNameValue);
+        Name updated = UpdatedNameValue;
 
         // Act
         Feature result = original.Named(updated);

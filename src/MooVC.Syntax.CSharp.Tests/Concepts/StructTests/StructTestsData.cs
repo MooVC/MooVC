@@ -34,7 +34,7 @@ public static class StructTestsData
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,
             Methods = methods ?? [],
-            Name = name ?? new Declaration { Name = new Variable(DefaultName) },
+            Declaration = name ?? new Declaration { Name = DefaultName },
             Operators = operators ?? new Operators(),
             Parameters = parameters ?? [],
             Properties = properties ?? [],

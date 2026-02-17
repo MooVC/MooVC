@@ -28,7 +28,7 @@ public sealed class WhenToStringIsCalled
             behavior: Struct.Kind.Ref,
             constructors: [constructor],
             isPartial: true,
-            name: new Declaration { Name = new Variable(StructTestsData.DefaultName) },
+            name: new Declaration { Name = StructTestsData.DefaultName },
             parameters: [new Parameter { Name = new Variable("input"), Type = typeof(int) }],
             scope: Scope.Internal);
 

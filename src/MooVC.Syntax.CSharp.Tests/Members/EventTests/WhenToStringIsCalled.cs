@@ -28,7 +28,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Event
         {
             Handler = new Symbol { Name = Handler },
-            Name = new Identifier(Name),
+            Name = new Name(Name),
         };
 
         // Act

@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
@@ -11,8 +12,8 @@ public sealed class WhenWithPropertiesIsCalled
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        Property[] existing = [new Property { Name = new Variable("First"), Type = typeof(int) }];
-        Property[] additional = [new Property { Name = new Variable("Second"), Type = typeof(string) }];
+        Property[] existing = [new Property { Name = new Name("First"), Type = typeof(int) }];
+        Property[] additional = [new Property { Name = new Name("Second"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(properties: existing.ToImmutableArray());
 
         // Act
@@ -21,7 +22,7 @@ public sealed class WhenWithPropertiesIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Properties.ShouldBe(original.Properties.Concat(additional));
-        result.Name.ShouldBe(original.Name);
+        result.Declaration.ShouldBe(original.Declaration);
         original.Properties.ShouldBe(existing);
     }
 }

@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithConstraintsIsCalled
 {
@@ -15,7 +16,7 @@ public sealed class WhenWithConstraintsIsCalled
 
         var original = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = new Name(Name),
             Constraints = [originalConstraint],
         };
 

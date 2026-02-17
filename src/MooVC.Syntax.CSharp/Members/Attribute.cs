@@ -38,7 +38,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the arguments on the Attribute.
+        /// Gets the arguments on the Attribute.
         /// </summary>
         /// <value>The arguments.</value>
         public ImmutableArray<Argument> Arguments { get; internal set; } = ImmutableArray<Argument>.Empty;
@@ -51,14 +51,14 @@
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Gets or sets the name on the Attribute.
+        /// Gets the name on the Attribute.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Symbol Name { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Gets or sets the target on the Attribute.
+        /// Gets the target on the Attribute.
         /// </summary>
         /// <value>The target.</value>
         public Specifier Target { get; internal set; } = Specifier.None;

@@ -23,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        representation.ShouldContain("private set");
+        representation.ShouldContain("private init");
         representation.ShouldContain("get => value;");
     }
 
@@ -61,6 +61,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        representation.ShouldBe("get; set;");
+        representation.ShouldBe("get; init;");
     }
 }

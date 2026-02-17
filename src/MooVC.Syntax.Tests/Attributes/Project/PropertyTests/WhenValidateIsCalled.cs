@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
-        Property subject = PropertyTestsData.Create(name: Identifier.Unnamed);
+        Property subject = PropertyTestsData.Create(name: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

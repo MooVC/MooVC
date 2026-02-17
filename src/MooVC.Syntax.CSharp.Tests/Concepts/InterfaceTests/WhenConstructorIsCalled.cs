@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.CSharp.Operators;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -18,9 +19,9 @@ public sealed class WhenConstructorIsCalled
         subject.Attributes.ShouldBe([]);
         subject.Events.ShouldBe([]);
         subject.Indexers.ShouldBe([]);
-        subject.IsPartial.ShouldBeFalse();
+        subject.IsPartial.ShouldBeTrue();
         subject.Methods.ShouldBe([]);
-        subject.Name.ShouldBe(Declaration.Unspecified);
+        subject.Declaration.ShouldBe(Declaration.Unspecified);
         subject.Operators.ShouldBe(new Operators());
         subject.Properties.ShouldBe([]);
         subject.Scope.ShouldBe(Scope.Public);
@@ -32,10 +33,10 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = new Variable(AttributeName) } };
-        var @event = new Event { Name = new Variable("Created") };
+        var @event = new Event { Name = new Name("Created") };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Variable("Value"), Type = typeof(string) };
+        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
 
         // Act
         Interface subject = InterfaceTestsData.Create(
@@ -44,7 +45,7 @@ public sealed class WhenConstructorIsCalled
             indexers: [indexer],
             isPartial: true,
             methods: [method],
-            name: new Declaration { Name = new Variable(InterfaceTestsData.DefaultName) },
+            name: new Declaration { Name = InterfaceTestsData.DefaultName },
             operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
             properties: [property],
             scope: Scope.Internal);
@@ -55,7 +56,7 @@ public sealed class WhenConstructorIsCalled
         subject.Indexers.ShouldBe(new[] { indexer });
         subject.IsPartial.ShouldBeTrue();
         subject.Methods.ShouldBe(new[] { method });
-        subject.Name.ShouldBe(new Declaration { Name = new Variable(InterfaceTestsData.DefaultName) });
+        subject.Declaration.ShouldBe(new Declaration { Name = InterfaceTestsData.DefaultName });
         subject.Operators.Conversions.ShouldNotBeEmpty();
         subject.Properties.ShouldBe(new[] { property });
         subject.Scope.ShouldBe(Scope.Internal);

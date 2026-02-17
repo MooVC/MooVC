@@ -35,7 +35,7 @@
             }
 
             /// <summary>
-            /// Gets or sets the add on the Methods.
+            /// Gets the add on the Methods.
             /// </summary>
             /// <value>The add.</value>
             public Snippet Add { get; internal set; } = Snippet.Empty;
@@ -48,7 +48,7 @@
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the remove on the Methods.
+            /// Gets the remove on the Methods.
             /// </summary>
             /// <value>The remove.</value>
             public Snippet Remove { get; internal set; } = Snippet.Empty;

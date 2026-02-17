@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
-using Identifier = MooVC.Syntax.Elements.Identifier;
 
 internal static class ConstructorTestsData
 {
@@ -32,7 +31,7 @@ internal static class ConstructorTestsData
     {
         return new Class
         {
-            Name = new Declaration { Name = new Identifier(name ?? string.Empty) },
+            Declaration = new Declaration { Name = name ?? string.Empty },
         };
     }
 }

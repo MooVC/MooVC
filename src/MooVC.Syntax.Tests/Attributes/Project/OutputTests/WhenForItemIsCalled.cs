@@ -9,7 +9,7 @@ public sealed class WhenForItemIsCalled
     {
         // Arrange
         Output original = OutputTestsData.Create();
-        var updated = new Identifier("Other");
+        var updated = new Name("Other");
 
         // Act
         Output result = original.ForItem(updated);

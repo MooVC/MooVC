@@ -35,9 +35,10 @@ public sealed class WhenToSnippetIsCalled
         {
             Interfaces =
             [
-                new Declaration { Name = new Identifier(ConstraintInterfaceName) },
+                new Declaration { Name = ConstraintInterfaceName },
             ],
         };
+
         var genericParameter = new GenericParameter
         {
             Name = GenericName,
@@ -46,12 +47,13 @@ public sealed class WhenToSnippetIsCalled
                 constraint,
             ],
         };
+
         var subject = new Struct
         {
             Behavior = Struct.Kind.ReadOnly,
-            Name = new Declaration
+            Declaration = new Declaration
             {
-                Name = new Identifier(StructName),
+                Name = StructName,
                 Parameters =
                 [
                     genericParameter,
@@ -67,7 +69,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldContain($"{Struct.Kind.ReadOnly} struct {StructName}");
+        result.ShouldContain($"{Struct.Kind.ReadOnly} partial struct {StructName}");
         result.ShouldContain(ParameterName);
         result.ShouldContain("where");
     }

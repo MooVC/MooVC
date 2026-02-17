@@ -8,7 +8,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenDefaultArrayThenInstanceIsCreated()
     {
         // Arrange
-        ImmutableArray<Segment> value = default;
+        ImmutableArray<Name> value = default;
 
         // Act & Assert
         _ = Should.NotThrow(() => _ = new Qualifier(value));
@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
-        ImmutableArray<Segment> value = [];
+        ImmutableArray<Name> value = [];
 
         // Act & Assert
         _ = Should.NotThrow(() => _ = new Qualifier(value));
@@ -28,7 +28,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenSameSegmentsTwiceThenInstancesAreEqual()
     {
         // Arrange
-        ImmutableArray<Segment> value = ["First", "Second"];
+        ImmutableArray<Name> value = ["First", "Second"];
 
         // Act
         var first = new Qualifier(value);
@@ -44,8 +44,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
     {
         // Arrange
-        ImmutableArray<Segment> left = ["First"];
-        ImmutableArray<Segment> right = ["Second"];
+        ImmutableArray<Name> left = ["First"];
+        ImmutableArray<Name> right = ["Second"];
 
         // Act
         var first = new Qualifier(left);

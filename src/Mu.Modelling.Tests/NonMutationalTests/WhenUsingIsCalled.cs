@@ -11,7 +11,7 @@ public sealed class WhenUsingIsCalled
     {
         // Arrange
         NonMutational original = ModellingTestData.CreateNonMutational();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedViewValue);
+        Name updated = UpdatedViewValue;
 
         // Act
         NonMutational result = original.Using(updated);

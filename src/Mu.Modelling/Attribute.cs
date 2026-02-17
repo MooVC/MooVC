@@ -2,12 +2,10 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Ardalis.GuardClauses;
 using Fluentify;
 using Graphify;
 using MooVC.Syntax;
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
@@ -30,7 +28,7 @@ public sealed partial class Attribute
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Descriptor("OfType")]
     [Traverse(Scope = TraverseScope.Property)]

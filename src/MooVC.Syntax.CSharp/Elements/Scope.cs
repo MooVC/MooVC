@@ -175,6 +175,21 @@
             return _value;
         }
 
+        /// <summary>
+        /// Returns the string representation of the Scope.
+        /// </summary>
+        /// <param name="implied">The implied scope.</param>
+        /// <returns>The string representation of the scope, or string.Empty if the instance matches the implied.</returns>
+        public string ToString(Scope implied)
+        {
+            if (this == implied)
+            {
+                return string.Empty;
+            }
+
+            return _value;
+        }
+
         private static int GetAccessibilityRank(string value)
         {
             switch (value)

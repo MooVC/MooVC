@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Output left = OutputTestsData.Create();
-        Output right = OutputTestsData.Create(itemName: new Identifier("Other"));
+        Output right = OutputTestsData.Create(itemName: new Name("Other"));
 
         // Act
         int leftHash = left.GetHashCode();

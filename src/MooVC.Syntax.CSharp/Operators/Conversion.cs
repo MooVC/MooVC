@@ -36,13 +36,13 @@
         }
 
         /// <summary>
-        /// Gets or sets the body on the Conversion.
+        /// Gets the body on the Conversion.
         /// </summary>
         /// <value>The body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets or sets the direction on the Conversion.
+        /// Gets the direction on the Conversion.
         /// </summary>
         /// <value>The direction.</value>
         public Intent Direction { get; internal set; } = Intent.To;
@@ -55,19 +55,19 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the mode on the Conversion.
+        /// Gets the mode on the Conversion.
         /// </summary>
         /// <value>The mode.</value>
         public Type Mode { get; internal set; } = Type.Implicit;
 
         /// <summary>
-        /// Gets or sets the scope on the Conversion.
+        /// Gets the scope on the Conversion.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
-        /// Gets or sets the target for the Conversion.
+        /// Gets the target for the Conversion.
         /// </summary>
         /// <value>The target for conversion.</value>
         [Descriptor("ForType")]
@@ -104,7 +104,7 @@
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Conversion)));
 
-            return ToSnippet(type.Name, options);
+            return ToSnippet(type.Declaration, options);
         }
 
         /// <summary>

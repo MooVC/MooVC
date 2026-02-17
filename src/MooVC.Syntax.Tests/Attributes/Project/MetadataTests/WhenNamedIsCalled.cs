@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        var updated = new Identifier("Other");
+        var updated = new Name("Other");
 
         // Act
         Metadata result = original.Named(updated);

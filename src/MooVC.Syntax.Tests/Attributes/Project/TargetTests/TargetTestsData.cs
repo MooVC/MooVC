@@ -24,7 +24,7 @@ internal static class TargetTestsData
         Snippet? inputs = default,
         bool keepDuplicateOutputs = false,
         Snippet? label = default,
-        Identifier? name = default,
+        Name? name = default,
         Snippet? outputs = default,
         Snippet? returns = default,
         TargetTask? task = default)
@@ -38,7 +38,7 @@ internal static class TargetTestsData
             Inputs = inputs ?? Snippet.From(DefaultInputs),
             KeepDuplicateOutputs = keepDuplicateOutputs,
             Label = label ?? Snippet.From(DefaultLabel),
-            Name = name ?? new Identifier(DefaultName),
+            Name = name ?? DefaultName,
             Outputs = outputs ?? Snippet.From(DefaultOutputs),
             Returns = returns ?? Snippet.From(DefaultReturns),
         };
@@ -56,7 +56,7 @@ internal static class TargetTestsData
         return new TargetTask
         {
             Condition = Snippet.From(DefaultTaskCondition),
-            Name = new Identifier(DefaultTaskName),
+            Name = DefaultTaskName,
         };
     }
 }

@@ -11,7 +11,7 @@ public sealed class WhenForIsCalled
     {
         // Arrange
         Model original = ModellingTestData.CreateModel();
-        Identifier updated = ModellingTestData.CreateIdentifier(UpdatedCompanyValue);
+        var updated = new Name(UpdatedCompanyValue);
 
         // Act
         Model result = original.For(updated);

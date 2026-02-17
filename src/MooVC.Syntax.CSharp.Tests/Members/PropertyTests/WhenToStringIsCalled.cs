@@ -37,7 +37,7 @@ public sealed class WhenToStringIsCalled
             public string Value
             {
                 get => value;
-                set => _value = value;
+                init => _value = value;
             }
             """;
 

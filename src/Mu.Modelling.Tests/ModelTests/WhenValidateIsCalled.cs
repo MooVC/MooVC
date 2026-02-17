@@ -27,7 +27,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
-        Model subject = Model.Undefined.For(ModellingTestData.CreateIdentifier(CompanyNameValue));
+        Model subject = Model.Undefined.For(CompanyNameValue);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

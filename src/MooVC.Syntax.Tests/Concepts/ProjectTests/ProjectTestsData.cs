@@ -91,7 +91,7 @@ internal static class ProjectTestsData
     {
         return new PropertyGroup
         {
-            Properties = [new Property { Name = new Identifier(DefaultPropertyName), Value = Snippet.From(DefaultPropertyValue) }],
+            Properties = [new Property { Name = DefaultPropertyName, Value = Snippet.From(DefaultPropertyValue) }],
         };
     }
 
@@ -117,7 +117,7 @@ internal static class ProjectTestsData
     {
         return new Target
         {
-            Name = new Identifier(DefaultTargetName),
+            Name = DefaultTargetName,
         };
     }
 }

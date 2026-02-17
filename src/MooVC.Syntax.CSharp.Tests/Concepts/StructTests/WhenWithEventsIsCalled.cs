@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenWithEventsIsCalled
 {
@@ -9,7 +10,7 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var @event = new Event { Name = new Variable("Changed") };
+        var @event = new Event { Name = new Name("Changed") };
         Struct original = StructTestsData.Create();
 
         // Act

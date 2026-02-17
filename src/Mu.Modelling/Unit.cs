@@ -18,10 +18,10 @@ public sealed partial class Unit
 
     [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
-    public ImmutableArray<Attribute> Attributes { get; internal init; } = ImmutableArray<Attribute>.Empty;
+    public ImmutableArray<Attribute> Attributes { get; internal init; } = [];
 
     [Descriptor("Featuring")]
-    public ImmutableArray<Feature> Features { get; internal init; } = ImmutableArray<Feature>.Empty;
+    public ImmutableArray<Feature> Features { get; internal init; } = [];
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
@@ -29,10 +29,10 @@ public sealed partial class Unit
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Descriptor("SeenAs")]
-    public ImmutableArray<View> Views { get; internal init; } = ImmutableArray<View>.Empty;
+    public ImmutableArray<View> Views { get; internal init; } = [];
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

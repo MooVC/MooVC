@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
         subject.Behaviours.ShouldBe(Property.Methods.Default);
         subject.Default.ShouldBe(Snippet.Empty);
         subject.IsUndefined.ShouldBeTrue();
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Scope.ShouldBe(Scope.Public);
         subject.Type.ShouldBe(Symbol.Undefined);
     }
@@ -44,7 +44,7 @@ public sealed class WhenConstructorIsCalled
         {
             Behaviours = behaviours,
             Default = Snippet.From(DefaultValue),
-            Name = new Identifier(PropertyName),
+            Name = PropertyName,
             Scope = Scope.Internal,
             Type = new Symbol { Name = new Identifier(PropertyType) },
         };
@@ -53,7 +53,7 @@ public sealed class WhenConstructorIsCalled
         subject.Behaviours.ShouldBe(behaviours);
         subject.Default.ShouldBe(Snippet.From(DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
-        subject.Name.ShouldBe(new Identifier(PropertyName));
+        subject.Name.ShouldBe(new Name(PropertyName));
         subject.Scope.ShouldBe(Scope.Internal);
         subject.Type.ShouldBe(new Symbol { Name = new Identifier(PropertyType) });
     }

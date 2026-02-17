@@ -13,7 +13,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Condition.ShouldBe(Snippet.Empty);
         subject.ContinueOnError.ShouldBe(TargetTask.Options.ErrorAndStop);
-        subject.Name.ShouldBe(Identifier.Unnamed);
+        subject.Name.ShouldBe(Name.Unnamed);
         subject.Outputs.ShouldBeEmpty();
         subject.Parameters.ShouldBeEmpty();
         subject.IsUndefined.ShouldBeTrue();
@@ -31,7 +31,7 @@ public sealed class WhenConstructorIsCalled
         {
             Condition = Snippet.From(TargetTaskTestsData.DefaultCondition),
             ContinueOnError = TargetTask.Options.WarnAndContinue,
-            Name = new Identifier(TargetTaskTestsData.DefaultName),
+            Name = TargetTaskTestsData.DefaultName,
             Outputs = [output],
             Parameters = [parameter],
         };
@@ -39,7 +39,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         subject.Condition.ShouldBe(Snippet.From(TargetTaskTestsData.DefaultCondition));
         subject.ContinueOnError.ShouldBe(TargetTask.Options.WarnAndContinue);
-        subject.Name.ShouldBe(new Identifier(TargetTaskTestsData.DefaultName));
+        subject.Name.ShouldBe(new Name(TargetTaskTestsData.DefaultName));
         subject.Outputs.ShouldBe(new[] { output });
         subject.Parameters.ShouldBe(new[] { parameter });
         subject.IsUndefined.ShouldBeFalse();

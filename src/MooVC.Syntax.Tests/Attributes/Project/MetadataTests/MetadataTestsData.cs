@@ -8,12 +8,12 @@ internal static class MetadataTestsData
     public const string DefaultName = "Metadata";
     public const string DefaultValue = "Value";
 
-    public static Metadata Create(Snippet? condition = default, Identifier? name = default, Snippet? value = default)
+    public static Metadata Create(Snippet? condition = default, Name? name = default, Snippet? value = default)
     {
         return new Metadata
         {
             Condition = condition ?? Snippet.From(DefaultCondition),
-            Name = name ?? new Identifier(DefaultName),
+            Name = name ?? DefaultName,
             Value = value ?? Snippet.From(DefaultValue),
         };
     }

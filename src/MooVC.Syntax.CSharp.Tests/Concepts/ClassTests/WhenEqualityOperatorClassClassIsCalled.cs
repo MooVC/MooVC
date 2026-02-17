@@ -82,7 +82,7 @@ public sealed class WhenEqualityOperatorClassClassIsCalled
     {
         // Arrange
         Class left = ClassTestsData.Create();
-        Class right = ClassTestsData.Create(name: new Declaration { Name = new Variable("Other") });
+        Class right = ClassTestsData.Create(name: new Declaration { Name = "Other" });
 
         // Act
         bool result = left == right;

@@ -28,7 +28,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUndefinedMutationalThenValidationErrorReturned()
     {
         // Arrange
-        Feature subject = Feature.Undefined.Named(new Identifier(FeatureNameValue));
+        Feature subject = Feature.Undefined.Named(FeatureNameValue);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

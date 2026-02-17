@@ -2,14 +2,14 @@ namespace MooVC.Syntax.Elements.QualifierTests;
 
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
-    private static readonly Segment alpha = new("Alpha");
-    private static readonly Segment beta = new("Beta");
+    private static readonly Name alpha = new("Alpha");
+    private static readonly Name beta = new("Beta");
 
     [Fact]
     public void GivenNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Segment[]? values = default;
+        Name[]? values = default;
 
         // Act
         Func<Qualifier> result = () => values;
@@ -22,14 +22,14 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
-        Segment[] values = [];
+        Name[] values = [];
 
         // Act
         Qualifier subject = values;
 
         // Assert
         _ = subject.ShouldNotBeNull();
-        Segment[] result = subject;
+        Name[] result = subject;
         result.ShouldBe(values);
     }
 
@@ -37,11 +37,11 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     public void GivenSegmentsThenRoundTripsSuccessfully()
     {
         // Arrange
-        Segment[] values = [alpha, beta];
+        Name[] values = [alpha, beta];
 
         // Act
         Qualifier subject = values;
-        Segment[] result = subject;
+        Name[] result = subject;
 
         // Assert
         result.ShouldBe(values);
@@ -51,7 +51,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        Segment[] values = [alpha, beta];
+        Name[] values = [alpha, beta];
 
         // Act
         Qualifier first = values;

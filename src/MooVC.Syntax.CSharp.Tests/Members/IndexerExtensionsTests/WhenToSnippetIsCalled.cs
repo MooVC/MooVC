@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = indexers.ToSnippet(Snippet.Options.Default);
+        var snippet = indexers.ToSnippet(Indexer.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -30,7 +30,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Indexer> indexers = [IndexerTestsData.Create()];
-        Snippet.Options? options = default;
+        Indexer.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = indexers.ToSnippet(options!));
@@ -84,8 +84,10 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Indexer.Options options = Indexer.Options.Default
+            .WithSnippets(snippet => snippet
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         var snippet = indexers.ToSnippet(options);

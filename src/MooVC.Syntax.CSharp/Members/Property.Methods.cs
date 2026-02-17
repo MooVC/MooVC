@@ -36,7 +36,7 @@ namespace MooVC.Syntax.CSharp.Members
             }
 
             /// <summary>
-            /// Gets or sets the get on the Methods.
+            /// Gets the get on the Methods.
             /// </summary>
             /// <value>The get.</value>
             public Snippet Get { get; internal set; } = Snippet.Empty;
@@ -49,7 +49,7 @@ namespace MooVC.Syntax.CSharp.Members
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets or sets the set on the Methods.
+            /// Gets the set on the Methods.
             /// </summary>
             /// <value>The set.</value>
             public Setter Set { get; internal set; } = Setter.Default;

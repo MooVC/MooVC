@@ -37,19 +37,19 @@
         }
 
         /// <summary>
-        /// Gets or sets the binaries on the Operators.
+        /// Gets the binaries on the Operators.
         /// </summary>
         /// <value>The binaries.</value>
         public ImmutableArray<Binary> Binaries { get; internal set; } = ImmutableArray<Binary>.Empty;
 
         /// <summary>
-        /// Gets or sets the comparisons on the Operators.
+        /// Gets the comparisons on the Operators.
         /// </summary>
         /// <value>The comparisons.</value>
         public ImmutableArray<Comparison> Comparisons { get; internal set; } = ImmutableArray<Comparison>.Empty;
 
         /// <summary>
-        /// Gets or sets the conversions on the Operators.
+        /// Gets the conversions on the Operators.
         /// </summary>
         /// <value>The conversions.</value>
         public ImmutableArray<Conversion> Conversions { get; internal set; } = ImmutableArray<Conversion>.Empty;

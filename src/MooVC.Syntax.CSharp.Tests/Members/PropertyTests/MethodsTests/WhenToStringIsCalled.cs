@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         representation.ShouldContain("get");
-        representation.ShouldContain("set");
+        representation.ShouldContain("init");
     }
 
     [Fact]

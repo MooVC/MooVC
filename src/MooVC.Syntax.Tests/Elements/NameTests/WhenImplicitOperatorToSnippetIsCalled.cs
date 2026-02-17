@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Segment? subject = default;
+        Name? subject = default;
 
         // Act
         Func<Snippet> result = () => subject;
@@ -21,7 +21,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public void GivenSegmentThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        Segment subject = Value;
+        Name subject = Value;
 
         // Act
         Snippet result = subject;

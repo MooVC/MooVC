@@ -13,7 +13,7 @@ public sealed class WhenWithMetadataIsCalled
 
         var additional = new Metadata
         {
-            Name = new Identifier("Other"),
+            Name = new Name("Other"),
             Value = Snippet.From("Value"),
         };
 

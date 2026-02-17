@@ -100,7 +100,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Name = new Identifier(Name),
-            Qualifier = new Segment[] { Segment.Empty },
+            Qualifier = new Name[] { "invalid" },
         };
 
         var context = new ValidationContext(symbol);
@@ -112,7 +112,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain($"{nameof(Symbol.Qualifier)}[0]");
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

@@ -10,7 +10,6 @@
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Comparison_Resources;
     using Concept = MooVC.Syntax.CSharp.Concepts.Type;
-    using Identifier = MooVC.Syntax.Elements.Identifier;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -35,7 +34,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the body on the Comparison.
+        /// Gets the body on the Comparison.
         /// </summary>
         /// <value>The body.</value>
         public Snippet Body { get; internal set; } = Snippet.Empty;
@@ -48,13 +47,13 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets or sets the operator on the Comparison.
+        /// Gets the operator on the Comparison.
         /// </summary>
         /// <value>The operator.</value>
         public Type Operator { get; internal set; } = Type.Unspecified;
 
         /// <summary>
-        /// Gets or sets the scope on the Comparison.
+        /// Gets the scope on the Comparison.
         /// </summary>
         /// <value>The scope.</value>
         public Scope Scope { get; internal set; } = Scope.Public;
@@ -90,7 +89,7 @@
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Comparison)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Comparison)));
 
-            return ToSnippet(type.Name, options);
+            return ToSnippet(type.Declaration, options);
         }
 
         /// <summary>
@@ -116,7 +115,7 @@
 
             string @operator = Operator;
             string scope = Scope;
-            var type = declaration.Name.ToSnippet(Identifier.Options.Pascal);
+            var type = declaration.ToSnippet(options);
             var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);

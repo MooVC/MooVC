@@ -51,7 +51,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        object other = StructTestsData.Create(name: new Declaration { Name = new Variable("Other") });
+        object other = StructTestsData.Create(name: new Declaration { Name = "Other" });
         Struct subject = StructTestsData.Create();
 
         // Act

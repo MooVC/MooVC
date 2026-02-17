@@ -27,7 +27,7 @@ public sealed partial class Feature
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Hide]
     [Traverse(Scope = TraverseScope.Property)]

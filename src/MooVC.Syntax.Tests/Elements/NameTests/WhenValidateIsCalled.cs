@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -18,7 +18,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(default);
+        var subject = new Name(default);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -28,7 +28,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(Empty);
+        var subject = new Name(Empty);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -52,7 +52,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(Pascal);
+        var subject = new Name(Pascal);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -68,7 +68,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithPrefixThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(WithPrefix);
+        var subject = new Name(WithPrefix);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -84,7 +84,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithUnderscoreThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(UpperWithUnderscore);
+        var subject = new Name(UpperWithUnderscore);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -100,7 +100,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(UpperWithDigits);
+        var subject = new Name(UpperWithDigits);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -116,7 +116,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(UnicodePascal);
+        var subject = new Name(UnicodePascal);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -126,7 +126,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -134,7 +134,7 @@ public sealed class WhenValidateIsCalled
     public void GivenLowercaseThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Segment(Lowercase);
+        var subject = new Name(Lowercase);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -144,7 +144,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -152,7 +152,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithHyphenThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Segment(WithHyphen);
+        var subject = new Name(WithHyphen);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -162,7 +162,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -170,7 +170,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Segment(Numeric);
+        var subject = new Name(Numeric);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -180,7 +180,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -193,7 +193,7 @@ public sealed class WhenValidateIsCalled
     public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange
-        var subject = new Segment(value);
+        var subject = new Name(value);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -203,7 +203,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Segment));
+        results[0].MemberNames.ShouldContain(nameof(Name));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 }

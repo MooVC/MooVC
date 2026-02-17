@@ -16,7 +16,7 @@
         /// <param name="indexers">The indexers.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Indexer> indexers, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Indexer> indexers, Indexer.Options options)
         {
             if (indexers.IsDefaultOrEmpty)
             {
@@ -31,7 +31,7 @@
                 .Select(indexer => indexer.ToSnippet(options))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options, content);
+            return Snippet.Blank.Combine(options.Snippets, content);
         }
     }
 }

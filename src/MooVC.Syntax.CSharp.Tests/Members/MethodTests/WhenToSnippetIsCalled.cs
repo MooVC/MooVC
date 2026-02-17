@@ -13,9 +13,10 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -30,9 +31,10 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-            .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -47,8 +49,10 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -74,8 +78,10 @@ public sealed class WhenToSnippetIsCalled
                 .As(typeof(Task))
                 .WithMode(Result.Modality.Asynchronous));
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -116,7 +122,7 @@ public sealed class WhenToSnippetIsCalled
         Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default);
+        string representation = subject.ToSnippet(Method.Options.Default);
 
         // Assert
         representation.ShouldContain("Perform<T>");

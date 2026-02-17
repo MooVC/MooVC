@@ -37,7 +37,7 @@ public sealed class WhenEqualsMetadataIsCalled
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
-        Metadata other = MetadataTestsData.Create(name: new Identifier("Other"));
+        Metadata other = MetadataTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = subject.Equals(other);

@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         TargetTask left = TargetTaskTestsData.Create();
-        TargetTask right = TargetTaskTestsData.Create(name: new Identifier("Other"));
+        TargetTask right = TargetTaskTestsData.Create(name: new Name("Other"));
 
         // Act
         int leftHash = left.GetHashCode();

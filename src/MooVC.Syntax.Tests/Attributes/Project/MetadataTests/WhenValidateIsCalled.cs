@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
-        Metadata subject = MetadataTestsData.Create(name: Identifier.Unnamed);
+        Metadata subject = MetadataTestsData.Create(name: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

@@ -16,7 +16,7 @@ internal static class TargetTaskTestsData
     public static TargetTask Create(
         Snippet? condition = default,
         TargetTask.Options? continueOnError = default,
-        Identifier? name = default,
+        Name? name = default,
         Output? output = default,
         Parameter? parameter = default)
     {
@@ -24,7 +24,7 @@ internal static class TargetTaskTestsData
         {
             Condition = condition ?? Snippet.From(DefaultCondition),
             ContinueOnError = continueOnError ?? TargetTask.Options.ErrorAndStop,
-            Name = name ?? new Identifier(DefaultName),
+            Name = name ?? DefaultName,
         };
 
         if (output is not null)
@@ -45,9 +45,9 @@ internal static class TargetTaskTestsData
         return new Output
         {
             Condition = Snippet.From(DefaultOutputCondition),
-            ItemName = new Identifier(DefaultOutputItemName),
-            PropertyName = new Identifier(DefaultOutputPropertyName),
-            TaskParameter = new Identifier(DefaultOutputTaskParameter),
+            ItemName = DefaultOutputItemName,
+            PropertyName = DefaultOutputPropertyName,
+            TaskParameter = DefaultOutputTaskParameter,
         };
     }
 
@@ -55,7 +55,7 @@ internal static class TargetTaskTestsData
     {
         return new Parameter
         {
-            Name = new Identifier(DefaultParameterName),
+            Name = DefaultParameterName,
             Value = Snippet.From(DefaultParameterValue),
         };
     }

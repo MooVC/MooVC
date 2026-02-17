@@ -31,15 +31,15 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
+    <Compile Update="Concepts\Definition.Resources.Designer.cs">
+      <DependentUpon>Definition.Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Concepts\Type.Resources.Designer.cs">
       <DependentUpon>Type.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Concepts\Definition.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Definition.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Concepts\Reference.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -173,13 +173,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Concepts\Definition.Resources.resx">
+      <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Concepts\Type.Resources.resx">
       <LastGenOutput>Type.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Concepts\Definition.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Concepts\Reference.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

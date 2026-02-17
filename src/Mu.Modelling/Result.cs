@@ -23,7 +23,7 @@ public sealed partial class Result
 
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier Name { get; internal init; } = Identifier.Unnamed;
+    public Name Name { get; internal init; } = Name.Unnamed;
 
     [Descriptor("OfType")]
     [Traverse(Scope = TraverseScope.Property)]

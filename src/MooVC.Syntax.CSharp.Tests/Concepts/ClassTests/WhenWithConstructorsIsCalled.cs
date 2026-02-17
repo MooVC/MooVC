@@ -29,7 +29,7 @@ public sealed class WhenWithConstructorsIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Constructors.ShouldBe(original.Constructors.Concat(additional));
-        result.Name.ShouldBe(original.Name);
+        result.Declaration.ShouldBe(original.Declaration);
         original.Constructors.ShouldBe(existing);
     }
 }

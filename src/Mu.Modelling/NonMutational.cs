@@ -23,7 +23,7 @@ public sealed partial class NonMutational
 
     [Descriptor("Using")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Identifier View { get; internal init; } = Identifier.Unnamed;
+    public Name View { get; internal init; } = Name.Unnamed;
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]

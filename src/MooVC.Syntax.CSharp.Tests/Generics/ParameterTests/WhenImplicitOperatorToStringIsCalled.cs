@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Name = "TParameter";
@@ -23,7 +25,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Parameter
         {
-            Name = new Identifier(Name),
+            Name = new Name(Name),
         };
 
         // Act

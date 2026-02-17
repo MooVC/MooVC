@@ -11,8 +11,8 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Identifier(ModelNameValue);
-        var company = new Identifier(CompanyNameValue);
+        var name = new Name(ModelNameValue);
+        var company = new Name(CompanyNameValue);
         Model subject = ModellingTestData.CreateModel(company: company, name: name);
 
         // Act

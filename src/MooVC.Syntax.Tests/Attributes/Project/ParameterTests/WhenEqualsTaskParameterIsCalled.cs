@@ -37,7 +37,7 @@ public sealed class WhenEqualsTaskParameterIsCalled
     {
         // Arrange
         Parameter subject = ParameterTestsData.Create();
-        Parameter other = ParameterTestsData.Create(name: new Identifier("Other"));
+        Parameter other = ParameterTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = subject.Equals(other);

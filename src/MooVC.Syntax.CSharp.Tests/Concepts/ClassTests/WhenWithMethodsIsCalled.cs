@@ -20,7 +20,7 @@ public sealed class WhenWithMethodsIsCalled
         // Assert
         result.ShouldNotBeSameAs(original);
         result.Methods.ShouldBe(original.Methods.Concat(additional));
-        result.Name.ShouldBe(original.Name);
+        result.Declaration.ShouldBe(original.Declaration);
         original.Methods.ShouldBe(existing);
     }
 }

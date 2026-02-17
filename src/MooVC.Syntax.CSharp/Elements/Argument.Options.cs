@@ -35,21 +35,21 @@
             };
 
             /// <summary>
-            /// Gets or sets the formatter on the Options.
+            /// Gets the formatter on the Options.
             /// </summary>
             /// <value>The formatter.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsFormatterRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Formatter Formatter { get; set; } = Formatter.Call;
 
             /// <summary>
-            /// Gets or sets the naming on the Options.
+            /// Gets the naming on the Options.
             /// </summary>
             /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Variable.Options Naming { get; set; } = Variable.Options.Camel;
 
             /// <summary>
-            /// Gets or sets the snippet on the Options.
+            /// Gets the snippet on the Options.
             /// </summary>
             /// <value>The snippet.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]

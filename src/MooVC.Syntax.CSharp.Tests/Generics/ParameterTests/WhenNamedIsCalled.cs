@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled
 {
@@ -16,7 +17,7 @@ public sealed class WhenNamedIsCalled
 
         var original = new Parameter
         {
-            Name = new Identifier(DefaultName),
+            Name = new Name(DefaultName),
             Constraints = [constraint],
         };
 
@@ -25,8 +26,8 @@ public sealed class WhenNamedIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Identifier(NewName));
+        result.Name.ShouldBe(new Name(NewName));
         result.Constraints.ShouldBe(original.Constraints);
-        original.Name.ShouldBe(new Identifier(DefaultName));
+        original.Name.ShouldBe(new Name(DefaultName));
     }
 }

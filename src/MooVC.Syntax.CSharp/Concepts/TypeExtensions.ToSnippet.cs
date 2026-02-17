@@ -25,7 +25,7 @@
             }
 
             Snippet[] content = types
-                .OrderBy(type => type.Name)
+                .OrderBy(type => type.Declaration)
                 .Select(type => type.ToSnippet(options))
                 .ToArray();
 

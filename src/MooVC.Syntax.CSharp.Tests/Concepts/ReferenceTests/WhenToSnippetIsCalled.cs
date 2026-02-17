@@ -21,7 +21,7 @@ public sealed class WhenToSnippetIsCalled
         {
             Interfaces =
             [
-                new Declaration { Name = new Identifier(ConstraintInterfaceName) },
+                new Declaration { Name = ConstraintInterfaceName },
             ],
         };
 
@@ -37,9 +37,9 @@ public sealed class WhenToSnippetIsCalled
         var subject = new TestReference
         {
             IsUndefinedValue = false,
-            Name = new Declaration
+            Declaration = new Declaration
             {
-                Name = new Identifier(TypeName),
+                Name = TypeName,
                 Parameters =
                 [
                     genericParameter,

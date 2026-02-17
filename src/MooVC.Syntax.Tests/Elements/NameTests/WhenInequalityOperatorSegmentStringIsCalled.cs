@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SegmentTests;
+namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenInequalityOperatorSegmentStringIsCalled
 {
@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Segment? left = default;
+        Name? left = default;
         string? right = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Segment? left = default;
+        Name? left = default;
         string right = Same;
 
         // Act
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Segment(Same);
+        var left = new Name(Same);
         string? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Segment(Same);
+        var left = new Name(Same);
         string right = Same;
 
         // Act
@@ -65,7 +65,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Segment(Same);
+        var left = new Name(Same);
         string right = Different;
 
         // Act

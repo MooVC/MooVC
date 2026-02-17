@@ -18,7 +18,7 @@ public sealed class WhenValidateIsCalled
         {
             IsUndefinedValue = false,
             Extensibility = Extensibility.Static,
-            Name = new Declaration { Name = new Variable(TypeName) },
+            Declaration = new Declaration { Name = TypeName },
         };
         var validationContext = new ValidationContext(subject);
 

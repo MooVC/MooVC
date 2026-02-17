@@ -52,20 +52,20 @@ namespace MooVC.Syntax.Attributes.Project
         /// </summary>
         /// <value>The item name.</value>
         [Descriptor("ForItem")]
-        public Identifier ItemName { get; internal set; } = Identifier.Unnamed;
+        public Name ItemName { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the property name on the TaskOutput.
         /// </summary>
         /// <value>The property name.</value>
         [Descriptor("ForProperty")]
-        public Identifier PropertyName { get; internal set; } = Identifier.Unnamed;
+        public Name PropertyName { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Gets the task parameter on the TaskOutput.
         /// </summary>
         /// <value>The task parameter.</value>
-        public Identifier TaskParameter { get; internal set; } = Identifier.Unnamed;
+        public Name TaskParameter { get; internal set; } = Name.Unnamed;
 
         /// <summary>
         /// Performs the to fragments operation for the MSBuild project attribute.
