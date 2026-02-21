@@ -28,18 +28,18 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Item
         {
-            Id = ItemTestsData.DefaultId,
-            Name = ItemTestsData.DefaultName,
-            Path = ItemTestsData.DefaultPath,
-            Type = ItemTestsData.DefaultType,
+            Id = Snippet.From(ItemTestsData.DefaultId),
+            Name = Snippet.From(ItemTestsData.DefaultName),
+            Path = Snippet.From(ItemTestsData.DefaultPath),
+            Type = Snippet.From(ItemTestsData.DefaultType),
             Items = [child],
         };
 
         // Assert
-        subject.Id.ShouldBe(ItemTestsData.DefaultId);
-        subject.Name.ShouldBe(ItemTestsData.DefaultName);
-        subject.Path.ShouldBe(ItemTestsData.DefaultPath);
-        subject.Type.ShouldBe(ItemTestsData.DefaultType);
+        subject.Id.ShouldBe(Snippet.From(ItemTestsData.DefaultId));
+        subject.Name.ShouldBe(Snippet.From(ItemTestsData.DefaultName));
+        subject.Path.ShouldBe(Snippet.From(ItemTestsData.DefaultPath));
+        subject.Type.ShouldBe(Snippet.From(ItemTestsData.DefaultType));
         subject.Items.ShouldBe(new[] { child });
         subject.IsUndefined.ShouldBeFalse();
     }

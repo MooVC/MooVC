@@ -31,12 +31,12 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Parameter
         {
-            Name = ParameterName,
+            Name = new Name(ParameterName),
             Constraints = [constraint],
         };
 
         // Assert
-        subject.Name.ShouldBe(ParameterName);
+        subject.Name.ShouldBe(new Name(ParameterName));
         subject.Constraints.ShouldBe(new[] { constraint });
     }
 }

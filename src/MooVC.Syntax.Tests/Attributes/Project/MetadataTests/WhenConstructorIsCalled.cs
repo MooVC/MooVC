@@ -23,15 +23,15 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Metadata
         {
-            Condition = MetadataTestsData.DefaultCondition,
+            Condition = Snippet.From(MetadataTestsData.DefaultCondition),
             Name = MetadataTestsData.DefaultName,
-            Value = MetadataTestsData.DefaultValue,
+            Value = Snippet.From(MetadataTestsData.DefaultValue),
         };
 
         // Assert
-        subject.Condition.ShouldBe(MetadataTestsData.DefaultCondition);
-        subject.Name.ShouldBe(MetadataTestsData.DefaultName);
-        subject.Value.ShouldBe(MetadataTestsData.DefaultValue);
+        subject.Condition.ShouldBe(Snippet.From(MetadataTestsData.DefaultCondition));
+        subject.Name.ShouldBe(new Name(MetadataTestsData.DefaultName));
+        subject.Value.ShouldBe(Snippet.From(MetadataTestsData.DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
     }
 }

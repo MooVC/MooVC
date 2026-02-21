@@ -17,7 +17,7 @@ public sealed class WhenNamedIsCalled
 
         var original = new Parameter
         {
-            Name = DefaultName,
+            Name = new Name(DefaultName),
             Constraints = [constraint],
         };
 
@@ -26,8 +26,8 @@ public sealed class WhenNamedIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(NewName);
+        result.Name.ShouldBe(new Name(NewName));
         result.Constraints.ShouldBe(original.Constraints);
-        original.Name.ShouldBe(DefaultName);
+        original.Name.ShouldBe(new Name(DefaultName));
     }
 }

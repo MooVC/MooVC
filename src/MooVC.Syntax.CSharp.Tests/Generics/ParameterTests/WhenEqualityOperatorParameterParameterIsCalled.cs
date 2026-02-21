@@ -113,7 +113,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     {
         return new Parameter
         {
-            Name = name,
+            Name = new Name(name),
             Constraints = constraint is null
                 ? [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }]
                 : [constraint],

@@ -50,7 +50,7 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Method
         {
-            Body = body,
+            Body = Snippet.From(body),
             Name = new Declaration { Name = MethodTestsData.DefaultName },
             Parameters = parameters,
             Result = result,
@@ -58,7 +58,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Body.ShouldBe(body);
+        subject.Body.ShouldBe(Snippet.From(body));
         subject.IsUndefined.ShouldBeFalse();
         subject.Name.ShouldBe(new Declaration { Name = MethodTestsData.DefaultName });
         subject.Parameters.ShouldBe(parameters);

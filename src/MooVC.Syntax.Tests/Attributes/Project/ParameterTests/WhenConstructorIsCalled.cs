@@ -23,12 +23,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Parameter
         {
             Name = ParameterTestsData.DefaultName,
-            Value = ParameterTestsData.DefaultValue,
+            Value = Snippet.From(ParameterTestsData.DefaultValue),
         };
 
         // Assert
-        subject.Name.ShouldBe(ParameterTestsData.DefaultName);
-        subject.Value.ShouldBe(ParameterTestsData.DefaultValue);
+        subject.Name.ShouldBe(new Name(ParameterTestsData.DefaultName));
+        subject.Value.ShouldBe(Snippet.From(ParameterTestsData.DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
     }
 }

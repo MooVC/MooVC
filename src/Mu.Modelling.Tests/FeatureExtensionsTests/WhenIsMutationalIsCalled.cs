@@ -11,16 +11,16 @@ public sealed class WhenIsMutationalIsCalled
     public void GivenBuilderThenFeatureIsMutational()
     {
         // Arrange
-        Feature original = Feature.Undefined.Named(FeatureNameValue);
+        Feature original = Feature.Undefined.Named(new Name(FeatureNameValue));
 
         // Act
         Feature result = original.IsMutational(mutational => mutational
             .IsCreational()
-            .Yields(RegisteredFactValue));
+            .Yields(new Name(RegisteredFactValue)));
 
         // Assert
         result.Type.ShouldBe(Feature.Kind.Mutational);
-        result.Mutational.Fact.ShouldBe(RegisteredFactValue);
+        result.Mutational.Fact.ShouldBe(new Name(RegisteredFactValue));
         result.NonMutational.ShouldBe(NonMutational.Undefined);
     }
 }

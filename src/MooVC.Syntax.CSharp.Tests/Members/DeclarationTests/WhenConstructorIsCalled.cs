@@ -33,7 +33,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(DeclarationTestsData.DefaultName);
+        subject.Name.ShouldBe(new Name(DeclarationTestsData.DefaultName));
         subject.Parameters.ShouldBe(new[] { parameter });
         subject.IsUnspecified.ShouldBeFalse();
     }

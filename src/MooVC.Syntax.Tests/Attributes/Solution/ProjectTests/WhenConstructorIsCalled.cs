@@ -33,7 +33,7 @@ public sealed class WhenConstructorIsCalled
             Id = ProjectTestsData.DefaultId,
             DisplayName = new Project.Name(ProjectTestsData.DefaultName),
             Path = new Project.RelativePath(ProjectTestsData.DefaultPath),
-            Type = ProjectTestsData.DefaultType,
+            Type = Snippet.From(ProjectTestsData.DefaultType),
             Builds = [build],
             Platforms = [platform],
         };
@@ -42,7 +42,7 @@ public sealed class WhenConstructorIsCalled
         subject.Id.ShouldBe(ProjectTestsData.DefaultId);
         subject.DisplayName.ShouldBe(new Project.Name(ProjectTestsData.DefaultName));
         subject.Path.ShouldBe(new Project.RelativePath(ProjectTestsData.DefaultPath));
-        subject.Type.ShouldBe(ProjectTestsData.DefaultType);
+        subject.Type.ShouldBe(Snippet.From(ProjectTestsData.DefaultType));
         subject.Builds.ShouldBe([build]);
         subject.Platforms.ShouldBe([platform]);
         subject.IsUndefined.ShouldBeFalse();

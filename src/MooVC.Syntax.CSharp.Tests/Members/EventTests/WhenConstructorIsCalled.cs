@@ -29,7 +29,7 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var behaviours = new Event.Methods
         {
-            Add = "value",
+            Add = Snippet.From("value"),
         };
 
         // Act
@@ -37,7 +37,7 @@ public sealed class WhenConstructorIsCalled
         {
             Behaviours = behaviours,
             Handler = new Symbol { Name = Handler },
-            Name = Name,
+            Name = new Name(Name),
             Scope = Scope.Private,
         };
 
@@ -45,7 +45,7 @@ public sealed class WhenConstructorIsCalled
         subject.Behaviours.ShouldBe(behaviours);
         subject.Handler.ShouldBe(new Symbol { Name = Handler });
         subject.IsUndefind.ShouldBeFalse();
-        subject.Name.ShouldBe(Name);
+        subject.Name.ShouldBe(new Name(Name));
         subject.Scope.ShouldBe(Scope.Private);
     }
 }

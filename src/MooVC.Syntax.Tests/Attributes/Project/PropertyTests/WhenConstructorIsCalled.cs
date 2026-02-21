@@ -23,15 +23,15 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Property
         {
-            Condition = PropertyTestsData.DefaultCondition,
+            Condition = Snippet.From(PropertyTestsData.DefaultCondition),
             Name = PropertyTestsData.DefaultName,
-            Value = PropertyTestsData.DefaultValue,
+            Value = Snippet.From(PropertyTestsData.DefaultValue),
         };
 
         // Assert
-        subject.Condition.ShouldBe(PropertyTestsData.DefaultCondition);
-        subject.Name.ShouldBe(PropertyTestsData.DefaultName);
-        subject.Value.ShouldBe(PropertyTestsData.DefaultValue);
+        subject.Condition.ShouldBe(Snippet.From(PropertyTestsData.DefaultCondition));
+        subject.Name.ShouldBe(new Name(PropertyTestsData.DefaultName));
+        subject.Value.ShouldBe(Snippet.From(PropertyTestsData.DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
     }
 }

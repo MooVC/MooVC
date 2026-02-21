@@ -13,7 +13,7 @@ public sealed class WhenKnownAsIsCalled
         // Arrange
         var original = new Directive
         {
-            Alias = Alias,
+            Alias = new Name(Alias),
             Qualifier = new Qualifier(["MooVC", "Syntax"]),
         };
 
@@ -22,9 +22,9 @@ public sealed class WhenKnownAsIsCalled
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Alias.ShouldBe(NewAlias);
+        result.Alias.ShouldBe(new Name(NewAlias));
         result.IsStatic.ShouldBe(original.IsStatic);
         result.Qualifier.ShouldBe(original.Qualifier);
-        original.Alias.ShouldBe(Alias);
+        original.Alias.ShouldBe(new Name(Alias));
     }
 }

@@ -26,14 +26,14 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new PropertyGroup
         {
-            Condition = PropertyGroupTestsData.DefaultCondition,
-            Label = PropertyGroupTestsData.DefaultLabel,
+            Condition = Snippet.From(PropertyGroupTestsData.DefaultCondition),
+            Label = Snippet.From(PropertyGroupTestsData.DefaultLabel),
             Properties = [property],
         };
 
         // Assert
-        subject.Condition.ShouldBe(PropertyGroupTestsData.DefaultCondition);
-        subject.Label.ShouldBe(PropertyGroupTestsData.DefaultLabel);
+        subject.Condition.ShouldBe(Snippet.From(PropertyGroupTestsData.DefaultCondition));
+        subject.Label.ShouldBe(Snippet.From(PropertyGroupTestsData.DefaultLabel));
         subject.Properties.ShouldBe(new[] { property });
         subject.IsUndefined.ShouldBeFalse();
     }

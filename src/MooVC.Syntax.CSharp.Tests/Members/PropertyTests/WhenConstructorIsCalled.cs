@@ -30,10 +30,10 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var behaviours = new Property.Methods
         {
-            Get = DefaultValue,
+            Get = Snippet.From(DefaultValue),
             Set = new Property.Setter
             {
-                Behaviour = "value = input",
+                Behaviour = Snippet.From("value = input"),
                 Mode = Property.Mode.Init,
                 Scope = Scope.Private,
             },
@@ -43,7 +43,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property
         {
             Behaviours = behaviours,
-            Default = DefaultValue,
+            Default = Snippet.From(DefaultValue),
             Name = PropertyName,
             Scope = Scope.Internal,
             Type = new Symbol { Name = PropertyType },
@@ -51,9 +51,9 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         subject.Behaviours.ShouldBe(behaviours);
-        subject.Default.ShouldBe(DefaultValue);
+        subject.Default.ShouldBe(Snippet.From(DefaultValue));
         subject.IsUndefined.ShouldBeFalse();
-        subject.Name.ShouldBe(PropertyName);
+        subject.Name.ShouldBe(new Name(PropertyName));
         subject.Scope.ShouldBe(Scope.Internal);
         subject.Type.ShouldBe(new Symbol { Name = PropertyType });
     }

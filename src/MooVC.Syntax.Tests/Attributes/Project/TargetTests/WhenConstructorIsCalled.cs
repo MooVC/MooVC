@@ -34,30 +34,30 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Target
         {
-            AfterTargets = TargetTestsData.DefaultAfterTargets,
-            BeforeTargets = TargetTestsData.DefaultBeforeTargets,
-            Condition = TargetTestsData.DefaultCondition,
-            DependsOnTargets = TargetTestsData.DefaultDependsOnTargets,
-            Inputs = TargetTestsData.DefaultInputs,
+            AfterTargets = Snippet.From(TargetTestsData.DefaultAfterTargets),
+            BeforeTargets = Snippet.From(TargetTestsData.DefaultBeforeTargets),
+            Condition = Snippet.From(TargetTestsData.DefaultCondition),
+            DependsOnTargets = Snippet.From(TargetTestsData.DefaultDependsOnTargets),
+            Inputs = Snippet.From(TargetTestsData.DefaultInputs),
             KeepDuplicateOutputs = true,
-            Label = TargetTestsData.DefaultLabel,
+            Label = Snippet.From(TargetTestsData.DefaultLabel),
             Name = TargetTestsData.DefaultName,
-            Outputs = TargetTestsData.DefaultOutputs,
-            Returns = TargetTestsData.DefaultReturns,
+            Outputs = Snippet.From(TargetTestsData.DefaultOutputs),
+            Returns = Snippet.From(TargetTestsData.DefaultReturns),
             Tasks = [task],
         };
 
         // Assert
-        subject.AfterTargets.ShouldBe(TargetTestsData.DefaultAfterTargets);
-        subject.BeforeTargets.ShouldBe(TargetTestsData.DefaultBeforeTargets);
-        subject.Condition.ShouldBe(TargetTestsData.DefaultCondition);
-        subject.DependsOnTargets.ShouldBe(TargetTestsData.DefaultDependsOnTargets);
-        subject.Inputs.ShouldBe(TargetTestsData.DefaultInputs);
+        subject.AfterTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultAfterTargets));
+        subject.BeforeTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultBeforeTargets));
+        subject.Condition.ShouldBe(Snippet.From(TargetTestsData.DefaultCondition));
+        subject.DependsOnTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultDependsOnTargets));
+        subject.Inputs.ShouldBe(Snippet.From(TargetTestsData.DefaultInputs));
         subject.KeepDuplicateOutputs.ShouldBeTrue();
-        subject.Label.ShouldBe(TargetTestsData.DefaultLabel);
-        subject.Name.ShouldBe(TargetTestsData.DefaultName);
-        subject.Outputs.ShouldBe(TargetTestsData.DefaultOutputs);
-        subject.Returns.ShouldBe(TargetTestsData.DefaultReturns);
+        subject.Label.ShouldBe(Snippet.From(TargetTestsData.DefaultLabel));
+        subject.Name.ShouldBe(new Name(TargetTestsData.DefaultName));
+        subject.Outputs.ShouldBe(Snippet.From(TargetTestsData.DefaultOutputs));
+        subject.Returns.ShouldBe(Snippet.From(TargetTestsData.DefaultReturns));
         subject.Tasks.ShouldBe(new[] { task });
         subject.IsUndefined.ShouldBeFalse();
     }

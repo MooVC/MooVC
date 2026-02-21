@@ -84,7 +84,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
     {
         return new Parameter
         {
-            Name = name,
+            Name = new Name(name),
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],
         };
     }
