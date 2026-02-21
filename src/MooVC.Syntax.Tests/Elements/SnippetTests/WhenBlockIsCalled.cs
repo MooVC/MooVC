@@ -7,20 +7,6 @@ public sealed class WhenBlockIsCalled
     private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
 
     [Fact]
-    public void GivenNullOptionsThenThrows()
-    {
-        // Arrange
-        var subject = new Snippet(lines);
-        Snippet.Options? options = default;
-
-        // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.Block(options!));
-
-        // Assert
-        exception.ParamName.ShouldBe(nameof(options));
-    }
-
-    [Fact]
     public void GivenNoOpeningThenTheWholeSnippetIsBlocked()
     {
         // Arrange
@@ -34,7 +20,7 @@ public sealed class WhenBlockIsCalled
         var subject = new Snippet(lines);
 
         // Act
-        Snippet result = subject.Block(Snippet.Options.Default);
+        Snippet result = subject.Block();
 
         // Assert
         string text = result.ToString();
@@ -52,16 +38,15 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = Snippet.From("return true;");
-        var opening = Snippet.From("if (condition)");
-
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.Allman));
+        var subject = Snippet.From(options, "return true;");
+        var opening = Snippet.From("if (condition)");
 
         // Act
-        Snippet result = subject.Block(options, opening);
+        Snippet result = subject.Block(opening);
 
         // Assert
         string text = result.ToString();
@@ -79,16 +64,15 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = Snippet.From("return true;");
-        var opening = Snippet.From("if (condition)");
-
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.KAndR));
+        var subject = Snippet.From(options, "return true;");
+        var opening = Snippet.From("if (condition)");
 
         // Act
-        Snippet result = subject.Block(options, opening);
+        Snippet result = subject.Block(opening);
 
         // Assert
         string text = result.ToString();
@@ -102,15 +86,14 @@ public sealed class WhenBlockIsCalled
         // Arrange
         const string expected = "get => value;";
 
-        var subject = Snippet.From("value;");
-        var opening = Snippet.From("get");
-
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+        var subject = Snippet.From(options, "value;");
+        var opening = Snippet.From("get");
 
         // Act
-        Snippet result = subject.Block(options, opening);
+        Snippet result = subject.Block(opening);
 
         // Assert
         string text = result.ToString();
@@ -124,15 +107,14 @@ public sealed class WhenBlockIsCalled
         // Arrange
         const string expected = "get { value; }";
 
-        var subject = Snippet.From("value;");
-        var opening = Snippet.From("get");
-
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block
                 .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+        var subject = Snippet.From(options, "value;");
+        var opening = Snippet.From("get");
 
         // Act
-        Snippet result = subject.Block(options, opening);
+        Snippet result = subject.Block(opening);
 
         // Assert
         string text = result.ToString();

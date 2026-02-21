@@ -26,7 +26,7 @@
                 .OrderBy(@using => @using)
                 .Select(@using => @using.ToSnippet(options))
                 .ToImmutableArray()
-                .Stack(options);
+                .Stack();
         }
     }
 }

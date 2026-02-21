@@ -31,7 +31,7 @@
                 .Select(unary => unary.ToSnippet(options, type))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options, content);
+            return Snippet.From(options, string.Empty).Combine(content);
         }
     }
 }

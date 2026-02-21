@@ -24,26 +24,40 @@
         /// <summary>
         /// Represents the blank for the Snippet.
         /// </summary>
-        public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
+        public static readonly Snippet Blank = new Snippet(Options.Default, new string[] { string.Empty }.ToImmutableArray());
 
         /// <summary>
         /// Gets the empty instance.
         /// </summary>
-        public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
+        public static readonly Snippet Empty = new Snippet(Options.Default, ImmutableArray<string>.Empty);
 
         private const int SingleLine = 1;
+        private readonly Options _options;
 
         /// <summary>
         /// Initializes a new instance of the Snippet class.
         /// </summary>
         /// <param name="value">The value.</param>
         internal Snippet(ImmutableArray<string> value)
+            : this(Options.Default, value)
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the Snippet class.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="value">The value.</param>
+        internal Snippet(Options options, ImmutableArray<string> value)
+        {
+            _ = Guard.Against.Null(options, message: FromOptionsRequired.Format(nameof(Options), nameof(value)));
+
             if (value.IsDefault)
             {
                 value = ImmutableArray<string>.Empty;
             }
 
+            _options = options;
             _value = value;
         }
 
@@ -118,7 +132,7 @@
 
             if (values.Length == 0 || (values.Length == 1 && string.IsNullOrEmpty(values[0])))
             {
-                return Empty;
+                return new Snippet(options, ImmutableArray<string>.Empty);
             }
 
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(values.Length);
@@ -133,7 +147,7 @@
                 }
             }
 
-            return builder.ToImmutable();
+            return new Snippet(options, builder.ToImmutable());
         }
 
         /// <summary>
@@ -158,7 +172,7 @@
 
             builder.Add(string.Concat(_value[last], value));
 
-            return builder.ToImmutable();
+            return new Snippet(_options, builder.ToImmutable());
         }
 
         /// <summary>
@@ -168,18 +182,7 @@
         /// <returns>The snippet.</returns>
         public Snippet Append(params string[] values)
         {
-            return Append(Options.Default, values);
-        }
-
-        /// <summary>
-        /// Performs the append operation for the syntax element.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <param name="values">The values.</param>
-        /// <returns>The snippet.</returns>
-        public Snippet Append(Options options, params string[] values)
-        {
-            return Combine(options, _value, values, (original, appended) => original.Concat(appended));
+            return Combine(_options, _value, values, (original, appended) => original.Concat(appended));
         }
 
         /// <summary>
@@ -195,23 +198,22 @@
         /// <summary>
         /// Performs the block operation for the syntax element.
         /// </summary>
-        /// <param name="options">The options.</param>
         /// <returns>The snippet.</returns>
-        public Snippet Block(Options options)
+        public Snippet Block()
         {
-            return Block(options, Empty);
+            return Block(Empty);
         }
 
         /// <summary>
         /// Performs the block operation for the syntax element.
         /// </summary>
-        /// <param name="options">The options.</param>
         /// <param name="opening">The opening.</param>
         /// <returns>The snippet.</returns>
-        public Snippet Block(Options options, Snippet opening)
+        public Snippet Block(Snippet opening)
         {
-            _ = Guard.Against.Null(options, message: BlockOptionsRequired);
             _ = Guard.Against.Null(opening, message: BlockOpeningRequired);
+
+            Options options = _options;
 
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
@@ -238,7 +240,7 @@
                         blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
                     }
 
-                    return new Snippet(ImmutableArray.Create(blocked, 0, index));
+                    return new Snippet(options, ImmutableArray.Create(blocked, 0, index));
                 }
 
                 if (options.Block.Style.IsKAndR && openingLines > 0)
@@ -266,7 +268,7 @@
 
                 blocked[index] = options.Block.Markers.Closing;
 
-                return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
+                return new Snippet(options, ImmutableArray.Create(blocked, 0, index + 1));
             }
             finally
             {
@@ -281,25 +283,13 @@
         /// <returns>The snippet.</returns>
         public Snippet Combine(params Snippet[] values)
         {
-            return Combine(Options.Default, values);
-        }
-
-        /// <summary>
-        /// Performs the combine operation for the syntax element.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <param name="values">The values.</param>
-        /// <returns>The snippet.</returns>
-        public Snippet Combine(Options options, params Snippet[] values)
-        {
-            _ = Guard.Against.Null(options, message: CombineOptionsRequired);
             _ = Guard.Against.Null(values, message: CombineSnippetsRequired);
 
             values = StripEmptySnippets(values);
 
             if (values.Length == 0)
             {
-                return Empty;
+                return new Snippet(_options, ImmutableArray<string>.Empty);
             }
 
             if (values.Length == 1)
@@ -319,18 +309,7 @@
         /// <returns>The snippet.</returns>
         public Snippet Prepend(params string[] values)
         {
-            return Prepend(Options.Default, values);
-        }
-
-        /// <summary>
-        /// Performs the prepend operation for the syntax element.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <param name="values">The values.</param>
-        /// <returns>The snippet.</returns>
-        public Snippet Prepend(Options options, params string[] values)
-        {
-            return Combine(options, _value, values, (original, prepended) => prepended.Concat(original));
+            return Combine(_options, _value, values, (original, prepended) => prepended.Concat(original));
         }
 
         /// <summary>
@@ -346,11 +325,10 @@
         /// <summary>
         /// Performs the shift operation for the syntax element.
         /// </summary>
-        /// <param name="options">The options.</param>
         /// <returns>The snippet.</returns>
-        public Snippet Shift(Options options)
+        public Snippet Shift()
         {
-            _ = Guard.Against.Null(options, message: ShiftOptionsRequired);
+            Options options = _options;
 
             string[] shifted = ArrayPool<string>.Shared.Rent(Lines);
 
@@ -370,7 +348,7 @@
                     shifted[index] = current;
                 }
 
-                return new Snippet(ImmutableArray.Create(shifted, 0, Lines));
+                return new Snippet(options, ImmutableArray.Create(shifted, 0, Lines));
             }
             finally
             {
@@ -381,15 +359,13 @@
         /// <summary>
         /// Performs the stack operation for the syntax element.
         /// </summary>
-        /// <param name="options">The options.</param>
         /// <param name="top">The top.</param>
         /// <returns>The snippet.</returns>
-        public Snippet Stack(Options options, Snippet top)
+        public Snippet Stack(Snippet top)
         {
-            _ = Guard.Against.Null(options, message: StackOptionsRequired);
             _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
 
-            return Prepend(options, top);
+            return Prepend(top);
         }
 
         /// <summary>
@@ -445,7 +421,7 @@
             }
         }
 
-        private static ImmutableArray<string> Combine(
+        private static Snippet Combine(
             Options options,
             Snippet original,
             string[] values,
@@ -460,7 +436,7 @@
                     snippets[index] = From(options, values[index]);
                 }
 
-                return Combine(original, snippets.Take(values.Length), combine);
+                return Combine(options, original, snippets.Take(values.Length), combine);
             }
             finally
             {
@@ -468,7 +444,8 @@
             }
         }
 
-        private static ImmutableArray<string> Combine(
+        private static Snippet Combine(
+            Options options,
             Snippet original,
             IEnumerable<Snippet> values,
             Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
@@ -476,7 +453,7 @@
             IEnumerable<string> first = original._value.Select(value => value);
             IEnumerable<string> second = values.SelectMany(snippet => snippet._value.Select(value => value));
 
-            return combine(first, second).ToImmutableArray();
+            return new Snippet(options, combine(first, second).ToImmutableArray());
         }
 
         private static Snippet[] StripEmptySnippets(Snippet[] values)
@@ -519,9 +496,9 @@
                     }
                 }
 
-                return combined
+                return new Snippet(_options, combined
                     .Take(index)
-                    .ToImmutableArray();
+                    .ToImmutableArray());
             }
             finally
             {

@@ -37,7 +37,7 @@
                 .ThenBy(directive => directive.Rendering)
                 .Select(directive => Snippet.From(options, directive.Rendering))
                 .ToImmutableArray()
-                .Stack(options);
+                .Stack();
         }
     }
 }

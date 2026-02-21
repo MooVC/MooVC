@@ -97,7 +97,7 @@
             var conversions = Conversions.ToSnippet(options, type);
             var unaries = Unaries.ToSnippet(options, type);
 
-            return Snippet.Blank.Combine(options, binaries, comparisons, conversions, unaries);
+            return Snippet.From(options, string.Empty).Combine(binaries, comparisons, conversions, unaries);
         }
 
         /// <summary>

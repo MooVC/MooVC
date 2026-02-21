@@ -150,7 +150,7 @@ namespace MooVC.Syntax.CSharp.Members
 
             return Snippet
                 .From(options, signature)
-                .Prepend(options, attributes);
+                .Prepend(attributes);
         }
 
         private string ToSnippet(Name name, Snippet.Options options)
@@ -164,7 +164,7 @@ namespace MooVC.Syntax.CSharp.Members
 
             Snippet signature = GetSignature(name, options);
 
-            return Body.Block(options, signature);
+            return Body.Block(signature);
         }
     }
 }

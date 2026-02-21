@@ -150,8 +150,8 @@ namespace MooVC.Syntax.CSharp.Members
             }
 
             return Body
-                .Block(options.Snippets, signature)
-                .Prepend(options.Snippets, attributes);
+                .Block(signature)
+                .Prepend(attributes);
         }
 
         /// <summary>
@@ -204,9 +204,9 @@ namespace MooVC.Syntax.CSharp.Members
             if (!clauses.IsEmpty)
             {
                 return clauses
-                    .Shift(options.Snippets)
-                    .Prepend(options.Snippets, Environment.NewLine)
-                    .Prepend(options.Snippets, signature);
+                    .Shift()
+                    .Prepend(Environment.NewLine)
+                    .Prepend(signature);
             }
 
             return Snippet.From(options.Snippets, signature);

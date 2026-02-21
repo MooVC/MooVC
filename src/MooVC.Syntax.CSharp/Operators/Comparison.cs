@@ -118,7 +118,7 @@
             var type = declaration.ToSnippet(options);
             var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({type} left, {type} right)");
 
-            return Body.Block(options, signature);
+            return Body.Block(signature);
         }
     }
 }

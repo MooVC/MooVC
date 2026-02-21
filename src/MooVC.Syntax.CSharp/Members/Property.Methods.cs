@@ -120,7 +120,7 @@ namespace MooVC.Syntax.CSharp.Members
                     return Snippet.From(options, $"{get} {set}");
                 }
 
-                return set.Stack(options, get);
+                return set.Stack(get);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scope scope = default)
@@ -134,7 +134,7 @@ namespace MooVC.Syntax.CSharp.Members
                     ? keyword
                     : $"{scope} {keyword}";
 
-                return snippet.Block(options, opening: Snippet.From(keyword));
+                return snippet.Block(opening: Snippet.From(keyword));
             }
         }
     }

@@ -7,21 +7,7 @@ public sealed class WhenShiftIsCalled
     private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
 
     [Fact]
-    public void GivenNullOptionsThenThrows()
-    {
-        // Arrange
-        var subject = new Snippet(lines);
-        Snippet.Options? options = default;
-
-        // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.Shift(options!));
-
-        // Assert
-        exception.ParamName.ShouldBe(nameof(options));
-    }
-
-    [Fact]
-    public void GivenOptionsThenLinesAreShifted()
+    public void GivenOptionsFromConstructionThenLinesAreShifted()
     {
         // Arrange
         const string expected = """
@@ -29,14 +15,14 @@ public sealed class WhenShiftIsCalled
             	return true;
             """;
 
-        const string whitespace = "\t";
-        var subject = new Snippet(lines);
+        const string whitespace = "	";
 
         Snippet.Options options = new Snippet.Options()
             .WithWhitespace(whitespace);
+        var subject = new Snippet(options, lines);
 
         // Act
-        Snippet result = subject.Shift(options);
+        Snippet result = subject.Shift();
 
         // Assert
         string text = result.ToString();

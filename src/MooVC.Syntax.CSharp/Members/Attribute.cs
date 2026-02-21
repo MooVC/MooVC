@@ -154,7 +154,7 @@
                 .Select(argument => argument.ToSnippet(declaration))
                 .ToArray();
 
-            Snippet syntax = separator.Combine(options, arguments);
+            Snippet syntax = separator.Combine(arguments);
 
             return value.Append($"({syntax})");
         }

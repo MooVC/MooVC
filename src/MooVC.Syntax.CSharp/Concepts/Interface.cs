@@ -55,9 +55,9 @@
                 .ToImmutableArray()
                 .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options });
 
-            Snippet body = Snippet.Blank.Combine(options, events, properties, indexers, methods);
+            Snippet body = Snippet.From(options, string.Empty).Combine(events, properties, indexers, methods);
 
-            return body.Block(options, signature);
+            return body.Block(signature);
         }
 
         private Snippet GetSignature(Snippet.Options options)
@@ -72,10 +72,10 @@
             if (!clauses.IsEmpty)
             {
                 return clauses
-                    .Shift(options)
-                    .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature)
-                    .Prepend(options, attributes);
+                    .Shift()
+                    .Prepend(Environment.NewLine)
+                    .Prepend(signature)
+                    .Prepend(attributes);
             }
 
             return Snippet.From(options, signature);

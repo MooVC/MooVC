@@ -16,7 +16,7 @@ public sealed class WhenStackIsCalled
         var snippets = ImmutableArray.Create(snippet);
 
         // Act
-        Snippet result = snippets.Stack(Snippet.Options.Default);
+        Snippet result = snippets.Stack();
 
         // Assert
         result.ShouldBeSameAs(snippet);
@@ -33,7 +33,7 @@ public sealed class WhenStackIsCalled
         string expected = string.Join(Environment.NewLine, FirstLine, SecondLine, ThirdLine);
 
         // Act
-        Snippet result = snippets.Stack(Snippet.Options.Default);
+        Snippet result = snippets.Stack();
 
         // Assert
         result.ToString().ShouldBe(expected);

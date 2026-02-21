@@ -94,20 +94,20 @@
             if (!usings.IsEmpty)
             {
                 type = type
-                    .Prepend(options.Snippets, Environment.NewLine)
-                    .Prepend(options.Snippets, usings);
+                    .Prepend(Environment.NewLine)
+                    .Prepend(usings);
             }
 
             if (options.Namespace.IsBlock)
             {
-                return type.Block(options.Snippets, @namespace);
+                return type.Block(@namespace);
             }
 
             @namespace = @namespace
                 .Append(';')
                 .Append(Environment.NewLine);
 
-            return type.Stack(options.Snippets, @namespace);
+            return type.Stack(@namespace);
         }
 
         /// <summary>

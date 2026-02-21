@@ -101,7 +101,7 @@
                 {
                     Snippet remove = Format("set", options, Set);
 
-                    add = remove.Stack(options, add);
+                    add = remove.Stack(add);
                 }
 
                 return add;
@@ -114,7 +114,7 @@
                     return $"{keyword};";
                 }
 
-                return snippet.Block(options, opening: Snippet.From(options, keyword));
+                return snippet.Block(opening: Snippet.From(options, keyword));
             }
         }
     }

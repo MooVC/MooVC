@@ -164,7 +164,7 @@
             string scope = Scope;
             var signature = Snippet.From($"{scope} static {mode} operator {result}({input} subject)");
 
-            return Body.Block(options, signature);
+            return Body.Block(signature);
         }
     }
 }

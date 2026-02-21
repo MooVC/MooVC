@@ -147,14 +147,14 @@
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
             }
 
-            signature = behaviours.Block(body, signature);
+            signature = Snippet.From(body, behaviours.ToString()).Block(signature);
 
             if (!Default.IsEmpty)
             {
-                signature = signature.Append(body, $" = {Default}");
+                signature = Snippet.From(body, signature.ToString()).Append($" = {Default}");
             }
 
-            return signature.Prepend(options.Snippets, attributes);
+            return signature.Prepend(attributes);
         }
 
         /// <summary>

@@ -27,7 +27,7 @@
                 .OrderBy(attribute => attribute.Name)
                 .Select(attribute => Snippet.From(options, attribute))
                 .ToImmutableArray()
-                .Stack(options);
+                .Stack();
         }
     }
 }

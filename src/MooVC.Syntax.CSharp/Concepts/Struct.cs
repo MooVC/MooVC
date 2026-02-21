@@ -103,10 +103,10 @@
             var operators = Operators.ToSnippet(options, this);
             var properties = Properties.ToSnippet(Property.Options.Default.WithSnippets(options));
             var methods = Methods.ToSnippet(Method.Options.Default.WithSnippets(options));
-            Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
+            Snippet body = Snippet.From(options, string.Empty).Combine(fields, constructors, events, indexers, properties, operators, methods);
 
             return body
-                .Block(options, signature)
+                .Block(signature)
                 .Prepend(attributes);
         }
 
@@ -128,9 +128,9 @@
             if (!clauses.IsEmpty)
             {
                 return clauses
-                    .Shift(options)
-                    .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature);
+                    .Shift()
+                    .Prepend(Environment.NewLine)
+                    .Prepend(signature);
             }
 
             return Snippet.From(options, signature);

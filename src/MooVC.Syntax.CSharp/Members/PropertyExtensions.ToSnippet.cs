@@ -33,7 +33,7 @@
                 .Select(property => property.ToSnippet(options))
                 .ToArray();
 
-            return Snippet.Blank.Combine(options.Snippets, content);
+            return Snippet.From(options.Snippets, string.Empty).Combine(content);
         }
     }
 }

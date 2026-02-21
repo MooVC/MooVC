@@ -140,7 +140,7 @@
                     .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
             }
 
-            return methods.Block(snippets, Snippet.From(snippets, signature));
+            return Snippet.From(snippets, methods.ToString()).Block(Snippet.From(snippets, signature));
         }
 
         /// <summary>

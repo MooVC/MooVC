@@ -30,7 +30,7 @@
                 .ThenBy(field => field.Name)
                 .Select(field => field.ToSnippet(options))
                 .ToImmutableArray()
-                .Stack(options);
+                .Stack();
         }
     }
 }

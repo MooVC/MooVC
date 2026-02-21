@@ -8,21 +8,6 @@ public sealed class WhenPrependIsCalled
     private const string Phi = "phi";
 
     [Fact]
-    public void GivenNullOptionsAndValuesThenThrows()
-    {
-        // Arrange
-        var subject = Snippet.From(Alpha);
-        Snippet.Options? options = default;
-
-        // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(
-            () => _ = subject.Prepend(options!, Beta));
-
-        // Assert
-        exception.ParamName.ShouldBe(nameof(options));
-    }
-
-    [Fact]
     public void GivenStringValuesThenTheyArePrepended()
     {
         // Arrange

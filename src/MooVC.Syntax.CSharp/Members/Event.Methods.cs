@@ -113,7 +113,7 @@
                     return Snippet.From($"{add} {remove}");
                 }
 
-                return remove.Stack(options, add);
+                return remove.Stack(add);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)
@@ -123,7 +123,7 @@
                     return Snippet.From($"{keyword};");
                 }
 
-                return snippet.Block(options, opening: Snippet.From(keyword));
+                return snippet.Block(opening: Snippet.From(keyword));
             }
         }
     }
