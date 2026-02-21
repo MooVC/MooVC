@@ -13,13 +13,13 @@ public sealed class WhenNamedIsCalled
         Attribute original = AttributeTestsData.Create();
 
         // Act
-        Attribute result = original.Named(new Symbol { Name = new Variable(NewName) });
+        Attribute result = original.Named(new Symbol { Name = NewName });
 
         // Assert
         result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Symbol { Name = new Variable(NewName) });
+        result.Name.ShouldBe(new Symbol { Name = NewName });
         result.Arguments.ShouldBe(original.Arguments);
         result.Target.ShouldBe(original.Target);
-        original.Name.ShouldBe(new Symbol { Name = new Variable(AttributeTestsData.DefaultName) });
+        original.Name.ShouldBe(new Symbol { Name = AttributeTestsData.DefaultName });
     }
 }

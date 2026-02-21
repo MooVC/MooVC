@@ -64,7 +64,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Variable));
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 

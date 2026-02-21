@@ -95,6 +95,7 @@
         {
             Snippet signature = GetSignature(options);
 
+            var attributes = Attributes.ToSnippet(options);
             var constructors = Constructors.ToSnippet(options, this);
             var events = Events.ToSnippet(Event.Options.Default.WithSnippets(options));
             var fields = Fields.ToSnippet(options);
@@ -104,7 +105,9 @@
             var methods = Methods.ToSnippet(Method.Options.Default.WithSnippets(options));
             Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, indexers, properties, operators, methods);
 
-            return body.Block(options, signature);
+            return body
+                .Block(options, signature)
+                .Prepend(attributes);
         }
 
         private Snippet GetSignature(Snippet.Options options)

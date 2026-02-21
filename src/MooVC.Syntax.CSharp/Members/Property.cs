@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Ardalis.GuardClauses;
@@ -35,6 +36,13 @@
         internal Property()
         {
         }
+
+        /// <summary>
+        /// Gets the attributes associated with the Property.
+        /// </summary>
+        /// <value>The attributes.</value>
+        [Descriptor("AttributedWith")]
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>
         /// Gets the behaviours on the Property.
@@ -128,6 +136,7 @@
                 return Snippet.Empty;
             }
 
+            var attributes = Attributes.ToSnippet(options.Snippets);
             Snippet signature = GetSignature(options);
             var behaviours = Behaviours.ToSnippet(options.Snippets, Scope);
             Snippet.Options body = options.Snippets;
@@ -145,7 +154,7 @@
                 signature = signature.Append(body, $" = {Default}");
             }
 
-            return signature;
+            return signature.Prepend(options.Snippets, attributes);
         }
 
         /// <summary>

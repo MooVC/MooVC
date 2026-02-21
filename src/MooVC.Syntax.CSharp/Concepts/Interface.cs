@@ -62,6 +62,7 @@
 
         private Snippet GetSignature(Snippet.Options options)
         {
+            var attributes = Attributes.ToSnippet(options);
             var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string name = Declaration;
             string partial = IsPartial.Partial();
@@ -73,7 +74,8 @@
                 return clauses
                     .Shift(options)
                     .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature);
+                    .Prepend(options, signature)
+                    .Prepend(options, attributes);
             }
 
             return Snippet.From(options, signature);

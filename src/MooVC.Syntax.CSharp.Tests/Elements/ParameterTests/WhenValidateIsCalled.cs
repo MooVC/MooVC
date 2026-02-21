@@ -94,7 +94,7 @@ public sealed class WhenValidateIsCalled
             modifier: Parameter.Mode.Out,
             attributes: new Attribute
             {
-                Name = new Symbol { Name = new Identifier(AttributeName) },
+                Name = new Symbol { Name = AttributeName },
             });
 
         var context = new ValidationContext(parameter);

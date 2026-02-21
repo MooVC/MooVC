@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public static class AttributeTestsData
 {
@@ -19,8 +20,8 @@ public static class AttributeTestsData
             Name = new Symbol
             {
                 Name = name is null
-                    ? Variable.Unnamed
-                    : new Variable(name),
+                    ? Symbol.Moniker.Unnamed
+                    : new Symbol.Moniker(name),
             },
             Target = target ?? Attribute.Specifier.None,
         };

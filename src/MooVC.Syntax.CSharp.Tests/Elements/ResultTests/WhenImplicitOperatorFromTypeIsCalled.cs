@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
     [Fact]
@@ -25,6 +27,6 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Result result = value;
 
         // Assert
-        result.Type.Name.ShouldBe(new Variable(nameof(Guid)));
+        result.Type.Name.ShouldBe(new Symbol.Moniker(nameof(Guid)));
     }
 }

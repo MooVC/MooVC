@@ -1,26 +1,24 @@
 ﻿namespace Mu.Modelling;
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
 using Graphify;
-using MooVC.Syntax;
-using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
 
-[Fluentify]
 [Valuify]
-public sealed partial class Attribute
+[Fluentify]
+public sealed partial class Component
     : IValidatableObject
 {
-    public static readonly Attribute Undefined = new();
+    public static readonly Component Undefined = new();
 
-    [Descriptor("DefaultedTo")]
+    [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Snippet Default { get; internal init; } = Snippet.Empty;
+    public ImmutableArray<Attribute> Attributes { get; internal init; } = [];
 
     [Descriptor("DescribedAs")]
     [Traverse(Scope = TraverseScope.Property)]
@@ -30,13 +28,13 @@ public sealed partial class Attribute
     [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
 
+    [Descriptor("IdentifiedBy")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Attribute Identifier { get; internal init; } = Attribute.Undefined;
+
     [Descriptor("Named")]
     [Traverse(Scope = TraverseScope.Property)]
     public Name Name { get; internal init; } = Name.Unnamed;
-
-    [Descriptor("OfType")]
-    [Traverse(Scope = TraverseScope.Property)]
-    public Symbol Type { get; internal init; } = Symbol.Undefined;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -46,9 +44,9 @@ public sealed partial class Attribute
         }
 
         return validationContext
-            .IncludeIf(!Default.IsEmpty, nameof(Default), _ => Default.IsSingleLine, Default)
-            .And(nameof(Name), _ => !Name.IsUnnamed, Name)
-            .And(nameof(Type), _ => !Type.IsUndefined, Type)
+            .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUndefined, Attributes)
+            .AndIf(!Identifier.IsUndefined, nameof(Identifier), Identifier)
+            .And(nameof(Name), name => !name.IsUnnamed, Name)
             .Results;
     }
 }

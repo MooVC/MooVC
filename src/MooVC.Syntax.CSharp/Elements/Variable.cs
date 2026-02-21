@@ -44,18 +44,6 @@
         public bool IsUnnamed => this == Unnamed;
 
         /// <summary>
-        /// Defines the Variable operator for the Variable.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The variable.</returns>
-        public static implicit operator Variable(Type type)
-        {
-            Guard.Against.Conversion<Type, Variable>(type);
-
-            return type.GetName();
-        }
-
-        /// <summary>
         /// Defines the string operator for the Variable.
         /// </summary>
         /// <param name="variable">The variable.</param>

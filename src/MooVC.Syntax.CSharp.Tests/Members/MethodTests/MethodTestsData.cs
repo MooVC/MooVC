@@ -59,6 +59,6 @@ internal static class MethodTestsData
             ];
         }
 
-        return parameters.ToImmutableArray();
+        return [.. parameters];
     }
 }

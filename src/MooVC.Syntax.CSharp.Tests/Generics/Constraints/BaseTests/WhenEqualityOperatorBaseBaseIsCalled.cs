@@ -25,7 +25,7 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
     public void GivenEitherBaseIsNullThenReturnsFalse()
     {
         // Arrange
-        Base? left = new Symbol { Name = new Variable(Same) };
+        Base? left = new Symbol { Name = Same };
         Base? right = default;
 
         // Act
@@ -41,8 +41,8 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
     public void GivenEqualBasesThenReturnsTrue()
     {
         // Arrange
-        Base left = new Symbol { Name = new Variable(Same) };
-        Base right = new Symbol { Name = new Variable(Same) };
+        Base left = new Symbol { Name = Same };
+        Base right = new Symbol { Name = Same };
 
         // Act
         bool result = left == right;
@@ -55,8 +55,8 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
     public void GivenDifferentBasesThenReturnsFalse()
     {
         // Arrange
-        Base left = new Symbol { Name = new Variable(Same) };
-        Base right = new Symbol { Name = new Variable(Different) };
+        Base left = new Symbol { Name = Same };
+        Base right = new Symbol { Name = Different };
 
         // Act
         bool result = left == right;

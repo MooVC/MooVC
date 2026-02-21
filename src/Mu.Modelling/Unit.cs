@@ -20,6 +20,13 @@ public sealed partial class Unit
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = [];
 
+    [Descriptor("Owns")]
+    public ImmutableArray<Component> Components { get; internal init; } = [];
+
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
+
     [Descriptor("Featuring")]
     public ImmutableArray<Feature> Features { get; internal init; } = [];
 
@@ -43,6 +50,7 @@ public sealed partial class Unit
 
         return validationContext
             .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUndefined, Attributes)
+            .AndIf(!Components.IsDefaultOrEmpty, nameof(Components), component => !component.IsUndefined, Components)
             .AndIf(!Features.IsDefaultOrEmpty, nameof(Features), feature => !feature.IsUndefined, Features)
             .And(nameof(Name), name => !name.IsUnnamed, Name)
             .AndIf(!Views.IsDefaultOrEmpty, nameof(Views), view => !view.IsUndefined, Views)

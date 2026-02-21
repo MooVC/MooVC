@@ -32,27 +32,27 @@
         public bool IsUnnamed => this == Unnamed;
 
         /// <summary>
-        /// Defines the string operator for the Segment.
+        /// Defines the string operator for the Name.
         /// </summary>
-        /// <param name="segment">The segment.</param>
+        /// <param name="name">The name.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Name segment)
+        public static implicit operator string(Name name)
         {
-            Guard.Against.Conversion<Name, string>(segment);
+            Guard.Against.Conversion<Name, string>(name);
 
-            return segment.ToString();
+            return name.ToString();
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Segment.
+        /// Defines the Snippet operator for the Name.
         /// </summary>
-        /// <param name="segment">The segment.</param>
+        /// <param name="name">The name.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Name segment)
+        public static implicit operator Snippet(Name name)
         {
-            Guard.Against.Conversion<Name, Snippet>(segment);
+            Guard.Against.Conversion<Name, Snippet>(name);
 
-            return Snippet.From(segment);
+            return Snippet.From(name);
         }
 
         /// <summary>

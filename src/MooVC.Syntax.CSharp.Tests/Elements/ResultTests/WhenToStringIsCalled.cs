@@ -25,7 +25,7 @@ public sealed class WhenToStringIsCalled
         {
             Modifier = Result.Kind.Ref,
             Mode = Result.Modality.Asynchronous,
-            Type = new Symbol { Name = new Variable(ValueType) },
+            Type = new Symbol { Name = ValueType },
         };
 
         // Act

@@ -120,4 +120,7 @@
   <data name="ToStringOptionsRequired" xml:space="preserve">
     <value>The formatting options for type `{0}` must be provided.</value>
   </data>
+  <data name="MonikerValidateValueRequired" xml:space="preserve">
+    <value>The value '{0}' is not valid for '{1}'. Please use a valid C# identifier, starting with an uppercase letter, containing letters, digits, or underscores, and excluding spaces or reserved keywords.</value>
+  </data>
 </root>

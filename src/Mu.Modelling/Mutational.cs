@@ -16,6 +16,10 @@ public sealed partial class Mutational
 {
     public static readonly Mutational Undefined = new();
 
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
+
     [Descriptor("Yields")]
     [Traverse(Scope = TraverseScope.Property)]
     public Name Fact { get; internal init; } = Name.Unnamed;

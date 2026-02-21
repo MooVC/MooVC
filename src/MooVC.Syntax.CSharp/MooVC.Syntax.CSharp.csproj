@@ -166,11 +166,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Unary.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="TypeExtensions.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TypeExtensions.Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Concepts\Definition.Resources.resx">
@@ -280,10 +275,6 @@
     <EmbeddedResource Update="Operators\Unary.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Unary.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="TypeExtensions.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TypeExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

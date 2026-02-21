@@ -9,7 +9,7 @@ public sealed class WhenOfTypeIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var type = new Symbol { Name = new Variable("int") };
+        var type = new Symbol { Name = "int" };
 
         // Act
         Property result = original.OfType(type);

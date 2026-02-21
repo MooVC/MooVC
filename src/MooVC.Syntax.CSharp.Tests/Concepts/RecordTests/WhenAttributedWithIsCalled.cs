@@ -5,7 +5,7 @@ using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
-public sealed class WhenWithAttributesIsCalled
+public sealed class WhenAttributedWithIsCalled
 {
     [Fact]
     public void GivenAttributesThenReturnsUpdatedInstance()
@@ -13,18 +13,18 @@ public sealed class WhenWithAttributesIsCalled
         // Arrange
         Attribute[] existing =
         [
-            new Attribute { Name = new Symbol { Name = new Variable("Existing") } },
+            new Attribute { Name = new Symbol { Name = "Existing" } },
         ];
 
         Attribute[] additional =
         [
-            new Attribute { Name = new Symbol { Name = new Variable("Additional") } },
+            new Attribute { Name = new Symbol { Name = "Additional" } },
         ];
 
         Record original = RecordTestsData.Create(attributes: existing.ToImmutableArray());
 
         // Act
-        Record result = original.WithAttributes(additional);
+        Record result = original.AttributedWith(additional);
 
         // Assert
         result.ShouldNotBeSameAs(original);

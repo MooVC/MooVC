@@ -112,7 +112,7 @@ internal static class ModellingTestData
         return new NonMutational
         {
             Source = kind ?? NonMutational.Kind.ReadStore,
-            View = view ?? DefaultViewName,
+            View = new View { Name = view ?? DefaultViewName },
         };
     }
 

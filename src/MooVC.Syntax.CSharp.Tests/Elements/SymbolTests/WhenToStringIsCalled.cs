@@ -27,7 +27,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Symbol
         {
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         // Act
@@ -45,10 +45,10 @@ public sealed class WhenToStringIsCalled
         {
             Arguments =
             [
-                new Symbol { Name = new Identifier(FirstArgumentName) },
-                new Symbol { Name = new Identifier(SecondArgumentName) },
+                new Symbol { Name = FirstArgumentName },
+                new Symbol { Name = SecondArgumentName },
             ],
-            Name = new Identifier(Name),
+            Name = Name,
         };
 
         // Act

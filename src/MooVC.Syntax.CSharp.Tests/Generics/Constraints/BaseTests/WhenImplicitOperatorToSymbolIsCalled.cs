@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSymbolIsCalled
 {
@@ -10,7 +11,7 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
     public void GivenBaseThenReturnsSymbol()
     {
         // Arrange
-        var name = new Variable(Name);
+        var name = new Symbol.Moniker(Name);
         Base subject = new Symbol { Name = name };
 
         // Act

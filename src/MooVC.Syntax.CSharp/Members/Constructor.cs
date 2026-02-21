@@ -39,6 +39,13 @@ namespace MooVC.Syntax.CSharp.Members
         }
 
         /// <summary>
+        /// Gets the attributes associated with the Property.
+        /// </summary>
+        /// <value>The attributes.</value>
+        [Descriptor("AttributedWith")]
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
+
+        /// <summary>
         /// Gets the body on the Constructor.
         /// </summary>
         /// <value>The body.</value>
@@ -135,12 +142,15 @@ namespace MooVC.Syntax.CSharp.Members
 
         private Snippet GetSignature(Name name, Snippet.Options options)
         {
+            var attributes = Attributes.ToSnippet(options);
             string extensibility = Extensibility;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string scope = Scope;
             string signature = Separator.Combine(scope, extensibility, $"{name}({parameters})");
 
-            return Snippet.From(options, signature);
+            return Snippet
+                .From(options, signature)
+                .Prepend(options, attributes);
         }
 
         private string ToSnippet(Name name, Snippet.Options options)

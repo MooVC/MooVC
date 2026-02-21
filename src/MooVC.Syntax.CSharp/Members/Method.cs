@@ -42,6 +42,13 @@ namespace MooVC.Syntax.CSharp.Members
         }
 
         /// <summary>
+        /// Gets the attributes associated with the Property.
+        /// </summary>
+        /// <value>The attributes.</value>
+        [Descriptor("AttributedWith")]
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
+
+        /// <summary>
         /// Gets the body snippet emitted after the method signature.
         /// </summary>
         /// <value>The statement or block content for the method body.</value>
@@ -134,6 +141,7 @@ namespace MooVC.Syntax.CSharp.Members
                 return Snippet.Empty;
             }
 
+            var attributes = Attributes.ToSnippet(options.Snippets);
             Snippet signature = GetSignature(options);
 
             if (Body.IsEmpty)
@@ -141,7 +149,9 @@ namespace MooVC.Syntax.CSharp.Members
                 return signature.Append(';');
             }
 
-            return Body.Block(options.Snippets, signature);
+            return Body
+                .Block(options.Snippets, signature)
+                .Prepend(options.Snippets, attributes);
         }
 
         /// <summary>

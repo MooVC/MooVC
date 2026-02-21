@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenConstructorIsCalled
 {
     private const string ArgumentName = "Inner";
@@ -11,7 +13,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Symbol();
 
         // Assert
-        subject.Name.ShouldBe(Variable.Unnamed);
+        subject.Name.ShouldBe(Symbol.Moniker.Unnamed);
         subject.Arguments.ShouldBeEmpty();
         subject.IsUndefined.ShouldBeTrue();
     }
@@ -20,17 +22,17 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var argument = new Symbol { Name = new Variable(ArgumentName) };
+        var argument = new Symbol { Name = ArgumentName };
 
         // Act
         var subject = new Symbol
         {
-            Name = new Variable(SymbolTestsData.DefaultName),
+            Name = SymbolTestsData.DefaultName,
             Arguments = [argument],
         };
 
         // Assert
-        subject.Name.ShouldBe(new Variable(SymbolTestsData.DefaultName));
+        subject.Name.ShouldBe(new Symbol.Moniker(SymbolTestsData.DefaultName));
         subject.Arguments.ShouldBe(new[] { argument });
         subject.IsUndefined.ShouldBeFalse();
     }

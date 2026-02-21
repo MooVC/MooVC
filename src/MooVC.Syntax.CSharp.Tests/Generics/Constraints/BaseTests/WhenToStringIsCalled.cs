@@ -23,7 +23,7 @@ public sealed class WhenToStringIsCalled
     public void GivenSpecifiedBaseThenReturnsName()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Variable(BaseName) };
+        Base subject = new Symbol { Name = BaseName };
 
         // Act
         string result = subject.ToString();

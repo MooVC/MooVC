@@ -8,8 +8,8 @@ public sealed class WhenWithArgumentsIsCalled
     public void GivenArgumentsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Symbol original = SymbolTestsData.Create(name: "Container", arguments: new Symbol { Name = new Variable("First") });
-        Symbol[] additional = [new Symbol { Name = new Variable("Second") }];
+        Symbol original = SymbolTestsData.Create(name: "Container", arguments: new Symbol { Name = "First" });
+        Symbol[] additional = [new Symbol { Name = "Second" }];
 
         // Act
         Symbol result = original.WithArguments(additional);

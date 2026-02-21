@@ -17,6 +17,10 @@ public sealed partial class Area
 {
     public static readonly Area Undefined = new();
 
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
+
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;

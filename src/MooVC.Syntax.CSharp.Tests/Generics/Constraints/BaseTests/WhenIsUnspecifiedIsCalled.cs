@@ -21,7 +21,7 @@ public sealed class WhenIsUnspecifiedIsCalled
     public void GivenSpecifiedBaseThenReturnsFalse()
     {
         // Arrange
-        Base subject = new Symbol { Name = new Variable("Base") };
+        Base subject = new Symbol { Name = "Base" };
 
         // Act
         bool result = subject.IsUnspecified;

@@ -31,13 +31,6 @@
         private const string Separator = ", ";
 
         /// <summary>
-        /// Initializes a new instance of the Symbol class.
-        /// </summary>
-        internal Symbol()
-        {
-        }
-
-        /// <summary>
         /// Gets the arguments on the Symbol.
         /// </summary>
         /// <value>The arguments.</value>
@@ -61,7 +54,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Variable Name { get; internal set; } = Variable.Unnamed;
+        public Moniker Name { get; internal set; } = Moniker.Unnamed;
 
         /// <summary>
         /// Gets the qualifier on the Symbol.
@@ -222,7 +215,7 @@
                 return string.Empty;
             }
 
-            var signature = Name.ToSnippet(Variable.Options.Pascal);
+            string signature = Name;
 
             signature = GetQualifiedSignature(options, signature);
 
@@ -235,7 +228,7 @@
 
             if (IsNullable)
             {
-                return signature.Append('?');
+                return $"{signature}?";
             }
 
             return signature;

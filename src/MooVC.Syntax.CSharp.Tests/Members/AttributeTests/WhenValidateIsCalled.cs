@@ -53,12 +53,12 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var attribute = new Attribute
         {
-            Name = new Symbol { Name = new Identifier(AttributeTestsData.DefaultName) },
+            Name = new Symbol { Name = AttributeTestsData.DefaultName },
             Arguments =
             [
                 new Argument
                 {
-                    Name = new Identifier(ArgumentName),
+                    Name = ArgumentName,
                     Value = Snippet.From($"alpha{Environment.NewLine}beta"),
                 }
             ],

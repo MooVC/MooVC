@@ -20,9 +20,20 @@ public sealed partial class View
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = [];
 
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
+
     [Descriptor("RenderedOn")]
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Qualifier> Facts { get; internal init; } = [];
+
+    [Ignore]
+    [Traverse(Scope = TraverseScope.None)]
+    public bool IsReference => !Name.IsUnnamed
+        && Attributes.IsDefaultOrEmpty
+        && Description.IsUndescribed
+        && Facts.IsDefaultOrEmpty;
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]

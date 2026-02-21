@@ -10,7 +10,7 @@ internal static class ResultTestsData
         {
             Modifier = modifier ?? Result.Kind.None,
             Mode = mode ?? Result.Modality.Asynchronous,
-            Type = type ?? new Symbol { Name = new Variable(DefaultTypeName) },
+            Type = type ?? new Symbol { Name = DefaultTypeName },
         };
     }
 }

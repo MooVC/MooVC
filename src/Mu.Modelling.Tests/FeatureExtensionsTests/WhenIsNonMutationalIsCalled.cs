@@ -16,11 +16,11 @@ public sealed class WhenIsNonMutationalIsCalled
         // Act
         Feature result = original.IsNonMutational(nonMutational => nonMutational
             .FromWriteStore()
-            .Using(ViewNameValue));
+            .Using(view => view.Named(ViewNameValue)));
 
         // Assert
         result.Type.ShouldBe(Feature.Kind.NonMutational);
-        result.NonMutational.View.ShouldBe(new Name(ViewNameValue));
+        result.NonMutational.View.Name.ShouldBe(new Name(ViewNameValue));
         result.Mutational.ShouldBe(Mutational.Undefined);
     }
 }

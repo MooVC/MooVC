@@ -32,7 +32,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var attribute = new Attribute { Name = new Symbol { Name = new Variable(AttributeName) } };
+        var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
         var @event = new Event { Name = new Name("Created") };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };

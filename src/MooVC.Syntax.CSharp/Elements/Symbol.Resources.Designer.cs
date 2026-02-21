@@ -22,9 +22,6 @@ namespace MooVC.Syntax.CSharp.Elements {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    /// <summary>
-    /// Represents the Symbol_Resources.
-    /// </summary>
     internal class Symbol_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
@@ -32,9 +29,6 @@ namespace MooVC.Syntax.CSharp.Elements {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        /// <summary>
-        /// Initializes a new instance of the Symbol_Resources class.
-        /// </summary>
         internal Symbol_Resources() {
         }
         
@@ -63,6 +57,15 @@ namespace MooVC.Syntax.CSharp.Elements {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{0}&apos; is not valid for &apos;{1}&apos;. Please use a valid C# identifier, starting with an uppercase letter, containing letters, digits, or underscores, and excluding spaces or reserved keywords..
+        /// </summary>
+        internal static string MonikerValidateValueRequired {
+            get {
+                return ResourceManager.GetString("MonikerValidateValueRequired", resourceCulture);
             }
         }
         

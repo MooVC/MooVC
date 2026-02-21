@@ -5,7 +5,10 @@ using Mu.Services;
 
 public static partial class AggregateExtensions
 {
-    public static TAggregate Propose<TAggregate, TFact>(this TAggregate aggregate, TFact fact, params IEnumerable<ITransform<TAggregate, TFact>> transforms)
+    public static TAggregate Propose<TAggregate, TFact>(
+        this TAggregate aggregate,
+        TFact fact,
+        params IEnumerable<ITransform<TAggregate, TFact>> transforms)
         where TAggregate : Aggregate
         where TFact : Fact<TAggregate>
     {

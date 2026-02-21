@@ -17,8 +17,6 @@ public partial class Model
                 {
                     public sealed partial class Unit
                     {
-                        private const string Separator = ".";
-
                         public Qualifier Namespace => new([Root.Company, Root.Name, Area.Name, Value.Name]);
 
                         public string ProjectName => Separator.Combine(Root.Company, Root.Name, Area.Name, Value.Name);

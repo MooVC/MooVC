@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
-            Name = new Identifier(Name),
+            Name = Name,
             Arguments = [Symbol.Undefined],
         };
 
@@ -89,7 +89,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Variable));
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -99,7 +99,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
-            Name = new Identifier(Name),
+            Name = Name,
             Qualifier = new Name[] { "invalid" },
         };
 
@@ -122,8 +122,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
-            Name = new Identifier(Name),
-            Arguments = [new Symbol { Name = new Identifier(ArgumentName) }],
+            Name = Name,
+            Arguments = [new Symbol { Name = ArgumentName }],
         };
 
         var context = new ValidationContext(symbol);

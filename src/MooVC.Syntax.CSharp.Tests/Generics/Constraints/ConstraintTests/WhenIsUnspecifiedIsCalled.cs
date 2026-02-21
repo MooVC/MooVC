@@ -24,7 +24,7 @@ public sealed class WhenIsUnspecifiedIsCalled
         // Arrange
         var subject = new Constraint
         {
-            Base = new Symbol { Name = new Variable("Result") },
+            Base = new Symbol { Name = "Result" },
         };
 
         // Act

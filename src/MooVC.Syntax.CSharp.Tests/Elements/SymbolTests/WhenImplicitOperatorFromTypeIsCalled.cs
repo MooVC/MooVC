@@ -28,7 +28,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Symbol subject = value;
 
         // Assert
-        subject.Name.ShouldBe(new Variable(nameof(StringBuilder)));
+        subject.Name.ShouldBe(new Symbol.Moniker(nameof(StringBuilder)));
         subject.Qualifier.ShouldBe(new Qualifier(["System", "Text"]));
     }
 }

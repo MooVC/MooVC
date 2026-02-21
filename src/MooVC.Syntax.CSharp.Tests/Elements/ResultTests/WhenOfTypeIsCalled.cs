@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenOfTypeIsCalled
 {
     [Fact]
@@ -7,7 +9,7 @@ public sealed class WhenOfTypeIsCalled
     {
         // Arrange
         Result original = ResultTestsData.Create();
-        var type = new Symbol { Name = new Variable("Updated") };
+        var type = new Symbol { Name = "Updated" };
 
         // Act
         Result result = original.OfType(type);
@@ -17,6 +19,6 @@ public sealed class WhenOfTypeIsCalled
         result.Type.ShouldBe(type);
         result.Modifier.ShouldBe(original.Modifier);
         result.Mode.ShouldBe(original.Mode);
-        original.Type.Name.ShouldBe(new Variable(ResultTestsData.DefaultTypeName));
+        original.Type.Name.ShouldBe(new Symbol.Moniker(ResultTestsData.DefaultTypeName));
     }
 }

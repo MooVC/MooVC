@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -69,7 +70,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Variable));
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
@@ -80,7 +81,7 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = new Variable(BaseName) },
+            Base = new Symbol { Name = BaseName },
             Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
@@ -115,7 +116,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         valid.ShouldBeFalse();
         results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Variable)));
+        results.ShouldContain(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Interface)));
     }
 }

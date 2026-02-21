@@ -16,6 +16,10 @@ public sealed partial class NonMutational
 {
     public static readonly NonMutational Undefined = new();
 
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
+
     [Descriptor("From")]
     [Hide]
     [Traverse(Scope = TraverseScope.Property)]
@@ -23,7 +27,7 @@ public sealed partial class NonMutational
 
     [Descriptor("Using")]
     [Traverse(Scope = TraverseScope.Property)]
-    public Name View { get; internal init; } = Name.Unnamed;
+    public View View { get; internal init; } = View.Undefined;
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
@@ -37,7 +41,7 @@ public sealed partial class NonMutational
         }
 
         return validationContext
-            .Include(nameof(View), _ => !View.IsUnnamed, View)
+            .Include(nameof(View), _ => !View.IsUndefined, View)
             .Results;
     }
 }

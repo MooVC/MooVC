@@ -46,7 +46,7 @@ public sealed class WhenConstructorIsCalled
             Default = Snippet.From(DefaultValue),
             Name = PropertyName,
             Scope = Scope.Internal,
-            Type = new Symbol { Name = new Identifier(PropertyType) },
+            Type = new Symbol { Name = PropertyType },
         };
 
         // Assert
@@ -55,6 +55,6 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeFalse();
         subject.Name.ShouldBe(new Name(PropertyName));
         subject.Scope.ShouldBe(Scope.Internal);
-        subject.Type.ShouldBe(new Symbol { Name = new Identifier(PropertyType) });
+        subject.Type.ShouldBe(new Symbol { Name = PropertyType });
     }
 }

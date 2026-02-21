@@ -1,5 +1,7 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
+using MooVC.Syntax.Elements;
+
 public sealed class WhenNamedIsCalled
 {
     [Fact]
@@ -7,7 +9,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Original");
-        var name = new Variable("Updated");
+        var name = new Symbol.Moniker("Updated");
 
         // Act
         Symbol result = original.Named(name);

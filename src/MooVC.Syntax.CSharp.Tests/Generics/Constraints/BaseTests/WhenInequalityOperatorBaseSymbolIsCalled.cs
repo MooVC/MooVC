@@ -25,7 +25,7 @@ public sealed class WhenInequalityOperatorBaseSymbolIsCalled
     public void GivenEitherSideIsNullThenReturnsTrue()
     {
         // Arrange
-        Base left = new Symbol { Name = new Variable(Same) };
+        Base left = new Symbol { Name = Same };
         Symbol? right = default;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenInequalityOperatorBaseSymbolIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Base left = new Symbol { Name = new Variable(Same) };
-        var right = new Symbol { Name = new Variable(Same) };
+        Base left = new Symbol { Name = Same };
+        var right = new Symbol { Name = Same };
 
         // Act
         bool result = left != right;
@@ -53,8 +53,8 @@ public sealed class WhenInequalityOperatorBaseSymbolIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Base left = new Symbol { Name = new Variable(Same) };
-        var right = new Symbol { Name = new Variable(Different) };
+        Base left = new Symbol { Name = Same };
+        var right = new Symbol { Name = Different };
 
         // Act
         bool result = left != right;

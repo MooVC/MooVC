@@ -95,8 +95,8 @@ public sealed class WhenEqualsParameterIsCalled
     public void GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Identifier("First") } });
-        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = new Identifier("Second") } });
+        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "First" } });
+        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "Second" } });
 
         // Act
         bool result = left.Equals(right);

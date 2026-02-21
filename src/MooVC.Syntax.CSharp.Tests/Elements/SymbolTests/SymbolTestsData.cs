@@ -14,7 +14,7 @@ internal static class SymbolTestsData
 
         if (!string.IsNullOrEmpty(name))
         {
-            symbol.Name = new Variable(name);
+            symbol.Name = name;
         }
 
         if (qualifier is not null)
@@ -33,7 +33,7 @@ internal static class SymbolTestsData
     public static Symbol CreateWithArgumentNames(string? name = DefaultName, params string[] argumentNames)
     {
         Symbol[] arguments = argumentNames
-            .Select(argument => new Symbol { Name = new Variable(argument) })
+            .Select(argument => new Symbol { Name = argument })
             .ToArray();
 
         return Create(name, arguments: arguments);

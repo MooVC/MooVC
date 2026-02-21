@@ -27,9 +27,11 @@
         }
 
         /// <summary>
-        /// Gets the attributes on the Type.
+        /// Gets the attributes associated with the Property.
         /// </summary>
         /// <value>The attributes.</value>
+        [Descriptor("AttributedWith")]
+        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>

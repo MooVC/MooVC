@@ -17,6 +17,7 @@ public sealed partial class Model
     : IValidatableObject
 {
     public static readonly Model Undefined = new();
+    private const string Separator = ".";
 
     [Descriptor("WithArea")]
     public ImmutableArray<Area> Areas { get; internal init; } = [];
@@ -24,6 +25,10 @@ public sealed partial class Model
     [Descriptor("For")]
     [Traverse(Scope = TraverseScope.Property)]
     public Name Company { get; internal init; } = Name.Unnamed;
+
+    [Descriptor("DescribedAs")]
+    [Traverse(Scope = TraverseScope.Property)]
+    public Description Description { get; internal init; } = Description.Undescribed;
 
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]

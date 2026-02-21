@@ -35,7 +35,7 @@ public sealed class WhenEqualsResultIsCalled
     {
         // Arrange
         Result subject = ResultTestsData.Create();
-        Result other = ResultTestsData.Create(type: new Symbol { Name = new Variable("Other") });
+        Result other = ResultTestsData.Create(type: new Symbol { Name = "Other" });
 
         // Act
         bool result = subject.Equals(other);
