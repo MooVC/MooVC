@@ -62,10 +62,10 @@ public sealed class WhenToTypedArrayIsCalled
     public void GivenAnArrayThenTheSameArrayIsReturned()
     {
         // Arrange
-        int[] expected = { 1, 2, 3 };
+        int[] expected = [1, 2, 3];
 
         // Act
-        int[] value = expected.ToTypedArray();
+        int[]? value = expected.ToTypedArray();
 
         // Assert
         value.ShouldBeSameAs(expected);

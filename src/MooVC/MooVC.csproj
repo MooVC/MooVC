@@ -49,6 +49,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IEnumerableExtensions.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ObjectExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObjectExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Paging\Serialization\PageConverter.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -68,6 +73,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Serializer.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="StringBuilderExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StringBuilderExtensions.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="StringExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StringExtensions.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Threading\Coordination\Coordinator.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -113,6 +128,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="ObjectExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObjectExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Paging\Serialization\PageConverter.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PageConverter.Resources.Designer.cs</LastGenOutput>
@@ -128,6 +147,14 @@
     <EmbeddedResource Update="Serialization\Serializer.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Serializer.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StringBuilderExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringBuilderExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StringExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Threading\Coordination\Coordinator.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

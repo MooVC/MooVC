@@ -1,0 +1,35 @@
+namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+
+using System.Collections.Immutable;
+using MooVC.Syntax.Elements;
+using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
+using Variable = MooVC.Syntax.CSharp.Elements.Variable;
+
+public static class ParameterTestsData
+{
+    public const string DefaultName = "Value";
+    public static readonly Symbol DefaultType = typeof(Version);
+
+    public static Parameter Create(
+        string? name = DefaultName,
+        Parameter.Mode? modifier = default,
+        Snippet? @default = default,
+        Symbol? type = default,
+        params Attribute[] attributes)
+    {
+        ImmutableArray<Attribute> provided = attributes.Length == 0
+            ? []
+            : [.. attributes];
+
+        return new Parameter
+        {
+            Attributes = provided,
+            Default = @default ?? Snippet.Empty,
+            Modifier = modifier ?? Parameter.Mode.None,
+            Name = name is null
+                ? Variable.Unnamed
+                : new Variable(name),
+            Type = type ?? DefaultType,
+        };
+    }
+}

@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Linq;
 
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 using Ardalis.GuardClauses;
 using static MooVC.Linq.IEnumerableExtensions_Resources;
 

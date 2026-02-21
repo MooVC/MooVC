@@ -1,0 +1,60 @@
+namespace MooVC.Syntax.CSharp.Members
+{
+    using Fluentify;
+    using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.Elements;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
+
+    /// <summary>
+    /// Represents a C# member syntax property.
+    /// </summary>
+    public partial class Property
+    {
+        /// <summary>
+        /// Represents a C# member syntax setter.
+        /// </summary>
+        [AutoInitializeWith(nameof(Default))]
+        [Fluentify]
+        [Valuify]
+        public sealed partial class Setter
+        {
+            /// <summary>
+            /// Gets the default instance.
+            /// </summary>
+            public static readonly Setter Default = new Setter();
+
+            /// <summary>
+            /// Initializes a new instance of the Setter class.
+            /// </summary>
+            internal Setter()
+            {
+            }
+
+            /// <summary>
+            /// Gets the behaviour on the Setter.
+            /// </summary>
+            /// <value>The behaviour.</value>
+            public Snippet Behaviour { get; internal set; } = Snippet.Empty;
+
+            /// <summary>
+            /// Gets a value indicating whether the Setter is default.
+            /// </summary>
+            /// <value>A value indicating whether the Setter is default.</value>
+            [Ignore]
+            public bool IsDefault => this == Default;
+
+            /// <summary>
+            /// Gets the mode on the Setter.
+            /// </summary>
+            /// <value>The mode.</value>
+            public Mode Mode { get; internal set; } = Mode.Init;
+
+            /// <summary>
+            /// Gets the scope on the Setter.
+            /// </summary>
+            /// <value>The scope.</value>
+            public Scope Scope { get; internal set; } = Scope.Unspecified;
+        }
+    }
+}

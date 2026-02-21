@@ -1,0 +1,26 @@
+namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+
+using System.Linq;
+using MooVC.Syntax.Elements;
+
+public sealed class WhenWithItemsIsCalled
+{
+    [Fact]
+    public void GivenItemsThenReturnsUpdatedInstance()
+    {
+        // Arrange
+        Item existing = FolderTestsData.CreateItem();
+        Item additional = FolderTestsData.CreateItem().Named(Snippet.From("OtherItem"));
+        Folder original = FolderTestsData.Create(item: existing);
+
+        // Act
+        Folder result = original.WithItems(additional);
+
+        // Assert
+        result.ShouldNotBeSameAs(original);
+        result.Items.ShouldBe(original.Items.Concat([additional]));
+        result.Files.ShouldBe(original.Files);
+        result.Name.ShouldBe(original.Name);
+        result.Projects.ShouldBe(original.Projects);
+    }
+}

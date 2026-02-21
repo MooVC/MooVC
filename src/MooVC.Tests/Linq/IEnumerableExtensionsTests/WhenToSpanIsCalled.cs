@@ -35,7 +35,7 @@ public sealed class WhenToSpanIsCalled
     public void GivenANullEnumerableThenAnEmptySpanIsReturned()
     {
         // Arrange
-        IEnumerable<int>? enumerable = null;
+        IEnumerable<int>? enumerable = default;
 
         // Act
         ReadOnlySpan<int> actual = enumerable.ToSpan();

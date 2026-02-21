@@ -1,0 +1,25 @@
+namespace MooVC.Syntax.Attributes.Project.TargetTests;
+
+using System.Linq;
+using MooVC.Syntax.Elements;
+
+public sealed class WhenWithTasksIsCalled
+{
+    [Fact]
+    public void GivenTasksThenReturnsUpdatedInstance()
+    {
+        // Arrange
+        TargetTask existing = TargetTestsData.CreateTask();
+        var additional = new TargetTask { Name = new Name("Other") };
+        Target original = TargetTestsData.Create(task: existing);
+
+        // Act
+        Target result = original.WithTasks(additional);
+
+        // Assert
+        result.ShouldNotBeSameAs(original);
+        result.Tasks.ShouldBe(original.Tasks.Concat([additional]));
+        result.Name.ShouldBe(original.Name);
+        result.Label.ShouldBe(original.Label);
+    }
+}

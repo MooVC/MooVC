@@ -1,0 +1,139 @@
+namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using MooVC.Syntax.Elements;
+
+public sealed class WhenValidateIsCalled
+{
+    private const string Name = "Result";
+    private const string ArgumentName = "Inner";
+
+    [Fact]
+    public void GivenUnspecifiedSymbolThenNoValidationErrorsReturned()
+    {
+        // Arrange
+        Symbol symbol = Symbol.Undefined;
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void GivenUnnamedSymbolThenValidationErrorReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Arguments = [new Symbol { Name = "Test" }],
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Name));
+        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public void GivenUnspecifiedArgumentThenValidationErrorReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Name = Name,
+            Arguments = [Symbol.Undefined],
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Arguments));
+        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Arguments = [new Symbol { Name = "Invalid Name" }],
+            Name = Name,
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
+        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public void GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Name = Name,
+            Qualifier = new Name[] { "invalid" },
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeFalse();
+        _ = results.ShouldHaveSingleItem();
+        results[0].MemberNames.ShouldContain(nameof(Name));
+        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public void GivenValidSymbolThenNoValidationErrorsReturned()
+    {
+        // Arrange
+        var symbol = new Symbol
+        {
+            Name = Name,
+            Arguments = [new Symbol { Name = ArgumentName }],
+        };
+
+        var context = new ValidationContext(symbol);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
+
+        // Assert
+        valid.ShouldBeTrue();
+        results.ShouldBeEmpty();
+    }
+}
