@@ -8,8 +8,8 @@ using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
-using Mu.Modelling.Syntax.CSharp;
 using Mu.Modelling.Syntax.CSharp.Concepts;
+using Muify.Domain;
 using Builder = MooVC.Syntax.Builder;
 
 internal sealed class Entity
@@ -31,7 +31,7 @@ internal sealed class Entity
                 .Named(component.Value.Name)
                 .WithProperties(component.Value.Attributes)
                 .WithProperties(identifier => identifier
-                    .AttributedWith(attribute => attribute.Named(Framework.Attributes.Identity))
+                    .AttributedWith(attribute => attribute.Named(typeof(IdentityAttribute)))
                     .Named(component.Value.Identifier.Name)
                     .OfType(component.Value.Identifier.Type)))
             .Referencing(component.References)

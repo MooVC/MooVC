@@ -25,6 +25,7 @@
     <ProjectReference Include="..\MooVC.Modelling\MooVC.Modelling.csproj" />
     <ProjectReference Include="..\MooVC.Syntax.CSharp\MooVC.Syntax.CSharp.csproj" />
     <ProjectReference Include="..\Mu\Mu.csproj" Aliases="Framework" />
+    <ProjectReference Include="..\Muify\Muify.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Feature\" />
