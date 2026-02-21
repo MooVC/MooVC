@@ -13,8 +13,8 @@ public sealed class WhenWithParametersIsCalled
 
         var additional = new Parameter
         {
-            Name = new Name("Other"),
-            Value = Snippet.From("Value"),
+            Name = "Other",
+            Value = "Value",
         };
 
         TargetTask original = TargetTaskTestsData.Create(parameter: existing);

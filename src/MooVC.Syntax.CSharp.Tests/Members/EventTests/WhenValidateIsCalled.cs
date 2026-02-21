@@ -52,7 +52,7 @@ public sealed class WhenValidateIsCalled
         var subject = new Event
         {
             Handler = new Symbol { Name = "Invalid Handler Name" },
-            Name = new Name(EventTestsData.DefaultName),
+            Name = EventTestsData.DefaultName,
         };
 
         var context = new ValidationContext(subject);

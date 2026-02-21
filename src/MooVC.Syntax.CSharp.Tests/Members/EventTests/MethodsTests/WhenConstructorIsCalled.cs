@@ -21,8 +21,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var add = Snippet.From("value");
-        var remove = Snippet.From("result");
+        var add = "value";
+        var remove = "result";
 
         // Act
         var subject = new Event.Methods

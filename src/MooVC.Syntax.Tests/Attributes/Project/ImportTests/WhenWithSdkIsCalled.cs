@@ -11,7 +11,7 @@ public sealed class WhenWithSdkIsCalled
     {
         // Arrange
         Import original = ImportTestsData.Create();
-        var updated = Snippet.From(UpdatedSdk);
+        var updated = UpdatedSdk;
 
         // Act
         Import result = original.WithSdk(updated);

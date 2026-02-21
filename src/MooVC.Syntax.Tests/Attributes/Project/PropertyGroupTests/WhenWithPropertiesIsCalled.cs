@@ -13,9 +13,9 @@ public sealed class WhenWithPropertiesIsCalled
 
         var additional = new Property
         {
-            Condition = Snippet.From("Extra"),
-            Name = new Name("Other"),
-            Value = Snippet.From("Value"),
+            Condition = "Extra",
+            Name = "Other",
+            Value = "Value",
         };
 
         PropertyGroup original = PropertyGroupTestsData.Create(property: existing);

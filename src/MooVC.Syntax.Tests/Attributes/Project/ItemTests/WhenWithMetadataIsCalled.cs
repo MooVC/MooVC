@@ -13,8 +13,8 @@ public sealed class WhenWithMetadataIsCalled
 
         var additional = new Metadata
         {
-            Name = new Name("Other"),
-            Value = Snippet.From("Value"),
+            Name = "Other",
+            Value = "Value",
         };
 
         Item original = ItemTestsData.Create(metadata: existing);

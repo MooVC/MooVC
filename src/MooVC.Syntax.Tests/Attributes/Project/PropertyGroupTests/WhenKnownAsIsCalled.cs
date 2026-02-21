@@ -11,7 +11,7 @@ public sealed class WhenKnownAsIsCalled
     {
         // Arrange
         PropertyGroup original = PropertyGroupTestsData.Create(property: PropertyGroupTestsData.CreateProperty());
-        var updated = Snippet.From(UpdatedLabel);
+        var updated = UpdatedLabel;
 
         // Act
         PropertyGroup result = original.KnownAs(updated);

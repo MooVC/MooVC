@@ -9,7 +9,7 @@ public sealed class WhenWithIdIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From("OtherId");
+        var updated = "OtherId";
 
         // Act
         Item result = original.WithId(updated);

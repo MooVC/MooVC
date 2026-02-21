@@ -9,7 +9,7 @@ public sealed class WhenWithCommentIsCalled
     {
         // Arrange
         Data original = DataTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Data result = original.WithComment(updated);

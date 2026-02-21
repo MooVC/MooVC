@@ -11,7 +11,7 @@ public sealed class WhenWithRemoveIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedRemove);
+        var updated = UpdatedRemove;
 
         // Act
         Item result = original.WithRemove(updated);

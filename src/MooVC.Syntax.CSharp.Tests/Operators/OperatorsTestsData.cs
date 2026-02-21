@@ -8,7 +8,7 @@ internal static class OperatorsTestsData
 {
     public const string DefaultDeclarationName = "Value";
 
-    public static readonly Snippet DefaultBody = Snippet.From("return default;");
+    public static readonly Snippet DefaultBody = "return default;";
 
     public static TestType Create(string? name = default, bool isUndefined = false)
     {

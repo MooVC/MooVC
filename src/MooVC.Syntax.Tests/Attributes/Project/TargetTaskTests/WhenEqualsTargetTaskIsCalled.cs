@@ -37,7 +37,7 @@ public sealed class WhenEqualsTargetTaskIsCalled
     {
         // Arrange
         TargetTask subject = TargetTaskTestsData.Create();
-        TargetTask other = TargetTaskTestsData.Create(name: new Name("Other"));
+        TargetTask other = TargetTaskTestsData.Create(name: "Other");
 
         // Act
         bool result = subject.Equals(other);

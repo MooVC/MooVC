@@ -11,7 +11,7 @@ public sealed class WhenWithRemoveMetadataIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedRemoveMetadata);
+        var updated = UpdatedRemoveMetadata;
 
         // Act
         Item result = original.WithRemoveMetadata(updated);

@@ -71,7 +71,7 @@ public sealed class WhenToSnippetIsCalled
     {
         return new Directive
         {
-            Alias = alias is null ? Name.Unnamed : new Name(alias),
+            Alias = alias is null ? Name.Unnamed : alias,
             IsStatic = isStatic,
             Qualifier = qualifier,
         };

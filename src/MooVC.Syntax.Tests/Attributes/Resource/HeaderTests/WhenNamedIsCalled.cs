@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Header original = HeaderTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Header result = original.Named(updated);

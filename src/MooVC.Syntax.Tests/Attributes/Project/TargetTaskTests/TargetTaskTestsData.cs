@@ -44,7 +44,7 @@ internal static class TargetTaskTestsData
     {
         return new Output
         {
-            Condition = Snippet.From(DefaultOutputCondition),
+            Condition = DefaultOutputCondition,
             ItemName = DefaultOutputItemName,
             PropertyName = DefaultOutputPropertyName,
             TaskParameter = DefaultOutputTaskParameter,
@@ -56,7 +56,7 @@ internal static class TargetTaskTestsData
         return new Parameter
         {
             Name = DefaultParameterName,
-            Value = Snippet.From(DefaultParameterValue),
+            Value = DefaultParameterValue,
         };
     }
 }

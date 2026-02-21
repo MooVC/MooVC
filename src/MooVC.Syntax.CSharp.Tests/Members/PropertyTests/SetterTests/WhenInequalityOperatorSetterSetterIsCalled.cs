@@ -24,7 +24,7 @@ public sealed class WhenInequalityOperatorSetterSetterIsCalled
     {
         // Arrange
         Property.Setter? left = default!;
-        var right = new Property.Setter { Behaviour = Snippet.From("value") };
+        var right = new Property.Setter { Behaviour = "value" };
 
         // Act
         bool result = left != right;
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorSetterSetterIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Setter { Behaviour = Snippet.From("value") };
+        var left = new Property.Setter { Behaviour = "value" };
         Property.Setter? right = default!;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorSetterSetterIsCalled
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Property.Setter { Behaviour = Snippet.From("value") };
+        var first = new Property.Setter { Behaviour = "value" };
         Property.Setter second = first;
 
         // Act
@@ -67,14 +67,14 @@ public sealed class WhenInequalityOperatorSetterSetterIsCalled
         // Arrange
         var left = new Property.Setter
         {
-            Behaviour = Snippet.From("value"),
+            Behaviour = "value",
             Mode = Property.Mode.Init,
             Scope = Scope.Private,
         };
 
         var right = new Property.Setter
         {
-            Behaviour = Snippet.From("value"),
+            Behaviour = "value",
             Mode = Property.Mode.Init,
             Scope = Scope.Private,
         };
@@ -92,8 +92,8 @@ public sealed class WhenInequalityOperatorSetterSetterIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Setter { Behaviour = Snippet.From("value") };
-        var right = new Property.Setter { Behaviour = Snippet.From("alternative") };
+        var left = new Property.Setter { Behaviour = "value" };
+        var right = new Property.Setter { Behaviour = "alternative" };
 
         // Act
         bool resultLeftRight = left != right;

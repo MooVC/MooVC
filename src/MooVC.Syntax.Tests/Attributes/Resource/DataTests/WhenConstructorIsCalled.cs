@@ -23,11 +23,11 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var comment = Snippet.From(DataTestsData.DefaultComment);
-        var mimeType = Snippet.From(DataTestsData.DefaultMimeType);
-        var name = Snippet.From(DataTestsData.DefaultName);
-        var type = Snippet.From(DataTestsData.DefaultType);
-        var value = Snippet.From(DataTestsData.DefaultValue);
+        var comment = DataTestsData.DefaultComment;
+        var mimeType = DataTestsData.DefaultMimeType;
+        var name = DataTestsData.DefaultName;
+        var type = DataTestsData.DefaultType;
+        var value = DataTestsData.DefaultValue;
 
         // Act
         var subject = new Data

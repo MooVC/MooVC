@@ -10,7 +10,7 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var @event = new Event { Name = new Name("Changed") };
+        var @event = new Event { Name = "Changed" };
         Struct original = StructTestsData.Create();
 
         // Act

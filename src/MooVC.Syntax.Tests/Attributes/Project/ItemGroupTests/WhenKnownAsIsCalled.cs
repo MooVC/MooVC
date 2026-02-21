@@ -11,7 +11,7 @@ public sealed class WhenKnownAsIsCalled
     {
         // Arrange
         ItemGroup original = ItemGroupTestsData.Create(item: ItemGroupTestsData.CreateItem());
-        var updated = Snippet.From(UpdatedLabel);
+        var updated = UpdatedLabel;
 
         // Act
         ItemGroup result = original.KnownAs(updated);

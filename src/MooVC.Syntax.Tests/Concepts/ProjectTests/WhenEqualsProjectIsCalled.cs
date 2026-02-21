@@ -38,7 +38,7 @@ public sealed class WhenEqualsProjectIsCalled
     {
         // Arrange
         Project subject = ProjectTestsData.Create();
-        Project other = ProjectTestsData.Create(import: new Import { Project = Snippet.From("Other") });
+        Project other = ProjectTestsData.Create(import: new Import { Project = "Other" });
 
         // Act
         bool result = subject.Equals(other);

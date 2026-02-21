@@ -10,10 +10,10 @@ public sealed class WhenWithAddIsCalled
         // Arrange
         var original = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
-        var add = Snippet.From("result");
+        var add = "result";
 
         // Act
         Event.Methods result = original.WithAdd(add);

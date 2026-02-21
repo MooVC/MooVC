@@ -9,7 +9,7 @@ public sealed class WhenWithDefaultIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var defaultValue = Snippet.From("value");
+        var defaultValue = "value";
 
         // Act
         Property result = original.WithDefault(defaultValue);

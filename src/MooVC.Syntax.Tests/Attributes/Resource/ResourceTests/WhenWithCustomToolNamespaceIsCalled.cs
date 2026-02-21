@@ -9,7 +9,7 @@ public sealed class WhenWithCustomToolNamespaceIsCalled
     {
         // Arrange
         Resource original = ResourceTestsData.Create();
-        var updated = Snippet.From("Other.Namespace");
+        var updated = "Other.Namespace";
 
         // Act
         Resource result = original.WithCustomToolNamespace(updated);

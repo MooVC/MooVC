@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     public void GivenDefaultOptionsThenReturnsJoinedLines()
     {
         // Arrange
-        var subject = Snippet.From(lines);
+        var subject = lines;
 
         const string expected = """
             if (condition)

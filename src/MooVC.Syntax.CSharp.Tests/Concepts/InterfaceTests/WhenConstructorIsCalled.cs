@@ -33,10 +33,10 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
-        var @event = new Event { Name = new Name("Created") };
+        var @event = new Event { Name = "Created" };
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
         var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
+        var property = new Property { Name = "Value", Type = typeof(string) };
 
         // Act
         Interface subject = InterfaceTestsData.Create(

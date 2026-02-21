@@ -25,7 +25,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Project left = ProjectTestsData.Create();
-        Project right = ProjectTestsData.Create(import: new Import { Project = Snippet.From("Other") });
+        Project right = ProjectTestsData.Create(import: new Import { Project = "Other" });
 
         // Act
         int leftHash = left.GetHashCode();

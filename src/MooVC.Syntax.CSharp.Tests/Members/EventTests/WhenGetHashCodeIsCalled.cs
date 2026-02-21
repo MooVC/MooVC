@@ -48,7 +48,7 @@ public sealed class WhenGetHashCodeIsCalled
         Event second = EventTestsData.Create(
             behaviours: new Event.Methods
             {
-                Add = Snippet.From(Behaviour),
+                Add = Behaviour,
             });
 
         // Act

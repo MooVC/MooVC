@@ -9,7 +9,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Name(Same);
+        var subject = Same;
         object? other = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Name(Same);
+        var subject = Same;
         object other = subject;
 
         // Act
@@ -37,8 +37,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
-        object right = new Name(Same);
+        var left = Same;
+        object right = Same;
 
         // Act
         bool result = left.Equals(right);
@@ -51,8 +51,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Name(Same);
-        object right = new Name(Different);
+        var left = Same;
+        object right = Different;
 
         // Act
         bool result = left.Equals(right);
@@ -65,7 +65,7 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenNonSegmentThenReturnsFalse()
     {
         // Arrange
-        var subject = new Name(Same);
+        var subject = Same;
         object other = Same;
 
         // Act
@@ -79,8 +79,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Name(Same);
-        var right = new Name(Same);
+        var left = Same;
+        var right = Same;
         object leftObject = left;
         object rightObject = right;
 
@@ -97,8 +97,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Name(Same);
-        var right = new Name(Different);
+        var left = Same;
+        var right = Different;
         object leftObject = left;
         object rightObject = right;
 

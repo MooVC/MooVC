@@ -10,7 +10,7 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
     {
         // Arrange
         Project left = ProjectTestsData.Create();
-        Project right = ProjectTestsData.Create(import: new Import { Project = Snippet.From("Other") });
+        Project right = ProjectTestsData.Create(import: new Import { Project = "Other" });
 
         // Act
         bool result = left != right;

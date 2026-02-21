@@ -9,7 +9,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Conversion original = ConversionTestsData.Create(body: Snippet.From("return value;"));
-        var replacement = Snippet.From("return other;");
+        var replacement = "return other;";
 
         // Act
         Conversion result = original.WithBody(replacement);

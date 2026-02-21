@@ -33,29 +33,29 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Item
         {
-            Condition = Snippet.From(ItemTestsData.DefaultCondition),
-            Exclude = Snippet.From(ItemTestsData.DefaultExclude),
-            Include = Snippet.From(ItemTestsData.DefaultInclude),
+            Condition = ItemTestsData.DefaultCondition,
+            Exclude = ItemTestsData.DefaultExclude,
+            Include = ItemTestsData.DefaultInclude,
             KeepDuplicates = true,
-            MatchOnMetadata = Snippet.From(ItemTestsData.DefaultMatchOnMetadata),
-            MatchOnMetadataOptions = Snippet.From(ItemTestsData.DefaultMatchOnMetadataOptions),
+            MatchOnMetadata = ItemTestsData.DefaultMatchOnMetadata,
+            MatchOnMetadataOptions = ItemTestsData.DefaultMatchOnMetadataOptions,
             Metadata = [metadata],
-            Remove = Snippet.From(ItemTestsData.DefaultRemove),
-            RemoveMetadata = Snippet.From(ItemTestsData.DefaultRemoveMetadata),
-            Update = Snippet.From(ItemTestsData.DefaultUpdate),
+            Remove = ItemTestsData.DefaultRemove,
+            RemoveMetadata = ItemTestsData.DefaultRemoveMetadata,
+            Update = ItemTestsData.DefaultUpdate,
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(ItemTestsData.DefaultCondition));
-        subject.Exclude.ShouldBe(Snippet.From(ItemTestsData.DefaultExclude));
-        subject.Include.ShouldBe(Snippet.From(ItemTestsData.DefaultInclude));
+        subject.Condition.ShouldBe(ItemTestsData.DefaultCondition);
+        subject.Exclude.ShouldBe(ItemTestsData.DefaultExclude);
+        subject.Include.ShouldBe(ItemTestsData.DefaultInclude);
         subject.KeepDuplicates.ShouldBeTrue();
-        subject.MatchOnMetadata.ShouldBe(Snippet.From(ItemTestsData.DefaultMatchOnMetadata));
-        subject.MatchOnMetadataOptions.ShouldBe(Snippet.From(ItemTestsData.DefaultMatchOnMetadataOptions));
+        subject.MatchOnMetadata.ShouldBe(ItemTestsData.DefaultMatchOnMetadata);
+        subject.MatchOnMetadataOptions.ShouldBe(ItemTestsData.DefaultMatchOnMetadataOptions);
         subject.Metadata.ShouldBe(new[] { metadata });
-        subject.Remove.ShouldBe(Snippet.From(ItemTestsData.DefaultRemove));
-        subject.RemoveMetadata.ShouldBe(Snippet.From(ItemTestsData.DefaultRemoveMetadata));
-        subject.Update.ShouldBe(Snippet.From(ItemTestsData.DefaultUpdate));
+        subject.Remove.ShouldBe(ItemTestsData.DefaultRemove);
+        subject.RemoveMetadata.ShouldBe(ItemTestsData.DefaultRemoveMetadata);
+        subject.Update.ShouldBe(ItemTestsData.DefaultUpdate);
         subject.IsUndefined.ShouldBeFalse();
     }
 }

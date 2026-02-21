@@ -9,7 +9,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Method original = MethodTestsData.Create(body: Snippet.From("return value;"));
-        var replacement = Snippet.From("return other;");
+        var replacement = "return other;";
 
         // Act
         Method result = original.WithBody(replacement);

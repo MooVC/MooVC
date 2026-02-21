@@ -25,7 +25,7 @@ public sealed class WhenFromIsCalled
         string[]? values = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(values!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = values!);
 
         // Assert
         exception.ParamName.ShouldBe(nameof(values));
@@ -35,7 +35,7 @@ public sealed class WhenFromIsCalled
     public void GivenEmptyThenReturnsEmpty()
     {
         // Arrange & Act
-        var result = Snippet.From(string.Empty);
+        var result = string.Empty;
 
         // Assert
         result.ShouldBe(Snippet.Empty);
@@ -51,7 +51,7 @@ public sealed class WhenFromIsCalled
         string value = string.Join(Environment.NewLine, first, second);
 
         // Act
-        var result = Snippet.From(value);
+        var result = value;
         ImmutableArray<string> converted = result;
 
         // Assert

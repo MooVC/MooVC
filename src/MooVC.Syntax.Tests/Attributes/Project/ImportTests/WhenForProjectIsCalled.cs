@@ -9,7 +9,7 @@ public sealed class WhenForProjectIsCalled
     {
         // Arrange
         Import original = ImportTestsData.Create();
-        var updated = Snippet.From("Updated");
+        var updated = "Updated";
 
         // Act
         Import result = original.ForProject(updated);

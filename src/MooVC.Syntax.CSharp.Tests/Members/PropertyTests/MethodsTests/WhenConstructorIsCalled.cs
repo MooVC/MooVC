@@ -20,8 +20,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var get = Snippet.From("value");
-        var set = new Property.Setter { Behaviour = Snippet.From("value = input"), Mode = Property.Mode.Set };
+        var get = "value";
+        var set = new Property.Setter { Behaviour = "value = input", Mode = Property.Mode.Set };
 
         // Act
         var subject = new Property.Methods

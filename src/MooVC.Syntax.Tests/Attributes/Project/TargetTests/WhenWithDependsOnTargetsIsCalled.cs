@@ -11,7 +11,7 @@ public sealed class WhenWithDependsOnTargetsIsCalled
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
-        var updated = Snippet.From(UpdatedDependsOnTargets);
+        var updated = UpdatedDependsOnTargets;
 
         // Act
         Target result = original.WithDependsOnTargets(updated);

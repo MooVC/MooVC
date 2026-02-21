@@ -11,7 +11,7 @@ public sealed class WhenWithUpdateIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedUpdate);
+        var updated = UpdatedUpdate;
 
         // Act
         Item result = original.WithUpdate(updated);

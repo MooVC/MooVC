@@ -12,7 +12,7 @@ public sealed class WhenWithBehavioursIsCalled
 
         var behaviours = new Event.Methods
         {
-            Add = Snippet.From("add => value"),
+            Add = "add => value",
         };
 
         // Act

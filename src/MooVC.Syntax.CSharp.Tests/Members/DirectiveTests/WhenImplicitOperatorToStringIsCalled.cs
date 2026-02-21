@@ -27,13 +27,13 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         var subject = new Directive
         {
             Alias = Alias,
-            Qualifier = ImmutableArray.Create(new Name("Collections")),
+            Qualifier = "Collections",
         };
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

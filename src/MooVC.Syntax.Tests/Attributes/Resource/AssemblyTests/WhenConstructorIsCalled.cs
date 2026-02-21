@@ -20,8 +20,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var alias = Snippet.From(AssemblyTestsData.DefaultAlias);
-        var name = Snippet.From(AssemblyTestsData.DefaultName);
+        var alias = AssemblyTestsData.DefaultAlias;
+        var name = AssemblyTestsData.DefaultName;
 
         // Act
         var subject = new Assembly

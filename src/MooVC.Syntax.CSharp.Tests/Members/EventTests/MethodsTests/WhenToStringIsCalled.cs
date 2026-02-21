@@ -36,7 +36,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value;"),
+            Add = "value;",
         };
 
         // Act
@@ -55,7 +55,7 @@ public sealed class WhenToStringIsCalled
     public void GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange
-        var add = Snippet.From($"first{Environment.NewLine}second");
+        var add = $"first{Environment.NewLine}second";
 
         var subject = new Event.Methods
         {

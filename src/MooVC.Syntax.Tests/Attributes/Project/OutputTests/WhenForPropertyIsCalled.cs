@@ -9,7 +9,7 @@ public sealed class WhenForPropertyIsCalled
     {
         // Arrange
         Output original = OutputTestsData.Create();
-        var updated = new Name("Other");
+        var updated = "Other";
 
         // Act
         Output result = original.ForProperty(updated);

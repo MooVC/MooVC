@@ -28,7 +28,7 @@ public sealed class WhenValidateIsCalled
     public void GivenMultiLineDefaultThenValidationErrorReturned()
     {
         // Arrange
-        Snippet defaultValue = Snippet.From($"Alpha{Environment.NewLine}Beta");
+        Snippet defaultValue = $"Alpha{Environment.NewLine}Beta";
         ModellingAttribute subject = ModellingTestData.CreateAttribute(defaultValue: defaultValue);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();

@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
     {
         // Arrange
         Property left = PropertyTestsData.Create();
-        Property right = PropertyTestsData.Create(name: new Name("Other"));
+        Property right = PropertyTestsData.Create(name: "Other");
 
         // Act
         bool result = left == right;

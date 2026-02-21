@@ -27,13 +27,13 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         var subject = new Argument
         {
             Name = new Identifier(Name),
-            Value = Snippet.From(Content),
+            Value = Content,
         };
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

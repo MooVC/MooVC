@@ -10,10 +10,10 @@ public sealed class WhenWithGetIsCalled
         // Arrange
         var original = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
-        var get = Snippet.From("result");
+        var get = "result";
 
         // Act
         Indexer.Methods result = original.WithGet(get);

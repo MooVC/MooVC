@@ -75,7 +75,7 @@ internal static class ProjectTestsData
     {
         return new Import
         {
-            Project = Snippet.From(DefaultImportProject),
+            Project = DefaultImportProject,
         };
     }
 
@@ -83,7 +83,7 @@ internal static class ProjectTestsData
     {
         return new ItemGroup
         {
-            Items = [new Item { Include = Snippet.From(DefaultItemInclude) }],
+            Items = [new Item { Include = DefaultItemInclude }],
         };
     }
 
@@ -91,7 +91,7 @@ internal static class ProjectTestsData
     {
         return new PropertyGroup
         {
-            Properties = [new Property { Name = DefaultPropertyName, Value = Snippet.From(DefaultPropertyValue) }],
+            Properties = [new Property { Name = DefaultPropertyName, Value = DefaultPropertyValue }],
         };
     }
 
@@ -99,7 +99,7 @@ internal static class ProjectTestsData
     {
         return new Resource
         {
-            CustomToolNamespace = Snippet.From(DefaultResourceToolNamespace),
+            CustomToolNamespace = DefaultResourceToolNamespace,
             Location = DefaultLocation,
         };
     }
@@ -109,7 +109,7 @@ internal static class ProjectTestsData
         return new Sdk
         {
             Name = DefaultSdkName,
-            Version = Snippet.From(DefaultSdkVersion),
+            Version = DefaultSdkVersion,
         };
     }
 

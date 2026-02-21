@@ -24,7 +24,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var body = Snippet.From(ConversionTestsData.DefaultBody);
+        var body = ConversionTestsData.DefaultBody;
         var subjectSymbol = new Symbol { Name = ConversionTestsData.DefaultSubject };
 
         // Act

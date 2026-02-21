@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("add => value"),
+            Add = "add => value",
         };
 
         // Act

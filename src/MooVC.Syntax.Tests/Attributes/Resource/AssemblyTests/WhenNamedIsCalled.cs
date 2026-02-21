@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Assembly original = AssemblyTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Assembly result = original.Named(updated);

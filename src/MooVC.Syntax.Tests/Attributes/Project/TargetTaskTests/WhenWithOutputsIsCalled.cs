@@ -13,9 +13,9 @@ public sealed class WhenWithOutputsIsCalled
 
         var additional = new Output
         {
-            ItemName = new Name("Other"),
-            PropertyName = new Name("Property"),
-            TaskParameter = new Name("Parameter"),
+            ItemName = "Other",
+            PropertyName = "Property",
+            TaskParameter = "Parameter",
         };
 
         TargetTask original = TargetTaskTestsData.Create(output: existing);

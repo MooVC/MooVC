@@ -11,7 +11,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         var argument = new Argument();
-        var value = Snippet.From(Value);
+        var value = Value;
 
         // Act
         Argument result = argument.WithValue(value);

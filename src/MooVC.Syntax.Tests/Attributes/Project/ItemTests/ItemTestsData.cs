@@ -53,9 +53,9 @@ internal static class ItemTestsData
     {
         return new Metadata
         {
-            Condition = Snippet.From(DefaultMetadataCondition),
+            Condition = DefaultMetadataCondition,
             Name = DefaultMetadataName,
-            Value = Snippet.From(DefaultMetadataValue),
+            Value = DefaultMetadataValue,
         };
     }
 }

@@ -24,7 +24,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var methods = new Indexer.Methods
         {
-            Get = Snippet.From("value;"),
+            Get = "value;",
         };
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
@@ -49,7 +49,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var methods = new Indexer.Methods
         {
-            Get = Snippet.From("return value;"),
+            Get = "return value;",
         };
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
@@ -74,7 +74,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var methods = new Indexer.Methods
         {
-            Get = Snippet.From("return value;"),
+            Get = "return value;",
         };
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);

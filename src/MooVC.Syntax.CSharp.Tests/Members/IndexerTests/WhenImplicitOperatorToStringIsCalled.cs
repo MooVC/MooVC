@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
-        string expected = subject.ToString();
+        string expected = subject;
 
         // Act
         string result = subject;

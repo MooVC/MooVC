@@ -9,7 +9,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string? right = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string right = Same;
 
         // Act
@@ -37,7 +37,7 @@ public sealed class WhenEqualsStringIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string right = Different;
 
         // Act

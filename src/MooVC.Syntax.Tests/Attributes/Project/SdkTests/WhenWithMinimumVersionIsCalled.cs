@@ -11,7 +11,7 @@ public sealed class WhenWithMinimumVersionIsCalled
     {
         // Arrange
         Sdk original = SdkTestsData.Create();
-        var updated = Snippet.From(UpdatedMinimumVersion);
+        var updated = UpdatedMinimumVersion;
 
         // Act
         Sdk result = original.WithMinimumVersion(updated);

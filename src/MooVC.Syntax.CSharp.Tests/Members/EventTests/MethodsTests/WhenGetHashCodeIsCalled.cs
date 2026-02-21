@@ -10,12 +10,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var second = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         // Act
@@ -32,12 +32,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var second = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         // Act
@@ -54,12 +54,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var second = new Event.Methods
         {
-            Add = Snippet.From("alternative"),
+            Add = "alternative",
         };
 
         // Act
@@ -76,12 +76,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         var second = new Event.Methods
         {
-            Remove = Snippet.From("alternative"),
+            Remove = "alternative",
         };
 
         // Act

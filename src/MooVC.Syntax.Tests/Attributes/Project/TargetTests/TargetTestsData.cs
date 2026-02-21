@@ -55,7 +55,7 @@ internal static class TargetTestsData
     {
         return new TargetTask
         {
-            Condition = Snippet.From(DefaultTaskCondition),
+            Condition = DefaultTaskCondition,
             Name = DefaultTaskName,
         };
     }

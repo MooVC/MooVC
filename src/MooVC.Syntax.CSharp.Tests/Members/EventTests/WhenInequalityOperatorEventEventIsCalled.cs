@@ -102,7 +102,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         Event right = EventTestsData.Create(
             behaviours: new Event.Methods
             {
-                Add = Snippet.From("value"),
+                Add = "value",
             });
 
         // Act

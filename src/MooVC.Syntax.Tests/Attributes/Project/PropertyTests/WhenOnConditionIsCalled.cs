@@ -11,7 +11,7 @@ public sealed class WhenOnConditionIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var updated = Snippet.From(UpdatedCondition);
+        var updated = UpdatedCondition;
 
         // Act
         Property result = original.OnCondition(updated);

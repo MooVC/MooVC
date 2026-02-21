@@ -9,7 +9,7 @@ public sealed class WhenWithBehaviourIsCalled
     {
         // Arrange
         var original = new Property.Setter();
-        var behaviour = Snippet.From("value = input");
+        var behaviour = "value = input";
 
         // Act
         Property.Setter result = original.WithBehaviour(behaviour);

@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string representation = subject;
 
         // Assert
-        representation.ShouldBe(subject.ToString());
+        representation.ShouldBe(subject);
     }
 }

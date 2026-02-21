@@ -11,7 +11,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Parameter original = ParameterTestsData.Create();
-        var updated = Snippet.From(UpdatedValue);
+        var updated = UpdatedValue;
 
         // Act
         Parameter result = original.WithValue(updated);

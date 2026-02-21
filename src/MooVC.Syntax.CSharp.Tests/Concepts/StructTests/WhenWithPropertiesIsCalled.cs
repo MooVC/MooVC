@@ -10,7 +10,7 @@ public sealed class WhenWithPropertiesIsCalled
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
+        var property = new Property { Name = "Value", Type = typeof(string) };
         Struct original = StructTestsData.Create();
 
         // Act

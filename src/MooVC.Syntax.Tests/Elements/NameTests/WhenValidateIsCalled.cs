@@ -18,7 +18,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(default);
+        var subject = default;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(Empty);
+        var subject = Empty;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -52,7 +52,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(Pascal);
+        var subject = Pascal;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -68,7 +68,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithPrefixThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(WithPrefix);
+        var subject = WithPrefix;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -84,7 +84,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithUnderscoreThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(UpperWithUnderscore);
+        var subject = UpperWithUnderscore;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -100,7 +100,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(UpperWithDigits);
+        var subject = UpperWithDigits;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -116,7 +116,7 @@ public sealed class WhenValidateIsCalled
     public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(UnicodePascal);
+        var subject = UnicodePascal;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -134,7 +134,7 @@ public sealed class WhenValidateIsCalled
     public void GivenLowercaseThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Name(Lowercase);
+        var subject = Lowercase;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -152,7 +152,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPascalCaseWithHyphenThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Name(WithHyphen);
+        var subject = WithHyphen;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -170,7 +170,7 @@ public sealed class WhenValidateIsCalled
     public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(Numeric);
+        var subject = Numeric;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -193,7 +193,7 @@ public sealed class WhenValidateIsCalled
     public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange
-        var subject = new Name(value);
+        var subject = value;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

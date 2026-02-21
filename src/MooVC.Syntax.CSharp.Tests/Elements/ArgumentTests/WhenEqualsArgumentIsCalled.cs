@@ -4,8 +4,8 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsArgumentIsCalled
 {
-    private static readonly Snippet same = Snippet.From("Alpha");
-    private static readonly Snippet different = Snippet.From("Beta");
+    private static readonly Snippet same = "Alpha";
+    private static readonly Snippet different = "Beta";
 
     [Fact]
     public void GivenEqualValuesThenReturnsTrue()

@@ -44,7 +44,7 @@ public sealed class WhenGetHashCodeIsCalled
         Indexer second = IndexerTestsData.Create(
             behaviours: new Indexer.Methods
             {
-                Get = Snippet.From("value"),
+                Get = "value",
             });
 
         // Act

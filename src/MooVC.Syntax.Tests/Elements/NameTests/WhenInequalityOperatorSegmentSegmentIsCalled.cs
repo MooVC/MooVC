@@ -24,7 +24,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     {
         // Arrange
         Name? left = default;
-        var right = new Name(Same);
+        var right = Same;
 
         // Act
         bool result = left != right;
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         Name? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Name(Same);
+        var first = Same;
         Name second = first;
 
         // Act
@@ -65,8 +65,8 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Name(Same);
-        var right = new Name(Same);
+        var left = Same;
+        var right = Same;
 
         // Act
         bool resultLeftRight = left != right;
@@ -81,8 +81,8 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
-        var right = new Name(Different);
+        var left = Same;
+        var right = Different;
 
         // Act
         bool resultLeftRight = left != right;

@@ -11,7 +11,7 @@ public sealed class WhenWithVersionIsCalled
     {
         // Arrange
         Sdk original = SdkTestsData.Create();
-        var updated = Snippet.From(UpdatedVersion);
+        var updated = UpdatedVersion;
 
         // Act
         Sdk result = original.WithVersion(updated);

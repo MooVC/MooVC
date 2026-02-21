@@ -12,10 +12,10 @@ public sealed class WhenWithArgumentsIsCalled
         Attribute original = AttributeTestsData.Create(arguments: new Argument
         {
             Name = new Identifier("Original"),
-            Value = Snippet.From("alpha"),
+            Value = "alpha",
         });
 
-        Argument[] additional = [new Argument { Name = new Identifier("Updated"), Value = Snippet.From("beta") }];
+        Argument[] additional = [new Argument { Name = new Identifier("Updated"), Value = "beta" }];
 
         // Act
         Attribute result = original.WithArguments(additional);

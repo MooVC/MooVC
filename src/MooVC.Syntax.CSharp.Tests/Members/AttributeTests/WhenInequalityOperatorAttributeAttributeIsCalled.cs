@@ -67,8 +67,8 @@ public sealed class WhenInequalityOperatorAttributeAttributeIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
-        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("right") });
+        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = "left" });
+        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = "right" });
 
         // Act
         bool resultLeftRight = left != right;

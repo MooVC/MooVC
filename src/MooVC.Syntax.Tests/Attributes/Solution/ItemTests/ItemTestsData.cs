@@ -30,10 +30,10 @@ internal static class ItemTestsData
     {
         return new Item
         {
-            Id = Snippet.From("ChildId"),
-            Name = Snippet.From("ChildName"),
-            Path = Snippet.From("assets/child.txt"),
-            Type = Snippet.From("ChildType"),
+            Id = "ChildId",
+            Name = "ChildName",
+            Path = "assets/child.txt",
+            Type = "ChildType",
         };
     }
 }

@@ -37,7 +37,7 @@ public sealed class WhenEqualsPropertyIsCalled
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
-        Property other = PropertyTestsData.Create(name: new Name("Other"));
+        Property other = PropertyTestsData.Create(name: "Other");
 
         // Act
         bool result = subject.Equals(other);

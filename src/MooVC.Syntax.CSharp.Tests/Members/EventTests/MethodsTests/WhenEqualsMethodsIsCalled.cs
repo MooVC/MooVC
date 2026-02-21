@@ -12,7 +12,7 @@ public sealed class WhenEqualsMethodsIsCalled
 
         var target = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         // Act
@@ -28,7 +28,7 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         Event.Methods target = subject;
@@ -46,12 +46,12 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var target = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         // Act
@@ -67,12 +67,12 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var target = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         // Act
@@ -88,12 +88,12 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var target = new Event.Methods
         {
-            Add = Snippet.From("alternative"),
+            Add = "alternative",
         };
 
         // Act
@@ -109,12 +109,12 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         var target = new Event.Methods
         {
-            Remove = Snippet.From("alternative"),
+            Remove = "alternative",
         };
 
         // Act

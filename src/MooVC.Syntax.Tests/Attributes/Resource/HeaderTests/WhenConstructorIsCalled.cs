@@ -20,8 +20,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var name = Snippet.From(HeaderTestsData.DefaultName);
-        var value = Snippet.From(HeaderTestsData.DefaultValue);
+        var name = HeaderTestsData.DefaultName;
+        var value = HeaderTestsData.DefaultValue;
 
         // Act
         var subject = new Header

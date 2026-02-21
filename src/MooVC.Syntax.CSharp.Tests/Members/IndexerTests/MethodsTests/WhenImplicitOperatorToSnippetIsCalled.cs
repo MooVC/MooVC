@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var expected = Snippet.From(subject.ToString());

@@ -10,12 +10,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var second = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act
@@ -32,12 +32,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var second = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
         // Act
@@ -54,12 +54,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var second = new Indexer.Methods
         {
-            Get = Snippet.From("alternative"),
+            Get = "alternative",
         };
 
         // Act
@@ -76,12 +76,12 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
         var second = new Indexer.Methods
         {
-            Set = Snippet.From("alternative"),
+            Set = "alternative",
         };
 
         // Act

@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorTaskParameterTaskParameterIsCalled
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
-        Parameter right = ParameterTestsData.Create(name: new Name("Other"));
+        Parameter right = ParameterTestsData.Create(name: "Other");
 
         // Act
         bool result = left != right;

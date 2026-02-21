@@ -70,7 +70,7 @@ public sealed class WhenEqualsIndexerIsCalled
         Indexer target = IndexerTestsData.Create(
             behaviours: new Indexer.Methods
             {
-                Get = Snippet.From("value"),
+                Get = "value",
             });
 
         // Act

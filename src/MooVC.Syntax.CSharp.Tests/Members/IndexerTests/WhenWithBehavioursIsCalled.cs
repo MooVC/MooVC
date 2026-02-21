@@ -12,7 +12,7 @@ public sealed class WhenWithBehavioursIsCalled
 
         var behaviours = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act

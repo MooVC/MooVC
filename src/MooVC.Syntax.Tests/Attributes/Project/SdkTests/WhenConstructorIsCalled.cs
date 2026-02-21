@@ -23,15 +23,15 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Sdk
         {
-            MinimumVersion = Snippet.From(SdkTestsData.DefaultMinimumVersion),
+            MinimumVersion = SdkTestsData.DefaultMinimumVersion,
             Name = SdkTestsData.DefaultName,
-            Version = Snippet.From(SdkTestsData.DefaultVersion),
+            Version = SdkTestsData.DefaultVersion,
         };
 
         // Assert
-        subject.MinimumVersion.ShouldBe(Snippet.From(SdkTestsData.DefaultMinimumVersion));
+        subject.MinimumVersion.ShouldBe(SdkTestsData.DefaultMinimumVersion);
         subject.Name.ShouldBe(SdkTestsData.DefaultName);
-        subject.Version.ShouldBe(Snippet.From(SdkTestsData.DefaultVersion));
+        subject.Version.ShouldBe(SdkTestsData.DefaultVersion);
         subject.IsUnspecified.ShouldBeFalse();
     }
 }

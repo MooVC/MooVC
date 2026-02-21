@@ -11,7 +11,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        var updated = Snippet.From(UpdatedValue);
+        var updated = UpdatedValue;
 
         // Act
         Metadata result = original.WithValue(updated);

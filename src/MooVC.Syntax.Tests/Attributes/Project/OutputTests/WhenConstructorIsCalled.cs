@@ -24,17 +24,17 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Output
         {
-            Condition = Snippet.From(OutputTestsData.DefaultCondition),
+            Condition = OutputTestsData.DefaultCondition,
             ItemName = OutputTestsData.DefaultItemName,
             PropertyName = OutputTestsData.DefaultPropertyName,
             TaskParameter = OutputTestsData.DefaultTaskParameter,
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(OutputTestsData.DefaultCondition));
-        subject.ItemName.ShouldBe(new Name(OutputTestsData.DefaultItemName));
-        subject.PropertyName.ShouldBe(new Name(OutputTestsData.DefaultPropertyName));
-        subject.TaskParameter.ShouldBe(new Name(OutputTestsData.DefaultTaskParameter));
+        subject.Condition.ShouldBe(OutputTestsData.DefaultCondition);
+        subject.ItemName.ShouldBe(OutputTestsData.DefaultItemName);
+        subject.PropertyName.ShouldBe(OutputTestsData.DefaultPropertyName);
+        subject.TaskParameter.ShouldBe(OutputTestsData.DefaultTaskParameter);
         subject.IsUndefined.ShouldBeFalse();
     }
 }

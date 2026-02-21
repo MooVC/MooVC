@@ -74,7 +74,7 @@ public sealed class WhenEqualsEventIsCalled
         Event target = EventTestsData.Create(
             behaviours: new Event.Methods
             {
-                Add = Snippet.From(Behaviour),
+                Add = Behaviour,
             });
 
         // Act

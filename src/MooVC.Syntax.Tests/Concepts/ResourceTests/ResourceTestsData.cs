@@ -41,8 +41,8 @@ internal static class ResourceTestsData
     {
         return new Assembly
         {
-            Alias = Snippet.From(DefaultAssemblyAlias),
-            Name = Snippet.From(DefaultAssemblyName),
+            Alias = DefaultAssemblyAlias,
+            Name = DefaultAssemblyName,
         };
     }
 
@@ -50,11 +50,11 @@ internal static class ResourceTestsData
     {
         return new Data
         {
-            Comment = Snippet.From(DefaultDataComment),
-            MimeType = Snippet.From(DefaultDataMimeType),
-            Name = Snippet.From(DefaultDataName),
-            Type = Snippet.From(DefaultDataType),
-            Value = Snippet.From(DefaultDataValue),
+            Comment = DefaultDataComment,
+            MimeType = DefaultDataMimeType,
+            Name = DefaultDataName,
+            Type = DefaultDataType,
+            Value = DefaultDataValue,
         };
     }
 
@@ -62,8 +62,8 @@ internal static class ResourceTestsData
     {
         return new Header
         {
-            Name = Snippet.From(DefaultHeaderName),
-            Value = Snippet.From(DefaultHeaderValue),
+            Name = DefaultHeaderName,
+            Value = DefaultHeaderValue,
         };
     }
 
@@ -71,10 +71,10 @@ internal static class ResourceTestsData
     {
         return new Metadata
         {
-            MimeType = Snippet.From(DefaultMetadataMimeType),
-            Name = Snippet.From(DefaultMetadataName),
-            Type = Snippet.From(DefaultMetadataType),
-            Value = Snippet.From(DefaultMetadataValue),
+            MimeType = DefaultMetadataMimeType,
+            Name = DefaultMetadataName,
+            Type = DefaultMetadataType,
+            Value = DefaultMetadataValue,
         };
     }
 }

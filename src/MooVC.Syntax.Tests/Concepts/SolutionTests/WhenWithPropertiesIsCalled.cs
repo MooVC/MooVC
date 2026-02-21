@@ -14,8 +14,8 @@ public sealed class WhenWithPropertiesIsCalled
 
         var additional = new Property
         {
-            Name = Snippet.From("OtherName"),
-            Value = Snippet.From("OtherValue"),
+            Name = "OtherName",
+            Value = "OtherValue",
         };
 
         Solution original = SolutionTestsData.Create(property: existing);

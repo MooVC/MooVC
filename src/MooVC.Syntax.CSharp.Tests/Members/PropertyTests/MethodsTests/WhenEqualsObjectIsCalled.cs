@@ -10,7 +10,7 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object? target = default;
@@ -28,8 +28,8 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         object target = subject;
@@ -47,14 +47,14 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         object target = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         // Act
@@ -70,12 +70,12 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object target = new Property.Methods
         {
-            Get = Snippet.From("alternative"),
+            Get = "alternative",
         };
 
         // Act

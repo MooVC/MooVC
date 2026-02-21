@@ -53,7 +53,7 @@ public sealed class WhenToFragmentsIsCalled
     public void GivenPublicResourceWithNamespaceThenReturnsCustomToolNamespace()
     {
         // Arrange
-        var customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
+        var customToolNamespace = ResourceTestsData.DefaultCustomToolNamespace;
         var location = new Path(ResourceTestsData.DefaultLocationPath);
         var designer = new Path(ResourceTestsData.DefaultDesignerPath);
         var subject = new Resource

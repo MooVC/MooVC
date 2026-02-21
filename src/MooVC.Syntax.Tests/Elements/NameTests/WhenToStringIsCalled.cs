@@ -13,7 +13,7 @@ public sealed class WhenToStringIsCalled
     public void GivenNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Name(default);
+        var subject = default;
 
         // Act
         string result = subject.ToString();
@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Empty);
+        var subject = Empty;
 
         // Act
         string result = subject.ToString();
@@ -39,7 +39,7 @@ public sealed class WhenToStringIsCalled
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Space);
+        var subject = Space;
 
         // Act
         string result = subject.ToString();
@@ -52,7 +52,7 @@ public sealed class WhenToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Alpha);
+        var subject = Alpha;
 
         // Act
         string result = subject.ToString();
@@ -65,7 +65,7 @@ public sealed class WhenToStringIsCalled
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Unicode);
+        var subject = Unicode;
 
         // Act
         string result = subject.ToString();
@@ -78,7 +78,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValueWithUnderscoreThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(WithUnderscore);
+        var subject = WithUnderscore;
 
         // Act
         string result = subject.ToString();
@@ -91,7 +91,7 @@ public sealed class WhenToStringIsCalled
     public void GivenReservedPrefixThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(WithPrefix);
+        var subject = WithPrefix;
 
         // Act
         string result = subject.ToString();
@@ -105,7 +105,7 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Name(value);
+        var subject = value;
 
         // Act
         string result = subject.ToString();
@@ -118,8 +118,8 @@ public sealed class WhenToStringIsCalled
     public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
-        var left = new Name("Alpha");
-        var right = new Name("Beta");
+        var left = "Alpha";
+        var right = "Beta";
 
         // Act
         string leftString = left.ToString();
@@ -133,7 +133,7 @@ public sealed class WhenToStringIsCalled
     public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
-        var subject = new Name(Alpha);
+        var subject = Alpha;
 
         // Act
         string first = subject.ToString();

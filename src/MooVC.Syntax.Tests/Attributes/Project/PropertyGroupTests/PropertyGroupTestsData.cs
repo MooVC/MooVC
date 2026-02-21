@@ -33,9 +33,9 @@ internal static class PropertyGroupTestsData
     {
         return new Property
         {
-            Condition = Snippet.From(DefaultPropertyCondition),
+            Condition = DefaultPropertyCondition,
             Name = DefaultPropertyName,
-            Value = Snippet.From(DefaultPropertyValue),
+            Value = DefaultPropertyValue,
         };
     }
 }

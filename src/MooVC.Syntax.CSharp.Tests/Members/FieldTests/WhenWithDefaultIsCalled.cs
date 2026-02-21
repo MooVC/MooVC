@@ -9,7 +9,7 @@ public sealed class WhenWithDefaultIsCalled
     {
         // Arrange
         Field original = FieldTestsData.Create();
-        var @default = Snippet.From("default");
+        var @default = "default";
 
         // Act
         Field result = original.WithDefault(@default);

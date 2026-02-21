@@ -8,7 +8,7 @@ public sealed class WhenEqualsMethodsIsCalled
     public void GivenNullThenFalseIsReturned()
     {
         // Arrange
-        var subject = new Property.Methods { Get = Snippet.From("value") };
+        var subject = new Property.Methods { Get = "value" };
         Property.Methods? target = default!;
 
         // Act
@@ -24,8 +24,8 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         Property.Methods target = subject;
@@ -43,14 +43,14 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         var target = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         // Act
@@ -68,12 +68,12 @@ public sealed class WhenEqualsMethodsIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var target = new Property.Methods
         {
-            Get = Snippet.From("alternative"),
+            Get = "alternative",
         };
 
         // Act

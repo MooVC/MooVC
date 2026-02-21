@@ -12,7 +12,7 @@ public sealed class WhenDefaultedToIsCalled
     {
         // Arrange
         ModellingAttribute original = ModellingTestData.CreateAttribute();
-        Snippet updated = Snippet.From(UpdatedDefaultValue);
+        Snippet updated = UpdatedDefaultValue;
 
         // Act
         ModellingAttribute result = original.DefaultedTo(updated);

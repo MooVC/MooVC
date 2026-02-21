@@ -48,8 +48,8 @@ public sealed class WhenToStringIsCalled
             Name = Name,
             Parameters =
             [
-                new Parameter { Name = new Name(FirstParameterName) },
-                new Parameter { Name = new Name(SecondParameterName) },
+                new Parameter { Name = FirstParameterName },
+                new Parameter { Name = SecondParameterName },
             ],
         };
 

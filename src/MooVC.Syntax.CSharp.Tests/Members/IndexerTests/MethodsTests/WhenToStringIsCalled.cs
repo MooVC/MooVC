@@ -38,7 +38,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value;"),
+            Get = "value;",
         };
 
         string expected = "get => value;";
@@ -54,7 +54,7 @@ public sealed class WhenToStringIsCalled
     public void GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange
-        var get = Snippet.From($"first{Environment.NewLine}second");
+        var get = $"first{Environment.NewLine}second";
 
         var subject = new Indexer.Methods
         {

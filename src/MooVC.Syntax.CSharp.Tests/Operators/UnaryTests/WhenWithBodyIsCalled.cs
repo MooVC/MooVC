@@ -9,7 +9,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Unary original = UnaryTestsData.Create(body: Snippet.From("return value;"));
-        var replacement = Snippet.From("return other;");
+        var replacement = "return other;";
 
         // Act
         Unary result = original.WithBody(replacement);

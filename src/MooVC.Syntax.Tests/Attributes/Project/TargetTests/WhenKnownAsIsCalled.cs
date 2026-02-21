@@ -11,7 +11,7 @@ public sealed class WhenKnownAsIsCalled
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
-        var updated = Snippet.From(UpdatedLabel);
+        var updated = UpdatedLabel;
 
         // Act
         Target result = original.KnownAs(updated);

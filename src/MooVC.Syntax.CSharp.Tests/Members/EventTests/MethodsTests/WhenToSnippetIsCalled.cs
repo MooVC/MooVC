@@ -10,7 +10,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("add => value"),
+            Add = "add => value",
         };
 
         Snippet.Options? options = default;
@@ -28,7 +28,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Remove = Snippet.From("value;"),
+            Remove = "value;",
         };
 
         // Act

@@ -9,7 +9,7 @@ public sealed class WhenWithMimeTypeIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Metadata result = original.WithMimeType(updated);

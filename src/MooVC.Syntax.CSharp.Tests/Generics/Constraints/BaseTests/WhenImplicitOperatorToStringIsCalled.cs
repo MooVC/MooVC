@@ -33,6 +33,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

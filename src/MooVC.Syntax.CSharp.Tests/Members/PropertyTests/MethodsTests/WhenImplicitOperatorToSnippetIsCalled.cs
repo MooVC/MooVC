@@ -23,7 +23,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         string expected = subject.ToString();

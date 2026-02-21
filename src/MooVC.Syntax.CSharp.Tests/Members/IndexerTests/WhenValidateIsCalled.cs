@@ -46,7 +46,7 @@ public sealed class WhenValidateIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create(
-            behaviours: new Indexer.Methods { Get = Snippet.From("value") },
+            behaviours: new Indexer.Methods { Get = "value" },
             result: Result.Void);
 
         var context = new ValidationContext(subject);
@@ -67,10 +67,10 @@ public sealed class WhenValidateIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create(
-            behaviours: new Indexer.Methods { Get = Snippet.From("value") },
+            behaviours: new Indexer.Methods { Get = "value" },
             parameter: new Parameter
             {
-                Default = Snippet.From($"first{Environment.NewLine}second"),
+                Default = $"first{Environment.NewLine}second",
                 Name = IndexerTestsData.DefaultParameterName,
                 Type = new Symbol { Name = IndexerTestsData.DefaultParameterType },
             });
@@ -93,7 +93,7 @@ public sealed class WhenValidateIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create(
-            behaviours: new Indexer.Methods { Get = Snippet.From("value") });
+            behaviours: new Indexer.Methods { Get = "value" });
 
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();

@@ -29,6 +29,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(Format));
+        result.ShouldBe(Format);
     }
 }

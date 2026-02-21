@@ -23,10 +23,10 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
-        string expected = subject.ToString();
+        string expected = subject;
 
         // Act
         string result = subject;

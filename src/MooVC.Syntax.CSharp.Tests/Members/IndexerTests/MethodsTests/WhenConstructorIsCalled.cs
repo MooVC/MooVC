@@ -20,8 +20,8 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var get = Snippet.From("value");
-        var set = Snippet.From("value = input");
+        var get = "value";
+        var set = "value = input";
 
         // Act
         var subject = new Indexer.Methods

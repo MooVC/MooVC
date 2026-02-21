@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string right = Same;
 
         // Act
@@ -65,7 +65,7 @@ public sealed class WhenInequalityOperatorSegmentStringIsCalled
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Name(Same);
+        var left = Same;
         string right = Different;
 
         // Act

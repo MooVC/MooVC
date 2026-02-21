@@ -36,8 +36,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var methods = new Indexer.Methods
         {
-            Get = Snippet.From("value;"),
-            Set = Snippet.From("_value[index] = value;"),
+            Get = "value;",
+            Set = "_value[index] = value;",
         };
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);

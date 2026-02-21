@@ -9,7 +9,7 @@ public sealed class WhenAtIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From("assets/other.txt");
+        var updated = "assets/other.txt";
 
         // Act
         Item result = original.At(updated);

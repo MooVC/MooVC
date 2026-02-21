@@ -23,13 +23,13 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Event.Methods
         {
-            Add = Snippet.From("add => value"),
+            Add = "add => value",
         };
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

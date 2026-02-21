@@ -9,7 +9,7 @@ public sealed class WhenOfTypeIsCalled
     {
         // Arrange
         Data original = DataTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Data result = original.OfType(updated);

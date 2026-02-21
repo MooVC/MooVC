@@ -28,7 +28,7 @@ internal static class ItemGroupTestsData
     {
         return new Item
         {
-            Include = Snippet.From(DefaultInclude),
+            Include = DefaultInclude,
         };
     }
 }

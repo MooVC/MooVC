@@ -12,7 +12,7 @@ public sealed class WhenStackIsCalled
     public void GivenSingleSnippetThenOriginalSnippetIsReturned()
     {
         // Arrange
-        var snippet = Snippet.From(FirstLine);
+        var snippet = FirstLine;
         var snippets = ImmutableArray.Create(snippet);
 
         // Act
@@ -26,9 +26,9 @@ public sealed class WhenStackIsCalled
     public void GivenMultipleSnippetsThenTheyAreStackedInOrder()
     {
         // Arrange
-        var first = Snippet.From(FirstLine);
-        var second = Snippet.From(SecondLine);
-        var third = Snippet.From(ThirdLine);
+        var first = FirstLine;
+        var second = SecondLine;
+        var third = ThirdLine;
         var snippets = ImmutableArray.Create(first, second, third);
         string expected = string.Join(Environment.NewLine, FirstLine, SecondLine, ThirdLine);
 

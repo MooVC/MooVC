@@ -25,13 +25,13 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Parameter
         {
-            Name = new Name(Name),
+            Name = Name,
         };
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

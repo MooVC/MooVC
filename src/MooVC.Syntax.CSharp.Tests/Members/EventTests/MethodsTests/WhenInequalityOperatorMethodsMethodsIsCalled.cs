@@ -26,7 +26,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
 
         var right = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         // Act
@@ -42,7 +42,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         Event.Methods? right = default;
@@ -60,7 +60,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var first = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         Event.Methods second = first;
@@ -78,12 +78,12 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var right = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         // Act
@@ -101,12 +101,12 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var right = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         // Act
@@ -124,12 +124,12 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Event.Methods
         {
-            Add = Snippet.From("value"),
+            Add = "value",
         };
 
         var right = new Event.Methods
         {
-            Add = Snippet.From("alternative"),
+            Add = "alternative",
         };
 
         // Act
@@ -147,12 +147,12 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Event.Methods
         {
-            Remove = Snippet.From("value"),
+            Remove = "value",
         };
 
         var right = new Event.Methods
         {
-            Remove = Snippet.From("alternative"),
+            Remove = "alternative",
         };
 
         // Act

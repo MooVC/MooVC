@@ -29,8 +29,8 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var behaviours = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
-            Set = Snippet.From("value = input"),
+            Get = "value",
+            Set = "value = input",
         };
 
         // Act

@@ -83,7 +83,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         return new Parameter
         {
-            Name = new Name(name),
+            Name = name,
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],
         };
     }

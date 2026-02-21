@@ -38,7 +38,7 @@ public sealed class WhenEqualityOperatorSolutionSolutionIsCalled
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
-        Solution right = SolutionTestsData.Create(property: new Property { Name = Snippet.From("Other") });
+        Solution right = SolutionTestsData.Create(property: new Property { Name = "Other" });
 
         // Act
         bool result = left == right;

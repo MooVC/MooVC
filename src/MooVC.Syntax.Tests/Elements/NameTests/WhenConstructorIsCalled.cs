@@ -6,7 +6,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(default));
+        _ = Should.NotThrow(() => _ = default);
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         string value = string.Empty;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = Should.NotThrow(() => _ = value);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         string value = "   ";
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = Should.NotThrow(() => _ = value);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         string value = new Faker().Random.AlphaNumeric(32);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = Should.NotThrow(() => _ = value);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class WhenConstructorIsCalled
         string value = new('x', 64_000);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = Should.NotThrow(() => _ = value);
     }
 
     [Fact]
@@ -56,8 +56,8 @@ public sealed class WhenConstructorIsCalled
         const string value = "Value";
 
         // Act
-        var first = new Name(value);
-        var second = new Name(value);
+        var first = value;
+        var second = value;
 
         // Assert
         first.Equals(second).ShouldBeTrue();
@@ -73,8 +73,8 @@ public sealed class WhenConstructorIsCalled
         const string right = "Second";
 
         // Act
-        var first = new Name(left);
-        var second = new Name(right);
+        var first = left;
+        var second = right;
 
         // Assert
         first.Equals(second).ShouldBeFalse();

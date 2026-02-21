@@ -22,10 +22,10 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var mimeType = Snippet.From(MetadataTestsData.DefaultMimeType);
-        var name = Snippet.From(MetadataTestsData.DefaultName);
-        var type = Snippet.From(MetadataTestsData.DefaultType);
-        var value = Snippet.From(MetadataTestsData.DefaultValue);
+        var mimeType = MetadataTestsData.DefaultMimeType;
+        var name = MetadataTestsData.DefaultName;
+        var type = MetadataTestsData.DefaultType;
+        var value = MetadataTestsData.DefaultValue;
 
         // Act
         var subject = new Metadata

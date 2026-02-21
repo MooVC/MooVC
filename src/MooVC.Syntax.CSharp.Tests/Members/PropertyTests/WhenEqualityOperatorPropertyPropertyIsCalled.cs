@@ -86,7 +86,7 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
         Property right = PropertyTestsData.Create(
             behaviours: new Property.Methods
             {
-                Get = Snippet.From("alternative"),
+                Get = "alternative",
             });
 
         // Act

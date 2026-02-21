@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorTargetTaskTargetTaskIsCalled
     {
         // Arrange
         TargetTask left = TargetTaskTestsData.Create();
-        TargetTask right = TargetTaskTestsData.Create(name: new Name("Other"));
+        TargetTask right = TargetTaskTestsData.Create(name: "Other");
 
         // Act
         bool result = left == right;

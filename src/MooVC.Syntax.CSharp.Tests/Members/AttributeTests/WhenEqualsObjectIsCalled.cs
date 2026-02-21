@@ -37,8 +37,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("value") });
-        object value = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("value") });
+        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = "value" });
+        object value = AttributeTestsData.Create(arguments: new Argument { Value = "value" });
 
         // Act
         bool result = subject.Equals(value);
@@ -51,8 +51,8 @@ public sealed class WhenEqualsObjectIsCalled
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
-        object value = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("right") });
+        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = "left" });
+        object value = AttributeTestsData.Create(arguments: new Argument { Value = "right" });
 
         // Act
         bool result = subject.Equals(value);

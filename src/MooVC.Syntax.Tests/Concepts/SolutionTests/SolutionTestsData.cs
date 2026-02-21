@@ -56,10 +56,10 @@ internal static class SolutionTestsData
     {
         return new Item
         {
-            Id = Snippet.From(DefaultItemId),
-            Name = Snippet.From(DefaultItemName),
-            Path = Snippet.From(DefaultItemPath),
-            Type = Snippet.From(DefaultItemType),
+            Id = DefaultItemId,
+            Name = DefaultItemName,
+            Path = DefaultItemPath,
+            Type = DefaultItemType,
         };
     }
 
@@ -70,7 +70,7 @@ internal static class SolutionTestsData
             Id = DefaultProjectId,
             DisplayName = new ProjectReference.Name(DefaultProjectName),
             Path = new ProjectReference.RelativePath(DefaultProjectPath),
-            Type = Snippet.From(DefaultProjectType),
+            Type = DefaultProjectType,
         };
     }
 
@@ -78,8 +78,8 @@ internal static class SolutionTestsData
     {
         return new Property
         {
-            Name = Snippet.From(DefaultPropertyName),
-            Value = Snippet.From(DefaultPropertyValue),
+            Name = DefaultPropertyName,
+            Value = DefaultPropertyValue,
         };
     }
 }

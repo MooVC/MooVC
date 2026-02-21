@@ -11,7 +11,7 @@ public sealed class WhenWithBehavioursIsCalled
         Property original = PropertyTestsData.Create();
         var behaviours = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act

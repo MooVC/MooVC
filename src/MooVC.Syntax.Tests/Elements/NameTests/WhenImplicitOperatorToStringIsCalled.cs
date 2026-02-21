@@ -24,7 +24,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenSegmentWithNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Name(default);
+        var subject = default;
 
         // Act
         string result = subject;
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Empty);
+        var subject = Empty;
 
         // Act
         string result = subject;
@@ -50,7 +50,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Space);
+        var subject = Space;
 
         // Act
         string result = subject;
@@ -63,7 +63,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Alpha);
+        var subject = Alpha;
 
         // Act
         string result = subject;
@@ -76,7 +76,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(Unicode);
+        var subject = Unicode;
 
         // Act
         string result = subject;
@@ -90,7 +90,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
-        var subject = new Name(value);
+        var subject = value;
 
         // Act
         string result = subject;

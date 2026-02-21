@@ -11,7 +11,7 @@ public sealed class WhenOnConditionIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        var updated = Snippet.From(UpdatedCondition);
+        var updated = UpdatedCondition;
 
         // Act
         Metadata result = original.OnCondition(updated);

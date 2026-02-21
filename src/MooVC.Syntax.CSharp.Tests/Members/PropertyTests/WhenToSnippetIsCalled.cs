@@ -24,7 +24,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var behaviours = new Property.Methods
         {
-            Get = Snippet.From("value;"),
+            Get = "value;",
             Set = new Property.Setter { Mode = Property.Mode.ReadOnly },
         };
 

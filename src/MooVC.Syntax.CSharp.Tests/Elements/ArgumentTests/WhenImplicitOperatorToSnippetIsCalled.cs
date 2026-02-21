@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         var subject = new Argument
         {
             Name = new Identifier(Name),
-            Value = Snippet.From(Content),
+            Value = Content,
         };
 
         // Act

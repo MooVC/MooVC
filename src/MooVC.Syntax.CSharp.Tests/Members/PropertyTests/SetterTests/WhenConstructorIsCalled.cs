@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var behaviour = Snippet.From("value = input");
+        var behaviour = "value = input";
 
         // Act
         var subject = new Property.Setter

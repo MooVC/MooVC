@@ -37,7 +37,7 @@ public sealed class WhenEqualsTaskOutputIsCalled
     {
         // Arrange
         Output subject = OutputTestsData.Create();
-        Output other = OutputTestsData.Create(itemName: new Name("Other"));
+        Output other = OutputTestsData.Create(itemName: "Other");
 
         // Act
         bool result = subject.Equals(other);

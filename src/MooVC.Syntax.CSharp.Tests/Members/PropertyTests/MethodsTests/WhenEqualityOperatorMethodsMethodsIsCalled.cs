@@ -25,7 +25,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         Property.Methods? left = default!;
         var right = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         Property.Methods? right = default!;
@@ -59,7 +59,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var first = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         Property.Methods second = first;
@@ -77,14 +77,14 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         var right = new Property.Methods
         {
-            Get = Snippet.From("value"),
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Get = "value",
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
         // Act
@@ -102,12 +102,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var right = new Property.Methods
         {
-            Get = Snippet.From("alternative"),
+            Get = "alternative",
         };
 
         // Act

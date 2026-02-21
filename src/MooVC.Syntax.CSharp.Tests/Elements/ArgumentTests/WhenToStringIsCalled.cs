@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Argument
         {
             Name = Identifier.Unnamed,
-            Value = Snippet.From(Value),
+            Value = Value,
         };
 
         // Act

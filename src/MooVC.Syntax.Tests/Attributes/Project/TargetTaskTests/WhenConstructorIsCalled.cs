@@ -29,7 +29,7 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new TargetTask
         {
-            Condition = Snippet.From(TargetTaskTestsData.DefaultCondition),
+            Condition = TargetTaskTestsData.DefaultCondition,
             ContinueOnError = TargetTask.Options.WarnAndContinue,
             Name = TargetTaskTestsData.DefaultName,
             Outputs = [output],
@@ -37,9 +37,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(TargetTaskTestsData.DefaultCondition));
+        subject.Condition.ShouldBe(TargetTaskTestsData.DefaultCondition);
         subject.ContinueOnError.ShouldBe(TargetTask.Options.WarnAndContinue);
-        subject.Name.ShouldBe(new Name(TargetTaskTestsData.DefaultName));
+        subject.Name.ShouldBe(TargetTaskTestsData.DefaultName);
         subject.Outputs.ShouldBe(new[] { output });
         subject.Parameters.ShouldBe(new[] { parameter });
         subject.IsUndefined.ShouldBeFalse();

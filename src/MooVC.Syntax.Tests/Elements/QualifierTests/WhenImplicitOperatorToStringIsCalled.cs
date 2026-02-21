@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Elements.QualifierTests;
 
-using System.Collections.Immutable;
-
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string First = "System";
@@ -24,14 +22,12 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public void GivenQualifierThenStringMatchesToString()
     {
         // Arrange
-        Qualifier subject = ImmutableArray.Create(
-            new Name(First),
-            new Name(Second));
+        Qualifier subject = new Name[] { First, Second };
 
         // Act
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        result.ShouldBe(subject);
     }
 }

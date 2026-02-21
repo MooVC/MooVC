@@ -12,8 +12,8 @@ public sealed class WhenWithEventsIsCalled
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Event[] existing = [new Event { Name = new Name("Created") }];
-        Event[] additional = [new Event { Name = new Name("Updated") }];
+        Event[] existing = [new Event { Name = "Created" }];
+        Event[] additional = [new Event { Name = "Updated" }];
         Class original = ClassTestsData.Create(events: existing.ToImmutableArray());
 
         // Act

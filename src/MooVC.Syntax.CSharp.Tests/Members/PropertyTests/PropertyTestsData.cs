@@ -18,7 +18,7 @@ internal static class PropertyTestsData
     {
         return new Property
         {
-            Behaviours = behaviours ?? new Property.Methods { Get = Snippet.From("value;") },
+            Behaviours = behaviours ?? new Property.Methods { Get = "value;" },
             Default = @default ?? Snippet.Empty,
             Name = name ?? Name.Unnamed,
             Scope = scope ?? Scope.Public,

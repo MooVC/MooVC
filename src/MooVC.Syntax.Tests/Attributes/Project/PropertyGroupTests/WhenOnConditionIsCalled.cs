@@ -11,7 +11,7 @@ public sealed class WhenOnConditionIsCalled
     {
         // Arrange
         PropertyGroup original = PropertyGroupTestsData.Create(property: PropertyGroupTestsData.CreateProperty());
-        var updated = Snippet.From(UpdatedCondition);
+        var updated = UpdatedCondition;
 
         // Act
         PropertyGroup result = original.OnCondition(updated);

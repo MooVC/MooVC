@@ -52,7 +52,7 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = Snippet.From("return true;");
+        var subject = "return true;";
         var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
@@ -79,7 +79,7 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = Snippet.From("return true;");
+        var subject = "return true;";
         var opening = Snippet.From("if (condition)");
 
         Snippet.Options options = new Snippet.Options()
@@ -102,8 +102,8 @@ public sealed class WhenBlockIsCalled
         // Arrange
         const string expected = "get => value;";
 
-        var subject = Snippet.From("value;");
-        var opening = Snippet.From("get");
+        var subject = "value;";
+        var opening = "get";
 
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block
@@ -124,8 +124,8 @@ public sealed class WhenBlockIsCalled
         // Arrange
         const string expected = "get { value; }";
 
-        var subject = Snippet.From("value;");
-        var opening = Snippet.From("get");
+        var subject = "value;";
+        var opening = "get";
 
         Snippet.Options options = new Snippet.Options()
             .WithBlock(block => block

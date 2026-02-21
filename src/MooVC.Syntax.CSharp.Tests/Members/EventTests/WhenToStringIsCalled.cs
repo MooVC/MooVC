@@ -28,7 +28,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Event
         {
             Handler = new Symbol { Name = Handler },
-            Name = new Name(Name),
+            Name = Name,
         };
 
         // Act
@@ -44,7 +44,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var methods = new Event.Methods
         {
-            Add = Snippet.From("value;"),
+            Add = "value;",
             Remove = Snippet.From("Console.WriteLine(value);"),
         };
 

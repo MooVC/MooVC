@@ -56,7 +56,7 @@ public sealed class WhenToStringIsCalled
             arguments: new Argument
             {
                 Name = new Identifier(ArgumentName),
-                Value = Snippet.From(ArgumentValue),
+                Value = ArgumentValue,
             });
 
         // Act

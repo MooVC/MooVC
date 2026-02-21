@@ -9,7 +9,7 @@ public sealed class WhenWithBodyIsCalled
     {
         // Arrange
         Comparison original = ComparisonTestsData.Create();
-        var body = Snippet.From("return left != right;");
+        var body = "return left != right;";
 
         // Act
         Comparison result = original.WithBody(body);

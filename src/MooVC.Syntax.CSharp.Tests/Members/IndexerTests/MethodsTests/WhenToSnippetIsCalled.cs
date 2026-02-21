@@ -10,7 +10,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("get => value"),
+            Get = "get => value",
         };
 
         Snippet.Options? options = default;

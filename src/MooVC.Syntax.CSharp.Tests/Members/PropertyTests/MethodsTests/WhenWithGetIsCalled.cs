@@ -10,10 +10,10 @@ public sealed class WhenWithGetIsCalled
         // Arrange
         var original = new Property.Methods
         {
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Set = new Property.Setter { Behaviour = "value = input" },
         };
 
-        var get = Snippet.From("result");
+        var get = "result";
 
         // Act
         Property.Methods result = original.WithGet(get);

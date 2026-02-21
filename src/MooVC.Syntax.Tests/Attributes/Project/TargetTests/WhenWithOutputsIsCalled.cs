@@ -11,7 +11,7 @@ public sealed class WhenWithOutputsIsCalled
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
-        var updated = Snippet.From(UpdatedOutputs);
+        var updated = UpdatedOutputs;
 
         // Act
         Target result = original.WithOutputs(updated);

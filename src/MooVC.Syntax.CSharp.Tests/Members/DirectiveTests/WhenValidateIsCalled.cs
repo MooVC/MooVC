@@ -31,7 +31,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Name(Alias),
+            Alias = Alias,
             IsStatic = true,
             Qualifier = new Qualifier(["System", "Console"]),
         };
@@ -55,7 +55,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Name(InvalidAlias),
+            Alias = InvalidAlias,
             Qualifier = new Qualifier(["MooVC", "Syntax"]),
         };
 

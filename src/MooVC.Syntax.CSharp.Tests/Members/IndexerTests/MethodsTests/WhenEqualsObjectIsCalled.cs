@@ -10,7 +10,7 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object? target = default;
@@ -28,7 +28,7 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object target = subject;
@@ -46,12 +46,12 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object target = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act
@@ -67,7 +67,7 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object target = new();
@@ -85,12 +85,12 @@ public sealed class WhenEqualsObjectIsCalled
         // Arrange
         var subject = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         object target = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
         // Act

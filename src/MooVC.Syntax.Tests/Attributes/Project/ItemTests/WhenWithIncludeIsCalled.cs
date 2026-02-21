@@ -11,7 +11,7 @@ public sealed class WhenWithIncludeIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedInclude);
+        var updated = UpdatedInclude;
 
         // Act
         Item result = original.WithInclude(updated);

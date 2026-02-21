@@ -16,7 +16,7 @@ public sealed class WhenWithConstraintsIsCalled
 
         var original = new Parameter
         {
-            Name = new Name(Name),
+            Name = Name,
             Constraints = [originalConstraint],
         };
 

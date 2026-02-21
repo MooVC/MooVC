@@ -11,7 +11,7 @@ public sealed class WhenWithExcludeIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedExclude);
+        var updated = UpdatedExclude;
 
         // Act
         Item result = original.WithExclude(updated);

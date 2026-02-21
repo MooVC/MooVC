@@ -11,7 +11,7 @@ public sealed class WhenWithBeforeTargetsIsCalled
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
-        var updated = Snippet.From(UpdatedBeforeTargets);
+        var updated = UpdatedBeforeTargets;
 
         // Act
         Target result = original.WithBeforeTargets(updated);

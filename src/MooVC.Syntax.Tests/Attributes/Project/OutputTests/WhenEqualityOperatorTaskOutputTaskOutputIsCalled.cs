@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorTaskOutputTaskOutputIsCalled
     {
         // Arrange
         Output left = OutputTestsData.Create();
-        Output right = OutputTestsData.Create(itemName: new Name("Other"));
+        Output right = OutputTestsData.Create(itemName: "Other");
 
         // Act
         bool result = left == right;

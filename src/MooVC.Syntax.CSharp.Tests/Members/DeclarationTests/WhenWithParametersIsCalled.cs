@@ -11,7 +11,7 @@ public sealed class WhenWithParametersIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        Parameter[] additional = [new Parameter { Name = new Name("U") }];
+        Parameter[] additional = [new Parameter { Name = "U" }];
 
         // Act
         Declaration result = original.WithParameters(additional);

@@ -11,7 +11,7 @@ public sealed class WhenOfTypeIsCalled
         var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
         var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
         Project original = ProjectTestsData.Create(build: build, platform: platform);
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Project result = original.OfType(updated);

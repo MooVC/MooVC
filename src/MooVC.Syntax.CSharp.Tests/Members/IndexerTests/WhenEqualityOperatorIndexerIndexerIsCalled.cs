@@ -102,7 +102,7 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
         Indexer right = IndexerTestsData.Create(
             behaviours: new Indexer.Methods
             {
-                Get = Snippet.From("value"),
+                Get = "value",
             });
 
         // Act

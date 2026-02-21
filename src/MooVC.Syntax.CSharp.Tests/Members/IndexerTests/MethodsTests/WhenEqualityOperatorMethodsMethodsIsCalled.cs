@@ -25,7 +25,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         Indexer.Methods? left = default;
         var right = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         Indexer.Methods? right = default;
@@ -59,7 +59,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var first = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         Indexer.Methods second = first;
@@ -77,12 +77,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var right = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         // Act
@@ -100,12 +100,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var right = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
         // Act
@@ -123,12 +123,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Indexer.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var right = new Indexer.Methods
         {
-            Get = Snippet.From("alternative"),
+            Get = "alternative",
         };
 
         // Act
@@ -146,12 +146,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         // Arrange
         var left = new Indexer.Methods
         {
-            Set = Snippet.From("value"),
+            Set = "value",
         };
 
         var right = new Indexer.Methods
         {
-            Set = Snippet.From("alternative"),
+            Set = "alternative",
         };
 
         // Act

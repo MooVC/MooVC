@@ -12,7 +12,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        var name = new Name(NewName);
+        var name = NewName;
 
         // Act
         Declaration result = original.Named(name);
@@ -21,6 +21,6 @@ public sealed class WhenNamedIsCalled
         result.ShouldNotBeSameAs(original);
         result.Name.ShouldBe(name);
         result.Parameters.ShouldBe(original.Parameters);
-        original.Name.ShouldBe(new Name(DeclarationTestsData.DefaultName));
+        original.Name.ShouldBe(DeclarationTestsData.DefaultName);
     }
 }

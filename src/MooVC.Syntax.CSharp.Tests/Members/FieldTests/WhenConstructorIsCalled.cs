@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var @default = Snippet.From("default");
+        var @default = "default";
         Symbol type = SymbolTestsData.Create("Result");
 
         // Act

@@ -23,8 +23,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var behaviours = new Property.Methods
         {
-            Get = Snippet.From("value;"),
-            Set = new Property.Setter { Behaviour = Snippet.From("_value = value;") },
+            Get = "value;",
+            Set = new Property.Setter { Behaviour = "_value = value;" },
         };
 
         Property subject = PropertyTestsData.Create(behaviours: behaviours);

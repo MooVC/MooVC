@@ -11,7 +11,7 @@ public sealed class WhenWithImportsIsCalled
     {
         // Arrange
         Import existing = ProjectTestsData.CreateImport();
-        var additional = new Import { Project = Snippet.From("Other"), Sdk = Snippet.Empty };
+        var additional = new Import { Project = "Other", Sdk = Snippet.Empty };
         Project original = ProjectTestsData.Create(import: existing);
 
         // Act

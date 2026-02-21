@@ -43,12 +43,12 @@ public sealed class WhenToSnippetIsCalled
     public void GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
-        Event @public = EventTestsData.Create(name: "Alpha", behaviours: new Event.Methods { Add = Snippet.From("a+=1;") });
+        Event @public = EventTestsData.Create(name: "Alpha", behaviours: new Event.Methods { Add = "a+=1;" });
 
         Event @protected = EventTestsData.Create(
             name: "Beta",
             scope: Scope.Protected,
-            behaviours: new Event.Methods { Remove = Snippet.From("b-=1;") });
+            behaviours: new Event.Methods { Remove = "b-=1;" });
 
         Event @virtual = EventTestsData.Create(name: "Gamma", behaviours: new Event.Methods { Remove = Snippet.From("g();") });
 

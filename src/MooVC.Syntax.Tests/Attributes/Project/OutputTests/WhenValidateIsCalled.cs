@@ -61,7 +61,7 @@ public sealed class WhenValidateIsCalled
     public void GivenPropertyWithoutItemThenValidationErrorReturned()
     {
         // Arrange
-        Output subject = OutputTestsData.Create(itemName: Name.Unnamed, propertyName: new Name("Property"));
+        Output subject = OutputTestsData.Create(itemName: Name.Unnamed, propertyName: "Property");
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

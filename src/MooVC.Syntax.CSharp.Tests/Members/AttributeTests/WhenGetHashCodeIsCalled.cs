@@ -24,8 +24,8 @@ public sealed class WhenGetHashCodeIsCalled
     public void GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
-        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("right") });
+        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = "left" });
+        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = "right" });
 
         // Act
         int leftHash = left.GetHashCode();

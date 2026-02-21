@@ -10,7 +10,7 @@ public sealed class WhenWithItemsIsCalled
     {
         // Arrange
         Item existing = ItemGroupTestsData.CreateItem();
-        var additional = new Item { Include = Snippet.From("Extra") };
+        var additional = new Item { Include = "Extra" };
         ItemGroup original = ItemGroupTestsData.Create(item: existing);
 
         // Act

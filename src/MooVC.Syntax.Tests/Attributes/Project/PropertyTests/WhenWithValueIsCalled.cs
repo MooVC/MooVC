@@ -11,7 +11,7 @@ public sealed class WhenWithValueIsCalled
     {
         // Arrange
         Property original = PropertyTestsData.Create();
-        var updated = Snippet.From(UpdatedValue);
+        var updated = UpdatedValue;
 
         // Act
         Property result = original.WithValue(updated);

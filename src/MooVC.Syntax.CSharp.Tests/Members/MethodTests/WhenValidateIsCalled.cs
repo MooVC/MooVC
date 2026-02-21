@@ -49,7 +49,7 @@ public sealed class WhenValidateIsCalled
         [
             new Parameter
             {
-                Default = Snippet.From($"first{Environment.NewLine}second"),
+                Default = $"first{Environment.NewLine}second",
                 Name = MethodTestsData.DefaultParameterName,
                 Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
             },

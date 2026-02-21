@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         var subject = new Directive
         {
             Alias = Alias,
-            Qualifier = ImmutableArray.Create(new Name("Collections")),
+            Qualifier = "Collections",
         };
 
         // Act

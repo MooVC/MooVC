@@ -31,14 +31,14 @@ public sealed class WhenConstructorIsCalled
         // Act
         var subject = new Constructor
         {
-            Body = Snippet.From(body),
+            Body = body,
             Extensibility = Extensibility.Static,
             Parameters = parameters,
             Scope = Scope.Internal,
         };
 
         // Assert
-        subject.Body.ShouldBe(Snippet.From(body));
+        subject.Body.ShouldBe(body);
         subject.Extensibility.ShouldBe(Extensibility.Static);
         subject.IsUndefined.ShouldBeFalse();
         subject.Parameters.ShouldBe(parameters);

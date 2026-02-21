@@ -11,7 +11,7 @@ public sealed class WhenOnConditionIsCalled
     {
         // Arrange
         TargetTask original = TargetTaskTestsData.Create(output: TargetTaskTestsData.CreateOutput());
-        var updated = Snippet.From(UpdatedCondition);
+        var updated = UpdatedCondition;
 
         // Act
         TargetTask result = original.OnCondition(updated);

@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var body = Snippet.From(ComparisonTestsData.DefaultBody);
+        var body = ComparisonTestsData.DefaultBody;
 
         // Act
         var subject = new Comparison

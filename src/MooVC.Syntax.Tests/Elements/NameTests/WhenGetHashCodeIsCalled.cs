@@ -9,8 +9,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var first = new Name(value);
-        var second = new Name(value);
+        var first = value;
+        var second = value;
 
         // Act
         int firstHash = first.GetHashCode();
@@ -47,7 +47,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         string value = generator.Lorem.Word();
-        var subject = new Name(value);
+        var subject = value;
 
         // Act
         int first = subject.GetHashCode();

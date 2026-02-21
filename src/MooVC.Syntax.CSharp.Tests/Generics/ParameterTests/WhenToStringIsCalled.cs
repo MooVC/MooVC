@@ -16,7 +16,7 @@ public sealed class WhenToStringIsCalled
 
         var subject = new Parameter
         {
-            Name = new Name(Name),
+            Name = Name,
             Constraints = [constraint],
         };
 

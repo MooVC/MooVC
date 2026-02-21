@@ -9,7 +9,7 @@ public sealed class WhenOfTypeIsCalled
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
-        var updated = Snippet.From("Other");
+        var updated = "Other";
 
         // Act
         Metadata result = original.OfType(updated);

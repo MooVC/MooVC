@@ -27,7 +27,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Resource
         {
-            CustomToolNamespace = Snippet.From($"Line1{Environment.NewLine}Line2"),
+            CustomToolNamespace = $"Line1{Environment.NewLine}Line2",
             Location = new Path(ResourceTestsData.DefaultLocationPath),
         };
 
@@ -49,7 +49,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Resource
         {
-            CustomToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace),
+            CustomToolNamespace = ResourceTestsData.DefaultCustomToolNamespace,
         };
 
         var context = new ValidationContext(subject);

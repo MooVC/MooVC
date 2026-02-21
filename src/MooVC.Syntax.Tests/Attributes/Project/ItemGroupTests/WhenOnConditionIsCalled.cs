@@ -11,7 +11,7 @@ public sealed class WhenOnConditionIsCalled
     {
         // Arrange
         ItemGroup original = ItemGroupTestsData.Create(item: ItemGroupTestsData.CreateItem());
-        var updated = Snippet.From(UpdatedCondition);
+        var updated = UpdatedCondition;
 
         // Act
         ItemGroup result = original.OnCondition(updated);

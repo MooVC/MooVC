@@ -11,7 +11,7 @@ public sealed class WhenWithMatchOnMetadataOptionsIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        var updated = Snippet.From(UpdatedMatchOnMetadataOptions);
+        var updated = UpdatedMatchOnMetadataOptions;
 
         // Act
         Item result = original.WithMatchOnMetadataOptions(updated);

@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     public void GivenValuesThenContainsDetails()
     {
         // Arrange
-        var name = new Name(ViewNameValue);
+        var name = ViewNameValue;
         View subject = ModellingTestData.CreateView(name: name);
 
         // Act

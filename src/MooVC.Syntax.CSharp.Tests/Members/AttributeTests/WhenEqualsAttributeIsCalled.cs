@@ -23,7 +23,7 @@ public sealed class WhenEqualsAttributeIsCalled
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("value") });
+        Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = "value" });
         Attribute other = subject;
 
         // Act
@@ -51,8 +51,8 @@ public sealed class WhenEqualsAttributeIsCalled
     public void GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
-        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("right") });
+        Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = "left" });
+        Attribute right = AttributeTestsData.Create(arguments: new Argument { Value = "right" });
 
         // Act
         bool result = left.Equals(right);

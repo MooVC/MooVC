@@ -11,7 +11,7 @@ public sealed class WhenKnownAsIsCalled
     {
         // Arrange
         Import original = ImportTestsData.Create();
-        var updated = Snippet.From(UpdatedLabel);
+        var updated = UpdatedLabel;
 
         // Act
         Import result = original.KnownAs(updated);

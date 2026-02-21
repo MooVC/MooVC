@@ -11,12 +11,12 @@ public sealed class WhenWithSetIsCalled
         // Arrange
         var original = new Property.Methods
         {
-            Get = Snippet.From("value"),
+            Get = "value",
         };
 
         var set = new Property.Setter
         {
-            Behaviour = Snippet.From("value = input"),
+            Behaviour = "value = input",
             Mode = Property.Mode.Init,
             Scope = Scope.Private,
         };

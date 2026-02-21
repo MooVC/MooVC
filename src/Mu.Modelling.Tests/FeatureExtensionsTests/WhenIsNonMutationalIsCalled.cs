@@ -20,7 +20,7 @@ public sealed class WhenIsNonMutationalIsCalled
 
         // Assert
         result.Type.ShouldBe(Feature.Kind.NonMutational);
-        result.NonMutational.View.Name.ShouldBe(new Name(ViewNameValue));
+        result.NonMutational.View.Name.ShouldBe(ViewNameValue);
         result.Mutational.ShouldBe(Mutational.Undefined);
     }
 }
