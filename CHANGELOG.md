@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
 - A `ForkOn` extension method that allows for branching logic based on a predicate evaluation within a LINQ call chain.
-- A new `Muify` Roslyn project with `Muify.Domain.IdentityAttributeGenerator` that emits a single-use `Muify.Domain.IdentityAttribute` for properties.
 
 # [9.2.0] - 2025-11-14
 
