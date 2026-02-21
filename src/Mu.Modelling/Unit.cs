@@ -16,6 +16,10 @@ public sealed partial class Unit
 {
     public static readonly Unit Undefined = new();
 
+    internal Unit()
+    {
+    }
+
     [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = [];

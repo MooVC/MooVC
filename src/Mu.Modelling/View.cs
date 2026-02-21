@@ -16,6 +16,10 @@ public sealed partial class View
 {
     public static readonly View Undefined = new();
 
+    internal View()
+    {
+    }
+
     [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = [];

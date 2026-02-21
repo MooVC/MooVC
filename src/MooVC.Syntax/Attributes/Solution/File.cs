@@ -25,7 +25,7 @@ namespace MooVC.Syntax.Attributes.Solution
         /// </summary>
         public static readonly File Undefined = string.Empty;
 
-        private static readonly Regex rule = new Regex(
+        private static readonly Regex _rule = new Regex(
             @"^(?![\\/])(?![A-Za-z]:)(?!\\\\)(?:(?:[^<>:""|?*\x00-\x1F\\/]+[\\/])*[^<>:""|?*\x00-\x1F\\/]+)$",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
@@ -76,7 +76,7 @@ namespace MooVC.Syntax.Attributes.Solution
                 yield break;
             }
 
-            if (_value is null || _value.Length == 0 || !rule.IsMatch(_value))
+            if (_value is null || _value.Length == 0 || !_rule.IsMatch(_value))
             {
                 yield return new ValidationResult(ValidateValueInvalid.Format(nameof(Path), nameof(File), _value), new[] { nameof(File) });
             }

@@ -57,7 +57,7 @@
             public static readonly Platform x86 = "x86";
             #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 
-            private static readonly Regex rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
+            private static readonly Regex _rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
 
             /// <summary>
             /// Gets a value indicating whether the current instance represents an unspecified value.
@@ -108,7 +108,7 @@
                     yield break;
                 }
 
-                if (!rule.IsMatch(_value))
+                if (!_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(ValidateValueInvalid.Format(nameof(Platform), _value), new[] { nameof(Platform) });
                 }

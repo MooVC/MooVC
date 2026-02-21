@@ -17,6 +17,10 @@ public sealed partial class Parameter
 {
     public static readonly Parameter Undefined = new();
 
+    internal Parameter()
+    {
+    }
+
     [Descriptor("DefaultedTo")]
     [Traverse(Scope = TraverseScope.Property)]
     public Snippet Default { get; internal init; } = Snippet.Empty;

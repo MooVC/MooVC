@@ -72,7 +72,7 @@ namespace MooVC.Syntax.Attributes.Project
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets the keep duplicate outputs on the Target.
+        /// Gets a value indicating whether or not to keep duplicate outputs on the Target.
         /// </summary>
         /// <value>The keep duplicate outputs.</value>
         public bool KeepDuplicateOutputs { get; internal set; }

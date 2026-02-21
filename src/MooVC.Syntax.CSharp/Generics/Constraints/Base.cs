@@ -23,6 +23,11 @@
         /// </summary>
         public static readonly Base Unspecified = Symbol.Undefined;
 
+        internal Base(Symbol symbol)
+        {
+            _value = symbol ?? Symbol.Undefined;
+        }
+
         /// <summary>
         /// Gets a value indicating whether the Base is unspecified.
         /// </summary>
@@ -32,7 +37,7 @@
         /// <summary>
         /// Defines the string operator for the Base.
         /// </summary>
-        /// <param name="@base">The base.</param>
+        /// <param name="base">The base.</param>
         /// <returns>The string.</returns>
         public static implicit operator string(Base @base)
         {
@@ -44,7 +49,7 @@
         /// <summary>
         /// Defines the Snippet operator for the Base.
         /// </summary>
-        /// <param name="@base">The base.</param>
+        /// <param name="base">The base.</param>
         /// <returns>The snippet.</returns>
         public static implicit operator Snippet(Base @base)
         {

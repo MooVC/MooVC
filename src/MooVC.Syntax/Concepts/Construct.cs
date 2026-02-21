@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -22,6 +23,7 @@
         /// </summary>
         /// <value>A value indicating whether the Construct is undefined.</value>
         [Ignore]
+        [SuppressMessage("Usage", "VALFY04:Type does not utilize Valuify", Justification = "The derived class will be annotated with it.")]
         public abstract bool IsUndefined { get; }
 
         /// <summary>

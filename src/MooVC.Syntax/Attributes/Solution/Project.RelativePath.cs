@@ -25,7 +25,7 @@
             /// </summary>
             public static readonly RelativePath Unspecified = string.Empty;
 
-            private static readonly Regex rule = new Regex(
+            private static readonly Regex _rule = new Regex(
                 @"^(?![\\/])(?![A-Za-z]:)(?!\\\\)(?:(?:[^<>:""|?*\x00-\x1F\\/]+[\\/])*[^<>:""|?*\x00-\x1F\\/]+\.[^<>:""|?*\x00-\x1F\\/\.]+)$",
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
@@ -63,7 +63,7 @@
                     yield break;
                 }
 
-                if (_value is null || !rule.IsMatch(_value))
+                if (_value is null || !_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(
                         RelativePathValidateValueInvalid.Format(nameof(Path), nameof(Project), _value),

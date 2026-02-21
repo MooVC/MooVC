@@ -16,6 +16,10 @@ public sealed partial class Component
 {
     public static readonly Component Undefined = new();
 
+    internal Component()
+    {
+    }
+
     [Descriptor("AttributedWith")]
     [Traverse(Scope = TraverseScope.Property)]
     public ImmutableArray<Attribute> Attributes { get; internal init; } = [];

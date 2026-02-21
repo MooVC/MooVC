@@ -20,7 +20,7 @@
         {
             public static readonly Name Unnamed = string.Empty;
 
-            private static readonly Regex rule = new Regex(
+            private static readonly Regex _rule = new Regex(
                 @"^(?![ .])(?!.*[ .]$)[^\\/:*?""<>|]+$",
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
@@ -42,7 +42,7 @@
                     yield break;
                 }
 
-                if (_value is null || !rule.IsMatch(_value))
+                if (_value is null || !_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(
                         NameValidateValueInvalid.Format(nameof(DisplayName), nameof(Project), _value),

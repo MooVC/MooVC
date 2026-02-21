@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents a C# syntax element variable.
     /// </summary>
-    partial class Variable
+    public partial class Variable
     {
         /// <summary>
         /// Defines options for the Variable C# syntax element.
@@ -34,7 +34,7 @@
             /// Gets the casing on the Options.
             /// </summary>
             /// <value>The casing.</value>
-            public Identifier.Casing Casing { get; set; } = Identifier.Casing.Camel;
+            public Identifier.Casing Casing { get; internal set; } = Identifier.Casing.Camel;
 
             /// <summary>
             /// Gets a value indicating whether the Options is camel.
@@ -65,10 +65,8 @@
             {
                 Guard.Against.Conversion<Options, Identifier.Options>(options);
 
-                return new Identifier.Options
-                {
-                    Casing = options.Casing,
-                };
+                return new Identifier.Options()
+                    .WithCasing(options.Casing);
             }
         }
     }

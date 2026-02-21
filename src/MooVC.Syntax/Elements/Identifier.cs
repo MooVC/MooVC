@@ -25,9 +25,9 @@
         /// </summary>
         public static readonly Identifier Unnamed = string.Empty;
 
-        private static readonly Regex rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex _rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-        private static readonly Dictionary<Casing, Func<string, string>> casingStrategies = new Dictionary<Casing, Func<string, string>>
+        private static readonly Dictionary<Casing, Func<string, string>> _strategies = new Dictionary<Casing, Func<string, string>>
         {
             { Casing.Pascal, StringExtensions.ToPascalCase },
             { Casing.Camel, StringExtensions.ToCamelCase },
@@ -163,7 +163,7 @@
                 return Snippet.Empty;
             }
 
-            if (!casingStrategies.TryGetValue(options.Casing, out Func<string, string> transform))
+            if (!_strategies.TryGetValue(options.Casing, out Func<string, string> transform))
             {
                 throw new NotSupportedException(ToStringCasingNotSupported.Format(options.Casing, nameof(Identifier)));
             }
@@ -185,7 +185,7 @@
 
             const int Unspecified = 0;
 
-            if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
+            if (_value is null || _value.Length == Unspecified || !_rule.IsMatch(_value))
             {
                 yield return new ValidationResult(
                     ValidateValueRequired.Format(_value, nameof(Identifier)),

@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a syntax element identifier.
     /// </summary>
-    partial class Identifier
+    public partial class Identifier
     {
         /// <summary>
         /// Represents a syntax element casing.

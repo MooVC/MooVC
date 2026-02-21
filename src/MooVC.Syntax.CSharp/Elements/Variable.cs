@@ -32,7 +32,7 @@
         /// Initializes a new instance of the Variable class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Variable(Identifier value)
+        internal Variable(Identifier value)
         {
             _value = value ?? Identifier.Unnamed;
         }

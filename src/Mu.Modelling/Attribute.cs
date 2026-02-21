@@ -18,6 +18,10 @@ public sealed partial class Attribute
 {
     public static readonly Attribute Undefined = new();
 
+    internal Attribute()
+    {
+    }
+
     [Descriptor("DefaultedTo")]
     [Traverse(Scope = TraverseScope.Property)]
     public Snippet Default { get; internal init; } = Snippet.Empty;

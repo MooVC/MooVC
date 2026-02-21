@@ -4,13 +4,13 @@ using System.Collections.Immutable;
 
 public sealed class WhenBlockIsCalled
 {
-    private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
+    private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
     [Fact]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
         Snippet.Options? options = default;
 
         // Act
@@ -31,7 +31,7 @@ public sealed class WhenBlockIsCalled
             }
             """;
 
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
 
         // Act
         Snippet result = subject.Block(Snippet.Options.Default);

@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents a syntax element identifier.
     /// </summary>
-    partial class Identifier
+    public partial class Identifier
     {
         /// <summary>
         /// Defines options for the Identifier syntax element.
@@ -31,7 +31,7 @@
             /// Gets the casing on the Options.
             /// </summary>
             /// <value>The casing.</value>
-            public Casing Casing { get; set; } = Casing.Camel;
+            public Casing Casing { get; internal set; } = Casing.Camel;
 
             /// <summary>
             /// Gets a value indicating whether the Options is camel.

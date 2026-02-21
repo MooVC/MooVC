@@ -23,7 +23,7 @@
             /// </summary>
             public static readonly Path Root = "/";
 
-            private static readonly Regex rule = new Regex(
+            private static readonly Regex _rule = new Regex(
                 @"^\/(?!\/)(?:(?!\.{1,2}\/)[^\/\x00-\x1F]+\/)+$",
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
@@ -61,7 +61,7 @@
                     yield break;
                 }
 
-                if (_value is null || _value.Length == 0 || !rule.IsMatch(_value))
+                if (_value is null || _value.Length == 0 || !_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(PathValidateValueInvalid.Format(nameof(Path), _value), new[] { nameof(Path) });
                 }

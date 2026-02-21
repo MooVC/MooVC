@@ -28,7 +28,7 @@
         /// Gets the unspecified instance.
         /// </summary>
         public static readonly Attribute Unspecified = new Attribute();
-        private static readonly Snippet separator = Snippet.From(", ");
+        private static readonly Snippet _separator = Snippet.From(", ");
 
         /// <summary>
         /// Initializes a new instance of the Attribute class.
@@ -154,7 +154,7 @@
                 .Select(argument => argument.ToSnippet(declaration))
                 .ToArray();
 
-            Snippet syntax = separator.Combine(options, arguments);
+            Snippet syntax = _separator.Combine(options, arguments);
 
             return value.Append($"({syntax})");
         }

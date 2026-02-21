@@ -17,6 +17,10 @@ public sealed partial class Result
 {
     public static readonly Result Undefined = new();
 
+    internal Result()
+    {
+    }
+
     [Descriptor("DescribedAs")]
     [Traverse(Scope = TraverseScope.Property)]
     public Description Description { get; internal init; } = Description.Undescribed;

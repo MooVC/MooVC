@@ -17,6 +17,10 @@ public sealed partial class Feature
 {
     public static readonly Feature Undefined = new();
 
+    internal Feature()
+    {
+    }
+
     [Descriptor("DescribedAs")]
     [Traverse(Scope = TraverseScope.Property)]
     public Description Description { get; internal init; } = Description.Undescribed;

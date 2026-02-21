@@ -30,6 +30,10 @@
         public static readonly Symbol Undefined = new Symbol();
         private const string Separator = ", ";
 
+        internal Symbol()
+        {
+        }
+
         /// <summary>
         /// Gets the arguments on the Symbol.
         /// </summary>

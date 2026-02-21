@@ -9,6 +9,11 @@ public sealed partial class Description
 {
     public static readonly Description Undescribed = new(string.Empty);
 
+    public Description(string value)
+    {
+        _value = value ?? string.Empty;
+    }
+
     public bool IsUndescribed => this == Undescribed;
 
     public override string ToString()

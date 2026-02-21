@@ -23,7 +23,7 @@
         /// Gets the empty instance.
         /// </summary>
         public static readonly Name Unnamed = string.Empty;
-        private static readonly Regex rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex _rule = new Regex(@"^@?[A-Z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         /// <summary>
         /// Gets a value indicating whether the Segment is empty.
@@ -144,7 +144,7 @@
 
             const int Unspecified = 0;
 
-            if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
+            if (_value is null || _value.Length == Unspecified || !_rule.IsMatch(_value))
             {
                 yield return new ValidationResult(
                     ValidateValueRequired.Format(_value, nameof(Name)),

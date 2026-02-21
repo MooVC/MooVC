@@ -22,7 +22,12 @@
         /// Represents the unnamed for the Identifier.
         /// </summary>
         public static readonly Identifier Unnamed = string.Empty;
-        private static readonly Regex rule = new Regex(@"^T(?:[A-Z][A-Za-z0-9]*)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex _rule = new Regex(@"^T(?:[A-Z][A-Za-z0-9]*)?$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+        public Identifier(string value)
+        {
+            _value = value ?? string.Empty;
+        }
 
         /// <summary>
         /// Gets a value indicating whether the Identifier is unnamed.
@@ -77,7 +82,7 @@
 
             const int Unspecified = 0;
 
-            if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
+            if (_value is null || _value.Length == Unspecified || !_rule.IsMatch(_value))
             {
                 yield return new ValidationResult(
                     ValidateValueRequired.Format(_value, nameof(Identifier)),

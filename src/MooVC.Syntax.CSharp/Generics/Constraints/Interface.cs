@@ -25,6 +25,11 @@
         /// </summary>
         public static readonly Interface Undefined = Declaration.Unspecified;
 
+        internal Interface(Declaration declaration)
+        {
+            _value = declaration ?? Declaration.Unspecified;
+        }
+
         /// <summary>
         /// Gets a value indicating whether the Interface is undefined.
         /// </summary>

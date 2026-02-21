@@ -16,6 +16,10 @@ public sealed partial class Mutational
 {
     public static readonly Mutational Undefined = new();
 
+    internal Mutational()
+    {
+    }
+
     [Descriptor("DescribedAs")]
     [Traverse(Scope = TraverseScope.Property)]
     public Description Description { get; internal init; } = Description.Undescribed;

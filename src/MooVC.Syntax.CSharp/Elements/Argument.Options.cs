@@ -39,21 +39,21 @@
             /// </summary>
             /// <value>The formatter.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsFormatterRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Formatter Formatter { get; set; } = Formatter.Call;
+            public Formatter Formatter { get; internal set; } = Formatter.Call;
 
             /// <summary>
             /// Gets the naming on the Options.
             /// </summary>
             /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsNamingRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Variable.Options Naming { get; set; } = Variable.Options.Camel;
+            public Variable.Options Naming { get; internal set; } = Variable.Options.Camel;
 
             /// <summary>
             /// Gets the snippet on the Options.
             /// </summary>
             /// <value>The snippet.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Code.Options Snippet { get; set; } = Code.Options.Default;
+            public Code.Options Snippet { get; internal set; } = Code.Options.Default;
         }
     }
 }

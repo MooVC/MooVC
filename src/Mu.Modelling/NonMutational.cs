@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Fluentify;
 using Graphify;
-using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
@@ -15,6 +14,10 @@ public sealed partial class NonMutational
     : IValidatableObject
 {
     public static readonly NonMutational Undefined = new();
+
+    internal NonMutational()
+    {
+    }
 
     [Descriptor("DescribedAs")]
     [Traverse(Scope = TraverseScope.Property)]

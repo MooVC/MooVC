@@ -40,7 +40,7 @@
             /// </summary>
             public static readonly BuildType Release = "Release";
 
-            private static readonly Regex rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
+            private static readonly Regex _rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
 
             /// <summary>
             /// Gets a value indicating whether the current instance represents an unnamed value.
@@ -91,7 +91,7 @@
                     yield break;
                 }
 
-                if (!rule.IsMatch(_value))
+                if (!_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(ValidateValueInvalid.Format(nameof(BuildType), _value), new[] { nameof(BuildType) });
                 }
