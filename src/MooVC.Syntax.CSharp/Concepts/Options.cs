@@ -1,7 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -26,15 +29,42 @@
         public bool IsDefault => this == Default;
 
         /// <summary>
-        /// Gets the namespace on the Options.
+        /// Gets the namespace options.
         /// </summary>
-        /// <value>The namespace.</value>
+        /// <value>The namespace options.</value>
         public Qualifier.Options Namespace { get; internal set; } = Qualifier.Options.File;
 
         /// <summary>
-        /// Gets the snippets on the Options.
+        /// Gets the snippets options.
         /// </summary>
-        /// <value>The snippets.</value>
+        /// <value>The snippets options.</value>
         public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+
+        /// <summary>
+        /// Gets the symbol options.
+        /// </summary>
+        /// <value>The symbol options.</value>
+        public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+
+        public static implicit operator Qualifier.Options(Options options)
+        {
+            Guard.Against.Conversion<Options, Qualifier.Options>(options);
+
+            return options.Namespace;
+        }
+
+        public static implicit operator Snippet.Options(Options options)
+        {
+            Guard.Against.Conversion<Options, Snippet.Options>(options);
+
+            return options.Snippets;
+        }
+
+        public static implicit operator Symbol.Options(Options options)
+        {
+            Guard.Against.Conversion<Options, Symbol.Options>(options);
+
+            return options.Types;
+        }
     }
 }

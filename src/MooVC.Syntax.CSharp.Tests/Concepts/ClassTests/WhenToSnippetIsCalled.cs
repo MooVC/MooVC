@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-using System;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
@@ -27,7 +26,7 @@ public sealed class WhenToSnippetIsCalled
         Class subject = ClassTestsData.Create(isStatic: true);
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         result.ShouldContain($"{StaticKeyword} class");

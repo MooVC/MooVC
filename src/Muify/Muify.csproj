@@ -13,15 +13,9 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Domain\IdentityAttributeGenerator.Resources.Designer.cs">
-      <DependentUpon>IdentityAttributeGenerator.Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <EmbeddedResource Update="Domain\IdentityAttributeGenerator.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>IdentityAttributeGenerator.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="$(OutputPath)\netstandard2.0\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MooVC.Syntax.CSharp\MooVC.Syntax.CSharp.csproj" />
   </ItemGroup>
 </Project>

@@ -68,6 +68,13 @@
                 return new Identifier.Options()
                     .WithCasing(options.Casing);
             }
+
+            public static implicit operator Identifier.Casing(Options options)
+            {
+                Guard.Against.Conversion<Options, Identifier.Casing>(options);
+
+                return options.Casing;
+            }
         }
     }
 }

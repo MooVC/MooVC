@@ -141,7 +141,7 @@ namespace MooVC.Syntax.CSharp.Members
                 return Snippet.Empty;
             }
 
-            var attributes = Attributes.ToSnippet(options.Snippets);
+            var attributes = Attributes.ToSnippet(options);
             Snippet signature = GetSignature(options);
 
             if (Body.IsEmpty)
@@ -150,8 +150,8 @@ namespace MooVC.Syntax.CSharp.Members
             }
 
             return Body
-                .Block(options.Snippets, signature)
-                .Prepend(options.Snippets, attributes);
+                .Block(options, signature)
+                .Prepend(options, attributes);
         }
 
         /// <summary>
@@ -197,19 +197,19 @@ namespace MooVC.Syntax.CSharp.Members
             string name = Name;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string result = Result.IsVoid ? "void" : Result;
-            string scope = Scope.ToString(options.Implied);
-            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options.Snippets), options.Snippets);
+            string scope = Scope.ToString(options);
+            var clauses = Name.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
             if (!clauses.IsEmpty)
             {
                 return clauses
-                    .Shift(options.Snippets)
-                    .Prepend(options.Snippets, Environment.NewLine)
-                    .Prepend(options.Snippets, signature);
+                    .Shift(options)
+                    .Prepend(options, Environment.NewLine)
+                    .Prepend(options, signature);
             }
 
-            return Snippet.From(options.Snippets, signature);
+            return Snippet.From(options, signature);
         }
     }
 }

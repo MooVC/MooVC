@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = types.ToSnippet(Snippet.Options.Default);
+        var snippet = types.ToSnippet(Type.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -30,7 +30,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Type> types = [OperatorsTestsData.Create("Alpha")];
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = types.ToSnippet(options!));
@@ -59,7 +59,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = types.ToSnippet(Snippet.Options.Default);
+        var snippet = types.ToSnippet(Type.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

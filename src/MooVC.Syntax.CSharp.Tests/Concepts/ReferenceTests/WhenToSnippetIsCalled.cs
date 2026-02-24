@@ -52,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         };
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         result.ShouldContain(TypeName);

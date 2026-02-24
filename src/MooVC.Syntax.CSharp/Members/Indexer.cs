@@ -124,7 +124,7 @@
 
             Snippet signature = GetSignature(options);
             var methods = Behaviours.ToSnippet(options.Snippets);
-            Snippet.Options snippets = options.Snippets;
+            Snippet.Options snippets = options;
 
             if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
             {
@@ -186,7 +186,7 @@
             string extensibility = Extensibility;
             string parameter = Parameter;
             string result = Result.WithMode(Result.Modality.Synchronous);
-            string scope = Scope.ToString(options.Implied);
+            string scope = Scope.ToString(options);
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 
             return Snippet.From(signature);

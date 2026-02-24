@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members
+﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -8,14 +8,12 @@ namespace MooVC.Syntax.CSharp.Members
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
-    /// <summary>
-    /// Represents a C# member syntax event.
-    /// </summary>
-    public partial class Event
+    public partial class Type
     {
         /// <summary>
-        /// Represents the rendering options for a event.
+        /// Represents a C# type syntax options.
         /// </summary>
+        [AutoInitializeWith(nameof(Default))]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -26,36 +24,36 @@ namespace MooVC.Syntax.CSharp.Members
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets the mode on the Setter.
+            /// Gets a value indicating whether the Options is default.
             /// </summary>
-            /// <value>The mode.</value>
-            public Scope Implied { get; internal set; } = Scope.Unspecified;
-
-            /// <summary>
-            /// Gets a value indicating whether the Setter is default.
-            /// </summary>
-            /// <value>A value indicating whether the Setter is default.</value>
+            /// <value>A value indicating whether the Options is default.</value>
             [Ignore]
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets the options for the Snippets.
+            /// Gets the snippets options.
             /// </summary>
-            /// <value>The behaviour.</value>
+            /// <value>The snippets options.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
 
-            public static implicit operator Scope(Options options)
-            {
-                Guard.Against.Conversion<Options, Scope>(options);
-
-                return options.Implied;
-            }
+            /// <summary>
+            /// Gets the symbol options.
+            /// </summary>
+            /// <value>The symbol options.</value>
+            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
 
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            public static implicit operator Symbol.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Symbol.Options>(options);
+
+                return options.Types;
             }
         }
     }

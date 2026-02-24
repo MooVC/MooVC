@@ -42,25 +42,25 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The snippet.</returns>
-        protected override Snippet PerformToSnippet(Snippet.Options options)
+        protected override Snippet PerformToSnippet(Options options)
         {
             Snippet signature = GetSignature(options);
 
-            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options });
-            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options });
-            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options });
+            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options.Snippets });
+            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options.Snippets });
+            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options.Snippets });
 
             var methods = Methods
                 .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
                 .ToImmutableArray()
-                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options });
+                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options.Snippets });
 
-            Snippet body = Snippet.Blank.Combine(options, events, properties, indexers, methods);
+            Snippet body = Snippet.Blank.Combine(options.Snippets, events, properties, indexers, methods);
 
-            return body.Block(options, signature);
+            return body.Block(options.Snippets, signature);
         }
 
-        private Snippet GetSignature(Snippet.Options options)
+        private Snippet GetSignature(Options options)
         {
             var attributes = Attributes.ToSnippet(options);
             var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);

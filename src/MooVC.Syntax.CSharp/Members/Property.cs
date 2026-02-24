@@ -136,10 +136,10 @@
                 return Snippet.Empty;
             }
 
-            var attributes = Attributes.ToSnippet(options.Snippets);
+            var attributes = Attributes.ToSnippet(options);
             Snippet signature = GetSignature(options);
-            var behaviours = Behaviours.ToSnippet(options.Snippets, Scope);
-            Snippet.Options body = options.Snippets;
+            var behaviours = Behaviours.ToSnippet(options, Scope);
+            Snippet.Options body = options;
 
             if (behaviours.IsSingleLine && body.Block.Inline.IsLambda && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly))
             {
@@ -154,7 +154,7 @@
                 signature = signature.Append(body, $" = {Default}");
             }
 
-            return signature.Prepend(options.Snippets, attributes);
+            return signature.Prepend(options, attributes);
         }
 
         /// <summary>

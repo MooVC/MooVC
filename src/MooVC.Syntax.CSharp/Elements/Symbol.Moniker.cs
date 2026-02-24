@@ -27,7 +27,7 @@
             /// Gets the empty instance.
             /// </summary>
             public static readonly Moniker Unnamed = string.Empty;
-            private static readonly Regex rule = new Regex(@"^@?[A-Za-z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+            private static readonly Regex _rule = new Regex(@"^@?[A-Za-z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
             internal Moniker(string value)
             {
@@ -90,6 +90,18 @@
                 }
 
                 return name;
+            }
+
+            /// <summary>
+            /// Defines the Name operator for the Moniker.
+            /// </summary>
+            /// <param name="name">The name.</param>
+            /// <returns>The moniker.</returns>
+            public static implicit operator Moniker(Name name)
+            {
+                Guard.Against.Conversion<Name, Moniker>(name);
+
+                return new Moniker(name);
             }
 
             /// <summary>
@@ -181,7 +193,7 @@
 
                 const int Unspecified = 0;
 
-                if (_value is null || _value.Length == Unspecified || !rule.IsMatch(_value))
+                if (_value is null || _value.Length == Unspecified || !_rule.IsMatch(_value))
                 {
                     yield return new ValidationResult(
                         MonikerValidateValueRequired.Format(_value, nameof(Moniker)),

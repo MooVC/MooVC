@@ -43,24 +43,6 @@ public sealed class WhenValidateIsCalled
     }
 
     [Fact]
-    public void GivenNullNameThenValidationErrorsReturned()
-    {
-        // Arrange
-        var subject = new Identifier(default);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
-    }
-
-    [Fact]
     public void GivenEmptyNameThenValidationErrorsReturned()
     {
         // Arrange

@@ -127,14 +127,14 @@ namespace MooVC.Syntax.CSharp.Members
             {
                 if (snippet.IsEmpty)
                 {
-                    return Snippet.From($"{keyword};");
+                    return Snippet.From(options, $"{keyword};");
                 }
 
                 keyword = scope is null || scope == Scope.Unspecified
                     ? keyword
                     : $"{scope} {keyword}";
 
-                return snippet.Block(options, opening: Snippet.From(keyword));
+                return snippet.Block(options, opening: Snippet.From(options, keyword));
             }
         }
     }

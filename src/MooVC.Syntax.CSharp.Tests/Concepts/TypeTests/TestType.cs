@@ -10,8 +10,8 @@ internal sealed class TestType
 
     public override bool IsUndefined => IsUndefinedValue;
 
-    protected override Snippet PerformToSnippet(Snippet.Options options)
+    protected override Snippet PerformToSnippet(Options options)
     {
-        return Snippet.From(options, "test");
+        return Snippet.From(options.Snippets, "test");
     }
 }

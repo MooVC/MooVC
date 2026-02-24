@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
-using System;
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -66,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         };
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         result.ShouldContain($"{Struct.Kind.ReadOnly} partial struct {StructName}");

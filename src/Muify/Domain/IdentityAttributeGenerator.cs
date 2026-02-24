@@ -1,8 +1,11 @@
 namespace Muify.Domain
 {
+    using System;
     using System.Text;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Text;
+    using MooVC.Syntax;
+    using MooVC.Syntax.CSharp.Concepts;
 
     [Generator(LanguageNames.CSharp)]
     public sealed class IdentityAttributeGenerator
@@ -18,14 +21,6 @@ namespace Muify.Domain
         /// </summary>
         internal const string Name = "Identity";
 
-        /// <summary>
-        /// Gets the generated content as a formatted string for use by the generator.
-        /// </summary>
-        /// <value>
-        /// The generated content as a formatted string for use by generator.
-        /// </value>
-        internal static string Content { get; } = string.Format(IdentityAttributeGenerator_Resources.Content, Name);
-
         /// <inheritdoc/>
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
@@ -34,6 +29,14 @@ namespace Muify.Domain
 
         private static void Generate(IncrementalGeneratorPostInitializationContext context)
         {
+            var content = Builder
+                .New<Definition>()
+                .From("Muify.Domain")
+                .For<Class>(@class => @class
+                    .Named($"{Name}Attribute")
+                    .DerivesFrom(typeof(Attribute)))
+                .ToSnippet();
+
             context.AddSource(Hint, SourceText.From(Content, Encoding.UTF8));
         }
     }

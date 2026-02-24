@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
-using System;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
@@ -25,7 +24,7 @@ public sealed class WhenToSnippetIsCalled
         var subject = new TestType { IsUndefinedValue = true };
 
         // Act
-        var result = subject.ToSnippet(Snippet.Options.Default);
+        var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         result.ShouldBe(Snippet.Empty);

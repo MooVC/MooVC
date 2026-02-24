@@ -1,7 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements
 {
     using System.ComponentModel.DataAnnotations;
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Parameter_Resources;
 
@@ -44,6 +47,20 @@
             /// <value>The types.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+
+            public static implicit operator Variable.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Variable.Options>(options);
+
+                return options.Naming;
+            }
+
+            public static implicit operator Symbol.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Symbol.Options>(options);
+
+                return options.Types;
+            }
         }
     }
 }

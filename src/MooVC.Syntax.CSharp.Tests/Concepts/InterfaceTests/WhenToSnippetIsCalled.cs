@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
-using System;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -61,7 +60,7 @@ public sealed class WhenToSnippetIsCalled
             scope: Scope.Internal);
 
         // Act
-        var result = subject.ToSnippet(Snippet.Options.Default);
+        var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         result.ShouldBeEquivalentTo(expected);

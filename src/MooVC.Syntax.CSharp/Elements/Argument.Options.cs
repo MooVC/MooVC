@@ -1,7 +1,10 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements
 {
     using System.ComponentModel.DataAnnotations;
+    using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Elements.Argument_Resources;
     using Code = MooVC.Syntax.Elements.Snippet;
@@ -54,6 +57,27 @@
             /// <value>The snippet.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Code.Options Snippet { get; internal set; } = Code.Options.Default;
+
+            public static implicit operator Formatter(Options options)
+            {
+                Guard.Against.Conversion<Options, Formatter>(options);
+
+                return options.Formatter;
+            }
+
+            public static implicit operator Variable.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Variable.Options>(options);
+
+                return options.Naming;
+            }
+
+            public static implicit operator Code.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Code.Options>(options);
+
+                return options.Snippet;
+            }
         }
     }
 }

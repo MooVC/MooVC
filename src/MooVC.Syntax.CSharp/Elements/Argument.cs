@@ -110,7 +110,7 @@
                 return $"{Value}";
             }
 
-            var name = Name.ToSnippet(options.Naming);
+            var name = Name.ToSnippet(options);
             string value = Value.ToString();
 
             if (!Modifier.IsNone)
@@ -118,7 +118,7 @@
                 value = $"{Modifier} {value}";
             }
 
-            return Snippet.From(options.Snippet, string.Format(options.Formatter, name, value));
+            return Snippet.From(options, string.Format(options.Formatter, name, value));
         }
 
         /// <summary>

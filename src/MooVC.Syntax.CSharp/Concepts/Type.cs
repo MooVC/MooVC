@@ -19,7 +19,7 @@
     /// <summary>
     /// Represents a C# type syntax type.
     /// </summary>
-    public abstract class Type
+    public abstract partial class Type
         : IValidatableObject
     {
         private protected Type()
@@ -106,7 +106,7 @@
         /// <returns>The string representation.</returns>
         public sealed override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), GetType()));
 
@@ -155,6 +155,6 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The snippet.</returns>
-        protected abstract Snippet PerformToSnippet(Snippet.Options options);
+        protected abstract Snippet PerformToSnippet(Options options);
     }
 }

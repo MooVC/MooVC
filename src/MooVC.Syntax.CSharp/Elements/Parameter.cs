@@ -126,8 +126,8 @@
             string attributes = GetAttributes();
             string @default = GetDefault();
             string modifier = Modifier;
-            var name = Name.ToSnippet(options.Naming);
-            string type = Type.ToSnippet(options.Types);
+            var name = Name.ToSnippet(options);
+            string type = Type.ToSnippet(options);
 
             return separator.Combine(attributes, modifier, type, name, @default);
         }

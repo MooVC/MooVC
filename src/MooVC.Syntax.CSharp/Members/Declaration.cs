@@ -59,9 +59,21 @@
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
-        /// Defines the segment operator for the Declaration.
+        /// Defines the string operator for the Declaration.
         /// </summary>
-        /// <param name="name">The segment.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The declaration.</returns>
+        public static implicit operator Declaration(string name)
+        {
+            Guard.Against.Conversion<string, Declaration>(name);
+
+            return new Declaration { Name = name };
+        }
+
+        /// <summary>
+        /// Defines the Name operator for the Declaration.
+        /// </summary>
+        /// <param name="name">The name.</param>
         /// <returns>The declaration.</returns>
         public static implicit operator Declaration(Name name)
         {

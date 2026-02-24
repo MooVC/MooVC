@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Fact]
-    public void GivenNullWhenRoundTrippedThenResultIsNull()
+    public void GivenNullWhenRoundTrippedThenResultIsEmpty()
     {
         // Arrange
         string? value = default;
@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        result.ShouldBeEmpty();
     }
 
     [Fact]

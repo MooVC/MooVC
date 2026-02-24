@@ -123,16 +123,16 @@
             string extensibility = Extensibility;
             string handler = Handler;
             string name = Name;
-            string scope = Scope.ToString(options.Implied);
+            string scope = Scope.ToString(options);
             string signature = Separator.Combine(scope, extensibility, "event", handler, name);
-            var methods = Behaviours.ToSnippet(options.Snippets);
+            var methods = Behaviours.ToSnippet(options);
 
             if (methods.IsEmpty)
             {
                 return string.Concat(signature, ";");
             }
 
-            Snippet.Options snippets = options.Snippets;
+            Snippet.Options snippets = options;
 
             if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
             {

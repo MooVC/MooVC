@@ -26,9 +26,9 @@ internal static class OperatorsTestsData
 
         public override bool IsUndefined { get; }
 
-        protected override Snippet PerformToSnippet(Snippet.Options options)
+        protected override Snippet PerformToSnippet(Options options)
         {
-            return Snippet.From(Declaration);
+            return Snippet.From(options.Snippets, Declaration);
         }
     }
 }

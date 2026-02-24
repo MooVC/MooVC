@@ -91,7 +91,7 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The snippet.</returns>
-        protected override Snippet PerformToSnippet(Snippet.Options options)
+        protected override Snippet PerformToSnippet(Options options)
         {
             Snippet signature = GetSignature(options);
 

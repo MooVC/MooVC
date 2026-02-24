@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Generics
+﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using System.Collections.Immutable;
     using System.Linq;
@@ -17,7 +17,7 @@
         /// <param name="types">The types.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Type> types, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Type> types, Type.Options options)
         {
             if (types.IsDefaultOrEmpty)
             {

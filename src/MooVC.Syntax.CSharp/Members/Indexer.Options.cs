@@ -1,8 +1,10 @@
 namespace MooVC.Syntax.CSharp.Members
 {
+    using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -41,6 +43,20 @@ namespace MooVC.Syntax.CSharp.Members
             /// </summary>
             /// <value>The behaviour.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+
+            public static implicit operator Scope(Options options)
+            {
+                Guard.Against.Conversion<Options, Scope>(options);
+
+                return options.Implied;
+            }
+
+            public static implicit operator Snippet.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Snippet.Options>(options);
+
+                return options.Snippets;
+            }
         }
     }
 }
