@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(CODESPACES)' == 'true'">
     <IsCodespace>true</IsCodespace>
   </PropertyGroup>
-  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Analyzers')) OR $(MSBuildProjectName.EndsWith('.Generators'))">
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Analyzers')) OR $(MSBuildProjectName.EndsWith('.Generators')) OR $(MSBuildProjectName.EndsWith('ify'))">
     <IsRoslynProject>true</IsRoslynProject>
   </PropertyGroup>
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
