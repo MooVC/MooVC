@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-public record Result<T>
+public sealed record Result<T>
     where T : notnull
 {
     private Result(T value)

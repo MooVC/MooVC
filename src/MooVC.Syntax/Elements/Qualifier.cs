@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.Elements
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,7 @@
     [SkipAutoInitialization]
     public partial class Qualifier
         : IComparable<Qualifier>,
+          IEnumerable<Name>,
           IValidatableObject
     {
         /// <summary>
@@ -45,7 +47,18 @@
         /// </summary>
         /// <param name="index">The element to retrieve from the Qualifier.</param>
         /// <value>The index.</value>
-        public Name this[int index] => _value[index];
+        public Name this[int index]
+        {
+            get
+            {
+                if (_value.Length <= index)
+                {
+                    return Name.Unnamed;
+                }
+
+                return _value[index];
+            }
+        }
 
         /// <summary>
         /// Defines the Qualifier operator for the Qualifier.
@@ -208,6 +221,16 @@
             }
 
             return CompareSegments(other);
+        }
+
+        public IEnumerator<Name> GetEnumerator()
+        {
+            return ((IEnumerable<Name>)_value).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         /// <summary>

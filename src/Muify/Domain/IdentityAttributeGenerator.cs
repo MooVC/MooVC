@@ -31,13 +31,13 @@ namespace Muify.Domain
         {
             var content = Builder
                 .New<Definition>()
-                .From("Muify.Domain")
+                .From(typeof(IdentityAttributeGenerator))
                 .For<Class>(@class => @class
                     .Named($"{Name}Attribute")
                     .DerivesFrom(typeof(Attribute)))
-                .ToSnippet();
+                .ToSnippet(Configuration.Options);
 
-            context.AddSource(Hint, SourceText.From(Content, Encoding.UTF8));
+            context.AddSource(Hint, SourceText.From(content, Encoding.UTF8));
         }
     }
 }

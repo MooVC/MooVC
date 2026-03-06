@@ -5,18 +5,18 @@ using Mu.Modelling.State;
 
 public sealed record Model
 {
-    private static readonly Type basis = typeof(Aggregate);
+    private static readonly Type _basis = typeof(Aggregate);
 
     private Model(Type type)
     {
-        if (!basis.IsAssignableFrom(type))
+        if (!_basis.IsAssignableFrom(type))
         {
-            throw new ArgumentException($"Type `{type}` must derive from `{basis}`.", nameof(type));
+            throw new ArgumentException($"Type `{type}` must derive from `{_basis}`.", nameof(type));
         }
 
         if (type.IsAbstract || !type.IsSealed)
         {
-            throw new ArgumentException($"Type `{type}` must be a sealed, concrete derivation of `{basis}`.", nameof(type));
+            throw new ArgumentException($"Type `{type}` must be a sealed, concrete derivation of `{_basis}`.", nameof(type));
         }
 
         Name = type.Name;

@@ -18,15 +18,15 @@ public partial class Model
                 {
                     public partial class Unit
                     {
-                        public partial class Components
+                        public partial class Features
                         {
-                            public partial class Component
+                            public partial class Feature
                             {
-                                public Qualifier Namespace => new([Root.Company, Root.Name, Area.Name, Value.Name]);
+                                public string DomainName => Separator.Combine(Root.Company, Root.Name, Area.Name, Unit.Name);
 
-                                public string ProjectName => Separator.Combine(Root.Company, Root.Name, Area.Name, Value.Name);
+                                public Qualifier Namespace => new([Root.Company, Root.Name, Area.Name, Unit.Name, Value.Name]);
 
-                                public ImmutableArray<Directive> References => Value.Attributes.GetReferences(Namespace);
+                                public string ProjectName => Separator.Combine(Root.Company, Root.Name, Area.Name, Unit.Name, Value.Name);
                             }
                         }
                     }

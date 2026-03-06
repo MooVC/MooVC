@@ -42,8 +42,8 @@ public static partial class ServiceCollectionExtensions
             .AddOptions<FileSystemWriter.Options>()
             .ForkOn(
                 _ => configuration is null,
-                builder => builder,
-                builder => builder.Bind(configuration!.GetSection(FileSystemWriter.Options.SectionName)))
+                @true: builder => builder,
+                @false: builder => builder.Bind(configuration!.GetSection(FileSystemWriter.Options.SectionName)))
             .Services
             .AddSingleton<IFileSystem, FileSystem>()
             .AddKeyedTransient<IWriter, FileSystemWriter>(FileSystemServiceKey);

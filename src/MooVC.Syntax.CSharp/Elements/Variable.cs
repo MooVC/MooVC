@@ -68,6 +68,18 @@
         }
 
         /// <summary>
+        /// Defines the Name operator for the Variable.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The variable.</returns>
+        public static implicit operator Variable(Name name)
+        {
+            Guard.Against.Conversion<Name, Variable>(name);
+
+            return name.ToString();
+        }
+
+        /// <summary>
         /// Defines the less than operator for the Variable.
         /// </summary>
         /// <param name="left">The left.</param>

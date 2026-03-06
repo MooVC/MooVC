@@ -17,11 +17,19 @@ public partial class Model
                 {
                     public sealed partial class Unit
                     {
+                        public string KernelName => Separator.Combine(Root.Company, Root.Name, Area.Name);
+
                         public Qualifier Namespace => new([Root.Company, Root.Name, Area.Name, Value.Name]);
 
                         public string ProjectName => Separator.Combine(Root.Company, Root.Name, Area.Name, Value.Name);
 
-                        public Directive[] References => Value.Attributes.GetReferences(Namespace);
+                        public ImmutableArray<Qualifier> Projects => Value.Attributes
+                            .Union(Value.Components.SelectMany(component => component.Attributes))
+                            .GetProjects(Root.Company, Root.Name, Area.Name, Value.Name);
+
+                        public ImmutableArray<Directive> References => Value.Attributes
+                            .Union(Value.Components.SelectMany(component => component.Attributes))
+                            .GetReferences(Namespace);
                     }
                 }
             }

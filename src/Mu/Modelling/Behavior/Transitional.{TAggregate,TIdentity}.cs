@@ -8,7 +8,7 @@ public abstract record Transitional<TAggregate, TIdentity>
     where TAggregate : Aggregate
     where TIdentity : struct
 {
-    private static readonly Model model = typeof(TAggregate);
+    private static readonly Model _model = typeof(TAggregate);
 
     protected Transitional(Reference<TIdentity> target)
     {
@@ -23,5 +23,5 @@ public abstract record Transitional<TAggregate, TIdentity>
 
     public Reference<TIdentity> Target { get; }
 
-    public override Model Model => model;
+    public override Model Model => _model;
 }

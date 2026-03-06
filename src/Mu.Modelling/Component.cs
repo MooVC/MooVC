@@ -40,6 +40,9 @@ public sealed partial class Component
     [Traverse(Scope = TraverseScope.Property)]
     public Name Name { get; internal init; } = Name.Unnamed;
 
+    [Descriptor("SeenAs")]
+    public ImmutableArray<View> Views { get; internal init; } = [];
+
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (IsUndefined)
@@ -51,6 +54,7 @@ public sealed partial class Component
             .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUndefined, Attributes)
             .AndIf(!Identifier.IsUndefined, nameof(Identifier), Identifier)
             .And(nameof(Name), name => !name.IsUnnamed, Name)
+            .AndIf(!Views.IsDefaultOrEmpty, nameof(Views), view => !view.IsUndefined, Views)
             .Results;
     }
 }

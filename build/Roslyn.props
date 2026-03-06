@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../analyzers/code.ruleset</CodeAnalysisRuleSet>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <DevelopmentDependency>true</DevelopmentDependency>
     <EnablePackageValidation>true</EnablePackageValidation>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>

@@ -42,8 +42,8 @@ public static partial class ServiceCollectionExtensions
             .AddOptions<ZipWriter.Options>()
             .ForkOn(
                 _ => configuration is null,
-                builder => builder,
-                builder => builder.Bind(configuration!.GetSection(ZipWriter.Options.SectionName)))
+                @true: builder => builder,
+                @false: builder => builder.Bind(configuration!.GetSection(ZipWriter.Options.SectionName)))
              .Services
             .AddKeyedTransient<IWriter, ZipWriter>(ZipServiceKey);
     }

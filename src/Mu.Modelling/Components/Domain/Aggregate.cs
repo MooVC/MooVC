@@ -25,10 +25,10 @@ internal sealed class Aggregate
             .For<Record>(record => record
                 .Named(unit.Value.Name)
                 .DerivesFrom(typeof(Base))
-                .WithProperties(unit.Value.Attributes))
-            .Referencing(unit.References)
+                .WithParameters(unit.Value.Attributes))
+            .Referencing([.. unit.References])
             .ToSnippet(unit.Root.Options);
 
-        yield return new File(content, Extensions.Code, unit.Value.Name, $"src/{unit.ProjectName}/");
+        yield return new File(content, Extensions.Code, unit.Value.Name, $"{Folders.Source}/{unit.ProjectName}/");
     }
 }

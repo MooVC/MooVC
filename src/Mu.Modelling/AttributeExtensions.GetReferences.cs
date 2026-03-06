@@ -6,14 +6,13 @@ using MooVC.Syntax.Elements;
 
 public static partial class AttributeExtensions
 {
-    internal static Directive[] GetReferences(this ImmutableArray<Attribute> attributes, Qualifier source)
+    internal static ImmutableArray<Directive> GetReferences(this IEnumerable<Attribute> attributes, Qualifier source)
     {
-        return attributes
+        return [.. attributes
             .Select(attribute => attribute.Type.Qualifier)
             .Distinct()
             .Where(qualifier => qualifier != source)
             .OrderBy(qualifier => qualifier)
-            .Select(qualifier => (Directive)qualifier)
-            .ToArray();
+            .Select(qualifier => (Directive)qualifier)];
     }
 }

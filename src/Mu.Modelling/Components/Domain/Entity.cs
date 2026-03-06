@@ -1,6 +1,6 @@
 ﻿namespace Mu.Modelling.Components.Domain;
 
-using System.Runtime.CompilerServices;
+using System.Collections.Immutable;
 using Graphify;
 using MooVC.Modelling;
 using MooVC.Syntax.Attributes.Project;
@@ -8,35 +8,67 @@ using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
+using MooVC.Syntax.Elements;
 using Mu.Modelling.Syntax.CSharp.Concepts;
 using Muify.Domain;
+using Attribute = Mu.Modelling.Attribute;
 using Builder = MooVC.Syntax.Builder;
 
 internal sealed class Entity
-    : IVisitor<Model.Graph.Areas.Area.Units.Unit.Components.Component, File>
+    : IVisitor<Model.Graph.Areas.Area.Components.Component, File>,
+      IVisitor<Model.Graph.Areas.Area.Units.Unit.Components.Component, File>
 {
-    public async IAsyncEnumerable<File> Observe(
-        Model.Graph.Areas.Area.Units.Unit.Components.Component component,
-        [EnumeratorCancellation] CancellationToken cancellationToken)
+    public IAsyncEnumerable<File> Observe(Model.Graph.Areas.Area.Components.Component component, CancellationToken cancellationToken)
     {
-        if (component.Value.Identifier.IsUndefined)
+        return Create(
+            component.Value.Identifier,
+            component.Value.Name,
+            component.Namespace,
+            component.ProjectName,
+            component.Value.Attributes,
+            component.References,
+            component.Root.Options);
+    }
+
+    public IAsyncEnumerable<File> Observe(Model.Graph.Areas.Area.Units.Unit.Components.Component component, CancellationToken cancellationToken)
+    {
+        return Create(
+            component.Value.Identifier,
+            component.Value.Name,
+            component.Namespace,
+            component.ProjectName,
+            component.Value.Attributes,
+            component.References,
+            component.Root.Options);
+    }
+
+    private static async IAsyncEnumerable<File> Create(
+        Attribute identifier,
+        Name name,
+        Qualifier @namespace,
+        string project,
+        ImmutableArray<Attribute> properties,
+        ImmutableArray<Directive> references,
+        Options options)
+    {
+        if (identifier.IsUndefined)
         {
             yield break;
         }
 
         var content = Builder
             .New<Definition>()
-            .From(component.Namespace)
+            .From(@namespace)
             .For<Class>(@class => @class
-                .Named(component.Value.Name)
-                .WithProperties(component.Value.Attributes)
+                .Named(name)
+                .WithProperties(properties)
                 .WithProperties(identifier => identifier
                     .AttributedWith(attribute => attribute.Named(typeof(IdentityAttribute)))
-                    .Named(component.Value.Identifier.Name)
-                    .OfType(component.Value.Identifier.Type)))
-            .Referencing(component.References)
-            .ToSnippet(component.Root.Options);
+                    .Named(identifier.Name)
+                    .OfType(identifier.Type)))
+            .Referencing([.. references])
+            .ToSnippet(options);
 
-        yield return new File(content, Extensions.Code, component.Value.Name, $"src/{component.ProjectName}/");
+        yield return new File(content, Extensions.Code, name, $"{Folders.Source}/{project}/");
     }
 }

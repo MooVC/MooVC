@@ -8,15 +8,14 @@ using Mu.Services;
 public sealed class Service(IRoot<Account, Open> root, IWriteStore<Account, Guid> store)
     : IService<Open, Guid>
 {
-    public async Task<Result<Guid>> Execute(Open open, CancellationToken cancellationToken)
+    public Task<Result<Guid>> Execute(Open open, CancellationToken cancellationToken)
     {
         var account = new Account();
         var identity = Guid.CreateVersion7();
 
-        return await root
+        return root
             .Apply(account, open, cancellationToken)
             .Then(opened => store.Save(account, identity, cancellationToken))
-            .Select(_ => identity)
-            .ConfigureAwait(false);
+            .Select(_ => identity);
     }
 }

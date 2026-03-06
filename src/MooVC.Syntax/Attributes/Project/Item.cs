@@ -84,6 +84,13 @@ namespace MooVC.Syntax.Attributes.Project
         public ImmutableArray<Metadata> Metadata { get; internal set; } = ImmutableArray<Metadata>.Empty;
 
         /// <summary>
+        /// Gets or sets the name associated with the current instance. The default value is <see cref="Name.Unnamed"/>.
+        /// </summary>
+        /// <value>The name.</value>
+        [Descriptor("Named")]
+        public Name Name { get; internal set; } = Name.Unnamed;
+
+        /// <summary>
         /// Gets the remove on the Item.
         /// </summary>
         /// <value>The remove.</value>
@@ -113,9 +120,10 @@ namespace MooVC.Syntax.Attributes.Project
             }
 
             ImmutableArray<XElement> metadata = Metadata.Get(entry => !entry.IsUndefined);
+            string name = Name.IsUnnamed ? nameof(Item) : Name.ToString();
 
             return ImmutableArray.Create(new XElement(
-                nameof(Item),
+                name,
                 Condition.ToXmlAttribute(nameof(Condition))
                 .And(Exclude.ToXmlAttribute(nameof(Exclude)))
                 .And(Include.ToXmlAttribute(nameof(Include)))
@@ -162,6 +170,7 @@ namespace MooVC.Syntax.Attributes.Project
                 .And(nameof(MatchOnMetadata), _ => !MatchOnMetadata.IsMultiLine, MatchOnMetadata)
                 .And(nameof(MatchOnMetadataOptions), _ => !MatchOnMetadataOptions.IsMultiLine, MatchOnMetadataOptions)
                 .AndIf(!Metadata.IsDefaultOrEmpty, nameof(Metadata), metadata => !metadata.IsUndefined, Metadata)
+                .AndIf(!Name.IsUnnamed, nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Remove), _ => !Remove.IsMultiLine, Remove)
                 .And(nameof(RemoveMetadata), _ => !RemoveMetadata.IsMultiLine, RemoveMetadata)
                 .And(nameof(Update), _ => !Update.IsMultiLine, Update)

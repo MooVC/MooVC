@@ -25,6 +25,9 @@ public sealed partial class Area
     [Traverse(Scope = TraverseScope.Property)]
     public Description Description { get; internal init; } = Description.Undescribed;
 
+    [Descriptor("Owns")]
+    public ImmutableArray<Component> Components { get; internal init; } = [];
+
     [Ignore]
     [Traverse(Scope = TraverseScope.None)]
     public bool IsUndefined => this == Undefined;
@@ -44,7 +47,8 @@ public sealed partial class Area
         }
 
         return validationContext
-            .IncludeIf(!Units.IsDefaultOrEmpty, nameof(Units), unit => !unit.IsUndefined, Units)
+            .IncludeIf(!Components.IsDefaultOrEmpty, nameof(Components), component => !component.IsUndefined, Components)
+            .AndIf(!Units.IsDefaultOrEmpty, nameof(Units), unit => !unit.IsUndefined, Units)
             .And(nameof(Name), name => !name.IsUnnamed, Name)
             .Results;
     }
