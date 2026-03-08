@@ -126,7 +126,9 @@
             var operators = Operators.ToSnippet(options, this);
             var properties = Properties.ToSnippet(Property.Options.Default.WithSnippets(options));
             var methods = Methods.ToSnippet(Method.Options.Default.WithSnippets(options));
-            Snippet body = Snippet.Blank.Combine(options, fields, constructors, events, properties, indexers, operators, methods);
+            var elements = new Snippet[] { fields, constructors, events, properties, indexers, operators, methods };
+            IEnumerable<Snippet> types = Types.Select(type => type.ToSnippet(options));
+            Snippet body = Snippet.Blank.Combine(options, elements.Concat(types).ToArray());
 
             return body
                 .Block(options, signature)

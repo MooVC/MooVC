@@ -1,4 +1,4 @@
-﻿namespace Muify.Domain.IdentityAttributeGeneratorTests;
+﻿namespace Muify.Domain.RaisesAttributeGeneratorTests;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Testing;
@@ -9,22 +9,23 @@ public sealed class WhenExecuted
         namespace Muify.Domain;
 
         [global::System.AttributeUsage(global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-        internal sealed class IdentityAttribute : global::System.Attribute
+        internal sealed class RaisesAttribute : global::System.Attribute
         {
+            public string Name { get; set; }
         }
         """;
 
     public static readonly Generated Identity = new(
         Content,
-        typeof(IdentityAttributeGenerator),
-        IdentityAttributeGenerator.Hint);
+        typeof(RaisesAttributeGenerator),
+        RaisesAttributeGenerator.Hint);
 
     [Theory]
     [Frameworks]
     public async Task GivenAnAssemblyThenTheAttributeIsGenerated(ReferenceAssemblies assemblies, LanguageVersion language)
     {
         // Arrange
-        var test = new GeneratorTest<IdentityAttributeGenerator>(assemblies, language);
+        var test = new GeneratorTest<RaisesAttributeGenerator>(assemblies, language);
 
         Identity.IsExpectedIn(test.TestState);
 

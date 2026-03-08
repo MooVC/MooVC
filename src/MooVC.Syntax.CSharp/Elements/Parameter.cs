@@ -39,6 +39,7 @@
         /// Gets the attribute list applied to the parameter.
         /// </summary>
         /// <value>The attributes emitted before the parameter declaration.</value>
+        [Descriptor("AttributedWith")]
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>

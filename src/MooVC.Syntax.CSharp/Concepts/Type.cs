@@ -101,6 +101,27 @@
         public Scope Scope { get; internal set; } = Scope.Public;
 
         /// <summary>
+        /// Gets the types defined within the type.
+        /// </summary>
+        /// <value>The types.</value>
+        [Descriptor("Containing")]
+        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
+        public ImmutableArray<Type> Types { get; internal set; } = ImmutableArray<Type>.Empty;
+
+        /// <summary>
+        /// Creates a new instance of the specified type T using its parameterless constructor.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of object to instantiate. T must inherit from Type and provide a public parameterless constructor.
+        /// </typeparam>
+        /// <returns>A new instance of type T.</returns>
+        public static T New<T>()
+            where T : Type, new()
+        {
+            return new T();
+        }
+
+        /// <summary>
         /// Returns the string representation of the will.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -147,6 +168,7 @@
                 .AndIf(!Methods.IsDefaultOrEmpty, nameof(Methods), method => !method.IsUndefined, Methods)
                 .And(nameof(Declaration), _ => !Declaration.IsUnspecified, Declaration)
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
+                .AndIf(!Types.IsDefaultOrEmpty, nameof(Types), type => !type.IsUndefined, Types)
                 .Results;
         }
 

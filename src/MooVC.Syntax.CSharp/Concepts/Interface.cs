@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
     using Fluentify;
@@ -8,6 +9,7 @@
     using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Generics.Constraints;
     using MooVC.Syntax.CSharp.Members;
+    using MooVC.Syntax.CSharp.Operators;
     using MooVC.Syntax.CSharp.Syntax;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Formatting;
@@ -46,16 +48,18 @@
         {
             Snippet signature = GetSignature(options);
 
-            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options.Snippets });
-            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options.Snippets });
-            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options.Snippets });
+            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options });
+            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options });
+            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options });
 
             var methods = Methods
                 .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
                 .ToImmutableArray()
-                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options.Snippets });
+                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options });
 
-            Snippet body = Snippet.Blank.Combine(options.Snippets, events, properties, indexers, methods);
+            var elements = new Snippet[] { events, properties, indexers, methods };
+            IEnumerable<Snippet> types = Types.Select(type => type.ToSnippet(options));
+            Snippet body = Snippet.Blank.Combine(options, elements.Concat(types).ToArray());
 
             return body.Block(options.Snippets, signature);
         }

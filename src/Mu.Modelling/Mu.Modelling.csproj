@@ -27,4 +27,21 @@
     <ProjectReference Include="..\Mu\Mu.csproj" Aliases="Framework" />
     <ProjectReference Include="..\Muify\Muify.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Model.Graph.Areas.Area.cs">
+      <DependentUpon>Model.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Model.Graph.Areas.Area.Components.Component.cs">
+      <DependentUpon>Model.Graph.Areas.Area.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Model.Graph.Areas.Area.Units.Unit.cs">
+      <DependentUpon>Model.Graph.Areas.Area.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Model.Graph.Areas.Area.Units.Unit.Components.Component.cs">
+      <DependentUpon>Model.Graph.Areas.Area.Units.Unit.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Model.Graph.Areas.Area.Units.Unit.Features.Feature.cs">
+      <DependentUpon>Model.Graph.Areas.Area.Units.Unit.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

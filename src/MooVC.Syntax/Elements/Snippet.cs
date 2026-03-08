@@ -24,7 +24,7 @@
         /// <summary>
         /// Represents the blank for the Snippet.
         /// </summary>
-        public static readonly Snippet Blank = new Snippet(new string[] { string.Empty }.ToImmutableArray());
+        public static readonly Snippet Blank = new Snippet(ImmutableArray.Create(string.Empty));
 
         /// <summary>
         /// Gets the empty instance.
@@ -235,7 +235,9 @@
                     }
                     else if (options.Block.Inline.IsSingleLineBraces)
                     {
-                        blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
+                        blocked[index - 1] = string.Concat(
+                            blocked[index - 1],
+                            $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
                     }
 
                     return new Snippet(ImmutableArray.Create(blocked, 0, index));

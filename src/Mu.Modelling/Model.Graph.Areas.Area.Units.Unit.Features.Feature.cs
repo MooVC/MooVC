@@ -27,6 +27,8 @@ public partial class Model
                                 public Qualifier Namespace => new([Root.Company, Root.Name, Area.Name, Unit.Name, Value.Name]);
 
                                 public string ProjectName => Separator.Combine(Root.Company, Root.Name, Area.Name, Unit.Name, Value.Name);
+
+                                public ImmutableArray<Directive> References => Value.Parameters.GetReferences(Namespace);
                             }
                         }
                     }

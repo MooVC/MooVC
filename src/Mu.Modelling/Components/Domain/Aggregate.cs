@@ -2,8 +2,10 @@
 
 extern alias Framework;
 
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Graphify;
+using MooVC;
 using MooVC.Modelling;
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.CSharp;
@@ -23,8 +25,15 @@ internal sealed class Aggregate
             .New<Definition>()
             .From(unit.Namespace)
             .For<Record>(record => record
-                .Named(unit.Value.Name)
+                .ForkOn(
+                    _ => unit.Value.Description.IsUndescribed,
+                    @true: _ => _,
+                    @false: record => record
+                        .AttributedWith(description => description
+                            .Named(typeof(DescriptionAttribute))
+                            .WithArguments((Name: nameof(Description), Value: unit.Value.Description))))
                 .DerivesFrom(typeof(Base))
+                .Named(unit.Value.Name)
                 .WithParameters(unit.Value.Attributes))
             .Referencing([.. unit.References])
             .ToSnippet(unit.Root.Options);

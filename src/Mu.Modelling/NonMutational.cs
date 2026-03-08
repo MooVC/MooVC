@@ -19,10 +19,6 @@ public sealed partial class NonMutational
     {
     }
 
-    [Descriptor("DescribedAs")]
-    [Traverse(Scope = TraverseScope.Property)]
-    public Description Description { get; internal init; } = Description.Undescribed;
-
     [Descriptor("From")]
     [Hide]
     [Traverse(Scope = TraverseScope.Property)]

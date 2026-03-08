@@ -20,11 +20,7 @@ public sealed partial class Mutational
     {
     }
 
-    [Descriptor("DescribedAs")]
-    [Traverse(Scope = TraverseScope.Property)]
-    public Description Description { get; internal init; } = Description.Undescribed;
-
-    [Descriptor("Yields")]
+    [Descriptor("Raises")]
     [Traverse(Scope = TraverseScope.Property)]
     public Name Fact { get; internal init; } = Name.Unnamed;
 

@@ -3,7 +3,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 using System.Linq;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
-public sealed class WhenWithAttributesIsCalled
+public sealed class WhenAttributedWithIsCalled
 {
     [Fact]
     public void GivenAttributesThenReturnsNewInstanceWithUpdatedAttributes()
@@ -28,7 +28,7 @@ public sealed class WhenWithAttributesIsCalled
         Parameter original = ParameterTestsData.Create(attributes: existing);
 
         // Act
-        Parameter result = original.WithAttributes(additional);
+        Parameter result = original.AttributedWith(additional);
 
         // Assert
         result.ShouldNotBeSameAs(original);

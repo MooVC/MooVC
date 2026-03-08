@@ -1,7 +1,9 @@
 ﻿namespace Mu.Modelling.Components.Domain;
 
 using System.Collections.Immutable;
+using System.ComponentModel;
 using Graphify;
+using MooVC;
 using MooVC.Modelling;
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.CSharp;
@@ -21,6 +23,7 @@ internal sealed class Entity
     public IAsyncEnumerable<File> Observe(Model.Graph.Areas.Area.Components.Component component, CancellationToken cancellationToken)
     {
         return Create(
+            component.Value.Description,
             component.Value.Identifier,
             component.Value.Name,
             component.Namespace,
@@ -33,6 +36,7 @@ internal sealed class Entity
     public IAsyncEnumerable<File> Observe(Model.Graph.Areas.Area.Units.Unit.Components.Component component, CancellationToken cancellationToken)
     {
         return Create(
+            component.Value.Description,
             component.Value.Identifier,
             component.Value.Name,
             component.Namespace,
@@ -43,6 +47,7 @@ internal sealed class Entity
     }
 
     private static async IAsyncEnumerable<File> Create(
+        Description description,
         Attribute identifier,
         Name name,
         Qualifier @namespace,
@@ -60,6 +65,13 @@ internal sealed class Entity
             .New<Definition>()
             .From(@namespace)
             .For<Class>(@class => @class
+                .ForkOn(
+                    _ => description.IsUndescribed,
+                    @true: _ => _,
+                    @false: record => record
+                        .AttributedWith(description => description
+                            .Named(typeof(DescriptionAttribute))
+                            .WithArguments((Name: nameof(Description), Value: description))))
                 .Named(name)
                 .WithProperties(properties)
                 .WithProperties(identifier => identifier
