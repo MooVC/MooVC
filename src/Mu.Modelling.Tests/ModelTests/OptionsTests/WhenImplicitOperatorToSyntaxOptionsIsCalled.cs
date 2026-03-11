@@ -1,6 +1,8 @@
 namespace Mu.Modelling.ModelTests.OptionsTests;
 
+using MooVC.Syntax.CSharp.Concepts;
 using SyntaxOptions = MooVC.Syntax.CSharp.Concepts.Options;
+using ModelOptions = Mu.Modelling.Model.Options;
 
 public sealed class WhenImplicitOperatorToSyntaxOptionsIsCalled
 {
@@ -8,8 +10,8 @@ public sealed class WhenImplicitOperatorToSyntaxOptionsIsCalled
     public void GivenOptionsThenSyntaxOptionsAreReturned()
     {
         // Arrange
-        var expected = SyntaxOptions.Default.WithNamespace("Mu.Sample");
-        Model.Options subject = new(Model.Options.GithubOptions.Default, expected);
+        SyntaxOptions expected = SyntaxOptions.Default.WithNamespace("Mu.Sample");
+        ModelOptions subject = new(ModelOptions.GithubOptions.Default, expected);
 
         // Act
         SyntaxOptions result = subject;

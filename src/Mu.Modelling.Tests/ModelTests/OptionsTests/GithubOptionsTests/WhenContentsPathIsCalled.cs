@@ -1,5 +1,7 @@
 namespace Mu.Modelling.ModelTests.OptionsTests.GithubOptionsTests;
 
+using static Mu.Modelling.Model.Options;
+
 public sealed class WhenContentsPathIsCalled
 {
     private const string ApiBaseAddress = "https://api.github.com/";
@@ -12,7 +14,7 @@ public sealed class WhenContentsPathIsCalled
     public void GivenGithubOptionsThenContentsPathsAreReturned()
     {
         // Arrange
-        var subject = new Model.Options.GithubOptions(ApiBaseAddress, Owner, Repository, Reference, string.Empty);
+        var subject = new GithubOptions(ApiBaseAddress, Owner, Repository, Reference, string.Empty);
 
         // Act
         string repositoryPath = subject.ContentsPath(string.Empty);

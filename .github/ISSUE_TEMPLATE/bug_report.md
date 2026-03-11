@@ -22,7 +22,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
 - MooVC Version: [e.g. 9.2.0]
 - .NET Version (Your Project): [e.g. NET 10]
- - IDE: [e.g. Visual Studio 2026 v18.0.0]
+ - IDE: [e.g. Visual Studio 2026 v18.3.3]
 
 **Additional context**
 Add any other context about the problem here.

@@ -7,43 +7,32 @@ using System.Text;
 using System.Text.Json;
 using Graphify;
 using MooVC.Modelling;
+using static Mu.Modelling.Options;
 
-internal sealed class Mirror
+internal sealed class Mirror(IHttpClientFactory factory)
     : IVisitor<Model, File>
 {
-    private static readonly DefaultHttpClientFactory DefaultHttpClientFactory = new();
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-    };
-
-    private readonly IHttpClientFactory _httpClientFactory;
-
-    public Mirror()
-        : this(DefaultHttpClientFactory)
-    {
-    }
-
-    internal Mirror(IHttpClientFactory httpClientFactory)
-    {
-        _httpClientFactory = httpClientFactory;
-    }
+    private const string Directory = "dir";
+    private const string File = "file";
 
     public async IAsyncEnumerable<File> Observe(Model model, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        Model.Options.GithubOptions options = model.Options.Github;
+        GithubOptions options = model.Options.Github;
 
         if (!options.IsConfigured)
         {
             yield break;
         }
 
-        HttpClient httpClient = _httpClientFactory.CreateClient(nameof(Mirror));
-        ImmutableArray<string> paths = await GetPaths(httpClient, options, cancellationToken).ConfigureAwait(false);
+        HttpClient httpClient = factory.CreateClient(nameof(Mirror));
+        ImmutableArray<string> paths = await GetPaths(httpClient, options, cancellationToken)
+            .ConfigureAwait(false);
 
         foreach (string relativePath in paths)
         {
-            string content = await GetFileContent(httpClient, options, relativePath, cancellationToken).ConfigureAwait(false);
+            string content = await GetFileContent(httpClient, options, relativePath, cancellationToken)
+                .ConfigureAwait(false);
+
             string extension = GetExtension(relativePath);
             string path = GetPath(relativePath);
 
@@ -51,12 +40,12 @@ internal sealed class Mirror
         }
     }
 
-    private static Uri BuildUri(Model.Options.GithubOptions options, string path)
+    private static Uri BuildUri(GithubOptions options, string path)
     {
         return new Uri(new Uri(options.ApiBaseAddress, UriKind.Absolute), path);
     }
 
-    private static HttpRequestMessage CreateRequest(HttpMethod method, Model.Options.GithubOptions options, string path)
+    private static HttpRequestMessage CreateRequest(HttpMethod method, GithubOptions options, string path)
     {
         HttpRequestMessage request = new(method, BuildUri(options, path));
         request.Headers.UserAgent.Add(new ProductInfoHeaderValue("Mu", "1.0"));
@@ -90,19 +79,22 @@ internal sealed class Mirror
             : extension[1..];
     }
 
-    private static async Task<string> GetFileContent(HttpClient httpClient, Model.Options.GithubOptions options, string path, CancellationToken cancellationToken)
+    private static async Task<string> GetFileContent(HttpClient httpClient, GithubOptions options, string path, CancellationToken cancellationToken)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, options, options.ContentsPath(path));
+
         using HttpResponseMessage response = await httpClient
             .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
             .ConfigureAwait(false);
 
-        response.EnsureSuccessStatusCode();
+        _ = response.EnsureSuccessStatusCode();
 
-        FileResponse? file = await JsonSerializer.DeserializeAsync<FileResponse>(
-            await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false),
-            JsonSerializerOptions,
-            cancellationToken)
+        Stream stream = await response.Content
+            .ReadAsStreamAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        FileResponse? file = await JsonSerializer
+            .DeserializeAsync<FileResponse>(stream, options.Json, cancellationToken)
             .ConfigureAwait(false);
 
         if (file is null || string.IsNullOrWhiteSpace(file.Content))
@@ -125,36 +117,41 @@ internal sealed class Mirror
         return string.Concat(path.Replace('\\', '/'), "/");
     }
 
-    private static async Task<ImmutableArray<string>> GetPaths(HttpClient httpClient, Model.Options.GithubOptions options, CancellationToken cancellationToken)
+    private static async Task<ImmutableArray<string>> GetPaths(HttpClient httpClient, GithubOptions options, CancellationToken cancellationToken)
     {
-        var results = ImmutableArray.CreateBuilder<string>();
+        ImmutableArray<string>.Builder results = ImmutableArray.CreateBuilder<string>();
         var queue = new Queue<string>();
         queue.Enqueue(string.Empty);
 
         while (queue.TryDequeue(out string? path))
         {
-            using HttpRequestMessage request = CreateRequest(HttpMethod.Get, options, options.ContentsPath(path));
+            path = options.ContentsPath(path);
+
+            using HttpRequestMessage request = CreateRequest(HttpMethod.Get, options, path);
+
             using HttpResponseMessage response = await httpClient
                 .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
+            _ = response.EnsureSuccessStatusCode();
 
-            ImmutableArray<ContentResponse> items = await JsonSerializer.DeserializeAsync<ImmutableArray<ContentResponse>>(
-                await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false),
-                JsonSerializerOptions,
-                cancellationToken)
+            Stream stream = await response.Content
+                .ReadAsStreamAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            ImmutableArray<ContentResponse> items = await JsonSerializer
+                .DeserializeAsync<ImmutableArray<ContentResponse>>(stream, options.Json, cancellationToken)
                 .ConfigureAwait(false);
 
             foreach (ContentResponse item in items)
             {
-                if (item.Type == "dir")
+                if (item.Type == Directory)
                 {
                     queue.Enqueue(item.Path);
                     continue;
                 }
 
-                if (item.Type == "file" && !string.IsNullOrWhiteSpace(item.Path))
+                if (item.Type == File && !string.IsNullOrWhiteSpace(item.Path))
                 {
                     results.Add(item.Path);
                 }
@@ -165,17 +162,6 @@ internal sealed class Mirror
     }
 
     private sealed record ContentResponse(string Path, string Type);
-
-    private sealed class DefaultHttpClientFactory
-        : IHttpClientFactory
-    {
-        private static readonly HttpClient SharedHttpClient = new();
-
-        public HttpClient CreateClient(string name)
-        {
-            return SharedHttpClient;
-        }
-    }
 
     private sealed record FileResponse(string Content, string Encoding);
 }
