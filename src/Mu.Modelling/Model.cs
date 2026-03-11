@@ -8,7 +8,6 @@ using MooVC.Syntax.Elements;
 using MooVC.Syntax.Validation;
 using Valuify;
 using Ignore = Valuify.IgnoreAttribute;
-using Options = MooVC.Syntax.CSharp.Concepts.Options;
 
 [Fluentify]
 [Graphify]
