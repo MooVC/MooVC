@@ -66,5 +66,16 @@
 
             return options.Types;
         }
+
+        public static implicit operator Type.Options(Options options)
+        {
+            Guard.Against.Conversion<Options, Type.Options>(options);
+
+            return new Type.Options
+            {
+                Snippets = options.Snippets,
+                Types = options.Types,
+            };
+        }
     }
 }

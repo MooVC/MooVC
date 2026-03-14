@@ -86,7 +86,7 @@
         /// Gets the operators.
         /// </summary>
         /// <value>The operators.</value>
-        public Operators Operators { get; internal set; } = new Operators();
+        public Operators Operators { get; internal set; } = Operators.Undefined;
 
         /// <summary>
         /// Gets the properties.

@@ -79,10 +79,6 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         Conversion publicAlphaTo = ConversionTestsData.Create(scope: Scope.Public, subject: new Symbol { Name = "Alpha" });
         Conversion publicAlphaFrom = ConversionTestsData.Create(direction: Conversion.Intent.From, scope: Scope.Public, subject: new Symbol { Name = "Alpha" });
         Conversion protectedBetaTo = ConversionTestsData.Create(scope: Scope.Protected, subject: new Symbol { Name = "Beta" });
@@ -90,7 +86,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Conversion> conversions = [protectedBetaTo, publicAlphaFrom, publicAlphaTo];
 
         // Act
-        var snippet = conversions.ToSnippet(options, type);
+        var snippet = conversions.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

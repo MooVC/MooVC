@@ -38,15 +38,18 @@ public sealed class WhenToSnippetIsCalled
         Snippet expected = """
             internal partial interface Sample
             {
-                public event Created;
+                event Created;
 
-                public string ValueA { get; set; }
+                string ValueA { get; init; }
 
-                public int ValueB { get; }
+                int ValueB { get; }
 
-                public int this[string item] { get; }
+                int this[string item]
+                {
+                    get;
+                }
 
-                public Task Execute();
+                Task Execute();
             }
             """;
 
@@ -63,6 +66,6 @@ public sealed class WhenToSnippetIsCalled
         var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldBeEquivalentTo(expected);
+        result.ShouldBe(expected);
     }
 }

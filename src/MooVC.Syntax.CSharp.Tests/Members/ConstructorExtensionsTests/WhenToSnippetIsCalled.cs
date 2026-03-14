@@ -9,9 +9,6 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
-    private static readonly Snippet.Options options = Snippet.Options.Default
-        .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -25,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
         Type type = OperatorsTestsData.Create();
 
         // Act
-        var snippet = constructors.ToSnippet(options, type);
+        var snippet = constructors.ToSnippet(Type.Options.Default, type);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -39,7 +36,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(options, type!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(Type.Options.Default, type!));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(type));
@@ -51,7 +48,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Constructor> constructors = [Create([])];
         Type type = OperatorsTestsData.Create();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(options!, type));
@@ -102,7 +99,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = constructors.ToSnippet(options, type);
+        var snippet = constructors.ToSnippet(Type.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

@@ -40,7 +40,7 @@
             /// </summary>
             /// <value>The closing.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(BoundaryClosingRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public string Closing { get; set; } = "}";
+            public string Closing { get; internal set; } = "}";
 
             /// <summary>
             /// Gets a value indicating whether this instance represents the default value.
@@ -56,7 +56,7 @@
             /// </summary>
             /// <value>The opening.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(BoundaryOpeningRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public string Opening { get; set; } = "{";
+            public string Opening { get; internal set; } = "{";
         }
     }
 }

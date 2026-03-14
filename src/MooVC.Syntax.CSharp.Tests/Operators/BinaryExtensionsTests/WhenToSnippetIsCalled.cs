@@ -79,10 +79,6 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         Binary publicAdd = BinaryTestsData.Create(@operator: Binary.Type.Add, scope: Scope.Public);
         Binary publicSubtract = BinaryTestsData.Create(@operator: Binary.Type.Subtract, scope: Scope.Public);
         Binary protectedMultiply = BinaryTestsData.Create(@operator: Binary.Type.Multiply, scope: Scope.Protected);
@@ -90,7 +86,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Binary> binaries = [publicSubtract, protectedMultiply, publicAdd];
 
         // Act
-        var snippet = binaries.ToSnippet(options, type);
+        var snippet = binaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

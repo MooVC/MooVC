@@ -24,11 +24,8 @@ public sealed class WhenToStringIsCalled
         Comparison subject = ComparisonTestsData.Create(body: Snippet.Empty, @operator: Comparison.Type.Unspecified);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         representation.ShouldBe(string.Empty);
@@ -41,11 +38,8 @@ public sealed class WhenToStringIsCalled
         Comparison subject = ComparisonTestsData.Create();
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         string expected = """

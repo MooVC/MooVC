@@ -97,7 +97,7 @@ namespace MooVC.Syntax.CSharp.Members
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
-                if (options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
+                if (options.Block.Inline.Properties.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
                 {
                     return Get;
                 }
@@ -120,7 +120,7 @@ namespace MooVC.Syntax.CSharp.Members
                     return Snippet.From(options, $"{get} {set}");
                 }
 
-                return set.Stack(options, get);
+                return set.Prepend(options, get);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scope scope = default)
@@ -133,6 +133,9 @@ namespace MooVC.Syntax.CSharp.Members
                 keyword = scope is null || scope == Scope.Unspecified
                     ? keyword
                     : $"{scope} {keyword}";
+
+                options = options.WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(inline.Properties)));
 
                 return snippet.Block(options, opening: Snippet.From(options, keyword));
             }

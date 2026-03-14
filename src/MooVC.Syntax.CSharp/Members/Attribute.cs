@@ -8,6 +8,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Linq;
+    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
@@ -28,7 +29,7 @@
         /// Gets the unspecified instance.
         /// </summary>
         public static readonly Attribute Unspecified = new Attribute();
-        private static readonly Snippet _separator = Snippet.From(", ");
+        private static readonly string _separator = ", ";
 
         /// <summary>
         /// Initializes a new instance of the Attribute class.
@@ -84,7 +85,7 @@
         {
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
 
-            return attribute.ToSnippet(Snippet.Options.Default);
+            return attribute.ToSnippet(Type.Options.Default);
         }
 
         /// <summary>
@@ -93,7 +94,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Type.Options.Default);
         }
 
         /// <summary>
@@ -101,9 +102,9 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Type.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Arguments), nameof(Attribute)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Type.Options), nameof(Arguments), nameof(Attribute)));
 
             if (Name.IsUndefined)
             {
@@ -117,7 +118,9 @@
                 value = value.Append($"{Target}:");
             }
 
-            value = value.Append(Name);
+            var name = Name.ToSnippet(options);
+
+            value = value.Append(name);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -150,13 +153,16 @@
         {
             Argument.Options declaration = Argument.Options.Declaration.WithSnippet(options);
 
-            Snippet[] arguments = Arguments
-                .Select(argument => argument.ToSnippet(declaration))
+            string[] arguments = Arguments
+                .Select(argument => argument
+                    .ToSnippet(declaration)
+                    .ToString())
                 .ToArray();
 
-            Snippet syntax = _separator.Combine(options, arguments);
+            string content = string.Join(_separator, arguments);
+            string snippet = Snippet.From(options, content);
 
-            return value.Append($"({syntax})");
+            return value.Append($"({snippet})");
         }
     }
 }

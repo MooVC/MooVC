@@ -11,6 +11,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Event_Resources;
+    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -132,13 +133,7 @@
                 return string.Concat(signature, ";");
             }
 
-            Snippet.Options snippets = options;
-
-            if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
-            {
-                snippets = snippets.WithBlock(block => block
-                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
-            }
+            Snippet.Options snippets = FormatBlockStyle(methods, options);
 
             return methods.Block(snippets, Snippet.From(snippets, signature));
         }
@@ -174,6 +169,17 @@
                 .Include(nameof(Handler), results, Handler)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
+        }
+
+        private static Snippet.Options FormatBlockStyle(Snippet methods, Options options)
+        {
+            InlineStyle style = methods.IsSingleLine && options.Snippets.Block.Inline.Properties.IsLambda
+                ? InlineStyle.SingleLineBraces
+                : options.Snippets.Block.Inline.Properties;
+
+            return options.Snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(style)));
         }
     }
 }

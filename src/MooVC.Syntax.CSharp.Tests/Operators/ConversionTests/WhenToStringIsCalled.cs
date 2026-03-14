@@ -25,11 +25,8 @@ public sealed class WhenToStringIsCalled
         Conversion subject = ConversionTestsData.Create(body: Snippet.Empty, subject: Symbol.Undefined);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         representation.ShouldBe(string.Empty);
@@ -42,11 +39,8 @@ public sealed class WhenToStringIsCalled
         Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.To);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         string expected = """
@@ -66,11 +60,8 @@ public sealed class WhenToStringIsCalled
         Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.From);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         string expected = """

@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -74,7 +73,7 @@
         /// Gets the scope on the Field.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scope Scope { get; internal set; } = Scope.Private;
 
         /// <summary>
         /// Gets the type on the Field.
@@ -105,6 +104,20 @@
             Guard.Against.Conversion<Field, Snippet>(field);
 
             return Snippet.From(field);
+        }
+
+        /// <summary>
+        /// Implicitly converts a tuple containing a name and type to an Field instance.
+        /// </summary>
+        /// <param name="field">The tuple containing the name and type to be converted into an Field.</param>
+        /// <returns>The Field.</returns>
+        public static implicit operator Field((Name Name, Symbol Type) field)
+        {
+            Guard.Against.Conversion<(Name Name, Symbol Type), Field>(field);
+
+            return new Field()
+                .Named(field.Name)
+                .OfType(field.Type);
         }
 
         /// <summary>

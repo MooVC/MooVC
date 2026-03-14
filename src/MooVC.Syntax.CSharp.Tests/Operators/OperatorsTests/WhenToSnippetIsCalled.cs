@@ -50,10 +50,6 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
         ImmutableArray<Comparison> comparisons = [ComparisonTestsData.Create()];
         ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
@@ -66,7 +62,7 @@ public sealed class WhenToSnippetIsCalled
             unaries: unaries);
 
         // Act
-        var snippet = subject.ToSnippet(options, type);
+        var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenSnippetReturnedExpected);

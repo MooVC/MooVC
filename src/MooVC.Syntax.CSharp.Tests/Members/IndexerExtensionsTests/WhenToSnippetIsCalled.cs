@@ -84,13 +84,8 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        Indexer.Options options = Indexer.Options.Default
-            .WithSnippets(snippet => snippet
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
-
         // Act
-        var snippet = indexers.ToSnippet(options);
+        var snippet = indexers.ToSnippet(Indexer.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

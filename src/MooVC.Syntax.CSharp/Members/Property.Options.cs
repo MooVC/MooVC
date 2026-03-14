@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
@@ -44,6 +45,12 @@ namespace MooVC.Syntax.CSharp.Members
             /// <value>The behaviour.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
 
+            /// <summary>
+            /// Gets the options for the Types.
+            /// </summary>
+            /// <value>The types.</value>
+            public Type.Options Types { get; internal set; } = Concepts.Type.Options.Default;
+
             public static implicit operator Scope(Options options)
             {
                 Guard.Against.Conversion<Options, Scope>(options);
@@ -56,6 +63,13 @@ namespace MooVC.Syntax.CSharp.Members
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            public static implicit operator Type.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Type.Options>(options);
+
+                return options.Types;
             }
         }
     }

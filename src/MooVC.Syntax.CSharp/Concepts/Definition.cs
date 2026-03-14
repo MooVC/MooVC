@@ -81,11 +81,7 @@
                 return string.Empty;
             }
 
-            var type = Type.ToSnippet(new Type.Options
-            {
-                Snippets = options.Snippets,
-                Types = options.Types,
-            });
+            var type = Type.ToSnippet(options);
 
             if (type.IsEmpty)
             {
@@ -97,9 +93,7 @@
 
             if (!usings.IsEmpty)
             {
-                type = type
-                    .Prepend(options, Environment.NewLine)
-                    .Prepend(options, usings);
+                type = type.Prepend(options, Snippet.Blank, usings);
             }
 
             if (options.Namespace.IsBlock)
@@ -107,11 +101,9 @@
                 return type.Block(options, @namespace);
             }
 
-            @namespace = @namespace
-                .Append(';')
-                .Append(Environment.NewLine);
+            @namespace = @namespace.Append(";", Environment.NewLine);
 
-            return type.Stack(options, @namespace);
+            return type.Prepend(options, @namespace);
         }
 
         /// <summary>

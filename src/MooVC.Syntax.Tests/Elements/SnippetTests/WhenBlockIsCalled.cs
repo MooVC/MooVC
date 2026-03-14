@@ -55,9 +55,8 @@ public sealed class WhenBlockIsCalled
         var subject = Snippet.From("return true;");
         var opening = Snippet.From("if (condition)");
 
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.Allman));
 
         // Act
@@ -82,9 +81,8 @@ public sealed class WhenBlockIsCalled
         var subject = Snippet.From("return true;");
         var opening = Snippet.From("if (condition)");
 
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)
                 .WithStyle(Snippet.BlockOptions.StyleType.KAndR));
 
         // Act
@@ -105,9 +103,10 @@ public sealed class WhenBlockIsCalled
         var subject = Snippet.From("value;");
         var opening = Snippet.From("get");
 
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
+                .WithInline(inline => inline
+                    .WithCode(Snippet.BlockOptions.InlineStyle.Lambda)));
 
         // Act
         Snippet result = subject.Block(options, opening);
@@ -127,9 +126,10 @@ public sealed class WhenBlockIsCalled
         var subject = Snippet.From("value;");
         var opening = Snippet.From("get");
 
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces));
+                .WithInline(inline => inline
+                    .WithCode(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
 
         // Act
         Snippet result = subject.Block(options, opening);

@@ -33,7 +33,7 @@
 
             for (int index = 1; index < snippets.Length; index++)
             {
-                stacked = snippets[index].Stack(options, stacked);
+                stacked = snippets[index].Prepend(options, stacked);
             }
 
             return stacked;

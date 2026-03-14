@@ -43,7 +43,10 @@ public sealed class WhenToStringIsCalled
 
                 int ValueB { get; }
 
-                int this[string item] { get; }
+                int this[string item]
+                {
+                    get;
+                }
 
                 Task Execute();
             }
@@ -62,6 +65,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBeEquivalentTo(expected);
+        result.ShouldBe(expected);
     }
 }

@@ -135,7 +135,7 @@
                 .Prepend(options, attributes);
         }
 
-        private Snippet GetSignature(Snippet.Options options)
+        private Snippet GetSignature(Options options)
         {
             var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
@@ -150,15 +150,27 @@
                 signature = $"{signature}({parameters})";
             }
 
+            var declaration = Snippet.From(options, signature);
+
+            if (!Base.IsUndefined)
+            {
+                var @base = Base.ToSnippet(options);
+
+                @base = Snippet.From(options, $": {@base}");
+
+                declaration = @base
+                    .Shift(options)
+                    .Prepend(options, signature);
+            }
+
             if (!clauses.IsEmpty)
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature);
+                    .Prepend(options, declaration);
             }
 
-            return Snippet.From(options, signature);
+            return declaration;
         }
     }
 }

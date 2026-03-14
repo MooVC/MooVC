@@ -30,7 +30,7 @@
             /// </summary>
             /// <value>The block.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsBlockRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public BlockOptions Block { get; internal set; } = new BlockOptions();
+            public BlockOptions Block { get; internal set; } = BlockOptions.Default;
 
             /// <summary>
             /// Gets a value indicating whether the Options is default.

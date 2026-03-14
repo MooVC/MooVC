@@ -38,11 +38,8 @@ public sealed class WhenToStringIsCalled
         Unary subject = UnaryTestsData.Create();
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToString(options, type);
+        string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
         string expected = """

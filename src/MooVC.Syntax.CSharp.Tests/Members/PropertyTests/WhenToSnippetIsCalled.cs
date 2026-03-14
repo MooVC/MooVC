@@ -30,13 +30,8 @@ public sealed class WhenToSnippetIsCalled
 
         Property subject = PropertyTestsData.Create(behaviours: behaviours);
 
-        Property.Options options = Property.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
-
         // Act
-        string representation = subject.ToSnippet(options);
+        string representation = subject.ToSnippet(Property.Options.Default);
 
         // Assert
         const string Expected = "public string Value => value;";

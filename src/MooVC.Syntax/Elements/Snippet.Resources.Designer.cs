@@ -22,9 +22,6 @@ namespace MooVC.Syntax.Elements {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    /// <summary>
-    /// Represents the Snippet_Resources.
-    /// </summary>
     internal class Snippet_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
@@ -32,9 +29,6 @@ namespace MooVC.Syntax.Elements {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        /// <summary>
-        /// Initializes a new instance of the Snippet_Resources class.
-        /// </summary>
         internal Snippet_Resources() {
         }
         
@@ -166,6 +160,24 @@ namespace MooVC.Syntax.Elements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The style to use for Inline methods must be provided..
+        /// </summary>
+        internal static string InlineMethodsRequired {
+            get {
+                return ResourceManager.GetString("InlineMethodsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The style to use for Inline properties must be provided..
+        /// </summary>
+        internal static string InlinePropertiesRequired {
+            get {
+                return ResourceManager.GetString("InlinePropertiesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Block configuration must be provided..
         /// </summary>
         internal static string OptionsBlockRequired {
@@ -198,24 +210,6 @@ namespace MooVC.Syntax.Elements {
         internal static string ShiftOptionsRequired {
             get {
                 return ResourceManager.GetString("ShiftOptionsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The options required to direct the stack must be provided..
-        /// </summary>
-        internal static string StackOptionsRequired {
-            get {
-                return ResourceManager.GetString("StackOptionsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The `{0}` to `{1}`  upon the current `{0}` must be provided..
-        /// </summary>
-        internal static string StackTopRequired {
-            get {
-                return ResourceManager.GetString("StackTopRequired", resourceCulture);
             }
         }
         

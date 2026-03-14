@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp.Members
 {
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
@@ -9,12 +10,12 @@ namespace MooVC.Syntax.CSharp.Members
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax indexer.
+    /// Represents a C# member syntax method.
     /// </summary>
-    public partial class Indexer
+    public partial class Method
     {
         /// <summary>
-        /// Represents the rendering options for a indexer.
+        /// Represents the rendering options for a method.
         /// </summary>
         [Fluentify]
         [Valuify]
@@ -41,8 +42,14 @@ namespace MooVC.Syntax.CSharp.Members
             /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
-            /// <value>The behaviour.</value>
+            /// <value>The snippets.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+
+            /// <summary>
+            /// Gets the options for the Types.
+            /// </summary>
+            /// <value>The types.</value>
+            public Type.Options Types { get; internal set; } = Type.Options.Default;
 
             public static implicit operator Scope(Options options)
             {
@@ -56,6 +63,13 @@ namespace MooVC.Syntax.CSharp.Members
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            public static implicit operator Type.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Type.Options>(options);
+
+                return options.Types;
             }
         }
     }

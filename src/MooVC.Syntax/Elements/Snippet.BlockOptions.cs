@@ -50,14 +50,14 @@
             /// </summary>
             /// <value>The markers.</value>
             [Required(ErrorMessageResourceName = nameof(BlockOptionsMarkersRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public BoundaryOptions Markers { get; internal set; } = new BoundaryOptions();
+            public BoundaryOptions Markers { get; internal set; } = BoundaryOptions.Default;
 
             /// <summary>
             /// Gets the inline on the BlockOptions.
             /// </summary>
             /// <value>The inline.</value>
             [Required(ErrorMessageResourceName = nameof(BlockOptionsInlineRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public InlineStyle Inline { get; internal set; } = InlineStyle.Lambda;
+            public InlineOptions Inline { get; internal set; } = InlineOptions.Default;
 
             /// <summary>
             /// Gets the style on the BlockOptions.

@@ -179,7 +179,9 @@
         /// <returns>The snippet.</returns>
         public Snippet Append(Options options, params string[] values)
         {
-            return Combine(options, _value, values, (original, appended) => original.Concat(appended));
+            IEnumerable<string> lines = Combine(options, _value, values, (original, appended) => original.Concat(appended));
+
+            return From(options, lines.ToArray());
         }
 
         /// <summary>
@@ -189,7 +191,29 @@
         /// <returns>The snippet.</returns>
         public Snippet Append(params Snippet[] values)
         {
-            return Combine(_value, values, (original, appended) => original.Concat(appended));
+            return Append(Options.Default, values);
+        }
+
+        /// <summary>
+        /// Performs the append operation for the syntax element.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The snippet.</returns>
+        public Snippet Append(Options options, params Snippet[] values)
+        {
+            IEnumerable<string> lines = Combine(_value, values, (original, appended) => original.Concat(appended));
+
+            return From(options, lines.ToArray());
+        }
+
+        /// <summary>
+        /// Performs the block operation for the syntax element.
+        /// </summary>
+        /// <returns>The snippet.</returns>
+        public Snippet Block()
+        {
+            return Block(Options.Default, Empty);
         }
 
         /// <summary>
@@ -216,59 +240,19 @@
             const int MaximumAdditionalLinesRequiredForBlock = 2;
 
             int openingLines = opening.Lines;
-            string[] blocked = ArrayPool<string>.Shared.Rent(Lines + openingLines + MaximumAdditionalLinesRequiredForBlock);
+            int totalLines = Lines + openingLines + MaximumAdditionalLinesRequiredForBlock;
+            string[] blocked = ArrayPool<string>.Shared.Rent(totalLines);
 
             try
             {
-                int index = 0;
+                FormatBlockOpening(opening, openingLines, blocked);
 
-                for (; index < openingLines; index++)
+                if (IsSingleLine && !options.Block.Inline.Code.IsMultiLineBraces)
                 {
-                    blocked[index] = opening._value[index];
+                    return FormatSingleLineBlock(options, blocked, openingLines);
                 }
 
-                if (IsSingleLine && !options.Block.Inline.IsMultiLineBraces)
-                {
-                    if (options.Block.Inline.IsLambda)
-                    {
-                        blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
-                    }
-                    else if (options.Block.Inline.IsSingleLineBraces)
-                    {
-                        blocked[index - 1] = string.Concat(
-                            blocked[index - 1],
-                            $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
-                    }
-
-                    return new Snippet(ImmutableArray.Create(blocked, 0, index));
-                }
-
-                if (options.Block.Style.IsKAndR && openingLines > 0)
-                {
-                    blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
-                }
-                else
-                {
-                    blocked[index++] = options.Block.Markers.Opening;
-                }
-
-                string whitespace = options.Whitespace;
-
-                for (int line = 0; line < Lines; line++)
-                {
-                    string current = _value[line];
-
-                    if (!string.IsNullOrEmpty(current))
-                    {
-                        current = string.Concat(whitespace, _value[line]);
-                    }
-
-                    blocked[index++] = current;
-                }
-
-                blocked[index] = options.Block.Markers.Closing;
-
-                return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
+                return FormatMultipleLineBlock(options, openingLines, blocked, openingLines);
             }
             finally
             {
@@ -332,7 +316,9 @@
         /// <returns>The snippet.</returns>
         public Snippet Prepend(Options options, params string[] values)
         {
-            return Combine(options, _value, values, (original, prepended) => prepended.Concat(original));
+            IEnumerable<string> lines = Combine(options, _value, values, (original, prepended) => prepended.Concat(original));
+
+            return From(options, lines.ToArray());
         }
 
         /// <summary>
@@ -342,7 +328,20 @@
         /// <returns>The snippet.</returns>
         public Snippet Prepend(params Snippet[] values)
         {
-            return Combine(_value, values, (original, prepended) => prepended.Concat(original));
+            return Prepend(Options.Default, values);
+        }
+
+        /// <summary>
+        /// Performs the prepend operation for the syntax element.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="values">The values.</param>
+        /// <returns>The snippet.</returns>
+        public Snippet Prepend(Options options, params Snippet[] values)
+        {
+            IEnumerable<string> lines = Combine(_value, values, (original, prepended) => prepended.Concat(original));
+
+            return From(options, lines.ToArray());
         }
 
         /// <summary>
@@ -378,20 +377,6 @@
             {
                 ArrayPool<string>.Shared.Return(shifted);
             }
-        }
-
-        /// <summary>
-        /// Performs the stack operation for the syntax element.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <param name="top">The top.</param>
-        /// <returns>The snippet.</returns>
-        public Snippet Stack(Options options, Snippet top)
-        {
-            _ = Guard.Against.Null(options, message: StackOptionsRequired);
-            _ = Guard.Against.Null(top, message: StackTopRequired.Format(nameof(Snippet), nameof(Stack)));
-
-            return Prepend(options, top);
         }
 
         /// <summary>
@@ -447,7 +432,7 @@
             }
         }
 
-        private static ImmutableArray<string> Combine(
+        private static IEnumerable<string> Combine(
             Options options,
             Snippet original,
             string[] values,
@@ -470,7 +455,7 @@
             }
         }
 
-        private static ImmutableArray<string> Combine(
+        private static IEnumerable<string> Combine(
             Snippet original,
             IEnumerable<Snippet> values,
             Func<IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> combine)
@@ -478,7 +463,15 @@
             IEnumerable<string> first = original._value.Select(value => value);
             IEnumerable<string> second = values.SelectMany(snippet => snippet._value.Select(value => value));
 
-            return combine(first, second).ToImmutableArray();
+            return combine(first, second);
+        }
+
+        private static void FormatBlockOpening(Snippet opening, int openingLines, string[] blocked)
+        {
+            for (int index = 0; index < openingLines; index++)
+            {
+                blocked[index] = opening._value[index];
+            }
         }
 
         private static Snippet[] StripEmptySnippets(Snippet[] values)
@@ -529,6 +522,52 @@
             {
                 ArrayPool<string>.Shared.Return(combined);
             }
+        }
+
+        private Snippet FormatMultipleLineBlock(Options options, int openingLines, string[] blocked, int index)
+        {
+            if (options.Block.Style.IsKAndR && openingLines > 0)
+            {
+                blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
+            }
+            else
+            {
+                blocked[index++] = options.Block.Markers.Opening;
+            }
+
+            string whitespace = options.Whitespace;
+
+            for (int line = 0; line < Lines; line++)
+            {
+                string current = _value[line];
+
+                if (!string.IsNullOrEmpty(current))
+                {
+                    current = string.Concat(whitespace, _value[line]);
+                }
+
+                blocked[index++] = current;
+            }
+
+            blocked[index] = options.Block.Markers.Closing;
+
+            return new Snippet(ImmutableArray.Create(blocked, 0, index + 1));
+        }
+
+        private Snippet FormatSingleLineBlock(Options options, string[] blocked, int index)
+        {
+            if (options.Block.Inline.Code.IsLambda)
+            {
+                blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
+            }
+            else if (options.Block.Inline.Code.IsSingleLineBraces)
+            {
+                blocked[index - 1] = string.Concat(
+                    blocked[index - 1],
+                    $" {options.Block.Markers.Opening} {_value[0]} {options.Block.Markers.Closing}");
+            }
+
+            return new Snippet(ImmutableArray.Create(blocked, 0, index));
         }
     }
 }

@@ -9,12 +9,12 @@ namespace MooVC.Syntax.CSharp.Members
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax method.
+    /// Represents a C# member syntax indexer.
     /// </summary>
-    public partial class Method
+    public partial class Indexer
     {
         /// <summary>
-        /// Represents the rendering options for a method.
+        /// Represents the rendering options for a indexer.
         /// </summary>
         [Fluentify]
         [Valuify]

@@ -79,10 +79,6 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         Unary publicIncrement = UnaryTestsData.Create(@operator: Unary.Type.Increment, scope: Scope.Public);
         Unary publicDecrement = UnaryTestsData.Create(@operator: Unary.Type.Decrement, scope: Scope.Public);
         Unary protectedNegate = UnaryTestsData.Create(@operator: Unary.Type.Not, scope: Scope.Protected);
@@ -90,7 +86,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Unary> unaries = [publicDecrement, protectedNegate, publicIncrement];
 
         // Act
-        var snippet = unaries.ToSnippet(options, type);
+        var snippet = unaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

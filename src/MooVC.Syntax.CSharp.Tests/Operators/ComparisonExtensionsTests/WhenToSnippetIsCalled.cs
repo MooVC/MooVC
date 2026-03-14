@@ -79,10 +79,6 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         Comparison publicEquality = ComparisonTestsData.Create(@operator: Comparison.Type.Equality, scope: Scope.Public);
         Comparison publicLessThan = ComparisonTestsData.Create(@operator: Comparison.Type.LessThan, scope: Scope.Public);
         Comparison protectedGreaterThan = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan, scope: Scope.Protected);
@@ -90,7 +86,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Comparison> comparisons = [publicLessThan, protectedGreaterThan, publicEquality];
 
         // Act
-        var snippet = comparisons.ToSnippet(options, type);
+        var snippet = comparisons.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
         snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

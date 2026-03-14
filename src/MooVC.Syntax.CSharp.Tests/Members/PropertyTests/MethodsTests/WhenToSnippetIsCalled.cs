@@ -40,12 +40,8 @@ public sealed class WhenToSnippetIsCalled
             },
         };
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block
-                .WithInline(Snippet.BlockOptions.InlineStyle.Lambda));
-
         // Act
-        string representation = subject.ToSnippet(options, Scope.Public);
+        string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
         representation.ShouldBe("value;");

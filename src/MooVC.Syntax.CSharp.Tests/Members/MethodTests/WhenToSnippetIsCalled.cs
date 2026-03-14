@@ -16,7 +16,7 @@ public sealed class WhenToSnippetIsCalled
         Method.Options options = Method.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -34,7 +34,7 @@ public sealed class WhenToSnippetIsCalled
         Method.Options options = Method.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.Lambda))));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -49,13 +49,8 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
 
-        Method.Options options = Method.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
-
         // Act
-        string representation = subject.ToSnippet(options);
+        string representation = subject.ToSnippet(Method.Options.Default);
 
         // Assert
         string expected = """
@@ -78,13 +73,8 @@ public sealed class WhenToSnippetIsCalled
                 .As(typeof(Task))
                 .WithMode(Result.Modality.Asynchronous));
 
-        Method.Options options = Method.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
-
         // Act
-        string representation = subject.ToSnippet(options);
+        string representation = subject.ToSnippet(Method.Options.Default);
 
         // Assert
         string expected = """

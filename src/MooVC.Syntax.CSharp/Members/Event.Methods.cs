@@ -110,20 +110,23 @@
 
                 if (Add.IsEmpty && Remove.IsEmpty)
                 {
-                    return Snippet.From($"{add} {remove}");
+                    return Snippet.From(options, $"{add} {remove}");
                 }
 
-                return remove.Stack(options, add);
+                return remove.Prepend(options, add);
             }
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet)
             {
                 if (snippet.IsEmpty)
                 {
-                    return Snippet.From($"{keyword};");
+                    return Snippet.From(options, $"{keyword};");
                 }
 
-                return snippet.Block(options, opening: Snippet.From(keyword));
+                options = options.WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(inline.Properties)));
+
+                return snippet.Block(options, opening: Snippet.From(options, keyword));
             }
         }
     }

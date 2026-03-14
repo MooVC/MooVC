@@ -12,6 +12,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Indexer_Resources;
+    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -123,14 +124,8 @@
             }
 
             Snippet signature = GetSignature(options);
-            var methods = Behaviours.ToSnippet(options.Snippets);
-            Snippet.Options snippets = options;
-
-            if (methods.IsSingleLine && snippets.Block.Inline.IsLambda)
-            {
-                snippets = snippets.WithBlock(block => block
-                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
-            }
+            var methods = Behaviours.ToSnippet(options);
+            Snippet.Options snippets = FormatBlockStyle(methods, options);
 
             return methods.Block(snippets, signature);
         }
@@ -181,6 +176,17 @@
                 .Results;
         }
 
+        private static Snippet.Options FormatBlockStyle(Snippet methods, Options options)
+        {
+            InlineStyle style = methods.IsSingleLine && options.Snippets.Block.Inline.Properties.IsLambda
+                ? InlineStyle.SingleLineBraces
+                : options.Snippets.Block.Inline.Properties;
+
+            return options.Snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(style)));
+        }
+
         private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
@@ -189,7 +195,7 @@
             string scope = Scope.ToString(options);
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 
-            return Snippet.From(signature);
+            return Snippet.From(options, signature);
         }
     }
 }

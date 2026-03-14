@@ -13,6 +13,7 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Constructor_Resources;
+    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -106,7 +107,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Name.Unnamed, Snippet.Options.Default);
+            return ToSnippet(Name.Unnamed, Type.Options.Default);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace MooVC.Syntax.CSharp.Members
         /// <param name="options">The options.</param>
         /// <param name="type">The type.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options, Type type)
+        public Snippet ToSnippet(Type.Options options, Type type)
         {
             _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Type), nameof(Constructor)));
 
@@ -140,7 +141,7 @@ namespace MooVC.Syntax.CSharp.Members
                 .Results;
         }
 
-        private Snippet GetSignature(Name name, Snippet.Options options)
+        private Snippet GetSignature(Name name, Type.Options options)
         {
             var attributes = Attributes.ToSnippet(options);
             string extensibility = Extensibility;
@@ -153,7 +154,7 @@ namespace MooVC.Syntax.CSharp.Members
                 .Prepend(options, attributes);
         }
 
-        private string ToSnippet(Name name, Snippet.Options options)
+        private string ToSnippet(Name name, Type.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Constructor)));
 
@@ -163,8 +164,19 @@ namespace MooVC.Syntax.CSharp.Members
             }
 
             Snippet signature = GetSignature(name, options);
+            Snippet.Options snippets = FormatBlockStyle(options);
 
-            return Body.Block(options, signature);
+            return Body.Block(snippets, signature);
+        }
+
+        private Snippet.Options FormatBlockStyle(Snippet.Options options)
+        {
+            InlineStyle style = Body.IsSingleLine && options.Block.Inline.Methods.IsLambda
+                ? InlineStyle.SingleLineBraces
+                : options.Block.Inline.Methods;
+
+            return options.WithBlock(block => block
+                .WithInline(inline => inline.WithCode(style)));
         }
     }
 }

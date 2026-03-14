@@ -106,6 +106,20 @@
         }
 
         /// <summary>
+        /// Implicitly converts a tuple containing a name and qualifier to an Symbol instance.
+        /// </summary>
+        /// <param name="symbol">The tuple containing the name and qualifier to be converted into an Symbol.</param>
+        /// <returns>The Symbol.</returns>
+        public static implicit operator Symbol((Moniker Name, Qualifier Qualifier) symbol)
+        {
+            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(symbol);
+
+            return new Symbol()
+                .From(symbol.Qualifier)
+                .Named(symbol.Name);
+        }
+
+        /// <summary>
         /// Defines the less than operator for the Symbol.
         /// </summary>
         /// <param name="left">The left.</param>

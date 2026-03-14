@@ -88,13 +88,8 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        Method.Options options = Method.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
-
         // Act
-        var snippet = methods.ToSnippet(options);
+        var snippet = methods.ToSnippet(Method.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

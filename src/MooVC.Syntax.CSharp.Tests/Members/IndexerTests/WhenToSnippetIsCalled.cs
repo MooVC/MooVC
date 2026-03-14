@@ -29,13 +29,8 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
-        Indexer.Options options = Indexer.Options.Default
-            .WithSnippets(snippet => snippet
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.Lambda)));
-
         // Act
-        string representation = subject.ToSnippet(options);
+        string representation = subject.ToSnippet(Indexer.Options.Default);
 
         // Assert
         string expected = "public string this[int index] { get => value; }";
@@ -57,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         Indexer.Options options = Indexer.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
+                    .WithInline(inline => inline.WithProperties(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -79,13 +74,8 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
-        Indexer.Options options = Indexer.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces)));
-
         // Act
-        string representation = subject.ToSnippet(options);
+        string representation = subject.ToSnippet(Indexer.Options.Default);
 
         // Assert
         string expected = """

@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp.Members.AttributeExtensionsTests;
 
 using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Members.AttributeTests;
 using MooVC.Syntax.Elements;
 
@@ -20,7 +21,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = attributes.ToSnippet(Snippet.Options.Default);
+        var snippet = attributes.ToSnippet(Type.Options.Default);
 
         // Assert
         snippet.ShouldBe(Snippet.Empty);
@@ -31,7 +32,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Attribute> attributes = [AttributeTestsData.Create()];
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = attributes.ToSnippet(options!));
@@ -55,7 +56,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = attributes.ToSnippet(Snippet.Options.Default);
+        var snippet = attributes.ToSnippet(Type.Options.Default);
 
         // Assert
         snippet.ToString().ShouldBe(expected);

@@ -26,7 +26,7 @@
             return directives
                 .Select(directive => new
                 {
-                    Rendering = directive.ToString(),
+                    Rendering = directive.ToSnippet(options),
                     Value = directive,
                 })
                 .OrderBy(directive => directive.Value.IsStatic)

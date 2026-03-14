@@ -100,7 +100,7 @@
                 {
                     Snippet remove = Format("set", options, Set);
 
-                    add = remove.Stack(options, add);
+                    add = remove.Prepend(options, add);
                 }
 
                 return add;
@@ -110,8 +110,11 @@
             {
                 if (snippet.IsEmpty)
                 {
-                    return $"{keyword};";
+                    return Snippet.From(options, $"{keyword};");
                 }
+
+                options = options.WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(inline.Properties)));
 
                 return snippet.Block(options, opening: Snippet.From(options, keyword));
             }

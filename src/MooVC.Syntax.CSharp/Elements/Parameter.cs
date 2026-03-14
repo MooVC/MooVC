@@ -100,6 +100,20 @@
         }
 
         /// <summary>
+        /// Implicitly converts a tuple containing a name and type to an Parameter instance.
+        /// </summary>
+        /// <param name="parameter">The tuple containing the name and type to be converted into an Parameter.</param>
+        /// <returns>The Parameter.</returns>
+        public static implicit operator Parameter((Variable Name, Symbol Type) parameter)
+        {
+            Guard.Against.Conversion<(Variable Name, Symbol Type), Parameter>(parameter);
+
+            return new Parameter()
+                .Named(parameter.Name)
+                .OfType(parameter.Type);
+        }
+
+        /// <summary>
         /// Returns the C# source representation of the parameter declaration.
         /// </summary>
         /// <returns>The rendered parameter text.</returns>

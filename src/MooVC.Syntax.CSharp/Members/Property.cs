@@ -12,6 +12,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Property_Resources;
+    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -114,6 +115,20 @@
         }
 
         /// <summary>
+        /// Implicitly converts a tuple containing a name and type to an Property instance.
+        /// </summary>
+        /// <param name="property">The tuple containing the name and type to be converted into an Property.</param>
+        /// <returns>The Property.</returns>
+        public static implicit operator Property((Name Name, Symbol Type) property)
+        {
+            Guard.Against.Conversion<(Name Name, Symbol Type), Property>(property);
+
+            return new Property()
+                .Named(property.Name)
+                .OfType(property.Type);
+        }
+
+        /// <summary>
         /// Returns the string representation of the Property.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -139,13 +154,7 @@
             var attributes = Attributes.ToSnippet(options);
             Snippet signature = GetSignature(options);
             var behaviours = Behaviours.ToSnippet(options, Scope);
-            Snippet.Options body = options;
-
-            if (behaviours.IsSingleLine && body.Block.Inline.IsLambda && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly))
-            {
-                body = body.WithBlock(block => block
-                    .WithInline(inline => Snippet.BlockOptions.InlineStyle.SingleLineBraces));
-            }
+            Snippet.Options body = FormatBlockStyle(behaviours, options);
 
             signature = behaviours.Block(body, signature);
 
@@ -195,6 +204,21 @@
                 .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
+        }
+
+        private Snippet.Options FormatBlockStyle(Snippet behaviours, Options options)
+        {
+            bool isSingleLineBraces = behaviours.IsSingleLine
+                && options.Snippets.Block.Inline.Properties.IsLambda
+                && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly);
+
+            InlineStyle style = isSingleLineBraces
+                ? InlineStyle.SingleLineBraces
+                : options.Snippets.Block.Inline.Properties;
+
+            return options.Snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(style)));
         }
 
         private Snippet GetSignature(Options options)

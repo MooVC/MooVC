@@ -15,6 +15,7 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Method_Resources;
+    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 
@@ -149,8 +150,12 @@ namespace MooVC.Syntax.CSharp.Members
                 return signature.Append(';');
             }
 
+            Snippet.Options snippets = options.Snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithCode(inline.Methods)));
+
             return Body
-                .Block(options, signature)
+                .Block(snippets, signature)
                 .Prepend(options, attributes);
         }
 

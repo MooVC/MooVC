@@ -1,8 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
+    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.Elements;
 
     /// <summary>
@@ -16,7 +16,7 @@
         /// <param name="attributes">The attributes.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Attribute> attributes, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Attribute> attributes, Type.Options options)
         {
             if (attributes.IsDefaultOrEmpty)
             {
@@ -25,7 +25,7 @@
 
             return attributes
                 .OrderBy(attribute => attribute.Name)
-                .Select(attribute => Snippet.From(options, attribute))
+                .Select(attribute => attribute.ToSnippet(options))
                 .ToImmutableArray()
                 .Stack(options);
         }

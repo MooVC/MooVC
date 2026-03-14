@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
         Type? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(Snippet.Options.Default, type!));
+        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(Type.Options.Default, type!));
 
         // Assert
         exception.ParamName.ShouldBe(nameof(type));
@@ -27,7 +27,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Constructor subject = ConstructorTestsData.Create();
         Type type = ConstructorTestsData.CreateType();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!, type));
@@ -44,7 +44,7 @@ public sealed class WhenToSnippetIsCalled
         Type type = ConstructorTestsData.CreateType();
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default, type);
+        string result = subject.ToSnippet(Type.Options.Default, type);
 
         // Assert
         result.ShouldBeEmpty();
@@ -65,11 +65,8 @@ public sealed class WhenToSnippetIsCalled
 
         Type type = ConstructorTestsData.CreateType();
 
-        Snippet.Options options = Snippet.Options.Default
-            .WithBlock(block => block.WithInline(Snippet.BlockOptions.InlineStyle.MultiLineBraces));
-
         // Act
-        string representation = subject.ToSnippet(options, type);
+        string representation = subject.ToSnippet(Type.Options.Default, type);
 
         // Assert
         string expected = """
