@@ -74,8 +74,13 @@ public sealed class WhenToSnippetIsCalled
 
         Indexer subject = IndexerTestsData.Create(behaviours: methods);
 
+        Indexer.Options options = Indexer.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithProperties(Snippet.BlockOptions.InlineStyle.MultiLineBraces))));
+
         // Act
-        string representation = subject.ToSnippet(Indexer.Options.Default);
+        string representation = subject.ToSnippet(options);
 
         // Assert
         string expected = """

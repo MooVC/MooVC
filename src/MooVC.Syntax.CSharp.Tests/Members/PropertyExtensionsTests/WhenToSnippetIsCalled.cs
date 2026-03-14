@@ -61,28 +61,19 @@ public sealed class WhenToSnippetIsCalled
         const string expected = """
             public static int Beta
             {
-                get
-                {
-                    value;
-                }
+                get => value;
                 init;
             }
 
             public virtual Version Alpha
             {
-                get
-                {
-                    value;
-                }
+                get => value;
                 init;
             }
 
             protected virtual string Gamma
             {
-                get
-                {
-                    value;
-                }
+                get => value;
                 init;
             }
             """;

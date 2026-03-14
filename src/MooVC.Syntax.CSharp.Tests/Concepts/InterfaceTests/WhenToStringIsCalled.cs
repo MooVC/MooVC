@@ -43,10 +43,7 @@ public sealed class WhenToStringIsCalled
 
                 int ValueB { get; }
 
-                int this[string item]
-                {
-                    get;
-                }
+                int this[string item] { get; }
 
                 Task Execute();
             }

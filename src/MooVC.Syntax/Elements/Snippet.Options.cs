@@ -33,6 +33,13 @@
             public BlockOptions Block { get; internal set; } = BlockOptions.Default;
 
             /// <summary>
+            /// Gets the chaining on the Options.
+            /// </summary>
+            /// <value>The block.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsChainingRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
+            public ChainingOptions Chaining { get; internal set; } = ChainingOptions.Default;
+
+            /// <summary>
             /// Gets a value indicating whether the Options is default.
             /// </summary>
             /// <value>A value indicating whether the Options is default.</value>

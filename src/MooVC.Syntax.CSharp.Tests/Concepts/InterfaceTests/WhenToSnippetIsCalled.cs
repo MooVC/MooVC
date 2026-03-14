@@ -44,10 +44,7 @@ public sealed class WhenToSnippetIsCalled
 
                 int ValueB { get; }
 
-                int this[string item]
-                {
-                    get;
-                }
+                int this[string item] { get; }
 
                 Task Execute();
             }

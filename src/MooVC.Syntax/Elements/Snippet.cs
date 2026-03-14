@@ -260,6 +260,18 @@
             }
         }
 
+        public Snippet Chain(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ChainOptionsRequired);
+
+            if (IsEmpty || options.Chaining.IsDefault || (_value.Length == 1 && _value[0].Length < options.MaxLength))
+            {
+                return this;
+            }
+
+            return Chain(options, options.Chaining, _value);
+        }
+
         /// <summary>
         /// Performs the combine operation for the syntax element.
         /// </summary>
@@ -422,6 +434,37 @@
             {
                 yield return new ValidationResult(ValidateLinesMismatch.Format(nameof(Lines), Lines, lines), new[] { nameof(Lines) });
             }
+        }
+
+        private static ImmutableArray<string> Chain(Options options, in ImmutableArray<IChain> strategies, IReadOnlyList<string> values)
+        {
+            var lines = new List<string>(values.Count);
+
+            foreach (string line in values)
+            {
+                if (string.IsNullOrEmpty(line) || line.Length < options.MaxLength)
+                {
+                    lines.Add(line);
+
+                    continue;
+                }
+
+                foreach (IChain strategy in strategies)
+                {
+                    ImmutableArray<string> chained = strategy.Chain(line);
+
+                    if (chained.Length == 1)
+                    {
+                        lines.Add(line);
+
+                        continue;
+                    }
+
+                    lines.AddRange(Chain(options, strategies, chained));
+                }
+            }
+
+            return lines.ToImmutableArray();
         }
 
         private static void Combine(string[] combined, ref int index, Snippet snippet)

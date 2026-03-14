@@ -64,29 +64,20 @@ public sealed class WhenToSnippetIsCalled
         const string expected = """
             public event Handler Alpha
             {
-                add
-                {
-                    a+=1;
-                }
+                add => a+=1;
                 remove;
             }
 
             public virtual event Handler Gamma
             {
                 add;
-                remove
-                {
-                    g();
-                }
+                remove => g();
             }
 
             protected event Handler Beta
             {
                 add;
-                remove
-                {
-                    b-=1;
-                }
+                remove => b-=1;
             }
             """;
 

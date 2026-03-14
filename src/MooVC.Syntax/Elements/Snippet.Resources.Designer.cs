@@ -124,6 +124,15 @@ namespace MooVC.Syntax.Elements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The options for chaining must be provided..
+        /// </summary>
+        internal static string ChainOptionsRequired {
+            get {
+                return ResourceManager.GetString("ChainOptionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The options to apply when combining the snippets must be provided..
         /// </summary>
         internal static string CombineOptionsRequired {
@@ -183,6 +192,15 @@ namespace MooVC.Syntax.Elements {
         internal static string OptionsBlockRequired {
             get {
                 return ResourceManager.GetString("OptionsBlockRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Chaining configuration must be provided..
+        /// </summary>
+        internal static string OptionsChainingRequired {
+            get {
+                return ResourceManager.GetString("OptionsChainingRequired", resourceCulture);
             }
         }
         

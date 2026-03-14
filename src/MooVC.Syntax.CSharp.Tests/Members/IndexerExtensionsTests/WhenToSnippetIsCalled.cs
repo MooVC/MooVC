@@ -68,20 +68,11 @@ public sealed class WhenToSnippetIsCalled
         ];
 
         const string expected = """
-            public static string this[Version alpha]
-            {
-                get;
-            }
+            public static string this[Version alpha] { get; }
 
-            public virtual int this[Version beta]
-            {
-                get;
-            }
+            public virtual int this[Version beta] { get; }
 
-            protected virtual int this[Version gamma]
-            {
-                get;
-            }
+            protected virtual int this[Version gamma] { get; }
             """;
 
         // Act

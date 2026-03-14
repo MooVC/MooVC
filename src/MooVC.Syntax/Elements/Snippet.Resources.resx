@@ -171,4 +171,10 @@
   <data name="InlinePropertiesRequired" xml:space="preserve">
     <value>The style to use for Inline properties must be provided.</value>
   </data>
+  <data name="OptionsChainingRequired" xml:space="preserve">
+    <value>The Chaining configuration must be provided.</value>
+  </data>
+  <data name="ChainOptionsRequired" xml:space="preserve">
+    <value>The options for chaining must be provided.</value>
+  </data>
 </root>

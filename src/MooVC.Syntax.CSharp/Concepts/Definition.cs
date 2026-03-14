@@ -88,6 +88,8 @@
                 return type;
             }
 
+            type = type.Chain(options);
+
             Snippet @namespace = $"namespace {Namespace}";
             var usings = Usings.ToSnippet(options);
 
