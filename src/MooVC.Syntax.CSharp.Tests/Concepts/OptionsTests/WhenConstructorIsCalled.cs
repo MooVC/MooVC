@@ -18,11 +18,11 @@ public sealed class WhenConstructorIsCalled
         });
 
         // Act
-        Qualifier.Options namespaceOption = subject.Namespace;
+        Qualifier.Options @namespace = subject.Namespace;
         Snippet.Options snippets = subject.Snippets;
 
         // Assert
-        namespaceOption.ShouldBe(Qualifier.Options.File);
+        @namespace.ShouldBe(Qualifier.Options.File);
         snippets.ShouldBe(expected);
     }
 }

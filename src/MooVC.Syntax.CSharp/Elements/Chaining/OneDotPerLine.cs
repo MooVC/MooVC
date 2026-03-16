@@ -107,7 +107,11 @@
 
                 string current = line.Substring(start, index - start).TrimEnd();
 
-                lines.Add(current);
+                if (!string.IsNullOrEmpty(current))
+                {
+                    lines.Add(current);
+                }
+
                 start = index;
             }
 
