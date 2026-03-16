@@ -74,7 +74,7 @@
 
                 UpdateDepthCounters(character, ref parenthesisDepth, ref bracketDepth, ref braceDepth);
 
-                if (!ShouldSplitOuterDot(character, index, parenthesisDepth, bracketDepth, braceDepth))
+                if (!ShouldSplitOuterDot(line, character, index, parenthesisDepth, bracketDepth, braceDepth))
                 {
                     continue;
                 }
@@ -175,13 +175,14 @@
                 && IsMethodCall(line, index);
         }
 
-        private static bool ShouldSplitOuterDot(char character, int index, int parenthesisDepth, int bracketDepth, int braceDepth)
+        private static bool ShouldSplitOuterDot(string line, char character, int index, int parenthesisDepth, int bracketDepth, int braceDepth)
         {
             return character == '.'
                 && index > 0
                 && parenthesisDepth == 0
                 && bracketDepth == 0
-                && braceDepth == 0;
+                && braceDepth == 0
+                && IsMethodCall(line, index);
         }
 
         private static int SkipGenericArguments(string line, int start)
