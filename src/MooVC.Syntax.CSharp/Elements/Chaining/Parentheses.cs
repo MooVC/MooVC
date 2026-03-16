@@ -1,14 +1,15 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.Chaining
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
+    using MooVC.Syntax.Elements;
 
-    internal static class ParenthesesChaining
+    public sealed class Parentheses
+        : Snippet.IChain
     {
-        public static ImmutableArray<string> Chain(string line, int maxLength)
+        public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
-            if (string.IsNullOrWhiteSpace(line) || line.Length < maxLength)
+            if (string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength)
             {
                 return ImmutableArray.Create(line);
             }
@@ -28,7 +29,7 @@
             }
 
             string content = line.Substring(opening + 1, closing - opening - 1);
-            var arguments = Split(content);
+            List<string> arguments = Split(content);
 
             if (arguments.Count < 2)
             {
@@ -40,7 +41,7 @@
             int leadingSpaces = CountLeadingSpaces(prefix);
             string indentation = new string(' ', leadingSpaces + 4);
             string closeIndentation = new string(' ', leadingSpaces);
-            var chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 2);
+            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 2);
 
             chained.Add(prefix + '(');
 

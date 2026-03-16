@@ -5,12 +5,12 @@
     using System.Collections.Immutable;
     using MooVC.Syntax.Elements;
 
-    public sealed class OneDotPerLineChain
+    public sealed class OneDotPerLine
         : Snippet.IChain
     {
-        public ImmutableArray<string> Chain(string line, int maxLength)
+        public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
-            if (string.IsNullOrWhiteSpace(line) || line.Length < maxLength)
+            if (string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength)
             {
                 return ImmutableArray.Create(line);
             }
@@ -45,7 +45,7 @@
 
             int leadingSpaces = CountLeadingSpaces(parts[0]);
             string indentation = new string(' ', leadingSpaces + 4);
-            var chained = ImmutableArray.CreateBuilder<string>(parts.Count);
+            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(parts.Count);
 
             chained.Add(parts[0]);
 
