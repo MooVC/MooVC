@@ -15,19 +15,59 @@
                 return ImmutableArray.Create(line);
             }
 
-            int firstDot = line.IndexOf('.');
-
-            if (firstDot <= 0)
-            {
-                return ImmutableArray.Create(line);
-            }
-
             var parts = new List<string>();
             int start = 0;
+            int parenthesisDepth = 0;
+            int bracketDepth = 0;
+            int braceDepth = 0;
 
-            for (int index = firstDot + 1; index < line.Length; index++)
+            for (int index = 0; index < line.Length; index++)
             {
-                if (line[index] != '.')
+                char character = line[index];
+
+                if (character == '(')
+                {
+                    parenthesisDepth++;
+                    continue;
+                }
+
+                if (character == ')' && parenthesisDepth > 0)
+                {
+                    parenthesisDepth--;
+                    continue;
+                }
+
+                if (character == '[')
+                {
+                    bracketDepth++;
+                    continue;
+                }
+
+                if (character == ']' && bracketDepth > 0)
+                {
+                    bracketDepth--;
+                    continue;
+                }
+
+                if (character == '{')
+                {
+                    braceDepth++;
+                    continue;
+                }
+
+                if (character == '}' && braceDepth > 0)
+                {
+                    braceDepth--;
+                    continue;
+                }
+
+                bool shouldSplit = character == '.'
+                    && index > 0
+                    && parenthesisDepth == 0
+                    && bracketDepth == 0
+                    && braceDepth == 0;
+
+                if (!shouldSplit)
                 {
                     continue;
                 }
