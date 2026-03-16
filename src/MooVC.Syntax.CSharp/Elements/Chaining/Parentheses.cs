@@ -149,7 +149,7 @@
                     continue;
                 }
 
-                if (candidateOpening > opening)
+                if (opening < 0 || candidateOpening < opening)
                 {
                     opening = candidateOpening;
                     closing = index;
