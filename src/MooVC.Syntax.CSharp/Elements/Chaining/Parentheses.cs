@@ -15,38 +15,31 @@
 
         public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
-            if (string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength)
+            if (IsUnchainable(line, options))
             {
                 return ImmutableArray.Create(line);
             }
 
-            int opening = line.IndexOf('(');
-
-            if (opening < 0)
+            if (!TryGetParenthesisRange(line, out int opening, out int closing))
             {
                 return ImmutableArray.Create(line);
             }
 
-            int closing = FindClosingParenthesis(line, opening);
+            List<string> arguments = SplitArguments(line, opening, closing);
 
-            if (closing < 0)
+            if (arguments.Count < 2)
             {
                 return ImmutableArray.Create(line);
             }
 
-            string content = line.Substring(opening + 1, closing - opening - 1);
-            List<string> arguments = Split(content);
-            bool unchained = arguments.Count < 2;
+            return BuildChainedResult(line, options, opening, closing, arguments);
+        }
 
-            if (unchained)
-            {
-                return ImmutableArray.Create(line);
-            }
-
+        private static ImmutableArray<string> BuildChainedResult(string line, Snippet.Options options, int opening, int closing, List<string> arguments)
+        {
             string prefix = line.Substring(0, opening);
             string suffix = line.Substring(closing + 1);
-            string leading = line.GetLeadingWhitespace();
-            string indentation = string.Concat(leading, options.Whitespace);
+            string indentation = GetArgumentIndentation(line, options);
 
             return FormatLines(arguments, prefix, suffix, indentation);
         }
@@ -86,14 +79,31 @@
             for (int index = 0; index < arguments.Count; index++)
             {
                 string argument = arguments[index];
-                bool isLast = index == arguments.Count - 1;
-                string closing = isLast ? ')' + suffix : ",";
-                string current = string.Concat(indentation, argument, closing);
 
-                chained.Add(current);
+                chained.Add(FormatArgument(argument, index, arguments.Count, indentation, suffix));
             }
 
             return chained.ToImmutable();
+        }
+
+        private static string FormatArgument(string argument, int index, int count, string indentation, string suffix)
+        {
+            bool isLast = index == count - 1;
+            string closing = isLast ? ')' + suffix : ",";
+
+            return string.Concat(indentation, argument, closing);
+        }
+
+        private static string GetArgumentIndentation(string line, Snippet.Options options)
+        {
+            string leading = line.GetLeadingWhitespace();
+
+            return string.Concat(leading, options.Whitespace);
+        }
+
+        private static bool IsUnchainable(string line, Snippet.Options options)
+        {
+            return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength;
         }
 
         private static List<string> Split(string content)
@@ -106,31 +116,79 @@
             {
                 char character = content[index];
 
-                if (character == '(')
-                {
-                    depth++;
-                }
-                else if (character == ')')
-                {
-                    depth--;
-                }
-                else if (character == ',' && depth == 0)
-                {
-                    string current = content.Substring(start, index - start).Trim();
+                UpdateDepthCounter(character, ref depth);
 
-                    lines.Add(current);
-                    start = index + 1;
+                if (!ShouldSplitArgument(character, depth))
+                {
+                    continue;
                 }
+
+                AddArgument(lines, content, start, index);
+                start = index + 1;
             }
 
+            AddLastArgument(lines, content, start);
+
+            return lines;
+        }
+
+        private static List<string> SplitArguments(string line, int opening, int closing)
+        {
+            string content = line.Substring(opening + 1, closing - opening - 1);
+
+            return Split(content);
+        }
+
+        private static bool ShouldSplitArgument(char character, int depth)
+        {
+            return character == ',' && depth == 0;
+        }
+
+        private static bool TryGetParenthesisRange(string line, out int opening, out int closing)
+        {
+            opening = line.IndexOf('(');
+            closing = -1;
+
+            if (opening < 0)
+            {
+                return false;
+            }
+
+            closing = FindClosingParenthesis(line, opening);
+
+            return closing >= 0;
+        }
+
+        private static void UpdateDepthCounter(char character, ref int depth)
+        {
+            if (character == '(')
+            {
+                depth++;
+
+                return;
+            }
+
+            if (character == ')')
+            {
+                depth--;
+            }
+        }
+
+        private static void AddArgument(List<string> arguments, string content, int start, int end)
+        {
+            string current = content.Substring(start, end - start).Trim();
+
+            arguments.Add(current);
+        }
+
+        private static void AddLastArgument(List<string> arguments, string content, int start)
+        {
             string last = content.Substring(start).Trim();
 
             if (!string.IsNullOrEmpty(last))
             {
-                lines.Add(last);
+                arguments.Add(last);
             }
-
-            return lines;
         }
     }
 }

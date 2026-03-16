@@ -49,7 +49,9 @@ public sealed class WhenChainIsCalled
             "var result = query",
             "    .Where(unit => unit.IsDefined)",
             "    .OrderBy(unit => unit.Name)",
-            "    .SelectMany(unit => unit.Features.Where(feature => feature.IsDefined).Select(feature => feature.Name))",
+            "    .SelectMany(unit => unit.Features",
+            "         .Where(feature => feature.IsDefined)",
+            "         .Select(feature => feature.Name))",
             "    .Distinct()",
             "    .ToList();",
         ];
