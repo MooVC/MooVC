@@ -3,6 +3,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.CSharp.Elements.Chaining;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
@@ -38,7 +39,11 @@
         /// Gets the snippets options.
         /// </summary>
         /// <value>The snippets options.</value>
-        public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+        public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default.WithChaining(new[]
+        {
+            OneDotPerLine.Instance,
+            Parentheses.Instance,
+        });
 
         /// <summary>
         /// Gets the symbol options.

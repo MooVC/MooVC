@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
+using MooVC.Syntax.CSharp.Elements.Chaining;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
@@ -10,12 +11,18 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var subject = new Options();
 
+        Snippet.Options expected = Snippet.Options.Default.WithChaining(new[]
+        {
+            OneDotPerLine.Instance,
+            Parentheses.Instance,
+        });
+
         // Act
         Qualifier.Options namespaceOption = subject.Namespace;
         Snippet.Options snippets = subject.Snippets;
 
         // Assert
         namespaceOption.ShouldBe(Qualifier.Options.File);
-        snippets.ShouldBe(Snippet.Options.Default);
+        snippets.ShouldBe(expected);
     }
 }

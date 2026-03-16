@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.Chaining
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using MooVC.Syntax.Elements;
@@ -8,6 +7,12 @@
     public sealed class OneDotPerLine
         : Snippet.IChain
     {
+        public static readonly Snippet.IChain Instance = new OneDotPerLine();
+
+        private OneDotPerLine()
+        {
+        }
+
         public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
             if (string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength)
@@ -15,7 +20,35 @@
                 return ImmutableArray.Create(line);
             }
 
-            var parts = new List<string>();
+            List<string> lines = IdentifyChainPoints(line);
+            bool unchained = lines.Count < 2;
+
+            if (unchained)
+            {
+                return ImmutableArray.Create(line);
+            }
+
+            string leading = line.GetLeadingWhitespace();
+            string indentation = string.Concat(leading, options.Whitespace);
+
+            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(lines.Count);
+
+            chained.Add(lines[0]);
+
+            for (int index = 1; index < lines.Count; index++)
+            {
+                string current = lines[index].TrimStart();
+
+                current = string.Concat(indentation, current);
+                chained.Add(current);
+            }
+
+            return chained.ToImmutable();
+        }
+
+        private static List<string> IdentifyChainPoints(string line)
+        {
+            var lines = new List<string>();
             int start = 0;
             int parenthesisDepth = 0;
             int bracketDepth = 0;
@@ -72,41 +105,16 @@
                     continue;
                 }
 
-                parts.Add(line.Substring(start, index - start).TrimEnd());
+                string current = line.Substring(start, index - start).TrimEnd();
+
+                lines.Add(current);
                 start = index;
             }
 
-            parts.Add(line.Substring(start).TrimEnd());
+            string final = line.Substring(start).TrimEnd();
+            lines.Add(final);
 
-            if (parts.Count < 2)
-            {
-                return ImmutableArray.Create(line);
-            }
-
-            int leadingSpaces = CountLeadingSpaces(parts[0]);
-            string indentation = new string(' ', leadingSpaces + 4);
-            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(parts.Count);
-
-            chained.Add(parts[0]);
-
-            for (int index = 1; index < parts.Count; index++)
-            {
-                chained.Add(indentation + parts[index].TrimStart());
-            }
-
-            return chained.ToImmutable();
-        }
-
-        private static int CountLeadingSpaces(string value)
-        {
-            int count = 0;
-
-            while (count < value.Length && value[count] == ' ')
-            {
-                count++;
-            }
-
-            return count;
+            return lines;
         }
     }
 }

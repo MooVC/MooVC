@@ -1,8 +1,10 @@
 ﻿namespace MooVC.Syntax.Elements
 {
     using System.Collections.Immutable;
+    using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
+    using MooVC.Syntax.Validation;
 
     /// <summary>
     /// Represents a syntax element snippet.
@@ -24,6 +26,18 @@
             }
 
             public bool IsDefault => this == Default;
+
+            public static implicit operator ChainingOptions(IChain[] options)
+            {
+                Guard.Against.Conversion<IChain[], ChainingOptions>(options);
+
+                if (options.Length == 0)
+                {
+                    return Default;
+                }
+
+                return options.ToImmutableArray();
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element snippet extensions.
     /// </summary>
-    internal static partial class StringExtensions
+    public static partial class StringExtensions
     {
         /// <summary>
         /// Creates XML attributes for the syntax element.
@@ -17,7 +17,7 @@ namespace MooVC.Syntax
         /// <param name="include">An optional predicate that determines if the attrbibute should be added.</param>
         /// <param name="toLower">Denotes whether or not the attribute name should be in lower case.</param>
         /// <returns>The XML attributes.</returns>
-        public static IEnumerable<XAttribute> ToXmlAttribute(this string value, string name, Predicate<string> include = default, bool toLower = false)
+        internal static IEnumerable<XAttribute> ToXmlAttribute(this string value, string name, Predicate<string> include = default, bool toLower = false)
         {
             if (string.IsNullOrEmpty(value) || !(include is null || include(value)))
             {

@@ -7,6 +7,12 @@
     public sealed class Parentheses
         : Snippet.IChain
     {
+        public static readonly Snippet.IChain Instance = new Parentheses();
+
+        private Parentheses()
+        {
+        }
+
         public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
             if (string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength)
@@ -30,41 +36,19 @@
 
             string content = line.Substring(opening + 1, closing - opening - 1);
             List<string> arguments = Split(content);
+            bool unchained = arguments.Count < 2;
 
-            if (arguments.Count < 2)
+            if (unchained)
             {
                 return ImmutableArray.Create(line);
             }
 
             string prefix = line.Substring(0, opening);
             string suffix = line.Substring(closing + 1);
-            int leadingSpaces = CountLeadingSpaces(prefix);
-            string indentation = new string(' ', leadingSpaces + 4);
-            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 1);
+            string leading = line.GetLeadingWhitespace();
+            string indentation = string.Concat(leading, options.Whitespace);
 
-            chained.Add(prefix + '(');
-
-            for (int index = 0; index < arguments.Count; index++)
-            {
-                string argument = arguments[index];
-                bool isLast = index == arguments.Count - 1;
-
-                chained.Add(indentation + argument + (isLast ? ')' + suffix : ","));
-            }
-
-            return chained.ToImmutable();
-        }
-
-        private static int CountLeadingSpaces(string value)
-        {
-            int count = 0;
-
-            while (count < value.Length && value[count] == ' ')
-            {
-                count++;
-            }
-
-            return count;
+            return FormatLines(arguments, prefix, suffix, indentation);
         }
 
         private static int FindClosingParenthesis(string line, int opening)
@@ -93,9 +77,28 @@
             return -1;
         }
 
+        private static ImmutableArray<string> FormatLines(List<string> arguments, string prefix, string suffix, string indentation)
+        {
+            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 1);
+
+            chained.Add(prefix + '(');
+
+            for (int index = 0; index < arguments.Count; index++)
+            {
+                string argument = arguments[index];
+                bool isLast = index == arguments.Count - 1;
+                string closing = isLast ? ')' + suffix : ",";
+                string current = string.Concat(indentation, argument, closing);
+
+                chained.Add(current);
+            }
+
+            return chained.ToImmutable();
+        }
+
         private static List<string> Split(string content)
         {
-            var values = new List<string>();
+            var lines = new List<string>();
             int depth = 0;
             int start = 0;
 
@@ -113,7 +116,9 @@
                 }
                 else if (character == ',' && depth == 0)
                 {
-                    values.Add(content.Substring(start, index - start).Trim());
+                    string current = content.Substring(start, index - start).Trim();
+
+                    lines.Add(current);
                     start = index + 1;
                 }
             }
@@ -122,10 +127,10 @@
 
             if (!string.IsNullOrEmpty(last))
             {
-                values.Add(last);
+                lines.Add(last);
             }
 
-            return values;
+            return lines;
         }
     }
 }
