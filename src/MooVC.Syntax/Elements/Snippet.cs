@@ -449,22 +449,30 @@
                     continue;
                 }
 
-                foreach (IChain strategy in strategies)
+                if (!IsChained(line, lines, options, strategies))
                 {
-                    ImmutableArray<string> chained = strategy.Chain(line, options);
-
-                    if (chained.Length == 1)
-                    {
-                        lines.Add(line);
-
-                        continue;
-                    }
-
-                    lines.AddRange(Chain(options, strategies, chained));
+                    lines.Add(line);
                 }
             }
 
             return lines.ToImmutableArray();
+        }
+
+        private static bool IsChained(string line, List<string> lines, Options options, ImmutableArray<IChain> strategies)
+        {
+            foreach (IChain strategy in strategies)
+            {
+                ImmutableArray<string> chained = strategy.Chain(line, options);
+
+                if (chained.Length > 1)
+                {
+                    lines.AddRange(Chain(options, strategies, chained));
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static void Combine(string[] combined, ref int index, Snippet snippet)
