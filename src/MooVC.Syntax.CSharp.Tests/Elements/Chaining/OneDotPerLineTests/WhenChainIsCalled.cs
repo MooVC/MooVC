@@ -50,8 +50,8 @@ public sealed class WhenChainIsCalled
             "    .Where(unit => unit.IsDefined)",
             "    .OrderBy(unit => unit.Name)",
             "    .SelectMany(unit => unit.Features",
-            "         .Where(feature => feature.IsDefined)",
-            "         .Select(feature => feature.Name))",
+            "        .Where(feature => feature.IsDefined)",
+            "        .Select(feature => feature.Name))",
             "    .Distinct()",
             "    .ToList();",
         ];
