@@ -40,8 +40,7 @@
             string suffix = line.Substring(closing + 1);
             int leadingSpaces = CountLeadingSpaces(prefix);
             string indentation = new string(' ', leadingSpaces + 4);
-            string closeIndentation = new string(' ', leadingSpaces);
-            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 2);
+            ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 1);
 
             chained.Add(prefix + '(');
 
@@ -50,10 +49,8 @@
                 string argument = arguments[index];
                 bool isLast = index == arguments.Count - 1;
 
-                chained.Add(indentation + argument + (isLast ? string.Empty : ","));
+                chained.Add(indentation + argument + (isLast ? ')' + suffix : ","));
             }
-
-            chained.Add(closeIndentation + ')' + suffix);
 
             return chained.ToImmutable();
         }
