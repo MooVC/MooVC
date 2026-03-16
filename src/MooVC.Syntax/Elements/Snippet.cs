@@ -451,7 +451,7 @@
 
                 foreach (IChain strategy in strategies)
                 {
-                    ImmutableArray<string> chained = strategy.Chain(line);
+                    ImmutableArray<string> chained = strategy.Chain(line, options.MaxLength);
 
                     if (chained.Length == 1)
                     {

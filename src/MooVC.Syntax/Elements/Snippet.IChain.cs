@@ -9,7 +9,7 @@
     {
         public interface IChain
         {
-            ImmutableArray<string> Chain(string line);
+            ImmutableArray<string> Chain(string line, int maxLength);
         }
     }
 }
