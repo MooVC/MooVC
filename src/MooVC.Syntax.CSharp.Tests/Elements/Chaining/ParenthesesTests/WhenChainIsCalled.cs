@@ -12,11 +12,11 @@ public sealed class WhenChainIsCalled
         Snippet.IChain subject = Parentheses.Instance;
         Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
 
-        const string value = "public Task ExecuteAsync(Order order, Customer customer, DateTime timestamp, CancellationToken cancellationToken);";
+        const string value = "public Task Execute(Order order, Customer customer, DateTime timestamp, CancellationToken cancellationToken);";
 
         string[] expected =
         [
-            "public Task ExecuteAsync(",
+            "public Task Execute(",
             "    Order order,",
             "    Customer customer,",
             "    DateTime timestamp,",
