@@ -148,10 +148,10 @@ public sealed class WhenChainIsCalled
             "var result = query",
             "    .Where(item => item.IsActive)",
             "    .OrderBy(item => item.Name)",
-            "    .Select(item => Convert(" +
-            "       item.Id,",
-            "       item.Name,",
-            "       item.TimeStamp))",
+            "    .Select(item => Convert(",
+            "        item.Id,",
+            "        item.Name,",
+            "        item.TimeStamp))",
             "    .ToList();",
         ];
 
