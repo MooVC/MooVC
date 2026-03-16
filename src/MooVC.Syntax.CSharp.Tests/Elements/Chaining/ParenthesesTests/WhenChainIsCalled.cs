@@ -30,4 +30,30 @@ public sealed class WhenChainIsCalled
         result.Length.ShouldBe(expected.Length);
         result.ShouldBe(expected);
     }
+
+    [Fact]
+    public void GivenNestedMethodCallWhenLineIsLongThenOutterParenthesesIsChainedFirst()
+    {
+        // Arrange
+        Snippet.IChain subject = Parentheses.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+
+        const string value = "await instance.Execute(order, GetCustomerById(customerId, cancellationToken), timestamp, cancellationToken);";
+
+        string[] expected =
+        [
+            "await instance.Execute(",
+            "    order,",
+            "    GetCustomerById(customerId, cancellationToken),",
+            "    timestamp,",
+            "    cancellationToken);",
+        ];
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        result.Length.ShouldBe(expected.Length);
+        result.ShouldBe(expected);
+    }
 }

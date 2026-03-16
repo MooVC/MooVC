@@ -44,32 +44,6 @@
             return FormatLines(arguments, prefix, suffix, indentation);
         }
 
-        private static int FindClosingParenthesis(string line, int opening)
-        {
-            int depth = 0;
-
-            for (int index = opening; index < line.Length; index++)
-            {
-                char character = line[index];
-
-                if (character == '(')
-                {
-                    depth++;
-                }
-                else if (character == ')')
-                {
-                    depth--;
-
-                    if (depth == 0)
-                    {
-                        return index;
-                    }
-                }
-            }
-
-            return -1;
-        }
-
         private static ImmutableArray<string> FormatLines(List<string> arguments, string prefix, string suffix, string indentation)
         {
             ImmutableArray<string>.Builder chained = ImmutableArray.CreateBuilder<string>(arguments.Count + 1);
@@ -146,17 +120,43 @@
 
         private static bool TryGetParenthesisRange(string line, out int opening, out int closing)
         {
-            opening = line.IndexOf('(');
+            opening = -1;
             closing = -1;
+            var stack = new Stack<int>();
 
-            if (opening < 0)
+            for (int index = 0; index < line.Length; index++)
             {
-                return false;
+                char character = line[index];
+
+                if (character == '(')
+                {
+                    stack.Push(index);
+
+                    continue;
+                }
+
+                if (character != ')' || stack.Count == 0)
+                {
+                    continue;
+                }
+
+                int candidateOpening = stack.Pop();
+                string content = line.Substring(candidateOpening + 1, index - candidateOpening - 1);
+                List<string> arguments = Split(content);
+
+                if (arguments.Count < 2)
+                {
+                    continue;
+                }
+
+                if (opening < 0 || candidateOpening < opening)
+                {
+                    opening = candidateOpening;
+                    closing = index;
+                }
             }
 
-            closing = FindClosingParenthesis(line, opening);
-
-            return closing >= 0;
+            return opening >= 0 && closing >= 0;
         }
 
         private static void UpdateDepthCounter(char character, ref int depth)
