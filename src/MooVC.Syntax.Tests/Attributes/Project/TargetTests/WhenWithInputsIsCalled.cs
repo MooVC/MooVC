@@ -6,7 +6,7 @@ public sealed class WhenWithInputsIsCalled
 {
     private const string UpdatedInputs = "UpdatedInputs";
 
-    [Fact]
+    [Test]
     public void GivenInputsThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
 {
     private const string Name = "Handled";
 
-    [Fact]
+    [Test]
     public void GivenNameThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange

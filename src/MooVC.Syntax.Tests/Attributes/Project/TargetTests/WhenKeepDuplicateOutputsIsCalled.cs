@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 public sealed class WhenKeepDuplicateOutputsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenKeepDuplicateOutputsThenReturnsUpdatedInstance()
     {
         // Arrange

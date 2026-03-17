@@ -14,8 +14,8 @@ public sealed class WhenToStringIsCalled
         { Scope.Unspecified, string.Empty },
     };
 
-    [Theory]
-    [MemberData(nameof(Data))]
+    [Test]
+    [MethodDataSource(nameof(Data))]
     public void GivenScopeThenLiteralValueReturned(Scope subject, string expected)
     {
         // Act

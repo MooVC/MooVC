@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultInstanceThenReturnsAutoImplementedAccessors()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldContain("init");
     }
 
-    [Fact]
+    [Test]
     public void GivenReadOnlyPropertyThenOnlyGetterIsReturned()
     {
         // Arrange

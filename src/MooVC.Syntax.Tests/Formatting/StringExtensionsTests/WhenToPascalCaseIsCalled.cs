@@ -6,7 +6,7 @@ public sealed class WhenToPascalCaseIsCalled
 {
     private static readonly Faker generator = new();
 
-    [Fact]
+    [Test]
     public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenToPascalCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
@@ -34,11 +34,11 @@ public sealed class WhenToPascalCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData(" ")]
-    [InlineData("   ")]
-    [InlineData("\t")]
-    [InlineData("\r\n")]
+    [Test]
+    [Arguments(" ")]
+    [Arguments("   ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
     public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
@@ -49,15 +49,15 @@ public sealed class WhenToPascalCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData("A", "A")]
-    [InlineData("a", "A")]
-    [InlineData("FooBar", "FooBar")]
-    [InlineData("fooBar", "FooBar")]
-    [InlineData("upperCaseValue", "UpperCaseValue")]
-    [InlineData("éclair", "Éclair")]
-    [InlineData("σigma", "Σigma")]
-    [InlineData("a1b2", "A1b2")]
+    [Test]
+    [Arguments("A", "A")]
+    [Arguments("a", "A")]
+    [Arguments("FooBar", "FooBar")]
+    [Arguments("fooBar", "FooBar")]
+    [Arguments("upperCaseValue", "UpperCaseValue")]
+    [Arguments("éclair", "Éclair")]
+    [Arguments("σigma", "Σigma")]
+    [Arguments("a1b2", "A1b2")]
     public void GivenValidValuesThenFirstCharacterIsUppercased(string value, string expected)
     {
         // Arrange & Act
@@ -67,12 +67,12 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("1Example")]
-    [InlineData("_Example")]
-    [InlineData("-Example")]
-    [InlineData("😀Example")]
-    [InlineData(".example")]
+    [Test]
+    [Arguments("1Example")]
+    [Arguments("_Example")]
+    [Arguments("-Example")]
+    [Arguments("😀Example")]
+    [Arguments(".example")]
     public void GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
     {
         // Arrange & Act
@@ -82,7 +82,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenTurkishCultureIsActiveThenInvariantUppercasingIsUsed()
     {
         // Arrange
@@ -106,7 +106,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe("Istanbul");
     }
 
-    [Fact]
+    [Test]
     public void GivenWordsWhenInvokedTwiceThenResultIsIdempotent()
     {
         // Arrange
@@ -128,7 +128,7 @@ public sealed class WhenToPascalCaseIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWithInternalWhitespaceThenOnlyFirstCharacterIsChanged()
     {
         // Arrange
@@ -141,7 +141,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe("Hello World");
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
     {
         // Arrange
@@ -154,7 +154,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenAlreadyPascalCaseThenResultIsUnchanged()
     {
         // Arrange
@@ -167,7 +167,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongValueThenOnlyFirstCharacterIsUppercased()
     {
         // Arrange
@@ -182,7 +182,7 @@ public sealed class WhenToPascalCaseIsCalled
         result.Skip(1).All(character => character == 'a').ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
     {
         // Arrange

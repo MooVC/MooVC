@@ -2,9 +2,9 @@ namespace MooVC.Syntax.Elements.QualifierTests.OptionsTests;
 
 public sealed class WhenPropertiesAreCalled
 {
-    [Theory]
-    [InlineData(0, false, true, "File")]
-    [InlineData(1, true, false, "Block")]
+    [Test]
+    [Arguments(0, false, true, "File")]
+    [Arguments(1, true, false, "Block")]
     public void GivenOptionThenFlagsAndStringMatch(int value, bool expectedBlock, bool expectedFile, string expectedText)
     {
         // Arrange

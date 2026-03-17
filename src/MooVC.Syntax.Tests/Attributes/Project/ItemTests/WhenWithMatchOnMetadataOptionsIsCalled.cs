@@ -6,7 +6,7 @@ public sealed class WhenWithMatchOnMetadataOptionsIsCalled
 {
     private const string UpdatedMatchOnMetadataOptions = "UpdatedMatchOnMetadataOptions";
 
-    [Fact]
+    [Test]
     public void GivenMatchOnMetadataOptionsThenReturnsUpdatedInstance()
     {
         // Arrange

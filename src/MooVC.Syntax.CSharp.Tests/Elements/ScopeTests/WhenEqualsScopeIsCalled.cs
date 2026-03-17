@@ -4,7 +4,7 @@ public sealed class WhenEqualsScopeIsCalled
 {
     private const string Same = "internal";
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsScopeIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualsScopeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenEqualsScopeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

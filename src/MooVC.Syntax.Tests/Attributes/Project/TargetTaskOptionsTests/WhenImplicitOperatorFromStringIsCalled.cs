@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenCreatesOption()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(Value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWhenRoundTrippedThenReturnsOriginal()
     {
         // Arrange

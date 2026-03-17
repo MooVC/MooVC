@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithImportsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenImportsThenReturnsUpdatedInstance()
     {
         // Arrange

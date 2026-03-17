@@ -6,7 +6,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Value = "42";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedValueThenReturnsValueOnly()
     {
         // Arrange

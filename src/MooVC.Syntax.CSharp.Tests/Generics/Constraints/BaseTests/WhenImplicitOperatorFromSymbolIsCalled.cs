@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromSymbolIsCalled
 {
     private const string Name = "Alpha";
 
-    [Fact]
+    [Test]
     public void GivenSymbolThenReturnsBase()
     {
         // Arrange

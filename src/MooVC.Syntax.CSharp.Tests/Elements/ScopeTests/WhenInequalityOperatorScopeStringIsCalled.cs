@@ -5,7 +5,7 @@ public sealed class WhenInequalityOperatorScopeStringIsCalled
     private const string Same = "internal";
     private const string Different = "public";
 
-    [Fact]
+    [Test]
     public void GivenSubjectNullValueNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorScopeStringIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSubjectNullValueThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenInequalityOperatorScopeStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSubjectValueValueNullThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenInequalityOperatorScopeStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenInequalityOperatorScopeStringIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Handler = "Handler";
     private const string Name = "Occurred";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenEventThenSnippetMatchesStringRepresentation()
     {
         // Arrange

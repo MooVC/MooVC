@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidNameThenValidationErrorReturned()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Folder.Path));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedFileThenValidationErrorReturned()
     {
         // Arrange

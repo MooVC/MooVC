@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Qualifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -24,7 +24,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Qualifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenSameSegmentsTwiceThenInstancesAreEqual()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenConstructorIsCalled
         first.GetHashCode().ShouldBe(second.GetHashCode());
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
     {
         // Arrange

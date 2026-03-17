@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithMethodsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithIndexersIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange

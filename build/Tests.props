@@ -20,19 +20,19 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="TUnit" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)..\test-support\Xunit\TheoryData.cs" Link="Xunit/TheoryData.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Using Include="Bogus" />
     <Using Include="NSubstitute" />
     <Using Include="Shouldly" />
+    <Using Include="TUnit.Core" />
     <Using Include="Xunit" />
   </ItemGroup>
 </Project>

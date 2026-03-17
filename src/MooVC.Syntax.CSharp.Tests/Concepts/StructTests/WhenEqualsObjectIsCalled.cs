@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValueThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange

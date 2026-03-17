@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorEventEventIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -93,7 +93,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentHandlersThenReturnsFalse()
     {
         // Arrange
@@ -130,7 +130,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
@@ -148,7 +148,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange

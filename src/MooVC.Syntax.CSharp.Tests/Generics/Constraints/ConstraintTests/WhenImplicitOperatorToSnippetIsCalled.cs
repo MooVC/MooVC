@@ -5,7 +5,7 @@ using Shouldly;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenConstraintThenSnippetMatchesStringRepresentation()
     {
         // Arrange

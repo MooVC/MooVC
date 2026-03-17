@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenLessThanOperatorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenLessThanOperatorIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenLessThanOperatorIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenLessThanOperatorIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSmallerLeftThenReturnsTrue()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenLessThanOperatorIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLargerLeftThenReturnsFalse()
     {
         // Arrange

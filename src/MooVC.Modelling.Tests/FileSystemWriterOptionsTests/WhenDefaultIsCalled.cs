@@ -4,7 +4,7 @@ public sealed class WhenDefaultIsCalled
 {
     private const int DefaultBufferSize = 4096;
 
-    [Fact]
+    [Test]
     public void GivenDefaultThenBufferSizeIsSet()
     {
         // Arrange & Act

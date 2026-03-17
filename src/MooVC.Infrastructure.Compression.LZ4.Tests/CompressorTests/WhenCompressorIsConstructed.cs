@@ -5,7 +5,7 @@ using K4os.Compression.LZ4.Streams;
 
 public sealed class WhenCompressorIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoSettingsThenTheDefaultSettingsAreUsed()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenCompressorIsConstructed
         compressor.Encoder.ShouldBeEquivalentTo(encoder);
     }
 
-    [Fact]
+    [Test]
     public void GivenSettingsThenTheSettingsAreApplied()
     {
         // Arrange

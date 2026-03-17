@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests.QualificationTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    [Fact]
+    [Test]
     public void GivenFullQualificationThenFlagsReflectValue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenPropertiesAreAccessed
         isGlobal.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenMinimumQualificationThenFlagsReflectValue()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenPropertiesAreAccessed
         isGlobal.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenGlobalQualificationThenFlagsReflectValue()
     {
         // Arrange

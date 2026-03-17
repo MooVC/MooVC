@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly ImmutableArray<string> different = ["Gamma"];
     private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange

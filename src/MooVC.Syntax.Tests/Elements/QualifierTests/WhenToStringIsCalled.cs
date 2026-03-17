@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEmptyValueThenReturnsEmptyString()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenSegmentsThenReturnsPeriodSeparatedValue()
     {
         // Arrange

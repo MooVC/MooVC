@@ -5,7 +5,7 @@ using Serializer = MooVC.Serialization.Json.Serializer;
 
 public sealed class WhenDeserializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenAValidSequenceThenAnInstanceIsReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenDeserializeIsCalled
         result.Property.ShouldBe(instance.Property);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenACancellationThenOperationCanceledExceptionIsThrown()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenDeserializeIsCalled
         _ = await Should.ThrowAsync<OperationCanceledException>(act);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAValidStreamThenAnInstanceIsReturnedAsync()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenDeserializeIsCalled
         result.Property.ShouldBe(instance.Property);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenACancellationThenOperationCanceledExceptionIsThrownAsync()
     {
         // Arrange

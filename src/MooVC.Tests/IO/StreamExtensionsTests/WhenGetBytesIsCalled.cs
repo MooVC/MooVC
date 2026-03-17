@@ -5,7 +5,7 @@ using System.Text;
 
 public sealed class WhenGetBytesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAStreamThenTheBytesWithinTheStreamAreReturned()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenGetBytesIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenGetBytesIsCalled
         actual.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullStreamThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange

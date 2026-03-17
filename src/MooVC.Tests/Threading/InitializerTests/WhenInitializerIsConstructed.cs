@@ -2,7 +2,7 @@
 
 public sealed class WhenInitializerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenAnInitiazerThenAnInstanceIsReturned()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenInitializerIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenInitializerIsConstructed
     }
 
     // Additional test cases
-    [Fact]
+    [Test]
     public void GivenAnEmptyInitiazerThenAnInstanceIsReturned()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenInitializerIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnInitiazerWithExceptionThenAnInstanceIsReturned()
     {
         // Arrange

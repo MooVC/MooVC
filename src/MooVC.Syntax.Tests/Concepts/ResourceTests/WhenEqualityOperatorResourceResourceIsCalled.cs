@@ -5,7 +5,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenEqualityOperatorResourceResourceIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorResourceResourceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualityOperatorResourceResourceIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualityOperatorResourceResourceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

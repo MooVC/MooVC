@@ -9,7 +9,7 @@ public sealed class WhenConstructorIsCalled
     private const string Handler = "Handled";
     private const string Name = "Occurred";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenEventIsUndefined()
     {
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenConstructorIsCalled
         subject.Scope.ShouldBe(Scope.Public);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

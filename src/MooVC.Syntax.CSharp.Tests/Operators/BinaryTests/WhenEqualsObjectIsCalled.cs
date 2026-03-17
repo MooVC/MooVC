@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNonBinaryObjectThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenBinaryObjectThenReturnsResultOfBinaryEquals()
     {
         // Arrange

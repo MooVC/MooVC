@@ -2,7 +2,7 @@ namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenWhereIfIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAFailingConditionThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(false);
@@ -10,7 +10,7 @@ public sealed class WhenWhereIfIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
     {
         IEnumerable<int>? enumeration = default;
@@ -33,7 +33,7 @@ public sealed class WhenWhereIfIsCalled
         wasEvaluated.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
     {
         IEnumerable<int>? enumeration = default;
@@ -51,7 +51,7 @@ public sealed class WhenWhereIfIsCalled
         wasEvaluated.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAPassingConditionThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(true);
@@ -59,7 +59,7 @@ public sealed class WhenWhereIfIsCalled
         wasInvoked.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenFailingApplicabilityThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(false);
@@ -67,7 +67,7 @@ public sealed class WhenWhereIfIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenPassingApplicabilityThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
@@ -75,7 +75,7 @@ public sealed class WhenWhereIfIsCalled
         wasInvoked.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
     {
         // Arrange
@@ -93,7 +93,7 @@ public sealed class WhenWhereIfIsCalled
         result.ShouldBe([2, 4]);
     }
 
-    [Fact]
+    [Test]
     public void GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
     {
         // Arrange

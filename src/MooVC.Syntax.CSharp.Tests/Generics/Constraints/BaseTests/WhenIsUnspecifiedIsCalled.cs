@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUnspecifiedBaseThenReturnsTrue()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenIsUnspecifiedIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSpecifiedBaseThenReturnsFalse()
     {
         // Arrange

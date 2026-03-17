@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         greaterThanOrEqual.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenPrivateAndPublicThenOrderingReflectsAccessibility()
     {
         // Arrange

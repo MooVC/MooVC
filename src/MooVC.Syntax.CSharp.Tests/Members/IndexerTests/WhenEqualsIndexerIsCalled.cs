@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsIndexerIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentResultsThenReturnsFalse()
     {
         // Arrange
@@ -100,7 +100,7 @@ public sealed class WhenEqualsIndexerIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange

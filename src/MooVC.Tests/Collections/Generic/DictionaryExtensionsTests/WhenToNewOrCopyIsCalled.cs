@@ -2,7 +2,7 @@ namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
 
 public sealed class WhenToNewOrCopyIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenToNewOrCopyIsCalled
         snapshot.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenADictionaryThenACloneIsReturned()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenToNewOrCopyIsCalled
         snapshot.ShouldBe(original);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEmptyDictionaryThenAnEmptyCloneIsReturned()
     {
         // Arrange

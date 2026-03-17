@@ -4,7 +4,7 @@ using global::Newtonsoft.Json;
 
 public sealed class WhenInstancesAreSerialized
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfAClassThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfAClassWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -52,7 +52,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfAClassWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -85,7 +85,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfAClassThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -115,7 +115,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(originals);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfAClassWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -149,7 +149,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(originals);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfAClassWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -192,7 +192,7 @@ public sealed class WhenInstancesAreSerialized
     }
 
 #if NET5_0_OR_GREATER
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -217,7 +217,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfARecordThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -238,7 +238,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -273,7 +273,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(original);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -305,7 +305,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(originals);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfARecordThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange
@@ -333,7 +333,7 @@ public sealed class WhenInstancesAreSerialized
         deserialized.ShouldBeEquivalentTo(originals);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstancesOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
     {
         // Arrange

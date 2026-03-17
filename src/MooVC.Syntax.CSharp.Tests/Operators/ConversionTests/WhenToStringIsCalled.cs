@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenEmptyReturned()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenConversionToDeclarationThenSignatureIsRendered()
     {
         // Arrange
@@ -53,7 +53,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenConversionFromDeclarationThenSignatureIsRendered()
     {
         // Arrange

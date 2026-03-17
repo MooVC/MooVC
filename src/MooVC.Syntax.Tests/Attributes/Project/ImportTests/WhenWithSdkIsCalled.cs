@@ -6,7 +6,7 @@ public sealed class WhenWithSdkIsCalled
 {
     private const string UpdatedSdk = "UpdatedSdk";
 
-    [Fact]
+    [Test]
     public void GivenSdkThenReturnsUpdatedInstance()
     {
         // Arrange

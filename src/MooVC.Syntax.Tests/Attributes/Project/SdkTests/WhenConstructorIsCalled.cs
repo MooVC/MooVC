@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenSdkIsUnspecified()
     {
         // Act
@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUnspecified.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Act

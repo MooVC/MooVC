@@ -14,7 +14,7 @@ public sealed class WhenStartAsyncIsCalled
         _host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), [_service]);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStoppedHostThenTheServiceStarts()
     {
         // Act
@@ -24,7 +24,7 @@ public sealed class WhenStartAsyncIsCalled
         await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStartedHostThenTheServiceIsNotStartedASecondTime()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenStartAsyncIsCalled
         await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenARestartThenTheServiceIsStartedTheSecondTime()
     {
         // Arrange
@@ -52,14 +52,14 @@ public sealed class WhenStartAsyncIsCalled
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public void GivenAStoppedHostStartAsyncIsNotCalled()
     {
         // Assert
         _ = _service.DidNotReceive().StartAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStopped()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenStartAsyncIsCalled
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenServiceStartAsyncThrowsExceptionAndStopAsyncAlsoThrowsThenHostIsStillStopped()
     {
         // Arrange

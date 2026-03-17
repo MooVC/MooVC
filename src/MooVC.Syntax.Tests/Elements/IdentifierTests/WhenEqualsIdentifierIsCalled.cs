@@ -5,7 +5,7 @@ public sealed class WhenEqualsIdentifierIsCalled
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualsIdentifierIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualsIdentifierIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualsIdentifierIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

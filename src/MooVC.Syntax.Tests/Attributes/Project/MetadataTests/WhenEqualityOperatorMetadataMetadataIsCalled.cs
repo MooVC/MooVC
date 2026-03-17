@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

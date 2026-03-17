@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenWithBinariesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedBinaries()
     {
         // Arrange

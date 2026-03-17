@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMethodThenSnippetIsReturned()
     {
         // Arrange

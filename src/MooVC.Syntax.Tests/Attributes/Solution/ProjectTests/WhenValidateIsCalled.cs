@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedDisplayNameThenValidationErrorReturned()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Project.DisplayName));
     }
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedPathThenValidationErrorReturned()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Project.Path));
     }
 
-    [Fact]
+    [Test]
     public void GivenMultiLineTypeThenValidationErrorReturned()
     {
         // Arrange

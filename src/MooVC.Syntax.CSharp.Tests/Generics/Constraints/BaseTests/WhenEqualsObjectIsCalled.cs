@@ -7,7 +7,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonBaseThenReturnsFalse()
     {
         // Arrange

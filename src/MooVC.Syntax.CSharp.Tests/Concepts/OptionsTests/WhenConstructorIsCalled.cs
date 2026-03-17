@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenValuesAreInitialized()
     {
         // Arrange

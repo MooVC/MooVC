@@ -6,7 +6,7 @@ public sealed class WhenWithRemoveIsCalled
 {
     private const string UpdatedRemove = "UpdatedRemove";
 
-    [Fact]
+    [Test]
     public void GivenRemoveThenReturnsUpdatedInstance()
     {
         // Arrange

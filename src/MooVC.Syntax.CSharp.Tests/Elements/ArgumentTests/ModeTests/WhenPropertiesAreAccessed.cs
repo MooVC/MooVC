@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    [Fact]
+    [Test]
     public void GivenInModeThenFlagsReflectValue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenPropertiesAreAccessed
         isRef.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoneModeThenFlagsReflectValue()
     {
         // Arrange

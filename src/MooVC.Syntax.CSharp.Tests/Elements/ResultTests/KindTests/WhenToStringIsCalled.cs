@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ResultTests.KindTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNoneThenReturnsEmpty()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenRefReadOnlyThenReturnsCombinedKeyword()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe("ref readonly");
     }
 
-    [Fact]
+    [Test]
     public void GivenUnsafeThenReturnsUnsafeKeyword()
     {
         // Arrange

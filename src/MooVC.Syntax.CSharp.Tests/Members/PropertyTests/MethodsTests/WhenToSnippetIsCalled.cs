@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenScopedSetterThenScopeIsIncluded()
     {
         // Arrange
@@ -27,7 +27,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldContain("get => value;");
     }
 
-    [Fact]
+    [Test]
     public void GivenReadOnlyLambdaThenGetterBodyIsReturned()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldBe("value;");
     }
 
-    [Fact]
+    [Test]
     public void GivenAutoImplementedMembersThenStubIsReturned()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameInstanceThenReturnsTrue()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentInstanceThenReturnsFalse()
     {
         // Arrange

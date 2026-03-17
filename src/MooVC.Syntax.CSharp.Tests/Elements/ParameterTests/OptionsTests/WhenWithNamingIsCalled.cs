@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests.OptionsTests;
 
 public sealed class WhenWithNamingIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenInequalityOperatorResultResultIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentResultsThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorResultResultIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentResultsThenReturnsTrue()
     {
         // Arrange

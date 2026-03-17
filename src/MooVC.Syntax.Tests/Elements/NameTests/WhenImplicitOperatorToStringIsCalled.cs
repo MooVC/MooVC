@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Alpha = "Alpha";
     private const string Unicode = "Álpha";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenSegmentWithNullValueThenResultIsNull()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(Space);
     }
 
-    [Fact]
+    [Test]
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(Alpha);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
@@ -85,7 +85,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(Unicode);
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongThenMatchesValue()
     {
         // Arrange

@@ -5,10 +5,10 @@ using Shouldly;
 
 public sealed class WhenForAllIsCalled
 {
-    [Theory]
-    [InlineData(1, 3)]
-    [InlineData(2, 6)]
-    [InlineData(3, 9)]
+    [Test]
+    [Arguments(1, 3)]
+    [Arguments(2, 6)]
+    [Arguments(3, 9)]
     public void GivenAnEnumerationThatRaisesExceptionsThenAnAggregateExceptionIsThrownContainingAllExceptions(int mod, int range)
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenForAllIsCalled
         exception.InnerExceptions.Count.ShouldBe(range / mod);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
     {
         // Arrange
@@ -50,7 +50,7 @@ public sealed class WhenForAllIsCalled
         invocations.Count.ShouldBe(enumeration.Count);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenForAllIsCalled
         exception.ParamName.ShouldBe(nameof(action));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
@@ -84,7 +84,7 @@ public sealed class WhenForAllIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -98,10 +98,10 @@ public sealed class WhenForAllIsCalled
         Should.NotThrow(act);
     }
 
-    [Theory]
-    [InlineData(1, 3)]
-    [InlineData(2, 6)]
-    [InlineData(3, 9)]
+    [Test]
+    [Arguments(1, 3)]
+    [Arguments(2, 6)]
+    [Arguments(3, 9)]
     public async Task GivenAnEnumerationThatRaisesExceptionsWhenAsyncThenAnAggregateExceptionIsThrownContainingAllExceptionsAsync(int mod, int range)
     {
         // Arrange
@@ -125,7 +125,7 @@ public sealed class WhenForAllIsCalled
         exception.InnerExceptions.Count.ShouldBe(range / mod);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnEnumerationWhenAnAsyncActionIsProvidedThenTheActionIsInvokedForEachEnumerationMemberTask()
     {
         // Arrange
@@ -147,7 +147,7 @@ public sealed class WhenForAllIsCalled
         invocations.Count.ShouldBe(enumeration.Count);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnEnumerationWhenNoAsyncActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -162,7 +162,7 @@ public sealed class WhenForAllIsCalled
         exception.ParamName.ShouldBe(nameof(operation));
     }
 
-    [Fact]
+    [Test]
     public async Task GivenANullEnumerationWhenAnAsyncActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
@@ -183,7 +183,7 @@ public sealed class WhenForAllIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenANullEnumerationWhenNoAsyncActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange

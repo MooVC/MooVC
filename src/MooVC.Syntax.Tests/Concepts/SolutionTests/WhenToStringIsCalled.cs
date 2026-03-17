@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Concepts.SolutionTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsDocument()
     {
         // Arrange

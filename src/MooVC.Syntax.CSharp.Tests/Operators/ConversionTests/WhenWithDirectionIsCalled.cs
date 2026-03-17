@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenWithDirectionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDirectionThenReturnsNewInstanceWithUpdatedDirection()
     {
         // Arrange

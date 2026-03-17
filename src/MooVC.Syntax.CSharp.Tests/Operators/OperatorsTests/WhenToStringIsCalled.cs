@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenEmptyReturned()
     {
         // Arrange

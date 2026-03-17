@@ -6,7 +6,7 @@ public sealed class WhenToCamelCaseIsCalled
 {
     private static readonly Faker generator = new();
 
-    [Fact]
+    [Test]
     public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenToCamelCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
@@ -34,11 +34,11 @@ public sealed class WhenToCamelCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData(" ")]
-    [InlineData("   ")]
-    [InlineData("\t")]
-    [InlineData("\r\n")]
+    [Test]
+    [Arguments(" ")]
+    [Arguments("   ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
     public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
@@ -49,15 +49,15 @@ public sealed class WhenToCamelCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData("A", "a")]
-    [InlineData("a", "a")]
-    [InlineData("FooBar", "fooBar")]
-    [InlineData("fooBar", "fooBar")]
-    [InlineData("UpperCaseValue", "upperCaseValue")]
-    [InlineData("Éclair", "éclair")]
-    [InlineData("Σigma", "σigma")]
-    [InlineData("A1b2", "a1b2")]
+    [Test]
+    [Arguments("A", "a")]
+    [Arguments("a", "a")]
+    [Arguments("FooBar", "fooBar")]
+    [Arguments("fooBar", "fooBar")]
+    [Arguments("UpperCaseValue", "upperCaseValue")]
+    [Arguments("Éclair", "éclair")]
+    [Arguments("Σigma", "σigma")]
+    [Arguments("A1b2", "a1b2")]
     public void GivenValidValuesThenFirstCharacterIsLowercased(string value, string expected)
     {
         // Arrange & Act
@@ -67,12 +67,12 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("1Example")]
-    [InlineData("_Example")]
-    [InlineData("-Example")]
-    [InlineData("😀Example")]
-    [InlineData(".Example")]
+    [Test]
+    [Arguments("1Example")]
+    [Arguments("_Example")]
+    [Arguments("-Example")]
+    [Arguments("😀Example")]
+    [Arguments(".Example")]
     public void GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
     {
         // Arrange & Act
@@ -82,7 +82,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenTurkishCultureIsActiveThenInvariantLowercasingIsUsed()
     {
         // Arrange
@@ -106,7 +106,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe("istanbul");
     }
 
-    [Fact]
+    [Test]
     public void GivenWordsWhenInvokedTwiceThenResultIsIdempotent()
     {
         // Arrange
@@ -148,7 +148,7 @@ public sealed class WhenToCamelCaseIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWithInternalWhitespaceThenOnlyFirstCharacterIsChanged()
     {
         // Arrange
@@ -161,7 +161,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe("hello World");
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
     {
         // Arrange
@@ -174,7 +174,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenAlreadyCamelCaseThenResultIsUnchanged()
     {
         // Arrange
@@ -187,7 +187,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongValueThenOnlyFirstCharacterIsLowercased()
     {
         // Arrange
@@ -202,7 +202,7 @@ public sealed class WhenToCamelCaseIsCalled
         result.Skip(1).All(character => character == 'A').ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
     {
         // Arrange

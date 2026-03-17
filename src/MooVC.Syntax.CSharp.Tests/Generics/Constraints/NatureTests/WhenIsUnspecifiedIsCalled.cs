@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUnspecifiedNatureThenReturnsTrue()
     {
         // Arrange
@@ -15,11 +15,11 @@ public sealed class WhenIsUnspecifiedIsCalled
         result.ShouldBeTrue();
     }
 
-    [Theory]
-    [InlineData(nameof(Nature.Class))]
-    [InlineData(nameof(Nature.Struct))]
-    [InlineData(nameof(Nature.Unmanaged))]
-    [InlineData(nameof(Nature.NotNull))]
+    [Test]
+    [Arguments(nameof(Nature.Class))]
+    [Arguments(nameof(Nature.Struct))]
+    [Arguments(nameof(Nature.Unmanaged))]
+    [Arguments(nameof(Nature.NotNull))]
     public void GivenSpecificNatureThenReturnsFalse(string field)
     {
         // Arrange

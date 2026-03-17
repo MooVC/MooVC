@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     private const string Handler = "Handler";
     private const string Name = "Occurred";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedEventThenEmptyReturned()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNoBehavioursThenDeclarationReturned()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe($"public event {Handler} {Name};");
     }
 
-    [Fact]
+    [Test]
     public void GivenBehavioursThenBodyIsRendered()
     {
         // Arrange

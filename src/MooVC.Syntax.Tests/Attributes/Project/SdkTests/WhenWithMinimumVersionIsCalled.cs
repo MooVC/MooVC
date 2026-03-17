@@ -6,7 +6,7 @@ public sealed class WhenWithMinimumVersionIsCalled
 {
     private const string UpdatedMinimumVersion = "UpdatedMinimumVersion";
 
-    [Fact]
+    [Test]
     public void GivenMinimumVersionThenReturnsUpdatedInstance()
     {
         // Arrange

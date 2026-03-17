@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsModeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenFalseIsReturned()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsModeIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualsModeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenEqualsModeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange

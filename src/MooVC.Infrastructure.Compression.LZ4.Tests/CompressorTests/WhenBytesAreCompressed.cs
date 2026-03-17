@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 public sealed class WhenBytesAreCompressed
 {
-    [Fact]
+    [Test]
     public async Task GivenBytesThenTheResultMatches()
     {
         // Arrange

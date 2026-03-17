@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsSolutionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsSolutionIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualsSolutionIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

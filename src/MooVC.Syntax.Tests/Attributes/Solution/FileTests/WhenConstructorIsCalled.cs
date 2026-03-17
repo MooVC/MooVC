@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -12,7 +12,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new File(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenFileIsUndefined()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         subject.ToString().ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenFileIsNotUndefined()
     {
         // Arrange

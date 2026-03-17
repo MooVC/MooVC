@@ -11,7 +11,7 @@ public sealed class WhenAddZipWriterIsCalled
     private const CompressionLevel CustomCompressionLevel = CompressionLevel.NoCompression;
     private const string ZipKey = "Zip";
 
-    [Fact]
+    [Test]
     public void GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -24,7 +24,7 @@ public sealed class WhenAddZipWriterIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenServicesThenWriterIsRegistered()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenAddZipWriterIsCalled
         options.Value.Compression.ShouldBe(ZipWriter.Options.Default.Compression);
     }
 
-    [Fact]
+    [Test]
     public void GivenConfigurationThenOptionsAreBound()
     {
         // Arrange

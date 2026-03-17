@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorPropertyGroupPropertyGroupIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

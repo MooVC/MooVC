@@ -5,7 +5,7 @@ public sealed class WhenEqualsStringIsCalled
     private const string Value = "explicit";
     private const string Other = "implicit";
 
-    [Fact]
+    [Test]
     public void GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsStringIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenEqualsStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentValueThenReturnsFalse()
     {
         // Arrange

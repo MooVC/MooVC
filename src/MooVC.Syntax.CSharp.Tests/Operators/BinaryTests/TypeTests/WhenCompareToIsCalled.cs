@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenCompareToIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullOtherThenReturnsPositiveOne()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenCompareToIsCalled
         result.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueThenReturnsZero()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenCompareToIsCalled
         resultRightLeft.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsExpectedOrder()
     {
         // Arrange

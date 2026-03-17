@@ -33,8 +33,8 @@ public sealed class WhenToArrayOrEmptyIsCalled
         { [], [] },
     };
 
-    [Theory]
-    [MemberData(nameof(EnumerableOrderTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerableOrderTestData))]
     public void GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
@@ -44,8 +44,8 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerablePredicateOrderTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerablePredicateOrderTestData))]
     public void GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
         IEnumerable<int> original,
         IEnumerable<int> expected)
@@ -57,7 +57,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
@@ -72,8 +72,8 @@ public sealed class WhenToArrayOrEmptyIsCalled
         exception.ParamName.ShouldBe(nameof(order));
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerableTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerableTestData))]
     public void GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
     {
         // Arrange
@@ -86,8 +86,8 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerablePredicateTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerablePredicateTestData))]
     public void GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
@@ -97,7 +97,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -110,7 +110,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -123,7 +123,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerableWhenAPredicateReturnsFalseThenEmptyArrayIsReturned()
     {
         // Arrange

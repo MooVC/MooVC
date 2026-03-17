@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
 
 public sealed class WhenEqualsOptionsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsOptionsIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

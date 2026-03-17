@@ -6,7 +6,7 @@ using SystemPath = System.IO.Path;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceThenValidationErrorReturned()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidPathCharacterThenValidationErrorReturned()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidFileNameCharacterThenValidationErrorReturned()
     {
         // Arrange
@@ -81,7 +81,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidPathThenNoValidationErrorReturned()
     {
         // Arrange

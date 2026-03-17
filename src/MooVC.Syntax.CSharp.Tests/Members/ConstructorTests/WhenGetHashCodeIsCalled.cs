@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualConstructorsThenHashCodesAreEqual()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentConstructorsThenHashCodesAreDifferent()
     {
         // Arrange

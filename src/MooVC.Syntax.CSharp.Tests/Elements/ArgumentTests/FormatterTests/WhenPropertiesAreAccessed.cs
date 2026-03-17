@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    [Fact]
+    [Test]
     public void GivenCallFormatterThenFlagsReflectValue()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenPropertiesAreAccessed
         isDeclaration.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDeclarationFormatterThenFlagsReflectValue()
     {
         // Arrange

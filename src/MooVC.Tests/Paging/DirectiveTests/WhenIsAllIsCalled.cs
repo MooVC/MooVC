@@ -3,7 +3,7 @@ namespace MooVC.Paging.DirectiveTests;
 
 public sealed class WhenIsAllIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTheAllDirectiveThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenIsAllIsCalled
         isAll.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADefaultDirectiveThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenIsAllIsCalled
         isAll.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -42,7 +42,7 @@ public sealed class WhenIsAllIsCalled
         isAll.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
     {
         // Arrange

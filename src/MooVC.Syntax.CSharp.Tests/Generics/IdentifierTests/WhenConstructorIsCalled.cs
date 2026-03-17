@@ -2,14 +2,14 @@ namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
         _ = Should.NotThrow(() => _ = new Identifier(default));
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenInstanceIsCreated()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Identifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceThenInstanceIsCreated()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Identifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenAlphaNumericThenInstanceIsCreated()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Identifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongThenInstanceIsCreated()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Identifier(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqual()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenConstructorIsCalled
         first.GetHashCode().ShouldBe(second.GetHashCode());
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesTwiceThenInstancesAreNotEqual()
     {
         // Arrange

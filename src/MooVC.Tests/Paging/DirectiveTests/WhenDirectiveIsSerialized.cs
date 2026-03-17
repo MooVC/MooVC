@@ -6,7 +6,7 @@ using Serializer = MooVC.Serialization.Json.Serializer;
 
 public sealed class WhenDirectiveIsSerialized
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenTheInstanceIsSerialized()
     {
         // Arrange

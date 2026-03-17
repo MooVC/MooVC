@@ -4,7 +4,7 @@ using SystemPath = System.IO.Path;
 
 public sealed class WhenFileNameWithoutExtensionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPathThenReturnsFileNameWithoutExtension()
     {
         // Arrange

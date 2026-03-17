@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNewConstraintThenReturnsValue()
     {
         // Arrange

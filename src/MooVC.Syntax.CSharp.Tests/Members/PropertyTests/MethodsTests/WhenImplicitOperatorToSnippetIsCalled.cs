@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullMethodsThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenMethodsThenSnippetMatchesStringRepresentation()
     {
         // Arrange

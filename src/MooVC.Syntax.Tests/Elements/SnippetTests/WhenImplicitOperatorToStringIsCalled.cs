@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullSnippetThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenSnippetThenReturnsStringRepresentation()
     {
         // Arrange

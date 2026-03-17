@@ -6,7 +6,7 @@ public sealed class WhenKnownAsIsCalled
 {
     private const string UpdatedLabel = "UpdatedLabel";
 
-    [Fact]
+    [Test]
     public void GivenLabelThenReturnsUpdatedInstance()
     {
         // Arrange

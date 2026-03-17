@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 public sealed class WhenInequalityOperatorProjectProjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

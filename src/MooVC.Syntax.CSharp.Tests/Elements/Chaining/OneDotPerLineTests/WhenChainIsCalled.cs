@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenChainIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenPropertyAccessWhenLineIsLongThenDoesNotSplitByDots()
     {
         // Arrange
@@ -55,7 +55,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange

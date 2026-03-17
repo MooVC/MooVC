@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange

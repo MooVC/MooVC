@@ -4,7 +4,7 @@ using System.Linq;
 
 public sealed class WhenWithProjectsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange

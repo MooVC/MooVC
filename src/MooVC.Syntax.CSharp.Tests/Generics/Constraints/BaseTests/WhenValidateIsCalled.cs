@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
 {
     private const string BaseName = "Result";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedBaseThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -43,7 +43,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidBaseThenNoValidationErrorsReturned()
     {
         // Arrange

@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Elements.Chaining;
 
 public sealed class WhenChainIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSingleQueryWhenLineIsLongThenSplitsByDots()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenNestedQueriesWhenLineIsLongThenBothQueriesSplitsByDots()
     {
         // Arrange
@@ -73,7 +73,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenParameterizedWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
@@ -102,7 +102,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenNestedParameterizedCallWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
@@ -133,7 +133,7 @@ public sealed class WhenChainIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenParameterizedQueryWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange

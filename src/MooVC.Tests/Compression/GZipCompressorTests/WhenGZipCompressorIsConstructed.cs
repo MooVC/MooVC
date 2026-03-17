@@ -5,7 +5,7 @@ using System.IO.Compression;
 
 public sealed class WhenGZipCompressorIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoLevelThenAnInstanceIsCreated()
     {
         // Act
@@ -15,10 +15,10 @@ public sealed class WhenGZipCompressorIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Theory]
-    [InlineData(CompressionLevel.Optimal)]
-    [InlineData(CompressionLevel.Fastest)]
-    [InlineData(CompressionLevel.NoCompression)]
+    [Test]
+    [Arguments(CompressionLevel.Optimal)]
+    [Arguments(CompressionLevel.Fastest)]
+    [Arguments(CompressionLevel.NoCompression)]
     public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
     {
         // Act
@@ -28,9 +28,9 @@ public sealed class WhenGZipCompressorIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Theory]
-    [InlineData((CompressionLevel)9)]
-    [InlineData((CompressionLevel)27)]
+    [Test]
+    [Arguments((CompressionLevel)9)]
+    [Arguments((CompressionLevel)27)]
     public void GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
     {
         // Act

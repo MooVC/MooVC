@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     private const string Mixed = "myValue";
     private const string MultiWord = "MyValue";
 
-    [Fact]
+    [Test]
     public void GivenOptionsWithPascalCasingThenReturnsPascalCasedValue()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("MyValue");
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsWithCamelCasingThenReturnsCamelCasedValue()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("myValue");
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsWithSnakeCasingThenReturnsSnakeCasedValue()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("my_value");
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsWithKebabCasingThenReturnsKebabCasedValue()
     {
         // Arrange
@@ -73,7 +73,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("my-value");
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsWithUnderscoreThenResultIsPrefixed()
     {
         // Arrange
@@ -90,10 +90,10 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("_myValue");
     }
 
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
+    [Test]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(3)]
     public void GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(int casing)
     {
         // Arrange
@@ -113,7 +113,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe($"@{expected}");
     }
 
-    [Fact]
+    [Test]
     public void GivenUnsupportedCasingThenThrows()
     {
         // Arrange
@@ -129,7 +129,7 @@ public sealed class WhenToSnippetIsCalled
         _ = Should.Throw<NotSupportedException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange

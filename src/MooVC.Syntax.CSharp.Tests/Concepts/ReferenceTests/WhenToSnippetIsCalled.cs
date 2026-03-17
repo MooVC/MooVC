@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
     private const string ParameterName = "value";
     private const string TypeName = "Widget";
 
-    [Fact]
+    [Test]
     public void GivenParametersAndConstraintsThenReturnsSignatureWithClauses()
     {
         // Arrange

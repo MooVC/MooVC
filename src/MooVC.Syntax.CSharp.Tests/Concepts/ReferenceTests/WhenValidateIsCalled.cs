@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
 {
     private const string TypeName = "Widget";
 
-    [Fact]
+    [Test]
     public void GivenInvalidExtensibilityThenReturnsValidationResults()
     {
         // Arrange

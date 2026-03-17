@@ -7,7 +7,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     private static readonly Snippet same = Snippet.From("Alpha");
     private static readonly Snippet different = Snippet.From("Beta");
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -79,7 +79,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenEqualityOperatorPathPathIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

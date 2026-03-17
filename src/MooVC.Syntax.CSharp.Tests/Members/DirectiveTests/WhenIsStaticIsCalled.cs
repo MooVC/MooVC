@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenIsStaticIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedStaticState()
     {
         // Arrange

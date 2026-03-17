@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Value = "private";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenScopeWithNullValueThenResultIsNull()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenScopeWithValueThenMatchesValue()
     {
         // Arrange

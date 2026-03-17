@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenNamedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange

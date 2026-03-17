@@ -11,7 +11,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
     private const int CustomBufferSize = 8192;
     private const string FileSystemKey = "FileSystem";
 
-    [Fact]
+    [Test]
     public void GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -24,7 +24,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenServicesThenWriterIsRegistered()
     {
         // Arrange
@@ -43,7 +43,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
         options.Value.BufferSize.ShouldBe(FileSystemWriter.Options.Default.BufferSize);
     }
 
-    [Fact]
+    [Test]
     public void GivenConfigurationThenOptionsAreBound()
     {
         // Arrange

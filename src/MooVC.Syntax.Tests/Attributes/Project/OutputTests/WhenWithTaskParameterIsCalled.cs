@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithTaskParameterIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTaskParameterThenReturnsUpdatedInstance()
     {
         // Arrange

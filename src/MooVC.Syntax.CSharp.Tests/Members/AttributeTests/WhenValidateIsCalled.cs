@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
 {
     private const string ArgumentName = "Message";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedAttributeThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedAttributeThenValidationErrorReturned()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidAttributeThenNoValidationErrorsReturned()
     {
         // Arrange

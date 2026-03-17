@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
@@ -91,7 +91,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange

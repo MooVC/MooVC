@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorTargetTargetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithIdIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIdThenReturnsUpdatedInstance()
     {
         // Arrange

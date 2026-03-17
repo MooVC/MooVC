@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenToSnippetIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenDefaultBehavioursThenSignatureIsTerminated()
     {
         // Arrange

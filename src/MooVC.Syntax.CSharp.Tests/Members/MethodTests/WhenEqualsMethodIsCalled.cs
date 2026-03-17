@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsMethodIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBodyThenReturnsFalse()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNameThenReturnsFalse()
     {
         // Arrange
@@ -75,7 +75,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentParametersThenReturnsFalse()
     {
         // Arrange
@@ -89,7 +89,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentResultThenReturnsFalse()
     {
         // Arrange
@@ -108,7 +108,7 @@ public sealed class WhenEqualsMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopeThenReturnsFalse()
     {
         // Arrange

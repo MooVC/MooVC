@@ -7,7 +7,7 @@ public sealed class WhenEqualsQualifierIsCalled
     private static readonly ImmutableArray<Name> different = ["Gamma"];
     private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualsQualifierIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualsQualifierIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualsQualifierIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

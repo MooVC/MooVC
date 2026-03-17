@@ -5,7 +5,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
     private const string Same = "internal";
     private const string Different = "public";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenEqualityOperatorScopeScopeIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

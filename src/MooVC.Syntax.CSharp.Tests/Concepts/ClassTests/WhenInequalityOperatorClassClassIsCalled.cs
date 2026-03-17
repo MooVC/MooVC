@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenInequalityOperatorClassClassIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange

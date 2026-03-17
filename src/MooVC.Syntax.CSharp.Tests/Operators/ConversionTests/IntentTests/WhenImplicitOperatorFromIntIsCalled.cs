@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
 {
     private const int Value = 1;
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsInteger()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

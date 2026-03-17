@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenWithOperatorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOperatorThenReturnsNewInstanceWithUpdatedOperator()
     {
         // Arrange

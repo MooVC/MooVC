@@ -7,7 +7,7 @@ public sealed class WhenEqualsSnippetIsCalled
     private static readonly ImmutableArray<string> different = ["Gamma"];
     private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualsSnippetIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualsSnippetIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualsSnippetIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

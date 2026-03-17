@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenATypeThenTheUnderlyingValueIsReturned()
     {
         // Arrange

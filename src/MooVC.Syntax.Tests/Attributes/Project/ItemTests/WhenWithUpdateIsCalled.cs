@@ -6,7 +6,7 @@ public sealed class WhenWithUpdateIsCalled
 {
     private const string UpdatedUpdate = "UpdatedUpdate";
 
-    [Fact]
+    [Test]
     public void GivenUpdateThenReturnsUpdatedInstance()
     {
         // Arrange

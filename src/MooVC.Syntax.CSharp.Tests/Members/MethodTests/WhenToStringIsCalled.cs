@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedMethodThenEmptyReturned()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyBodyWhenSynchronousThenSignatureIsRendered()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe("public string Perform(int value);");
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyBodyWhenAsynchronousThenSignatureIsRendered()
     {
         // Arrange

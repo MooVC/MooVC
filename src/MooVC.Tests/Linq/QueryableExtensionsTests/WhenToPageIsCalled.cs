@@ -5,9 +5,9 @@ using MooVC.Paging;
 
 public sealed class WhenToPageIsCalled
 {
-    [Theory]
-    [InlineData(new[] { 1, 2, 3 })]
-    [InlineData(new int[0])]
+    [Test]
+    [Arguments(new[] { 1, 2, 3 })]
+    [Arguments(new int[0])]
     public void GivenAnAllDirectiveThenAllResultsAreReturned(int[] expected)
     {
         // Arrange
@@ -22,10 +22,10 @@ public sealed class WhenToPageIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(new[] { 1, 2, 3 }, 0, 3, 6, new[] { 1, 2, 3, 4, 5, 6 })]
-    [InlineData(new[] { 3, 4 }, 1, 2, 6, new[] { 1, 2, 3, 4, 5, 6 })]
-    [InlineData(new int[0], 2, 2, 4, new[] { 1, 2, 3, 4 })]
+    [Test]
+    [Arguments(new[] { 1, 2, 3 }, 0, 3, 6, new[] { 1, 2, 3, 4, 5, 6 })]
+    [Arguments(new[] { 3, 4 }, 1, 2, 6, new[] { 1, 2, 3, 4, 5, 6 })]
+    [Arguments(new int[0], 2, 2, 4, new[] { 1, 2, 3, 4 })]
     public void GivenADirectiveThenTheExpectedPageIsReturned(int[] expected, ushort page, ushort limit, ulong total, int[] values)
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenToPageIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullQueryThenAnEmptyPageIsReturned()
     {
         // Arrange

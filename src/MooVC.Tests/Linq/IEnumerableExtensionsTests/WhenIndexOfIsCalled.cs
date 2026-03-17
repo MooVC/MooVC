@@ -2,7 +2,7 @@ namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenIndexOfIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAListWhenAPredicateThatYeildsNoMatchingEntryThenNegativeOneIsReturned()
     {
         // Arrange
@@ -15,10 +15,10 @@ public sealed class WhenIndexOfIsCalled
         actualIndex.ShouldBe(-1);
     }
 
-    [Theory]
-    [InlineData(new[] { 1, 2, 3 }, 2, 1)]
-    [InlineData(new[] { -1, -2, -3 }, -3, 2)]
-    [InlineData(new[] { 1, 2, 3 }, 1, 0)]
+    [Test]
+    [Arguments(new[] { 1, 2, 3 }, 2, 1)]
+    [Arguments(new[] { -1, -2, -3 }, -3, 2)]
+    [Arguments(new[] { 1, 2, 3 }, 1, 0)]
     public void GivenAListWhenAPredicateThatYieldsOneMatchingEntryThenTheIndexOfTheMatchingEntryIsReturned(int[] enumeration, int target, int expectedIndex)
     {
         // Act
@@ -28,10 +28,10 @@ public sealed class WhenIndexOfIsCalled
         actualIndex.ShouldBe(expectedIndex);
     }
 
-    [Theory]
-    [InlineData(new[] { 1, 2, 2 }, 2, 1)]
-    [InlineData(new[] { -1, -2, -1 }, -1, 0)]
-    [InlineData(new[] { 1, 1, 1 }, 1, 0)]
+    [Test]
+    [Arguments(new[] { 1, 2, 2 }, 2, 1)]
+    [Arguments(new[] { -1, -2, -1 }, -1, 0)]
+    [Arguments(new[] { 1, 1, 1 }, 1, 0)]
     public void GivenAListWhenAPredicateThatYieldsTwoMatchingEntriesThenTheIndexOfTheFirstMatchingEntryIsReturned(
         int[] enumeration,
         int target,
@@ -44,7 +44,7 @@ public sealed class WhenIndexOfIsCalled
         actualIndex.ShouldBe(expectedIndex);
     }
 
-    [Fact]
+    [Test]
     public void GivenAListWhenNoPredicateIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenIndexOfIsCalled
         exception.ParamName.ShouldBe(nameof(predicate));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullListWhenAPredicateIsProvidedThenNegativeOneIsReturned()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenIndexOfIsCalled
         actualIndex.ShouldBe(-1);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullListWhenNoPredicateIsProvidedThenNegativeOneIsReturned()
     {
         // Arrange
@@ -85,7 +85,7 @@ public sealed class WhenIndexOfIsCalled
         actualIndex.ShouldBe(-1);
     }
 
-    [Fact]
+    [Test]
     public void GivenAListContainingNullsWhenAPredicateForNullIsProvidedThenTheIndexOfTheFirstNullIsReturned()
     {
         // Arrange

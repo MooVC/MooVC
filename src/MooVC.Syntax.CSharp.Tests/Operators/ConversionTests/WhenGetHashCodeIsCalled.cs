@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentConversionsThenReturnTheSameValue()
     {
         // Arrange

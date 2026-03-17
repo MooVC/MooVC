@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenEqualityOperatorOptionsStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualityOperatorOptionsStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange

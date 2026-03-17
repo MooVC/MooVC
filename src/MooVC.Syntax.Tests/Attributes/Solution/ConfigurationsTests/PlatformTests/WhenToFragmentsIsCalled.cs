@@ -6,7 +6,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenToFragmentsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUnspecifiedThenReturnsEmpty()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToFragmentsIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsFragment()
     {
         // Arrange

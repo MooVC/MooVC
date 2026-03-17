@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultValueThenValidationErrorReturned()
     {
         // Arrange
@@ -24,7 +24,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyArrayThenNoValidationErrorReturned()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenSegmentsThenNoValidationErrorReturned()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullSegmentThenValidationErrorReturned()
     {
         // Arrange

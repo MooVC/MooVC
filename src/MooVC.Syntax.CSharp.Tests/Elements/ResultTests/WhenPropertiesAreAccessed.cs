@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    [Fact]
+    [Test]
     public void GivenTaskResultThenFlagsReflectValue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenPropertiesAreAccessed
         isVoid.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedResultThenFlagsReflectValue()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenPropertiesAreAccessed
         isVoid.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenVoidResultThenFlagsReflectValue()
     {
         // Arrange

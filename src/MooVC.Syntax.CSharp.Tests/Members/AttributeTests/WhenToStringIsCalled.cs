@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string ArgumentValue = "42";
     private const string AttributeName = AttributeTestsData.DefaultName;
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedAttributeThenReturnsEmpty()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNameThenReturnsAttributeString()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe($"[{AttributeName}]");
     }
 
-    [Fact]
+    [Test]
     public void GivenTargetThenReturnsAttributeStringWithTarget()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe($"[{Attribute.Specifier.Method}:{AttributeName}]");
     }
 
-    [Fact]
+    [Test]
     public void GivenArgumentsThenReturnsAttributeStringWithArguments()
     {
         // Arrange

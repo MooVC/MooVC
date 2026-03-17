@@ -6,7 +6,7 @@ public sealed class WhenBlockIsCalled
 {
     private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenBlockIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenNoOpeningThenTheWholeSnippetIsBlocked()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenBlockIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAllmanStyleAndOpeningThenBlockIsExpanded()
     {
         // Arrange
@@ -68,7 +68,7 @@ public sealed class WhenBlockIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenKAndRStyleAndOpeningThenBlockIsInline()
     {
         // Arrange
@@ -94,7 +94,7 @@ public sealed class WhenBlockIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenLambdaInlineThenSingleLineValueIsAppended()
     {
         // Arrange
@@ -117,7 +117,7 @@ public sealed class WhenBlockIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenSingleLineBracesThenSingleLineValueIsWrapped()
     {
         // Arrange

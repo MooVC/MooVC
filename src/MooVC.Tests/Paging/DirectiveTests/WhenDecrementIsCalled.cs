@@ -3,11 +3,11 @@ namespace MooVC.Paging.DirectiveTests;
 
 public sealed class WhenDecrementIsCalled
 {
-    [Theory]
-    [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
-    [InlineData(2, 1, 1)]
-    [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    [Test]
+    [Arguments(ushort.MaxValue, ushort.MaxValue - 1, 25)]
+    [Arguments(2, 1, 1)]
+    [Arguments(5, 4, 10)]
+    [Arguments(ushort.MinValue + 1, Directive.FirstPage, 5)]
     public void GivenADirectiveWhenPostDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenDecrementIsCalled
         directive.Page.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveAtMinWhenPostDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
@@ -35,11 +35,11 @@ public sealed class WhenDecrementIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
-    [InlineData(2, 1, 1)]
-    [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    [Test]
+    [Arguments(ushort.MaxValue, ushort.MaxValue - 1, 25)]
+    [Arguments(2, 1, 1)]
+    [Arguments(5, 4, 10)]
+    [Arguments(ushort.MinValue + 1, Directive.FirstPage, 5)]
     public void GivenADirectiveWhenPreDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
@@ -53,7 +53,7 @@ public sealed class WhenDecrementIsCalled
         directive.Page.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveAtMinWhenPreDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
@@ -67,10 +67,10 @@ public sealed class WhenDecrementIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(2, 0, 2, 25)]
-    [InlineData(3, 1, 2, 1)]
-    [InlineData(9, 4, 5, 10)]
+    [Test]
+    [Arguments(2, 0, 2, 25)]
+    [Arguments(3, 1, 2, 1)]
+    [Arguments(9, 4, 5, 10)]
     public void GivenADirectiveWhenDecrementedThenDirectiveIsDecrementedByTheAmount(ushort current, ushort expected, ushort decrement, ushort limit)
     {
         // Arrange
@@ -84,11 +84,11 @@ public sealed class WhenDecrementIsCalled
         original.Limit.ShouldBe(limit);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(10)]
-    [InlineData(ushort.MaxValue)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(ushort.MaxValue)]
     public void GivenADirectiveAtMinWhenDecrementedThenDirectiveIsNotDecremented(ushort decrement)
     {
         // Arrange

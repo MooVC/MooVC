@@ -9,7 +9,7 @@ public sealed class WhenEqualsEventIsCalled
     private const string AlternativeName = "Ended";
     private const string Behaviour = "value";
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -84,7 +84,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentHandlersThenReturnsFalse()
     {
         // Arrange
@@ -98,7 +98,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenEqualsEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange

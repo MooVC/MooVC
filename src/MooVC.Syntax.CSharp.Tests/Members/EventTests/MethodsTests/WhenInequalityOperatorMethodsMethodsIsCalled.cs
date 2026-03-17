@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -54,7 +54,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -95,7 +95,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -118,7 +118,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentAddValuesThenReturnsTrue()
     {
         // Arrange
@@ -141,7 +141,7 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentRemoveValuesThenReturnsTrue()
     {
         // Arrange

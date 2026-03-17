@@ -8,7 +8,7 @@ public sealed class WhenToSnippetIsCalled
     private const string Name = "Value";
     private const string Value = "42";
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenNamedValueThenAppliesFormatterAndNaming()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenToSnippetIsCalled
         result.ShouldBe("value: 42");
     }
 
-    [Fact]
+    [Test]
     public void GivenModifierThenModifierIsPrefixed()
     {
         // Arrange

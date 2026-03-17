@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 public sealed class WhenEqualsComparisonIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualsComparisonIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenEqualsComparisonIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenEqualsComparisonIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange

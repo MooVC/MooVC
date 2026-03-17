@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         _ = Should.NotThrow(() => _ = new Snippet(values));
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenInstanceIsCreated()
     {
         // Arrange

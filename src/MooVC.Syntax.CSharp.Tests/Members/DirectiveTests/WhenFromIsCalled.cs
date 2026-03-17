@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenFromIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedQualifier()
     {
         // Arrange

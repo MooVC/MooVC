@@ -18,8 +18,8 @@ public sealed class WhenPropertiesAreAccessed
         ];
     }
 
-    [Theory]
-    [MemberData(nameof(Expectations))]
+    [Test]
+    [MethodDataSource(nameof(Expectations))]
     public void GivenTypeThenFlagsReflectValue(UnaryTypeExpectation expectation)
     {
         // Arrange

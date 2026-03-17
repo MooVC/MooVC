@@ -4,7 +4,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenWithConfigurationsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenConfigurationsThenReturnsUpdatedInstance()
     {
         // Arrange

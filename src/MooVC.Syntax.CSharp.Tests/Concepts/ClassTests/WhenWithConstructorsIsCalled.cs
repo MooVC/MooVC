@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithConstructorsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange

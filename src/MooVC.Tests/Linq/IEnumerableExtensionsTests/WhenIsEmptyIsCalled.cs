@@ -2,7 +2,7 @@
 
 public sealed class WhenIsEmptyIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnEmptySourceThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenIsEmptyIsCalled
         isEmpty.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenIsEmptyIsCalled
         isEmpty.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
     {
         // Arrange

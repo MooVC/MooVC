@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenWithParametersIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
     {
         // Arrange

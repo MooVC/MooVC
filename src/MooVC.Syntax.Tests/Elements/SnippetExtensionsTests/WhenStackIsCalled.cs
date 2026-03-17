@@ -8,7 +8,7 @@ public sealed class WhenStackIsCalled
     private const string SecondLine = "Second";
     private const string ThirdLine = "Third";
 
-    [Fact]
+    [Test]
     public void GivenSingleSnippetThenOriginalSnippetIsReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenStackIsCalled
         result.ShouldBeSameAs(snippet);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleSnippetsThenTheyAreStackedInOrder()
     {
         // Arrange

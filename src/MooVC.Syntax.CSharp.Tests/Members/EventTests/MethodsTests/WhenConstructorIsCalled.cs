@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenInstanceIsDefault()
     {
         // Act
@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         subject.ShouldBe(Event.Methods.Default);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithTasksIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTasksThenReturnsUpdatedInstance()
     {
         // Arrange

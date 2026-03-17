@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string NamedIdentifier = "TNamed";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenIdentifierThenSnippetMatchesStringRepresentation()
     {
         // Arrange

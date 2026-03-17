@@ -5,7 +5,7 @@ public sealed class WhenEqualsIntIsCalled
     private const int Value = 1;
     private const int Other = 0;
 
-    [Fact]
+    [Test]
     public void GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsIntIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenEqualsIntIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentValueThenReturnsFalse()
     {
         // Arrange

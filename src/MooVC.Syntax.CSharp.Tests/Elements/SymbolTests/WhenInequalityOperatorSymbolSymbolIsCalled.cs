@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange

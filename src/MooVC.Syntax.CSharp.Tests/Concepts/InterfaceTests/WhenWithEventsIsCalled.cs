@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithEventsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange

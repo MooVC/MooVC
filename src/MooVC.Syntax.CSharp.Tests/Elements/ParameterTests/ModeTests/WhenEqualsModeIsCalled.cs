@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenEqualsModeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualsModeIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

@@ -4,7 +4,7 @@ using global::Newtonsoft.Json;
 
 public sealed class WhenSerializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenANullInstanceThenAJsonWriterExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenSerializeIsCalled
         exception.Message.ShouldContain("BSON must start with an Object or Array.");
     }
 
-    [Fact]
+    [Test]
     public async Task GivenANullInstanceWhenSerializedToAStreamThenAJsonWriterExceptionIsThrown()
     {
         // Arrange

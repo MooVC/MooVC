@@ -4,7 +4,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -27,7 +27,7 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

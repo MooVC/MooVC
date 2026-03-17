@@ -4,7 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string MultiWord = "MyValue";
 
-    [Fact]
+    [Test]
     public void GivenDefaultOptionsThenUsesCamelCase()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe("myValue");
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenToStringIsCalled
         leftString.ShouldNotBe(rightString);
     }
 
-    [Fact]
+    [Test]
     public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange

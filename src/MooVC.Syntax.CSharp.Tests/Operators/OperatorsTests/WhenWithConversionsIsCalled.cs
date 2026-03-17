@@ -9,7 +9,7 @@ public sealed class WhenWithConversionsIsCalled
 {
     private const string Subject = "Alternate";
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedConversions()
     {
         // Arrange

@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsRecordIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenEqualsRecordIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenEqualsRecordIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenEqualsRecordIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

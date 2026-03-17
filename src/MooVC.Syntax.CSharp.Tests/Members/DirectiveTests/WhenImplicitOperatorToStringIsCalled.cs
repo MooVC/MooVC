@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Alias = "System";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenDirectiveThenStringMatchesToString()
     {
         // Arrange

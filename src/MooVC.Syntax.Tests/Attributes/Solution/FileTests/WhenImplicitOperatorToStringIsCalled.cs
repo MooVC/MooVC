@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFileThenReturnsStringValue()
     {
         // Arrange

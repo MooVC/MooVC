@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorMethodMethodIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentMethodsThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenInequalityOperatorMethodMethodIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentMethodsThenReturnsTrue()
     {
         // Arrange

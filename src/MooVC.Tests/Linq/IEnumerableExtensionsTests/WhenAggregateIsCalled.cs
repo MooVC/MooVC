@@ -2,7 +2,7 @@
 
 public sealed class WhenAggregateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenAggregateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnNullListThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenAggregateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenAggregateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAListThenResultsMatchingEachKeyAreReturned()
     {
         // Arrange
@@ -55,7 +55,7 @@ public sealed class WhenAggregateIsCalled
         results.ShouldBe(source.Values);
     }
 
-    [Fact]
+    [Test]
     public void GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
     {
         // Arrange

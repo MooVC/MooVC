@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.BoundaryOptionsTests;
 
 public sealed class WhenWithClosingIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange

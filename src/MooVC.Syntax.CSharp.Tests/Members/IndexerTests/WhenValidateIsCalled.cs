@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenDefaultBehavioursThenValidationErrorReturned()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenVoidResultThenValidationErrorReturned()
     {
         // Arrange
@@ -62,7 +62,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
@@ -88,7 +88,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidIndexerThenNoValidationErrorsReturned()
     {
         // Arrange

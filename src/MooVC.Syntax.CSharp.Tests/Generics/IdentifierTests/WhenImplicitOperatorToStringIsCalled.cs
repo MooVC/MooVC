@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string IdentifierName = "TAlpha";
 
-    [Fact]
+    [Test]
     public void GivenIdentifierThenReturnsValue()
     {
         // Arrange

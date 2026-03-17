@@ -7,7 +7,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedAssemblyThenValidationErrorReturned()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Resource.Assemblies));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedHeaderThenValidationErrorReturned()
     {
         // Arrange

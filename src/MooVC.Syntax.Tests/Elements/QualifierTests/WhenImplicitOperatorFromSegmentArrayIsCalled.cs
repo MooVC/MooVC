@@ -5,7 +5,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     private static readonly Name alpha = new("Alpha");
     private static readonly Name beta = new("Beta");
 
-    [Fact]
+    [Test]
     public void GivenNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         result.ShouldBe(values);
     }
 
-    [Fact]
+    [Test]
     public void GivenSegmentsThenRoundTripsSuccessfully()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         result.ShouldBe(values);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

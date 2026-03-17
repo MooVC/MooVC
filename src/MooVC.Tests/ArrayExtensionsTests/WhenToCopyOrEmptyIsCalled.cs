@@ -23,8 +23,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         { default },
     };
 
-    [Theory]
-    [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
         // Act
@@ -34,8 +34,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBe(source);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
         // Act
@@ -45,8 +45,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
@@ -56,8 +56,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act

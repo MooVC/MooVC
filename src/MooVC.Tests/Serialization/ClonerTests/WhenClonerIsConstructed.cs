@@ -2,7 +2,7 @@
 
 public sealed class WhenClonerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenASerializerThenAnInstanceIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenClonerIsConstructed
         _ = cloner.ShouldNotBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoSerializerThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange

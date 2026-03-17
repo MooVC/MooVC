@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenUnaryIsUndefined()
     {
         // Act
@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
         subject.Scope.ShouldBe(Scope.Public);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenWithModeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenModeThenReturnsNewInstanceWithUpdatedMode()
     {
         // Arrange

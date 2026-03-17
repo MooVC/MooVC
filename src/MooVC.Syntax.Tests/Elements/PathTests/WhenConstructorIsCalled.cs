@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenPathIsEmpty()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         subject.ToString().ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenPathIsNotEmpty()
     {
         // Arrange

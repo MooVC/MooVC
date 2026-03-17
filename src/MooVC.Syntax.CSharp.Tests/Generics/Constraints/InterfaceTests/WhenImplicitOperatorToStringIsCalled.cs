@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Name = "IDisposable";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenInterfaceThenStringMatchesToString()
     {
         // Arrange

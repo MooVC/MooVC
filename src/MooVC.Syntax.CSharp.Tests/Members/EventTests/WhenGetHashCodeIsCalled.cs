@@ -9,7 +9,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string AlternativeName = "Ended";
     private const string Behaviour = "value";
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
@@ -24,7 +24,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldNotBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBehavioursThenHashesDiffer()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldNotBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentHandlersThenHashesDiffer()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldNotBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenHashesDiffer()
     {
         // Arrange
@@ -90,7 +90,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldNotBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenHashesDiffer()
     {
         // Arrange

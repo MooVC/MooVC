@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string VariableName = "Variable";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenVariableThenSnippetMatchesStringRepresentation()
     {
         // Arrange

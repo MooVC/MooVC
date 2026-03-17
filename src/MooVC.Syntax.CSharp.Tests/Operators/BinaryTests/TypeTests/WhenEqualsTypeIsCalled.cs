@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenEqualsTypeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsTypeIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameInstanceThenReturnsTrue()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenEqualsTypeIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentInstanceThenReturnsFalse()
     {
         // Arrange

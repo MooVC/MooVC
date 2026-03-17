@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenStringThenReturnsKind()
     {
         // Arrange

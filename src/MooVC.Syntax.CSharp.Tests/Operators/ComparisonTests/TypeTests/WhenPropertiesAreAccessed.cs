@@ -16,8 +16,8 @@ public sealed class WhenPropertiesAreAccessed
         ];
     }
 
-    [Theory]
-    [MemberData(nameof(Expectations))]
+    [Test]
+    [MethodDataSource(nameof(Expectations))]
     public void GivenTypeThenFlagsReflectValue(ComparisonTypeExpectation expectation)
     {
         // Arrange

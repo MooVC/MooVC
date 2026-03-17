@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualFieldsThenHashCodesAreEqual()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentFieldsThenHashCodesAreDifferent()
     {
         // Arrange

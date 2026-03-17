@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenATypeThenTheValueIsReturned()
     {
         // Arrange

@@ -6,7 +6,7 @@ using static MooVC.Syntax.Attributes.Solution.Configurations;
 
 public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

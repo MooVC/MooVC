@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenFieldThenStringMatchesToString()
     {
         // Arrange

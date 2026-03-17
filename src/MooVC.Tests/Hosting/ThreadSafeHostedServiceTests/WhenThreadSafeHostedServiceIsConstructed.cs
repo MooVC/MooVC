@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 public sealed class WhenThreadSafeHostedServiceIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenALoggerAndServicesThenAnInstanceIsCreated()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenALoggerAndNoServicesThenAnInstanceIsCreated()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         _ = Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenALoggerAndNullServicesThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         exception.ParamName.ShouldBe(nameof(services));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullLoggerAndServicesThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange

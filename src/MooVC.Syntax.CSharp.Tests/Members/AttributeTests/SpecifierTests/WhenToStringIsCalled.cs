@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNoneThenReturnsEmpty()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsValue()
     {
         // Arrange

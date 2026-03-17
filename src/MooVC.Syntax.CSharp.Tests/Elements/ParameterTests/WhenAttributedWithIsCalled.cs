@@ -5,7 +5,7 @@ using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenAttributedWithIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAttributesThenReturnsNewInstanceWithUpdatedAttributes()
     {
         // Arrange

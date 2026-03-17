@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenWithWhitespaceIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange

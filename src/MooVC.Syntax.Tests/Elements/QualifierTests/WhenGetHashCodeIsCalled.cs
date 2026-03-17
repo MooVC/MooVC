@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly ImmutableArray<Name> first = ["Alpha", "Beta"];
     private static readonly ImmutableArray<Name> second = ["Gamma", "Delta"];
 
-    [Fact]
+    [Test]
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenGetHashCodeIsCalled
         leftHash.ShouldBe(rightHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenHashesAreNotEqual()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenGetHashCodeIsCalled
         leftHash.ShouldNotBe(rightHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange

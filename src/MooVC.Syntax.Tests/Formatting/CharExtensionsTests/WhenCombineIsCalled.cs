@@ -8,7 +8,7 @@ public sealed class WhenCombineIsCalled
     private const char Separator = ',';
     private static readonly string[] samples = ["first", "second", "third"];
 
-    [Fact]
+    [Test]
     public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenCombineIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenCombineIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenElementsThenTheyAreFormattedAndCombined()
     {
         // Arrange

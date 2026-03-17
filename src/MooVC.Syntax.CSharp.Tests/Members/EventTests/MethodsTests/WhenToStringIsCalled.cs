@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultInstanceThenReturnsEmpty()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenAutoImplementedMembersThenReturnsEmpty()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenExpressionBodiesThenReturnsExpressions()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange

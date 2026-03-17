@@ -4,7 +4,7 @@ using SystemPath = System.IO.Path;
 
 public sealed class WhenExtensionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPathThenReturnsExtension()
     {
         // Arrange

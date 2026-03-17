@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 public sealed class WhenIsPartialIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 public sealed class WhenIsStaticIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIsStaticThenReturnsUpdatedInstance()
     {
         // Arrange

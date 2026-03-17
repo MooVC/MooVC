@@ -7,7 +7,7 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedConfigurationThenNoValidationErrorReturned()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedFileThenValidationErrorReturned()
     {
         // Arrange
@@ -56,7 +56,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Solution.Files));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedFolderThenValidationErrorReturned()
     {
         // Arrange
@@ -73,7 +73,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Solution.Folders));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedItemThenValidationErrorReturned()
     {
         // Arrange
@@ -90,7 +90,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Solution.Items));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedProjectThenValidationErrorReturned()
     {
         // Arrange
@@ -107,7 +107,7 @@ public sealed class WhenValidateIsCalled
         results[0].MemberNames.ShouldContain(nameof(Solution.Projects));
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedPropertyThenValidationErrorReturned()
     {
         // Arrange

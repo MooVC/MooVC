@@ -12,7 +12,7 @@ public sealed class WhenPrependIsCalled
     private const string Word = "World";
     private const string Greeting = "Hello";
 
-    [Fact]
+    [Test]
     public void GivenNullBuilderWhenValueIsCharThenThrowsArgumentNullException()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenPrependIsCalled
         _ = Should.Throw<ArgumentNullException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullBuilderWhenValueIsStringThenThrowsArgumentNullException()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenPrependIsCalled
         _ = Should.Throw<ArgumentNullException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenDefaultCharWhenPrependThenBuilderIsUpdated()
     {
         // Arrange
@@ -52,7 +52,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("\0abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceCharWhenPrependThenBuilderStartsWithWhitespace()
     {
         // Arrange
@@ -66,7 +66,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe(" abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenLetterCharWhenPrependThenBuilderStartsWithThatLetter()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("HWorld");
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleCharsWhenPrependThenOrderIsReversed()
     {
         // Arrange
@@ -94,7 +94,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenNullStringWhenPrependThenThrowsArgumentNullException()
     {
         // Arrange
@@ -108,7 +108,7 @@ public sealed class WhenPrependIsCalled
         _ = Should.Throw<ArgumentNullException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyStringWhenPrependThenBuilderIsUnchanged()
     {
         // Arrange
@@ -122,7 +122,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceStringWhenPrependThenBuilderStartsWithWhitespace()
     {
         // Arrange
@@ -136,7 +136,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("   abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenStringWhenPrependThenValueAppearsAtStart()
     {
         // Arrange
@@ -150,7 +150,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("HelloWorld");
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleStringsWhenPrependThenOrderIsReversed()
     {
         // Arrange
@@ -164,7 +164,7 @@ public sealed class WhenPrependIsCalled
         builder.ToString().ShouldBe("abc");
     }
 
-    [Fact]
+    [Test]
     public void GivenRandomStringsWhenPrependThenConcatenationMatches()
     {
         // Arrange

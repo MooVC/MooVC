@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
 {
     private const string AttributeName = "Obsolete";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedParameterThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedParameterThenValidationErrorReturned()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenDefaultWithMultipleLinesThenValidationErrorReturned()
     {
         // Arrange
@@ -62,7 +62,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenAttributesWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
@@ -86,7 +86,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidParameterThenNoValidationErrorsReturned()
     {
         // Arrange

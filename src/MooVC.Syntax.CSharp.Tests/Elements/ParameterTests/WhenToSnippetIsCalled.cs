@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsThenReturnsParameterStringUsingNaming()
     {
         // Arrange

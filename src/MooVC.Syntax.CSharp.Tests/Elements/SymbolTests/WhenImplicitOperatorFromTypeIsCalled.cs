@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenThrows()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenTypeThenSymbolUsesNameAndQualifier()
     {
         // Arrange

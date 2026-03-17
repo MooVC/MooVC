@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenInequalityOperatorIntentIntentIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorIntentIntentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValuesThenReturnsFalse()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenInequalityOperatorIntentIntentIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

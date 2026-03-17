@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Operators;
 
 public sealed class WhenWithOperatorsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange

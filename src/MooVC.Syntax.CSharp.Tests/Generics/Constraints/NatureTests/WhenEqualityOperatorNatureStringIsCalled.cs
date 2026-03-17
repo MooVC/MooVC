@@ -5,7 +5,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     private const string Same = "class";
     private const string Different = "struct";
 
-    [Fact]
+    [Test]
     public void GivenBothSidesNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

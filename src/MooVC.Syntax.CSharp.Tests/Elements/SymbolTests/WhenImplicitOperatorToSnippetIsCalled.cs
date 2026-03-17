@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Value = "Symbol";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenSymbolThenSnippetMatchesStringRepresentation()
     {
         // Arrange

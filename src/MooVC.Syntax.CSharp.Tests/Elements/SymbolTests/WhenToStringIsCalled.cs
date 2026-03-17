@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     private const string FirstArgumentName = "Inner";
     private const string SecondArgumentName = "Other";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedSymbolThenEmptyReturned()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNameThenNameReturned()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(Name);
     }
 
-    [Fact]
+    [Test]
     public void GivenArgumentsThenNameAndArgumentListReturned()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
     }
 
-    [Fact]
+    [Test]
     public void GivenQualifierThenQualifierPrefixedToName()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenEqualityOperatorFileStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSameValueThenReturnsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualityOperatorFileStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange

@@ -4,7 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Format = "{0}::{1}";
 
-    [Fact]
+    [Test]
     public void GivenFormatterThenStringValueReturned()
     {
         // Arrange

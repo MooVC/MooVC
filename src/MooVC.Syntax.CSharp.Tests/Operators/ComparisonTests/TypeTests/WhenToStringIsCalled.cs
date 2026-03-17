@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAValueThenReturnsTheValue()
     {
         // Arrange

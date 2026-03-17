@@ -9,7 +9,7 @@ public sealed class WhenNamedIsCalled
     private const string DefaultName = "TValue";
     private const string NewName = "TOther";
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange

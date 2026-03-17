@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenIsUnnamedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUnnamedIdentifierThenReturnsTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenIsUnnamedIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenNamedIdentifierThenReturnsFalse()
     {
         // Arrange

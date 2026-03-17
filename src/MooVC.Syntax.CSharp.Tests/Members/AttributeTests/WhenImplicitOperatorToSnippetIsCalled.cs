@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Name = "Obsolete";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenAttributeThenSnippetMatchesStringRepresentation()
     {
         // Arrange

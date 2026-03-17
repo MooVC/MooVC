@@ -4,7 +4,7 @@ using System.Linq;
 
 public sealed class WhenCombineIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenCombineIsCalled
         actual.ShouldContain(ExpectedValue);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenCombineIsCalled
         actual.ShouldHaveSingleItem().ShouldBe(ExpectedValue);
     }
 
-    [Fact]
+    [Test]
     public void GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenCombineIsCalled
         actual.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenCombineIsCalled
         actual.ShouldBe(source!.Concat(expected!));
     }
 
-    [Fact]
+    [Test]
     public void GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange

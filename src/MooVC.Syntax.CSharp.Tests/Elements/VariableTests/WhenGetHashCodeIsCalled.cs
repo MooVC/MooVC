@@ -4,7 +4,7 @@ public sealed class WhenGetHashCodeIsCalled
 {
     private static readonly Faker generator = new();
 
-    [Fact]
+    [Test]
     public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenHashesAreNotEqual()
     {
         // Arrange
@@ -42,7 +42,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldNotBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange

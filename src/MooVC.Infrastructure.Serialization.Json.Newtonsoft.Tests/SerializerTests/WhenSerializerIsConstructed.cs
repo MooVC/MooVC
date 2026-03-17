@@ -5,7 +5,7 @@ using global::Newtonsoft.Json;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
@@ -16,7 +16,7 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
-    [Fact]
+    [Test]
     public void GivenABufferSizeThenASerializerIsCreatedWithTheBufferSizeApplied()
     {
         // Arrange & Act
@@ -28,10 +28,10 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(BufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(-1)]
-    [InlineData(1)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(-1)]
+    [Arguments(1)]
     public void GivenABelowMinimumBufferSizeThenASerializerIsCreatedWithTheMinimumBufferSizeApplied(int bufferSize)
     {
         // Arrange & Act
@@ -42,7 +42,7 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(Serializer.MinimumBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
-    [Fact]
+    [Test]
     public void GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
@@ -54,7 +54,7 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(Serializer.DefaultBufferSize, encoding, serializer, settings);
     }
 
-    [Fact]
+    [Test]
     public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         // Arrange & Act

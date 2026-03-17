@@ -2,7 +2,7 @@
 
 public sealed class WhenPrependIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoValueWhenTheSourceIsEmptyThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -42,7 +42,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheOriginalElementsWithin()
     {
         // Arrange
@@ -56,7 +56,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBe(original);
     }
 
-    [Fact]
+    [Test]
     public void GivenASingleValueWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementWithin()
     {
         // Arrange
@@ -70,7 +70,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenASingleValueWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementWithin()
     {
         // Arrange
@@ -84,7 +84,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenASingleValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementAtTheStart()
     {
         // Arrange
@@ -99,7 +99,7 @@ public sealed class WhenPrependIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenASingleValueWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementAtTheStart()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenPrependIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMutipleValuesWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementsWithin()
     {
         // Arrange
@@ -128,7 +128,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValuesWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementsWithin()
     {
         // Arrange
@@ -142,7 +142,7 @@ public sealed class WhenPrependIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValuesWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementsAtTheStart()
     {
         // Arrange
@@ -157,7 +157,7 @@ public sealed class WhenPrependIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValuesWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementsAtTheStart()
     {
         // Arrange
@@ -172,7 +172,7 @@ public sealed class WhenPrependIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameValuesAsTheSourceWhenTheSourceHasMultipleElementsThenAnArrayIsReturnedWithTheSourceDuplicated()
     {
         // Arrange

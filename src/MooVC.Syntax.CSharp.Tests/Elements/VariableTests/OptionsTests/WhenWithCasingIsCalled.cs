@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithCasingIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenCasingThenReturnsNewInstanceWithUpdatedCasing()
     {
         // Arrange

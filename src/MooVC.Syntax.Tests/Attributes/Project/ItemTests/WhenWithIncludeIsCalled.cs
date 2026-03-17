@@ -6,7 +6,7 @@ public sealed class WhenWithIncludeIsCalled
 {
     private const string UpdatedInclude = "UpdatedInclude";
 
-    [Fact]
+    [Test]
     public void GivenIncludeThenReturnsUpdatedInstance()
     {
         // Arrange

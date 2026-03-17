@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenOfTypeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTypeThenReturnsNewInstanceWithUpdatedType()
     {
         // Arrange

@@ -3,7 +3,7 @@ namespace MooVC.Paging.PageTests;
 
 public sealed class WhenPageIsEnumerated
 {
-    [Fact]
+    [Test]
     public void GivenValuesThenTheEnumeratedValuesAreReturnedInOrder()
     {
         // Arrange

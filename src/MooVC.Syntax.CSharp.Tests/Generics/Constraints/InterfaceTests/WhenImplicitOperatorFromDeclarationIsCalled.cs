@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenImplicitOperatorFromDeclarationIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDeclarationThenCreatesInterface()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorFromDeclarationIsCalled
         result.ToString().ShouldBe(value.ToString());
     }
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedDeclarationThenCreatesInterface()
     {
         // Arrange

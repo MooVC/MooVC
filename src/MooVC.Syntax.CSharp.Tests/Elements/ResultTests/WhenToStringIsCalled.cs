@@ -4,7 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string ValueType = "Value";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedResultThenReturnsEmpty()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenModifierAndTypeThenCombinedSignatureReturned()
     {
         // Arrange

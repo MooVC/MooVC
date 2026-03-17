@@ -8,7 +8,7 @@ public sealed class WhenToSnippetIsCalled
     private const string SecondLine = "Second";
     private const string WhitespaceLine = " ";
 
-    [Fact]
+    [Test]
     public void GivenSingleValueThenSingleLineSnippetIsReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
         result.ToString().ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyStringThenSnippetIsNotEmpty()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenToSnippetIsCalled
         result.ToString().ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesWithNullOrEmptyThenTheyAreFiltered()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenToSnippetIsCalled
         result.ToString().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
     {
         // Arrange

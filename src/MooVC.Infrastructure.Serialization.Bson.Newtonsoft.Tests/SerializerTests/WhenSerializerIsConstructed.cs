@@ -5,7 +5,7 @@ using global::Newtonsoft.Json;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
@@ -16,7 +16,7 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
-    [Fact]
+    [Test]
     public void GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
@@ -28,9 +28,9 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(encoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
-    [Theory]
-    [InlineData(DateTimeKind.Utc)]
-    [InlineData(DateTimeKind.Local)]
+    [Test]
+    [Arguments(DateTimeKind.Utc)]
+    [Arguments(DateTimeKind.Local)]
     public void GivenAKindThenASerializerIsCreatedWithTheKindApplied(DateTimeKind kind)
     {
         // Arrange & Act
@@ -41,7 +41,7 @@ public sealed class WhenSerializerIsConstructed
         AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
     }
 
-    [Fact]
+    [Test]
     public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         var settings = new JsonSerializerSettings

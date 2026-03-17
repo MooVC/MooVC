@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 public sealed class WhenWithBehaviorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBehaviorThenReturnsUpdatedInstance()
     {
         // Arrange

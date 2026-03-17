@@ -5,7 +5,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Same = "class";
     private const string Different = "struct";
 
-    [Fact]
+    [Test]
     public void GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange

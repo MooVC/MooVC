@@ -7,7 +7,7 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
 public sealed class WhenWithProjectsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange

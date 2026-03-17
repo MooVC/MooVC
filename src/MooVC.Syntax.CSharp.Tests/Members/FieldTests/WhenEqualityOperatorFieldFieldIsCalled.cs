@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenEqualityOperatorFieldFieldIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualityOperatorFieldFieldIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenEqualityOperatorFieldFieldIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenEqualityOperatorFieldFieldIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenEqualityOperatorFieldFieldIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenEqualityOperatorFieldFieldIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

@@ -5,7 +5,7 @@ using System.Linq;
 
 public sealed class WhenExtractIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenACollectionThenAnEnumerableContainingAllMembersIsReturnedAndTheCollectionIsEmptied()
     {
         // Arrange
@@ -22,11 +22,11 @@ public sealed class WhenExtractIsCalled
         source.ShouldBeEmpty();
     }
 
-    [Theory]
-    [InlineData(1)]
-    [InlineData(10)]
-    [InlineData(25)]
-    [InlineData(50)]
+    [Test]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(25)]
+    [Arguments(50)]
     public void GivenACollectionAndACountThenAnEnumerableContainingTheSpecifiedNumberOfMembersIsReturned(ulong count)
     {
         // Arrange
@@ -45,7 +45,7 @@ public sealed class WhenExtractIsCalled
         actual.Count().ShouldBe((int)count);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullCollectionAndACountThenAnEmptyEnumerableIsReturned()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenExtractIsCalled
         actual.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullCollectionThenAnEmptyEnumerableIsReturned()
     {
         // Arrange

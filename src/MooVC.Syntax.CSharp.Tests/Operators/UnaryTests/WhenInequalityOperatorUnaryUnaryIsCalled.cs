@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentUnaryOperatorsThenReturnsFalse()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentUnaryOperatorsThenReturnsTrue()
     {
         // Arrange

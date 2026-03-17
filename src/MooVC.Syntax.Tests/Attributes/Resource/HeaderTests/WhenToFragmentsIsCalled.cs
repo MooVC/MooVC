@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 public sealed class WhenToFragmentsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenToFragmentsIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsFragment()
     {
         // Arrange

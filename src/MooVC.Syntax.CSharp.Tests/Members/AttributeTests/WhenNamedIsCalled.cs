@@ -6,7 +6,7 @@ public sealed class WhenNamedIsCalled
 {
     private const string NewName = "DebuggerStepThrough";
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange

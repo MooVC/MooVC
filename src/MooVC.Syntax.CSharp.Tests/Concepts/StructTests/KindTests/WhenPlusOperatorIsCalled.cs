@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenPlusOperatorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenReadonlyRecordThenCombinedKindReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenPlusOperatorIsCalled
         result.ToString().ShouldBe("readonly record");
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidCombinationThenThrows()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenPlusOperatorIsCalled
         _ = result.ShouldThrow<InvalidOperationException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenNullLeftThenThrows()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenPlusOperatorIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenNullRightThenThrows()
     {
         // Arrange

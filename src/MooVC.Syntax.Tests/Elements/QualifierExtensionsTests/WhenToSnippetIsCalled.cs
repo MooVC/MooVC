@@ -9,9 +9,9 @@ public sealed class WhenToSnippetIsCalled
     private const string FirstQualifier = "MooVC.Sandbox";
     private const string SecondQualifier = "MooVC.Core";
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
     public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenToSnippetIsCalled
         snippet.ShouldBe(Snippet.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenToSnippetIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenTheyAreOrderedAlphabetically()
     {
         // Arrange

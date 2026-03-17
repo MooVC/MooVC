@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 public sealed class WhenWithContinueOnErrorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenContinueOnErrorThenReturnsUpdatedInstance()
     {
         // Arrange

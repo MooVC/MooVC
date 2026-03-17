@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
     private const string UnicodePascal = "Álpha";
     private const string WithHyphen = "My-Segment";
 
-    [Fact]
+    [Test]
     public void GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseWithPrefixThenNoValidationErrorReturned()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseWithUnderscoreThenNoValidationErrorReturned()
     {
         // Arrange
@@ -96,7 +96,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
     {
         // Arrange
@@ -112,7 +112,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
@@ -130,7 +130,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenLowercaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -148,7 +148,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseWithHyphenThenValidationErrorsReturned()
     {
         // Arrange
@@ -166,7 +166,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
@@ -184,12 +184,12 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Theory]
-    [InlineData(" MySegment")]
-    [InlineData("MySegment ")]
-    [InlineData("My Segment")]
-    [InlineData("My\tSegment")]
-    [InlineData("My\nSegment")]
+    [Test]
+    [Arguments(" MySegment")]
+    [Arguments("MySegment ")]
+    [Arguments("My Segment")]
+    [Arguments("My\tSegment")]
+    [Arguments("My\nSegment")]
     public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange

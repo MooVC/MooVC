@@ -4,7 +4,7 @@ using System;
 
 public sealed class WhenWithIdIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIdThenReturnsUpdatedInstance()
     {
         // Arrange

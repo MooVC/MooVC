@@ -11,9 +11,9 @@ public sealed class WhenToSnippetIsCalled
     private const string SecondFieldName = "Beta";
     private const string ThirdFieldName = "Gamma";
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
     public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenToSnippetIsCalled
         snippet.ShouldBe(Snippet.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
@@ -42,7 +42,7 @@ public sealed class WhenToSnippetIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenTheyAreOrderedByStaticReadonlyScopeAndName()
     {
         // Arrange

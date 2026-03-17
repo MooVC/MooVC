@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "value";
     private const string Content = "argument";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenArgumentThenStringMatchesToString()
     {
         // Arrange

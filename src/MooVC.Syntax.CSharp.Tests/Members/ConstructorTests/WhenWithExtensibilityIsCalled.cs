@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithExtensibilityIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenExtensibilityThenReturnsNewInstanceWithUpdatedExtensibility()
     {
         // Arrange

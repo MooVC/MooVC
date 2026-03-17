@@ -4,7 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Value = "TResult";
 
-    [Fact]
+    [Test]
     public void GivenNamedIdentifierThenReturnsValue()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(Value);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedIdentifierThenReturnsEmpty()
     {
         // Arrange

@@ -4,7 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private static readonly string[] lines = ["if (condition)", "return true;"];
 
-    [Fact]
+    [Test]
     public void GivenDefaultOptionsThenReturnsJoinedLines()
     {
         // Arrange

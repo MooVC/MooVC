@@ -7,7 +7,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
     private const int Same = 1;
     private const int Different = 0;
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

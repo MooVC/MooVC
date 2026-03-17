@@ -17,7 +17,7 @@ public sealed class WhenApplyIsCalled
         _coordinator.Dispose();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenApplyIsCalled
         exception.ParamName.ShouldBe(nameof(subject));
     }
 
-    [Fact]
+    [Test]
     public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrown()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenApplyIsCalled
         _ = await Should.ThrowAsync<ObjectDisposedException>(act);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrown()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenApplyIsCalled
         counter.ShouldBe(ExpectedCount);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrown()
     {
         // Arrange
@@ -98,7 +98,7 @@ public sealed class WhenApplyIsCalled
         _ = await Should.ThrowAsync<TimeoutException>(act);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
     {
         // Arrange
@@ -119,7 +119,7 @@ public sealed class WhenApplyIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
     {
         // Arrange

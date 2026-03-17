@@ -9,7 +9,7 @@ public sealed class WhenConstructorIsCalled
 {
     private const string AttributeName = "Serializable";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenStructIsUndefined()
     {
         // Act
@@ -32,7 +32,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

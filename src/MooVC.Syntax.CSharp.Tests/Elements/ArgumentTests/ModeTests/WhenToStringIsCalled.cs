@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenParamsModeThenReturnsParamsKeyword()
     {
         // Arrange

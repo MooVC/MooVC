@@ -8,7 +8,7 @@ public sealed class WhenCombineIsCalled
     private const string Separator = ",";
     private static readonly string[] samples = ["first", "second", "third"];
 
-    [Fact]
+    [Test]
     public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(separator));
     }
 
-    [Fact]
+    [Test]
     public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(separator));
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(values));
     }
 
-    [Fact]
+    [Test]
     public void GivenNoValuesThenAnEmptyStringIsReturned()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
@@ -78,7 +78,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
@@ -91,7 +91,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(string.Join(separator, samples));
     }
 
-    [Fact]
+    [Test]
     public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -107,7 +107,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(formatter));
     }
 
-    [Fact]
+    [Test]
     public void GivenElementsAreDefaultThenAnEmptyStringIsReturned()
     {
         // Arrange
@@ -121,7 +121,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenElementsAreEmptyThenAnEmptyStringIsReturned()
     {
         // Arrange
@@ -135,7 +135,7 @@ public sealed class WhenCombineIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
@@ -150,7 +150,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(separator));
     }
 
-    [Fact]
+    [Test]
     public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
@@ -165,7 +165,7 @@ public sealed class WhenCombineIsCalled
         exception.ParamName.ShouldBe(nameof(separator));
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleElementsThenTheyAreFormattedAndCombinedWithTheSeparator()
     {
         // Arrange

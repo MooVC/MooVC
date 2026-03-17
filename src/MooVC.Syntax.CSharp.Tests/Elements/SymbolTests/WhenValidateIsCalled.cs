@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     private const string Name = "Result";
     private const string ArgumentName = "Inner";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedSymbolThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedSymbolThenValidationErrorReturned()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedArgumentThenValidationErrorReturned()
     {
         // Arrange
@@ -70,7 +70,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
@@ -93,7 +93,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
@@ -116,7 +116,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidSymbolThenNoValidationErrorsReturned()
     {
         // Arrange

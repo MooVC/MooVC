@@ -6,7 +6,7 @@ using MooVC.Syntax.Concepts;
 
 public sealed class WhenNewIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenConstructTypeThenNewInstanceIsReturned()
     {
         // Arrange

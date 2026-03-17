@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenReturnsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenResultThenReturnsNewInstanceWithUpdatedResult()
     {
         // Arrange

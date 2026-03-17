@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenChangeExtensionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenExtensionThenReturnsUpdatedPath()
     {
         // Arrange

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenValidationErrorReturned()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenBodyThenValidationSucceeds()
     {
         // Arrange

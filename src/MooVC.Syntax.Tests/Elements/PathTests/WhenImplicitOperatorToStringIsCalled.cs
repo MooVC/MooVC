@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Alpha = "Assets";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
@@ -43,7 +43,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongThenMatchesValue()
     {
         // Arrange

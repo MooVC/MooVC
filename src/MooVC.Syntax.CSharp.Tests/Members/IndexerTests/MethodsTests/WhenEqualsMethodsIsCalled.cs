@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsMethodsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenEqualsMethodsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenEqualsMethodsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenEqualsMethodsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
@@ -82,7 +82,7 @@ public sealed class WhenEqualsMethodsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentGetValuesThenReturnsFalse()
     {
         // Arrange
@@ -103,7 +103,7 @@ public sealed class WhenEqualsMethodsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentSetValuesThenReturnsFalse()
     {
         // Arrange

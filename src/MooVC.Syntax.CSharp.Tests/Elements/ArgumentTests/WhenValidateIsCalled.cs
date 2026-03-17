@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     private const string Name = "Value";
     private const string Value = "42";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyValueThenValidationErrorReturned()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenMultilineValueThenValidationErrorReturned()
     {
         // Arrange
@@ -70,7 +70,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidArgumentThenNoValidationErrorsReturned()
     {
         // Arrange

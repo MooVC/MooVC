@@ -6,7 +6,7 @@ public sealed class WhenWithAfterTargetsIsCalled
 {
     private const string UpdatedAfterTargets = "UpdatedAfterTargets";
 
-    [Fact]
+    [Test]
     public void GivenAfterTargetsThenReturnsUpdatedInstance()
     {
         // Arrange

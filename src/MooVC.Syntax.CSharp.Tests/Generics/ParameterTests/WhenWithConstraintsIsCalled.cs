@@ -8,7 +8,7 @@ public sealed class WhenWithConstraintsIsCalled
 {
     private const string Name = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenAdditionalConstraintsThenReturnsNewInstanceWithCombinedValues()
     {
         // Arrange

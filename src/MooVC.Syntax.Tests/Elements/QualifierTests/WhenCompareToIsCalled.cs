@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.QualifierTests;
 
 public sealed class WhenCompareToIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUnqualifiedAndQualifiedThenUnqualifiedIsLess()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenCompareToIsCalled
         result.ShouldBeLessThan(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenSystemQualifierThenSystemComesFirst()
     {
         // Arrange

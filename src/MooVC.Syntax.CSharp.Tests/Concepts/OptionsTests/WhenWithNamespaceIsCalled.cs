@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithNamespaceIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNamespaceThenReturnsUpdatedInstance()
     {
         // Arrange

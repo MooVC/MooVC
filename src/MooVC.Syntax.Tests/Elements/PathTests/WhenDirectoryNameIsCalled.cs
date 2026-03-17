@@ -4,7 +4,7 @@ using SystemPath = System.IO.Path;
 
 public sealed class WhenDirectoryNameIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPathThenReturnsDirectoryName()
     {
         // Arrange

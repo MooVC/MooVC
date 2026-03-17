@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
     private const string ParameterName = "value";
     private const string StructName = "Payload";
 
-    [Fact]
+    [Test]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenToSnippetIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenReadOnlyStructWithParametersThenIncludesSignatureDetails()
     {
         // Arrange

@@ -22,8 +22,8 @@ public sealed class WhenCloneIsCalled
         return [first, second, third];
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData))]
     public void GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembers(ExpandoObject original)
     {
         // Act
@@ -34,7 +34,7 @@ public sealed class WhenCloneIsCalled
         clone.ShouldBe(original);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnInitializedObjectWithAnExpandoObjectContainedWithinThenItWillReturnANewObjectWithTheChildCloned()
     {
         // Arrange
@@ -53,7 +53,7 @@ public sealed class WhenCloneIsCalled
         ((ExpandoObject)clone.Child).ShouldBe((ExpandoObject)parent.Child);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullObjectWithDefaultIfNullSetToFalseThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -66,7 +66,7 @@ public sealed class WhenCloneIsCalled
         _ = Should.Throw<ArgumentNullException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullObjectWithDefaultIfNullSetToTrueThenAnEmptyObjectIsReturned()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenCloneIsCalled
         value.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnInitializedObjectWithNonExpandoChildThenTheChildIsNotCloned()
     {
         // Arrange

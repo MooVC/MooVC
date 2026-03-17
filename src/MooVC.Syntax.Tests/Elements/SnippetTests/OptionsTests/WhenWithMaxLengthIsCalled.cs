@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenWithMaxLengthIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -5,7 +5,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenNamedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBuildsThenReturnsUpdatedInstance()
     {
         // Arrange

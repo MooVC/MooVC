@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenPropertiesAreCalled
 {
-    [Fact]
+    [Test]
     public void GivenPascalCasingThenFlagsAreTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenPropertiesAreCalled
         subject.IsPascal.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenCamelCasingThenFlagsAreFalse()
     {
         // Arrange

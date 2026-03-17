@@ -6,7 +6,7 @@ public sealed class WhenWithBeforeTargetsIsCalled
 {
     private const string UpdatedBeforeTargets = "UpdatedBeforeTargets";
 
-    [Fact]
+    [Test]
     public void GivenBeforeTargetsThenReturnsUpdatedInstance()
     {
         // Arrange

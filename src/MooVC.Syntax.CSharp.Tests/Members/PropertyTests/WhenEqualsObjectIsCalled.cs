@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullThenFalseIsReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentTypeThenFalseIsReturned()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Collections.Generic.CollectionExtensionsTests;
 
 public sealed class WhenAddRangeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenAddRangeIsCalled
         Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullTargetThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenAddRangeIsCalled
         _ = Should.Throw<ArgumentNullException>(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenItemsWhenTheTargetIsEmptyThenTheItemsAreAddedToTheTarget()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenAddRangeIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetWithoutRemovingTheExistingEntries()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenAddRangeIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
     {
         // Arrange
@@ -73,7 +73,7 @@ public sealed class WhenAddRangeIsCalled
         actual.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
     {
         // Arrange

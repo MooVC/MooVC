@@ -6,7 +6,7 @@ public sealed class WhenShiftIsCalled
 {
     private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenShiftIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsThenLinesAreShifted()
     {
         // Arrange

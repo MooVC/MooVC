@@ -6,7 +6,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenWithAssembliesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAssembliesThenReturnsUpdatedInstance()
     {
         // Arrange

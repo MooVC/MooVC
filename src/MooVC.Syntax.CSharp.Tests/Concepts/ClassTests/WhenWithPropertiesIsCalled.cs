@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange

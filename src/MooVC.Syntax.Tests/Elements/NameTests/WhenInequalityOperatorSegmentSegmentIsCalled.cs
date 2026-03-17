@@ -5,7 +5,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenInequalityOperatorSegmentSegmentIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

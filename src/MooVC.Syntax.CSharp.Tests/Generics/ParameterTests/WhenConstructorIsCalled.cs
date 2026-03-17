@@ -8,7 +8,7 @@ public sealed class WhenConstructorIsCalled
 {
     private const string ParameterName = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenParameterIsUnnamed()
     {
         // Act
@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
         subject.Constraints.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

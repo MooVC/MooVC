@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithSnippetsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSnippetsThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -2,15 +2,15 @@ namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenPropertiesAreCalled
 {
-    [Theory]
-    [InlineData("in", true, false, false, false, false, false, false, false)]
-    [InlineData("out", false, true, false, false, false, false, false, false)]
-    [InlineData("", false, false, true, false, false, false, false, false)]
-    [InlineData("params", false, false, false, true, false, false, false, false)]
-    [InlineData("ref", false, false, false, false, true, false, false, false)]
-    [InlineData("ref readonly", false, false, false, false, false, true, false, false)]
-    [InlineData("scoped", false, false, false, false, false, false, true, false)]
-    [InlineData("this", false, false, false, false, false, false, false, true)]
+    [Test]
+    [Arguments("in", true, false, false, false, false, false, false, false)]
+    [Arguments("out", false, true, false, false, false, false, false, false)]
+    [Arguments("", false, false, true, false, false, false, false, false)]
+    [Arguments("params", false, false, false, true, false, false, false, false)]
+    [Arguments("ref", false, false, false, false, true, false, false, false)]
+    [Arguments("ref readonly", false, false, false, false, false, true, false, false)]
+    [Arguments("scoped", false, false, false, false, false, false, true, false)]
+    [Arguments("this", false, false, false, false, false, false, false, true)]
     public void GivenModeThenFlagsMatch(
         string value,
         bool expectedIn,

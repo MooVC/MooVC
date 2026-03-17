@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenValidationSucceeds()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenMissingBodyThenValidationFails()
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Body)));
     }
 
-    [Fact]
+    [Test]
     public void GivenMissingSubjectThenValidationFails()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Target)));
     }
 
-    [Fact]
+    [Test]
     public void GivenValidConversionThenValidationSucceeds()
     {
         // Arrange

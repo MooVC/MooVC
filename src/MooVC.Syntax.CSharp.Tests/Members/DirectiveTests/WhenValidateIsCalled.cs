@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     private const string Alias = "Alias";
     private const string InvalidAlias = "alias";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedDirectiveThenValidationIsSkipped()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenStaticAliasThenValidationErrorReturned()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidAliasThenValidationErrorReturned()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidQualifierThenValidationErrorReturned()
     {
         // Arrange
@@ -94,7 +94,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidDirectiveThenNoValidationErrorsReturned()
     {
         // Arrange

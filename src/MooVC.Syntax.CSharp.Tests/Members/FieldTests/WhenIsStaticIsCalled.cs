@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenIsStaticIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange

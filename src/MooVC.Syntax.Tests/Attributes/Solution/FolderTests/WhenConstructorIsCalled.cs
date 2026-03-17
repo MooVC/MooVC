@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenFolderIsUndefined()
     {
         // Act
@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

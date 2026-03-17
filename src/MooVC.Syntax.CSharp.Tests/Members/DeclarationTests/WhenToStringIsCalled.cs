@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     private const string FirstParameterName = "TFirst";
     private const string SecondParameterName = "TSecond";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenNameThenNameReturned()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe(Name);
     }
 
-    [Fact]
+    [Test]
     public void GivenParametersThenNameAndParameterListReturned()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
 
 public sealed class WhenWithStyleIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenStyleThenReturnsUpdatedInstance()
     {
         // Arrange

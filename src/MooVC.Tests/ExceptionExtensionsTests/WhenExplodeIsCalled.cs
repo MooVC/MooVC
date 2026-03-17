@@ -2,7 +2,7 @@
 
 public sealed class WhenExplodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullExceptionThenTheActionIsGracefullyIgnored()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenExplodeIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnExceptionWithNoInnerExceptionThenTheActionIsInvokedForTheParent()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenExplodeIsCalled
         invocationCount.ShouldBe(ExpectedInvocationCount);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedForEachExceptionInHierarchicalOrder()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenExplodeIsCalled
         invocationCount.ShouldBe(ExpectedInvocationCount);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedInCorrectOrder()
     {
         // Arrange
