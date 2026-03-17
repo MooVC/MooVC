@@ -1,7 +1,15 @@
 ﻿namespace MooVC.Syntax
 {
+    /// <summary>
+    /// Provides helpers for string analysis used by syntax generation.
+    /// </summary>
     public static partial class StringExtensions
     {
+        /// <summary>
+        /// Gets the leading whitespace portion from a string.
+        /// </summary>
+        /// <param name="value">The string to inspect.</param>
+        /// <returns>The leading whitespace characters, or <see cref="string.Empty"/> when none are present.</returns>
         public static string GetLeadingWhitespace(this string value)
         {
             if (string.IsNullOrEmpty(value))

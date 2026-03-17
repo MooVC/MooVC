@@ -5,6 +5,9 @@ using MooVC.Compression;
 using MooVC.Serialization;
 using static global::Apex.Serialization.Binary;
 
+/// <summary>
+/// Provides Apex binary serialization.
+/// </summary>
 public sealed class Serializer
     : SynchronousSerializer,
       IDisposable
@@ -12,6 +15,11 @@ public sealed class Serializer
     private readonly IBinary _binary;
     private bool _isDisposed;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Serializer"/> class.
+    /// </summary>
+    /// <param name="compressor">The optional stream compressor.</param>
+    /// <param name="settings">The Apex serializer settings.</param>
     public Serializer(ICompressor? compressor = default, Settings? settings = default)
         : base(compressor: compressor)
     {
@@ -20,6 +28,9 @@ public sealed class Serializer
         _binary = Create(settings);
     }
 
+    /// <summary>
+    /// Releases managed resources used by the serializer.
+    /// </summary>
     public void Dispose()
     {
         Dispose(isDisposing: true);
