@@ -6,15 +6,26 @@ using static System.String;
 using static MooVC.Infrastructure.Serialization.MessagePack.Resources;
 using Base = MooVC.Serialization.Serializer;
 
+/// <summary>
+/// Provides MessagePack serialization.
+/// </summary>
 public sealed class Serializer
     : Base
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Serializer"/> class.
+    /// </summary>
+    /// <param name="compressor">The optional stream compressor.</param>
+    /// <param name="options">The MessagePack serializer options.</param>
     public Serializer(ICompressor? compressor = default, MessagePackSerializerOptions? options = default)
         : base(compressor: compressor)
     {
         Options = options ?? MessagePackSerializerOptions.Standard;
     }
 
+    /// <summary>
+    /// Gets the MessagePack serializer options used for serialization operations.
+    /// </summary>
     public MessagePackSerializerOptions Options { get; }
 
     protected override async Task<T> PerformDeserialize<T>(Stream source, CancellationToken cancellationToken)
