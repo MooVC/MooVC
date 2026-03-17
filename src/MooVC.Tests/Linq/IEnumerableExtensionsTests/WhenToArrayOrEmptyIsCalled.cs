@@ -1,37 +1,39 @@
 namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using Xunit;
+
 public sealed class WhenToArrayOrEmptyIsCalled
 {
-    public static readonly TheoryData<int[], int[]> EnumerablePredicateOrderTestData = new()
+    public static IEnumerable<(int[] Original, int[] Expected)> EnumerablePredicateOrderTestData()
     {
-        { [3, 1, 2], [1, 3] },
-        { [3, 2, 1], [1, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return ([3, 1, 2], [1, 3]);
+        yield return ([3, 2, 1], [1, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
+    }
 
-    public static readonly TheoryData<int[], int[]> EnumerableOrderTestData = new()
+    public static IEnumerable<(int[] Original, int[] Expected)> EnumerableOrderTestData()
     {
-        { [3, 1, 2], [1, 2, 3] },
-        { [3, 2, 1], [1, 2, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return ([3, 1, 2], [1, 2, 3]);
+        yield return ([3, 2, 1], [1, 2, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
+    }
 
-    public static readonly TheoryData<int[]> EnumerableTestData = new()
+    public static IEnumerable<int[]> EnumerableTestData()
     {
-        { [1, 2] },
-        { [1] },
-        { [] },
-    };
+        yield return [1, 2];
+        yield return [1];
+        yield return [];
+    }
 
-    public static readonly TheoryData<int[], int[]> EnumerablePredicateTestData = new()
+    public static IEnumerable<(int[] Original, int[] Expected)> EnumerablePredicateTestData()
     {
-        { [3, 1, 2], [3, 1] },
-        { [1, 2, 3], [1, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return ([3, 1, 2], [3, 1]);
+        yield return ([1, 2, 3], [1, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
+    }
 
     [Test]
     [MethodDataSource(nameof(EnumerableOrderTestData))]
@@ -77,7 +79,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
     public void GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
     {
         // Arrange
-        int[] expected = enumerable.ToArray();
+        int[] expected = [.. enumerable];
 
         // Act
         int[] result = enumerable.ToArrayOrEmpty();
@@ -133,6 +135,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
-        result.ShouldBe(Array.Empty<int>());
+        result.ShouldBe([]);
     }
 }

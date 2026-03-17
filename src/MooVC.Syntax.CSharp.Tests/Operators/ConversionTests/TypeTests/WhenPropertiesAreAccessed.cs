@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static TheoryData<ConversionTypeExpectation> Expectations()
+    public static IEnumerable<ConversionTypeExpectation> GivenTypeThenFlagsReflectValueData()
     {
         return
         [
@@ -12,7 +12,7 @@ public sealed class WhenPropertiesAreAccessed
     }
 
     [Test]
-    [MethodDataSource(nameof(Expectations))]
+    [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
     public void GivenTypeThenFlagsReflectValue(ConversionTypeExpectation expectation)
     {
         // Arrange

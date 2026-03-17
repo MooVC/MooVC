@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static TheoryData<BinaryTypeExpectation> Expectations()
+    public static IEnumerable<BinaryTypeExpectation> GivenTypeThenFlagsReflectValueData()
     {
         return
         [
@@ -21,7 +21,7 @@ public sealed class WhenPropertiesAreAccessed
     }
 
     [Test]
-    [MethodDataSource(nameof(Expectations))]
+    [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
     public void GivenTypeThenFlagsReflectValue(BinaryTypeExpectation expectation)
     {
         // Arrange

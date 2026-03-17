@@ -4,7 +4,7 @@ using System.Dynamic;
 
 public sealed class WhenCloneIsCalled
 {
-    public static TheoryData<ExpandoObject> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
+    public static IEnumerable<ExpandoObject> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
     {
         dynamic first = new ExpandoObject();
         dynamic second = new ExpandoObject();
