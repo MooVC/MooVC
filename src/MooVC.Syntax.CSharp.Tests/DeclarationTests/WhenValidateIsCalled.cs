@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenValidateIsCalled
 {
@@ -30,7 +30,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var declaration = new Declaration
         {
-            Arguments = [new Argument { Name = "T" }],
+            Generics = [new Generic { Name = "T" }],
         };
 
         var context = new ValidationContext(declaration);
@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = Name,
-            Arguments = [new Argument { Name = "Invalid Name" }],
+            Generics = [new Generic { Name = "Invalid Name" }],
         };
 
         var context = new ValidationContext(declaration);
@@ -76,7 +76,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = Name,
-            Arguments = [new Argument { Name = "T" }],
+            Generics = [new Generic { Name = "T" }],
         };
 
         var context = new ValidationContext(declaration);

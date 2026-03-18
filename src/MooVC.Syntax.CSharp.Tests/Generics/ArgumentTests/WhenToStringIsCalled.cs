@@ -12,7 +12,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
 
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = new Name(Name),
             Constraints = [constraint],

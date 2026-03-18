@@ -9,58 +9,58 @@
     using MooVC.Linq;
     using MooVC.Syntax.CSharp;
     using MooVC.Syntax.Validation;
-    using static MooVC.Syntax.CSharp.Generics.Interface_Resources;
+    using static MooVC.Syntax.CSharp.Generics.Implementation_Resources;
 
     /// <summary>
-    /// Represents a C# generic syntax interface.
+    /// Represents a C# generic syntax implementation.
     /// </summary>
     [Monify(Type = typeof(Declaration))]
     [SkipAutoInitialization]
-    public sealed partial class Interface
+    public sealed partial class Implementation
         : IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
         /// </summary>
-        public static readonly Interface Undefined = Declaration.Unspecified;
+        public static readonly Implementation Undefined = Declaration.Unspecified;
 
-        internal Interface(Declaration declaration)
+        internal Implementation(Declaration declaration)
         {
             _value = declaration ?? Declaration.Unspecified;
         }
 
         /// <summary>
-        /// Gets a value indicating whether the Interface is undefined.
+        /// Gets a value indicating whether the implementation is undefined.
         /// </summary>
-        /// <value>A value indicating whether the Interface is undefined.</value>
+        /// <value>A value indicating whether the implementation is undefined.</value>
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Interface.
+        /// Defines the string operator for the implementation.
         /// </summary>
-        /// <param name="@interface">The interface.</param>
+        /// <param name="implementation">The implementation.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Interface @interface)
+        public static implicit operator string(Implementation implementation)
         {
-            Guard.Against.Conversion<Interface, Snippet>(@interface);
+            Guard.Against.Conversion<Implementation, Snippet>(implementation);
 
-            return @interface.ToString();
+            return implementation.ToString();
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Interface.
+        /// Defines the Snippet operator for the implementation.
         /// </summary>
-        /// <param name="@interface">The interface.</param>
+        /// <param name="implementation">The implementation.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Interface @interface)
+        public static implicit operator Snippet(Implementation implementation)
         {
-            Guard.Against.Conversion<Interface, Snippet>(@interface);
+            Guard.Against.Conversion<Implementation, Snippet>(implementation);
 
-            return Snippet.From(@interface);
+            return Snippet.From(implementation);
         }
 
         /// <summary>
-        /// Returns the string representation of the Interface.
+        /// Returns the string representation of the implementation.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()
@@ -69,7 +69,7 @@
         }
 
         /// <summary>
-        /// Validates the Interface.
+        /// Validates the implementation.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
@@ -84,7 +84,7 @@
                 yield break;
             }
 
-            yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Interface)), new[] { nameof(Interface) });
+            yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Implementation)), new[] { nameof(Implementation) });
         }
     }
 }

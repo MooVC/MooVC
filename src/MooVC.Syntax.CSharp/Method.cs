@@ -199,7 +199,7 @@ namespace MooVC.Syntax.CSharp
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
             string result = Result.IsVoid ? "void" : Result;
             string scope = Scope.ToString(options);
-            var clauses = Name.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Name.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
             if (!clauses.IsEmpty)

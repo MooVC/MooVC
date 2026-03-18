@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenValidateIsCalled
 {
@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenUnnamedArgumentThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Argument { Constraints = [new() { New = New.Required }] };
+        var subject = new Generic { Constraints = [new() { New = New.Required }] };
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -24,7 +24,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Argument.Name));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Generic.Name));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -34,10 +34,10 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new Interface(new Declaration { Name = InvalidInterfaceName })],
+            Interfaces = [new Implementation(new Declaration { Name = InvalidInterfaceName })],
         };
 
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = Name,
             Constraints = [constraint],
@@ -52,7 +52,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenNameWithNoConstraintsThenNoValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = Name,
         };
@@ -83,11 +83,11 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Base = new Symbol { Name = "Base" },
-            Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
+            Interfaces = [new Implementation(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
 
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = Name,
             Constraints = [constraint],
@@ -108,7 +108,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenUndefinedArgumentThenValidationIsSkipped()
     {
         // Arrange
-        Argument subject = Argument.Undefined;
+        Generic subject = Generic.Undefined;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

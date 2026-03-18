@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Interface? subject = default;
+        Implementation? subject = default;
 
         // Act
         Func<string> result = () => subject;
@@ -18,10 +18,10 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Test]
-    public async Task GivenInterfaceThenStringMatchesToString()
+    public async Task GivenImplementationThenStringMatchesToString()
     {
         // Arrange
-        Interface subject = new Declaration
+        Implementation subject = new Declaration
         {
             Name = Name,
         };

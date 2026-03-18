@@ -5,27 +5,27 @@
     using MooVC.Syntax.Formatting;
 
     /// <summary>
-    /// Represents a C# generic syntax argument extensions.
+    /// Represents a C# generic syntax generic extensions.
     /// </summary>
-    public static partial class ArgumentExtensions
+    public static partial class GenericExtensions
     {
         private const string Separator = ", ";
 
         /// <summary>
         /// Creates a snippet representation of the C# generic syntax.
         /// </summary>
-        /// <param name="arguments">The arguments.</param>
+        /// <param name="generics">The generics.</param>
         /// <param name="formatter">The formatter.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Argument> arguments, Func<Argument, string> formatter, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Generic> generics, Func<Generic, string> formatter, Snippet.Options options)
         {
-            if (arguments.IsDefaultOrEmpty)
+            if (generics.IsDefaultOrEmpty)
             {
                 return Snippet.Empty;
             }
 
-            string snippet = Separator.Combine(arguments, formatter);
+            string snippet = Separator.Combine(generics, formatter);
 
             return Snippet.From(options, snippet);
         }

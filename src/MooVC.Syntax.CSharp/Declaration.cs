@@ -12,7 +12,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Declaration_Resources;
-    using Generic = MooVC.Syntax.CSharp.Generics.Argument;
+    using Generic = MooVC.Syntax.CSharp.Generics.Generic;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -38,10 +38,10 @@
         }
 
         /// <summary>
-        /// Gets the parameters on the Declaration.
+        /// Gets the generics on the Declaration.
         /// </summary>
-        /// <value>The parameters.</value>
-        public ImmutableArray<Generic> Arguments { get; internal set; } = ImmutableArray<Generic>.Empty;
+        /// <value>The generics.</value>
+        public ImmutableArray<Generic> Generics { get; internal set; } = ImmutableArray<Generic>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Declaration is unspecified.
@@ -196,9 +196,9 @@
 
             string signature = Name;
 
-            if (!Arguments.IsDefaultOrEmpty)
+            if (!Generics.IsDefaultOrEmpty)
             {
-                var parameters = Arguments.ToSnippet(Generic.Names, options);
+                var parameters = Generics.ToSnippet(Generic.Names, options);
 
                 signature = $"{signature}<{parameters}>";
             }
@@ -220,7 +220,7 @@
             }
 
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), parameter => !parameter.IsUndefined, Arguments)
+                .IncludeIf(!Generics.IsDefaultOrEmpty, nameof(Generics), parameter => !parameter.IsUndefined, Generics)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }

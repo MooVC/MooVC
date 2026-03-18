@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.StructTests;
 
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using MooVC.Syntax.CSharp.Generics;
 using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
 using Parameter = MooVC.Syntax.CSharp.Parameter;
 
@@ -36,7 +36,7 @@ public sealed class WhenToSnippetIsCalled
             ],
         };
 
-        var genericParameter = new Argument
+        var genericParameter = new Generic
         {
             Name = GenericName,
             Constraints =
@@ -51,7 +51,7 @@ public sealed class WhenToSnippetIsCalled
             Declaration = new Declaration
             {
                 Name = StructName,
-                Arguments =
+                Generics =
                 [
                     genericParameter,
                 ],

@@ -11,8 +11,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Argument? left = default;
-        Argument? right = default;
+        Generic? left = default;
+        Generic? right = default;
 
         // Act
         bool result = left == right;
@@ -25,8 +25,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Argument? left = default;
-        Argument right = Create();
+        Generic? left = default;
+        Generic right = Create();
 
         // Act
         bool result = left == right;
@@ -39,8 +39,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        Argument left = Create();
-        Argument? right = default;
+        Generic left = Create();
+        Generic? right = default;
 
         // Act
         bool result = left == right;
@@ -53,8 +53,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Argument first = Create();
-        Argument second = first;
+        Generic first = Create();
+        Generic second = first;
 
         // Act
         bool result = first == second;
@@ -67,8 +67,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Argument left = Create();
-        Argument right = Create();
+        Generic left = Create();
+        Generic right = Create();
 
         // Act
         bool result = left == right;
@@ -81,8 +81,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
-        Argument left = Create();
-        Argument right = Create(AlternativeName);
+        Generic left = Create();
+        Generic right = Create(AlternativeName);
 
         // Act
         bool result = left == right;
@@ -95,8 +95,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenDifferentConstraintsThenReturnsFalse()
     {
         // Arrange
-        Argument left = Create();
-        Argument right = Create(constraint: Constraint.Unspecified);
+        Generic left = Create();
+        Generic right = Create(constraint: Constraint.Unspecified);
 
         // Act
         bool resultLeftRight = left == right;
@@ -107,9 +107,9 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
-    private static Argument Create(string name = DefaultName, Constraint? constraint = default)
+    private static Generic Create(string name = DefaultName, Constraint? constraint = default)
     {
-        return new Argument
+        return new Generic
         {
             Name = new Name(name),
             Constraints = constraint is null

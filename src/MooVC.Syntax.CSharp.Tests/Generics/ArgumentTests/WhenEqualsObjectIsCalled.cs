@@ -12,7 +12,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         object other = new();
-        Argument subject = Create();
+        Generic subject = Create();
 
         // Act
         bool result = subject.Equals(other);
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Argument subject = Create();
+        Generic subject = Create();
         object? other = default;
 
         // Act
@@ -39,7 +39,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Argument subject = Create();
+        Generic subject = Create();
         object other = subject;
 
         // Act
@@ -53,7 +53,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEquivalentArgumentThenReturnsTrue()
     {
         // Arrange
-        Argument subject = Create();
+        Generic subject = Create();
         object other = Create();
 
         // Act
@@ -67,7 +67,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentArgumentThenReturnsFalse()
     {
         // Arrange
-        Argument subject = Create();
+        Generic subject = Create();
         object other = Create(AlternativeName);
 
         // Act
@@ -77,9 +77,9 @@ public sealed class WhenEqualsObjectIsCalled
         _ = await Assert.That(result).IsFalse();
     }
 
-    private static Argument Create(string name = DefaultName)
+    private static Generic Create(string name = DefaultName)
     {
-        return new Argument
+        return new Generic
         {
             Name = new Name(name),
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],

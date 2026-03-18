@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Argument? subject = default;
+        Generic? subject = default;
 
         // Act
         Func<Snippet> result = () => subject;
@@ -21,7 +21,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public async Task GivenArgumentThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = Name,
         };

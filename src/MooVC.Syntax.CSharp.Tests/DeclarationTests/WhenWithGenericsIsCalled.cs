@@ -1,23 +1,23 @@
 ﻿namespace MooVC.Syntax.CSharp.DeclarationTests;
 
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
-public sealed class WhenWithArgumentsIsCalled
+public sealed class WhenWithGenericsIsCalled
 {
     [Test]
     public async Task GivenArgumentsThenReturnsNewInstanceWithUpdatedArguments()
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        Argument[] additional = [new Argument { Name = new Name("U") }];
+        Generic[] additional = [new Generic { Name = new Name("U") }];
 
         // Act
-        Declaration result = original.WithArguments(additional);
+        Declaration result = original.WithGenerics(additional);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(result.Arguments.Length).IsEqualTo(2);
-        _ = await Assert.That(result.Arguments).IsEquivalentTo([.. original.Arguments, .. additional]);
+        _ = await Assert.That(result.Generics.Length).IsEqualTo(2);
+        _ = await Assert.That(result.Generics).IsEquivalentTo([.. original.Generics, .. additional]);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

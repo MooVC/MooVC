@@ -12,78 +12,78 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# generic syntax argument.
+    /// Represents a C# generic syntax generic.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
     [Valuify]
-    public sealed partial class Argument
+    public sealed partial class Generic
         : IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
         /// </summary>
-        public static readonly Argument Undefined = new Argument();
+        public static readonly Generic Undefined = new Generic();
 
         /// <summary>
-        /// Gets the names on the Argument.
+        /// Gets the names on the Generic.
         /// </summary>
         /// <value>The names.</value>
-        public static readonly Func<Argument, string> Names = argument => argument.Name;
+        public static readonly Func<Generic, string> Names = generic => generic.Name;
 
         /// <summary>
-        /// Initializes a new instance of the Argument class.
+        /// Initializes a new instance of the Generic class.
         /// </summary>
-        internal Argument()
+        internal Generic()
         {
         }
 
         /// <summary>
-        /// Gets the name on the Argument.
+        /// Gets the name on the Generic.
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
         public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
-        /// Gets the constraints on the Argument.
+        /// Gets the constraints on the Generic.
         /// </summary>
         /// <value>The constraints.</value>
         public ImmutableArray<Constraint> Constraints { get; internal set; } = ImmutableArray<Constraint>.Empty;
 
         /// <summary>
-        /// Gets a value indicating whether the Argument is undefined.
+        /// Gets a value indicating whether the Generic is undefined.
         /// </summary>
-        /// <value>A value indicating whether the Argument is undefined.</value>
+        /// <value>A value indicating whether the Generic is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Argument.
+        /// Defines the string operator for the Generic.
         /// </summary>
-        /// <param name="argument">The argument.</param>
+        /// <param name="generic">The generic.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Argument argument)
+        public static implicit operator string(Generic generic)
         {
-            Guard.Against.Conversion<Argument, string>(argument);
+            Guard.Against.Conversion<Generic, string>(generic);
 
-            return argument.ToString();
+            return generic.ToString();
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Argument.
+        /// Defines the Snippet operator for the Generic.
         /// </summary>
-        /// <param name="argument">The argument.</param>
+        /// <param name="generic">The generic.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Argument argument)
+        public static implicit operator Snippet(Generic generic)
         {
-            Guard.Against.Conversion<Argument, Snippet>(argument);
+            Guard.Against.Conversion<Generic, Snippet>(generic);
 
-            return Snippet.From(argument);
+            return Snippet.From(generic);
         }
 
         /// <summary>
-        /// Returns the string representation of the Argument.
+        /// Returns the string representation of the Generic.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()
@@ -92,7 +92,7 @@
         }
 
         /// <summary>
-        /// Validates the Argument.
+        /// Validates the Generic.
         /// </summary>
         /// <remarks>Required members include: Constraints, Name.</remarks>
         /// <param name="validationContext">The validation context.</param>

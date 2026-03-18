@@ -5,7 +5,7 @@
     using Ardalis.GuardClauses;
     using MooVC.Syntax.CSharp;
     using MooVC.Syntax.Validation;
-    using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+    using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
     internal sealed class FullyQualifiedName
     {
@@ -33,11 +33,11 @@
         {
             Guard.Against.Conversion<FullyQualifiedName, Declaration>(fullyQualifiedName);
 
-            var parameters = new List<Argument>(fullyQualifiedName.Arguments.Length);
+            var parameters = new List<Generic>(fullyQualifiedName.Arguments.Length);
 
             foreach (FullyQualifiedName argument in fullyQualifiedName.Arguments)
             {
-                parameters.Add(new Argument
+                parameters.Add(new Generic
                 {
                     Name = argument.Name,
                 });
@@ -46,7 +46,7 @@
             return new Declaration
             {
                 Name = fullyQualifiedName.Name,
-                Arguments = parameters.ToImmutableArray(),
+                Generics = parameters.ToImmutableArray(),
             };
         }
 

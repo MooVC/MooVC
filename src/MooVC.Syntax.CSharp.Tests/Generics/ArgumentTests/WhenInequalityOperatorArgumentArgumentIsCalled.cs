@@ -10,8 +10,8 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Argument? left = default;
-        Argument? right = default;
+        Generic? left = default;
+        Generic? right = default;
 
         // Act
         bool result = left != right;
@@ -24,8 +24,8 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Argument? left = default;
-        Argument right = Create();
+        Generic? left = default;
+        Generic right = Create();
 
         // Act
         bool result = left != right;
@@ -38,8 +38,8 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        Argument left = Create();
-        Argument? right = default;
+        Generic left = Create();
+        Generic? right = default;
 
         // Act
         bool result = left != right;
@@ -52,8 +52,8 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Argument left = Create();
-        Argument right = Create();
+        Generic left = Create();
+        Generic right = Create();
 
         // Act
         bool result = left != right;
@@ -66,8 +66,8 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Argument left = Create();
-        Argument right = Create(name: DefaultName + "Alt");
+        Generic left = Create();
+        Generic right = Create(name: DefaultName + "Alt");
 
         // Act
         bool resultLeftRight = left != right;
@@ -78,9 +78,9 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
         _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
-    private static Argument Create(string name = DefaultName)
+    private static Generic Create(string name = DefaultName)
     {
-        return new Argument
+        return new Generic
         {
             Name = new Name(name),
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],

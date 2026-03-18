@@ -10,8 +10,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingArgumentsThenReturnSameHash()
     {
         // Arrange
-        Argument first = Create();
-        Argument second = Create();
+        Generic first = Create();
+        Generic second = Create();
 
         // Act
         int firstHash = first.GetHashCode();
@@ -25,8 +25,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentArgumentsThenReturnDifferentHashes()
     {
         // Arrange
-        Argument first = Create();
-        Argument second = Create(name: DefaultName + "Alternative");
+        Generic first = Create();
+        Generic second = Create(name: DefaultName + "Alternative");
 
         // Act
         int firstHash = first.GetHashCode();
@@ -36,9 +36,9 @@ public sealed class WhenGetHashCodeIsCalled
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
-    private static Argument Create(string name = DefaultName)
+    private static Generic Create(string name = DefaultName)
     {
-        return new Argument
+        return new Generic
         {
             Name = new Name(name),
             Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],

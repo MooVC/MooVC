@@ -1,7 +1,7 @@
 namespace MooVC.Syntax.CSharp.DeclarationTests;
 
 using System.Linq;
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 internal static class DeclarationTestsData
 {
@@ -18,7 +18,7 @@ internal static class DeclarationTestsData
 
         if (parameterNames?.Length > 0)
         {
-            declaration.Arguments = [.. parameterNames.Select(parameter => new Argument { Name = parameter })];
+            declaration.Generics = [.. parameterNames.Select(parameter => new Generic { Name = parameter })];
         }
 
         return declaration;

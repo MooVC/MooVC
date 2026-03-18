@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
         {
             Nature = Nature.Class,
             Base = new Symbol { Name = BaseName },
-            Interfaces = [new Interface(new Declaration { Name = InterfaceName })],
+            Interfaces = [new Implementation(new Declaration { Name = InterfaceName })],
             New = New.Required,
         };
 
@@ -49,8 +49,8 @@ public sealed class WhenToStringIsCalled
             Base = new Symbol { Name = BaseName },
             Interfaces =
             [
-                new Interface(new Declaration { Name = InterfaceName }),
-                new Interface(new Declaration { Name = AdditionalInterfaceName }),
+                new Implementation(new Declaration { Name = InterfaceName }),
+                new Implementation(new Declaration { Name = AdditionalInterfaceName }),
             ],
         };
 

@@ -56,10 +56,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Variable.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Generics\Interface.Resources.Designer.cs">
+    <Compile Update="Generics\Implementation.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Interface.Resources.resx</DependentUpon>
+      <DependentUpon>Implementation.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Attribute.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -105,11 +105,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Directive.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Generics\Identifier.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Identifier.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Event.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -188,9 +183,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Variable.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Generics\Interface.Resources.resx">
+    <EmbeddedResource Update="Generics\Implementation.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Interface.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Implementation.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Attribute.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -227,10 +222,6 @@
     <EmbeddedResource Update="Directive.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Directive.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Generics\Identifier.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Event.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.DeclarationTests;
 
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenConstructorIsCalled
 {
@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        _ = await Assert.That(subject.Arguments).IsEmpty();
+        _ = await Assert.That(subject.Generics).IsEmpty();
         _ = await Assert.That(subject.IsUnspecified).IsTrue();
     }
 
@@ -22,18 +22,18 @@ public sealed class WhenConstructorIsCalled
     public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var parameter = new Argument { Name = ParameterName };
+        var parameter = new Generic { Name = ParameterName };
 
         // Act
         var subject = new Declaration
         {
             Name = DeclarationTestsData.DefaultName,
-            Arguments = [parameter],
+            Generics = [parameter],
         };
 
         // Assert
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
-        _ = await Assert.That(subject.Arguments).IsEquivalentTo([parameter]);
+        _ = await Assert.That(subject.Generics).IsEquivalentTo([parameter]);
         _ = await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

@@ -13,14 +13,14 @@ public sealed class WhenNamedIsCalled
         // Arrange
         var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
 
-        var original = new Argument
+        var original = new Generic
         {
             Name = new Name(DefaultName),
             Constraints = [constraint],
         };
 
         // Act
-        Argument result = original.Named(NewName);
+        Generic result = original.Named(NewName);
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);

@@ -1,18 +1,23 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ImplementationTests;
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenValidateIsCalled
 {
-    private const string ValidSimple = "T";
-    private const string ValidComplex = "TValue";
-    private const string InvalidLowercase = "tValue";
+    private const string ValidImplementationName = "IValid";
+    private const string InvalidImplementationName = "Invalid Name";
 
     [Test]
-    public async Task GivenUnnamedIdentifierThenNoValidationErrorsReturned()
+    public async Task GivenValidImplementationThenNoValidationErrorsReturned()
     {
         // Arrange
-        Identifier subject = Identifier.Unnamed;
+        Implementation subject = new Declaration
+        {
+            Name = ValidImplementationName,
+        };
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -22,49 +27,17 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsTrue();
         _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    [Arguments(ValidSimple)]
-    [Arguments(ValidComplex)]
-    public async Task GivenValidNamesThenNoValidationErrorsReturned(string name)
-    {
-        // Arrange
-        var subject = new Identifier(name);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenEmptyNameThenValidationErrorsReturned()
-    {
-        // Arrange
-        var subject = new Identifier(" ");
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
     public async Task GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange
-        var subject = new Identifier(InvalidLowercase);
+        Implementation subject = new Declaration
+        {
+            Name = InvalidImplementationName,
+        };
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -74,7 +47,51 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenTooShortNameThenValidationErrorsReturned()
+    {
+        // Arrange
+        Implementation subject = new Declaration
+        {
+            Name = "I",
+        };
+
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenInvalidDeclarationThenValidationErrorsReturned()
+    {
+        // Arrange
+        Implementation subject = new Declaration
+        {
+            Generics = [new Generic()],
+        };
+
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

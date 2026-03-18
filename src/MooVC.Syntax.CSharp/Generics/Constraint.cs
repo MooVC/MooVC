@@ -43,7 +43,7 @@
         /// Gets the interfaces on the Constraint.
         /// </summary>
         /// <value>The interfaces.</value>
-        public ImmutableArray<Interface> Interfaces { get; internal set; } = ImmutableArray<Interface>.Empty;
+        public ImmutableArray<Implementation> Interfaces { get; internal set; } = ImmutableArray<Implementation>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Constraint is unspecified.

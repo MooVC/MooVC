@@ -1,12 +1,12 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
 public sealed class WhenImplicitOperatorToDeclarationIsCalled
 {
     [Test]
-    public async Task GivenInterfaceThenReturnsDeclaration()
+    public async Task GivenImplementationThenReturnsDeclaration()
     {
         // Arrange
-        Interface subject = new Declaration { Name = "IAlpha" };
+        Implementation subject = new Declaration { Name = "IAlpha" };
 
         // Act
         Declaration result = subject;

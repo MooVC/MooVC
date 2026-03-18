@@ -10,7 +10,7 @@ public sealed class WhenConstructorIsCalled
     public async Task GivenDefaultsThenArgumentIsUnnamed()
     {
         // Act
-        var subject = new Argument();
+        var subject = new Generic();
 
         // Assert
         _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
@@ -27,7 +27,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Act
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = new Name(ArgumentName),
             Constraints = [constraint],

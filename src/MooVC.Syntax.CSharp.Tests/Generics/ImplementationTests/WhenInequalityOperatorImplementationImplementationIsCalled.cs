@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
-public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
+public sealed class WhenInequalityOperatorImplementationImplementationIsCalled
 {
     private const string Same = "IAlpha";
     private const string Different = "IBeta";
@@ -9,8 +9,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Interface? left = default;
-        Interface? right = default;
+        Implementation? left = default;
+        Implementation? right = default;
 
         // Act
         bool result = left != right;
@@ -23,8 +23,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
-        Interface? right = default;
+        Implementation left = new Declaration { Name = Same };
+        Implementation? right = default;
 
         // Act
         bool result = left != right;
@@ -37,8 +37,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
-        Interface right = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
+        Implementation right = new Declaration { Name = Same };
 
         // Act
         bool result = left != right;
@@ -51,8 +51,8 @@ public sealed class WhenInequalityOperatorInterfaceInterfaceIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
-        Interface right = new Declaration { Name = Different };
+        Implementation left = new Declaration { Name = Same };
+        Implementation right = new Declaration { Name = Different };
 
         // Act
         bool result = left != right;

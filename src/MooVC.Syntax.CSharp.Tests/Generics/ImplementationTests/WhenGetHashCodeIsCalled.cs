@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        Interface first = new Declaration { Name = Same };
-        Interface second = new Declaration { Name = Same };
+        Implementation first = new Declaration { Name = Same };
+        Implementation second = new Declaration { Name = Same };
 
         // Act
         int firstHash = first.GetHashCode();
@@ -24,8 +24,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        Interface first = new Declaration { Name = Same };
-        Interface second = new Declaration { Name = Different };
+        Implementation first = new Declaration { Name = Same };
+        Implementation second = new Declaration { Name = Different };
 
         // Act
         int firstHash = first.GetHashCode();

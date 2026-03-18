@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
-public sealed class WhenInequalityOperatorInterfaceDeclarationIsCalled
+public sealed class WhenInequalityOperatorImplementationDeclarationIsCalled
 {
     private const string Same = "IAlpha";
     private const string Different = "IBeta";
@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorInterfaceDeclarationIsCalled
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Interface? left = default;
+        Implementation? left = default;
         Declaration? right = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenInequalityOperatorInterfaceDeclarationIsCalled
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
         Declaration? right = default;
 
         // Act
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorInterfaceDeclarationIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
         var right = new Declaration { Name = Same };
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorInterfaceDeclarationIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
         var right = new Declaration { Name = Different };
 
         // Act

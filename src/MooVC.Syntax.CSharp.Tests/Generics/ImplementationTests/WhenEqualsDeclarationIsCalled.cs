@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
 public sealed class WhenEqualsDeclarationIsCalled
 {
@@ -9,7 +9,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Interface subject = new Declaration { Name = Same };
+        Implementation subject = new Declaration { Name = Same };
         Declaration? other = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
         var right = new Declaration { Name = Same };
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Interface left = new Declaration { Name = Same };
+        Implementation left = new Declaration { Name = Same };
         var right = new Declaration { Name = Different };
 
         // Act

@@ -22,7 +22,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         var subject = new Constraint
         {
             Base = Base.Unspecified,
-            Interfaces = [Interface.Undefined],
+            Interfaces = [Implementation.Undefined],
             Nature = Nature.Unspecified,
         };
 

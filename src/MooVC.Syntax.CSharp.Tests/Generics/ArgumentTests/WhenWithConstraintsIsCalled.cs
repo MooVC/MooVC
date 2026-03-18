@@ -12,7 +12,7 @@ public sealed class WhenWithConstraintsIsCalled
         // Arrange
         var originalConstraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
 
-        var original = new Argument
+        var original = new Generic
         {
             Name = new Name(Name),
             Constraints = [originalConstraint],
@@ -21,7 +21,7 @@ public sealed class WhenWithConstraintsIsCalled
         var additionalConstraint = new Constraint { New = New.Required };
 
         // Act
-        Argument result = original.WithConstraints(additionalConstraint);
+        Generic result = original.WithConstraints(additionalConstraint);
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);

@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Argument? subject = default;
+        Generic? subject = default;
 
         // Act
         Func<string> result = () => subject;
@@ -21,7 +21,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public async Task GivenArgumentThenMatchesToString()
     {
         // Arrange
-        var subject = new Argument
+        var subject = new Generic
         {
             Name = new Name(Name),
         };

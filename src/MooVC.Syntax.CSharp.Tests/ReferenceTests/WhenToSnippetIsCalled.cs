@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.ReferenceTests;
 
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using MooVC.Syntax.CSharp.Generics;
 using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
 using Parameter = MooVC.Syntax.CSharp.Parameter;
 
@@ -23,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
             ],
         };
 
-        var argument = new Argument
+        var argument = new Generic
         {
             Name = GenericName,
             Constraints =
@@ -38,7 +38,7 @@ public sealed class WhenToSnippetIsCalled
             Declaration = new Declaration
             {
                 Name = TypeName,
-                Arguments =
+                Generics =
                 [
                     argument,
                 ],

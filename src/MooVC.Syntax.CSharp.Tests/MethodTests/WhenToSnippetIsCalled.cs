@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.MethodTests;
 
 using MooVC.Syntax.CSharp.Generics;
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
 using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
 
 public sealed class WhenToSnippetIsCalled
@@ -96,7 +95,7 @@ public sealed class WhenToSnippetIsCalled
             New = New.Required,
         };
 
-        var generic = new Argument
+        var generic = new Generic
         {
             Name = "T",
             Constraints = [constraints],
@@ -105,7 +104,7 @@ public sealed class WhenToSnippetIsCalled
         var declaration = new Declaration
         {
             Name = "Perform",
-            Arguments = [generic],
+            Generics = [generic],
         };
 
         Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);

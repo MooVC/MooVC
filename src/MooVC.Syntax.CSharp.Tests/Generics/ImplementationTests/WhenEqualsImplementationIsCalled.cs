@@ -1,16 +1,16 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
-public sealed class WhenEqualsStringIsCalled
+public sealed class WhenEqualsImplementationIsCalled
 {
-    private const string Same = "TAlpha";
-    private const string Different = "TBravo";
+    private const string Same = "IAlpha";
+    private const string Different = "IBeta";
 
     [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
-        string? other = default;
+        Implementation subject = new Declaration { Name = Same };
+        Implementation? other = default;
 
         // Act
         bool result = subject.Equals(other);
@@ -23,8 +23,8 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Identifier(Same);
-        string other = Same;
+        Implementation subject = new Declaration { Name = Same };
+        Implementation other = subject;
 
         // Act
         bool result = subject.Equals(other);
@@ -37,11 +37,11 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var subject = new Identifier(Same);
-        string other = Same;
+        Implementation left = new Declaration { Name = Same };
+        Implementation right = new Declaration { Name = Same };
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = left.Equals(right);
 
         // Assert
         _ = await Assert.That(result).IsTrue();
@@ -51,11 +51,11 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
-        string other = Different;
+        Implementation left = new Declaration { Name = Same };
+        Implementation right = new Declaration { Name = Different };
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = left.Equals(right);
 
         // Assert
         _ = await Assert.That(result).IsFalse();

@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.DeclarationTests;
 
-using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenToStringIsCalled
 {
@@ -44,10 +44,10 @@ public sealed class WhenToStringIsCalled
         var subject = new Declaration
         {
             Name = Name,
-            Arguments =
+            Generics =
             [
-                new Argument { Name = new Name(FirstParameterName) },
-                new Argument { Name = new Name(SecondParameterName) },
+                new Generic { Name = new Name(FirstParameterName) },
+                new Generic { Name = new Name(SecondParameterName) },
             ],
         };
 

@@ -1,15 +1,15 @@
-﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ImplementationTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    private const string Same = "TAlpha";
-    private const string Different = "TBravo";
+    private const string Same = "IAlpha";
+    private const string Different = "IBeta";
 
     [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
+        Implementation subject = new Declaration { Name = Same };
         object? other = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Identifier(Same);
+        Implementation subject = new Declaration { Name = Same };
         object other = subject;
 
         // Act
@@ -37,8 +37,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Identifier(Same);
-        object right = new Identifier(Same);
+        Implementation left = new Declaration { Name = Same };
+        object right = (Implementation)new Declaration { Name = Same };
 
         // Act
         bool result = left.Equals(right);
@@ -51,8 +51,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier(Same);
-        object right = new Identifier(Different);
+        Implementation left = new Declaration { Name = Same };
+        object right = (Implementation)new Declaration { Name = Different };
 
         // Act
         bool result = left.Equals(right);
@@ -62,11 +62,11 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Test]
-    public async Task GivenNonIdentifierThenReturnsFalse()
+    public async Task GivenNonImplementationThenReturnsFalse()
     {
         // Arrange
-        var subject = new Identifier(Same);
-        object other = Same;
+        Implementation subject = new Declaration { Name = Same };
+        object other = new Declaration { Name = Same };
 
         // Act
         bool result = subject.Equals(other);

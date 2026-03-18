@@ -111,7 +111,7 @@
         private Snippet GetSignature(Snippet.Options options)
         {
             Kind behavior = Behavior;
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string partial = IsPartial.Partial();
             string name = Declaration;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);
