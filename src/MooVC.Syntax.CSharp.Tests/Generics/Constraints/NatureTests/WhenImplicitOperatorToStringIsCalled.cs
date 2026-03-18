@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenNatureThenReturnsValue()
+    public async Task GivenNatureThenReturnsValue()
     {
         // Arrange
         Nature subject = "struct";
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

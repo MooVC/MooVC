@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         Struct original = StructTestsData.Create(name: new Declaration { Name = "Original" });
@@ -16,8 +16,8 @@ public sealed class WhenNamedIsCalled
         Struct result = original.Named(name);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Declaration.ShouldBe(name);
-        original.Declaration.ShouldBe(new Declaration { Name = "Original" });
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Declaration).IsEqualTo(name);
+        await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = "Original" });
     }
 }

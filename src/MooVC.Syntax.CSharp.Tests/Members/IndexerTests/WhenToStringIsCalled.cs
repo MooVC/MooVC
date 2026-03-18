@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedIndexerThenEmptyReturned()
+    public async Task GivenUndefinedIndexerThenEmptyReturned()
     {
         // Arrange
         Indexer subject = Indexer.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenDefaultBehavioursThenEmptyReturned()
+    public async Task GivenDefaultBehavioursThenEmptyReturned()
     {
         // Arrange
         Indexer subject = Indexer.Undefined;
@@ -27,11 +27,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenBehavioursWhenGetAndSetThenBodyIsRendered()
+    public async Task GivenBehavioursWhenGetAndSetThenBodyIsRendered()
     {
         // Arrange
         var methods = new Indexer.Methods
@@ -54,6 +54,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

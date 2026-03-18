@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Format = "{0}={1}";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument.Formatter? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenFormatterThenSnippetMatchesStringRepresentation()
+    public async Task GivenFormatterThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         Argument.Formatter subject = Format;
@@ -29,6 +29,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(Format));
+        await Assert.That(result).IsEqualTo(Snippet.From(Format));
     }
 }

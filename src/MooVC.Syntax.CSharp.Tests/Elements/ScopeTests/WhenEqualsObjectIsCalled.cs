@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string Different = "public";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Scope subject = Same;
@@ -16,11 +16,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Scope subject = Same;
@@ -30,11 +30,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Scope left = Same;
@@ -44,11 +44,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Scope left = Same;
@@ -58,11 +58,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonScopeThenReturnsFalse()
+    public async Task GivenNonScopeThenReturnsFalse()
     {
         // Arrange
         Scope subject = Same;
@@ -72,6 +72,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

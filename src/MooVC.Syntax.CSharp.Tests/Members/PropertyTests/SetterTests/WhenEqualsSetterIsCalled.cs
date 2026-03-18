@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenEqualsSetterIsCalled
 {
     [Test]
-    public void GivenNullThenFalseIsReturned()
+    public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
         var subject = new Property.Setter { Behaviour = Snippet.From("value") };
@@ -16,11 +16,11 @@ public sealed class WhenEqualsSetterIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenTrueIsReturned()
+    public async Task GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
         var subject = new Property.Setter { Behaviour = Snippet.From("value") };
@@ -30,11 +30,11 @@ public sealed class WhenEqualsSetterIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentInstanceThenTrueIsReturned()
+    public async Task GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
         var subject = new Property.Setter
@@ -56,12 +56,12 @@ public sealed class WhenEqualsSetterIsCalled
         bool resultTargetSubject = target.Equals(subject);
 
         // Assert
-        resultSubjectTarget.ShouldBeTrue();
-        resultTargetSubject.ShouldBeTrue();
+        await Assert.That(resultSubjectTarget).IsTrue();
+        await Assert.That(resultTargetSubject).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentInstanceThenFalseIsReturned()
+    public async Task GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange
         var subject = new Property.Setter { Behaviour = Snippet.From("value") };
@@ -72,7 +72,7 @@ public sealed class WhenEqualsSetterIsCalled
         bool resultTargetSubject = target.Equals(subject);
 
         // Assert
-        resultSubjectTarget.ShouldBeFalse();
-        resultTargetSubject.ShouldBeFalse();
+        await Assert.That(resultSubjectTarget).IsFalse();
+        await Assert.That(resultTargetSubject).IsFalse();
     }
 }

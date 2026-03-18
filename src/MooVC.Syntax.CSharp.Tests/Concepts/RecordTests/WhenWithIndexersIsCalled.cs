@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithIndexersIsCalled
 {
     [Test]
-    public void GivenIndexersThenReturnsUpdatedInstance()
+    public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
         var existing = new Indexer { Parameter = new Parameter { Name = "Item" } };
@@ -17,8 +17,8 @@ public sealed class WhenWithIndexersIsCalled
         Record result = original.WithIndexers(appended);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Indexers.ShouldBe(new[] { existing, appended });
-        result.IsPartial.ShouldBe(original.IsPartial);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Indexers).IsEqualTo(new[] { existing, appended });
+        await Assert.That(result.IsPartial).IsEqualTo(original.IsPartial);
     }
 }

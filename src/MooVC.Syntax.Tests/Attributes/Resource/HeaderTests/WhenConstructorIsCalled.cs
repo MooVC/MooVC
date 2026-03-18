@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenHeaderIsUndefined()
+    public async Task GivenDefaultsThenHeaderIsUndefined()
     {
         // Act
         var subject = new Header();
 
         // Assert
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var name = Snippet.From(HeaderTestsData.DefaultName);
@@ -31,8 +31,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(name);
-        subject.Value.ShouldBe(value);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Name).IsEqualTo(name);
+        await Assert.That(subject.Value).IsEqualTo(value);
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

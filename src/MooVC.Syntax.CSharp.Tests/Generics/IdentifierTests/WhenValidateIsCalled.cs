@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     private const string InvalidLowercase = "tValue";
 
     [Test]
-    public void GivenUnnamedIdentifierThenNoValidationErrorsReturned()
+    public async Task GivenUnnamedIdentifierThenNoValidationErrorsReturned()
     {
         // Arrange
         Identifier subject = Identifier.Unnamed;
@@ -20,14 +20,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
     [Arguments(ValidSimple)]
     [Arguments(ValidComplex)]
-    public void GivenValidNamesThenNoValidationErrorsReturned(string name)
+    public async Task GivenValidNamesThenNoValidationErrorsReturned(string name)
     {
         // Arrange
         var subject = new Identifier(name);
@@ -38,12 +38,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenEmptyNameThenValidationErrorsReturned()
+    public async Task GivenEmptyNameThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Identifier(" ");
@@ -54,14 +54,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidNameThenValidationErrorsReturned()
+    public async Task GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Identifier(InvalidLowercase);
@@ -72,9 +72,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Identifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

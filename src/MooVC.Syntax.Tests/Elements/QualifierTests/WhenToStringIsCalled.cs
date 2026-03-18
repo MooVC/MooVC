@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenEmptyValueThenReturnsEmptyString()
+    public async Task GivenEmptyValueThenReturnsEmptyString()
     {
         // Arrange
         var qualifier = new Qualifier([]);
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string result = qualifier.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSegmentsThenReturnsPeriodSeparatedValue()
+    public async Task GivenSegmentsThenReturnsPeriodSeparatedValue()
     {
         // Arrange
         ImmutableArray<Name> value = ["Alpha", "Beta", "Gamma"];
@@ -28,6 +28,6 @@ public sealed class WhenToStringIsCalled
         string result = qualifier.ToString();
 
         // Assert
-        result.ShouldBe("Alpha.Beta.Gamma");
+        await Assert.That(result).IsEqualTo("Alpha.Beta.Gamma");
     }
 }

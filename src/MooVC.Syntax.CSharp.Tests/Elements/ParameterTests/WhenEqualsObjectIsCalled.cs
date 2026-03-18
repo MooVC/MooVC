@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Parameter subject = ParameterTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(default);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentTypeThenReturnsFalse()
+    public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
         Parameter subject = ParameterTestsData.Create();
@@ -26,11 +26,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter subject = ParameterTestsData.Create(modifier: Parameter.Mode.Out);
@@ -40,6 +40,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.ArrayExtensionsTests;
+﻿namespace MooVC.ArrayExtensionsTests;
 
 public sealed class WhenToCopyOrEmptyIsCalled
 {
@@ -25,45 +25,45 @@ public sealed class WhenToCopyOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
-    public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
+    public async Task GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
         // Act
         int[] result = source.ToCopyOrEmpty();
 
         // Assert
-        result.ShouldBe(source);
+        await Assert.That(result).IsEqualTo(source);
     }
 
     [Test]
     [MethodDataSource(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
-    public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
+    public async Task GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
         // Act
         int[] result = original.ToCopyOrEmpty(predicate: value => value != 2);
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
     [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
-    public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
+    public async Task GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
         string[] result = source.ToCopyOrEmpty();
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
     [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
-    public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
+    public async Task GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
         string[] result = source.ToCopyOrEmpty(predicate: value => value != "Aarrgh!");
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 }

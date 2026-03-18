@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.OutputTests;
+﻿namespace MooVC.Syntax.Attributes.Project.OutputTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenOnConditionIsCalled
     private const string UpdatedCondition = "UpdatedCondition";
 
     [Test]
-    public void GivenConditionThenReturnsUpdatedInstance()
+    public async Task GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange
         Output original = OutputTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         Output result = original.OnCondition(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Condition.ShouldBe(updated);
-        result.ItemName.ShouldBe(original.ItemName);
-        result.PropertyName.ShouldBe(original.PropertyName);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Condition).IsEqualTo(updated);
+        await Assert.That(result.ItemName).IsEqualTo(original.ItemName);
+        await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
     }
 }

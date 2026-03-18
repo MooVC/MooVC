@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,21 +10,21 @@ public sealed class WhenConstructorIsCalled
     private const string Name = "Occurred";
 
     [Test]
-    public void GivenDefaultsThenEventIsUndefined()
+    public async Task GivenDefaultsThenEventIsUndefined()
     {
         // Act
         var subject = new Event();
 
         // Assert
-        subject.Behaviours.ShouldBe(Event.Methods.Default);
-        subject.Handler.ShouldBe(Symbol.Undefined);
-        subject.IsUndefind.ShouldBeTrue();
-        subject.Name.ShouldBe(Unnamed);
-        subject.Scope.ShouldBe(Scope.Public);
+        await Assert.That(subject.Behaviours).IsEqualTo(Event.Methods.Default);
+        await Assert.That(subject.Handler).IsEqualTo(Symbol.Undefined);
+        await Assert.That(subject.IsUndefind).IsTrue();
+        await Assert.That(subject.Name).IsEqualTo(Unnamed);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var behaviours = new Event.Methods
@@ -42,10 +42,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Behaviours.ShouldBe(behaviours);
-        subject.Handler.ShouldBe(new Symbol { Name = Handler });
-        subject.IsUndefind.ShouldBeFalse();
-        subject.Name.ShouldBe(new Name(Name));
-        subject.Scope.ShouldBe(Scope.Private);
+        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        await Assert.That(subject.Handler).IsEqualTo(new Symbol { Name = Handler });
+        await Assert.That(subject.IsUndefind).IsFalse();
+        await Assert.That(subject.Name).IsEqualTo(new Name(Name));
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

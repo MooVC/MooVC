@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ParameterTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorTaskParameterTaskParameterIsCalled
 {
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -15,6 +15,6 @@ public sealed class WhenInequalityOperatorTaskParameterTaskParameterIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

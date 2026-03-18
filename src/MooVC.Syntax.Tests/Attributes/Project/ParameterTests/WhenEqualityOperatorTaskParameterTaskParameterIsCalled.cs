@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ParameterTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorTaskParameterTaskParameterIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Parameter? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorTaskParameterTaskParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorTaskParameterTaskParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorTaskParameterTaskParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

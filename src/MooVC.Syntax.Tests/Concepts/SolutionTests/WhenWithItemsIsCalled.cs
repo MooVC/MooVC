@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithItemsIsCalled
 {
     [Test]
-    public void GivenItemsThenReturnsUpdatedInstance()
+    public async Task GivenItemsThenReturnsUpdatedInstance()
     {
         // Arrange
         Item existing = SolutionTestsData.CreateItem();
@@ -26,8 +26,8 @@ public sealed class WhenWithItemsIsCalled
         Solution result = original.WithItems(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Items.ShouldBe(original.Items.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

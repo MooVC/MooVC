@@ -1,11 +1,10 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-using Shouldly;
 
 public sealed class WhenForEachIsCalled
 {
     [Test]
-    public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
+    public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
@@ -20,11 +19,11 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        invocations.ShouldBe(enumeration);
+        await Assert.That(invocations).IsEqualTo(enumeration);
     }
 
     [Test]
-    public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
@@ -34,12 +33,12 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(action!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(action));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 
     [Test]
-    public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
@@ -54,11 +53,11 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        wasInvoked.ShouldBeFalse();
+        await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
-    public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
@@ -67,6 +66,6 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(default!);
 
         // Assert
-        Should.NotThrow(act);
+        await Assert.That(act).ThrowsNothing();
     }
 }

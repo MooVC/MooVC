@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Operators;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators;
 public sealed class WhenWithOperatorsIsCalled
 {
     [Test]
-    public void GivenOperatorsThenReturnsUpdatedInstance()
+    public async Task GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
         var operators = new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] };
@@ -16,8 +16,8 @@ public sealed class WhenWithOperatorsIsCalled
         Struct result = original.WithOperators(operators);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Operators.ShouldBe(operators);
-        original.Operators.ShouldBe(new Operators());
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Operators).IsEqualTo(operators);
+        await Assert.That(original.Operators).IsEqualTo(new Operators());
     }
 }

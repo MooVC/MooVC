@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenDefaultValueThenValidationErrorReturned()
+    public async Task GivenDefaultValueThenValidationErrorReturned()
     {
         // Arrange
         var qualifier = new Qualifier(default);
@@ -18,14 +18,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(qualifier, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Qualifier));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results.Count).IsEqualTo(1);
+        await Assert.That(results[0].MemberNames).Contains(nameof(Qualifier));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenEmptyArrayThenNoValidationErrorReturned()
+    public async Task GivenEmptyArrayThenNoValidationErrorReturned()
     {
         // Arrange
         var qualifier = new Qualifier([]);
@@ -36,12 +36,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(qualifier, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenSegmentsThenNoValidationErrorReturned()
+    public async Task GivenSegmentsThenNoValidationErrorReturned()
     {
         // Arrange
         ImmutableArray<Name> value = ["Alpha", "Beta"];
@@ -53,12 +53,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(qualifier, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.Count.ShouldBe(0);
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results.Count).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenNullSegmentThenValidationErrorReturned()
+    public async Task GivenNullSegmentThenValidationErrorReturned()
     {
         // Arrange
         Name[] values = [new("Alpha"), default!];
@@ -71,9 +71,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(qualifier, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain("Qualifier[1]");
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results.Count).IsEqualTo(1);
+        await Assert.That(results[0].MemberNames).Contains("Qualifier[1]");
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

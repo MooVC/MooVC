@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 using SystemPath = System.IO.Path;
 
 public sealed class WhenFileNameIsCalled
 {
     [Test]
-    public void GivenPathThenReturnsFileName()
+    public async Task GivenPathThenReturnsFileName()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -15,6 +15,6 @@ public sealed class WhenFileNameIsCalled
         string result = subject.FileName;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

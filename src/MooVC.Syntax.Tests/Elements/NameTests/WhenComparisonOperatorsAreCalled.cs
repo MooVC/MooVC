@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public void GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
         Name? left = default;
@@ -16,14 +16,14 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        lessThan.ShouldBeTrue();
-        greaterThan.ShouldBeFalse();
-        lessThanOrEqual.ShouldBeTrue();
-        greaterThanOrEqual.ShouldBeFalse();
+        await Assert.That(lessThan).IsTrue();
+        await Assert.That(greaterThan).IsFalse();
+        await Assert.That(lessThanOrEqual).IsTrue();
+        await Assert.That(greaterThanOrEqual).IsFalse();
     }
 
     [Test]
-    public void GivenAlphabeticalValuesThenOrderingMatchesOrdinalComparison()
+    public async Task GivenAlphabeticalValuesThenOrderingMatchesOrdinalComparison()
     {
         // Arrange
         Name left = "Alpha";
@@ -36,9 +36,9 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        lessThan.ShouldBeTrue();
-        greaterThan.ShouldBeFalse();
-        lessThanOrEqual.ShouldBeTrue();
-        greaterThanOrEqual.ShouldBeFalse();
+        await Assert.That(lessThan).IsTrue();
+        await Assert.That(greaterThan).IsFalse();
+        await Assert.That(lessThanOrEqual).IsTrue();
+        await Assert.That(greaterThanOrEqual).IsFalse();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 public sealed class WhenWithIsPartialIsCalled
 {
     [Test]
-    public void GivenIsPartialThenReturnsUpdatedInstance()
+    public async Task GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange
         Record original = RecordTestsData.Create(isPartial: true);
@@ -12,8 +12,8 @@ public sealed class WhenWithIsPartialIsCalled
         Record result = original.IsPartial(false);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsPartial.ShouldBeFalse();
-        original.IsPartial.ShouldBeTrue();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.IsPartial).IsFalse();
+        await Assert.That(original.IsPartial).IsTrue();
     }
 }

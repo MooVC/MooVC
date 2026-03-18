@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System;
 using System.Linq;
@@ -8,7 +8,7 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 public sealed class WhenWithProjectsIsCalled
 {
     [Test]
-    public void GivenProjectsThenReturnsUpdatedInstance()
+    public async Task GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange
         ProjectReference existing = SolutionTestsData.CreateProject();
@@ -27,8 +27,8 @@ public sealed class WhenWithProjectsIsCalled
         Solution result = original.WithProjects(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Projects.ShouldBe(original.Projects.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
+        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

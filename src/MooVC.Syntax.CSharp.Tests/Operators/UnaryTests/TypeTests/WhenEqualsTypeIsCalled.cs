@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenEqualsTypeIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(null as Unary.Type);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameInstanceThenReturnsTrue()
+    public async Task GivenTheSameInstanceThenReturnsTrue()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(type);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentInstanceThenReturnsFalse()
+    public async Task GivenADifferentInstanceThenReturnsFalse()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -38,6 +38,6 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(Unary.Type.Increment);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

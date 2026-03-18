@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -13,11 +13,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -27,11 +27,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -41,6 +41,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -10,26 +10,26 @@ public sealed class WhenConstructorIsCalled
     private const string AttributeName = "Serializable";
 
     [Test]
-    public void GivenDefaultsThenInterfaceIsUndefined()
+    public async Task GivenDefaultsThenInterfaceIsUndefined()
     {
         // Act
         var subject = new Interface();
 
         // Assert
-        subject.Attributes.ShouldBe([]);
-        subject.Events.ShouldBe([]);
-        subject.Indexers.ShouldBe([]);
-        subject.IsPartial.ShouldBeTrue();
-        subject.Methods.ShouldBe([]);
-        subject.Declaration.ShouldBe(Declaration.Unspecified);
-        subject.Operators.ShouldBe(new Operators());
-        subject.Properties.ShouldBe([]);
-        subject.Scope.ShouldBe(Scope.Public);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Attributes).IsEqualTo([]);
+        await Assert.That(subject.Events).IsEqualTo([]);
+        await Assert.That(subject.Indexers).IsEqualTo([]);
+        await Assert.That(subject.IsPartial).IsTrue();
+        await Assert.That(subject.Methods).IsEqualTo([]);
+        await Assert.That(subject.Declaration).IsEqualTo(Declaration.Unspecified);
+        await Assert.That(subject.Operators).IsEqualTo(new Operators());
+        await Assert.That(subject.Properties).IsEqualTo([]);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
@@ -51,15 +51,15 @@ public sealed class WhenConstructorIsCalled
             scope: Scope.Internal);
 
         // Assert
-        subject.Attributes.ShouldBe(new[] { attribute });
-        subject.Events.ShouldBe(new[] { @event });
-        subject.Indexers.ShouldBe(new[] { indexer });
-        subject.IsPartial.ShouldBeTrue();
-        subject.Methods.ShouldBe(new[] { method });
-        subject.Declaration.ShouldBe(new Declaration { Name = InterfaceTestsData.DefaultName });
-        subject.Operators.Conversions.ShouldNotBeEmpty();
-        subject.Properties.ShouldBe(new[] { property });
-        subject.Scope.ShouldBe(Scope.Internal);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Attributes).IsEqualTo(new[] { attribute });
+        await Assert.That(subject.Events).IsEqualTo(new[] { @event });
+        await Assert.That(subject.Indexers).IsEqualTo(new[] { indexer });
+        await Assert.That(subject.IsPartial).IsTrue();
+        await Assert.That(subject.Methods).IsEqualTo(new[] { method });
+        await Assert.That(subject.Declaration).IsEqualTo(new Declaration { Name = InterfaceTestsData.DefaultName });
+        await Assert.That(subject.Operators.Conversions).IsNotEmpty();
+        await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

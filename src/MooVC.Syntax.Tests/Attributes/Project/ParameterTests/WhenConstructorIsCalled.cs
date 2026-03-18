@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.Attributes.Project.ParameterTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenTaskParameterIsUndefined()
+    public async Task GivenDefaultsThenTaskParameterIsUndefined()
     {
         // Act
         var subject = new Parameter();
 
         // Assert
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Parameter
@@ -27,8 +27,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(new Name(ParameterTestsData.DefaultName));
-        subject.Value.ShouldBe(Snippet.From(ParameterTestsData.DefaultValue));
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Name).IsEqualTo(new Name(ParameterTestsData.DefaultName));
+        await Assert.That(subject.Value).IsEqualTo(Snippet.From(ParameterTestsData.DefaultValue));
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

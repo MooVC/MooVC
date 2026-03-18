@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Formatting.StringExtensionsTests;
+﻿namespace MooVC.Syntax.Formatting.StringExtensionsTests;
 
 using MooVC.Syntax.Elements;
 
@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
     private const string WhitespaceLine = " ";
 
     [Test]
-    public void GivenSingleValueThenSingleLineSnippetIsReturned()
+    public async Task GivenSingleValueThenSingleLineSnippetIsReturned()
     {
         // Arrange
         const string value = FirstLine;
@@ -18,12 +18,12 @@ public sealed class WhenToSnippetIsCalled
         var result = value.ToSnippet();
 
         // Assert
-        result.Lines.ShouldBe(1);
-        result.ToString().ShouldBe(value);
+        await Assert.That(result.Lines).IsEqualTo(1);
+        await Assert.That(result.ToString()).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenEmptyStringThenSnippetIsNotEmpty()
+    public async Task GivenEmptyStringThenSnippetIsNotEmpty()
     {
         // Arrange
         string value = string.Empty;
@@ -32,13 +32,13 @@ public sealed class WhenToSnippetIsCalled
         var result = value.ToSnippet();
 
         // Assert
-        result.IsEmpty.ShouldBeFalse();
-        result.Lines.ShouldBe(1);
-        result.ToString().ShouldBe(string.Empty);
+        await Assert.That(result.IsEmpty).IsFalse();
+        await Assert.That(result.Lines).IsEqualTo(1);
+        await Assert.That(result.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesWithNullOrEmptyThenTheyAreFiltered()
+    public async Task GivenValuesWithNullOrEmptyThenTheyAreFiltered()
     {
         // Arrange
         string?[] nullable =
@@ -57,12 +57,12 @@ public sealed class WhenToSnippetIsCalled
         var result = values.ToSnippet();
 
         // Assert
-        result.Lines.ShouldBe(3);
-        result.ToString().ShouldBe(expected);
+        await Assert.That(result.Lines).IsEqualTo(3);
+        await Assert.That(result.ToString()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
+    public async Task GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
     {
         // Arrange
         string?[] nullable =
@@ -77,6 +77,6 @@ public sealed class WhenToSnippetIsCalled
         var result = values.ToSnippet();
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 }

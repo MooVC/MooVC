@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
     [Test]
-    public void GivenUnspecifiedConstraintThenReturnsTrue()
+    public async Task GivenUnspecifiedConstraintThenReturnsTrue()
     {
         // Arrange
         Constraint subject = Constraint.Unspecified;
@@ -14,11 +14,11 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSpecifiedConstraintThenReturnsFalse()
+    public async Task GivenSpecifiedConstraintThenReturnsFalse()
     {
         // Arrange
         var subject = new Constraint
@@ -30,6 +30,6 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

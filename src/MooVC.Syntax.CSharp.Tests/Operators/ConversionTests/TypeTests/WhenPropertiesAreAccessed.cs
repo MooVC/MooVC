@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
@@ -13,7 +13,7 @@ public sealed class WhenPropertiesAreAccessed
 
     [Test]
     [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
-    public void GivenTypeThenFlagsReflectValue(ConversionTypeExpectation expectation)
+    public async Task GivenTypeThenFlagsReflectValue(ConversionTypeExpectation expectation)
     {
         // Arrange
         Conversion.Type subject = expectation.OperatorType;
@@ -24,9 +24,9 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        isExplicit.ShouldBe(expectation.IsExplicit);
-        isImplicit.ShouldBe(expectation.IsImplicit);
-        representation.ShouldBe(expectation.ExpectedString);
+        await Assert.That(isExplicit).IsEqualTo(expectation.IsExplicit);
+        await Assert.That(isImplicit).IsEqualTo(expectation.IsImplicit);
+        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record ConversionTypeExpectation(

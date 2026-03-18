@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     private const string OtherValue = "sealed";
 
     [Test]
-    public void GivenNullExtensibilityThenReturnsFalse()
+    public async Task GivenNullExtensibilityThenReturnsFalse()
     {
         // Arrange
         Extensibility? subject = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
         bool result = subject == StaticValue;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenMatchingValueThenReturnsTrue()
+    public async Task GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
         Extensibility subject = Extensibility.Static;
@@ -28,11 +28,11 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
         bool result = subject == StaticValue;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Extensibility subject = Extensibility.Static;
@@ -41,6 +41,6 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
         bool result = subject == OtherValue;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

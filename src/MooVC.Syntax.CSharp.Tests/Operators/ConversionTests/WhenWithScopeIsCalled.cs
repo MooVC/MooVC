@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenWithScopeIsCalled
         Conversion result = original.WithScope(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Direction.ShouldBe(original.Direction);
-        result.Mode.ShouldBe(original.Mode);
-        result.Scope.ShouldBe(replacement);
-        result.Target.ShouldBe(original.Target);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(original.Body);
+        await Assert.That(result.Direction).IsEqualTo(original.Direction);
+        await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        await Assert.That(result.Scope).IsEqualTo(replacement);
+        await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

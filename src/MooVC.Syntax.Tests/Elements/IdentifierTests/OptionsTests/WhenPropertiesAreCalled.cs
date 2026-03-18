@@ -1,26 +1,26 @@
-namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
 
 public sealed class WhenPropertiesAreCalled
 {
     [Test]
-    public void GivenPascalCasingThenFlagsAreTrue()
+    public async Task GivenPascalCasingThenFlagsAreTrue()
     {
         // Arrange
         var subject = new Identifier.Options { Casing = Identifier.Casing.Pascal };
 
         // Act & Assert
-        subject.IsCamel.ShouldBeTrue();
-        subject.IsPascal.ShouldBeTrue();
+        await Assert.That(subject.IsCamel).IsTrue();
+        await Assert.That(subject.IsPascal).IsTrue();
     }
 
     [Test]
-    public void GivenCamelCasingThenFlagsAreFalse()
+    public async Task GivenCamelCasingThenFlagsAreFalse()
     {
         // Arrange
         var subject = new Identifier.Options { Casing = Identifier.Casing.Camel };
 
         // Act & Assert
-        subject.IsCamel.ShouldBeFalse();
-        subject.IsPascal.ShouldBeFalse();
+        await Assert.That(subject.IsCamel).IsFalse();
+        await Assert.That(subject.IsPascal).IsFalse();
     }
 }

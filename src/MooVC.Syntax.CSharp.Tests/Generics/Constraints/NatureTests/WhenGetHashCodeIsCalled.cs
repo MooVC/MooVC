@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Different = "struct";
 
     [Test]
-    public void GivenMatchingValuesThenReturnsSameHash()
+    public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
         Nature first = Same;
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsDifferentHashes()
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
         Nature first = Same;
@@ -32,6 +32,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

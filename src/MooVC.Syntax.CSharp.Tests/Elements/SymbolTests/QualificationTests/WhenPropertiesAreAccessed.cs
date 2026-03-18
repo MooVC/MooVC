@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests.QualificationTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests.QualificationTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
     [Test]
-    public void GivenFullQualificationThenFlagsReflectValue()
+    public async Task GivenFullQualificationThenFlagsReflectValue()
     {
         // Arrange
         Symbol.Qualification subject = Symbol.Qualification.Full;
@@ -14,13 +14,13 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        isFull.ShouldBeTrue();
-        isMinimum.ShouldBeFalse();
-        isGlobal.ShouldBeFalse();
+        await Assert.That(isFull).IsTrue();
+        await Assert.That(isMinimum).IsFalse();
+        await Assert.That(isGlobal).IsFalse();
     }
 
     [Test]
-    public void GivenMinimumQualificationThenFlagsReflectValue()
+    public async Task GivenMinimumQualificationThenFlagsReflectValue()
     {
         // Arrange
         Symbol.Qualification subject = Symbol.Qualification.Minimum;
@@ -31,13 +31,13 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        isFull.ShouldBeFalse();
-        isMinimum.ShouldBeTrue();
-        isGlobal.ShouldBeFalse();
+        await Assert.That(isFull).IsFalse();
+        await Assert.That(isMinimum).IsTrue();
+        await Assert.That(isGlobal).IsFalse();
     }
 
     [Test]
-    public void GivenGlobalQualificationThenFlagsReflectValue()
+    public async Task GivenGlobalQualificationThenFlagsReflectValue()
     {
         // Arrange
         Symbol.Qualification subject = Symbol.Qualification.Global;
@@ -48,8 +48,8 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        isFull.ShouldBeFalse();
-        isMinimum.ShouldBeFalse();
-        isGlobal.ShouldBeTrue();
+        await Assert.That(isFull).IsFalse();
+        await Assert.That(isMinimum).IsFalse();
+        await Assert.That(isGlobal).IsTrue();
     }
 }

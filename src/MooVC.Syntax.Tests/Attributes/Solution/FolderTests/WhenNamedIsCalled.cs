@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         Folder original = FolderTestsData.Create();
@@ -13,10 +13,10 @@ public sealed class WhenNamedIsCalled
         Folder result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Files.ShouldBe(original.Files);
-        result.Items.ShouldBe(original.Items);
-        result.Projects.ShouldBe(original.Projects);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(updated);
+        await Assert.That(result.Files).IsEqualTo(original.Files);
+        await Assert.That(result.Items).IsEqualTo(original.Items);
+        await Assert.That(result.Projects).IsEqualTo(original.Projects);
     }
 }

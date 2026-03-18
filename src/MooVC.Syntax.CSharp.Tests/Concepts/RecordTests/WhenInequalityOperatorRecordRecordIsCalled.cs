@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenInequalityOperatorRecordRecordIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Record? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Record? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Record left = RecordTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         Record first = RecordTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Record left = RecordTestsData.Create(parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }]);
@@ -73,12 +73,12 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsTrue()
+    public async Task GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange
         Record left = RecordTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentExtensibilitiesThenReturnsTrue()
+    public async Task GivenDifferentExtensibilitiesThenReturnsTrue()
     {
         // Arrange
         Record left = RecordTestsData.Create(extensibility: Extensibility.Abstract);
@@ -102,6 +102,6 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

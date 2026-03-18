@@ -7,7 +7,7 @@ public sealed class WhenToKebabCaseIsCalled
     private static readonly Faker generator = new();
 
     [Test]
-    public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string? value = default;
@@ -16,12 +16,12 @@ public sealed class WhenToKebabCaseIsCalled
         Action action = () => value!.ToKebabCase();
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
-    public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
+    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
         string value = string.Empty;
@@ -30,8 +30,8 @@ public sealed class WhenToKebabCaseIsCalled
         Action action = () => value.ToKebabCase();
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -39,14 +39,14 @@ public sealed class WhenToKebabCaseIsCalled
     [Arguments("\t")]
     [Arguments("\r\n")]
     [Arguments("   ")]
-    public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
+    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
         Action action = () => value.ToKebabCase();
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -65,30 +65,30 @@ public sealed class WhenToKebabCaseIsCalled
     [Arguments("Section2Update", "section2-update")]
     [Arguments("ÉclairDeluxe", "éclair-deluxe")]
     [Arguments("ΣigmaValue", "σigma-value")]
-    public void GivenValuesThenExpectedKebabCaseIsReturned(string value, string expected)
+    public async Task GivenValuesThenExpectedKebabCaseIsReturned(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
     [Arguments("A", "a")]
     [Arguments("ABC", "abc")]
     [Arguments("XMLHttpRequest", "xml-http-request")]
-    public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
+    public async Task GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
+    public async Task GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
     {
         // Arrange
         string value = "alpha  beta---gamma___delta";
@@ -97,11 +97,11 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe("alpha-beta-gamma-delta");
+        await Assert.That(result).IsEqualTo("alpha-beta-gamma-delta");
     }
 
     [Test]
-    public void GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
+    public async Task GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
     {
         // Arrange
         string value = "  _Alpha__Beta- ";
@@ -110,11 +110,11 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe("alpha-beta");
+        await Assert.That(result).IsEqualTo("alpha-beta");
     }
 
     [Test]
-    public void GivenDigitBeforeUppercaseThenSeparatorIsInserted()
+    public async Task GivenDigitBeforeUppercaseThenSeparatorIsInserted()
     {
         // Arrange
         string value = "Part3Revision";
@@ -123,37 +123,37 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe("part3-revision");
+        await Assert.That(result).IsEqualTo("part3-revision");
     }
 
     [Test]
     [Arguments("__", "")]
     [Arguments("---", "")]
     [Arguments("___---___", "")]
-    public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
+    public async Task GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
     [Arguments("123", "123")]
     [Arguments("9lives", "9lives")]
     [Arguments("Version2Alpha3", "version2-alpha3")]
-    public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
+    public async Task GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenInternationalUppercaseThenLowercaseIsInvariant()
+    public async Task GivenInternationalUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
         CultureInfo originalCulture = CultureInfo.CurrentCulture;
@@ -173,11 +173,11 @@ public sealed class WhenToKebabCaseIsCalled
         }
 
         // Assert
-        result.ShouldBe("istanbul-city");
+        await Assert.That(result).IsEqualTo("istanbul-city");
     }
 
     [Test]
-    public void GivenWordsTwiceThenResultIsIdempotent()
+    public async Task GivenWordsTwiceThenResultIsIdempotent()
     {
         // Arrange
         const int WordCount = 10;
@@ -213,12 +213,12 @@ public sealed class WhenToKebabCaseIsCalled
         {
             string firstResult = word.ToKebabCase();
             string secondResult = firstResult.ToKebabCase();
-            secondResult.ShouldBe(firstResult);
+            await Assert.That(secondResult).IsEqualTo(firstResult);
         }
     }
 
     [Test]
-    public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
+    public async Task GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
     {
         // Arrange
         string value = new('A', 16_384);
@@ -227,6 +227,6 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        result.ShouldBe(new string('a', 16_384));
+        await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 }

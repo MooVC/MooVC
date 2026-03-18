@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(null);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentTypeThenReturnsFalse()
+    public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -25,11 +25,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -39,6 +39,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

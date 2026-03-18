@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
 
 public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Snippet.BlockOptions? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Snippet.BlockOptions? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet.BlockOptions();
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         var first = new Snippet.BlockOptions();
@@ -55,11 +55,11 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Snippet.BlockOptions();
@@ -70,12 +70,12 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet.BlockOptions();
@@ -88,7 +88,7 @@ public sealed class WhenInequalityOperatorBlockOptionsBlockOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

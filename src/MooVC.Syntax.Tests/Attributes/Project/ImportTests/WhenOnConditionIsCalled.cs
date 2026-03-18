@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenOnConditionIsCalled
     private const string UpdatedCondition = "UpdatedCondition";
 
     [Test]
-    public void GivenConditionThenReturnsUpdatedInstance()
+    public async Task GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange
         Import original = ImportTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         Import result = original.OnCondition(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Condition.ShouldBe(updated);
-        result.Project.ShouldBe(original.Project);
-        result.Label.ShouldBe(original.Label);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Condition).IsEqualTo(updated);
+        await Assert.That(result.Project).IsEqualTo(original.Project);
+        await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

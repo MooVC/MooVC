@@ -10,17 +10,17 @@ public sealed class WhenIsReservedIsCalled
     [Arguments(null)]
     [Arguments("")]
     [Arguments("   ")]
-    public void GivenNullEmptyOrWhitespaceWhenStringThenReturnsFalse(string? value)
+    public async Task GivenNullEmptyOrWhitespaceWhenStringThenReturnsFalse(string? value)
     {
         // Arrange & Act
         bool result = value.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenAReservedKeywordWhenStringThenReturnsTrue()
+    public async Task GivenAReservedKeywordWhenStringThenReturnsTrue()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -30,11 +30,11 @@ public sealed class WhenIsReservedIsCalled
         bool result = keyword.IsReserved();
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenAtPrefixedReservedKeywordWhenStringThenReturnsFalse()
+    public async Task GivenAtPrefixedReservedKeywordWhenStringThenReturnsFalse()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -44,11 +44,11 @@ public sealed class WhenIsReservedIsCalled
         bool result = $"@{keyword}".IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenPascalCaseReservedKeywordWhenStringThenReturnsFalse()
+    public async Task GivenPascalCaseReservedKeywordWhenStringThenReturnsFalse()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -61,7 +61,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = keyword.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -71,17 +71,17 @@ public sealed class WhenIsReservedIsCalled
     [Arguments("class\t")]
     [Arguments("\nclass")]
     [Arguments("class\n")]
-    public void GivenLeadingOrTrailingWhitespaceWhenStringThenReturnsFalse(string value)
+    public async Task GivenLeadingOrTrailingWhitespaceWhenStringThenReturnsFalse(string value)
     {
         // Arrange & Act
         bool result = value.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNullWhenStringBuilderThenReturnsFalse()
+    public async Task GivenNullWhenStringBuilderThenReturnsFalse()
     {
         // Arrange
         StringBuilder? builder = default;
@@ -90,13 +90,13 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
     [Arguments("")]
     [Arguments("   ")]
-    public void GivenEmptyOrWhitespaceWhenStringBuilderThenReturnsFalse(string value)
+    public async Task GivenEmptyOrWhitespaceWhenStringBuilderThenReturnsFalse(string value)
     {
         // Arrange
         var builder = new StringBuilder(value);
@@ -105,11 +105,11 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenAReservedKeywordWhenStringBuilderThenReturnsTrue()
+    public async Task GivenAReservedKeywordWhenStringBuilderThenReturnsTrue()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -120,11 +120,11 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenAtPrefixedReservedKeywordWhenStringBuilderThenReturnsFalse()
+    public async Task GivenAtPrefixedReservedKeywordWhenStringBuilderThenReturnsFalse()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -135,11 +135,11 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenPascalCaseReservedKeywordWhenStringBuilderThenReturnsFalse()
+    public async Task GivenPascalCaseReservedKeywordWhenStringBuilderThenReturnsFalse()
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -154,7 +154,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -164,7 +164,7 @@ public sealed class WhenIsReservedIsCalled
     [Arguments("class\t")]
     [Arguments("\nclass")]
     [Arguments("class\n")]
-    public void GivenLeadingOrTrailingWhitespaceWhenStringBuilderThenReturnsFalse(string value)
+    public async Task GivenLeadingOrTrailingWhitespaceWhenStringBuilderThenReturnsFalse(string value)
     {
         // Arrange
         var builder = new StringBuilder(value);
@@ -173,6 +173,6 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

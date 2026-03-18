@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenEqualityOperatorModeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
     private const string Different = "out";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Argument.Mode? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Argument.Mode? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Argument.Mode left = Argument.Mode.In;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Argument.Mode left = Argument.Mode.In;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Argument.Mode left = Argument.Mode.In;
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorModeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

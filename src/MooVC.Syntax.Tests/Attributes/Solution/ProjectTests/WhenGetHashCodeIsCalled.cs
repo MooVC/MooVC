@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using System;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashCodesMatch()
+    public async Task GivenEqualValuesThenHashCodesMatch()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashCodesDiffer()
+    public async Task GivenDifferentValuesThenHashCodesDiffer()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

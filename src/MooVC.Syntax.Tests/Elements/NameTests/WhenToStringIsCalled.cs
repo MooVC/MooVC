@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     private const string WithPrefix = "@Alpha";
 
     [Test]
-    public void GivenNullValueThenResultIsNull()
+    public async Task GivenNullValueThenResultIsNull()
     {
         // Arrange
         var subject = new Name(default);
@@ -19,11 +19,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBeNull();
+        await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenEmptyThenMatchesValue()
+    public async Task GivenEmptyThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Empty);
@@ -32,11 +32,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Empty);
+        await Assert.That(result).IsEqualTo(Empty);
     }
 
     [Test]
-    public void GivenWhitespaceThenMatchesValue()
+    public async Task GivenWhitespaceThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Space);
@@ -45,11 +45,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Space);
+        await Assert.That(result).IsEqualTo(Space);
     }
 
     [Test]
-    public void GivenAsciiThenMatchesValue()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Alpha);
@@ -58,11 +58,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Alpha);
+        await Assert.That(result).IsEqualTo(Alpha);
     }
 
     [Test]
-    public void GivenUnicodeThenMatchesValue()
+    public async Task GivenUnicodeThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Unicode);
@@ -71,11 +71,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Unicode);
+        await Assert.That(result).IsEqualTo(Unicode);
     }
 
     [Test]
-    public void GivenValueWithUnderscoreThenMatchesValue()
+    public async Task GivenValueWithUnderscoreThenMatchesValue()
     {
         // Arrange
         var subject = new Name(WithUnderscore);
@@ -84,11 +84,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(WithUnderscore);
+        await Assert.That(result).IsEqualTo(WithUnderscore);
     }
 
     [Test]
-    public void GivenReservedPrefixThenMatchesValue()
+    public async Task GivenReservedPrefixThenMatchesValue()
     {
         // Arrange
         var subject = new Name(WithPrefix);
@@ -97,11 +97,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(WithPrefix);
+        await Assert.That(result).IsEqualTo(WithPrefix);
     }
 
     [Test]
-    public void GivenVeryLongThenMatchesValue()
+    public async Task GivenVeryLongThenMatchesValue()
     {
         // Arrange
         string value = new('x', 64_000);
@@ -111,11 +111,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenDifferentValuesThenDifferentResultsAreReturned()
+    public async Task GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
         var left = new Name("Alpha");
@@ -126,11 +126,11 @@ public sealed class WhenToStringIsCalled
         string rightString = right.ToString();
 
         // Assert
-        leftString.ShouldNotBe(rightString);
+        await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
-    public void GivenRepeatedCallsThenResultIsStable()
+    public async Task GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
         var subject = new Name(Alpha);
@@ -140,6 +140,6 @@ public sealed class WhenToStringIsCalled
         string second = subject.ToString();
 
         // Assert
-        first.ShouldBe(second);
+        await Assert.That(first).IsEqualTo(second);
     }
 }

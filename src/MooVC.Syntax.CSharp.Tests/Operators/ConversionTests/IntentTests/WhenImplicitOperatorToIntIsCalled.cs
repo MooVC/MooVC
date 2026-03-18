@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenImplicitOperatorToIntIsCalled
 {
     [Test]
-    public void GivenAnIntentThenReturnsTheValue()
+    public async Task GivenAnIntentThenReturnsTheValue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToIntIsCalled
         int value = intent;
 
         // Assert
-        value.ShouldBe(1);
+        await Assert.That(value).IsEqualTo(1);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter first = Argument.Formatter.Declaration;
@@ -55,11 +55,11 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -70,12 +70,12 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -86,7 +86,7 @@ public sealed class WhenInequalityOperatorFormatterFormatterIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

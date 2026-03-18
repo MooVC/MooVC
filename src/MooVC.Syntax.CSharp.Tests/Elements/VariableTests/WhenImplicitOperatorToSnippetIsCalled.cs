@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.VariableTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using MooVC.Syntax.Elements;
 using MooVC.Syntax.Formatting;
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string VariableName = "Variable";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Variable? variable = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => variable;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenVariableThenSnippetMatchesStringRepresentation()
+    public async Task GivenVariableThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Variable(VariableName);
@@ -31,6 +31,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(expected));
+        await Assert.That(result).IsEqualTo(Snippet.From(expected));
     }
 }

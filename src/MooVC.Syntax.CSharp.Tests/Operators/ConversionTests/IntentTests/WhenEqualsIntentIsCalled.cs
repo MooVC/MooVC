@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenEqualsIntentIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(default(Conversion.Intent));
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameReferenceThenReturnsTrue()
+    public async Task GivenTheSameReferenceThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(intent);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -38,11 +38,11 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(Conversion.Intent.From);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -51,6 +51,6 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(Conversion.Intent.To);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

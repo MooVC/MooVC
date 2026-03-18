@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenInequalityOperatorKindStringIsCalled
 {
     [Test]
-    public void GivenKindMatchesStringThenReturnsFalse()
+    public async Task GivenKindMatchesStringThenReturnsFalse()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != Right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenKindDiffersFromStringThenReturnsTrue()
+    public async Task GivenKindDiffersFromStringThenReturnsTrue()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Ref;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != Right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNullKindThenReturnsFalseWhenComparedToNull()
+    public async Task GivenNullKindThenReturnsFalseWhenComparedToNull()
     {
         // Arrange
         Struct.Kind left = default!;
@@ -40,6 +40,6 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != default(string);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

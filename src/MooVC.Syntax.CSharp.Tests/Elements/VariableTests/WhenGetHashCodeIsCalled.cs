@@ -5,7 +5,7 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly Faker generator = new();
 
     [Test]
-    public void GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
+    public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
         string value = generator.Lorem.Word();
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValueThenHashesAreNotEqual()
+    public async Task GivenDifferentValueThenHashesAreNotEqual()
     {
         // Arrange
         string[] words = generator
@@ -39,11 +39,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = secondMember.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenSameInstanceWhenCalledTwiceThenHashIsStable()
+    public async Task GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
         string value = generator.Lorem.Word();
@@ -54,6 +54,6 @@ public sealed class WhenGetHashCodeIsCalled
         int second = subject.GetHashCode();
 
         // Assert
-        first.ShouldBe(second);
+        await Assert.That(first).IsEqualTo(second);
     }
 }

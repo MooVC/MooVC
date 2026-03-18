@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using System;
 using System.Xml.Linq;
@@ -6,7 +6,7 @@ using System.Xml.Linq;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Header subject = Header.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         Header subject = HeaderTestsData.Create();
@@ -35,6 +35,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

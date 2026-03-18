@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenWithModeIsCalled
 {
     [Test]
-    public void GivenModeThenReturnsNewInstanceWithUpdatedMode()
+    public async Task GivenModeThenReturnsNewInstanceWithUpdatedMode()
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenWithModeIsCalled
         Conversion result = original.WithMode(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Direction.ShouldBe(original.Direction);
-        result.Mode.ShouldBe(replacement);
-        result.Scope.ShouldBe(original.Scope);
-        result.Target.ShouldBe(original.Target);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(original.Body);
+        await Assert.That(result.Direction).IsEqualTo(original.Direction);
+        await Assert.That(result.Mode).IsEqualTo(replacement);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

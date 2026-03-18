@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using System;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Record subject = RecordTestsData.Create();
@@ -14,6 +14,6 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 }

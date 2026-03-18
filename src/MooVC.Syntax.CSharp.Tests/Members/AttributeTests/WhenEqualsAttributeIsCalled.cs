@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenEqualsAttributeIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Attribute subject = AttributeTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenEqualsAttributeIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Attribute subject = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("value") });
@@ -30,11 +30,11 @@ public sealed class WhenEqualsAttributeIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Property);
@@ -44,11 +44,11 @@ public sealed class WhenEqualsAttributeIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentArgumentsThenReturnsFalse()
+    public async Task GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
@@ -58,6 +58,6 @@ public sealed class WhenEqualsAttributeIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

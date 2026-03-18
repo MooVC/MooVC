@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualMethodsThenHashCodesAreEqual()
+    public async Task GivenEqualMethodsThenHashCodesAreEqual()
     {
         // Arrange
         Method first = MethodTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentMethodsThenHashCodesAreDifferent()
+    public async Task GivenDifferentMethodsThenHashCodesAreDifferent()
     {
         // Arrange
         Method first = MethodTestsData.Create();
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

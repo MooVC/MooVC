@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedPropertyThenEmptyReturned()
+    public async Task GivenUndefinedPropertyThenEmptyReturned()
     {
         // Arrange
         Property subject = Property.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenGetAndSetThenBodyIsRendered()
+    public async Task GivenGetAndSetThenBodyIsRendered()
     {
         // Arrange
         var behaviours = new Property.Methods
@@ -41,6 +41,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

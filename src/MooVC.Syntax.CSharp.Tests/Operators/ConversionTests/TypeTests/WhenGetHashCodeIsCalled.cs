@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentValuesThenReturnsTheSameHash()
+    public async Task GivenEquivalentValuesThenReturnsTheSameHash()
     {
         // Arrange
         Conversion.Type first = Conversion.Type.Explicit;
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsDifferentHashes()
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
         Conversion.Type first = Conversion.Type.Explicit;
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

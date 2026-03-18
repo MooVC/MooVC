@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenGreaterThanOperatorIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Binary.Type? leftType = default;
@@ -13,11 +13,11 @@ public sealed class WhenGreaterThanOperatorIsCalled
         bool result = leftType > rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Binary.Type? leftType = default;
@@ -27,11 +27,11 @@ public sealed class WhenGreaterThanOperatorIsCalled
         bool result = leftType > rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Binary.Type leftType = Binary.Type.Add;
@@ -41,11 +41,11 @@ public sealed class WhenGreaterThanOperatorIsCalled
         bool result = leftType > rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSmallerLeftThenReturnsFalse()
+    public async Task GivenSmallerLeftThenReturnsFalse()
     {
         // Arrange
         Binary.Type leftType = Binary.Type.Add;
@@ -55,11 +55,11 @@ public sealed class WhenGreaterThanOperatorIsCalled
         bool result = leftType > rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLargerLeftThenReturnsTrue()
+    public async Task GivenLargerLeftThenReturnsTrue()
     {
         // Arrange
         Binary.Type leftType = Binary.Type.Subtract;
@@ -69,6 +69,6 @@ public sealed class WhenGreaterThanOperatorIsCalled
         bool result = leftType > rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

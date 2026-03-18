@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Metadata subject = Metadata.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineConditionThenValidationErrorReturned()
+    public async Task GivenMultiLineConditionThenValidationErrorReturned()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create(condition: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.Condition));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Metadata.Condition));
     }
 
     [Test]
-    public void GivenUnnamedNameThenValidationErrorReturned()
+    public async Task GivenUnnamedNameThenValidationErrorReturned()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create(name: Name.Unnamed);
@@ -52,8 +52,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.Name));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Metadata.Name));
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Different = "TBravo";
 
     [Test]
-    public void GivenMatchingIdentifiersThenReturnSameHash()
+    public async Task GivenMatchingIdentifiersThenReturnSameHash()
     {
         // Arrange
         var first = new Identifier(Same);
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentIdentifiersThenReturnDifferentHashes()
+    public async Task GivenDifferentIdentifiersThenReturnDifferentHashes()
     {
         // Arrange
         var first = new Identifier(Same);
@@ -32,6 +32,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

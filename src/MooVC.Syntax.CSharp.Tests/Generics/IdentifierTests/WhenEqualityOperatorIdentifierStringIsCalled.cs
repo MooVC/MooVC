@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenEqualityOperatorIdentifierStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
     private const string Value = "Value";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Identifier? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Identifier? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Identifier left = Value;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Identifier first = Value;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Identifier left = Value;
@@ -72,11 +72,11 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Identifier left = Value;
@@ -86,6 +86,6 @@ public sealed class WhenEqualityOperatorIdentifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

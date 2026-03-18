@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = FileTestsData.DefaultPath;
@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         File subject = value;
 
         // Asserts
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

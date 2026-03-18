@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorSdkSdkIsCalled
 {
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Sdk left = SdkTestsData.Create();
@@ -15,6 +15,6 @@ public sealed class WhenInequalityOperatorSdkSdkIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

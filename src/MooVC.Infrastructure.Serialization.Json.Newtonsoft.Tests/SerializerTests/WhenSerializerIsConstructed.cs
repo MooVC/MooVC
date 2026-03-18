@@ -6,7 +6,7 @@ using global::Newtonsoft.Json;
 public sealed class WhenSerializerIsConstructed
 {
     [Test]
-    public void GivenNoSettingsThenADefaultSerializerIsCreated()
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
         var serializer = new Serializer();
@@ -17,7 +17,7 @@ public sealed class WhenSerializerIsConstructed
     }
 
     [Test]
-    public void GivenABufferSizeThenASerializerIsCreatedWithTheBufferSizeApplied()
+    public async Task GivenABufferSizeThenASerializerIsCreatedWithTheBufferSizeApplied()
     {
         // Arrange & Act
         const int BufferSize = 32;
@@ -32,7 +32,7 @@ public sealed class WhenSerializerIsConstructed
     [Arguments(0)]
     [Arguments(-1)]
     [Arguments(1)]
-    public void GivenABelowMinimumBufferSizeThenASerializerIsCreatedWithTheMinimumBufferSizeApplied(int bufferSize)
+    public async Task GivenABelowMinimumBufferSizeThenASerializerIsCreatedWithTheMinimumBufferSizeApplied(int bufferSize)
     {
         // Arrange & Act
         var serializer = new Serializer(bufferSize: bufferSize);
@@ -43,7 +43,7 @@ public sealed class WhenSerializerIsConstructed
     }
 
     [Test]
-    public void GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
+    public async Task GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
         Encoding encoding = Encoding.ASCII;
@@ -55,7 +55,7 @@ public sealed class WhenSerializerIsConstructed
     }
 
     [Test]
-    public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    public async Task GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         // Arrange & Act
         var settings = new JsonSerializerSettings
@@ -76,19 +76,19 @@ public sealed class WhenSerializerIsConstructed
 
     private static void AssertEqual(int bufferSize, Encoding encoding, Serializer serializer, JsonSerializerSettings settings)
     {
-        serializer.BufferSize.ShouldBe(bufferSize);
-        serializer.Encoding.ShouldBe(encoding);
-        serializer.Json.DateTimeZoneHandling.ShouldBe(settings.DateTimeZoneHandling);
+        await Assert.That(serializer.BufferSize).IsEqualTo(bufferSize);
+        await Assert.That(serializer.Encoding).IsEqualTo(encoding);
+        await Assert.That(serializer.Json.DateTimeZoneHandling).IsEqualTo(settings.DateTimeZoneHandling);
 
         AssertEqual(settings, serializer);
     }
 
     private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
-        serializer.Json.DefaultValueHandling.ShouldBe(expected.DefaultValueHandling);
-        serializer.Json.NullValueHandling.ShouldBe(expected.NullValueHandling);
-        serializer.Json.ReferenceLoopHandling.ShouldBe(expected.ReferenceLoopHandling);
-        serializer.Json.TypeNameHandling.ShouldBe(expected.TypeNameHandling);
-        serializer.Json.TypeNameAssemblyFormatHandling.ShouldBe(expected.TypeNameAssemblyFormatHandling);
+        await Assert.That(serializer.Json.DefaultValueHandling).IsEqualTo(expected.DefaultValueHandling);
+        await Assert.That(serializer.Json.NullValueHandling).IsEqualTo(expected.NullValueHandling);
+        await Assert.That(serializer.Json.ReferenceLoopHandling).IsEqualTo(expected.ReferenceLoopHandling);
+        await Assert.That(serializer.Json.TypeNameHandling).IsEqualTo(expected.TypeNameHandling);
+        await Assert.That(serializer.Json.TypeNameAssemblyFormatHandling).IsEqualTo(expected.TypeNameAssemblyFormatHandling);
     }
 }

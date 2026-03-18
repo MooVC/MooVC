@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Operators.UnaryTests;
 public sealed class WhenWithUnariesIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedUnaries()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedUnaries()
     {
         // Arrange
         ImmutableArray<Unary> originalUnaries = [UnaryTestsData.Create()];
@@ -19,11 +19,11 @@ public sealed class WhenWithUnariesIsCalled
         Operators result = original.WithUnaries(updatedUnaries);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Binaries.ShouldBe(original.Binaries);
-        result.Comparisons.ShouldBe(original.Comparisons);
-        result.Conversions.ShouldBe(original.Conversions);
-        result.Unaries.ShouldBe(expectedUnaries);
-        original.Unaries.ShouldBe(originalUnaries);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
+        await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
+        await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
+        await Assert.That(result.Unaries).IsEqualTo(expectedUnaries);
+        await Assert.That(original.Unaries).IsEqualTo(originalUnaries);
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Project.RelativePath? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         const string path = "src/Project.csproj";
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Project.RelativePath("src/Project.csproj");
@@ -44,6 +44,6 @@ public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

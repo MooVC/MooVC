@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsRecordIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Record subject = RecordTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenEqualsRecordIsCalled
         bool result = subject.Equals(default);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Record subject = RecordTestsData.Create(methods: [new Method { Name = new Declaration { Name = "Execute" } }]);
@@ -27,11 +27,11 @@ public sealed class WhenEqualsRecordIsCalled
         bool result = subject.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Record subject = RecordTestsData.Create(events: [new Event { Name = "Created" }]);
@@ -41,11 +41,11 @@ public sealed class WhenEqualsRecordIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Record subject = RecordTestsData.Create(fields: [new Field { Name = "Value", Type = typeof(string) }]);
@@ -55,6 +55,6 @@ public sealed class WhenEqualsRecordIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

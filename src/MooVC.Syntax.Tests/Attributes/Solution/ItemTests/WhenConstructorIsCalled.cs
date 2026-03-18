@@ -1,26 +1,26 @@
-namespace MooVC.Syntax.Attributes.Solution.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenItemIsUndefined()
+    public async Task GivenDefaultsThenItemIsUndefined()
     {
         // Act
         var subject = new Item();
 
         // Assert
-        subject.Id.ShouldBe(Snippet.Empty);
-        subject.Items.ShouldBeEmpty();
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Path.ShouldBe(Snippet.Empty);
-        subject.Type.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Id).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Items).IsEmpty();
+        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Path).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Item child = ItemTestsData.CreateChild();
@@ -36,11 +36,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Id.ShouldBe(Snippet.From(ItemTestsData.DefaultId));
-        subject.Name.ShouldBe(Snippet.From(ItemTestsData.DefaultName));
-        subject.Path.ShouldBe(Snippet.From(ItemTestsData.DefaultPath));
-        subject.Type.ShouldBe(Snippet.From(ItemTestsData.DefaultType));
-        subject.Items.ShouldBe(new[] { child });
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Id).IsEqualTo(Snippet.From(ItemTestsData.DefaultId));
+        await Assert.That(subject.Name).IsEqualTo(Snippet.From(ItemTestsData.DefaultName));
+        await Assert.That(subject.Path).IsEqualTo(Snippet.From(ItemTestsData.DefaultPath));
+        await Assert.That(subject.Type).IsEqualTo(Snippet.From(ItemTestsData.DefaultType));
+        await Assert.That(subject.Items).IsEqualTo(new[] { child });
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

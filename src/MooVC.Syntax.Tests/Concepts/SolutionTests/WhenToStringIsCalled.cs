@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Solution subject = Solution.Undefined;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsDocument()
+    public async Task GivenValuesThenReturnsDocument()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -6,7 +6,7 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Identifier? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Identifier? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         var left = new Identifier(Same);
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         var first = new Identifier(Same);
@@ -58,11 +58,11 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Identifier(Same);
@@ -73,12 +73,12 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Identifier(Same);
@@ -89,7 +89,7 @@ public sealed class WhenInequalityOperatorIdentifierIdentifierIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

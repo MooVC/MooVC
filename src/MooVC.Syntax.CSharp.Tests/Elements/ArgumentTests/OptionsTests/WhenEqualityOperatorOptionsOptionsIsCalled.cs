@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
 
 public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Argument.Options? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Argument.Options? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         var left = new Argument.Options();
@@ -41,11 +41,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var first = new Argument.Options();
@@ -55,11 +55,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Argument.Options();
@@ -70,12 +70,12 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Argument.Options();
@@ -88,7 +88,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

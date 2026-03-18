@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithMethodsIsCalled
 {
     [Test]
-    public void GivenMethodsThenReturnsUpdatedInstance()
+    public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
         Method[] existing = [new Method { Name = new Declaration { Name = "First" } }];
@@ -18,9 +18,9 @@ public sealed class WhenWithMethodsIsCalled
         Class result = original.WithMethods(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Methods.ShouldBe(original.Methods.Concat(additional));
-        result.Declaration.ShouldBe(original.Declaration);
-        original.Methods.ShouldBe(existing);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Methods).IsEqualTo(original.Methods.Concat(additional));
+        await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        await Assert.That(original.Methods).IsEqualTo(existing);
     }
 }

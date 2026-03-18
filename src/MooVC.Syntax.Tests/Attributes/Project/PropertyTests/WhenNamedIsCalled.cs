@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Property original = PropertyTestsData.Create();
@@ -15,9 +15,9 @@ public sealed class WhenNamedIsCalled
         Property result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Value.ShouldBe(original.Value);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

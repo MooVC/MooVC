@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 using Identifier = MooVC.Syntax.Elements.Identifier;
@@ -9,7 +9,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
     private const string Alias = "Alias";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Directive? left = default;
@@ -19,11 +19,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Directive? left = default;
@@ -33,11 +33,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
@@ -47,11 +47,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         Directive first = Create();
@@ -61,11 +61,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
@@ -75,11 +75,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentAliasesThenReturnsTrue()
+    public async Task GivenDifferentAliasesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
@@ -90,12 +90,12 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentQualifiersThenReturnsTrue()
+    public async Task GivenDifferentQualifiersThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
@@ -105,11 +105,11 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentStaticStatesThenReturnsTrue()
+    public async Task GivenDifferentStaticStatesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
@@ -119,7 +119,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenKindThenReturnsUnderlyingValue()
+    public async Task GivenKindThenReturnsUnderlyingValue()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.Ref;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("ref");
+        await Assert.That(result).IsEqualTo("ref");
     }
 }

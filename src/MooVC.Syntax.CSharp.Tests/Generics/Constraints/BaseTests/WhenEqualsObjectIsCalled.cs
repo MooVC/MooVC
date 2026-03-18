@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Base subject = new Symbol { Name = Same };
@@ -18,11 +18,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Base subject = new Symbol { Name = Same };
@@ -32,11 +32,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -46,11 +46,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -60,11 +60,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonBaseThenReturnsFalse()
+    public async Task GivenNonBaseThenReturnsFalse()
     {
         // Arrange
         Base subject = new Symbol { Name = Same };
@@ -74,6 +74,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other.ToString());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

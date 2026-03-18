@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Value = "private";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Scope? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenScopeWithNullValueThenResultIsNull()
+    public async Task GivenScopeWithNullValueThenResultIsNull()
     {
         // Arrange
         Scope subject = (string?)null;
@@ -27,11 +27,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenScopeWithValueThenMatchesValue()
+    public async Task GivenScopeWithValueThenMatchesValue()
     {
         // Arrange
         Scope subject = Value;
@@ -40,6 +40,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Value);
+        await Assert.That(result).IsEqualTo(Value);
     }
 }

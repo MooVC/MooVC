@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenEmptyReturned()
+    public async Task GivenUndefinedThenEmptyReturned()
     {
         // Arrange
         Conversion subject = Conversion.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenUnspecifiedDeclarationThenEmptyReturned()
+    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create(body: Snippet.Empty, subject: Symbol.Undefined);
@@ -29,11 +29,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenConversionToDeclarationThenSignatureIsRendered()
+    public async Task GivenConversionToDeclarationThenSignatureIsRendered()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.To);
@@ -50,11 +50,11 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenConversionFromDeclarationThenSignatureIsRendered()
+    public async Task GivenConversionFromDeclarationThenSignatureIsRendered()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.From);
@@ -71,6 +71,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

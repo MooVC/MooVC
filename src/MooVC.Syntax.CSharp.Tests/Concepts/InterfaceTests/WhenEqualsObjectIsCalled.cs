@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Interface subject = InterfaceTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Interface subject = InterfaceTestsData.Create(isPartial: true);
@@ -29,11 +29,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Interface subject = InterfaceTestsData.Create(scope: Scope.Internal);
@@ -43,11 +43,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Interface subject = InterfaceTestsData.Create(isPartial: true);
@@ -57,6 +57,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

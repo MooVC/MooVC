@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenEqualsTypeIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Binary.Type type = Binary.Type.Add;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(default(Binary.Type));
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameInstanceThenReturnsTrue()
+    public async Task GivenTheSameInstanceThenReturnsTrue()
     {
         // Arrange
         Binary.Type type = Binary.Type.Add;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(type);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentInstanceThenReturnsFalse()
+    public async Task GivenADifferentInstanceThenReturnsFalse()
     {
         // Arrange
         Binary.Type type = Binary.Type.Add;
@@ -38,6 +38,6 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(Binary.Type.Subtract);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

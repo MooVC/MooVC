@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualFieldsThenHashCodesAreEqual()
+    public async Task GivenEqualFieldsThenHashCodesAreEqual()
     {
         // Arrange
         Field first = FieldTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentFieldsThenHashCodesAreDifferent()
+    public async Task GivenDifferentFieldsThenHashCodesAreDifferent()
     {
         // Arrange
         Field first = FieldTestsData.Create();
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

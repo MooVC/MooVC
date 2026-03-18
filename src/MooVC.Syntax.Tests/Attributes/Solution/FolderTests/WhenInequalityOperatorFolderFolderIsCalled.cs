@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenInequalityOperatorFolderFolderIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Folder? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorFolderFolderIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Folder left = FolderTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorFolderFolderIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Folder left = FolderTestsData.Create();
@@ -41,6 +41,6 @@ public sealed class WhenInequalityOperatorFolderFolderIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

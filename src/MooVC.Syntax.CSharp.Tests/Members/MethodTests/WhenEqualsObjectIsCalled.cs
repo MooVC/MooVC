@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNonMethodObjectThenReturnsFalse()
+    public async Task GivenNonMethodObjectThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenMethodObjectThenReturnsResultOfMethodEquals()
+    public async Task GivenMethodObjectThenReturnsResultOfMethodEquals()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

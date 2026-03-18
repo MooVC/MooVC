@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
         Event subject = Event.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnnamedEventThenValidationErrorReturned()
+    public async Task GivenUnnamedEventThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Event
@@ -39,14 +39,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Event.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Event.Name));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidHandlerThenValidationErrorReturned()
+    public async Task GivenInvalidHandlerThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Event
@@ -62,14 +62,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidEventThenNoValidationErrorsReturned()
+    public async Task GivenValidEventThenNoValidationErrorsReturned()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -80,7 +80,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

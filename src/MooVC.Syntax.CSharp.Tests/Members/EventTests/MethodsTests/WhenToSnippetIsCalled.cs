@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Event.Methods
@@ -16,14 +16,14 @@ public sealed class WhenToSnippetIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenRemoveBodyThenAddStubIsPrepended()
+    public async Task GivenRemoveBodyThenAddStubIsPrepended()
     {
         // Arrange
         var subject = new Event.Methods
@@ -40,6 +40,6 @@ public sealed class WhenToSnippetIsCalled
             remove => value;
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

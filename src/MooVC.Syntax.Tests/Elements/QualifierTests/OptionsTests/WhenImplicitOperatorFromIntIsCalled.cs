@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests.OptionsTests;
 
 public sealed class WhenImplicitOperatorFromIntIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     private const int BlockValue = 1;
 
     [Test]
-    public void GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsInt()
     {
         // Arrange
         int value = BlockValue;
@@ -15,12 +15,12 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Qualifier.Options subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
         int value = FileValue;
@@ -30,6 +30,6 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 }

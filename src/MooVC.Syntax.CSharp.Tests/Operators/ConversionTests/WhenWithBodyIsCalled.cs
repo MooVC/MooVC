@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
     [Test]
-    public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
+    public async Task GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange
         Conversion original = ConversionTestsData.Create(body: Snippet.From("return value;"));
@@ -15,11 +15,11 @@ public sealed class WhenWithBodyIsCalled
         Conversion result = original.WithBody(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(replacement);
-        result.Direction.ShouldBe(original.Direction);
-        result.Mode.ShouldBe(original.Mode);
-        result.Scope.ShouldBe(original.Scope);
-        result.Target.ShouldBe(original.Target);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(replacement);
+        await Assert.That(result.Direction).IsEqualTo(original.Direction);
+        await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

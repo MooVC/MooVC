@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenEqualsKindIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -13,11 +13,11 @@ public sealed class WhenEqualsKindIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -27,6 +27,6 @@ public sealed class WhenEqualsKindIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

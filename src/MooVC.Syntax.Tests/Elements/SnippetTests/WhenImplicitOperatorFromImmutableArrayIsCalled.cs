@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
     private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenDefaultThenInstanceIsCreated()
+    public async Task GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
         ImmutableArray<string> provided = default;
@@ -16,13 +16,13 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         Snippet subject = provided;
 
         // Assert
-        _ = subject.ShouldNotBeNull();
+        _ = await Assert.That(subject).IsNotNull();
         ImmutableArray<string> result = subject;
-        result.IsEmpty.ShouldBeTrue();
+        await Assert.That(result.IsEmpty).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenRoundTripsSuccessfully()
+    public async Task GivenValuesThenRoundTripsSuccessfully()
     {
         // Arrange
         ImmutableArray<string> provided = values;
@@ -32,11 +32,11 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         ImmutableArray<string> result = subject;
 
         // Assert
-        result.ShouldBe(provided);
+        await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
-    public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         ImmutableArray<string> provided = values;
@@ -46,8 +46,8 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         Snippet second = provided;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        await Assert.That(ReferenceEquals(first, second)).IsFalse();
+        await Assert.That((first == second)).IsTrue();
+        await Assert.That(first.Equals(second)).IsTrue();
     }
 }

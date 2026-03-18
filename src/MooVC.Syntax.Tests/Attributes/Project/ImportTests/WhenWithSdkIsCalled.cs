@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithSdkIsCalled
     private const string UpdatedSdk = "UpdatedSdk";
 
     [Test]
-    public void GivenSdkThenReturnsUpdatedInstance()
+    public async Task GivenSdkThenReturnsUpdatedInstance()
     {
         // Arrange
         Import original = ImportTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenWithSdkIsCalled
         Import result = original.WithSdk(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Sdk.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Project.ShouldBe(original.Project);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Sdk).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Project).IsEqualTo(original.Project);
     }
 }

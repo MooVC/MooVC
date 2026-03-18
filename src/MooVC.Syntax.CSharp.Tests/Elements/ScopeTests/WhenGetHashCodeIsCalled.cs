@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashesMatch()
+    public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
         Scope left = "internal";
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Scope left = "internal";
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Unicode = "Álpha";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Name? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenSegmentWithNullValueThenResultIsNull()
+    public async Task GivenSegmentWithNullValueThenResultIsNull()
     {
         // Arrange
         var subject = new Name(default);
@@ -30,11 +30,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenEmptyThenMatchesValue()
+    public async Task GivenEmptyThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Empty);
@@ -43,11 +43,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Empty);
+        await Assert.That(result).IsEqualTo(Empty);
     }
 
     [Test]
-    public void GivenWhitespaceThenMatchesValue()
+    public async Task GivenWhitespaceThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Space);
@@ -56,11 +56,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Space);
+        await Assert.That(result).IsEqualTo(Space);
     }
 
     [Test]
-    public void GivenAsciiThenMatchesValue()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Alpha);
@@ -69,11 +69,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Alpha);
+        await Assert.That(result).IsEqualTo(Alpha);
     }
 
     [Test]
-    public void GivenUnicodeThenMatchesValue()
+    public async Task GivenUnicodeThenMatchesValue()
     {
         // Arrange
         var subject = new Name(Unicode);
@@ -82,11 +82,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Unicode);
+        await Assert.That(result).IsEqualTo(Unicode);
     }
 
     [Test]
-    public void GivenVeryLongThenMatchesValue()
+    public async Task GivenVeryLongThenMatchesValue()
     {
         // Arrange
         string value = new('x', 64_000);
@@ -96,6 +96,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenEqualityOperatorStructStructIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Struct? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Struct? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Struct left = StructTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Struct first = StructTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Struct left = StructTestsData.Create(scope: Scope.Internal);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Struct left = StructTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentBehaviorsThenReturnsFalse()
+    public async Task GivenDifferentBehaviorsThenReturnsFalse()
     {
         // Arrange
         Struct left = StructTestsData.Create(behavior: Struct.Kind.Record);
@@ -102,6 +102,6 @@ public sealed class WhenEqualityOperatorStructStructIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

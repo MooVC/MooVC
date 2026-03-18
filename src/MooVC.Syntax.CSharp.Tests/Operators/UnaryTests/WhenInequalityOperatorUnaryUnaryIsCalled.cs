@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
 {
     [Test]
-    public void GivenEquivalentUnaryOperatorsThenReturnsFalse()
+    public async Task GivenEquivalentUnaryOperatorsThenReturnsFalse()
     {
         // Arrange
         Unary first = UnaryTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentUnaryOperatorsThenReturnsTrue()
+    public async Task GivenDifferentUnaryOperatorsThenReturnsTrue()
     {
         // Arrange
         Unary first = UnaryTestsData.Create();
@@ -27,6 +27,6 @@ public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 public sealed class WhenAppendIsCalled
 {
@@ -8,22 +8,22 @@ public sealed class WhenAppendIsCalled
     private const string Phi = "phi";
 
     [Test]
-    public void GivenNullOptionsAndValuesThenThrows()
+    public async Task GivenNullOptionsAndValuesThenThrows()
     {
         // Arrange
         var subject = Snippet.From(Alpha);
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(
-            () => _ = subject.Append(options!, Beta));
+        ArgumentNullException exception = await Assert.That(
+            () => _ = subject.Append(options!, Beta)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenStringValuesThenTheyAreAppended()
+    public async Task GivenStringValuesThenTheyAreAppended()
     {
         // Arrange
         string expected = string.Join(Environment.NewLine, Alpha, Beta, Gamma);
@@ -34,11 +34,11 @@ public sealed class WhenAppendIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultiLineValuesThenTheLinesAreAppended()
+    public async Task GivenMultiLineValuesThenTheLinesAreAppended()
     {
         // Arrange
         string expected = string.Join(Environment.NewLine, Alpha, Beta, Phi, Gamma);
@@ -50,11 +50,11 @@ public sealed class WhenAppendIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenSnippetsThenTheyAreAppended()
+    public async Task GivenSnippetsThenTheyAreAppended()
     {
         // Arrange
         string expected = string.Join(Environment.NewLine, Alpha, Beta, Phi, Gamma);
@@ -68,6 +68,6 @@ public sealed class WhenAppendIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        await Assert.That(text).IsEqualTo(expected);
     }
 }

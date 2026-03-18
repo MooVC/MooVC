@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenInequalityOperatorFieldFieldIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Field? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Field? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Field left = FieldTestsData.Create();
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         Field first = FieldTestsData.Create();
@@ -55,11 +55,11 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Field left = FieldTestsData.Create();
@@ -70,12 +70,12 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Field left = FieldTestsData.Create();
@@ -85,6 +85,6 @@ public sealed class WhenInequalityOperatorFieldFieldIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

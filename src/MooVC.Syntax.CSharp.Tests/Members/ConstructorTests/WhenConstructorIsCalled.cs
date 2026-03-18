@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
@@ -8,21 +8,21 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenConstructorIsUndefined()
+    public async Task GivenDefaultsThenConstructorIsUndefined()
     {
         // Act
         var subject = new Constructor();
 
         // Assert
-        subject.Body.ShouldBe(Snippet.Empty);
-        subject.Extensibility.ShouldBe(Extensibility.Implicit);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Parameters.ShouldBe([]);
-        subject.Scope.ShouldBe(Scope.Public);
+        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Implicit);
+        await Assert.That(subject.IsUndefined).IsTrue();
+        await Assert.That(subject.Parameters).IsEqualTo([]);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var parameters = ImmutableArray.Create(ParameterTestsData.Create());
@@ -38,10 +38,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Body.ShouldBe(Snippet.From(body));
-        subject.Extensibility.ShouldBe(Extensibility.Static);
-        subject.IsUndefined.ShouldBeFalse();
-        subject.Parameters.ShouldBe(parameters);
-        subject.Scope.ShouldBe(Scope.Internal);
+        await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
+        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Static);
+        await Assert.That(subject.IsUndefined).IsFalse();
+        await Assert.That(subject.Parameters).IsEqualTo(parameters);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

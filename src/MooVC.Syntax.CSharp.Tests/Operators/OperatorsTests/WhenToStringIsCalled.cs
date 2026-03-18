@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenEmptyReturned()
+    public async Task GivenUndefinedThenEmptyReturned()
     {
         // Arrange
         Operators subject = Operators.Undefined;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

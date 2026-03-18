@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithExtensibilityIsCalled
 {
     [Test]
-    public void GivenExtensibilityThenReturnsNewInstanceWithUpdatedExtensibility()
+    public async Task GivenExtensibilityThenReturnsNewInstanceWithUpdatedExtensibility()
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
@@ -14,12 +14,12 @@ public sealed class WhenWithExtensibilityIsCalled
         Constructor result = original.WithExtensibility(Extensibility.Static);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Extensibility.ShouldBe(Extensibility.Static);
-        result.Parameters.ShouldBe(original.Parameters);
-        result.Scope.ShouldBe(original.Scope);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(original.Body);
+        await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Static);
+        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        original.Extensibility.ShouldBe(Extensibility.Implicit);
+        await Assert.That(original.Extensibility).IsEqualTo(Extensibility.Implicit);
     }
 }

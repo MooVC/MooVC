@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 public sealed class WhenWithModifierIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var argument = new Argument();
@@ -12,8 +12,8 @@ public sealed class WhenWithModifierIsCalled
         Argument result = argument.WithModifier(Argument.Mode.In);
 
         // Assert
-        result.ShouldNotBeSameAs(argument);
-        result.Modifier.ShouldBe(Argument.Mode.In);
-        argument.Modifier.ShouldNotBe(Argument.Mode.In);
+        await Assert.That(ReferenceEquals(result, argument)).IsFalse();
+        await Assert.That(result.Modifier).IsEqualTo(Argument.Mode.In);
+        await Assert.That(argument.Modifier).IsNotEqualTo(Argument.Mode.In);
     }
 }

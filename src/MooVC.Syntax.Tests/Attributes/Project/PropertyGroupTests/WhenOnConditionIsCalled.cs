@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenOnConditionIsCalled
     private const string UpdatedCondition = "UpdatedCondition";
 
     [Test]
-    public void GivenConditionThenReturnsUpdatedInstance()
+    public async Task GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange
         PropertyGroup original = PropertyGroupTestsData.Create(property: PropertyGroupTestsData.CreateProperty());
@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         PropertyGroup result = original.OnCondition(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Condition.ShouldBe(updated);
-        result.Label.ShouldBe(original.Label);
-        result.Properties.ShouldBe(original.Properties);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Condition).IsEqualTo(updated);
+        await Assert.That(result.Label).IsEqualTo(original.Label);
+        await Assert.That(result.Properties).IsEqualTo(original.Properties);
     }
 }

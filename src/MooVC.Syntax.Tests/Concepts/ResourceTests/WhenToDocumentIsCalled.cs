@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Xml.Linq;
 using Resource = MooVC.Syntax.Concepts.Resource;
@@ -6,7 +6,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 public sealed class WhenToDocumentIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmptyDocument()
+    public async Task GivenUndefinedThenReturnsEmptyDocument()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -15,12 +15,12 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        result.Root.ShouldBeNull();
-        result.Declaration.ShouldBeNull();
+        await Assert.That(result.Root).IsNull();
+        await Assert.That(result.Declaration).IsNull();
     }
 
     [Test]
-    public void GivenValuesThenReturnsDocument()
+    public async Task GivenValuesThenReturnsDocument()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -58,10 +58,10 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        XDeclaration declaration = result.Declaration.ShouldNotBeNull();
-        declaration.Version.ShouldBe("1.0");
-        declaration.Encoding.ShouldBe("utf-8");
-        declaration.Standalone.ShouldBe("yes");
-        XNode.DeepEquals(expected, result).ShouldBeTrue();
+        await Assert.That(XDeclaration declaration = result.Declaration).IsNotNull();
+        await Assert.That(declaration.Version).IsEqualTo("1.0");
+        await Assert.That(declaration.Encoding).IsEqualTo("utf-8");
+        await Assert.That(declaration.Standalone).IsEqualTo("yes");
+        await Assert.That(XNode.DeepEquals(expected, result)).IsTrue();
     }
 }

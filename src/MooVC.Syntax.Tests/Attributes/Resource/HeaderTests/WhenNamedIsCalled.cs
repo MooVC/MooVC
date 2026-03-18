@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Header original = HeaderTestsData.Create();
@@ -15,8 +15,8 @@ public sealed class WhenNamedIsCalled
         Header result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Value.ShouldBe(original.Value);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(updated);
+        await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

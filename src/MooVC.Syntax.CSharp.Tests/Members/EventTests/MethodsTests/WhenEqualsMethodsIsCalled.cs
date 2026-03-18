@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsMethodsIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Event.Methods? subject = default;
@@ -19,11 +19,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var subject = new Event.Methods
@@ -37,11 +37,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         var subject = new Event.Methods
@@ -58,11 +58,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         var subject = new Event.Methods
@@ -79,11 +79,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentAddValuesThenReturnsFalse()
+    public async Task GivenDifferentAddValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Event.Methods
@@ -100,11 +100,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentRemoveValuesThenReturnsFalse()
+    public async Task GivenDifferentRemoveValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Event.Methods
@@ -121,6 +121,6 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

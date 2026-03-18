@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentValuesThenHashesMatch()
+    public async Task GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
         var first = new Event.Methods
@@ -23,11 +23,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Event.Methods
@@ -45,11 +45,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentAddValuesThenHashesDiffer()
+    public async Task GivenDifferentAddValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Event.Methods
@@ -67,11 +67,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentRemoveValuesThenHashesDiffer()
+    public async Task GivenDifferentRemoveValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Event.Methods
@@ -89,6 +89,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

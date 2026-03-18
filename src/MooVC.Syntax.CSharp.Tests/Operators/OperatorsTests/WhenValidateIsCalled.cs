@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedOperatorsThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedOperatorsThenNoValidationErrorsReturned()
     {
         // Arrange
         Operators subject = Operators.Undefined;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidBinaryThenValidationErrorsReturned()
+    public async Task GivenInvalidBinaryThenValidationErrorsReturned()
     {
         // Arrange
         Operators subject = OperatorsSubjectData.Create(binaries: [new Binary()]);
@@ -34,13 +34,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Binary.Body)));
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results).IsNotEmpty();
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Binary.Body)));
     }
 
     [Test]
-    public void GivenValidOperatorsThenNoValidationErrorsReturned()
+    public async Task GivenValidOperatorsThenNoValidationErrorsReturned()
     {
         // Arrange
         Operators subject = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
@@ -51,7 +51,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Operators;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators;
 public sealed class WhenWithOperatorsIsCalled
 {
     [Test]
-    public void GivenOperatorsThenReturnsUpdatedInstance()
+    public async Task GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create();
@@ -19,8 +19,8 @@ public sealed class WhenWithOperatorsIsCalled
         Class result = original.WithOperators(operators);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Operators.ShouldBe(operators);
-        original.Operators.Conversions.ShouldBeEmpty();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Operators).IsEqualTo(operators);
+        await Assert.That(original.Operators.Conversions).IsEmpty();
     }
 }

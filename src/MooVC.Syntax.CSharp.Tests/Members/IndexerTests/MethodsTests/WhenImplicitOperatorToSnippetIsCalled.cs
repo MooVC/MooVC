@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Indexer.Methods? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenMethodsThenSnippetMatchesStringRepresentation()
+    public async Task GivenMethodsThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -20,9 +20,9 @@ public sealed class WhenPageIsSerialized
         Page<int> cloned = await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        _ = cloned.ShouldNotBeNull();
-        cloned.ShouldNotBeSameAs(original);
-        cloned.ShouldBe(original);
+        _ = await Assert.That(cloned).IsNotNull();
+        await Assert.That(ReferenceEquals(cloned, original)).IsFalse();
+        await Assert.That(cloned).IsEqualTo(original);
     }
 }
 #endif

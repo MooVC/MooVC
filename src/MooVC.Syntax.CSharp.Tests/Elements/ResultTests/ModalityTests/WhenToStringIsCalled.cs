@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests.ModalityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests.ModalityTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenAsynchronousThenReturnsAsyncKeyword()
+    public async Task GivenAsynchronousThenReturnsAsyncKeyword()
     {
         // Arrange
         Result.Modality subject = Result.Modality.Asynchronous;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("async");
+        await Assert.That(representation).IsEqualTo("async");
     }
 
     [Test]
-    public void GivenSynchronousThenReturnsEmpty()
+    public async Task GivenSynchronousThenReturnsEmpty()
     {
         // Arrange
         Result.Modality subject = Result.Modality.Synchronous;
@@ -25,6 +25,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

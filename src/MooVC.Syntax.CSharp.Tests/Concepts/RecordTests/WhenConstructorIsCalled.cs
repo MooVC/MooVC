@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -10,30 +10,30 @@ public sealed class WhenConstructorIsCalled
     private const string AttributeName = "Serializable";
 
     [Test]
-    public void GivenDefaultsThenRecordIsUndefined()
+    public async Task GivenDefaultsThenRecordIsUndefined()
     {
         // Act
         var subject = new Record();
 
         // Assert
-        subject.Attributes.ShouldBe([]);
-        subject.Constructors.ShouldBe([]);
-        subject.Events.ShouldBe([]);
-        subject.Extensibility.ShouldBe(Extensibility.Sealed);
-        subject.Fields.ShouldBe([]);
-        subject.Indexers.ShouldBe([]);
-        subject.IsPartial.ShouldBeTrue();
-        subject.Methods.ShouldBe([]);
-        subject.Declaration.ShouldBe(Declaration.Unspecified);
-        subject.Operators.ShouldBe(new Operators());
-        subject.Parameters.ShouldBe([]);
-        subject.Properties.ShouldBe([]);
-        subject.Scope.ShouldBe(Scope.Public);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Attributes).IsEqualTo([]);
+        await Assert.That(subject.Constructors).IsEqualTo([]);
+        await Assert.That(subject.Events).IsEqualTo([]);
+        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Sealed);
+        await Assert.That(subject.Fields).IsEqualTo([]);
+        await Assert.That(subject.Indexers).IsEqualTo([]);
+        await Assert.That(subject.IsPartial).IsTrue();
+        await Assert.That(subject.Methods).IsEqualTo([]);
+        await Assert.That(subject.Declaration).IsEqualTo(Declaration.Unspecified);
+        await Assert.That(subject.Operators).IsEqualTo(new Operators());
+        await Assert.That(subject.Parameters).IsEqualTo([]);
+        await Assert.That(subject.Properties).IsEqualTo([]);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
@@ -61,19 +61,19 @@ public sealed class WhenConstructorIsCalled
             scope: Scope.Internal);
 
         // Assert
-        subject.Attributes.ShouldBe(new[] { attribute });
-        subject.Constructors.ShouldBe(new[] { constructor });
-        subject.Events.ShouldBe(new[] { @event });
-        subject.Extensibility.ShouldBe(Extensibility.Abstract);
-        subject.Fields.ShouldBe(new[] { field });
-        subject.Indexers.ShouldBe(new[] { indexer });
-        subject.IsPartial.ShouldBeTrue();
-        subject.Methods.ShouldBe(new[] { method });
-        subject.Declaration.ShouldBe(new Declaration { Name = RecordTestsData.DefaultName });
-        subject.Operators.Conversions.ShouldNotBeEmpty();
-        _ = subject.Parameters.ShouldHaveSingleItem();
-        subject.Properties.ShouldBe(new[] { property });
-        subject.Scope.ShouldBe(Scope.Internal);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Attributes).IsEqualTo(new[] { attribute });
+        await Assert.That(subject.Constructors).IsEqualTo(new[] { constructor });
+        await Assert.That(subject.Events).IsEqualTo(new[] { @event });
+        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Abstract);
+        await Assert.That(subject.Fields).IsEqualTo(new[] { field });
+        await Assert.That(subject.Indexers).IsEqualTo(new[] { indexer });
+        await Assert.That(subject.IsPartial).IsTrue();
+        await Assert.That(subject.Methods).IsEqualTo(new[] { method });
+        await Assert.That(subject.Declaration).IsEqualTo(new Declaration { Name = RecordTestsData.DefaultName });
+        await Assert.That(subject.Operators.Conversions).IsNotEmpty();
+        _ = await subject.Parameters.Single();
+        await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

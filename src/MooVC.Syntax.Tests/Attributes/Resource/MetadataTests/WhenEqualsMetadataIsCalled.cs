@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsMetadataIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsMetadataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualsMetadataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualsMetadataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

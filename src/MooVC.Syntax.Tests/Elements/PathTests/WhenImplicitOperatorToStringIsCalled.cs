@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Alpha = "Assets";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Path? path = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => path;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenMemberWithNullValueThenResultIsEmpty()
+    public async Task GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
         var subject = new Path(default);
@@ -27,11 +27,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenEmptyThenMatchesValue()
+    public async Task GivenEmptyThenMatchesValue()
     {
         // Arrange
         var subject = new Path(string.Empty);
@@ -40,11 +40,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenAsciiThenMatchesValue()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Path(Alpha);
@@ -54,11 +54,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenVeryLongThenMatchesValue()
+    public async Task GivenVeryLongThenMatchesValue()
     {
         // Arrange
         string value = new('x', 64_000);
@@ -68,6 +68,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 }

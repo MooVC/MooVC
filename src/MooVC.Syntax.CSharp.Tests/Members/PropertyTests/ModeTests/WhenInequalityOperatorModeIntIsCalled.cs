@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -8,7 +8,7 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
     private const int Different = 2;
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Property.Mode? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Property.Mode? left = default;
@@ -32,11 +32,11 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Property.Mode left = Property.Mode.Init;
@@ -46,11 +46,11 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Property.Mode left = Property.Mode.ReadOnly;
@@ -60,11 +60,11 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Property.Mode left = Property.Mode.ReadOnly;
@@ -74,6 +74,6 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

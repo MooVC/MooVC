@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "IDisposable";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Interface? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenInterfaceThenStringMatchesToString()
+    public async Task GivenInterfaceThenStringMatchesToString()
     {
         // Arrange
         Interface subject = new Declaration
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

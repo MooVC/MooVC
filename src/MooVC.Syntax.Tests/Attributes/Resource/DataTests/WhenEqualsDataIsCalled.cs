@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.DataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.DataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsDataIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Data subject = DataTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsDataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Data subject = DataTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualsDataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Data subject = DataTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualsDataIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUnnamedThenValidationIsSkipped()
+    public async Task GivenUnnamedThenValidationIsSkipped()
     {
         // Arrange
         Project.Name subject = Project.Name.Unnamed;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidNameThenValidationErrorReturned()
+    public async Task GivenInvalidNameThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Project.Name("Invalid/Name");
@@ -34,8 +34,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Name));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Project.Name));
     }
 }

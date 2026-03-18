@@ -1,24 +1,24 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenSdkIsUnspecified()
+    public async Task GivenDefaultsThenSdkIsUnspecified()
     {
         // Act
         var subject = new Sdk();
 
         // Assert
-        subject.MinimumVersion.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Qualifier.Unqualified);
-        subject.Version.ShouldBe(Snippet.Empty);
-        subject.IsUnspecified.ShouldBeTrue();
+        await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Name).IsEqualTo(Qualifier.Unqualified);
+        await Assert.That(subject.Version).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUnspecified).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Sdk
@@ -29,9 +29,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.MinimumVersion.ShouldBe(Snippet.From(SdkTestsData.DefaultMinimumVersion));
-        subject.Name.ShouldBe(SdkTestsData.DefaultName);
-        subject.Version.ShouldBe(Snippet.From(SdkTestsData.DefaultVersion));
-        subject.IsUnspecified.ShouldBeFalse();
+        await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.From(SdkTestsData.DefaultMinimumVersion));
+        await Assert.That(subject.Name).IsEqualTo(SdkTestsData.DefaultName);
+        await Assert.That(subject.Version).IsEqualTo(Snippet.From(SdkTestsData.DefaultVersion));
+        await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

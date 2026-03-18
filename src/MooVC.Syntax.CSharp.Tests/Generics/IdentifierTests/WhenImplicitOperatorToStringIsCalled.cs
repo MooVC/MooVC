@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string IdentifierName = "TAlpha";
 
     [Test]
-    public void GivenIdentifierThenReturnsValue()
+    public async Task GivenIdentifierThenReturnsValue()
     {
         // Arrange
         var identifier = new Identifier(IdentifierName);
@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = identifier;
 
         // Assert
-        value.ShouldBe(IdentifierName);
+        await Assert.That(value).IsEqualTo(IdentifierName);
     }
 }

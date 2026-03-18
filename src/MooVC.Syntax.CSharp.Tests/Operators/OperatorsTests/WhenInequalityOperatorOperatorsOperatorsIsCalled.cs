@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Operators? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Operators? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Operators left = OperatorsSubjectData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Operators left = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
@@ -58,12 +58,12 @@ public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Operators left = OperatorsSubjectData.Create();
@@ -74,7 +74,7 @@ public sealed class WhenInequalityOperatorOperatorsOperatorsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

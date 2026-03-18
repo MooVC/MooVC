@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenIsStaticIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedStaticState()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedStaticState()
     {
         // Arrange
         var original = new Directive
@@ -17,10 +17,10 @@ public sealed class WhenIsStaticIsCalled
         Directive result = original.IsStatic(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsStatic.ShouldBeTrue();
-        result.Alias.ShouldBe(original.Alias);
-        result.Qualifier.ShouldBe(original.Qualifier);
-        original.IsStatic.ShouldBeFalse();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.IsStatic).IsTrue();
+        await Assert.That(result.Alias).IsEqualTo(original.Alias);
+        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        await Assert.That(original.IsStatic).IsFalse();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using MooVC.Syntax.Attributes.Solution;
 using static MooVC.Syntax.Attributes.Solution.Configurations;
@@ -6,7 +6,7 @@ using static MooVC.Syntax.Attributes.Solution.Configurations;
 public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Solution? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Solution left = SolutionTestsData.Create();
@@ -44,6 +44,6 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

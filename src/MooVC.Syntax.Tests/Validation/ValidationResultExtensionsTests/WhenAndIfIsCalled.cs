@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Validation.ValidationResultExtensionsTests;
+﻿namespace MooVC.Syntax.Validation.ValidationResultExtensionsTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +7,7 @@ public sealed class WhenAndIfIsCalled
     private const string Message = "Validated";
 
     [Test]
-    public void GivenFalseConditionThenPrecedingResultIsReturned()
+    public async Task GivenFalseConditionThenPrecedingResultIsReturned()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -25,12 +25,12 @@ public sealed class WhenAndIfIsCalled
             validatable);
 
         // Assert
-        actual.ShouldBe(preceding);
-        validatable.Calls.ShouldBe(1);
+        await Assert.That(actual).IsEqualTo(preceding);
+        await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenTrueConditionThenValidationIsAppended()
+    public async Task GivenTrueConditionThenValidationIsAppended()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -49,16 +49,16 @@ public sealed class WhenAndIfIsCalled
             additionalValidatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
-        precedingValidatable.Calls.ShouldBe(1);
-        additionalValidatable.Calls.ShouldBe(1);
+        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFalseConditionAndMultipleValidatablesThenPrecedingResultIsReturned()
+    public async Task GivenFalseConditionAndMultipleValidatablesThenPrecedingResultIsReturned()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -78,14 +78,14 @@ public sealed class WhenAndIfIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        actual.ShouldBe(preceding);
-        precedingValidatable.Calls.ShouldBe(1);
-        firstAdditional.Calls.ShouldBe(0);
-        secondAdditional.Calls.ShouldBe(0);
+        await Assert.That(actual).IsEqualTo(preceding);
+        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        await Assert.That(firstAdditional.Calls).IsEqualTo(0);
+        await Assert.That(secondAdditional.Calls).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenTrueConditionAndMultipleValidatablesThenValidationIsAppended()
+    public async Task GivenTrueConditionAndMultipleValidatablesThenValidationIsAppended()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -105,17 +105,17 @@ public sealed class WhenAndIfIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
-        precedingValidatable.Calls.ShouldBe(1);
-        firstAdditional.Calls.ShouldBe(1);
-        secondAdditional.Calls.ShouldBe(1);
+        await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        await Assert.That(firstAdditional.Calls).IsEqualTo(1);
+        await Assert.That(secondAdditional.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFunctionConditionThenItDeterminesWhetherValidationOccurs()
+    public async Task GivenFunctionConditionThenItDeterminesWhetherValidationOccurs()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -134,16 +134,16 @@ public sealed class WhenAndIfIsCalled
             additionalValidatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
-        precedingValidatable.Calls.ShouldBe(1);
-        additionalValidatable.Calls.ShouldBe(1);
+        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFunctionConditionAndValidatablesThenItDeterminesWhetherValidationOccurs()
+    public async Task GivenFunctionConditionAndValidatablesThenItDeterminesWhetherValidationOccurs()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -162,9 +162,9 @@ public sealed class WhenAndIfIsCalled
             [additionalValidatable]);
 
         // Assert
-        actual.ShouldBe(preceding);
-        precedingValidatable.Calls.ShouldBe(1);
-        additionalValidatable.Calls.ShouldBe(0);
+        await Assert.That(actual).IsEqualTo(preceding);
+        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        await Assert.That(additionalValidatable.Calls).IsEqualTo(0);
     }
 
     private sealed class TrackingValidatable : IValidatableObject

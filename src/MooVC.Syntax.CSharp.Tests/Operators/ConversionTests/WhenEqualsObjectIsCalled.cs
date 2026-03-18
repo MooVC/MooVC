@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNonConversionObjectThenReturnsFalse()
+    public async Task GivenNonConversionObjectThenReturnsFalse()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenConversionObjectThenReturnsResultOfConversionEquals()
+    public async Task GivenConversionObjectThenReturnsResultOfConversionEquals()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

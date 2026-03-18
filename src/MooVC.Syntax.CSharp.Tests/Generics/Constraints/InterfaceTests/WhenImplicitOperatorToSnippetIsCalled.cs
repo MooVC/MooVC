@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Name = "IDisposable";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Interface? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenInterfaceThenSnippetMatchesStringRepresentation()
+    public async Task GivenInterfaceThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         Interface subject = new Declaration
@@ -33,6 +33,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

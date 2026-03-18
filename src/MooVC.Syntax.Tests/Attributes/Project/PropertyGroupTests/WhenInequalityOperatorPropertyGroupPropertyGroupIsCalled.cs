@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorPropertyGroupPropertyGroupIsCalled
 {
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         PropertyGroup left = PropertyGroupTestsData.Create();
@@ -15,6 +15,6 @@ public sealed class WhenInequalityOperatorPropertyGroupPropertyGroupIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

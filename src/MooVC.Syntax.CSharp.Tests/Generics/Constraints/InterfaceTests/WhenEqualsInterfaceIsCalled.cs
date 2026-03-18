@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsInterfaceIsCalled
     private const string Different = "IBeta";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Interface subject = new Declaration { Name = Same };
@@ -18,11 +18,11 @@ public sealed class WhenEqualsInterfaceIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Interface subject = new Declaration { Name = Same };
@@ -32,11 +32,11 @@ public sealed class WhenEqualsInterfaceIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Interface left = new Declaration { Name = Same };
@@ -46,11 +46,11 @@ public sealed class WhenEqualsInterfaceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Interface left = new Declaration { Name = Same };
@@ -60,6 +60,6 @@ public sealed class WhenEqualsInterfaceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

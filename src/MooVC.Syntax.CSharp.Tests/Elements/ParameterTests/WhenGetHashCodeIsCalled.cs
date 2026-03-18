@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashesMatch()
+    public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.In);
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(@default: Snippet.From("alpha"));
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

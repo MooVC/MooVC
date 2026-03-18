@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
 public sealed class WhenKeepDuplicatesIsCalled
 {
     [Test]
-    public void GivenKeepDuplicatesThenReturnsUpdatedInstance()
+    public async Task GivenKeepDuplicatesThenReturnsUpdatedInstance()
     {
         // Arrange
         Item original = ItemTestsData.Create();
@@ -13,9 +13,9 @@ public sealed class WhenKeepDuplicatesIsCalled
         Item result = original.KeepDuplicates(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.KeepDuplicates.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Include.ShouldBe(original.Include);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.KeepDuplicates).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Include).IsEqualTo(original.Include);
     }
 }

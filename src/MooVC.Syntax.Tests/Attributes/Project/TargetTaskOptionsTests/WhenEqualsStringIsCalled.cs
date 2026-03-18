@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         TargetTask.Options subject = TargetTask.Options.WarnAndContinue;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("WarnAndContinue");
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         TargetTask.Options subject = TargetTask.Options.ErrorAndContinue;
@@ -25,6 +25,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("WarnAndContinue");
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

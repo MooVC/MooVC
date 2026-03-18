@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorTargetTaskTargetTaskIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         TargetTask? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorTargetTaskTargetTaskIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         TargetTask left = TargetTaskTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorTargetTaskTargetTaskIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         TargetTask left = TargetTaskTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorTargetTaskTargetTaskIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

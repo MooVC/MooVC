@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenIsSystemIsCalled
 {
     [Test]
-    public void GivenSystemQualifierThenReturnsTrue()
+    public async Task GivenSystemQualifierThenReturnsTrue()
     {
         // Arrange
         var subject = new Directive
@@ -17,11 +17,11 @@ public sealed class WhenIsSystemIsCalled
         bool result = subject.IsSystem;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNonSystemQualifierThenReturnsFalse()
+    public async Task GivenNonSystemQualifierThenReturnsFalse()
     {
         // Arrange
         var subject = new Directive
@@ -33,6 +33,6 @@ public sealed class WhenIsSystemIsCalled
         bool result = subject.IsSystem;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenValueThenCreatesOption()
+    public async Task GivenValueThenCreatesOption()
     {
         // Arrange
         const string Value = "WarnAndContinue";
@@ -12,12 +12,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         TargetTask.Options subject = Value;
 
         // Assert
-        (subject == Value).ShouldBeTrue();
-        subject.Equals(Value).ShouldBeTrue();
+        await Assert.That((subject == Value)).IsTrue();
+        await Assert.That(subject.Equals(Value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenReturnsOriginal()
+    public async Task GivenValueWhenRoundTrippedThenReturnsOriginal()
     {
         // Arrange
         const string Value = "ErrorAndContinue";
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Value);
+        await Assert.That(result).IsEqualTo(Value);
     }
 }

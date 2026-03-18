@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
     {
         // Arrange
         Field original = FieldTestsData.Create();
@@ -14,14 +14,14 @@ public sealed class WhenWithScopeIsCalled
         Field result = original.WithScope(Scope.Internal);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(original.Default);
-        result.IsReadOnly.ShouldBe(original.IsReadOnly);
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(Scope.Internal);
-        result.Type.ShouldBe(original.Type);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Default).IsEqualTo(original.Default);
+        await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
+        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Scope).IsEqualTo(Scope.Internal);
+        await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        original.Scope.ShouldBe(Scope.Public);
+        await Assert.That(original.Scope).IsEqualTo(Scope.Public);
     }
 }

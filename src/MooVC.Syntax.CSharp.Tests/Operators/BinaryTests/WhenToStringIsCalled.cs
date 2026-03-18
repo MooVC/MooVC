@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenEmptyReturned()
+    public async Task GivenUndefinedThenEmptyReturned()
     {
         // Arrange
         Binary subject = Binary.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenUnspecifiedDeclarationThenEmptyReturned()
+    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create(body: Snippet.Empty, @operator: Binary.Type.Unspecified);
@@ -28,11 +28,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenSignatureIsRendered()
+    public async Task GivenValuesThenSignatureIsRendered()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -49,6 +49,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

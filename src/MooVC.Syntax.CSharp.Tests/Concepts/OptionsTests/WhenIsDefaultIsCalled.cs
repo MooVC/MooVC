@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenIsDefaultIsCalled
 {
     [Test]
-    public void GivenDefaultValuesThenReturnsTrue()
+    public async Task GivenDefaultValuesThenReturnsTrue()
     {
         // Arrange
         var subject = new Options();
@@ -14,11 +14,11 @@ public sealed class WhenIsDefaultIsCalled
         bool result = subject.IsDefault;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNonDefaultValuesThenReturnsFalse()
+    public async Task GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange
         Options subject = new Options()
@@ -28,6 +28,6 @@ public sealed class WhenIsDefaultIsCalled
         bool result = subject.IsDefault;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

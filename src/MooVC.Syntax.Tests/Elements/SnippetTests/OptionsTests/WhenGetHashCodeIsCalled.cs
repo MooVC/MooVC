@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenMatchingValuesThenReturnsSameHash()
+    public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
         var first = new Snippet.Options();
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsDifferentHashes()
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
         var first = new Snippet.Options();
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 public sealed class WhenIsPartialIsCalled
 {
     [Test]
-    public void GivenIsPartialThenReturnsUpdatedInstance()
+    public async Task GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create(isPartial: false);
@@ -12,8 +12,8 @@ public sealed class WhenIsPartialIsCalled
         Class result = original.IsPartial(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsPartial.ShouldBeTrue();
-        original.IsPartial.ShouldBeFalse();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.IsPartial).IsTrue();
+        await Assert.That(original.IsPartial).IsFalse();
     }
 }

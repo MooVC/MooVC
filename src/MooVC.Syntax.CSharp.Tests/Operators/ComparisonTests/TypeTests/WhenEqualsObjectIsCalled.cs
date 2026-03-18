@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(null as object);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameReferenceThenReturnsTrue()
+    public async Task GivenTheSameReferenceThenReturnsTrue()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(type as object);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -38,11 +38,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(Comparison.Type.Equality as object);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -51,11 +51,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(Comparison.Type.Inequality as object);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenAnUnrecognisedTypeThenReturnsFalse()
+    public async Task GivenAnUnrecognisedTypeThenReturnsFalse()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -64,6 +64,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

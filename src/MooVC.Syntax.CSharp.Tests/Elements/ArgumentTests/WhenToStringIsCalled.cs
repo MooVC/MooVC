@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenToStringIsCalled
     private const string Value = "42";
 
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Argument subject = Argument.Undefined;
@@ -16,11 +16,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenUnnamedValueThenReturnsValueOnly()
+    public async Task GivenUnnamedValueThenReturnsValueOnly()
     {
         // Arrange
         var subject = new Argument
@@ -33,6 +33,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Value);
+        await Assert.That(result).IsEqualTo(Value);
     }
 }

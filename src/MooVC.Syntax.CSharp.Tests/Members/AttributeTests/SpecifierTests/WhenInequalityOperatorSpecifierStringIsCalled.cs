@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenInequalityOperatorSpecifierStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
     private const string Different = "delegate";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Type;
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Type;
@@ -58,11 +58,11 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Type;
@@ -72,6 +72,6 @@ public sealed class WhenInequalityOperatorSpecifierStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

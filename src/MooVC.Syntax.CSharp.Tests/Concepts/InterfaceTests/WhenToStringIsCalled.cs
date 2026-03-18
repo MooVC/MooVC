@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedInterfaceThenReturnsEmpty()
+    public async Task GivenUndefinedInterfaceThenReturnsEmpty()
     {
         // Arrange
         Interface subject = Interface.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsInterfaceSignature()
+    public async Task GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
         var created = new Event { Name = "Created" };
@@ -62,6 +62,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

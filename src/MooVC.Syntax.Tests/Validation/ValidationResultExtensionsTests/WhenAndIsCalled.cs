@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Validation.ValidationResultExtensionsTests;
+﻿namespace MooVC.Syntax.Validation.ValidationResultExtensionsTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ public sealed class WhenAndIsCalled
     private const string SecondMessage = "Second";
 
     [Test]
-    public void GivenValidatableThenItsResultsAreAppended()
+    public async Task GivenValidatableThenItsResultsAreAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -26,14 +26,14 @@ public sealed class WhenAndIsCalled
             additionalValidatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = [.. actual.Results];
-        results.ShouldBe([initial, additionalValidatable.Results.Single()]);
+        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
     }
 
     [Test]
-    public void GivenValidatablesThenAllResultsAreAppended()
+    public async Task GivenValidatablesThenAllResultsAreAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -52,14 +52,14 @@ public sealed class WhenAndIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = [.. actual.Results];
-        results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
     [Test]
-    public void GivenPredicateThenPredicateResultIsAppended()
+    public async Task GivenPredicateThenPredicateResultIsAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -79,13 +79,13 @@ public sealed class WhenAndIsCalled
 
         // Assert
         ValidationResult[] results = [.. actual.Results];
-        results.Length.ShouldBe(2);
-        results.ShouldContain(initial);
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(additionalValidatable)));
+        await Assert.That(results.Length).IsEqualTo(2);
+        await Assert.That(results).Contains(initial);
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(additionalValidatable)));
     }
 
     [Test]
-    public void GivenPredicateAndValidatablesThenPredicateFailuresAreIncluded()
+    public async Task GivenPredicateAndValidatablesThenPredicateFailuresAreIncluded()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -106,11 +106,11 @@ public sealed class WhenAndIsCalled
 
         // Assert
         ValidationResult[] results = [.. actual.Results];
-        results.Length.ShouldBe(2);
-        results.ShouldContain(initial);
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(firstAdditional)));
-        firstAdditional.Calls.ShouldBe(1);
-        secondAdditional.Calls.ShouldBe(1);
+        await Assert.That(results.Length).IsEqualTo(2);
+        await Assert.That(results).Contains(initial);
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(firstAdditional)));
+        await Assert.That(firstAdditional.Calls).IsEqualTo(1);
+        await Assert.That(secondAdditional.Calls).IsEqualTo(1);
     }
 
     private sealed class StubValidatable : IValidatableObject

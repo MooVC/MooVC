@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.Attributes.Project.OutputTests;
+﻿namespace MooVC.Syntax.Attributes.Project.OutputTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenTaskOutputIsUndefined()
+    public async Task GivenDefaultsThenTaskOutputIsUndefined()
     {
         // Act
         var subject = new Output();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.ItemName.ShouldBe(Name.Unnamed);
-        subject.PropertyName.ShouldBe(Name.Unnamed);
-        subject.TaskParameter.ShouldBe(Name.Unnamed);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.ItemName).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.PropertyName).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.TaskParameter).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Output
@@ -31,10 +31,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(OutputTestsData.DefaultCondition));
-        subject.ItemName.ShouldBe(new Name(OutputTestsData.DefaultItemName));
-        subject.PropertyName.ShouldBe(new Name(OutputTestsData.DefaultPropertyName));
-        subject.TaskParameter.ShouldBe(new Name(OutputTestsData.DefaultTaskParameter));
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(OutputTestsData.DefaultCondition));
+        await Assert.That(subject.ItemName).IsEqualTo(new Name(OutputTestsData.DefaultItemName));
+        await Assert.That(subject.PropertyName).IsEqualTo(new Name(OutputTestsData.DefaultPropertyName));
+        await Assert.That(subject.TaskParameter).IsEqualTo(new Name(OutputTestsData.DefaultTaskParameter));
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

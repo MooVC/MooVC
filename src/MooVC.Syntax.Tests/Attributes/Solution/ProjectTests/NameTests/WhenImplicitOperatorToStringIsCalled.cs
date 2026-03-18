@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsValue()
+    public async Task GivenValueThenReturnsValue()
     {
         // Arrange
         const string name = "ProjectName";
@@ -15,6 +15,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(name);
+        await Assert.That(result).IsEqualTo(name);
     }
 }

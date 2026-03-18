@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenLessThanOperatorIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Comparison.Type? leftType = default;
@@ -13,11 +13,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Comparison.Type? leftType = default;
@@ -27,11 +27,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Comparison.Type leftType = Comparison.Type.Equality;
@@ -41,11 +41,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSmallerLeftThenReturnsTrue()
+    public async Task GivenSmallerLeftThenReturnsTrue()
     {
         // Arrange
         Comparison.Type leftType = Comparison.Type.Inequality;
@@ -55,11 +55,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLargerLeftThenReturnsFalse()
+    public async Task GivenLargerLeftThenReturnsFalse()
     {
         // Arrange
         Comparison.Type leftType = Comparison.Type.LessThan;
@@ -69,6 +69,6 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

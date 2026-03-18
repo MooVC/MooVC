@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -9,7 +9,7 @@ public sealed class WhenWithConstraintsIsCalled
     private const string Name = "TValue";
 
     [Test]
-    public void GivenAdditionalConstraintsThenReturnsNewInstanceWithCombinedValues()
+    public async Task GivenAdditionalConstraintsThenReturnsNewInstanceWithCombinedValues()
     {
         // Arrange
         var originalConstraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
@@ -26,9 +26,9 @@ public sealed class WhenWithConstraintsIsCalled
         Parameter result = original.WithConstraints(additionalConstraint);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(original.Name);
-        result.Constraints.ShouldBe(new[] { originalConstraint, additionalConstraint });
-        original.Constraints.ShouldBe(new[] { originalConstraint });
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Constraints).IsEqualTo(new[] { originalConstraint, additionalConstraint });
+        await Assert.That(original.Constraints).IsEqualTo(new[] { originalConstraint });
     }
 }

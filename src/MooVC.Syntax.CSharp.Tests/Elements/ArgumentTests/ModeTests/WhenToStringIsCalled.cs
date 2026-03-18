@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenParamsModeThenReturnsParamsKeyword()
+    public async Task GivenParamsModeThenReturnsParamsKeyword()
     {
         // Arrange
         Argument.Mode subject = Argument.Mode.Params;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("params");
+        await Assert.That(result).IsEqualTo("params");
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenOnConditionIsCalled
     private const string UpdatedCondition = "UpdatedCondition";
 
     [Test]
-    public void GivenConditionThenReturnsUpdatedInstance()
+    public async Task GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         Metadata result = original.OnCondition(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Condition.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
-        result.Value.ShouldBe(original.Value);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Condition).IsEqualTo(updated);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

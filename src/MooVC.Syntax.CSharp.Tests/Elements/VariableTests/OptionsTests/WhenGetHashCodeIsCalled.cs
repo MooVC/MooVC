@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualOptionsThenHashCodesAreEqual()
+    public async Task GivenEqualOptionsThenHashCodesAreEqual()
     {
         // Arrange
         var first = new Variable.Options();
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentOptionsThenHashCodesAreDifferent()
+    public async Task GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange
         var first = new Variable.Options();
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

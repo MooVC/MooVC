@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Unicode = "Álpha";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Identifier? identifier = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => identifier;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenMemberWithNullValueThenResultIsEmpty()
+    public async Task GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
         var subject = new Identifier(default);
@@ -30,11 +30,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenEmptyThenMatchesValue()
+    public async Task GivenEmptyThenMatchesValue()
     {
         // Arrange
         var subject = new Identifier(string.Empty);
@@ -43,11 +43,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenAsciiThenMatchesValue()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
         var subject = new Identifier(Alpha);
@@ -57,11 +57,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenUnicodeThenMatchesValueInPascalCase()
+    public async Task GivenUnicodeThenMatchesValueInPascalCase()
     {
         // Arrange
         var subject = new Identifier(Unicode);
@@ -71,11 +71,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenVeryLongThenMatchesValue()
+    public async Task GivenVeryLongThenMatchesValue()
     {
         // Arrange
         string value = new('x', 64_000);
@@ -86,6 +86,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

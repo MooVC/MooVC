@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Operators.BinaryTests;
@@ -9,21 +9,21 @@ using MooVC.Syntax.CSharp.Operators.UnaryTests;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenOperatorsIsUndefined()
+    public async Task GivenDefaultsThenOperatorsIsUndefined()
     {
         // Act
         var subject = new Operators();
 
         // Assert
-        subject.Binaries.ShouldBeEmpty();
-        subject.Comparisons.ShouldBeEmpty();
-        subject.Conversions.ShouldBeEmpty();
-        subject.Unaries.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Binaries).IsEmpty();
+        await Assert.That(subject.Comparisons).IsEmpty();
+        await Assert.That(subject.Conversions).IsEmpty();
+        await Assert.That(subject.Unaries).IsEmpty();
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
@@ -41,10 +41,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Binaries.ShouldBe(binaries);
-        subject.Comparisons.ShouldBe(comparisons);
-        subject.Conversions.ShouldBe(conversions);
-        subject.Unaries.ShouldBe(unaries);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Binaries).IsEqualTo(binaries);
+        await Assert.That(subject.Comparisons).IsEqualTo(comparisons);
+        await Assert.That(subject.Conversions).IsEqualTo(conversions);
+        await Assert.That(subject.Unaries).IsEqualTo(unaries);
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithHandlerIsCalled
     private const string Handler = "Handled";
 
     [Test]
-    public void GivenHandlerThenReturnsNewInstanceWithUpdatedHandler()
+    public async Task GivenHandlerThenReturnsNewInstanceWithUpdatedHandler()
     {
         // Arrange
         Event original = EventTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenWithHandlerIsCalled
         Event result = original.WithHandler(handler);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Handler.ShouldBe(handler);
-        result.Behaviours.ShouldBe(original.Behaviours);
-        result.Name.ShouldBe(original.Name);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Handler).IsEqualTo(handler);
+        await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

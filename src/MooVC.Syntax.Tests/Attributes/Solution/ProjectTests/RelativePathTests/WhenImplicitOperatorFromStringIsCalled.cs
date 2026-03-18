@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         const string value = "src/Project.csproj";
@@ -14,7 +14,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Project.RelativePath subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

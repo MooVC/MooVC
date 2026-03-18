@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public void GivenUnspecifiedThenReturnsEmpty()
+    public async Task GivenUnspecifiedThenReturnsEmpty()
     {
         // Arrange
         Configurations.Platform subject = Configurations.Platform.Unspecified;
@@ -16,11 +16,11 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenValueThenReturnsFragment()
+    public async Task GivenValueThenReturnsFragment()
     {
         // Arrange
         Configurations.Platform subject = Configurations.Platform.AnyCPU;
@@ -31,7 +31,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        XElement fragment = result.ShouldHaveSingleItem();
-        XNode.DeepEquals(expected, fragment).ShouldBeTrue();
+        XElement fragment = result.Single();
+        await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
     }
 }

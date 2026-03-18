@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorItemItemIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Item? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorItemItemIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Item left = ItemTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorItemItemIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Item left = ItemTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorItemItemIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

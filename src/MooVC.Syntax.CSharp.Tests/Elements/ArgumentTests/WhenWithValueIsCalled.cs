@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithValueIsCalled
     private const string Value = "42";
 
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var argument = new Argument();
@@ -17,8 +17,8 @@ public sealed class WhenWithValueIsCalled
         Argument result = argument.WithValue(value);
 
         // Assert
-        result.ShouldNotBeSameAs(argument);
-        result.Value.ShouldBe(value);
-        argument.Value.ShouldNotBe(value);
+        await Assert.That(ReferenceEquals(result, argument)).IsFalse();
+        await Assert.That(result.Value).IsEqualTo(value);
+        await Assert.That(argument.Value).IsNotEqualTo(value);
     }
 }

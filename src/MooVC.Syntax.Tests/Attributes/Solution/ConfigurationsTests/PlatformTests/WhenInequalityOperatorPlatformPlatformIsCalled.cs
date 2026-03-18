@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenInequalityOperatorPlatformPlatformIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Configurations.Platform? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorPlatformPlatformIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Configurations.Platform("CustomPlatform");
@@ -29,11 +29,11 @@ public sealed class WhenInequalityOperatorPlatformPlatformIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Configurations.Platform("CustomPlatform");
@@ -43,6 +43,6 @@ public sealed class WhenInequalityOperatorPlatformPlatformIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

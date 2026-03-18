@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Configurations
@@ -24,11 +24,11 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Configurations
@@ -47,6 +47,6 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

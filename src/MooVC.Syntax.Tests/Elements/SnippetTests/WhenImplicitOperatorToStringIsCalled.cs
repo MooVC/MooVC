@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenNullSnippetThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSnippetThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Snippet? subject = default;
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> action = () => subject;
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenSnippetThenReturnsStringRepresentation()
+    public async Task GivenSnippetThenReturnsStringRepresentation()
     {
         // Arrange
         var subject = Snippet.From("value");
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

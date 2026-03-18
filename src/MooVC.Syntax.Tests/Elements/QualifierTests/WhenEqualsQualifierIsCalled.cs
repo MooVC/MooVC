@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsQualifierIsCalled
     private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -18,11 +18,11 @@ public sealed class WhenEqualsQualifierIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var first = new Qualifier(same);
@@ -32,11 +32,11 @@ public sealed class WhenEqualsQualifierIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -47,12 +47,12 @@ public sealed class WhenEqualsQualifierIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -63,7 +63,7 @@ public sealed class WhenEqualsQualifierIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

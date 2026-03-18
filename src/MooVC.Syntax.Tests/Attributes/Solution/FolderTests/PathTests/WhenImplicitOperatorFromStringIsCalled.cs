@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests.PathTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests.PathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenRootThenMatchesRootInstance()
+    public async Task GivenRootThenMatchesRootInstance()
     {
         // Arrange
         string value = "/";
@@ -14,12 +14,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Folder.Path subject = value;
 
         // Assert
-        subject.IsRoot.ShouldBeTrue();
-        (subject == value).ShouldBeTrue();
+        await Assert.That(subject.IsRoot).IsTrue();
+        await Assert.That((subject == value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         const string value = "/Folder/";
@@ -28,8 +28,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Folder.Path subject = value;
 
         // Assert
-        subject.IsRoot.ShouldBeFalse();
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        await Assert.That(subject.IsRoot).IsFalse();
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

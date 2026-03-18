@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenEqualityOperatorFileStringIsCalled
 {
     [Test]
-    public void GivenSameValueThenReturnsTrue()
+    public async Task GivenSameValueThenReturnsTrue()
     {
         // Arrange
         var left = new File(FileTestsData.DefaultPath);
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorFileStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         var left = new File(FileTestsData.DefaultPath);
@@ -27,6 +27,6 @@ public sealed class WhenEqualityOperatorFileStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

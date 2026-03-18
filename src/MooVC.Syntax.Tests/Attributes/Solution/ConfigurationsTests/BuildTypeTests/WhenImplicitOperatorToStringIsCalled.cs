@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsValue()
+    public async Task GivenValueThenReturnsValue()
     {
         // Arrange
         var subject = new Configurations.BuildType("Custom");
@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe("Custom");
+        await Assert.That(result).IsEqualTo("Custom");
     }
 }

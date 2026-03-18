@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmptyResults()
+    public async Task GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
         Solution subject = Solution.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUndefinedConfigurationThenNoValidationErrorReturned()
+    public async Task GivenUndefinedConfigurationThenNoValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(configurations: Configurations.Default);
@@ -35,12 +35,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUndefinedFileThenValidationErrorReturned()
+    public async Task GivenUndefinedFileThenValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(file: File.Undefined);
@@ -51,13 +51,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Files));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Solution.Files));
     }
 
     [Test]
-    public void GivenUndefinedFolderThenValidationErrorReturned()
+    public async Task GivenUndefinedFolderThenValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(folder: Folder.Undefined);
@@ -68,13 +68,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Folders));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Solution.Folders));
     }
 
     [Test]
-    public void GivenUndefinedItemThenValidationErrorReturned()
+    public async Task GivenUndefinedItemThenValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(item: Item.Undefined);
@@ -85,13 +85,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Items));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Solution.Items));
     }
 
     [Test]
-    public void GivenUndefinedProjectThenValidationErrorReturned()
+    public async Task GivenUndefinedProjectThenValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(project: ProjectReference.Undefined);
@@ -102,13 +102,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Projects));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Solution.Projects));
     }
 
     [Test]
-    public void GivenUndefinedPropertyThenValidationErrorReturned()
+    public async Task GivenUndefinedPropertyThenValidationErrorReturned()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create(property: Property.Undefined);
@@ -119,8 +119,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Solution.Properties));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Solution.Properties));
     }
 }

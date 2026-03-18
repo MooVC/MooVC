@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenOtherTypeThenReturnsFalse()
+    public async Task GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Solution subject = SolutionTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

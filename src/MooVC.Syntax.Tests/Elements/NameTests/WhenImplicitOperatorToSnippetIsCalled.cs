@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string Value = "Segment";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Name? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenSegmentThenSnippetMatchesStringRepresentation()
+    public async Task GivenSegmentThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         Name subject = Value;
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

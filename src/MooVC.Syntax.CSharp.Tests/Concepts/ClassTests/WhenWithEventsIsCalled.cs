@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithEventsIsCalled
 {
     [Test]
-    public void GivenEventsThenReturnsUpdatedInstance()
+    public async Task GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
         Event[] existing = [new Event { Name = new Name("Created") }];
@@ -19,9 +19,9 @@ public sealed class WhenWithEventsIsCalled
         Class result = original.WithEvents(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Events.ShouldBe(original.Events.Concat(additional));
-        result.Scope.ShouldBe(original.Scope);
-        original.Events.ShouldBe(existing);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Events).IsEqualTo(original.Events.Concat(additional));
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        await Assert.That(original.Events).IsEqualTo(existing);
     }
 }

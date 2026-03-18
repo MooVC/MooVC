@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "Occurred";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Event? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenEventThenStringMatchesToString()
+    public async Task GivenEventThenStringMatchesToString()
     {
         // Arrange
         var subject = new Event
@@ -34,6 +34,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

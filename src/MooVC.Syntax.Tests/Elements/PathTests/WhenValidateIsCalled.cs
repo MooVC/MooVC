@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +7,7 @@ using SystemPath = System.IO.Path;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenEmptyThenNoValidationErrorReturned()
+    public async Task GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
         Path subject = Path.Empty;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenWhitespaceThenValidationErrorReturned()
+    public async Task GivenWhitespaceThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Path("   ");
@@ -34,14 +34,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Path));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results.Count).IsEqualTo(1);
+        await Assert.That(results[0].MemberNames).Contains(nameof(Path));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidPathCharacterThenValidationErrorReturned()
+    public async Task GivenInvalidPathCharacterThenValidationErrorReturned()
     {
         // Arrange
         char invalidPathCharacter = SystemPath.GetInvalidPathChars()[0];
@@ -54,14 +54,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Path));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results.Count).IsEqualTo(1);
+        await Assert.That(results[0].MemberNames).Contains(nameof(Path));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidFileNameCharacterThenValidationErrorReturned()
+    public async Task GivenInvalidFileNameCharacterThenValidationErrorReturned()
     {
         // Arrange
         char invalidFileNameCharacter = SystemPath.GetInvalidFileNameChars()
@@ -75,14 +75,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Path));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results.Count).IsEqualTo(1);
+        await Assert.That(results[0].MemberNames).Contains(nameof(Path));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidPathThenNoValidationErrorReturned()
+    public async Task GivenValidPathThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -93,7 +93,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

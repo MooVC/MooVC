@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests.StyleTypeTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests.StyleTypeTests;
 
 public sealed class WhenIsKAndRIsCalled
 {
     [Test]
-    public void GivenKAndRThenReturnsTrue()
+    public async Task GivenKAndRThenReturnsTrue()
     {
         // Arrange
         Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.KAndR;
@@ -12,11 +12,11 @@ public sealed class WhenIsKAndRIsCalled
         bool result = style.IsKAndR;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenAllmanThenReturnsFalse()
+    public async Task GivenAllmanThenReturnsFalse()
     {
         // Arrange
         Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.Allman;
@@ -25,6 +25,6 @@ public sealed class WhenIsKAndRIsCalled
         bool result = style.IsKAndR;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

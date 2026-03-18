@@ -3,7 +3,7 @@
 public sealed class WhenHasAnyIsCalled
 {
     [Test]
-    public void GivenAnEmptySourceThenANegativeResponseIsReturned()
+    public async Task GivenAnEmptySourceThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [];
@@ -12,11 +12,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        hasAny.ShouldBeFalse();
+        await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
-    public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
+    public async Task GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [];
@@ -25,11 +25,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        hasAny.ShouldBeFalse();
+        await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
-    public void GivenAnPopulatedSourceThenAPositiveResponseIsReturned()
+    public async Task GivenAnPopulatedSourceThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[1];
@@ -38,11 +38,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        hasAny.ShouldBeTrue();
+        await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
-    public void GivenAnPopulatedSourceWithMultipleElementsThenAPositiveResponseIsReturned()
+    public async Task GivenAnPopulatedSourceWithMultipleElementsThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[3];
@@ -51,11 +51,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        hasAny.ShouldBeTrue();
+        await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
-    public void GivenAnPopulatedSourceAndAFailingPredicateThenANegativeResponseIsReturned()
+    public async Task GivenAnPopulatedSourceAndAFailingPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[1];
@@ -64,11 +64,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => false);
 
         // Assert
-        hasAny.ShouldBeFalse();
+        await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
-    public void GivenAnPopulatedSourceAndAPassingPredicateThenAPositiveResponseIsReturned()
+    public async Task GivenAnPopulatedSourceAndAPassingPredicateThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[1];
@@ -77,11 +77,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        hasAny.ShouldBeTrue();
+        await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
-    public void GivenANullSourceThenANegativeResponseIsReturned()
+    public async Task GivenANullSourceThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -90,11 +90,11 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        hasAny.ShouldBeFalse();
+        await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
-    public void GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
+    public async Task GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -103,6 +103,6 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        hasAny.ShouldBeFalse();
+        await Assert.That(hasAny).IsFalse();
     }
 }

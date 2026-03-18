@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
     private const string Name = "Alpha";
 
     [Test]
-    public void GivenBaseThenReturnsSymbol()
+    public async Task GivenBaseThenReturnsSymbol()
     {
         // Arrange
         var name = new Symbol.Moniker(Name);
@@ -17,6 +17,6 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
         Symbol value = subject;
 
         // Assert
-        value.Name.ShouldBe(name);
+        await Assert.That(value.Name).IsEqualTo(name);
     }
 }

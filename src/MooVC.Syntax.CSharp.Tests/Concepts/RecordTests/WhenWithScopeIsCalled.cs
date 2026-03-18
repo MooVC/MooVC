@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsUpdatedInstance()
+    public async Task GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
         Record original = RecordTestsData.Create(scope: Scope.Internal);
@@ -15,8 +15,8 @@ public sealed class WhenWithScopeIsCalled
         Record result = original.WithScope(Scope.Protected);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Scope.ShouldBe(Scope.Protected);
-        original.Scope.ShouldBe(Scope.Internal);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Scope).IsEqualTo(Scope.Protected);
+        await Assert.That(original.Scope).IsEqualTo(Scope.Internal);
     }
 }

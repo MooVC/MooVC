@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Elements.Chaining;
 public sealed class WhenChainIsCalled
 {
     [Test]
-    public void GivenSingleQueryWhenLineIsLongThenSplitsByDots()
+    public async Task GivenSingleQueryWhenLineIsLongThenSplitsByDots()
     {
         // Arrange
         const string value = "var result = query.Where(item => item.IsActive).OrderBy(item => item.Name).Select(item => item.Id).ToList();";
@@ -30,12 +30,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        await Assert.That(result.Length).IsEqualTo(expected.Length);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenNestedQueriesWhenLineIsLongThenBothQueriesSplitsByDots()
+    public async Task GivenNestedQueriesWhenLineIsLongThenBothQueriesSplitsByDots()
     {
         // Arrange
         const string value = "var result = query" +
@@ -69,12 +69,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        await Assert.That(result.Length).IsEqualTo(expected.Length);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenParameterizedWhenLineIsLongThenOutterQuerySplitsByDots()
+    public async Task GivenParameterizedWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
         const string value = "public Task Execute(Order order, Customer customer, DateTime timestamp, CancellationToken cancellationToken);";
@@ -98,12 +98,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        await Assert.That(result.Length).IsEqualTo(expected.Length);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenNestedParameterizedCallWhenLineIsLongThenOutterQuerySplitsByDots()
+    public async Task GivenNestedParameterizedCallWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
         const string value = "await instance.Execute(order, GetCustomerById(customerId, cancellationToken), timestamp, cancellationToken);";
@@ -129,12 +129,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        await Assert.That(result.Length).IsEqualTo(expected.Length);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenParameterizedQueryWhenLineIsLongThenOutterQuerySplitsByDots()
+    public async Task GivenParameterizedQueryWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
         const string value = "var result = query" +
@@ -165,7 +165,7 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        await Assert.That(result.Length).IsEqualTo(expected.Length);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

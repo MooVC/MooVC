@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenKindThenReturnsString()
+    public async Task GivenKindThenReturnsString()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.ReadOnly;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe("readonly");
+        await Assert.That(result).IsEqualTo("readonly");
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Interface subject = InterfaceTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenValuesThenReturnsInterfaceSignature()
+    public async Task GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
         var created = new Event { Name = "Created" };
@@ -63,6 +63,6 @@ public sealed class WhenToSnippetIsCalled
         var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

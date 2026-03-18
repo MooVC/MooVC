@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Field? subject = default;
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenFieldThenStringMatchesToString()
+    public async Task GivenFieldThenStringMatchesToString()
     {
         // Arrange
         Field subject = FieldTestsData.Create();
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

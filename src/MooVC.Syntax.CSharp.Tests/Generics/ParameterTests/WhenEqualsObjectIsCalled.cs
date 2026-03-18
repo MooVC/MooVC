@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -10,7 +10,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string DefaultName = "TValue";
 
     [Test]
-    public void GivenNonParameterThenReturnsFalse()
+    public async Task GivenNonParameterThenReturnsFalse()
     {
         // Arrange
         object other = new();
@@ -20,11 +20,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Parameter subject = Create();
@@ -34,11 +34,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Parameter subject = Create();
@@ -48,11 +48,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentParameterThenReturnsTrue()
+    public async Task GivenEquivalentParameterThenReturnsTrue()
     {
         // Arrange
         Parameter subject = Create();
@@ -62,11 +62,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentParameterThenReturnsFalse()
+    public async Task GivenDifferentParameterThenReturnsFalse()
     {
         // Arrange
         Parameter subject = Create();
@@ -76,7 +76,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     private static Parameter Create(string name = DefaultName)

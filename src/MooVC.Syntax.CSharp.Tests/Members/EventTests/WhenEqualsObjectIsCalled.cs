@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -41,11 +41,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentTypeThenReturnsFalse()
+    public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -55,11 +55,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -69,6 +69,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

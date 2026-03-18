@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsUpdatedInstance()
+    public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
         var existing = new Parameter { Name = new Variable("first"), Type = typeof(string) };
@@ -17,8 +17,8 @@ public sealed class WhenWithParametersIsCalled
         Record result = original.WithParameters(appended);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Parameters.ShouldBe(new[] { existing, appended });
-        result.Properties.ShouldBe(original.Properties);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Parameters).IsEqualTo(new[] { existing, appended });
+        await Assert.That(result.Properties).IsEqualTo(original.Properties);
     }
 }

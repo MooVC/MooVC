@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -16,11 +16,11 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenLocationThenReturnsCompileAndEmbeddedResource()
+    public async Task GivenLocationThenReturnsCompileAndEmbeddedResource()
     {
         // Arrange
         var location = new Path(ResourceTestsData.DefaultLocationPath);
@@ -44,13 +44,13 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.Length.ShouldBe(2);
-        XNode.DeepEquals(expectedCompile, result[0]).ShouldBeTrue();
-        XNode.DeepEquals(expectedEmbeddedResource, result[1]).ShouldBeTrue();
+        await Assert.That(result.Length).IsEqualTo(2);
+        await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
+        await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
     }
 
     [Test]
-    public void GivenPublicResourceWithNamespaceThenReturnsCustomToolNamespace()
+    public async Task GivenPublicResourceWithNamespaceThenReturnsCustomToolNamespace()
     {
         // Arrange
         var customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
@@ -82,8 +82,8 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.Length.ShouldBe(2);
-        XNode.DeepEquals(expectedCompile, result[0]).ShouldBeTrue();
-        XNode.DeepEquals(expectedEmbeddedResource, result[1]).ShouldBeTrue();
+        await Assert.That(result.Length).IsEqualTo(2);
+        await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
+        await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
     }
 }

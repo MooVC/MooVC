@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUnnamedThenValidationIsSkipped()
+    public async Task GivenUnnamedThenValidationIsSkipped()
     {
         // Arrange
         Configurations.BuildType subject = Configurations.BuildType.Unnamed;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidValueThenValidationErrorReturned()
+    public async Task GivenInvalidValueThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Configurations.BuildType(" Invalid");
@@ -34,8 +34,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Configurations.BuildType));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Configurations.BuildType));
     }
 }

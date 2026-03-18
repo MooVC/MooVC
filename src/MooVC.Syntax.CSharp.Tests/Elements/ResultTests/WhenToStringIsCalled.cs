@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenToStringIsCalled
 {
     private const string ValueType = "Value";
 
     [Test]
-    public void GivenUndefinedResultThenReturnsEmpty()
+    public async Task GivenUndefinedResultThenReturnsEmpty()
     {
         // Arrange
         Result subject = Result.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenModifierAndTypeThenCombinedSignatureReturned()
+    public async Task GivenModifierAndTypeThenCombinedSignatureReturned()
     {
         // Arrange
         var subject = new Result
@@ -32,6 +32,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("async ref Value");
+        await Assert.That(representation).IsEqualTo("async ref Value");
     }
 }

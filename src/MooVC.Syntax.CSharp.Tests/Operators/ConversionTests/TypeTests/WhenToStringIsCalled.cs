@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenATypeThenTheUnderlyingValueIsReturned()
+    public async Task GivenATypeThenTheUnderlyingValueIsReturned()
     {
         // Arrange
         Conversion.Type type = Conversion.Type.Explicit;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string value = type.ToString();
 
         // Assert
-        value.ShouldBe("explicit");
+        await Assert.That(value).IsEqualTo("explicit");
     }
 }

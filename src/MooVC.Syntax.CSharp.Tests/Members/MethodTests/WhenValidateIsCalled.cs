@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
         Method subject = Method.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnspecifiedNameThenValidationErrorReturned()
+    public async Task GivenUnspecifiedNameThenValidationErrorReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(name: Declaration.Unspecified);
@@ -35,14 +35,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Method.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Method.Name));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidParameterThenValidationErrorReturned()
+    public async Task GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(parameters:
@@ -62,14 +62,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Default));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Parameter.Default));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidResultThenValidationErrorReturned()
+    public async Task GivenInvalidResultThenValidationErrorReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(result: new Result { Modifier = Result.Kind.Ref });
@@ -80,14 +80,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Result.Type));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Result.Type));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidMethodThenNoValidationErrorsReturned()
+    public async Task GivenValidMethodThenNoValidationErrorsReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(
@@ -108,7 +108,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

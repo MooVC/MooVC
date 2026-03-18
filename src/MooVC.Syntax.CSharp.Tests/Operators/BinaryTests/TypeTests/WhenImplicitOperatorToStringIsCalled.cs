@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenATypeThenTheValueIsReturned()
+    public async Task GivenATypeThenTheValueIsReturned()
     {
         // Arrange
         Binary.Type type = Binary.Type.Add;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = type;
 
         // Assert
-        value.ShouldBe("+");
+        await Assert.That(value).IsEqualTo("+");
     }
 }

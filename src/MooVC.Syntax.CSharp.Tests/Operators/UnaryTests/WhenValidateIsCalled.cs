@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationErrorReturned()
+    public async Task GivenUndefinedThenValidationErrorReturned()
     {
         // Arrange
         Unary subject = Unary.Undefined;
@@ -17,14 +17,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Unary.Body));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Unary.Body));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenBodyThenValidationSucceeds()
+    public async Task GivenBodyThenValidationSucceeds()
     {
         // Arrange
         Unary subject = UnaryTestsData.Create();
@@ -35,7 +35,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

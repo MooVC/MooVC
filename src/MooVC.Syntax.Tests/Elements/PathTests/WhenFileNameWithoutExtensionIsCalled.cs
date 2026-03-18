@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 using SystemPath = System.IO.Path;
 
 public sealed class WhenFileNameWithoutExtensionIsCalled
 {
     [Test]
-    public void GivenPathThenReturnsFileNameWithoutExtension()
+    public async Task GivenPathThenReturnsFileNameWithoutExtension()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -15,6 +15,6 @@ public sealed class WhenFileNameWithoutExtensionIsCalled
         string result = subject.FileNameWithoutExtension;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

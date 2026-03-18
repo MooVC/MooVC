@@ -7,14 +7,14 @@ public sealed class WhenImplicitlyCastFromUShort
     [Arguments(Directive.MinimumLimit, ushort.MinValue)]
     [Arguments(5, 5)]
     [Arguments(ushort.MaxValue, ushort.MaxValue)]
-    public void GivenAValueThenAnInstanceIsReturnedWithTheExpectedPage(ushort expected, ushort page)
+    public async Task GivenAValueThenAnInstanceIsReturnedWithTheExpectedPage(ushort expected, ushort page)
     {
         // Act
         Directive directive = page;
 
         // Assert
-        directive.Limit.ShouldBe(Directive.DefaultLimit);
-        directive.Page.ShouldBe(expected);
+        await Assert.That(directive.Limit).IsEqualTo(Directive.DefaultLimit);
+        await Assert.That(directive.Page).IsEqualTo(expected);
     }
 }
 #endif

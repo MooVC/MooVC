@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenKnownAsIsCalled
     private const string UpdatedLabel = "UpdatedLabel";
 
     [Test]
-    public void GivenLabelThenReturnsUpdatedInstance()
+    public async Task GivenLabelThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -17,9 +17,9 @@ public sealed class WhenKnownAsIsCalled
         Target result = original.KnownAs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Label.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Name.ShouldBe(original.Name);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Label).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.OptionsTests;
 
 public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Parameter.Options? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Parameter.Options? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         var left = new Parameter.Options();
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Parameter.Options();
@@ -56,12 +56,12 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Parameter.Options();
@@ -74,7 +74,7 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

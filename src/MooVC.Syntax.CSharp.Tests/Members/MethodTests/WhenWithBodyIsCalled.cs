@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
     [Test]
-    public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
+    public async Task GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange
         Method original = MethodTestsData.Create(body: Snippet.From("return value;"));
@@ -15,11 +15,11 @@ public sealed class WhenWithBodyIsCalled
         Method result = original.WithBody(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(replacement);
-        result.Name.ShouldBe(original.Name);
-        result.Parameters.ShouldBe(original.Parameters);
-        result.Result.ShouldBe(original.Result);
-        result.Scope.ShouldBe(original.Scope);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(replacement);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        await Assert.That(result.Result).IsEqualTo(original.Result);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

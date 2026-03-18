@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Elements;
@@ -7,22 +7,22 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenMethodIsUndefined()
+    public async Task GivenDefaultsThenMethodIsUndefined()
     {
         // Act
         var subject = new Method();
 
         // Assert
-        subject.Body.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Name.ShouldBe(Declaration.Unspecified);
-        subject.Parameters.ShouldBe([]);
-        subject.Result.ShouldBe(Result.Task);
-        subject.Scope.ShouldBe(Scope.Public);
+        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
+        await Assert.That(subject.Name).IsEqualTo(Declaration.Unspecified);
+        await Assert.That(subject.Parameters).IsEqualTo([]);
+        await Assert.That(subject.Result).IsEqualTo(Result.Task);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         ImmutableArray<Parameter> parameters =
@@ -58,11 +58,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Body.ShouldBe(Snippet.From(body));
-        subject.IsUndefined.ShouldBeFalse();
-        subject.Name.ShouldBe(new Declaration { Name = MethodTestsData.DefaultName });
-        subject.Parameters.ShouldBe(parameters);
-        subject.Result.ShouldBe(result);
-        subject.Scope.ShouldBe(Scope.Internal);
+        await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
+        await Assert.That(subject.IsUndefined).IsFalse();
+        await Assert.That(subject.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
+        await Assert.That(subject.Parameters).IsEqualTo(parameters);
+        await Assert.That(subject.Result).IsEqualTo(result);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

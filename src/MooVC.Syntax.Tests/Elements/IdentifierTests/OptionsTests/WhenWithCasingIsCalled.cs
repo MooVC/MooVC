@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
 
 public sealed class WhenWithCasingIsCalled
 {
     [Test]
-    public void GivenCasingThenReturnsNewInstanceWithUpdatedCasing()
+    public async Task GivenCasingThenReturnsNewInstanceWithUpdatedCasing()
     {
         // Arrange
         var original = new Identifier.Options();
@@ -12,8 +12,8 @@ public sealed class WhenWithCasingIsCalled
         Identifier.Options result = original.WithCasing(Identifier.Casing.Pascal);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Casing.ShouldBe(Identifier.Casing.Pascal);
-        original.Casing.ShouldBe(Identifier.Casing.Camel);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Casing).IsEqualTo(Identifier.Casing.Pascal);
+        await Assert.That(original.Casing).IsEqualTo(Identifier.Casing.Camel);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using System;
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -16,11 +16,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragments()
+    public async Task GivenValuesThenReturnsFragments()
     {
         // Arrange
         var location = new Path(ResourceTestsData.DefaultLocationPath);
@@ -46,6 +46,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

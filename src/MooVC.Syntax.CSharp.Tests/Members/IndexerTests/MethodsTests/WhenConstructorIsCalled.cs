@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenMethodsIsDefault()
+    public async Task GivenDefaultsThenMethodsIsDefault()
     {
         // Act
         var subject = new Indexer.Methods();
 
         // Assert
-        subject.Get.ShouldBe(Snippet.Empty);
-        subject.IsDefault.ShouldBeTrue();
-        subject.Set.ShouldBe(Snippet.Empty);
+        await Assert.That(subject.Get).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsDefault).IsTrue();
+        await Assert.That(subject.Set).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var get = Snippet.From("value");
@@ -31,8 +31,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Get.ShouldBe(get);
-        subject.IsDefault.ShouldBeFalse();
-        subject.Set.ShouldBe(set);
+        await Assert.That(subject.Get).IsEqualTo(get);
+        await Assert.That(subject.IsDefault).IsFalse();
+        await Assert.That(subject.Set).IsEqualTo(set);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenInequalityOperatorModeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
     private const string Different = "ref";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Parameter.Mode? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.Out;
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.Out;
@@ -58,11 +58,11 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.In;
@@ -72,6 +72,6 @@ public sealed class WhenInequalityOperatorModeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

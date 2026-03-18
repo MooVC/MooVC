@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(default(object));
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenOtherTypeThenReturnsFalse()
+    public async Task GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -28,11 +28,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -42,11 +42,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -56,6 +56,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

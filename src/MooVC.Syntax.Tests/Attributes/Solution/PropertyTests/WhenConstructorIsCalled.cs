@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenPropertyIsUndefined()
+    public async Task GivenDefaultsThenPropertyIsUndefined()
     {
         // Act
         var subject = new Property();
 
         // Assert
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Property
@@ -27,8 +27,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(Snippet.From(PropertyTestsData.DefaultName));
-        subject.Value.ShouldBe(Snippet.From(PropertyTestsData.DefaultValue));
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Name).IsEqualTo(Snippet.From(PropertyTestsData.DefaultName));
+        await Assert.That(subject.Value).IsEqualTo(Snippet.From(PropertyTestsData.DefaultValue));
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

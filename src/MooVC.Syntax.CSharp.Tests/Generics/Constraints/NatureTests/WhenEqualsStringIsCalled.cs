@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsStringIsCalled
     private const string Different = "struct";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Nature subject = Same;
@@ -19,13 +19,13 @@ public sealed class WhenEqualsStringIsCalled
         bool resultRightLeft = ((Nature?)other)?.Equals(subject) ?? false;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
     [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Nature left = Same;
@@ -36,13 +36,13 @@ public sealed class WhenEqualsStringIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
     [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Nature left = Same;
@@ -53,7 +53,7 @@ public sealed class WhenEqualsStringIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

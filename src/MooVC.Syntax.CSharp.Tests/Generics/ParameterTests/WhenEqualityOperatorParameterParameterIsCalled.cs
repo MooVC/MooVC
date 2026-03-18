@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -10,7 +10,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     private const string DefaultName = "TValue";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Parameter? left = default;
@@ -20,11 +20,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Parameter? left = default;
@@ -34,11 +34,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Parameter left = Create();
@@ -48,11 +48,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Parameter first = Create();
@@ -62,11 +62,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter left = Create();
@@ -76,11 +76,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Parameter left = Create();
@@ -90,11 +90,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentConstraintsThenReturnsFalse()
+    public async Task GivenDifferentConstraintsThenReturnsFalse()
     {
         // Arrange
         Parameter left = Create();
@@ -105,8 +105,8 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     private static Parameter Create(string name = DefaultName, Constraint? constraint = default)

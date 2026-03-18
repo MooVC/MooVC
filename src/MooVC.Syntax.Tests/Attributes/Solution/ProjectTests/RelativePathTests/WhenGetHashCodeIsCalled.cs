@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashesMatch()
+    public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
         const string path = "src/Project.csproj";
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Project.RelativePath("src/Project.csproj");
@@ -32,6 +32,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

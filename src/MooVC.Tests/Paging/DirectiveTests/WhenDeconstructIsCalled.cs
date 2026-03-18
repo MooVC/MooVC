@@ -4,7 +4,7 @@ namespace MooVC.Paging.DirectiveTests;
 public sealed class WhenDeconstructIsCalled
 {
     [Test]
-    public void GivenDefaultDirectiveThenFirstPageAndMinimumLimitAreReturned()
+    public async Task GivenDefaultDirectiveThenFirstPageAndMinimumLimitAreReturned()
     {
         // Arrange
         const ushort expectedLimit = Directive.MinimumLimit;
@@ -15,12 +15,12 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        limit.ShouldBe(expectedLimit);
-        page.ShouldBe(expectedPage);
+        await Assert.That(limit).IsEqualTo(expectedLimit);
+        await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
-    public void GivenDirectiveWithCustomValuesThenThoseValuesAreReturned()
+    public async Task GivenDirectiveWithCustomValuesThenThoseValuesAreReturned()
     {
         // Arrange
         const ushort expectedLimit = 15;
@@ -31,12 +31,12 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        limit.ShouldBe(expectedLimit);
-        page.ShouldBe(expectedPage);
+        await Assert.That(limit).IsEqualTo(expectedLimit);
+        await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
-    public void GivenDirectiveWithMaximumValuesThenThoseValuesAreReturned()
+    public async Task GivenDirectiveWithMaximumValuesThenThoseValuesAreReturned()
     {
         // Arrange
         const ushort expectedLimit = ushort.MaxValue;
@@ -47,12 +47,12 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        limit.ShouldBe(expectedLimit);
-        page.ShouldBe(expectedPage);
+        await Assert.That(limit).IsEqualTo(expectedLimit);
+        await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
-    public void GivenDirectiveWithMinimumValuesThenFirstPageAndMinimumSizeAreReturned()
+    public async Task GivenDirectiveWithMinimumValuesThenFirstPageAndMinimumSizeAreReturned()
     {
         // Arrange
         const ushort expectedLimit = Directive.MinimumLimit;
@@ -63,8 +63,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort page, ushort size) = directive;
 
         // Assert
-        page.ShouldBe(expectedPage);
-        size.ShouldBe(expectedLimit);
+        await Assert.That(page).IsEqualTo(expectedPage);
+        await Assert.That(size).IsEqualTo(expectedLimit);
     }
 }
 #endif

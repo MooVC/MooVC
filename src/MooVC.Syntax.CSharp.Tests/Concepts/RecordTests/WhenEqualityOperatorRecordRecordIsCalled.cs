@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenEqualityOperatorRecordRecordIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Record? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Record? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Record left = RecordTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Record first = RecordTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Record left = RecordTestsData.Create(scope: Scope.Internal);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Record left = RecordTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentExtensibilitiesThenReturnsFalse()
+    public async Task GivenDifferentExtensibilitiesThenReturnsFalse()
     {
         // Arrange
         Record left = RecordTestsData.Create(extensibility: Extensibility.Abstract);
@@ -102,6 +102,6 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

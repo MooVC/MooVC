@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,7 +10,7 @@ public sealed class WhenEqualsEventIsCalled
     private const string Behaviour = "value";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Event? subject = default;
@@ -20,11 +20,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -34,11 +34,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -48,11 +48,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -62,11 +62,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentBehavioursThenReturnsFalse()
+    public async Task GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -81,11 +81,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentHandlersThenReturnsFalse()
+    public async Task GivenDifferentHandlersThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -95,11 +95,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentStaticStatesThenReturnsFalse()
+    public async Task GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -111,11 +111,11 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentScopesThenReturnsFalse()
+    public async Task GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -125,6 +125,6 @@ public sealed class WhenEqualsEventIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

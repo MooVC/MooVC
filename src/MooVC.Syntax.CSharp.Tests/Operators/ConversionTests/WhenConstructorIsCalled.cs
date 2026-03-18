@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,22 +6,22 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenConversionIsUndefined()
+    public async Task GivenDefaultsThenConversionIsUndefined()
     {
         // Act
         var subject = new Conversion();
 
         // Assert
-        subject.Body.ShouldBe(Snippet.Empty);
-        subject.Direction.ShouldBe(Conversion.Intent.To);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Mode.ShouldBe(Conversion.Type.Implicit);
-        subject.Scope.ShouldBe(Scope.Public);
-        subject.Target.ShouldBe(Symbol.Undefined);
+        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.To);
+        await Assert.That(subject.IsUndefined).IsTrue();
+        await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Implicit);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        await Assert.That(subject.Target).IsEqualTo(Symbol.Undefined);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var body = Snippet.From(ConversionTestsData.DefaultBody);
@@ -38,11 +38,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Body.ShouldBe(body);
-        subject.Direction.ShouldBe(Conversion.Intent.From);
-        subject.IsUndefined.ShouldBeFalse();
-        subject.Mode.ShouldBe(Conversion.Type.Explicit);
-        subject.Scope.ShouldBe(Scope.Private);
-        subject.Target.ShouldBe(subjectSymbol);
+        await Assert.That(subject.Body).IsEqualTo(body);
+        await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.From);
+        await Assert.That(subject.IsUndefined).IsFalse();
+        await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Explicit);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        await Assert.That(subject.Target).IsEqualTo(subjectSymbol);
     }
 }

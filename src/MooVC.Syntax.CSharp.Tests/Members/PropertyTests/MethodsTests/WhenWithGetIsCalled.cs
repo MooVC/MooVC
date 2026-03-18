@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithGetIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Property.Methods
@@ -19,9 +19,9 @@ public sealed class WhenWithGetIsCalled
         Property.Methods result = original.WithGet(get);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Get.ShouldBe(get);
-        result.Set.ShouldBe(original.Set);
-        original.Get.ShouldBe(Snippet.Empty);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Get).IsEqualTo(get);
+        await Assert.That(result.Set).IsEqualTo(original.Set);
+        await Assert.That(original.Get).IsEqualTo(Snippet.Empty);
     }
 }

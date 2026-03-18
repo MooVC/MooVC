@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithExtensibilityIsCalled
 {
     [Test]
-    public void GivenExtensibilityThenReturnsUpdatedInstance()
+    public async Task GivenExtensibilityThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create(extensibility: Extensibility.Sealed);
@@ -15,9 +15,9 @@ public sealed class WhenWithExtensibilityIsCalled
         Class result = original.WithExtensibility(Extensibility.Abstract);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Extensibility.ShouldBe(Extensibility.Abstract);
-        result.Declaration.ShouldBe(original.Declaration);
-        original.Extensibility.ShouldBe(Extensibility.Sealed);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Abstract);
+        await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        await Assert.That(original.Extensibility).IsEqualTo(Extensibility.Sealed);
     }
 }

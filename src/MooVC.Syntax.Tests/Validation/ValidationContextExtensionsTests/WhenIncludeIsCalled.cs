@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Validation.ValidationContextExtensionsTests;
+﻿namespace MooVC.Syntax.Validation.ValidationContextExtensionsTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ public sealed class WhenIncludeIsCalled
     private const string SecondMessage = "Second";
 
     [Test]
-    public void GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         ValidationContext? validationContext = default;
@@ -18,12 +18,12 @@ public sealed class WhenIncludeIsCalled
         Action action = () => validationContext!.Include(nameof(validatable), validatable);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(validationContext));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(validationContext));
     }
 
     [Test]
-    public void GivenResultsAreNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenResultsAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         var validatable = new StubValidatable();
@@ -34,12 +34,12 @@ public sealed class WhenIncludeIsCalled
         Action action = () => context.Include(nameof(validatable), results!, validatable);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(results));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(results));
     }
 
     [Test]
-    public void GivenValidatableIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValidatableIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         var validatable = new StubValidatable();
@@ -50,12 +50,12 @@ public sealed class WhenIncludeIsCalled
         Action action = () => context.Include(nameof(validatable), target!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(validatable));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(validatable));
     }
 
     [Test]
-    public void GivenValidatablesAreNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValidatablesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         IValidatableObject[] validatables = [new StubValidatable()];
@@ -66,12 +66,12 @@ public sealed class WhenIncludeIsCalled
         Action action = () => context.Include(nameof(validatables), targets!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(validatables));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(validatables));
     }
 
     [Test]
-    public void GivenValidatableThenValidationResultsAreReturned()
+    public async Task GivenValidatableThenValidationResultsAreReturned()
     {
         // Arrange
         var validatable = new StubValidatable(new ValidationResult(FirstMessage));
@@ -83,14 +83,14 @@ public sealed class WhenIncludeIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe([validatable.Results.Single()]);
+        await Assert.That(results).IsEqualTo([validatable.Results.Single()]);
     }
 
     [Test]
-    public void GivenExistingResultsThenValidationResultsAreAppended()
+    public async Task GivenExistingResultsThenValidationResultsAreAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -105,14 +105,14 @@ public sealed class WhenIncludeIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe([initial, validatable.Results.Single()]);
+        await Assert.That(combined).IsEqualTo([initial, validatable.Results.Single()]);
     }
 
     [Test]
-    public void GivenMultipleValidatablesThenAllValidationResultsAreReturned()
+    public async Task GivenMultipleValidatablesThenAllValidationResultsAreReturned()
     {
         // Arrange
         var first = new StubValidatable(new ValidationResult(FirstMessage));
@@ -125,14 +125,14 @@ public sealed class WhenIncludeIsCalled
             [first, second]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] results = actual.Results.ToArray();
-        results.ShouldBe([first.Results.Single(), second.Results.Single()]);
+        await Assert.That(results).IsEqualTo([first.Results.Single(), second.Results.Single()]);
     }
 
     [Test]
-    public void GivenResultsAndMultipleValidatablesThenAllValidationResultsAreAppended()
+    public async Task GivenResultsAndMultipleValidatablesThenAllValidationResultsAreAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
@@ -148,10 +148,10 @@ public sealed class WhenIncludeIsCalled
             [first, second]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
 
         ValidationResult[] combined = actual.Results.ToArray();
-        combined.ShouldBe([initial, first.Results.Single(), second.Results.Single()]);
+        await Assert.That(combined).IsEqualTo([initial, first.Results.Single(), second.Results.Single()]);
     }
 
     private sealed class StubValidatable : IValidatableObject

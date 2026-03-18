@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenEqualityOperatorTypeTypeIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Unary.Type? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorTypeTypeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameValuesThenReturnsTrue()
+    public async Task GivenSameValuesThenReturnsTrue()
     {
         // Arrange
         Unary.Type left = Unary.Type.Not;
@@ -28,12 +28,12 @@ public sealed class WhenEqualityOperatorTypeTypeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Unary.Type left = Unary.Type.Not;
@@ -44,7 +44,7 @@ public sealed class WhenEqualityOperatorTypeTypeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

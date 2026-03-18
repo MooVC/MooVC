@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenDefaultInstanceThenReturnsReadOnlyProperty()
+    public async Task GivenDefaultInstanceThenReturnsReadOnlyProperty()
     {
         // Arrange
         Indexer.Methods subject = Indexer.Methods.Default;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenAutoImplementedMembersThenReturnsReadOnlyProperty()
+    public async Task GivenAutoImplementedMembersThenReturnsReadOnlyProperty()
     {
         // Arrange
         var subject = new Indexer.Methods();
@@ -29,11 +29,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenExpressionBodiesThenReturnsExpressions()
+    public async Task GivenExpressionBodiesThenReturnsExpressions()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -47,11 +47,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultiLineBodyThenReturnsBlock()
+    public async Task GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange
         var get = Snippet.From($"first{Environment.NewLine}second");
@@ -73,6 +73,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

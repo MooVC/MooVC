@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenEqualsIntIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsIntIsCalled
     private const int Other = 0;
 
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -15,11 +15,11 @@ public sealed class WhenEqualsIntIsCalled
         bool result = intent.Equals(default(int?));
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -28,11 +28,11 @@ public sealed class WhenEqualsIntIsCalled
         bool result = intent.Equals(Value);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -41,6 +41,6 @@ public sealed class WhenEqualsIntIsCalled
         bool result = intent.Equals(Other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

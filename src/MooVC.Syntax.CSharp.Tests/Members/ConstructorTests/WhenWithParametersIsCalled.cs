@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.ParameterTests;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Elements.ParameterTests;
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
+    public async Task GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
@@ -20,12 +20,12 @@ public sealed class WhenWithParametersIsCalled
         Constructor result = original.WithParameters([.. parameters]);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Extensibility.ShouldBe(original.Extensibility);
-        result.Parameters.ShouldBe([.. parameters]);
-        result.Scope.ShouldBe(original.Scope);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(original.Body);
+        await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
+        await Assert.That(result.Parameters).IsEqualTo([.. parameters]);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        original.Parameters.ShouldBeEmpty();
+        await Assert.That(original.Parameters).IsEmpty();
     }
 }

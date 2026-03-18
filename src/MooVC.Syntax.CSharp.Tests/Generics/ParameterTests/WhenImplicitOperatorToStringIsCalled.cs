@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "TParameter";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Parameter? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenParameterThenMatchesToString()
+    public async Task GivenParameterThenMatchesToString()
     {
         // Arrange
         var subject = new Parameter
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

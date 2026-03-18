@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithBeforeTargetsIsCalled
     private const string UpdatedBeforeTargets = "UpdatedBeforeTargets";
 
     [Test]
-    public void GivenBeforeTargetsThenReturnsUpdatedInstance()
+    public async Task GivenBeforeTargetsThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -17,9 +17,9 @@ public sealed class WhenWithBeforeTargetsIsCalled
         Target result = original.WithBeforeTargets(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.BeforeTargets.ShouldBe(updated);
-        result.AfterTargets.ShouldBe(original.AfterTargets);
-        result.Name.ShouldBe(original.Name);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.BeforeTargets).IsEqualTo(updated);
+        await Assert.That(result.AfterTargets).IsEqualTo(original.AfterTargets);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

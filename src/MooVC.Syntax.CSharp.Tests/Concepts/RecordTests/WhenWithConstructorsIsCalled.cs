@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithConstructorsIsCalled
 {
     [Test]
-    public void GivenConstructorsThenReturnsUpdatedInstance()
+    public async Task GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
         var originalConstructor = new Constructor();
@@ -17,8 +17,8 @@ public sealed class WhenWithConstructorsIsCalled
         Record result = original.WithConstructors(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Attributes.ShouldBe(original.Attributes);
-        result.Constructors.ShouldBe(new[] { originalConstructor, updated });
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
+        await Assert.That(result.Constructors).IsEqualTo(new[] { originalConstructor, updated });
     }
 }

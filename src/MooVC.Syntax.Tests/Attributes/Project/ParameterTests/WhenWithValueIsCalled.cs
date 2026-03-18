@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ParameterTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithValueIsCalled
     private const string UpdatedValue = "UpdatedValue";
 
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Parameter original = ParameterTestsData.Create();
@@ -17,8 +17,8 @@ public sealed class WhenWithValueIsCalled
         Parameter result = original.WithValue(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Value.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Value).IsEqualTo(updated);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

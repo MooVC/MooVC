@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Indexer.Methods? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Indexer.Methods? left = default;
@@ -32,11 +32,11 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         var left = new Indexer.Methods
@@ -50,11 +50,11 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var first = new Indexer.Methods
@@ -68,11 +68,11 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Indexer.Methods
@@ -90,12 +90,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Indexer.Methods
@@ -113,12 +113,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentGetValuesThenReturnsFalse()
+    public async Task GivenDifferentGetValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Indexer.Methods
@@ -136,12 +136,12 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentSetValuesThenReturnsFalse()
+    public async Task GivenDifferentSetValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Indexer.Methods
@@ -159,7 +159,7 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

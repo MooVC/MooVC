@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenImportIsUndefined()
+    public async Task GivenDefaultsThenImportIsUndefined()
     {
         // Act
         var subject = new Import();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.Label.ShouldBe(Snippet.Empty);
-        subject.Project.ShouldBe(Snippet.Empty);
-        subject.Sdk.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Project).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Sdk).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Import
@@ -31,10 +31,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(ImportTestsData.DefaultCondition));
-        subject.Label.ShouldBe(Snippet.From(ImportTestsData.DefaultLabel));
-        subject.Project.ShouldBe(Snippet.From(ImportTestsData.DefaultProject));
-        subject.Sdk.ShouldBe(Snippet.From(ImportTestsData.DefaultSdk));
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ImportTestsData.DefaultCondition));
+        await Assert.That(subject.Label).IsEqualTo(Snippet.From(ImportTestsData.DefaultLabel));
+        await Assert.That(subject.Project).IsEqualTo(Snippet.From(ImportTestsData.DefaultProject));
+        await Assert.That(subject.Sdk).IsEqualTo(Snippet.From(ImportTestsData.DefaultSdk));
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

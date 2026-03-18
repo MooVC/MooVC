@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashCodesMatch()
+    public async Task GivenEqualValuesThenHashCodesMatch()
     {
         // Arrange
         Folder left = FolderTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashCodesDiffer()
+    public async Task GivenDifferentValuesThenHashCodesDiffer()
     {
         // Arrange
         Folder left = FolderTestsData.Create();
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

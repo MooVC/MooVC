@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentValuesThenHashesMatch()
+    public async Task GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
         Binary first = BinaryTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Binary first = BinaryTestsData.Create();
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

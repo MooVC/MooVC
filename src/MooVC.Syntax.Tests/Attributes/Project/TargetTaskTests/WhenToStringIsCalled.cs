@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 using System;
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         TargetTask subject = TargetTask.Undefined;
@@ -16,11 +16,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         Parameter parameter = TargetTaskTestsData.CreateParameter();
@@ -52,6 +52,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

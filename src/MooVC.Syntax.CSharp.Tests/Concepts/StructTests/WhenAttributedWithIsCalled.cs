@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenAttributedWithIsCalled
 {
     [Test]
-    public void GivenAttributesThenReturnsUpdatedInstance()
+    public async Task GivenAttributesThenReturnsUpdatedInstance()
     {
         // Arrange
         Attribute[] existing =
@@ -27,9 +27,9 @@ public sealed class WhenAttributedWithIsCalled
         Struct result = original.AttributedWith(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Attributes.ShouldBe(original.Attributes.Concat(additional));
-        result.Constructors.ShouldBe(original.Constructors);
-        original.Attributes.ShouldBe(existing);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
+        await Assert.That(result.Constructors).IsEqualTo(original.Constructors);
+        await Assert.That(original.Attributes).IsEqualTo(existing);
     }
 }

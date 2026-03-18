@@ -1,26 +1,26 @@
-namespace MooVC.Syntax.Attributes.Resource.DataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.DataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenDataIsUndefined()
+    public async Task GivenDefaultsThenDataIsUndefined()
     {
         // Act
         var subject = new Data();
 
         // Assert
-        subject.Comment.ShouldBe(Snippet.Empty);
-        subject.MimeType.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Type.ShouldBe(Snippet.Empty);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.Comment).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.MimeType).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var comment = Snippet.From(DataTestsData.DefaultComment);
@@ -40,11 +40,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Comment.ShouldBe(comment);
-        subject.MimeType.ShouldBe(mimeType);
-        subject.Name.ShouldBe(name);
-        subject.Type.ShouldBe(type);
-        subject.Value.ShouldBe(value);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Comment).IsEqualTo(comment);
+        await Assert.That(subject.MimeType).IsEqualTo(mimeType);
+        await Assert.That(subject.Name).IsEqualTo(name);
+        await Assert.That(subject.Type).IsEqualTo(type);
+        await Assert.That(subject.Value).IsEqualTo(value);
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

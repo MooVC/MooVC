@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenEqualityOperatorOptionsStringIsCalled
 {
     [Test]
-    public void GivenMatchingValueThenReturnsTrue()
+    public async Task GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
         TargetTask.Options left = TargetTask.Options.WarnAndContinue;
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorOptionsStringIsCalled
         bool result = left == Right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         TargetTask.Options left = TargetTask.Options.ErrorAndContinue;
@@ -27,6 +27,6 @@ public sealed class WhenEqualityOperatorOptionsStringIsCalled
         bool result = left == Right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

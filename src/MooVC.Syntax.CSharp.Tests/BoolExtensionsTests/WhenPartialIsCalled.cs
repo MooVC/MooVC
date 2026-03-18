@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Syntax.BoolExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Syntax.BoolExtensionsTests;
 
 public sealed class WhenPartialIsCalled
 {
     [Test]
-    public void GivenTrueThenReturnsPartialKeyword()
+    public async Task GivenTrueThenReturnsPartialKeyword()
     {
         // Arrange
         bool subject = true;
@@ -12,11 +12,11 @@ public sealed class WhenPartialIsCalled
         string result = subject.Partial();
 
         // Assert
-        result.ShouldBe("partial");
+        await Assert.That(result).IsEqualTo("partial");
     }
 
     [Test]
-    public void GivenFalseThenReturnsEmpty()
+    public async Task GivenFalseThenReturnsEmpty()
     {
         // Arrange
         bool subject = false;
@@ -25,6 +25,6 @@ public sealed class WhenPartialIsCalled
         string result = subject.Partial();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

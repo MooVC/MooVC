@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Struct first = StructTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenOtherTypeThenReturnsFalse()
+    public async Task GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
         object other = new();
@@ -30,11 +30,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValueThenReturnsTrue()
+    public async Task GivenEqualValueThenReturnsTrue()
     {
         // Arrange
         object other = StructTestsData.Create(scope: Scope.Internal);
@@ -44,11 +44,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         object other = StructTestsData.Create(name: new Declaration { Name = "Other" });
@@ -58,6 +58,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

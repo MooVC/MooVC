@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using MooVC.Syntax.Elements;
 
@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string SecondArgumentName = "Other";
 
     [Test]
-    public void GivenUnspecifiedSymbolThenEmptyReturned()
+    public async Task GivenUnspecifiedSymbolThenEmptyReturned()
     {
         // Arrange
         Symbol subject = Symbol.Undefined;
@@ -18,11 +18,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenNameThenNameReturned()
+    public async Task GivenNameThenNameReturned()
     {
         // Arrange
         var subject = new Symbol
@@ -34,11 +34,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(Name);
+        await Assert.That(representation).IsEqualTo(Name);
     }
 
     [Test]
-    public void GivenArgumentsThenNameAndArgumentListReturned()
+    public async Task GivenArgumentsThenNameAndArgumentListReturned()
     {
         // Arrange
         var subject = new Symbol
@@ -55,11 +55,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
+        await Assert.That(representation).IsEqualTo($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
     }
 
     [Test]
-    public void GivenQualifierThenQualifierPrefixedToName()
+    public async Task GivenQualifierThenQualifierPrefixedToName()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["MooVC", "Syntax"]));
@@ -68,6 +68,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(Name);
+        await Assert.That(representation).IsEqualTo(Name);
     }
 }

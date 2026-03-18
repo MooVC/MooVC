@@ -1,32 +1,32 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenTargetIsUndefined()
+    public async Task GivenDefaultsThenTargetIsUndefined()
     {
         // Act
         var subject = new Target();
 
         // Assert
-        subject.AfterTargets.ShouldBe(Snippet.Empty);
-        subject.BeforeTargets.ShouldBe(Snippet.Empty);
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.DependsOnTargets.ShouldBe(Snippet.Empty);
-        subject.Inputs.ShouldBe(Snippet.Empty);
-        subject.KeepDuplicateOutputs.ShouldBeFalse();
-        subject.Label.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Outputs.ShouldBe(Snippet.Empty);
-        subject.Returns.ShouldBe(Snippet.Empty);
-        subject.Tasks.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Inputs).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.KeepDuplicateOutputs).IsFalse();
+        await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.Outputs).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Returns).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.Tasks).IsEmpty();
+        await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         TargetTask task = TargetTestsData.CreateTask();
@@ -48,17 +48,17 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.AfterTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultAfterTargets));
-        subject.BeforeTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultBeforeTargets));
-        subject.Condition.ShouldBe(Snippet.From(TargetTestsData.DefaultCondition));
-        subject.DependsOnTargets.ShouldBe(Snippet.From(TargetTestsData.DefaultDependsOnTargets));
-        subject.Inputs.ShouldBe(Snippet.From(TargetTestsData.DefaultInputs));
-        subject.KeepDuplicateOutputs.ShouldBeTrue();
-        subject.Label.ShouldBe(Snippet.From(TargetTestsData.DefaultLabel));
-        subject.Name.ShouldBe(new Name(TargetTestsData.DefaultName));
-        subject.Outputs.ShouldBe(Snippet.From(TargetTestsData.DefaultOutputs));
-        subject.Returns.ShouldBe(Snippet.From(TargetTestsData.DefaultReturns));
-        subject.Tasks.ShouldBe(new[] { task });
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultAfterTargets));
+        await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultBeforeTargets));
+        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTestsData.DefaultCondition));
+        await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultDependsOnTargets));
+        await Assert.That(subject.Inputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultInputs));
+        await Assert.That(subject.KeepDuplicateOutputs).IsTrue();
+        await Assert.That(subject.Label).IsEqualTo(Snippet.From(TargetTestsData.DefaultLabel));
+        await Assert.That(subject.Name).IsEqualTo(new Name(TargetTestsData.DefaultName));
+        await Assert.That(subject.Outputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultOutputs));
+        await Assert.That(subject.Returns).IsEqualTo(Snippet.From(TargetTestsData.DefaultReturns));
+        await Assert.That(subject.Tasks).IsEqualTo(new[] { task });
+        await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests.KindTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenNoneThenReturnsEmpty()
+    public async Task GivenNoneThenReturnsEmpty()
     {
         // Arrange
         Result.Kind subject = Result.Kind.None;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenRefReadOnlyThenReturnsCombinedKeyword()
+    public async Task GivenRefReadOnlyThenReturnsCombinedKeyword()
     {
         // Arrange
         Result.Kind subject = Result.Kind.RefReadOnly;
@@ -25,11 +25,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("ref readonly");
+        await Assert.That(representation).IsEqualTo("ref readonly");
     }
 
     [Test]
-    public void GivenUnsafeThenReturnsUnsafeKeyword()
+    public async Task GivenUnsafeThenReturnsUnsafeKeyword()
     {
         // Arrange
         Result.Kind subject = Result.Kind.Unsafe;
@@ -38,6 +38,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("unsafe");
+        await Assert.That(representation).IsEqualTo("unsafe");
     }
 }

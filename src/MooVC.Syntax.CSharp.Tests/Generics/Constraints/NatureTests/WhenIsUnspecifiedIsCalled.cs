@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
     [Test]
-    public void GivenUnspecifiedNatureThenReturnsTrue()
+    public async Task GivenUnspecifiedNatureThenReturnsTrue()
     {
         // Arrange
         Nature subject = Nature.Unspecified;
@@ -12,7 +12,7 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -20,7 +20,7 @@ public sealed class WhenIsUnspecifiedIsCalled
     [Arguments(nameof(Nature.Struct))]
     [Arguments(nameof(Nature.Unmanaged))]
     [Arguments(nameof(Nature.NotNull))]
-    public void GivenSpecificNatureThenReturnsFalse(string field)
+    public async Task GivenSpecificNatureThenReturnsFalse(string field)
     {
         // Arrange
         Nature subject = typeof(Nature)
@@ -31,6 +31,6 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

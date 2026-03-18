@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenBothBasesAreNullThenReturnsTrue()
+    public async Task GivenBothBasesAreNullThenReturnsTrue()
     {
         // Arrange
         Base? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherBaseIsNullThenReturnsFalse()
+    public async Task GivenEitherBaseIsNullThenReturnsFalse()
     {
         // Arrange
         Base? left = new Symbol { Name = Same };
@@ -33,12 +33,12 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenEqualBasesThenReturnsTrue()
+    public async Task GivenEqualBasesThenReturnsTrue()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -48,11 +48,11 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentBasesThenReturnsFalse()
+    public async Task GivenDifferentBasesThenReturnsFalse()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -62,6 +62,6 @@ public sealed class WhenEqualityOperatorBaseBaseIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

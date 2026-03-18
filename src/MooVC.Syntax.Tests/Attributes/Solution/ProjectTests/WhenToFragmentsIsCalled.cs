@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -6,7 +6,7 @@ using System.Xml.Linq;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Project subject = Project.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
@@ -41,7 +41,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        XElement fragment = result.ShouldHaveSingleItem();
-        XNode.DeepEquals(expected, fragment).ShouldBeTrue();
+        XElement fragment = result.Single();
+        await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
     }
 }

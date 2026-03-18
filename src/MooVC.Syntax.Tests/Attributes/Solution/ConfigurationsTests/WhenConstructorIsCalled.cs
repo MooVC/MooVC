@@ -1,18 +1,18 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenConfigurationsAreDefault()
+    public async Task GivenDefaultsThenConfigurationsAreDefault()
     {
         // Act
         var subject = new Configurations();
 
         // Assert
-        subject.Builds.ShouldBe([Configurations.BuildType.Debug, Configurations.BuildType.Release]);
-        subject.Platforms.ShouldBe([Configurations.Platform.AnyCPU]);
-        subject.IsDefault.ShouldBeTrue();
+        await Assert.That(subject.Builds).IsEqualTo([Configurations.BuildType.Debug, Configurations.BuildType.Release]);
+        await Assert.That(subject.Platforms).IsEqualTo([Configurations.Platform.AnyCPU]);
+        await Assert.That(subject.IsDefault).IsTrue();
     }
 }

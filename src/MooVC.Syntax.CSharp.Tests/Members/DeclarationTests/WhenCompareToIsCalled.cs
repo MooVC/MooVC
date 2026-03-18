@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 public sealed class WhenCompareToIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenCompareToIsCalled
     private const string Beta = "Beta";
 
     [Test]
-    public void GivenNullOtherThenReturnsOne()
+    public async Task GivenNullOtherThenReturnsOne()
     {
         // Arrange
         Declaration subject = DeclarationTestsData.Create();
@@ -16,11 +16,11 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        result.ShouldBe(1);
+        await Assert.That(result).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenLowerNameThenReturnsNegative()
+    public async Task GivenLowerNameThenReturnsNegative()
     {
         // Arrange
         Declaration subject = DeclarationTestsData.Create(Alpha);
@@ -30,11 +30,11 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        result.ShouldBeLessThan(0);
+        await Assert.That(result).IsLessThan(0);
     }
 
     [Test]
-    public void GivenEqualNamesThenReturnsZero()
+    public async Task GivenEqualNamesThenReturnsZero()
     {
         // Arrange
         Declaration subject = DeclarationTestsData.Create(Alpha);
@@ -44,6 +44,6 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        result.ShouldBe(0);
+        await Assert.That(result).IsEqualTo(0);
     }
 }

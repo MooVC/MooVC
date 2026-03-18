@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
     [Test]
-    public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
+    public async Task GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange
         Binary original = BinaryTestsData.Create();
@@ -15,9 +15,9 @@ public sealed class WhenWithBodyIsCalled
         Binary result = original.WithBody(body);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(body);
-        result.Operator.ShouldBe(original.Operator);
-        result.Scope.ShouldBe(original.Scope);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(body);
+        await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenFromIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedQualifier()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedQualifier()
     {
         // Arrange
         var original = new Directive
@@ -20,10 +20,10 @@ public sealed class WhenFromIsCalled
         Directive result = original.From(qualifier);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Alias.ShouldBe(original.Alias);
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Qualifier.ShouldBe(qualifier);
-        original.Qualifier.ShouldBe(new Qualifier(["MooVC", "Syntax"]));
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Alias).IsEqualTo(original.Alias);
+        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        await Assert.That(result.Qualifier).IsEqualTo(qualifier);
+        await Assert.That(original.Qualifier).IsEqualTo(new Qualifier(["MooVC", "Syntax"]));
     }
 }

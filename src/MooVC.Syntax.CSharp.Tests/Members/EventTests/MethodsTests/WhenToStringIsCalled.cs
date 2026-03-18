@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenDefaultInstanceThenReturnsEmpty()
+    public async Task GivenDefaultInstanceThenReturnsEmpty()
     {
         // Arrange
         Event.Methods subject = Event.Methods.Default;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenAutoImplementedMembersThenReturnsEmpty()
+    public async Task GivenAutoImplementedMembersThenReturnsEmpty()
     {
         // Arrange
         var subject = new Event.Methods();
@@ -27,11 +27,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBeEmpty();
+        await Assert.That(representation).IsEmpty();
     }
 
     [Test]
-    public void GivenExpressionBodiesThenReturnsExpressions()
+    public async Task GivenExpressionBodiesThenReturnsExpressions()
     {
         // Arrange
         var subject = new Event.Methods
@@ -48,11 +48,11 @@ public sealed class WhenToStringIsCalled
             remove;
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultiLineBodyThenReturnsBlock()
+    public async Task GivenMultiLineBodyThenReturnsBlock()
     {
         // Arrange
         var add = Snippet.From($"first{Environment.NewLine}second");
@@ -75,6 +75,6 @@ public sealed class WhenToStringIsCalled
             remove;
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

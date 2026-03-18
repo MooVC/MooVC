@@ -3,7 +3,7 @@
 public sealed class WhenToIndexIsCalled
 {
     [Test]
-    public void GivenANullSelectorThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullSelectorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         Func<int, string>? selector = default;
@@ -13,12 +13,12 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(selector!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(selector));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(selector));
     }
 
     [Test]
-    public void GivenANullSourceThenAnEmptyDictionaryIsReturned()
+    public async Task GivenANullSourceThenAnEmptyDictionaryIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -27,12 +27,12 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        _ = index.ShouldNotBeNull();
-        index.ShouldBeEmpty();
+        _ = await Assert.That(index).IsNotNull();
+        await Assert.That(index).IsEmpty();
     }
 
     [Test]
-    public void GivenANullTransformThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullTransformThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         Func<int, string>? transform = default;
@@ -42,12 +42,12 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value, transform!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(transform));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(transform));
     }
 
     [Test]
-    public void GivenASourceThenAMatchingDictionaryIsReturned()
+    public async Task GivenASourceThenAMatchingDictionaryIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
@@ -56,13 +56,13 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, int> index = source.ToIndex(value => value);
 
         // Assert
-        _ = index.ShouldNotBeNull();
-        index.Keys.ShouldBe(source);
-        index.Values.ShouldBe(source);
+        _ = await Assert.That(index).IsNotNull();
+        await Assert.That(index.Keys).IsEqualTo(source);
+        await Assert.That(index.Values).IsEqualTo(source);
     }
 
     [Test]
-    public void GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
+    public async Task GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
@@ -72,13 +72,13 @@ public sealed class WhenToIndexIsCalled
         IDictionary<int, string> index = source.ToIndex(value => value, transform);
 
         // Assert
-        _ = index.ShouldNotBeNull();
-        index.Keys.ShouldBe(source);
-        index.All(element => element.Value == transform(element.Key)).ShouldBeTrue();
+        _ = await Assert.That(index).IsNotNull();
+        await Assert.That(index.Keys).IsEqualTo(source);
+        await Assert.That(index.All(element => element.Value == transform(element.Key))).IsTrue();
     }
 
     [Test]
-    public void GivenASourceWithDuplicatesThenAnArgumentExceptionIsThrown()
+    public async Task GivenASourceWithDuplicatesThenAnArgumentExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int> source = [1, 1, 2];
@@ -87,6 +87,6 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value);
 
         // Assert
-        _ = Should.Throw<ArgumentException>(act);
+        await Assert.That(act).Throws<ArgumentException>();
     }
 }

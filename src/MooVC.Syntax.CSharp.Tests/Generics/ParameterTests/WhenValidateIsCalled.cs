@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
     private const string InvalidInterfaceName = "Example";
 
     [Test]
-    public void GivenUnnamedParameterThenValidationErrorsReturned()
+    public async Task GivenUnnamedParameterThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Parameter { Constraints = [new() { New = New.Required }] };
@@ -25,14 +25,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Parameter.Name));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenConstraintsWithValidationErrorsThenValidationErrorsReturned()
+    public async Task GivenConstraintsWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -53,14 +53,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Interface));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenNameWithNoConstraintsThenNoValidationErrorsReturned()
+    public async Task GivenNameWithNoConstraintsThenNoValidationErrorsReturned()
     {
         // Arrange
         var subject = new Parameter
@@ -75,12 +75,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenValidParameterThenNoValidationErrorsReturned()
+    public async Task GivenValidParameterThenNoValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -103,12 +103,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUndefinedParameterThenValidationIsSkipped()
+    public async Task GivenUndefinedParameterThenValidationIsSkipped()
     {
         // Arrange
         Parameter subject = Parameter.Undefined;
@@ -119,7 +119,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

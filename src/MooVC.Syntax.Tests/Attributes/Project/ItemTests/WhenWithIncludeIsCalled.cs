@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithIncludeIsCalled
     private const string UpdatedInclude = "UpdatedInclude";
 
     [Test]
-    public void GivenIncludeThenReturnsUpdatedInstance()
+    public async Task GivenIncludeThenReturnsUpdatedInstance()
     {
         // Arrange
         Item original = ItemTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenWithIncludeIsCalled
         Item result = original.WithInclude(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Include.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Exclude.ShouldBe(original.Exclude);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Include).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Exclude).IsEqualTo(original.Exclude);
     }
 }

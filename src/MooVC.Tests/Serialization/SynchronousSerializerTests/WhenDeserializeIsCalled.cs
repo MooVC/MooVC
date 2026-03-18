@@ -48,8 +48,8 @@ public sealed class WhenDeserializeIsCalled
         string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
-        deserialized.ShouldBe(instance);
+        await Assert.That(wasInvoked).IsTrue();
+        await Assert.That(deserialized).IsEqualTo(instance);
     }
 
     [Test]
@@ -73,7 +73,7 @@ public sealed class WhenDeserializeIsCalled
         string deserialized = await serializer.Deserialize<string>(stream, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
-        deserialized.ShouldBe(instance);
+        await Assert.That(wasInvoked).IsTrue();
+        await Assert.That(deserialized).IsEqualTo(instance);
     }
 }

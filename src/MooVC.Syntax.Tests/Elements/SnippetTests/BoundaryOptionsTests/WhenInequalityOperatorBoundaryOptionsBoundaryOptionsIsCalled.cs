@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BoundaryOptionsTests;
 
 public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Snippet.BoundaryOptions? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Snippet.BoundaryOptions? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet.BoundaryOptions();
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
         var first = new Snippet.BoundaryOptions();
@@ -55,11 +55,11 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Snippet.BoundaryOptions();
@@ -70,12 +70,12 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet.BoundaryOptions();
@@ -88,7 +88,7 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 }

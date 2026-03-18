@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithNamespaceIsCalled
 {
     [Test]
-    public void GivenNamespaceThenReturnsUpdatedInstance()
+    public async Task GivenNamespaceThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Options();
@@ -14,9 +14,9 @@ public sealed class WhenWithNamespaceIsCalled
         Options result = original.WithNamespace(Qualifier.Options.Block);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Namespace.ShouldBe(Qualifier.Options.Block);
-        result.Snippets.ShouldBe(original.Snippets);
-        original.Namespace.ShouldBe(Qualifier.Options.File);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Namespace).IsEqualTo(Qualifier.Options.Block);
+        await Assert.That(result.Snippets).IsEqualTo(original.Snippets);
+        await Assert.That(original.Namespace).IsEqualTo(Qualifier.Options.File);
     }
 }

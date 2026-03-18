@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenFalseIsReturned()
+    public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenTrueIsReturned()
+    public async Task GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentInstanceThenTrueIsReturned()
+    public async Task GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -41,11 +41,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentTypeThenFalseIsReturned()
+    public async Task GivenDifferentTypeThenFalseIsReturned()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -55,6 +55,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

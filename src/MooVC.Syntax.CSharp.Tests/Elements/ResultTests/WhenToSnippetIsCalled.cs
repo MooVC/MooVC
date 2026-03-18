@@ -1,20 +1,20 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Result subject = Result.Task;
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 }

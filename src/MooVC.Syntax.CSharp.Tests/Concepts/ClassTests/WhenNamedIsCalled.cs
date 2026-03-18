@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create();
@@ -16,8 +16,8 @@ public sealed class WhenNamedIsCalled
         Class result = original.Named(newName);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Declaration.ShouldBe(newName);
-        original.Declaration.ShouldBe(new Declaration { Name = ClassTestsData.DefaultName });
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Declaration).IsEqualTo(newName);
+        await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = ClassTestsData.DefaultName });
     }
 }

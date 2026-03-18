@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Constructor? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Constructor? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Constructor left = ConstructorTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Constructor first = ConstructorTestsData.Create();
@@ -57,11 +57,11 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Constructor left = ConstructorTestsData.Create();
@@ -72,12 +72,12 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Constructor left = ConstructorTestsData.Create();
@@ -87,6 +87,6 @@ public sealed class WhenEqualityOperatorConstructorConstructorIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

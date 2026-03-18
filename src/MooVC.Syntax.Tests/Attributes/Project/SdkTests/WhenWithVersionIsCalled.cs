@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithVersionIsCalled
     private const string UpdatedVersion = "UpdatedVersion";
 
     [Test]
-    public void GivenVersionThenReturnsUpdatedInstance()
+    public async Task GivenVersionThenReturnsUpdatedInstance()
     {
         // Arrange
         Sdk original = SdkTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenWithVersionIsCalled
         Sdk result = original.WithVersion(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Version.ShouldBe(updated);
-        result.MinimumVersion.ShouldBe(original.MinimumVersion);
-        result.Name.ShouldBe(original.Name);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Version).IsEqualTo(updated);
+        await Assert.That(result.MinimumVersion).IsEqualTo(original.MinimumVersion);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

@@ -5,7 +5,7 @@ public sealed class WhenToStringIsCalled
     private const string MultiWord = "MyValue";
 
     [Test]
-    public void GivenDefaultOptionsThenUsesPascalCase()
+    public async Task GivenDefaultOptionsThenUsesPascalCase()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(MultiWord);
+        await Assert.That(result).IsEqualTo(MultiWord);
     }
 
     [Test]
-    public void GivenDifferentValuesThenDifferentResultsAreReturned()
+    public async Task GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
         var left = new Identifier("MyName");
@@ -29,11 +29,11 @@ public sealed class WhenToStringIsCalled
         string rightString = right.ToString();
 
         // Assert
-        leftString.ShouldNotBe(rightString);
+        await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
-    public void GivenRepeatedCallsThenResultIsStable()
+    public async Task GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -43,6 +43,6 @@ public sealed class WhenToStringIsCalled
         string second = subject.ToString();
 
         // Assert
-        first.ShouldBe(second);
+        await Assert.That(first).IsEqualTo(second);
     }
 }

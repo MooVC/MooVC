@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenEqualityOperatorNatureNatureIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
     private const string Different = "struct";
 
     [Test]
-    public void GivenBothSidesNullThenReturnsTrue()
+    public async Task GivenBothSidesNullThenReturnsTrue()
     {
         // Arrange
         Nature? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideNullThenReturnsFalse()
+    public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
         Nature left = Same;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Nature left = Same;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Nature left = Same;
@@ -58,6 +58,6 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
 
 public sealed class WhenWithMarkersIsCalled
 {
     [Test]
-    public void GivenMarkersThenReturnsUpdatedInstance()
+    public async Task GivenMarkersThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Snippet.BlockOptions();
@@ -16,8 +16,8 @@ public sealed class WhenWithMarkersIsCalled
         Snippet.BlockOptions result = options.WithMarkers(markers);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Markers.ShouldBe(markers);
-        options.Markers.ShouldNotBe(markers);
+        await Assert.That(ReferenceEquals(result, options)).IsFalse();
+        await Assert.That(result.Markers).IsEqualTo(markers);
+        await Assert.That(options.Markers).IsNotEqualTo(markers);
     }
 }

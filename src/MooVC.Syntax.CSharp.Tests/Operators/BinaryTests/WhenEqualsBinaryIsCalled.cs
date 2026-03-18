@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenEqualsBinaryIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Binary? subject = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualsBinaryIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsBinaryIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -41,11 +41,11 @@ public sealed class WhenEqualsBinaryIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -55,6 +55,6 @@ public sealed class WhenEqualsBinaryIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

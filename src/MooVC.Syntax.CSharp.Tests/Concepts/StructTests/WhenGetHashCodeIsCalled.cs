@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsSameHash()
+    public async Task GivenEqualValuesThenReturnsSameHash()
     {
         // Arrange
         Struct left = StructTestsData.Create(scope: Scope.Internal);
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        rightHash.ShouldBe(leftHash);
+        await Assert.That(rightHash).IsEqualTo(leftHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsDifferentHashes()
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
         Struct left = StructTestsData.Create(behavior: Struct.Kind.ReadOnly);
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        rightHash.ShouldNotBe(leftHash);
+        await Assert.That(rightHash).IsNotEqualTo(leftHash);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
@@ -22,7 +22,7 @@ public sealed class WhenPropertiesAreAccessed
 
     [Test]
     [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
-    public void GivenTypeThenFlagsReflectValue(BinaryTypeExpectation expectation)
+    public async Task GivenTypeThenFlagsReflectValue(BinaryTypeExpectation expectation)
     {
         // Arrange
         Binary.Type subject = expectation.OperatorType;
@@ -42,18 +42,18 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        isAdd.ShouldBe(expectation.IsAdd);
-        isAnd.ShouldBe(expectation.IsAnd);
-        isDivide.ShouldBe(expectation.IsDivide);
-        isLeft.ShouldBe(expectation.IsLeft);
-        isModulus.ShouldBe(expectation.IsModulus);
-        isMultiply.ShouldBe(expectation.IsMultiply);
-        isOr.ShouldBe(expectation.IsOr);
-        isRight.ShouldBe(expectation.IsRight);
-        isSubtract.ShouldBe(expectation.IsSubtract);
-        isUnspecified.ShouldBe(expectation.IsUnspecified);
-        isXor.ShouldBe(expectation.IsXor);
-        representation.ShouldBe(expectation.ExpectedString);
+        await Assert.That(isAdd).IsEqualTo(expectation.IsAdd);
+        await Assert.That(isAnd).IsEqualTo(expectation.IsAnd);
+        await Assert.That(isDivide).IsEqualTo(expectation.IsDivide);
+        await Assert.That(isLeft).IsEqualTo(expectation.IsLeft);
+        await Assert.That(isModulus).IsEqualTo(expectation.IsModulus);
+        await Assert.That(isMultiply).IsEqualTo(expectation.IsMultiply);
+        await Assert.That(isOr).IsEqualTo(expectation.IsOr);
+        await Assert.That(isRight).IsEqualTo(expectation.IsRight);
+        await Assert.That(isSubtract).IsEqualTo(expectation.IsSubtract);
+        await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        await Assert.That(isXor).IsEqualTo(expectation.IsXor);
+        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record BinaryTypeExpectation(

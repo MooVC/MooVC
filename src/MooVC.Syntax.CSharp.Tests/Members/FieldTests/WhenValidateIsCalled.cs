@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
         Field subject = Field.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultilineDefaultThenValidationErrorReturned()
+    public async Task GivenMultilineDefaultThenValidationErrorReturned()
     {
         // Arrange
         var multiLine = Snippet.From("first", "second");
@@ -36,14 +36,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Field.Default));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Field.Default));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenUnnamedFieldThenValidationErrorReturned()
+    public async Task GivenUnnamedFieldThenValidationErrorReturned()
     {
         // Arrange
         Field subject = FieldTestsData.Create(name: null, type: SymbolTestsData.Create("Result"));
@@ -54,14 +54,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Field.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Field.Name));
+        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidFieldThenNoValidationErrorsReturned()
+    public async Task GivenValidFieldThenNoValidationErrorsReturned()
     {
         // Arrange
         Field subject = FieldTestsData.Create(type: SymbolTestsData.Create("Result"));
@@ -72,7 +72,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

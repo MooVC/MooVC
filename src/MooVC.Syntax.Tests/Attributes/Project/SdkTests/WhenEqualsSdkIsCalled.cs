@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsSdkIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsSdkIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualsSdkIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualsSdkIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

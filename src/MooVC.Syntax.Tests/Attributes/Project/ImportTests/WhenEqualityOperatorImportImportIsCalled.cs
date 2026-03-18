@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorImportImportIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Import? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Import? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Import left = ImportTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Import left = ImportTestsData.Create();
@@ -57,6 +57,6 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

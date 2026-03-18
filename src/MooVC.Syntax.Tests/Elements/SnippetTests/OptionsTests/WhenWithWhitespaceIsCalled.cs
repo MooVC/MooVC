@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenWithWhitespaceIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Snippet.Options();
@@ -13,8 +13,8 @@ public sealed class WhenWithWhitespaceIsCalled
         Snippet.Options result = options.WithWhitespace(value);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Whitespace.ShouldBe(value);
-        options.Whitespace.ShouldNotBe(value);
+        await Assert.That(ReferenceEquals(result, options)).IsFalse();
+        await Assert.That(result.Whitespace).IsEqualTo(value);
+        await Assert.That(options.Whitespace).IsNotEqualTo(value);
     }
 }

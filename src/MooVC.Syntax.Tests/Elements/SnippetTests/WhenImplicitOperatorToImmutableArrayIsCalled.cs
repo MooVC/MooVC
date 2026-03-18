@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
     private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenEmptySnippetThenCreatesDefaultArray()
+    public async Task GivenEmptySnippetThenCreatesDefaultArray()
     {
         // Arrange
         Snippet subject = Snippet.Empty;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
         ImmutableArray<string> result = subject;
 
         // Assert
-        result.ShouldBe([]);
+        await Assert.That(result).IsEqualTo([]);
     }
 
     [Test]
-    public void GivenSnippetThenReturnsMatchingArray()
+    public async Task GivenSnippetThenReturnsMatchingArray()
     {
         // Arrange
         Snippet subject = values;
@@ -29,6 +29,6 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
         ImmutableArray<string> result = subject;
 
         // Assert
-        result.ShouldBe(values);
+        await Assert.That(result).IsEqualTo(values);
     }
 }

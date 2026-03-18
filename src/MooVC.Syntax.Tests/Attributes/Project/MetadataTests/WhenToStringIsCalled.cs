@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using System;
 using System.Xml.Linq;
@@ -6,7 +6,7 @@ using System.Xml.Linq;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Metadata subject = Metadata.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
@@ -34,6 +34,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

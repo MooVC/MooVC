@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenEqualityOperatorNewStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
     private const string Different = "";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         New? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideNullThenReturnsFalse()
+    public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
         New left = Same;
@@ -31,12 +31,12 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         New left = Same;
@@ -47,12 +47,12 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         New left = Same;
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

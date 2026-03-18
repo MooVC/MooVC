@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -13,11 +13,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter first = Argument.Formatter.Call;
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Declaration;
@@ -42,12 +42,12 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -58,12 +58,12 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentTypeThenReturnsFalse()
+    public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
@@ -73,6 +73,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

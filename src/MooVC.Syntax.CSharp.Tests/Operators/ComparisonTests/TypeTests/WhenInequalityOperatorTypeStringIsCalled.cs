@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenInequalityOperatorTypeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
     private const string Different = "!=";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Comparison.Type? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Comparison.Type? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Comparison.Type left = Comparison.Type.Equality;
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Comparison.Type left = Comparison.Type.Equality;
@@ -58,11 +58,11 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Comparison.Type left = Comparison.Type.Equality;
@@ -72,6 +72,6 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

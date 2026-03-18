@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenImplicitOperatorToDeclarationIsCalled
 {
     [Test]
-    public void GivenInterfaceThenReturnsDeclaration()
+    public async Task GivenInterfaceThenReturnsDeclaration()
     {
         // Arrange
         Interface subject = new Declaration { Name = "IAlpha" };
@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToDeclarationIsCalled
         Declaration result = subject;
 
         // Assert
-        result.ToString().ShouldBe(subject.ToString());
+        await Assert.That(result.ToString()).IsEqualTo(subject.ToString());
     }
 }

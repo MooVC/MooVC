@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationSucceeds()
+    public async Task GivenUndefinedThenValidationSucceeds()
     {
         // Arrange
         Conversion subject = Conversion.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMissingBodyThenValidationFails()
+    public async Task GivenMissingBodyThenValidationFails()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create(body: Snippet.Empty);
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Body)));
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results).IsNotEmpty();
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Body)));
     }
 
     [Test]
-    public void GivenMissingSubjectThenValidationFails()
+    public async Task GivenMissingSubjectThenValidationFails()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create(subject: Symbol.Undefined);
@@ -52,13 +52,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Conversion.Target)));
+        await Assert.That(valid).IsFalse();
+        await Assert.That(results).IsNotEmpty();
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Target)));
     }
 
     [Test]
-    public void GivenValidConversionThenValidationSucceeds()
+    public async Task GivenValidConversionThenValidationSucceeds()
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create();
@@ -69,7 +69,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 }

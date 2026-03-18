@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenKnownAsIsCalled
     private const string NewAlias = "NewAlias";
 
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedAlias()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedAlias()
     {
         // Arrange
         var original = new Directive
@@ -21,10 +21,10 @@ public sealed class WhenKnownAsIsCalled
         Directive result = original.KnownAs(NewAlias);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Alias.ShouldBe(new Name(NewAlias));
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Qualifier.ShouldBe(original.Qualifier);
-        original.Alias.ShouldBe(new Name(Alias));
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Alias).IsEqualTo(new Name(NewAlias));
+        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        await Assert.That(original.Alias).IsEqualTo(new Name(Alias));
     }
 }

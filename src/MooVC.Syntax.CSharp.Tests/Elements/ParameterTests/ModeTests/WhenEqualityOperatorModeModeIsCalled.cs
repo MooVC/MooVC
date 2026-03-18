@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenEqualityOperatorModeModeIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Parameter.Mode? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.In;
@@ -41,11 +41,11 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode first = Parameter.Mode.RefReadonly;
@@ -55,11 +55,11 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.Ref;
@@ -70,12 +70,12 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Parameter.Mode left = Parameter.Mode.Out;
@@ -86,7 +86,7 @@ public sealed class WhenEqualityOperatorModeModeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

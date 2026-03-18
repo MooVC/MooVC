@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
     private const string UpdatedName = "UpdatedName";
 
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -17,9 +17,9 @@ public sealed class WhenNamedIsCalled
         Target result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Label.ShouldBe(original.Label);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(updated);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

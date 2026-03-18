@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenIsNullableIsCalled
 {
     [Test]
-    public void GivenNullableThenReturnsUpdatedInstance()
+    public async Task GivenNullableThenReturnsUpdatedInstance()
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Value");
@@ -12,11 +12,11 @@ public sealed class WhenIsNullableIsCalled
         Symbol result = original.IsNullable(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsNullable.ShouldBeTrue();
-        result.Name.ShouldBe(original.Name);
-        result.Qualifier.ShouldBe(original.Qualifier);
-        result.Arguments.ShouldBe(original.Arguments);
-        original.IsNullable.ShouldBeFalse();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.IsNullable).IsTrue();
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
+        await Assert.That(original.IsNullable).IsFalse();
     }
 }

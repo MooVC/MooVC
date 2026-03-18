@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenEqualsResultIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Result subject = ResultTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenEqualsResultIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Result subject = ResultTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsResultIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Result subject = ResultTestsData.Create();
@@ -41,6 +41,6 @@ public sealed class WhenEqualsResultIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

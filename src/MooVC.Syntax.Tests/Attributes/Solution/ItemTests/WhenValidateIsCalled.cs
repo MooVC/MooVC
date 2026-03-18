@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Item subject = Item.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineIdThenValidationErrorReturned()
+    public async Task GivenMultiLineIdThenValidationErrorReturned()
     {
         // Arrange
         Item subject = ItemTestsData.Create(id: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Item.Id));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Item.Id));
     }
 
     [Test]
-    public void GivenMultiLineNameThenValidationErrorReturned()
+    public async Task GivenMultiLineNameThenValidationErrorReturned()
     {
         // Arrange
         Item subject = ItemTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -52,13 +52,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Item.Name));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Item.Name));
     }
 
     [Test]
-    public void GivenMultiLinePathThenValidationErrorReturned()
+    public async Task GivenMultiLinePathThenValidationErrorReturned()
     {
         // Arrange
         Item subject = ItemTestsData.Create(path: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -69,13 +69,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Item.Path));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Item.Path));
     }
 
     [Test]
-    public void GivenMultiLineTypeThenValidationErrorReturned()
+    public async Task GivenMultiLineTypeThenValidationErrorReturned()
     {
         // Arrange
         Item subject = ItemTestsData.Create(type: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -86,8 +86,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Item.Type));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Item.Type));
     }
 }

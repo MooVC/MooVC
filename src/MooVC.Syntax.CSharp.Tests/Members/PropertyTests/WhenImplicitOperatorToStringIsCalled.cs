@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Property? subject = default;
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenPropertyThenStringMatchesToString()
+    public async Task GivenPropertyThenStringMatchesToString()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

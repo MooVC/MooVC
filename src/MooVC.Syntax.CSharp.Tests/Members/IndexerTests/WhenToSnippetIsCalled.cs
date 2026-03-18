@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
         Indexer.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenBehavioursWhenInlineIsLambdaThenBodyIsRendered()
+    public async Task GivenBehavioursWhenInlineIsLambdaThenBodyIsRendered()
     {
         // Arrange
         var methods = new Indexer.Methods
@@ -35,11 +35,11 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         string expected = "public string this[int index] { get => value; }";
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenBehavioursWhenInlineIsSingleLineBracesThenBodyIsRendered()
+    public async Task GivenBehavioursWhenInlineIsSingleLineBracesThenBodyIsRendered()
     {
         // Arrange
         var methods = new Indexer.Methods
@@ -60,11 +60,11 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         string expected = "public string this[int index] { get { return value; } }";
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenBehavioursWhenInlineIsMutipleLineBracesThenBodyIsRendered()
+    public async Task GivenBehavioursWhenInlineIsMutipleLineBracesThenBodyIsRendered()
     {
         // Arrange
         var methods = new Indexer.Methods
@@ -93,6 +93,6 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        await Assert.That(representation).IsEqualTo(expected);
     }
 }

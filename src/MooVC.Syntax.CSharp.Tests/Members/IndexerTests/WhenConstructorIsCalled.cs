@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,21 +10,21 @@ public sealed class WhenConstructorIsCalled
     private const string ResultType = "string";
 
     [Test]
-    public void GivenDefaultsThenIndexerIsUndefined()
+    public async Task GivenDefaultsThenIndexerIsUndefined()
     {
         // Act
         var subject = new Indexer();
 
         // Assert
-        subject.Behaviours.ShouldBe(Indexer.Methods.Default);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Parameter.ShouldBe(Parameter.Undefined);
-        subject.Result.ShouldBe(Result.Void);
-        subject.Scope.ShouldBe(Scope.Public);
+        await Assert.That(subject.Behaviours).IsEqualTo(Indexer.Methods.Default);
+        await Assert.That(subject.IsUndefined).IsTrue();
+        await Assert.That(subject.Parameter).IsEqualTo(Parameter.Undefined);
+        await Assert.That(subject.Result).IsEqualTo(Result.Void);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var behaviours = new Indexer.Methods
@@ -51,21 +51,21 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Behaviours.ShouldBe(behaviours);
-        subject.IsUndefined.ShouldBeFalse();
+        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        await Assert.That(subject.IsUndefined).IsFalse();
 
-        subject.Parameter.ShouldBe(new Parameter
+        await Assert.That(subject.Parameter).IsEqualTo(new Parameter
         {
             Name = ParameterName,
             Type = new Symbol { Name = ParameterType },
         });
 
-        subject.Result.ShouldBe(new Result
+        await Assert.That(subject.Result).IsEqualTo(new Result
         {
             Mode = Result.Modality.Synchronous,
             Type = new Symbol { Name = ResultType },
         });
 
-        subject.Scope.ShouldBe(Scope.Private);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

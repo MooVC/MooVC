@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.OutputTests;
+﻿namespace MooVC.Syntax.Attributes.Project.OutputTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Output subject = Output.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineConditionThenValidationErrorReturned()
+    public async Task GivenMultiLineConditionThenValidationErrorReturned()
     {
         // Arrange
         Output subject = OutputTestsData.Create(condition: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Output.Condition));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Output.Condition));
     }
 
     [Test]
-    public void GivenItemWithoutPropertyThenValidationErrorReturned()
+    public async Task GivenItemWithoutPropertyThenValidationErrorReturned()
     {
         // Arrange
         Output subject = OutputTestsData.Create(propertyName: Name.Unnamed);
@@ -52,13 +52,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Output.PropertyName));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Output.PropertyName));
     }
 
     [Test]
-    public void GivenPropertyWithoutItemThenValidationErrorReturned()
+    public async Task GivenPropertyWithoutItemThenValidationErrorReturned()
     {
         // Arrange
         Output subject = OutputTestsData.Create(itemName: Name.Unnamed, propertyName: new Name("Property"));
@@ -69,8 +69,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Output.ItemName));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Output.ItemName));
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
 
 public sealed class WhenImplicitOperatorFromIntIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     private const int ReadOnlyValue = 1;
 
     [Test]
-    public void GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsInt()
     {
         // Arrange
         int value = ReadOnlyValue;
@@ -15,12 +15,12 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Property.Mode subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
         int value = SetValue;
@@ -30,6 +30,6 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 }

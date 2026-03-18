@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenEqualityOperatorParameterParameterIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Parameter? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Parameter? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Parameter first = ParameterTestsData.Create(modifier: Parameter.Mode.Ref);
@@ -57,11 +57,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.In);
@@ -72,12 +72,12 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentModifiersThenReturnsFalse()
+    public async Task GivenDifferentModifiersThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.Ref);
@@ -87,11 +87,11 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -102,12 +102,12 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentAttributesThenReturnsFalse()
+    public async Task GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "Left" } });
@@ -118,7 +118,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

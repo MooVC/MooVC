@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -7,21 +7,21 @@ public sealed class WhenShiftIsCalled
     private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Snippet(lines);
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.Shift(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.Shift(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenOptionsThenLinesAreShifted()
+    public async Task GivenOptionsThenLinesAreShifted()
     {
         // Arrange
         const string expected = """
@@ -40,6 +40,6 @@ public sealed class WhenShiftIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        await Assert.That(text).IsEqualTo(expected);
     }
 }

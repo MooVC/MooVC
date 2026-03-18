@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Import subject = Import.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        await Assert.That(valid).IsTrue();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineConditionThenValidationErrorReturned()
+    public async Task GivenMultiLineConditionThenValidationErrorReturned()
     {
         // Arrange
         Import subject = ImportTestsData.Create(condition: Snippet.From($"alpha{Environment.NewLine}beta"), project: Snippet.From("Project"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Import.Condition));
+        await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        await Assert.That(results[0].MemberNames).Contains(nameof(Import.Condition));
     }
 
     [Test]
-    public void GivenSingleLineProjectThenNoValidationErrorReturned()
+    public async Task GivenSingleLineProjectThenNoValidationErrorReturned()
     {
         // Arrange
         Import subject = ImportTestsData.Create(project: Snippet.From("Project"));
@@ -52,6 +52,6 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
+        await Assert.That(valid).IsTrue();
     }
 }

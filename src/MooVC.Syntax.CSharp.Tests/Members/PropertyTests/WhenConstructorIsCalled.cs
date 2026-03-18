@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,22 +10,22 @@ public sealed class WhenConstructorIsCalled
     private const string PropertyType = "string";
 
     [Test]
-    public void GivenDefaultsThenPropertyIsUndefined()
+    public async Task GivenDefaultsThenPropertyIsUndefined()
     {
         // Act
         var subject = new Property();
 
         // Assert
-        subject.Behaviours.ShouldBe(Property.Methods.Default);
-        subject.Default.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Scope.ShouldBe(Scope.Public);
-        subject.Type.ShouldBe(Symbol.Undefined);
+        await Assert.That(subject.Behaviours).IsEqualTo(Property.Methods.Default);
+        await Assert.That(subject.Default).IsEqualTo(Snippet.Empty);
+        await Assert.That(subject.IsUndefined).IsTrue();
+        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        await Assert.That(subject.Type).IsEqualTo(Symbol.Undefined);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var behaviours = new Property.Methods
@@ -50,11 +50,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Behaviours.ShouldBe(behaviours);
-        subject.Default.ShouldBe(Snippet.From(DefaultValue));
-        subject.IsUndefined.ShouldBeFalse();
-        subject.Name.ShouldBe(new Name(PropertyName));
-        subject.Scope.ShouldBe(Scope.Internal);
-        subject.Type.ShouldBe(new Symbol { Name = PropertyType });
+        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        await Assert.That(subject.Default).IsEqualTo(Snippet.From(DefaultValue));
+        await Assert.That(subject.IsUndefined).IsFalse();
+        await Assert.That(subject.Name).IsEqualTo(new Name(PropertyName));
+        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        await Assert.That(subject.Type).IsEqualTo(new Symbol { Name = PropertyType });
     }
 }

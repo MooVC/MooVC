@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNonOptionsObjectThenReturnsFalse()
+    public async Task GivenNonOptionsObjectThenReturnsFalse()
     {
         // Arrange
         var subject = new Options();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenOptionsObjectThenReturnsTrue()
+    public async Task GivenOptionsObjectThenReturnsTrue()
     {
         // Arrange
         var subject = new Options();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

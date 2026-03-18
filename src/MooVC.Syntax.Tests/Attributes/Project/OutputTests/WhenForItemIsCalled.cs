@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.OutputTests;
+﻿namespace MooVC.Syntax.Attributes.Project.OutputTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenForItemIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Output original = OutputTestsData.Create();
@@ -15,10 +15,10 @@ public sealed class WhenForItemIsCalled
         Output result = original.ForItem(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.ItemName.ShouldBe(updated);
-        result.PropertyName.ShouldBe(original.PropertyName);
-        result.TaskParameter.ShouldBe(original.TaskParameter);
-        result.Condition.ShouldBe(original.Condition);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.ItemName).IsEqualTo(updated);
+        await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
+        await Assert.That(result.TaskParameter).IsEqualTo(original.TaskParameter);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

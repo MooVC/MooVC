@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 public sealed class WhenInequalityOperatorProjectProjectIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Project? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -41,6 +41,6 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

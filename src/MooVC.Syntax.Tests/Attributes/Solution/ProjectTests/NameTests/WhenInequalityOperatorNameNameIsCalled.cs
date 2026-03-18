@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenInequalityOperatorNameNameIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Project.Name? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorNameNameIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         const string name = "ProjectName";
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorNameNameIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Project.Name("ProjectName");
@@ -44,6 +44,6 @@ public sealed class WhenInequalityOperatorNameNameIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

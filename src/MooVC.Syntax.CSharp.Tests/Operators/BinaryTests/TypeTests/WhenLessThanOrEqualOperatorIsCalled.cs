@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenLessThanOrEqualOperatorIsCalled
 {
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Binary.Type? leftType = default;
@@ -13,11 +13,11 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Binary.Type leftType = Binary.Type.Add;
@@ -27,11 +27,11 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Binary.Type leftType = Binary.Type.Add;
@@ -41,6 +41,6 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

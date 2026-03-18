@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 public sealed class WhenWithTargetIsCalled
 {
     [Test]
-    public void GivenTargetThenReturnsNewInstanceWithUpdatedTarget()
+    public async Task GivenTargetThenReturnsNewInstanceWithUpdatedTarget()
     {
         // Arrange
         Attribute original = AttributeTestsData.Create();
@@ -12,9 +12,9 @@ public sealed class WhenWithTargetIsCalled
         Attribute result = original.WithTarget(Attribute.Specifier.Return);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Target.ShouldBe(Attribute.Specifier.Return);
-        result.Name.ShouldBe(original.Name);
-        result.Arguments.ShouldBe(original.Arguments);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Target).IsEqualTo(Attribute.Specifier.Return);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
     }
 }

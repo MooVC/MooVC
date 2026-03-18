@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]
-    public void GivenPropertiesThenReturnsUpdatedInstance()
+    public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
         var property = new Property { Name = new Name("Value"), Type = typeof(string) };
@@ -16,8 +16,8 @@ public sealed class WhenWithPropertiesIsCalled
         Interface result = original.WithProperties(property);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldContain(property);
-        original.Properties.ShouldBeEmpty();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Properties).Contains(property);
+        await Assert.That(original.Properties).IsEmpty();
     }
 }

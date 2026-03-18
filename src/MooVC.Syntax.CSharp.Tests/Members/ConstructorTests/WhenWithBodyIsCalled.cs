@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
     [Test]
-    public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
+    public async Task GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
@@ -15,12 +15,12 @@ public sealed class WhenWithBodyIsCalled
         Constructor result = original.WithBody(body);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(body);
-        result.Extensibility.ShouldBe(original.Extensibility);
-        result.Parameters.ShouldBe(original.Parameters);
-        result.Scope.ShouldBe(original.Scope);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Body).IsEqualTo(body);
+        await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
+        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        original.Body.ShouldBe(Snippet.From("Initialize();"));
+        await Assert.That(original.Body).IsEqualTo(Snippet.From("Initialize();"));
     }
 }

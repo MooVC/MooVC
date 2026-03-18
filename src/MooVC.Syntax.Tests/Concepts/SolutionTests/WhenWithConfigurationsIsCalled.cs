@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenWithConfigurationsIsCalled
 {
     [Test]
-    public void GivenConfigurationsThenReturnsUpdatedInstance()
+    public async Task GivenConfigurationsThenReturnsUpdatedInstance()
     {
         // Arrange
         Configurations existing = Configurations.Default;
@@ -22,8 +22,8 @@ public sealed class WhenWithConfigurationsIsCalled
         Solution result = original.WithConfigurations(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Configurations.ShouldBe(updated);
-        result.Files.ShouldBe(original.Files);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Configurations).IsEqualTo(updated);
+        await Assert.That(result.Files).IsEqualTo(original.Files);
     }
 }

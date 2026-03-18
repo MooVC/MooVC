@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierExtensionsTests;
+﻿namespace MooVC.Syntax.Elements.QualifierExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -12,7 +12,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Qualifier> qualifiers = isDefault
@@ -23,25 +23,25 @@ public sealed class WhenToSnippetIsCalled
         var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Qualifier> qualifiers = [FirstQualifier];
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = qualifiers.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = qualifiers.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedAlphabetically()
+    public async Task GivenValuesThenTheyAreOrderedAlphabetically()
     {
         // Arrange
         ImmutableArray<Qualifier> qualifiers = [FirstQualifier, SecondQualifier];
@@ -55,6 +55,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

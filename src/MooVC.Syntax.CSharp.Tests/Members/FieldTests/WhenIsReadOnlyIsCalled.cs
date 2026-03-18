@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenIsReadOnlyIsCalled
 {
     [Test]
-    public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
+    public async Task GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange
         Field original = FieldTestsData.Create(isReadOnly: true);
@@ -12,14 +12,14 @@ public sealed class WhenIsReadOnlyIsCalled
         Field result = original.IsReadOnly(false);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(original.Default);
-        result.IsReadOnly.ShouldBeFalse();
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(original.Type);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Default).IsEqualTo(original.Default);
+        await Assert.That(result.IsReadOnly).IsFalse();
+        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        original.IsReadOnly.ShouldBeTrue();
+        await Assert.That(original.IsReadOnly).IsTrue();
     }
 }

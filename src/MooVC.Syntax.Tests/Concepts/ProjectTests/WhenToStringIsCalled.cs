@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Project subject = Project.Undefined;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsDocumentString()
+    public async Task GivenValuesThenReturnsDocumentString()
     {
         // Arrange
         Project subject = ProjectTestsData.Create();
@@ -25,6 +25,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(subject.ToDocument().ToString());
+        await Assert.That(result).IsEqualTo(subject.ToDocument().ToString());
     }
 }

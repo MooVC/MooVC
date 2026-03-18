@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedClassThenReturnsEmpty()
+    public async Task GivenUndefinedClassThenReturnsEmpty()
     {
         // Arrange
         Class subject = Class.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsClassSignature()
+    public async Task GivenValuesThenReturnsClassSignature()
     {
         // Arrange
         var constructor = new Constructor();
@@ -34,9 +34,9 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldContain("internal abstract partial class");
-        result.ShouldContain(ClassTestsData.DefaultName);
-        result.ShouldContain("{");
-        result.ShouldContain("}");
+        await Assert.That(result).Contains("internal abstract partial class");
+        await Assert.That(result).Contains(ClassTestsData.DefaultName);
+        await Assert.That(result).Contains("{");
+        await Assert.That(result).Contains("}");
     }
 }

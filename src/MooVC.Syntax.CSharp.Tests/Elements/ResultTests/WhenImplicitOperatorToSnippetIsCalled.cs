@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenThrows()
+    public async Task GivenNullSubjectThenThrows()
     {
         // Arrange
         Result? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenResultThenSnippetMatchesToString()
+    public async Task GivenResultThenSnippetMatchesToString()
     {
         // Arrange
         Result subject = ResultTestsData.Create(modifier: Result.Kind.Ref, mode: Result.Modality.Asynchronous);
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ToString().ShouldBe(subject.ToString());
+        await Assert.That(result.ToString()).IsEqualTo(subject.ToString());
     }
 }

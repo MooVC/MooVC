@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
     private const string NewName = "DebuggerStepThrough";
 
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedName()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
         Attribute original = AttributeTestsData.Create();
@@ -16,10 +16,10 @@ public sealed class WhenNamedIsCalled
         Attribute result = original.Named(new Symbol { Name = NewName });
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Symbol { Name = NewName });
-        result.Arguments.ShouldBe(original.Arguments);
-        result.Target.ShouldBe(original.Target);
-        original.Name.ShouldBe(new Symbol { Name = AttributeTestsData.DefaultName });
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Name).IsEqualTo(new Symbol { Name = NewName });
+        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
+        await Assert.That(result.Target).IsEqualTo(original.Target);
+        await Assert.That(original.Name).IsEqualTo(new Symbol { Name = AttributeTestsData.DefaultName });
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.NameTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenEqualsNameIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.Name("ProjectName");
@@ -15,11 +15,11 @@ public sealed class WhenEqualsNameIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         const string name = "ProjectName";
@@ -30,11 +30,11 @@ public sealed class WhenEqualsNameIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.Name("ProjectName");
@@ -44,6 +44,6 @@ public sealed class WhenEqualsNameIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

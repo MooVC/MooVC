@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../analyzers/tests.ruleset</CodeAnalysisRuleSet>
     <CollectCoverage>true</CollectCoverage>
@@ -15,7 +15,6 @@
   <ItemGroup>
     <PackageReference Include="Bogus" />
     <PackageReference Include="NSubstitute" />
-    <PackageReference Include="Shouldly" />
     <PackageReference Include="TUnit" />
   </ItemGroup>
   <ItemGroup>
@@ -24,7 +23,6 @@
   <ItemGroup>
     <Using Include="Bogus" />
     <Using Include="NSubstitute" />
-    <Using Include="Shouldly" />
     <Using Include="TUnit.Core"/>
     <Using Include="TUnit.Assertions"/>
     <Using Include="TUnit.Assertions.Extensions"/>

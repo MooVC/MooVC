@@ -53,7 +53,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Test]
-    public void GivenAStoppedHostStartAsyncIsNotCalled()
+    public async Task GivenAStoppedHostStartAsyncIsNotCalled()
     {
         // Assert
         _ = _service.DidNotReceive().StartAsync(Arg.Any<CancellationToken>());
@@ -67,9 +67,9 @@ public sealed class WhenStartAsyncIsCalled
         _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
 
         // Act & Assert
-        AggregateException actual = await Should.ThrowAsync<AggregateException>(() => _host.StartAsync(CancellationToken.None));
+        AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
 
-        actual.InnerException.ShouldBe(expected);
+        await Assert.That(actual.InnerException).IsEqualTo(expected);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
@@ -84,10 +84,10 @@ public sealed class WhenStartAsyncIsCalled
         _service.When(services => _service.StopAsync(Arg.Any<CancellationToken>())).Do(_ => throw stop);
 
         // Act & Assert
-        AggregateException actual = await Should.ThrowAsync<AggregateException>(() => _host.StartAsync(CancellationToken.None));
+        AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
 
-        actual.InnerException.ShouldBe(start);
-        actual.InnerExceptions.ShouldNotContain(stop);
+        await Assert.That(actual.InnerException).IsEqualTo(start);
+        await Assert.That(actual.InnerExceptions).DoesNotContain(stop);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }

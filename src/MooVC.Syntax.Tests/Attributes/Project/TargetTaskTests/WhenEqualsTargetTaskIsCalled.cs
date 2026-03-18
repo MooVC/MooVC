@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsTargetTaskIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         TargetTask subject = TargetTaskTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsTargetTaskIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         TargetTask subject = TargetTaskTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualsTargetTaskIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         TargetTask subject = TargetTaskTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualsTargetTaskIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

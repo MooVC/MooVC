@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsMethodsIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Indexer.Methods? subject = default;
@@ -19,11 +19,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -37,11 +37,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -58,11 +58,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -79,11 +79,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentGetValuesThenReturnsFalse()
+    public async Task GivenDifferentGetValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -100,11 +100,11 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentSetValuesThenReturnsFalse()
+    public async Task GivenDifferentSetValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Indexer.Methods
@@ -121,6 +121,6 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 }

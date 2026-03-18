@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenScopedSetterThenScopeIsIncluded()
+    public async Task GivenScopedSetterThenScopeIsIncluded()
     {
         // Arrange
         var subject = new Property.Methods
@@ -23,12 +23,12 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        representation.ShouldContain("private init");
-        representation.ShouldContain("get => value;");
+        await Assert.That(representation).Contains("private init");
+        await Assert.That(representation).Contains("get => value;");
     }
 
     [Test]
-    public void GivenReadOnlyLambdaThenGetterBodyIsReturned()
+    public async Task GivenReadOnlyLambdaThenGetterBodyIsReturned()
     {
         // Arrange
         var subject = new Property.Methods
@@ -44,11 +44,11 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        representation.ShouldBe("value;");
+        await Assert.That(representation).IsEqualTo("value;");
     }
 
     [Test]
-    public void GivenAutoImplementedMembersThenStubIsReturned()
+    public async Task GivenAutoImplementedMembersThenStubIsReturned()
     {
         // Arrange
         var subject = new Property.Methods();
@@ -57,6 +57,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        representation.ShouldBe("get; init;");
+        await Assert.That(representation).IsEqualTo("get; init;");
     }
 }

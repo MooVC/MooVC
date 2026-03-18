@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         New? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenConstraintThenSnippetMatchesStringRepresentation()
+    public async Task GivenConstraintThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         New subject = New.Required;
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

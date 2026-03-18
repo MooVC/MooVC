@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
+﻿namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
 
 using System.Collections.Generic;
 using System.IO.Compression;
@@ -12,7 +12,7 @@ public sealed class WhenAddZipWriterIsCalled
     private const string ZipKey = "Zip";
 
     [Test]
-    public void GivenNullServicesThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         IServiceCollection services = default!;
@@ -21,11 +21,11 @@ public sealed class WhenAddZipWriterIsCalled
         Action action = () => services.AddZipWriter();
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenServicesThenWriterIsRegistered()
+    public async Task GivenServicesThenWriterIsRegistered()
     {
         // Arrange
         ServiceCollection services = new();
@@ -37,12 +37,12 @@ public sealed class WhenAddZipWriterIsCalled
         IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        _ = writer.ShouldBeOfType<ZipWriter>();
-        options.Value.Compression.ShouldBe(ZipWriter.Options.Default.Compression);
+        await Assert.That(writer).IsTypeOf<ZipWriter>();
+        await Assert.That(options.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
     }
 
     [Test]
-    public void GivenConfigurationThenOptionsAreBound()
+    public async Task GivenConfigurationThenOptionsAreBound()
     {
         // Arrange
         var settings = new Dictionary<string, string?>
@@ -60,6 +60,6 @@ public sealed class WhenAddZipWriterIsCalled
         IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        options.Value.Compression.ShouldBe(CustomCompressionLevel);
+        await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
     }
 }

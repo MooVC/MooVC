@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentValuesThenHashesMatch()
+    public async Task GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
         Indexer first = IndexerTestsData.Create();
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Indexer first = IndexerTestsData.Create();
@@ -32,11 +32,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentBehavioursThenHashesDiffer()
+    public async Task GivenDifferentBehavioursThenHashesDiffer()
     {
         // Arrange
         Indexer first = IndexerTestsData.Create();
@@ -52,11 +52,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentResultsThenHashesDiffer()
+    public async Task GivenDifferentResultsThenHashesDiffer()
     {
         // Arrange
         Indexer first = IndexerTestsData.Create();
@@ -73,6 +73,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

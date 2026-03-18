@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using System.Linq;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithItemsIsCalled
 {
     [Test]
-    public void GivenItemsThenReturnsUpdatedInstance()
+    public async Task GivenItemsThenReturnsUpdatedInstance()
     {
         // Arrange
         Item existing = ItemTestsData.CreateChild();
@@ -17,11 +17,11 @@ public sealed class WhenWithItemsIsCalled
         Item result = original.WithItems(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Items.ShouldBe(original.Items.Concat([additional]));
-        result.Id.ShouldBe(original.Id);
-        result.Name.ShouldBe(original.Name);
-        result.Path.ShouldBe(original.Path);
-        result.Type.ShouldBe(original.Type);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        await Assert.That(result.Id).IsEqualTo(original.Id);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Path).IsEqualTo(original.Path);
+        await Assert.That(result.Type).IsEqualTo(original.Type);
     }
 }

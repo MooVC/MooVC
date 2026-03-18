@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsObjectIsCalled
     private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Qualifier(same);
@@ -18,11 +18,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var subject = new Qualifier(same);
@@ -32,11 +32,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -46,11 +46,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -60,11 +60,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonQualifierThenReturnsFalse()
+    public async Task GivenNonQualifierThenReturnsFalse()
     {
         // Arrange
         var subject = new Qualifier(same);
@@ -74,11 +74,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
+    public async Task GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -91,12 +91,12 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = right.Equals(leftObject);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        await Assert.That(resultLeftRight).IsTrue();
+        await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
+    public async Task GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -109,7 +109,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = right.Equals(leftObject);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        await Assert.That(resultLeftRight).IsFalse();
+        await Assert.That(resultRightLeft).IsFalse();
     }
 }

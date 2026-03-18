@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 public sealed class WhenIsStaticIsCalled
 {
     [Test]
-    public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
+    public async Task GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange
         Field original = FieldTestsData.Create(isStatic: false);
@@ -12,14 +12,14 @@ public sealed class WhenIsStaticIsCalled
         Field result = original.IsStatic(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(original.Default);
-        result.IsReadOnly.ShouldBe(original.IsReadOnly);
-        result.IsStatic.ShouldBeTrue();
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(original.Type);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Default).IsEqualTo(original.Default);
+        await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
+        await Assert.That(result.IsStatic).IsTrue();
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        original.IsStatic.ShouldBeFalse();
+        await Assert.That(original.IsStatic).IsFalse();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenOfTypeIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedType()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedType()
     {
         // Arrange
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
@@ -18,12 +18,12 @@ public sealed class WhenOfTypeIsCalled
         Parameter result = original.OfType(type);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Attributes.ShouldBe(original.Attributes);
-        result.Default.ShouldBe(original.Default);
-        result.Modifier.ShouldBe(original.Modifier);
-        result.Name.ShouldBe(original.Name);
-        result.Type.ShouldBe(type);
-        original.Name.ShouldBe(new Variable(ParameterTestsData.DefaultName));
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
+        await Assert.That(result.Default).IsEqualTo(original.Default);
+        await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        await Assert.That(result.Name).IsEqualTo(original.Name);
+        await Assert.That(result.Type).IsEqualTo(type);
+        await Assert.That(original.Name).IsEqualTo(new Variable(ParameterTestsData.DefaultName));
     }
 }

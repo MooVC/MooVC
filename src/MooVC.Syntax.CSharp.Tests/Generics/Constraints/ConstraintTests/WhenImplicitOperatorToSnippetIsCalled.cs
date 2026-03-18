@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.Elements;
-using Shouldly;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Constraint? subject = default;
@@ -15,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenConstraintThenSnippetMatchesStringRepresentation()
+    public async Task GivenConstraintThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Constraint
@@ -33,6 +32,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

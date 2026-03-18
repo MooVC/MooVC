@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetExtensionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetExtensionsTests;
 
 using System.Collections.Immutable;
 
@@ -9,7 +9,7 @@ public sealed class WhenStackIsCalled
     private const string ThirdLine = "Third";
 
     [Test]
-    public void GivenSingleSnippetThenOriginalSnippetIsReturned()
+    public async Task GivenSingleSnippetThenOriginalSnippetIsReturned()
     {
         // Arrange
         var snippet = Snippet.From(FirstLine);
@@ -19,11 +19,11 @@ public sealed class WhenStackIsCalled
         Snippet result = snippets.Stack(Snippet.Options.Default);
 
         // Assert
-        result.ShouldBeSameAs(snippet);
+        await Assert.That(ReferenceEquals(result, snippet)).IsTrue();
     }
 
     [Test]
-    public void GivenMultipleSnippetsThenTheyAreStackedInOrder()
+    public async Task GivenMultipleSnippetsThenTheyAreStackedInOrder()
     {
         // Arrange
         var first = Snippet.From(FirstLine);
@@ -36,6 +36,6 @@ public sealed class WhenStackIsCalled
         Snippet result = snippets.Stack(Snippet.Options.Default);
 
         // Assert
-        result.ToString().ShouldBe(expected);
+        await Assert.That(result.ToString()).IsEqualTo(expected);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Formatting.CharExtensionsTests;
+﻿namespace MooVC.Syntax.Formatting.CharExtensionsTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -9,7 +9,7 @@ public sealed class WhenCombineIsCalled
     private static readonly string[] samples = ["first", "second", "third"];
 
     [Test]
-    public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValuesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string[]? values = default;
@@ -18,11 +18,11 @@ public sealed class WhenCombineIsCalled
         Action action = () => Separator.Combine(values!);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenSingleValueThenTheValueIsReturned()
+    public async Task GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
         string value = samples[0];
@@ -31,11 +31,11 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(value);
 
         // Assert
-        result.ShouldBe(value);
+        await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
+    public async Task GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
         string expected = string.Join(Separator, samples);
@@ -44,11 +44,11 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(samples);
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         var elements = ImmutableArray.Create(samples);
@@ -58,11 +58,11 @@ public sealed class WhenCombineIsCalled
         Action action = () => Separator.Combine(elements, formatter!);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenElementsThenTheyAreFormattedAndCombined()
+    public async Task GivenElementsThenTheyAreFormattedAndCombined()
     {
         // Arrange
         var elements = ImmutableArray.Create(samples);
@@ -72,6 +72,6 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        result.ShouldBe(expected);
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

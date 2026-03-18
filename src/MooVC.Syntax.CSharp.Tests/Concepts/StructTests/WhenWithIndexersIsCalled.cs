@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithIndexersIsCalled
 {
     [Test]
-    public void GivenIndexersThenReturnsUpdatedInstance()
+    public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
         var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
@@ -16,8 +16,8 @@ public sealed class WhenWithIndexersIsCalled
         Struct result = original.WithIndexers(indexer);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Indexers.ShouldContain(indexer);
-        original.Indexers.ShouldBeEmpty();
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.Indexers).Contains(indexer);
+        await Assert.That(original.Indexers).IsEmpty();
     }
 }

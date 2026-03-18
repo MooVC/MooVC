@@ -24,11 +24,11 @@ public sealed class WhenInitializeIsCalled
         object? third = await initializer.Initialize(CancellationToken.None);
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
-        _ = first.ShouldNotBeNull();
-        first.ShouldBe(second);
-        first.ShouldBe(third);
-        second.ShouldBe(third);
+        await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
+        _ = await Assert.That(first).IsNotNull();
+        await Assert.That(first).IsEqualTo(second);
+        await Assert.That(first).IsEqualTo(third);
+        await Assert.That(second).IsEqualTo(third);
     }
 
     [Test]
@@ -53,7 +53,7 @@ public sealed class WhenInitializeIsCalled
         await act();
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
+        await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
     }
 
     [Test]
@@ -80,7 +80,7 @@ public sealed class WhenInitializeIsCalled
         _ = await Task.WhenAll(tasks);
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
+        await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
     }
 
     private static async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceActionAsync(

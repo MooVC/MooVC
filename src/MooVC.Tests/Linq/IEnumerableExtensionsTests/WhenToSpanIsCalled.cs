@@ -5,13 +5,13 @@ public sealed class WhenToSpanIsCalled
     [Test]
     [Arguments(default)]
     [Arguments(new int[0])]
-    public void GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
+    public async Task GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
     {
         // Act
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        actual.IsEmpty.ShouldBeTrue();
+        await Assert.That(actual.IsEmpty).IsTrue();
     }
 
     [Test]
@@ -19,7 +19,7 @@ public sealed class WhenToSpanIsCalled
     [Arguments(new[] { 1, 2, 3 })]
     [Arguments(new[] { 2 })]
     [Arguments(new[] { 3, 2, 1 })]
-    public void GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
+    public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
     {
         // Act
         ReadOnlySpan<int> actual = expected.ToSpan();
@@ -27,12 +27,12 @@ public sealed class WhenToSpanIsCalled
         // Assert
         for (int index = 0; index < expected.Count(); index++)
         {
-            actual[index].ShouldBe(expected.ElementAt(index));
+            await Assert.That(actual[index]).IsEqualTo(expected.ElementAt(index));
         }
     }
 
     [Test]
-    public void GivenANullEnumerableThenAnEmptySpanIsReturned()
+    public async Task GivenANullEnumerableThenAnEmptySpanIsReturned()
     {
         // Arrange
         IEnumerable<int>? enumerable = default;
@@ -41,11 +41,11 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        actual.IsEmpty.ShouldBeTrue();
+        await Assert.That(actual.IsEmpty).IsTrue();
     }
 
     [Test]
-    public void GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
+    public async Task GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3, 4];
@@ -54,6 +54,6 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        actual.Length.ShouldBe(enumerable.Count());
+        await Assert.That(actual.Length).IsEqualTo(enumerable.Count());
     }
 }

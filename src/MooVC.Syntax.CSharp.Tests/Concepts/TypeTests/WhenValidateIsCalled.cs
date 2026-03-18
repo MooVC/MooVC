@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmptyResults()
+    public async Task GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
         var subject = new TestType { IsUndefinedValue = true };
@@ -19,11 +19,11 @@ public sealed class WhenValidateIsCalled
         IEnumerable<ValidationResult> results = subject.Validate(validationContext);
 
         // Assert
-        results.ShouldBeEmpty();
+        await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnspecifiedNameThenReturnsValidationResults()
+    public async Task GivenUnspecifiedNameThenReturnsValidationResults()
     {
         // Arrange
         var subject = new TestType
@@ -38,6 +38,6 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Type.Declaration)));
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Type.Declaration)));
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithRemoveMetadataIsCalled
     private const string UpdatedRemoveMetadata = "UpdatedRemoveMetadata";
 
     [Test]
-    public void GivenRemoveMetadataThenReturnsUpdatedInstance()
+    public async Task GivenRemoveMetadataThenReturnsUpdatedInstance()
     {
         // Arrange
         Item original = ItemTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenWithRemoveMetadataIsCalled
         Item result = original.WithRemoveMetadata(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.RemoveMetadata.ShouldBe(updated);
-        result.Remove.ShouldBe(original.Remove);
-        result.Condition.ShouldBe(original.Condition);
+        await Assert.That(ReferenceEquals(result, original)).IsFalse();
+        await Assert.That(result.RemoveMetadata).IsEqualTo(updated);
+        await Assert.That(result.Remove).IsEqualTo(original.Remove);
+        await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

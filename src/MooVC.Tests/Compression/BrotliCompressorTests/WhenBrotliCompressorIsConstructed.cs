@@ -7,13 +7,13 @@ using System.IO.Compression;
 public sealed class WhenBrotliCompressorIsConstructed
 {
     [Test]
-    public void GivenNoLevelThenAnInstanceIsCreated()
+    public async Task GivenNoLevelThenAnInstanceIsCreated()
     {
         // Act
         Func<ICompressor> act = () => new BrotliCompressor();
 
         // Assert
-        _ = Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
@@ -21,25 +21,25 @@ public sealed class WhenBrotliCompressorIsConstructed
     [Arguments(CompressionLevel.Fastest)]
     [Arguments(CompressionLevel.NoCompression)]
     [Arguments(CompressionLevel.SmallestSize)]
-    public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
+    public async Task GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
     {
         // Act
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        _ = Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
     [Arguments((CompressionLevel)9)]
     [Arguments((CompressionLevel)27)]
-    public void GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
+    public async Task GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
     {
         // Act
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        _ = Should.Throw<InvalidEnumArgumentException>(act);
+        await Assert.That(act).Throws<InvalidEnumArgumentException>();
     }
 }
 #endif

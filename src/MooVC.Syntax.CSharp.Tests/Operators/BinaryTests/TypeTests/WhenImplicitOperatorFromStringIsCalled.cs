@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Value = "+";
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = Value;
@@ -14,13 +14,13 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Binary.Type subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
-        subject.ToString().ShouldBe(value);
+        await Assert.That((subject == value)).IsTrue();
+        await Assert.That(subject.Equals(value)).IsTrue();
+        await Assert.That(subject.ToString()).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         string value = Value;
@@ -30,8 +30,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Binary.Type second = value;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        await Assert.That(ReferenceEquals(first, second)).IsFalse();
+        await Assert.That((first == second)).IsTrue();
+        await Assert.That(first.Equals(second)).IsTrue();
     }
 }

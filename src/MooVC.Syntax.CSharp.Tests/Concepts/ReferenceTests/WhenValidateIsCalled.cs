@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +11,7 @@ public sealed class WhenValidateIsCalled
     private const string TypeName = "Widget";
 
     [Test]
-    public void GivenInvalidExtensibilityThenReturnsValidationResults()
+    public async Task GivenInvalidExtensibilityThenReturnsValidationResults()
     {
         // Arrange
         var subject = new TestReference
@@ -26,6 +26,6 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));
+        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));
     }
 }

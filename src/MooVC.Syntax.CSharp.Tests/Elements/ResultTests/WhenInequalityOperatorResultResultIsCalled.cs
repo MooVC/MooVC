@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenInequalityOperatorResultResultIsCalled
 {
     [Test]
-    public void GivenEquivalentResultsThenReturnsFalse()
+    public async Task GivenEquivalentResultsThenReturnsFalse()
     {
         // Arrange
         Result left = ResultTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorResultResultIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentResultsThenReturnsTrue()
+    public async Task GivenDifferentResultsThenReturnsTrue()
     {
         // Arrange
         Result left = ResultTestsData.Create();
@@ -27,6 +27,6 @@ public sealed class WhenInequalityOperatorResultResultIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        await Assert.That(result).IsTrue();
     }
 }

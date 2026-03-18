@@ -1,17 +1,17 @@
-namespace MooVC.Linq.IEnumerableExtensionsTests;
+﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenWhereIfIsCalled
 {
     [Test]
-    public void GivenAFailingConditionThenThePredicateIsNotApplied()
+    public async Task GivenAFailingConditionThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(false);
 
-        wasInvoked.ShouldBeFalse();
+        await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
-    public void GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
+    public async Task GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
     {
         IEnumerable<int>? enumeration = default;
         bool wasEvaluated = false;
@@ -29,12 +29,12 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(Condition, Predicate);
 
-        result.ShouldBeNull();
-        wasEvaluated.ShouldBeFalse();
+        await Assert.That(result).IsNull();
+        await Assert.That(wasEvaluated).IsFalse();
     }
 
     [Test]
-    public void GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
+    public async Task GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
     {
         IEnumerable<int>? enumeration = default;
         bool wasEvaluated = false;
@@ -47,36 +47,36 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(true, Predicate);
 
-        result.ShouldBeNull();
-        wasEvaluated.ShouldBeFalse();
+        await Assert.That(result).IsNull();
+        await Assert.That(wasEvaluated).IsFalse();
     }
 
     [Test]
-    public void GivenAPassingConditionThenThePredicateIsApplied()
+    public async Task GivenAPassingConditionThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(true);
 
-        wasInvoked.ShouldBeTrue();
+        await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
-    public void GivenFailingApplicabilityThenThePredicateIsNotApplied()
+    public async Task GivenFailingApplicabilityThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(false);
 
-        wasInvoked.ShouldBeFalse();
+        await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
-    public void GivenPassingApplicabilityThenThePredicateIsApplied()
+    public async Task GivenPassingApplicabilityThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
 
-        wasInvoked.ShouldBeTrue();
+        await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
-    public void GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
+    public async Task GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
     {
         // Arrange
         int[] enumeration = [1, 2, 3, 4, 5];
@@ -90,11 +90,11 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
 
         // Assert
-        result.ShouldBe([2, 4]);
+        await Assert.That(result).IsEqualTo([2, 4]);
     }
 
     [Test]
-    public void GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
+    public async Task GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
     {
         // Arrange
         int[] enumeration = [1, 2, 3, 4, 5];
@@ -108,7 +108,7 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
 
         // Assert
-        result.ShouldBe([1, 2, 3, 4, 5]);
+        await Assert.That(result).IsEqualTo([1, 2, 3, 4, 5]);
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)

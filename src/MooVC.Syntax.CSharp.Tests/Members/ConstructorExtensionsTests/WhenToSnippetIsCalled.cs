@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorExtensionsTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Concepts;
@@ -12,7 +12,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Constructor> constructors = isDefault
@@ -25,25 +25,25 @@ public sealed class WhenToSnippetIsCalled
         var snippet = constructors.ToSnippet(Type.Options.Default, type);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullConstructThenAnExceptionIsThrown()
+    public async Task GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Constructor> constructors = [Create([])];
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(Type.Options.Default, type!));
+        ArgumentNullException exception = await Assert.That(() => _ = constructors.ToSnippet(Type.Options.Default, type!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(type));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Constructor> constructors = [Create([])];
@@ -51,14 +51,14 @@ public sealed class WhenToSnippetIsCalled
         Type.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = constructors.ToSnippet(options!, type));
+        ArgumentNullException exception = await Assert.That(() => _ = constructors.ToSnippet(options!, type)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenAnOrderedSnippetIsReturned()
+    public async Task GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
         Type type = OperatorsTestsData.Create(name: "Test");
@@ -102,7 +102,7 @@ public sealed class WhenToSnippetIsCalled
         var snippet = constructors.ToSnippet(Type.Options.Default, type);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 
     private static Constructor Create(ImmutableArray<Parameter> parameters, Scope? scope = default)

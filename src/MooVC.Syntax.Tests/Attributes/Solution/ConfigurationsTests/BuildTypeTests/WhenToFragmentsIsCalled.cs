@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public void GivenUnnamedThenReturnsEmpty()
+    public async Task GivenUnnamedThenReturnsEmpty()
     {
         // Arrange
         Configurations.BuildType subject = Configurations.BuildType.Unnamed;
@@ -16,11 +16,11 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.ShouldBeEmpty();
+        await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenValueThenReturnsFragment()
+    public async Task GivenValueThenReturnsFragment()
     {
         // Arrange
         Configurations.BuildType subject = Configurations.BuildType.Debug;
@@ -31,7 +31,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        XElement fragment = result.ShouldHaveSingleItem();
-        XNode.DeepEquals(expected, fragment).ShouldBeTrue();
+        XElement fragment = result.Single();
+        await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
     }
 }
