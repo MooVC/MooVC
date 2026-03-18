@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
-using MooVC.Syntax.CSharp.Elements.Chaining;
-using MooVC.Syntax.Elements;
+using MooVC.Syntax.CSharp.Chaining;
 
 public sealed class WhenConstructorIsCalled
 {

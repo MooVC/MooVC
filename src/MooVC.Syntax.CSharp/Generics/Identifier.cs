@@ -6,7 +6,6 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Generics.Identifier_Resources;
 

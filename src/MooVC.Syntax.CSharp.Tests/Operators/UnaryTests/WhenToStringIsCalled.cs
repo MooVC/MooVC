@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToStringIsCalled
 {
     [Test]

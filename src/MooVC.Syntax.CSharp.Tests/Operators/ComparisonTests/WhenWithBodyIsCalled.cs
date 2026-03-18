@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenWithBodyIsCalled
 {
     [Test]

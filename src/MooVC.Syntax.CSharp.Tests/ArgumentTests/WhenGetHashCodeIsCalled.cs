@@ -1,0 +1,37 @@
+﻿namespace MooVC.Syntax.CSharp.ArgumentTests;
+
+public sealed class WhenGetHashCodeIsCalled
+{
+    private static readonly Snippet same = Snippet.From("Alpha");
+    private static readonly Snippet different = Snippet.From("Beta");
+
+    [Test]
+    public async Task GivenMatchingValuesThenReturnsSameHash()
+    {
+        // Arrange
+        var first = new Argument { Value = same };
+        var second = new Argument { Value = same };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
+    {
+        // Arrange
+        var first = new Argument { Value = same };
+        var second = new Argument { Value = different };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+}

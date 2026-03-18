@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
-using MooVC.Syntax.CSharp.Elements;
-
 public sealed class WhenEqualsInterfaceIsCalled
 {
     [Test]

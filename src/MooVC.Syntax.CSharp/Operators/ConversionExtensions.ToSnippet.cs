@@ -4,7 +4,6 @@
     using System.Linq;
     using MooVC.Linq;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.Elements;
 
     /// <summary>
     /// Represents a C# operator syntax conversion extensions.

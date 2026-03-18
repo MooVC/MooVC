@@ -1,0 +1,120 @@
+﻿namespace MooVC.Syntax.CSharp.MethodTests;
+
+using MooVC.Syntax.CSharp.Generics;
+using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
+
+public sealed class WhenToSnippetIsCalled
+{
+    [Test]
+    public async Task GivenSingleLineBracesThenBodyIsRenderedInline()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) { return value; }");
+    }
+
+    [Test]
+    public async Task GivenLambdaInlineThenBodyIsRenderedInline()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.Lambda))));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) => return value;");
+    }
+
+    [Test]
+    public async Task GivenBodyWhenSynchronousThenBlockIsRendered()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        string expected = """
+            public string Perform(int value)
+            {
+                return value;
+            }
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenBodyWhenAsynchronousThenBlockIsRendered()
+    {
+        // Arrange
+        Method subject = MethodTestsData
+            .Create(body: Snippet.From("return await value;"))
+            .Returns(result => result
+                .As(typeof(Task))
+                .WithMode(Result.Modality.Asynchronous));
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        string expected = """
+            public async Task<string> Perform(int value)
+            {
+                return await value;
+            }
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenGenericConstraintsThenWhereClauseIsIncluded()
+    {
+        // Arrange
+        var constraints = new Constraint
+        {
+            Nature = Nature.Class,
+            New = New.Required,
+        };
+
+        var generic = new Argument
+        {
+            Name = "T",
+            Constraints = [constraints],
+        };
+
+        var declaration = new Declaration
+        {
+            Name = "Perform",
+            Arguments = [generic],
+        };
+
+        Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        _ = await Assert.That(representation).Contains("Perform<T>");
+        _ = await Assert.That(representation).Contains("where class, new()");
+    }
+}

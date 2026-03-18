@@ -1,8 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenAttributedWithIsCalled
 {

@@ -6,16 +6,13 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Generics;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
-    using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Concepts.Reference_Resources;
-    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
+    using Parameter = MooVC.Syntax.CSharp.Parameter;
 
     /// <summary>
     /// Represents a C# type syntax reference.
@@ -136,7 +133,7 @@
 
         private Snippet GetSignature(Options options)
         {
-            var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
             var parameters = Parameters.ToSnippet(_options);

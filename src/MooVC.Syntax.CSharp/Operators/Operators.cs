@@ -8,7 +8,6 @@
     using Fluentify;
     using MooVC.Syntax;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Operators_Resources;

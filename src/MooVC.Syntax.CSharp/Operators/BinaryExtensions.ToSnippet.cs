@@ -3,7 +3,6 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.CSharp.Concepts;
-    using MooVC.Syntax.Elements;
 
     /// <summary>
     /// Represents a C# operator syntax binary extensions.

@@ -1,10 +1,8 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
-using MooVC.Syntax.CSharp.Generics.Constraints;
-using MooVC.Syntax.CSharp.Members;
-using MooVC.Syntax.Elements;
-using ElementParameter = MooVC.Syntax.CSharp.Elements.Parameter;
-using GenericParameter = MooVC.Syntax.CSharp.Generics.Parameter;
+using Argument = MooVC.Syntax.CSharp.Generics.Argument;
+using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
+using Parameter = MooVC.Syntax.CSharp.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -25,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
             ],
         };
 
-        var genericParameter = new GenericParameter
+        var argument = new Argument
         {
             Name = GenericName,
             Constraints =
@@ -40,14 +38,14 @@ public sealed class WhenToSnippetIsCalled
             Declaration = new Declaration
             {
                 Name = TypeName,
-                Parameters =
+                Arguments =
                 [
-                    genericParameter,
+                    argument,
                 ],
             },
             Parameters =
             [
-                new ElementParameter { Name = new Identifier(ParameterName), Type = typeof(int) },
+                new Parameter { Name = new Identifier(ParameterName), Type = typeof(int) },
             ],
         };
 

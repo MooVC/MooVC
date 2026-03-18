@@ -3,7 +3,7 @@
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
-    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
+    using Parameter = MooVC.Syntax.CSharp.Parameter;
 
     /// <summary>
     /// Represents a C# type syntax class.

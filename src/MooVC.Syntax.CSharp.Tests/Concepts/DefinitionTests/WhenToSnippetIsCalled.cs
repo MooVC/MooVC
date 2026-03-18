@@ -2,10 +2,7 @@
 
 using MooVC.Syntax;
 using MooVC.Syntax.CSharp.Concepts;
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
-using MooVC.Syntax.Elements;
-using static MooVC.Syntax.CSharp.Elements.Symbol;
+using static MooVC.Syntax.CSharp.Symbol;
 using Attribute = System.Attribute;
 using Options = MooVC.Syntax.CSharp.Concepts.Options;
 

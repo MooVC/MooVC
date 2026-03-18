@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToSnippetIsCalled
 {
     [Test]

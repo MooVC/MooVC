@@ -1,7 +1,7 @@
 ﻿namespace MooVC.Syntax.SnippetTests;
 
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Elements.Chaining;
+using MooVC.Syntax.CSharp.Chaining;
 
 public sealed class WhenChainIsCalled
 {

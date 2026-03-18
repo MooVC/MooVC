@@ -6,17 +6,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Generics;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
-    using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Syntax;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
-    using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
+    using Parameter = MooVC.Syntax.CSharp.Parameter;
 
     /// <summary>
     /// Represents a C# type syntax struct.
@@ -115,7 +112,7 @@
         private Snippet GetSignature(Snippet.Options options)
         {
             Kind behavior = Behavior;
-            var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string partial = IsPartial.Partial();
             string name = Declaration;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);

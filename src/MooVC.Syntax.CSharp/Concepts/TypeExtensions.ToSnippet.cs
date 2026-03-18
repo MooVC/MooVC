@@ -3,7 +3,6 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
-    using MooVC.Syntax.Elements;
 
     /// <summary>
     /// Represents a C# type syntax type extensions.

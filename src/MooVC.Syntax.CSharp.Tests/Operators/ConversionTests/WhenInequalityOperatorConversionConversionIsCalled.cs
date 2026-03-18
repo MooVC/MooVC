@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
-using MooVC.Syntax.CSharp.Elements;
-
 public sealed class WhenInequalityOperatorConversionConversionIsCalled
 {
     [Test]

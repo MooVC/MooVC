@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-using MooVC.Syntax.CSharp.Elements;
-
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]

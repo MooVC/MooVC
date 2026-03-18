@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.CSharp.Members;
-
 public sealed class WhenWithScopeIsCalled
 {
     [Test]

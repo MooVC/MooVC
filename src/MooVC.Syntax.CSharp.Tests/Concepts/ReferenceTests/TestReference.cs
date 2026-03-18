@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
 using MooVC.Syntax.CSharp.Concepts;
-using MooVC.Syntax.CSharp.Elements;
 
 internal sealed class TestReference
     : Reference

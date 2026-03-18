@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToStringIsCalled
 {
     [Test]

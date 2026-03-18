@@ -5,7 +5,6 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 using MooVC.Syntax.CSharp.Operators.ComparisonTests;
 using MooVC.Syntax.CSharp.Operators.ConversionTests;
 using MooVC.Syntax.CSharp.Operators.UnaryTests;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {

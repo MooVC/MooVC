@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenWithBodyIsCalled
 {
     [Test]

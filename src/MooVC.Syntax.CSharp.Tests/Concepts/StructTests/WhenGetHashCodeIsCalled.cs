@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
-using MooVC.Syntax.CSharp.Elements;
-
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]

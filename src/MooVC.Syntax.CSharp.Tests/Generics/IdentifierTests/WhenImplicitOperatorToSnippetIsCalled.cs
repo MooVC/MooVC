@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     private const string NamedIdentifier = "TNamed";

@@ -4,9 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
-    using MooVC.Syntax.CSharp.Members;
-    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.CSharp;
     using Valuify;
     using static MooVC.Syntax.CSharp.Operators.Comparison_Resources;
     using Concept = MooVC.Syntax.CSharp.Concepts.Type;

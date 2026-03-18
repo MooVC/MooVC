@@ -2,8 +2,7 @@
 {
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
-    using MooVC.Syntax.Elements;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;

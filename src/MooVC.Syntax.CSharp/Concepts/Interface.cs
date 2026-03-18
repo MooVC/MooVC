@@ -5,13 +5,10 @@
     using System.Collections.Immutable;
     using System.Linq;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Elements;
+    using MooVC.Syntax.CSharp;
     using MooVC.Syntax.CSharp.Generics;
-    using MooVC.Syntax.CSharp.Generics.Constraints;
-    using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.CSharp.Operators;
     using MooVC.Syntax.CSharp.Syntax;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Formatting;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -67,7 +64,7 @@
         private Snippet GetSignature(Options options)
         {
             var attributes = Attributes.ToSnippet(options);
-            var clauses = Declaration.Parameters.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string name = Declaration;
             string partial = IsPartial.Partial();
             string scope = Scope;

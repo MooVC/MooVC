@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
-using MooVC.Syntax.CSharp.Members;
-using MooVC.Syntax.Elements;
-
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]

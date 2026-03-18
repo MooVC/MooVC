@@ -1,8 +1,5 @@
 namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
-using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.Elements;
-
 internal static class ComparisonTestsData
 {
     public const string DefaultBody = "return left == right;";
