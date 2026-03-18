@@ -1,8 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 namespace MooVC.Paging.DirectiveTests;
 
-using System.Collections.Generic;
-
 public sealed class WhenDirectiveIsConstructed
 {
     [Test]

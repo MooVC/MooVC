@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenNamedIsCalled
 {
     [Test]

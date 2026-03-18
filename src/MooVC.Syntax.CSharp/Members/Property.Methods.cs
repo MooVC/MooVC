@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Members
 {
-    using System;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Elements;

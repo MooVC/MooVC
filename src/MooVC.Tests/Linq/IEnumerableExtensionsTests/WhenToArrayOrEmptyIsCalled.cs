@@ -1,7 +1,5 @@
 namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-using Xunit;
-
 public sealed class WhenToArrayOrEmptyIsCalled
 {
     public static IEnumerable<(int[] Original, int[] Expected)> EnumerablePredicateOrderTestData()

@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
-using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 

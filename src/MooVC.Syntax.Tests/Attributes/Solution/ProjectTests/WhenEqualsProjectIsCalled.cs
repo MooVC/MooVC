@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenEqualsProjectIsCalled
 {
     [Test]

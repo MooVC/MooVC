@@ -2,7 +2,6 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Linq;
 using MooVC.Syntax.Elements;
-using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 
 internal static class SymbolTestsData
 {

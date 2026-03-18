@@ -3,7 +3,6 @@
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
 public static partial class ServiceCollectionExtensions

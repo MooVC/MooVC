@@ -15,7 +15,6 @@ namespace MooVC.Syntax.CSharp.Members
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Members.Method_Resources;
-    using static MooVC.Syntax.Elements.Snippet.BlockOptions;
     using Ignore = Valuify.IgnoreAttribute;
     using Parameter = MooVC.Syntax.CSharp.Elements.Parameter;
 

@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Generics.Constraints
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.Elements;

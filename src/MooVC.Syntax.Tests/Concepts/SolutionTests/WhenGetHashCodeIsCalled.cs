@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using MooVC.Syntax.Attributes.Solution;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {

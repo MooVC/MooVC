@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {

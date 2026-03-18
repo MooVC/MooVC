@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Elements
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;

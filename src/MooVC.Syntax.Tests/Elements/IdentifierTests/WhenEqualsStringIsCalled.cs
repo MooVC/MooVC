@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.Elements.IdentifierTests;
 
 using Shouldly;
-using Xunit;
 
 public sealed class WhenEqualsStringIsCalled
 {

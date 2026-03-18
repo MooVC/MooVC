@@ -1,7 +1,5 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToSnippetIsCalled
 {
     private const string StaticKeyword = "static";

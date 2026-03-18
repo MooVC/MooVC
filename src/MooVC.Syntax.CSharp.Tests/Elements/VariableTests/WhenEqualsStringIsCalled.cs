@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using Shouldly;
-using Xunit;
 
 public sealed class WhenEqualsStringIsCalled
 {

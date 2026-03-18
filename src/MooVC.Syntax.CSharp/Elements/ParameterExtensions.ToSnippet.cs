@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.Elements;
