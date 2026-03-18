@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
-    using MooVC.Syntax.Elements;
 
     /// <summary>
     /// Represents a formatting helper string extensions.

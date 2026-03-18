@@ -15,7 +15,6 @@
         /// <param name="from">The from.</param>
         /// <typeparam name="TFrom">The type from which the conversion is to occur.</typeparam>
         /// <typeparam name="TTo">The type to which the conversion is to occur.</typeparam>
-        /// <returns>The conversion t from.</returns>
         public static void Conversion<TFrom, TTo>(this IGuardClause clause, TFrom from)
         {
             _ = clause.Null(from, message: ConvertToIdentifierRequired.Format(typeof(TFrom), typeof(TTo)));

@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.Formatting.StringExtensionsTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToSnippetIsCalled
 {
     private const string FirstLine = "First";

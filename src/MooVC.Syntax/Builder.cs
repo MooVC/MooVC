@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax
 {
-    using MooVC.Syntax.Concepts;
-
     /// <summary>
     /// Represents a syntax helper builder.
     /// </summary>

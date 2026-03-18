@@ -7,7 +7,7 @@
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.Concepts;
+    using MooVC.Syntax;
     using MooVC.Syntax.CSharp.Elements;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.Elements;

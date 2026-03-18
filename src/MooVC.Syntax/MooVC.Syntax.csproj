@@ -9,7 +9,7 @@
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferenceDependencies</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fluentify" >
+    <PackageReference Include="Fluentify">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -33,57 +33,57 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
-    <Compile Update="Attributes\Solution\Configurations.Resources.Designer.cs">
+    <Compile Update="Solution\Configurations.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Configurations.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Attributes\Solution\File.Resources.Designer.cs">
+    <Compile Update="Solution\File.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>File.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Attributes\Solution\Folder.Resources.Designer.cs">
+    <Compile Update="Solution\Folder.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Folder.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Attributes\Solution\Project.Resources.Designer.cs">
+    <Compile Update="Solution\Project.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Project.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Concepts\Construct.Resources.Designer.cs">
+    <Compile Update="Construct.Resources.Designer.cs">
       <DependentUpon>Construct.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\Identifier.Resources.Designer.cs">
+    <Compile Update="Identifier.Resources.Designer.cs">
       <DependentUpon>Identifier.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\Path.Resources.Designer.cs">
+    <Compile Update="Path.Resources.Designer.cs">
       <DependentUpon>Path.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\Name.Resources.Designer.cs">
+    <Compile Update="Name.Resources.Designer.cs">
       <DependentUpon>Name.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\Qualifier.Resources.Designer.cs">
+    <Compile Update="Qualifier.Resources.Designer.cs">
       <DependentUpon>Qualifier.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\Snippet.Resources.Designer.cs">
+    <Compile Update="Snippet.Resources.Designer.cs">
       <DependentUpon>Snippet.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Elements\SnippetExtensions.Resources.Designer.cs">
+    <Compile Update="SnippetExtensions.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SnippetExtensions.Resources.resx</DependentUpon>
@@ -110,47 +110,47 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Attributes\Solution\Configurations.Resources.resx">
+    <EmbeddedResource Update="Solution\Configurations.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Configurations.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Attributes\Solution\File.Resources.resx">
+    <EmbeddedResource Update="Solution\File.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>File.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Attributes\Solution\Folder.Resources.resx">
+    <EmbeddedResource Update="Solution\Folder.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Folder.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Attributes\Solution\Project.Resources.resx">
+    <EmbeddedResource Update="Solution\Project.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Project.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Concepts\Construct.Resources.resx">
+    <EmbeddedResource Update="Construct.Resources.resx">
       <LastGenOutput>Construct.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Identifier.Resources.resx">
+    <EmbeddedResource Update="Identifier.Resources.resx">
       <LastGenOutput>Identifier.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Path.Resources.resx">
+    <EmbeddedResource Update="Path.Resources.resx">
       <LastGenOutput>Path.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Name.Resources.resx">
+    <EmbeddedResource Update="Name.Resources.resx">
       <LastGenOutput>Name.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Qualifier.Resources.resx">
+    <EmbeddedResource Update="Qualifier.Resources.resx">
       <LastGenOutput>Qualifier.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Snippet.Resources.resx">
+    <EmbeddedResource Update="Snippet.Resources.resx">
       <LastGenOutput>Snippet.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\SnippetExtensions.Resources.resx">
+    <EmbeddedResource Update="SnippetExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SnippetExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

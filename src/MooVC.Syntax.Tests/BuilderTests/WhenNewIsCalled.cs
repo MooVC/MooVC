@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MooVC.Syntax.Concepts;
+using MooVC.Syntax;
 
 public sealed class WhenNewIsCalled
 {

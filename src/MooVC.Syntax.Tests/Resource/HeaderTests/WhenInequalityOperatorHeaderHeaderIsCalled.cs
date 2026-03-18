@@ -1,0 +1,60 @@
+﻿namespace MooVC.Syntax.Resource.HeaderTests;
+
+public sealed class WhenInequalityOperatorHeaderHeaderIsCalled
+{
+    [Test]
+    public async Task GivenBothNullThenReturnsFalse()
+    {
+        // Arrange
+        Header? left = default;
+        Header? right = default;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Header? left = default;
+        Header right = HeaderTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Header left = HeaderTestsData.Create();
+        Header right = HeaderTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Header left = HeaderTestsData.Create();
+        Header right = HeaderTestsData.Create(value: Snippet.From("Other"));
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+}
