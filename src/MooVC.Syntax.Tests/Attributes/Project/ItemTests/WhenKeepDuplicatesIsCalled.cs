@@ -7,14 +7,13 @@ public sealed class WhenKeepDuplicatesIsCalled
     {
         // Arrange
         Item original = ItemTestsData.Create();
-        const bool updated = true;
 
         // Act
-        Item result = original.KeepDuplicates(updated);
+        Item result = original.KeepDuplicates(true);
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.KeepDuplicates).IsEqualTo(updated);
+        _ = await Assert.That(result.KeepDuplicates).IsTrue();
         _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
         _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }
