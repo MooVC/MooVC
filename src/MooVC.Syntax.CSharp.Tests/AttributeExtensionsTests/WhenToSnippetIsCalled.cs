@@ -2,7 +2,6 @@
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.AttributeTests;
-using MooVC.Syntax.CSharp.Concepts;
 
 public sealed class WhenToSnippetIsCalled
 {

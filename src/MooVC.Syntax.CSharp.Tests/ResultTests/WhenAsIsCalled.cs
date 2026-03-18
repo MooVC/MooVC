@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.ResultTests;
 
+using Type = System.Type;
+
 public sealed class WhenAsIsCalled
 {
     private const string ValueType = "Value";

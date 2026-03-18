@@ -31,22 +31,22 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
-    <Compile Update="Concepts\Definition.Resources.Designer.cs">
+    <Compile Update="Definition.Resources.Designer.cs">
       <DependentUpon>Definition.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Concepts\Type.Resources.Designer.cs">
+    <Compile Update="Type.Resources.Designer.cs">
       <DependentUpon>Type.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Concepts\Reference.Resources.Designer.cs">
+    <Compile Update="Reference.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Reference.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Concepts\Struct.Resources.Designer.cs">
+    <Compile Update="Struct.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Struct.Resources.resx</DependentUpon>
@@ -141,46 +141,46 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Symbol.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Operators\Comparison.Resources.Designer.cs">
+    <Compile Update="Comparison.Resources.Designer.cs">
       <DependentUpon>Comparison.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Operators\Binary.Resources.Designer.cs">
+    <Compile Update="Binary.Resources.Designer.cs">
       <DependentUpon>Binary.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Operators\Conversion.Resources.Designer.cs">
+    <Compile Update="Conversion.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Conversion.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Operators\Operators.Resources.Designer.cs">
+    <Compile Update="Operators.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Operators.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Operators\Unary.Resources.Designer.cs">
+    <Compile Update="Unary.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Unary.Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Concepts\Definition.Resources.resx">
+    <EmbeddedResource Update="Definition.Resources.resx">
       <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Concepts\Type.Resources.resx">
+    <EmbeddedResource Update="Type.Resources.resx">
       <LastGenOutput>Type.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Concepts\Reference.Resources.resx">
+    <EmbeddedResource Update="Reference.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Reference.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Concepts\Struct.Resources.resx">
+    <EmbeddedResource Update="Struct.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Struct.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -256,28 +256,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Symbol.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Operators\Comparison.Resources.resx">
+    <EmbeddedResource Update="Comparison.Resources.resx">
       <LastGenOutput>Comparison.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Operators\Binary.Resources.resx">
+    <EmbeddedResource Update="Binary.Resources.resx">
       <LastGenOutput>Binary.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Operators\Conversion.Resources.resx">
+    <EmbeddedResource Update="Conversion.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Conversion.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Operators\Operators.Resources.resx">
+    <EmbeddedResource Update="Operators.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Operators.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Operators\Unary.Resources.resx">
+    <EmbeddedResource Update="Unary.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Unary.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Elements\" />
   </ItemGroup>
 </Project>

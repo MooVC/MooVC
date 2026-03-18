@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.Resource.ResourceTests;
 
-using Resource = Resource;
-
 public sealed class WhenWithHeadersIsCalled
 {
     [Test]

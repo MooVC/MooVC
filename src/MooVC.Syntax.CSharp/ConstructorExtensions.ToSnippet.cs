@@ -3,7 +3,6 @@
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
-    using MooVC.Syntax.CSharp.Concepts;
 
     /// <summary>
     /// Represents a C# member syntax constructor extensions.

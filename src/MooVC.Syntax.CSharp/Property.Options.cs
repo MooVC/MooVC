@@ -2,7 +2,6 @@ namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -47,7 +46,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Types.
             /// </summary>
             /// <value>The types.</value>
-            public Type.Options Types { get; internal set; } = Concepts.Type.Options.Default;
+            public Type.Options Types { get; internal set; } = MooVC.Syntax.CSharp.Type.Options.Default;
 
             public static implicit operator Scope(Options options)
             {

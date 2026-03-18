@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SolutionTests;
+﻿namespace MooVC.Syntax.Solution.SolutionTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {

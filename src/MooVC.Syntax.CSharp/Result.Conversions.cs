@@ -1,9 +1,9 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
-    using System;
     using System.Threading.Tasks;
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.CSharp.Result_Resources;
+    using CType = System.Type;
 
     /// <summary>
     /// Represents a C# syntax element result.
@@ -15,9 +15,9 @@
         /// </summary>
         /// <param name="wrapper">The wrapper.</param>
         /// <returns>The result.</returns>
-        public Result As(Type wrapper)
+        public Result As(CType wrapper)
         {
-            _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Type), typeof(Result)));
+            _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Kind), typeof(Result)));
 
             Symbol wrapped = new Symbol()
                 .From(wrapper)

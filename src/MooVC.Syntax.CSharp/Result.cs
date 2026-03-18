@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -11,6 +10,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Result_Resources;
+    using CType = System.Type;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -91,9 +91,9 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The return signature.</returns>
-        public static implicit operator Result(Type type)
+        public static implicit operator Result(CType type)
         {
-            Guard.Against.Conversion<Type, Result>(type);
+            Guard.Against.Conversion<CType, Result>(type);
 
             return new Result { Type = type };
         }

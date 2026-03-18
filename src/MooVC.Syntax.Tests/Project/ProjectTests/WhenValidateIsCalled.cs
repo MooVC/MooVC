@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static MooVC.Syntax.Resource.Item;
 
 public sealed class WhenValidateIsCalled
 {
@@ -59,7 +60,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenUndefinedResourceThenValidationErrorReturned()
     {
         // Arrange
-        Project subject = ProjectTestsData.Create(resource: Item.Undefined);
+        Project subject = ProjectTestsData.Create(resource: Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

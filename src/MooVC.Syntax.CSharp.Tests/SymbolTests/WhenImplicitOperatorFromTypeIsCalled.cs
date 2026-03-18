@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.SymbolTests;
 
 using System.Text;
+using Type = System.Type;
 
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {

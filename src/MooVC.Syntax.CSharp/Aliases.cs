@@ -3,13 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Kind = System.Type;
 
     /// <summary>
     /// Provides mappings between CLR primitive types and their C# keyword aliases.
     /// </summary>
     internal static class Aliases
     {
-        private static readonly Dictionary<Type, string> aliases = new Dictionary<Type, string>
+        private static readonly Dictionary<Kind, string> _aliases = new Dictionary<Kind, string>
         {
             { typeof(bool), "bool" },
             { typeof(byte), "byte" },
@@ -34,9 +35,9 @@
         /// <param name="type">The CLR type to resolve.</param>
         /// <param name="alias">When this method returns, contains the C# alias if found.</param>
         /// <returns><see langword="true"/> if an alias exists; otherwise, <see langword="false"/>.</returns>
-        public static bool TryGet(Type type, out string alias)
+        public static bool TryGet(Kind type, out string alias)
         {
-            return aliases.TryGetValue(type, out alias);
+            return _aliases.TryGetValue(type, out alias);
         }
 
         /// <summary>
@@ -46,7 +47,7 @@
         /// <returns><see langword="true"/> if the name is a C# alias; otherwise, <see langword="false"/>.</returns>
         public static bool IsSystem(string type)
         {
-            return aliases.Values.Contains(type, StringComparer.OrdinalIgnoreCase);
+            return _aliases.Values.Contains(type, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace MooVC.Syntax.SolutionTests;
+﻿namespace MooVC.Syntax.Solution.SolutionTests;
 
 using System;
-using ProjectReference = Attributes.Solution.Project;
 
 public sealed class WhenWithProjectsIsCalled
 {
@@ -9,13 +8,13 @@ public sealed class WhenWithProjectsIsCalled
     public async Task GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange
-        ProjectReference existing = SolutionTestsData.CreateProject();
+        Project existing = SolutionTestsData.CreateProject();
 
-        var additional = new ProjectReference
+        var additional = new Project
         {
             Id = Guid.Parse("9D9B238E-46E7-4B65-944F-3FC5A25E85B1"),
-            DisplayName = new ProjectReference.Name("OtherName"),
-            Path = new ProjectReference.RelativePath("src/Other.csproj"),
+            DisplayName = new Project.Name("OtherName"),
+            Path = new Project.RelativePath("src/Other.csproj"),
             Type = Snippet.From("OtherType"),
         };
 

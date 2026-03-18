@@ -6,7 +6,6 @@ namespace MooVC.Syntax.CSharp
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.CSharp.Concepts;
     using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;

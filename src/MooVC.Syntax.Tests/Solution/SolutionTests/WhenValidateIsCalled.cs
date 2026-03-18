@@ -1,8 +1,7 @@
-﻿namespace MooVC.Syntax.SolutionTests;
+﻿namespace MooVC.Syntax.Solution.SolutionTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using ProjectReference = Attributes.Solution.Project;
 
 public sealed class WhenValidateIsCalled
 {
@@ -93,7 +92,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenUndefinedProjectThenValidationErrorReturned()
     {
         // Arrange
-        Solution subject = SolutionTestsData.Create(project: ProjectReference.Undefined);
+        Solution subject = SolutionTestsData.Create(project: Project.Undefined);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

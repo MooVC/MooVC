@@ -12,6 +12,7 @@
     using Valuify;
     using static MooVC.Syntax.CSharp.Symbol_Resources;
     using Ignore = Valuify.IgnoreAttribute;
+    using Kind = System.Type;
 
     /// <summary>
     /// Represents a C# syntax element symbol.
@@ -95,9 +96,9 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The symbol.</returns>
-        public static implicit operator Symbol(Type type)
+        public static implicit operator Symbol(Kind type)
         {
-            Guard.Against.Conversion<Type, Symbol>(type);
+            Guard.Against.Conversion<Kind, Symbol>(type);
 
             return new Symbol()
                 .From(type)

@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.ConstructorTests;
 
-using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.ParameterTests;
 
 public sealed class WhenToSnippetIsCalled

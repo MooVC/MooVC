@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Resource = Resource;
 
 public sealed class WhenValidateIsCalled
 {

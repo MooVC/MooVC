@@ -9,6 +9,7 @@
     using Monify;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Symbol_Resources;
+    using Kind = System.Type;
 
     public partial class Symbol
     {
@@ -67,9 +68,9 @@
             /// </summary>
             /// <param name="type">The type.</param>
             /// <returns>The moniker.</returns>
-            public static implicit operator Moniker(Type type)
+            public static implicit operator Moniker(Kind type)
             {
-                Guard.Against.Conversion<Type, Moniker>(type);
+                Guard.Against.Conversion<Kind, Moniker>(type);
 
                 if (Aliases.TryGet(type, out string alias))
                 {

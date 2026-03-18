@@ -1,8 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.ConstructorExtensionsTests;
 
 using System.Collections.Immutable;
-using MooVC.Syntax.CSharp.Concepts;
-using MooVC.Syntax.CSharp.Operators;
+using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.ParameterTests;
 
 public sealed class WhenToSnippetIsCalled
