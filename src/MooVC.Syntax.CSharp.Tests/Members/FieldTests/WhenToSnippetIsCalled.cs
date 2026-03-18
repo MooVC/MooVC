@@ -14,9 +14,10 @@ public sealed class WhenToSnippetIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

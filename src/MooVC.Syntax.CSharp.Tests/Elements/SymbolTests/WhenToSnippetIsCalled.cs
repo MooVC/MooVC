@@ -12,9 +12,10 @@ public sealed class WhenToSnippetIsCalled
         Symbol.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
@@ -24,7 +25,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
 
-        Symbol.Options options = new Symbol.Options()
+        Symbol.Options options = Symbol.Options.Default
             .WithQualification(Symbol.Qualification.Full);
 
         // Act
@@ -40,7 +41,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
 
-        Symbol.Options options = new Symbol.Options()
+        Symbol.Options options = Symbol.Options.Default
             .WithQualification(Symbol.Qualification.Global);
 
         // Act

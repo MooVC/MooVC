@@ -14,7 +14,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Project.RelativePath subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 }

@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         TargetTask.Options subject = Value;
 
         // Assert
-        _ = await Assert.That((subject == Value)).IsTrue();
+        _ = await Assert.That(subject == Value).IsTrue();
         _ = await Assert.That(subject.Equals(Value)).IsTrue();
     }
 

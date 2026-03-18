@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         File subject = value;
 
         // Asserts
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 }

@@ -15,9 +15,10 @@ public sealed class WhenToSnippetIsCalled
         Type? type = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(Type.Options.Default, type!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.ToSnippet(Type.Options.Default, type!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
@@ -30,9 +31,10 @@ public sealed class WhenToSnippetIsCalled
         Type.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!, type)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!, type);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

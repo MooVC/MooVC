@@ -58,7 +58,7 @@ public sealed class WhenCombineIsCalled
         string separator = Separator;
 
         // Act
-        string result = separator.Combine([]);
+        string result = separator.Combine();
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(string.Empty);

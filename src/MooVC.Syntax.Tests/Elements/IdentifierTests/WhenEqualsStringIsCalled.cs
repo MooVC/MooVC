@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Elements.IdentifierTests;
 
-
 public sealed class WhenEqualsStringIsCalled
 {
     private const string Same = "Alpha";

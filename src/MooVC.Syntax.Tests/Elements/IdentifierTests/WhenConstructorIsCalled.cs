@@ -61,7 +61,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(first).IsEqualTo(second);
-        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first.GetHashCode()).IsEqualTo(second.GetHashCode());
     }
 
@@ -78,6 +78,6 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(first.Equals(second)).IsFalse();
-        _ = await Assert.That((first != second)).IsTrue();
+        _ = await Assert.That(first != second).IsTrue();
     }
 }
