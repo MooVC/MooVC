@@ -73,7 +73,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -91,7 +91,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -109,7 +109,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -127,7 +127,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -145,7 +145,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -168,7 +168,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }

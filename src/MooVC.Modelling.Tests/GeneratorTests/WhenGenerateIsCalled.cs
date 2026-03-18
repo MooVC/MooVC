@@ -34,7 +34,7 @@ public sealed class WhenGenerateIsCalled
         IReadOnlyList<File> results = await Materialize(generator.Generate(model, CancellationToken.None));
 
         // Assert
-        _ = await Assert.That(results.Count).IsEqualTo(1);
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0]).IsEqualTo(expectedFile);
         _ = navigator.Received(1).Navigate<File>(model, Arg.Any<CancellationToken>());
     }
