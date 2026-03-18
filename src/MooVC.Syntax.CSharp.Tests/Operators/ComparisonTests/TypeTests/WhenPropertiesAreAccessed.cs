@@ -34,14 +34,14 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(isEquality).IsEqualTo(expectation.IsEquality);
-        await Assert.That(isGreaterThan).IsEqualTo(expectation.IsGreaterThan);
-        await Assert.That(isGreaterThanOrEqual).IsEqualTo(expectation.IsGreaterThanOrEqual);
-        await Assert.That(isInequality).IsEqualTo(expectation.IsInequality);
-        await Assert.That(isLessThan).IsEqualTo(expectation.IsLessThan);
-        await Assert.That(isLessThanOrEqual).IsEqualTo(expectation.IsLessThanOrEqual);
-        await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
-        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
+        _ = await Assert.That(isEquality).IsEqualTo(expectation.IsEquality);
+        _ = await Assert.That(isGreaterThan).IsEqualTo(expectation.IsGreaterThan);
+        _ = await Assert.That(isGreaterThanOrEqual).IsEqualTo(expectation.IsGreaterThanOrEqual);
+        _ = await Assert.That(isInequality).IsEqualTo(expectation.IsInequality);
+        _ = await Assert.That(isLessThan).IsEqualTo(expectation.IsLessThan);
+        _ = await Assert.That(isLessThanOrEqual).IsEqualTo(expectation.IsLessThanOrEqual);
+        _ = await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record ComparisonTypeExpectation(

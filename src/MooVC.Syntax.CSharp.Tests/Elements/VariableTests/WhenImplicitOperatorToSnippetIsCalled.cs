@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => variable;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -31,6 +31,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Snippet.From(expected));
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(expected));
     }
 }

@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
@@ -32,7 +32,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Empty);
+        _ = await Assert.That(result).IsEqualTo(Empty);
     }
 
     [Test]
@@ -45,7 +45,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Space);
+        _ = await Assert.That(result).IsEqualTo(Space);
     }
 
     [Test]
@@ -58,7 +58,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Alpha);
+        _ = await Assert.That(result).IsEqualTo(Alpha);
     }
 
     [Test]
@@ -71,7 +71,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Unicode);
+        _ = await Assert.That(result).IsEqualTo(Unicode);
     }
 
     [Test]
@@ -84,7 +84,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(WithUnderscore);
+        _ = await Assert.That(result).IsEqualTo(WithUnderscore);
     }
 
     [Test]
@@ -97,7 +97,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(WithPrefix);
+        _ = await Assert.That(result).IsEqualTo(WithPrefix);
     }
 
     [Test]
@@ -111,7 +111,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -126,7 +126,7 @@ public sealed class WhenToStringIsCalled
         string rightString = right.ToString();
 
         // Assert
-        await Assert.That(leftString).IsNotEqualTo(rightString);
+        _ = await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
@@ -140,6 +140,6 @@ public sealed class WhenToStringIsCalled
         string second = subject.ToString();
 
         // Assert
-        await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

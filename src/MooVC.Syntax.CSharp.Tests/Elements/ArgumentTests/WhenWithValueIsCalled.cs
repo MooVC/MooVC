@@ -17,8 +17,8 @@ public sealed class WhenWithValueIsCalled
         Argument result = argument.WithValue(value);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, argument)).IsFalse();
-        await Assert.That(result.Value).IsEqualTo(value);
-        await Assert.That(argument.Value).IsNotEqualTo(value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(argument);
+        _ = await Assert.That(result.Value).IsEqualTo(value);
+        _ = await Assert.That(argument.Value).IsNotEqualTo(value);
     }
 }

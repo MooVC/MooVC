@@ -15,10 +15,10 @@ public sealed class WhenFromIsCalled
         Symbol result = original.From(qualifier);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Qualifier).IsEqualTo(qualifier);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
-        await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(qualifier);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
+        _ = await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
     }
 }

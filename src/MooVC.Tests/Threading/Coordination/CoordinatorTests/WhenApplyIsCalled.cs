@@ -28,7 +28,7 @@ public sealed class WhenApplyIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply("N/A", CancellationToken.None);
 
         // Assert
-        await Assert.That(act).Throws<ObjectDisposedException>();
+        _ = await Assert.That(act).Throws<ObjectDisposedException>();
     }
 
     [Test]
@@ -69,7 +69,7 @@ public sealed class WhenApplyIsCalled
         await Task.WhenAll(tasks);
 
         // Assert
-        await Assert.That(counter).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(counter).IsEqualTo(ExpectedCount);
     }
 
     [Test]
@@ -95,7 +95,7 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
 
         // Assert
-        await Assert.That(act).Throws<TimeoutException>();
+        _ = await Assert.That(act).Throws<TimeoutException>();
     }
 
     [Test]

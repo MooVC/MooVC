@@ -13,8 +13,8 @@ public sealed class WhenWithClosingIsCalled
         Snippet.BoundaryOptions result = options.WithClosing(value);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, options)).IsFalse();
-        await Assert.That(result.Closing).IsEqualTo(value);
-        await Assert.That(options.Closing).IsNotEqualTo(value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result.Closing).IsEqualTo(value);
+        _ = await Assert.That(options.Closing).IsNotEqualTo(value);
     }
 }

@@ -20,7 +20,7 @@ public sealed class WhenToSnippetIsCalled
             () => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -43,7 +43,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("value: 42");
+        _ = await Assert.That(result).IsEqualTo("value: 42");
     }
 
     [Test]
@@ -67,6 +67,6 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("value: ref 42");
+        _ = await Assert.That(result).IsEqualTo("value: ref 42");
     }
 }

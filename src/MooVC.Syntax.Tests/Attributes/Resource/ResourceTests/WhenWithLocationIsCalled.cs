@@ -15,10 +15,10 @@ public sealed class WhenWithLocationIsCalled
         Resource result = original.WithLocation(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.CustomToolNamespace).IsEqualTo(original.CustomToolNamespace);
-        await Assert.That(result.Designer).IsEqualTo(original.Designer);
-        await Assert.That(result.Location).IsEqualTo(updated);
-        await Assert.That(result.Visibility).IsEqualTo(original.Visibility);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.CustomToolNamespace).IsEqualTo(original.CustomToolNamespace);
+        _ = await Assert.That(result.Designer).IsEqualTo(original.Designer);
+        _ = await Assert.That(result.Location).IsEqualTo(updated);
+        _ = await Assert.That(result.Visibility).IsEqualTo(original.Visibility);
     }
 }

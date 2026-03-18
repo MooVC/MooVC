@@ -15,13 +15,13 @@ public sealed class WhenWithDefaultIsCalled
         Property result = original.WithDefault(defaultValue);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
-        await Assert.That(result.Default).IsEqualTo(defaultValue);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Default).IsEqualTo(defaultValue);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        await Assert.That(original.Default).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(original.Default).IsEqualTo(Snippet.Empty);
     }
 }

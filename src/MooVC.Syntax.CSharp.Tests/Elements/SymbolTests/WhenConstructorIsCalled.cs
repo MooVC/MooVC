@@ -11,9 +11,9 @@ public sealed class WhenConstructorIsCalled
         var subject = new Symbol();
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(Symbol.Moniker.Unnamed);
-        await Assert.That(subject.Arguments).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Symbol.Moniker.Unnamed);
+        _ = await Assert.That(subject.Arguments).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -30,8 +30,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(SymbolTestsData.DefaultName));
-        await Assert.That(subject.Arguments).IsEqualTo(new[] { argument });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(SymbolTestsData.DefaultName));
+        _ = await Assert.That(subject.Arguments).IsEqualTo(new[] { argument });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

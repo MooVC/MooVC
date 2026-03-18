@@ -15,8 +15,8 @@ public sealed class WhenNamedIsCalled
         Header result = original.Named(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(updated);
-        await Assert.That(result.Value).IsEqualTo(original.Value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(updated);
+        _ = await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

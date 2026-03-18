@@ -16,11 +16,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Event();
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(Event.Methods.Default);
-        await Assert.That(subject.Handler).IsEqualTo(Symbol.Undefined);
-        await Assert.That(subject.IsUndefind).IsTrue();
-        await Assert.That(subject.Name).IsEqualTo(Unnamed);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(Event.Methods.Default);
+        _ = await Assert.That(subject.Handler).IsEqualTo(Symbol.Undefined);
+        _ = await Assert.That(subject.IsUndefind).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Unnamed);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
@@ -42,10 +42,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
-        await Assert.That(subject.Handler).IsEqualTo(new Symbol { Name = Handler });
-        await Assert.That(subject.IsUndefind).IsFalse();
-        await Assert.That(subject.Name).IsEqualTo(new Name(Name));
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        _ = await Assert.That(subject.Handler).IsEqualTo(new Symbol { Name = Handler });
+        _ = await Assert.That(subject.IsUndefind).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(Name));
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

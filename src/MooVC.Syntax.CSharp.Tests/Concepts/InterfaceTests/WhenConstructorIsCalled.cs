@@ -16,16 +16,16 @@ public sealed class WhenConstructorIsCalled
         var subject = new Interface();
 
         // Assert
-        await Assert.That(subject.Attributes).IsEqualTo([]);
-        await Assert.That(subject.Events).IsEqualTo([]);
-        await Assert.That(subject.Indexers).IsEqualTo([]);
-        await Assert.That(subject.IsPartial).IsTrue();
-        await Assert.That(subject.Methods).IsEqualTo([]);
-        await Assert.That(subject.Declaration).IsEqualTo(Declaration.Unspecified);
-        await Assert.That(subject.Operators).IsEqualTo(new Operators());
-        await Assert.That(subject.Properties).IsEqualTo([]);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Attributes).IsEmpty();
+        _ = await Assert.That(subject.Events).IsEmpty();
+        _ = await Assert.That(subject.Indexers).IsEmpty();
+        _ = await Assert.That(subject.IsPartial).IsTrue();
+        _ = await Assert.That(subject.Methods).IsEmpty();
+        _ = await Assert.That(subject.Declaration).IsEqualTo(Declaration.Unspecified);
+        _ = await Assert.That(subject.Operators).IsEqualTo(new Operators());
+        _ = await Assert.That(subject.Properties).IsEmpty();
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -51,15 +51,15 @@ public sealed class WhenConstructorIsCalled
             scope: Scope.Internal);
 
         // Assert
-        await Assert.That(subject.Attributes).IsEqualTo(new[] { attribute });
-        await Assert.That(subject.Events).IsEqualTo(new[] { @event });
-        await Assert.That(subject.Indexers).IsEqualTo(new[] { indexer });
-        await Assert.That(subject.IsPartial).IsTrue();
-        await Assert.That(subject.Methods).IsEqualTo(new[] { method });
-        await Assert.That(subject.Declaration).IsEqualTo(new Declaration { Name = InterfaceTestsData.DefaultName });
-        await Assert.That(subject.Operators.Conversions).IsNotEmpty();
-        await Assert.That(subject.Properties).IsEqualTo(new[] { property });
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Attributes).IsEqualTo(new[] { attribute });
+        _ = await Assert.That(subject.Events).IsEqualTo(new[] { @event });
+        _ = await Assert.That(subject.Indexers).IsEqualTo(new[] { indexer });
+        _ = await Assert.That(subject.IsPartial).IsTrue();
+        _ = await Assert.That(subject.Methods).IsEqualTo(new[] { method });
+        _ = await Assert.That(subject.Declaration).IsEqualTo(new Declaration { Name = InterfaceTestsData.DefaultName });
+        _ = await Assert.That(subject.Operators.Conversions).IsNotEmpty();
+        _ = await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

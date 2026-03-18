@@ -19,6 +19,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(InterfaceName);
+        _ = await Assert.That(result).IsEqualTo(InterfaceName);
     }
 }

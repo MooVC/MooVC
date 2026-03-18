@@ -12,8 +12,8 @@ public sealed class WhenWithModifierIsCalled
         Argument result = argument.WithModifier(Argument.Mode.In);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, argument)).IsFalse();
-        await Assert.That(result.Modifier).IsEqualTo(Argument.Mode.In);
-        await Assert.That(argument.Modifier).IsNotEqualTo(Argument.Mode.In);
+        _ = await Assert.That(result).IsNotSameReferenceAs(argument);
+        _ = await Assert.That(result.Modifier).IsEqualTo(Argument.Mode.In);
+        _ = await Assert.That(argument.Modifier).IsNotEqualTo(Argument.Mode.In);
     }
 }

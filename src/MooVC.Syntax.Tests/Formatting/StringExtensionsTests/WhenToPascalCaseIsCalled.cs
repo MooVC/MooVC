@@ -17,7 +17,7 @@ public sealed class WhenToPascalCaseIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenToPascalCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -46,7 +46,7 @@ public sealed class WhenToPascalCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -64,7 +64,7 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -79,7 +79,7 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -103,7 +103,7 @@ public sealed class WhenToPascalCaseIsCalled
         }
 
         // Assert
-        await Assert.That(result).IsEqualTo("Istanbul");
+        _ = await Assert.That(result).IsEqualTo("Istanbul");
     }
 
     [Test]
@@ -124,7 +124,7 @@ public sealed class WhenToPascalCaseIsCalled
             string second = first.ToPascalCase();
 
             // Assert
-            await Assert.That(second).IsEqualTo(first);
+            _ = await Assert.That(second).IsEqualTo(first);
         }
     }
 
@@ -138,7 +138,7 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("Hello World");
+        _ = await Assert.That(result).IsEqualTo("Hello World");
     }
 
     [Test]
@@ -151,7 +151,7 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -164,7 +164,7 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -177,9 +177,9 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result[0]).IsEqualTo('A');
-        await Assert.That(result.Length).IsEqualTo(value.Length);
-        await Assert.That(result.Skip(1).All(character => character == 'a')).IsTrue();
+        _ = await Assert.That(result[0]).IsEqualTo('A');
+        _ = await Assert.That(result.Length).IsEqualTo(value.Length);
+        _ = await Assert.That(result.Skip(1).All(character => character == 'a')).IsTrue();
     }
 
     [Test]
@@ -192,6 +192,6 @@ public sealed class WhenToPascalCaseIsCalled
         string result = value.ToPascalCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("X.Foo");
+        _ = await Assert.That(result).IsEqualTo("X.Foo");
     }
 }

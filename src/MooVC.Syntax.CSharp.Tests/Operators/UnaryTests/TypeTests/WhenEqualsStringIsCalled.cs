@@ -15,7 +15,7 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(null as string);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Value);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -41,6 +41,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Other);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -48,7 +48,7 @@ public sealed class WhenToSnippetIsCalled
         var actual = content.ToSnippet(_options);
 
         // Assert
-        await Assert.That(actual.ToString()).IsEqualTo(expected);
+        _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
     }
 
     [Test]
@@ -90,6 +90,6 @@ public sealed class WhenToSnippetIsCalled
         var actual = content.ToSnippet(_options);
 
         // Assert
-        await Assert.That(actual.ToString()).IsEqualTo(expected);
+        _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
     }
 }

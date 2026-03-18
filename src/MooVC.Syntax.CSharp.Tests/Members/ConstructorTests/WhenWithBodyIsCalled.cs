@@ -15,12 +15,12 @@ public sealed class WhenWithBodyIsCalled
         Constructor result = original.WithBody(body);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(body);
-        await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
-        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(body);
+        _ = await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        await Assert.That(original.Body).IsEqualTo(Snippet.From("Initialize();"));
+        _ = await Assert.That(original.Body).IsEqualTo(Snippet.From("Initialize();"));
     }
 }

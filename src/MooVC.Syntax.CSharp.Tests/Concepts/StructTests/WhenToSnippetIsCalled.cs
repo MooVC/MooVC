@@ -23,7 +23,7 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -68,8 +68,8 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        await Assert.That(result).Contains($"{Struct.Kind.ReadOnly} partial struct {StructName}");
-        await Assert.That(result).Contains(ParameterName);
-        await Assert.That(result).Contains("where");
+        _ = await Assert.That(result).Contains($"{Struct.Kind.ReadOnly} partial struct {StructName}");
+        _ = await Assert.That(result).Contains(ParameterName);
+        _ = await Assert.That(result).Contains("where");
     }
 }

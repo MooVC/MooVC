@@ -14,7 +14,7 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -27,6 +27,6 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        await Assert.That(result).Contains($"{StaticKeyword} class");
+        _ = await Assert.That(result).Contains($"{StaticKeyword} class");
     }
 }

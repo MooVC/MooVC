@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -36,9 +36,9 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).Contains("internal ref partial struct");
-        await Assert.That(result).Contains(StructTestsData.DefaultName);
-        await Assert.That(result).Contains("(");
-        await Assert.That(result).Contains(")");
+        _ = await Assert.That(result).Contains("internal ref partial struct");
+        _ = await Assert.That(result).Contains(StructTestsData.DefaultName);
+        _ = await Assert.That(result).Contains("(");
+        _ = await Assert.That(result).Contains(")");
     }
 }

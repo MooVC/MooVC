@@ -12,13 +12,13 @@ public sealed class WhenConstructorIsCalled
         var subject = new Solution();
 
         // Assert
-        await Assert.That(subject.Configurations).IsEqualTo(Configurations.Default);
-        await Assert.That(subject.Files).IsEmpty();
-        await Assert.That(subject.Folders).IsEmpty();
-        await Assert.That(subject.Items).IsEmpty();
-        await Assert.That(subject.Projects).IsEmpty();
-        await Assert.That(subject.Properties).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Configurations).IsEqualTo(Configurations.Default);
+        _ = await Assert.That(subject.Files).IsEmpty();
+        _ = await Assert.That(subject.Folders).IsEmpty();
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.Projects).IsEmpty();
+        _ = await Assert.That(subject.Properties).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -44,12 +44,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Configurations).IsEqualTo(configurations);
-        await Assert.That(subject.Files).IsEqualTo(new[] { file });
-        await Assert.That(subject.Folders).IsEqualTo(new[] { folder });
-        await Assert.That(subject.Items).IsEqualTo(new[] { item });
-        await Assert.That(subject.Projects).IsEqualTo(new[] { project });
-        await Assert.That(subject.Properties).IsEqualTo(new[] { property });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Configurations).IsEqualTo(configurations);
+        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
+        _ = await Assert.That(subject.Folders).IsEqualTo(new[] { folder });
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
+        _ = await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

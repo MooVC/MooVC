@@ -16,7 +16,7 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
         ImmutableArray<string> result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo([]);
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -29,6 +29,6 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
         ImmutableArray<string> result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEqualTo(values);
     }
 }

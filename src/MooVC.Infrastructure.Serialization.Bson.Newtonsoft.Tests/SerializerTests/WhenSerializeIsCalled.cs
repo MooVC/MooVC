@@ -16,7 +16,7 @@ public sealed class WhenSerializeIsCalled
 
         // Assert
         JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>();
-        await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
+        _ = await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
     }
 
     [Test]
@@ -32,6 +32,6 @@ public sealed class WhenSerializeIsCalled
 
         // Assert
         JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>();
-        await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
+        _ = await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
     }
 }

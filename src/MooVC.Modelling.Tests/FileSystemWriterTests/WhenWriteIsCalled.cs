@@ -30,11 +30,11 @@ public sealed class WhenWriteIsCalled
 
         // Assert
         bool isFound = fileSystem.TryGetFileContent(expectedPath, out byte[]? fileContent);
-        await Assert.That(isFound).IsTrue();
+        _ = await Assert.That(isFound).IsTrue();
         _ = await Assert.That(fileContent).IsNotNull();
-        await Assert.That(Encoding.UTF8.GetString(fileContent)).IsEqualTo(Content);
+        _ = await Assert.That(Encoding.UTF8.GetString(fileContent)).IsEqualTo(Content);
         _ = await Assert.That(expectedDirectory).IsNotNull();
-        await Assert.That(fileSystem.CreatedDirectories).Contains(expectedDirectory);
+        _ = await Assert.That(fileSystem.CreatedDirectories).Contains(expectedDirectory);
     }
 
     private static IOptionsSnapshot<FileSystemWriter.Options> CreateOptionsSnapshot()

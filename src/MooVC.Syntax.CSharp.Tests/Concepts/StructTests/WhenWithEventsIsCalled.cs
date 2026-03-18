@@ -16,8 +16,8 @@ public sealed class WhenWithEventsIsCalled
         Struct result = original.WithEvents(@event);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Events).Contains(@event);
-        await Assert.That(original.Events).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Events).Contains(@event);
+        _ = await Assert.That(original.Events).IsEmpty();
     }
 }

@@ -19,7 +19,7 @@ public sealed class WhenValidateIsCalled
         IEnumerable<ValidationResult> results = subject.Validate(validationContext);
 
         // Assert
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -38,6 +38,6 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Type.Declaration)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Type.Declaration)));
     }
 }

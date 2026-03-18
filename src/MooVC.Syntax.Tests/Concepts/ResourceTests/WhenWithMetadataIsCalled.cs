@@ -18,8 +18,8 @@ public sealed class WhenWithMetadataIsCalled
         Resource result = original.WithMetadata(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
-        await Assert.That(result.Headers).IsEqualTo(original.Headers);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
+        _ = await Assert.That(result.Headers).IsEqualTo(original.Headers);
     }
 }

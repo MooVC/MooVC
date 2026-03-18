@@ -26,9 +26,9 @@ public sealed class WhenWithConstraintsIsCalled
         Parameter result = original.WithConstraints(additionalConstraint);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Constraints).IsEqualTo(new[] { originalConstraint, additionalConstraint });
-        await Assert.That(original.Constraints).IsEqualTo(new[] { originalConstraint });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Constraints).IsEqualTo(new[] { originalConstraint, additionalConstraint });
+        _ = await Assert.That(original.Constraints).IsEqualTo(new[] { originalConstraint });
     }
 }

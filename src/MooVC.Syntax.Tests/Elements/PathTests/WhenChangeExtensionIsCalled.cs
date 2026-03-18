@@ -12,7 +12,7 @@ public sealed class WhenChangeExtensionIsCalled
         Path result = subject.ChangeExtension(PathTestsData.ChangedExtension);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, subject)).IsFalse();
-        await Assert.That(result.ToString()).IsEqualTo(PathTestsData.DefaultChangedExtensionPath);
+        _ = await Assert.That(result).IsNotSameReferenceAs(subject);
+        _ = await Assert.That(result.ToString()).IsEqualTo(PathTestsData.DefaultChangedExtensionPath);
     }
 }

@@ -12,8 +12,8 @@ public sealed class WhenWithIsPartialIsCalled
         Struct result = original.IsPartial(true);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.IsPartial).IsTrue();
-        await Assert.That(original.IsPartial).IsFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.IsPartial).IsTrue();
+        _ = await Assert.That(original.IsPartial).IsFalse();
     }
 }

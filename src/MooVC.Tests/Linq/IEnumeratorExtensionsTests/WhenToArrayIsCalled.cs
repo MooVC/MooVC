@@ -19,7 +19,7 @@ public sealed class WhenToArrayIsCalled
         object[] actual = enumerator.ToArray();
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -48,7 +48,7 @@ public sealed class WhenToArrayIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
     }
 
     [Test]
@@ -62,7 +62,7 @@ public sealed class WhenToArrayIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
     }
 
     [Test]
@@ -77,7 +77,7 @@ public sealed class WhenToArrayIsCalled
         object[] actual = enumerator.ToArray();
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
@@ -92,6 +92,6 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Value);
+        _ = await Assert.That(result).IsEqualTo(Value);
     }
 
     [Test]
@@ -27,6 +27,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

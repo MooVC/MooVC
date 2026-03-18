@@ -38,16 +38,16 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(isComplement).IsEqualTo(expectation.IsComplement);
-        await Assert.That(isDecrement).IsEqualTo(expectation.IsDecrement);
-        await Assert.That(isFalse).IsEqualTo(expectation.IsFalse);
-        await Assert.That(isIncrement).IsEqualTo(expectation.IsIncrement);
-        await Assert.That(isMinus).IsEqualTo(expectation.IsMinus);
-        await Assert.That(isNot).IsEqualTo(expectation.IsNot);
-        await Assert.That(isPlus).IsEqualTo(expectation.IsPlus);
-        await Assert.That(isTrue).IsEqualTo(expectation.IsTrue);
-        await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
-        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
+        _ = await Assert.That(isComplement).IsEqualTo(expectation.IsComplement);
+        _ = await Assert.That(isDecrement).IsEqualTo(expectation.IsDecrement);
+        _ = await Assert.That(isFalse).IsEqualTo(expectation.IsFalse);
+        _ = await Assert.That(isIncrement).IsEqualTo(expectation.IsIncrement);
+        _ = await Assert.That(isMinus).IsEqualTo(expectation.IsMinus);
+        _ = await Assert.That(isNot).IsEqualTo(expectation.IsNot);
+        _ = await Assert.That(isPlus).IsEqualTo(expectation.IsPlus);
+        _ = await Assert.That(isTrue).IsEqualTo(expectation.IsTrue);
+        _ = await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record UnaryTypeExpectation(

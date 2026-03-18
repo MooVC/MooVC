@@ -17,9 +17,9 @@ public sealed class WhenWithOutputsIsCalled
         Target result = original.WithOutputs(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Outputs).IsEqualTo(updated);
-        await Assert.That(result.Returns).IsEqualTo(original.Returns);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Outputs).IsEqualTo(updated);
+        _ = await Assert.That(result.Returns).IsEqualTo(original.Returns);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

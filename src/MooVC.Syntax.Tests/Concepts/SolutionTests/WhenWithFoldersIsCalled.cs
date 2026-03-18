@@ -22,8 +22,8 @@ public sealed class WhenWithFoldersIsCalled
         Solution result = original.WithFolders(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Folders).IsEqualTo(original.Folders.Concat([additional]));
-        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Folders).IsEqualTo(original.Folders.Concat([additional]));
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

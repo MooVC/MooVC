@@ -13,8 +13,8 @@ public sealed class WhenPropertiesAreAccessed
         bool isDeclaration = subject.IsDeclaration;
 
         // Assert
-        await Assert.That(isCall).IsTrue();
-        await Assert.That(isDeclaration).IsFalse();
+        _ = await Assert.That(isCall).IsTrue();
+        _ = await Assert.That(isDeclaration).IsFalse();
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenPropertiesAreAccessed
         bool isDeclaration = subject.IsDeclaration;
 
         // Assert
-        await Assert.That(isCall).IsFalse();
-        await Assert.That(isDeclaration).IsTrue();
+        _ = await Assert.That(isCall).IsFalse();
+        _ = await Assert.That(isDeclaration).IsTrue();
     }
 }

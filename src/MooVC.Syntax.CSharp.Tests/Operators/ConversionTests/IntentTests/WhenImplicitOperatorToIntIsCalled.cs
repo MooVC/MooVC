@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToIntIsCalled
         int value = intent;
 
         // Assert
-        await Assert.That(value).IsEqualTo(1);
+        _ = await Assert.That(value).IsEqualTo(1);
     }
 }

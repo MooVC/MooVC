@@ -15,7 +15,7 @@ public sealed class WhenFromIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = Snippet.From(options!, value)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenFromIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = Snippet.From(values!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
     [Test]
@@ -38,8 +38,8 @@ public sealed class WhenFromIsCalled
         var result = Snippet.From(string.Empty);
 
         // Assert
-        await Assert.That(result).IsEqualTo(Snippet.Empty);
-        await Assert.That(result.IsEmpty).IsTrue();
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result.IsEmpty).IsTrue();
     }
 
     [Test]
@@ -55,6 +55,6 @@ public sealed class WhenFromIsCalled
         ImmutableArray<string> converted = result;
 
         // Assert
-        await Assert.That(converted).IsEqualTo([first, second]);
+        _ = await Assert.That(converted).IsEqualTo([first, second]);
     }
 }

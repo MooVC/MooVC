@@ -13,12 +13,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Method();
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Name).IsEqualTo(Declaration.Unspecified);
-        await Assert.That(subject.Parameters).IsEqualTo([]);
-        await Assert.That(subject.Result).IsEqualTo(Result.Task);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Declaration.Unspecified);
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.Result).IsEqualTo(Result.Task);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
@@ -58,11 +58,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
-        await Assert.That(subject.Parameters).IsEqualTo(parameters);
-        await Assert.That(subject.Result).IsEqualTo(result);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
+        _ = await Assert.That(subject.Parameters).IsEqualTo(parameters);
+        _ = await Assert.That(subject.Result).IsEqualTo(result);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

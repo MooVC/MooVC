@@ -15,6 +15,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(path);
+        _ = await Assert.That(result).IsEqualTo(path);
     }
 }

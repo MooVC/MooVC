@@ -12,7 +12,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == 4);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(-1);
+        _ = await Assert.That(actualIndex).IsEqualTo(-1);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == target);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(expectedIndex);
+        _ = await Assert.That(actualIndex).IsEqualTo(expectedIndex);
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == target);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(expectedIndex);
+        _ = await Assert.That(actualIndex).IsEqualTo(expectedIndex);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenIndexOfIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(predicate));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(predicate));
     }
 
     [Test]
@@ -69,7 +69,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == 4);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(-1);
+        _ = await Assert.That(actualIndex).IsEqualTo(-1);
     }
 
     [Test]
@@ -82,7 +82,7 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(default!);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(-1);
+        _ = await Assert.That(actualIndex).IsEqualTo(-1);
     }
 
     [Test]
@@ -95,6 +95,6 @@ public sealed class WhenIndexOfIsCalled
         int actualIndex = enumeration.IndexOf(item => item == default);
 
         // Assert
-        await Assert.That(actualIndex).IsEqualTo(1);
+        _ = await Assert.That(actualIndex).IsEqualTo(1);
     }
 }

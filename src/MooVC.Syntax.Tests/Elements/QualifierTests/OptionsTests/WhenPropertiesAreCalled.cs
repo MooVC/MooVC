@@ -16,8 +16,8 @@ public sealed class WhenPropertiesAreCalled
         string text = subject.ToString();
 
         // Assert
-        await Assert.That(isBlock).IsEqualTo(expectedBlock);
-        await Assert.That(isFile).IsEqualTo(expectedFile);
-        await Assert.That(text).IsEqualTo(expectedText);
+        _ = await Assert.That(isBlock).IsEqualTo(expectedBlock);
+        _ = await Assert.That(isFile).IsEqualTo(expectedFile);
+        _ = await Assert.That(text).IsEqualTo(expectedText);
     }
 }

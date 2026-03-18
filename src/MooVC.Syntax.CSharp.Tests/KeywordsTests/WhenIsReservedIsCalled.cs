@@ -16,7 +16,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = value.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = keyword.IsReserved();
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = $"@{keyword}".IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -61,7 +61,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = keyword.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -77,7 +77,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = value.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -90,7 +90,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -105,7 +105,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -120,7 +120,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -135,7 +135,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -154,7 +154,7 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -173,6 +173,6 @@ public sealed class WhenIsReservedIsCalled
         bool result = builder.IsReserved();
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -16,8 +16,8 @@ public sealed class WhenWithIndexersIsCalled
         Struct result = original.WithIndexers(indexer);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Indexers).Contains(indexer);
-        await Assert.That(original.Indexers).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Indexers).Contains(indexer);
+        _ = await Assert.That(original.Indexers).IsEmpty();
     }
 }

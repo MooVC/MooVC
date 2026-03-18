@@ -11,11 +11,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Resource();
 
         // Assert
-        await Assert.That(subject.CustomToolNamespace).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Designer).IsEqualTo(Path.Empty);
-        await Assert.That(subject.Location).IsEqualTo(Path.Empty);
-        await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Internal);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.CustomToolNamespace).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Designer).IsEqualTo(Path.Empty);
+        _ = await Assert.That(subject.Location).IsEqualTo(Path.Empty);
+        _ = await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Internal);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -36,10 +36,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.CustomToolNamespace).IsEqualTo(customToolNamespace);
-        await Assert.That(subject.Designer).IsEqualTo(designer);
-        await Assert.That(subject.Location).IsEqualTo(location);
-        await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Public);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.CustomToolNamespace).IsEqualTo(customToolNamespace);
+        _ = await Assert.That(subject.Designer).IsEqualTo(designer);
+        _ = await Assert.That(subject.Location).IsEqualTo(location);
+        _ = await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Public);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

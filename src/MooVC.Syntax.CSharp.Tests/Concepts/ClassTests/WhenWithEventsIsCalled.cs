@@ -19,9 +19,9 @@ public sealed class WhenWithEventsIsCalled
         Class result = original.WithEvents(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Events).IsEqualTo(original.Events.Concat(additional));
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        await Assert.That(original.Events).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Events).IsEqualTo(original.Events.Concat(additional));
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(original.Events).IsEqualTo(existing);
     }
 }

@@ -15,9 +15,9 @@ public sealed class WhenWithTaskParameterIsCalled
         Output result = original.WithTaskParameter(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.TaskParameter).IsEqualTo(updated);
-        await Assert.That(result.ItemName).IsEqualTo(original.ItemName);
-        await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.TaskParameter).IsEqualTo(updated);
+        _ = await Assert.That(result.ItemName).IsEqualTo(original.ItemName);
+        _ = await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
     }
 }

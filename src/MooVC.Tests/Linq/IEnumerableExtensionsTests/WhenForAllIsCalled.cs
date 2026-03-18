@@ -26,7 +26,7 @@ public sealed class WhenForAllIsCalled
 
         // Assert
         AggregateException exception = await Assert.That(act).Throws<AggregateException>();
-        await Assert.That(exception.InnerExceptions.Count).IsEqualTo(range / mod);
+        _ = await Assert.That(exception.InnerExceptions.Count).IsEqualTo(range / mod);
     }
 
     [Test]
@@ -45,8 +45,8 @@ public sealed class WhenForAllIsCalled
         enumeration.ForAll(Action);
 
         // Assert
-        await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
-        await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
+        _ = await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
+        _ = await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
     }
 
     [Test]
@@ -61,7 +61,7 @@ public sealed class WhenForAllIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 
     [Test]
@@ -80,7 +80,7 @@ public sealed class WhenForAllIsCalled
         enumeration.ForAll(Action);
 
         // Assert
-        await Assert.That(wasInvoked).IsFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -94,7 +94,7 @@ public sealed class WhenForAllIsCalled
         Action act = () => enumeration.ForAll(action!);
 
         // Assert
-        await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
@@ -121,7 +121,7 @@ public sealed class WhenForAllIsCalled
 
         // Assert
         AggregateException exception = await Assert.That(act).Throws<AggregateException>();
-        await Assert.That(exception.InnerExceptions.Count).IsEqualTo(range / mod);
+        _ = await Assert.That(exception.InnerExceptions.Count).IsEqualTo(range / mod);
     }
 
     [Test]
@@ -142,8 +142,8 @@ public sealed class WhenForAllIsCalled
         await enumeration.ForAll(Operation);
 
         // Assert
-        await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
-        await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
+        _ = await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
+        _ = await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
     }
 
     [Test]
@@ -158,7 +158,7 @@ public sealed class WhenForAllIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(operation));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(operation));
     }
 
     [Test]
@@ -179,7 +179,7 @@ public sealed class WhenForAllIsCalled
         await enumeration.ForAll(Operation);
 
         // Assert
-        await Assert.That(wasInvoked).IsFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -192,6 +192,6 @@ public sealed class WhenForAllIsCalled
         Func<Task> act = async () => await enumeration.ForAll(default!);
 
         // Assert
-        await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 }

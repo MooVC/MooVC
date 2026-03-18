@@ -23,9 +23,9 @@ public sealed class WhenWithMetadataIsCalled
         Item result = original.WithMetadata(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
-        await Assert.That(result.Include).IsEqualTo(original.Include);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }
 }

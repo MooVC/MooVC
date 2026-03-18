@@ -20,7 +20,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -48,7 +48,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -62,7 +62,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -76,7 +76,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     private static Parameter Create(string name = DefaultName)

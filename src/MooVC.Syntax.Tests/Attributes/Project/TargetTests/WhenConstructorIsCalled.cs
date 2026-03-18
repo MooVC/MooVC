@@ -11,18 +11,18 @@ public sealed class WhenConstructorIsCalled
         var subject = new Target();
 
         // Assert
-        await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Inputs).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.KeepDuplicateOutputs).IsFalse();
-        await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        await Assert.That(subject.Outputs).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Returns).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Tasks).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Inputs).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.KeepDuplicateOutputs).IsFalse();
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Outputs).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Returns).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Tasks).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -48,17 +48,17 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultAfterTargets));
-        await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultBeforeTargets));
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTestsData.DefaultCondition));
-        await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultDependsOnTargets));
-        await Assert.That(subject.Inputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultInputs));
-        await Assert.That(subject.KeepDuplicateOutputs).IsTrue();
-        await Assert.That(subject.Label).IsEqualTo(Snippet.From(TargetTestsData.DefaultLabel));
-        await Assert.That(subject.Name).IsEqualTo(new Name(TargetTestsData.DefaultName));
-        await Assert.That(subject.Outputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultOutputs));
-        await Assert.That(subject.Returns).IsEqualTo(Snippet.From(TargetTestsData.DefaultReturns));
-        await Assert.That(subject.Tasks).IsEqualTo(new[] { task });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.AfterTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultAfterTargets));
+        _ = await Assert.That(subject.BeforeTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultBeforeTargets));
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTestsData.DefaultCondition));
+        _ = await Assert.That(subject.DependsOnTargets).IsEqualTo(Snippet.From(TargetTestsData.DefaultDependsOnTargets));
+        _ = await Assert.That(subject.Inputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultInputs));
+        _ = await Assert.That(subject.KeepDuplicateOutputs).IsTrue();
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.From(TargetTestsData.DefaultLabel));
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(TargetTestsData.DefaultName));
+        _ = await Assert.That(subject.Outputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultOutputs));
+        _ = await Assert.That(subject.Returns).IsEqualTo(Snippet.From(TargetTestsData.DefaultReturns));
+        _ = await Assert.That(subject.Tasks).IsEqualTo(new[] { task });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

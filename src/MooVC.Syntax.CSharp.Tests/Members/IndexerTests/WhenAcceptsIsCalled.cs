@@ -22,10 +22,10 @@ public sealed class WhenAcceptsIsCalled
         Indexer result = original.Accepts(parameter);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
-        await Assert.That(result.Parameter).IsEqualTo(parameter);
-        await Assert.That(result.Result).IsEqualTo(original.Result);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Parameter).IsEqualTo(parameter);
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

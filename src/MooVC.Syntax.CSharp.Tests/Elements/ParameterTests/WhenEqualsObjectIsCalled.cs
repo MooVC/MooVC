@@ -12,7 +12,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(default);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -26,7 +26,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -40,6 +40,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -15,8 +15,8 @@ public sealed class WhenWithBlockIsCalled
         Snippet.Options result = options.WithBlock(block);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, options)).IsFalse();
-        await Assert.That(result.Block).IsEqualTo(block);
-        await Assert.That(options.Block).IsNotEqualTo(block);
+        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result.Block).IsEqualTo(block);
+        _ = await Assert.That(options.Block).IsNotEqualTo(block);
     }
 }

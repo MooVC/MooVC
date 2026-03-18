@@ -17,12 +17,12 @@ public sealed class WhenOfTypeIsCalled
         Project result = original.OfType(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Type).IsEqualTo(updated);
-        await Assert.That(result.Id).IsEqualTo(original.Id);
-        await Assert.That(result.DisplayName).IsEqualTo(original.DisplayName);
-        await Assert.That(result.Path).IsEqualTo(original.Path);
-        await Assert.That(result.Builds).IsEqualTo(original.Builds);
-        await Assert.That(result.Platforms).IsEqualTo(original.Platforms);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Type).IsEqualTo(updated);
+        _ = await Assert.That(result.Id).IsEqualTo(original.Id);
+        _ = await Assert.That(result.DisplayName).IsEqualTo(original.DisplayName);
+        _ = await Assert.That(result.Path).IsEqualTo(original.Path);
+        _ = await Assert.That(result.Builds).IsEqualTo(original.Builds);
+        _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms);
     }
 }

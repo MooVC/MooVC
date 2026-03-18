@@ -16,8 +16,8 @@ public sealed class WhenWithParametersIsCalled
         Struct result = original.WithParameters(parameter);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Parameters).Contains(parameter);
-        await Assert.That(original.Parameters).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Parameters).Contains(parameter);
+        _ = await Assert.That(original.Parameters).IsEmpty();
     }
 }

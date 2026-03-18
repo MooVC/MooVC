@@ -19,9 +19,9 @@ public sealed class WhenWithIndexersIsCalled
         Class result = original.WithIndexers(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Indexers).IsEqualTo(original.Indexers.Concat(additional));
-        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
-        await Assert.That(original.Indexers).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Indexers).IsEqualTo(original.Indexers.Concat(additional));
+        _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        _ = await Assert.That(original.Indexers).IsEqualTo(existing);
     }
 }

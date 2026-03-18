@@ -16,7 +16,7 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        await Assert.That(actual).IsNull();
+        _ = await Assert.That(actual).IsNull();
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = expected.Page(Directive.All);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }
 #endif

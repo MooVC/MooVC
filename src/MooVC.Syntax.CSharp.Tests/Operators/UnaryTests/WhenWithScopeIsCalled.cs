@@ -16,9 +16,9 @@ public sealed class WhenWithScopeIsCalled
         Unary result = original.WithScope(replacement);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(original.Body);
-        await Assert.That(result.Operator).IsEqualTo(original.Operator);
-        await Assert.That(result.Scope).IsEqualTo(replacement);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        _ = await Assert.That(result.Scope).IsEqualTo(replacement);
     }
 }

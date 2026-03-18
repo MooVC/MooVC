@@ -11,12 +11,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Item();
 
         // Assert
-        await Assert.That(subject.Id).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Items).IsEmpty();
-        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Path).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Id).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Path).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -36,11 +36,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Id).IsEqualTo(Snippet.From(ItemTestsData.DefaultId));
-        await Assert.That(subject.Name).IsEqualTo(Snippet.From(ItemTestsData.DefaultName));
-        await Assert.That(subject.Path).IsEqualTo(Snippet.From(ItemTestsData.DefaultPath));
-        await Assert.That(subject.Type).IsEqualTo(Snippet.From(ItemTestsData.DefaultType));
-        await Assert.That(subject.Items).IsEqualTo(new[] { child });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Id).IsEqualTo(Snippet.From(ItemTestsData.DefaultId));
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.From(ItemTestsData.DefaultName));
+        _ = await Assert.That(subject.Path).IsEqualTo(Snippet.From(ItemTestsData.DefaultPath));
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.From(ItemTestsData.DefaultType));
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { child });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

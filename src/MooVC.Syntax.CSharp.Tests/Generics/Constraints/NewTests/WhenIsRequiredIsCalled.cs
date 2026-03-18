@@ -12,8 +12,8 @@ public sealed class WhenIsRequiredIsCalled
         bool result = subject.IsRequired;
 
         // Assert
-        await Assert.That(result).IsTrue();
-        await Assert.That(subject.IsNotRequired).IsFalse();
+        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(subject.IsNotRequired).IsFalse();
     }
 
     [Test]
@@ -26,7 +26,7 @@ public sealed class WhenIsRequiredIsCalled
         bool result = subject.IsRequired;
 
         // Assert
-        await Assert.That(result).IsFalse();
-        await Assert.That(subject.IsNotRequired).IsTrue();
+        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(subject.IsNotRequired).IsTrue();
     }
 }

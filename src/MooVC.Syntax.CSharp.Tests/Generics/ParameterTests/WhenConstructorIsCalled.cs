@@ -15,8 +15,8 @@ public sealed class WhenConstructorIsCalled
         var subject = new Parameter();
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        await Assert.That(subject.Constraints).IsEmpty();
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Constraints).IsEmpty();
     }
 
     [Test]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(new Name(ParameterName));
-        await Assert.That(subject.Constraints).IsEqualTo(new[] { constraint });
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(ParameterName));
+        _ = await Assert.That(subject.Constraints).IsEqualTo(new[] { constraint });
     }
 }

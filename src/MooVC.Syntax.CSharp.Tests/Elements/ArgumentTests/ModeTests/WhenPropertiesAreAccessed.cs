@@ -15,10 +15,10 @@ public sealed class WhenPropertiesAreAccessed
         bool isRef = subject.IsRef;
 
         // Assert
-        await Assert.That(isIn).IsTrue();
-        await Assert.That(isOut).IsFalse();
-        await Assert.That(isNone).IsFalse();
-        await Assert.That(isRef).IsFalse();
+        _ = await Assert.That(isIn).IsTrue();
+        _ = await Assert.That(isOut).IsFalse();
+        _ = await Assert.That(isNone).IsFalse();
+        _ = await Assert.That(isRef).IsFalse();
     }
 
     [Test]
@@ -34,9 +34,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isRef = subject.IsRef;
 
         // Assert
-        await Assert.That(isIn).IsFalse();
-        await Assert.That(isOut).IsFalse();
-        await Assert.That(isNone).IsTrue();
-        await Assert.That(isRef).IsFalse();
+        _ = await Assert.That(isIn).IsFalse();
+        _ = await Assert.That(isOut).IsFalse();
+        _ = await Assert.That(isNone).IsTrue();
+        _ = await Assert.That(isRef).IsFalse();
     }
 }

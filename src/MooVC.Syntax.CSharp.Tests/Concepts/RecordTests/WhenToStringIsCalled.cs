@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -35,9 +35,9 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).Contains("internal abstract partial record");
-        await Assert.That(result).Contains(RecordTestsData.DefaultName);
-        await Assert.That(result).Contains("(");
-        await Assert.That(result).Contains(")");
+        _ = await Assert.That(result).Contains("internal abstract partial record");
+        _ = await Assert.That(result).Contains(RecordTestsData.DefaultName);
+        _ = await Assert.That(result).Contains("(");
+        _ = await Assert.That(result).Contains(")");
     }
 }

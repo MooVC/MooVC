@@ -27,8 +27,8 @@ public sealed class WhenWithProjectsIsCalled
         Solution result = original.WithProjects(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
-        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

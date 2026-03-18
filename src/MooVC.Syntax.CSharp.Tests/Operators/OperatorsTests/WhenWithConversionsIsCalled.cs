@@ -22,11 +22,11 @@ public sealed class WhenWithConversionsIsCalled
         Operators result = original.WithConversions(updatedConversions);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
-        await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
-        await Assert.That(result.Conversions).IsEqualTo(expectedConversions);
-        await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
-        await Assert.That(original.Conversions).IsEqualTo(originalConversions);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
+        _ = await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
+        _ = await Assert.That(result.Conversions).IsEqualTo(expectedConversions);
+        _ = await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
+        _ = await Assert.That(original.Conversions).IsEqualTo(originalConversions);
     }
 }

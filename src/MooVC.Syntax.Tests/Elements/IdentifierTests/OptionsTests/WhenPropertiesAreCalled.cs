@@ -9,8 +9,8 @@ public sealed class WhenPropertiesAreCalled
         var subject = new Identifier.Options { Casing = Identifier.Casing.Pascal };
 
         // Act & Assert
-        await Assert.That(subject.IsCamel).IsTrue();
-        await Assert.That(subject.IsPascal).IsTrue();
+        _ = await Assert.That(subject.IsCamel).IsTrue();
+        _ = await Assert.That(subject.IsPascal).IsTrue();
     }
 
     [Test]
@@ -20,7 +20,7 @@ public sealed class WhenPropertiesAreCalled
         var subject = new Identifier.Options { Casing = Identifier.Casing.Camel };
 
         // Act & Assert
-        await Assert.That(subject.IsCamel).IsFalse();
-        await Assert.That(subject.IsPascal).IsFalse();
+        _ = await Assert.That(subject.IsCamel).IsFalse();
+        _ = await Assert.That(subject.IsPascal).IsFalse();
     }
 }

@@ -12,9 +12,9 @@ public sealed class WhenWithTargetIsCalled
         Attribute result = original.WithTarget(Attribute.Specifier.Return);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Target).IsEqualTo(Attribute.Specifier.Return);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Target).IsEqualTo(Attribute.Specifier.Return);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
     }
 }

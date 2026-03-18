@@ -14,8 +14,8 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Conversion.Intent subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
@@ -29,8 +29,8 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Conversion.Intent second = value;
 
         // Assert
-        await Assert.That(ReferenceEquals(first, second)).IsFalse();
-        await Assert.That((first == second)).IsTrue();
-        await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first.Equals(second)).IsTrue();
     }
 }

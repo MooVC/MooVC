@@ -15,8 +15,8 @@ public sealed class WhenWithScopeIsCalled
         Class result = original.WithScope(Scope.Private);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Scope).IsEqualTo(Scope.Private);
-        await Assert.That(original.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Public);
     }
 }

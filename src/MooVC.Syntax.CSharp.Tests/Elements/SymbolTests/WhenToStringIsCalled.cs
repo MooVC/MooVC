@@ -18,7 +18,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo(Name);
+        _ = await Assert.That(representation).IsEqualTo(Name);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
+        _ = await Assert.That(representation).IsEqualTo($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
     }
 
     [Test]
@@ -68,6 +68,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo(Name);
+        _ = await Assert.That(representation).IsEqualTo(Name);
     }
 }

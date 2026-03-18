@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(MultiWord);
+        _ = await Assert.That(result).IsEqualTo(MultiWord);
     }
 
     [Test]
@@ -29,7 +29,7 @@ public sealed class WhenToStringIsCalled
         string rightString = right.ToString();
 
         // Assert
-        await Assert.That(leftString).IsNotEqualTo(rightString);
+        _ = await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public sealed class WhenToStringIsCalled
         string second = subject.ToString();
 
         // Assert
-        await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

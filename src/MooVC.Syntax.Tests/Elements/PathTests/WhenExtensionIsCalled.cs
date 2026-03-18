@@ -15,6 +15,6 @@ public sealed class WhenExtensionIsCalled
         string result = subject.Extension;
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

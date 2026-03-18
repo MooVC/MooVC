@@ -16,7 +16,7 @@ public sealed class WhenPageIsEnumerated
 
         foreach (int value in result)
         {
-            await Assert.That(value).IsEqualTo(values[index++]);
+            _ = await Assert.That(value).IsEqualTo(values[index++]);
         }
     }
 }

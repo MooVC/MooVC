@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo("ref");
+        _ = await Assert.That(result).IsEqualTo("ref");
     }
 }

@@ -12,7 +12,7 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("WarnAndContinue");
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("WarnAndContinue");
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

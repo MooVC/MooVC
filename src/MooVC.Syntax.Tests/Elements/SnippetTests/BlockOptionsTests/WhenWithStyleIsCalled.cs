@@ -12,8 +12,8 @@ public sealed class WhenWithStyleIsCalled
         Snippet.BlockOptions result = options.WithStyle(Snippet.BlockOptions.StyleType.KAndR);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, options)).IsFalse();
-        await Assert.That(result.Style).IsEqualTo(Snippet.BlockOptions.StyleType.KAndR);
-        await Assert.That(options.Style).IsEqualTo(Snippet.BlockOptions.StyleType.Allman);
+        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result.Style).IsEqualTo(Snippet.BlockOptions.StyleType.KAndR);
+        _ = await Assert.That(options.Style).IsEqualTo(Snippet.BlockOptions.StyleType.Allman);
     }
 }

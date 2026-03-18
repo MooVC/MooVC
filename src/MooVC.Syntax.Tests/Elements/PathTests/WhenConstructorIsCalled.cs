@@ -12,8 +12,8 @@ public sealed class WhenConstructorIsCalled
         var subject = new Path(value);
 
         // Assert
-        await Assert.That(subject.IsEmpty).IsTrue();
-        await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
+        _ = await Assert.That(subject.IsEmpty).IsTrue();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Path(value);
 
         // Assert
-        await Assert.That(subject.IsEmpty).IsFalse();
-        await Assert.That(subject.ToString()).IsEqualTo(value);
+        _ = await Assert.That(subject.IsEmpty).IsFalse();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(value);
     }
 }

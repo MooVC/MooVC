@@ -31,11 +31,11 @@ public sealed class WhenAttributedWithIsCalled
         Parameter result = original.AttributedWith(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Attributes.Length).IsEqualTo(existing.Length + additional.Length);
-        await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
-        await Assert.That(result.Default).IsEqualTo(original.Default);
-        await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Attributes.Length).IsEqualTo(existing.Length + additional.Length);
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

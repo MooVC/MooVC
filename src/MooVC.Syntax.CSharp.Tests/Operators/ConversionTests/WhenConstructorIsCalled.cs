@@ -12,12 +12,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Conversion();
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.To);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Implicit);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
-        await Assert.That(subject.Target).IsEqualTo(Symbol.Undefined);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.To);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Implicit);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Target).IsEqualTo(Symbol.Undefined);
     }
 
     [Test]
@@ -38,11 +38,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(body);
-        await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.From);
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Explicit);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
-        await Assert.That(subject.Target).IsEqualTo(subjectSymbol);
+        _ = await Assert.That(subject.Body).IsEqualTo(body);
+        _ = await Assert.That(subject.Direction).IsEqualTo(Conversion.Intent.From);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Conversion.Type.Explicit);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Target).IsEqualTo(subjectSymbol);
     }
 }

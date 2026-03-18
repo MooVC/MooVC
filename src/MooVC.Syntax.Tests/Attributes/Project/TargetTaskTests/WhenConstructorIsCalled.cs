@@ -11,12 +11,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new TargetTask();
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.ErrorAndStop);
-        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        await Assert.That(subject.Outputs).IsEmpty();
-        await Assert.That(subject.Parameters).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.ErrorAndStop);
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Outputs).IsEmpty();
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -37,11 +37,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTaskTestsData.DefaultCondition));
-        await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.WarnAndContinue);
-        await Assert.That(subject.Name).IsEqualTo(new Name(TargetTaskTestsData.DefaultName));
-        await Assert.That(subject.Outputs).IsEqualTo(new[] { output });
-        await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTaskTestsData.DefaultCondition));
+        _ = await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.WarnAndContinue);
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(TargetTaskTestsData.DefaultName));
+        _ = await Assert.That(subject.Outputs).IsEqualTo(new[] { output });
+        _ = await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

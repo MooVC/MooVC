@@ -18,6 +18,6 @@ public sealed class WhenImplicitOperatorFromSymbolIsCalled
 
         // Assert
         _ = await Assert.That(@base).IsNotNull();
-        await Assert.That(areEqual).IsTrue();
+        _ = await Assert.That(areEqual).IsTrue();
     }
 }

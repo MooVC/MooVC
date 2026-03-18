@@ -15,11 +15,11 @@ public sealed class WhenWithBodyIsCalled
         Method result = original.WithBody(replacement);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(replacement);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
-        await Assert.That(result.Result).IsEqualTo(original.Result);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(replacement);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

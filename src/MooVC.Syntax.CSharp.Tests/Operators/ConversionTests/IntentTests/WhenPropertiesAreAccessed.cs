@@ -13,7 +13,7 @@ public sealed class WhenPropertiesAreAccessed
         bool isFrom = subject.IsFrom;
 
         // Assert
-        await Assert.That(isTo).IsTrue();
-        await Assert.That(isFrom).IsFalse();
+        _ = await Assert.That(isTo).IsTrue();
+        _ = await Assert.That(isFrom).IsFalse();
     }
 }

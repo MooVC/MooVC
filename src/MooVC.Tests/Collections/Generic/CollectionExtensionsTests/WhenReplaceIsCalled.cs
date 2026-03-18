@@ -13,7 +13,7 @@ public sealed class WhenReplaceIsCalled
         Action act = () => target.Replace(items);
 
         // Assert
-        await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenReplaceIsCalled
         Action act = () => target!.Replace(items);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -69,7 +69,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(items);
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
@@ -83,6 +83,6 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(items);
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

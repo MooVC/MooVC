@@ -17,7 +17,7 @@ public sealed class WhenShiftIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = subject.Shift(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -40,6 +40,6 @@ public sealed class WhenShiftIsCalled
 
         // Assert
         string text = result.ToString();
-        await Assert.That(text).IsEqualTo(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 }

@@ -30,8 +30,8 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(expected.Length);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -69,8 +69,8 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(expected.Length);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -98,8 +98,8 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(expected.Length);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -129,8 +129,8 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(expected.Length);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -165,7 +165,7 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(options);
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(expected.Length);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -22,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
         var snippet = events.ToSnippet(Event.Options.Default);
 
         // Assert
-        await Assert.That(snippet).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
@@ -36,7 +36,7 @@ public sealed class WhenToSnippetIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = events.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -85,6 +85,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = events.ToSnippet(Event.Options.Default);
 
         // Assert
-        await Assert.That(snippet.ToString()).IsEqualTo(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

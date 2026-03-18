@@ -14,8 +14,8 @@ public sealed class WhenEqualsFormatterIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        await Assert.That(resultLeftRight).IsTrue();
-        await Assert.That(resultRightLeft).IsTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenEqualsFormatterIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        await Assert.That(resultLeftRight).IsFalse();
-        await Assert.That(resultRightLeft).IsFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

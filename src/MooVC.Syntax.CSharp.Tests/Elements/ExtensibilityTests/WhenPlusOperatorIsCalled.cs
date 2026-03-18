@@ -13,7 +13,7 @@ public sealed class WhenPlusOperatorIsCalled
         Extensibility result = left + right;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo("static abstract");
+        _ = await Assert.That(result.ToString()).IsEqualTo("static abstract");
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenPlusOperatorIsCalled
         Extensibility result = left + right;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo("sealed override");
+        _ = await Assert.That(result.ToString()).IsEqualTo("sealed override");
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left + right;
 
         // Assert
-        await Assert.That(result).Throws<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left! + right;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -69,6 +69,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left + right!;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

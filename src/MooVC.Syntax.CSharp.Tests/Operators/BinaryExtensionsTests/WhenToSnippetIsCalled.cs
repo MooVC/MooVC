@@ -42,7 +42,7 @@ public sealed class WhenToSnippetIsCalled
         var result = binaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        await Assert.That(result).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenToSnippetIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = binaries.ToSnippet(Snippet.Options.Default, type!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
     [Test]
@@ -71,7 +71,7 @@ public sealed class WhenToSnippetIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = binaries.ToSnippet(options!, type)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -89,6 +89,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = binaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

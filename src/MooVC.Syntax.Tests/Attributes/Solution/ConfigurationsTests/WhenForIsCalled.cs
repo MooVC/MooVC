@@ -16,8 +16,8 @@ public sealed class WhenForIsCalled
         Configurations result = original.For(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Platforms).IsEqualTo(original.Platforms.Concat([updated]));
-        await Assert.That(result.Builds).IsEqualTo(original.Builds);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms.Concat([updated]));
+        _ = await Assert.That(result.Builds).IsEqualTo(original.Builds);
     }
 }

@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
         Snippet.Options snippets = subject.Snippets;
 
         // Assert
-        await Assert.That(@namespace).IsEqualTo(Qualifier.Options.File);
-        await Assert.That(snippets).IsEqualTo(expected);
+        _ = await Assert.That(@namespace).IsEqualTo(Qualifier.Options.File);
+        _ = await Assert.That(snippets).IsEqualTo(expected);
     }
 }

@@ -11,10 +11,10 @@ public sealed class WhenConstructorIsCalled
         var subject = new Sdk();
 
         // Assert
-        await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Name).IsEqualTo(Qualifier.Unqualified);
-        await Assert.That(subject.Version).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUnspecified).IsTrue();
+        _ = await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Qualifier.Unqualified);
+        _ = await Assert.That(subject.Version).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUnspecified).IsTrue();
     }
 
     [Test]
@@ -29,9 +29,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.From(SdkTestsData.DefaultMinimumVersion));
-        await Assert.That(subject.Name).IsEqualTo(SdkTestsData.DefaultName);
-        await Assert.That(subject.Version).IsEqualTo(Snippet.From(SdkTestsData.DefaultVersion));
-        await Assert.That(subject.IsUnspecified).IsFalse();
+        _ = await Assert.That(subject.MinimumVersion).IsEqualTo(Snippet.From(SdkTestsData.DefaultMinimumVersion));
+        _ = await Assert.That(subject.Name).IsEqualTo(SdkTestsData.DefaultName);
+        _ = await Assert.That(subject.Version).IsEqualTo(Snippet.From(SdkTestsData.DefaultVersion));
+        _ = await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

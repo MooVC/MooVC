@@ -18,7 +18,7 @@ public sealed class WhenMinIsCalled
         DateTime selected = oldest.Min(newest);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(oldest);
+        _ = await Assert.That(selected).IsEqualTo(oldest);
     }
 
     [Test]
@@ -29,7 +29,7 @@ public sealed class WhenMinIsCalled
         DateTime selected = newest.Min(oldest);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(oldest);
+        _ = await Assert.That(selected).IsEqualTo(oldest);
     }
 
     [Test]
@@ -42,6 +42,6 @@ public sealed class WhenMinIsCalled
         DateTime selected = sameDate.Min(sameDate);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(sameDate);
+        _ = await Assert.That(selected).IsEqualTo(sameDate);
     }
 }

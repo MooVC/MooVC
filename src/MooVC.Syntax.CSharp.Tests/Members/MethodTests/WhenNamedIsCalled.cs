@@ -16,12 +16,12 @@ public sealed class WhenNamedIsCalled
         Method result = original.Named(new Declaration { Name = NewName });
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(original.Body);
-        await Assert.That(result.Name).IsEqualTo(new Declaration { Name = NewName });
-        await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
-        await Assert.That(result.Result).IsEqualTo(original.Result);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        await Assert.That(original.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Name).IsEqualTo(new Declaration { Name = NewName });
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(original.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
     }
 }

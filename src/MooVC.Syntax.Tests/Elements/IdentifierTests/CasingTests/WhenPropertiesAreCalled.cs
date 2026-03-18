@@ -13,10 +13,10 @@ public sealed class WhenPropertiesAreCalled
         Identifier.Casing subject = value;
 
         // Act & Assert
-        await Assert.That(subject.IsPascal).IsEqualTo(expectedPascal);
-        await Assert.That(subject.IsCamel).IsEqualTo(expectedCamel);
-        await Assert.That(subject.IsKebab).IsEqualTo(expectedKebab);
-        await Assert.That(subject.IsSnake).IsEqualTo(expectedSnake);
+        _ = await Assert.That(subject.IsPascal).IsEqualTo(expectedPascal);
+        _ = await Assert.That(subject.IsCamel).IsEqualTo(expectedCamel);
+        _ = await Assert.That(subject.IsKebab).IsEqualTo(expectedKebab);
+        _ = await Assert.That(subject.IsSnake).IsEqualTo(expectedSnake);
     }
 
     [Test]
@@ -33,6 +33,6 @@ public sealed class WhenPropertiesAreCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -18,8 +18,8 @@ public sealed class WhenWithAssembliesIsCalled
         Resource result = original.WithAssemblies(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Assemblies).IsEqualTo(original.Assemblies.Concat([additional]));
-        await Assert.That(result.Data).IsEqualTo(original.Data);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Assemblies).IsEqualTo(original.Assemblies.Concat([additional]));
+        _ = await Assert.That(result.Data).IsEqualTo(original.Data);
     }
 }

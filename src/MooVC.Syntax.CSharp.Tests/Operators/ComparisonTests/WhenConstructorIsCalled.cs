@@ -12,10 +12,10 @@ public sealed class WhenConstructorIsCalled
         var subject = new Comparison();
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.Unspecified);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.Unspecified);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
@@ -33,9 +33,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(body);
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.GreaterThan);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Body).IsEqualTo(body);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.GreaterThan);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

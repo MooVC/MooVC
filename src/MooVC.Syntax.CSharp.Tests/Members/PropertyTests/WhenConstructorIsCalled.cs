@@ -16,12 +16,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property();
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(Property.Methods.Default);
-        await Assert.That(subject.Default).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
-        await Assert.That(subject.Type).IsEqualTo(Symbol.Undefined);
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(Property.Methods.Default);
+        _ = await Assert.That(subject.Default).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Type).IsEqualTo(Symbol.Undefined);
     }
 
     [Test]
@@ -50,11 +50,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
-        await Assert.That(subject.Default).IsEqualTo(Snippet.From(DefaultValue));
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.Name).IsEqualTo(new Name(PropertyName));
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
-        await Assert.That(subject.Type).IsEqualTo(new Symbol { Name = PropertyType });
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        _ = await Assert.That(subject.Default).IsEqualTo(Snippet.From(DefaultValue));
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(PropertyName));
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Type).IsEqualTo(new Symbol { Name = PropertyType });
     }
 }

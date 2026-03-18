@@ -13,7 +13,7 @@ public sealed class WhenPlusOperatorIsCalled
         Struct.Kind result = left + right;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo("readonly record");
+        _ = await Assert.That(result.ToString()).IsEqualTo("readonly record");
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left + right;
 
         // Assert
-        await Assert.That(result).Throws<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left! + right;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -55,6 +55,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left + right!;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

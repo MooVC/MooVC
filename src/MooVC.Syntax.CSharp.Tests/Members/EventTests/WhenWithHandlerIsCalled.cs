@@ -17,9 +17,9 @@ public sealed class WhenWithHandlerIsCalled
         Event result = original.WithHandler(handler);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Handler).IsEqualTo(handler);
-        await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Handler).IsEqualTo(handler);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

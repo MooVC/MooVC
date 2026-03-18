@@ -18,7 +18,7 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        await Assert.That(wasInvoked).IsFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
     }
 
     [Test]
@@ -62,7 +62,7 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
     }
 
     [Test]
@@ -86,6 +86,6 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        await Assert.That(actualOrder).IsEqualTo(expectedOrder);
+        _ = await Assert.That(actualOrder).IsEqualTo(expectedOrder);
     }
 }

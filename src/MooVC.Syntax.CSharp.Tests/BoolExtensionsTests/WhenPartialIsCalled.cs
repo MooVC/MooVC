@@ -12,7 +12,7 @@ public sealed class WhenPartialIsCalled
         string result = subject.Partial();
 
         // Assert
-        await Assert.That(result).IsEqualTo("partial");
+        _ = await Assert.That(result).IsEqualTo("partial");
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenPartialIsCalled
         string result = subject.Partial();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

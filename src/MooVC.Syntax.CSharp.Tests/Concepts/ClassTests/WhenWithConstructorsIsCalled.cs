@@ -27,9 +27,9 @@ public sealed class WhenWithConstructorsIsCalled
         Class result = original.WithConstructors(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Constructors).IsEqualTo(original.Constructors.Concat(additional));
-        await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
-        await Assert.That(original.Constructors).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Constructors).IsEqualTo(original.Constructors.Concat(additional));
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        _ = await Assert.That(original.Constructors).IsEqualTo(existing);
     }
 }

@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

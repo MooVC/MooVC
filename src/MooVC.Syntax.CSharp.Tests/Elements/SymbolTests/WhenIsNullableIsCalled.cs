@@ -12,11 +12,11 @@ public sealed class WhenIsNullableIsCalled
         Symbol result = original.IsNullable(true);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.IsNullable).IsTrue();
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
-        await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
-        await Assert.That(original.IsNullable).IsFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.IsNullable).IsTrue();
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
+        _ = await Assert.That(original.IsNullable).IsFalse();
     }
 }

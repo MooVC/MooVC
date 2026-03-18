@@ -14,6 +14,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Format);
+        _ = await Assert.That(result).IsEqualTo(Format);
     }
 }

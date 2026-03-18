@@ -19,11 +19,11 @@ public sealed class WhenWithBinariesIsCalled
         Operators result = original.WithBinaries(updatedBinaries);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Binaries).IsEqualTo(expectedBinaries);
-        await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
-        await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
-        await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
-        await Assert.That(original.Binaries).IsEqualTo(originalBinaries);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Binaries).IsEqualTo(expectedBinaries);
+        _ = await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
+        _ = await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
+        _ = await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
+        _ = await Assert.That(original.Binaries).IsEqualTo(originalBinaries);
     }
 }

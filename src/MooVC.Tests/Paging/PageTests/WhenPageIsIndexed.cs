@@ -17,7 +17,7 @@ public sealed class WhenPageIsIndexed
         int actual = result[index];
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -33,7 +33,7 @@ public sealed class WhenPageIsIndexed
         Action act = () => _ = result[index];
 
         // Assert
-        await Assert.That(act).Throws<IndexOutOfRangeException>();
+        _ = await Assert.That(act).Throws<IndexOutOfRangeException>();
     }
 }
 #endif

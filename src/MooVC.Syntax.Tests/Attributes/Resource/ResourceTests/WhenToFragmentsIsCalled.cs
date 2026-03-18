@@ -16,7 +16,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -44,9 +44,9 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(2);
-        await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
-        await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
+        _ = await Assert.That(result.Length).IsEqualTo(2);
+        _ = await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
+        _ = await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
     }
 
     [Test]
@@ -82,8 +82,8 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        await Assert.That(result.Length).IsEqualTo(2);
-        await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
-        await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
+        _ = await Assert.That(result.Length).IsEqualTo(2);
+        _ = await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
+        _ = await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
     }
 }

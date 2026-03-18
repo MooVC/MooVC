@@ -15,7 +15,7 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenEqualsMethodsIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -58,8 +58,8 @@ public sealed class WhenEqualsMethodsIsCalled
         bool resultTargetSubject = target.Equals(subject);
 
         // Assert
-        await Assert.That(resultSubjectTarget).IsTrue();
-        await Assert.That(resultTargetSubject).IsTrue();
+        _ = await Assert.That(resultSubjectTarget).IsTrue();
+        _ = await Assert.That(resultTargetSubject).IsTrue();
     }
 
     [Test]
@@ -81,7 +81,7 @@ public sealed class WhenEqualsMethodsIsCalled
         bool resultTargetSubject = target.Equals(subject);
 
         // Assert
-        await Assert.That(resultSubjectTarget).IsFalse();
-        await Assert.That(resultTargetSubject).IsFalse();
+        _ = await Assert.That(resultSubjectTarget).IsFalse();
+        _ = await Assert.That(resultTargetSubject).IsFalse();
     }
 }

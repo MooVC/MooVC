@@ -18,8 +18,8 @@ public sealed class WhenWithImportsIsCalled
         Project result = original.WithImports(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Imports).IsEqualTo(original.Imports.Concat([additional]));
-        await Assert.That(result.ItemGroups).IsEqualTo(original.ItemGroups);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Imports).IsEqualTo(original.Imports.Concat([additional]));
+        _ = await Assert.That(result.ItemGroups).IsEqualTo(original.ItemGroups);
     }
 }

@@ -15,9 +15,9 @@ public sealed class WhenForPropertyIsCalled
         Output result = original.ForProperty(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.PropertyName).IsEqualTo(updated);
-        await Assert.That(result.ItemName).IsEqualTo(original.ItemName);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.PropertyName).IsEqualTo(updated);
+        _ = await Assert.That(result.ItemName).IsEqualTo(original.ItemName);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

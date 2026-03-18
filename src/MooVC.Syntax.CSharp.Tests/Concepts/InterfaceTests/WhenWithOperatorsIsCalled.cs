@@ -16,8 +16,8 @@ public sealed class WhenWithOperatorsIsCalled
         Interface result = original.WithOperators(operators);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Operators).IsEqualTo(operators);
-        await Assert.That(original.Operators).IsEqualTo(new Operators());
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Operators).IsEqualTo(operators);
+        _ = await Assert.That(original.Operators).IsEqualTo(new Operators());
     }
 }

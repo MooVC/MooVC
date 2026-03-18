@@ -13,7 +13,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        await Assert.That(isAll).IsTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
@@ -26,7 +26,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        await Assert.That(isAll).IsTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
@@ -39,7 +39,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        await Assert.That(isAll).IsTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
@@ -52,7 +52,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        await Assert.That(isAll).IsFalse();
+        _ = await Assert.That(isAll).IsFalse();
     }
 }
 #endif

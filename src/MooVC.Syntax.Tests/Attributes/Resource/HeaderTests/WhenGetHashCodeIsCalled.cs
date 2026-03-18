@@ -14,6 +14,6 @@ public sealed class WhenGetHashCodeIsCalled
         int otherHashCode = other.GetHashCode();
 
         // Assert
-        await Assert.That(hashCode).IsEqualTo(otherHashCode);
+        _ = await Assert.That(hashCode).IsEqualTo(otherHashCode);
     }
 }

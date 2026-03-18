@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Func<Qualifier> result = () => values;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         // Assert
         _ = await Assert.That(subject).IsNotNull();
         Name[] result = subject;
-        await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEqualTo(values);
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Name[] result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEqualTo(values);
     }
 
     [Test]
@@ -58,8 +58,8 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Qualifier second = values;
 
         // Assert
-        await Assert.That(ReferenceEquals(first, second)).IsFalse();
-        await Assert.That((first == second)).IsTrue();
-        await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first.Equals(second)).IsTrue();
     }
 }

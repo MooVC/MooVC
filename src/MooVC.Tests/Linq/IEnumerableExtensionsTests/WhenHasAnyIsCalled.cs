@@ -12,7 +12,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        await Assert.That(hasAny).IsFalse();
+        _ = await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        await Assert.That(hasAny).IsFalse();
+        _ = await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        await Assert.That(hasAny).IsTrue();
+        _ = await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        await Assert.That(hasAny).IsTrue();
+        _ = await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
@@ -64,7 +64,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => false);
 
         // Assert
-        await Assert.That(hasAny).IsFalse();
+        _ = await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
@@ -77,7 +77,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        await Assert.That(hasAny).IsTrue();
+        _ = await Assert.That(hasAny).IsTrue();
     }
 
     [Test]
@@ -90,7 +90,7 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny();
 
         // Assert
-        await Assert.That(hasAny).IsFalse();
+        _ = await Assert.That(hasAny).IsFalse();
     }
 
     [Test]
@@ -103,6 +103,6 @@ public sealed class WhenHasAnyIsCalled
         bool hasAny = source.HasAny(predicate => true);
 
         // Assert
-        await Assert.That(hasAny).IsFalse();
+        _ = await Assert.That(hasAny).IsFalse();
     }
 }

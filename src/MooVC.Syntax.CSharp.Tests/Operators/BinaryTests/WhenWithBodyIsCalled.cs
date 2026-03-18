@@ -15,9 +15,9 @@ public sealed class WhenWithBodyIsCalled
         Binary result = original.WithBody(body);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(body);
-        await Assert.That(result.Operator).IsEqualTo(original.Operator);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(body);
+        _ = await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

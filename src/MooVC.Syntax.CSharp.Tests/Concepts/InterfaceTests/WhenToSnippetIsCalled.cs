@@ -16,7 +16,7 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -63,6 +63,6 @@ public sealed class WhenToSnippetIsCalled
         var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

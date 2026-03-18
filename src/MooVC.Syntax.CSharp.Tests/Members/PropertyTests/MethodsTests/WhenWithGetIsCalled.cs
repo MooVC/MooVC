@@ -19,9 +19,9 @@ public sealed class WhenWithGetIsCalled
         Property.Methods result = original.WithGet(get);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Get).IsEqualTo(get);
-        await Assert.That(result.Set).IsEqualTo(original.Set);
-        await Assert.That(original.Get).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Get).IsEqualTo(get);
+        _ = await Assert.That(result.Set).IsEqualTo(original.Set);
+        _ = await Assert.That(original.Get).IsEqualTo(Snippet.Empty);
     }
 }

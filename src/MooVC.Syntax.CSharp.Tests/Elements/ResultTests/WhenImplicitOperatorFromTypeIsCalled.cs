@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Func<Result> result = () => value!;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Result result = value;
 
         // Assert
-        await Assert.That(result.Type.Name).IsEqualTo(new Symbol.Moniker(nameof(Guid)));
+        _ = await Assert.That(result.Type.Name).IsEqualTo(new Symbol.Moniker(nameof(Guid)));
     }
 }

@@ -19,11 +19,11 @@ public sealed class WhenReturnsIsCalled
         Method updated = original.Returns(result);
 
         // Assert
-        await Assert.That(ReferenceEquals(updated, original)).IsFalse();
-        await Assert.That(updated.Body).IsEqualTo(original.Body);
-        await Assert.That(updated.Name).IsEqualTo(original.Name);
-        await Assert.That(updated.Parameters).IsEqualTo(original.Parameters);
-        await Assert.That(updated.Result).IsEqualTo(result);
-        await Assert.That(updated.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(updated).IsNotSameReferenceAs(original);
+        _ = await Assert.That(updated.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(updated.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(updated.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(updated.Result).IsEqualTo(result);
+        _ = await Assert.That(updated.Scope).IsEqualTo(original.Scope);
     }
 }

@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet snippet = subject;
 
         // Assert
-        await Assert.That(snippet).IsEqualTo(Snippet.From(subject.ToString()));
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

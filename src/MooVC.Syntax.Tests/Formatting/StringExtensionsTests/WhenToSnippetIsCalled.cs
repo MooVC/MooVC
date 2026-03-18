@@ -18,8 +18,8 @@ public sealed class WhenToSnippetIsCalled
         var result = value.ToSnippet();
 
         // Assert
-        await Assert.That(result.Lines).IsEqualTo(1);
-        await Assert.That(result.ToString()).IsEqualTo(value);
+        _ = await Assert.That(result.Lines).IsEqualTo(1);
+        _ = await Assert.That(result.ToString()).IsEqualTo(value);
     }
 
     [Test]
@@ -32,9 +32,9 @@ public sealed class WhenToSnippetIsCalled
         var result = value.ToSnippet();
 
         // Assert
-        await Assert.That(result.IsEmpty).IsFalse();
-        await Assert.That(result.Lines).IsEqualTo(1);
-        await Assert.That(result.ToString()).IsEqualTo(string.Empty);
+        _ = await Assert.That(result.IsEmpty).IsFalse();
+        _ = await Assert.That(result.Lines).IsEqualTo(1);
+        _ = await Assert.That(result.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -57,8 +57,8 @@ public sealed class WhenToSnippetIsCalled
         var result = values.ToSnippet();
 
         // Assert
-        await Assert.That(result.Lines).IsEqualTo(3);
-        await Assert.That(result.ToString()).IsEqualTo(expected);
+        _ = await Assert.That(result.Lines).IsEqualTo(3);
+        _ = await Assert.That(result.ToString()).IsEqualTo(expected);
     }
 
     [Test]
@@ -77,6 +77,6 @@ public sealed class WhenToSnippetIsCalled
         var result = values.ToSnippet();
 
         // Assert
-        await Assert.That(result).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 }

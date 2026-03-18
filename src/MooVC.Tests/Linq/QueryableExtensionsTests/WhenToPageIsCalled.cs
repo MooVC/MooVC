@@ -17,9 +17,9 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(Directive.All);
 
         // Assert
-        await Assert.That(result.Directive).IsEqualTo(Directive.All);
-        await Assert.That(result.Total).IsEqualTo((ulong)expected.LongLength);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Directive).IsEqualTo(Directive.All);
+        _ = await Assert.That(result.Total).IsEqualTo((ulong)expected.LongLength);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -36,9 +36,9 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.Total).IsEqualTo(total);
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.Total).IsEqualTo(total);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -52,8 +52,8 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.Total).IsEqualTo(default);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.Total).IsEqualTo(default);
     }
 }
 #endif

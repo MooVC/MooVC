@@ -12,10 +12,10 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property.Setter();
 
         // Assert
-        await Assert.That(subject.Behaviour).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsDefault).IsTrue();
-        await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Unspecified);
+        _ = await Assert.That(subject.Behaviour).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsDefault).IsTrue();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Unspecified);
     }
 
     [Test]
@@ -33,9 +33,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Behaviour).IsEqualTo(behaviour);
-        await Assert.That(subject.IsDefault).IsFalse();
-        await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Behaviour).IsEqualTo(behaviour);
+        _ = await Assert.That(subject.IsDefault).IsFalse();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

@@ -22,7 +22,7 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = first.Min(second);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(first);
+        _ = await Assert.That(selected).IsEqualTo(first);
     }
 
     [Test]
@@ -37,7 +37,7 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = first.Min(second);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(second);
+        _ = await Assert.That(selected).IsEqualTo(second);
     }
 
     [Test]
@@ -50,6 +50,6 @@ public sealed class WhenMinIsCalled
         DateTimeOffset selected = sameDate.Min(sameDate);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(sameDate);
+        _ = await Assert.That(selected).IsEqualTo(sameDate);
     }
 }

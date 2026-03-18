@@ -15,11 +15,11 @@ public sealed class WhenWithBehaviourIsCalled
         Property.Setter result = original.WithBehaviour(behaviour);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Behaviour).IsEqualTo(behaviour);
-        await Assert.That(result.Mode).IsEqualTo(original.Mode);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviour).IsEqualTo(behaviour);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        await Assert.That(original.Behaviour).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(original.Behaviour).IsEqualTo(Snippet.Empty);
     }
 }

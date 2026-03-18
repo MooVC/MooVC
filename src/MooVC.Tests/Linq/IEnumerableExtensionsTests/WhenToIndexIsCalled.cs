@@ -14,7 +14,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(selector));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(selector));
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = await Assert.That(index).IsNotNull();
-        await Assert.That(index).IsEmpty();
+        _ = await Assert.That(index).IsEmpty();
     }
 
     [Test]
@@ -43,7 +43,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(transform));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(transform));
     }
 
     [Test]
@@ -57,8 +57,8 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = await Assert.That(index).IsNotNull();
-        await Assert.That(index.Keys).IsEqualTo(source);
-        await Assert.That(index.Values).IsEqualTo(source);
+        _ = await Assert.That(index.Keys).IsEqualTo(source);
+        _ = await Assert.That(index.Values).IsEqualTo(source);
     }
 
     [Test]
@@ -73,8 +73,8 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = await Assert.That(index).IsNotNull();
-        await Assert.That(index.Keys).IsEqualTo(source);
-        await Assert.That(index.All(element => element.Value == transform(element.Key))).IsTrue();
+        _ = await Assert.That(index.Keys).IsEqualTo(source);
+        _ = await Assert.That(index.All(element => element.Value == transform(element.Key))).IsTrue();
     }
 
     [Test]
@@ -87,6 +87,6 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentException>();
+        _ = await Assert.That(act).Throws<ArgumentException>();
     }
 }

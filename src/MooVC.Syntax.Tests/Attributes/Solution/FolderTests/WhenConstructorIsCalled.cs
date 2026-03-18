@@ -9,11 +9,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Folder();
 
         // Assert
-        await Assert.That(subject.Files).IsEmpty();
-        await Assert.That(subject.Items).IsEmpty();
-        await Assert.That(subject.Projects).IsEmpty();
-        await Assert.That(subject.Name).IsEqualTo(Folder.Path.Root);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Files).IsEmpty();
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.Projects).IsEmpty();
+        _ = await Assert.That(subject.Name).IsEqualTo(Folder.Path.Root);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -34,10 +34,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Files).IsEqualTo(new[] { file });
-        await Assert.That(subject.Items).IsEqualTo(new[] { item });
-        await Assert.That(subject.Name).IsEqualTo(new Folder.Path(FolderTestsData.DefaultName));
-        await Assert.That(subject.Projects).IsEqualTo(new[] { project });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Name).IsEqualTo(new Folder.Path(FolderTestsData.DefaultName));
+        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

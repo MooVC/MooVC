@@ -22,8 +22,8 @@ public sealed class WhenConstructorIsCalled
         var subject = new File(value);
 
         // Assert
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new File(value);
 
         // Assert
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.ToFragments()).IsNotEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.ToFragments()).IsNotEmpty();
     }
 }

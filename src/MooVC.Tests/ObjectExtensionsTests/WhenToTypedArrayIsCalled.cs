@@ -12,8 +12,8 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan[] value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(value.Length).IsEqualTo(1);
-        await Assert.That(value.Single()).IsEqualTo(expected);
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 
     [Test]
@@ -26,8 +26,8 @@ public sealed class WhenToTypedArrayIsCalled
         TimeSpan?[] value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(value.Length).IsEqualTo(1);
-        await Assert.That(value.Single()).IsNull();
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsNull();
     }
 
     [Test]
@@ -40,8 +40,8 @@ public sealed class WhenToTypedArrayIsCalled
         object[] value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(value.Length).IsEqualTo(1);
-        await Assert.That(ReferenceEquals(value.Single(), expected)).IsTrue();
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsSameReferenceAs(expected);
     }
 
     [Test]
@@ -54,8 +54,8 @@ public sealed class WhenToTypedArrayIsCalled
         object?[] value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(value.Length).IsEqualTo(1);
-        await Assert.That(value.Single()).IsNull();
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsNull();
     }
 
     [Test]
@@ -68,7 +68,7 @@ public sealed class WhenToTypedArrayIsCalled
         int[]? value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(ReferenceEquals(value, expected)).IsTrue();
+        _ = await Assert.That(value).IsSameReferenceAs(expected);
     }
 
     [Test]
@@ -81,6 +81,6 @@ public sealed class WhenToTypedArrayIsCalled
         int[]? value = expected.ToTypedArray();
 
         // Assert
-        await Assert.That(value).IsNull();
+        _ = await Assert.That(value).IsNull();
     }
 }

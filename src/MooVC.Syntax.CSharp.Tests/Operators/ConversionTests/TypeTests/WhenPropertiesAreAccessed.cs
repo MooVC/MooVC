@@ -24,9 +24,9 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(isExplicit).IsEqualTo(expectation.IsExplicit);
-        await Assert.That(isImplicit).IsEqualTo(expectation.IsImplicit);
-        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
+        _ = await Assert.That(isExplicit).IsEqualTo(expectation.IsExplicit);
+        _ = await Assert.That(isImplicit).IsEqualTo(expectation.IsImplicit);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record ConversionTypeExpectation(

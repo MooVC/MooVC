@@ -18,6 +18,6 @@ public sealed class WhenFileNameIsCalled
         string fileName = file.FullName;
 
         // Assert
-        await Assert.That(fileName).IsEqualTo(expectedFileName);
+        _ = await Assert.That(fileName).IsEqualTo(expectedFileName);
     }
 }

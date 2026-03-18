@@ -16,8 +16,8 @@ public sealed class WhenWithConstructorsIsCalled
         Struct result = original.WithConstructors(constructor);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Constructors).Contains(constructor);
-        await Assert.That(original.Constructors).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Constructors).Contains(constructor);
+        _ = await Assert.That(original.Constructors).IsEmpty();
     }
 }

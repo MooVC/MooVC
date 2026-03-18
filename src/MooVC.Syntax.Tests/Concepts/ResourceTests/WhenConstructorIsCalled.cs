@@ -12,11 +12,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Resource();
 
         // Assert
-        await Assert.That(subject.Assemblies).IsEmpty();
-        await Assert.That(subject.Data).IsEmpty();
-        await Assert.That(subject.Headers).IsEmpty();
-        await Assert.That(subject.Metadata).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Assemblies).IsEmpty();
+        _ = await Assert.That(subject.Data).IsEmpty();
+        _ = await Assert.That(subject.Headers).IsEmpty();
+        _ = await Assert.That(subject.Metadata).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -38,10 +38,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Assemblies).IsEqualTo(new[] { assembly });
-        await Assert.That(subject.Data).IsEqualTo(new[] { data });
-        await Assert.That(subject.Headers).IsEqualTo(new[] { header });
-        await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Assemblies).IsEqualTo(new[] { assembly });
+        _ = await Assert.That(subject.Data).IsEqualTo(new[] { data });
+        _ = await Assert.That(subject.Headers).IsEqualTo(new[] { header });
+        _ = await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

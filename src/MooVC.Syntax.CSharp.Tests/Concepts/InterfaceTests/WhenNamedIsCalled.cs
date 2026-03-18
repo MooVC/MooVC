@@ -16,8 +16,8 @@ public sealed class WhenNamedIsCalled
         Interface result = original.Named(name);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Declaration).IsEqualTo(name);
-        await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = "Original" });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Declaration).IsEqualTo(name);
+        _ = await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = "Original" });
     }
 }

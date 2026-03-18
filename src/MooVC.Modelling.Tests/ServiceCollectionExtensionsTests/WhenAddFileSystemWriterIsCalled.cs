@@ -21,7 +21,7 @@ public sealed class WhenAddFileSystemWriterIsCalled
         Action action = () => services.AddFileSystemWriter();
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -38,9 +38,9 @@ public sealed class WhenAddFileSystemWriterIsCalled
         IOptionsSnapshot<FileSystemWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<FileSystemWriter.Options>>();
 
         // Assert
-        await Assert.That(writer).IsTypeOf<FileSystemWriter>();
+        _ = await Assert.That(writer).IsTypeOf<FileSystemWriter>();
         _ = await Assert.That(fileSystem).IsNotNull();
-        await Assert.That(options.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
+        _ = await Assert.That(options.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
     }
 
     [Test]
@@ -64,6 +64,6 @@ public sealed class WhenAddFileSystemWriterIsCalled
         IOptionsSnapshot<FileSystemWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<FileSystemWriter.Options>>();
 
         // Assert
-        await Assert.That(options.Value.BufferSize).IsEqualTo(CustomBufferSize);
+        _ = await Assert.That(options.Value.BufferSize).IsEqualTo(CustomBufferSize);
     }
 }

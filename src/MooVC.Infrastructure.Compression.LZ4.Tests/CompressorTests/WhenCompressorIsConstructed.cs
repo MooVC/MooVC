@@ -16,8 +16,8 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor();
 
         // Assert
-        await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
-        await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
+        _ = await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
+        _ = await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor(decoder: decoder, encoder: encoder);
 
         // Assert
-        await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
-        await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
+        _ = await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
+        _ = await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
     }
 }

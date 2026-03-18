@@ -12,8 +12,8 @@ public sealed class WhenWithIsPartialIsCalled
         Record result = original.IsPartial(false);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.IsPartial).IsFalse();
-        await Assert.That(original.IsPartial).IsTrue();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.IsPartial).IsFalse();
+        _ = await Assert.That(original.IsPartial).IsTrue();
     }
 }

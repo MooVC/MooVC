@@ -24,9 +24,9 @@ public sealed class WhenWithOutputsIsCalled
         TargetTask result = original.WithOutputs(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Outputs).IsEqualTo(original.Outputs.Concat([additional]));
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Outputs).IsEqualTo(original.Outputs.Concat([additional]));
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

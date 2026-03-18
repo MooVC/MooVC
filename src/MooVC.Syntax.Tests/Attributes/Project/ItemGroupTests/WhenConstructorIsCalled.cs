@@ -11,10 +11,10 @@ public sealed class WhenConstructorIsCalled
         var subject = new ItemGroup();
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Items).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -32,9 +32,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultCondition));
-        await Assert.That(subject.Label).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultLabel));
-        await Assert.That(subject.Items).IsEqualTo(new[] { item });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultCondition));
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultLabel));
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

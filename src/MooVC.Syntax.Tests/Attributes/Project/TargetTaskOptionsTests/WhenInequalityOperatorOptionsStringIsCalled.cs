@@ -13,6 +13,6 @@ public sealed class WhenInequalityOperatorOptionsStringIsCalled
         bool result = left != Right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

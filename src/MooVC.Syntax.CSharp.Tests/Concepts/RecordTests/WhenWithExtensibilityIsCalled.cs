@@ -15,8 +15,8 @@ public sealed class WhenWithExtensibilityIsCalled
         Record result = original.WithExtensibility(Extensibility.Implicit);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Implicit);
-        await Assert.That(original.Extensibility).IsEqualTo(Extensibility.Abstract);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Implicit);
+        _ = await Assert.That(original.Extensibility).IsEqualTo(Extensibility.Abstract);
     }
 }

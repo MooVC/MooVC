@@ -19,7 +19,7 @@ public sealed class WhenPrependIsCalled
             () => _ = subject.Prepend(options!, Beta)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenPrependIsCalled
 
         // Assert
         string text = result.ToString();
-        await Assert.That(text).IsEqualTo(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
@@ -49,7 +49,7 @@ public sealed class WhenPrependIsCalled
 
         // Assert
         string text = result.ToString();
-        await Assert.That(text).IsEqualTo(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
@@ -67,6 +67,6 @@ public sealed class WhenPrependIsCalled
 
         // Assert
         string text = result.ToString();
-        await Assert.That(text).IsEqualTo(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 }

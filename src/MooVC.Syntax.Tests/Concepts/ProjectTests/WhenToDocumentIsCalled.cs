@@ -15,8 +15,8 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        await Assert.That(result.Root).IsNull();
-        await Assert.That(result.Declaration).IsNull();
+        _ = await Assert.That(result.Root).IsNull();
+        _ = await Assert.That(result.Declaration).IsNull();
     }
 
     [Test]
@@ -81,10 +81,10 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        await Assert.That(XDeclaration declaration = result.Declaration).IsNotNull();
-        await Assert.That(declaration.Version).IsEqualTo("1.0");
-        await Assert.That(declaration.Encoding).IsEqualTo("utf-8");
-        await Assert.That(declaration.Standalone).IsEqualTo("yes");
-        await Assert.That(XNode.DeepEquals(expected, result)).IsTrue();
+        _ = await Assert.That(XDeclaration declaration = result.Declaration).IsNotNull();
+        _ = await Assert.That(declaration.Version).IsEqualTo("1.0");
+        _ = await Assert.That(declaration.Encoding).IsEqualTo("utf-8");
+        _ = await Assert.That(declaration.Standalone).IsEqualTo("yes");
+        _ = await Assert.That(XNode.DeepEquals(expected, result)).IsTrue();
     }
 }

@@ -11,17 +11,17 @@ public sealed class WhenConstructorIsCalled
         var subject = new Item();
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Exclude).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Include).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.KeepDuplicates).IsFalse();
-        await Assert.That(subject.MatchOnMetadata).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.MatchOnMetadataOptions).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Metadata).IsEmpty();
-        await Assert.That(subject.Remove).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.RemoveMetadata).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Update).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Exclude).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Include).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.KeepDuplicates).IsFalse();
+        _ = await Assert.That(subject.MatchOnMetadata).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.MatchOnMetadataOptions).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Metadata).IsEmpty();
+        _ = await Assert.That(subject.Remove).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.RemoveMetadata).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Update).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -46,16 +46,16 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemTestsData.DefaultCondition));
-        await Assert.That(subject.Exclude).IsEqualTo(Snippet.From(ItemTestsData.DefaultExclude));
-        await Assert.That(subject.Include).IsEqualTo(Snippet.From(ItemTestsData.DefaultInclude));
-        await Assert.That(subject.KeepDuplicates).IsTrue();
-        await Assert.That(subject.MatchOnMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadata));
-        await Assert.That(subject.MatchOnMetadataOptions).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadataOptions));
-        await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
-        await Assert.That(subject.Remove).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemove));
-        await Assert.That(subject.RemoveMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemoveMetadata));
-        await Assert.That(subject.Update).IsEqualTo(Snippet.From(ItemTestsData.DefaultUpdate));
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemTestsData.DefaultCondition));
+        _ = await Assert.That(subject.Exclude).IsEqualTo(Snippet.From(ItemTestsData.DefaultExclude));
+        _ = await Assert.That(subject.Include).IsEqualTo(Snippet.From(ItemTestsData.DefaultInclude));
+        _ = await Assert.That(subject.KeepDuplicates).IsTrue();
+        _ = await Assert.That(subject.MatchOnMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadata));
+        _ = await Assert.That(subject.MatchOnMetadataOptions).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadataOptions));
+        _ = await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
+        _ = await Assert.That(subject.Remove).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemove));
+        _ = await Assert.That(subject.RemoveMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemoveMetadata));
+        _ = await Assert.That(subject.Update).IsEqualTo(Snippet.From(ItemTestsData.DefaultUpdate));
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

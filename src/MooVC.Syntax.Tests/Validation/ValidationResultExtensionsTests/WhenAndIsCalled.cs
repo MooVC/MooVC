@@ -26,10 +26,10 @@ public sealed class WhenAndIsCalled
             additionalValidatable);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
     }
 
     [Test]
@@ -52,10 +52,10 @@ public sealed class WhenAndIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        _ = await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
     [Test]
@@ -79,9 +79,9 @@ public sealed class WhenAndIsCalled
 
         // Assert
         ValidationResult[] results = [.. actual.Results];
-        await Assert.That(results.Length).IsEqualTo(2);
-        await Assert.That(results).Contains(initial);
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(additionalValidatable)));
+        _ = await Assert.That(results.Length).IsEqualTo(2);
+        _ = await Assert.That(results).Contains(initial);
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(additionalValidatable)));
     }
 
     [Test]
@@ -106,11 +106,11 @@ public sealed class WhenAndIsCalled
 
         // Assert
         ValidationResult[] results = [.. actual.Results];
-        await Assert.That(results.Length).IsEqualTo(2);
-        await Assert.That(results).Contains(initial);
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(firstAdditional)));
-        await Assert.That(firstAdditional.Calls).IsEqualTo(1);
-        await Assert.That(secondAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(results.Length).IsEqualTo(2);
+        _ = await Assert.That(results).Contains(initial);
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(firstAdditional)));
+        _ = await Assert.That(firstAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(secondAdditional.Calls).IsEqualTo(1);
     }
 
     private sealed class StubValidatable : IValidatableObject

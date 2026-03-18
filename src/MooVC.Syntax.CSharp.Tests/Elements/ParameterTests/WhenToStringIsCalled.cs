@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
+        _ = await Assert.That(result).IsEqualTo($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
     }
 
     [Test]
@@ -52,8 +52,8 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        await Assert.That(result).Contains(AttributeName);
-        await Assert.That(result).Contains(Parameter.Mode.Out);
-        await Assert.That(result).Contains(ParameterTestsData.DefaultName);
+        _ = await Assert.That(result).Contains(AttributeName);
+        _ = await Assert.That(result).Contains(Parameter.Mode.Out);
+        _ = await Assert.That(result).Contains(ParameterTestsData.DefaultName);
     }
 }

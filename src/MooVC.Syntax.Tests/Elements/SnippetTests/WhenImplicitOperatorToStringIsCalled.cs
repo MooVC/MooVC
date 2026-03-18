@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> action = () => subject;
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

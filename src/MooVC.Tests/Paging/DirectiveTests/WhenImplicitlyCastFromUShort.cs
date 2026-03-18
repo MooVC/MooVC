@@ -13,8 +13,8 @@ public sealed class WhenImplicitlyCastFromUShort
         Directive directive = page;
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(Directive.DefaultLimit);
-        await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(Directive.DefaultLimit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 }
 #endif

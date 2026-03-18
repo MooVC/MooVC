@@ -12,10 +12,10 @@ public sealed class WhenWithModifierIsCalled
         Result result = original.WithModifier(Result.Kind.Ref);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Modifier).IsEqualTo(Result.Kind.Ref);
-        await Assert.That(result.Mode).IsEqualTo(original.Mode);
-        await Assert.That(result.Type).IsEqualTo(original.Type);
-        await Assert.That(original.Modifier).IsEqualTo(Result.Kind.None);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Modifier).IsEqualTo(Result.Kind.Ref);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(original.Modifier).IsEqualTo(Result.Kind.None);
     }
 }

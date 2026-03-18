@@ -69,7 +69,7 @@ public sealed class WhenStartAsyncIsCalled
         // Act & Assert
         AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
 
-        await Assert.That(actual.InnerException).IsEqualTo(expected);
+        _ = await Assert.That(actual.InnerException).IsEqualTo(expected);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
@@ -86,8 +86,8 @@ public sealed class WhenStartAsyncIsCalled
         // Act & Assert
         AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
 
-        await Assert.That(actual.InnerException).IsEqualTo(start);
-        await Assert.That(actual.InnerExceptions).DoesNotContain(stop);
+        _ = await Assert.That(actual.InnerException).IsEqualTo(start);
+        _ = await Assert.That(actual.InnerExceptions).DoesNotContain(stop);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }

@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = type;
 
         // Assert
-        await Assert.That(value).IsEqualTo("explicit");
+        _ = await Assert.That(value).IsEqualTo("explicit");
     }
 }

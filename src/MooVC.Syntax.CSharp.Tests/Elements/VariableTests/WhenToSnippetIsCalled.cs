@@ -22,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("MyValue");
+        _ = await Assert.That(result).IsEqualTo("MyValue");
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("myValue");
+        _ = await Assert.That(result).IsEqualTo("myValue");
     }
 
     [Test]
@@ -54,7 +54,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("my_value");
+        _ = await Assert.That(result).IsEqualTo("my_value");
     }
 
     [Test]
@@ -70,7 +70,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("my-value");
+        _ = await Assert.That(result).IsEqualTo("my-value");
     }
 
     [Test]
@@ -87,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("_myValue");
+        _ = await Assert.That(result).IsEqualTo("_myValue");
     }
 
     [Test]
@@ -110,7 +110,7 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo($"@{expected}");
+        _ = await Assert.That(result).IsEqualTo($"@{expected}");
     }
 
     [Test]
@@ -126,7 +126,7 @@ public sealed class WhenToSnippetIsCalled
         Func<string> act = () => subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(act).Throws<NotSupportedException>();
+        _ = await Assert.That(act).Throws<NotSupportedException>();
     }
 
     [Test]
@@ -140,6 +140,6 @@ public sealed class WhenToSnippetIsCalled
         Func<string> act = () => subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 }

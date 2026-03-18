@@ -18,7 +18,7 @@ public sealed class WhenCombineIsCalled
         Action action = () => Separator.Combine(values!);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(value);
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(samples);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -58,7 +58,7 @@ public sealed class WhenCombineIsCalled
         Action action = () => Separator.Combine(elements, formatter!);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -72,6 +72,6 @@ public sealed class WhenCombineIsCalled
         string result = Separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

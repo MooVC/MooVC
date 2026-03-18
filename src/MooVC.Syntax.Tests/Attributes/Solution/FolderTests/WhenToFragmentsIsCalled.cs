@@ -15,7 +15,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -57,6 +57,6 @@ public sealed class WhenToFragmentsIsCalled
 
         // Assert
         XElement fragment = result.Single();
-        await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
+        _ = await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
     }
 }

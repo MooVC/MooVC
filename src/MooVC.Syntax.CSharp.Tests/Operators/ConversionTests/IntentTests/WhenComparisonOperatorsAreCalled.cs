@@ -16,10 +16,10 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        await Assert.That(lessThan).IsTrue();
-        await Assert.That(greaterThan).IsFalse();
-        await Assert.That(lessThanOrEqual).IsTrue();
-        await Assert.That(greaterThanOrEqual).IsFalse();
+        _ = await Assert.That(lessThan).IsTrue();
+        _ = await Assert.That(greaterThan).IsFalse();
+        _ = await Assert.That(lessThanOrEqual).IsTrue();
+        _ = await Assert.That(greaterThanOrEqual).IsFalse();
     }
 
     [Test]
@@ -36,9 +36,9 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool lessThanOrEqual = left <= right;
 
         // Assert
-        await Assert.That(greaterThan).IsTrue();
-        await Assert.That(lessThan).IsFalse();
-        await Assert.That(greaterThanOrEqual).IsTrue();
-        await Assert.That(lessThanOrEqual).IsFalse();
+        _ = await Assert.That(greaterThan).IsTrue();
+        _ = await Assert.That(lessThan).IsFalse();
+        _ = await Assert.That(greaterThanOrEqual).IsTrue();
+        _ = await Assert.That(lessThanOrEqual).IsFalse();
     }
 }

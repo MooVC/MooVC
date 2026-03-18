@@ -17,8 +17,8 @@ public sealed class WhenNamedIsCalled
         Argument result = argument.Named(name);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, argument)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(name);
-        await Assert.That(argument.Name).IsNotEqualTo(name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(argument);
+        _ = await Assert.That(result.Name).IsEqualTo(name);
+        _ = await Assert.That(argument.Name).IsNotEqualTo(name);
     }
 }

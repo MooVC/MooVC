@@ -35,8 +35,8 @@ public sealed class WhenCloneIsCalled
         ExpandoObject clone = original.Clone();
 
         // Assert
-        await Assert.That(ReferenceEquals(clone, original)).IsFalse();
-        await Assert.That(clone).IsEqualTo(original);
+        _ = await Assert.That(clone).IsNotSameReferenceAs(original);
+        _ = await Assert.That(clone).IsEqualTo(original);
     }
 
     [Test]
@@ -53,9 +53,9 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        await Assert.That(ReferenceEquals(((ExpandoObject)clone), (ExpandoObject)parent)).IsFalse();
-        await Assert.That(ReferenceEquals(((ExpandoObject)clone.Child), (ExpandoObject)parent.Child)).IsFalse();
-        await Assert.That(((ExpandoObject)clone.Child)).IsEqualTo((ExpandoObject)parent.Child);
+        _ = await Assert.That(((ExpandoObject)clone)).IsNotSameReferenceAs((ExpandoObject)parent);
+        _ = await Assert.That(((ExpandoObject)clone.Child)).IsNotSameReferenceAs((ExpandoObject)parent.Child);
+        _ = await Assert.That(((ExpandoObject)clone.Child)).IsEqualTo((ExpandoObject)parent.Child);
     }
 
     [Test]
@@ -68,7 +68,7 @@ public sealed class WhenCloneIsCalled
         Action act = () => source.Clone(defaultIfNull: false);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -82,7 +82,7 @@ public sealed class WhenCloneIsCalled
 
         // Assert
         _ = await Assert.That(value).IsNotNull();
-        await Assert.That(value).IsEmpty();
+        _ = await Assert.That(value).IsEmpty();
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        await Assert.That(ReferenceEquals(((ExpandoObject)clone), (ExpandoObject)parent)).IsFalse();
-        await Assert.That(ReferenceEquals(((object)clone.Child), (object)parent.Child)).IsTrue();
+        _ = await Assert.That(((ExpandoObject)clone)).IsNotSameReferenceAs((ExpandoObject)parent);
+        _ = await Assert.That(((object)clone.Child)).IsSameReferenceAs((object)parent.Child);
     }
 }

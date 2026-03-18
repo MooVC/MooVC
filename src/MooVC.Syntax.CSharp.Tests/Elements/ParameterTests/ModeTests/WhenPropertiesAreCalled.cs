@@ -26,13 +26,13 @@ public sealed class WhenPropertiesAreCalled
         Parameter.Mode subject = value;
 
         // Act & Assert
-        await Assert.That(subject.IsIn).IsEqualTo(expectedIn);
-        await Assert.That(subject.IsOut).IsEqualTo(expectedOut);
-        await Assert.That(subject.IsNone).IsEqualTo(expectedNone);
-        await Assert.That(subject.IsParams).IsEqualTo(expectedParams);
-        await Assert.That(subject.IsRef).IsEqualTo(expectedRef);
-        await Assert.That(subject.IsRefReadonly).IsEqualTo(expectedRefReadonly);
-        await Assert.That(subject.IsScoped).IsEqualTo(expectedScoped);
-        await Assert.That(subject.IsThis).IsEqualTo(expectedThis);
+        _ = await Assert.That(subject.IsIn).IsEqualTo(expectedIn);
+        _ = await Assert.That(subject.IsOut).IsEqualTo(expectedOut);
+        _ = await Assert.That(subject.IsNone).IsEqualTo(expectedNone);
+        _ = await Assert.That(subject.IsParams).IsEqualTo(expectedParams);
+        _ = await Assert.That(subject.IsRef).IsEqualTo(expectedRef);
+        _ = await Assert.That(subject.IsRefReadonly).IsEqualTo(expectedRefReadonly);
+        _ = await Assert.That(subject.IsScoped).IsEqualTo(expectedScoped);
+        _ = await Assert.That(subject.IsThis).IsEqualTo(expectedThis);
     }
 }

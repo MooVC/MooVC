@@ -12,7 +12,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Nature result = Value;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Nature result = Value;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 }

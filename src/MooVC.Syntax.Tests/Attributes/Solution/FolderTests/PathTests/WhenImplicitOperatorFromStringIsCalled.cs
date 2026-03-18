@@ -14,8 +14,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Folder.Path subject = value;
 
         // Assert
-        await Assert.That(subject.IsRoot).IsTrue();
-        await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.IsRoot).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
     }
 
     [Test]
@@ -28,8 +28,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Folder.Path subject = value;
 
         // Assert
-        await Assert.That(subject.IsRoot).IsFalse();
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject.IsRoot).IsFalse();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

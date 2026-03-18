@@ -12,7 +12,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
 
         // Assert
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -52,7 +52,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        await Assert.That(results).IsEqualTo(source.Values);
+        _ = await Assert.That(results).IsEqualTo(source.Values);
     }
 
     [Test]
@@ -71,6 +71,6 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        await Assert.That(results).IsEqualTo(expected);
+        _ = await Assert.That(results).IsEqualTo(expected);
     }
 }

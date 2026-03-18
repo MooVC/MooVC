@@ -12,7 +12,7 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(default(Comparison.Type));
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(type);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(Comparison.Type.Equality);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -51,6 +51,6 @@ public sealed class WhenEqualsTypeIsCalled
         bool result = type.Equals(Comparison.Type.Inequality);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

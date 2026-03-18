@@ -14,11 +14,11 @@ public sealed class WhenNamedIsCalled
         Parameter result = original.Named(new Variable(NewName));
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(new Variable(NewName));
-        await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
-        await Assert.That(result.Default).IsEqualTo(original.Default);
-        await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
-        await Assert.That(original.Name).IsEqualTo(new Variable(ParameterTestsData.DefaultName));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(new Variable(NewName));
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(original.Name).IsEqualTo(new Variable(ParameterTestsData.DefaultName));
     }
 }

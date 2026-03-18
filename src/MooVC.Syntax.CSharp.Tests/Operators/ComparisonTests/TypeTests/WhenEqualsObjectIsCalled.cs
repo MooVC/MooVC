@@ -12,7 +12,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(null as object);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(type as object);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(Comparison.Type.Equality as object);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(Comparison.Type.Inequality as object);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -64,6 +64,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(new object());
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

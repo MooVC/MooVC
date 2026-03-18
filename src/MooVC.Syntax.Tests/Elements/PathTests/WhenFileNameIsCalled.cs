@@ -15,6 +15,6 @@ public sealed class WhenFileNameIsCalled
         string result = subject.FileName;
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

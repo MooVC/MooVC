@@ -43,7 +43,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -71,7 +71,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(order));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(order));
     }
 
     [Test]
@@ -85,7 +85,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -109,7 +109,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -122,7 +122,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -135,6 +135,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
-        await Assert.That(result).IsEqualTo([]);
+        _ = await Assert.That(result).IsEmpty();
     }
 }

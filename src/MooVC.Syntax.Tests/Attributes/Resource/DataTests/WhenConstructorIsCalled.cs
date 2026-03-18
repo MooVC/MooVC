@@ -11,12 +11,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Data();
 
         // Assert
-        await Assert.That(subject.Comment).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.MimeType).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Comment).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.MimeType).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -40,11 +40,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Comment).IsEqualTo(comment);
-        await Assert.That(subject.MimeType).IsEqualTo(mimeType);
-        await Assert.That(subject.Name).IsEqualTo(name);
-        await Assert.That(subject.Type).IsEqualTo(type);
-        await Assert.That(subject.Value).IsEqualTo(value);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Comment).IsEqualTo(comment);
+        _ = await Assert.That(subject.MimeType).IsEqualTo(mimeType);
+        _ = await Assert.That(subject.Name).IsEqualTo(name);
+        _ = await Assert.That(subject.Type).IsEqualTo(type);
+        _ = await Assert.That(subject.Value).IsEqualTo(value);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

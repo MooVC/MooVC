@@ -16,7 +16,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -44,6 +44,6 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

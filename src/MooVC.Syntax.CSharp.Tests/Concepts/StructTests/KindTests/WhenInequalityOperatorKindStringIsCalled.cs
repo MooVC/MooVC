@@ -13,7 +13,7 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != Right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != Right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -40,6 +40,6 @@ public sealed class WhenInequalityOperatorKindStringIsCalled
         bool result = left != default(string);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

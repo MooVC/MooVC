@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         TargetTask result = original.OnCondition(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Condition).IsEqualTo(updated);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.ContinueOnError).IsEqualTo(original.ContinueOnError);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.ContinueOnError).IsEqualTo(original.ContinueOnError);
     }
 }

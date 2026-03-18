@@ -15,6 +15,6 @@ public sealed class WhenFileNameWithoutExtensionIsCalled
         string result = subject.FileNameWithoutExtension;
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -19,8 +19,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsTrue();
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -35,9 +35,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsFalse();
-        await Assert.That(results).IsNotEmpty();
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Body)));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).IsNotEmpty();
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Body)));
     }
 
     [Test]
@@ -52,9 +52,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsFalse();
-        await Assert.That(results).IsNotEmpty();
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Target)));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).IsNotEmpty();
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Target)));
     }
 
     [Test]
@@ -69,7 +69,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsTrue();
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

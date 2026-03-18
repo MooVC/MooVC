@@ -12,9 +12,9 @@ public sealed class WhenUseUnderscoreIsCalled
         Variable.Options result = original.UseUnderscore(true);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Casing).IsEqualTo(original.Casing);
-        await Assert.That(result.UseUnderscore).IsTrue();
-        await Assert.That(original.UseUnderscore).IsFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Casing).IsEqualTo(original.Casing);
+        _ = await Assert.That(result.UseUnderscore).IsTrue();
+        _ = await Assert.That(original.UseUnderscore).IsFalse();
     }
 }

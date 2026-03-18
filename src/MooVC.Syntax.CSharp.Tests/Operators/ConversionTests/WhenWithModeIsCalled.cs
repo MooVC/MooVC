@@ -13,11 +13,11 @@ public sealed class WhenWithModeIsCalled
         Conversion result = original.WithMode(replacement);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(original.Body);
-        await Assert.That(result.Direction).IsEqualTo(original.Direction);
-        await Assert.That(result.Mode).IsEqualTo(replacement);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        await Assert.That(result.Target).IsEqualTo(original.Target);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Direction).IsEqualTo(original.Direction);
+        _ = await Assert.That(result.Mode).IsEqualTo(replacement);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

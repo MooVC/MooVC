@@ -17,8 +17,8 @@ public sealed class WhenWithEventsIsCalled
         Record result = original.WithEvents(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Events).IsEqualTo(new[] { created, updated });
-        await Assert.That(result.Fields).IsEqualTo(original.Fields);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Events).IsEqualTo(new[] { created, updated });
+        _ = await Assert.That(result.Fields).IsEqualTo(original.Fields);
     }
 }

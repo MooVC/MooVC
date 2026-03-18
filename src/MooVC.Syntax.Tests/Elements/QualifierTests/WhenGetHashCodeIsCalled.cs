@@ -19,7 +19,7 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        await Assert.That(leftHash).IsEqualTo(rightHash);
+        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        await Assert.That(leftHash).IsNotEqualTo(rightHash);
+        _ = await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 
     [Test]
@@ -48,6 +48,6 @@ public sealed class WhenGetHashCodeIsCalled
         int second = subject.GetHashCode();
 
         // Assert
-        await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

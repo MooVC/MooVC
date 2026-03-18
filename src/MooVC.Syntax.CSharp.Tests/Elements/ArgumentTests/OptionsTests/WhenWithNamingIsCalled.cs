@@ -13,8 +13,8 @@ public sealed class WhenWithNamingIsCalled
         Argument.Options result = options.WithNaming(value);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, options)).IsFalse();
-        await Assert.That(result.Naming).IsEqualTo(value);
-        await Assert.That(options.Naming).IsNotEqualTo(value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result.Naming).IsEqualTo(value);
+        _ = await Assert.That(options.Naming).IsNotEqualTo(value);
     }
 }

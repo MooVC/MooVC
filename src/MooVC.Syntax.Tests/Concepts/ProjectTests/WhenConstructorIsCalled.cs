@@ -12,13 +12,13 @@ public sealed class WhenConstructorIsCalled
         var subject = new Project();
 
         // Assert
-        await Assert.That(subject.Imports).IsEmpty();
-        await Assert.That(subject.ItemGroups).IsEmpty();
-        await Assert.That(subject.PropertyGroups).IsEmpty();
-        await Assert.That(subject.Resources).IsEmpty();
-        await Assert.That(subject.Sdks).IsEmpty();
-        await Assert.That(subject.Targets).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Imports).IsEmpty();
+        _ = await Assert.That(subject.ItemGroups).IsEmpty();
+        _ = await Assert.That(subject.PropertyGroups).IsEmpty();
+        _ = await Assert.That(subject.Resources).IsEmpty();
+        _ = await Assert.That(subject.Sdks).IsEmpty();
+        _ = await Assert.That(subject.Targets).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -44,12 +44,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Imports).IsEqualTo(new[] { import });
-        await Assert.That(subject.ItemGroups).IsEqualTo(new[] { itemGroup });
-        await Assert.That(subject.PropertyGroups).IsEqualTo(new[] { propertyGroup });
-        await Assert.That(subject.Resources).IsEqualTo(new[] { resource });
-        await Assert.That(subject.Sdks).IsEqualTo(new[] { sdk });
-        await Assert.That(subject.Targets).IsEqualTo(new[] { target });
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Imports).IsEqualTo(new[] { import });
+        _ = await Assert.That(subject.ItemGroups).IsEqualTo(new[] { itemGroup });
+        _ = await Assert.That(subject.PropertyGroups).IsEqualTo(new[] { propertyGroup });
+        _ = await Assert.That(subject.Resources).IsEqualTo(new[] { resource });
+        _ = await Assert.That(subject.Sdks).IsEqualTo(new[] { sdk });
+        _ = await Assert.That(subject.Targets).IsEqualTo(new[] { target });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

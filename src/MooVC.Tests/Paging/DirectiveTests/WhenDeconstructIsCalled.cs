@@ -15,8 +15,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        await Assert.That(limit).IsEqualTo(expectedLimit);
-        await Assert.That(page).IsEqualTo(expectedPage);
+        _ = await Assert.That(limit).IsEqualTo(expectedLimit);
+        _ = await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
@@ -31,8 +31,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        await Assert.That(limit).IsEqualTo(expectedLimit);
-        await Assert.That(page).IsEqualTo(expectedPage);
+        _ = await Assert.That(limit).IsEqualTo(expectedLimit);
+        _ = await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
@@ -47,8 +47,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort limit, ushort page) = directive;
 
         // Assert
-        await Assert.That(limit).IsEqualTo(expectedLimit);
-        await Assert.That(page).IsEqualTo(expectedPage);
+        _ = await Assert.That(limit).IsEqualTo(expectedLimit);
+        _ = await Assert.That(page).IsEqualTo(expectedPage);
     }
 
     [Test]
@@ -63,8 +63,8 @@ public sealed class WhenDeconstructIsCalled
         (ushort page, ushort size) = directive;
 
         // Assert
-        await Assert.That(page).IsEqualTo(expectedPage);
-        await Assert.That(size).IsEqualTo(expectedLimit);
+        _ = await Assert.That(page).IsEqualTo(expectedPage);
+        _ = await Assert.That(size).IsEqualTo(expectedLimit);
     }
 }
 #endif

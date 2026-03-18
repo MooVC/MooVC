@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string representation = subject;
 
         // Assert
-        await Assert.That(representation).IsEqualTo(subject.ToString());
+        _ = await Assert.That(representation).IsEqualTo(subject.ToString());
     }
 }

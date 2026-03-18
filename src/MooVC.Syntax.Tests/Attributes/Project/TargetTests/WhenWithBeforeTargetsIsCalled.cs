@@ -17,9 +17,9 @@ public sealed class WhenWithBeforeTargetsIsCalled
         Target result = original.WithBeforeTargets(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.BeforeTargets).IsEqualTo(updated);
-        await Assert.That(result.AfterTargets).IsEqualTo(original.AfterTargets);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.BeforeTargets).IsEqualTo(updated);
+        _ = await Assert.That(result.AfterTargets).IsEqualTo(original.AfterTargets);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

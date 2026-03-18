@@ -19,9 +19,9 @@ public sealed class WhenWithAddIsCalled
         Event.Methods result = original.WithAdd(add);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Add).IsEqualTo(add);
-        await Assert.That(result.Remove).IsEqualTo(original.Remove);
-        await Assert.That(original.Add).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Add).IsEqualTo(add);
+        _ = await Assert.That(result.Remove).IsEqualTo(original.Remove);
+        _ = await Assert.That(original.Add).IsEqualTo(Snippet.Empty);
     }
 }

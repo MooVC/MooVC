@@ -13,10 +13,10 @@ public sealed class WhenNamedIsCalled
         Folder result = original.Named(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(updated);
-        await Assert.That(result.Files).IsEqualTo(original.Files);
-        await Assert.That(result.Items).IsEqualTo(original.Items);
-        await Assert.That(result.Projects).IsEqualTo(original.Projects);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(updated);
+        _ = await Assert.That(result.Files).IsEqualTo(original.Files);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result.Projects).IsEqualTo(original.Projects);
     }
 }

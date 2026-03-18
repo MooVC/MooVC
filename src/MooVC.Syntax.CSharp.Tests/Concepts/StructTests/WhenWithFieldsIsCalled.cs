@@ -16,8 +16,8 @@ public sealed class WhenWithFieldsIsCalled
         Struct result = original.WithFields(field);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Fields).Contains(field);
-        await Assert.That(original.Fields).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Fields).Contains(field);
+        _ = await Assert.That(original.Fields).IsEmpty();
     }
 }

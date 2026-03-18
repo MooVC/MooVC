@@ -39,7 +39,7 @@ public sealed class WhenBrotliCompressorIsConstructed
         Func<ICompressor> act = () => new BrotliCompressor(level: level);
 
         // Assert
-        await Assert.That(act).Throws<InvalidEnumArgumentException>();
+        _ = await Assert.That(act).Throws<InvalidEnumArgumentException>();
     }
 }
 #endif

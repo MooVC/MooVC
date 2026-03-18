@@ -12,7 +12,7 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(default(Conversion.Intent));
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(intent);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(Conversion.Intent.From);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -51,6 +51,6 @@ public sealed class WhenEqualsIntentIsCalled
         bool result = intent.Equals(Conversion.Intent.To);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

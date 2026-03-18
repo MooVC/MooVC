@@ -13,10 +13,10 @@ public sealed class WhenOfTypeIsCalled
         Result result = original.OfType(type);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Type).IsEqualTo(type);
-        await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
-        await Assert.That(result.Mode).IsEqualTo(original.Mode);
-        await Assert.That(original.Type.Name).IsEqualTo(new Symbol.Moniker(ResultTestsData.DefaultTypeName));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Type).IsEqualTo(type);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(original.Type.Name).IsEqualTo(new Symbol.Moniker(ResultTestsData.DefaultTypeName));
     }
 }

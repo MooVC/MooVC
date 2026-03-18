@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
         Func<Name[]> result = () => qualifier;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -31,6 +31,6 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
         Name[] result = qualifier;
 
         // Assert
-        await Assert.That(result).IsEqualTo([.. value]);
+        _ = await Assert.That(result).IsEqualTo([.. value]);
     }
 }

@@ -19,7 +19,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
@@ -33,7 +33,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
@@ -48,7 +48,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
     [Test]
@@ -61,7 +61,7 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(Array.Empty<string>());
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -75,7 +75,7 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(value);
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -88,7 +88,7 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(samples);
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Join(separator, samples));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples));
     }
 
     [Test]
@@ -104,7 +104,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(formatter));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(formatter));
     }
 
     [Test]
@@ -118,7 +118,7 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -132,7 +132,7 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -147,7 +147,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
@@ -162,7 +162,7 @@ public sealed class WhenCombineIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
@@ -176,6 +176,6 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
     }
 }

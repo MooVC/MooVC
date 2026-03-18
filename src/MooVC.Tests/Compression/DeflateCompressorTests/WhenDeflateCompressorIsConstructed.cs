@@ -37,6 +37,6 @@ public sealed class WhenDeflateCompressorIsConstructed
         Func<ICompressor> act = () => new DeflateCompressor(level: level);
 
         // Assert
-        await Assert.That(act).Throws<InvalidEnumArgumentException>();
+        _ = await Assert.That(act).Throws<InvalidEnumArgumentException>();
     }
 }

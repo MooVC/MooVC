@@ -14,7 +14,7 @@ public sealed class WhenImplicitOperatorFromDeclarationIsCalled
         Interface result = value;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo(value.ToString());
+        _ = await Assert.That(result.ToString()).IsEqualTo(value.ToString());
     }
 
     [Test]
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorFromDeclarationIsCalled
         Interface result = value;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo(value.ToString());
+        _ = await Assert.That(result.ToString()).IsEqualTo(value.ToString());
     }
 }

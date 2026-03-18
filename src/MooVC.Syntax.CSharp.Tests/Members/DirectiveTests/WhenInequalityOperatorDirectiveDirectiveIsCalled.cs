@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -33,7 +33,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -47,7 +47,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -61,7 +61,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = first != second;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -75,7 +75,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -90,8 +90,8 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        await Assert.That(resultLeftRight).IsTrue();
-        await Assert.That(resultRightLeft).IsTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
@@ -105,7 +105,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -119,7 +119,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)

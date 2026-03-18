@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         string result = qualifier.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -28,6 +28,6 @@ public sealed class WhenToStringIsCalled
         string result = qualifier.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo("Alpha.Beta.Gamma");
+        _ = await Assert.That(result).IsEqualTo("Alpha.Beta.Gamma");
     }
 }

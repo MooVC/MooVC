@@ -15,6 +15,6 @@ public sealed class WhenInequalityOperatorPropertyPropertyIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

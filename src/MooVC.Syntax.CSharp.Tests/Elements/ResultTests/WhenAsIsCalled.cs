@@ -15,7 +15,7 @@ public sealed class WhenAsIsCalled
         Action action = () => _ = subject.As(wrapper!);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -32,7 +32,7 @@ public sealed class WhenAsIsCalled
         Result result = subject.AsTask();
 
         // Assert
-        await Assert.That(result.Type.ToString()).IsEqualTo("Task<Value>");
+        _ = await Assert.That(result.Type.ToString()).IsEqualTo("Task<Value>");
     }
 
     [Test]
@@ -49,6 +49,6 @@ public sealed class WhenAsIsCalled
         Result result = subject.AsValueTask();
 
         // Assert
-        await Assert.That(result.Type.ToString()).IsEqualTo("ValueTask<Value>");
+        _ = await Assert.That(result.Type.ToString()).IsEqualTo("ValueTask<Value>");
     }
 }

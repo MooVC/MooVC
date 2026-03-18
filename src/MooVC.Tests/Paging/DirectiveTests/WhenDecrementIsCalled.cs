@@ -17,8 +17,8 @@ public sealed class WhenDecrementIsCalled
         directive--;
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(limit);
-        await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -32,7 +32,7 @@ public sealed class WhenDecrementIsCalled
         actual--;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -49,8 +49,8 @@ public sealed class WhenDecrementIsCalled
         --directive;
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(limit);
-        await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -64,7 +64,7 @@ public sealed class WhenDecrementIsCalled
         --actual;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -80,8 +80,8 @@ public sealed class WhenDecrementIsCalled
         Directive actual = original - decrement;
 
         // Assert
-        await Assert.That(actual.Page).IsEqualTo(expected);
-        await Assert.That(original.Limit).IsEqualTo(limit);
+        _ = await Assert.That(actual.Page).IsEqualTo(expected);
+        _ = await Assert.That(original.Limit).IsEqualTo(limit);
     }
 
     [Test]
@@ -98,7 +98,7 @@ public sealed class WhenDecrementIsCalled
         Directive actual = expected - decrement;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }
 #endif

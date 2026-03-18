@@ -22,8 +22,8 @@ public sealed class WhenWithConfigurationsIsCalled
         Solution result = original.WithConfigurations(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Configurations).IsEqualTo(updated);
-        await Assert.That(result.Files).IsEqualTo(original.Files);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Configurations).IsEqualTo(updated);
+        _ = await Assert.That(result.Files).IsEqualTo(original.Files);
     }
 }

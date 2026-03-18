@@ -17,9 +17,9 @@ public sealed class WhenWithMatchOnMetadataIsCalled
         Item result = original.WithMatchOnMetadata(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.MatchOnMetadata).IsEqualTo(updated);
-        await Assert.That(result.MatchOnMetadataOptions).IsEqualTo(original.MatchOnMetadataOptions);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.MatchOnMetadata).IsEqualTo(updated);
+        _ = await Assert.That(result.MatchOnMetadataOptions).IsEqualTo(original.MatchOnMetadataOptions);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

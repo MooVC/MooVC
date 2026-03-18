@@ -16,8 +16,8 @@ public sealed class WhenWithMethodsIsCalled
         Record result = original.WithMethods(undo);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Methods).IsEqualTo(new[] { execute, undo });
-        await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Methods).IsEqualTo(new[] { execute, undo });
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
     }
 }

@@ -20,10 +20,10 @@ public sealed class WhenReturnsIsCalled
         Indexer updated = original.Returns(result);
 
         // Assert
-        await Assert.That(ReferenceEquals(updated, original)).IsFalse();
-        await Assert.That(updated.Behaviours).IsEqualTo(original.Behaviours);
-        await Assert.That(updated.Parameter).IsEqualTo(original.Parameter);
-        await Assert.That(updated.Result).IsEqualTo(result);
-        await Assert.That(updated.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(updated).IsNotSameReferenceAs(original);
+        _ = await Assert.That(updated.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(updated.Parameter).IsEqualTo(original.Parameter);
+        _ = await Assert.That(updated.Result).IsEqualTo(result);
+        _ = await Assert.That(updated.Scope).IsEqualTo(original.Scope);
     }
 }

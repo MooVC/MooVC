@@ -37,8 +37,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            await Assert.That(input1).IsEqualTo(instance);
-            await Assert.That(input2).IsAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -49,7 +49,7 @@ public sealed class WhenSerializeIsCalled
         _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -62,8 +62,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            await Assert.That(input1).IsEqualTo(instance);
-            await Assert.That(input2).IsAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -74,7 +74,7 @@ public sealed class WhenSerializeIsCalled
         await serializer.Serialize(instance, stream, CancellationToken.None);
 
         // Assert
-        await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -87,8 +87,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            await Assert.That(input1).IsEqualTo(instance);
-            await Assert.That(input2).IsAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -99,7 +99,7 @@ public sealed class WhenSerializeIsCalled
         _ = await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
-        await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -115,6 +115,6 @@ public sealed class WhenSerializeIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(target));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(target));
     }
 }

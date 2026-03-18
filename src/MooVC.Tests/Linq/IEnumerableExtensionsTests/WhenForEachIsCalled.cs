@@ -19,7 +19,7 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        await Assert.That(invocations).IsEqualTo(enumeration);
+        _ = await Assert.That(invocations).IsEqualTo(enumeration);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public sealed class WhenForEachIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 
     [Test]
@@ -53,7 +53,7 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        await Assert.That(wasInvoked).IsFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -66,6 +66,6 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(default!);
 
         // Assert
-        await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 }

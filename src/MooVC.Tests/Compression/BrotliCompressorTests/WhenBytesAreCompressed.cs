@@ -20,13 +20,13 @@ public sealed class WhenBytesAreCompressed
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
 
         // Assert
-        await Assert.That(compressed).IsNotEqualTo(expected);
+        _ = await Assert.That(compressed).IsNotEqualTo(expected);
 
         // Act
         IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
-        await Assert.That(decompressed).IsEqualTo(expected);
+        _ = await Assert.That(decompressed).IsEqualTo(expected);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public sealed class WhenBytesAreCompressed
         IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
-        await Assert.That(decompressed).IsEqualTo(expected);
+        _ = await Assert.That(decompressed).IsEqualTo(expected);
     }
 }
 #endif

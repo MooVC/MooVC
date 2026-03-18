@@ -12,9 +12,9 @@ public sealed class WhenPropertiesAreCalled
         Property.Mode subject = value;
 
         // Act & Assert
-        await Assert.That(subject.IsInit).IsEqualTo(expectedInit);
-        await Assert.That(subject.IsReadOnly).IsEqualTo(expectedReadOnly);
-        await Assert.That(subject.IsSet).IsEqualTo(expectedSet);
+        _ = await Assert.That(subject.IsInit).IsEqualTo(expectedInit);
+        _ = await Assert.That(subject.IsReadOnly).IsEqualTo(expectedReadOnly);
+        _ = await Assert.That(subject.IsSet).IsEqualTo(expectedSet);
     }
 
     [Test]
@@ -30,6 +30,6 @@ public sealed class WhenPropertiesAreCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

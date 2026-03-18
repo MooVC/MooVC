@@ -13,7 +13,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left < right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left > right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left < right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -55,6 +55,6 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left <= right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

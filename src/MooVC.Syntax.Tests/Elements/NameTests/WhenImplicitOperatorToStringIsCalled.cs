@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
@@ -43,7 +43,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Empty);
+        _ = await Assert.That(result).IsEqualTo(Empty);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Space);
+        _ = await Assert.That(result).IsEqualTo(Space);
     }
 
     [Test]
@@ -69,7 +69,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Alpha);
+        _ = await Assert.That(result).IsEqualTo(Alpha);
     }
 
     [Test]
@@ -82,7 +82,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Unicode);
+        _ = await Assert.That(result).IsEqualTo(Unicode);
     }
 
     [Test]
@@ -96,6 +96,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 }

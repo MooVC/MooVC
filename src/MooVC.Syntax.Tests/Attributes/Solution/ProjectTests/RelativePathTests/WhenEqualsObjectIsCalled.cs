@@ -14,7 +14,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(default(object));
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals("src/Other.csproj");
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -42,6 +42,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

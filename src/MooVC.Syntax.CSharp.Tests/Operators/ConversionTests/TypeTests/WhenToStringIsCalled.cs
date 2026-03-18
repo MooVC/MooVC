@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string value = type.ToString();
 
         // Assert
-        await Assert.That(value).IsEqualTo("explicit");
+        _ = await Assert.That(value).IsEqualTo("explicit");
     }
 }

@@ -19,8 +19,8 @@ public sealed class WhenWithFilesIsCalled
         Solution result = original.WithFiles(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Files).IsEqualTo(original.Files.Concat([additional]));
-        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Files).IsEqualTo(original.Files.Concat([additional]));
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

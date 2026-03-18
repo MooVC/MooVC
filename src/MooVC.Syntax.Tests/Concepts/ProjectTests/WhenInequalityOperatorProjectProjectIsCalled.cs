@@ -16,6 +16,6 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         bool result = left != right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

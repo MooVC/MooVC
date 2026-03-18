@@ -42,7 +42,7 @@ public sealed class WhenToSnippetIsCalled
         var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        await Assert.That(snippet).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
@@ -65,6 +65,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenSnippetReturnedExpected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenSnippetReturnedExpected);
     }
 }

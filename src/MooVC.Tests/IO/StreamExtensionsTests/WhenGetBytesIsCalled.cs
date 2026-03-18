@@ -16,7 +16,7 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
@@ -44,6 +44,6 @@ public sealed class WhenGetBytesIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(source));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(source));
     }
 }

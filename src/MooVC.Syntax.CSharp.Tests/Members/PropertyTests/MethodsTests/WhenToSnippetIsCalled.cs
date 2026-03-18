@@ -23,8 +23,8 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        await Assert.That(representation).Contains("private init");
-        await Assert.That(representation).Contains("get => value;");
+        _ = await Assert.That(representation).Contains("private init");
+        _ = await Assert.That(representation).Contains("get => value;");
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("value;");
+        _ = await Assert.That(representation).IsEqualTo("value;");
     }
 
     [Test]
@@ -57,6 +57,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("get; init;");
+        _ = await Assert.That(representation).IsEqualTo("get; init;");
     }
 }

@@ -16,11 +16,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, []);
 
         // Assert
-        await Assert.That(result).IsEmpty();
-        await Assert.That(result.Count).IsEqualTo(0);
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.HasTotal).IsFalse();
-        await Assert.That(result.Total).IsNull();
+        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result.Count).IsEqualTo(0);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsFalse();
+        _ = await Assert.That(result.Total).IsNull();
     }
 
     [Test]
@@ -36,11 +36,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values);
 
         // Assert
-        await Assert.That(result).IsEqualTo(values);
-        await Assert.That(result.Count).IsEqualTo(values.Length);
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.HasTotal).IsFalse();
-        await Assert.That(result.Total).IsNull();
+        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result.Count).IsEqualTo(values.Length);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsFalse();
+        _ = await Assert.That(result.Total).IsNull();
     }
 
     [Test]
@@ -56,11 +56,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values, total: total);
 
         // Assert
-        await Assert.That(result).IsEqualTo(values);
-        await Assert.That(result.Count).IsEqualTo(values.Length);
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.HasTotal).IsTrue();
-        await Assert.That(result.Total).IsEqualTo(total);
+        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result.Count).IsEqualTo(values.Length);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsTrue();
+        _ = await Assert.That(result.Total).IsEqualTo(total);
     }
 
     [Test]
@@ -75,11 +75,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values!, total: total);
 
         // Assert
-        await Assert.That(result).IsEmpty();
-        await Assert.That(result.Count).IsEqualTo(0);
-        await Assert.That(result.Directive).IsEqualTo(directive);
-        await Assert.That(result.HasTotal).IsTrue();
-        await Assert.That(result.Total).IsEqualTo(total);
+        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result.Count).IsEqualTo(0);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsTrue();
+        _ = await Assert.That(result.Total).IsEqualTo(total);
     }
 }
 #endif

@@ -26,6 +26,6 @@ public sealed class WhenClonerIsConstructed
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(serializer));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(serializer));
     }
 }

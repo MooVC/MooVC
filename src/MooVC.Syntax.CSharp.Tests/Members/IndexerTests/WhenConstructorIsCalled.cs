@@ -16,11 +16,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Indexer();
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(Indexer.Methods.Default);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Parameter).IsEqualTo(Parameter.Undefined);
-        await Assert.That(subject.Result).IsEqualTo(Result.Void);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(Indexer.Methods.Default);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Parameter).IsEqualTo(Parameter.Undefined);
+        _ = await Assert.That(subject.Result).IsEqualTo(Result.Void);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
@@ -51,21 +51,21 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Behaviours).IsEqualTo(behaviours);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
 
-        await Assert.That(subject.Parameter).IsEqualTo(new Parameter
+        _ = await Assert.That(subject.Parameter).IsEqualTo(new Parameter
         {
             Name = ParameterName,
             Type = new Symbol { Name = ParameterType },
         });
 
-        await Assert.That(subject.Result).IsEqualTo(new Result
+        _ = await Assert.That(subject.Result).IsEqualTo(new Result
         {
             Mode = Result.Modality.Synchronous,
             Type = new Symbol { Name = ResultType },
         });
 
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

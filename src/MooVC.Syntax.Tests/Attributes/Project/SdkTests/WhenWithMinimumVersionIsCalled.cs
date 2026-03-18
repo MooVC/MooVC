@@ -17,9 +17,9 @@ public sealed class WhenWithMinimumVersionIsCalled
         Sdk result = original.WithMinimumVersion(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.MinimumVersion).IsEqualTo(updated);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Version).IsEqualTo(original.Version);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.MinimumVersion).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Version).IsEqualTo(original.Version);
     }
 }

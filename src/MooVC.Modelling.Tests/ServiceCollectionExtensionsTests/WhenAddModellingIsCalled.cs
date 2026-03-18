@@ -34,11 +34,11 @@ public sealed class WhenAddModellingIsCalled
         IOptionsSnapshot<ZipWriter.Options> zipOptions = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        await Assert.That(generator).IsTypeOf<Generator<TestModel>>();
-        await Assert.That(fileSystemWriter).IsTypeOf<FileSystemWriter>();
-        await Assert.That(zipWriter).IsTypeOf<ZipWriter>();
-        await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
-        await Assert.That(zipOptions.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
+        _ = await Assert.That(generator).IsTypeOf<Generator<TestModel>>();
+        _ = await Assert.That(fileSystemWriter).IsTypeOf<FileSystemWriter>();
+        _ = await Assert.That(zipWriter).IsTypeOf<ZipWriter>();
+        _ = await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
+        _ = await Assert.That(zipOptions.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
     }
 
     [Test]
@@ -64,8 +64,8 @@ public sealed class WhenAddModellingIsCalled
         IOptionsSnapshot<ZipWriter.Options> zipOptions = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(CustomBufferSize);
-        await Assert.That(zipOptions.Value.Compression).IsEqualTo(CustomCompressionLevel);
+        _ = await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(CustomBufferSize);
+        _ = await Assert.That(zipOptions.Value.Compression).IsEqualTo(CustomCompressionLevel);
     }
 
     [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]

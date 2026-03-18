@@ -17,6 +17,6 @@ public sealed class WhenImplicitOperatorToSymbolIsCalled
         Symbol value = subject;
 
         // Assert
-        await Assert.That(value.Name).IsEqualTo(name);
+        _ = await Assert.That(value.Name).IsEqualTo(name);
     }
 }

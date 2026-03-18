@@ -19,7 +19,7 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(validationContext));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(validationContext));
     }
 
     [Test]
@@ -35,7 +35,7 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(results));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(results));
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(validatable));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(validatable));
     }
 
     [Test]
@@ -67,7 +67,7 @@ public sealed class WhenIncludeIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(validatables));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(validatables));
     }
 
     [Test]
@@ -83,10 +83,10 @@ public sealed class WhenIncludeIsCalled
             validatable);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        await Assert.That(results).IsEqualTo([validatable.Results.Single()]);
+        _ = await Assert.That(results).IsEqualTo([validatable.Results.Single()]);
     }
 
     [Test]
@@ -105,10 +105,10 @@ public sealed class WhenIncludeIsCalled
             validatable);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        await Assert.That(combined).IsEqualTo([initial, validatable.Results.Single()]);
+        _ = await Assert.That(combined).IsEqualTo([initial, validatable.Results.Single()]);
     }
 
     [Test]
@@ -125,10 +125,10 @@ public sealed class WhenIncludeIsCalled
             [first, second]);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        await Assert.That(results).IsEqualTo([first.Results.Single(), second.Results.Single()]);
+        _ = await Assert.That(results).IsEqualTo([first.Results.Single(), second.Results.Single()]);
     }
 
     [Test]
@@ -148,10 +148,10 @@ public sealed class WhenIncludeIsCalled
             [first, second]);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = actual.Results.ToArray();
-        await Assert.That(combined).IsEqualTo([initial, first.Results.Single(), second.Results.Single()]);
+        _ = await Assert.That(combined).IsEqualTo([initial, first.Results.Single(), second.Results.Single()]);
     }
 
     private sealed class StubValidatable : IValidatableObject

@@ -42,18 +42,18 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(isAdd).IsEqualTo(expectation.IsAdd);
-        await Assert.That(isAnd).IsEqualTo(expectation.IsAnd);
-        await Assert.That(isDivide).IsEqualTo(expectation.IsDivide);
-        await Assert.That(isLeft).IsEqualTo(expectation.IsLeft);
-        await Assert.That(isModulus).IsEqualTo(expectation.IsModulus);
-        await Assert.That(isMultiply).IsEqualTo(expectation.IsMultiply);
-        await Assert.That(isOr).IsEqualTo(expectation.IsOr);
-        await Assert.That(isRight).IsEqualTo(expectation.IsRight);
-        await Assert.That(isSubtract).IsEqualTo(expectation.IsSubtract);
-        await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
-        await Assert.That(isXor).IsEqualTo(expectation.IsXor);
-        await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
+        _ = await Assert.That(isAdd).IsEqualTo(expectation.IsAdd);
+        _ = await Assert.That(isAnd).IsEqualTo(expectation.IsAnd);
+        _ = await Assert.That(isDivide).IsEqualTo(expectation.IsDivide);
+        _ = await Assert.That(isLeft).IsEqualTo(expectation.IsLeft);
+        _ = await Assert.That(isModulus).IsEqualTo(expectation.IsModulus);
+        _ = await Assert.That(isMultiply).IsEqualTo(expectation.IsMultiply);
+        _ = await Assert.That(isOr).IsEqualTo(expectation.IsOr);
+        _ = await Assert.That(isRight).IsEqualTo(expectation.IsRight);
+        _ = await Assert.That(isSubtract).IsEqualTo(expectation.IsSubtract);
+        _ = await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        _ = await Assert.That(isXor).IsEqualTo(expectation.IsXor);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record BinaryTypeExpectation(

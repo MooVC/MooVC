@@ -55,9 +55,9 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        await Assert.That(result).Contains(TypeName);
-        await Assert.That(result).Contains(ParameterName);
-        await Assert.That(result).Contains("where");
-        await Assert.That(result).Contains("widget");
+        _ = await Assert.That(result).Contains(TypeName);
+        _ = await Assert.That(result).Contains(ParameterName);
+        _ = await Assert.That(result).Contains("where");
+        _ = await Assert.That(result).Contains("widget");
     }
 }

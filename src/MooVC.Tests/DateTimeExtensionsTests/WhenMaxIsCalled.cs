@@ -18,7 +18,7 @@ public sealed class WhenMaxIsCalled
         DateTime selected = oldest.Max(newest);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(newest);
+        _ = await Assert.That(selected).IsEqualTo(newest);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenMaxIsCalled
         DateTime selected = newest.Max(oldest);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(newest);
+        _ = await Assert.That(selected).IsEqualTo(newest);
     }
 
     [Test]
@@ -44,6 +44,6 @@ public sealed class WhenMaxIsCalled
         DateTime selected = sameDate.Max(sameDate);
 
         // Assert
-        await Assert.That(selected).IsEqualTo(sameDate);
+        _ = await Assert.That(selected).IsEqualTo(sameDate);
     }
 }

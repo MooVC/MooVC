@@ -12,13 +12,13 @@ public sealed class WhenConstructorIsCalled
         var subject = new Project();
 
         // Assert
-        await Assert.That(subject.Id).IsEqualTo(Guid.Empty);
-        await Assert.That(subject.DisplayName).IsEqualTo(Project.Name.Unnamed);
-        await Assert.That(subject.Path).IsEqualTo(Project.RelativePath.Unspecified);
-        await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Builds).IsEmpty();
-        await Assert.That(subject.Platforms).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Id).IsEqualTo(Guid.Empty);
+        _ = await Assert.That(subject.DisplayName).IsEqualTo(Project.Name.Unnamed);
+        _ = await Assert.That(subject.Path).IsEqualTo(Project.RelativePath.Unspecified);
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Builds).IsEmpty();
+        _ = await Assert.That(subject.Platforms).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -39,12 +39,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Id).IsEqualTo(ProjectTestsData.DefaultId);
-        await Assert.That(subject.DisplayName).IsEqualTo(new Project.Name(ProjectTestsData.DefaultName));
-        await Assert.That(subject.Path).IsEqualTo(new Project.RelativePath(ProjectTestsData.DefaultPath));
-        await Assert.That(subject.Type).IsEqualTo(Snippet.From(ProjectTestsData.DefaultType));
-        await Assert.That(subject.Builds).IsEqualTo([build]);
-        await Assert.That(subject.Platforms).IsEqualTo([platform]);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Id).IsEqualTo(ProjectTestsData.DefaultId);
+        _ = await Assert.That(subject.DisplayName).IsEqualTo(new Project.Name(ProjectTestsData.DefaultName));
+        _ = await Assert.That(subject.Path).IsEqualTo(new Project.RelativePath(ProjectTestsData.DefaultPath));
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.From(ProjectTestsData.DefaultType));
+        _ = await Assert.That(subject.Builds).IsEqualTo([build]);
+        _ = await Assert.That(subject.Platforms).IsEqualTo([platform]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

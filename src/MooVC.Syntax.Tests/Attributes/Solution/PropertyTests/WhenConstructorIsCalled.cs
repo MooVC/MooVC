@@ -11,9 +11,9 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property();
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -27,8 +27,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(Snippet.From(PropertyTestsData.DefaultName));
-        await Assert.That(subject.Value).IsEqualTo(Snippet.From(PropertyTestsData.DefaultValue));
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.From(PropertyTestsData.DefaultName));
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.From(PropertyTestsData.DefaultValue));
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

@@ -15,10 +15,10 @@ public sealed class WhenWithArgumentsIsCalled
         Symbol result = original.WithArguments(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Arguments).IsEqualTo(original.Arguments.Concat(additional));
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
-        await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments.Concat(additional));
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        _ = await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
     }
 }

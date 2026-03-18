@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         Item result = original.OnCondition(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Condition).IsEqualTo(updated);
-        await Assert.That(result.Exclude).IsEqualTo(original.Exclude);
-        await Assert.That(result.Include).IsEqualTo(original.Include);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Exclude).IsEqualTo(original.Exclude);
+        _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }
 }

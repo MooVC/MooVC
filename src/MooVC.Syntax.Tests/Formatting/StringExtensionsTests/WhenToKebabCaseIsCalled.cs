@@ -17,7 +17,7 @@ public sealed class WhenToKebabCaseIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenToKebabCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -46,7 +46,7 @@ public sealed class WhenToKebabCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -71,7 +71,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -84,7 +84,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -97,7 +97,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("alpha-beta-gamma-delta");
+        _ = await Assert.That(result).IsEqualTo("alpha-beta-gamma-delta");
     }
 
     [Test]
@@ -110,7 +110,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("alpha-beta");
+        _ = await Assert.That(result).IsEqualTo("alpha-beta");
     }
 
     [Test]
@@ -123,7 +123,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("part3-revision");
+        _ = await Assert.That(result).IsEqualTo("part3-revision");
     }
 
     [Test]
@@ -136,7 +136,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -149,7 +149,7 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -173,7 +173,7 @@ public sealed class WhenToKebabCaseIsCalled
         }
 
         // Assert
-        await Assert.That(result).IsEqualTo("istanbul-city");
+        _ = await Assert.That(result).IsEqualTo("istanbul-city");
     }
 
     [Test]
@@ -213,7 +213,7 @@ public sealed class WhenToKebabCaseIsCalled
         {
             string firstResult = word.ToKebabCase();
             string secondResult = firstResult.ToKebabCase();
-            await Assert.That(secondResult).IsEqualTo(firstResult);
+            _ = await Assert.That(secondResult).IsEqualTo(firstResult);
         }
     }
 
@@ -227,6 +227,6 @@ public sealed class WhenToKebabCaseIsCalled
         string result = value.ToKebabCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(new string('a', 16_384));
+        _ = await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 }

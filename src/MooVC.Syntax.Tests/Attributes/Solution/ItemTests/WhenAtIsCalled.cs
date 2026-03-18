@@ -15,11 +15,11 @@ public sealed class WhenAtIsCalled
         Item result = original.At(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Path).IsEqualTo(updated);
-        await Assert.That(result.Id).IsEqualTo(original.Id);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Type).IsEqualTo(original.Type);
-        await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Path).IsEqualTo(updated);
+        _ = await Assert.That(result.Id).IsEqualTo(original.Id);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
     }
 }

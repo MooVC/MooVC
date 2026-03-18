@@ -26,6 +26,6 @@ public sealed class WhenValidateIsCalled
         ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
-        await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));
     }
 }

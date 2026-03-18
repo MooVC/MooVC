@@ -14,9 +14,9 @@ public sealed class WhenConstructorIsCalled
         var subject = new Declaration();
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        await Assert.That(subject.Parameters).IsEmpty();
-        await Assert.That(subject.IsUnspecified).IsTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.IsUnspecified).IsTrue();
     }
 
     [Test]
@@ -33,8 +33,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
-        await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
-        await Assert.That(subject.IsUnspecified).IsFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
+        _ = await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
+        _ = await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

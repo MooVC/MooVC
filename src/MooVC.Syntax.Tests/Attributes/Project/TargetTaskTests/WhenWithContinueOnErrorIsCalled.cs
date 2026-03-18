@@ -13,9 +13,9 @@ public sealed class WhenWithContinueOnErrorIsCalled
         TargetTask result = original.WithContinueOnError(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.ContinueOnError).IsEqualTo(updated);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.ContinueOnError).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

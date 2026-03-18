@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = intent.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(nameof(Conversion.Intent.From));
+        _ = await Assert.That(result).IsEqualTo(nameof(Conversion.Intent.From));
     }
 }

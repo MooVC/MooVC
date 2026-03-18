@@ -16,7 +16,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -33,7 +33,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo("using static System.Console;");
+        _ = await Assert.That(result).IsEqualTo("using static System.Console;");
     }
 
     [Test]
@@ -50,6 +50,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        await Assert.That(result).IsEqualTo("using Alias = MooVC.Syntax;");
+        _ = await Assert.That(result).IsEqualTo("using Alias = MooVC.Syntax;");
     }
 }

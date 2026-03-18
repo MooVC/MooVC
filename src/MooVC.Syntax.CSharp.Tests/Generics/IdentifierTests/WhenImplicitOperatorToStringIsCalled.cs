@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = identifier;
 
         // Assert
-        await Assert.That(value).IsEqualTo(IdentifierName);
+        _ = await Assert.That(value).IsEqualTo(IdentifierName);
     }
 }

@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
         ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("System.Text.Result");
+        _ = await Assert.That(representation).IsEqualTo("System.Text.Result");
     }
 
     [Test]
@@ -47,7 +47,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("global::System.Text.Result");
+        _ = await Assert.That(representation).IsEqualTo("global::System.Text.Result");
     }
 
     [Test]
@@ -61,6 +61,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Symbol.Options.Default);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("Result?");
+        _ = await Assert.That(representation).IsEqualTo("Result?");
     }
 }

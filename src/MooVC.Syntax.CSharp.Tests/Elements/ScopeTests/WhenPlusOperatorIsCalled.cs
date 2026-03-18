@@ -13,7 +13,7 @@ public sealed class WhenPlusOperatorIsCalled
         Scope result = left + right;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo("private protected");
+        _ = await Assert.That(result.ToString()).IsEqualTo("private protected");
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenPlusOperatorIsCalled
         Scope result = left + right;
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo("protected internal");
+        _ = await Assert.That(result.ToString()).IsEqualTo("protected internal");
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left + right;
 
         // Assert
-        await Assert.That(result).Throws<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left! + right;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -69,6 +69,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left + right!;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

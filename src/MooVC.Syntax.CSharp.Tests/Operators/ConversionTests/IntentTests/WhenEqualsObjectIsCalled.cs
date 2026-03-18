@@ -12,7 +12,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(null as object);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(intent as object);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(Conversion.Intent.From as object);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(Conversion.Intent.To as object);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -64,6 +64,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(new object());
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

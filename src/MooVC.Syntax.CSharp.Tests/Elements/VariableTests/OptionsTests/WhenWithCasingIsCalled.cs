@@ -14,9 +14,9 @@ public sealed class WhenWithCasingIsCalled
         Variable.Options result = original.WithCasing(Identifier.Casing.Pascal);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Casing).IsEqualTo(Identifier.Casing.Pascal);
-        await Assert.That(result.UseUnderscore).IsEqualTo(original.UseUnderscore);
-        await Assert.That(original.Casing).IsEqualTo(Identifier.Casing.Camel);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Casing).IsEqualTo(Identifier.Casing.Pascal);
+        _ = await Assert.That(result.UseUnderscore).IsEqualTo(original.UseUnderscore);
+        _ = await Assert.That(original.Casing).IsEqualTo(Identifier.Casing.Camel);
     }
 }

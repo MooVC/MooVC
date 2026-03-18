@@ -17,8 +17,8 @@ public sealed class WhenIncrementIsCalled
         directive++;
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(limit);
-        await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -32,7 +32,7 @@ public sealed class WhenIncrementIsCalled
         actual++;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -49,8 +49,8 @@ public sealed class WhenIncrementIsCalled
         ++directive;
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(limit);
-        await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -64,7 +64,7 @@ public sealed class WhenIncrementIsCalled
         ++actual;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -80,8 +80,8 @@ public sealed class WhenIncrementIsCalled
         Directive actual = original + increment;
 
         // Assert
-        await Assert.That(original.Limit).IsEqualTo(limit);
-        await Assert.That(actual.Page).IsEqualTo(expected);
+        _ = await Assert.That(original.Limit).IsEqualTo(limit);
+        _ = await Assert.That(actual.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -98,7 +98,7 @@ public sealed class WhenIncrementIsCalled
         Directive actual = expected + increment;
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }
 #endif

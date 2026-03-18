@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         PropertyGroup result = original.OnCondition(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Condition).IsEqualTo(updated);
-        await Assert.That(result.Label).IsEqualTo(original.Label);
-        await Assert.That(result.Properties).IsEqualTo(original.Properties);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Label).IsEqualTo(original.Label);
+        _ = await Assert.That(result.Properties).IsEqualTo(original.Properties);
     }
 }

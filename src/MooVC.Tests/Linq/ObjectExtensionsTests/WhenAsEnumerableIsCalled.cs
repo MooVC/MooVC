@@ -12,7 +12,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan> value = expected.AsEnumerable();
 
         // Assert
-        await Assert.That(value.Single()).IsEqualTo(expected);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan?> value = expected.AsEnumerable();
 
         // Assert
-        await Assert.That(value.Single()).IsNull();
+        _ = await Assert.That(value.Single()).IsNull();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object> value = expected.AsEnumerable();
 
         // Assert
-        await Assert.That(value.Single()).IsEqualTo(expected);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 
     [Test]
@@ -51,6 +51,6 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object?> value = expected.AsEnumerable();
 
         // Assert
-        await Assert.That(value.Single()).IsNull();
+        _ = await Assert.That(value.Single()).IsNull();
     }
 }

@@ -17,9 +17,9 @@ public sealed class WhenNewIsCalled
         // Assert
         _ = await Assert.That(first).IsNotNull();
         _ = await Assert.That(second).IsNotNull();
-        await Assert.That(first).IsTypeOf<TestConstruct>();
-        await Assert.That(second).IsTypeOf<TestConstruct>();
-        await Assert.That(ReferenceEquals(first, second)).IsFalse();
+        _ = await Assert.That(first).IsTypeOf<TestConstruct>();
+        _ = await Assert.That(second).IsTypeOf<TestConstruct>();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
     }
 
     private sealed class TestConstruct

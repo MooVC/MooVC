@@ -23,12 +23,12 @@ public sealed class WhenAcceptsIsCalled
         Method result = original.Accepts(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Body).IsEqualTo(original.Body);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Parameters.Length).IsEqualTo(original.Parameters.Length + additional.Length);
-        await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
-        await Assert.That(result.Result).IsEqualTo(original.Result);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Parameters.Length).IsEqualTo(original.Parameters.Length + additional.Length);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

@@ -11,10 +11,10 @@ public sealed class WhenConstructorIsCalled
         var subject = new Event.Methods();
 
         // Assert
-        await Assert.That(subject.Add).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Remove).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsDefault).IsTrue();
-        await Assert.That(subject).IsEqualTo(Event.Methods.Default);
+        _ = await Assert.That(subject.Add).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Remove).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsDefault).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(Event.Methods.Default);
     }
 
     [Test]
@@ -32,8 +32,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Add).IsEqualTo(add);
-        await Assert.That(subject.Remove).IsEqualTo(remove);
-        await Assert.That(subject.IsDefault).IsFalse();
+        _ = await Assert.That(subject.Add).IsEqualTo(add);
+        _ = await Assert.That(subject.Remove).IsEqualTo(remove);
+        _ = await Assert.That(subject.IsDefault).IsFalse();
     }
 }

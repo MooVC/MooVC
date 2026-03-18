@@ -14,9 +14,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        await Assert.That(isFull).IsTrue();
-        await Assert.That(isMinimum).IsFalse();
-        await Assert.That(isGlobal).IsFalse();
+        _ = await Assert.That(isFull).IsTrue();
+        _ = await Assert.That(isMinimum).IsFalse();
+        _ = await Assert.That(isGlobal).IsFalse();
     }
 
     [Test]
@@ -31,9 +31,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        await Assert.That(isFull).IsFalse();
-        await Assert.That(isMinimum).IsTrue();
-        await Assert.That(isGlobal).IsFalse();
+        _ = await Assert.That(isFull).IsFalse();
+        _ = await Assert.That(isMinimum).IsTrue();
+        _ = await Assert.That(isGlobal).IsFalse();
     }
 
     [Test]
@@ -48,8 +48,8 @@ public sealed class WhenPropertiesAreAccessed
         bool isGlobal = subject.IsGlobal;
 
         // Assert
-        await Assert.That(isFull).IsFalse();
-        await Assert.That(isMinimum).IsFalse();
-        await Assert.That(isGlobal).IsTrue();
+        _ = await Assert.That(isFull).IsFalse();
+        _ = await Assert.That(isMinimum).IsFalse();
+        _ = await Assert.That(isGlobal).IsTrue();
     }
 }

@@ -13,7 +13,7 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        await Assert.That(result).IsEqualTo(1);
+        _ = await Assert.That(result).IsEqualTo(1);
     }
 
     [Test]
@@ -28,8 +28,8 @@ public sealed class WhenCompareToIsCalled
         int resultRightLeft = rightType.CompareTo(leftType);
 
         // Assert
-        await Assert.That(resultLeftRight).IsEqualTo(0);
-        await Assert.That(resultRightLeft).IsEqualTo(0);
+        _ = await Assert.That(resultLeftRight).IsEqualTo(0);
+        _ = await Assert.That(resultRightLeft).IsEqualTo(0);
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenCompareToIsCalled
         int resultRightLeft = rightType.CompareTo(leftType);
 
         // Assert
-        await Assert.That(resultLeftRight).IsLessThan(0);
-        await Assert.That(resultRightLeft).IsGreaterThan(0);
+        _ = await Assert.That(resultLeftRight).IsLessThan(0);
+        _ = await Assert.That(resultRightLeft).IsGreaterThan(0);
     }
 }

@@ -25,9 +25,9 @@ public sealed class WhenWithSetIsCalled
         Property.Methods result = original.WithSet(set);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Get).IsEqualTo(original.Get);
-        await Assert.That(result.Set).IsEqualTo(set);
-        await Assert.That(original.Set).IsEqualTo(Property.Setter.Default);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Get).IsEqualTo(original.Get);
+        _ = await Assert.That(result.Set).IsEqualTo(set);
+        _ = await Assert.That(original.Set).IsEqualTo(Property.Setter.Default);
     }
 }

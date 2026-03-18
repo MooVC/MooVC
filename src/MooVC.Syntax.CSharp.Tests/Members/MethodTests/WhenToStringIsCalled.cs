@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo("public string Perform(int value);");
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value);");
     }
 
     [Test]
@@ -44,6 +44,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo("public async Task<string> Perform(int value);");
+        _ = await Assert.That(representation).IsEqualTo("public async Task<string> Perform(int value);");
     }
 }

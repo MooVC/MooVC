@@ -14,7 +14,7 @@ public sealed class WhenToXmlAttributeIsCalled
         XAttribute[] attributes = [.. subject.ToXmlAttribute()];
 
         // Assert
-        await Assert.That(attributes).IsEmpty();
+        _ = await Assert.That(attributes).IsEmpty();
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenToXmlAttributeIsCalled
 
         // Assert
         _ = await attributes.Single();
-        await Assert.That(attributes[0].Name.ToString()).IsEqualTo("ContinueOnError");
-        await Assert.That(attributes[0].Value).IsEqualTo(subject.ToString());
+        _ = await Assert.That(attributes[0].Name.ToString()).IsEqualTo("ContinueOnError");
+        _ = await Assert.That(attributes[0].Value).IsEqualTo(subject.ToString());
     }
 }

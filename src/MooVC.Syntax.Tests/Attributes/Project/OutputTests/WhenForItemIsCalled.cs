@@ -15,10 +15,10 @@ public sealed class WhenForItemIsCalled
         Output result = original.ForItem(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.ItemName).IsEqualTo(updated);
-        await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
-        await Assert.That(result.TaskParameter).IsEqualTo(original.TaskParameter);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.ItemName).IsEqualTo(updated);
+        _ = await Assert.That(result.PropertyName).IsEqualTo(original.PropertyName);
+        _ = await Assert.That(result.TaskParameter).IsEqualTo(original.TaskParameter);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

@@ -14,8 +14,8 @@ public sealed class WhenDirectiveIsConstructed
         Directive directive = new(Limit: limit, Page: page);
 
         // Assert
-        await Assert.That(directive.Limit).IsEqualTo(limit);
-        await Assert.That(directive.Page).IsEqualTo(page);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(page);
     }
 
     [Test]
@@ -33,8 +33,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            await Assert.That(directive.Limit).IsEqualTo(limit);
-            await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
+            _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+            _ = await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
         }
     }
 
@@ -53,8 +53,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
-            await Assert.That(directive.Page).IsEqualTo(page);
+            _ = await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
+            _ = await Assert.That(directive.Page).IsEqualTo(page);
         }
     }
 
@@ -71,8 +71,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
-            await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
+            _ = await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
+            _ = await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
         }
     }
 }

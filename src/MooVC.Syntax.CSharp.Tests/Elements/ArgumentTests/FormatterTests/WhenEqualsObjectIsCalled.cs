@@ -13,7 +13,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -27,7 +27,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -42,8 +42,8 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
 
         // Assert
-        await Assert.That(resultLeftRight).IsTrue();
-        await Assert.That(resultRightLeft).IsTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
@@ -58,8 +58,8 @@ public sealed class WhenEqualsObjectIsCalled
         bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
 
         // Assert
-        await Assert.That(resultLeftRight).IsFalse();
-        await Assert.That(resultRightLeft).IsFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
@@ -73,6 +73,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

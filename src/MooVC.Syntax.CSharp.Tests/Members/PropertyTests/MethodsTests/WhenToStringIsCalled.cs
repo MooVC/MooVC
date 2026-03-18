@@ -14,8 +14,8 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).Contains("get");
-        await Assert.That(representation).Contains("init");
+        _ = await Assert.That(representation).Contains("get");
+        _ = await Assert.That(representation).Contains("init");
     }
 
     [Test]
@@ -32,6 +32,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        await Assert.That(representation).IsEqualTo("value;");
+        _ = await Assert.That(representation).IsEqualTo("value;");
     }
 }

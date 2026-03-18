@@ -16,7 +16,7 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        await Assert.That(result).IsEqualTo(1);
+        _ = await Assert.That(result).IsEqualTo(1);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        await Assert.That(result).IsLessThan(0);
+        _ = await Assert.That(result).IsLessThan(0);
     }
 
     [Test]
@@ -44,6 +44,6 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        await Assert.That(result).IsEqualTo(0);
+        _ = await Assert.That(result).IsEqualTo(0);
     }
 }

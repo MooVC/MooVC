@@ -14,11 +14,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Constructor();
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Implicit);
-        await Assert.That(subject.IsUndefined).IsTrue();
-        await Assert.That(subject.Parameters).IsEqualTo([]);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Implicit);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
@@ -38,10 +38,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
-        await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Static);
-        await Assert.That(subject.IsUndefined).IsFalse();
-        await Assert.That(subject.Parameters).IsEqualTo(parameters);
-        await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Static);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Parameters).IsEqualTo(parameters);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

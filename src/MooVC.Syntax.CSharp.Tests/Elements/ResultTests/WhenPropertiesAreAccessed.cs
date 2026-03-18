@@ -14,9 +14,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        await Assert.That(isTask).IsTrue();
-        await Assert.That(isUndefined).IsFalse();
-        await Assert.That(isVoid).IsFalse();
+        _ = await Assert.That(isTask).IsTrue();
+        _ = await Assert.That(isUndefined).IsFalse();
+        _ = await Assert.That(isVoid).IsFalse();
     }
 
     [Test]
@@ -31,9 +31,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        await Assert.That(isTask).IsFalse();
-        await Assert.That(isUndefined).IsTrue();
-        await Assert.That(isVoid).IsFalse();
+        _ = await Assert.That(isTask).IsFalse();
+        _ = await Assert.That(isUndefined).IsTrue();
+        _ = await Assert.That(isVoid).IsFalse();
     }
 
     [Test]
@@ -48,8 +48,8 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        await Assert.That(isTask).IsFalse();
-        await Assert.That(isUndefined).IsFalse();
-        await Assert.That(isVoid).IsTrue();
+        _ = await Assert.That(isTask).IsFalse();
+        _ = await Assert.That(isUndefined).IsFalse();
+        _ = await Assert.That(isVoid).IsTrue();
     }
 }

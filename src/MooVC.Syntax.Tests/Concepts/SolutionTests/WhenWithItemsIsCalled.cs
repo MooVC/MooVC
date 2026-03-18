@@ -26,8 +26,8 @@ public sealed class WhenWithItemsIsCalled
         Solution result = original.WithItems(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
-        await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

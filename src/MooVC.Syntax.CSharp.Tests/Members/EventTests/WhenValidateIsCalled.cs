@@ -19,8 +19,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsTrue();
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -39,10 +39,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsFalse();
+        _ = await Assert.That(valid).IsFalse();
         _ = await results.Single();
-        await Assert.That(results[0].MemberNames).Contains(nameof(Event.Name));
-        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Event.Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -62,10 +62,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsFalse();
+        _ = await Assert.That(valid).IsFalse();
         _ = await results.Single();
-        await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
-        await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -80,7 +80,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        await Assert.That(valid).IsTrue();
-        await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

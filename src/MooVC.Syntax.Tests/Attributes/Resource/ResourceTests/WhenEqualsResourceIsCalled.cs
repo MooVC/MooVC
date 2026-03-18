@@ -15,7 +15,7 @@ public sealed class WhenEqualsResourceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -29,7 +29,7 @@ public sealed class WhenEqualsResourceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -43,7 +43,7 @@ public sealed class WhenEqualsResourceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -57,6 +57,6 @@ public sealed class WhenEqualsResourceIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -16,10 +16,10 @@ public sealed class WhenWithProjectsIsCalled
         Folder result = original.WithProjects(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
-        await Assert.That(result.Files).IsEqualTo(original.Files);
-        await Assert.That(result.Items).IsEqualTo(original.Items);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
+        _ = await Assert.That(result.Files).IsEqualTo(original.Files);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

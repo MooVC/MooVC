@@ -13,9 +13,9 @@ public sealed class WhenKeepDuplicateOutputsIsCalled
         Target result = original.KeepDuplicateOutputs(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.KeepDuplicateOutputs).IsEqualTo(updated);
-        await Assert.That(result.Outputs).IsEqualTo(original.Outputs);
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.KeepDuplicateOutputs).IsEqualTo(updated);
+        _ = await Assert.That(result.Outputs).IsEqualTo(original.Outputs);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

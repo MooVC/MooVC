@@ -16,13 +16,13 @@ public sealed class WhenNamedIsCalled
         Property result = original.Named(name);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
-        await Assert.That(result.Default).IsEqualTo(original.Default);
-        await Assert.That(result.Name).IsEqualTo(name);
-        await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Name).IsEqualTo(name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        await Assert.That(original.Name).IsEqualTo((Name)PropertyTestsData.DefaultName);
+        _ = await Assert.That(original.Name).IsEqualTo((Name)PropertyTestsData.DefaultName);
     }
 }

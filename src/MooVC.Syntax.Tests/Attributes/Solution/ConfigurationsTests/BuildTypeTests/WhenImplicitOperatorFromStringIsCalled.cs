@@ -14,7 +14,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Configurations.BuildType subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

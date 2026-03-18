@@ -11,9 +11,9 @@ public sealed class WhenConstructorIsCalled
         var subject = new Property.Methods();
 
         // Assert
-        await Assert.That(subject.Get).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsDefault).IsTrue();
-        await Assert.That(subject.Set).IsEqualTo(Property.Setter.Default);
+        _ = await Assert.That(subject.Get).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsDefault).IsTrue();
+        _ = await Assert.That(subject.Set).IsEqualTo(Property.Setter.Default);
     }
 
     [Test]
@@ -31,8 +31,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Get).IsEqualTo(get);
-        await Assert.That(subject.IsDefault).IsFalse();
-        await Assert.That(subject.Set).IsEqualTo(set);
+        _ = await Assert.That(subject.Get).IsEqualTo(get);
+        _ = await Assert.That(subject.IsDefault).IsFalse();
+        _ = await Assert.That(subject.Set).IsEqualTo(set);
     }
 }

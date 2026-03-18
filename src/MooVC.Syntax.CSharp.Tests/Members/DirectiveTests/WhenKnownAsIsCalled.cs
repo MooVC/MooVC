@@ -21,10 +21,10 @@ public sealed class WhenKnownAsIsCalled
         Directive result = original.KnownAs(NewAlias);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Alias).IsEqualTo(new Name(NewAlias));
-        await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
-        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
-        await Assert.That(original.Alias).IsEqualTo(new Name(Alias));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Alias).IsEqualTo(new Name(NewAlias));
+        _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        _ = await Assert.That(original.Alias).IsEqualTo(new Name(Alias));
     }
 }

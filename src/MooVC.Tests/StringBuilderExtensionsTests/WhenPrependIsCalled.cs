@@ -22,7 +22,7 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder!.Prepend(LetterChar);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -35,7 +35,7 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder!.Prepend(Greeting);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -48,8 +48,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(DefaultChar);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo("\0abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("\0abc");
     }
 
     [Test]
@@ -62,8 +62,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(SpaceChar);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo(" abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo(" abc");
     }
 
     [Test]
@@ -76,8 +76,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(LetterChar);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo("HWorld");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("HWorld");
     }
 
     [Test]
@@ -91,7 +91,7 @@ public sealed class WhenPrependIsCalled
         _ = builder.Prepend('a');
 
         // Assert
-        await Assert.That(builder.ToString()).IsEqualTo("abc");
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
@@ -105,7 +105,7 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder.Prepend(value!);
 
         // Assert
-        await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -118,8 +118,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(EmptyString);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo("abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
@@ -132,8 +132,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(SpaceString);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo("   abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("   abc");
     }
 
     [Test]
@@ -146,8 +146,8 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(Greeting);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo("HelloWorld");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("HelloWorld");
     }
 
     [Test]
@@ -161,7 +161,7 @@ public sealed class WhenPrependIsCalled
         _ = builder.Prepend("a");
 
         // Assert
-        await Assert.That(builder.ToString()).IsEqualTo("abc");
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
@@ -177,7 +177,7 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(head);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, builder)).IsTrue();
-        await Assert.That(builder.ToString()).IsEqualTo(head + tail);
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo(head + tail);
     }
 }

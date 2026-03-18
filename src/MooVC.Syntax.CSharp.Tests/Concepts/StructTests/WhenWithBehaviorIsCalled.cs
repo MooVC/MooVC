@@ -12,8 +12,8 @@ public sealed class WhenWithBehaviorIsCalled
         Struct result = original.WithBehavior(Struct.Kind.ReadOnly);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Behavior).IsEqualTo(Struct.Kind.ReadOnly);
-        await Assert.That(original.Behavior).IsEqualTo(Struct.Kind.Ref);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behavior).IsEqualTo(Struct.Kind.ReadOnly);
+        _ = await Assert.That(original.Behavior).IsEqualTo(Struct.Kind.Ref);
     }
 }

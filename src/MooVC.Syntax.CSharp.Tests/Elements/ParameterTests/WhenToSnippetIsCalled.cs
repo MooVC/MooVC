@@ -12,7 +12,7 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => parameter.ToSnippet(options: default);
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -30,6 +30,6 @@ public sealed class WhenToSnippetIsCalled
         string result = parameter.ToSnippet(options);
 
         // Assert
-        await Assert.That(result).IsEqualTo("string value");
+        _ = await Assert.That(result).IsEqualTo("string value");
     }
 }

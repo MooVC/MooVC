@@ -19,7 +19,7 @@ public sealed class WhenStackIsCalled
         Snippet result = snippets.Stack(Snippet.Options.Default);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, snippet)).IsTrue();
+        _ = await Assert.That(result).IsSameReferenceAs(snippet);
     }
 
     [Test]
@@ -36,6 +36,6 @@ public sealed class WhenStackIsCalled
         Snippet result = snippets.Stack(Snippet.Options.Default);
 
         // Assert
-        await Assert.That(result.ToString()).IsEqualTo(expected);
+        _ = await Assert.That(result.ToString()).IsEqualTo(expected);
     }
 }

@@ -17,6 +17,6 @@ public sealed class WhenConstructorIsCalled
             culture: null)!;
 
         // Assert
-        await Assert.That(subject).IsEqualTo(Struct.Kind.ReadOnly);
+        _ = await Assert.That(subject).IsEqualTo(Struct.Kind.ReadOnly);
     }
 }

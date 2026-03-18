@@ -29,7 +29,7 @@ public sealed class WhenInitializerIsConstructed
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
     }
 
     // Additional test cases

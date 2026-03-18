@@ -12,7 +12,7 @@ public sealed class WhenIsPermittedIsCalled
         bool result = subject.IsPermitted(Extensibility.Abstract, Extensibility.Static);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -25,6 +25,6 @@ public sealed class WhenIsPermittedIsCalled
         bool result = subject.IsPermitted(Extensibility.Override, Extensibility.Sealed);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -11,9 +11,9 @@ public sealed class WhenConstructorIsCalled
         var subject = new Assembly();
 
         // Assert
-        await Assert.That(subject.Alias).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Alias).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -31,8 +31,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Alias).IsEqualTo(alias);
-        await Assert.That(subject.Name).IsEqualTo(name);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Alias).IsEqualTo(alias);
+        _ = await Assert.That(subject.Name).IsEqualTo(name);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

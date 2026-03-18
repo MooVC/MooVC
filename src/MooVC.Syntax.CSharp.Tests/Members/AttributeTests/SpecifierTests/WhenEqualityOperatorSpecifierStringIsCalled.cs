@@ -16,7 +16,7 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -30,7 +30,7 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -58,7 +58,7 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

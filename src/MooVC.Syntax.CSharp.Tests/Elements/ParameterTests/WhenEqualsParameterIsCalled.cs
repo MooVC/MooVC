@@ -18,7 +18,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -32,7 +32,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left?.Equals(right) ?? false;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -46,7 +46,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -60,7 +60,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -74,7 +74,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -88,7 +88,7 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -102,6 +102,6 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

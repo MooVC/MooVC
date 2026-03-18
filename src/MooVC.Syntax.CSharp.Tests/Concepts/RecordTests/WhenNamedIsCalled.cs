@@ -16,8 +16,8 @@ public sealed class WhenNamedIsCalled
         Record result = original.Named(newName);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Declaration).IsEqualTo(newName);
-        await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = RecordTestsData.DefaultName });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Declaration).IsEqualTo(newName);
+        _ = await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = RecordTestsData.DefaultName });
     }
 }

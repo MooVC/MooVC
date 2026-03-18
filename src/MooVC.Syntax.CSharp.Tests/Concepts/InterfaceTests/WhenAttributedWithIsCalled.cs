@@ -27,9 +27,9 @@ public sealed class WhenAttributedWithIsCalled
         Interface result = original.AttributedWith(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
-        await Assert.That(result.Events).IsEqualTo(original.Events);
-        await Assert.That(original.Attributes).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
+        _ = await Assert.That(result.Events).IsEqualTo(original.Events);
+        _ = await Assert.That(original.Attributes).IsEqualTo(existing);
     }
 }

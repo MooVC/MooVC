@@ -21,7 +21,7 @@ public sealed class WhenAddZipWriterIsCalled
         Action action = () => services.AddZipWriter();
 
         // Assert
-        await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -37,8 +37,8 @@ public sealed class WhenAddZipWriterIsCalled
         IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        await Assert.That(writer).IsTypeOf<ZipWriter>();
-        await Assert.That(options.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
+        _ = await Assert.That(writer).IsTypeOf<ZipWriter>();
+        _ = await Assert.That(options.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
     }
 
     [Test]
@@ -60,6 +60,6 @@ public sealed class WhenAddZipWriterIsCalled
         IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
+        _ = await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
     }
 }

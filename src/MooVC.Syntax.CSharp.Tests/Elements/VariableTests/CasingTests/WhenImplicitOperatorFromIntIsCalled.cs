@@ -17,8 +17,8 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Identifier.Casing subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int result = subject;
 
         // Assert
-        await Assert.That(result).IsEqualTo(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 }

@@ -22,7 +22,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("public string Perform(int value) { return value; }");
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) { return value; }");
     }
 
     [Test]
@@ -40,7 +40,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(options);
 
         // Assert
-        await Assert.That(representation).IsEqualTo("public string Perform(int value) => return value;");
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) => return value;");
     }
 
     [Test]
@@ -60,7 +60,7 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        await Assert.That(representation).IsEqualTo(expected);
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
@@ -84,7 +84,7 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        await Assert.That(representation).IsEqualTo(expected);
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]
@@ -115,7 +115,7 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Method.Options.Default);
 
         // Assert
-        await Assert.That(representation).Contains("Perform<T>");
-        await Assert.That(representation).Contains("where class, new()");
+        _ = await Assert.That(representation).Contains("Perform<T>");
+        _ = await Assert.That(representation).Contains("where class, new()");
     }
 }

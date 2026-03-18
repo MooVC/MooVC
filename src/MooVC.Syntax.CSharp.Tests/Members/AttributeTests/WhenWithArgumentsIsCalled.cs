@@ -21,10 +21,10 @@ public sealed class WhenWithArgumentsIsCalled
         Attribute result = original.WithArguments(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Arguments.Length).IsEqualTo(2);
-        await Assert.That(result.Arguments).IsEqualTo(original.Arguments.Concat(additional));
-        await Assert.That(result.Name).IsEqualTo(original.Name);
-        await Assert.That(result.Target).IsEqualTo(original.Target);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Arguments.Length).IsEqualTo(2);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments.Concat(additional));
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

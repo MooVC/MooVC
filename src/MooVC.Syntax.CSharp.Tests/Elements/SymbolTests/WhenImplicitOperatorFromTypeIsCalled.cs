@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Func<Symbol> result = () => value!;
 
         // Assert
-        await Assert.That(result).Throws<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -28,7 +28,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Symbol subject = value;
 
         // Assert
-        await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(nameof(StringBuilder)));
-        await Assert.That(subject.Qualifier).IsEqualTo(new Qualifier(["System", "Text"]));
+        _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(nameof(StringBuilder)));
+        _ = await Assert.That(subject.Qualifier).IsEqualTo(new Qualifier(["System", "Text"]));
     }
 }

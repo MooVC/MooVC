@@ -25,8 +25,8 @@ public sealed class WhenAndIfIsCalled
             validatable);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(preceding);
-        await Assert.That(validatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(actual).IsEqualTo(preceding);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -49,12 +49,12 @@ public sealed class WhenAndIfIsCalled
             additionalValidatable);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
-        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -78,10 +78,10 @@ public sealed class WhenAndIfIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(preceding);
-        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        await Assert.That(firstAdditional.Calls).IsEqualTo(0);
-        await Assert.That(secondAdditional.Calls).IsEqualTo(0);
+        _ = await Assert.That(actual).IsEqualTo(preceding);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(firstAdditional.Calls).IsEqualTo(0);
+        _ = await Assert.That(secondAdditional.Calls).IsEqualTo(0);
     }
 
     [Test]
@@ -105,13 +105,13 @@ public sealed class WhenAndIfIsCalled
             [firstAdditional, secondAdditional]);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
-        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        await Assert.That(firstAdditional.Calls).IsEqualTo(1);
-        await Assert.That(secondAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(firstAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(secondAdditional.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -134,12 +134,12 @@ public sealed class WhenAndIfIsCalled
             additionalValidatable);
 
         // Assert
-        await Assert.That(ReferenceEquals(actual.ValidationContext, context)).IsTrue();
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = actual.Results.ToArray();
-        await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
-        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -162,9 +162,9 @@ public sealed class WhenAndIfIsCalled
             [additionalValidatable]);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(preceding);
-        await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        await Assert.That(additionalValidatable.Calls).IsEqualTo(0);
+        _ = await Assert.That(actual).IsEqualTo(preceding);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(0);
     }
 
     private sealed class TrackingValidatable : IValidatableObject

@@ -12,7 +12,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(default);
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -38,8 +38,8 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
@@ -52,8 +52,8 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result).IsEqualTo(original);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsEqualTo(original);
     }
 
     [Test]
@@ -67,7 +67,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        await Assert.That(result.Single()).IsEqualTo(expected);
+        _ = await Assert.That(result.Single()).IsEqualTo(expected);
     }
 
     [Test]
@@ -81,7 +81,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        await Assert.That(result.Single()).IsEqualTo(expected);
+        _ = await Assert.That(result.Single()).IsEqualTo(expected);
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -111,7 +111,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -125,7 +125,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -139,7 +139,7 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -154,7 +154,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -169,7 +169,7 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -183,6 +183,6 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(original);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }

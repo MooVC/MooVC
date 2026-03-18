@@ -13,7 +13,7 @@ public sealed class WhenCompareToIsCalled
         int result = left.CompareTo(right);
 
         // Assert
-        await Assert.That(result).IsLessThan(0);
+        _ = await Assert.That(result).IsLessThan(0);
     }
 
     [Test]
@@ -27,6 +27,6 @@ public sealed class WhenCompareToIsCalled
         bool result = left < right;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

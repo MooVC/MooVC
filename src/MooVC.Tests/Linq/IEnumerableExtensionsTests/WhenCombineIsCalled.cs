@@ -16,8 +16,8 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
-        await Assert.That(actual).Contains(ExpectedValue);
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).Contains(ExpectedValue);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
+        _ = await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
     }
 
     [Test]
@@ -45,7 +45,7 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
@@ -60,8 +60,8 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
-        await Assert.That(actual).IsEqualTo(source!.Concat(expected!));
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).IsEqualTo(source!.Concat(expected!));
     }
 
     [Test]
@@ -75,6 +75,6 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }

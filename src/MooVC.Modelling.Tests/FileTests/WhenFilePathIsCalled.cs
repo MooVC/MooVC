@@ -18,6 +18,6 @@ public sealed class WhenFilePathIsCalled
         string filePath = file.FullPath;
 
         // Assert
-        await Assert.That(filePath).IsEqualTo(expectedFilePath);
+        _ = await Assert.That(filePath).IsEqualTo(expectedFilePath);
     }
 }

@@ -17,9 +17,9 @@ public sealed class WhenWithParametersIsCalled
         Declaration result = original.WithParameters(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Parameters.Length).IsEqualTo(2);
-        await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
-        await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Parameters.Length).IsEqualTo(2);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

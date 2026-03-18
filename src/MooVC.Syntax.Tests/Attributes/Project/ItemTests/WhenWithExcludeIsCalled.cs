@@ -17,9 +17,9 @@ public sealed class WhenWithExcludeIsCalled
         Item result = original.WithExclude(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Exclude).IsEqualTo(updated);
-        await Assert.That(result.Condition).IsEqualTo(original.Condition);
-        await Assert.That(result.Include).IsEqualTo(original.Include);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Exclude).IsEqualTo(updated);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }
 }

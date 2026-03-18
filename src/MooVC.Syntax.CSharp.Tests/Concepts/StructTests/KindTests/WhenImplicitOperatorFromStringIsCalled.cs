@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Struct.Kind result = Value;
 
         // Assert
-        await Assert.That(result).IsEqualTo(Struct.Kind.Record);
+        _ = await Assert.That(result).IsEqualTo(Struct.Kind.Record);
     }
 }

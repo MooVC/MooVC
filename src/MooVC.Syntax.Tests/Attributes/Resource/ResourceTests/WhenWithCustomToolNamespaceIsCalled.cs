@@ -15,10 +15,10 @@ public sealed class WhenWithCustomToolNamespaceIsCalled
         Resource result = original.WithCustomToolNamespace(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.CustomToolNamespace).IsEqualTo(updated);
-        await Assert.That(result.Designer).IsEqualTo(original.Designer);
-        await Assert.That(result.Location).IsEqualTo(original.Location);
-        await Assert.That(result.Visibility).IsEqualTo(original.Visibility);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.CustomToolNamespace).IsEqualTo(updated);
+        _ = await Assert.That(result.Designer).IsEqualTo(original.Designer);
+        _ = await Assert.That(result.Location).IsEqualTo(original.Location);
+        _ = await Assert.That(result.Visibility).IsEqualTo(original.Visibility);
     }
 }

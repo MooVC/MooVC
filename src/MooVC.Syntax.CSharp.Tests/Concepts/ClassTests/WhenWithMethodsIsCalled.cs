@@ -18,9 +18,9 @@ public sealed class WhenWithMethodsIsCalled
         Class result = original.WithMethods(additional);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Methods).IsEqualTo(original.Methods.Concat(additional));
-        await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
-        await Assert.That(original.Methods).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Methods).IsEqualTo(original.Methods.Concat(additional));
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        _ = await Assert.That(original.Methods).IsEqualTo(existing);
     }
 }

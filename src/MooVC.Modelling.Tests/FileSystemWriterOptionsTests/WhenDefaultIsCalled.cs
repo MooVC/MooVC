@@ -11,6 +11,6 @@ public sealed class WhenDefaultIsCalled
         FileSystemWriter.Options options = FileSystemWriter.Options.Default;
 
         // Assert
-        await Assert.That(options.BufferSize).IsEqualTo(DefaultBufferSize);
+        _ = await Assert.That(options.BufferSize).IsEqualTo(DefaultBufferSize);
     }
 }

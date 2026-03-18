@@ -15,6 +15,6 @@ public sealed class WhenDirectoryNameIsCalled
         string result = subject.DirectoryName;
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

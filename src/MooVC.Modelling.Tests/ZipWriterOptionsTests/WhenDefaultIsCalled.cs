@@ -12,6 +12,6 @@ public sealed class WhenDefaultIsCalled
         ZipWriter.Options options = ZipWriter.Options.Default;
 
         // Assert
-        await Assert.That(options.Compression).IsEqualTo(CompressionLevel.Optimal);
+        _ = await Assert.That(options.Compression).IsEqualTo(CompressionLevel.Optimal);
     }
 }

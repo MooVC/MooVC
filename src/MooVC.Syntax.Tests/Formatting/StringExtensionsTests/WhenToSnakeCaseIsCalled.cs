@@ -17,7 +17,7 @@ public sealed class WhenToSnakeCaseIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenToSnakeCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -46,7 +46,7 @@ public sealed class WhenToSnakeCaseIsCalled
 
         // Assert
         ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -70,7 +70,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -83,7 +83,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("alpha_beta_gamma_delta");
+        _ = await Assert.That(result).IsEqualTo("alpha_beta_gamma_delta");
     }
 
     [Test]
@@ -109,7 +109,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("alpha_beta");
+        _ = await Assert.That(result).IsEqualTo("alpha_beta");
     }
 
     [Test]
@@ -122,7 +122,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo("part3_revision");
+        _ = await Assert.That(result).IsEqualTo("part3_revision");
     }
 
     [Test]
@@ -135,7 +135,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -148,7 +148,7 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -172,7 +172,7 @@ public sealed class WhenToSnakeCaseIsCalled
         }
 
         // Assert
-        await Assert.That(result).IsEqualTo("istanbul_city");
+        _ = await Assert.That(result).IsEqualTo("istanbul_city");
     }
 
     [Test]
@@ -212,7 +212,7 @@ public sealed class WhenToSnakeCaseIsCalled
         {
             string firstResult = word.ToSnakeCase();
             string secondResult = firstResult.ToSnakeCase();
-            await Assert.That(secondResult).IsEqualTo(firstResult);
+            _ = await Assert.That(secondResult).IsEqualTo(firstResult);
         }
     }
 
@@ -226,6 +226,6 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        await Assert.That(result).IsEqualTo(new string('a', 16_384));
+        _ = await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 }

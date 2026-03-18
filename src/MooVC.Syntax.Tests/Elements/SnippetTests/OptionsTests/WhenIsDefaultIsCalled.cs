@@ -12,7 +12,7 @@ public sealed class WhenIsDefaultIsCalled
         bool result = options.IsDefault;
 
         // Assert
-        await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -26,6 +26,6 @@ public sealed class WhenIsDefaultIsCalled
         bool result = options.IsDefault;
 
         // Assert
-        await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

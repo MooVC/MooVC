@@ -19,9 +19,9 @@ public sealed class WhenWithRemoveIsCalled
         Event.Methods result = original.WithRemove(remove);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Remove).IsEqualTo(remove);
-        await Assert.That(result.Add).IsEqualTo(original.Add);
-        await Assert.That(original.Remove).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Remove).IsEqualTo(remove);
+        _ = await Assert.That(result.Add).IsEqualTo(original.Add);
+        _ = await Assert.That(original.Remove).IsEqualTo(Snippet.Empty);
     }
 }

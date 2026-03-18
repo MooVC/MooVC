@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
@@ -40,8 +40,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
@@ -54,8 +54,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
@@ -68,7 +68,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        await Assert.That((subject == value)).IsTrue();
-        await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 }

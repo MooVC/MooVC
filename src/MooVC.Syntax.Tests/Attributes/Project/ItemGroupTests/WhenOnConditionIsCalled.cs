@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         ItemGroup result = original.OnCondition(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Condition).IsEqualTo(updated);
-        await Assert.That(result.Items).IsEqualTo(original.Items);
-        await Assert.That(result.Label).IsEqualTo(original.Label);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

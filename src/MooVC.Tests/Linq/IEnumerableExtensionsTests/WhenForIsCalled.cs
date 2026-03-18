@@ -18,7 +18,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        await Assert.That(wasInvoked).IsFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -31,7 +31,7 @@ public sealed class WhenForIsCalled
         Action act = () => enumeration.For(default!);
 
         // Assert
-        await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
@@ -50,7 +50,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        await Assert.That(indexes).IsEqualTo([0, 1, 2]);
+        _ = await Assert.That(indexes).IsEqualTo([0, 1, 2]);
     }
 
     [Test]
@@ -63,7 +63,7 @@ public sealed class WhenForIsCalled
 
         void Action(int index, int value)
         {
-            await Assert.That(index).IsEqualTo(expected++);
+            _ = await Assert.That(index).IsEqualTo(expected++);
             invocations.Add(value);
         }
 
@@ -71,7 +71,7 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        await Assert.That(invocations).IsEqualTo(enumeration);
+        _ = await Assert.That(invocations).IsEqualTo(enumeration);
     }
 
     [Test]
@@ -86,6 +86,6 @@ public sealed class WhenForIsCalled
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
-        await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 }

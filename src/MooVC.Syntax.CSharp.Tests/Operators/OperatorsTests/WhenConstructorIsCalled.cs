@@ -15,11 +15,11 @@ public sealed class WhenConstructorIsCalled
         var subject = new Operators();
 
         // Assert
-        await Assert.That(subject.Binaries).IsEmpty();
-        await Assert.That(subject.Comparisons).IsEmpty();
-        await Assert.That(subject.Conversions).IsEmpty();
-        await Assert.That(subject.Unaries).IsEmpty();
-        await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Binaries).IsEmpty();
+        _ = await Assert.That(subject.Comparisons).IsEmpty();
+        _ = await Assert.That(subject.Conversions).IsEmpty();
+        _ = await Assert.That(subject.Unaries).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
@@ -41,10 +41,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        await Assert.That(subject.Binaries).IsEqualTo(binaries);
-        await Assert.That(subject.Comparisons).IsEqualTo(comparisons);
-        await Assert.That(subject.Conversions).IsEqualTo(conversions);
-        await Assert.That(subject.Unaries).IsEqualTo(unaries);
-        await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Binaries).IsEqualTo(binaries);
+        _ = await Assert.That(subject.Comparisons).IsEqualTo(comparisons);
+        _ = await Assert.That(subject.Conversions).IsEqualTo(conversions);
+        _ = await Assert.That(subject.Unaries).IsEqualTo(unaries);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

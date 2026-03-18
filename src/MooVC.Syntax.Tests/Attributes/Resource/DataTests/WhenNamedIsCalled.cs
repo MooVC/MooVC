@@ -15,11 +15,11 @@ public sealed class WhenNamedIsCalled
         Data result = original.Named(updated);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.Name).IsEqualTo(updated);
-        await Assert.That(result.Comment).IsEqualTo(original.Comment);
-        await Assert.That(result.MimeType).IsEqualTo(original.MimeType);
-        await Assert.That(result.Type).IsEqualTo(original.Type);
-        await Assert.That(result.Value).IsEqualTo(original.Value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(updated);
+        _ = await Assert.That(result.Comment).IsEqualTo(original.Comment);
+        _ = await Assert.That(result.MimeType).IsEqualTo(original.MimeType);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

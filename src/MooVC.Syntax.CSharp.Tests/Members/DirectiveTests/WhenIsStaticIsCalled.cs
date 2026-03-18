@@ -17,10 +17,10 @@ public sealed class WhenIsStaticIsCalled
         Directive result = original.IsStatic(true);
 
         // Assert
-        await Assert.That(ReferenceEquals(result, original)).IsFalse();
-        await Assert.That(result.IsStatic).IsTrue();
-        await Assert.That(result.Alias).IsEqualTo(original.Alias);
-        await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
-        await Assert.That(original.IsStatic).IsFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.IsStatic).IsTrue();
+        _ = await Assert.That(result.Alias).IsEqualTo(original.Alias);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        _ = await Assert.That(original.IsStatic).IsFalse();
     }
 }

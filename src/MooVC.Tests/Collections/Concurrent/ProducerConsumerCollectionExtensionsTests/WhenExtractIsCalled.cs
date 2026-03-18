@@ -18,8 +18,8 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        await Assert.That(actual).IsEqualTo(expected);
-        await Assert.That(source).IsEmpty();
+        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(source).IsEmpty();
     }
 
     [Test]
@@ -40,9 +40,9 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        await Assert.That(source.Intersect(actual)).IsEmpty();
-        await Assert.That(source.Count).IsEqualTo(Total - (int)count);
-        await Assert.That(actual.Count()).IsEqualTo((int)count);
+        _ = await Assert.That(source.Intersect(actual)).IsEmpty();
+        _ = await Assert.That(source.Count).IsEqualTo(Total - (int)count);
+        _ = await Assert.That(actual.Count()).IsEqualTo((int)count);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract(count: 50);
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
@@ -68,6 +68,6 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract();
 
         // Assert
-        await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 }
