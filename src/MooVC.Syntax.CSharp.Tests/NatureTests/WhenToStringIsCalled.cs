@@ -1,0 +1,24 @@
+﻿namespace MooVC.Syntax.CSharp.NatureTests;
+
+public sealed class WhenToStringIsCalled
+{
+    [Test]
+    [Arguments("class", nameof(Nature.Class))]
+    [Arguments("struct", nameof(Nature.Struct))]
+    [Arguments("unmanaged", nameof(Nature.Unmanaged))]
+    [Arguments("notnull", nameof(Nature.NotNull))]
+    [Arguments("", nameof(Nature.Unspecified))]
+    public async Task GivenNatureThenReturnsValue(string expected, string field)
+    {
+        // Arrange
+        Nature subject = typeof(Nature)
+            .GetField(field)!
+            .GetValue(null) as Nature ?? Nature.Unspecified;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+}

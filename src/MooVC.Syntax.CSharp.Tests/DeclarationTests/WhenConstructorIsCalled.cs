@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.DeclarationTests;
 
-using Generic = MooVC.Syntax.CSharp.Generics.Generic;
-
 public sealed class WhenConstructorIsCalled
 {
     private const string ParameterName = "T";

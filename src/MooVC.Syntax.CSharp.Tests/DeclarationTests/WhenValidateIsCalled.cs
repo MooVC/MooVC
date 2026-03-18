@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 public sealed class WhenValidateIsCalled
 {

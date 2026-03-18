@@ -1,0 +1,77 @@
+﻿namespace MooVC.Syntax.CSharp.NatureTests;
+
+public sealed class WhenEqualsObjectIsCalled
+{
+    private const string Same = "class";
+    private const string Different = "struct";
+
+    [Test]
+    public async Task GivenNullThenReturnsFalse()
+    {
+        // Arrange
+        Nature subject = Same;
+        object? other = default;
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Nature subject = Same;
+        object other = subject;
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Nature left = Same;
+        object right = (Nature)Same;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Nature left = Same;
+        object right = (Nature)Different;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenNonNatureThenReturnsFalse()
+    {
+        // Arrange
+        Nature subject = Same;
+        object other = Same;
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+}

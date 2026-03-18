@@ -8,11 +8,9 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp;
-    using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Declaration_Resources;
-    using Generic = MooVC.Syntax.CSharp.Generics.Generic;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>

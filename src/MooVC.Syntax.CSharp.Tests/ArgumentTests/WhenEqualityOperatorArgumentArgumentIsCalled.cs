@@ -2,8 +2,8 @@
 
 public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
 {
-    private static readonly Snippet same = Snippet.From("Alpha");
-    private static readonly Snippet different = Snippet.From("Beta");
+    private static readonly Snippet _same = Snippet.From("Alpha");
+    private static readonly Snippet _different = Snippet.From("Beta");
 
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
@@ -24,7 +24,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     {
         // Arrange
         Argument? left = default;
-        var right = new Argument { Value = same };
+        var right = new Argument { Value = _same };
 
         // Act
         bool result = left == right;
@@ -37,7 +37,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Argument { Value = same };
+        var left = new Argument { Value = _same };
         Argument? right = default;
 
         // Act
@@ -51,7 +51,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Argument { Value = same };
+        var first = new Argument { Value = _same };
         Argument second = first;
 
         // Act
@@ -65,8 +65,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Argument { Value = same };
-        var right = new Argument { Value = same };
+        var left = new Argument { Value = _same };
+        var right = new Argument { Value = _same };
 
         // Act
         bool resultLeftRight = left == right;
@@ -81,8 +81,8 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Argument { Value = same };
-        var right = new Argument { Value = different };
+        var left = new Argument { Value = _same };
+        var right = new Argument { Value = _different };
 
         // Act
         bool resultLeftRight = left == right;

@@ -1,8 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.MethodTests;
 
-using MooVC.Syntax.CSharp.Generics;
-using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
-
 public sealed class WhenToSnippetIsCalled
 {
     [Test]

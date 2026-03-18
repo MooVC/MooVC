@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.CSharp.DeclarationTests;
 
 using System.Linq;
-using Generic = MooVC.Syntax.CSharp.Generics.Generic;
 
 internal static class DeclarationTestsData
 {

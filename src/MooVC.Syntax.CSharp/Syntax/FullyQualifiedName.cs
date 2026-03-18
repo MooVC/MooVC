@@ -5,7 +5,7 @@
     using Ardalis.GuardClauses;
     using MooVC.Syntax.CSharp;
     using MooVC.Syntax.Validation;
-    using Generic = MooVC.Syntax.CSharp.Generics.Generic;
+    using Generic = MooVC.Syntax.CSharp.Generic;
 
     internal sealed class FullyQualifiedName
     {

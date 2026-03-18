@@ -7,7 +7,6 @@
     using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp;
-    using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Syntax;
     using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;

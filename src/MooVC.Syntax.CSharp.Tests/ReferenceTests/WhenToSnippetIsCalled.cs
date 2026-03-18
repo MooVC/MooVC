@@ -1,9 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.ReferenceTests;
 
-using MooVC.Syntax.CSharp.Generics;
-using Constraint = MooVC.Syntax.CSharp.Generics.Constraint;
-using Parameter = MooVC.Syntax.CSharp.Parameter;
-
 public sealed class WhenToSnippetIsCalled
 {
     private const string ConstraintInterfaceName = "IWidget";

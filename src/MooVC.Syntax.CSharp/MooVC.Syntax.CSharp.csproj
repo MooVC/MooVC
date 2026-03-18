@@ -56,7 +56,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Variable.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Generics\Implementation.Resources.Designer.cs">
+    <Compile Update="Implementation.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Implementation.Resources.resx</DependentUpon>
@@ -183,7 +183,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Variable.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Generics\Implementation.Resources.resx">
+    <EmbeddedResource Update="Implementation.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Implementation.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
