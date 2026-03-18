@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using MooVC.Syntax.Attributes.Resource;
 using Resource = MooVC.Syntax.Concepts.Resource;
@@ -6,21 +6,21 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenResourceIsUndefined()
+    public async Task GivenDefaultsThenResourceIsUndefined()
     {
         // Act
         var subject = new Resource();
 
         // Assert
-        subject.Assemblies.ShouldBeEmpty();
-        subject.Data.ShouldBeEmpty();
-        subject.Headers.ShouldBeEmpty();
-        subject.Metadata.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Assemblies).IsEmpty();
+        _ = await Assert.That(subject.Data).IsEmpty();
+        _ = await Assert.That(subject.Headers).IsEmpty();
+        _ = await Assert.That(subject.Metadata).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Assembly assembly = ResourceTestsData.CreateAssembly();
@@ -38,10 +38,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Assemblies.ShouldBe(new[] { assembly });
-        subject.Data.ShouldBe(new[] { data });
-        subject.Headers.ShouldBe(new[] { header });
-        subject.Metadata.ShouldBe(new[] { metadata });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Assemblies).IsEquivalentTo([assembly]);
+        _ = await Assert.That(subject.Data).IsEquivalentTo([data]);
+        _ = await Assert.That(subject.Headers).IsEquivalentTo([header]);
+        _ = await Assert.That(subject.Metadata).IsEquivalentTo([metadata]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

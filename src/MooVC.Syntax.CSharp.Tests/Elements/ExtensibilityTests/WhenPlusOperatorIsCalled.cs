@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenPlusOperatorIsCalled
 {
     [Test]
-    public void GivenStaticAbstractThenCombinedExtensibilityReturned()
+    public async Task GivenStaticAbstractThenCombinedExtensibilityReturned()
     {
         // Arrange
         Extensibility left = Extensibility.Static;
@@ -13,11 +13,11 @@ public sealed class WhenPlusOperatorIsCalled
         Extensibility result = left + right;
 
         // Assert
-        result.ToString().ShouldBe("static abstract");
+        _ = await Assert.That(result.ToString()).IsEqualTo("static abstract");
     }
 
     [Test]
-    public void GivenSealedOverrideThenCombinedExtensibilityReturned()
+    public async Task GivenSealedOverrideThenCombinedExtensibilityReturned()
     {
         // Arrange
         Extensibility left = Extensibility.Sealed;
@@ -27,11 +27,11 @@ public sealed class WhenPlusOperatorIsCalled
         Extensibility result = left + right;
 
         // Assert
-        result.ToString().ShouldBe("sealed override");
+        _ = await Assert.That(result.ToString()).IsEqualTo("sealed override");
     }
 
     [Test]
-    public void GivenInvalidCombinationThenThrows()
+    public async Task GivenInvalidCombinationThenThrows()
     {
         // Arrange
         Extensibility left = Extensibility.Static;
@@ -41,11 +41,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left + right;
 
         // Assert
-        _ = result.ShouldThrow<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
-    public void GivenNullLeftThenThrows()
+    public async Task GivenNullLeftThenThrows()
     {
         // Arrange
         Extensibility? left = default;
@@ -55,11 +55,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left! + right;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenNullRightThenThrows()
+    public async Task GivenNullRightThenThrows()
     {
         // Arrange
         Extensibility left = Extensibility.Static;
@@ -69,6 +69,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Extensibility> result = () => left + right!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

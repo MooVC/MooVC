@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenEqualsMethodIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Method? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -30,11 +30,11 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentBodyThenReturnsFalse()
+    public async Task GivenDifferentBodyThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentNameThenReturnsFalse()
+    public async Task GivenDifferentNameThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -72,25 +72,25 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentParametersThenReturnsFalse()
+    public async Task GivenDifferentParametersThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
-        Method target = MethodTestsData.Create(parameters: new[] { new Parameter { Name = "other" } });
+        Method target = MethodTestsData.Create(parameters: [new Parameter { Name = "other" }]);
 
         // Act
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentResultThenReturnsFalse()
+    public async Task GivenDifferentResultThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -105,11 +105,11 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentScopeThenReturnsFalse()
+    public async Task GivenDifferentScopeThenReturnsFalse()
     {
         // Arrange
         Method subject = MethodTestsData.Create();
@@ -119,6 +119,6 @@ public sealed class WhenEqualsMethodIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

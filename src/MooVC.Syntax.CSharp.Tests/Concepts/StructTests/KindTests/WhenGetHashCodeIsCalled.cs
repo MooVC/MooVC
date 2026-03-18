@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsSameHash()
+    public async Task GivenEqualValuesThenReturnsSameHash()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -14,11 +14,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        rightHash.ShouldBe(leftHash);
+        _ = await Assert.That(rightHash).IsEqualTo(leftHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsDifferentHashes()
+    public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -29,6 +29,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        rightHash.ShouldNotBe(leftHash);
+        _ = await Assert.That(rightHash).IsNotEqualTo(leftHash);
     }
 }

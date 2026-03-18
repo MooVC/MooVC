@@ -3,7 +3,7 @@
 public sealed class WhenClonerIsConstructed
 {
     [Test]
-    public void GivenASerializerThenAnInstanceIsReturned()
+    public async Task GivenASerializerThenAnInstanceIsReturned()
     {
         // Arrange
         ISerializer serializer = Substitute.For<ISerializer>();
@@ -12,11 +12,11 @@ public sealed class WhenClonerIsConstructed
         var cloner = new Cloner(serializer);
 
         // Assert
-        _ = cloner.ShouldNotBeNull();
+        _ = await Assert.That(cloner).IsNotNull();
     }
 
     [Test]
-    public void GivenNoSerializerThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenNoSerializerThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         ISerializer? serializer = default;
@@ -25,7 +25,7 @@ public sealed class WhenClonerIsConstructed
         Func<ICloner> act = () => new Cloner(serializer!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(serializer));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(serializer));
     }
 }

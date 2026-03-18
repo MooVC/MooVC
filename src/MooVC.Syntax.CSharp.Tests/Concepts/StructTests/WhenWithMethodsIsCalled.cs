@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithMethodsIsCalled
 {
     [Test]
-    public void GivenMethodsThenReturnsUpdatedInstance()
+    public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
         var method = new Method { Name = new Declaration { Name = "Execute" } };
@@ -15,8 +15,8 @@ public sealed class WhenWithMethodsIsCalled
         Struct result = original.WithMethods(method);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Methods.ShouldContain(method);
-        original.Methods.ShouldBeEmpty();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Methods).Contains(method);
+        _ = await Assert.That(original.Methods).IsEmpty();
     }
 }

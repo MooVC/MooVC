@@ -1,51 +1,51 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<Name> different = ["Gamma"];
-    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> _different = ["Gamma"];
+    private static readonly ImmutableArray<Name> _same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightDefaultThenReturnsTrue()
+    public async Task GivenLeftValueRightDefaultThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
+        var left = new Qualifier(_same);
         ImmutableArray<Name> right = default;
 
         // Act
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(same);
-        ImmutableArray<Name> right = same;
+        var left = new Qualifier(_same);
+        ImmutableArray<Name> right = _same;
 
         // Act
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
-        ImmutableArray<Name> right = different;
+        var left = new Qualifier(_same);
+        ImmutableArray<Name> right = _different;
 
         // Act
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

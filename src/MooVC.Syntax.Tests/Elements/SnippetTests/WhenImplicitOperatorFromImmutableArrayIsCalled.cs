@@ -1,13 +1,13 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _values = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenDefaultThenInstanceIsCreated()
+    public async Task GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
         ImmutableArray<string> provided = default;
@@ -16,38 +16,38 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         Snippet subject = provided;
 
         // Assert
-        _ = subject.ShouldNotBeNull();
+        _ = await Assert.That(subject).IsNotNull();
         ImmutableArray<string> result = subject;
-        result.IsEmpty.ShouldBeTrue();
+        _ = await Assert.That(result.IsEmpty).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenRoundTripsSuccessfully()
+    public async Task GivenValuesThenRoundTripsSuccessfully()
     {
         // Arrange
-        ImmutableArray<string> provided = values;
+        ImmutableArray<string> provided = _values;
 
         // Act
         Snippet subject = provided;
         ImmutableArray<string> result = subject;
 
         // Assert
-        result.ShouldBe(provided);
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
-    public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        ImmutableArray<string> provided = values;
+        ImmutableArray<string> provided = _values;
 
         // Act
         Snippet first = provided;
         Snippet second = provided;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

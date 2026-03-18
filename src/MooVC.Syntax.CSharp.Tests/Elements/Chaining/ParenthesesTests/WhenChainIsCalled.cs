@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.Chaining.ParenthesesTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.Chaining.ParenthesesTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenChainIsCalled
 {
     [Test]
-    public void GivenMethodSignatureWhenLineIsLongThenEachParameterIsOnNewLine()
+    public async Task GivenMethodSignatureWhenLineIsLongThenEachParameterIsOnNewLine()
     {
         // Arrange
         Snippet.IChain subject = Parentheses.Instance;
@@ -27,12 +27,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(value, options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenNestedMethodCallWhenLineIsLongThenOutterParenthesesIsChainedFirst()
+    public async Task GivenNestedMethodCallWhenLineIsLongThenOutterParenthesesIsChainedFirst()
     {
         // Arrange
         Snippet.IChain subject = Parentheses.Instance;
@@ -53,7 +53,7 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(value, options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 }

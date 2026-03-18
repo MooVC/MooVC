@@ -1,17 +1,17 @@
-namespace MooVC.Modelling.ZipWriterOptionsTests;
+﻿namespace MooVC.Modelling.ZipWriterOptionsTests;
 
 using System.IO.Compression;
 
 public sealed class WhenDefaultIsCalled
 {
     [Test]
-    public void GivenDefaultThenCompressionIsOptimal()
+    public async Task GivenDefaultThenCompressionIsOptimal()
     {
         // Arrange
         // Act
         ZipWriter.Options options = ZipWriter.Options.Default;
 
         // Assert
-        options.Compression.ShouldBe(CompressionLevel.Optimal);
+        _ = await Assert.That(options.Compression).IsEqualTo(CompressionLevel.Optimal);
     }
 }

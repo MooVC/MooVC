@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
     private const string Name = "Value";
 
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var argument = new Argument();
@@ -17,8 +17,8 @@ public sealed class WhenNamedIsCalled
         Argument result = argument.Named(name);
 
         // Assert
-        result.ShouldNotBeSameAs(argument);
-        result.Name.ShouldBe(name);
-        argument.Name.ShouldNotBe(name);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(argument);
+        _ = await Assert.That(result.Name).IsEqualTo(name);
+        _ = await Assert.That(argument.Name).IsNotEqualTo(name);
     }
 }

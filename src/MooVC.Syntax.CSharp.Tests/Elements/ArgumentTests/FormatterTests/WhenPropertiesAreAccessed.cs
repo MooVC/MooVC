@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
     [Test]
-    public void GivenCallFormatterThenFlagsReflectValue()
+    public async Task GivenCallFormatterThenFlagsReflectValue()
     {
         // Arrange
         Argument.Formatter subject = Argument.Formatter.Call;
@@ -13,12 +13,12 @@ public sealed class WhenPropertiesAreAccessed
         bool isDeclaration = subject.IsDeclaration;
 
         // Assert
-        isCall.ShouldBeTrue();
-        isDeclaration.ShouldBeFalse();
+        _ = await Assert.That(isCall).IsTrue();
+        _ = await Assert.That(isDeclaration).IsFalse();
     }
 
     [Test]
-    public void GivenDeclarationFormatterThenFlagsReflectValue()
+    public async Task GivenDeclarationFormatterThenFlagsReflectValue()
     {
         // Arrange
         Argument.Formatter subject = Argument.Formatter.Declaration;
@@ -28,7 +28,7 @@ public sealed class WhenPropertiesAreAccessed
         bool isDeclaration = subject.IsDeclaration;
 
         // Assert
-        isCall.ShouldBeFalse();
-        isDeclaration.ShouldBeTrue();
+        _ = await Assert.That(isCall).IsFalse();
+        _ = await Assert.That(isDeclaration).IsTrue();
     }
 }

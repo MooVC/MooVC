@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenRequiredThenReturnsNewConstraint()
+    public async Task GivenRequiredThenReturnsNewConstraint()
     {
         // Arrange
         New subject = New.Required;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("new()");
+        _ = await Assert.That(result).IsEqualTo("new()");
     }
 
     [Test]
-    public void GivenNotRequiredThenReturnsEmpty()
+    public async Task GivenNotRequiredThenReturnsEmpty()
     {
         // Arrange
         New subject = New.NotRequired;
@@ -25,6 +25,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

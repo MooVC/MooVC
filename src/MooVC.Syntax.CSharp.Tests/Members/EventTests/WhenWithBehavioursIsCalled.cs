@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBehavioursIsCalled
 {
     [Test]
-    public void GivenBehavioursThenReturnsNewInstanceWithUpdatedBehaviours()
+    public async Task GivenBehavioursThenReturnsNewInstanceWithUpdatedBehaviours()
     {
         // Arrange
         Event original = EventTestsData.Create();
@@ -19,9 +19,9 @@ public sealed class WhenWithBehavioursIsCalled
         Event result = original.WithBehaviours(behaviours);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviours.ShouldBe(behaviours);
-        result.Handler.ShouldBe(original.Handler);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(behaviours);
+        _ = await Assert.That(result.Handler).IsEqualTo(original.Handler);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Class subject = ClassTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Class subject = ClassTestsData.Create(isStatic: true);
@@ -29,11 +29,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Class subject = ClassTestsData.Create(scope: Scope.Internal);
@@ -43,11 +43,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Class subject = ClassTestsData.Create(isPartial: true);
@@ -57,6 +57,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

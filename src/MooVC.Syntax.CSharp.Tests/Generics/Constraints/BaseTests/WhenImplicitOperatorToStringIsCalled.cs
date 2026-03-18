@@ -1,14 +1,13 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using Shouldly;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Value = "BaseClass";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Base? @base = default;
@@ -17,11 +16,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => @base;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenBaseThenStringMatchesToString()
+    public async Task GivenBaseThenStringMatchesToString()
     {
         // Arrange
         Base subject = new Symbol
@@ -33,6 +32,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

@@ -1,14 +1,14 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 public sealed class WhenToStringIsCalled
 {
-    private static readonly string[] lines = ["if (condition)", "return true;"];
+    private static readonly string[] _lines = ["if (condition)", "return true;"];
 
     [Test]
-    public void GivenDefaultOptionsThenReturnsJoinedLines()
+    public async Task GivenDefaultOptionsThenReturnsJoinedLines()
     {
         // Arrange
-        var subject = Snippet.From(lines);
+        var subject = Snippet.From(_lines);
 
         const string expected = """
             if (condition)
@@ -19,6 +19,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

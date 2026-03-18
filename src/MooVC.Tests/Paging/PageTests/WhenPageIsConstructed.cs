@@ -7,7 +7,7 @@ public sealed class WhenPageIsConstructed
     [Arguments(1, 10)]
     [Arguments(5, 0)]
     [Arguments(0, 100)]
-    public void GivenNoValuesThenAllPropertiesAreSetToDefaults(ushort page, ushort limit)
+    public async Task GivenNoValuesThenAllPropertiesAreSetToDefaults(ushort page, ushort limit)
     {
         // Arrange
         Directive directive = new(Limit: limit, Page: page);
@@ -16,18 +16,18 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, []);
 
         // Assert
-        result.ShouldBeEmpty();
-        result.Count.ShouldBe(0);
-        result.Directive.ShouldBe(directive);
-        result.HasTotal.ShouldBeFalse();
-        result.Total.ShouldBeNull();
+        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result.Count).IsEqualTo(0);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsFalse();
+        _ = await Assert.That(result.Total).IsNull();
     }
 
     [Test]
     [Arguments(1, 10, new[] { 1, 2, 3, 4 })]
     [Arguments(5, 0, new int[0])]
     [Arguments(0, 100, new[] { 1 })]
-    public void GivenValuesAndNoTotalThenAllPropertiesAreSet(ushort page, ushort limit, int[] values)
+    public async Task GivenValuesAndNoTotalThenAllPropertiesAreSet(ushort page, ushort limit, int[] values)
     {
         // Arrange
         Directive directive = new(Limit: limit, Page: page);
@@ -36,18 +36,18 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values);
 
         // Assert
-        result.ShouldBe(values);
-        result.Count.ShouldBe(values.Length);
-        result.Directive.ShouldBe(directive);
-        result.HasTotal.ShouldBeFalse();
-        result.Total.ShouldBeNull();
+        _ = await Assert.That(result).IsEquivalentTo(values);
+        _ = await Assert.That(result.Count).IsEqualTo(values.Length);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsFalse();
+        _ = await Assert.That(result.Total).IsNull();
     }
 
     [Test]
     [Arguments(1, 10, 50, new[] { 1, 2, 3, 4 })]
     [Arguments(5, 0, 20, new int[0])]
     [Arguments(0, 100, 0, new[] { 1 })]
-    public void GivenValuesAndAnIntTotalThenAllPropertiesAreSet(ushort page, ushort limit, ulong total, int[] values)
+    public async Task GivenValuesAndAnIntTotalThenAllPropertiesAreSet(ushort page, ushort limit, ulong total, int[] values)
     {
         // Arrange
         Directive directive = new(Limit: limit, Page: page);
@@ -56,15 +56,15 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values, total: total);
 
         // Assert
-        result.ShouldBe(values);
-        result.Count.ShouldBe(values.Length);
-        result.Directive.ShouldBe(directive);
-        result.HasTotal.ShouldBeTrue();
-        result.Total.ShouldBe(total);
+        _ = await Assert.That(result).IsEquivalentTo(values);
+        _ = await Assert.That(result.Count).IsEqualTo(values.Length);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsTrue();
+        _ = await Assert.That(result.Total).IsEqualTo(total);
     }
 
     [Test]
-    public void GivenNullValuesThenEmptyValuesAreSet()
+    public async Task GivenNullValuesThenEmptyValuesAreSet()
     {
         // Arrange
         Directive directive = new(Limit: 120, Page: 1);
@@ -75,11 +75,11 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values!, total: total);
 
         // Assert
-        result.ShouldBeEmpty();
-        result.Count.ShouldBe(0);
-        result.Directive.ShouldBe(directive);
-        result.HasTotal.ShouldBeTrue();
-        result.Total.ShouldBe(total);
+        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result.Count).IsEqualTo(0);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.HasTotal).IsTrue();
+        _ = await Assert.That(result.Total).IsEqualTo(total);
     }
 }
 #endif

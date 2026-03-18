@@ -1,27 +1,28 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenShiftIsCalled
 {
-    private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
+    private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.Shift(options!));
+        Func<Snippet> act = () => _ = subject.Shift(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenOptionsThenLinesAreShifted()
+    public async Task GivenOptionsThenLinesAreShifted()
     {
         // Arrange
         const string expected = """
@@ -30,7 +31,7 @@ public sealed class WhenShiftIsCalled
             """;
 
         const string whitespace = "\t";
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
 
         Snippet.Options options = new Snippet.Options()
             .WithWhitespace(whitespace);
@@ -40,6 +41,6 @@ public sealed class WhenShiftIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Assembly? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Assembly? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Assembly left = AssemblyTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Assembly left = AssemblyTestsData.Create();
@@ -57,6 +57,6 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

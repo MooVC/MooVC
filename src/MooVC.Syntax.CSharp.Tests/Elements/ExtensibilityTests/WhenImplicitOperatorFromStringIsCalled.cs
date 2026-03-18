@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -7,17 +7,17 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Value = "custom";
 
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Extensibility)value);
+        _ = await Assert.That(() => _ = (Extensibility)value).ThrowsNothing();
     }
 
     [Test]
-    public void GivenNullWhenRoundTrippedThenResultIsNull()
+    public async Task GivenNullWhenRoundTrippedThenResultIsNull()
     {
         // Arrange
         string? value = default;
@@ -27,11 +27,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenEmptyThenEqualsString()
+    public async Task GivenEmptyThenEqualsString()
     {
         // Arrange
         string value = Empty;
@@ -40,12 +40,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Extensibility subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenWhitespaceThenEqualsString()
+    public async Task GivenWhitespaceThenEqualsString()
     {
         // Arrange
         string value = Space;
@@ -54,12 +54,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Extensibility subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = Value;
@@ -68,12 +68,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Extensibility subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
         string value = Value;
@@ -83,11 +83,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         string value = Value;
@@ -97,8 +97,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Extensibility second = value;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

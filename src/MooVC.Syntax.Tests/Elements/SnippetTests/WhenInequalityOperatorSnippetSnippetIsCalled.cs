@@ -1,14 +1,14 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenInequalityOperatorSnippetSnippetIsCalled
 {
-    private static readonly ImmutableArray<string> different = ["Gamma"];
-    private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _different = ["Gamma"];
+    private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Snippet? left = default;
@@ -18,80 +18,80 @@ public sealed class WhenInequalityOperatorSnippetSnippetIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Snippet? left = default;
-        var right = new Snippet(same);
+        var right = new Snippet(_same);
 
         // Act
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet(same);
+        var left = new Snippet(_same);
         Snippet? right = default;
 
         // Act
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Snippet(same);
+        var first = new Snippet(_same);
         Snippet second = first;
 
         // Act
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet(same);
-        var right = new Snippet(same);
+        var left = new Snippet(_same);
+        var right = new Snippet(_same);
 
         // Act
         bool resultLeftRight = left != right;
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet(same);
-        var right = new Snippet(different);
+        var left = new Snippet(_same);
+        var right = new Snippet(_different);
 
         // Act
         bool resultLeftRight = left != right;
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 }

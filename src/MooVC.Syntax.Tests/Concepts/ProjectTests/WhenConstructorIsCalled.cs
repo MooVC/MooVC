@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
 using Resource = MooVC.Syntax.Attributes.Resource.Resource;
@@ -6,23 +6,23 @@ using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenProjectIsUndefined()
+    public async Task GivenDefaultsThenProjectIsUndefined()
     {
         // Act
         var subject = new Project();
 
         // Assert
-        subject.Imports.ShouldBeEmpty();
-        subject.ItemGroups.ShouldBeEmpty();
-        subject.PropertyGroups.ShouldBeEmpty();
-        subject.Resources.ShouldBeEmpty();
-        subject.Sdks.ShouldBeEmpty();
-        subject.Targets.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Imports).IsEmpty();
+        _ = await Assert.That(subject.ItemGroups).IsEmpty();
+        _ = await Assert.That(subject.PropertyGroups).IsEmpty();
+        _ = await Assert.That(subject.Resources).IsEmpty();
+        _ = await Assert.That(subject.Sdks).IsEmpty();
+        _ = await Assert.That(subject.Targets).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Import import = ProjectTestsData.CreateImport();
@@ -44,12 +44,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Imports.ShouldBe(new[] { import });
-        subject.ItemGroups.ShouldBe(new[] { itemGroup });
-        subject.PropertyGroups.ShouldBe(new[] { propertyGroup });
-        subject.Resources.ShouldBe(new[] { resource });
-        subject.Sdks.ShouldBe(new[] { sdk });
-        subject.Targets.ShouldBe(new[] { target });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Imports).IsEquivalentTo([import]);
+        _ = await Assert.That(subject.ItemGroups).IsEquivalentTo([itemGroup]);
+        _ = await Assert.That(subject.PropertyGroups).IsEquivalentTo([propertyGroup]);
+        _ = await Assert.That(subject.Resources).IsEquivalentTo([resource]);
+        _ = await Assert.That(subject.Sdks).IsEquivalentTo([sdk]);
+        _ = await Assert.That(subject.Targets).IsEquivalentTo([target]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

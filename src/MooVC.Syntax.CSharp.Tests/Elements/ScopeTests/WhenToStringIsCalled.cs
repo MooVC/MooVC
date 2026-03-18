@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -16,12 +16,12 @@ public sealed class WhenToStringIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenScopeThenLiteralValueReturnedData))]
-    public void GivenScopeThenLiteralValueReturned(Scope subject, string expected)
+    public async Task GivenScopeThenLiteralValueReturned(Scope subject, string expected)
     {
         // Act
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(expected);
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 }

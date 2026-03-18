@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualsPropertyIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenEqualsPropertyIsCalled
         bool result = subject.Equals(default);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -28,11 +28,11 @@ public sealed class WhenEqualsPropertyIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
@@ -42,6 +42,6 @@ public sealed class WhenEqualsPropertyIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

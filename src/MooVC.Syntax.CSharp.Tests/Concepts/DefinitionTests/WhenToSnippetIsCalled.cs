@@ -16,7 +16,7 @@ public sealed class WhenToSnippetIsCalled
         .WithTypes(types => types.WithQualification(Qualification.Global));
 
     [Test]
-    public void GivenInstructionsWhenAttributeThenAttributeIsCreated()
+    public async Task GivenInstructionsWhenAttributeThenAttributeIsCreated()
     {
         // Arrange
         const string expected = """
@@ -48,11 +48,11 @@ public sealed class WhenToSnippetIsCalled
         var actual = content.ToSnippet(_options);
 
         // Assert
-        actual.ToString().ShouldBe(expected);
+        _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenInstructionsWhenAttributeWithPropertiesThenAttributeIsCreated()
+    public async Task GivenInstructionsWhenAttributeWithPropertiesThenAttributeIsCreated()
     {
         // Arrange
         const string expected = """
@@ -90,6 +90,6 @@ public sealed class WhenToSnippetIsCalled
         var actual = content.ToSnippet(_options);
 
         // Assert
-        actual.ToString().ShouldBe(expected);
+        _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
     }
 }

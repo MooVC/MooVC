@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string NamedIdentifier = "TNamed";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Identifier? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenIdentifierThenSnippetMatchesStringRepresentation()
+    public async Task GivenIdentifierThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Identifier(NamedIdentifier);
@@ -29,6 +29,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

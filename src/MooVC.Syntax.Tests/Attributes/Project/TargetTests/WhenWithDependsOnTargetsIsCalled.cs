@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithDependsOnTargetsIsCalled
     private const string UpdatedDependsOnTargets = "UpdatedDependsOnTargets";
 
     [Test]
-    public void GivenDependsOnTargetsThenReturnsUpdatedInstance()
+    public async Task GivenDependsOnTargetsThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -17,9 +17,9 @@ public sealed class WhenWithDependsOnTargetsIsCalled
         Target result = original.WithDependsOnTargets(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.DependsOnTargets.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.DependsOnTargets).IsEqualTo(updated);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

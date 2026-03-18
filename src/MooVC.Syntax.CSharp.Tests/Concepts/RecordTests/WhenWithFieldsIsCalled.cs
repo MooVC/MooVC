@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithFieldsIsCalled
 {
     [Test]
-    public void GivenFieldsThenReturnsUpdatedInstance()
+    public async Task GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
         var existing = new Field { Name = new Variable("_value"), Type = typeof(int) };
@@ -17,8 +17,8 @@ public sealed class WhenWithFieldsIsCalled
         Record result = original.WithFields(appended);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Fields.ShouldBe(new[] { existing, appended });
-        result.Indexers.ShouldBe(original.Indexers);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Fields).IsEquivalentTo([existing, appended]);
+        _ = await Assert.That(result.Indexers).IsEqualTo(original.Indexers);
     }
 }

@@ -1,14 +1,13 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithIndexersIsCalled
 {
     [Test]
-    public void GivenIndexersThenReturnsUpdatedInstance()
+    public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
         Indexer[] existing = [new Indexer { Parameter = new Parameter { Name = "Item" } }];
@@ -19,9 +18,9 @@ public sealed class WhenWithIndexersIsCalled
         Class result = original.WithIndexers(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Indexers.ShouldBe(original.Indexers.Concat(additional));
-        result.IsStatic.ShouldBe(original.IsStatic);
-        original.Indexers.ShouldBe(existing);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Indexers).IsEquivalentTo([.. original.Indexers, .. additional]);
+        _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        _ = await Assert.That(original.Indexers).IsEquivalentTo(existing);
     }
 }

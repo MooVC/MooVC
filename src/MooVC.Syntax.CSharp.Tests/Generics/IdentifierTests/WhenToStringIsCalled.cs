@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenToStringIsCalled
 {
     private const string Value = "TResult";
 
     [Test]
-    public void GivenNamedIdentifierThenReturnsValue()
+    public async Task GivenNamedIdentifierThenReturnsValue()
     {
         // Arrange
         var subject = new Identifier(Value);
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Value);
+        _ = await Assert.That(result).IsEqualTo(Value);
     }
 
     [Test]
-    public void GivenUnnamedIdentifierThenReturnsEmpty()
+    public async Task GivenUnnamedIdentifierThenReturnsEmpty()
     {
         // Arrange
         Identifier subject = Identifier.Unnamed;
@@ -27,6 +27,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

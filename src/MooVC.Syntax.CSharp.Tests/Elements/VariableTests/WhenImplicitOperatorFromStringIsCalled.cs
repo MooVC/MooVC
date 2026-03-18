@@ -8,17 +8,17 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Alpha = "Alpha";
 
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Variable)value);
+        _ = await Assert.That(() => _ = (Variable)value).ThrowsNothing();
     }
 
     [Test]
-    public void GivenNullWhenRoundTrippedThenResultIsEmpty()
+    public async Task GivenNullWhenRoundTrippedThenResultIsEmpty()
     {
         // Arrange
         string? value = default;
@@ -28,11 +28,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenEmptyThenEqualsString()
+    public async Task GivenEmptyThenEqualsString()
     {
         // Arrange
         string value = Empty;
@@ -41,26 +41,27 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Variable subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = Alpha;
+        string expected = value.ToCamelCase();
 
         // Act
         Variable subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenVeryLongThenEqualsString()
+    public async Task GivenVeryLongThenEqualsString()
     {
         // Arrange
         string value = new('x', 64_000);
@@ -70,12 +71,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Variable subject = value;
 
         // Assert
-        (subject == expected).ShouldBeTrue();
-        subject.Equals(expected).ShouldBeTrue();
+        _ = await Assert.That(subject == expected).IsTrue();
+        _ = await Assert.That(subject.Equals(expected)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginalInCamelCase()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginalInCamelCase()
     {
         // Arrange
         string value = Alpha;
@@ -86,11 +87,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         string value = Alpha;
@@ -100,8 +101,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Variable second = value;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

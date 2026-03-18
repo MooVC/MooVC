@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Conversion.Type type = Conversion.Type.Explicit;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(null as object);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameInstanceThenReturnsTrue()
+    public async Task GivenTheSameInstanceThenReturnsTrue()
     {
         // Arrange
         Conversion.Type type = Conversion.Type.Explicit;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(type as object);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentInstanceThenReturnsFalse()
+    public async Task GivenADifferentInstanceThenReturnsFalse()
     {
         // Arrange
         Conversion.Type type = Conversion.Type.Explicit;
@@ -38,6 +38,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = type.Equals(Conversion.Type.Implicit as object);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

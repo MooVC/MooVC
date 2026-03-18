@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithOutputsIsCalled
 {
     [Test]
-    public void GivenOutputsThenReturnsUpdatedInstance()
+    public async Task GivenOutputsThenReturnsUpdatedInstance()
     {
         // Arrange
         Output existing = TargetTaskTestsData.CreateOutput();
@@ -24,9 +23,9 @@ public sealed class WhenWithOutputsIsCalled
         TargetTask result = original.WithOutputs(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Outputs.ShouldBe(original.Outputs.Concat([additional]));
-        result.Name.ShouldBe(original.Name);
-        result.Condition.ShouldBe(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Outputs).IsEquivalentTo([.. original.Outputs, additional]);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

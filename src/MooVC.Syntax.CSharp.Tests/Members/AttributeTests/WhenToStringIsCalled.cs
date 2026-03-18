@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     private const string AttributeName = AttributeTestsData.DefaultName;
 
     [Test]
-    public void GivenUnspecifiedAttributeThenReturnsEmpty()
+    public async Task GivenUnspecifiedAttributeThenReturnsEmpty()
     {
         // Arrange
         var attribute = new Attribute();
@@ -19,11 +19,11 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenNameThenReturnsAttributeString()
+    public async Task GivenNameThenReturnsAttributeString()
     {
         // Arrange
         Attribute attribute = AttributeTestsData.Create();
@@ -32,11 +32,11 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        result.ShouldBe($"[{AttributeName}]");
+        _ = await Assert.That(result).IsEqualTo($"[{AttributeName}]");
     }
 
     [Test]
-    public void GivenTargetThenReturnsAttributeStringWithTarget()
+    public async Task GivenTargetThenReturnsAttributeStringWithTarget()
     {
         // Arrange
         Attribute attribute = AttributeTestsData.Create(target: Attribute.Specifier.Method);
@@ -45,11 +45,11 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        result.ShouldBe($"[{Attribute.Specifier.Method}:{AttributeName}]");
+        _ = await Assert.That(result).IsEqualTo($"[{Attribute.Specifier.Method}:{AttributeName}]");
     }
 
     [Test]
-    public void GivenArgumentsThenReturnsAttributeStringWithArguments()
+    public async Task GivenArgumentsThenReturnsAttributeStringWithArguments()
     {
         // Arrange
         Attribute attribute = AttributeTestsData.Create(
@@ -63,6 +63,6 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        result.ShouldBe($"[{AttributeName}({ArgumentName} = {ArgumentValue})]");
+        _ = await Assert.That(result).IsEqualTo($"[{AttributeName}({ArgumentName} = {ArgumentValue})]");
     }
 }

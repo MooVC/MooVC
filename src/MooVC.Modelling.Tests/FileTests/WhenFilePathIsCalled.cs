@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.FileTests;
+﻿namespace MooVC.Modelling.FileTests;
 
 public sealed class WhenFilePathIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenFilePathIsCalled
     private const string PathValue = "Models";
 
     [Test]
-    public void GivenFileInformationThenFilePathIsReturned()
+    public async Task GivenFileInformationThenFilePathIsReturned()
     {
         // Arrange
         File file = new(Content, Extension, Name, PathValue);
@@ -18,6 +18,6 @@ public sealed class WhenFilePathIsCalled
         string filePath = file.FullPath;
 
         // Assert
-        filePath.ShouldBe(expectedFilePath);
+        _ = await Assert.That(filePath).IsEqualTo(expectedFilePath);
     }
 }

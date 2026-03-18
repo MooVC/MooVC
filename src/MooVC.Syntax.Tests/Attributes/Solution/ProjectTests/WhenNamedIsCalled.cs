@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
@@ -15,12 +15,12 @@ public sealed class WhenNamedIsCalled
         Project result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.DisplayName.ShouldBe(updated);
-        result.Id.ShouldBe(original.Id);
-        result.Path.ShouldBe(original.Path);
-        result.Type.ShouldBe(original.Type);
-        result.Builds.ShouldBe(original.Builds);
-        result.Platforms.ShouldBe(original.Platforms);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.DisplayName).IsEqualTo(updated);
+        _ = await Assert.That(result.Id).IsEqualTo(original.Id);
+        _ = await Assert.That(result.Path).IsEqualTo(original.Path);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result.Builds).IsEqualTo(original.Builds);
+        _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms);
     }
 }

@@ -26,7 +26,7 @@ public sealed class WhenCloneIsCalled
         _ = await serializer.Received(1).Serialize(instance, Arg.Any<CancellationToken>());
         _ = await serializer.Received(1).Deserialize<WhenCloneIsCalled>(binary, Arg.Any<CancellationToken>());
 
-        clone.ShouldBe(instance);
+        _ = await Assert.That(clone).IsEqualTo(instance);
     }
 
     [Test]
@@ -41,7 +41,7 @@ public sealed class WhenCloneIsCalled
         Func<Task> act = async () => await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(original));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(original));
     }
 }

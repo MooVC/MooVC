@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenAcceptsIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
+    public async Task GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
     {
         // Arrange
         Method original = MethodTestsData.Create();
@@ -23,12 +23,12 @@ public sealed class WhenAcceptsIsCalled
         Method result = original.Accepts(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Name.ShouldBe(original.Name);
-        result.Parameters.Length.ShouldBe(original.Parameters.Length + additional.Length);
-        result.Parameters.ShouldBe(original.Parameters.Concat(additional));
-        result.Result.ShouldBe(original.Result);
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Parameters.Length).IsEqualTo(original.Parameters.Length + additional.Length);
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. original.Parameters, .. additional]);
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

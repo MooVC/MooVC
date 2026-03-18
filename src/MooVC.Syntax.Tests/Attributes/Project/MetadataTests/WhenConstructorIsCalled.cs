@@ -1,24 +1,24 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenMetadataIsUndefined()
+    public async Task GivenDefaultsThenMetadataIsUndefined()
     {
         // Act
         var subject = new Metadata();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var subject = new Metadata
@@ -29,9 +29,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(MetadataTestsData.DefaultCondition));
-        subject.Name.ShouldBe(new Name(MetadataTestsData.DefaultName));
-        subject.Value.ShouldBe(Snippet.From(MetadataTestsData.DefaultValue));
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(MetadataTestsData.DefaultCondition));
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(MetadataTestsData.DefaultName));
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.From(MetadataTestsData.DefaultValue));
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

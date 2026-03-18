@@ -3,7 +3,7 @@
 public sealed class WhenExplodeIsCalled
 {
     [Test]
-    public void GivenANullExceptionThenTheActionIsGracefullyIgnored()
+    public async Task GivenANullExceptionThenTheActionIsGracefullyIgnored()
     {
         // Arrange
         Exception? exception = default;
@@ -18,11 +18,11 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        wasInvoked.ShouldBeFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
-    public void GivenAnExceptionWithNoInnerExceptionThenTheActionIsInvokedForTheParent()
+    public async Task GivenAnExceptionWithNoInnerExceptionThenTheActionIsInvokedForTheParent()
     {
         // Arrange
         const int ExpectedInvocationCount = 1;
@@ -38,11 +38,11 @@ public sealed class WhenExplodeIsCalled
         exception.Explode(Action);
 
         // Assert
-        invocationCount.ShouldBe(ExpectedInvocationCount);
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
     }
 
     [Test]
-    public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedForEachExceptionInHierarchicalOrder()
+    public async Task GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedForEachExceptionInHierarchicalOrder()
     {
         // Arrange
         const int ExpectedInvocationCount = 4;
@@ -62,11 +62,11 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        invocationCount.ShouldBe(ExpectedInvocationCount);
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
     }
 
     [Test]
-    public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedInCorrectOrder()
+    public async Task GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedInCorrectOrder()
     {
         // Arrange
         var tier3 = new InvalidOperationException();
@@ -86,6 +86,6 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        actualOrder.ShouldBe(expectedOrder);
+        _ = await Assert.That(actualOrder).IsEquivalentTo(expectedOrder);
     }
 }

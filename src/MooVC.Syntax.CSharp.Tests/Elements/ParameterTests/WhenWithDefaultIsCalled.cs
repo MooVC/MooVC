@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithDefaultIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedDefault()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedDefault()
     {
         // Arrange
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
@@ -15,11 +15,11 @@ public sealed class WhenWithDefaultIsCalled
         Parameter result = original.WithDefault(@default);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(@default);
-        result.Attributes.ShouldBe(original.Attributes);
-        result.Modifier.ShouldBe(original.Modifier);
-        result.Name.ShouldBe(original.Name);
-        original.Default.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Default).IsEqualTo(@default);
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(original.Default).IsEqualTo(Snippet.Empty);
     }
 }

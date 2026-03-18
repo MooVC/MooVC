@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
     private const string NewName = "Other";
 
     [Test]
-    public void GivenNameThenReturnsNewInstanceWithUpdatedName()
+    public async Task GivenNameThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
         Method original = MethodTestsData.Create();
@@ -16,12 +16,12 @@ public sealed class WhenNamedIsCalled
         Method result = original.Named(new Declaration { Name = NewName });
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Name.ShouldBe(new Declaration { Name = NewName });
-        result.Parameters.ShouldBe(original.Parameters);
-        result.Result.ShouldBe(original.Result);
-        result.Scope.ShouldBe(original.Scope);
-        original.Name.ShouldBe(new Declaration { Name = MethodTestsData.DefaultName });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Name).IsEqualTo(new Declaration { Name = NewName });
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(result.Result).IsEqualTo(original.Result);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(original.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
     }
 }

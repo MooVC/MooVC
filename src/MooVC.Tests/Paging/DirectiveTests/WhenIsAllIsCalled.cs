@@ -4,7 +4,7 @@ namespace MooVC.Paging.DirectiveTests;
 public sealed class WhenIsAllIsCalled
 {
     [Test]
-    public void GivenTheAllDirectiveThenAPositiveResponseIsReturned()
+    public async Task GivenTheAllDirectiveThenAPositiveResponseIsReturned()
     {
         // Arrange
         Directive directive = Directive.All;
@@ -13,11 +13,11 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
-    public void GivenADefaultDirectiveThenAPositiveResponseIsReturned()
+    public async Task GivenADefaultDirectiveThenAPositiveResponseIsReturned()
     {
         // Arrange
         Directive directive = default;
@@ -26,11 +26,11 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
-    public void GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
+    public async Task GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
     {
         // Arrange
         Directive directive = new(Limit: Directive.MinimumLimit, Page: Directive.FirstPage);
@@ -39,11 +39,11 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
     [Test]
-    public void GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
+    public async Task GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
     {
         // Arrange
         Directive directive = new(Limit: 5, Page: 2);
@@ -52,7 +52,7 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeFalse();
+        _ = await Assert.That(isAll).IsFalse();
     }
 }
 #endif

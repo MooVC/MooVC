@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Operators.BinaryTests;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 public sealed class WhenEqualsOperatorsIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Operators? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualsOperatorsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Operators subject = OperatorsSubjectData.Create();
@@ -30,11 +30,11 @@ public sealed class WhenEqualsOperatorsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
@@ -45,11 +45,11 @@ public sealed class WhenEqualsOperatorsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Operators subject = OperatorsSubjectData.Create();
@@ -59,6 +59,6 @@ public sealed class WhenEqualsOperatorsIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

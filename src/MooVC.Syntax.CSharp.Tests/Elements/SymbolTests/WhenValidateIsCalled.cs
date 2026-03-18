@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
     private const string ArgumentName = "Inner";
 
     [Test]
-    public void GivenUnspecifiedSymbolThenNoValidationErrorsReturned()
+    public async Task GivenUnspecifiedSymbolThenNoValidationErrorsReturned()
     {
         // Arrange
         Symbol symbol = Symbol.Undefined;
@@ -21,12 +21,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnnamedSymbolThenValidationErrorReturned()
+    public async Task GivenUnnamedSymbolThenValidationErrorReturned()
     {
         // Arrange
         var symbol = new Symbol
@@ -41,14 +41,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenUnspecifiedArgumentThenValidationErrorReturned()
+    public async Task GivenUnspecifiedArgumentThenValidationErrorReturned()
     {
         // Arrange
         var symbol = new Symbol
@@ -64,14 +64,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Arguments));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Arguments));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
+    public async Task GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
         var symbol = new Symbol
@@ -87,14 +87,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
+    public async Task GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
         var symbol = new Symbol
@@ -110,14 +110,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidSymbolThenNoValidationErrorsReturned()
+    public async Task GivenValidSymbolThenNoValidationErrorsReturned()
     {
         // Arrange
         var symbol = new Symbol
@@ -133,7 +133,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Attribute? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Attribute? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Attribute first = AttributeTestsData.Create(target: Attribute.Specifier.Method);
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Method);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentTargetsThenReturnsFalse()
+    public async Task GivenDifferentTargetsThenReturnsFalse()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Method);
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentArgumentsThenReturnsFalse()
+    public async Task GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(
@@ -106,7 +106,7 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

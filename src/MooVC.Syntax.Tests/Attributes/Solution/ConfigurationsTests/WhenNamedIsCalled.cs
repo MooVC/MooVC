@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenBuildsThenReturnsUpdatedInstance()
+    public async Task GivenBuildsThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Configurations();
@@ -16,8 +15,8 @@ public sealed class WhenNamedIsCalled
         Configurations result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Builds.ShouldBe(original.Builds.Concat([updated]));
-        result.Platforms.ShouldBe(original.Platforms);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Builds).IsEquivalentTo([.. original.Builds, updated]);
+        _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms);
     }
 }

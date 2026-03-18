@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.OptionsTests;
 
 public sealed class WhenWithNamingIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Parameter.Options();
@@ -13,8 +13,8 @@ public sealed class WhenWithNamingIsCalled
         Parameter.Options result = options.WithNaming(value);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Naming.ShouldBe(value);
-        options.Naming.ShouldNotBe(value);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
+        _ = await Assert.That(result.Naming).IsEqualTo(value);
+        _ = await Assert.That(options.Naming).IsNotEqualTo(value);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Linq.IEnumerableExtensionsTests;
+﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 using System.Collections.Immutable;
 
@@ -37,18 +37,18 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerableOrderTestData))]
-    public void GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
+    public async Task GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element);
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
     [MethodDataSource(nameof(EnumerablePredicateOrderTestData))]
-    public void GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
+    public async Task GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
         IEnumerable<int> original,
         IEnumerable<int> expected)
     {
@@ -56,11 +56,11 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
+    public async Task GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int> enumerable = [1];
@@ -70,13 +70,13 @@ public sealed class WhenToArrayOrEmptyIsCalled
         Action act = () => enumerable.ToArrayOrEmpty(order!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(order));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(order));
     }
 
     [Test]
     [MethodDataSource(nameof(EnumerableTestData))]
-    public void GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
+    public async Task GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
     {
         // Arrange
         IEnumerable<int> expected = [.. enumerable];
@@ -85,22 +85,22 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
     [MethodDataSource(nameof(EnumerablePredicateTestData))]
-    public void GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
+    public async Task GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
         IEnumerable<int> result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
+    public async Task GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
         IEnumerable<string>? enumerable = default;
@@ -109,11 +109,11 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
+    public async Task GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
         IEnumerable<string>? enumerable = default;
@@ -122,11 +122,11 @@ public sealed class WhenToArrayOrEmptyIsCalled
         string[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenAnEnumerableWhenAPredicateReturnsFalseThenEmptyArrayIsReturned()
+    public async Task GivenAnEnumerableWhenAPredicateReturnsFalseThenEmptyArrayIsReturned()
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3];
@@ -135,6 +135,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
-        result.ShouldBe([]);
+        _ = await Assert.That(result).IsEmpty();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
     private const string Different = "IBeta";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Interface? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideNullThenReturnsFalse()
+    public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
         Interface left = new Declaration { Name = Same };
@@ -32,11 +32,11 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Interface left = new Declaration { Name = Same };
@@ -46,11 +46,11 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Interface left = new Declaration { Name = Same };
@@ -60,6 +60,6 @@ public sealed class WhenEqualityOperatorInterfaceDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

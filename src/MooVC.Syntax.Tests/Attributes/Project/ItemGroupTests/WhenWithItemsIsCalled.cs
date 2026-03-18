@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithItemsIsCalled
 {
     [Test]
-    public void GivenItemsThenReturnsUpdatedInstance()
+    public async Task GivenItemsThenReturnsUpdatedInstance()
     {
         // Arrange
         Item existing = ItemGroupTestsData.CreateItem();
@@ -17,9 +16,9 @@ public sealed class WhenWithItemsIsCalled
         ItemGroup result = original.WithItems(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Items.ShouldBe(original.Items.Concat([additional]));
-        result.Condition.ShouldBe(original.Condition);
-        result.Label.ShouldBe(original.Label);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

@@ -3,7 +3,7 @@
 public sealed class WhenAsEnumerableIsCalled
 {
     [Test]
-    public void GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
+    public async Task GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
         var expected = TimeSpan.FromHours(1);
@@ -12,11 +12,11 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan> value = expected.AsEnumerable();
 
         // Assert
-        value.ShouldHaveSingleItem().ShouldBe(expected);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
+    public async Task GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
         TimeSpan? expected = default;
@@ -25,11 +25,11 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<TimeSpan?> value = expected.AsEnumerable();
 
         // Assert
-        value.ShouldHaveSingleItem().ShouldBeNull();
+        _ = await Assert.That(value.Single()).IsNull();
     }
 
     [Test]
-    public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
+    public async Task GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
         object expected = new();
@@ -38,11 +38,11 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object> value = expected.AsEnumerable();
 
         // Assert
-        value.ShouldHaveSingleItem().ShouldBe(expected);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
+    public async Task GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
         object? expected = default;
@@ -51,6 +51,6 @@ public sealed class WhenAsEnumerableIsCalled
         IEnumerable<object?> value = expected.AsEnumerable();
 
         // Assert
-        value.ShouldHaveSingleItem().ShouldBeNull();
+        _ = await Assert.That(value.Single()).IsNull();
     }
 }

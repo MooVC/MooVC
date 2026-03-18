@@ -1,14 +1,13 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]
-    public void GivenPropertiesThenReturnsUpdatedInstance()
+    public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
         Property[] existing = [new Property { Name = new Name("First"), Type = typeof(int) }];
@@ -19,9 +18,9 @@ public sealed class WhenWithPropertiesIsCalled
         Class result = original.WithProperties(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldBe(original.Properties.Concat(additional));
-        result.Declaration.ShouldBe(original.Declaration);
-        original.Properties.ShouldBe(existing);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Properties).IsEquivalentTo([.. original.Properties, .. additional]);
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        _ = await Assert.That(original.Properties).IsEquivalentTo(existing);
     }
 }

@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithMetadataIsCalled
 {
     [Test]
-    public void GivenMetadataThenReturnsUpdatedInstance()
+    public async Task GivenMetadataThenReturnsUpdatedInstance()
     {
         // Arrange
         Metadata existing = ItemTestsData.CreateMetadata();
@@ -23,9 +22,9 @@ public sealed class WhenWithMetadataIsCalled
         Item result = original.WithMetadata(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Metadata.ShouldBe(original.Metadata.Concat([additional]));
-        result.Condition.ShouldBe(original.Condition);
-        result.Include.ShouldBe(original.Include);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Metadata).IsEquivalentTo([.. original.Metadata, additional]);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string AlternativeAlias = "Other";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Directive subject = Create();
@@ -18,11 +18,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Directive subject = Create();
@@ -32,11 +32,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentDirectiveThenReturnsTrue()
+    public async Task GivenEquivalentDirectiveThenReturnsTrue()
     {
         // Arrange
         Directive subject = Create();
@@ -46,11 +46,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentDirectiveThenReturnsFalse()
+    public async Task GivenDifferentDirectiveThenReturnsFalse()
     {
         // Arrange
         Directive subject = Create();
@@ -60,11 +60,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonDirectiveThenReturnsFalse()
+    public async Task GivenNonDirectiveThenReturnsFalse()
     {
         // Arrange
         Directive subject = Create();
@@ -74,7 +74,7 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(comparison);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     private static Directive Create(string alias = Alias)

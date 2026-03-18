@@ -1,19 +1,19 @@
-namespace MooVC.Syntax.Attributes.Solution.FileTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new File(value));
+        _ = await Assert.That(() => _ = new File(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenEmptyThenFileIsUndefined()
+    public async Task GivenEmptyThenFileIsUndefined()
     {
         // Arrange
         string value = string.Empty;
@@ -22,12 +22,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new File(value);
 
         // Assert
-        subject.IsUndefined.ShouldBeTrue();
-        subject.ToString().ShouldBe(string.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValueThenFileIsNotUndefined()
+    public async Task GivenValueThenFileIsNotUndefined()
     {
         // Arrange
         string value = FileTestsData.DefaultPath;
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new File(value);
 
         // Assert
-        subject.IsUndefined.ShouldBeFalse();
-        subject.ToFragments().ShouldNotBeEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.ToFragments()).IsNotEmpty();
     }
 }

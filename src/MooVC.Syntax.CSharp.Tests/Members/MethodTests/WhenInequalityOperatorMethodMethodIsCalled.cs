@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorMethodMethodIsCalled
 {
     [Test]
-    public void GivenEquivalentMethodsThenReturnsFalse()
+    public async Task GivenEquivalentMethodsThenReturnsFalse()
     {
         // Arrange
         Method first = MethodTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorMethodMethodIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentMethodsThenReturnsTrue()
+    public async Task GivenDifferentMethodsThenReturnsTrue()
     {
         // Arrange
         Method first = MethodTestsData.Create();
@@ -29,6 +29,6 @@ public sealed class WhenInequalityOperatorMethodMethodIsCalled
         bool result = first != second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

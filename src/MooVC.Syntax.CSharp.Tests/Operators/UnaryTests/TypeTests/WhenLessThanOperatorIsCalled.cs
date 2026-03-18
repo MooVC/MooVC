@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenLessThanOperatorIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Unary.Type? leftType = default;
@@ -13,11 +13,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Unary.Type? leftType = default;
@@ -27,11 +27,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Plus;
@@ -41,11 +41,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSmallerLeftThenReturnsTrue()
+    public async Task GivenSmallerLeftThenReturnsTrue()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Not;
@@ -55,11 +55,11 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLargerLeftThenReturnsFalse()
+    public async Task GivenLargerLeftThenReturnsFalse()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Plus;
@@ -69,6 +69,6 @@ public sealed class WhenLessThanOperatorIsCalled
         bool result = leftType < rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

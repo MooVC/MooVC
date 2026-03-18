@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     private const string BaseName = "Result";
 
     [Test]
-    public void GivenUnspecifiedBaseThenNoValidationErrorsReturned()
+    public async Task GivenUnspecifiedBaseThenNoValidationErrorsReturned()
     {
         // Arrange
         Base subject = Base.Unspecified;
@@ -20,12 +20,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidBaseThenValidationErrorsReturned()
+    public async Task GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Base(new Symbol { Name = "Invalid Symbol Name" });
@@ -36,14 +36,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidBaseThenNoValidationErrorsReturned()
+    public async Task GivenValidBaseThenNoValidationErrorsReturned()
     {
         // Arrange
         Base subject = new Symbol { Name = BaseName };
@@ -54,7 +54,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

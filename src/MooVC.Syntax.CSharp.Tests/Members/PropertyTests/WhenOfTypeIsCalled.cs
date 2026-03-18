@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenOfTypeIsCalled
 {
     [Test]
-    public void GivenTypeThenReturnsUpdatedInstance()
+    public async Task GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange
         Property original = PropertyTestsData.Create();
@@ -15,13 +15,13 @@ public sealed class WhenOfTypeIsCalled
         Property result = original.OfType(type);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviours.ShouldBe(original.Behaviours);
-        result.Default.ShouldBe(original.Default);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(type);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(type);
 
-        original.Type.ShouldBe(PropertyTestsData.DefaultType);
+        _ = await Assert.That(original.Type).IsEqualTo(PropertyTestsData.DefaultType);
     }
 }

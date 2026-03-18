@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
     private const string Beta = "Beta";
 
     [Test]
-    public void GivenLeftNullThenLessThanReturnsTrue()
+    public async Task GivenLeftNullThenLessThanReturnsTrue()
     {
         // Arrange
         Declaration? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         bool result = left < right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenGreaterNameThenGreaterThanReturnsTrue()
+    public async Task GivenGreaterNameThenGreaterThanReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create(Beta);
@@ -30,11 +30,11 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         bool result = left > right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualNamesThenLessThanOrEqualReturnsTrue()
+    public async Task GivenEqualNamesThenLessThanOrEqualReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create(Alpha);
@@ -44,11 +44,11 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         bool result = left <= right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualNamesThenGreaterThanOrEqualReturnsTrue()
+    public async Task GivenEqualNamesThenGreaterThanOrEqualReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create(Alpha);
@@ -58,6 +58,6 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         bool result = left >= right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

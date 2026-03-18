@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.Elements;
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Alias = "System";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Directive? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenDirectiveThenSnippetMatchesStringRepresentation()
+    public async Task GivenDirectiveThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Directive
@@ -34,6 +34,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

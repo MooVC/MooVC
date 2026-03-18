@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithArgumentsIsCalled
 {
     [Test]
-    public void GivenArgumentsThenReturnsNewInstanceWithUpdatedArguments()
+    public async Task GivenArgumentsThenReturnsNewInstanceWithUpdatedArguments()
     {
         // Arrange
         Attribute original = AttributeTestsData.Create(arguments: new Argument
@@ -21,10 +21,10 @@ public sealed class WhenWithArgumentsIsCalled
         Attribute result = original.WithArguments(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Arguments.Length.ShouldBe(2);
-        result.Arguments.ShouldBe(original.Arguments.Concat(additional));
-        result.Name.ShouldBe(original.Name);
-        result.Target.ShouldBe(original.Target);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Arguments.Length).IsEqualTo(2);
+        _ = await Assert.That(result.Arguments).IsEquivalentTo([.. original.Arguments, .. additional]);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Target).IsEqualTo(original.Target);
     }
 }

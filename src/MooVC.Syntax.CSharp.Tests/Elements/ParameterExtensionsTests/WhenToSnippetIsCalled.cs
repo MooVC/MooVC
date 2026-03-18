@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Parameter> parameters = isDefault
@@ -26,25 +26,26 @@ public sealed class WhenToSnippetIsCalled
         var snippet = parameters.ToSnippet(Parameter.Options.Camel);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Parameter> parameters = [ParameterTestsData.Create()];
         Parameter.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = parameters.ToSnippet(options!));
+        Func<Snippet> act = () => _ = parameters.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedByDefaultParamsAndName()
+    public async Task GivenValuesThenTheyAreOrderedByDefaultParamsAndName()
     {
         // Arrange
         Parameter noDefault = ParameterTestsData.Create(name: FirstName);
@@ -60,6 +61,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = parameters.ToSnippet(Parameter.Options.Camel);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Extensibility? subject = default;
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenExtensibilityThenStringMatchesToString()
+    public async Task GivenExtensibilityThenStringMatchesToString()
     {
         // Arrange
         Extensibility subject = Extensibility.Static;
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithDesignerIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Resource original = ResourceTestsData.Create();
@@ -15,10 +15,10 @@ public sealed class WhenWithDesignerIsCalled
         Resource result = original.WithDesigner(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.CustomToolNamespace.ShouldBe(original.CustomToolNamespace);
-        result.Designer.ShouldBe(updated);
-        result.Location.ShouldBe(original.Location);
-        result.Visibility.ShouldBe(original.Visibility);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.CustomToolNamespace).IsEqualTo(original.CustomToolNamespace);
+        _ = await Assert.That(result.Designer).IsEqualTo(updated);
+        _ = await Assert.That(result.Location).IsEqualTo(original.Location);
+        _ = await Assert.That(result.Visibility).IsEqualTo(original.Visibility);
     }
 }

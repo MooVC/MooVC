@@ -6,7 +6,7 @@ using MooVC.Paging;
 public sealed class WhenPageIsCalled
 {
     [Test]
-    public void GivenNoQueryableThenTheEmptyQueryableIsReturned()
+    public async Task GivenNoQueryableThenTheEmptyQueryableIsReturned()
     {
         // Arrange
         IQueryable<int>? queryable = default;
@@ -16,11 +16,11 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        actual.ShouldBeNull();
+        _ = await Assert.That(actual).IsNull();
     }
 
     [Test]
-    public void GivenAnAllDirectiveThenTheQueryAbleIsReturned()
+    public async Task GivenAnAllDirectiveThenTheQueryAbleIsReturned()
     {
         // Arrange
         var faker = new Faker();
@@ -34,11 +34,11 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = expected.Page(Directive.All);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenADirectiveThenTheSetIsFilteredIsCalled()
+    public async Task GivenADirectiveThenTheSetIsFilteredIsCalled()
     {
         // Arrange
         var faker = new Faker();
@@ -55,7 +55,7 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 }
 #endif

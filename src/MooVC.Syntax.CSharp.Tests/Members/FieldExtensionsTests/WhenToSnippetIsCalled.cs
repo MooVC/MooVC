@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.FieldExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -14,7 +14,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Field> fields = isDefault
@@ -25,25 +25,26 @@ public sealed class WhenToSnippetIsCalled
         var snippet = fields.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Field> fields = [Create(name: FirstFieldName)];
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = fields.ToSnippet(options!));
+        Func<Snippet> act = () => _ = fields.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedByStaticReadonlyScopeAndName()
+    public async Task GivenValuesThenTheyAreOrderedByStaticReadonlyScopeAndName()
     {
         // Arrange
         Field staticReadonly = Create(name: ThirdFieldName, isStatic: true, isReadOnly: true);
@@ -67,7 +68,7 @@ public sealed class WhenToSnippetIsCalled
         var snippet = fields.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 
     private static Field Create(string name, bool isStatic = false, bool isReadOnly = true, Scope? scope = default)

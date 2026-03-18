@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenNullMethodsThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullMethodsThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Property.Methods? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenMethodsThenSnippetMatchesStringRepresentation()
+    public async Task GivenMethodsThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Property.Methods
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ToString().ShouldBe(expected);
+        _ = await Assert.That(result.ToString()).IsEqualTo(expected);
     }
 }

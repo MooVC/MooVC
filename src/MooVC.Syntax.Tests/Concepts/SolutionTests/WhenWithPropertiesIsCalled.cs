@@ -1,13 +1,12 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]
-    public void GivenPropertiesThenReturnsUpdatedInstance()
+    public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
         Property existing = SolutionTestsData.CreateProperty();
@@ -24,8 +23,8 @@ public sealed class WhenWithPropertiesIsCalled
         Solution result = original.WithProperties(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldBe(original.Properties.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Properties).IsEquivalentTo([.. original.Properties, additional]);
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -7,17 +7,17 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Value = "in";
 
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Parameter.Mode)value);
+        _ = await Assert.That(() => _ = (Parameter.Mode)value).ThrowsNothing();
     }
 
     [Test]
-    public void GivenNullWhenRoundTrippedThenResultIsNull()
+    public async Task GivenNullWhenRoundTrippedThenResultIsNull()
     {
         // Arrange
         string? value = default;
@@ -27,11 +27,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenEmptyThenEqualsString()
+    public async Task GivenEmptyThenEqualsString()
     {
         // Arrange
         string value = Empty;
@@ -40,12 +40,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenWhitespaceThenEqualsString()
+    public async Task GivenWhitespaceThenEqualsString()
     {
         // Arrange
         string value = Space;
@@ -54,12 +54,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = Value;
@@ -68,7 +68,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Parameter.Mode subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 }

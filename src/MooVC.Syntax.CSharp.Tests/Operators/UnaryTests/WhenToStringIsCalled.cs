@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenEmptyReturned()
+    public async Task GivenUndefinedThenEmptyReturned()
     {
         // Arrange
         Unary subject = Unary.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenUnspecifiedDeclarationThenEmptyReturned()
+    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
         Unary subject = UnaryTestsData.Create(body: Snippet.Empty, @operator: Unary.Type.Unspecified);
@@ -28,11 +28,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString(Snippet.Options.Default, type);
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenSignatureIsRendered()
+    public async Task GivenValuesThenSignatureIsRendered()
     {
         // Arrange
         Unary subject = UnaryTestsData.Create();
@@ -49,6 +49,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 }

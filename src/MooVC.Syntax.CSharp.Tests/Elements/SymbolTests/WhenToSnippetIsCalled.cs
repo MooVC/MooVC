@@ -1,57 +1,58 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create();
         Symbol.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenFullQualificationThenQualifierIsIncluded()
+    public async Task GivenFullQualificationThenQualifierIsIncluded()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
 
-        Symbol.Options options = new Symbol.Options()
+        Symbol.Options options = Symbol.Options.Default
             .WithQualification(Symbol.Qualification.Full);
 
         // Act
         string representation = subject.ToSnippet(options);
 
         // Assert
-        representation.ShouldBe("System.Text.Result");
+        _ = await Assert.That(representation).IsEqualTo("System.Text.Result");
     }
 
     [Test]
-    public void GivenGlobalQualificationThenGlobalPrefixIsAdded()
+    public async Task GivenGlobalQualificationThenGlobalPrefixIsAdded()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
 
-        Symbol.Options options = new Symbol.Options()
+        Symbol.Options options = Symbol.Options.Default
             .WithQualification(Symbol.Qualification.Global);
 
         // Act
         string representation = subject.ToSnippet(options);
 
         // Assert
-        representation.ShouldBe("global::System.Text.Result");
+        _ = await Assert.That(representation).IsEqualTo("global::System.Text.Result");
     }
 
     [Test]
-    public void GivenNullableThenSuffixIsApplied()
+    public async Task GivenNullableThenSuffixIsApplied()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create();
@@ -61,6 +62,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Symbol.Options.Default);
 
         // Assert
-        representation.ShouldBe("Result?");
+        _ = await Assert.That(representation).IsEqualTo("Result?");
     }
 }

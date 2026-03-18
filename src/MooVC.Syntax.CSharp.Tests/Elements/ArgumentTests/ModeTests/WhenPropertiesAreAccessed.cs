@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
     [Test]
-    public void GivenInModeThenFlagsReflectValue()
+    public async Task GivenInModeThenFlagsReflectValue()
     {
         // Arrange
         Argument.Mode subject = Argument.Mode.In;
@@ -15,14 +15,14 @@ public sealed class WhenPropertiesAreAccessed
         bool isRef = subject.IsRef;
 
         // Assert
-        isIn.ShouldBeTrue();
-        isOut.ShouldBeFalse();
-        isNone.ShouldBeFalse();
-        isRef.ShouldBeFalse();
+        _ = await Assert.That(isIn).IsTrue();
+        _ = await Assert.That(isOut).IsFalse();
+        _ = await Assert.That(isNone).IsFalse();
+        _ = await Assert.That(isRef).IsFalse();
     }
 
     [Test]
-    public void GivenNoneModeThenFlagsReflectValue()
+    public async Task GivenNoneModeThenFlagsReflectValue()
     {
         // Arrange
         Argument.Mode subject = Argument.Mode.None;
@@ -34,9 +34,9 @@ public sealed class WhenPropertiesAreAccessed
         bool isRef = subject.IsRef;
 
         // Assert
-        isIn.ShouldBeFalse();
-        isOut.ShouldBeFalse();
-        isNone.ShouldBeTrue();
-        isRef.ShouldBeFalse();
+        _ = await Assert.That(isIn).IsFalse();
+        _ = await Assert.That(isOut).IsFalse();
+        _ = await Assert.That(isNone).IsTrue();
+        _ = await Assert.That(isRef).IsFalse();
     }
 }

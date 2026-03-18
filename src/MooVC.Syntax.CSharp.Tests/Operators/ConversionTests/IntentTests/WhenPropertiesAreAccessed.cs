@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
     [Test]
-    public void GivenToThenFlagsReflectValue()
+    public async Task GivenToThenFlagsReflectValue()
     {
         // Arrange
         Conversion.Intent subject = Conversion.Intent.To;
@@ -13,7 +13,7 @@ public sealed class WhenPropertiesAreAccessed
         bool isFrom = subject.IsFrom;
 
         // Assert
-        isTo.ShouldBeTrue();
-        isFrom.ShouldBeFalse();
+        _ = await Assert.That(isTo).IsTrue();
+        _ = await Assert.That(isFrom).IsFalse();
     }
 }

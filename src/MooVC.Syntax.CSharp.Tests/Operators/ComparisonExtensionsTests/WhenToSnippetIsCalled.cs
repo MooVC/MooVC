@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -29,7 +29,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Comparison> comparisons = isDefault
@@ -42,25 +42,26 @@ public sealed class WhenToSnippetIsCalled
         var result = comparisons.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullConstructThenAnExceptionIsThrown()
+    public async Task GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Comparison> comparisons = [ComparisonTestsData.Create()];
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = comparisons.ToSnippet(Snippet.Options.Default, type!));
+        Func<Snippet> act = () => _ = comparisons.ToSnippet(Snippet.Options.Default, type!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(type));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Comparison> comparisons = [ComparisonTestsData.Create()];
@@ -68,14 +69,15 @@ public sealed class WhenToSnippetIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = comparisons.ToSnippet(options!, type));
+        Func<Snippet> act = () => _ = comparisons.ToSnippet(options!, type);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenAnOrderedSnippetIsReturned()
+    public async Task GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
@@ -89,6 +91,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = comparisons.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

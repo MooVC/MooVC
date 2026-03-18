@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
@@ -10,11 +10,11 @@ public sealed class WhenToSnippetIsCalled
 {
     private const string ConstraintInterfaceName = "IComponent";
     private const string GenericName = "T";
-    private const string ParameterName = "value";
+    private const string ParameterName = "Value";
     private const string StructName = "Payload";
 
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Struct subject = StructTestsData.Create();
@@ -23,11 +23,11 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenReadOnlyStructWithParametersThenIncludesSignatureDetails()
+    public async Task GivenReadOnlyStructWithParametersThenIncludesSignatureDetails()
     {
         // Arrange
         var constraint = new Constraint
@@ -68,8 +68,8 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldContain($"{Struct.Kind.ReadOnly} partial struct {StructName}");
-        result.ShouldContain(ParameterName);
-        result.ShouldContain("where");
+        _ = await Assert.That(result).Contains($"{Struct.Kind.ReadOnly} partial struct {StructName}");
+        _ = await Assert.That(result).Contains(ParameterName);
+        _ = await Assert.That(result).Contains("where");
     }
 }

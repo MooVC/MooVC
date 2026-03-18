@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenWithFilesIsCalled
 {
     [Test]
-    public void GivenFilesThenReturnsUpdatedInstance()
+    public async Task GivenFilesThenReturnsUpdatedInstance()
     {
         // Arrange
         File existing = SolutionTestsData.CreateFile();
@@ -19,8 +18,8 @@ public sealed class WhenWithFilesIsCalled
         Solution result = original.WithFiles(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Files.ShouldBe(original.Files.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Files).IsEquivalentTo([.. original.Files, additional]);
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

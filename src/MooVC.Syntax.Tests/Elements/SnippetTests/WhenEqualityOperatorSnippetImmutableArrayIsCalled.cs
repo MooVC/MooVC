@@ -1,51 +1,51 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenEqualityOperatorSnippetImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<string> different = ["Gamma"];
-    private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _different = ["Gamma"];
+    private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightDefaultThenReturnsFalse()
+    public async Task GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet(same);
+        var left = new Snippet(_same);
         ImmutableArray<string> right = default;
 
         // Act
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet(same);
-        ImmutableArray<string> right = same;
+        var left = new Snippet(_same);
+        ImmutableArray<string> right = _same;
 
         // Act
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet(same);
-        ImmutableArray<string> right = different;
+        var left = new Snippet(_same);
+        ImmutableArray<string> right = _different;
 
         // Act
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

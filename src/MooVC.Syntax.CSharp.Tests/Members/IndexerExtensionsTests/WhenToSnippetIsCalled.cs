@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -11,7 +11,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Indexer> indexers = isDefault
@@ -22,25 +22,26 @@ public sealed class WhenToSnippetIsCalled
         var snippet = indexers.ToSnippet(Indexer.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Indexer> indexers = [IndexerTestsData.Create()];
         Indexer.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = indexers.ToSnippet(options!));
+        Func<Snippet> act = () => _ = indexers.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedByScopeExtensibilityParameterAndResult()
+    public async Task GivenValuesThenTheyAreOrderedByScopeExtensibilityParameterAndResult()
     {
         // Arrange
         Indexer publicVirtual = IndexerTestsData.Create(
@@ -79,6 +80,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = indexers.ToSnippet(Indexer.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

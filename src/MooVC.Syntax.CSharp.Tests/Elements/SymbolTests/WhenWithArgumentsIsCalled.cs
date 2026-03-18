@@ -1,11 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
-
-using System.Linq;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenWithArgumentsIsCalled
 {
     [Test]
-    public void GivenArgumentsThenReturnsUpdatedInstance()
+    public async Task GivenArgumentsThenReturnsUpdatedInstance()
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Container", arguments: new Symbol { Name = "First" });
@@ -15,10 +13,10 @@ public sealed class WhenWithArgumentsIsCalled
         Symbol result = original.WithArguments(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Arguments.ShouldBe(original.Arguments.Concat(additional));
-        result.Name.ShouldBe(original.Name);
-        result.Qualifier.ShouldBe(original.Qualifier);
-        result.IsNullable.ShouldBe(original.IsNullable);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Arguments).IsEquivalentTo([.. original.Arguments, .. additional]);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
+        _ = await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
@@ -7,21 +7,22 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Field subject = FieldTestsData.Create();
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenUndefinedFieldThenEmptyReturned()
+    public async Task GivenUndefinedFieldThenEmptyReturned()
     {
         // Arrange
         Field subject = Field.Undefined;
@@ -30,11 +31,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenFieldWithDefaultThenSignatureIncludesAssignment()
+    public async Task GivenFieldWithDefaultThenSignatureIncludesAssignment()
     {
         // Arrange
         Field subject = FieldTestsData.Create(
@@ -49,6 +50,6 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        result.ShouldBe("public static Result Value = default;");
+        _ = await Assert.That(result).IsEqualTo("public static Result Value = default;");
     }
 }

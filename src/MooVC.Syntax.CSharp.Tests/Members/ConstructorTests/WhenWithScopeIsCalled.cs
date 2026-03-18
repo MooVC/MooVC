@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
     {
         // Arrange
         Constructor original = ConstructorTestsData.Create();
@@ -14,12 +14,12 @@ public sealed class WhenWithScopeIsCalled
         Constructor result = original.WithScope(Scope.Private);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Extensibility.ShouldBe(original.Extensibility);
-        result.Parameters.ShouldBe(original.Parameters);
-        result.Scope.ShouldBe(Scope.Private);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
 
-        original.Scope.ShouldBe(Scope.Public);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Public);
     }
 }

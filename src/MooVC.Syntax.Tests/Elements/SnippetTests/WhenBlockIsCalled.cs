@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -7,21 +7,22 @@ public sealed class WhenBlockIsCalled
     private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Snippet(_lines);
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.Block(options!));
+        Func<Snippet> act = () => _ = subject.Block(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenNoOpeningThenTheWholeSnippetIsBlocked()
+    public async Task GivenNoOpeningThenTheWholeSnippetIsBlocked()
     {
         // Arrange
         const string expected = """
@@ -38,11 +39,11 @@ public sealed class WhenBlockIsCalled
 
         // Assert
         string text = result.ToString();
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenAllmanStyleAndOpeningThenBlockIsExpanded()
+    public async Task GivenAllmanStyleAndOpeningThenBlockIsExpanded()
     {
         // Arrange
         const string expected = """
@@ -65,11 +66,11 @@ public sealed class WhenBlockIsCalled
         // Assert
         string text = result.ToString();
 
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenKAndRStyleAndOpeningThenBlockIsInline()
+    public async Task GivenKAndRStyleAndOpeningThenBlockIsInline()
     {
         // Arrange
         const string expected = """
@@ -91,11 +92,11 @@ public sealed class WhenBlockIsCalled
         // Assert
         string text = result.ToString();
 
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenLambdaInlineThenSingleLineValueIsAppended()
+    public async Task GivenLambdaInlineThenSingleLineValueIsAppended()
     {
         // Arrange
         const string expected = "get => value;";
@@ -114,11 +115,11 @@ public sealed class WhenBlockIsCalled
         // Assert
         string text = result.ToString();
 
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenSingleLineBracesThenSingleLineValueIsWrapped()
+    public async Task GivenSingleLineBracesThenSingleLineValueIsWrapped()
     {
         // Arrange
         const string expected = "get { value; }";
@@ -137,6 +138,6 @@ public sealed class WhenBlockIsCalled
         // Assert
         string text = result.ToString();
 
-        text.ShouldBe(expected);
+        _ = await Assert.That(text).IsEqualTo(expected);
     }
 }

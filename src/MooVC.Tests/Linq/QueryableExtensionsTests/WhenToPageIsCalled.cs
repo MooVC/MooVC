@@ -8,7 +8,7 @@ public sealed class WhenToPageIsCalled
     [Test]
     [Arguments(new[] { 1, 2, 3 })]
     [Arguments(new int[0])]
-    public void GivenAnAllDirectiveThenAllResultsAreReturned(int[] expected)
+    public async Task GivenAnAllDirectiveThenAllResultsAreReturned(int[] expected)
     {
         // Arrange
         IQueryable<int> query = expected.AsQueryable();
@@ -17,16 +17,16 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(Directive.All);
 
         // Assert
-        result.Directive.ShouldBe(Directive.All);
-        result.Total.ShouldBe((ulong)expected.LongLength);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Directive).IsEqualTo(Directive.All);
+        _ = await Assert.That(result.Total).IsEqualTo((ulong)expected.LongLength);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
     [Arguments(new[] { 1, 2, 3 }, 0, 3, 6, new[] { 1, 2, 3, 4, 5, 6 })]
     [Arguments(new[] { 3, 4 }, 1, 2, 6, new[] { 1, 2, 3, 4, 5, 6 })]
     [Arguments(new int[0], 2, 2, 4, new[] { 1, 2, 3, 4 })]
-    public void GivenADirectiveThenTheExpectedPageIsReturned(int[] expected, ushort page, ushort limit, ulong total, int[] values)
+    public async Task GivenADirectiveThenTheExpectedPageIsReturned(int[] expected, ushort page, ushort limit, ulong total, int[] values)
     {
         // Arrange
         Directive directive = new(Limit: limit, Page: page);
@@ -36,13 +36,13 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        result.Directive.ShouldBe(directive);
-        result.Total.ShouldBe(total);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.Total).IsEqualTo(total);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenNullQueryThenAnEmptyPageIsReturned()
+    public async Task GivenNullQueryThenAnEmptyPageIsReturned()
     {
         // Arrange
         IQueryable<int>? query = default;
@@ -52,8 +52,8 @@ public sealed class WhenToPageIsCalled
         var result = query.ToPage(directive);
 
         // Assert
-        result.Directive.ShouldBe(directive);
-        result.Total.ShouldBe(default);
+        _ = await Assert.That(result.Directive).IsEqualTo(directive);
+        _ = await Assert.That(result.Total).IsEqualTo(default);
     }
 }
 #endif

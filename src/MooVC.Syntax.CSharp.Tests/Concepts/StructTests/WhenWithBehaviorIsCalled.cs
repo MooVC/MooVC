@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 public sealed class WhenWithBehaviorIsCalled
 {
     [Test]
-    public void GivenBehaviorThenReturnsUpdatedInstance()
+    public async Task GivenBehaviorThenReturnsUpdatedInstance()
     {
         // Arrange
         Struct original = StructTestsData.Create(behavior: Struct.Kind.Ref);
@@ -12,8 +12,8 @@ public sealed class WhenWithBehaviorIsCalled
         Struct result = original.WithBehavior(Struct.Kind.ReadOnly);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behavior.ShouldBe(Struct.Kind.ReadOnly);
-        original.Behavior.ShouldBe(Struct.Kind.Ref);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Behavior).IsEqualTo(Struct.Kind.ReadOnly);
+        _ = await Assert.That(original.Behavior).IsEqualTo(Struct.Kind.Ref);
     }
 }

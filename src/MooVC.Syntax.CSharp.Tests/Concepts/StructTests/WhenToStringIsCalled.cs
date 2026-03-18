@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedStructThenReturnsEmpty()
+    public async Task GivenUndefinedStructThenReturnsEmpty()
     {
         // Arrange
         Struct subject = Struct.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsStructSignature()
+    public async Task GivenValuesThenReturnsStructSignature()
     {
         // Arrange
         var constructor = new Constructor();
@@ -36,9 +36,9 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldContain("internal ref partial struct");
-        result.ShouldContain(StructTestsData.DefaultName);
-        result.ShouldContain("(");
-        result.ShouldContain(")");
+        _ = await Assert.That(result).Contains("internal ref partial struct");
+        _ = await Assert.That(result).Contains(StructTestsData.DefaultName);
+        _ = await Assert.That(result).Contains("(");
+        _ = await Assert.That(result).Contains(")");
     }
 }

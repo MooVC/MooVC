@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => parameter.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenOptionsThenReturnsParameterStringUsingNaming()
+    public async Task GivenOptionsThenReturnsParameterStringUsingNaming()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(name: "Value", type: typeof(string));
@@ -30,6 +30,6 @@ public sealed class WhenToSnippetIsCalled
         string result = parameter.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("string value");
+        _ = await Assert.That(result).IsEqualTo("string value");
     }
 }

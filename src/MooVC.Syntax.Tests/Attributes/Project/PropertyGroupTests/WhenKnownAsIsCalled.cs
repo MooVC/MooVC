@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenKnownAsIsCalled
     private const string UpdatedLabel = "UpdatedLabel";
 
     [Test]
-    public void GivenLabelThenReturnsUpdatedInstance()
+    public async Task GivenLabelThenReturnsUpdatedInstance()
     {
         // Arrange
         PropertyGroup original = PropertyGroupTestsData.Create(property: PropertyGroupTestsData.CreateProperty());
@@ -17,9 +17,9 @@ public sealed class WhenKnownAsIsCalled
         PropertyGroup result = original.KnownAs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Label.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Properties.ShouldBe(original.Properties);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Label).IsEqualTo(updated);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Properties).IsEqualTo(original.Properties);
     }
 }

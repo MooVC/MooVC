@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public void GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
         Extensibility? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left < right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenHigherRankThenGreaterThanIsTrue()
+    public async Task GivenHigherRankThenGreaterThanIsTrue()
     {
         // Arrange
         Extensibility left = Extensibility.Static;
@@ -27,11 +27,11 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left > right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLowerRankThenLessThanIsTrue()
+    public async Task GivenLowerRankThenLessThanIsTrue()
     {
         // Arrange
         Extensibility left = Extensibility.Override;
@@ -41,11 +41,11 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left < right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenLessThanOrEqualIsTrue()
+    public async Task GivenEqualValuesThenLessThanOrEqualIsTrue()
     {
         // Arrange
         Extensibility left = Extensibility.Virtual;
@@ -55,6 +55,6 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool result = left <= right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

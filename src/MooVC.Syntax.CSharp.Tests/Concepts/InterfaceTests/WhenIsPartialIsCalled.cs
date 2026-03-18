@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 public sealed class WhenIsPartialIsCalled
 {
     [Test]
-    public void GivenIsPartialThenReturnsUpdatedInstance()
+    public async Task GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange
         Interface original = InterfaceTestsData.Create(isPartial: false);
@@ -12,8 +12,8 @@ public sealed class WhenIsPartialIsCalled
         Interface result = original.IsPartial(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsPartial.ShouldBeTrue();
-        original.IsPartial.ShouldBeFalse();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.IsPartial).IsTrue();
+        _ = await Assert.That(original.IsPartial).IsFalse();
     }
 }

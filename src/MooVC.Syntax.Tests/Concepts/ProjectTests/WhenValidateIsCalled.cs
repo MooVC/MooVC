@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using Resource = MooVC.Syntax.Attributes.Resource.Resource;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmptyResults()
+    public async Task GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
         Project subject = Project.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUndefinedImportThenValidationErrorReturned()
+    public async Task GivenUndefinedImportThenValidationErrorReturned()
     {
         // Arrange
         Project subject = ProjectTestsData.Create(import: Import.Undefined);
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Imports));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Imports));
     }
 
     [Test]
-    public void GivenUnspecifiedSdkThenValidationErrorReturned()
+    public async Task GivenUnspecifiedSdkThenValidationErrorReturned()
     {
         // Arrange
         Project subject = ProjectTestsData.Create(sdk: Sdk.Unspecified);
@@ -52,13 +52,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Sdks));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Sdks));
     }
 
     [Test]
-    public void GivenUndefinedResourceThenValidationErrorReturned()
+    public async Task GivenUndefinedResourceThenValidationErrorReturned()
     {
         // Arrange
         Project subject = ProjectTestsData.Create(resource: Resource.Undefined);
@@ -69,8 +69,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.Resources));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Resources));
     }
 }

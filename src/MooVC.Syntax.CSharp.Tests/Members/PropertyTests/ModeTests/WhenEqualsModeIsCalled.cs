@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.ModeTests;
 
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenEqualsModeIsCalled
 {
     [Test]
-    public void GivenNullThenFalseIsReturned()
+    public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
         Property.Mode? subject = Property.Mode.Set;
@@ -15,11 +15,11 @@ public sealed class WhenEqualsModeIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenTrueIsReturned()
+    public async Task GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
         Property.Mode subject = Property.Mode.Init;
@@ -29,11 +29,11 @@ public sealed class WhenEqualsModeIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentInstanceThenTrueIsReturned()
+    public async Task GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
         Property.Mode subject = Property.Mode.ReadOnly;
@@ -43,11 +43,11 @@ public sealed class WhenEqualsModeIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentInstanceThenFalseIsReturned()
+    public async Task GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange
         Property.Mode subject = Property.Mode.Set;
@@ -57,6 +57,6 @@ public sealed class WhenEqualsModeIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

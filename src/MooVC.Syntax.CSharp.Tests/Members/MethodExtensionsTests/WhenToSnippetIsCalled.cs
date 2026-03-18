@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.MethodExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -11,7 +11,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Method> methods = isDefault
@@ -22,25 +22,26 @@ public sealed class WhenToSnippetIsCalled
         var snippet = methods.ToSnippet(Method.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Method> methods = [MethodTestsData.Create()];
         Method.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = methods.ToSnippet(options!));
+        Func<Snippet> act = () => _ = methods.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedByStaticScopeExtensibilityAndName()
+    public async Task GivenValuesThenTheyAreOrderedByStaticScopeExtensibilityAndName()
     {
         // Arrange
         Method staticMethod = MethodTestsData.Create(
@@ -92,6 +93,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = methods.ToSnippet(Method.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

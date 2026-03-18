@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsUpdatedInstance()
+    public async Task GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create(scope: Scope.Public);
@@ -15,8 +15,8 @@ public sealed class WhenWithScopeIsCalled
         Class result = original.WithScope(Scope.Private);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Scope.ShouldBe(Scope.Private);
-        original.Scope.ShouldBe(Scope.Public);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Public);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenEqualityOperatorTypeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
     private const string Different = "-";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Binary.Type? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Binary.Type? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Binary.Type left = Binary.Type.Add;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Binary.Type left = Binary.Type.Add;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Binary.Type left = Binary.Type.Add;
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

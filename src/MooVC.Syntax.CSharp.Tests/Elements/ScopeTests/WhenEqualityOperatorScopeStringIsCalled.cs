@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenEqualityOperatorScopeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
     private const string Different = "public";
 
     [Test]
-    public void GivenSubjectNullValueNullThenReturnsTrue()
+    public async Task GivenSubjectNullValueNullThenReturnsTrue()
     {
         // Arrange
         Scope? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSubjectNullValueThenReturnsFalse()
+    public async Task GivenSubjectNullValueThenReturnsFalse()
     {
         // Arrange
         Scope? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSubjectValueValueNullThenReturnsFalse()
+    public async Task GivenSubjectValueValueNullThenReturnsFalse()
     {
         // Arrange
         Scope left = Same;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Scope left = Same;
@@ -59,12 +59,12 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Scope left = Same;
@@ -75,7 +75,7 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

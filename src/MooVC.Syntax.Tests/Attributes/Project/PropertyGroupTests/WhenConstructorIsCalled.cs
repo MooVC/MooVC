@@ -1,24 +1,24 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenPropertyGroupIsUndefined()
+    public async Task GivenDefaultsThenPropertyGroupIsUndefined()
     {
         // Act
         var subject = new PropertyGroup();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.Label.ShouldBe(Snippet.Empty);
-        subject.Properties.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Properties).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Property property = PropertyGroupTestsData.CreateProperty();
@@ -32,9 +32,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(PropertyGroupTestsData.DefaultCondition));
-        subject.Label.ShouldBe(Snippet.From(PropertyGroupTestsData.DefaultLabel));
-        subject.Properties.ShouldBe(new[] { property });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(PropertyGroupTestsData.DefaultCondition));
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.From(PropertyGroupTestsData.DefaultLabel));
+        _ = await Assert.That(subject.Properties).IsEquivalentTo([property]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

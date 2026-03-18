@@ -6,18 +6,18 @@ using global::Newtonsoft.Json;
 public sealed class WhenSerializerIsConstructed
 {
     [Test]
-    public void GivenNoSettingsThenADefaultSerializerIsCreated()
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
         var serializer = new Serializer();
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
+        await AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
     [Test]
-    public void GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
+    public async Task GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
         Encoding encoding = Encoding.ASCII;
@@ -25,24 +25,24 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(encoding, DateTimeKind.Unspecified, serializer, settings);
+        await AssertEqual(encoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
     [Test]
     [Arguments(DateTimeKind.Utc)]
     [Arguments(DateTimeKind.Local)]
-    public void GivenAKindThenASerializerIsCreatedWithTheKindApplied(DateTimeKind kind)
+    public async Task GivenAKindThenASerializerIsCreatedWithTheKindApplied(DateTimeKind kind)
     {
         // Arrange & Act
         var serializer = new Serializer(kind: kind);
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
+        await AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
     }
 
     [Test]
-    public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    public async Task GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         var settings = new JsonSerializerSettings
         {
@@ -56,28 +56,28 @@ public sealed class WhenSerializerIsConstructed
 
         var serializer = new Serializer(settings: settings);
 
-        AssertEqual(
+        await AssertEqual(
             Serializer.DefaultEncoding,
             DateTimeKind.Unspecified,
             serializer,
             settings);
     }
 
-    private static void AssertEqual(Encoding encoding, DateTimeKind kind, Serializer serializer, JsonSerializerSettings settings)
+    private static async Task AssertEqual(Encoding encoding, DateTimeKind kind, Serializer serializer, JsonSerializerSettings settings)
     {
-        serializer.Encoding.ShouldBe(encoding);
-        serializer.Kind.ShouldBe(kind);
-        serializer.Json.DateFormatHandling.ShouldBe(settings.DateFormatHandling);
+        _ = await Assert.That(serializer.Encoding).IsEqualTo(encoding);
+        _ = await Assert.That(serializer.Kind).IsEqualTo(kind);
+        _ = await Assert.That(serializer.Json.DateFormatHandling).IsEqualTo(settings.DateFormatHandling);
 
-        AssertEqual(settings, serializer);
+        await AssertEqual(settings, serializer);
     }
 
-    private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
+    private static async Task AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
-        serializer.Json.DefaultValueHandling.ShouldBe(expected.DefaultValueHandling);
-        serializer.Json.NullValueHandling.ShouldBe(expected.NullValueHandling);
-        serializer.Json.ReferenceLoopHandling.ShouldBe(expected.ReferenceLoopHandling);
-        serializer.Json.TypeNameHandling.ShouldBe(expected.TypeNameHandling);
-        serializer.Json.TypeNameAssemblyFormatHandling.ShouldBe(expected.TypeNameAssemblyFormatHandling);
+        _ = await Assert.That(serializer.Json.DefaultValueHandling).IsEqualTo(expected.DefaultValueHandling);
+        _ = await Assert.That(serializer.Json.NullValueHandling).IsEqualTo(expected.NullValueHandling);
+        _ = await Assert.That(serializer.Json.ReferenceLoopHandling).IsEqualTo(expected.ReferenceLoopHandling);
+        _ = await Assert.That(serializer.Json.TypeNameHandling).IsEqualTo(expected.TypeNameHandling);
+        _ = await Assert.That(serializer.Json.TypeNameAssemblyFormatHandling).IsEqualTo(expected.TypeNameAssemblyFormatHandling);
     }
 }

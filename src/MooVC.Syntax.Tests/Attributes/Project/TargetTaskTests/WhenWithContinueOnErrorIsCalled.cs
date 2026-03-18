@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 public sealed class WhenWithContinueOnErrorIsCalled
 {
     [Test]
-    public void GivenContinueOnErrorThenReturnsUpdatedInstance()
+    public async Task GivenContinueOnErrorThenReturnsUpdatedInstance()
     {
         // Arrange
         TargetTask original = TargetTaskTestsData.Create(parameter: TargetTaskTestsData.CreateParameter());
@@ -13,9 +13,9 @@ public sealed class WhenWithContinueOnErrorIsCalled
         TargetTask result = original.WithContinueOnError(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.ContinueOnError.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
-        result.Condition.ShouldBe(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.ContinueOnError).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

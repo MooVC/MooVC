@@ -1,13 +1,12 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithImportsIsCalled
 {
     [Test]
-    public void GivenImportsThenReturnsUpdatedInstance()
+    public async Task GivenImportsThenReturnsUpdatedInstance()
     {
         // Arrange
         Import existing = ProjectTestsData.CreateImport();
@@ -18,8 +17,8 @@ public sealed class WhenWithImportsIsCalled
         Project result = original.WithImports(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Imports.ShouldBe(original.Imports.Concat([additional]));
-        result.ItemGroups.ShouldBe(original.ItemGroups);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Imports).IsEquivalentTo([.. original.Imports, additional]);
+        _ = await Assert.That(result.ItemGroups).IsEqualTo(original.ItemGroups);
     }
 }

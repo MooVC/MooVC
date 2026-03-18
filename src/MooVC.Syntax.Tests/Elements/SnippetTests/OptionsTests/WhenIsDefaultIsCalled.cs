@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenIsDefaultIsCalled
 {
     [Test]
-    public void GivenDefaultValuesThenReturnsTrue()
+    public async Task GivenDefaultValuesThenReturnsTrue()
     {
         // Arrange
         var options = new Snippet.Options();
@@ -12,11 +12,11 @@ public sealed class WhenIsDefaultIsCalled
         bool result = options.IsDefault;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNonDefaultValuesThenReturnsFalse()
+    public async Task GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange
         Snippet.Options options = new Snippet.Options()
@@ -26,6 +26,6 @@ public sealed class WhenIsDefaultIsCalled
         bool result = options.IsDefault;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

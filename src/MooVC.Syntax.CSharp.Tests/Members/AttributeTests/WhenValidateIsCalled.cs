@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
     private const string ArgumentName = "Message";
 
     [Test]
-    public void GivenUnspecifiedAttributeThenNoValidationErrorsReturned()
+    public async Task GivenUnspecifiedAttributeThenNoValidationErrorsReturned()
     {
         // Arrange
         Attribute attribute = Attribute.Unspecified;
@@ -21,12 +21,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(attribute, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnnamedAttributeThenValidationErrorReturned()
+    public async Task GivenUnnamedAttributeThenValidationErrorReturned()
     {
         // Arrange
         var attribute = new Attribute
@@ -41,14 +41,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(attribute, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Attribute.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Attribute.Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
+    public async Task GivenArgumentWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
         var attribute = new Attribute
@@ -71,14 +71,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(attribute, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Argument.Value));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Argument.Value));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidAttributeThenNoValidationErrorsReturned()
+    public async Task GivenValidAttributeThenNoValidationErrorsReturned()
     {
         // Arrange
         Attribute attribute = AttributeTestsData.Create(arguments: new Argument
@@ -94,7 +94,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(attribute, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

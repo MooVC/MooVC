@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.TypeTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         var subject = new TestType();
@@ -14,11 +14,11 @@ public sealed class WhenToSnippetIsCalled
         Func<Snippet> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenUndefinedThenReturnsEmptySnippet()
+    public async Task GivenUndefinedThenReturnsEmptySnippet()
     {
         // Arrange
         var subject = new TestType { IsUndefinedValue = true };
@@ -27,6 +27,6 @@ public sealed class WhenToSnippetIsCalled
         var result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 }

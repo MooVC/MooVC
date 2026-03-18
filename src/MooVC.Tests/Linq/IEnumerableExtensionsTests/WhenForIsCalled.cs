@@ -1,9 +1,9 @@
-namespace MooVC.Linq.IEnumerableExtensionsTests;
+﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenForIsCalled
 {
     [Test]
-    public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
@@ -18,11 +18,11 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        wasInvoked.ShouldBeFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
-    public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerable<int>? enumeration = default;
@@ -31,11 +31,11 @@ public sealed class WhenForIsCalled
         Action act = () => enumeration.For(default!);
 
         // Assert
-        Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
-    public void GivenAnEnumerationThenTheCorrectIndexIsPassedToTheActionForEachEnumerationMember()
+    public async Task GivenAnEnumerationThenTheCorrectIndexIsPassedToTheActionForEachEnumerationMember()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
@@ -50,20 +50,18 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        indexes.ShouldBe([0, 1, 2]);
+        _ = await Assert.That(indexes).IsEquivalentTo([0, 1, 2]);
     }
 
     [Test]
-    public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
+    public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
         var invocations = new List<int>();
-        int expected = 0;
 
         void Action(int index, int value)
         {
-            index.ShouldBe(expected++);
             invocations.Add(value);
         }
 
@@ -71,11 +69,11 @@ public sealed class WhenForIsCalled
         enumeration.For(Action);
 
         // Assert
-        invocations.ShouldBe(enumeration);
+        _ = await Assert.That(invocations).IsEquivalentTo(enumeration);
     }
 
     [Test]
-    public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         int[] enumeration = [1, 2, 3];
@@ -85,7 +83,7 @@ public sealed class WhenForIsCalled
         Action act = () => enumeration.For(action!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(action));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 }

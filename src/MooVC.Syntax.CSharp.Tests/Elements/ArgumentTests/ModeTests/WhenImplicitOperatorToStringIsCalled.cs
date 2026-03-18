@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenModeThenReturnsUnderlyingValue()
+    public async Task GivenModeThenReturnsUnderlyingValue()
     {
         // Arrange
         Argument.Mode subject = Argument.Mode.Out;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe("out");
+        _ = await Assert.That(result).IsEqualTo("out");
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenUseUnderscoreIsCalled
 {
     [Test]
-    public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
+    public async Task GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange
         var original = new Variable.Options();
@@ -12,9 +12,9 @@ public sealed class WhenUseUnderscoreIsCalled
         Variable.Options result = original.UseUnderscore(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Casing.ShouldBe(original.Casing);
-        result.UseUnderscore.ShouldBeTrue();
-        original.UseUnderscore.ShouldBeFalse();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Casing).IsEqualTo(original.Casing);
+        _ = await Assert.That(result.UseUnderscore).IsTrue();
+        _ = await Assert.That(original.UseUnderscore).IsFalse();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string Name = "TValue";
 
     [Test]
-    public void GivenValueThenReturnsFormattedString()
+    public async Task GivenValueThenReturnsFormattedString()
     {
         // Arrange
         var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
@@ -24,6 +24,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Name);
+        _ = await Assert.That(result).IsEqualTo(Name);
     }
 }

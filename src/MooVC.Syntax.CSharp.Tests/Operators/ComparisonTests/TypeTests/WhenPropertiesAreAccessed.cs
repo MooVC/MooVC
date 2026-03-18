@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
@@ -18,7 +18,7 @@ public sealed class WhenPropertiesAreAccessed
 
     [Test]
     [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
-    public void GivenTypeThenFlagsReflectValue(ComparisonTypeExpectation expectation)
+    public async Task GivenTypeThenFlagsReflectValue(ComparisonTypeExpectation expectation)
     {
         // Arrange
         Comparison.Type subject = expectation.OperatorType;
@@ -34,14 +34,14 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        isEquality.ShouldBe(expectation.IsEquality);
-        isGreaterThan.ShouldBe(expectation.IsGreaterThan);
-        isGreaterThanOrEqual.ShouldBe(expectation.IsGreaterThanOrEqual);
-        isInequality.ShouldBe(expectation.IsInequality);
-        isLessThan.ShouldBe(expectation.IsLessThan);
-        isLessThanOrEqual.ShouldBe(expectation.IsLessThanOrEqual);
-        isUnspecified.ShouldBe(expectation.IsUnspecified);
-        representation.ShouldBe(expectation.ExpectedString);
+        _ = await Assert.That(isEquality).IsEqualTo(expectation.IsEquality);
+        _ = await Assert.That(isGreaterThan).IsEqualTo(expectation.IsGreaterThan);
+        _ = await Assert.That(isGreaterThanOrEqual).IsEqualTo(expectation.IsGreaterThanOrEqual);
+        _ = await Assert.That(isInequality).IsEqualTo(expectation.IsInequality);
+        _ = await Assert.That(isLessThan).IsEqualTo(expectation.IsLessThan);
+        _ = await Assert.That(isLessThanOrEqual).IsEqualTo(expectation.IsLessThanOrEqual);
+        _ = await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record ComparisonTypeExpectation(

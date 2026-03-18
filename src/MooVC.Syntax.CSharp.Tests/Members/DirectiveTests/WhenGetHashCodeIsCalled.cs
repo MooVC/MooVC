@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Alias = "Alias";
 
     [Test]
-    public void GivenMatchingDirectivesThenReturnSameHash()
+    public async Task GivenMatchingDirectivesThenReturnSameHash()
     {
         // Arrange
         var first = new Directive
@@ -27,11 +27,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentDirectivesThenReturnDifferentHashes()
+    public async Task GivenDifferentDirectivesThenReturnDifferentHashes()
     {
         // Arrange
         var first = new Directive
@@ -51,6 +51,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

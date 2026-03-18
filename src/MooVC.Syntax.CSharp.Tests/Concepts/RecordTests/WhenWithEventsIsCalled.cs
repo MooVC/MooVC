@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithEventsIsCalled
 {
     [Test]
-    public void GivenEventsThenReturnsUpdatedInstance()
+    public async Task GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
         var created = new Event { Name = new Name("Created") };
@@ -17,8 +17,8 @@ public sealed class WhenWithEventsIsCalled
         Record result = original.WithEvents(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Events.ShouldBe(new[] { created, updated });
-        result.Fields.ShouldBe(original.Fields);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Events).IsEquivalentTo([created, updated]);
+        _ = await Assert.That(result.Fields).IsEqualTo(original.Fields);
     }
 }

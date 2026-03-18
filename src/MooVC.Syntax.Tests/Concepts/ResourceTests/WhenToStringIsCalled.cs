@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Xml.Linq;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsDocument()
+    public async Task GivenValuesThenReturnsDocument()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -56,6 +56,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected.ToString());
+        _ = await Assert.That(result).IsEqualTo(expected.ToString());
     }
 }

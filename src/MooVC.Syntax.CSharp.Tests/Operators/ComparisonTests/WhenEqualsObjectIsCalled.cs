@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNonComparisonObjectThenReturnsFalse()
+    public async Task GivenNonComparisonObjectThenReturnsFalse()
     {
         // Arrange
         Comparison subject = ComparisonTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenComparisonObjectThenReturnsResultOfComparisonEquals()
+    public async Task GivenComparisonObjectThenReturnsResultOfComparisonEquals()
     {
         // Arrange
         Comparison subject = ComparisonTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

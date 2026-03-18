@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenDefaultInstanceThenReturnsAutoImplementedAccessors()
+    public async Task GivenDefaultInstanceThenReturnsAutoImplementedAccessors()
     {
         // Arrange
         Property.Methods subject = Property.Methods.Default;
@@ -14,12 +14,12 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldContain("get");
-        representation.ShouldContain("init");
+        _ = await Assert.That(representation).Contains("get");
+        _ = await Assert.That(representation).Contains("init");
     }
 
     [Test]
-    public void GivenReadOnlyPropertyThenOnlyGetterIsReturned()
+    public async Task GivenReadOnlyPropertyThenOnlyGetterIsReturned()
     {
         // Arrange
         var subject = new Property.Methods
@@ -32,6 +32,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe("value;");
+        _ = await Assert.That(representation).IsEqualTo("value;");
     }
 }

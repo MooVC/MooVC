@@ -1,12 +1,11 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenWithFoldersIsCalled
 {
     [Test]
-    public void GivenFoldersThenReturnsUpdatedInstance()
+    public async Task GivenFoldersThenReturnsUpdatedInstance()
     {
         // Arrange
         Folder existing = SolutionTestsData.CreateFolder();
@@ -22,8 +21,8 @@ public sealed class WhenWithFoldersIsCalled
         Solution result = original.WithFolders(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Folders.ShouldBe(original.Folders.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Folders).IsEquivalentTo([.. original.Folders, additional]);
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

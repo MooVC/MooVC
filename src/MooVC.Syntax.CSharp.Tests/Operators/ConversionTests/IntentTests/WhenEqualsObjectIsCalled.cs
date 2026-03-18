@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(null as object);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameReferenceThenReturnsTrue()
+    public async Task GivenTheSameReferenceThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -25,11 +25,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(intent as object);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -38,11 +38,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(Conversion.Intent.From as object);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -51,11 +51,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(Conversion.Intent.To as object);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenAnUnrecognisedTypeThenReturnsFalse()
+    public async Task GivenAnUnrecognisedTypeThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -64,6 +64,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = intent.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

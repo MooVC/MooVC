@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenResourceIsUndefined()
+    public async Task GivenDefaultsThenResourceIsUndefined()
     {
         // Act
         var subject = new Resource();
 
         // Assert
-        subject.CustomToolNamespace.ShouldBe(Snippet.Empty);
-        subject.Designer.ShouldBe(Path.Empty);
-        subject.Location.ShouldBe(Path.Empty);
-        subject.Visibility.ShouldBe(Resource.Scope.Internal);
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.CustomToolNamespace).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Designer).IsEqualTo(Path.Empty);
+        _ = await Assert.That(subject.Location).IsEqualTo(Path.Empty);
+        _ = await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Internal);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var customToolNamespace = Snippet.From(ResourceTestsData.DefaultCustomToolNamespace);
@@ -36,10 +36,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.CustomToolNamespace.ShouldBe(customToolNamespace);
-        subject.Designer.ShouldBe(designer);
-        subject.Location.ShouldBe(location);
-        subject.Visibility.ShouldBe(Resource.Scope.Public);
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.CustomToolNamespace).IsEqualTo(customToolNamespace);
+        _ = await Assert.That(subject.Designer).IsEqualTo(designer);
+        _ = await Assert.That(subject.Location).IsEqualTo(location);
+        _ = await Assert.That(subject.Visibility).IsEqualTo(Resource.Scope.Public);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

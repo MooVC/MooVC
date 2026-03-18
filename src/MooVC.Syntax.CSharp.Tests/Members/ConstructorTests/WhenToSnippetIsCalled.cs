@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using MooVC.Syntax.CSharp.Concepts;
 using MooVC.Syntax.CSharp.Elements;
@@ -8,21 +8,22 @@ using MooVC.Syntax.Elements;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullConstructThenThrows()
+    public async Task GivenNullConstructThenThrows()
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create();
         Type? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(Type.Options.Default, type!));
+        Func<Snippet> act = () => _ = subject.ToSnippet(Type.Options.Default, type!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(type));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create();
@@ -30,14 +31,15 @@ public sealed class WhenToSnippetIsCalled
         Type.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!, type));
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!, type);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenUndefinedConstructorThenEmptyReturned()
+    public async Task GivenUndefinedConstructorThenEmptyReturned()
     {
         // Arrange
         Constructor subject = Constructor.Undefined;
@@ -47,11 +49,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default, type);
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenBodyThenBlockIsRendered()
+    public async Task GivenBodyThenBlockIsRendered()
     {
         // Arrange
         Parameter[] parameters =
@@ -76,6 +78,6 @@ public sealed class WhenToSnippetIsCalled
             }
             """;
 
-        representation.ShouldBe(expected);
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 }

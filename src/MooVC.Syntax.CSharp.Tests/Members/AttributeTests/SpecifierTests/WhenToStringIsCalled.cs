@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenNoneThenReturnsEmpty()
+    public async Task GivenNoneThenReturnsEmpty()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.None;
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValueThenReturnsValue()
+    public async Task GivenValueThenReturnsValue()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Property;
@@ -25,6 +25,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("property");
+        _ = await Assert.That(result).IsEqualTo("property");
     }
 }

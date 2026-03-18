@@ -1,31 +1,31 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultArrayThenInstanceIsCreated()
+    public async Task GivenDefaultArrayThenInstanceIsCreated()
     {
         // Arrange
         ImmutableArray<Name> value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Qualifier(value));
+        _ = await Assert.That(() => _ = new Qualifier(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenEmptyArrayThenInstanceIsCreated()
+    public async Task GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
         ImmutableArray<Name> value = [];
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Qualifier(value));
+        _ = await Assert.That(() => _ = new Qualifier(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenSameSegmentsTwiceThenInstancesAreEqual()
+    public async Task GivenSameSegmentsTwiceThenInstancesAreEqual()
     {
         // Arrange
         ImmutableArray<Name> value = ["First", "Second"];
@@ -35,13 +35,13 @@ public sealed class WhenConstructorIsCalled
         var second = new Qualifier(value);
 
         // Assert
-        first.Equals(second).ShouldBeTrue();
-        (first == second).ShouldBeTrue();
-        first.GetHashCode().ShouldBe(second.GetHashCode());
+        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first.GetHashCode()).IsEqualTo(second.GetHashCode());
     }
 
     [Test]
-    public void GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
+    public async Task GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
     {
         // Arrange
         ImmutableArray<Name> left = ["First"];
@@ -52,7 +52,7 @@ public sealed class WhenConstructorIsCalled
         var second = new Qualifier(right);
 
         // Assert
-        first.Equals(second).ShouldBeFalse();
-        (first != second).ShouldBeTrue();
+        _ = await Assert.That(first.Equals(second)).IsFalse();
+        _ = await Assert.That(first != second).IsTrue();
     }
 }

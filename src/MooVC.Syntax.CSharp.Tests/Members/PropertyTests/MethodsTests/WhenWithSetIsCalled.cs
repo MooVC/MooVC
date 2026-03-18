@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.MethodsTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithSetIsCalled
 {
     [Test]
-    public void GivenSetterThenReturnsUpdatedInstance()
+    public async Task GivenSetterThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Property.Methods
@@ -25,9 +25,9 @@ public sealed class WhenWithSetIsCalled
         Property.Methods result = original.WithSet(set);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Get.ShouldBe(original.Get);
-        result.Set.ShouldBe(set);
-        original.Set.ShouldBe(Property.Setter.Default);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Get).IsEqualTo(original.Get);
+        _ = await Assert.That(result.Set).IsEqualTo(set);
+        _ = await Assert.That(original.Set).IsEqualTo(Property.Setter.Default);
     }
 }

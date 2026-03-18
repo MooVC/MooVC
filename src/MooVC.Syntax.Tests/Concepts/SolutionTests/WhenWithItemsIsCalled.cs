@@ -1,13 +1,12 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithItemsIsCalled
 {
     [Test]
-    public void GivenItemsThenReturnsUpdatedInstance()
+    public async Task GivenItemsThenReturnsUpdatedInstance()
     {
         // Arrange
         Item existing = SolutionTestsData.CreateItem();
@@ -26,8 +25,8 @@ public sealed class WhenWithItemsIsCalled
         Solution result = original.WithItems(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Items.ShouldBe(original.Items.Concat([additional]));
-        result.Configurations.ShouldBe(original.Configurations);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
+        _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

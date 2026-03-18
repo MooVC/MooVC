@@ -1,11 +1,9 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
-
-using System.Linq;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenWithProjectsIsCalled
 {
     [Test]
-    public void GivenProjectsThenReturnsUpdatedInstance()
+    public async Task GivenProjectsThenReturnsUpdatedInstance()
     {
         // Arrange
         Project existing = FolderTestsData.CreateProject();
@@ -16,10 +14,10 @@ public sealed class WhenWithProjectsIsCalled
         Folder result = original.WithProjects(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Projects.ShouldBe(original.Projects.Concat([additional]));
-        result.Files.ShouldBe(original.Files);
-        result.Items.ShouldBe(original.Items);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Projects).IsEquivalentTo([.. original.Projects, additional]);
+        _ = await Assert.That(result.Files).IsEqualTo(original.Files);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

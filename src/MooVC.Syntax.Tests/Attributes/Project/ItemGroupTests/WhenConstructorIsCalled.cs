@@ -1,24 +1,24 @@
-namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenItemGroupIsUndefined()
+    public async Task GivenDefaultsThenItemGroupIsUndefined()
     {
         // Act
         var subject = new ItemGroup();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.Label.ShouldBe(Snippet.Empty);
-        subject.Items.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Item item = ItemGroupTestsData.CreateItem();
@@ -32,9 +32,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(ItemGroupTestsData.DefaultCondition));
-        subject.Label.ShouldBe(Snippet.From(ItemGroupTestsData.DefaultLabel));
-        subject.Items.ShouldBe(new[] { item });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultCondition));
+        _ = await Assert.That(subject.Label).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultLabel));
+        _ = await Assert.That(subject.Items).IsEquivalentTo([item]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

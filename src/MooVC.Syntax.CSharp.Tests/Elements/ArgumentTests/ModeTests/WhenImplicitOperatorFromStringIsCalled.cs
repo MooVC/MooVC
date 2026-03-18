@@ -1,51 +1,44 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.ModeTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Value = "in";
 
     [Test]
-    public void GivenDefaultThenInstanceIsCreated()
+    public async Task GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
         string? provided = default;
 
         // Act
         Argument.Mode subject = provided!;
-
-        // Assert
-        _ = subject.ShouldNotBeNull();
-        string result = subject;
-        result.ShouldBe(provided);
-    }
-
-    [Test]
-    public void GivenValueThenRoundTripsSuccessfully()
-    {
-        // Arrange
-        const string provided = Value;
-
-        // Act
-        Argument.Mode subject = provided;
         string result = subject;
 
         // Assert
-        result.ShouldBe(provided);
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenValueThenRoundTripsSuccessfully()
     {
-        // Arrange
-        const string provided = Value;
-
-        // Act
-        Argument.Mode first = provided;
-        Argument.Mode second = provided;
+        // Arrange & Act
+        Argument.Mode subject = Value;
+        string result = subject;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(result).IsEqualTo(Value);
+    }
+
+    [Test]
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    {
+        // Arrange & Act
+        Argument.Mode first = Value;
+        Argument.Mode second = Value;
+
+        // Assert
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

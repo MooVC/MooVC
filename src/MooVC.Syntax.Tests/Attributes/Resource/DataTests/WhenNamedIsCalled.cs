@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.DataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.DataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Data original = DataTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenNamedIsCalled
         Data result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.Comment.ShouldBe(original.Comment);
-        result.MimeType.ShouldBe(original.MimeType);
-        result.Type.ShouldBe(original.Type);
-        result.Value.ShouldBe(original.Value);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(updated);
+        _ = await Assert.That(result.Comment).IsEqualTo(original.Comment);
+        _ = await Assert.That(result.MimeType).IsEqualTo(original.MimeType);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
+        _ = await Assert.That(result.Value).IsEqualTo(original.Value);
     }
 }

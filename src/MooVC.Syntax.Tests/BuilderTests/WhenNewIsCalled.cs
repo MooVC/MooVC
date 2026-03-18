@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.BuilderTests;
+﻿namespace MooVC.Syntax.BuilderTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Concepts;
 public sealed class WhenNewIsCalled
 {
     [Test]
-    public void GivenConstructTypeThenNewInstanceIsReturned()
+    public async Task GivenConstructTypeThenNewInstanceIsReturned()
     {
         // Arrange
         // Act
@@ -15,11 +15,11 @@ public sealed class WhenNewIsCalled
         TestConstruct second = Builder.New<TestConstruct>();
 
         // Assert
-        _ = first.ShouldNotBeNull();
-        _ = second.ShouldNotBeNull();
-        _ = first.ShouldBeOfType<TestConstruct>();
-        _ = second.ShouldBeOfType<TestConstruct>();
-        first.ShouldNotBeSameAs(second);
+        _ = await Assert.That(first).IsNotNull();
+        _ = await Assert.That(second).IsNotNull();
+        _ = await Assert.That(first).IsTypeOf<TestConstruct>();
+        _ = await Assert.That(second).IsTypeOf<TestConstruct>();
+        _ = await Assert.That(first).IsNotStrictlyEqualTo(second);
     }
 
     private sealed class TestConstruct

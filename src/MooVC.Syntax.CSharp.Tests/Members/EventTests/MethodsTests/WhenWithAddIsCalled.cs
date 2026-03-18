@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithAddIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Event.Methods
@@ -19,9 +19,9 @@ public sealed class WhenWithAddIsCalled
         Event.Methods result = original.WithAdd(add);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Add.ShouldBe(add);
-        result.Remove.ShouldBe(original.Remove);
-        original.Add.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Add).IsEqualTo(add);
+        _ = await Assert.That(result.Remove).IsEqualTo(original.Remove);
+        _ = await Assert.That(original.Add).IsEqualTo(Snippet.Empty);
     }
 }

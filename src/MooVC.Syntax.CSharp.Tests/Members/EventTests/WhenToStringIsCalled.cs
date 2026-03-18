@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string Name = "Occurred";
 
     [Test]
-    public void GivenUndefinedEventThenEmptyReturned()
+    public async Task GivenUndefinedEventThenEmptyReturned()
     {
         // Arrange
         Event subject = Event.Undefined;
@@ -18,11 +18,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenNoBehavioursThenDeclarationReturned()
+    public async Task GivenNoBehavioursThenDeclarationReturned()
     {
         // Arrange
         var subject = new Event
@@ -35,11 +35,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe($"public event {Handler} {Name};");
+        _ = await Assert.That(representation).IsEqualTo($"public event {Handler} {Name};");
     }
 
     [Test]
-    public void GivenBehavioursThenBodyIsRendered()
+    public async Task GivenBehavioursThenBodyIsRendered()
     {
         // Arrange
         var methods = new Event.Methods
@@ -62,6 +62,6 @@ public sealed class WhenToStringIsCalled
             }
             """;
 
-        representation.ShouldBe(expected.ToString());
+        _ = await Assert.That(representation).IsEqualTo(expected.ToString());
     }
 }

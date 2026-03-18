@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenFormatterThenReturnsUnderlyingValue()
+    public async Task GivenFormatterThenReturnsUnderlyingValue()
     {
         // Arrange
         Argument.Formatter subject = Argument.Formatter.Call;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe("{0}: {1}");
+        _ = await Assert.That(result).IsEqualTo("{0}: {1}");
     }
 }

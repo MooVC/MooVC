@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
 
 public sealed class WhenWithFormatterIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Argument.Options();
@@ -13,8 +13,8 @@ public sealed class WhenWithFormatterIsCalled
         Argument.Options result = options.WithFormatter(value);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Formatter.ShouldBe(value);
-        options.Formatter.ShouldNotBe(value);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
+        _ = await Assert.That(result.Formatter).IsEqualTo(value);
+        _ = await Assert.That(options.Formatter).IsNotEqualTo(value);
     }
 }

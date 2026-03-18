@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
@@ -8,19 +8,19 @@ public sealed class WhenConstructorIsCalled
     private const string ParameterName = "T";
 
     [Test]
-    public void GivenDefaultsThenDeclarationIsUnspecified()
+    public async Task GivenDefaultsThenDeclarationIsUnspecified()
     {
         // Act
         var subject = new Declaration();
 
         // Assert
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Parameters.ShouldBeEmpty();
-        subject.IsUnspecified.ShouldBeTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.IsUnspecified).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var parameter = new Parameter { Name = ParameterName };
@@ -33,8 +33,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(new Name(DeclarationTestsData.DefaultName));
-        subject.Parameters.ShouldBe(new[] { parameter });
-        subject.IsUnspecified.ShouldBeFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
+        _ = await Assert.That(subject.Parameters).IsEquivalentTo([parameter]);
+        _ = await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

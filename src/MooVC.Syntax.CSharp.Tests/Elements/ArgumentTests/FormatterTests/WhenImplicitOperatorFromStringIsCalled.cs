@@ -1,26 +1,25 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Value = "{0} = {1}";
 
     [Test]
-    public void GivenDefaultThenInstanceIsCreated()
+    public async Task GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
         string? provided = default;
 
         // Act
         Argument.Formatter subject = provided!;
+        string result = subject;
 
         // Assert
-        _ = subject.ShouldNotBeNull();
-        string result = subject;
-        result.ShouldBe(provided);
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
-    public void GivenValueThenRoundTripsSuccessfully()
+    public async Task GivenValueThenRoundTripsSuccessfully()
     {
         // Arrange
         const string provided = Value;
@@ -30,11 +29,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(provided);
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         const string provided = Value;
@@ -44,8 +43,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Argument.Formatter second = provided;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

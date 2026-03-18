@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -9,18 +9,18 @@ public sealed class WhenConstructorIsCalled
     private const string ParameterName = "TValue";
 
     [Test]
-    public void GivenDefaultsThenParameterIsUnnamed()
+    public async Task GivenDefaultsThenParameterIsUnnamed()
     {
         // Act
         var subject = new Parameter();
 
         // Assert
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Constraints.ShouldBeEmpty();
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Constraints).IsEmpty();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var constraint = new Constraint
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(new Name(ParameterName));
-        subject.Constraints.ShouldBe(new[] { constraint });
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(ParameterName));
+        _ = await Assert.That(subject.Constraints).IsEquivalentTo([constraint]);
     }
 }

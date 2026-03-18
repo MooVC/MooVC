@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string InterfaceName = "IExample";
 
     [Test]
-    public void GivenUnspecifiedConstraintThenReturnsEmpty()
+    public async Task GivenUnspecifiedConstraintThenReturnsEmpty()
     {
         // Arrange
         Constraint constraint = Constraint.Unspecified;
@@ -18,11 +18,11 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenConstraintWithValuesThenReturnsFormattedString()
+    public async Task GivenConstraintWithValuesThenReturnsFormattedString()
     {
         // Arrange
         var constraint = new Constraint
@@ -37,11 +37,11 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        result.ShouldBe($"where class, {BaseName}, {InterfaceName}, new()");
+        _ = await Assert.That(result).IsEqualTo($"where class, {BaseName}, {InterfaceName}, new()");
     }
 
     [Test]
-    public void GivenMultipleInterfacesThenReturnsAllInterfacesInOrder()
+    public async Task GivenMultipleInterfacesThenReturnsAllInterfacesInOrder()
     {
         // Arrange
         const string AdditionalInterfaceName = "IAnother";
@@ -61,6 +61,6 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        result.ShouldBe($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
+        _ = await Assert.That(result).IsEqualTo($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
     }
 }

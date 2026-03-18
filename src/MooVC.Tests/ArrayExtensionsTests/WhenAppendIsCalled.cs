@@ -3,7 +3,7 @@
 public sealed class WhenAppendIsCalled
 {
     [Test]
-    public void GivenANullValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
+    public async Task GivenANullValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
     {
         // Arrange
         int[]? original = default;
@@ -12,11 +12,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(default);
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenNoValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
+    public async Task GivenNoValueWhenTheSourceIsNullThenAnEmptyArrayIsReturned()
     {
         // Arrange
         int[]? original = default;
@@ -25,11 +25,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenNoValueWhenTheSourceIsEmptyThenAnEmptyArrayIsReturned()
+    public async Task GivenNoValueWhenTheSourceIsEmptyThenAnEmptyArrayIsReturned()
     {
         // Arrange
         int[]? original = [];
@@ -38,12 +38,12 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenNoValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheOriginalElementsWithin()
+    public async Task GivenNoValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheOriginalElementsWithin()
     {
         // Arrange
         int[]? original = [1, 2, 3, 4, 5];
@@ -52,12 +52,12 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append();
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.ShouldBe(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result).IsEquivalentTo(original);
     }
 
     [Test]
-    public void GivenASingleValueWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementWithin()
+    public async Task GivenASingleValueWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementWithin()
     {
         // Arrange
         int[]? original = default;
@@ -67,11 +67,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        result.ShouldHaveSingleItem().ShouldBe(expected);
+        _ = await Assert.That(result.Single()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenASingleValueWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementWithin()
+    public async Task GivenASingleValueWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementWithin()
     {
         // Arrange
         int[] original = [];
@@ -81,11 +81,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        result.ShouldHaveSingleItem().ShouldBe(expected);
+        _ = await Assert.That(result.Single()).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenASingleValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementAtTheEnd()
+    public async Task GivenASingleValueWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementAtTheEnd()
     {
         // Arrange
         int[] original = [1, 2, 3];
@@ -96,11 +96,11 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenASingleValueWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementAtTheEnd()
+    public async Task GivenASingleValueWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementAtTheEnd()
     {
         // Arrange
         int[] original = [1, 1, 1];
@@ -111,11 +111,11 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(value);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenMutipleValuesWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementsWithin()
+    public async Task GivenMutipleValuesWhenTheSourceIsNullThenAnArrayIsReturnedWithTheElementsWithin()
     {
         // Arrange
         int[]? original = default;
@@ -125,11 +125,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenMultipleValuesWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementsWithin()
+    public async Task GivenMultipleValuesWhenTheSourceIsEmptyThenAnArrayIsReturnedWithTheElementsWithin()
     {
         // Arrange
         int[] original = [];
@@ -139,11 +139,11 @@ public sealed class WhenAppendIsCalled
         int[] result = original.Append(expected);
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenMultipleValuesWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementsAtTheEnd()
+    public async Task GivenMultipleValuesWhenTheSourceIsPopulatedThenAnArrayIsReturnedWithTheElementsAtTheEnd()
     {
         // Arrange
         int[] original = [1, 2, 3];
@@ -154,11 +154,11 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenMultipleValuesWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementsAtTheEnd()
+    public async Task GivenMultipleValuesWhenTheSourceHasMultipleSimilarElementsThenAnArrayIsReturnedWithTheNewElementsAtTheEnd()
     {
         // Arrange
         int[] original = [1, 2, 1];
@@ -169,11 +169,11 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(others);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
-    public void GivenTheSameValuesAsTheSourceWhenTheSourceHasMultipleElementsThenAnArrayIsReturnedWithTheSourceDuplicated()
+    public async Task GivenTheSameValuesAsTheSourceWhenTheSourceHasMultipleElementsThenAnArrayIsReturnedWithTheSourceDuplicated()
     {
         // Arrange
         int[] original = [2, 1, 2];
@@ -183,6 +183,6 @@ public sealed class WhenAppendIsCalled
         int[] actual = original.Append(original);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 }

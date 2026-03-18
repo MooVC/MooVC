@@ -1,13 +1,12 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
+    public async Task GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
@@ -17,9 +16,9 @@ public sealed class WhenWithParametersIsCalled
         Declaration result = original.WithParameters(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Parameters.Length.ShouldBe(2);
-        result.Parameters.ShouldBe(original.Parameters.Concat(additional));
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Parameters.Length).IsEqualTo(2);
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. original.Parameters, .. additional]);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using System;
 using MooVC.Syntax.Elements;
@@ -9,22 +9,22 @@ public sealed class WhenToSnippetIsCalled
     private const string Value = "42";
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Argument { Name = "Value" };
         Argument.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(
-            () => _ = subject.ToSnippet(options!));
+        Func<Snippet> act = () => subject.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenNamedValueThenAppliesFormatterAndNaming()
+    public async Task GivenNamedValueThenAppliesFormatterAndNaming()
     {
         // Arrange
         var subject = new Argument
@@ -43,11 +43,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("value: 42");
+        _ = await Assert.That(result).IsEqualTo("value: 42");
     }
 
     [Test]
-    public void GivenModifierThenModifierIsPrefixed()
+    public async Task GivenModifierThenModifierIsPrefixed()
     {
         // Arrange
         var subject = new Argument
@@ -67,6 +67,6 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("value: ref 42");
+        _ = await Assert.That(result).IsEqualTo("value: ref 42");
     }
 }

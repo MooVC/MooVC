@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public void GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
         Scope? left = default;
@@ -16,14 +16,14 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        lessThan.ShouldBeTrue();
-        greaterThan.ShouldBeFalse();
-        lessThanOrEqual.ShouldBeTrue();
-        greaterThanOrEqual.ShouldBeFalse();
+        _ = await Assert.That(lessThan).IsTrue();
+        _ = await Assert.That(greaterThan).IsFalse();
+        _ = await Assert.That(lessThanOrEqual).IsTrue();
+        _ = await Assert.That(greaterThanOrEqual).IsFalse();
     }
 
     [Test]
-    public void GivenPrivateAndPublicThenOrderingReflectsAccessibility()
+    public async Task GivenPrivateAndPublicThenOrderingReflectsAccessibility()
     {
         // Arrange
         Scope left = Scope.Private;
@@ -36,9 +36,9 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        lessThan.ShouldBeTrue();
-        greaterThan.ShouldBeFalse();
-        lessThanOrEqual.ShouldBeTrue();
-        greaterThanOrEqual.ShouldBeFalse();
+        _ = await Assert.That(lessThan).IsTrue();
+        _ = await Assert.That(greaterThan).IsFalse();
+        _ = await Assert.That(lessThanOrEqual).IsTrue();
+        _ = await Assert.That(greaterThanOrEqual).IsFalse();
     }
 }

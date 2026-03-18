@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests.ModeTests;
 
 public sealed class WhenPropertiesAreCalled
 {
@@ -11,7 +11,7 @@ public sealed class WhenPropertiesAreCalled
     [Arguments("ref readonly", false, false, false, false, false, true, false, false)]
     [Arguments("scoped", false, false, false, false, false, false, true, false)]
     [Arguments("this", false, false, false, false, false, false, false, true)]
-    public void GivenModeThenFlagsMatch(
+    public async Task GivenModeThenFlagsMatch(
         string value,
         bool expectedIn,
         bool expectedOut,
@@ -26,13 +26,13 @@ public sealed class WhenPropertiesAreCalled
         Parameter.Mode subject = value;
 
         // Act & Assert
-        subject.IsIn.ShouldBe(expectedIn);
-        subject.IsOut.ShouldBe(expectedOut);
-        subject.IsNone.ShouldBe(expectedNone);
-        subject.IsParams.ShouldBe(expectedParams);
-        subject.IsRef.ShouldBe(expectedRef);
-        subject.IsRefReadonly.ShouldBe(expectedRefReadonly);
-        subject.IsScoped.ShouldBe(expectedScoped);
-        subject.IsThis.ShouldBe(expectedThis);
+        _ = await Assert.That(subject.IsIn).IsEqualTo(expectedIn);
+        _ = await Assert.That(subject.IsOut).IsEqualTo(expectedOut);
+        _ = await Assert.That(subject.IsNone).IsEqualTo(expectedNone);
+        _ = await Assert.That(subject.IsParams).IsEqualTo(expectedParams);
+        _ = await Assert.That(subject.IsRef).IsEqualTo(expectedRef);
+        _ = await Assert.That(subject.IsRefReadonly).IsEqualTo(expectedRefReadonly);
+        _ = await Assert.That(subject.IsScoped).IsEqualTo(expectedScoped);
+        _ = await Assert.That(subject.IsThis).IsEqualTo(expectedThis);
     }
 }

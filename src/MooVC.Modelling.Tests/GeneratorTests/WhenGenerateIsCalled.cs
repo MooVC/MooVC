@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.GeneratorTests;
+﻿namespace MooVC.Modelling.GeneratorTests;
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -34,8 +34,8 @@ public sealed class WhenGenerateIsCalled
         IReadOnlyList<File> results = await Materialize(generator.Generate(model, CancellationToken.None));
 
         // Assert
-        results.Count.ShouldBe(1);
-        results[0].ShouldBe(expectedFile);
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0]).IsEqualTo(expectedFile);
         _ = navigator.Received(1).Navigate<File>(model, Arg.Any<CancellationToken>());
     }
 

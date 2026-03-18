@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
     {
         // Arrange
         Comparison original = ComparisonTestsData.Create();
@@ -16,9 +16,9 @@ public sealed class WhenWithScopeIsCalled
         Comparison result = original.WithScope(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Operator.ShouldBe(original.Operator);
-        result.Scope.ShouldBe(replacement);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        _ = await Assert.That(result.Scope).IsEqualTo(replacement);
     }
 }

@@ -10,12 +10,12 @@ internal sealed class TestableSynchronousCompressor
     [SuppressMessage("Major Code Smell", "S1854:Unused assignments should be removed", Justification = "Assignment is used.")]
     protected override Stream PerformCompress(Stream source)
     {
-        return new MemoryStream(source.GetBytes().Select(@byte => ++@byte).ToArray());
+        return new MemoryStream([.. source.GetBytes().Select(@byte => ++@byte)]);
     }
 
     [SuppressMessage("Major Code Smell", "S1854:Unused assignments should be removed", Justification = "Assignment is used.")]
     protected override Stream PerformDecompress(Stream source)
     {
-        return new MemoryStream(source.GetBytes().Select(@byte => --@byte).ToArray());
+        return new MemoryStream([.. source.GetBytes().Select(@byte => --@byte)]);
     }
 }

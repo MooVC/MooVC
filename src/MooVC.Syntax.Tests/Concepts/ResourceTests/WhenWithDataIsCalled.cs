@@ -1,13 +1,12 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Resource;
 using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenWithDataIsCalled
 {
     [Test]
-    public void GivenDataThenReturnsUpdatedInstance()
+    public async Task GivenDataThenReturnsUpdatedInstance()
     {
         // Arrange
         Data existing = ResourceTestsData.CreateData();
@@ -18,8 +17,8 @@ public sealed class WhenWithDataIsCalled
         Resource result = original.WithData(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Data.ShouldBe(original.Data.Concat([additional]));
-        result.Assemblies.ShouldBe(original.Assemblies);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Data).IsEquivalentTo([.. original.Data, additional]);
+        _ = await Assert.That(result.Assemblies).IsEqualTo(original.Assemblies);
     }
 }

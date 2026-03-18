@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenWithMaxLengthIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Snippet.Options();
@@ -13,8 +13,8 @@ public sealed class WhenWithMaxLengthIsCalled
         Snippet.Options result = options.WithMaxLength(value);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.MaxLength.ShouldBe(value);
-        options.MaxLength.ShouldNotBe(value);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
+        _ = await Assert.That(result.MaxLength).IsEqualTo(value);
+        _ = await Assert.That(options.MaxLength).IsNotEqualTo(value);
     }
 }

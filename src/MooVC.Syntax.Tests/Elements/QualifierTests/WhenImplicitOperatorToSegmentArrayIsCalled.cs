@@ -1,14 +1,14 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
 {
-    private static readonly Name alpha = new("Alpha");
-    private static readonly Name beta = new("Beta");
+    private static readonly Name _alpha = new("Alpha");
+    private static readonly Name _beta = new("Beta");
 
     [Test]
-    public void GivenNullQualifierThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullQualifierThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Qualifier? qualifier = default;
@@ -17,20 +17,20 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
         Func<Name[]> result = () => qualifier;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenQualifierThenSegmentsAreReturned()
+    public async Task GivenQualifierThenSegmentsAreReturned()
     {
         // Arrange
-        ImmutableArray<Name> value = [alpha, beta];
+        ImmutableArray<Name> value = [_alpha, _beta];
         var qualifier = new Qualifier(value);
 
         // Act
         Name[] result = qualifier;
 
         // Assert
-        result.ShouldBe([.. value]);
+        _ = await Assert.That(result).IsEquivalentTo([.. value]);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 using System;
 using MooVC.Syntax.Elements;
@@ -6,23 +6,23 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenProjectIsUndefined()
+    public async Task GivenDefaultsThenProjectIsUndefined()
     {
         // Act
         var subject = new Project();
 
         // Assert
-        subject.Id.ShouldBe(Guid.Empty);
-        subject.DisplayName.ShouldBe(Project.Name.Unnamed);
-        subject.Path.ShouldBe(Project.RelativePath.Unspecified);
-        subject.Type.ShouldBe(Snippet.Empty);
-        subject.Builds.ShouldBeEmpty();
-        subject.Platforms.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Id).IsEqualTo(Guid.Empty);
+        _ = await Assert.That(subject.DisplayName).IsEqualTo(Project.Name.Unnamed);
+        _ = await Assert.That(subject.Path).IsEqualTo(Project.RelativePath.Unspecified);
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Builds).IsEmpty();
+        _ = await Assert.That(subject.Platforms).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Act
         var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
@@ -39,12 +39,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Id.ShouldBe(ProjectTestsData.DefaultId);
-        subject.DisplayName.ShouldBe(new Project.Name(ProjectTestsData.DefaultName));
-        subject.Path.ShouldBe(new Project.RelativePath(ProjectTestsData.DefaultPath));
-        subject.Type.ShouldBe(Snippet.From(ProjectTestsData.DefaultType));
-        subject.Builds.ShouldBe([build]);
-        subject.Platforms.ShouldBe([platform]);
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Id).IsEqualTo(ProjectTestsData.DefaultId);
+        _ = await Assert.That(subject.DisplayName).IsEqualTo(new Project.Name(ProjectTestsData.DefaultName));
+        _ = await Assert.That(subject.Path).IsEqualTo(new Project.RelativePath(ProjectTestsData.DefaultPath));
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.From(ProjectTestsData.DefaultType));
+        _ = await Assert.That(subject.Builds).IsEquivalentTo([build]);
+        _ = await Assert.That(subject.Platforms).IsEquivalentTo([platform]);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

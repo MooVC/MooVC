@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -14,7 +14,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Directive> directives = isDefault
@@ -25,25 +25,26 @@ public sealed class WhenToSnippetIsCalled
         var snippet = directives.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Directive> directives = [Create(SystemQualifier)];
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = directives.ToSnippet(options!));
+        Func<Snippet> act = () => _ = directives.ToSnippet(options!);
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenTheyAreOrderedCorrectly()
+    public async Task GivenValuesThenTheyAreOrderedCorrectly()
     {
         // Arrange
         Directive alias = Create(CustomQualifier, alias: Alias);
@@ -64,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         var snippet = directives.ToSnippet(Snippet.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 
     private static Directive Create(string qualifier, string? alias = default, bool isStatic = false)

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentInstancesThenHashCodesAreEqual()
+    public async Task GivenEquivalentInstancesThenHashCodesAreEqual()
     {
         // Arrange
         var first = new Property.Setter { Behaviour = Snippet.From("value") };
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentInstancesThenHashCodesAreNotEqual()
+    public async Task GivenDifferentInstancesThenHashCodesAreNotEqual()
     {
         // Arrange
         var first = new Property.Setter { Behaviour = Snippet.From("value") };
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

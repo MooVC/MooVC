@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.Elements;
@@ -11,7 +11,7 @@ public sealed class WhenToStringIsCalled
     private const string SecondParameterName = "TSecond";
 
     [Test]
-    public void GivenUnspecifiedDeclarationThenEmptyReturned()
+    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
         Declaration subject = Declaration.Unspecified;
@@ -20,11 +20,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenNameThenNameReturned()
+    public async Task GivenNameThenNameReturned()
     {
         // Arrange
         var subject = new Declaration
@@ -36,11 +36,11 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe(Name);
+        _ = await Assert.That(representation).IsEqualTo(Name);
     }
 
     [Test]
-    public void GivenParametersThenNameAndParameterListReturned()
+    public async Task GivenParametersThenNameAndParameterListReturned()
     {
         // Arrange
         var subject = new Declaration
@@ -57,6 +57,6 @@ public sealed class WhenToStringIsCalled
         string representation = subject.ToString();
 
         // Assert
-        representation.ShouldBe($"{Name}<{FirstParameterName}, {SecondParameterName}>");
+        _ = await Assert.That(representation).IsEqualTo($"{Name}<{FirstParameterName}, {SecondParameterName}>");
     }
 }

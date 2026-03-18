@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
     [Test]
-    public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
+    public async Task GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange
         Unary original = UnaryTestsData.Create(body: Snippet.From("return value;"));
@@ -15,9 +15,9 @@ public sealed class WhenWithBodyIsCalled
         Unary result = original.WithBody(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(replacement);
-        result.Operator.ShouldBe(original.Operator);
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Body).IsEqualTo(replacement);
+        _ = await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

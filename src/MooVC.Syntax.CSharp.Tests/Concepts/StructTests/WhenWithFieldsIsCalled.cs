@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithFieldsIsCalled
 {
     [Test]
-    public void GivenFieldsThenReturnsUpdatedInstance()
+    public async Task GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
         var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
@@ -16,8 +16,8 @@ public sealed class WhenWithFieldsIsCalled
         Struct result = original.WithFields(field);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Fields.ShouldContain(field);
-        original.Fields.ShouldBeEmpty();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Fields).Contains(field);
+        _ = await Assert.That(original.Fields).IsEmpty();
     }
 }

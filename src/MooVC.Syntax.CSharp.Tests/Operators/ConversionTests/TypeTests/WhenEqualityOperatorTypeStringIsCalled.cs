@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.TypeTests;
 
 public sealed class WhenEqualityOperatorTypeStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
     private const string Different = "implicit";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Conversion.Type? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Conversion.Type? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Conversion.Type left = Conversion.Type.Explicit;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Conversion.Type left = Conversion.Type.Explicit;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Conversion.Type left = Conversion.Type.Explicit;
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

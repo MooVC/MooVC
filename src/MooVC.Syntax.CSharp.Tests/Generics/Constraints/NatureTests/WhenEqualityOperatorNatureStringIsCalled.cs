@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenEqualityOperatorNatureStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     private const string Different = "struct";
 
     [Test]
-    public void GivenBothSidesNullThenReturnsTrue()
+    public async Task GivenBothSidesNullThenReturnsTrue()
     {
         // Arrange
         Nature? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideNullThenReturnsFalse()
+    public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
         Nature left = Same;
@@ -31,12 +31,12 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Nature left = Same;
@@ -47,12 +47,12 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Nature left = Same;
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

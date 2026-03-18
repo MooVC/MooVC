@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Validation.ValidationContextExtensionsTests;
+﻿namespace MooVC.Syntax.Validation.ValidationContextExtensionsTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ public sealed class WhenIncludeIfIsCalled
     private const string Message = "Validated";
 
     [Test]
-    public void GivenFalseConditionThenValidationIsNotPerformed()
+    public async Task GivenFalseConditionThenValidationIsNotPerformed()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -21,13 +21,13 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
-        actual.Results.ShouldBeEmpty();
-        validatable.Calls.ShouldBe(0);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+        _ = await Assert.That(actual.Results).IsEmpty();
+        _ = await Assert.That(validatable.Calls).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenTrueConditionThenValidationResultsAreReturned()
+    public async Task GivenTrueConditionThenValidationResultsAreReturned()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -40,15 +40,15 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        results.ShouldBe([validatable.Results.Single()]);
-        validatable.Calls.ShouldBe(1);
+        _ = await Assert.That(results).IsEquivalentTo([validatable.Results.Single()]);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenExistingResultsAndFalseConditionThenResultsAreUnchanged()
+    public async Task GivenExistingResultsAndFalseConditionThenResultsAreUnchanged()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -64,15 +64,15 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        combined.ShouldBe([initial]);
-        validatable.Calls.ShouldBe(0);
+        _ = await Assert.That(combined).IsEquivalentTo([initial]);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenExistingResultsAndTrueConditionThenValidationResultsAreAppended()
+    public async Task GivenExistingResultsAndTrueConditionThenValidationResultsAreAppended()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -88,15 +88,15 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        combined.ShouldBe([initial, validatable.Results.Single()]);
-        validatable.Calls.ShouldBe(1);
+        _ = await Assert.That(combined).IsEquivalentTo([initial, validatable.Results.Single()]);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenMultipleValidatablesAndFalseConditionThenValidationIsNotPerformed()
+    public async Task GivenMultipleValidatablesAndFalseConditionThenValidationIsNotPerformed()
     {
         // Arrange
         var first = new TrackingValidatable(new ValidationResult("First"));
@@ -110,14 +110,14 @@ public sealed class WhenIncludeIfIsCalled
             [first, second]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
-        actual.Results.ShouldBeEmpty();
-        first.Calls.ShouldBe(0);
-        second.Calls.ShouldBe(0);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+        _ = await Assert.That(actual.Results).IsEmpty();
+        _ = await Assert.That(first.Calls).IsEqualTo(0);
+        _ = await Assert.That(second.Calls).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenMultipleValidatablesAndTrueConditionThenAllAreValidated()
+    public async Task GivenMultipleValidatablesAndTrueConditionThenAllAreValidated()
     {
         // Arrange
         var first = new TrackingValidatable(new ValidationResult("First"));
@@ -131,16 +131,16 @@ public sealed class WhenIncludeIfIsCalled
             [first, second]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        results.ShouldBe([first.Results.Single(), second.Results.Single()]);
-        first.Calls.ShouldBe(1);
-        second.Calls.ShouldBe(1);
+        _ = await Assert.That(results).IsEquivalentTo([first.Results.Single(), second.Results.Single()]);
+        _ = await Assert.That(first.Calls).IsEqualTo(1);
+        _ = await Assert.That(second.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFunctionConditionThenItsValueDeterminesWhetherValidationOccurs()
+    public async Task GivenFunctionConditionThenItsValueDeterminesWhetherValidationOccurs()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -153,15 +153,15 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        results.ShouldBe([validatable.Results.Single()]);
-        validatable.Calls.ShouldBe(1);
+        _ = await Assert.That(results).IsEquivalentTo([validatable.Results.Single()]);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFunctionConditionAndExistingResultsThenItsValueDeterminesWhetherValidationOccurs()
+    public async Task GivenFunctionConditionAndExistingResultsThenItsValueDeterminesWhetherValidationOccurs()
     {
         // Arrange
         var validatable = new TrackingValidatable(new ValidationResult(Message));
@@ -177,15 +177,15 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        combined.ShouldBe([initial]);
-        validatable.Calls.ShouldBe(0);
+        _ = await Assert.That(combined).IsEquivalentTo([initial]);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenPredicateAndTrueConditionThenPredicateOutcomeAffectsResults()
+    public async Task GivenPredicateAndTrueConditionThenPredicateOutcomeAffectsResults()
     {
         // Arrange
         const string memberName = "member";
@@ -200,16 +200,16 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(memberName);
-        validatable.Calls.ShouldBe(1);
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(memberName);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenPredicateAndFalseConditionThenValidationIsSkipped()
+    public async Task GivenPredicateAndFalseConditionThenValidationIsSkipped()
     {
         // Arrange
         const string memberName = "member";
@@ -228,14 +228,14 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        predicateInvoked.ShouldBeFalse();
-        validatable.Calls.ShouldBe(0);
-        actual.ValidationContext.ShouldBeSameAs(context);
-        actual.Results.ShouldBe(results);
+        _ = await Assert.That(predicateInvoked).IsFalse();
+        _ = await Assert.That(validatable.Calls).IsEqualTo(0);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+        _ = await Assert.That(actual.Results).IsEqualTo(results);
     }
 
     [Test]
-    public void GivenPredicateAndMultipleValidatablesWhenConditionTrueThenPredicateResultsAreIncluded()
+    public async Task GivenPredicateAndMultipleValidatablesWhenConditionTrueThenPredicateResultsAreIncluded()
     {
         // Arrange
         const string memberName = "member";
@@ -254,18 +254,18 @@ public sealed class WhenIncludeIfIsCalled
             [first, second]);
 
         // Assert
-        actual.ValidationContext.ShouldBeSameAs(context);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        combined.Length.ShouldBe(2);
-        combined.ShouldContain(initial);
-        combined.ShouldContain(result => result.MemberNames.Contains(memberName));
-        first.Calls.ShouldBe(1);
-        second.Calls.ShouldBe(1);
+        _ = await Assert.That(combined.Length).IsEqualTo(2);
+        _ = await Assert.That(combined).Contains(initial);
+        _ = await Assert.That(combined).Contains(result => result.MemberNames.Contains(memberName));
+        _ = await Assert.That(first.Calls).IsEqualTo(1);
+        _ = await Assert.That(second.Calls).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenFunctionConditionWithPredicateWhenFalseThenValidationIsSkipped()
+    public async Task GivenFunctionConditionWithPredicateWhenFalseThenValidationIsSkipped()
     {
         // Arrange
         const string memberName = "member";
@@ -289,11 +289,11 @@ public sealed class WhenIncludeIfIsCalled
             validatable);
 
         // Assert
-        conditionInvoked.ShouldBeTrue();
-        predicateInvoked.ShouldBeFalse();
-        validatable.Calls.ShouldBe(0);
-        actual.ValidationContext.ShouldBeSameAs(context);
-        actual.Results.ShouldBe(results);
+        _ = await Assert.That(conditionInvoked).IsTrue();
+        _ = await Assert.That(predicateInvoked).IsFalse();
+        _ = await Assert.That(validatable.Calls).IsEqualTo(0);
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+        _ = await Assert.That(actual.Results).IsEqualTo(results);
     }
 
     private sealed class TrackingValidatable : IValidatableObject

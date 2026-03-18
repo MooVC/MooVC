@@ -1,24 +1,24 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenInstanceIsDefault()
+    public async Task GivenDefaultsThenInstanceIsDefault()
     {
         // Act
         var subject = new Event.Methods();
 
         // Assert
-        subject.Add.ShouldBe(Snippet.Empty);
-        subject.Remove.ShouldBe(Snippet.Empty);
-        subject.IsDefault.ShouldBeTrue();
-        subject.ShouldBe(Event.Methods.Default);
+        _ = await Assert.That(subject.Add).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Remove).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsDefault).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(Event.Methods.Default);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var add = Snippet.From("value");
@@ -32,8 +32,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Add.ShouldBe(add);
-        subject.Remove.ShouldBe(remove);
-        subject.IsDefault.ShouldBeFalse();
+        _ = await Assert.That(subject.Add).IsEqualTo(add);
+        _ = await Assert.That(subject.Remove).IsEqualTo(remove);
+        _ = await Assert.That(subject.IsDefault).IsFalse();
     }
 }

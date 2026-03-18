@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public void GivenMethodThenSnippetIsReturned()
+    public async Task GivenMethodThenSnippetIsReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet snippet = subject;
 
         // Assert
-        snippet.ShouldBe(Snippet.From(subject.ToString()));
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

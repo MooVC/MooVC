@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Property? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Property left = PropertyTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Property left = PropertyTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -53,7 +53,7 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Test]
-    public void GivenAStoppedHostStartAsyncIsNotCalled()
+    public async Task GivenAStoppedHostStartAsyncIsNotCalled()
     {
         // Assert
         _ = _service.DidNotReceive().StartAsync(Arg.Any<CancellationToken>());
@@ -66,10 +66,13 @@ public sealed class WhenStartAsyncIsCalled
         var expected = new InvalidOperationException("Service failed to start.");
         _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
 
-        // Act & Assert
-        AggregateException actual = await Should.ThrowAsync<AggregateException>(() => _host.StartAsync(CancellationToken.None));
+        // Act
+        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
 
-        actual.InnerException.ShouldBe(expected);
+        // Assert
+        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
+
+        _ = await Assert.That(actual.InnerException).IsEqualTo(expected);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
@@ -83,11 +86,14 @@ public sealed class WhenStartAsyncIsCalled
         _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw start);
         _service.When(services => _service.StopAsync(Arg.Any<CancellationToken>())).Do(_ => throw stop);
 
-        // Act & Assert
-        AggregateException actual = await Should.ThrowAsync<AggregateException>(() => _host.StartAsync(CancellationToken.None));
+        // Act
+        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
 
-        actual.InnerException.ShouldBe(start);
-        actual.InnerExceptions.ShouldNotContain(stop);
+        // Assert
+        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
+
+        _ = await Assert.That(actual.InnerException).IsEqualTo(start);
+        _ = await Assert.That(actual.InnerExceptions).DoesNotContain(stop);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }

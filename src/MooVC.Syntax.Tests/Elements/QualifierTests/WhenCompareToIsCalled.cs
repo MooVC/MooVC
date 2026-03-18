@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 public sealed class WhenCompareToIsCalled
 {
     [Test]
-    public void GivenUnqualifiedAndQualifiedThenUnqualifiedIsLess()
+    public async Task GivenUnqualifiedAndQualifiedThenUnqualifiedIsLess()
     {
         // Arrange
         Qualifier left = Qualifier.Unqualified;
@@ -13,11 +13,11 @@ public sealed class WhenCompareToIsCalled
         int result = left.CompareTo(right);
 
         // Assert
-        result.ShouldBeLessThan(0);
+        _ = await Assert.That(result).IsLessThan(0);
     }
 
     [Test]
-    public void GivenSystemQualifierThenSystemComesFirst()
+    public async Task GivenSystemQualifierThenSystemComesFirst()
     {
         // Arrange
         var left = new Qualifier(["System", "Text"]);
@@ -27,6 +27,6 @@ public sealed class WhenCompareToIsCalled
         bool result = left < right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

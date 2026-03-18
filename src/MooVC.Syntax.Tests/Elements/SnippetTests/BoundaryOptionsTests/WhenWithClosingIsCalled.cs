@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BoundaryOptionsTests;
 
 public sealed class WhenWithClosingIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Snippet.BoundaryOptions();
@@ -13,8 +13,8 @@ public sealed class WhenWithClosingIsCalled
         Snippet.BoundaryOptions result = options.WithClosing(value);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Closing.ShouldBe(value);
-        options.Closing.ShouldNotBe(value);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
+        _ = await Assert.That(result.Closing).IsEqualTo(value);
+        _ = await Assert.That(options.Closing).IsNotEqualTo(value);
     }
 }

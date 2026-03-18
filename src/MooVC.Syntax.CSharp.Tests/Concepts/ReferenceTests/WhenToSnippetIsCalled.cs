@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ReferenceTests;
 
 using MooVC.Syntax.CSharp.Generics.Constraints;
 using MooVC.Syntax.CSharp.Members;
@@ -14,7 +14,7 @@ public sealed class WhenToSnippetIsCalled
     private const string TypeName = "Widget";
 
     [Test]
-    public void GivenParametersAndConstraintsThenReturnsSignatureWithClauses()
+    public async Task GivenParametersAndConstraintsThenReturnsSignatureWithClauses()
     {
         // Arrange
         var constraint = new Constraint
@@ -55,9 +55,9 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldContain(TypeName);
-        result.ShouldContain(ParameterName);
-        result.ShouldContain("where");
-        result.ShouldContain("widget");
+        _ = await Assert.That(result).Contains(TypeName);
+        _ = await Assert.That(result).Contains(ParameterName);
+        _ = await Assert.That(result).Contains("where");
+        _ = await Assert.That(result).Contains("widget");
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests.TypeTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenATypeThenTheUnderlyingValueIsReturned()
+    public async Task GivenATypeThenTheUnderlyingValueIsReturned()
     {
         // Arrange
         Binary.Type type = Binary.Type.Add;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string value = type.ToString();
 
         // Assert
-        value.ShouldBe("+");
+        _ = await Assert.That(value).IsEqualTo("+");
     }
 }

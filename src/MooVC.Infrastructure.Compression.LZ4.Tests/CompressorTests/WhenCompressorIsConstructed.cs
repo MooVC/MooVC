@@ -6,7 +6,7 @@ using K4os.Compression.LZ4.Streams;
 public sealed class WhenCompressorIsConstructed
 {
     [Test]
-    public void GivenNoSettingsThenTheDefaultSettingsAreUsed()
+    public async Task GivenNoSettingsThenTheDefaultSettingsAreUsed()
     {
         // Arrange
         var decoder = new LZ4DecoderSettings();
@@ -16,12 +16,12 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor();
 
         // Assert
-        compressor.Decoder.ShouldBeEquivalentTo(decoder);
-        compressor.Encoder.ShouldBeEquivalentTo(encoder);
+        _ = await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
+        _ = await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
     }
 
     [Test]
-    public void GivenSettingsThenTheSettingsAreApplied()
+    public async Task GivenSettingsThenTheSettingsAreApplied()
     {
         // Arrange
         var decoder = new LZ4DecoderSettings
@@ -42,7 +42,7 @@ public sealed class WhenCompressorIsConstructed
         var compressor = new Compressor(decoder: decoder, encoder: encoder);
 
         // Assert
-        compressor.Decoder.ShouldBeEquivalentTo(decoder);
-        compressor.Encoder.ShouldBeEquivalentTo(encoder);
+        _ = await Assert.That(compressor.Decoder).IsEquivalentTo(decoder);
+        _ = await Assert.That(compressor.Encoder).IsEquivalentTo(encoder);
     }
 }

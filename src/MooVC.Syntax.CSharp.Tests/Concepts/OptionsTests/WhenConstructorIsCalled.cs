@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.CSharp.Elements.Chaining;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenValuesAreInitialized()
+    public async Task GivenDefaultsThenValuesAreInitialized()
     {
         // Arrange
         var subject = new Options();
@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
         Snippet.Options snippets = subject.Snippets;
 
         // Assert
-        @namespace.ShouldBe(Qualifier.Options.File);
-        snippets.ShouldBe(expected);
+        _ = await Assert.That(@namespace).IsEqualTo(Qualifier.Options.File);
+        _ = await Assert.That(snippets).IsEqualTo(expected);
     }
 }

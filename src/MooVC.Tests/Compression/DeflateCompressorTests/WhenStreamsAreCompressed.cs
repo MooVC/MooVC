@@ -23,7 +23,7 @@ public sealed class WhenStreamsAreCompressed
 
         // Assert
         IEnumerable<byte> compressedBytes = compressed.GetBytes();
-        compressedBytes.ShouldNotBe(expected);
+        _ = await Assert.That(compressedBytes).IsNotEquivalentTo(expected);
 
         // Act
         compressed.Position = 0;
@@ -31,7 +31,7 @@ public sealed class WhenStreamsAreCompressed
 
         // Assert
         IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
-        decompressedBytes.ShouldBe(expected);
+        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -52,6 +52,6 @@ public sealed class WhenStreamsAreCompressed
 
         // Assert
         IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
-        decompressedBytes.ShouldBe(expected);
+        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Formatting.StringExtensionsTests;
+﻿namespace MooVC.Syntax.Formatting.StringExtensionsTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -6,109 +6,109 @@ using System.Linq;
 public sealed class WhenCombineIsCalled
 {
     private const string Separator = ",";
-    private static readonly string[] samples = ["first", "second", "third"];
+    private static readonly string[] _samples = ["first", "second", "third"];
 
     [Test]
-    public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string? separator = default;
 
         // Act
-        Action action = () => separator!.Combine(samples);
+        Action act = () => separator!.Combine(_samples);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrown()
+    public async Task GivenSeparatorIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
         string separator = string.Empty;
 
         // Act
-        Action action = () => separator.Combine(samples);
+        Action act = () => separator.Combine(_samples);
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValuesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string separator = Separator;
         string[]? values = default;
 
         // Act
-        Action action = () => separator.Combine(values!);
+        Action act = () => separator.Combine(values!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(values));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
     [Test]
-    public void GivenNoValuesThenAnEmptyStringIsReturned()
+    public async Task GivenNoValuesThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
 
         // Act
-        string result = separator.Combine(Array.Empty<string>());
+        string result = separator.Combine();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSingleValueThenTheValueIsReturned()
+    public async Task GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
         string separator = Separator;
-        string value = samples[0];
+        string value = _samples[0];
 
         // Act
         string result = separator.Combine(value);
 
         // Assert
-        result.ShouldBe(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
+    public async Task GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
         string separator = Separator;
 
         // Act
-        string result = separator.Combine(samples);
+        string result = separator.Combine(_samples);
 
         // Assert
-        result.ShouldBe(string.Join(separator, samples));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, _samples));
     }
 
     [Test]
-    public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string separator = Separator;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
         Func<string, string>? formatter = default;
 
         // Act
-        Action action = () => separator.Combine(elements, formatter!);
+        Action act = () => separator.Combine(elements, formatter!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(formatter));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(formatter));
     }
 
     [Test]
-    public void GivenElementsAreDefaultThenAnEmptyStringIsReturned()
+    public async Task GivenElementsAreDefaultThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -118,11 +118,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenElementsAreEmptyThenAnEmptyStringIsReturned()
+    public async Task GivenElementsAreEmptyThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -132,50 +132,50 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrownWhenElementsAreProvided()
+    public async Task GivenSeparatorIsNullThenArgumentNullExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
         string? separator = default;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
-        Action action = () => separator!.Combine(elements, value => value);
+        Action act = () => separator!.Combine(elements, value => value);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrownWhenElementsAreProvided()
+    public async Task GivenSeparatorIsEmptyThenArgumentExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
         string separator = string.Empty;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
-        Action action = () => separator.Combine(elements, value => value);
+        Action act = () => separator.Combine(elements, value => value);
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenMultipleElementsThenTheyAreFormattedAndCombinedWithTheSeparator()
+    public async Task GivenMultipleElementsThenTheyAreFormattedAndCombinedWithTheSeparator()
     {
         // Arrange
         string separator = Separator;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
         string result = separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        result.ShouldBe(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, _samples.Select(value => value.ToUpperInvariant())));
     }
 }

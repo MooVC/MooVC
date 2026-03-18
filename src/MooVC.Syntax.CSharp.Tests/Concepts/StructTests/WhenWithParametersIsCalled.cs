@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsUpdatedInstance()
+    public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
         var parameter = new Parameter { Name = new Variable("input"), Type = typeof(int) };
@@ -16,8 +16,8 @@ public sealed class WhenWithParametersIsCalled
         Struct result = original.WithParameters(parameter);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Parameters.ShouldContain(parameter);
-        original.Parameters.ShouldBeEmpty();
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Parameters).Contains(parameter);
+        _ = await Assert.That(original.Parameters).IsEmpty();
     }
 }

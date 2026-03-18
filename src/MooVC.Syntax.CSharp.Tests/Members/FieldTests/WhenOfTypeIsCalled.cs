@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Elements.SymbolTests;
 public sealed class WhenOfTypeIsCalled
 {
     [Test]
-    public void GivenTypeThenReturnsNewInstanceWithUpdatedType()
+    public async Task GivenTypeThenReturnsNewInstanceWithUpdatedType()
     {
         // Arrange
         Field original = FieldTestsData.Create();
@@ -16,14 +16,14 @@ public sealed class WhenOfTypeIsCalled
         Field result = original.OfType(type);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(original.Default);
-        result.IsReadOnly.ShouldBe(original.IsReadOnly);
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
+        _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(type);
 
-        original.Type.ShouldBe(FieldTestsData.DefaultType);
+        _ = await Assert.That(original.Type).IsEqualTo(FieldTestsData.DefaultType);
     }
 }

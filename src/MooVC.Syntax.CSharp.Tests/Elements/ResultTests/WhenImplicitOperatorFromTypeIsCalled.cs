@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
     [Test]
-    public void GivenNullThenThrows()
+    public async Task GivenNullThenThrows()
     {
         // Arrange
         Type? value = default;
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Func<Result> result = () => value!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenTypeThenResultUsesSymbolType()
+    public async Task GivenTypeThenResultUsesSymbolType()
     {
         // Arrange
         Type value = typeof(Guid);
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Result result = value;
 
         // Assert
-        result.Type.Name.ShouldBe(new Symbol.Moniker(nameof(Guid)));
+        _ = await Assert.That(result.Type.Name).IsEqualTo(new Symbol.Moniker(nameof(Guid)));
     }
 }

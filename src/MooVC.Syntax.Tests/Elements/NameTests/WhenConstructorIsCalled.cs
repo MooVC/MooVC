@@ -1,56 +1,56 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange & Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(default));
+        _ = await Assert.That(() => _ = new Name(default)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenEmptyThenInstanceIsCreated()
+    public async Task GivenEmptyThenInstanceIsCreated()
     {
         // Arrange
         string value = string.Empty;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = await Assert.That(() => _ = new Name(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenWhitespaceThenInstanceIsCreated()
+    public async Task GivenWhitespaceThenInstanceIsCreated()
     {
         // Arrange
         string value = "   ";
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = await Assert.That(() => _ = new Name(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenAlphaNumericThenInstanceIsCreated()
+    public async Task GivenAlphaNumericThenInstanceIsCreated()
     {
         // Arrange
         string value = new Faker().Random.AlphaNumeric(32);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = await Assert.That(() => _ = new Name(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenVeryLongThenInstanceIsCreated()
+    public async Task GivenVeryLongThenInstanceIsCreated()
     {
         // Arrange
         string value = new('x', 64_000);
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = new Name(value));
+        _ = await Assert.That(() => _ = new Name(value)).ThrowsNothing();
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqual()
+    public async Task GivenSameValueTwiceThenInstancesAreEqual()
     {
         // Arrange
         const string value = "Value";
@@ -60,13 +60,13 @@ public sealed class WhenConstructorIsCalled
         var second = new Name(value);
 
         // Assert
-        first.Equals(second).ShouldBeTrue();
-        (first == second).ShouldBeTrue();
-        first.GetHashCode().ShouldBe(second.GetHashCode());
+        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first.GetHashCode()).IsEqualTo(second.GetHashCode());
     }
 
     [Test]
-    public void GivenDifferentValuesTwiceThenInstancesAreNotEqual()
+    public async Task GivenDifferentValuesTwiceThenInstancesAreNotEqual()
     {
         // Arrange
         const string left = "First";
@@ -77,7 +77,7 @@ public sealed class WhenConstructorIsCalled
         var second = new Name(right);
 
         // Assert
-        first.Equals(second).ShouldBeFalse();
-        (first != second).ShouldBeTrue();
+        _ = await Assert.That(first.Equals(second)).IsFalse();
+        _ = await Assert.That(first != second).IsTrue();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenBothSidesAreNullThenReturnsTrue()
+    public async Task GivenBothSidesAreNullThenReturnsTrue()
     {
         // Arrange
         Base? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideIsNullThenReturnsFalse()
+    public async Task GivenEitherSideIsNullThenReturnsFalse()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -32,11 +32,11 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -46,11 +46,11 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -60,6 +60,6 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }
