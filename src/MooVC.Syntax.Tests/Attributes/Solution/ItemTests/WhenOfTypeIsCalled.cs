@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenOfTypeIsCalled
 {
     [Test]
-    public void GivenTypeThenReturnsUpdatedInstance()
+    public async Task GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange
         Item original = ItemTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenOfTypeIsCalled
         Item result = original.OfType(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Type.ShouldBe(updated);
-        result.Id.ShouldBe(original.Id);
-        result.Name.ShouldBe(original.Name);
-        result.Path.ShouldBe(original.Path);
-        result.Items.ShouldBe(original.Items);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Type).IsEqualTo(updated);
+        _ = await Assert.That(result.Id).IsEqualTo(original.Id);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Path).IsEqualTo(original.Path);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
     }
 }

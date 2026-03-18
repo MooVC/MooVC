@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithSnippetsIsCalled
 {
     [Test]
-    public void GivenSnippetsThenReturnsUpdatedInstance()
+    public async Task GivenSnippetsThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Options();
@@ -15,9 +15,9 @@ public sealed class WhenWithSnippetsIsCalled
         Options result = original.WithSnippets(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Snippets.ShouldBe(replacement);
-        result.Namespace.ShouldBe(original.Namespace);
-        result.IsDefault.ShouldBeFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Snippets).IsEqualTo(replacement);
+        _ = await Assert.That(result.Namespace).IsEqualTo(original.Namespace);
+        _ = await Assert.That(result.IsDefault).IsFalse();
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentValuesThenHashesMatch()
+    public async Task GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
         var first = new Indexer.Methods
@@ -23,11 +23,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Indexer.Methods
@@ -45,11 +45,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentGetValuesThenHashesDiffer()
+    public async Task GivenDifferentGetValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Indexer.Methods
@@ -67,11 +67,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentSetValuesThenHashesDiffer()
+    public async Task GivenDifferentSetValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Indexer.Methods
@@ -89,6 +89,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

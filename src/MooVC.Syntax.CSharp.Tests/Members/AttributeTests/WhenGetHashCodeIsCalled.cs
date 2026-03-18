@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashesMatch()
+    public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Return);
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(arguments: new Argument { Value = Snippet.From("left") });
@@ -32,6 +32,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        _ = await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

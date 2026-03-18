@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Operators;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators;
 public sealed class WhenWithOperatorsIsCalled
 {
     [Test]
-    public void GivenOperatorsThenReturnsUpdatedInstance()
+    public async Task GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Operators { Binaries = [new Binary { Scope = Scope.Public }] };
@@ -17,8 +17,8 @@ public sealed class WhenWithOperatorsIsCalled
         Record result = record.WithOperators(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(record);
-        result.Operators.ShouldBe(updated);
-        record.Operators.ShouldBe(original);
+        _ = await Assert.That(result).IsNotSameReferenceAs(record);
+        _ = await Assert.That(result.Operators).IsEqualTo(updated);
+        _ = await Assert.That(record.Operators).IsEqualTo(original);
     }
 }

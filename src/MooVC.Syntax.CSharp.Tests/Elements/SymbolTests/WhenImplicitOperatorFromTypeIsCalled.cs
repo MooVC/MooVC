@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 using System.Text;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenImplicitOperatorFromTypeIsCalled
 {
     [Test]
-    public void GivenNullThenThrows()
+    public async Task GivenNullThenThrows()
     {
         // Arrange
         Type? value = default;
@@ -15,11 +15,11 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Func<Symbol> result = () => value!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenTypeThenSymbolUsesNameAndQualifier()
+    public async Task GivenTypeThenSymbolUsesNameAndQualifier()
     {
         // Arrange
         Type value = typeof(StringBuilder);
@@ -28,7 +28,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Symbol subject = value;
 
         // Assert
-        subject.Name.ShouldBe(new Symbol.Moniker(nameof(StringBuilder)));
-        subject.Qualifier.ShouldBe(new Qualifier(["System", "Text"]));
+        _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(nameof(StringBuilder)));
+        _ = await Assert.That(subject.Qualifier).IsEqualTo(new Qualifier(["System", "Text"]));
     }
 }

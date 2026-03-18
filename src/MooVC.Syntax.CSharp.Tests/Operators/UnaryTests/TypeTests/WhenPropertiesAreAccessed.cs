@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
@@ -20,7 +20,7 @@ public sealed class WhenPropertiesAreAccessed
 
     [Test]
     [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
-    public void GivenTypeThenFlagsReflectValue(UnaryTypeExpectation expectation)
+    public async Task GivenTypeThenFlagsReflectValue(UnaryTypeExpectation expectation)
     {
         // Arrange
         Unary.Type subject = expectation.OperatorType;
@@ -38,16 +38,16 @@ public sealed class WhenPropertiesAreAccessed
         string representation = subject.ToString();
 
         // Assert
-        isComplement.ShouldBe(expectation.IsComplement);
-        isDecrement.ShouldBe(expectation.IsDecrement);
-        isFalse.ShouldBe(expectation.IsFalse);
-        isIncrement.ShouldBe(expectation.IsIncrement);
-        isMinus.ShouldBe(expectation.IsMinus);
-        isNot.ShouldBe(expectation.IsNot);
-        isPlus.ShouldBe(expectation.IsPlus);
-        isTrue.ShouldBe(expectation.IsTrue);
-        isUnspecified.ShouldBe(expectation.IsUnspecified);
-        representation.ShouldBe(expectation.ExpectedString);
+        _ = await Assert.That(isComplement).IsEqualTo(expectation.IsComplement);
+        _ = await Assert.That(isDecrement).IsEqualTo(expectation.IsDecrement);
+        _ = await Assert.That(isFalse).IsEqualTo(expectation.IsFalse);
+        _ = await Assert.That(isIncrement).IsEqualTo(expectation.IsIncrement);
+        _ = await Assert.That(isMinus).IsEqualTo(expectation.IsMinus);
+        _ = await Assert.That(isNot).IsEqualTo(expectation.IsNot);
+        _ = await Assert.That(isPlus).IsEqualTo(expectation.IsPlus);
+        _ = await Assert.That(isTrue).IsEqualTo(expectation.IsTrue);
+        _ = await Assert.That(isUnspecified).IsEqualTo(expectation.IsUnspecified);
+        _ = await Assert.That(representation).IsEqualTo(expectation.ExpectedString);
     }
 
     public sealed record UnaryTypeExpectation(

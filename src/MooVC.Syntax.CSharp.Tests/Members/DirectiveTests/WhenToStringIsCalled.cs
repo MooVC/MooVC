@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenToStringIsCalled
     private const string Alias = "Alias";
 
     [Test]
-    public void GivenUndefinedDirectiveThenReturnsEmptyString()
+    public async Task GivenUndefinedDirectiveThenReturnsEmptyString()
     {
         // Arrange
         Directive subject = Directive.Undefined;
@@ -16,11 +16,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenStaticUsingThenReturnsStaticDirectiveRepresentation()
+    public async Task GivenStaticUsingThenReturnsStaticDirectiveRepresentation()
     {
         // Arrange
         var subject = new Directive
@@ -33,11 +33,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("using static System.Console;");
+        _ = await Assert.That(result).IsEqualTo("using static System.Console;");
     }
 
     [Test]
-    public void GivenAliasThenReturnsAliasDirectiveRepresentation()
+    public async Task GivenAliasThenReturnsAliasDirectiveRepresentation()
     {
         // Arrange
         var subject = new Directive
@@ -50,6 +50,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("using Alias = MooVC.Syntax;");
+        _ = await Assert.That(result).IsEqualTo("using Alias = MooVC.Syntax;");
     }
 }

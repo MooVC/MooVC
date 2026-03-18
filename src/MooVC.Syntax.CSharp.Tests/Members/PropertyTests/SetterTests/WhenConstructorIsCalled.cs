@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,20 +6,20 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenSetterIsDefault()
+    public async Task GivenDefaultsThenSetterIsDefault()
     {
         // Act
         var subject = new Property.Setter();
 
         // Assert
-        subject.Behaviour.ShouldBe(Snippet.Empty);
-        subject.IsDefault.ShouldBeTrue();
-        subject.Mode.ShouldBe(Property.Mode.Init);
-        subject.Scope.ShouldBe(Scope.Unspecified);
+        _ = await Assert.That(subject.Behaviour).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsDefault).IsTrue();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Unspecified);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var behaviour = Snippet.From("value = input");
@@ -33,9 +33,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Behaviour.ShouldBe(behaviour);
-        subject.IsDefault.ShouldBeFalse();
-        subject.Mode.ShouldBe(Property.Mode.Init);
-        subject.Scope.ShouldBe(Scope.Internal);
+        _ = await Assert.That(subject.Behaviour).IsEqualTo(behaviour);
+        _ = await Assert.That(subject.IsDefault).IsFalse();
+        _ = await Assert.That(subject.Mode).IsEqualTo(Property.Mode.Init);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
     }
 }

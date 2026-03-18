@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.ItemTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorItemItemIsCalled
 {
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Item left = ItemTestsData.Create();
@@ -15,6 +15,6 @@ public sealed class WhenInequalityOperatorItemItemIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenPlusOperatorIsCalled
 {
     [Test]
-    public void GivenPrivateProtectedThenCombinedScopeReturned()
+    public async Task GivenPrivateProtectedThenCombinedScopeReturned()
     {
         // Arrange
         Scope left = Scope.Private;
@@ -13,11 +13,11 @@ public sealed class WhenPlusOperatorIsCalled
         Scope result = left + right;
 
         // Assert
-        result.ToString().ShouldBe("private protected");
+        _ = await Assert.That(result.ToString()).IsEqualTo("private protected");
     }
 
     [Test]
-    public void GivenProtectedInternalThenCombinedScopeReturned()
+    public async Task GivenProtectedInternalThenCombinedScopeReturned()
     {
         // Arrange
         Scope left = Scope.Protected;
@@ -27,11 +27,11 @@ public sealed class WhenPlusOperatorIsCalled
         Scope result = left + right;
 
         // Assert
-        result.ToString().ShouldBe("protected internal");
+        _ = await Assert.That(result.ToString()).IsEqualTo("protected internal");
     }
 
     [Test]
-    public void GivenInvalidCombinationThenThrows()
+    public async Task GivenInvalidCombinationThenThrows()
     {
         // Arrange
         Scope left = Scope.Private;
@@ -41,11 +41,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left + right;
 
         // Assert
-        _ = result.ShouldThrow<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
-    public void GivenNullLeftThenThrows()
+    public async Task GivenNullLeftThenThrows()
     {
         // Arrange
         Scope? left = default;
@@ -55,11 +55,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left! + right;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenNullRightThenThrows()
+    public async Task GivenNullRightThenThrows()
     {
         // Arrange
         Scope left = Scope.Public;
@@ -69,6 +69,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Scope> result = () => left + right!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

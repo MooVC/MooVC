@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
     private static readonly string[] parameterNames = ["TFirst", "TSecond"];
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Declaration? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Declaration? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Declaration first = DeclarationTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create(parameterNames: parameterNames);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentParametersThenReturnsFalse()
+    public async Task GivenDifferentParametersThenReturnsFalse()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create(parameterNames: parameterNames);
@@ -103,7 +103,7 @@ public sealed class WhenEqualityOperatorDeclarationDeclarationIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

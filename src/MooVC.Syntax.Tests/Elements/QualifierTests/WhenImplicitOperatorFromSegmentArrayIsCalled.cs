@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     private static readonly Name beta = new("Beta");
 
     [Test]
-    public void GivenNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Name[]? values = default;
@@ -15,11 +15,11 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Func<Qualifier> result = () => values;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenEmptyArrayThenInstanceIsCreated()
+    public async Task GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
         Name[] values = [];
@@ -28,13 +28,13 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Qualifier subject = values;
 
         // Assert
-        _ = subject.ShouldNotBeNull();
+        _ = await Assert.That(subject).IsNotNull();
         Name[] result = subject;
-        result.ShouldBe(values);
+        _ = await Assert.That(result).IsEqualTo(values);
     }
 
     [Test]
-    public void GivenSegmentsThenRoundTripsSuccessfully()
+    public async Task GivenSegmentsThenRoundTripsSuccessfully()
     {
         // Arrange
         Name[] values = [alpha, beta];
@@ -44,11 +44,11 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Name[] result = subject;
 
         // Assert
-        result.ShouldBe(values);
+        _ = await Assert.That(result).IsEqualTo(values);
     }
 
     [Test]
-    public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         Name[] values = [alpha, beta];
@@ -58,8 +58,8 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         Qualifier second = values;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first.Equals(second)).IsTrue();
     }
 }

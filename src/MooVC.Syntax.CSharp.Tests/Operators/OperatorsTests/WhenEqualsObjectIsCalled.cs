@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         object? subject = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenWrongTypeThenReturnsFalse()
+    public async Task GivenWrongTypeThenReturnsFalse()
     {
         // Arrange
         object subject = new();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenOperatorsThenReturnsTrue()
+    public async Task GivenOperatorsThenReturnsTrue()
     {
         // Arrange
         Operators subject = OperatorsSubjectData.Create();
@@ -41,6 +41,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

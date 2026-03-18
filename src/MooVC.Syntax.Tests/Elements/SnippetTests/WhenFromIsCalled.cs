@@ -1,49 +1,49 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
 public sealed class WhenFromIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         string value = "alpha";
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(options!, value));
+        ArgumentNullException exception = await Assert.That(() => _ = Snippet.From(options!, value)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenNullValueThenThrows()
+    public async Task GivenNullValueThenThrows()
     {
         // Arrange
         string[]? values = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = Snippet.From(values!));
+        ArgumentNullException exception = await Assert.That(() => _ = Snippet.From(values!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(values));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
     [Test]
-    public void GivenEmptyThenReturnsEmpty()
+    public async Task GivenEmptyThenReturnsEmpty()
     {
         // Arrange & Act
         var result = Snippet.From(string.Empty);
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
-        result.IsEmpty.ShouldBeTrue();
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result.IsEmpty).IsTrue();
     }
 
     [Test]
-    public void GivenTextThenCreatesSnippetFromLines()
+    public async Task GivenTextThenCreatesSnippetFromLines()
     {
         // Arrange
         const string first = "alpha";
@@ -55,6 +55,6 @@ public sealed class WhenFromIsCalled
         ImmutableArray<string> converted = result;
 
         // Assert
-        converted.ShouldBe([first, second]);
+        _ = await Assert.That(converted).IsEqualTo([first, second]);
     }
 }

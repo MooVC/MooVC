@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Method = "method";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Attribute.Specifier? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenValueThenReturnsMatchingString()
+    public async Task GivenValueThenReturnsMatchingString()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Method;
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(Method);
+        _ = await Assert.That(result).IsEqualTo(Method);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.OptionsTests;
 
 public sealed class WhenEqualsOptionsIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Argument.Options();
@@ -14,12 +14,12 @@ public sealed class WhenEqualsOptionsIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Argument.Options();
@@ -32,7 +32,7 @@ public sealed class WhenEqualsOptionsIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

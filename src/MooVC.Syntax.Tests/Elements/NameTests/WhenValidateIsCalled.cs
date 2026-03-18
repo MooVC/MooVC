@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.NameTests;
+﻿namespace MooVC.Syntax.Elements.NameTests;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -15,7 +15,7 @@ public sealed class WhenValidateIsCalled
     private const string WithHyphen = "My-Segment";
 
     [Test]
-    public void GivenNullValueThenValidationErrorReturned()
+    public async Task GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(default);
@@ -26,14 +26,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenEmptyThenNoValidationErrorReturned()
+    public async Task GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(Empty);
@@ -44,12 +44,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenPascalCaseThenNoValidationErrorReturned()
+    public async Task GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(Pascal);
@@ -60,12 +60,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.Count.ShouldBe(0);
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenPascalCaseWithPrefixThenNoValidationErrorReturned()
+    public async Task GivenPascalCaseWithPrefixThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(WithPrefix);
@@ -76,12 +76,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.Count.ShouldBe(0);
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenPascalCaseWithUnderscoreThenNoValidationErrorReturned()
+    public async Task GivenPascalCaseWithUnderscoreThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(UpperWithUnderscore);
@@ -92,12 +92,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.Count.ShouldBe(0);
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
+    public async Task GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(UpperWithDigits);
@@ -108,12 +108,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.Count.ShouldBe(0);
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenUnicodeTitleCaseThenValidationErrorReturned()
+    public async Task GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(UnicodePascal);
@@ -124,14 +124,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenLowercaseThenValidationErrorsReturned()
+    public async Task GivenLowercaseThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Name(Lowercase);
@@ -142,14 +142,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenPascalCaseWithHyphenThenValidationErrorsReturned()
+    public async Task GivenPascalCaseWithHyphenThenValidationErrorsReturned()
     {
         // Arrange
         var subject = new Name(WithHyphen);
@@ -160,14 +160,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenNumericOnlyThenValidationErrorReturned()
+    public async Task GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(Numeric);
@@ -178,10 +178,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -190,7 +190,7 @@ public sealed class WhenValidateIsCalled
     [Arguments("My Segment")]
     [Arguments("My\tSegment")]
     [Arguments("My\nSegment")]
-    public void GivenWhitespacePresentThenValidationErrorReturned(string value)
+    public async Task GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange
         var subject = new Name(value);
@@ -201,9 +201,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string Different = "TBravo";
 
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Identifier(Same);
@@ -16,11 +16,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var subject = new Identifier(Same);
@@ -30,11 +30,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Identifier(Same);
@@ -44,11 +44,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Identifier(Same);
@@ -58,11 +58,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonIdentifierThenReturnsFalse()
+    public async Task GivenNonIdentifierThenReturnsFalse()
     {
         // Arrange
         var subject = new Identifier(Same);
@@ -72,6 +72,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

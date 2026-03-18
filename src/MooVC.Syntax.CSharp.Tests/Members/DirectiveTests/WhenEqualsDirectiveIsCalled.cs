@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DirectiveTests;
 
 using MooVC.Syntax.Elements;
 using Identifier = MooVC.Syntax.Elements.Identifier;
@@ -9,7 +9,7 @@ public sealed class WhenEqualsDirectiveIsCalled
     private const string Alias = "Alias";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Directive? left = default;
@@ -19,11 +19,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Directive? left = default;
@@ -33,11 +33,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left?.Equals(right) ?? false;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
@@ -47,11 +47,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Directive first = Create();
@@ -61,11 +61,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Directive left = Create();
@@ -75,11 +75,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentAliasesThenReturnsFalse()
+    public async Task GivenDifferentAliasesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
@@ -89,11 +89,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentQualifiersThenReturnsFalse()
+    public async Task GivenDifferentQualifiersThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
@@ -103,11 +103,11 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentStaticStatesThenReturnsFalse()
+    public async Task GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
         Directive left = Create();
@@ -117,7 +117,7 @@ public sealed class WhenEqualsDirectiveIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)

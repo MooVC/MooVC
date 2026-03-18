@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Metadata subject = Metadata.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineMimeTypeThenValidationErrorReturned()
+    public async Task GivenMultiLineMimeTypeThenValidationErrorReturned()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create(mimeType: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.MimeType));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Metadata.MimeType));
     }
 
     [Test]
-    public void GivenMultiLineNameThenValidationErrorReturned()
+    public async Task GivenMultiLineNameThenValidationErrorReturned()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -52,13 +52,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.Name));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Metadata.Name));
     }
 
     [Test]
-    public void GivenMultiLineTypeThenValidationErrorReturned()
+    public async Task GivenMultiLineTypeThenValidationErrorReturned()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create(type: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -69,8 +69,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Metadata.Type));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Metadata.Type));
     }
 }

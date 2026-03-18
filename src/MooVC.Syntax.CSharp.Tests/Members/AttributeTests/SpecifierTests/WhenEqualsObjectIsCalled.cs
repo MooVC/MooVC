@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         object? value = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenNonMatchingTypeThenReturnsFalse()
+    public async Task GivenNonMatchingTypeThenReturnsFalse()
     {
         // Arrange
         object value = new();
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Class;
@@ -41,11 +41,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Class;
@@ -55,6 +55,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(value);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

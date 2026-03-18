@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.MethodTests;
+﻿namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenMethodThenStringRepresentationIsReturned()
+    public async Task GivenMethodThenStringRepresentationIsReturned()
     {
         // Arrange
         Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
@@ -14,6 +14,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string representation = subject;
 
         // Assert
-        representation.ShouldBe(subject.ToString());
+        _ = await Assert.That(representation).IsEqualTo(subject.ToString());
     }
 }

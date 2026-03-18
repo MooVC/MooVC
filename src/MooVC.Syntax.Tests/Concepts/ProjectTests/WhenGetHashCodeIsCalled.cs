@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashCodesMatch()
+    public async Task GivenEqualValuesThenHashCodesMatch()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -17,11 +17,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashCodesDiffer()
+    public async Task GivenDifferentValuesThenHashCodesDiffer()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -32,6 +32,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        _ = await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

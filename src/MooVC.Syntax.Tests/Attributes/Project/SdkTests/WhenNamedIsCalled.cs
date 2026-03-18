@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Sdk original = SdkTestsData.Create();
@@ -15,9 +15,9 @@ public sealed class WhenNamedIsCalled
         Sdk result = original.Named(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(updated);
-        result.MinimumVersion.ShouldBe(original.MinimumVersion);
-        result.Version.ShouldBe(original.Version);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(updated);
+        _ = await Assert.That(result.MinimumVersion).IsEqualTo(original.MinimumVersion);
+        _ = await Assert.That(result.Version).IsEqualTo(original.Version);
     }
 }

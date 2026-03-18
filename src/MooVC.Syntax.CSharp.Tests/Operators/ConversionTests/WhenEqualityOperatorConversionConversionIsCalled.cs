@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenEqualityOperatorConversionConversionIsCalled
 {
     [Test]
-    public void GivenEquivalentConversionsThenReturnsTrue()
+    public async Task GivenEquivalentConversionsThenReturnsTrue()
     {
         // Arrange
         Conversion first = ConversionTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorConversionConversionIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentConversionsThenReturnsFalse()
+    public async Task GivenDifferentConversionsThenReturnsFalse()
     {
         // Arrange
         Conversion first = ConversionTestsData.Create();
@@ -29,6 +29,6 @@ public sealed class WhenEqualityOperatorConversionConversionIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

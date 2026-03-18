@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
     [Test]
-    public void GivenTaskResultThenFlagsReflectValue()
+    public async Task GivenTaskResultThenFlagsReflectValue()
     {
         // Arrange
         Result subject = Result.Task;
@@ -14,13 +14,13 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        isTask.ShouldBeTrue();
-        isUndefined.ShouldBeFalse();
-        isVoid.ShouldBeFalse();
+        _ = await Assert.That(isTask).IsTrue();
+        _ = await Assert.That(isUndefined).IsFalse();
+        _ = await Assert.That(isVoid).IsFalse();
     }
 
     [Test]
-    public void GivenUndefinedResultThenFlagsReflectValue()
+    public async Task GivenUndefinedResultThenFlagsReflectValue()
     {
         // Arrange
         Result subject = Result.Undefined;
@@ -31,13 +31,13 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        isTask.ShouldBeFalse();
-        isUndefined.ShouldBeTrue();
-        isVoid.ShouldBeFalse();
+        _ = await Assert.That(isTask).IsFalse();
+        _ = await Assert.That(isUndefined).IsTrue();
+        _ = await Assert.That(isVoid).IsFalse();
     }
 
     [Test]
-    public void GivenVoidResultThenFlagsReflectValue()
+    public async Task GivenVoidResultThenFlagsReflectValue()
     {
         // Arrange
         Result subject = Result.Void;
@@ -48,8 +48,8 @@ public sealed class WhenPropertiesAreAccessed
         bool isVoid = subject.IsVoid;
 
         // Assert
-        isTask.ShouldBeFalse();
-        isUndefined.ShouldBeFalse();
-        isVoid.ShouldBeTrue();
+        _ = await Assert.That(isTask).IsFalse();
+        _ = await Assert.That(isUndefined).IsFalse();
+        _ = await Assert.That(isVoid).IsTrue();
     }
 }

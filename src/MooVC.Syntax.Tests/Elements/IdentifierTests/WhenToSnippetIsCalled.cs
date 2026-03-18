@@ -8,7 +8,7 @@ public sealed class WhenToSnippetIsCalled
     private const string MultiWord = "MyValue";
 
     [Test]
-    public void GivenOptionsWithPascalCasingThenReturnsPascalCasedValue()
+    public async Task GivenOptionsWithPascalCasingThenReturnsPascalCasedValue()
     {
         // Arrange
         var subject = new Identifier(Mixed);
@@ -20,11 +20,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("MyValue");
+        _ = await Assert.That(result).IsEqualTo("MyValue");
     }
 
     [Test]
-    public void GivenOptionsWithCamelCasingThenReturnsCamelCasedValue()
+    public async Task GivenOptionsWithCamelCasingThenReturnsCamelCasedValue()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -36,11 +36,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("myValue");
+        _ = await Assert.That(result).IsEqualTo("myValue");
     }
 
     [Test]
-    public void GivenOptionsWithSnakeCasingThenReturnsSnakeCasedValue()
+    public async Task GivenOptionsWithSnakeCasingThenReturnsSnakeCasedValue()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -52,11 +52,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("my_value");
+        _ = await Assert.That(result).IsEqualTo("my_value");
     }
 
     [Test]
-    public void GivenOptionsWithKebabCasingThenReturnsKebabCasedValue()
+    public async Task GivenOptionsWithKebabCasingThenReturnsKebabCasedValue()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -68,11 +68,11 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(options);
 
         // Assert
-        result.ShouldBe("my-value");
+        _ = await Assert.That(result).IsEqualTo("my-value");
     }
 
     [Test]
-    public void GivenUnsupportedCasingThenThrows()
+    public async Task GivenUnsupportedCasingThenThrows()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -84,11 +84,11 @@ public sealed class WhenToSnippetIsCalled
         Func<string> act = () => subject.ToSnippet(options);
 
         // Assert
-        _ = Should.Throw<NotSupportedException>(act);
+        _ = await Assert.That(act).Throws<NotSupportedException>();
     }
 
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         var subject = new Identifier(MultiWord);
@@ -98,6 +98,6 @@ public sealed class WhenToSnippetIsCalled
         Func<string> act = () => subject.ToSnippet(options);
 
         // Assert
-        _ = Should.Throw<ArgumentNullException>(act);
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests.StyleTypeTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests.StyleTypeTests;
 
 public sealed class WhenIsAllmanIsCalled
 {
     [Test]
-    public void GivenAllmanThenReturnsTrue()
+    public async Task GivenAllmanThenReturnsTrue()
     {
         // Arrange
         Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.Allman;
@@ -12,11 +12,11 @@ public sealed class WhenIsAllmanIsCalled
         bool result = style.IsAllman;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenKAndRThenReturnsFalse()
+    public async Task GivenKAndRThenReturnsFalse()
     {
         // Arrange
         Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.KAndR;
@@ -25,6 +25,6 @@ public sealed class WhenIsAllmanIsCalled
         bool result = style.IsAllman;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

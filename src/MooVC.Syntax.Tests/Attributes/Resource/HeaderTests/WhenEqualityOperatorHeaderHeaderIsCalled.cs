@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Header? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Header? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Header left = HeaderTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Header left = HeaderTestsData.Create();
@@ -57,6 +57,6 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

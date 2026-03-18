@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenOnConditionIsCalled
     private const string UpdatedCondition = "UpdatedCondition";
 
     [Test]
-    public void GivenConditionThenReturnsUpdatedInstance()
+    public async Task GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange
         ItemGroup original = ItemGroupTestsData.Create(item: ItemGroupTestsData.CreateItem());
@@ -17,9 +17,9 @@ public sealed class WhenOnConditionIsCalled
         ItemGroup result = original.OnCondition(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Condition.ShouldBe(updated);
-        result.Items.ShouldBe(original.Items);
-        result.Label.ShouldBe(original.Label);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Items).IsEqualTo(original.Items);
+        _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

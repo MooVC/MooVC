@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenCompareToIsCalled
 {
     [Test]
-    public void GivenNullOtherThenReturnsPositiveOne()
+    public async Task GivenNullOtherThenReturnsPositiveOne()
     {
         // Arrange
         Unary.Type subject = Unary.Type.Plus;
@@ -13,11 +13,11 @@ public sealed class WhenCompareToIsCalled
         int result = subject.CompareTo(other);
 
         // Assert
-        result.ShouldBe(1);
+        _ = await Assert.That(result).IsEqualTo(1);
     }
 
     [Test]
-    public void GivenSameValueThenReturnsZero()
+    public async Task GivenSameValueThenReturnsZero()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Plus;
@@ -28,12 +28,12 @@ public sealed class WhenCompareToIsCalled
         int resultRightLeft = rightType.CompareTo(leftType);
 
         // Assert
-        resultLeftRight.ShouldBe(0);
-        resultRightLeft.ShouldBe(0);
+        _ = await Assert.That(resultLeftRight).IsEqualTo(0);
+        _ = await Assert.That(resultRightLeft).IsEqualTo(0);
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsExpectedOrder()
+    public async Task GivenDifferentValuesThenReturnsExpectedOrder()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Not;
@@ -44,7 +44,7 @@ public sealed class WhenCompareToIsCalled
         int resultRightLeft = rightType.CompareTo(leftType);
 
         // Assert
-        resultLeftRight.ShouldBeLessThan(0);
-        resultRightLeft.ShouldBeGreaterThan(0);
+        _ = await Assert.That(resultLeftRight).IsLessThan(0);
+        _ = await Assert.That(resultRightLeft).IsGreaterThan(0);
     }
 }

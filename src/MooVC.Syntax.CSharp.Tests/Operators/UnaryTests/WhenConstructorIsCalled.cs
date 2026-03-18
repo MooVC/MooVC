@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,20 +6,20 @@ using MooVC.Syntax.Elements;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenUnaryIsUndefined()
+    public async Task GivenDefaultsThenUnaryIsUndefined()
     {
         // Act
         var subject = new Unary();
 
         // Assert
-        subject.Body.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
-        subject.Operator.ShouldBe(Unary.Type.Unspecified);
-        subject.Scope.ShouldBe(Scope.Public);
+        _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
+        _ = await Assert.That(subject.Operator).IsEqualTo(Unary.Type.Unspecified);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var body = Snippet.From(UnaryTestsData.DefaultBody);
@@ -33,9 +33,9 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Body.ShouldBe(body);
-        subject.IsUndefined.ShouldBeFalse();
-        subject.Operator.ShouldBe(Unary.Type.Not);
-        subject.Scope.ShouldBe(Scope.Private);
+        _ = await Assert.That(subject.Body).IsEqualTo(body);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
+        _ = await Assert.That(subject.Operator).IsEqualTo(Unary.Type.Not);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
     }
 }

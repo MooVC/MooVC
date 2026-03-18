@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Symbol? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Symbol? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.Create();
@@ -41,11 +41,11 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Symbol left = SymbolTestsData.Create();
@@ -56,12 +56,12 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsTrue()
+    public async Task GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.Create();
@@ -71,6 +71,6 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

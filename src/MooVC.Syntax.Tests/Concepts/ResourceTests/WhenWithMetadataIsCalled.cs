@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Resource;
@@ -7,7 +7,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 public sealed class WhenWithMetadataIsCalled
 {
     [Test]
-    public void GivenMetadataThenReturnsUpdatedInstance()
+    public async Task GivenMetadataThenReturnsUpdatedInstance()
     {
         // Arrange
         Metadata existing = ResourceTestsData.CreateMetadata();
@@ -18,8 +18,8 @@ public sealed class WhenWithMetadataIsCalled
         Resource result = original.WithMetadata(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Metadata.ShouldBe(original.Metadata.Concat([additional]));
-        result.Headers.ShouldBe(original.Headers);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
+        _ = await Assert.That(result.Headers).IsEqualTo(original.Headers);
     }
 }

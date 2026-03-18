@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithMethodsIsCalled
 {
     [Test]
-    public void GivenMethodsThenReturnsUpdatedInstance()
+    public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
         var execute = new Method { Name = new Declaration { Name = "Execute" } };
@@ -16,8 +16,8 @@ public sealed class WhenWithMethodsIsCalled
         Record result = original.WithMethods(undo);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Methods.ShouldBe(new[] { execute, undo });
-        result.Declaration.ShouldBe(original.Declaration);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Methods).IsEqualTo(new[] { execute, undo });
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
     }
 }

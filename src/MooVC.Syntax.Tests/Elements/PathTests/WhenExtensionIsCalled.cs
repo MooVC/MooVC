@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 using SystemPath = System.IO.Path;
 
 public sealed class WhenExtensionIsCalled
 {
     [Test]
-    public void GivenPathThenReturnsExtension()
+    public async Task GivenPathThenReturnsExtension()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -15,6 +15,6 @@ public sealed class WhenExtensionIsCalled
         string result = subject.Extension;
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -5,7 +5,7 @@ public sealed class WhenToStringIsCalled
     private const string MultiWord = "MyValue";
 
     [Test]
-    public void GivenDefaultOptionsThenUsesCamelCase()
+    public async Task GivenDefaultOptionsThenUsesCamelCase()
     {
         // Arrange
         var subject = new Variable(MultiWord);
@@ -14,11 +14,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe("myValue");
+        _ = await Assert.That(result).IsEqualTo("myValue");
     }
 
     [Test]
-    public void GivenDifferentValuesThenDifferentResultsAreReturned()
+    public async Task GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
         var left = new Variable("MyName");
@@ -29,11 +29,11 @@ public sealed class WhenToStringIsCalled
         string rightString = right.ToString();
 
         // Assert
-        leftString.ShouldNotBe(rightString);
+        _ = await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
-    public void GivenRepeatedCallsThenResultIsStable()
+    public async Task GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
         var subject = new Variable(MultiWord);
@@ -43,6 +43,6 @@ public sealed class WhenToStringIsCalled
         string second = subject.ToString();
 
         // Assert
-        first.ShouldBe(second);
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

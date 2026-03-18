@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
 {
     private const string AlternativeName = "Alternate";
 
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Declaration? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Declaration? left = default;
@@ -29,11 +29,11 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
@@ -43,11 +43,11 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
@@ -58,12 +58,12 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsTrue()
+    public async Task GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
@@ -73,6 +73,6 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

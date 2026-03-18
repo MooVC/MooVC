@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.SdkTests;
+﻿namespace MooVC.Syntax.Attributes.Project.SdkTests;
 
 using System;
 using System.Xml.Linq;
@@ -6,7 +6,7 @@ using System.Xml.Linq;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUnspecifiedThenReturnsEmpty()
+    public async Task GivenUnspecifiedThenReturnsEmpty()
     {
         // Arrange
         Sdk subject = Sdk.Unspecified;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
@@ -35,6 +35,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

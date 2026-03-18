@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
+﻿namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -17,7 +17,7 @@ public sealed class WhenAddModellingIsCalled
     private const string ZipKey = "Zip";
 
     [Test]
-    public void GivenServicesThenDependenciesAreRegistered()
+    public async Task GivenServicesThenDependenciesAreRegistered()
     {
         // Arrange
         INavigator<TestModel> navigator = Substitute.For<INavigator<TestModel>>();
@@ -34,15 +34,15 @@ public sealed class WhenAddModellingIsCalled
         IOptionsSnapshot<ZipWriter.Options> zipOptions = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        _ = generator.ShouldBeOfType<Generator<TestModel>>();
-        _ = fileSystemWriter.ShouldBeOfType<FileSystemWriter>();
-        _ = zipWriter.ShouldBeOfType<ZipWriter>();
-        fileSystemOptions.Value.BufferSize.ShouldBe(FileSystemWriter.Options.Default.BufferSize);
-        zipOptions.Value.Compression.ShouldBe(ZipWriter.Options.Default.Compression);
+        _ = await Assert.That(generator).IsTypeOf<Generator<TestModel>>();
+        _ = await Assert.That(fileSystemWriter).IsTypeOf<FileSystemWriter>();
+        _ = await Assert.That(zipWriter).IsTypeOf<ZipWriter>();
+        _ = await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
+        _ = await Assert.That(zipOptions.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
     }
 
     [Test]
-    public void GivenConfigurationThenOptionsAreBound()
+    public async Task GivenConfigurationThenOptionsAreBound()
     {
         // Arrange
         var settings = new Dictionary<string, string?>
@@ -64,8 +64,8 @@ public sealed class WhenAddModellingIsCalled
         IOptionsSnapshot<ZipWriter.Options> zipOptions = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
 
         // Assert
-        fileSystemOptions.Value.BufferSize.ShouldBe(CustomBufferSize);
-        zipOptions.Value.Compression.ShouldBe(CustomCompressionLevel);
+        _ = await Assert.That(fileSystemOptions.Value.BufferSize).IsEqualTo(CustomBufferSize);
+        _ = await Assert.That(zipOptions.Value.Compression).IsEqualTo(CustomCompressionLevel);
     }
 
     [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]

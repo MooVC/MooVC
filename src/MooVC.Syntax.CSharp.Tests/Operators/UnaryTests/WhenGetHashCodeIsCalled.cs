@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEquivalentUnaryOperatorsThenReturnTheSameValue()
+    public async Task GivenEquivalentUnaryOperatorsThenReturnTheSameValue()
     {
         // Arrange
         Unary first = UnaryTestsData.Create();
@@ -14,6 +14,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        secondHash.ShouldBe(firstHash);
+        _ = await Assert.That(secondHash).IsEqualTo(firstHash);
     }
 }

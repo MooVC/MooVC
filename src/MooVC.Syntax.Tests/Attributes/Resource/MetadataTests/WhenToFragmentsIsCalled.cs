@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -6,7 +6,7 @@ using System.Xml.Linq;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmpty()
+    public async Task GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
         Metadata subject = Metadata.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        result.ShouldBeEmpty();
+        _ = await Assert.That(result).IsEmpty();
     }
 
     [Test]
-    public void GivenValuesThenReturnsFragment()
+    public async Task GivenValuesThenReturnsFragment()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
@@ -35,7 +35,7 @@ public sealed class WhenToFragmentsIsCalled
         ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
-        XElement fragment = result.ShouldHaveSingleItem();
-        XNode.DeepEquals(expected, fragment).ShouldBeTrue();
+        XElement fragment = result.Single();
+        _ = await Assert.That(XNode.DeepEquals(expected, fragment)).IsTrue();
     }
 }

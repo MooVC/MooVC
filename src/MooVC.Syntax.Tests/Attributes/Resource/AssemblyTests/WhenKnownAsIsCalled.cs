@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenKnownAsIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Assembly original = AssemblyTestsData.Create();
@@ -15,8 +15,8 @@ public sealed class WhenKnownAsIsCalled
         Assembly result = original.KnownAs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Alias.ShouldBe(updated);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Alias).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

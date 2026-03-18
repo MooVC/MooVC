@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenATypeThenTheValueIsReturned()
+    public async Task GivenATypeThenTheValueIsReturned()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = type;
 
         // Assert
-        value.ShouldBe("!");
+        _ = await Assert.That(value).IsEqualTo("!");
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.SolutionTests;
+﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using MooVC.Syntax.Attributes.Solution;
 using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
@@ -6,23 +6,23 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenSolutionIsUndefined()
+    public async Task GivenDefaultsThenSolutionIsUndefined()
     {
         // Act
         var subject = new Solution();
 
         // Assert
-        subject.Configurations.ShouldBe(Configurations.Default);
-        subject.Files.ShouldBeEmpty();
-        subject.Folders.ShouldBeEmpty();
-        subject.Items.ShouldBeEmpty();
-        subject.Projects.ShouldBeEmpty();
-        subject.Properties.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Configurations).IsEqualTo(Configurations.Default);
+        _ = await Assert.That(subject.Files).IsEmpty();
+        _ = await Assert.That(subject.Folders).IsEmpty();
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.Projects).IsEmpty();
+        _ = await Assert.That(subject.Properties).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Configurations configurations = Configurations.Default;
@@ -44,12 +44,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Configurations.ShouldBe(configurations);
-        subject.Files.ShouldBe(new[] { file });
-        subject.Folders.ShouldBe(new[] { folder });
-        subject.Items.ShouldBe(new[] { item });
-        subject.Projects.ShouldBe(new[] { project });
-        subject.Properties.ShouldBe(new[] { property });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Configurations).IsEqualTo(configurations);
+        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
+        _ = await Assert.That(subject.Folders).IsEqualTo(new[] { folder });
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
+        _ = await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

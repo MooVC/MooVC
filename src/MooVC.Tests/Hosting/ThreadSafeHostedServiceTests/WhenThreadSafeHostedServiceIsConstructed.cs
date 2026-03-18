@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 public sealed class WhenThreadSafeHostedServiceIsConstructed
 {
     [Test]
-    public void GivenALoggerAndServicesThenAnInstanceIsCreated()
+    public async Task GivenALoggerAndServicesThenAnInstanceIsCreated()
     {
         // Arrange
         ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
@@ -16,11 +16,11 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
 
         // Assert
-        _ = Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
-    public void GivenALoggerAndNoServicesThenAnInstanceIsCreated()
+    public async Task GivenALoggerAndNoServicesThenAnInstanceIsCreated()
     {
         // Arrange
         ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
@@ -30,11 +30,11 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services);
 
         // Assert
-        _ = Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
-    public void GivenALoggerAndNullServicesThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenALoggerAndNullServicesThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
@@ -44,12 +44,12 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(services));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(services));
     }
 
     [Test]
-    public void GivenANullLoggerAndServicesThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullLoggerAndServicesThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         ILogger<ThreadSafeHostedService>? logger = default;
@@ -59,7 +59,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, [service]);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(logger));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(logger));
     }
 }

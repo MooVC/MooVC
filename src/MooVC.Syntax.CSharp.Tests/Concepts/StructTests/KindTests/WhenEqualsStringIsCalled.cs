@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
     [Test]
-    public void GivenMatchingStringThenReturnsTrue()
+    public async Task GivenMatchingStringThenReturnsTrue()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.ReadOnly;
@@ -12,11 +12,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("readonly");
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNonMatchingStringThenReturnsFalse()
+    public async Task GivenNonMatchingStringThenReturnsFalse()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.ReadOnly;
@@ -25,6 +25,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = subject.Equals("record");
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

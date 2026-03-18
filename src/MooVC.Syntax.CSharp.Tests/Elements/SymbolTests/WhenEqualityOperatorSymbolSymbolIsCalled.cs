@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
     private static readonly string[] arguments = ["Inner", "Outer"];
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Symbol? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Symbol? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Symbol first = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentArgumentsThenReturnsFalse()
+    public async Task GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: arguments);
@@ -103,7 +103,7 @@ public sealed class WhenEqualityOperatorSymbolSymbolIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

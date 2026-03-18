@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenEqualityOperatorPathPathIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Path? left = default;
@@ -13,11 +13,11 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Path? left = default;
@@ -27,11 +27,11 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -41,11 +41,11 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -55,6 +55,6 @@ public sealed class WhenEqualityOperatorPathPathIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

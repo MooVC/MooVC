@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Content = "argument";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenArgumentThenSnippetMatchesStringRepresentation()
+    public async Task GivenArgumentThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Argument
@@ -34,6 +34,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

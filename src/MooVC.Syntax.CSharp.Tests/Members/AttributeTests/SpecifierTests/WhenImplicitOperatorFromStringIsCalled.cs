@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -6,17 +6,17 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Method = "method";
 
     [Test]
-    public void GivenNullThenInstanceIsCreated()
+    public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
         string? value = default;
 
         // Act & Assert
-        _ = Should.NotThrow(() => _ = (Attribute.Specifier)value);
+        _ = await Assert.That(() => _ = (Attribute.Specifier)value).ThrowsNothing();
     }
 
     [Test]
-    public void GivenNullWhenRoundTrippedThenResultIsNull()
+    public async Task GivenNullWhenRoundTrippedThenResultIsNull()
     {
         // Arrange
         string? value = default;
@@ -26,11 +26,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? result = subject;
 
         // Assert
-        result.ShouldBeNull();
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
-    public void GivenNoneThenEqualsString()
+    public async Task GivenNoneThenEqualsString()
     {
         // Arrange
         string value = None;
@@ -39,12 +39,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Attribute.Specifier subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
         string value = Method;
@@ -53,12 +53,12 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Attribute.Specifier subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
         string value = Method;
@@ -68,11 +68,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         string value = Method;
@@ -82,8 +82,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Attribute.Specifier second = value;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first.Equals(second)).IsTrue();
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenNamedIsCalled
 {
     [Test]
-    public void GivenNameThenReturnsUpdatedInstance()
+    public async Task GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange
         var newName = new Declaration { Name = "Updated" };
@@ -16,8 +16,8 @@ public sealed class WhenNamedIsCalled
         Record result = original.Named(newName);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Declaration.ShouldBe(newName);
-        original.Declaration.ShouldBe(new Declaration { Name = RecordTestsData.DefaultName });
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Declaration).IsEqualTo(newName);
+        _ = await Assert.That(original.Declaration).IsEqualTo(new Declaration { Name = RecordTestsData.DefaultName });
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.ImportTests;
+﻿namespace MooVC.Syntax.Attributes.Project.ImportTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenKnownAsIsCalled
     private const string UpdatedLabel = "UpdatedLabel";
 
     [Test]
-    public void GivenLabelThenReturnsUpdatedInstance()
+    public async Task GivenLabelThenReturnsUpdatedInstance()
     {
         // Arrange
         Import original = ImportTestsData.Create();
@@ -17,9 +17,9 @@ public sealed class WhenKnownAsIsCalled
         Import result = original.KnownAs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Label.ShouldBe(updated);
-        result.Condition.ShouldBe(original.Condition);
-        result.Project.ShouldBe(original.Project);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Label).IsEqualTo(updated);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Project).IsEqualTo(original.Project);
     }
 }

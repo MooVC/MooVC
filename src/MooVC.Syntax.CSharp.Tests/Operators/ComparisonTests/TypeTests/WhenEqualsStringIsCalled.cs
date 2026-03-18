@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsStringIsCalled
     private const string Other = "!=";
 
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -15,11 +15,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(null as string);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -28,11 +28,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Value);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -41,6 +41,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

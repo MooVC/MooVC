@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedTypeWithModifierThenValidationFails()
+    public async Task GivenUndefinedTypeWithModifierThenValidationFails()
     {
         // Arrange
         var subject = new Result
@@ -21,12 +21,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Result.Type)));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Result.Type)));
     }
 
     [Test]
-    public void GivenDefaultResultThenValidationSucceeds()
+    public async Task GivenDefaultResultThenValidationSucceeds()
     {
         // Arrange
         var subject = new Result();
@@ -37,7 +37,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

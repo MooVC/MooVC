@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenNullThenPathIsEmpty()
+    public async Task GivenNullThenPathIsEmpty()
     {
         // Arrange
         string? value = default;
@@ -12,12 +12,12 @@ public sealed class WhenConstructorIsCalled
         var subject = new Path(value);
 
         // Assert
-        subject.IsEmpty.ShouldBeTrue();
-        subject.ToString().ShouldBe(string.Empty);
+        _ = await Assert.That(subject.IsEmpty).IsTrue();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValueThenPathIsNotEmpty()
+    public async Task GivenValueThenPathIsNotEmpty()
     {
         // Arrange
         string value = PathTestsData.DefaultPath;
@@ -26,7 +26,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Path(value);
 
         // Assert
-        subject.IsEmpty.ShouldBeFalse();
-        subject.ToString().ShouldBe(value);
+        _ = await Assert.That(subject.IsEmpty).IsFalse();
+        _ = await Assert.That(subject.ToString()).IsEqualTo(value);
     }
 }

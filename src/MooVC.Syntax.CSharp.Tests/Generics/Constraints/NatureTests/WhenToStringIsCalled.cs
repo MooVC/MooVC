@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     [Arguments("unmanaged", nameof(Nature.Unmanaged))]
     [Arguments("notnull", nameof(Nature.NotNull))]
     [Arguments("", nameof(Nature.Unspecified))]
-    public void GivenNatureThenReturnsValue(string expected, string field)
+    public async Task GivenNatureThenReturnsValue(string expected, string field)
     {
         // Arrange
         Nature subject = typeof(Nature)
@@ -19,6 +19,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

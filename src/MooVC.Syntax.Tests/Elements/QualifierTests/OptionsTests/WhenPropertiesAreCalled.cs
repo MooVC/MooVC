@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Elements.QualifierTests.OptionsTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests.OptionsTests;
 
 public sealed class WhenPropertiesAreCalled
 {
     [Test]
     [Arguments(0, false, true, "File")]
     [Arguments(1, true, false, "Block")]
-    public void GivenOptionThenFlagsAndStringMatch(int value, bool expectedBlock, bool expectedFile, string expectedText)
+    public async Task GivenOptionThenFlagsAndStringMatch(int value, bool expectedBlock, bool expectedFile, string expectedText)
     {
         // Arrange
         Qualifier.Options subject = value;
@@ -16,8 +16,8 @@ public sealed class WhenPropertiesAreCalled
         string text = subject.ToString();
 
         // Assert
-        isBlock.ShouldBe(expectedBlock);
-        isFile.ShouldBe(expectedFile);
-        text.ShouldBe(expectedText);
+        _ = await Assert.That(isBlock).IsEqualTo(expectedBlock);
+        _ = await Assert.That(isFile).IsEqualTo(expectedFile);
+        _ = await Assert.That(text).IsEqualTo(expectedText);
     }
 }

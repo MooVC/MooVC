@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
 
 public sealed class WhenWithStyleIsCalled
 {
     [Test]
-    public void GivenStyleThenReturnsUpdatedInstance()
+    public async Task GivenStyleThenReturnsUpdatedInstance()
     {
         // Arrange
         var options = new Snippet.BlockOptions();
@@ -12,8 +12,8 @@ public sealed class WhenWithStyleIsCalled
         Snippet.BlockOptions result = options.WithStyle(Snippet.BlockOptions.StyleType.KAndR);
 
         // Assert
-        result.ShouldNotBeSameAs(options);
-        result.Style.ShouldBe(Snippet.BlockOptions.StyleType.KAndR);
-        options.Style.ShouldBe(Snippet.BlockOptions.StyleType.Allman);
+        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result.Style).IsEqualTo(Snippet.BlockOptions.StyleType.KAndR);
+        _ = await Assert.That(options.Style).IsEqualTo(Snippet.BlockOptions.StyleType.Allman);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Interface? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Interface? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Interface left = InterfaceTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Interface first = InterfaceTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = first == second;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Interface left = InterfaceTestsData.Create(scope: Scope.Internal);
@@ -73,12 +73,12 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool resultRightLeft = right == left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Interface left = InterfaceTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentScopesThenReturnsFalse()
+    public async Task GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange
         Interface left = InterfaceTestsData.Create(scope: Scope.Internal);
@@ -102,6 +102,6 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

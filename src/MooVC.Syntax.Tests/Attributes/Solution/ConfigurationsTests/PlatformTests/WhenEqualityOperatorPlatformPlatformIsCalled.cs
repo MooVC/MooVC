@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenEqualityOperatorPlatformPlatformIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Configurations.Platform? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorPlatformPlatformIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Configurations.Platform("CustomPlatform");
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorPlatformPlatformIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Configurations.Platform("CustomPlatform");
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorPlatformPlatformIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

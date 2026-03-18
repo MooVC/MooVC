@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithConstructorsIsCalled
 {
     [Test]
-    public void GivenConstructorsThenReturnsUpdatedInstance()
+    public async Task GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
         var constructor = new Constructor { Scope = Scope.Protected };
@@ -16,8 +16,8 @@ public sealed class WhenWithConstructorsIsCalled
         Struct result = original.WithConstructors(constructor);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Constructors.ShouldContain(constructor);
-        original.Constructors.ShouldBeEmpty();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Constructors).Contains(constructor);
+        _ = await Assert.That(original.Constructors).IsEmpty();
     }
 }

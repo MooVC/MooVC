@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenOfTypeIsCalled
 {
     [Test]
-    public void GivenTypeThenReturnsUpdatedInstance()
+    public async Task GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange
         Result original = ResultTestsData.Create();
@@ -13,10 +13,10 @@ public sealed class WhenOfTypeIsCalled
         Result result = original.OfType(type);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Type.ShouldBe(type);
-        result.Modifier.ShouldBe(original.Modifier);
-        result.Mode.ShouldBe(original.Mode);
-        original.Type.Name.ShouldBe(new Symbol.Moniker(ResultTestsData.DefaultTypeName));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Type).IsEqualTo(type);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(original.Type.Name).IsEqualTo(new Symbol.Moniker(ResultTestsData.DefaultTypeName));
     }
 }

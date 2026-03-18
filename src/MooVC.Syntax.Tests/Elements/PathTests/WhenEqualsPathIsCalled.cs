@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenEqualsPathIsCalled
 {
     [Test]
-    public void GivenRightNullThenReturnsFalse()
+    public async Task GivenRightNullThenReturnsFalse()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -13,11 +13,11 @@ public sealed class WhenEqualsPathIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -27,11 +27,11 @@ public sealed class WhenEqualsPathIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -41,11 +41,11 @@ public sealed class WhenEqualsPathIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Path(PathTestsData.DefaultPath);
@@ -55,6 +55,6 @@ public sealed class WhenEqualsPathIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

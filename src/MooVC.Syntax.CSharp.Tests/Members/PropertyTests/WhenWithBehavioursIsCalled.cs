@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBehavioursIsCalled
 {
     [Test]
-    public void GivenBehavioursThenReturnsUpdatedInstance()
+    public async Task GivenBehavioursThenReturnsUpdatedInstance()
     {
         // Arrange
         Property original = PropertyTestsData.Create();
@@ -18,13 +18,13 @@ public sealed class WhenWithBehavioursIsCalled
         Property result = original.WithBehaviours(behaviours);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviours.ShouldBe(behaviours);
-        result.Default.ShouldBe(original.Default);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(original.Type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(behaviours);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        original.Behaviours.ShouldNotBe(behaviours);
+        _ = await Assert.That(original.Behaviours).IsNotEqualTo(behaviours);
     }
 }

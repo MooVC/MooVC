@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsUpdatedInstance()
+    public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
         Parameter[] existing = [new Parameter { Name = new Variable("value"), Type = typeof(int) }];
@@ -19,9 +19,9 @@ public sealed class WhenWithParametersIsCalled
         Class result = original.WithParameters(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Parameters.ShouldBe(original.Parameters.Concat(additional));
-        result.Scope.ShouldBe(original.Scope);
-        original.Parameters.ShouldBe(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(original.Parameters).IsEqualTo(existing);
     }
 }

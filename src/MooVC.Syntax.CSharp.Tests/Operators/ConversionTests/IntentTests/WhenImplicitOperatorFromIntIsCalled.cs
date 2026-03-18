@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenImplicitOperatorFromIntIsCalled
 {
     private const int Value = 1;
 
     [Test]
-    public void GivenValueThenEqualsInteger()
+    public async Task GivenValueThenEqualsInteger()
     {
         // Arrange
         int value = Value;
@@ -14,12 +14,12 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Conversion.Intent subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
         int value = Value;
@@ -29,8 +29,8 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Conversion.Intent second = value;
 
         // Assert
-        ReferenceEquals(first, second).ShouldBeFalse();
-        (first == second).ShouldBeTrue();
-        first.Equals(second).ShouldBeTrue();
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That((first == second)).IsTrue();
+        _ = await Assert.That(first.Equals(second)).IsTrue();
     }
 }

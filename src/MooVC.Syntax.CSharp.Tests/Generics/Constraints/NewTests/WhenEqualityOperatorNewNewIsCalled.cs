@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenEqualityOperatorNewNewIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorNewNewIsCalled
     private const string Different = "";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         New? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorNewNewIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEitherSideNullThenReturnsFalse()
+    public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
         New left = Same;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorNewNewIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         New left = Same;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorNewNewIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         New left = Same;
@@ -58,6 +58,6 @@ public sealed class WhenEqualityOperatorNewNewIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

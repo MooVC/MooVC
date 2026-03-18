@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenStringThenReturnsKind()
+    public async Task GivenStringThenReturnsKind()
     {
         // Arrange
         const string Value = "record";
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Struct.Kind result = Value;
 
         // Assert
-        result.ShouldBe(Struct.Kind.Record);
+        _ = await Assert.That(result).IsEqualTo(Struct.Kind.Record);
     }
 }

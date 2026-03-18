@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.FieldTests;
+﻿namespace MooVC.Syntax.CSharp.Members.FieldTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithDefaultIsCalled
 {
     [Test]
-    public void GivenDefaultThenReturnsNewInstanceWithUpdatedDefault()
+    public async Task GivenDefaultThenReturnsNewInstanceWithUpdatedDefault()
     {
         // Arrange
         Field original = FieldTestsData.Create();
@@ -15,14 +15,14 @@ public sealed class WhenWithDefaultIsCalled
         Field result = original.WithDefault(@default);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Default.ShouldBe(@default);
-        result.IsReadOnly.ShouldBe(original.IsReadOnly);
-        result.IsStatic.ShouldBe(original.IsStatic);
-        result.Name.ShouldBe(original.Name);
-        result.Scope.ShouldBe(original.Scope);
-        result.Type.ShouldBe(original.Type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Default).IsEqualTo(@default);
+        _ = await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
+        _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        original.Default.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(original.Default).IsEqualTo(Snippet.Empty);
     }
 }

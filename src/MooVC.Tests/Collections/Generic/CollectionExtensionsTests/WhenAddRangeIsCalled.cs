@@ -1,9 +1,9 @@
-namespace MooVC.Collections.Generic.CollectionExtensionsTests;
+﻿namespace MooVC.Collections.Generic.CollectionExtensionsTests;
 
 public sealed class WhenAddRangeIsCalled
 {
     [Test]
-    public void GivenANullListThenNoArgumentNullExceptionIsThrown()
+    public async Task GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
         ICollection<int> target = [];
@@ -13,11 +13,11 @@ public sealed class WhenAddRangeIsCalled
         Action act = () => target.AddRange(items);
 
         // Assert
-        Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]
-    public void GivenANullTargetThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullTargetThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         ICollection<int>? target = default;
@@ -27,11 +27,11 @@ public sealed class WhenAddRangeIsCalled
         Action act = () => target!.AddRange(items);
 
         // Assert
-        _ = Should.Throw<ArgumentNullException>(act);
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenItemsWhenTheTargetIsEmptyThenTheItemsAreAddedToTheTarget()
+    public async Task GivenItemsWhenTheTargetIsEmptyThenTheItemsAreAddedToTheTarget()
     {
         // Arrange
         ICollection<int> actual = [];
@@ -41,11 +41,11 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(expected);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetWithoutRemovingTheExistingEntries()
+    public async Task GivenItemsWhenTheTargetIsNotEmptyThenTheItemsAreAddedToTheTargetWithoutRemovingTheExistingEntries()
     {
         // Arrange
         ICollection<int> actual = [1, 2, 3];
@@ -56,11 +56,11 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
+    public async Task GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
     {
         // Arrange
         ICollection<int> actual = [];
@@ -70,11 +70,11 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
-    public void GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
+    public async Task GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
     {
         // Arrange
         ICollection<int> actual = [1, 2, 3];
@@ -84,6 +84,6 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        actual.ShouldBe([1, 2, 3]);
+        _ = await Assert.That(actual).IsEqualTo([1, 2, 3]);
     }
 }

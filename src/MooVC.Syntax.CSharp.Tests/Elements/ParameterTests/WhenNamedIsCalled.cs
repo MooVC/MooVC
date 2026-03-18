@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenNamedIsCalled
 {
     private const string NewName = "other";
 
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedName()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
         Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
@@ -14,11 +14,11 @@ public sealed class WhenNamedIsCalled
         Parameter result = original.Named(new Variable(NewName));
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Variable(NewName));
-        result.Attributes.ShouldBe(original.Attributes);
-        result.Default.ShouldBe(original.Default);
-        result.Modifier.ShouldBe(original.Modifier);
-        original.Name.ShouldBe(new Variable(ParameterTestsData.DefaultName));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(new Variable(NewName));
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(original.Name).IsEqualTo(new Variable(ParameterTestsData.DefaultName));
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 public sealed class WhenWithModeIsCalled
 {
     [Test]
-    public void GivenModeThenReturnsUpdatedInstance()
+    public async Task GivenModeThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Property.Setter { Mode = Property.Mode.Set };
@@ -12,11 +12,11 @@ public sealed class WhenWithModeIsCalled
         Property.Setter result = original.WithMode(Property.Mode.Init);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviour.ShouldBe(original.Behaviour);
-        result.Mode.ShouldBe(Property.Mode.Init);
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviour).IsEqualTo(original.Behaviour);
+        _ = await Assert.That(result.Mode).IsEqualTo(Property.Mode.Init);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        original.Mode.ShouldBe(Property.Mode.Set);
+        _ = await Assert.That(original.Mode).IsEqualTo(Property.Mode.Set);
     }
 }

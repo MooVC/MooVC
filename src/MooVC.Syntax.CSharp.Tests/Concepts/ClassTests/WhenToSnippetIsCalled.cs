@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 public sealed class WhenToSnippetIsCalled
 {
     private const string StaticKeyword = "static";
 
     [Test]
-    public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Class subject = ClassTestsData.Create();
@@ -14,11 +14,11 @@ public sealed class WhenToSnippetIsCalled
         Func<string> action = () => subject.ToSnippet(options: default);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenStaticClassThenSignatureIncludesStaticKeyword()
+    public async Task GivenStaticClassThenSignatureIncludesStaticKeyword()
     {
         // Arrange
         Class subject = ClassTestsData.Create(isStatic: true);
@@ -27,6 +27,6 @@ public sealed class WhenToSnippetIsCalled
         string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
-        result.ShouldContain($"{StaticKeyword} class");
+        _ = await Assert.That(result).Contains($"{StaticKeyword} class");
     }
 }

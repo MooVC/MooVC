@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
+﻿namespace MooVC.Syntax.CSharp.Members.ConstructorTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Elements.ParameterTests;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedThenNoValidationErrorsReturned()
     {
         // Arrange
         Constructor subject = Constructor.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidParameterThenValidationErrorReturned()
+    public async Task GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create(parameters: [Parameter.Undefined]);
@@ -35,14 +35,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Constructor.Parameters));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Constructor.Parameters));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidConstructorThenNoValidationErrorsReturned()
+    public async Task GivenValidConstructorThenNoValidationErrorsReturned()
     {
         // Arrange
         Constructor subject = ConstructorTestsData.Create(parameters: [ParameterTestsData.Create()]);
@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

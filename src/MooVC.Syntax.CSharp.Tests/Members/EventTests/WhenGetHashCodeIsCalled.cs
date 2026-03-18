@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -10,7 +10,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Behaviour = "value";
 
     [Test]
-    public void GivenEquivalentValuesThenHashesMatch()
+    public async Task GivenEquivalentValuesThenHashesMatch()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -21,11 +21,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -36,11 +36,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentBehavioursThenHashesDiffer()
+    public async Task GivenDifferentBehavioursThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -56,11 +56,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentHandlersThenHashesDiffer()
+    public async Task GivenDifferentHandlersThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -71,11 +71,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentStaticStatesThenHashesDiffer()
+    public async Task GivenDifferentStaticStatesThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -87,11 +87,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentScopesThenHashesDiffer()
+    public async Task GivenDifferentScopesThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
@@ -102,6 +102,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

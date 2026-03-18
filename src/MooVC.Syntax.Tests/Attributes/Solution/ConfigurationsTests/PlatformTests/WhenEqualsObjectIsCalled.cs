@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Configurations.Platform("CustomPlatform");
@@ -14,11 +14,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(default(object));
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentTypeThenReturnsFalse()
+    public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
         var subject = new Configurations.Platform("CustomPlatform");
@@ -27,11 +27,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals("OtherPlatform");
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenPlatformWithSameValueThenReturnsTrue()
+    public async Task GivenPlatformWithSameValueThenReturnsTrue()
     {
         // Arrange
         var subject = new Configurations.Platform("CustomPlatform");
@@ -41,6 +41,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

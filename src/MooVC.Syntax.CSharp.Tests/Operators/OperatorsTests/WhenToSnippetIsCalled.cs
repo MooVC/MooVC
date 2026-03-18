@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Operators.BinaryTests;
@@ -32,7 +32,7 @@ public sealed class WhenToSnippetIsCalled
         """;
 
     [Test]
-    public void GivenUndefinedThenEmptyReturned()
+    public async Task GivenUndefinedThenEmptyReturned()
     {
         // Arrange
         Operators subject = Operators.Undefined;
@@ -42,11 +42,11 @@ public sealed class WhenToSnippetIsCalled
         var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenValuesThenSnippetReturned()
+    public async Task GivenValuesThenSnippetReturned()
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
@@ -65,6 +65,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = subject.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        snippet.ToString().ShouldBe(GivenValuesThenSnippetReturnedExpected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenSnippetReturnedExpected);
     }
 }

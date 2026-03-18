@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.HeaderTests;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenUndefinedThenValidationIsSkipped()
     {
         // Arrange
         Header subject = Header.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineNameThenValidationErrorReturned()
+    public async Task GivenMultiLineNameThenValidationErrorReturned()
     {
         // Arrange
         Header subject = HeaderTestsData.Create(name: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Header.Name));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Header.Name));
     }
 
     [Test]
-    public void GivenMultiLineValueThenValidationErrorReturned()
+    public async Task GivenMultiLineValueThenValidationErrorReturned()
     {
         // Arrange
         Header subject = HeaderTestsData.Create(value: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -52,8 +52,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Header.Value));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Header.Value));
     }
 }

@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenConstructorIsCalled
 {
     private const string ArgumentName = "Inner";
 
     [Test]
-    public void GivenDefaultsThenSymbolIsUnspecified()
+    public async Task GivenDefaultsThenSymbolIsUnspecified()
     {
         // Act
         var subject = new Symbol();
 
         // Assert
-        subject.Name.ShouldBe(Symbol.Moniker.Unnamed);
-        subject.Arguments.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Name).IsEqualTo(Symbol.Moniker.Unnamed);
+        _ = await Assert.That(subject.Arguments).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var argument = new Symbol { Name = ArgumentName };
@@ -30,8 +30,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Name.ShouldBe(new Symbol.Moniker(SymbolTestsData.DefaultName));
-        subject.Arguments.ShouldBe(new[] { argument });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(SymbolTestsData.DefaultName));
+        _ = await Assert.That(subject.Arguments).IsEqualTo(new[] { argument });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

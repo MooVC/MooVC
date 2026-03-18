@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsSameHashCode()
+    public async Task GivenEqualValuesThenReturnsSameHashCode()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -14,6 +14,6 @@ public sealed class WhenGetHashCodeIsCalled
         int otherHashCode = other.GetHashCode();
 
         // Assert
-        hashCode.ShouldBe(otherHashCode);
+        _ = await Assert.That(hashCode).IsEqualTo(otherHashCode);
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
     {
         // Arrange
         Event original = EventTestsData.Create(scope: Scope.Internal);
@@ -14,10 +14,10 @@ public sealed class WhenWithScopeIsCalled
         Event result = original.WithScope(Scope.Private);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Scope.ShouldBe(Scope.Private);
-        result.Behaviours.ShouldBe(original.Behaviours);
-        result.Handler.ShouldBe(original.Handler);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(result.Handler).IsEqualTo(original.Handler);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

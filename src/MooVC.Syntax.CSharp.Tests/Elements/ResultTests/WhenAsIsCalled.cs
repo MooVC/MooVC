@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ResultTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenAsIsCalled
 {
     private const string ValueType = "Value";
 
     [Test]
-    public void GivenNullWrapperThenThrows()
+    public async Task GivenNullWrapperThenThrows()
     {
         // Arrange
         var subject = new Result();
@@ -15,11 +15,11 @@ public sealed class WhenAsIsCalled
         Action action = () => _ = subject.As(wrapper!);
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenAsTaskThenResultIsWrapped()
+    public async Task GivenAsTaskThenResultIsWrapped()
     {
         // Arrange
         var subject = new Result
@@ -32,11 +32,11 @@ public sealed class WhenAsIsCalled
         Result result = subject.AsTask();
 
         // Assert
-        result.Type.ToString().ShouldBe("Task<Value>");
+        _ = await Assert.That(result.Type.ToString()).IsEqualTo("Task<Value>");
     }
 
     [Test]
-    public void GivenAsValueTaskThenResultIsWrapped()
+    public async Task GivenAsValueTaskThenResultIsWrapped()
     {
         // Arrange
         var subject = new Result
@@ -49,6 +49,6 @@ public sealed class WhenAsIsCalled
         Result result = subject.AsValueTask();
 
         // Assert
-        result.Type.ToString().ShouldBe("ValueTask<Value>");
+        _ = await Assert.That(result.Type.ToString()).IsEqualTo("ValueTask<Value>");
     }
 }

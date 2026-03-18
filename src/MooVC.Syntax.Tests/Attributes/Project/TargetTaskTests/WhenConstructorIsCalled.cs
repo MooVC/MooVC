@@ -1,26 +1,26 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenTargetTaskIsUndefined()
+    public async Task GivenDefaultsThenTargetTaskIsUndefined()
     {
         // Act
         var subject = new TargetTask();
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.Empty);
-        subject.ContinueOnError.ShouldBe(TargetTask.Options.ErrorAndStop);
-        subject.Name.ShouldBe(Name.Unnamed);
-        subject.Outputs.ShouldBeEmpty();
-        subject.Parameters.ShouldBeEmpty();
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.ErrorAndStop);
+        _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
+        _ = await Assert.That(subject.Outputs).IsEmpty();
+        _ = await Assert.That(subject.Parameters).IsEmpty();
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         Output output = TargetTaskTestsData.CreateOutput();
@@ -37,11 +37,11 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Condition.ShouldBe(Snippet.From(TargetTaskTestsData.DefaultCondition));
-        subject.ContinueOnError.ShouldBe(TargetTask.Options.WarnAndContinue);
-        subject.Name.ShouldBe(new Name(TargetTaskTestsData.DefaultName));
-        subject.Outputs.ShouldBe(new[] { output });
-        subject.Parameters.ShouldBe(new[] { parameter });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTaskTestsData.DefaultCondition));
+        _ = await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.WarnAndContinue);
+        _ = await Assert.That(subject.Name).IsEqualTo(new Name(TargetTaskTestsData.DefaultName));
+        _ = await Assert.That(subject.Outputs).IsEqualTo(new[] { output });
+        _ = await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

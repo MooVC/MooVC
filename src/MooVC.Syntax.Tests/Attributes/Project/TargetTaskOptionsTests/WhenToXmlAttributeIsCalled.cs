@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 using System.Xml.Linq;
 
 public sealed class WhenToXmlAttributeIsCalled
 {
     [Test]
-    public void GivenErrorAndStopThenReturnsEmptySequence()
+    public async Task GivenErrorAndStopThenReturnsEmptySequence()
     {
         // Arrange
         TargetTask.Options subject = TargetTask.Options.ErrorAndStop;
@@ -14,11 +14,11 @@ public sealed class WhenToXmlAttributeIsCalled
         XAttribute[] attributes = [.. subject.ToXmlAttribute()];
 
         // Assert
-        attributes.ShouldBeEmpty();
+        _ = await Assert.That(attributes).IsEmpty();
     }
 
     [Test]
-    public void GivenValueThenReturnsContinueOnErrorAttribute()
+    public async Task GivenValueThenReturnsContinueOnErrorAttribute()
     {
         // Arrange
         TargetTask.Options subject = TargetTask.Options.WarnAndContinue;
@@ -27,8 +27,8 @@ public sealed class WhenToXmlAttributeIsCalled
         XAttribute[] attributes = [.. subject.ToXmlAttribute()];
 
         // Assert
-        _ = attributes.ShouldHaveSingleItem();
-        attributes[0].Name.ToString().ShouldBe("ContinueOnError");
-        attributes[0].Value.ShouldBe(subject.ToString());
+        _ = await attributes.Single();
+        _ = await Assert.That(attributes[0].Name.ToString()).IsEqualTo("ContinueOnError");
+        _ = await Assert.That(attributes[0].Value).IsEqualTo(subject.ToString());
     }
 }

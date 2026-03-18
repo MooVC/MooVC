@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenHashesMatch()
+    public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
         var first = new Configurations.BuildType("Custom");
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentValuesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         var first = new Configurations.BuildType("Custom");
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

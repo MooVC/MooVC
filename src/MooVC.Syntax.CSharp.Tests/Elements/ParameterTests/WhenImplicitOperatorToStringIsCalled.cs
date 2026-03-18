@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Name = ParameterTestsData.DefaultName;
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Parameter? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenParameterThenStringMatchesToString()
+    public async Task GivenParameterThenStringMatchesToString()
     {
         // Arrange
         Parameter subject = ParameterTestsData.Create(name: Name);
@@ -27,6 +27,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -10,7 +10,7 @@ public sealed class WhenNamedIsCalled
     private const string NewName = "TOther";
 
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedName()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
         var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
@@ -25,9 +25,9 @@ public sealed class WhenNamedIsCalled
         Parameter result = original.Named(NewName);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Name.ShouldBe(new Name(NewName));
-        result.Constraints.ShouldBe(original.Constraints);
-        original.Name.ShouldBe(new Name(DefaultName));
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Name).IsEqualTo(new Name(NewName));
+        _ = await Assert.That(result.Constraints).IsEqualTo(original.Constraints);
+        _ = await Assert.That(original.Name).IsEqualTo(new Name(DefaultName));
     }
 }

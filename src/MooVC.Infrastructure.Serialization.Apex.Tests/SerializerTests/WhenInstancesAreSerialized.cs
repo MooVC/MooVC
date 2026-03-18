@@ -18,7 +18,7 @@ public sealed class WhenInstancesAreSerialized
         _serializer = new Serializer(settings: settings);
     }
 
-    public void Dispose()
+    public async Task Dispose()
     {
         Dispose(isDisposing: true);
 
@@ -41,8 +41,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await _serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -66,8 +66,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await _serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -92,8 +92,8 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await _serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -116,8 +116,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await _serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -135,8 +135,8 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await _serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -163,8 +163,8 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await _serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldNotBeSameAs(original);
-        deserialized.ShouldBeEquivalentTo(original);
+        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
     [Test]
@@ -192,7 +192,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableClass> deserialized = await _serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     [Test]
@@ -225,7 +225,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableClass> deserialized = await _serializer.Deserialize<IEnumerable<SerializableClass>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     [Test]
@@ -261,7 +261,7 @@ public sealed class WhenInstancesAreSerialized
             .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     [Test]
@@ -292,7 +292,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableRecord> deserialized = await _serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     [Test]
@@ -319,7 +319,7 @@ public sealed class WhenInstancesAreSerialized
         IEnumerable<SerializableRecord> deserialized = await _serializer.Deserialize<IEnumerable<SerializableRecord>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     [Test]
@@ -359,7 +359,7 @@ public sealed class WhenInstancesAreSerialized
             .Deserialize<IEnumerable<ISerializableInstance>>(stream, CancellationToken.None);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(originals);
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
 
     private void Dispose(bool isDisposing)

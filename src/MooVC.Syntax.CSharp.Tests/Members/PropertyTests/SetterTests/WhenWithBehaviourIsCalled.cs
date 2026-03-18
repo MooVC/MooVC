@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBehaviourIsCalled
 {
     [Test]
-    public void GivenBehaviourThenReturnsUpdatedInstance()
+    public async Task GivenBehaviourThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Property.Setter();
@@ -15,11 +15,11 @@ public sealed class WhenWithBehaviourIsCalled
         Property.Setter result = original.WithBehaviour(behaviour);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviour.ShouldBe(behaviour);
-        result.Mode.ShouldBe(original.Mode);
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviour).IsEqualTo(behaviour);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
-        original.Behaviour.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(original.Behaviour).IsEqualTo(Snippet.Empty);
     }
 }

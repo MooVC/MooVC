@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeTests.SpecifierTests;
 
 public sealed class WhenEqualityOperatorSpecifierStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
     private const string Different = "module";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Class;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Class;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier left = Attribute.Specifier.Class;
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorSpecifierStringIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

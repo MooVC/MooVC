@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 public sealed class WhenKeepDuplicateOutputsIsCalled
 {
     [Test]
-    public void GivenKeepDuplicateOutputsThenReturnsUpdatedInstance()
+    public async Task GivenKeepDuplicateOutputsThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -13,9 +13,9 @@ public sealed class WhenKeepDuplicateOutputsIsCalled
         Target result = original.KeepDuplicateOutputs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.KeepDuplicateOutputs.ShouldBe(updated);
-        result.Outputs.ShouldBe(original.Outputs);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.KeepDuplicateOutputs).IsEqualTo(updated);
+        _ = await Assert.That(result.Outputs).IsEqualTo(original.Outputs);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

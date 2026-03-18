@@ -12,28 +12,28 @@ public sealed class WhenMinIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Act
         DateTime selected = oldest.Min(newest);
 
         // Assert
-        selected.ShouldBe(oldest);
+        _ = await Assert.That(selected).IsEqualTo(oldest);
     }
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Act
         DateTime selected = newest.Min(oldest);
 
         // Assert
-        selected.ShouldBe(oldest);
+        _ = await Assert.That(selected).IsEqualTo(oldest);
     }
 
     [Test]
-    public void GivenSameDatesThenTheSameDateIsReturned()
+    public async Task GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange
         var sameDate = new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -42,6 +42,6 @@ public sealed class WhenMinIsCalled
         DateTime selected = sameDate.Min(sameDate);
 
         // Assert
-        selected.ShouldBe(sameDate);
+        _ = await Assert.That(selected).IsEqualTo(sameDate);
     }
 }

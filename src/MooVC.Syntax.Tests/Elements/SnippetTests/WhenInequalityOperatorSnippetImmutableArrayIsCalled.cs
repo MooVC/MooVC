@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -8,7 +8,7 @@ public sealed class WhenInequalityOperatorSnippetImmutableArrayIsCalled
     private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightDefaultThenReturnsTrue()
+    public async Task GivenLeftValueRightDefaultThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet(same);
@@ -18,11 +18,11 @@ public sealed class WhenInequalityOperatorSnippetImmutableArrayIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Snippet(same);
@@ -32,11 +32,11 @@ public sealed class WhenInequalityOperatorSnippetImmutableArrayIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet(same);
@@ -46,6 +46,6 @@ public sealed class WhenInequalityOperatorSnippetImmutableArrayIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

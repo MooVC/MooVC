@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Formatting.StringExtensionsTests;
+﻿namespace MooVC.Syntax.Formatting.StringExtensionsTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -9,7 +9,7 @@ public sealed class WhenCombineIsCalled
     private static readonly string[] samples = ["first", "second", "third"];
 
     [Test]
-    public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string? separator = default;
@@ -18,12 +18,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator!.Combine(samples);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrown()
+    public async Task GivenSeparatorIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
         string separator = string.Empty;
@@ -32,12 +32,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator.Combine(samples);
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenValuesAreNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValuesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string separator = Separator;
@@ -47,12 +47,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator.Combine(values!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(values));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
     [Test]
-    public void GivenNoValuesThenAnEmptyStringIsReturned()
+    public async Task GivenNoValuesThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -61,11 +61,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(Array.Empty<string>());
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSingleValueThenTheValueIsReturned()
+    public async Task GivenSingleValueThenTheValueIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -75,11 +75,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(value);
 
         // Assert
-        result.ShouldBe(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
-    public void GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
+    public async Task GivenMultipleValuesThenTheyAreCombinedWithTheSeparator()
     {
         // Arrange
         string separator = Separator;
@@ -88,11 +88,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(samples);
 
         // Assert
-        result.ShouldBe(string.Join(separator, samples));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples));
     }
 
     [Test]
-    public void GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenFormatterIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string separator = Separator;
@@ -103,12 +103,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator.Combine(elements, formatter!);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(formatter));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(formatter));
     }
 
     [Test]
-    public void GivenElementsAreDefaultThenAnEmptyStringIsReturned()
+    public async Task GivenElementsAreDefaultThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -118,11 +118,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenElementsAreEmptyThenAnEmptyStringIsReturned()
+    public async Task GivenElementsAreEmptyThenAnEmptyStringIsReturned()
     {
         // Arrange
         string separator = Separator;
@@ -132,11 +132,11 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value);
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSeparatorIsNullThenArgumentNullExceptionIsThrownWhenElementsAreProvided()
+    public async Task GivenSeparatorIsNullThenArgumentNullExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
         string? separator = default;
@@ -146,12 +146,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator!.Combine(elements, value => value);
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenSeparatorIsEmptyThenArgumentExceptionIsThrownWhenElementsAreProvided()
+    public async Task GivenSeparatorIsEmptyThenArgumentExceptionIsThrownWhenElementsAreProvided()
     {
         // Arrange
         string separator = string.Empty;
@@ -161,12 +161,12 @@ public sealed class WhenCombineIsCalled
         Action action = () => separator.Combine(elements, value => value);
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(separator));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
     [Test]
-    public void GivenMultipleElementsThenTheyAreFormattedAndCombinedWithTheSeparator()
+    public async Task GivenMultipleElementsThenTheyAreFormattedAndCombinedWithTheSeparator()
     {
         // Arrange
         string separator = Separator;
@@ -176,6 +176,6 @@ public sealed class WhenCombineIsCalled
         string result = separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        result.ShouldBe(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
     }
 }

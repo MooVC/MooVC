@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualOptionsThenHashCodesMatch()
+    public async Task GivenEqualOptionsThenHashCodesMatch()
     {
         // Arrange
         var left = new Options();
@@ -16,11 +16,11 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldBe(rightHash);
+        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 
     [Test]
-    public void GivenDifferentOptionsThenHashCodesDiffer()
+    public async Task GivenDifferentOptionsThenHashCodesDiffer()
     {
         // Arrange
         var left = new Options();
@@ -31,6 +31,6 @@ public sealed class WhenGetHashCodeIsCalled
         int rightHash = right.GetHashCode();
 
         // Assert
-        leftHash.ShouldNotBe(rightHash);
+        _ = await Assert.That(leftHash).IsNotEqualTo(rightHash);
     }
 }

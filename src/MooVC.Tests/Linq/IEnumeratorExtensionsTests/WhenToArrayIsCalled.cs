@@ -7,7 +7,7 @@ using System.Linq;
 public sealed class WhenToArrayIsCalled
 {
     [Test]
-    public void GivenANonGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
+    public async Task GivenANonGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
         int[] values = [1, 2, 3];
@@ -19,11 +19,11 @@ public sealed class WhenToArrayIsCalled
         object[] actual = enumerator.ToArray();
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenAGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
+    public async Task GivenAGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
         int[] expected = [4, 5, 6];
@@ -34,11 +34,11 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenANullEnumeratorThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullEnumeratorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerator? enumerator = default;
@@ -47,12 +47,12 @@ public sealed class WhenToArrayIsCalled
         Action act = () => enumerator!.ToArray();
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(enumerator));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
     }
 
     [Test]
-    public void GivenANullGenericEnumeratorThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullGenericEnumeratorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         IEnumerator<int>? enumerator = default;
@@ -61,13 +61,13 @@ public sealed class WhenToArrayIsCalled
         Action act = () => enumerator!.ToArray();
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(enumerator));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
     }
 
     [Test]
     [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
-    public void GivenAnEmptyEnumeratorThenAnEmptyArrayIsReturned()
+    public async Task GivenAnEmptyEnumeratorThenAnEmptyArrayIsReturned()
     {
         // Arrange
         var list = new List<int>();
@@ -77,12 +77,12 @@ public sealed class WhenToArrayIsCalled
         object[] actual = enumerator.ToArray();
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
     [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
-    public void GivenAnEmptyGenericEnumeratorThenAnEmptyArrayIsReturned()
+    public async Task GivenAnEmptyGenericEnumeratorThenAnEmptyArrayIsReturned()
     {
         // Arrange
         var list = new List<int>();
@@ -92,6 +92,6 @@ public sealed class WhenToArrayIsCalled
         int[] actual = enumerator.ToArray();
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

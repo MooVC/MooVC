@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenBothBasesAreNullThenReturnsFalse()
+    public async Task GivenBothBasesAreNullThenReturnsFalse()
     {
         // Arrange
         Base? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEitherBaseIsNullThenReturnsTrue()
+    public async Task GivenEitherBaseIsNullThenReturnsTrue()
     {
         // Arrange
         Base? left = new Symbol { Name = Same };
@@ -33,12 +33,12 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         bool resultRightLeft = right != left;
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenEqualBasesThenReturnsFalse()
+    public async Task GivenEqualBasesThenReturnsFalse()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -48,11 +48,11 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentBasesThenReturnsTrue()
+    public async Task GivenDifferentBasesThenReturnsTrue()
     {
         // Arrange
         Base left = new Symbol { Name = Same };
@@ -62,6 +62,6 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

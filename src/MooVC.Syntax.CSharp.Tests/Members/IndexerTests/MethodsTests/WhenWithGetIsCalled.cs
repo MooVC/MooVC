@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests.MethodsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithGetIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Indexer.Methods
@@ -19,9 +19,9 @@ public sealed class WhenWithGetIsCalled
         Indexer.Methods result = original.WithGet(get);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Get.ShouldBe(get);
-        result.Set.ShouldBe(original.Set);
-        original.Get.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Get).IsEqualTo(get);
+        _ = await Assert.That(result.Set).IsEqualTo(original.Set);
+        _ = await Assert.That(original.Get).IsEqualTo(Snippet.Empty);
     }
 }

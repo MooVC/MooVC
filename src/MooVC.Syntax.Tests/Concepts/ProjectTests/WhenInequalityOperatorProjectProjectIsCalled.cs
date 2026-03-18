@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ProjectTests;
+﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenInequalityOperatorProjectProjectIsCalled
 {
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Project left = ProjectTestsData.Create();
@@ -16,6 +16,6 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

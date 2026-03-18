@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.FileSystemWriterTests;
+﻿namespace MooVC.Modelling.FileSystemWriterTests;
 
 using System.Collections.Generic;
 using System.Text;
@@ -30,11 +30,11 @@ public sealed class WhenWriteIsCalled
 
         // Assert
         bool isFound = fileSystem.TryGetFileContent(expectedPath, out byte[]? fileContent);
-        isFound.ShouldBeTrue();
-        _ = fileContent.ShouldNotBeNull();
-        Encoding.UTF8.GetString(fileContent).ShouldBe(Content);
-        _ = expectedDirectory.ShouldNotBeNull();
-        fileSystem.CreatedDirectories.ShouldContain(expectedDirectory);
+        _ = await Assert.That(isFound).IsTrue();
+        _ = await Assert.That(fileContent).IsNotNull();
+        _ = await Assert.That(Encoding.UTF8.GetString(fileContent)).IsEqualTo(Content);
+        _ = await Assert.That(expectedDirectory).IsNotNull();
+        _ = await Assert.That(fileSystem.CreatedDirectories).Contains(expectedDirectory);
     }
 
     private static IOptionsSnapshot<FileSystemWriter.Options> CreateOptionsSnapshot()

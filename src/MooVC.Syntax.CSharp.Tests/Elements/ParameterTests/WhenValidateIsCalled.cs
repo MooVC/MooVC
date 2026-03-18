@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ public sealed class WhenValidateIsCalled
     private const string AttributeName = "Obsolete";
 
     [Test]
-    public void GivenUndefinedParameterThenNoValidationErrorsReturned()
+    public async Task GivenUndefinedParameterThenNoValidationErrorsReturned()
     {
         // Arrange
         Parameter parameter = Parameter.Undefined;
@@ -22,12 +22,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(parameter, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUnnamedParameterThenValidationErrorReturned()
+    public async Task GivenUnnamedParameterThenValidationErrorReturned()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(name: null);
@@ -38,14 +38,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(parameter, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Name));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Parameter.Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenDefaultWithMultipleLinesThenValidationErrorReturned()
+    public async Task GivenDefaultWithMultipleLinesThenValidationErrorReturned()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(@default: Snippet.From($"alpha{Environment.NewLine}beta"));
@@ -56,14 +56,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(parameter, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Parameter.Default));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Parameter.Default));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenAttributesWithValidationErrorsThenValidationErrorsReturned()
+    public async Task GivenAttributesWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
@@ -80,14 +80,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(parameter, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(parameter.Attributes));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(parameter.Attributes));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidParameterThenNoValidationErrorsReturned()
+    public async Task GivenValidParameterThenNoValidationErrorsReturned()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
@@ -104,7 +104,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(parameter, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenLessThanOrEqualOperatorIsCalled
 {
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Unary.Type? leftType = default;
@@ -13,11 +13,11 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Plus;
@@ -27,11 +27,11 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Unary.Type leftType = Unary.Type.Plus;
@@ -41,6 +41,6 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
         bool result = leftType <= rightType;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

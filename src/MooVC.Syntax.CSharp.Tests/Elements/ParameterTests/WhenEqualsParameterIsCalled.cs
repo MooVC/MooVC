@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using MooVC.Syntax.Elements;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
@@ -8,7 +8,7 @@ public sealed class WhenEqualsParameterIsCalled
     private const string AlternativeName = "other";
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Parameter? left = default;
@@ -18,11 +18,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left?.Equals(right) ?? (right is null);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Parameter? left = default;
@@ -32,11 +32,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left?.Equals(right) ?? false;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -46,11 +46,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Parameter first = ParameterTestsData.Create(modifier: Parameter.Mode.RefReadonly);
@@ -60,11 +60,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(@default: Snippet.From("42"));
@@ -74,11 +74,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentNamesThenReturnsFalse()
+    public async Task GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create();
@@ -88,11 +88,11 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentAttributesThenReturnsFalse()
+    public async Task GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
         Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "First" } });
@@ -102,6 +102,6 @@ public sealed class WhenEqualsParameterIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

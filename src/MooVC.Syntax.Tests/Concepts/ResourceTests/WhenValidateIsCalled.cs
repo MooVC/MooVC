@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenReturnsEmptyResults()
+    public async Task GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -19,12 +19,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenUndefinedAssemblyThenValidationErrorReturned()
+    public async Task GivenUndefinedAssemblyThenValidationErrorReturned()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create(assembly: Assembly.Undefined);
@@ -35,13 +35,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Resource.Assemblies));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Resource.Assemblies));
     }
 
     [Test]
-    public void GivenUndefinedHeaderThenValidationErrorReturned()
+    public async Task GivenUndefinedHeaderThenValidationErrorReturned()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create(header: Header.Undefined);
@@ -52,8 +52,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Resource.Headers));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Resource.Headers));
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public void GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
         Conversion.Intent? left = default;
@@ -16,14 +16,14 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool greaterThanOrEqual = left >= right;
 
         // Assert
-        lessThan.ShouldBeTrue();
-        greaterThan.ShouldBeFalse();
-        lessThanOrEqual.ShouldBeTrue();
-        greaterThanOrEqual.ShouldBeFalse();
+        _ = await Assert.That(lessThan).IsTrue();
+        _ = await Assert.That(greaterThan).IsFalse();
+        _ = await Assert.That(lessThanOrEqual).IsTrue();
+        _ = await Assert.That(greaterThanOrEqual).IsFalse();
     }
 
     [Test]
-    public void GivenFromAndToThenOrderingReflectsValues()
+    public async Task GivenFromAndToThenOrderingReflectsValues()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
@@ -36,9 +36,9 @@ public sealed class WhenComparisonOperatorsAreCalled
         bool lessThanOrEqual = left <= right;
 
         // Assert
-        greaterThan.ShouldBeTrue();
-        lessThan.ShouldBeFalse();
-        greaterThanOrEqual.ShouldBeTrue();
-        lessThanOrEqual.ShouldBeFalse();
+        _ = await Assert.That(greaterThan).IsTrue();
+        _ = await Assert.That(lessThan).IsFalse();
+        _ = await Assert.That(greaterThanOrEqual).IsTrue();
+        _ = await Assert.That(lessThanOrEqual).IsFalse();
     }
 }

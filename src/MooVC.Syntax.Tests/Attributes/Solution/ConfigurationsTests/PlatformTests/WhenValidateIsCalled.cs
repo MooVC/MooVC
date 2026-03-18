@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.PlatformTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUnspecifiedThenValidationIsSkipped()
+    public async Task GivenUnspecifiedThenValidationIsSkipped()
     {
         // Arrange
         Configurations.Platform subject = Configurations.Platform.Unspecified;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidValueThenValidationErrorReturned()
+    public async Task GivenInvalidValueThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Configurations.Platform(" Invalid");
@@ -34,8 +34,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Configurations.Platform));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Configurations.Platform));
     }
 }

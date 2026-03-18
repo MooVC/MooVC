@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.QualifierTests;
+﻿namespace MooVC.Syntax.Elements.QualifierTests;
 
 using System.Collections.Immutable;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsImmutableArrayIsCalled
     private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightDefaultThenReturnsFalse()
+    public async Task GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -18,11 +18,11 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -32,11 +32,11 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(same);
@@ -46,6 +46,6 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 public sealed class WhenGetBytesIsCalled
 {
     [Test]
-    public void GivenAStreamThenTheBytesWithinTheStreamAreReturned()
+    public async Task GivenAStreamThenTheBytesWithinTheStreamAreReturned()
     {
         // Arrange
         byte[] expected = [1, 2, 3];
@@ -16,11 +16,11 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
+    public async Task GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
     {
         // Arrange
         byte[] expected = [];
@@ -30,11 +30,11 @@ public sealed class WhenGetBytesIsCalled
         IEnumerable<byte> actual = stream.GetBytes();
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
-    public void GivenANullStreamThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenANullStreamThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
         Stream? source = default;
@@ -43,7 +43,7 @@ public sealed class WhenGetBytesIsCalled
         Action act = () => source!.GetBytes();
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(source));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(source));
     }
 }

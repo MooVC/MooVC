@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public void GivenEqualValuesThenReturnsSameHashCode()
+    public async Task GivenEqualValuesThenReturnsSameHashCode()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -14,6 +14,6 @@ public sealed class WhenGetHashCodeIsCalled
         int otherHashCode = other.GetHashCode();
 
         // Assert
-        hashCode.ShouldBe(otherHashCode);
+        _ = await Assert.That(hashCode).IsEqualTo(otherHashCode);
     }
 }

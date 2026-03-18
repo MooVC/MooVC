@@ -5,7 +5,7 @@ using System.Linq;
 public sealed class WhenCombineIsCalled
 {
     [Test]
-    public void GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
+    public async Task GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
         const int ExpectedValue = 9;
@@ -16,12 +16,12 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        actual.Count().ShouldBe(ExpectedCount);
-        actual.ShouldContain(ExpectedValue);
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).Contains(ExpectedValue);
     }
 
     [Test]
-    public void GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
+    public async Task GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
         const int ExpectedValue = 9;
@@ -31,11 +31,11 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        actual.ShouldHaveSingleItem().ShouldBe(ExpectedValue);
+        _ = await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
     }
 
     [Test]
-    public void GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
+    public async Task GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -45,11 +45,11 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
     [Test]
-    public void GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
+    public async Task GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
         const int ExpectedCount = 6;
@@ -60,12 +60,12 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.Count().ShouldBe(ExpectedCount);
-        actual.ShouldBe(source!.Concat(expected!));
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).IsEqualTo(source!.Concat(expected!));
     }
 
     [Test]
-    public void GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
+    public async Task GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -75,6 +75,6 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 }

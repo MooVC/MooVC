@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +11,7 @@ public sealed class WhenValidateIsCalled
     private const string InvalidInterfaceName = "Invalid Name";
 
     [Test]
-    public void GivenValidInterfaceThenNoValidationErrorsReturned()
+    public async Task GivenValidInterfaceThenNoValidationErrorsReturned()
     {
         // Arrange
         Interface subject = new Declaration
@@ -26,12 +26,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidNameThenValidationErrorsReturned()
+    public async Task GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange
         Interface subject = new Declaration
@@ -46,14 +46,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Interface));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenTooShortNameThenValidationErrorsReturned()
+    public async Task GivenTooShortNameThenValidationErrorsReturned()
     {
         // Arrange
         Interface subject = new Members.Declaration
@@ -68,14 +68,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Interface));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidDeclarationThenValidationErrorsReturned()
+    public async Task GivenInvalidDeclarationThenValidationErrorsReturned()
     {
         // Arrange
         Interface subject = new Members.Declaration
@@ -90,9 +90,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Interface));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

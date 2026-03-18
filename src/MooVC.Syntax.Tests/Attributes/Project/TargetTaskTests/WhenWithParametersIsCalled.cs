@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskTests;
 
 using System.Linq;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithParametersIsCalled
 {
     [Test]
-    public void GivenParametersThenReturnsUpdatedInstance()
+    public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
         Parameter existing = TargetTaskTestsData.CreateParameter();
@@ -23,9 +23,9 @@ public sealed class WhenWithParametersIsCalled
         TargetTask result = original.WithParameters(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Parameters.ShouldBe(original.Parameters.Concat([additional]));
-        result.Name.ShouldBe(original.Name);
-        result.Condition.ShouldBe(original.Condition);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat([additional]));
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
     }
 }

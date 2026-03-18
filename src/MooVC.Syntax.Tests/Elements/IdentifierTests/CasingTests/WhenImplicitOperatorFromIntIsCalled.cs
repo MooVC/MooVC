@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.IdentifierTests.CasingTests;
+﻿namespace MooVC.Syntax.Elements.IdentifierTests.CasingTests;
 
 public sealed class WhenImplicitOperatorFromIntIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     private const int CamelValue = 1;
 
     [Test]
-    public void GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsInt()
     {
         // Arrange
         int value = CamelValue;
@@ -15,12 +15,12 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         Identifier.Casing subject = value;
 
         // Assert
-        (subject == value).ShouldBeTrue();
-        subject.Equals(value).ShouldBeTrue();
+        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject.Equals(value)).IsTrue();
     }
 
     [Test]
-    public void GivenValueWhenRoundTrippedThenMatchesOriginal()
+    public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
         int value = PascalValue;
@@ -30,6 +30,6 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         int result = subject;
 
         // Assert
-        result.ShouldBe(value);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 }

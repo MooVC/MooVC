@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ProjectTests.RelativePathTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUnspecifiedThenValidationIsSkipped()
+    public async Task GivenUnspecifiedThenValidationIsSkipped()
     {
         // Arrange
         Project.RelativePath subject = Project.RelativePath.Unspecified;
@@ -18,12 +18,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenAbsolutePathThenValidationErrorReturned()
+    public async Task GivenAbsolutePathThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Project.RelativePath("/root/Project.csproj");
@@ -34,8 +34,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Project.RelativePath));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.RelativePath));
     }
 }

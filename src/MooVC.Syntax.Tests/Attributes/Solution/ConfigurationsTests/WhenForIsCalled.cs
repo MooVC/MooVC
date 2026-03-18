@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
 
 using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Attributes.Solution;
 public sealed class WhenForIsCalled
 {
     [Test]
-    public void GivenPlatformsThenReturnsUpdatedInstance()
+    public async Task GivenPlatformsThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Configurations();
@@ -16,8 +16,8 @@ public sealed class WhenForIsCalled
         Configurations result = original.For(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Platforms.ShouldBe(original.Platforms.Concat([updated]));
-        result.Builds.ShouldBe(original.Builds);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms.Concat([updated]));
+        _ = await Assert.That(result.Builds).IsEqualTo(original.Builds);
     }
 }

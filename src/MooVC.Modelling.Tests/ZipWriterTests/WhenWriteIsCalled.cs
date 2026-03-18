@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.ZipWriterTests;
+﻿namespace MooVC.Modelling.ZipWriterTests;
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -36,11 +36,11 @@ public sealed class WhenWriteIsCalled
         stream.Position = 0;
         using var archive = new ZipArchive(stream, ZipArchiveMode.Read, leaveOpen: true);
         ZipArchiveEntry entry = archive.Entries.Single();
-        entry.FullName.ShouldBe(expectedEntryPath);
+        _ = await Assert.That(entry.FullName).IsEqualTo(expectedEntryPath);
         await using Stream entryStream = entry.Open();
         using var reader = new StreamReader(entryStream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, leaveOpen: false);
         string entryContent = await reader.ReadToEndAsync();
-        entryContent.ShouldBe(Content);
+        _ = await Assert.That(entryContent).IsEqualTo(Content);
     }
 
     private static IOptionsSnapshot<ZipWriter.Options> CreateOptionsSnapshot()

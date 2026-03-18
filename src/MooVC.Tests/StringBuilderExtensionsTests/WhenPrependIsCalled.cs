@@ -13,7 +13,7 @@ public sealed class WhenPrependIsCalled
     private const string Greeting = "Hello";
 
     [Test]
-    public void GivenNullBuilderWhenValueIsCharThenThrowsArgumentNullException()
+    public async Task GivenNullBuilderWhenValueIsCharThenThrowsArgumentNullException()
     {
         // Arrange
         StringBuilder? builder = default;
@@ -22,11 +22,11 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder!.Prepend(LetterChar);
 
         // Assert
-        _ = Should.Throw<ArgumentNullException>(act);
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenNullBuilderWhenValueIsStringThenThrowsArgumentNullException()
+    public async Task GivenNullBuilderWhenValueIsStringThenThrowsArgumentNullException()
     {
         // Arrange
         StringBuilder? builder = default;
@@ -35,11 +35,11 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder!.Prepend(Greeting);
 
         // Assert
-        _ = Should.Throw<ArgumentNullException>(act);
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenDefaultCharWhenPrependThenBuilderIsUpdated()
+    public async Task GivenDefaultCharWhenPrependThenBuilderIsUpdated()
     {
         // Arrange
         var builder = new StringBuilder("abc");
@@ -48,12 +48,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(DefaultChar);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe("\0abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("\0abc");
     }
 
     [Test]
-    public void GivenWhitespaceCharWhenPrependThenBuilderStartsWithWhitespace()
+    public async Task GivenWhitespaceCharWhenPrependThenBuilderStartsWithWhitespace()
     {
         // Arrange
         var builder = new StringBuilder("abc");
@@ -62,12 +62,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(SpaceChar);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe(" abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo(" abc");
     }
 
     [Test]
-    public void GivenLetterCharWhenPrependThenBuilderStartsWithThatLetter()
+    public async Task GivenLetterCharWhenPrependThenBuilderStartsWithThatLetter()
     {
         // Arrange
         var builder = new StringBuilder(Word);
@@ -76,12 +76,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(LetterChar);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe("HWorld");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("HWorld");
     }
 
     [Test]
-    public void GivenMultipleCharsWhenPrependThenOrderIsReversed()
+    public async Task GivenMultipleCharsWhenPrependThenOrderIsReversed()
     {
         // Arrange
         var builder = new StringBuilder("c");
@@ -91,11 +91,11 @@ public sealed class WhenPrependIsCalled
         _ = builder.Prepend('a');
 
         // Assert
-        builder.ToString().ShouldBe("abc");
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
-    public void GivenNullStringWhenPrependThenThrowsArgumentNullException()
+    public async Task GivenNullStringWhenPrependThenThrowsArgumentNullException()
     {
         // Arrange
         var builder = new StringBuilder("abc");
@@ -105,11 +105,11 @@ public sealed class WhenPrependIsCalled
         Action act = () => _ = builder.Prepend(value!);
 
         // Assert
-        _ = Should.Throw<ArgumentNullException>(act);
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenEmptyStringWhenPrependThenBuilderIsUnchanged()
+    public async Task GivenEmptyStringWhenPrependThenBuilderIsUnchanged()
     {
         // Arrange
         var builder = new StringBuilder("abc");
@@ -118,12 +118,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(EmptyString);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe("abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
-    public void GivenWhitespaceStringWhenPrependThenBuilderStartsWithWhitespace()
+    public async Task GivenWhitespaceStringWhenPrependThenBuilderStartsWithWhitespace()
     {
         // Arrange
         var builder = new StringBuilder("abc");
@@ -132,12 +132,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(SpaceString);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe("   abc");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("   abc");
     }
 
     [Test]
-    public void GivenStringWhenPrependThenValueAppearsAtStart()
+    public async Task GivenStringWhenPrependThenValueAppearsAtStart()
     {
         // Arrange
         var builder = new StringBuilder(Word);
@@ -146,12 +146,12 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(Greeting);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe("HelloWorld");
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("HelloWorld");
     }
 
     [Test]
-    public void GivenMultipleStringsWhenPrependThenOrderIsReversed()
+    public async Task GivenMultipleStringsWhenPrependThenOrderIsReversed()
     {
         // Arrange
         var builder = new StringBuilder("c");
@@ -161,11 +161,11 @@ public sealed class WhenPrependIsCalled
         _ = builder.Prepend("a");
 
         // Assert
-        builder.ToString().ShouldBe("abc");
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
-    public void GivenRandomStringsWhenPrependThenConcatenationMatches()
+    public async Task GivenRandomStringsWhenPrependThenConcatenationMatches()
     {
         // Arrange
         var faker = new Faker();
@@ -177,7 +177,7 @@ public sealed class WhenPrependIsCalled
         StringBuilder result = builder.Prepend(head);
 
         // Assert
-        ReferenceEquals(result, builder).ShouldBeTrue();
-        builder.ToString().ShouldBe(head + tail);
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo(head + tail);
     }
 }

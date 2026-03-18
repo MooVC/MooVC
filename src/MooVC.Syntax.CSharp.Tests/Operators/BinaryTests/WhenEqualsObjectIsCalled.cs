@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public void GivenNonBinaryObjectThenReturnsFalse()
+    public async Task GivenNonBinaryObjectThenReturnsFalse()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -12,11 +12,11 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(new object());
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenBinaryObjectThenReturnsResultOfBinaryEquals()
+    public async Task GivenBinaryObjectThenReturnsResultOfBinaryEquals()
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
@@ -26,6 +26,6 @@ public sealed class WhenEqualsObjectIsCalled
         bool result = subject.Equals(target);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

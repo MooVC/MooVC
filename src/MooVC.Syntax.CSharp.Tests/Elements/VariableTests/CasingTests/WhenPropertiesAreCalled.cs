@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.VariableTests.CasingTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests.CasingTests;
 
 using MooVC.Syntax.Elements;
 
@@ -9,16 +9,16 @@ public sealed class WhenPropertiesAreCalled
     [Arguments(1, false, true, false, false)]
     [Arguments(2, false, false, true, false)]
     [Arguments(3, false, false, false, true)]
-    public void GivenCasingThenFlagsMatch(int value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
+    public async Task GivenCasingThenFlagsMatch(int value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
     {
         // Arrange
         Identifier.Casing subject = value;
 
         // Act & Assert
-        subject.IsPascal.ShouldBe(expectedPascal);
-        subject.IsCamel.ShouldBe(expectedCamel);
-        subject.IsKebab.ShouldBe(expectedKebab);
-        subject.IsSnake.ShouldBe(expectedSnake);
+        _ = await Assert.That(subject.IsPascal).IsEqualTo(expectedPascal);
+        _ = await Assert.That(subject.IsCamel).IsEqualTo(expectedCamel);
+        _ = await Assert.That(subject.IsKebab).IsEqualTo(expectedKebab);
+        _ = await Assert.That(subject.IsSnake).IsEqualTo(expectedSnake);
     }
 
     [Test]
@@ -26,7 +26,7 @@ public sealed class WhenPropertiesAreCalled
     [Arguments(1, "Camel")]
     [Arguments(2, "Kebab")]
     [Arguments(3, "Snake")]
-    public void GivenCasingThenToStringMatches(int value, string expected)
+    public async Task GivenCasingThenToStringMatches(int value, string expected)
     {
         // Arrange
         Identifier.Casing subject = value;
@@ -35,6 +35,6 @@ public sealed class WhenPropertiesAreCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

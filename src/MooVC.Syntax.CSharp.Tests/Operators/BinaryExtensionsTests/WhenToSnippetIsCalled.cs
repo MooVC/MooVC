@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryExtensionsTests;
 
 using System;
 using System.Collections.Immutable;
@@ -29,7 +29,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Binary> binaries = isDefault
@@ -42,25 +42,25 @@ public sealed class WhenToSnippetIsCalled
         var result = binaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        result.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullConstructThenAnExceptionIsThrown()
+    public async Task GivenNullConstructThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = binaries.ToSnippet(Snippet.Options.Default, type!));
+        ArgumentNullException exception = await Assert.That(() => _ = binaries.ToSnippet(Snippet.Options.Default, type!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(type));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
@@ -68,14 +68,14 @@ public sealed class WhenToSnippetIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = binaries.ToSnippet(options!, type));
+        ArgumentNullException exception = await Assert.That(() => _ = binaries.ToSnippet(options!, type)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenAnOrderedSnippetIsReturned()
+    public async Task GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
@@ -89,6 +89,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = binaries.ToSnippet(Snippet.Options.Default, type);
 
         // Assert
-        snippet.ToString().ShouldBe(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);
     }
 }

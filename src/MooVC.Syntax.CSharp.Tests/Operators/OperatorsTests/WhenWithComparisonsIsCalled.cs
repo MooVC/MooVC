@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.OperatorsTests;
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Operators.ComparisonTests;
 public sealed class WhenWithComparisonsIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsNewInstanceWithUpdatedComparisons()
+    public async Task GivenValueThenReturnsNewInstanceWithUpdatedComparisons()
     {
         // Arrange
         ImmutableArray<Comparison> originalComparisons = [ComparisonTestsData.Create()];
@@ -19,11 +19,11 @@ public sealed class WhenWithComparisonsIsCalled
         Operators result = original.WithComparisons(updatedComparisons);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Binaries.ShouldBe(original.Binaries);
-        result.Comparisons.ShouldBe(expectedComparisons);
-        result.Conversions.ShouldBe(original.Conversions);
-        result.Unaries.ShouldBe(original.Unaries);
-        original.Comparisons.ShouldBe(originalComparisons);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
+        _ = await Assert.That(result.Comparisons).IsEqualTo(expectedComparisons);
+        _ = await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
+        _ = await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
+        _ = await Assert.That(original.Comparisons).IsEqualTo(originalComparisons);
     }
 }

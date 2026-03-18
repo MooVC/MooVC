@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenEqualityOperatorIntentIntIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
     private const int Different = 0;
 
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
@@ -44,11 +44,11 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
@@ -58,11 +58,11 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
@@ -72,6 +72,6 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

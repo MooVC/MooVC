@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]
-    public void GivenPropertiesThenReturnsUpdatedInstance()
+    public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
         var existing = new Property { Name = new Name("Value"), Type = typeof(string) };
@@ -17,8 +17,8 @@ public sealed class WhenWithPropertiesIsCalled
         Record result = original.WithProperties(appended);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldBe(new[] { existing, appended });
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Properties).IsEqualTo(new[] { existing, appended });
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenEqualsSymbolIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create();
@@ -13,11 +13,11 @@ public sealed class WhenEqualsSymbolIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Symbol subject = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
@@ -27,11 +27,11 @@ public sealed class WhenEqualsSymbolIsCalled
         bool result = subject.Equals(other);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
@@ -41,11 +41,11 @@ public sealed class WhenEqualsSymbolIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentArgumentsThenReturnsFalse()
+    public async Task GivenDifferentArgumentsThenReturnsFalse()
     {
         // Arrange
         Symbol left = SymbolTestsData.CreateWithArgumentNames(argumentNames: "Inner");
@@ -55,6 +55,6 @@ public sealed class WhenEqualsSymbolIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

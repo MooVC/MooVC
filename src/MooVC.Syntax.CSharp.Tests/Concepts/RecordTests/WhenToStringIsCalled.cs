@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenUndefinedRecordThenReturnsEmpty()
+    public async Task GivenUndefinedRecordThenReturnsEmpty()
     {
         // Arrange
         Record subject = Record.Undefined;
@@ -15,11 +15,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsRecordSignature()
+    public async Task GivenValuesThenReturnsRecordSignature()
     {
         // Arrange
         var constructor = new Constructor();
@@ -35,9 +35,9 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldContain("internal abstract partial record");
-        result.ShouldContain(RecordTestsData.DefaultName);
-        result.ShouldContain("(");
-        result.ShouldContain(")");
+        _ = await Assert.That(result).Contains("internal abstract partial record");
+        _ = await Assert.That(result).Contains(RecordTestsData.DefaultName);
+        _ = await Assert.That(result).Contains("(");
+        _ = await Assert.That(result).Contains(")");
     }
 }

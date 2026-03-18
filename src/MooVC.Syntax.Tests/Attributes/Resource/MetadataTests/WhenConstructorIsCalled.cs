@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenMetadataIsUndefined()
+    public async Task GivenDefaultsThenMetadataIsUndefined()
     {
         // Act
         var subject = new Metadata();
 
         // Assert
-        subject.MimeType.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.Type.ShouldBe(Snippet.Empty);
-        subject.Value.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.MimeType).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Type).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Value).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var mimeType = Snippet.From(MetadataTestsData.DefaultMimeType);
@@ -37,10 +37,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.MimeType.ShouldBe(mimeType);
-        subject.Name.ShouldBe(name);
-        subject.Type.ShouldBe(type);
-        subject.Value.ShouldBe(value);
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.MimeType).IsEqualTo(mimeType);
+        _ = await Assert.That(subject.Name).IsEqualTo(name);
+        _ = await Assert.That(subject.Type).IsEqualTo(type);
+        _ = await Assert.That(subject.Value).IsEqualTo(value);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

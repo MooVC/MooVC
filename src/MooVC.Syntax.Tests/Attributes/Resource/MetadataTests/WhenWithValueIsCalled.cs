@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithValueIsCalled
 {
     [Test]
-    public void GivenValueThenReturnsUpdatedInstance()
+    public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
         Metadata original = MetadataTestsData.Create();
@@ -15,10 +15,10 @@ public sealed class WhenWithValueIsCalled
         Metadata result = original.WithValue(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Value.ShouldBe(updated);
-        result.MimeType.ShouldBe(original.MimeType);
-        result.Name.ShouldBe(original.Name);
-        result.Type.ShouldBe(original.Type);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Value).IsEqualTo(updated);
+        _ = await Assert.That(result.MimeType).IsEqualTo(original.MimeType);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Type).IsEqualTo(original.Type);
     }
 }

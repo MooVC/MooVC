@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenEqualsStringIsCalled
     private const string Other = "++";
 
     [Test]
-    public void GivenANullReferenceThenReturnsFalse()
+    public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -15,11 +15,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(null as string);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenTheSameValueThenReturnsTrue()
+    public async Task GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -28,11 +28,11 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Value);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenADifferentValueThenReturnsFalse()
+    public async Task GivenADifferentValueThenReturnsFalse()
     {
         // Arrange
         Unary.Type type = Unary.Type.Not;
@@ -41,6 +41,6 @@ public sealed class WhenEqualsStringIsCalled
         bool result = type.Equals(Other);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

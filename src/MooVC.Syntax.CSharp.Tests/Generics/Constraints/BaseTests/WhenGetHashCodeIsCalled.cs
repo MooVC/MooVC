@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Different = "Beta";
 
     [Test]
-    public void GivenMatchingBasesThenReturnSameHash()
+    public async Task GivenMatchingBasesThenReturnSameHash()
     {
         // Arrange
         Base first = new Symbol { Name = Same };
@@ -19,11 +19,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentBasesThenReturnDifferentHashes()
+    public async Task GivenDifferentBasesThenReturnDifferentHashes()
     {
         // Arrange
         Base first = new Symbol { Name = Same };
@@ -34,6 +34,6 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 }

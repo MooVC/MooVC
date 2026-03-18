@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenAValueThenReturnsTheValue()
+    public async Task GivenAValueThenReturnsTheValue()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = type.ToString();
 
         // Assert
-        result.ShouldBe("==");
+        _ = await Assert.That(result).IsEqualTo("==");
     }
 }

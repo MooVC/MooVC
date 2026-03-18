@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using System.Linq;
 using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
@@ -6,7 +6,7 @@ using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 public sealed class WhenAttributedWithIsCalled
 {
     [Test]
-    public void GivenAttributesThenReturnsNewInstanceWithUpdatedAttributes()
+    public async Task GivenAttributesThenReturnsNewInstanceWithUpdatedAttributes()
     {
         // Arrange
         Attribute[] existing =
@@ -31,11 +31,11 @@ public sealed class WhenAttributedWithIsCalled
         Parameter result = original.AttributedWith(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Attributes.Length.ShouldBe(existing.Length + additional.Length);
-        result.Attributes.ShouldBe(original.Attributes.Concat(additional));
-        result.Default.ShouldBe(original.Default);
-        result.Modifier.ShouldBe(original.Modifier);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Attributes.Length).IsEqualTo(existing.Length + additional.Length);
+        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
+        _ = await Assert.That(result.Default).IsEqualTo(original.Default);
+        _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

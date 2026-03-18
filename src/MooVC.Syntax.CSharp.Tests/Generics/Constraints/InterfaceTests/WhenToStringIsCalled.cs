@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.InterfaceTests;
 
 using MooVC.Syntax.CSharp.Members;
 
@@ -7,7 +7,7 @@ public sealed class WhenToStringIsCalled
     private const string InterfaceName = "IExample";
 
     [Test]
-    public void GivenInterfaceDeclarationThenReturnsName()
+    public async Task GivenInterfaceDeclarationThenReturnsName()
     {
         // Arrange
         Interface subject = new Declaration
@@ -19,6 +19,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(InterfaceName);
+        _ = await Assert.That(result).IsEqualTo(InterfaceName);
     }
 }

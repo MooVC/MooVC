@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
+﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Name = "Sample";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Declaration? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Func<Snippet> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenDeclarationThenSnippetMatchesStringRepresentation()
+    public async Task GivenDeclarationThenSnippetMatchesStringRepresentation()
     {
         // Arrange
         var subject = new Declaration
@@ -32,6 +32,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         Snippet result = subject;
 
         // Assert
-        result.ShouldBe(Snippet.From(subject.ToString()));
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
     }
 }

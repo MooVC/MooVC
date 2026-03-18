@@ -3,7 +3,7 @@
 public sealed class WhenAggregateIsCalled
 {
     [Test]
-    public void GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
+    public async Task GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
         IEnumerable<int>? items = default;
@@ -12,11 +12,11 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        results.ShouldBeEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenAnNullListThenAnEmptyListOfResultsIsReturned()
+    public async Task GivenAnNullListThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
         IEnumerable<int>? items = default;
@@ -25,11 +25,11 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
 
         // Assert
-        results.ShouldBeEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
+    public async Task GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
         IEnumerable<int> items = [1, 2, 3];
@@ -38,11 +38,11 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate<int, string>(default);
 
         // Assert
-        results.ShouldBeEmpty();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenAListThenResultsMatchingEachKeyAreReturned()
+    public async Task GivenAListThenResultsMatchingEachKeyAreReturned()
     {
         // Arrange
         IEnumerable<int> items = [1, 2, 3];
@@ -52,11 +52,11 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        results.ShouldBe(source.Values);
+        _ = await Assert.That(results).IsEqualTo(source.Values);
     }
 
     [Test]
-    public void GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
+    public async Task GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
     {
         // Arrange
         var items = new List<int> { 1, 2, 3 };
@@ -71,6 +71,6 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        results.ShouldBe(expected);
+        _ = await Assert.That(results).IsEqualTo(expected);
     }
 }

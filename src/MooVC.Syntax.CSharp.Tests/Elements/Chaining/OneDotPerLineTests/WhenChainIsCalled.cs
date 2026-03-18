@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.Chaining.OneDotPerLineTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.Chaining.OneDotPerLineTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenChainIsCalled
 {
     [Test]
-    public void GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
+    public async Task GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
     {
         // Arrange
         const string value = "var result = query.Where(item => item.IsActive).OrderBy(item => item.Name).Select(item => item.Id).ToList();";
@@ -27,12 +27,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(value, options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenPropertyAccessWhenLineIsLongThenDoesNotSplitByDots()
+    public async Task GivenPropertyAccessWhenLineIsLongThenDoesNotSplitByDots()
     {
         // Arrange
         const string value = "var result = source.Select(item => item.TimeStamp).ToList();";
@@ -51,12 +51,12 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(value, options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
+    public async Task GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
         const string value = "var result = query" +
@@ -85,7 +85,7 @@ public sealed class WhenChainIsCalled
         ImmutableArray<string> result = subject.Chain(value, options);
 
         // Assert
-        result.Length.ShouldBe(expected.Length);
-        result.ShouldBe(expected);
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

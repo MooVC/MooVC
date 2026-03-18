@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.OptionsTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 {
     [Test]
-    public void GivenEquivalentOptionsThenReturnsTrue()
+    public async Task GivenEquivalentOptionsThenReturnsTrue()
     {
         // Arrange
         var left = new Options();
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentOptionsThenReturnsFalse()
+    public async Task GivenDifferentOptionsThenReturnsFalse()
     {
         // Arrange
         var left = new Options();
@@ -29,6 +29,6 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

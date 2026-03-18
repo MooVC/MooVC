@@ -5,17 +5,17 @@ using global::Apex.Serialization;
 public sealed class WhenSerializerIsConstructed
 {
     [Test]
-    public void GivenNoSettingsThenADefaultSerializerIsCreated()
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
         using var serializer = new Serializer();
 
         // Assert
-        _ = serializer.ShouldNotBeNull();
+        _ = await Assert.That(serializer).IsNotNull();
     }
 
     [Test]
-    public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    public async Task GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         // Arrange
         var settings = new Settings
@@ -32,6 +32,6 @@ public sealed class WhenSerializerIsConstructed
         using var serializer = new Serializer(settings: settings);
 
         // Assert
-        _ = serializer.ShouldNotBeNull();
+        _ = await Assert.That(serializer).IsNotNull();
     }
 }

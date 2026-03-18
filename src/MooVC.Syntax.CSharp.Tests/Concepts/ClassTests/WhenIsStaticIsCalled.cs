@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 public sealed class WhenIsStaticIsCalled
 {
     [Test]
-    public void GivenIsStaticThenReturnsUpdatedInstance()
+    public async Task GivenIsStaticThenReturnsUpdatedInstance()
     {
         // Arrange
         Class original = ClassTestsData.Create(isStatic: false);
@@ -12,8 +12,8 @@ public sealed class WhenIsStaticIsCalled
         Class result = original.IsStatic(true);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.IsStatic.ShouldBeTrue();
-        original.IsStatic.ShouldBeFalse();
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.IsStatic).IsTrue();
+        _ = await Assert.That(original.IsStatic).IsFalse();
     }
 }

@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.Attributes.Solution.FolderTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenFolderIsUndefined()
+    public async Task GivenDefaultsThenFolderIsUndefined()
     {
         // Act
         var subject = new Folder();
 
         // Assert
-        subject.Files.ShouldBeEmpty();
-        subject.Items.ShouldBeEmpty();
-        subject.Projects.ShouldBeEmpty();
-        subject.Name.ShouldBe(Folder.Path.Root);
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Files).IsEmpty();
+        _ = await Assert.That(subject.Items).IsEmpty();
+        _ = await Assert.That(subject.Projects).IsEmpty();
+        _ = await Assert.That(subject.Name).IsEqualTo(Folder.Path.Root);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         File file = FolderTestsData.CreateFile();
@@ -34,10 +34,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Files.ShouldBe(new[] { file });
-        subject.Items.ShouldBe(new[] { item });
-        subject.Name.ShouldBe(new Folder.Path(FolderTestsData.DefaultName));
-        subject.Projects.ShouldBe(new[] { project });
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
+        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Name).IsEqualTo(new Folder.Path(FolderTestsData.DefaultName));
+        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

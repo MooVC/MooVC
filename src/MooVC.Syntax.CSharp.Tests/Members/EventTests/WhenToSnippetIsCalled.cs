@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.CSharp.Members.EventTests;
+﻿namespace MooVC.Syntax.CSharp.Members.EventTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Event subject = EventTestsData.Create();
         Event.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenDefaultBehavioursThenSignatureIsTerminated()
+    public async Task GivenDefaultBehavioursThenSignatureIsTerminated()
     {
         // Arrange
         Event subject = EventTestsData.Create();
@@ -28,6 +28,6 @@ public sealed class WhenToSnippetIsCalled
         string representation = subject.ToSnippet(Event.Options.Default);
 
         // Assert
-        representation.ShouldBe("public event Handler Occurred;");
+        _ = await Assert.That(representation).IsEqualTo("public event Handler Occurred;");
     }
 }

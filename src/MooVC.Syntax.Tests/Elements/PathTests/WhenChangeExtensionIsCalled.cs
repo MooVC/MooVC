@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenChangeExtensionIsCalled
 {
     [Test]
-    public void GivenExtensionThenReturnsUpdatedPath()
+    public async Task GivenExtensionThenReturnsUpdatedPath()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -12,7 +12,7 @@ public sealed class WhenChangeExtensionIsCalled
         Path result = subject.ChangeExtension(PathTestsData.ChangedExtension);
 
         // Assert
-        result.ShouldNotBeSameAs(subject);
-        result.ToString().ShouldBe(PathTestsData.DefaultChangedExtensionPath);
+        _ = await Assert.That(result).IsNotSameReferenceAs(subject);
+        _ = await Assert.That(result.ToString()).IsEqualTo(PathTestsData.DefaultChangedExtensionPath);
     }
 }

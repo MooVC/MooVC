@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.Elements.PathTests;
+﻿namespace MooVC.Syntax.Elements.PathTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenEmptyThenReturnsEmpty()
+    public async Task GivenEmptyThenReturnsEmpty()
     {
         // Arrange
         var subject = new Path(string.Empty);
@@ -12,11 +12,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValueThenReturnsValue()
+    public async Task GivenValueThenReturnsValue()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
@@ -25,6 +25,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(PathTestsData.DefaultPath);
+        _ = await Assert.That(result).IsEqualTo(PathTestsData.DefaultPath);
     }
 }

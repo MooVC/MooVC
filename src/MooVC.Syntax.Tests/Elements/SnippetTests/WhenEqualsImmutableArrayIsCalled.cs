@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Elements.SnippetTests;
+﻿namespace MooVC.Syntax.Elements.SnippetTests;
 
 using System.Collections.Immutable;
 
@@ -8,7 +8,7 @@ public sealed class WhenEqualsImmutableArrayIsCalled
     private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
 
     [Test]
-    public void GivenLeftValueRightDefaultThenReturnsFalse()
+    public async Task GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
         var left = new Snippet(same);
@@ -18,11 +18,11 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Snippet(same);
@@ -33,12 +33,12 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeTrue();
-        resultRightLeft.ShouldBeTrue();
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Snippet(same);
@@ -49,7 +49,7 @@ public sealed class WhenEqualsImmutableArrayIsCalled
         bool resultRightLeft = right.Equals(left);
 
         // Assert
-        resultLeftRight.ShouldBeFalse();
-        resultRightLeft.ShouldBeFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

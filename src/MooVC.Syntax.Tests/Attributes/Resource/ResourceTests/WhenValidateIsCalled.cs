@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 using System.ComponentModel.DataAnnotations;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public void GivenUndefinedThenNoValidationErrorReturned()
+    public async Task GivenUndefinedThenNoValidationErrorReturned()
     {
         // Arrange
         Resource subject = Resource.Undefined;
@@ -17,12 +17,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultiLineCustomToolNamespaceThenValidationErrorReturned()
+    public async Task GivenMultiLineCustomToolNamespaceThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Resource
@@ -38,13 +38,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Resource.CustomToolNamespace));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Resource.CustomToolNamespace));
     }
 
     [Test]
-    public void GivenEmptyLocationThenValidationErrorReturned()
+    public async Task GivenEmptyLocationThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Resource
@@ -59,13 +59,13 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.Count.ShouldBe(1);
-        results[0].MemberNames.ShouldContain(nameof(Resource.Location));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Resource.Location));
     }
 
     [Test]
-    public void GivenValidValuesThenNoValidationErrorReturned()
+    public async Task GivenValidValuesThenNoValidationErrorReturned()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
@@ -76,7 +76,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

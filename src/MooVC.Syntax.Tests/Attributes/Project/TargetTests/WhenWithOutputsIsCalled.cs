@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
 using MooVC.Syntax.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenWithOutputsIsCalled
     private const string UpdatedOutputs = "UpdatedOutputs";
 
     [Test]
-    public void GivenOutputsThenReturnsUpdatedInstance()
+    public async Task GivenOutputsThenReturnsUpdatedInstance()
     {
         // Arrange
         Target original = TargetTestsData.Create(task: TargetTestsData.CreateTask());
@@ -17,9 +17,9 @@ public sealed class WhenWithOutputsIsCalled
         Target result = original.WithOutputs(updated);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Outputs.ShouldBe(updated);
-        result.Returns.ShouldBe(original.Returns);
-        result.Name.ShouldBe(original.Name);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Outputs).IsEqualTo(updated);
+        _ = await Assert.That(result.Returns).IsEqualTo(original.Returns);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

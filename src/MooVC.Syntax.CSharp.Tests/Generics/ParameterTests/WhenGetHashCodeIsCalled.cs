@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.ParameterTests;
 
 using MooVC.Syntax.CSharp.Elements.SymbolTests;
 using MooVC.Syntax.CSharp.Generics.Constraints;
@@ -9,7 +9,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string DefaultName = "TValue";
 
     [Test]
-    public void GivenMatchingParametersThenReturnSameHash()
+    public async Task GivenMatchingParametersThenReturnSameHash()
     {
         // Arrange
         Parameter first = Create();
@@ -20,11 +20,11 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldBe(secondHash);
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 
     [Test]
-    public void GivenDifferentParametersThenReturnDifferentHashes()
+    public async Task GivenDifferentParametersThenReturnDifferentHashes()
     {
         // Arrange
         Parameter first = Create();
@@ -35,7 +35,7 @@ public sealed class WhenGetHashCodeIsCalled
         int secondHash = second.GetHashCode();
 
         // Assert
-        firstHash.ShouldNotBe(secondHash);
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
     }
 
     private static Parameter Create(string name = DefaultName)

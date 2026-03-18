@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
     private const string InvalidName = "Invalid Name";
 
     [Test]
-    public void GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
+    public async Task GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
     {
         // Arrange
         Constraint constraint = Constraint.Unspecified;
@@ -25,12 +25,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenInvalidInterfaceThenValidationErrorsReturned()
+    public async Task GivenInvalidInterfaceThenValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -45,14 +45,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Interface));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Interface));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenInvalidBaseThenValidationErrorsReturned()
+    public async Task GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -67,14 +67,14 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        _ = results.ShouldHaveSingleItem();
-        results[0].MemberNames.ShouldContain(nameof(Symbol.Moniker));
-        results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await results.Single();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
-    public void GivenValidConstraintThenNoValidationErrorsReturned()
+    public async Task GivenValidConstraintThenNoValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -92,12 +92,12 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeTrue();
-        results.ShouldBeEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
-    public void GivenMultipleInvalidValuesThenAllValidationErrorsReturned()
+    public async Task GivenMultipleInvalidValuesThenAllValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
@@ -113,9 +113,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        valid.ShouldBeFalse();
-        results.ShouldNotBeEmpty();
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
-        results.ShouldContain(result => result.MemberNames.Contains(nameof(Interface)));
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).IsNotEmpty();
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Interface)));
     }
 }

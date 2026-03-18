@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenPlusOperatorIsCalled
 {
     [Test]
-    public void GivenReadonlyRecordThenCombinedKindReturned()
+    public async Task GivenReadonlyRecordThenCombinedKindReturned()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.ReadOnly;
@@ -13,11 +13,11 @@ public sealed class WhenPlusOperatorIsCalled
         Struct.Kind result = left + right;
 
         // Assert
-        result.ToString().ShouldBe("readonly record");
+        _ = await Assert.That(result.ToString()).IsEqualTo("readonly record");
     }
 
     [Test]
-    public void GivenInvalidCombinationThenThrows()
+    public async Task GivenInvalidCombinationThenThrows()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Ref;
@@ -27,11 +27,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left + right;
 
         // Assert
-        _ = result.ShouldThrow<InvalidOperationException>();
+        _ = await Assert.That(result).Throws<InvalidOperationException>();
     }
 
     [Test]
-    public void GivenNullLeftThenThrows()
+    public async Task GivenNullLeftThenThrows()
     {
         // Arrange
         Struct.Kind? left = default;
@@ -41,11 +41,11 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left! + right;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenNullRightThenThrows()
+    public async Task GivenNullRightThenThrows()
     {
         // Arrange
         Struct.Kind left = Struct.Kind.Record;
@@ -55,6 +55,6 @@ public sealed class WhenPlusOperatorIsCalled
         Func<Struct.Kind> result = () => left + right!;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

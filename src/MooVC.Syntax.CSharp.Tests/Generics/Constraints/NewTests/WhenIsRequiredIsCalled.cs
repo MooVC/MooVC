@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenIsRequiredIsCalled
 {
     [Test]
-    public void GivenRequiredValueThenReturnsTrue()
+    public async Task GivenRequiredValueThenReturnsTrue()
     {
         // Arrange
         New subject = New.Required;
@@ -12,12 +12,12 @@ public sealed class WhenIsRequiredIsCalled
         bool result = subject.IsRequired;
 
         // Assert
-        result.ShouldBeTrue();
-        subject.IsNotRequired.ShouldBeFalse();
+        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(subject.IsNotRequired).IsFalse();
     }
 
     [Test]
-    public void GivenNonRequiredValueThenReturnsFalse()
+    public async Task GivenNonRequiredValueThenReturnsFalse()
     {
         // Arrange
         New subject = New.NotRequired;
@@ -26,7 +26,7 @@ public sealed class WhenIsRequiredIsCalled
         bool result = subject.IsRequired;
 
         // Assert
-        result.ShouldBeFalse();
-        subject.IsNotRequired.ShouldBeTrue();
+        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(subject.IsNotRequired).IsTrue();
     }
 }

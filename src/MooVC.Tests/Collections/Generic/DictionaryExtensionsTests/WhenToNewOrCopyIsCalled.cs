@@ -1,9 +1,9 @@
-namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
+﻿namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
 
 public sealed class WhenToNewOrCopyIsCalled
 {
     [Test]
-    public void GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
+    public async Task GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
     {
         // Arrange
         IDictionary<string, object>? original = default;
@@ -12,12 +12,12 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, object>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = snapshot.ShouldNotBeNull();
-        snapshot.ShouldBeEmpty();
+        _ = await Assert.That(snapshot).IsNotNull();
+        _ = await Assert.That(snapshot).IsEmpty();
     }
 
     [Test]
-    public void GivenADictionaryThenACloneIsReturned()
+    public async Task GivenADictionaryThenACloneIsReturned()
     {
         // Arrange
         IDictionary<string, int>? original = new Dictionary<string, int>
@@ -30,12 +30,12 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        snapshot.ShouldNotBeSameAs(original);
-        snapshot.ShouldBe(original);
+        _ = await Assert.That(snapshot).IsNotSameReferenceAs(original);
+        _ = await Assert.That(snapshot).IsEqualTo(original);
     }
 
     [Test]
-    public void GivenAnEmptyDictionaryThenAnEmptyCloneIsReturned()
+    public async Task GivenAnEmptyDictionaryThenAnEmptyCloneIsReturned()
     {
         // Arrange
         IDictionary<string, int>? original = new Dictionary<string, int>();
@@ -44,7 +44,7 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        snapshot.ShouldNotBeSameAs(original);
-        snapshot.ShouldBe(original);
+        _ = await Assert.That(snapshot).IsNotSameReferenceAs(original);
+        _ = await Assert.That(snapshot).IsEqualTo(original);
     }
 }

@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
+﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
 using System.Linq;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenWithPropertiesIsCalled
 {
     [Test]
-    public void GivenPropertiesThenReturnsUpdatedInstance()
+    public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
         Property existing = PropertyGroupTestsData.CreateProperty();
@@ -24,9 +24,9 @@ public sealed class WhenWithPropertiesIsCalled
         PropertyGroup result = original.WithProperties(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Properties.ShouldBe(original.Properties.Concat([additional]));
-        result.Condition.ShouldBe(original.Condition);
-        result.Label.ShouldBe(original.Label);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Properties).IsEqualTo(original.Properties.Concat([additional]));
+        _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
+        _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }
 }

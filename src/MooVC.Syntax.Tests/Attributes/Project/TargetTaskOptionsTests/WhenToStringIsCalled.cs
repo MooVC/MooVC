@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
+﻿namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenToStringIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenToStringIsCalled
     [Arguments("WarnAndContinue", nameof(TargetTask.Options.WarnAndContinue))]
     [Arguments("ErrorAndContinue", nameof(TargetTask.Options.ErrorAndContinue))]
     [Arguments("ErrorAndStop", nameof(TargetTask.Options.ErrorAndStop))]
-    public void GivenOptionThenReturnsValue(string expected, string field)
+    public async Task GivenOptionThenReturnsValue(string expected, string field)
     {
         // Arrange
         TargetTask.Options subject = typeof(TargetTask.Options)
@@ -17,6 +17,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

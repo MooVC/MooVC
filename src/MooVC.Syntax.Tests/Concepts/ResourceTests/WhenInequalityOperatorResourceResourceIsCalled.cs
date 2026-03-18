@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.Concepts.ResourceTests;
+﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
 using MooVC.Syntax.Attributes.Resource;
 using Resource = MooVC.Syntax.Concepts.Resource;
@@ -6,7 +6,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 public sealed class WhenInequalityOperatorResourceResourceIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Resource? left = default;
@@ -16,11 +16,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
         Resource? left = default;
@@ -30,11 +30,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         Resource left = ResourceTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Resource left = ResourceTestsData.Create();
@@ -58,6 +58,6 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

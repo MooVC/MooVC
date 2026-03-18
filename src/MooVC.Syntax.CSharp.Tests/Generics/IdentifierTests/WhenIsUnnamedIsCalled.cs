@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.IdentifierTests;
 
 public sealed class WhenIsUnnamedIsCalled
 {
     [Test]
-    public void GivenUnnamedIdentifierThenReturnsTrue()
+    public async Task GivenUnnamedIdentifierThenReturnsTrue()
     {
         // Arrange
         Identifier subject = Identifier.Unnamed;
@@ -12,11 +12,11 @@ public sealed class WhenIsUnnamedIsCalled
         bool result = subject.IsUnnamed;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenNamedIdentifierThenReturnsFalse()
+    public async Task GivenNamedIdentifierThenReturnsFalse()
     {
         // Arrange
         var subject = new Identifier("TValue");
@@ -25,6 +25,6 @@ public sealed class WhenIsUnnamedIsCalled
         bool result = subject.IsUnnamed;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenIsUnspecifiedIsCalled
 {
     [Test]
-    public void GivenUnspecifiedBaseThenReturnsTrue()
+    public async Task GivenUnspecifiedBaseThenReturnsTrue()
     {
         // Arrange
         Base subject = Base.Unspecified;
@@ -14,11 +14,11 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenSpecifiedBaseThenReturnsFalse()
+    public async Task GivenSpecifiedBaseThenReturnsFalse()
     {
         // Arrange
         Base subject = new Symbol { Name = "Base" };
@@ -27,6 +27,6 @@ public sealed class WhenIsUnspecifiedIsCalled
         bool result = subject.IsUnspecified;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

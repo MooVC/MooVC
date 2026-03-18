@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
@@ -7,7 +7,7 @@ public sealed class WhenToStringIsCalled
     private const string BaseName = "BaseType";
 
     [Test]
-    public void GivenUnspecifiedBaseThenReturnsEmpty()
+    public async Task GivenUnspecifiedBaseThenReturnsEmpty()
     {
         // Arrange
         Base subject = Base.Unspecified;
@@ -16,11 +16,11 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenSpecifiedBaseThenReturnsName()
+    public async Task GivenSpecifiedBaseThenReturnsName()
     {
         // Arrange
         Base subject = new Symbol { Name = BaseName };
@@ -29,6 +29,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(BaseName);
+        _ = await Assert.That(result).IsEqualTo(BaseName);
     }
 }

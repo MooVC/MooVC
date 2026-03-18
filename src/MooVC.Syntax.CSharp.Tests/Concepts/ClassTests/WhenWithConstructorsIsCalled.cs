@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Members;
 public sealed class WhenWithConstructorsIsCalled
 {
     [Test]
-    public void GivenConstructorsThenReturnsUpdatedInstance()
+    public async Task GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
         Constructor[] existing =
@@ -27,9 +27,9 @@ public sealed class WhenWithConstructorsIsCalled
         Class result = original.WithConstructors(additional);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Constructors.ShouldBe(original.Constructors.Concat(additional));
-        result.Declaration.ShouldBe(original.Declaration);
-        original.Constructors.ShouldBe(existing);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Constructors).IsEqualTo(original.Constructors.Concat(additional));
+        _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
+        _ = await Assert.That(original.Constructors).IsEqualTo(existing);
     }
 }

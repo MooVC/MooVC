@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Project.MetadataTests;
+﻿namespace MooVC.Syntax.Attributes.Project.MetadataTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsTrue()
+    public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Metadata? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsTrue()
+    public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
         Metadata left = MetadataTestsData.Create();
@@ -29,11 +29,11 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Metadata left = MetadataTestsData.Create();
@@ -43,6 +43,6 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
         bool result = left == right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

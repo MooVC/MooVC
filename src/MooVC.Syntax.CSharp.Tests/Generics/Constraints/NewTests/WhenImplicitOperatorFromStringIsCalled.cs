@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenNewConstraintThenCreatesNew()
+    public async Task GivenNewConstraintThenCreatesNew()
     {
         // Arrange
         const string Value = "new()";
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         New result = Value;
 
         // Assert
-        result.ToString().ShouldBe(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 
     [Test]
-    public void GivenEmptyValueThenCreatesNew()
+    public async Task GivenEmptyValueThenCreatesNew()
     {
         // Arrange
         const string Value = "";
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         New result = Value;
 
         // Assert
-        result.ToString().ShouldBe(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 }

@@ -1,25 +1,25 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public void GivenNullOptionsThenThrows()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
         Property.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = subject.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = subject.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenGetOnlyPropertyWhenInlineIsLambdaThenBodyIsRendered()
+    public async Task GivenGetOnlyPropertyWhenInlineIsLambdaThenBodyIsRendered()
     {
         // Arrange
         var behaviours = new Property.Methods
@@ -36,6 +36,6 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         const string Expected = "public string Value => value;";
 
-        representation.ShouldBe(Expected);
+        _ = await Assert.That(representation).IsEqualTo(Expected);
     }
 }

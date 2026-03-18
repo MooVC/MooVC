@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenEqualsStructIsCalled
 {
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Struct first = StructTestsData.Create();
@@ -15,11 +15,11 @@ public sealed class WhenEqualsStructIsCalled
         bool result = first.Equals(second);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEqualValueThenReturnsTrue()
+    public async Task GivenEqualValueThenReturnsTrue()
     {
         // Arrange
         Struct left = StructTestsData.Create(scope: Scope.Internal);
@@ -29,11 +29,11 @@ public sealed class WhenEqualsStructIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Struct left = StructTestsData.Create(behavior: Struct.Kind.Ref);
@@ -43,6 +43,6 @@ public sealed class WhenEqualsStructIsCalled
         bool result = left.Equals(right);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

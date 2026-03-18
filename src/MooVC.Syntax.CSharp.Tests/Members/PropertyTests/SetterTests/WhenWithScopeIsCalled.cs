@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
+﻿namespace MooVC.Syntax.CSharp.Members.PropertyTests.SetterTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenWithScopeIsCalled
 {
     [Test]
-    public void GivenScopeThenReturnsUpdatedInstance()
+    public async Task GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
         var original = new Property.Setter { Scope = Scope.Internal };
@@ -14,11 +14,11 @@ public sealed class WhenWithScopeIsCalled
         Property.Setter result = original.WithScope(Scope.Private);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Behaviour.ShouldBe(original.Behaviour);
-        result.Mode.ShouldBe(original.Mode);
-        result.Scope.ShouldBe(Scope.Private);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Behaviour).IsEqualTo(original.Behaviour);
+        _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
 
-        original.Scope.ShouldBe(Scope.Internal);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Internal);
     }
 }

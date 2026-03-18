@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.AttributeExtensionsTests;
+﻿namespace MooVC.Syntax.CSharp.Members.AttributeExtensionsTests;
 
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp.Concepts;
@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
     [Test]
     [Arguments(true)]
     [Arguments(false)]
-    public void GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
     {
         // Arrange
         ImmutableArray<Attribute> attributes = isDefault
@@ -24,25 +24,25 @@ public sealed class WhenToSnippetIsCalled
         var snippet = attributes.ToSnippet(Type.Options.Default);
 
         // Assert
-        snippet.ShouldBe(Snippet.Empty);
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
     }
 
     [Test]
-    public void GivenNullOptionsThenAnExceptionIsThrown()
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
         ImmutableArray<Attribute> attributes = [AttributeTestsData.Create()];
         Type.Options? options = default;
 
         // Act
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(() => _ = attributes.ToSnippet(options!));
+        ArgumentNullException exception = await Assert.That(() => _ = attributes.ToSnippet(options!)).Throws<ArgumentNullException>();
 
         // Assert
-        exception.ParamName.ShouldBe(nameof(options));
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]
-    public void GivenValuesThenAnOrderedSnippetIsReturned()
+    public async Task GivenValuesThenAnOrderedSnippetIsReturned()
     {
         // Arrange
         Attribute first = AttributeTestsData.Create(name: FirstAttributeName);
@@ -59,6 +59,6 @@ public sealed class WhenToSnippetIsCalled
         var snippet = attributes.ToSnippet(Type.Options.Default);
 
         // Assert
-        snippet.ToString().ShouldBe(expected);
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 }

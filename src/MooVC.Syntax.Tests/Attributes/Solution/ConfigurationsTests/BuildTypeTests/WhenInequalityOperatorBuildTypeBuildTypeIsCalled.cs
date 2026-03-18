@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
+﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests.BuildTypeTests;
 
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
 {
     [Test]
-    public void GivenBothNullThenReturnsFalse()
+    public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Configurations.BuildType? left = default;
@@ -15,11 +15,11 @@ public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenEqualValuesThenReturnsFalse()
+    public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Configurations.BuildType("Custom");
@@ -29,11 +29,11 @@ public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         var left = new Configurations.BuildType("Custom");
@@ -43,6 +43,6 @@ public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
         bool result = left != right;
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 }

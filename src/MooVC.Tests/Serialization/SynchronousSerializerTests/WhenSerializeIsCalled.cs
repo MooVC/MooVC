@@ -37,8 +37,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            _ = input2.ShouldBeAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -49,7 +49,7 @@ public sealed class WhenSerializeIsCalled
         _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -62,8 +62,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            _ = input2.ShouldBeAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -74,7 +74,7 @@ public sealed class WhenSerializeIsCalled
         await serializer.Serialize(instance, stream, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -87,8 +87,8 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            _ = input2.ShouldBeAssignableTo<Stream>();
+            _ = await Assert.That(input1).IsEqualTo(instance);
+            _ = await Assert.That(input2).IsAssignableTo<Stream>();
 
             wasInvoked = true;
         }
@@ -99,7 +99,7 @@ public sealed class WhenSerializeIsCalled
         _ = await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     [Test]
@@ -114,7 +114,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, target!, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(target));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(target));
     }
 }

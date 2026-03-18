@@ -7,7 +7,7 @@ public sealed class WhenToSnakeCaseIsCalled
     private static readonly Faker generator = new();
 
     [Test]
-    public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         string? value = default;
@@ -16,12 +16,12 @@ public sealed class WhenToSnakeCaseIsCalled
         Action action = () => value!.ToSnakeCase();
 
         // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
-    public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
+    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
         string value = string.Empty;
@@ -30,8 +30,8 @@ public sealed class WhenToSnakeCaseIsCalled
         Action action = () => value.ToSnakeCase();
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -39,14 +39,14 @@ public sealed class WhenToSnakeCaseIsCalled
     [Arguments("\t")]
     [Arguments("\r\n")]
     [Arguments("   ")]
-    public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
+    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
         Action action = () => value.ToSnakeCase();
 
         // Assert
-        ArgumentException exception = Should.Throw<ArgumentException>(action);
-        exception.ParamName.ShouldBe(nameof(value));
+        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
     [Test]
@@ -64,30 +64,30 @@ public sealed class WhenToSnakeCaseIsCalled
     [Arguments("Section2Update", "section2_update")]
     [Arguments("ÉclairDeluxe", "éclair_deluxe")]
     [Arguments("ΣigmaValue", "σigma_value")]
-    public void GivenValuesThenExpectedSnakeCaseIsReturned(string value, string expected)
+    public async Task GivenValuesThenExpectedSnakeCaseIsReturned(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
     [Arguments("A", "a")]
     [Arguments("ABC", "abc")]
     [Arguments("XMLHttpRequest", "xml_http_request")]
-    public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
+    public async Task GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
+    public async Task GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
     {
         // Arrange
         string value = "alpha  beta---gamma___delta";
@@ -96,11 +96,11 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe("alpha_beta_gamma_delta");
+        _ = await Assert.That(result).IsEqualTo("alpha_beta_gamma_delta");
     }
 
     [Test]
-    public void GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
+    public async Task GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
     {
         // Arrange
         string value = "  _Alpha__Beta- ";
@@ -109,11 +109,11 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe("alpha_beta");
+        _ = await Assert.That(result).IsEqualTo("alpha_beta");
     }
 
     [Test]
-    public void GivenDigitBeforeUppercaseThenSeparatorIsInserted()
+    public async Task GivenDigitBeforeUppercaseThenSeparatorIsInserted()
     {
         // Arrange
         string value = "Part3Revision";
@@ -122,37 +122,37 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe("part3_revision");
+        _ = await Assert.That(result).IsEqualTo("part3_revision");
     }
 
     [Test]
     [Arguments("__", "")]
     [Arguments("---", "")]
     [Arguments("___---___", "")]
-    public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
+    public async Task GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
     [Arguments("123", "123")]
     [Arguments("9lives", "9lives")]
     [Arguments("Version2Alpha3", "version2_alpha3")]
-    public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
+    public async Task GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe(expected);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
-    public void GivenUnicodeUppercaseThenLowercaseIsInvariant()
+    public async Task GivenUnicodeUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
         CultureInfo originalCulture = CultureInfo.CurrentCulture;
@@ -172,11 +172,11 @@ public sealed class WhenToSnakeCaseIsCalled
         }
 
         // Assert
-        result.ShouldBe("istanbul_city");
+        _ = await Assert.That(result).IsEqualTo("istanbul_city");
     }
 
     [Test]
-    public void GivenWordsTwiceThenResultIsIdempotent()
+    public async Task GivenWordsTwiceThenResultIsIdempotent()
     {
         // Arrange
         const int wordCount = 10;
@@ -212,12 +212,12 @@ public sealed class WhenToSnakeCaseIsCalled
         {
             string firstResult = word.ToSnakeCase();
             string secondResult = firstResult.ToSnakeCase();
-            secondResult.ShouldBe(firstResult);
+            _ = await Assert.That(secondResult).IsEqualTo(firstResult);
         }
     }
 
     [Test]
-    public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
+    public async Task GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
     {
         // Arrange
         string value = new('A', 16_384);
@@ -226,6 +226,6 @@ public sealed class WhenToSnakeCaseIsCalled
         string result = value.ToSnakeCase();
 
         // Assert
-        result.ShouldBe(new string('a', 16_384));
+        _ = await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 }

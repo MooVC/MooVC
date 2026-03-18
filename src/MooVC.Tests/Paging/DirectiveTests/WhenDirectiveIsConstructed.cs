@@ -8,21 +8,21 @@ public sealed class WhenDirectiveIsConstructed
     [Arguments(Directive.FirstPage + 5, Directive.MinimumLimit + 10)]
     [Arguments(Directive.FirstPage, ushort.MaxValue)]
     [Arguments(ushort.MaxValue, Directive.MinimumLimit)]
-    public void GivenAValidPageAndSizeThenThePropertiesAreSetToMatch(ushort page, ushort limit)
+    public async Task GivenAValidPageAndSizeThenThePropertiesAreSetToMatch(ushort page, ushort limit)
     {
         // Act
         Directive directive = new(Limit: limit, Page: page);
 
         // Assert
-        directive.Limit.ShouldBe(limit);
-        directive.Page.ShouldBe(page);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(page);
     }
 
     [Test]
     [Arguments(Directive.MinimumLimit)]
     [Arguments(Directive.MinimumLimit + 10)]
     [Arguments(ushort.MaxValue)]
-    public void GivenAnInvalidPageAndAValidSizeThenThePageIsSetToTheFirstPageAndTheSizeIsSetToTheConfigured(ushort limit)
+    public async Task GivenAnInvalidPageAndAValidSizeThenThePageIsSetToTheFirstPageAndTheSizeIsSetToTheConfigured(ushort limit)
     {
         unchecked
         {
@@ -33,8 +33,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            directive.Limit.ShouldBe(limit);
-            directive.Page.ShouldBe(Directive.FirstPage);
+            _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+            _ = await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
         }
     }
 
@@ -42,7 +42,7 @@ public sealed class WhenDirectiveIsConstructed
     [Arguments(Directive.FirstPage)]
     [Arguments(Directive.FirstPage + 5)]
     [Arguments(ushort.MaxValue)]
-    public void GivenAnValidPageAndAnInvalidSizeThenThePageIsSetToTheConfiguredAndTheSizeIsSetToTheMinimum(ushort page)
+    public async Task GivenAnValidPageAndAnInvalidSizeThenThePageIsSetToTheConfiguredAndTheSizeIsSetToTheMinimum(ushort page)
     {
         unchecked
         {
@@ -53,13 +53,13 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            directive.Limit.ShouldBe(Directive.MinimumLimit);
-            directive.Page.ShouldBe(page);
+            _ = await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
+            _ = await Assert.That(directive.Page).IsEqualTo(page);
         }
     }
 
     [Test]
-    public void GivenBothInvalidPageAndSizeThenBothAreSetToTheirDefaultValues()
+    public async Task GivenBothInvalidPageAndSizeThenBothAreSetToTheirDefaultValues()
     {
         unchecked
         {
@@ -71,8 +71,8 @@ public sealed class WhenDirectiveIsConstructed
             Directive directive = new(Limit: limit, Page: page);
 
             // Assert
-            directive.Limit.ShouldBe(Directive.MinimumLimit);
-            directive.Page.ShouldBe(Directive.FirstPage);
+            _ = await Assert.That(directive.Limit).IsEqualTo(Directive.MinimumLimit);
+            _ = await Assert.That(directive.Page).IsEqualTo(Directive.FirstPage);
         }
     }
 }

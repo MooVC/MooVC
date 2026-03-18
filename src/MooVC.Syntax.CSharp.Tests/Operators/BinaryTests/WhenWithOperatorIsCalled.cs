@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenWithOperatorIsCalled
 {
     [Test]
-    public void GivenOperatorThenReturnsNewInstanceWithUpdatedOperator()
+    public async Task GivenOperatorThenReturnsNewInstanceWithUpdatedOperator()
     {
         // Arrange
         Binary original = BinaryTestsData.Create();
@@ -13,9 +13,9 @@ public sealed class WhenWithOperatorIsCalled
         Binary result = original.WithOperator(replacement);
 
         // Assert
-        result.ShouldNotBeSameAs(original);
-        result.Body.ShouldBe(original.Body);
-        result.Operator.ShouldBe(replacement);
-        result.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Operator).IsEqualTo(replacement);
+        _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

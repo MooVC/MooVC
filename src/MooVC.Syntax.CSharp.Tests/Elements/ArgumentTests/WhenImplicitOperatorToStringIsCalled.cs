@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests;
 
 using MooVC.Syntax.Elements;
 
@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Content = "argument";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Argument? subject = default;
@@ -17,11 +17,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenArgumentThenStringMatchesToString()
+    public async Task GivenArgumentThenStringMatchesToString()
     {
         // Arrange
         var subject = new Argument
@@ -34,6 +34,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

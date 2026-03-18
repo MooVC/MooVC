@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ArgumentTests.FormatterTests;
 
 public sealed class WhenToStringIsCalled
 {
     private const string Format = "{0}::{1}";
 
     [Test]
-    public void GivenFormatterThenStringValueReturned()
+    public async Task GivenFormatterThenStringValueReturned()
     {
         // Arrange
         Argument.Formatter subject = Format;
@@ -14,6 +14,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        result.ShouldBe(Format);
+        _ = await Assert.That(result).IsEqualTo(Format);
     }
 }

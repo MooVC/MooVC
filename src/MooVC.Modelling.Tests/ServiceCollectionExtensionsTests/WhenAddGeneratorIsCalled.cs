@@ -1,4 +1,4 @@
-namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
+﻿namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
 
 using System.Diagnostics.CodeAnalysis;
 using Graphify;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 public sealed class WhenAddGeneratorIsCalled
 {
     [Test]
-    public void GivenNullServicesThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         IServiceCollection services = default!;
@@ -16,11 +16,11 @@ public sealed class WhenAddGeneratorIsCalled
         Action action = () => services.AddGenerator();
 
         // Assert
-        _ = action.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenServicesThenGeneratorIsRegistered()
+    public async Task GivenServicesThenGeneratorIsRegistered()
     {
         // Arrange
         INavigator<TestModel> navigator = Substitute.For<INavigator<TestModel>>();
@@ -33,7 +33,7 @@ public sealed class WhenAddGeneratorIsCalled
         IGenerator<TestModel> generator = provider.GetRequiredService<IGenerator<TestModel>>();
 
         // Assert
-        _ = generator.ShouldBeOfType<Generator<TestModel>>();
+        _ = await Assert.That(generator).IsTypeOf<Generator<TestModel>>();
     }
 
     [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]

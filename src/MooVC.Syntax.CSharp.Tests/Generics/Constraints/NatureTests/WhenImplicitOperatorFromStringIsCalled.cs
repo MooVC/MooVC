@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public void GivenNonEmptyValueThenCreatesNature()
+    public async Task GivenNonEmptyValueThenCreatesNature()
     {
         // Arrange
         const string Value = "unmanaged";
@@ -12,11 +12,11 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Nature result = Value;
 
         // Assert
-        result.ToString().ShouldBe(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 
     [Test]
-    public void GivenEmptyValueThenCreatesNature()
+    public async Task GivenEmptyValueThenCreatesNature()
     {
         // Arrange
         const string Value = "";
@@ -25,6 +25,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Nature result = Value;
 
         // Assert
-        result.ToString().ShouldBe(Value);
+        _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 }

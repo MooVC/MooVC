@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.Elements;
@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 public sealed class WhenEqualsIndexerIsCalled
 {
     [Test]
-    public void GivenNullThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Indexer? subject = default;
@@ -16,11 +16,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenSameReferenceThenReturnsTrue()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -30,11 +30,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenEquivalentValueThenReturnsTrue()
+    public async Task GivenEquivalentValueThenReturnsTrue()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -44,11 +44,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeTrue();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public void GivenDifferentValueThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -58,11 +58,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentBehavioursThenReturnsFalse()
+    public async Task GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -77,11 +77,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentResultsThenReturnsFalse()
+    public async Task GivenDifferentResultsThenReturnsFalse()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -97,11 +97,11 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public void GivenDifferentScopesThenReturnsFalse()
+    public async Task GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
@@ -111,6 +111,6 @@ public sealed class WhenEqualsIndexerIsCalled
         bool result = target.Equals(subject);
 
         // Assert
-        result.ShouldBeFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

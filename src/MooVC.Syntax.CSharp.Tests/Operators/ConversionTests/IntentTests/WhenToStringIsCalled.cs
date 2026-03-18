@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public void GivenAValueThenReturnsTheValue()
+    public async Task GivenAValueThenReturnsTheValue()
     {
         // Arrange
         Conversion.Intent intent = Conversion.Intent.From;
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = intent.ToString();
 
         // Assert
-        result.ShouldBe(nameof(Conversion.Intent.From));
+        _ = await Assert.That(result).IsEqualTo(nameof(Conversion.Intent.From));
     }
 }

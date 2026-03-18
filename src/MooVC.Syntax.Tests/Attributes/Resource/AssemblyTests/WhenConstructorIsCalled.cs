@@ -1,23 +1,23 @@
-namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
+﻿namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
 
 using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenDefaultsThenAssemblyIsUndefined()
+    public async Task GivenDefaultsThenAssemblyIsUndefined()
     {
         // Act
         var subject = new Assembly();
 
         // Assert
-        subject.Alias.ShouldBe(Snippet.Empty);
-        subject.Name.ShouldBe(Snippet.Empty);
-        subject.IsUndefined.ShouldBeTrue();
+        _ = await Assert.That(subject.Alias).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.Name).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
     [Test]
-    public void GivenValuesThenPropertiesAreAssigned()
+    public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
         var alias = Snippet.From(AssemblyTestsData.DefaultAlias);
@@ -31,8 +31,8 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        subject.Alias.ShouldBe(alias);
-        subject.Name.ShouldBe(name);
-        subject.IsUndefined.ShouldBeFalse();
+        _ = await Assert.That(subject.Alias).IsEqualTo(alias);
+        _ = await Assert.That(subject.Name).IsEqualTo(name);
+        _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

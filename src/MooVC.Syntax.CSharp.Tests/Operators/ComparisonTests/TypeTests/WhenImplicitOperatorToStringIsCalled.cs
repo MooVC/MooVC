@@ -1,9 +1,9 @@
-namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
+﻿namespace MooVC.Syntax.CSharp.Operators.ComparisonTests.TypeTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public void GivenATypeThenReturnsTheValue()
+    public async Task GivenATypeThenReturnsTheValue()
     {
         // Arrange
         Comparison.Type type = Comparison.Type.Equality;
@@ -12,6 +12,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string value = type;
 
         // Assert
-        value.ShouldBe(Comparison.Type.Equality.ToString());
+        _ = await Assert.That(value).IsEqualTo(Comparison.Type.Equality.ToString());
     }
 }

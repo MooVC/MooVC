@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Members.IndexerTests;
+﻿namespace MooVC.Syntax.CSharp.Members.IndexerTests;
 
 using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenReturnsIsCalled
 {
     [Test]
-    public void GivenResultThenReturnsNewInstanceWithUpdatedResult()
+    public async Task GivenResultThenReturnsNewInstanceWithUpdatedResult()
     {
         // Arrange
         Indexer original = IndexerTestsData.Create();
@@ -20,10 +20,10 @@ public sealed class WhenReturnsIsCalled
         Indexer updated = original.Returns(result);
 
         // Assert
-        updated.ShouldNotBeSameAs(original);
-        updated.Behaviours.ShouldBe(original.Behaviours);
-        updated.Parameter.ShouldBe(original.Parameter);
-        updated.Result.ShouldBe(result);
-        updated.Scope.ShouldBe(original.Scope);
+        _ = await Assert.That(updated).IsNotSameReferenceAs(original);
+        _ = await Assert.That(updated.Behaviours).IsEqualTo(original.Behaviours);
+        _ = await Assert.That(updated.Parameter).IsEqualTo(original.Parameter);
+        _ = await Assert.That(updated.Result).IsEqualTo(result);
+        _ = await Assert.That(updated.Scope).IsEqualTo(original.Scope);
     }
 }

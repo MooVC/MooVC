@@ -1,11 +1,11 @@
-namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     private const string Value = "Symbol";
 
     [Test]
-    public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
         Symbol? subject = default;
@@ -14,11 +14,11 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         Func<string> result = () => subject;
 
         // Assert
-        _ = result.ShouldThrow<ArgumentNullException>();
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
-    public void GivenSymbolThenStringMatchesToString()
+    public async Task GivenSymbolThenStringMatchesToString()
     {
         // Arrange
         var subject = new Symbol
@@ -30,6 +30,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        result.ShouldBe(subject.ToString());
+        _ = await Assert.That(result).IsEqualTo(subject.ToString());
     }
 }

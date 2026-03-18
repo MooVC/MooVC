@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
+﻿namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 using System;
 using System.Reflection;
@@ -6,7 +6,7 @@ using System.Reflection;
 public sealed class WhenConstructorIsCalled
 {
     [Test]
-    public void GivenValueThenKindIsCreated()
+    public async Task GivenValueThenKindIsCreated()
     {
         // Act
         var subject = (Struct.Kind)Activator.CreateInstance(
@@ -17,6 +17,6 @@ public sealed class WhenConstructorIsCalled
             culture: null)!;
 
         // Assert
-        subject.ShouldBe(Struct.Kind.ReadOnly);
+        _ = await Assert.That(subject).IsEqualTo(Struct.Kind.ReadOnly);
     }
 }

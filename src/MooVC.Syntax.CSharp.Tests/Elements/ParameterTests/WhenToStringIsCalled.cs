@@ -1,4 +1,4 @@
-namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
+﻿namespace MooVC.Syntax.CSharp.Elements.ParameterTests;
 
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
     private const string Default = "42";
 
     [Test]
-    public void GivenUndefinedParameterThenReturnsEmpty()
+    public async Task GivenUndefinedParameterThenReturnsEmpty()
     {
         // Arrange
         Parameter parameter = Parameter.Undefined;
@@ -19,11 +19,11 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        result.ShouldBe(string.Empty);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]
-    public void GivenValuesThenReturnsParameterString()
+    public async Task GivenValuesThenReturnsParameterString()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
@@ -34,11 +34,11 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        result.ShouldBe($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
+        _ = await Assert.That(result).IsEqualTo($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
     }
 
     [Test]
-    public void GivenAttributesThenReturnsParameterStringWithAttributes()
+    public async Task GivenAttributesThenReturnsParameterStringWithAttributes()
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
@@ -52,8 +52,8 @@ public sealed class WhenToStringIsCalled
         string result = parameter.ToString();
 
         // Assert
-        result.ShouldContain(AttributeName);
-        result.ShouldContain(Parameter.Mode.Out);
-        result.ShouldContain(ParameterTestsData.DefaultName);
+        _ = await Assert.That(result).Contains(AttributeName);
+        _ = await Assert.That(result).Contains(Parameter.Mode.Out);
+        _ = await Assert.That(result).Contains(ParameterTestsData.DefaultName);
     }
 }
