@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.StructTests.KindTests;
 
 public sealed class WhenEqualsStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMatchingStringThenReturnsTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonMatchingStringThenReturnsFalse()
     {
         // Arrange

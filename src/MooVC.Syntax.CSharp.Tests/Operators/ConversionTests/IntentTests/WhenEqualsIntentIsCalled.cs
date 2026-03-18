@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenEqualsIntentIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsIntentIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenEqualsIntentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenTheSameValueThenReturnsTrue()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenEqualsIntentIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenADifferentValueThenReturnsFalse()
     {
         // Arrange

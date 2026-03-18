@@ -6,7 +6,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string InterfaceName = "IExample";
 
-    [Fact]
+    [Test]
     public void GivenInterfaceDeclarationThenReturnsName()
     {
         // Arrange

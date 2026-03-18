@@ -8,7 +8,7 @@ public sealed class WhenValidateIsCalled
     private const string ValidComplex = "TValue";
     private const string InvalidLowercase = "tValue";
 
-    [Fact]
+    [Test]
     public void GivenUnnamedIdentifierThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -24,9 +24,9 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Theory]
-    [InlineData(ValidSimple)]
-    [InlineData(ValidComplex)]
+    [Test]
+    [Arguments(ValidSimple)]
+    [Arguments(ValidComplex)]
     public void GivenValidNamesThenNoValidationErrorsReturned(string name)
     {
         // Arrange
@@ -42,7 +42,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyNameThenValidationErrorsReturned()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange

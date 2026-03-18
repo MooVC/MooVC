@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
 {
     private const string Name = "Result";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedDeclarationThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnnamedDeclarationThenValidationErrorReturned()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
@@ -71,7 +71,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidDeclarationThenNoValidationErrorsReturned()
     {
         // Arrange

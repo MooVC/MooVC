@@ -8,7 +8,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
     private const string AlternativeAlias = "Other";
     private const string Alias = "Alias";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -50,7 +50,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -78,7 +78,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentAliasesThenReturnsFalse()
     {
         // Arrange
@@ -94,7 +94,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentQualifiersThenReturnsFalse()
     {
         // Arrange
@@ -108,7 +108,7 @@ public sealed class WhenEqualityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange

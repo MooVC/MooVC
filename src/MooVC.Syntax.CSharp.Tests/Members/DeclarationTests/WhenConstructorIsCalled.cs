@@ -7,7 +7,7 @@ public sealed class WhenConstructorIsCalled
 {
     private const string ParameterName = "T";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenDeclarationIsUnspecified()
     {
         // Act
@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUnspecified.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

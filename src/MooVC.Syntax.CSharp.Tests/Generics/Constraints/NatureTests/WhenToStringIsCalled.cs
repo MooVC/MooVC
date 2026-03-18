@@ -2,12 +2,12 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.NatureTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Theory]
-    [InlineData("class", nameof(Nature.Class))]
-    [InlineData("struct", nameof(Nature.Struct))]
-    [InlineData("unmanaged", nameof(Nature.Unmanaged))]
-    [InlineData("notnull", nameof(Nature.NotNull))]
-    [InlineData("", nameof(Nature.Unspecified))]
+    [Test]
+    [Arguments("class", nameof(Nature.Class))]
+    [Arguments("struct", nameof(Nature.Struct))]
+    [Arguments("unmanaged", nameof(Nature.Unmanaged))]
+    [Arguments("notnull", nameof(Nature.NotNull))]
+    [Arguments("", nameof(Nature.Unspecified))]
     public void GivenNatureThenReturnsValue(string expected, string field)
     {
         // Arrange

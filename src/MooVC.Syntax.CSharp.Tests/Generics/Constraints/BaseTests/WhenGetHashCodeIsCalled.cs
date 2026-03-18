@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenMatchingBasesThenReturnSameHash()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBasesThenReturnDifferentHashes()
     {
         // Arrange

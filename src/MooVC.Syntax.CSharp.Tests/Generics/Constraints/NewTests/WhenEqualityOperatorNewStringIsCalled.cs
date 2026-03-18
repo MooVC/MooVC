@@ -5,7 +5,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
     private const string Same = "new()";
     private const string Different = "";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualityOperatorNewStringIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

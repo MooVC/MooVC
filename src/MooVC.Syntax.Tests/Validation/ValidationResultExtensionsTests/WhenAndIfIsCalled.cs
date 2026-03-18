@@ -6,7 +6,7 @@ public sealed class WhenAndIfIsCalled
 {
     private const string Message = "Validated";
 
-    [Fact]
+    [Test]
     public void GivenFalseConditionThenPrecedingResultIsReturned()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenAndIfIsCalled
         validatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenTrueConditionThenValidationIsAppended()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenAndIfIsCalled
         additionalValidatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFalseConditionAndMultipleValidatablesThenPrecedingResultIsReturned()
     {
         // Arrange
@@ -84,7 +84,7 @@ public sealed class WhenAndIfIsCalled
         secondAdditional.Calls.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenTrueConditionAndMultipleValidatablesThenValidationIsAppended()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenAndIfIsCalled
         secondAdditional.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFunctionConditionThenItDeterminesWhetherValidationOccurs()
     {
         // Arrange
@@ -142,7 +142,7 @@ public sealed class WhenAndIfIsCalled
         additionalValidatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFunctionConditionAndValidatablesThenItDeterminesWhetherValidationOccurs()
     {
         // Arrange

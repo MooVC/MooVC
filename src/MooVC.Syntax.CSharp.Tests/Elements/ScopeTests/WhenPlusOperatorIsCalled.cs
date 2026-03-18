@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenPlusOperatorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPrivateProtectedThenCombinedScopeReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenPlusOperatorIsCalled
         result.ToString().ShouldBe("private protected");
     }
 
-    [Fact]
+    [Test]
     public void GivenProtectedInternalThenCombinedScopeReturned()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenPlusOperatorIsCalled
         result.ToString().ShouldBe("protected internal");
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidCombinationThenThrows()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenPlusOperatorIsCalled
         _ = result.ShouldThrow<InvalidOperationException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenNullLeftThenThrows()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenPlusOperatorIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenNullRightThenThrows()
     {
         // Arrange

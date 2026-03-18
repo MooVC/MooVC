@@ -2,20 +2,20 @@ namespace MooVC.Syntax.CSharp.Elements.ScopeTests;
 
 public sealed class WhenToStringIsCalled
 {
-    public static TheoryData<Scope, string> Data => new()
+    public static IEnumerable<(Scope Scope, string Expected)> GivenScopeThenLiteralValueReturnedData()
     {
-        { Scope.File, "file" },
-        { Scope.Internal, "internal" },
-        { Scope.Public, "public" },
-        { Scope.Private, "private" },
-        { Scope.Private + Scope.Protected, "private protected" },
-        { Scope.Protected, "protected" },
-        { Scope.Protected + Scope.Internal, "protected internal" },
-        { Scope.Unspecified, string.Empty },
-    };
+        yield return (Scope.File, "file");
+        yield return (Scope.Internal, "internal");
+        yield return (Scope.Public, "public");
+        yield return (Scope.Private, "private");
+        yield return (Scope.Private + Scope.Protected, "private protected");
+        yield return (Scope.Protected, "protected");
+        yield return (Scope.Protected + Scope.Internal, "protected internal");
+        yield return (Scope.Unspecified, string.Empty);
+    }
 
-    [Theory]
-    [MemberData(nameof(Data))]
+    [Test]
+    [MethodDataSource(nameof(GivenScopeThenLiteralValueReturnedData))]
     public void GivenScopeThenLiteralValueReturned(Scope subject, string expected)
     {
         // Act

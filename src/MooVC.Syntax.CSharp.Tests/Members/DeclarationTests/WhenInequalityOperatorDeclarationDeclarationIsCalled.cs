@@ -4,7 +4,7 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
 {
     private const string AlternativeName = "Alternate";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -62,7 +62,7 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenHigherRankThenGreaterThanIsTrue()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLowerRankThenLessThanIsTrue()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenComparisonOperatorsAreCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenLessThanOrEqualIsTrue()
     {
         // Arrange

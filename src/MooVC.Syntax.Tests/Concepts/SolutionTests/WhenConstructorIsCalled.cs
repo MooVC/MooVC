@@ -5,7 +5,7 @@ using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenSolutionIsUndefined()
     {
         // Act
@@ -21,7 +21,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

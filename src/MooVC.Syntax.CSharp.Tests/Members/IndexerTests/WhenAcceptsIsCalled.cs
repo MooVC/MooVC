@@ -6,7 +6,7 @@ public sealed class WhenAcceptsIsCalled
 {
     private const string ParameterName = "value";
 
-    [Fact]
+    [Test]
     public void GivenParameterThenReturnsNewInstanceWithUpdatedParameter()
     {
         // Arrange

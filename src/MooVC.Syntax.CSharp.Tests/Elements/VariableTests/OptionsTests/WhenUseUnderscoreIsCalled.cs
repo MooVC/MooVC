@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.VariableTests.OptionsTests;
 
 public sealed class WhenUseUnderscoreIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFlagThenReturnsNewInstanceWithUpdatedFlag()
     {
         // Arrange

@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 public sealed class WhenToXmlAttributeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenErrorAndStopThenReturnsEmptySequence()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToXmlAttributeIsCalled
         attributes.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsContinueOnErrorAttribute()
     {
         // Arrange

@@ -2,9 +2,9 @@
 
 public sealed class WhenToSpanIsCalled
 {
-    [Theory]
-    [InlineData(default)]
-    [InlineData(new int[0])]
+    [Test]
+    [Arguments(default)]
+    [Arguments(new int[0])]
     public void GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
     {
         // Act
@@ -14,11 +14,11 @@ public sealed class WhenToSpanIsCalled
         actual.IsEmpty.ShouldBeTrue();
     }
 
-    [Theory]
-    [InlineData(new int[0])]
-    [InlineData(new[] { 1, 2, 3 })]
-    [InlineData(new[] { 2 })]
-    [InlineData(new[] { 3, 2, 1 })]
+    [Test]
+    [Arguments(new int[0])]
+    [Arguments(new[] { 1, 2, 3 })]
+    [Arguments(new[] { 2 })]
+    [Arguments(new[] { 3, 2, 1 })]
     public void GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
     {
         // Act
@@ -31,7 +31,7 @@ public sealed class WhenToSpanIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerableThenAnEmptySpanIsReturned()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenToSpanIsCalled
         actual.IsEmpty.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
     {
         // Arrange

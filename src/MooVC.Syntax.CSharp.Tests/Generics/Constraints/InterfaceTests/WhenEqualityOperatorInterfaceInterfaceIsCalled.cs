@@ -7,7 +7,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
     private const string Same = "IAlpha";
     private const string Different = "IBeta";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

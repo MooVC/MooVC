@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 public sealed class WhenNamedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNameThenReturnsUpdatedInstance()
     {
         // Arrange

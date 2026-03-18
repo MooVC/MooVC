@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Name = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsFormattedString()
     {
         // Arrange

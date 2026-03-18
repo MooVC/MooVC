@@ -60,7 +60,7 @@ jobs:
       run: dotnet build ${{ env.solution }} --configuration ${{ env.configuration }} --no-restore
 
     - name: Test Solution
-      run: dotnet test ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
+      run: dotnet test --solution ${{ env.solution }} --configuration ${{ env.configuration }} --no-build
 
     - name: Upload Code Coverage
       uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de

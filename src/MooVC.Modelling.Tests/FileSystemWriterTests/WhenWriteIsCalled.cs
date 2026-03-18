@@ -12,7 +12,7 @@ public sealed class WhenWriteIsCalled
     private const string Name = "example";
     private const string PathValue = "Models";
 
-    [Fact]
+    [Test]
     public async Task GivenFilesThenContentIsWritten()
     {
         // Arrange

@@ -9,7 +9,7 @@ public sealed class WhenConstructorIsCalled
     private const string ParameterType = "int";
     private const string ResultType = "string";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenIndexerIsUndefined()
     {
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenConstructorIsCalled
         subject.Scope.ShouldBe(Scope.Public);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

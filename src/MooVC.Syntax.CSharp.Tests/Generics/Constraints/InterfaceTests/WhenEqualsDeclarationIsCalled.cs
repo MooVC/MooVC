@@ -7,7 +7,7 @@ public sealed class WhenEqualsDeclarationIsCalled
     private const string Same = "IAlpha";
     private const string Different = "IBeta";
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenEqualsDeclarationIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenEqualsDeclarationIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

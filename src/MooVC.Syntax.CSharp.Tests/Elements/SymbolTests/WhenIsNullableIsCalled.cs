@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
 public sealed class WhenIsNullableIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullableThenReturnsUpdatedInstance()
     {
         // Arrange

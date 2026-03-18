@@ -6,7 +6,7 @@ public sealed class WhenToSnakeCaseIsCalled
 {
     private static readonly Faker generator = new();
 
-    [Fact]
+    [Test]
     public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenToSnakeCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
@@ -34,11 +34,11 @@ public sealed class WhenToSnakeCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData(" ")]
-    [InlineData("\t")]
-    [InlineData("\r\n")]
-    [InlineData("   ")]
+    [Test]
+    [Arguments(" ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
+    [Arguments("   ")]
     public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
@@ -49,21 +49,21 @@ public sealed class WhenToSnakeCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData("already_snake_case", "already_snake_case")]
-    [InlineData("simple", "simple")]
-    [InlineData("Single", "single")]
-    [InlineData("PascalCase", "pascal_case")]
-    [InlineData("camelCaseValue", "camel_case_value")]
-    [InlineData("Hello World", "hello_world")]
-    [InlineData("Hello-World", "hello_world")]
-    [InlineData("Hello__World", "hello_world")]
-    [InlineData("_Hello", "hello")]
-    [InlineData("-Hello", "hello")]
-    [InlineData(" Hello ", "hello")]
-    [InlineData("Section2Update", "section2_update")]
-    [InlineData("ÉclairDeluxe", "éclair_deluxe")]
-    [InlineData("ΣigmaValue", "σigma_value")]
+    [Test]
+    [Arguments("already_snake_case", "already_snake_case")]
+    [Arguments("simple", "simple")]
+    [Arguments("Single", "single")]
+    [Arguments("PascalCase", "pascal_case")]
+    [Arguments("camelCaseValue", "camel_case_value")]
+    [Arguments("Hello World", "hello_world")]
+    [Arguments("Hello-World", "hello_world")]
+    [Arguments("Hello__World", "hello_world")]
+    [Arguments("_Hello", "hello")]
+    [Arguments("-Hello", "hello")]
+    [Arguments(" Hello ", "hello")]
+    [Arguments("Section2Update", "section2_update")]
+    [Arguments("ÉclairDeluxe", "éclair_deluxe")]
+    [Arguments("ΣigmaValue", "σigma_value")]
     public void GivenValuesThenExpectedSnakeCaseIsReturned(string value, string expected)
     {
         // Arrange & Act
@@ -73,10 +73,10 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("A", "a")]
-    [InlineData("ABC", "abc")]
-    [InlineData("XMLHttpRequest", "xml_http_request")]
+    [Test]
+    [Arguments("A", "a")]
+    [Arguments("ABC", "abc")]
+    [Arguments("XMLHttpRequest", "xml_http_request")]
     public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
     {
         // Arrange & Act
@@ -86,7 +86,7 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
     {
         // Arrange
@@ -99,7 +99,7 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe("alpha_beta_gamma_delta");
     }
 
-    [Fact]
+    [Test]
     public void GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
     {
         // Arrange
@@ -112,7 +112,7 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe("alpha_beta");
     }
 
-    [Fact]
+    [Test]
     public void GivenDigitBeforeUppercaseThenSeparatorIsInserted()
     {
         // Arrange
@@ -125,10 +125,10 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe("part3_revision");
     }
 
-    [Theory]
-    [InlineData("__", "")]
-    [InlineData("---", "")]
-    [InlineData("___---___", "")]
+    [Test]
+    [Arguments("__", "")]
+    [Arguments("---", "")]
+    [Arguments("___---___", "")]
     public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
     {
         // Arrange & Act
@@ -138,10 +138,10 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("123", "123")]
-    [InlineData("9lives", "9lives")]
-    [InlineData("Version2Alpha3", "version2_alpha3")]
+    [Test]
+    [Arguments("123", "123")]
+    [Arguments("9lives", "9lives")]
+    [Arguments("Version2Alpha3", "version2_alpha3")]
     public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
     {
         // Arrange & Act
@@ -151,7 +151,7 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnicodeUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
@@ -175,7 +175,7 @@ public sealed class WhenToSnakeCaseIsCalled
         result.ShouldBe("istanbul_city");
     }
 
-    [Fact]
+    [Test]
     public void GivenWordsTwiceThenResultIsIdempotent()
     {
         // Arrange
@@ -216,7 +216,7 @@ public sealed class WhenToSnakeCaseIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
     {
         // Arrange

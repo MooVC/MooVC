@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.PropertyTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentInstancesThenHashCodesAreEqual()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentInstancesThenHashCodesAreNotEqual()
     {
         // Arrange

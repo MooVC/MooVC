@@ -6,7 +6,7 @@ public sealed class WhenWithDependsOnTargetsIsCalled
 {
     private const string UpdatedDependsOnTargets = "UpdatedDependsOnTargets";
 
-    [Fact]
+    [Test]
     public void GivenDependsOnTargetsThenReturnsUpdatedInstance()
     {
         // Arrange

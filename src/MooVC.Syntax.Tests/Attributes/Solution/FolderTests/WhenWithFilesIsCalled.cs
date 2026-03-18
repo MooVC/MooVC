@@ -4,7 +4,7 @@ using System.Linq;
 
 public sealed class WhenWithFilesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFilesThenReturnsUpdatedInstance()
     {
         // Arrange

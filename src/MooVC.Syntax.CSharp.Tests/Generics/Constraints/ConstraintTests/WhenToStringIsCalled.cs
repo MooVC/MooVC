@@ -2,14 +2,13 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.ConstraintTests;
 
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
-using Variable = MooVC.Syntax.CSharp.Elements.Variable;
 
 public sealed class WhenToStringIsCalled
 {
     private const string BaseName = "Result";
     private const string InterfaceName = "IExample";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedConstraintThenReturnsEmpty()
     {
         // Arrange
@@ -22,7 +21,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenConstraintWithValuesThenReturnsFormattedString()
     {
         // Arrange
@@ -41,7 +40,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe($"where class, {BaseName}, {InterfaceName}, new()");
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleInterfacesThenReturnsAllInterfacesInOrder()
     {
         // Arrange

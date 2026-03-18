@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Elements;
 
 public sealed class WhenEqualityOperatorConversionConversionIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentConversionsThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorConversionConversionIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentConversionsThenReturnsFalse()
     {
         // Arrange

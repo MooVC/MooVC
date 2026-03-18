@@ -7,7 +7,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     private static readonly ImmutableArray<string> different = ["Gamma"];
     private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -79,7 +79,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

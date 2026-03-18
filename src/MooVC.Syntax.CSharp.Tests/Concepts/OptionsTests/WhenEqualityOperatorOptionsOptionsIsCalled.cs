@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEquivalentOptionsThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentOptionsThenReturnsFalse()
     {
         // Arrange

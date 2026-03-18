@@ -5,7 +5,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     private const int FileValue = 0;
     private const int BlockValue = 1;
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsInt()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange

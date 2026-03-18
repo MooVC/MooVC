@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string AttributeName = "Obsolete";
     private const string Default = "42";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedParameterThenReturnsEmpty()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsParameterString()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
     }
 
-    [Fact]
+    [Test]
     public void GivenAttributesThenReturnsParameterStringWithAttributes()
     {
         // Arrange

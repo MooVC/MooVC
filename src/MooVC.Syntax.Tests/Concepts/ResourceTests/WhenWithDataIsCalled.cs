@@ -6,7 +6,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenWithDataIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDataThenReturnsUpdatedInstance()
     {
         // Arrange

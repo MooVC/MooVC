@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
 {
     private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         result.IsEmpty.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenRoundTripsSuccessfully()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         result.ShouldBe(provided);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

@@ -8,7 +8,6 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Elements;
-    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Elements.Symbol_Resources;
 

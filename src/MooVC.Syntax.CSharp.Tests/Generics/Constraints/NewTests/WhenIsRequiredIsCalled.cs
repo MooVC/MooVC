@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenIsRequiredIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenRequiredValueThenReturnsTrue()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenIsRequiredIsCalled
         subject.IsNotRequired.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonRequiredValueThenReturnsFalse()
     {
         // Arrange

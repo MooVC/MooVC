@@ -6,7 +6,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Alias = "Alias";
 
-    [Fact]
+    [Test]
     public void GivenUndefinedDirectiveThenReturnsEmptyString()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenStaticUsingThenReturnsStaticDirectiveRepresentation()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe("using static System.Console;");
     }
 
-    [Fact]
+    [Test]
     public void GivenAliasThenReturnsAliasDirectiveRepresentation()
     {
         // Arrange

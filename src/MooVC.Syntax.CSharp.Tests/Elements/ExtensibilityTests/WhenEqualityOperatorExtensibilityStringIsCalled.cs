@@ -5,7 +5,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     private const string StaticValue = "static";
     private const string OtherValue = "sealed";
 
-    [Fact]
+    [Test]
     public void GivenNullExtensibilityThenReturnsFalse()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValueThenReturnsFalse()
     {
         // Arrange

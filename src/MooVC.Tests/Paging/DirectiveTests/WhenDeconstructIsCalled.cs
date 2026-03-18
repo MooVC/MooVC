@@ -3,7 +3,7 @@ namespace MooVC.Paging.DirectiveTests;
 
 public sealed class WhenDeconstructIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultDirectiveThenFirstPageAndMinimumLimitAreReturned()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenDeconstructIsCalled
         page.ShouldBe(expectedPage);
     }
 
-    [Fact]
+    [Test]
     public void GivenDirectiveWithCustomValuesThenThoseValuesAreReturned()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenDeconstructIsCalled
         page.ShouldBe(expectedPage);
     }
 
-    [Fact]
+    [Test]
     public void GivenDirectiveWithMaximumValuesThenThoseValuesAreReturned()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenDeconstructIsCalled
         page.ShouldBe(expectedPage);
     }
 
-    [Fact]
+    [Test]
     public void GivenDirectiveWithMinimumValuesThenFirstPageAndMinimumSizeAreReturned()
     {
         // Arrange

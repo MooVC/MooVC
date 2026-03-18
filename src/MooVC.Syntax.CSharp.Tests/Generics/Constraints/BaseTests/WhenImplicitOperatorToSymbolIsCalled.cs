@@ -1,13 +1,12 @@
 namespace MooVC.Syntax.CSharp.Generics.Constraints.BaseTests;
 
 using MooVC.Syntax.CSharp.Elements;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToSymbolIsCalled
 {
     private const string Name = "Alpha";
 
-    [Fact]
+    [Test]
     public void GivenBaseThenReturnsSymbol()
     {
         // Arrange

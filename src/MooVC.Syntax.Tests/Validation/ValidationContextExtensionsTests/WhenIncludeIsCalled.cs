@@ -7,7 +7,7 @@ public sealed class WhenIncludeIsCalled
     private const string FirstMessage = "First";
     private const string SecondMessage = "Second";
 
-    [Fact]
+    [Test]
     public void GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenIncludeIsCalled
         exception.ParamName.ShouldBe(nameof(validationContext));
     }
 
-    [Fact]
+    [Test]
     public void GivenResultsAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenIncludeIsCalled
         exception.ParamName.ShouldBe(nameof(results));
     }
 
-    [Fact]
+    [Test]
     public void GivenValidatableIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -54,7 +54,7 @@ public sealed class WhenIncludeIsCalled
         exception.ParamName.ShouldBe(nameof(validatable));
     }
 
-    [Fact]
+    [Test]
     public void GivenValidatablesAreNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -70,7 +70,7 @@ public sealed class WhenIncludeIsCalled
         exception.ParamName.ShouldBe(nameof(validatables));
     }
 
-    [Fact]
+    [Test]
     public void GivenValidatableThenValidationResultsAreReturned()
     {
         // Arrange
@@ -89,7 +89,7 @@ public sealed class WhenIncludeIsCalled
         results.ShouldBe([validatable.Results.Single()]);
     }
 
-    [Fact]
+    [Test]
     public void GivenExistingResultsThenValidationResultsAreAppended()
     {
         // Arrange
@@ -111,7 +111,7 @@ public sealed class WhenIncludeIsCalled
         combined.ShouldBe([initial, validatable.Results.Single()]);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValidatablesThenAllValidationResultsAreReturned()
     {
         // Arrange
@@ -131,7 +131,7 @@ public sealed class WhenIncludeIsCalled
         results.ShouldBe([first.Results.Single(), second.Results.Single()]);
     }
 
-    [Fact]
+    [Test]
     public void GivenResultsAndMultipleValidatablesThenAllValidationResultsAreAppended()
     {
         // Arrange

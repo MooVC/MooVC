@@ -5,7 +5,7 @@ public sealed class WhenCompareToIsCalled
     private const string Alpha = "Alpha";
     private const string Beta = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenNullOtherThenReturnsOne()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenCompareToIsCalled
         result.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenLowerNameThenReturnsNegative()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenCompareToIsCalled
         result.ShouldBeLessThan(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualNamesThenReturnsZero()
     {
         // Arrange

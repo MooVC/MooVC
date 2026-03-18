@@ -6,7 +6,7 @@ public sealed class WhenWithVersionIsCalled
 {
     private const string UpdatedVersion = "UpdatedVersion";
 
-    [Fact]
+    [Test]
     public void GivenVersionThenReturnsUpdatedInstance()
     {
         // Arrange

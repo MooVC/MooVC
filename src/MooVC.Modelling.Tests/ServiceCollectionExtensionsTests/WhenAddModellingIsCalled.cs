@@ -16,7 +16,7 @@ public sealed class WhenAddModellingIsCalled
     private const string FileSystemKey = "FileSystem";
     private const string ZipKey = "Zip";
 
-    [Fact]
+    [Test]
     public void GivenServicesThenDependenciesAreRegistered()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenAddModellingIsCalled
         zipOptions.Value.Compression.ShouldBe(ZipWriter.Options.Default.Compression);
     }
 
-    [Fact]
+    [Test]
     public void GivenConfigurationThenOptionsAreBound()
     {
         // Arrange

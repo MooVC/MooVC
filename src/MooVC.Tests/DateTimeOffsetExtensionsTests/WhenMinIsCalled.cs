@@ -2,16 +2,16 @@
 
 public sealed class WhenMinIsCalled
 {
-    public static readonly TheoryData<DateTime, DateTime> GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData = new()
+    public static IEnumerable<(DateTime Oldest, DateTime Newest)> GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData()
     {
-        { new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-    };
+        yield return (new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+    }
 
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
     public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
@@ -25,8 +25,8 @@ public sealed class WhenMinIsCalled
         selected.ShouldBe(first);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
     public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenMinIsCalled
         selected.ShouldBe(second);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange

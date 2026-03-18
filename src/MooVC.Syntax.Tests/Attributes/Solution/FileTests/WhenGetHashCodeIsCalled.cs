@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.FileTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenHashCodesMatch()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenGetHashCodeIsCalled
         leftHash.ShouldBe(rightHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenHashCodesDiffer()
     {
         // Arrange

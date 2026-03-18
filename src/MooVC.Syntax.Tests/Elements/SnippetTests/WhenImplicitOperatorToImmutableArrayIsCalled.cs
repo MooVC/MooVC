@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
 {
     private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenEmptySnippetThenCreatesDefaultArray()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
         result.ShouldBe([]);
     }
 
-    [Fact]
+    [Test]
     public void GivenSnippetThenReturnsMatchingArray()
     {
         // Arrange

@@ -12,7 +12,7 @@ public sealed class WhenGenerateIsCalled
     private const string Name = "example";
     private const string PathValue = "Models";
 
-    [Fact]
+    [Test]
     public async Task GivenNavigatorThenFilesAreReturned()
     {
         // Arrange

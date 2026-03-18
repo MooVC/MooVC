@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualOptionsThenHashCodesAreEqual()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange

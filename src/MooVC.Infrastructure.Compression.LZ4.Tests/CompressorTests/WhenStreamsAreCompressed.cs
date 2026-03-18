@@ -5,7 +5,7 @@ using MooVC.IO;
 
 public sealed class WhenStreamsAreCompressed
 {
-    [Fact]
+    [Test]
     public async Task GivenAStreamThenTheResultMatches()
     {
         // Arrange

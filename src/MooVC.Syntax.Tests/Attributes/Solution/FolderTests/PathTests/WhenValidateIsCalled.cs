@@ -6,7 +6,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenRootThenValidationIsSkipped()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidPathThenValidationErrorReturned()
     {
         // Arrange

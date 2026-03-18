@@ -2,10 +2,10 @@ namespace MooVC.Syntax.Attributes.Project.TargetTaskOptionsTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Theory]
-    [InlineData("WarnAndContinue", nameof(TargetTask.Options.WarnAndContinue))]
-    [InlineData("ErrorAndContinue", nameof(TargetTask.Options.ErrorAndContinue))]
-    [InlineData("ErrorAndStop", nameof(TargetTask.Options.ErrorAndStop))]
+    [Test]
+    [Arguments("WarnAndContinue", nameof(TargetTask.Options.WarnAndContinue))]
+    [Arguments("ErrorAndContinue", nameof(TargetTask.Options.ErrorAndContinue))]
+    [Arguments("ErrorAndStop", nameof(TargetTask.Options.ErrorAndStop))]
     public void GivenOptionThenReturnsValue(string expected, string field)
     {
         // Arrange

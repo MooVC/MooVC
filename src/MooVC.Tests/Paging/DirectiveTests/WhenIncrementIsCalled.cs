@@ -1,15 +1,13 @@
 ﻿#if NET6_0_OR_GREATER
 namespace MooVC.Paging.DirectiveTests;
 
-using System.Collections.Generic;
-
 public sealed class WhenIncrementIsCalled
 {
-    [Theory]
-    [InlineData(0, 1, 25)]
-    [InlineData(1, 2, 1)]
-    [InlineData(4, 5, 10)]
-    [InlineData(ushort.MaxValue - 1, ushort.MaxValue, 5)]
+    [Test]
+    [Arguments(0, 1, 25)]
+    [Arguments(1, 2, 1)]
+    [Arguments(4, 5, 10)]
+    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
     public void GivenADirectiveWhenPostIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
@@ -23,7 +21,7 @@ public sealed class WhenIncrementIsCalled
         directive.Page.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveAtMaxWhenPostIncrementedThenDirectiveIsNotIncremented()
     {
         // Arrange
@@ -37,11 +35,11 @@ public sealed class WhenIncrementIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(0, 1, 25)]
-    [InlineData(1, 2, 1)]
-    [InlineData(4, 5, 10)]
-    [InlineData(ushort.MaxValue - 1, ushort.MaxValue, 5)]
+    [Test]
+    [Arguments(0, 1, 25)]
+    [Arguments(1, 2, 1)]
+    [Arguments(4, 5, 10)]
+    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
     public void GivenADirectiveWhenPreIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
@@ -55,7 +53,7 @@ public sealed class WhenIncrementIsCalled
         directive.Page.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveAtMaxWhenPreIncrementedThenDirectiveIsNotIncremented()
     {
         // Arrange
@@ -69,10 +67,10 @@ public sealed class WhenIncrementIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(0, 2, 2, 25)]
-    [InlineData(1, 3, 2, 1)]
-    [InlineData(4, 9, 5, 10)]
+    [Test]
+    [Arguments(0, 2, 2, 25)]
+    [Arguments(1, 3, 2, 1)]
+    [Arguments(4, 9, 5, 10)]
     public void GivenADirectiveWhenIncrementedThenDirectiveIsIncrementedByTheAmount(ushort current, ushort expected, ushort increment, ushort limit)
     {
         // Arrange
@@ -86,11 +84,11 @@ public sealed class WhenIncrementIsCalled
         actual.Page.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(10)]
-    [InlineData(ushort.MaxValue)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(ushort.MaxValue)]
     public void GivenADirectiveAtMaxWhenIncrementedThenDirectiveIsNotIncremented(ushort increment)
     {
         // Arrange

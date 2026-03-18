@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
     private static readonly ImmutableArray<Name> different = ["Gamma"];
     private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightDefaultThenReturnsTrue()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenInequalityOperatorQualifierImmutableArrayIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

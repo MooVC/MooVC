@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenWithUnariesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedUnaries()
     {
         // Arrange

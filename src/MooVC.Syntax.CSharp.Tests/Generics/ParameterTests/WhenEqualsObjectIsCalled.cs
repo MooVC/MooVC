@@ -9,7 +9,7 @@ public sealed class WhenEqualsObjectIsCalled
     private const string AlternativeName = "TOther";
     private const string DefaultName = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenNonParameterThenReturnsFalse()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEquivalentParameterThenReturnsTrue()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentParameterThenReturnsFalse()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ResultTests.ModalityTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAsynchronousThenReturnsAsyncKeyword()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         representation.ShouldBe("async");
     }
 
-    [Fact]
+    [Test]
     public void GivenSynchronousThenReturnsEmpty()
     {
         // Arrange

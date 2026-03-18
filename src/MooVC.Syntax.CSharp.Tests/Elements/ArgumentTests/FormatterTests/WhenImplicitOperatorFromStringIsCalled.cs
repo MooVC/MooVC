@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Value = "{0} = {1}";
 
-    [Fact]
+    [Test]
     public void GivenDefaultThenInstanceIsCreated()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBe(provided);
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenRoundTripsSuccessfully()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBe(provided);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

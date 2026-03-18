@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    [Fact]
+    [Test]
     public void GivenToThenFlagsReflectValue()
     {
         // Arrange

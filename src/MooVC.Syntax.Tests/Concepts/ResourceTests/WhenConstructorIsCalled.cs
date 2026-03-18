@@ -5,7 +5,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenResourceIsUndefined()
     {
         // Act
@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

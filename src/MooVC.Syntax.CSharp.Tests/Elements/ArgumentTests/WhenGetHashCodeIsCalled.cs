@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly Snippet same = Snippet.From("Alpha");
     private static readonly Snippet different = Snippet.From("Beta");
 
-    [Fact]
+    [Test]
     public void GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange

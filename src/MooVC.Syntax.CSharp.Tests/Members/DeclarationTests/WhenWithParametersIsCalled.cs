@@ -6,7 +6,7 @@ using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenWithParametersIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenParametersThenReturnsNewInstanceWithUpdatedParameters()
     {
         // Arrange

@@ -6,7 +6,7 @@ public sealed class WhenGetHashCodeIsCalled
 {
     private const string Alias = "Alias";
 
-    [Fact]
+    [Test]
     public void GivenMatchingDirectivesThenReturnSameHash()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentDirectivesThenReturnDifferentHashes()
     {
         // Arrange

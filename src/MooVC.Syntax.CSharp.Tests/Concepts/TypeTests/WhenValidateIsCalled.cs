@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmptyResults()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedNameThenReturnsValidationResults()
     {
         // Arrange

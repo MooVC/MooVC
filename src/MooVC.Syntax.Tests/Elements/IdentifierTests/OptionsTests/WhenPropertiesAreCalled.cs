@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
 
 public sealed class WhenPropertiesAreCalled
 {
-    [Fact]
+    [Test]
     public void GivenPascalCasingThenFlagsAreTrue()
     {
         // Arrange
@@ -13,7 +13,7 @@ public sealed class WhenPropertiesAreCalled
         subject.IsPascal.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenCamelCasingThenFlagsAreFalse()
     {
         // Arrange

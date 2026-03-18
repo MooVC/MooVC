@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Resource.ResourceTests;
 
 public sealed class WhenWithVisibilityIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange

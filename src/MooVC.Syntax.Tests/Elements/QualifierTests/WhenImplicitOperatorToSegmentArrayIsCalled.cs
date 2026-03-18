@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
     private static readonly Name alpha = new("Alpha");
     private static readonly Name beta = new("Beta");
 
-    [Fact]
+    [Test]
     public void GivenNullQualifierThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToSegmentArrayIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenQualifierThenSegmentsAreReturned()
     {
         // Arrange

@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.MethodTests;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNonMethodObjectThenReturnsFalse()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenEqualsObjectIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenMethodObjectThenReturnsResultOfMethodEquals()
     {
         // Arrange

@@ -7,7 +7,7 @@ public sealed class WhenKnownAsIsCalled
     private const string Alias = "Alias";
     private const string NewAlias = "NewAlias";
 
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedAlias()
     {
         // Arrange

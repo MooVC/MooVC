@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenFromIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenFromIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenNullValueThenThrows()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenFromIsCalled
         exception.ParamName.ShouldBe(nameof(values));
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenReturnsEmpty()
     {
         // Arrange & Act
@@ -42,7 +42,7 @@ public sealed class WhenFromIsCalled
         result.IsEmpty.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenTextThenCreatesSnippetFromLines()
     {
         // Arrange

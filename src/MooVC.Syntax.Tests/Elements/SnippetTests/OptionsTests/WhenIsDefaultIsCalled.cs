@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.OptionsTests;
 
 public sealed class WhenIsDefaultIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultValuesThenReturnsTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenIsDefaultIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange

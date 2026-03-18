@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
         .WithNamespace(Qualifier.Options.Block)
         .WithTypes(types => types.WithQualification(Qualification.Global));
 
-    [Fact]
+    [Test]
     public void GivenInstructionsWhenAttributeThenAttributeIsCreated()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenToSnippetIsCalled
         actual.ToString().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenInstructionsWhenAttributeWithPropertiesThenAttributeIsCreated()
     {
         // Arrange

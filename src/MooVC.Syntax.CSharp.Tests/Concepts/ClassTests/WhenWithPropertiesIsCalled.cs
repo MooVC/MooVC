@@ -2,13 +2,12 @@ namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
 using System.Linq;
-using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange

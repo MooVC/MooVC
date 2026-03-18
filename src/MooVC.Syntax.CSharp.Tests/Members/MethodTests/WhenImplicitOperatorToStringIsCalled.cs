@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMethodThenStringRepresentationIsReturned()
     {
         // Arrange

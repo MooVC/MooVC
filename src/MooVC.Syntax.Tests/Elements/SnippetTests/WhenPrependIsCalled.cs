@@ -7,7 +7,7 @@ public sealed class WhenPrependIsCalled
     private const string Gamma = "gamma";
     private const string Phi = "phi";
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsAndValuesThenThrows()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenPrependIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenStringValuesThenTheyArePrepended()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenPrependIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultiLineValuesThenTheLinesArePrepended()
     {
         // Arrange
@@ -52,7 +52,7 @@ public sealed class WhenPrependIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenSnippetsThenTheyArePrepended()
     {
         // Arrange

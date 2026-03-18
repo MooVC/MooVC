@@ -13,7 +13,7 @@ public sealed class WhenWriteIsCalled
     private const string Name = "example";
     private const string PathValue = "Models";
 
-    [Fact]
+    [Test]
     [SuppressMessage("Major Code Smell", "S6966:Awaitable method should be used", Justification = "Feature is not available in all supported versions.")]
     public async Task GivenFilesThenArchiveContainsEntry()
     {

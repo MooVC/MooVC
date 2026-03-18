@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ExtensibilityTests;
 
 public sealed class WhenIsPermittedIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPermittedValuesThenReturnsTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenIsPermittedIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenUnpermittedValuesThenReturnsFalse()
     {
         // Arrange

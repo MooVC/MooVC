@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Solution.ProjectTests;
 
 public sealed class WhenAtIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPathThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public sealed class WhenAddGeneratorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenAddGeneratorIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenServicesThenGeneratorIsRegistered()
     {
         // Arrange

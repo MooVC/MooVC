@@ -5,7 +5,7 @@ using MooVC.Syntax.Attributes.Project;
 
 public sealed class WhenToDocumentIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmptyDocument()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToDocumentIsCalled
         result.Declaration.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsDocument()
     {
         // Arrange

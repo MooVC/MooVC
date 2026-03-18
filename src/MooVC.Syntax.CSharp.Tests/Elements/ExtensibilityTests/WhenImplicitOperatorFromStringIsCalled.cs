@@ -6,7 +6,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Space = "   ";
     private const string Value = "custom";
 
-    [Fact]
+    [Test]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         _ = Should.NotThrow(() => _ = (Extensibility)value);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullWhenRoundTrippedThenResultIsNull()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenEqualsString()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceThenEqualsString()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsString()
     {
         // Arrange
@@ -72,7 +72,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
@@ -86,7 +86,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

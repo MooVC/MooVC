@@ -4,7 +4,7 @@ using Shouldly;
 
 public sealed class WhenForEachIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenForEachIsCalled
         invocations.ShouldBe(enumeration);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -38,7 +38,7 @@ public sealed class WhenForEachIsCalled
         exception.ParamName.ShouldBe(nameof(action));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenForEachIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange

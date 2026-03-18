@@ -8,7 +8,7 @@ using MooVC.Syntax.CSharp.Operators.UnaryTests;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenOperatorsIsUndefined()
     {
         // Act
@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

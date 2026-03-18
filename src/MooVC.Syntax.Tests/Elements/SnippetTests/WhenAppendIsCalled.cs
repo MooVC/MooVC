@@ -7,7 +7,7 @@ public sealed class WhenAppendIsCalled
     private const string Gamma = "gamma";
     private const string Phi = "phi";
 
-    [Fact]
+    [Test]
     public void GivenNullOptionsAndValuesThenThrows()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenAppendIsCalled
         exception.ParamName.ShouldBe(nameof(options));
     }
 
-    [Fact]
+    [Test]
     public void GivenStringValuesThenTheyAreAppended()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenAppendIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultiLineValuesThenTheLinesAreAppended()
     {
         // Arrange
@@ -53,7 +53,7 @@ public sealed class WhenAppendIsCalled
         text.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenSnippetsThenTheyAreAppended()
     {
         // Arrange

@@ -5,7 +5,7 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Same = "TAlpha";
     private const string Different = "TBravo";
 
-    [Fact]
+    [Test]
     public void GivenMatchingIdentifiersThenReturnSameHash()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentIdentifiersThenReturnDifferentHashes()
     {
         // Arrange

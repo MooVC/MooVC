@@ -7,7 +7,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithFieldsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange

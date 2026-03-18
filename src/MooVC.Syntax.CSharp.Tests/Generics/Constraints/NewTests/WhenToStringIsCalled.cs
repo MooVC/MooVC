@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Generics.Constraints.NewTests;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenRequiredThenReturnsNewConstraint()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe("new()");
     }
 
-    [Fact]
+    [Test]
     public void GivenNotRequiredThenReturnsEmpty()
     {
         // Arrange

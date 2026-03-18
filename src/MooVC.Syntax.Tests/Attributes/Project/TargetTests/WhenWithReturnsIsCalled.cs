@@ -6,7 +6,7 @@ public sealed class WhenWithReturnsIsCalled
 {
     private const string UpdatedReturns = "UpdatedReturns";
 
-    [Fact]
+    [Test]
     public void GivenReturnsThenReturnsUpdatedInstance()
     {
         // Arrange

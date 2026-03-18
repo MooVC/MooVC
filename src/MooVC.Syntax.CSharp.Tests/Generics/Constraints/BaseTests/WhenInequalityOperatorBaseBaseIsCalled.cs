@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenBothBasesAreNullThenReturnsFalse()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEitherBaseIsNullThenReturnsTrue()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualBasesThenReturnsFalse()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBasesThenReturnsTrue()
     {
         // Arrange

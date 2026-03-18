@@ -4,7 +4,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
 {
     private const string Alternative = "property";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -76,7 +76,7 @@ public sealed class WhenEqualityOperatorSpecifierSpecifierIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

@@ -4,7 +4,7 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -62,7 +62,7 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Empty = "";
     private const string Alpha = "Alpha";
 
-    [Fact]
+    [Test]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         _ = Should.NotThrow(() => _ = (Variable)value);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullWhenRoundTrippedThenResultIsEmpty()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenEqualsString()
     {
         // Arrange
@@ -45,7 +45,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsString()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongThenEqualsString()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(expected).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWhenRoundTrippedThenMatchesOriginalInCamelCase()
     {
         // Arrange
@@ -89,7 +89,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

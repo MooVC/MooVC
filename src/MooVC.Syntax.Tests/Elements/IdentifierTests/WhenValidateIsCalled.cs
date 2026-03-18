@@ -12,7 +12,7 @@ public sealed class WhenValidateIsCalled
     private const string Numeric = "123";
     private const string UnicodePascal = "Álpha";
 
-    [Fact]
+    [Test]
     public void GivenNullValueThenNoValidationErrorReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenPascalCaseThenNoValidationErrorReturned()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
         results.Count.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
@@ -78,7 +78,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenCamelCaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -96,7 +96,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenSnakeCaseThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenKebabCaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -132,7 +132,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
@@ -150,12 +150,12 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Theory]
-    [InlineData(" Alpha")]
-    [InlineData("Alpha ")]
-    [InlineData("Alpha Beta")]
-    [InlineData("Alpha\tBeta")]
-    [InlineData("Alpha\nBeta")]
+    [Test]
+    [Arguments(" Alpha")]
+    [Arguments("Alpha ")]
+    [Arguments("Alpha Beta")]
+    [Arguments("Alpha\tBeta")]
+    [Arguments("Alpha\nBeta")]
     public void GivenWhitespacePresentThenValidationErrorReturned(string value)
     {
         // Arrange

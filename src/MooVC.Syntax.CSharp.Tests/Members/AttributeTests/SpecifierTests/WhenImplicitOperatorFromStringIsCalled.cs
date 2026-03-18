@@ -5,7 +5,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string None = "";
     private const string Method = "method";
 
-    [Fact]
+    [Test]
     public void GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         _ = Should.NotThrow(() => _ = (Attribute.Specifier)value);
     }
 
-    [Fact]
+    [Test]
     public void GivenNullWhenRoundTrippedThenResultIsNull()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenNoneThenEqualsString()
     {
         // Arrange
@@ -43,7 +43,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsString()
     {
         // Arrange
@@ -57,7 +57,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.Equals(value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
@@ -71,7 +71,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

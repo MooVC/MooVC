@@ -4,7 +4,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenConfigurationsAreDefault()
     {
         // Act

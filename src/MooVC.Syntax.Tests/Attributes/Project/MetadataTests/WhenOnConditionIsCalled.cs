@@ -6,7 +6,7 @@ public sealed class WhenOnConditionIsCalled
 {
     private const string UpdatedCondition = "UpdatedCondition";
 
-    [Fact]
+    [Test]
     public void GivenConditionThenReturnsUpdatedInstance()
     {
         // Arrange

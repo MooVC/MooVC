@@ -2,7 +2,7 @@
 
 public sealed class WhenToIndexIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullSelectorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenToIndexIsCalled
         exception.ParamName.ShouldBe(nameof(selector));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullSourceThenAnEmptyDictionaryIsReturned()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenToIndexIsCalled
         index.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullTransformThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenToIndexIsCalled
         exception.ParamName.ShouldBe(nameof(transform));
     }
 
-    [Fact]
+    [Test]
     public void GivenASourceThenAMatchingDictionaryIsReturned()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenToIndexIsCalled
         index.Values.ShouldBe(source);
     }
 
-    [Fact]
+    [Test]
     public void GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenToIndexIsCalled
         index.All(element => element.Value == transform(element.Key)).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenASourceWithDuplicatesThenAnArgumentExceptionIsThrown()
     {
         // Arrange

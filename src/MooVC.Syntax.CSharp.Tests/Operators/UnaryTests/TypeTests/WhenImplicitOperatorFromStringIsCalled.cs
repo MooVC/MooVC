@@ -4,7 +4,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Value = "--";
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsString()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         subject.ToString().ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange

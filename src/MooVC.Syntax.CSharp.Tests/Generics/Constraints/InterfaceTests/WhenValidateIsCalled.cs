@@ -10,7 +10,7 @@ public sealed class WhenValidateIsCalled
     private const string ValidInterfaceName = "IValid";
     private const string InvalidInterfaceName = "Invalid Name";
 
-    [Fact]
+    [Test]
     public void GivenValidInterfaceThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidNameThenValidationErrorsReturned()
     {
         // Arrange
@@ -52,7 +52,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenTooShortNameThenValidationErrorsReturned()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidDeclarationThenValidationErrorsReturned()
     {
         // Arrange

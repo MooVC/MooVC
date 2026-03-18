@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenForPropertyIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPropertyNameThenReturnsUpdatedInstance()
     {
         // Arrange

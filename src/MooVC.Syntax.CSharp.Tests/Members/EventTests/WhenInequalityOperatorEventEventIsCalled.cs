@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenInequalityOperatorEventEventIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -93,7 +93,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentBehavioursThenReturnsTrue()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentHandlersThenReturnsTrue()
     {
         // Arrange
@@ -130,7 +130,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenReturnsTrue()
     {
         // Arrange
@@ -148,7 +148,7 @@ public sealed class WhenInequalityOperatorEventEventIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentScopesThenReturnsTrue()
     {
         // Arrange

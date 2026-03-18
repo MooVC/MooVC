@@ -6,7 +6,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string BaseName = "BaseType";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedBaseThenReturnsEmpty()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenSpecifiedBaseThenReturnsName()
     {
         // Arrange

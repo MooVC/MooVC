@@ -2,7 +2,7 @@
 
 public sealed class WhenAsEnumerableIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenAsEnumerableIsCalled
         value.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenAsEnumerableIsCalled
         value.ShouldHaveSingleItem().ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenAsEnumerableIsCalled
         value.ShouldHaveSingleItem().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange

@@ -4,7 +4,7 @@ using Attribute = MooVC.Syntax.CSharp.Members.Attribute;
 
 public sealed class WhenEqualityOperatorParameterParameterIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsTrue()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -46,7 +46,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -76,7 +76,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentModifiersThenReturnsFalse()
     {
         // Arrange
@@ -90,7 +90,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentNamesThenReturnsFalse()
     {
         // Arrange
@@ -106,7 +106,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange

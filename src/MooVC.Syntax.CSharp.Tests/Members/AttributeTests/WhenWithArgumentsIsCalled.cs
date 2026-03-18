@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithArgumentsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenArgumentsThenReturnsNewInstanceWithUpdatedArguments()
     {
         // Arrange

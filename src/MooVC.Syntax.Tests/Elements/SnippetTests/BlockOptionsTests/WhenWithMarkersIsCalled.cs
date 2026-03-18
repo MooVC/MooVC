@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests;
 
 public sealed class WhenWithMarkersIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMarkersThenReturnsUpdatedInstance()
     {
         // Arrange

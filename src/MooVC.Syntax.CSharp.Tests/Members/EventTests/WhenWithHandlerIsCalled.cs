@@ -6,7 +6,7 @@ public sealed class WhenWithHandlerIsCalled
 {
     private const string Handler = "Handled";
 
-    [Fact]
+    [Test]
     public void GivenHandlerThenReturnsNewInstanceWithUpdatedHandler()
     {
         // Arrange

@@ -8,7 +8,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
     private const string AlternativeAlias = "Other";
     private const string Alias = "Alias";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -50,7 +50,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -78,7 +78,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentAliasesThenReturnsTrue()
     {
         // Arrange
@@ -94,7 +94,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentQualifiersThenReturnsTrue()
     {
         // Arrange
@@ -108,7 +108,7 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentStaticStatesThenReturnsTrue()
     {
         // Arrange

@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenIsSystemIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSystemQualifierThenReturnsTrue()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenIsSystemIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenNonSystemQualifierThenReturnsFalse()
     {
         // Arrange

@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 public sealed class WhenWithComparisonsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenReturnsNewInstanceWithUpdatedComparisons()
     {
         // Arrange

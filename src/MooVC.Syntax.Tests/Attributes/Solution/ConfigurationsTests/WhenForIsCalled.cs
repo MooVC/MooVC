@@ -5,7 +5,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenForIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenPlatformsThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -4,7 +4,7 @@ public sealed class WhenAsIsCalled
 {
     private const string ValueType = "Value";
 
-    [Fact]
+    [Test]
     public void GivenNullWrapperThenThrows()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenAsIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenAsTaskThenResultIsWrapped()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenAsIsCalled
         result.Type.ToString().ShouldBe("Task<Value>");
     }
 
-    [Fact]
+    [Test]
     public void GivenAsValueTaskThenResultIsWrapped()
     {
         // Arrange

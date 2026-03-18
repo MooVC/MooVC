@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
 public sealed class WhenKeepDuplicatesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenKeepDuplicatesThenReturnsUpdatedInstance()
     {
         // Arrange

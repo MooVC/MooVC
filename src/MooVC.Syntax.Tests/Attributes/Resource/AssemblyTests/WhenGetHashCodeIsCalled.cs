@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Attributes.Resource.AssemblyTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsSameHashCode()
     {
         // Arrange

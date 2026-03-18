@@ -1,15 +1,13 @@
 ﻿#if NET6_0_OR_GREATER
 namespace MooVC.Paging.DirectiveTests;
 
-using System.Collections.Generic;
-
 public sealed class WhenDirectiveIsConstructed
 {
-    [Theory]
-    [InlineData(Directive.FirstPage, Directive.MinimumLimit)]
-    [InlineData(Directive.FirstPage + 5, Directive.MinimumLimit + 10)]
-    [InlineData(Directive.FirstPage, ushort.MaxValue)]
-    [InlineData(ushort.MaxValue, Directive.MinimumLimit)]
+    [Test]
+    [Arguments(Directive.FirstPage, Directive.MinimumLimit)]
+    [Arguments(Directive.FirstPage + 5, Directive.MinimumLimit + 10)]
+    [Arguments(Directive.FirstPage, ushort.MaxValue)]
+    [Arguments(ushort.MaxValue, Directive.MinimumLimit)]
     public void GivenAValidPageAndSizeThenThePropertiesAreSetToMatch(ushort page, ushort limit)
     {
         // Act
@@ -20,10 +18,10 @@ public sealed class WhenDirectiveIsConstructed
         directive.Page.ShouldBe(page);
     }
 
-    [Theory]
-    [InlineData(Directive.MinimumLimit)]
-    [InlineData(Directive.MinimumLimit + 10)]
-    [InlineData(ushort.MaxValue)]
+    [Test]
+    [Arguments(Directive.MinimumLimit)]
+    [Arguments(Directive.MinimumLimit + 10)]
+    [Arguments(ushort.MaxValue)]
     public void GivenAnInvalidPageAndAValidSizeThenThePageIsSetToTheFirstPageAndTheSizeIsSetToTheConfigured(ushort limit)
     {
         unchecked
@@ -40,10 +38,10 @@ public sealed class WhenDirectiveIsConstructed
         }
     }
 
-    [Theory]
-    [InlineData(Directive.FirstPage)]
-    [InlineData(Directive.FirstPage + 5)]
-    [InlineData(ushort.MaxValue)]
+    [Test]
+    [Arguments(Directive.FirstPage)]
+    [Arguments(Directive.FirstPage + 5)]
+    [Arguments(ushort.MaxValue)]
     public void GivenAnValidPageAndAnInvalidSizeThenThePageIsSetToTheConfiguredAndTheSizeIsSetToTheMinimum(ushort page)
     {
         unchecked
@@ -60,7 +58,7 @@ public sealed class WhenDirectiveIsConstructed
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenBothInvalidPageAndSizeThenBothAreSetToTheirDefaultValues()
     {
         unchecked

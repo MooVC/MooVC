@@ -6,7 +6,7 @@ using System.Linq;
 
 public sealed class WhenToArrayIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANonGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenToArrayIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenToArrayIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumeratorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenToArrayIsCalled
         exception.ParamName.ShouldBe(nameof(enumerator));
     }
 
-    [Fact]
+    [Test]
     public void GivenANullGenericEnumeratorThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -65,7 +65,7 @@ public sealed class WhenToArrayIsCalled
         exception.ParamName.ShouldBe(nameof(enumerator));
     }
 
-    [Fact]
+    [Test]
     [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
     public void GivenAnEmptyEnumeratorThenAnEmptyArrayIsReturned()
     {
@@ -80,7 +80,7 @@ public sealed class WhenToArrayIsCalled
         actual.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
     public void GivenAnEmptyGenericEnumeratorThenAnEmptyArrayIsReturned()
     {

@@ -9,7 +9,7 @@ public sealed class WhenConstructorIsCalled
     private const string PropertyName = "Name";
     private const string PropertyType = "string";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenPropertyIsUndefined()
     {
         // Act
@@ -24,7 +24,7 @@ public sealed class WhenConstructorIsCalled
         subject.Type.ShouldBe(Symbol.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

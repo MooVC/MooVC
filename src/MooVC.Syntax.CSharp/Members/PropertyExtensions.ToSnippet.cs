@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Members
 {
-    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;

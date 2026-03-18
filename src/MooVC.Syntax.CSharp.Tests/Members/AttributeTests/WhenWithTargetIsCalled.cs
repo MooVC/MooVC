@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Members.AttributeTests;
 
 public sealed class WhenWithTargetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTargetThenReturnsNewInstanceWithUpdatedTarget()
     {
         // Arrange

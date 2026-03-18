@@ -2,7 +2,7 @@
 
 public sealed class WhenHasAnyIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnEmptySourceThenANegativeResponseIsReturned()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEmptySourceAndAPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnPopulatedSourceThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -41,7 +41,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnPopulatedSourceWithMultipleElementsThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -54,7 +54,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnPopulatedSourceAndAFailingPredicateThenANegativeResponseIsReturned()
     {
         // Arrange
@@ -67,7 +67,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnPopulatedSourceAndAPassingPredicateThenAPositiveResponseIsReturned()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullSourceThenANegativeResponseIsReturned()
     {
         // Arrange
@@ -93,7 +93,7 @@ public sealed class WhenHasAnyIsCalled
         hasAny.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullSourceAndAPredicateThenANegativeResponseIsReturned()
     {
         // Arrange

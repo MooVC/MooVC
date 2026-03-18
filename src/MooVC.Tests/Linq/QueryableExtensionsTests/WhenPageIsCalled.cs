@@ -5,7 +5,7 @@ using MooVC.Paging;
 
 public sealed class WhenPageIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenNoQueryableThenTheEmptyQueryableIsReturned()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenPageIsCalled
         actual.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnAllDirectiveThenTheQueryAbleIsReturned()
     {
         // Arrange
@@ -37,7 +37,7 @@ public sealed class WhenPageIsCalled
         actual.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenADirectiveThenTheSetIsFilteredIsCalled()
     {
         // Arrange

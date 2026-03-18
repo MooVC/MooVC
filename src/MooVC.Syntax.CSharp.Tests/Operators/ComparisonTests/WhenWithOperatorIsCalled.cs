@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ComparisonTests;
 
 public sealed class WhenWithOperatorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOperatorThenReturnsNewInstanceWithUpdatedOperator()
     {
         // Arrange

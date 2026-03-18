@@ -6,7 +6,7 @@ public sealed class WhenWithRemoveMetadataIsCalled
 {
     private const string UpdatedRemoveMetadata = "UpdatedRemoveMetadata";
 
-    [Fact]
+    [Test]
     public void GivenRemoveMetadataThenReturnsUpdatedInstance()
     {
         // Arrange

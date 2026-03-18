@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedTypeWithModifierThenValidationFails()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Result.Type)));
     }
 
-    [Fact]
+    [Test]
     public void GivenDefaultResultThenValidationSucceeds()
     {
         // Arrange

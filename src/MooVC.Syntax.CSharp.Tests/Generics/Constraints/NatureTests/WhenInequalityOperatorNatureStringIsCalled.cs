@@ -5,7 +5,7 @@ public sealed class WhenInequalityOperatorNatureStringIsCalled
     private const string Same = "class";
     private const string Different = "struct";
 
-    [Fact]
+    [Test]
     public void GivenBothSidesNullThenReturnsFalse()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenInequalityOperatorNatureStringIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenInequalityOperatorNatureStringIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -51,7 +51,7 @@ public sealed class WhenInequalityOperatorNatureStringIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

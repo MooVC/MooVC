@@ -4,7 +4,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenRootThenMatchesRootInstance()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         (subject == value).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValueThenEqualsString()
     {
         // Arrange

@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBodyIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBodyThenReturnsNewInstanceWithUpdatedBody()
     {
         // Arrange

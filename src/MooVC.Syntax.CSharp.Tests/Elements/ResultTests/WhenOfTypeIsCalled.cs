@@ -1,10 +1,8 @@
 namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenOfTypeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTypeThenReturnsUpdatedInstance()
     {
         // Arrange

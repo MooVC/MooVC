@@ -6,7 +6,7 @@ public sealed class WhenToKebabCaseIsCalled
 {
     private static readonly Faker generator = new();
 
-    [Fact]
+    [Test]
     public void GivenValueIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenToKebabCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Fact]
+    [Test]
     public void GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
@@ -34,11 +34,11 @@ public sealed class WhenToKebabCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData(" ")]
-    [InlineData("\t")]
-    [InlineData("\r\n")]
-    [InlineData("   ")]
+    [Test]
+    [Arguments(" ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
+    [Arguments("   ")]
     public void GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
@@ -49,22 +49,22 @@ public sealed class WhenToKebabCaseIsCalled
         exception.ParamName.ShouldBe(nameof(value));
     }
 
-    [Theory]
-    [InlineData("already-kebab-case", "already-kebab-case")]
-    [InlineData("already_snake_case", "already-snake-case")]
-    [InlineData("simple", "simple")]
-    [InlineData("Single", "single")]
-    [InlineData("PascalCase", "pascal-case")]
-    [InlineData("camelCaseValue", "camel-case-value")]
-    [InlineData("Hello World", "hello-world")]
-    [InlineData("Hello-World", "hello-world")]
-    [InlineData("Hello__World", "hello-world")]
-    [InlineData("_Hello", "hello")]
-    [InlineData("-Hello", "hello")]
-    [InlineData(" Hello ", "hello")]
-    [InlineData("Section2Update", "section2-update")]
-    [InlineData("ÉclairDeluxe", "éclair-deluxe")]
-    [InlineData("ΣigmaValue", "σigma-value")]
+    [Test]
+    [Arguments("already-kebab-case", "already-kebab-case")]
+    [Arguments("already_snake_case", "already-snake-case")]
+    [Arguments("simple", "simple")]
+    [Arguments("Single", "single")]
+    [Arguments("PascalCase", "pascal-case")]
+    [Arguments("camelCaseValue", "camel-case-value")]
+    [Arguments("Hello World", "hello-world")]
+    [Arguments("Hello-World", "hello-world")]
+    [Arguments("Hello__World", "hello-world")]
+    [Arguments("_Hello", "hello")]
+    [Arguments("-Hello", "hello")]
+    [Arguments(" Hello ", "hello")]
+    [Arguments("Section2Update", "section2-update")]
+    [Arguments("ÉclairDeluxe", "éclair-deluxe")]
+    [Arguments("ΣigmaValue", "σigma-value")]
     public void GivenValuesThenExpectedKebabCaseIsReturned(string value, string expected)
     {
         // Arrange & Act
@@ -74,10 +74,10 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("A", "a")]
-    [InlineData("ABC", "abc")]
-    [InlineData("XMLHttpRequest", "xml-http-request")]
+    [Test]
+    [Arguments("A", "a")]
+    [Arguments("ABC", "abc")]
+    [Arguments("XMLHttpRequest", "xml-http-request")]
     public void GivenAcronymsAndTransitionsThenBoundariesAreHandled(string value, string expected)
     {
         // Arrange & Act
@@ -87,7 +87,7 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
     {
         // Arrange
@@ -100,7 +100,7 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe("alpha-beta-gamma-delta");
     }
 
-    [Fact]
+    [Test]
     public void GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
     {
         // Arrange
@@ -113,7 +113,7 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe("alpha-beta");
     }
 
-    [Fact]
+    [Test]
     public void GivenDigitBeforeUppercaseThenSeparatorIsInserted()
     {
         // Arrange
@@ -126,10 +126,10 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe("part3-revision");
     }
 
-    [Theory]
-    [InlineData("__", "")]
-    [InlineData("---", "")]
-    [InlineData("___---___", "")]
+    [Test]
+    [Arguments("__", "")]
+    [Arguments("---", "")]
+    [Arguments("___---___", "")]
     public void GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
     {
         // Arrange & Act
@@ -139,10 +139,10 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [InlineData("123", "123")]
-    [InlineData("9lives", "9lives")]
-    [InlineData("Version2Alpha3", "version2-alpha3")]
+    [Test]
+    [Arguments("123", "123")]
+    [Arguments("9lives", "9lives")]
+    [Arguments("Version2Alpha3", "version2-alpha3")]
     public void GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
     {
         // Arrange & Act
@@ -152,7 +152,7 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenInternationalUppercaseThenLowercaseIsInvariant()
     {
         // Arrange
@@ -176,7 +176,7 @@ public sealed class WhenToKebabCaseIsCalled
         result.ShouldBe("istanbul-city");
     }
 
-    [Fact]
+    [Test]
     public void GivenWordsTwiceThenResultIsIdempotent()
     {
         // Arrange
@@ -217,7 +217,7 @@ public sealed class WhenToKebabCaseIsCalled
         }
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
     {
         // Arrange

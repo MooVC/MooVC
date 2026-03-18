@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithMetadataIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenMetadataThenReturnsUpdatedInstance()
     {
         // Arrange

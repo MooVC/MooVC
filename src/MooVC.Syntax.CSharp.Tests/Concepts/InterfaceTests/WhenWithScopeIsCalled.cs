@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithScopeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange

@@ -4,7 +4,6 @@
     using System.Collections.Immutable;
     using Ardalis.GuardClauses;
     using MooVC.Syntax.CSharp.Elements;
-    using MooVC.Syntax.CSharp.Generics;
     using MooVC.Syntax.CSharp.Members;
     using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;

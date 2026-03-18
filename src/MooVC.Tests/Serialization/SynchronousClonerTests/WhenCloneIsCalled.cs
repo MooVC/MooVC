@@ -2,7 +2,7 @@
 
 public sealed class WhenCloneIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenInstanceCloningIsRequested()
     {
         // Arrange

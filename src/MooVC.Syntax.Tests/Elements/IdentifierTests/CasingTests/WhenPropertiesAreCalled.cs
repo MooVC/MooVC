@@ -2,11 +2,11 @@ namespace MooVC.Syntax.Elements.IdentifierTests.CasingTests;
 
 public sealed class WhenPropertiesAreCalled
 {
-    [Theory]
-    [InlineData(0, true, false, false, false)]
-    [InlineData(1, false, true, false, false)]
-    [InlineData(2, false, false, true, false)]
-    [InlineData(3, false, false, false, true)]
+    [Test]
+    [Arguments(0, true, false, false, false)]
+    [Arguments(1, false, true, false, false)]
+    [Arguments(2, false, false, true, false)]
+    [Arguments(3, false, false, false, true)]
     public void GivenCasingThenFlagsMatch(int value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
     {
         // Arrange
@@ -19,11 +19,11 @@ public sealed class WhenPropertiesAreCalled
         subject.IsSnake.ShouldBe(expectedSnake);
     }
 
-    [Theory]
-    [InlineData(0, "Pascal")]
-    [InlineData(1, "Camel")]
-    [InlineData(2, "Kebab")]
-    [InlineData(3, "Snake")]
+    [Test]
+    [Arguments(0, "Pascal")]
+    [Arguments(1, "Camel")]
+    [Arguments(2, "Kebab")]
+    [Arguments(3, "Snake")]
     public void GivenCasingThenToStringMatches(int value, string expected)
     {
         // Arrange

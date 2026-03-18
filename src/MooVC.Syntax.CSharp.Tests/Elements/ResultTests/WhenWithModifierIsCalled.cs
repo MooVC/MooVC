@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Elements.ResultTests;
 
 public sealed class WhenWithModifierIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenModifierThenReturnsUpdatedInstance()
     {
         // Arrange

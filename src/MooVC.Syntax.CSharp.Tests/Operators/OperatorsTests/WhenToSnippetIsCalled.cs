@@ -31,7 +31,7 @@ public sealed class WhenToSnippetIsCalled
         }
         """;
 
-    [Fact]
+    [Test]
     public void GivenUndefinedThenEmptyReturned()
     {
         // Arrange
@@ -45,7 +45,7 @@ public sealed class WhenToSnippetIsCalled
         snippet.ShouldBe(Snippet.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenSnippetReturned()
     {
         // Arrange

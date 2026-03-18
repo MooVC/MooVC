@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
 {
     private const string DefaultName = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenMatchingParametersThenReturnSameHash()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenGetHashCodeIsCalled
         firstHash.ShouldBe(secondHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentParametersThenReturnDifferentHashes()
     {
         // Arrange

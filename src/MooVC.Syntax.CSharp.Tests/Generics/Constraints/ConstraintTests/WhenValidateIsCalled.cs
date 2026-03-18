@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
-using MooVC.Syntax.Elements;
 
 public sealed class WhenValidateIsCalled
 {
@@ -14,7 +13,7 @@ public sealed class WhenValidateIsCalled
     private const string InvalidInterfaceName = "Invalid Interface";
     private const string InvalidName = "Invalid Name";
 
-    [Fact]
+    [Test]
     public void GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -30,7 +29,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidInterfaceThenValidationErrorsReturned()
     {
         // Arrange
@@ -52,7 +51,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -74,7 +73,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidConstraintThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -97,7 +96,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleInvalidValuesThenAllValidationErrorsReturned()
     {
         // Arrange

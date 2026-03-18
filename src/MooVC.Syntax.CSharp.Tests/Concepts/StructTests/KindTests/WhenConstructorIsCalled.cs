@@ -5,7 +5,7 @@ using System.Reflection;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenValueThenKindIsCreated()
     {
         // Act

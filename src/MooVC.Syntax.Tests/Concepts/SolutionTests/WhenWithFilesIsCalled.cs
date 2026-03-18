@@ -5,7 +5,7 @@ using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenWithFilesIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenFilesThenReturnsUpdatedInstance()
     {
         // Arrange

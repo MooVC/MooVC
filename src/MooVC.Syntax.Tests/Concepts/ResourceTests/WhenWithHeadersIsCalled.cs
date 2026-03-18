@@ -6,7 +6,7 @@ using Resource = MooVC.Syntax.Concepts.Resource;
 
 public sealed class WhenWithHeadersIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenHeadersThenReturnsUpdatedInstance()
     {
         // Arrange

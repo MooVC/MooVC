@@ -14,7 +14,7 @@ public sealed class WhenStopAsyncIsCalled
         _host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), [_service]);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStartedHostThenTheServiceStops()
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class WhenStopAsyncIsCalled
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStoppedHostThenTheServiceIsNotStopped()
     {
         // Act
@@ -38,7 +38,7 @@ public sealed class WhenStopAsyncIsCalled
         await _service.DidNotReceive().StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
     {
         // Arrange
@@ -54,7 +54,7 @@ public sealed class WhenStopAsyncIsCalled
         await _service.Received(2).StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenMultipleStartsAndStopsThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
     {
         // Arrange

@@ -4,7 +4,7 @@ using global::MessagePack;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoOptionsConfigurationThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
@@ -14,7 +14,7 @@ public sealed class WhenSerializerIsConstructed
         serializer.Options.ShouldBeEquivalentTo(MessagePackSerializerOptions.Standard);
     }
 
-    [Fact]
+    [Test]
     public void GivenOptionsThenASerializerIsCreatedWithTheOptionsApplied()
     {
         // Arrange & Act

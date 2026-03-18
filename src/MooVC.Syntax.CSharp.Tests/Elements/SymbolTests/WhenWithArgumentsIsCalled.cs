@@ -4,7 +4,7 @@ using System.Linq;
 
 public sealed class WhenWithArgumentsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenArgumentsThenReturnsUpdatedInstance()
     {
         // Arrange

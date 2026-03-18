@@ -4,7 +4,7 @@ using global::Apex.Serialization;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
+    [Test]
     public void GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
@@ -14,7 +14,7 @@ public sealed class WhenSerializerIsConstructed
         _ = serializer.ShouldNotBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         // Arrange

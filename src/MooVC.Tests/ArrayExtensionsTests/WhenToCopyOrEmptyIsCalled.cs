@@ -2,29 +2,29 @@ namespace MooVC.ArrayExtensionsTests;
 
 public sealed class WhenToCopyOrEmptyIsCalled
 {
-    public static readonly TheoryData<int[]> GivenAnArrayThenAMatchingArrayIsReturnedData = new()
+    public static IEnumerable<Func<int[]>> GivenAnArrayThenAMatchingArrayIsReturnedData()
     {
-        { [1, 2] },
-        { [1] },
-        { [] },
-    };
+        yield return () => [1, 2];
+        yield return () => [1];
+        yield return () => [];
+    }
 
-    public static readonly TheoryData<int[], int[]> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData = new()
+    public static IEnumerable<Func<(int[] Original, int[] Expected)>> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData()
     {
-        { [3, 1, 2], [3, 1] },
-        { [1, 2, 3], [1, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return () => ([3, 1, 2], [3, 1]);
+        yield return () => ([1, 2, 3], [1, 3]);
+        yield return () => ([1], [1]);
+        yield return () => ([], []);
+    }
 
-    public static readonly TheoryData<string[]?> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData = new()
+    public static IEnumerable<Func<string[]?>> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData()
     {
-        { [] },
-        { default },
-    };
+        yield return () => [];
+        yield return () => default;
+    }
 
-    [Theory]
-    [MemberData(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
         // Act
@@ -34,8 +34,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBe(source);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
     public void GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
         // Act
@@ -45,8 +45,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act
@@ -56,8 +56,8 @@ public sealed class WhenToCopyOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Theory]
-    [MemberData(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
     public void GivenAnEmptyArrayAndAPredicateThenAnEmptyArrayIsReturned(string[]? source)
     {
         // Act

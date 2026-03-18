@@ -6,7 +6,7 @@ public sealed class WhenWithExcludeIsCalled
 {
     private const string UpdatedExclude = "UpdatedExclude";
 
-    [Fact]
+    [Test]
     public void GivenExcludeThenReturnsUpdatedInstance()
     {
         // Arrange

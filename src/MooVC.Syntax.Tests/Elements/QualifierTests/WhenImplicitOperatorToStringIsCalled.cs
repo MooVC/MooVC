@@ -7,7 +7,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string First = "System";
     private const string Second = "Collections";
 
-    [Fact]
+    [Test]
     public void GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         _ = result.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenQualifierThenStringMatchesToString()
     {
         // Arrange

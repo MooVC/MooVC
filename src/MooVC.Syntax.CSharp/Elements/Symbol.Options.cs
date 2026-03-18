@@ -2,7 +2,6 @@
 {
     using Ardalis.GuardClauses;
     using Fluentify;
-    using MooVC.Syntax.Elements;
     using MooVC.Syntax.Validation;
     using Valuify;
 

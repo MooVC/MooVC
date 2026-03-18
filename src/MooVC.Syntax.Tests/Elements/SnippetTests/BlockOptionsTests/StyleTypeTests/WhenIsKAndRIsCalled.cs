@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.SnippetTests.BlockOptionsTests.StyleTypeTests;
 
 public sealed class WhenIsKAndRIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenKAndRThenReturnsTrue()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenIsKAndRIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenAllmanThenReturnsFalse()
     {
         // Arrange

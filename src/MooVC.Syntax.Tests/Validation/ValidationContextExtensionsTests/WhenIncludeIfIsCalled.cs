@@ -7,7 +7,7 @@ public sealed class WhenIncludeIfIsCalled
     private const string InitialMessage = "Initial";
     private const string Message = "Validated";
 
-    [Fact]
+    [Test]
     public void GivenFalseConditionThenValidationIsNotPerformed()
     {
         // Arrange
@@ -26,7 +26,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenTrueConditionThenValidationResultsAreReturned()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenExistingResultsAndFalseConditionThenResultsAreUnchanged()
     {
         // Arrange
@@ -71,7 +71,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenExistingResultsAndTrueConditionThenValidationResultsAreAppended()
     {
         // Arrange
@@ -95,7 +95,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValidatablesAndFalseConditionThenValidationIsNotPerformed()
     {
         // Arrange
@@ -116,7 +116,7 @@ public sealed class WhenIncludeIfIsCalled
         second.Calls.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenMultipleValidatablesAndTrueConditionThenAllAreValidated()
     {
         // Arrange
@@ -139,7 +139,7 @@ public sealed class WhenIncludeIfIsCalled
         second.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFunctionConditionThenItsValueDeterminesWhetherValidationOccurs()
     {
         // Arrange
@@ -160,7 +160,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFunctionConditionAndExistingResultsThenItsValueDeterminesWhetherValidationOccurs()
     {
         // Arrange
@@ -184,7 +184,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void GivenPredicateAndTrueConditionThenPredicateOutcomeAffectsResults()
     {
         // Arrange
@@ -208,7 +208,7 @@ public sealed class WhenIncludeIfIsCalled
         validatable.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenPredicateAndFalseConditionThenValidationIsSkipped()
     {
         // Arrange
@@ -234,7 +234,7 @@ public sealed class WhenIncludeIfIsCalled
         actual.Results.ShouldBe(results);
     }
 
-    [Fact]
+    [Test]
     public void GivenPredicateAndMultipleValidatablesWhenConditionTrueThenPredicateResultsAreIncluded()
     {
         // Arrange
@@ -264,7 +264,7 @@ public sealed class WhenIncludeIfIsCalled
         second.Calls.ShouldBe(1);
     }
 
-    [Fact]
+    [Test]
     public void GivenFunctionConditionWithPredicateWhenFalseThenValidationIsSkipped()
     {
         // Arrange

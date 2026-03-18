@@ -6,7 +6,7 @@ using MooVC.Syntax.CSharp.Operators.BinaryTests;
 
 public sealed class WhenValidateIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedOperatorsThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenInvalidBinaryThenValidationErrorsReturned()
     {
         // Arrange
@@ -39,7 +39,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldContain(result => result.MemberNames.Contains(nameof(Binary.Body)));
     }
 
-    [Fact]
+    [Test]
     public void GivenValidOperatorsThenNoValidationErrorsReturned()
     {
         // Arrange

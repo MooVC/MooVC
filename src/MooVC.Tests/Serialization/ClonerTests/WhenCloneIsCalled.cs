@@ -2,7 +2,7 @@
 
 public sealed class WhenCloneIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenTheSerializerIsInvoked()
     {
         // Arrange
@@ -29,7 +29,7 @@ public sealed class WhenCloneIsCalled
         clone.ShouldBe(instance);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNullInstanceThenArgumentNullExceptionIsThrown()
     {
         // Arrange

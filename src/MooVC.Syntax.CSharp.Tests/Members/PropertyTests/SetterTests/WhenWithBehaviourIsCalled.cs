@@ -4,7 +4,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenWithBehaviourIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenBehaviourThenReturnsUpdatedInstance()
     {
         // Arrange

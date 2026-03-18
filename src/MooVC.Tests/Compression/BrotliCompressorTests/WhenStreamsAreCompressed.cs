@@ -8,7 +8,7 @@ using MooVC.IO;
 
 public sealed class WhenStreamsAreCompressed
 {
-    [Fact]
+    [Test]
     public async Task GivenAStreamThenTheResultMatches()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenStreamsAreCompressed
         decompressedBytes.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnEmptyStreamThenTheResultMatches()
     {
         // Arrange

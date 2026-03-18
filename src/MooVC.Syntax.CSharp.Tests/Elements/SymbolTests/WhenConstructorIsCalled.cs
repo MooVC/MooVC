@@ -1,12 +1,10 @@
 namespace MooVC.Syntax.CSharp.Elements.SymbolTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenConstructorIsCalled
 {
     private const string ArgumentName = "Inner";
 
-    [Fact]
+    [Test]
     public void GivenDefaultsThenSymbolIsUnspecified()
     {
         // Act
@@ -18,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         subject.IsUndefined.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

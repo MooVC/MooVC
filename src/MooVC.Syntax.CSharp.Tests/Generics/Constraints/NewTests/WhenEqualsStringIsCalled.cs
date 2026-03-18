@@ -7,7 +7,7 @@ public sealed class WhenEqualsStringIsCalled
     private const string Same = "new()";
     private const string Different = "";
 
-    [Fact]
+    [Test]
     public void GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -23,7 +23,7 @@ public sealed class WhenEqualsStringIsCalled
         resultRightLeft.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
     public void GivenEqualValuesThenReturnsTrue()
     {
@@ -40,7 +40,7 @@ public sealed class WhenEqualsStringIsCalled
         resultRightLeft.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
     public void GivenDifferentValuesThenReturnsFalse()
     {

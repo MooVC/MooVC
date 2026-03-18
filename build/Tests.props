@@ -10,21 +10,13 @@
     <NoWarn>CA1859;CA1861;IDE0039;xUnit1044;</NoWarn>
     <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" />
-    <PackageReference Include="coverlet.msbuild">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="TUnit" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
@@ -33,6 +25,8 @@
     <Using Include="Bogus" />
     <Using Include="NSubstitute" />
     <Using Include="Shouldly" />
-    <Using Include="Xunit" />
+    <Using Include="TUnit.Core"/>
+    <Using Include="TUnit.Assertions"/>
+    <Using Include="TUnit.Assertions.Extensions"/>
   </ItemGroup>
 </Project>

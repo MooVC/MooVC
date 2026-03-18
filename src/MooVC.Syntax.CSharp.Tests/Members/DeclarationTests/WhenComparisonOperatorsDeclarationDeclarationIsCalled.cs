@@ -5,7 +5,7 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
     private const string Alpha = "Alpha";
     private const string Beta = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenLeftNullThenLessThanReturnsTrue()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenGreaterNameThenGreaterThanReturnsTrue()
     {
         // Arrange
@@ -33,7 +33,7 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualNamesThenLessThanOrEqualReturnsTrue()
     {
         // Arrange
@@ -47,7 +47,7 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualNamesThenGreaterThanOrEqualReturnsTrue()
     {
         // Arrange

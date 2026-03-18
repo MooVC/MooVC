@@ -7,7 +7,7 @@ public sealed class WhenFileNameIsCalled
     private const string Name = "example";
     private const string PathValue = "Models";
 
-    [Fact]
+    [Test]
     public void GivenNameAndExtensionThenFileNameIsReturned()
     {
         // Arrange

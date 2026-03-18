@@ -2,7 +2,7 @@ namespace MooVC.Syntax.Elements.IdentifierTests.OptionsTests;
 
 public sealed class WhenWithCasingIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenCasingThenReturnsNewInstanceWithUpdatedCasing()
     {
         // Arrange

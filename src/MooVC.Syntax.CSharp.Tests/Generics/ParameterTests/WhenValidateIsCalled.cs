@@ -13,7 +13,7 @@ public sealed class WhenValidateIsCalled
     private const string InterfaceName = "IExample";
     private const string InvalidInterfaceName = "Example";
 
-    [Fact]
+    [Test]
     public void GivenUnnamedParameterThenValidationErrorsReturned()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenConstraintsWithValidationErrorsThenValidationErrorsReturned()
     {
         // Arrange
@@ -59,7 +59,7 @@ public sealed class WhenValidateIsCalled
         results[0].ErrorMessage.ShouldNotBeNullOrWhiteSpace();
     }
 
-    [Fact]
+    [Test]
     public void GivenNameWithNoConstraintsThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -79,7 +79,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenValidParameterThenNoValidationErrorsReturned()
     {
         // Arrange
@@ -107,7 +107,7 @@ public sealed class WhenValidateIsCalled
         results.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenUndefinedParameterThenValidationIsSkipped()
     {
         // Arrange

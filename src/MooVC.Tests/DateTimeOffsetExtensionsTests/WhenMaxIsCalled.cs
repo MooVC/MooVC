@@ -2,16 +2,16 @@
 
 public sealed class WhenMaxIsCalled
 {
-    public static readonly TheoryData<DateTime, DateTime> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData = new()
+    public static IEnumerable<(DateTime Oldest, DateTime Newest)> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData()
     {
-        { new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-    };
+        yield return (new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+    }
 
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
     public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
@@ -25,8 +25,8 @@ public sealed class WhenMaxIsCalled
         selected.ShouldBe(second);
     }
 
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
     public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
@@ -40,7 +40,7 @@ public sealed class WhenMaxIsCalled
         selected.ShouldBe(first);
     }
 
-    [Fact]
+    [Test]
     public void GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange

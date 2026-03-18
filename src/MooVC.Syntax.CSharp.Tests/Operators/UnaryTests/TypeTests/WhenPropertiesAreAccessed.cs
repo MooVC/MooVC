@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.UnaryTests.TypeTests;
 
 public sealed class WhenPropertiesAreAccessed
 {
-    public static TheoryData<UnaryTypeExpectation> Expectations()
+    public static IEnumerable<UnaryTypeExpectation> GivenTypeThenFlagsReflectValueData()
     {
         return
         [
@@ -18,8 +18,8 @@ public sealed class WhenPropertiesAreAccessed
         ];
     }
 
-    [Theory]
-    [MemberData(nameof(Expectations))]
+    [Test]
+    [MethodDataSource(nameof(GivenTypeThenFlagsReflectValueData))]
     public void GivenTypeThenFlagsReflectValue(UnaryTypeExpectation expectation)
     {
         // Arrange

@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
     private const string WithUnderscore = "Alpha_Beta";
     private const string WithPrefix = "@Alpha";
 
-    [Fact]
+    [Test]
     public void GivenNullValueThenResultIsNull()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenEmptyThenMatchesValue()
     {
         // Arrange
@@ -35,7 +35,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenWhitespaceThenMatchesValue()
     {
         // Arrange
@@ -48,7 +48,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(Space);
     }
 
-    [Fact]
+    [Test]
     public void GivenAsciiThenMatchesValue()
     {
         // Arrange
@@ -61,7 +61,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(Alpha);
     }
 
-    [Fact]
+    [Test]
     public void GivenUnicodeThenMatchesValue()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(Unicode);
     }
 
-    [Fact]
+    [Test]
     public void GivenValueWithUnderscoreThenMatchesValue()
     {
         // Arrange
@@ -87,7 +87,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(WithUnderscore);
     }
 
-    [Fact]
+    [Test]
     public void GivenReservedPrefixThenMatchesValue()
     {
         // Arrange
@@ -100,7 +100,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(WithPrefix);
     }
 
-    [Fact]
+    [Test]
     public void GivenVeryLongThenMatchesValue()
     {
         // Arrange
@@ -114,7 +114,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(value);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenDifferentResultsAreReturned()
     {
         // Arrange
@@ -129,7 +129,7 @@ public sealed class WhenToStringIsCalled
         leftString.ShouldNotBe(rightString);
     }
 
-    [Fact]
+    [Test]
     public void GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange

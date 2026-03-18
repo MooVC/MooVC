@@ -2,7 +2,7 @@
 
 public sealed class WhenInitializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerThenTheInitializerIsOnlyCalledOnceAndTheInstanceIsAlwaysTheSame()
     {
         // Arrange
@@ -31,7 +31,7 @@ public sealed class WhenInitializeIsCalled
         second.ShouldBe(third);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnce()
     {
         // Arrange
@@ -56,7 +56,7 @@ public sealed class WhenInitializeIsCalled
         invocations.ShouldBe(ExpectedInvocations);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerWithDelayThenTheInitializerIsStillCalledOnlyOnce()
     {
         // Arrange

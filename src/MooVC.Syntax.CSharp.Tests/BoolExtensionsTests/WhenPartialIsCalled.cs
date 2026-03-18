@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Syntax.BoolExtensionsTests;
 
 public sealed class WhenPartialIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenTrueThenReturnsPartialKeyword()
     {
         // Arrange
@@ -15,7 +15,7 @@ public sealed class WhenPartialIsCalled
         result.ShouldBe("partial");
     }
 
-    [Fact]
+    [Test]
     public void GivenFalseThenReturnsEmpty()
     {
         // Arrange

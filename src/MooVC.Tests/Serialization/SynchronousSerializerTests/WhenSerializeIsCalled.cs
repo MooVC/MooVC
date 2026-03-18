@@ -5,7 +5,7 @@ using MooVC.Compression;
 
 public sealed class WhenSerializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenACompressorThenCompressAsyncIsInvoked()
     {
         // Arrange
@@ -27,7 +27,7 @@ public sealed class WhenSerializeIsCalled
         _ = await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenDataSerializationIsRequested()
     {
         // Arrange
@@ -52,7 +52,7 @@ public sealed class WhenSerializeIsCalled
         wasInvoked.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStreamThenStreamSerializationIsRequested()
     {
         // Arrange
@@ -77,7 +77,7 @@ public sealed class WhenSerializeIsCalled
         wasInvoked.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNullInstanceThenDataSerializationIsRequested()
     {
         // Arrange
@@ -102,7 +102,7 @@ public sealed class WhenSerializeIsCalled
         wasInvoked.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNullStreamThenThrowsArgumentNullException()
     {
         // Arrange

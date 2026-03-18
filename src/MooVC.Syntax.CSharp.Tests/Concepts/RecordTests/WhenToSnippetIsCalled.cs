@@ -4,7 +4,7 @@ using System;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange

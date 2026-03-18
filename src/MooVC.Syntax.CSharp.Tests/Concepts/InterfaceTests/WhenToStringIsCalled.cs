@@ -5,7 +5,7 @@ using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenToStringIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedInterfaceThenReturnsEmpty()
     {
         // Arrange
@@ -18,7 +18,7 @@ public sealed class WhenToStringIsCalled
         result.ShouldBe(string.Empty);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange

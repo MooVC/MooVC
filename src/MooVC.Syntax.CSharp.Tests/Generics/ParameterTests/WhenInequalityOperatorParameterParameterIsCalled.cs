@@ -8,7 +8,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
 {
     private const string DefaultName = "TValue";
 
-    [Fact]
+    [Test]
     public void GivenBothNullThenReturnsFalse()
     {
         // Arrange
@@ -22,7 +22,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -36,7 +36,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
@@ -50,7 +50,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -64,7 +64,7 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange

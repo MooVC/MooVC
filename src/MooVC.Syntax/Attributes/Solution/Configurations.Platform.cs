@@ -44,7 +44,7 @@
             /// </summary>
             public static readonly Platform ARM64 = "ARM64";
 
-            #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 
             /// <summary>
             /// Represents the 64-bit x64 platform identifier.
@@ -55,7 +55,8 @@
             /// Represents the x86 (32-bit) platform architecture.
             /// </summary>
             public static readonly Platform x86 = "x86";
-            #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 
             private static readonly Regex _rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
 

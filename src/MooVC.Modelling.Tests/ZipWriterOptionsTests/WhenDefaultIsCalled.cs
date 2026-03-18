@@ -4,7 +4,7 @@ using System.IO.Compression;
 
 public sealed class WhenDefaultIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultThenCompressionIsOptimal()
     {
         // Arrange

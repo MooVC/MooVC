@@ -5,7 +5,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenHashesMatch()
     {
         // Arrange
@@ -20,7 +20,7 @@ public sealed class WhenGetHashCodeIsCalled
         leftHash.ShouldBe(rightHash);
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange

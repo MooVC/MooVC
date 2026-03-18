@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Operators.ConversionTests.IntentTests;
 
 public sealed class WhenImplicitOperatorToIntIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAnIntentThenReturnsTheValue()
     {
         // Arrange

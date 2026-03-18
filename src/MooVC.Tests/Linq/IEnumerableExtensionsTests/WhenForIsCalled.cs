@@ -2,7 +2,7 @@ namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenForIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
     {
         // Arrange
@@ -21,7 +21,7 @@ public sealed class WhenForIsCalled
         wasInvoked.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -34,7 +34,7 @@ public sealed class WhenForIsCalled
         Should.NotThrow(act);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationThenTheCorrectIndexIsPassedToTheActionForEachEnumerationMember()
     {
         // Arrange
@@ -53,7 +53,7 @@ public sealed class WhenForIsCalled
         indexes.ShouldBe([0, 1, 2]);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedInOrderForEachEnumerationMember()
     {
         // Arrange
@@ -74,7 +74,7 @@ public sealed class WhenForIsCalled
         invocations.ShouldBe(enumeration);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange

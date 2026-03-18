@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenToFragmentsIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenUndefinedThenReturnsEmpty()
     {
         // Arrange
@@ -19,7 +19,7 @@ public sealed class WhenToFragmentsIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenLocationThenReturnsCompileAndEmbeddedResource()
     {
         // Arrange
@@ -49,7 +49,7 @@ public sealed class WhenToFragmentsIsCalled
         XNode.DeepEquals(expectedEmbeddedResource, result[1]).ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenPublicResourceWithNamespaceThenReturnsCustomToolNamespace()
     {
         // Arrange

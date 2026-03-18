@@ -2,7 +2,7 @@
 
 public sealed class WhenToTypedArrayIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
@@ -16,7 +16,7 @@ public sealed class WhenToTypedArrayIsCalled
         value.Single().ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
@@ -30,7 +30,7 @@ public sealed class WhenToTypedArrayIsCalled
         value.Single().ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
@@ -44,7 +44,7 @@ public sealed class WhenToTypedArrayIsCalled
         value.Single().ShouldBeSameAs(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenToTypedArrayIsCalled
         value.Single().ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnArrayThenTheSameArrayIsReturned()
     {
         // Arrange
@@ -71,7 +71,7 @@ public sealed class WhenToTypedArrayIsCalled
         value.ShouldBeSameAs(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullArrayThenNullIsReturned()
     {
         // Arrange

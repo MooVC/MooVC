@@ -1,63 +1,65 @@
 namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using System.Collections.Immutable;
+
 public sealed class WhenToArrayOrEmptyIsCalled
 {
-    public static readonly TheoryData<int[], int[]> EnumerablePredicateOrderTestData = new()
+    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerablePredicateOrderTestData()
     {
-        { [3, 1, 2], [1, 3] },
-        { [3, 2, 1], [1, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return () => ([3, 1, 2], [1, 3]);
+        yield return () => ([3, 2, 1], [1, 3]);
+        yield return () => ([1], [1]);
+        yield return () => ([], []);
+    }
 
-    public static readonly TheoryData<int[], int[]> EnumerableOrderTestData = new()
+    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerableOrderTestData()
     {
-        { [3, 1, 2], [1, 2, 3] },
-        { [3, 2, 1], [1, 2, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return () => ([3, 1, 2], [1, 2, 3]);
+        yield return () => ([3, 2, 1], [1, 2, 3]);
+        yield return () => ([1], [1]);
+        yield return () => ([], []);
+    }
 
-    public static readonly TheoryData<int[]> EnumerableTestData = new()
+    public static IEnumerable<Func<IEnumerable<int>>> EnumerableTestData()
     {
-        { [1, 2] },
-        { [1] },
-        { [] },
-    };
+        yield return () => [1, 2];
+        yield return () => [1];
+        yield return () => [];
+    }
 
-    public static readonly TheoryData<int[], int[]> EnumerablePredicateTestData = new()
+    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerablePredicateTestData()
     {
-        { [3, 1, 2], [3, 1] },
-        { [1, 2, 3], [1, 3] },
-        { [1], [1] },
-        { [], [] },
-    };
+        yield return () => ([3, 1, 2], [3, 1]);
+        yield return () => ([1, 2, 3], [1, 3]);
+        yield return () => ([1], [1]);
+        yield return () => ([], []);
+    }
 
-    [Theory]
-    [MemberData(nameof(EnumerableOrderTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerableOrderTestData))]
     public void GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.ToArrayOrEmpty(element => element);
+        IEnumerable<int> result = original.ToArrayOrEmpty(element => element);
 
         // Assert
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerablePredicateOrderTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerablePredicateOrderTestData))]
     public void GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
         IEnumerable<int> original,
         IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
+        IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
@@ -72,32 +74,32 @@ public sealed class WhenToArrayOrEmptyIsCalled
         exception.ParamName.ShouldBe(nameof(order));
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerableTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerableTestData))]
     public void GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
     {
         // Arrange
-        int[] expected = enumerable.ToArray();
+        IEnumerable<int> expected = [.. enumerable];
 
         // Act
-        int[] result = enumerable.ToArrayOrEmpty();
+        IEnumerable<int> result = enumerable.ToArrayOrEmpty();
 
         // Assert
         result.ShouldBe(expected);
     }
 
-    [Theory]
-    [MemberData(nameof(EnumerablePredicateTestData))]
+    [Test]
+    [MethodDataSource(nameof(EnumerablePredicateTestData))]
     public void GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
-        int[] result = original.ToArrayOrEmpty(predicate: value => value != 2);
+        IEnumerable<int> result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
         result.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -110,7 +112,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -123,16 +125,16 @@ public sealed class WhenToArrayOrEmptyIsCalled
         result.ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public void GivenAnEnumerableWhenAPredicateReturnsFalseThenEmptyArrayIsReturned()
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3];
 
         // Act
-        int[] result = enumerable.ToArrayOrEmpty(predicate: value => false);
+        IEnumerable<int> result = enumerable.ToArrayOrEmpty(predicate: value => false);
 
         // Assert
-        result.ShouldBe(Array.Empty<int>());
+        result.ShouldBe([]);
     }
 }

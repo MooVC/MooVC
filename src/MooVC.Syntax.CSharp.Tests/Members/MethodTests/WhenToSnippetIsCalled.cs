@@ -7,7 +7,7 @@ using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
 public sealed class WhenToSnippetIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenSingleLineBracesThenBodyIsRenderedInline()
     {
         // Arrange
@@ -25,7 +25,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldBe("public string Perform(int value) { return value; }");
     }
 
-    [Fact]
+    [Test]
     public void GivenLambdaInlineThenBodyIsRenderedInline()
     {
         // Arrange
@@ -43,7 +43,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldBe("public string Perform(int value) => return value;");
     }
 
-    [Fact]
+    [Test]
     public void GivenBodyWhenSynchronousThenBlockIsRendered()
     {
         // Arrange
@@ -63,7 +63,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenBodyWhenAsynchronousThenBlockIsRendered()
     {
         // Arrange
@@ -87,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         representation.ShouldBe(expected);
     }
 
-    [Fact]
+    [Test]
     public void GivenGenericConstraintsThenWhereClauseIsIncluded()
     {
         // Arrange

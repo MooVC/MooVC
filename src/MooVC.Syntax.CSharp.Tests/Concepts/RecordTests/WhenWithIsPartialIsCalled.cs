@@ -2,7 +2,7 @@ namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 public sealed class WhenWithIsPartialIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenIsPartialThenReturnsUpdatedInstance()
     {
         // Arrange

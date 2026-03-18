@@ -6,7 +6,7 @@ using MooVC.Syntax.Elements;
 
 public sealed class WhenConstructorIsCalled
 {
-    [Fact]
+    [Test]
     public void GivenDefaultsThenFieldIsUndefined()
     {
         // Act
@@ -22,7 +22,7 @@ public sealed class WhenConstructorIsCalled
         subject.Type.ShouldBe(Symbol.Undefined);
     }
 
-    [Fact]
+    [Test]
     public void GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange

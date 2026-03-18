@@ -1,12 +1,10 @@
 namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
-using MooVC.Syntax.Elements;
-
 public sealed class WhenToSnippetIsCalled
 {
     private const string StaticKeyword = "static";
 
-    [Fact]
+    [Test]
     public void GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -19,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
         _ = action.ShouldThrow<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void GivenStaticClassThenSignatureIncludesStaticKeyword()
     {
         // Arrange

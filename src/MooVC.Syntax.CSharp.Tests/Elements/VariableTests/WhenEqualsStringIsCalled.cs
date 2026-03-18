@@ -1,14 +1,13 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
 using Shouldly;
-using Xunit;
 
 public sealed class WhenEqualsStringIsCalled
 {
     private const string Same = "Alpha";
     private const string Different = "Beta";
 
-    [Fact]
+    [Test]
     public void GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -22,7 +21,7 @@ public sealed class WhenEqualsStringIsCalled
         result.ShouldBeFalse();
     }
 
-    [Fact]
+    [Test]
     public void GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -36,7 +35,7 @@ public sealed class WhenEqualsStringIsCalled
         result.ShouldBeTrue();
     }
 
-    [Fact]
+    [Test]
     public void GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange

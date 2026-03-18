@@ -7,7 +7,7 @@ public sealed class WhenAndIsCalled
     private const string FirstMessage = "First";
     private const string SecondMessage = "Second";
 
-    [Fact]
+    [Test]
     public void GivenValidatableThenItsResultsAreAppended()
     {
         // Arrange
@@ -32,7 +32,7 @@ public sealed class WhenAndIsCalled
         results.ShouldBe([initial, additionalValidatable.Results.Single()]);
     }
 
-    [Fact]
+    [Test]
     public void GivenValidatablesThenAllResultsAreAppended()
     {
         // Arrange
@@ -58,7 +58,7 @@ public sealed class WhenAndIsCalled
         results.ShouldBe([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
-    [Fact]
+    [Test]
     public void GivenPredicateThenPredicateResultIsAppended()
     {
         // Arrange
@@ -84,7 +84,7 @@ public sealed class WhenAndIsCalled
         results.ShouldContain(result => result.MemberNames.Contains(nameof(additionalValidatable)));
     }
 
-    [Fact]
+    [Test]
     public void GivenPredicateAndValidatablesThenPredicateFailuresAreIncluded()
     {
         // Arrange
