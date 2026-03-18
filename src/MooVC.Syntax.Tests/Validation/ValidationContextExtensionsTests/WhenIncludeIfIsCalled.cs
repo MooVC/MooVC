@@ -203,7 +203,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(memberName);
         _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }

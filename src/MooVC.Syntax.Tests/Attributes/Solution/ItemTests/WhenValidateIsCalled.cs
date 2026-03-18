@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Id));
     }
 
@@ -53,7 +53,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Name));
     }
 
@@ -70,7 +70,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Path));
     }
 
@@ -87,7 +87,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Type));
     }
 }

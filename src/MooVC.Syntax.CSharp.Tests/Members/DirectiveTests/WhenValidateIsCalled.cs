@@ -44,7 +44,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Directive.Alias));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -67,7 +67,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -89,7 +89,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains("Qualifier[0]");
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }

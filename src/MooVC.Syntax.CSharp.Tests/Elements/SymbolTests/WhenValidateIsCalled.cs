@@ -42,7 +42,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Name));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -65,7 +65,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Arguments));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -88,7 +88,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
@@ -111,7 +111,7 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await results.Single();
+        _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
