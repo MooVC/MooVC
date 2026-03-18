@@ -4,7 +4,7 @@ using System.Dynamic;
 
 public sealed class WhenCloneIsCalled
 {
-    public static IEnumerable<ExpandoObject> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
+    public static IEnumerable<Func<ExpandoObject>> GivenAnInitializedObjectThenItWillReturnANewObjectWithTheSameMembersData()
     {
         dynamic first = new ExpandoObject();
         dynamic second = new ExpandoObject();
@@ -19,7 +19,12 @@ public sealed class WhenCloneIsCalled
         third.Alpha = 1.0;
         third.Beta = new object();
 
-        return [first, second, third];
+        return
+        [
+            () => first,
+            () => second,
+            () => third,
+        ];
     }
 
     [Test]

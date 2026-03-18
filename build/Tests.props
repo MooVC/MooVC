@@ -22,9 +22,6 @@
     <ProjectReference Include="..\$(RootNamespace)\$(RootNamespace).csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)..\test-support\Xunit\TheoryData.cs" Link="Xunit/TheoryData.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Using Include="Bogus" />
     <Using Include="NSubstitute" />
     <Using Include="Shouldly" />

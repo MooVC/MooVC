@@ -2,25 +2,25 @@ namespace MooVC.ArrayExtensionsTests;
 
 public sealed class WhenToCopyOrEmptyIsCalled
 {
-    public static IEnumerable<int[]> GivenAnArrayThenAMatchingArrayIsReturnedData()
+    public static IEnumerable<Func<int[]>> GivenAnArrayThenAMatchingArrayIsReturnedData()
     {
-        yield return [1, 2];
-        yield return [1];
-        yield return [];
+        yield return () => [1, 2];
+        yield return () => [1];
+        yield return () => [];
     }
 
-    public static IEnumerable<(int[] Original, int[] Expected)> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData()
+    public static IEnumerable<Func<(int[] Original, int[] Expected)>> GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData()
     {
-        yield return ([3, 1, 2], [3, 1]);
-        yield return ([1, 2, 3], [1, 3]);
-        yield return ([1], [1]);
-        yield return ([], []);
+        yield return () => ([3, 1, 2], [3, 1]);
+        yield return () => ([1, 2, 3], [1, 3]);
+        yield return () => ([1], [1]);
+        yield return () => ([], []);
     }
 
-    public static IEnumerable<string[]?> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData()
+    public static IEnumerable<Func<string[]?>> GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData()
     {
-        yield return [];
-        yield return default;
+        yield return () => [];
+        yield return () => default;
     }
 
     [Test]
