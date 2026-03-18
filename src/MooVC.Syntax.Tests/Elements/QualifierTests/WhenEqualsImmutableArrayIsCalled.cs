@@ -4,14 +4,14 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualsImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<Name> different = ["Gamma"];
-    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> _different = ["Gamma"];
+    private static readonly ImmutableArray<Name> _same = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(same);
+        var left = new Qualifier(_same);
         ImmutableArray<Name> right = default;
 
         // Act
@@ -25,8 +25,8 @@ public sealed class WhenEqualsImmutableArrayIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
-        ImmutableArray<Name> right = same;
+        var left = new Qualifier(_same);
+        ImmutableArray<Name> right = _same;
 
         // Act
         bool result = left.Equals(right);
@@ -39,8 +39,8 @@ public sealed class WhenEqualsImmutableArrayIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(same);
-        ImmutableArray<Name> right = different;
+        var left = new Qualifier(_same);
+        ImmutableArray<Name> right = _different;
 
         // Act
         bool result = left.Equals(right);

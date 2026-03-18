@@ -44,7 +44,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger, services!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(services));
     }
 
@@ -59,7 +59,7 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         Func<IHostedService> act = () => new ThreadSafeHostedService(logger!, [service]);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(logger));
     }
 }

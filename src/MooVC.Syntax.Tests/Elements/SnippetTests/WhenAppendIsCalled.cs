@@ -15,10 +15,10 @@ public sealed class WhenAppendIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(
-            () => _ = subject.Append(options!, Beta)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.Append(options!, Beta);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

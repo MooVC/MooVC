@@ -11,7 +11,7 @@ public sealed class WhenToArrayIsCalled
     {
         // Arrange
         int[] values = [1, 2, 3];
-        object[] expected = values.Cast<object>().ToArray();
+        object[] expected = [.. values.Cast<object>()];
         var list = new List<int>(values);
         IEnumerator enumerator = list.GetEnumerator();
 

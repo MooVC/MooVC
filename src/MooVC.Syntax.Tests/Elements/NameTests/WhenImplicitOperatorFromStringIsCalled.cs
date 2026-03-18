@@ -40,7 +40,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Name subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 
@@ -54,7 +54,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Name subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 
@@ -68,7 +68,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Name subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 
@@ -82,7 +82,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Name subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
     }
 

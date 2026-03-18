@@ -4,7 +4,7 @@ using System.Globalization;
 
 public sealed class WhenToPascalCaseIsCalled
 {
-    private static readonly Faker generator = new();
+    private static readonly Faker _generator = new();
 
     [Test]
     public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
@@ -13,10 +13,10 @@ public sealed class WhenToPascalCaseIsCalled
         string? value = default;
 
         // Act
-        Action action = () => value!.ToPascalCase();
+        Action act = () => value!.ToPascalCase();
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -27,10 +27,10 @@ public sealed class WhenToPascalCaseIsCalled
         string value = string.Empty;
 
         // Act
-        Action action = () => value.ToPascalCase();
+        Action act = () => value.ToPascalCase();
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -42,10 +42,10 @@ public sealed class WhenToPascalCaseIsCalled
     public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
-        Action action = () => value.ToPascalCase();
+        Action act = () => value.ToPascalCase();
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -112,10 +112,9 @@ public sealed class WhenToPascalCaseIsCalled
         // Arrange
         const int wordCount = 10;
 
-        string[] words = Enumerable
+        string[] words = [.. Enumerable
             .Range(0, wordCount)
-            .Select(_ => generator.Lorem.Word())
-            .ToArray();
+            .Select(_ => _generator.Lorem.Word())];
 
         // Act & Assert
         foreach (string word in words)

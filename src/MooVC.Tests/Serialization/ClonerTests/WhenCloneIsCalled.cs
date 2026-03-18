@@ -41,7 +41,7 @@ public sealed class WhenCloneIsCalled
         Func<Task> act = async () => await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(original));
     }
 }

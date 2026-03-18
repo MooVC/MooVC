@@ -55,7 +55,7 @@ public sealed class WhenIndexOfIsCalled
         Action act = () => enumeration.IndexOf(predicate!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(predicate));
     }
 

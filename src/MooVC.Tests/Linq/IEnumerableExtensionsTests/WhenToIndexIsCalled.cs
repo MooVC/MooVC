@@ -13,7 +13,7 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(selector!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(selector));
     }
 
@@ -42,7 +42,7 @@ public sealed class WhenToIndexIsCalled
         Action act = () => source.ToIndex(value => value, transform!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(transform));
     }
 

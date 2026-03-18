@@ -15,10 +15,10 @@ public sealed class WhenPrependIsCalled
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(
-            () => _ = subject.Prepend(options!, Beta)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.Prepend(options!, Beta);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

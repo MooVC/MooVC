@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _values = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenEmptySnippetThenCreatesDefaultArray()
@@ -23,12 +23,12 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
     public async Task GivenSnippetThenReturnsMatchingArray()
     {
         // Arrange
-        Snippet subject = values;
+        Snippet subject = _values;
 
         // Act
         ImmutableArray<string> result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEqualTo(_values);
     }
 }

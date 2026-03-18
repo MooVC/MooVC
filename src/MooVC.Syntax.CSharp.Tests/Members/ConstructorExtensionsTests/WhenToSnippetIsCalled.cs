@@ -36,9 +36,10 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = constructors.ToSnippet(Type.Options.Default, type!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = constructors.ToSnippet(Type.Options.Default, type!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(type));
     }
 
@@ -51,9 +52,10 @@ public sealed class WhenToSnippetIsCalled
         Type.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = constructors.ToSnippet(options!, type)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = constructors.ToSnippet(options!, type);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

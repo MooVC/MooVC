@@ -4,19 +4,20 @@ using System.Collections.Immutable;
 
 public sealed class WhenShiftIsCalled
 {
-    private static readonly ImmutableArray<string> lines = ["if (condition)", "return true;"];
+    private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
     [Test]
     public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
         Snippet.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = subject.Shift(options!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = subject.Shift(options!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
@@ -30,7 +31,7 @@ public sealed class WhenShiftIsCalled
             """;
 
         const string whitespace = "\t";
-        var subject = new Snippet(lines);
+        var subject = new Snippet(_lines);
 
         Snippet.Options options = new Snippet.Options()
             .WithWhitespace(whitespace);

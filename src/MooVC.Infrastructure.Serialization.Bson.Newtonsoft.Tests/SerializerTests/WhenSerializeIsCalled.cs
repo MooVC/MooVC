@@ -15,7 +15,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> action = async () => await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
-        JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>();
+        JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>().And.IsNotNull();
         _ = await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
     }
 
@@ -31,7 +31,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> action = async () => await serializer.Serialize(instance!, stream, CancellationToken.None);
 
         // Assert
-        JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>();
+        JsonWriterException exception = await Assert.That(action).Throws<JsonWriterException>().And.IsNotNull();
         _ = await Assert.That(exception.Message).Contains("BSON must start with an Object or Array.");
     }
 }

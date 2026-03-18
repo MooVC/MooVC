@@ -33,9 +33,10 @@ public sealed class WhenToSnippetIsCalled
         Indexer.Options? options = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = indexers.ToSnippet(options!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = indexers.ToSnippet(options!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 

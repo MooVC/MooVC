@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
 {
-    private static readonly ImmutableArray<string> different = ["Gamma"];
-    private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _different = ["Gamma"];
+    private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
@@ -26,7 +26,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     {
         // Arrange
         Snippet? left = default;
-        var right = new Snippet(same);
+        var right = new Snippet(_same);
 
         // Act
         bool result = left == right;
@@ -39,7 +39,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet(same);
+        var left = new Snippet(_same);
         Snippet? right = default;
 
         // Act
@@ -53,7 +53,7 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Snippet(same);
+        var first = new Snippet(_same);
         Snippet second = first;
 
         // Act
@@ -67,8 +67,8 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet(same);
-        var right = new Snippet(same);
+        var left = new Snippet(_same);
+        var right = new Snippet(_same);
 
         // Act
         bool resultLeftRight = left == right;
@@ -83,8 +83,8 @@ public sealed class WhenEqualityOperatorSnippetSnippetIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet(same);
-        var right = new Snippet(different);
+        var left = new Snippet(_same);
+        var right = new Snippet(_different);
 
         // Act
         bool resultLeftRight = left == right;

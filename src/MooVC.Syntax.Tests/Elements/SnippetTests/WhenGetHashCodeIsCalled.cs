@@ -4,15 +4,15 @@ using System.Collections.Immutable;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    private static readonly ImmutableArray<string> different = ["Gamma"];
-    private static readonly ImmutableArray<string> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _different = ["Gamma"];
+    private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        var first = new Snippet(same);
-        var second = new Snippet(same);
+        var first = new Snippet(_same);
+        var second = new Snippet(_same);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -26,8 +26,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        var first = new Snippet(same);
-        var second = new Snippet(different);
+        var first = new Snippet(_same);
+        var second = new Snippet(_different);
 
         // Act
         int firstHash = first.GetHashCode();

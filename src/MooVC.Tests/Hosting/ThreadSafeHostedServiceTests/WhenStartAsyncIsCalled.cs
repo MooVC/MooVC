@@ -66,8 +66,11 @@ public sealed class WhenStartAsyncIsCalled
         var expected = new InvalidOperationException("Service failed to start.");
         _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
 
-        // Act & Assert
-        AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
+        // Act
+        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
+
+        // Assert
+        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
 
         _ = await Assert.That(actual.InnerException).IsEqualTo(expected);
 
@@ -83,8 +86,11 @@ public sealed class WhenStartAsyncIsCalled
         _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw start);
         _service.When(services => _service.StopAsync(Arg.Any<CancellationToken>())).Do(_ => throw stop);
 
-        // Act & Assert
-        AggregateException actual = await Assert.That(() => _host.StartAsync(CancellationToken.None)).Throws<AggregateException>();
+        // Act
+        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
+
+        // Assert
+        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
 
         _ = await Assert.That(actual.InnerException).IsEqualTo(start);
         _ = await Assert.That(actual.InnerExceptions).DoesNotContain(stop);

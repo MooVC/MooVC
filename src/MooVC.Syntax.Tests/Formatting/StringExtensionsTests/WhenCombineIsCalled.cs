@@ -6,7 +6,7 @@ using System.Linq;
 public sealed class WhenCombineIsCalled
 {
     private const string Separator = ",";
-    private static readonly string[] samples = ["first", "second", "third"];
+    private static readonly string[] _samples = ["first", "second", "third"];
 
     [Test]
     public async Task GivenSeparatorIsNullThenArgumentNullExceptionIsThrown()
@@ -15,10 +15,10 @@ public sealed class WhenCombineIsCalled
         string? separator = default;
 
         // Act
-        Action action = () => separator!.Combine(samples);
+        Action act = () => separator!.Combine(_samples);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
@@ -29,10 +29,10 @@ public sealed class WhenCombineIsCalled
         string separator = string.Empty;
 
         // Act
-        Action action = () => separator.Combine(samples);
+        Action act = () => separator.Combine(_samples);
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
@@ -44,10 +44,10 @@ public sealed class WhenCombineIsCalled
         string[]? values = default;
 
         // Act
-        Action action = () => separator.Combine(values!);
+        Action act = () => separator.Combine(values!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
@@ -58,7 +58,7 @@ public sealed class WhenCombineIsCalled
         string separator = Separator;
 
         // Act
-        string result = separator.Combine(Array.Empty<string>());
+        string result = separator.Combine([]);
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(string.Empty);
@@ -69,7 +69,7 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        string value = samples[0];
+        string value = _samples[0];
 
         // Act
         string result = separator.Combine(value);
@@ -85,10 +85,10 @@ public sealed class WhenCombineIsCalled
         string separator = Separator;
 
         // Act
-        string result = separator.Combine(samples);
+        string result = separator.Combine(_samples);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, _samples));
     }
 
     [Test]
@@ -96,14 +96,14 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
         Func<string, string>? formatter = default;
 
         // Act
-        Action action = () => separator.Combine(elements, formatter!);
+        Action act = () => separator.Combine(elements, formatter!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(formatter));
     }
 
@@ -140,13 +140,13 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string? separator = default;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
-        Action action = () => separator!.Combine(elements, value => value);
+        Action act = () => separator!.Combine(elements, value => value);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
@@ -155,13 +155,13 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = string.Empty;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
-        Action action = () => separator.Combine(elements, value => value);
+        Action act = () => separator.Combine(elements, value => value);
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(separator));
     }
 
@@ -170,12 +170,12 @@ public sealed class WhenCombineIsCalled
     {
         // Arrange
         string separator = Separator;
-        var elements = ImmutableArray.Create(samples);
+        var elements = ImmutableArray.Create(_samples);
 
         // Act
         string result = separator.Combine(elements, value => value.ToUpperInvariant());
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Join(separator, samples.Select(value => value.ToUpperInvariant())));
+        _ = await Assert.That(result).IsEqualTo(string.Join(separator, _samples.Select(value => value.ToUpperInvariant())));
     }
 }

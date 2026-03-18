@@ -4,7 +4,7 @@ using System.Globalization;
 
 public sealed class WhenToCamelCaseIsCalled
 {
-    private static readonly Faker generator = new();
+    private static readonly Faker _generator = new();
 
     [Test]
     public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
@@ -13,10 +13,10 @@ public sealed class WhenToCamelCaseIsCalled
         string? value = default;
 
         // Act
-        Action action = () => value!.ToCamelCase();
+        Action act = () => value!.ToCamelCase();
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -27,10 +27,10 @@ public sealed class WhenToCamelCaseIsCalled
         string value = string.Empty;
 
         // Act
-        Action action = () => value.ToCamelCase();
+        Action act = () => value.ToCamelCase();
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -42,10 +42,10 @@ public sealed class WhenToCamelCaseIsCalled
     public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
     {
         // Arrange & Act
-        Action action = () => value.ToCamelCase();
+        Action act = () => value.ToCamelCase();
 
         // Assert
-        ArgumentException exception = await Assert.That(action).Throws<ArgumentException>();
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
     }
 
@@ -132,11 +132,10 @@ public sealed class WhenToCamelCaseIsCalled
             return string.Concat(first, remaining);
         }
 
-        string[] words = Enumerable
+        string[] words = [.. Enumerable
             .Range(0, WordCount)
-            .Select(_ => generator.Lorem.Word())
-            .Select(CapitalizeFirstLetter)
-            .ToArray();
+            .Select(_ => _generator.Lorem.Word())
+            .Select(CapitalizeFirstLetter)];
 
         // Act & Assert
         foreach (string word in words)

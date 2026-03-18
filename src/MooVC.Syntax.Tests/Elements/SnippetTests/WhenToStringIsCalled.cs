@@ -2,13 +2,13 @@
 
 public sealed class WhenToStringIsCalled
 {
-    private static readonly string[] lines = ["if (condition)", "return true;"];
+    private static readonly string[] _lines = ["if (condition)", "return true;"];
 
     [Test]
     public async Task GivenDefaultOptionsThenReturnsJoinedLines()
     {
         // Arrange
-        var subject = Snippet.From(lines);
+        var subject = Snippet.From(_lines);
 
         const string expected = """
             if (condition)

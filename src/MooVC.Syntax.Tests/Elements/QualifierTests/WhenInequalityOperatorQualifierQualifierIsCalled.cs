@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 
 public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
 {
-    private static readonly ImmutableArray<Name> different = ["Gamma"];
-    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> _different = ["Gamma"];
+    private static readonly ImmutableArray<Name> _same = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenBothNullThenReturnsFalse()
@@ -26,7 +26,7 @@ public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
     {
         // Arrange
         Qualifier? left = default;
-        var right = new Qualifier(same);
+        var right = new Qualifier(_same);
 
         // Act
         bool result = left != right;
@@ -39,7 +39,7 @@ public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
     public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
+        var left = new Qualifier(_same);
         Qualifier? right = default;
 
         // Act
@@ -53,7 +53,7 @@ public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
     public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Qualifier(same);
+        var first = new Qualifier(_same);
         Qualifier second = first;
 
         // Act
@@ -67,8 +67,8 @@ public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(same);
-        var right = new Qualifier(same);
+        var left = new Qualifier(_same);
+        var right = new Qualifier(_same);
 
         // Act
         bool resultLeftRight = left != right;
@@ -83,8 +83,8 @@ public sealed class WhenInequalityOperatorQualifierQualifierIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
-        var right = new Qualifier(different);
+        var left = new Qualifier(_same);
+        var right = new Qualifier(_different);
 
         // Act
         bool resultLeftRight = left != right;

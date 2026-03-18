@@ -35,7 +35,7 @@ public sealed class WhenValidateIsCalled
         var validationContext = new ValidationContext(subject);
 
         // Act
-        ValidationResult[] results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = [.. subject.Validate(validationContext)];
 
         // Assert
         _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Type.Declaration)));

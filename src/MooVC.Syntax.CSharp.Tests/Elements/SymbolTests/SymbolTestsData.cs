@@ -31,9 +31,7 @@ internal static class SymbolTestsData
 
     public static Symbol CreateWithArgumentNames(string? name = DefaultName, params string[] argumentNames)
     {
-        Symbol[] arguments = argumentNames
-            .Select(argument => new Symbol { Name = argument })
-            .ToArray();
+        Symbol[] arguments = [.. argumentNames.Select(argument => new Symbol { Name = argument })];
 
         return Create(name, arguments: arguments);
     }

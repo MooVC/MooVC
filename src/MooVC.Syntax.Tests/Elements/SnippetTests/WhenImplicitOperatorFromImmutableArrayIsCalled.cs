@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
 {
-    private static readonly ImmutableArray<string> values = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<string> _values = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenDefaultThenInstanceIsCreated()
@@ -25,7 +25,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
     public async Task GivenValuesThenRoundTripsSuccessfully()
     {
         // Arrange
-        ImmutableArray<string> provided = values;
+        ImmutableArray<string> provided = _values;
 
         // Act
         Snippet subject = provided;
@@ -39,7 +39,7 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
     public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        ImmutableArray<string> provided = values;
+        ImmutableArray<string> provided = _values;
 
         // Act
         Snippet first = provided;

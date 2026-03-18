@@ -4,15 +4,15 @@ using System.Collections.Immutable;
 
 public sealed class WhenGetHashCodeIsCalled
 {
-    private static readonly ImmutableArray<Name> first = ["Alpha", "Beta"];
-    private static readonly ImmutableArray<Name> second = ["Gamma", "Delta"];
+    private static readonly ImmutableArray<Name> _first = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> _second = ["Gamma", "Delta"];
 
     [Test]
     public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
     {
         // Arrange
-        var left = new Qualifier(first);
-        var right = new Qualifier(first);
+        var left = new Qualifier(_first);
+        var right = new Qualifier(_first);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -26,8 +26,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenHashesAreNotEqual()
     {
         // Arrange
-        var left = new Qualifier(first);
-        var right = new Qualifier(second);
+        var left = new Qualifier(_first);
+        var right = new Qualifier(_second);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -41,7 +41,7 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenSameInstanceWhenCalledTwiceThenHashIsStable()
     {
         // Arrange
-        var subject = new Qualifier(WhenGetHashCodeIsCalled.first);
+        var subject = new Qualifier(WhenGetHashCodeIsCalled._first);
 
         // Act
         int first = subject.GetHashCode();

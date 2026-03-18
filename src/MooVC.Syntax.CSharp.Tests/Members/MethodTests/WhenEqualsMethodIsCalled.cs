@@ -80,7 +80,7 @@ public sealed class WhenEqualsMethodIsCalled
     {
         // Arrange
         Method subject = MethodTestsData.Create();
-        Method target = MethodTestsData.Create(parameters: new[] { new Parameter { Name = "other" } });
+        Method target = MethodTestsData.Create(parameters: [new Parameter { Name = "other" }]);
 
         // Act
         bool result = target.Equals(subject);

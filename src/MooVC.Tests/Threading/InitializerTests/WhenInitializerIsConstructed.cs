@@ -28,7 +28,7 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
     }
 

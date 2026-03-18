@@ -4,14 +4,14 @@ using System.Collections.Immutable;
 
 public sealed class WhenEqualsObjectIsCalled
 {
-    private static readonly ImmutableArray<Name> different = ["Gamma"];
-    private static readonly ImmutableArray<Name> same = ["Alpha", "Beta"];
+    private static readonly ImmutableArray<Name> _different = ["Gamma"];
+    private static readonly ImmutableArray<Name> _same = ["Alpha", "Beta"];
 
     [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        var subject = new Qualifier(same);
+        var subject = new Qualifier(_same);
         object? other = default;
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var subject = new Qualifier(same);
+        var subject = new Qualifier(_same);
         object other = subject;
 
         // Act
@@ -39,8 +39,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Qualifier(same);
-        object right = new Qualifier(same);
+        var left = new Qualifier(_same);
+        object right = new Qualifier(_same);
 
         // Act
         bool result = left.Equals(right);
@@ -53,8 +53,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Qualifier(same);
-        object right = new Qualifier(different);
+        var left = new Qualifier(_same);
+        object right = new Qualifier(_different);
 
         // Act
         bool result = left.Equals(right);
@@ -67,8 +67,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenNonQualifierThenReturnsFalse()
     {
         // Arrange
-        var subject = new Qualifier(same);
-        object other = same;
+        var subject = new Qualifier(_same);
+        object other = _same;
 
         // Act
         bool result = subject.Equals(other);
@@ -81,8 +81,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Qualifier(same);
-        var right = new Qualifier(same);
+        var left = new Qualifier(_same);
+        var right = new Qualifier(_same);
         object leftObject = left;
         object rightObject = right;
 
@@ -99,8 +99,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentValuesFromBothSidesThenResultsAreSymmetric()
     {
         // Arrange
-        var left = new Qualifier(same);
-        var right = new Qualifier(different);
+        var left = new Qualifier(_same);
+        var right = new Qualifier(_different);
         object leftObject = left;
         object rightObject = right;
 
