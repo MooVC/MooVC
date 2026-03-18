@@ -21,8 +21,8 @@ public sealed class WhenPageIsSerialized
 
         // Assert
         _ = await Assert.That(cloned).IsNotNull();
-        _ = await Assert.That(cloned).IsNotSameReferenceAs(original);
-        _ = await Assert.That(cloned).IsEqualTo(original);
+        _ = await Assert.That(cloned).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(cloned).IsEquivalentTo(original);
     }
 }
 #endif

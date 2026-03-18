@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 
@@ -19,9 +18,9 @@ public sealed class WhenWithPropertiesIsCalled
         Class result = original.WithProperties(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Properties).IsEqualTo(original.Properties.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Properties).IsEquivalentTo([.. original.Properties, .. additional]);
         _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
-        _ = await Assert.That(original.Properties).IsEqualTo(existing);
+        _ = await Assert.That(original.Properties).IsEquivalentTo(existing);
     }
 }

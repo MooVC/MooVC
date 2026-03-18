@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,9 +18,9 @@ public sealed class WhenWithIndexersIsCalled
         Class result = original.WithIndexers(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Indexers).IsEqualTo(original.Indexers.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Indexers).IsEquivalentTo([.. original.Indexers, .. additional]);
         _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
-        _ = await Assert.That(original.Indexers).IsEqualTo(existing);
+        _ = await Assert.That(original.Indexers).IsEquivalentTo(existing);
     }
 }

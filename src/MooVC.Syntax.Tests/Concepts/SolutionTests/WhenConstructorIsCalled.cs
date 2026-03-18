@@ -45,11 +45,11 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(subject.Configurations).IsEqualTo(configurations);
-        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
-        _ = await Assert.That(subject.Folders).IsEqualTo(new[] { folder });
-        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
-        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
-        _ = await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        _ = await Assert.That(subject.Files).IsEquivalentTo([file]);
+        _ = await Assert.That(subject.Folders).IsEquivalentTo([folder]);
+        _ = await Assert.That(subject.Items).IsEquivalentTo([item]);
+        _ = await Assert.That(subject.Projects).IsEquivalentTo([project]);
+        _ = await Assert.That(subject.Properties).IsEquivalentTo([property]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

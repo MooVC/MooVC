@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 using MooVC.Syntax.Elements;
 
@@ -19,9 +18,9 @@ public sealed class WhenWithEventsIsCalled
         Class result = original.WithEvents(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Events).IsEqualTo(original.Events.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Events).IsEquivalentTo([.. original.Events, .. additional]);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        _ = await Assert.That(original.Events).IsEqualTo(existing);
+        _ = await Assert.That(original.Events).IsEquivalentTo(existing);
     }
 }

@@ -44,12 +44,12 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        _ = await Assert.That(subject.Imports).IsEqualTo(new[] { import });
-        _ = await Assert.That(subject.ItemGroups).IsEqualTo(new[] { itemGroup });
-        _ = await Assert.That(subject.PropertyGroups).IsEqualTo(new[] { propertyGroup });
-        _ = await Assert.That(subject.Resources).IsEqualTo(new[] { resource });
-        _ = await Assert.That(subject.Sdks).IsEqualTo(new[] { sdk });
-        _ = await Assert.That(subject.Targets).IsEqualTo(new[] { target });
+        _ = await Assert.That(subject.Imports).IsEquivalentTo([import]);
+        _ = await Assert.That(subject.ItemGroups).IsEquivalentTo([itemGroup]);
+        _ = await Assert.That(subject.PropertyGroups).IsEquivalentTo([propertyGroup]);
+        _ = await Assert.That(subject.Resources).IsEquivalentTo([resource]);
+        _ = await Assert.That(subject.Sdks).IsEquivalentTo([sdk]);
+        _ = await Assert.That(subject.Targets).IsEquivalentTo([target]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

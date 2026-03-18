@@ -31,7 +31,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(SymbolTestsData.DefaultName));
-        _ = await Assert.That(subject.Arguments).IsEqualTo(new[] { argument });
+        _ = await Assert.That(subject.Arguments).IsEquivalentTo([argument]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

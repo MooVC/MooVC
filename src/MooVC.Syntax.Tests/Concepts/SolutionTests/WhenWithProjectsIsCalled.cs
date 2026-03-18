@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
 using System;
-using System.Linq;
 using MooVC.Syntax.Elements;
 using ProjectReference = MooVC.Syntax.Attributes.Solution.Project;
 
@@ -27,8 +26,8 @@ public sealed class WhenWithProjectsIsCalled
         Solution result = original.WithProjects(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Projects).IsEqualTo(original.Projects.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Projects).IsEquivalentTo([.. original.Projects, additional]);
         _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

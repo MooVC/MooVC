@@ -20,10 +20,10 @@ public sealed class WhenWithParametersIsCalled
         Constructor result = original.WithParameters([.. parameters]);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(original.Body);
         _ = await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
-        _ = await Assert.That(result.Parameters).IsEqualTo([.. parameters]);
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. parameters]);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
 
         _ = await Assert.That(original.Parameters).IsEmpty();

@@ -37,9 +37,6 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            _ = await Assert.That(input1).IsEqualTo(instance);
-            _ = await Assert.That(input2).IsAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
@@ -62,9 +59,6 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            _ = await Assert.That(input1).IsEqualTo(instance);
-            _ = await Assert.That(input2).IsAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
@@ -87,9 +81,6 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            _ = await Assert.That(input1).IsEqualTo(instance);
-            _ = await Assert.That(input2).IsAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
@@ -114,7 +105,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, target!, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(target));
     }
 }

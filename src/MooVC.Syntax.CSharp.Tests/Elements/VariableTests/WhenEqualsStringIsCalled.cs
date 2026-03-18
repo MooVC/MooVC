@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Elements.VariableTests;
 
-
 public sealed class WhenEqualsStringIsCalled
 {
     private const string Same = "Alpha";

@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Members;
 
 public sealed class WhenWithMethodsIsCalled
@@ -18,9 +17,9 @@ public sealed class WhenWithMethodsIsCalled
         Class result = original.WithMethods(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Methods).IsEqualTo(original.Methods.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Methods).IsEquivalentTo([.. original.Methods, .. additional]);
         _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
-        _ = await Assert.That(original.Methods).IsEqualTo(existing);
+        _ = await Assert.That(original.Methods).IsEquivalentTo(existing);
     }
 }

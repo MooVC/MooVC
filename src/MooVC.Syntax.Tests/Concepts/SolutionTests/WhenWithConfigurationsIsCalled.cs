@@ -22,7 +22,7 @@ public sealed class WhenWithConfigurationsIsCalled
         Solution result = original.WithConfigurations(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Configurations).IsEqualTo(updated);
         _ = await Assert.That(result.Files).IsEqualTo(original.Files);
     }

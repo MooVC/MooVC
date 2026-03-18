@@ -12,7 +12,7 @@ public sealed class WhenIsReadOnlyIsCalled
         Field result = original.IsReadOnly(false);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Default).IsEqualTo(original.Default);
         _ = await Assert.That(result.IsReadOnly).IsFalse();
         _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);

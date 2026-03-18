@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Concepts.SolutionTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 using MooVC.Syntax.Elements;
 
@@ -26,8 +25,8 @@ public sealed class WhenWithItemsIsCalled
         Solution result = original.WithItems(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
         _ = await Assert.That(result.Configurations).IsEqualTo(original.Configurations);
     }
 }

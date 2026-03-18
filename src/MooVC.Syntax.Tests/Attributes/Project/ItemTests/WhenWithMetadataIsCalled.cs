@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Project.ItemTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithMetadataIsCalled
@@ -24,7 +23,7 @@ public sealed class WhenWithMetadataIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
+        _ = await Assert.That(result.Metadata).IsEquivalentTo([.. original.Metadata, additional]);
         _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
         _ = await Assert.That(result.Include).IsEqualTo(original.Include);
     }

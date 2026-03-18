@@ -14,7 +14,7 @@ public sealed class WhenWithExtensibilityIsCalled
         Constructor result = original.WithExtensibility(Extensibility.Static);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(original.Body);
         _ = await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Static);
         _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);

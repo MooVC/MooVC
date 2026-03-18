@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,9 +18,9 @@ public sealed class WhenWithParametersIsCalled
         Class result = original.WithParameters(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. original.Parameters, .. additional]);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
-        _ = await Assert.That(original.Parameters).IsEqualTo(existing);
+        _ = await Assert.That(original.Parameters).IsEquivalentTo(existing);
     }
 }

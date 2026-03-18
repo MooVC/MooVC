@@ -17,8 +17,8 @@ public sealed class WhenWithPropertiesIsCalled
         Record result = original.WithProperties(appended);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Properties).IsEqualTo(new[] { existing, appended });
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Properties).IsEquivalentTo([existing, appended]);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
 }

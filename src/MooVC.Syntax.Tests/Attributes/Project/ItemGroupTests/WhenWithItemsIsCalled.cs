@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Project.ItemGroupTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithItemsIsCalled
@@ -18,7 +17,7 @@ public sealed class WhenWithItemsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
         _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
         _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }

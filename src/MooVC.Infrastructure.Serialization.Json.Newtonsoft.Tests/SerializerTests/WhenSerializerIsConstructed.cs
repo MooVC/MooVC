@@ -13,7 +13,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
+        await AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(BufferSize, Serializer.DefaultEncoding, serializer, settings);
+        await AssertEqual(BufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
     [Test]
@@ -39,7 +39,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.MinimumBufferSize, Serializer.DefaultEncoding, serializer, settings);
+        await AssertEqual(Serializer.MinimumBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultBufferSize, encoding, serializer, settings);
+        await AssertEqual(Serializer.DefaultBufferSize, encoding, serializer, settings);
     }
 
     [Test]
@@ -71,19 +71,19 @@ public sealed class WhenSerializerIsConstructed
         var serializer = new Serializer(settings: settings);
 
         // Assert
-        AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
+        await AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
-    private static void AssertEqual(int bufferSize, Encoding encoding, Serializer serializer, JsonSerializerSettings settings)
+    private static async Task AssertEqual(int bufferSize, Encoding encoding, Serializer serializer, JsonSerializerSettings settings)
     {
         _ = await Assert.That(serializer.BufferSize).IsEqualTo(bufferSize);
         _ = await Assert.That(serializer.Encoding).IsEqualTo(encoding);
         _ = await Assert.That(serializer.Json.DateTimeZoneHandling).IsEqualTo(settings.DateTimeZoneHandling);
 
-        AssertEqual(settings, serializer);
+        await AssertEqual(settings, serializer);
     }
 
-    private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
+    private static async Task AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
         _ = await Assert.That(serializer.Json.DefaultValueHandling).IsEqualTo(expected.DefaultValueHandling);
         _ = await Assert.That(serializer.Json.NullValueHandling).IsEqualTo(expected.NullValueHandling);

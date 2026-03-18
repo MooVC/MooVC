@@ -19,7 +19,7 @@ public sealed class WhenWithAddIsCalled
         Event.Methods result = original.WithAdd(add);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Add).IsEqualTo(add);
         _ = await Assert.That(result.Remove).IsEqualTo(original.Remove);
         _ = await Assert.That(original.Add).IsEqualTo(Snippet.Empty);

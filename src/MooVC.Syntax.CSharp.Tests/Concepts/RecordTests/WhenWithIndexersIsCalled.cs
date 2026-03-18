@@ -17,8 +17,8 @@ public sealed class WhenWithIndexersIsCalled
         Record result = original.WithIndexers(appended);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Indexers).IsEqualTo(new[] { existing, appended });
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Indexers).IsEquivalentTo([existing, appended]);
         _ = await Assert.That(result.IsPartial).IsEqualTo(original.IsPartial);
     }
 }

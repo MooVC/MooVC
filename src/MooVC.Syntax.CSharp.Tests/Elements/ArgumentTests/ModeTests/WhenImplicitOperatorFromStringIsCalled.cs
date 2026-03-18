@@ -12,40 +12,33 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Act
         Argument.Mode subject = provided!;
+        string result = subject;
 
         // Assert
-        _ = await Assert.That(subject).IsNotNull();
-        string result = subject;
         _ = await Assert.That(result).IsEqualTo(provided);
     }
 
     [Test]
     public async Task GivenValueThenRoundTripsSuccessfully()
     {
-        // Arrange
-        const string provided = Value;
-
-        // Act
-        Argument.Mode subject = provided;
+        // Arrange & Act
+        Argument.Mode subject = Value;
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(provided);
+        _ = await Assert.That(result).IsEqualTo(Value);
     }
 
     [Test]
     public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
-        // Arrange
-        const string provided = Value;
-
-        // Act
-        Argument.Mode first = provided;
-        Argument.Mode second = provided;
+        // Arrange & Act
+        Argument.Mode first = Value;
+        Argument.Mode second = Value;
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That((first == second)).IsTrue();
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

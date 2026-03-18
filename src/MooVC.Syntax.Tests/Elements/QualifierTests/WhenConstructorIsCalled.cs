@@ -35,7 +35,7 @@ public sealed class WhenConstructorIsCalled
         var second = new Qualifier(value);
 
         // Assert
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
         _ = await Assert.That((first == second)).IsTrue();
         _ = await Assert.That(first.GetHashCode()).IsEqualTo(second.GetHashCode());
     }

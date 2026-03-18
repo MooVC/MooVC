@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Solution.ItemTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithItemsIsCalled
@@ -17,8 +16,8 @@ public sealed class WhenWithItemsIsCalled
         Item result = original.WithItems(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
         _ = await Assert.That(result.Id).IsEqualTo(original.Id);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Path).IsEqualTo(original.Path);

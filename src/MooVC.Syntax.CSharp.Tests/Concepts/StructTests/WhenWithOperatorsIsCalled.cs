@@ -16,7 +16,7 @@ public sealed class WhenWithOperatorsIsCalled
         Struct result = original.WithOperators(operators);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Operators).IsEqualTo(operators);
         _ = await Assert.That(original.Operators).IsEqualTo(new Operators());
     }

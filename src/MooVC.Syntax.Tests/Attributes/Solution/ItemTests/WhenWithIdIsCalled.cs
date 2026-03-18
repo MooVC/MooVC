@@ -15,7 +15,7 @@ public sealed class WhenWithIdIsCalled
         Item result = original.WithId(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Id).IsEqualTo(updated);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Path).IsEqualTo(original.Path);

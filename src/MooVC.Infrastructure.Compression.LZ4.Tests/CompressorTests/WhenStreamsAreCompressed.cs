@@ -20,12 +20,12 @@ public sealed class WhenStreamsAreCompressed
         // Act & Assert
         using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
 
-        _ = await Assert.That(compressed.GetBytes()).IsNotEqualTo(expected);
+        _ = await Assert.That(compressed.GetBytes()).IsNotEquivalentTo(expected);
 
         compressed.Position = 0;
 
         using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
-        _ = await Assert.That(decompressed.GetBytes()).IsEqualTo(expected);
+        _ = await Assert.That(decompressed.GetBytes()).IsEquivalentTo(expected);
     }
 }

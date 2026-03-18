@@ -15,7 +15,7 @@ public sealed class WhenWithDesignerIsCalled
         Resource result = original.WithDesigner(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.CustomToolNamespace).IsEqualTo(original.CustomToolNamespace);
         _ = await Assert.That(result.Designer).IsEqualTo(updated);
         _ = await Assert.That(result.Location).IsEqualTo(original.Location);

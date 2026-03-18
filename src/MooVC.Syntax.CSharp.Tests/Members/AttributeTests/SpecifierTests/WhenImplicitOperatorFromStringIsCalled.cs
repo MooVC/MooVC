@@ -39,8 +39,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Attribute.Specifier subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
@@ -53,8 +53,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Attribute.Specifier subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
@@ -83,7 +83,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That((first == second)).IsTrue();
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

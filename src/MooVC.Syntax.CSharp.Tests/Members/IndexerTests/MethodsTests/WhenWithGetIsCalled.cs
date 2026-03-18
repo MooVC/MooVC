@@ -19,7 +19,7 @@ public sealed class WhenWithGetIsCalled
         Indexer.Methods result = original.WithGet(get);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Get).IsEqualTo(get);
         _ = await Assert.That(result.Set).IsEqualTo(original.Set);
         _ = await Assert.That(original.Get).IsEqualTo(Snippet.Empty);

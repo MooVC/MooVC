@@ -16,7 +16,7 @@ public sealed class WhenWithPropertiesIsCalled
         Interface result = original.WithProperties(property);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Properties).Contains(property);
         _ = await Assert.That(original.Properties).IsEmpty();
     }

@@ -15,7 +15,7 @@ public sealed class WhenWithDefaultIsCalled
         Property result = original.WithDefault(defaultValue);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
         _ = await Assert.That(result.Default).IsEqualTo(defaultValue);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);

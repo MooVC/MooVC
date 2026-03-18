@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Solution.FolderTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithItemsIsCalled
@@ -18,7 +17,7 @@ public sealed class WhenWithItemsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Items).IsEqualTo(original.Items.Concat([additional]));
+        _ = await Assert.That(result.Items).IsEquivalentTo([.. original.Items, additional]);
         _ = await Assert.That(result.Files).IsEqualTo(original.Files);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Projects).IsEqualTo(original.Projects);

@@ -19,11 +19,11 @@ public sealed class WhenWithComparisonsIsCalled
         Operators result = original.WithComparisons(updatedComparisons);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
-        _ = await Assert.That(result.Comparisons).IsEqualTo(expectedComparisons);
-        _ = await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
-        _ = await Assert.That(result.Unaries).IsEqualTo(original.Unaries);
-        _ = await Assert.That(original.Comparisons).IsEqualTo(originalComparisons);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Binaries).IsEquivalentTo(original.Binaries);
+        _ = await Assert.That(result.Comparisons).IsEquivalentTo([.. expectedComparisons]);
+        _ = await Assert.That(result.Conversions).IsEquivalentTo(original.Conversions);
+        _ = await Assert.That(result.Unaries).IsEquivalentTo(original.Unaries);
+        _ = await Assert.That(original.Comparisons).IsEquivalentTo(originalComparisons);
     }
 }

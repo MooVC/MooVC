@@ -15,7 +15,7 @@ public sealed class WhenWithMethodsIsCalled
         Interface result = original.WithMethods(method);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Methods).Contains(method);
         _ = await Assert.That(original.Methods).IsEmpty();
     }

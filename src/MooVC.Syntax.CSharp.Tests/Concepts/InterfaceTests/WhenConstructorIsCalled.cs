@@ -51,14 +51,14 @@ public sealed class WhenConstructorIsCalled
             scope: Scope.Internal);
 
         // Assert
-        _ = await Assert.That(subject.Attributes).IsEqualTo(new[] { attribute });
-        _ = await Assert.That(subject.Events).IsEqualTo(new[] { @event });
-        _ = await Assert.That(subject.Indexers).IsEqualTo(new[] { indexer });
+        _ = await Assert.That(subject.Attributes).IsEquivalentTo([attribute]);
+        _ = await Assert.That(subject.Events).IsEquivalentTo([@event]);
+        _ = await Assert.That(subject.Indexers).IsEquivalentTo([indexer]);
         _ = await Assert.That(subject.IsPartial).IsTrue();
-        _ = await Assert.That(subject.Methods).IsEqualTo(new[] { method });
+        _ = await Assert.That(subject.Methods).IsEquivalentTo([method]);
         _ = await Assert.That(subject.Declaration).IsEqualTo(new Declaration { Name = InterfaceTestsData.DefaultName });
         _ = await Assert.That(subject.Operators.Conversions).IsNotEmpty();
-        _ = await Assert.That(subject.Properties).IsEqualTo(new[] { property });
+        _ = await Assert.That(subject.Properties).IsEquivalentTo([property]);
         _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }

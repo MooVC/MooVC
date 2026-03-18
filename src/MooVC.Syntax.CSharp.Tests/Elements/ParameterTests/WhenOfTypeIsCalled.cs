@@ -18,7 +18,7 @@ public sealed class WhenOfTypeIsCalled
         Parameter result = original.OfType(type);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
         _ = await Assert.That(result.Default).IsEqualTo(original.Default);
         _ = await Assert.That(result.Modifier).IsEqualTo(original.Modifier);

@@ -43,8 +43,8 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.DisplayName).IsEqualTo(new Project.Name(ProjectTestsData.DefaultName));
         _ = await Assert.That(subject.Path).IsEqualTo(new Project.RelativePath(ProjectTestsData.DefaultPath));
         _ = await Assert.That(subject.Type).IsEqualTo(Snippet.From(ProjectTestsData.DefaultType));
-        _ = await Assert.That(subject.Builds).IsEqualTo([build]);
-        _ = await Assert.That(subject.Platforms).IsEqualTo([platform]);
+        _ = await Assert.That(subject.Builds).IsEquivalentTo([build]);
+        _ = await Assert.That(subject.Platforms).IsEquivalentTo([platform]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

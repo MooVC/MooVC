@@ -19,7 +19,7 @@ public sealed class WhenWithBehavioursIsCalled
         Event result = original.WithBehaviours(behaviours);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Behaviours).IsEqualTo(behaviours);
         _ = await Assert.That(result.Handler).IsEqualTo(original.Handler);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);

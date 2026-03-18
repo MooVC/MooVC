@@ -12,7 +12,7 @@ public sealed class WhenWithIsPartialIsCalled
         Struct result = original.IsPartial(true);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.IsPartial).IsTrue();
         _ = await Assert.That(original.IsPartial).IsFalse();
     }

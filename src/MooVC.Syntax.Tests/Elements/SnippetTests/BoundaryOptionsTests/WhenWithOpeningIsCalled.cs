@@ -13,7 +13,7 @@ public sealed class WhenWithOpeningIsCalled
         Snippet.BoundaryOptions result = options.WithOpening(value);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
         _ = await Assert.That(result.Opening).IsEqualTo(value);
         _ = await Assert.That(options.Opening).IsNotEqualTo(value);
     }

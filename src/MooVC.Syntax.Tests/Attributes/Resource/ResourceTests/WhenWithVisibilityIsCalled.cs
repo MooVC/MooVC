@@ -12,7 +12,7 @@ public sealed class WhenWithVisibilityIsCalled
         Resource result = original.WithVisibility(Resource.Scope.Public);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.CustomToolNamespace).IsEqualTo(original.CustomToolNamespace);
         _ = await Assert.That(result.Designer).IsEqualTo(original.Designer);
         _ = await Assert.That(result.Location).IsEqualTo(original.Location);

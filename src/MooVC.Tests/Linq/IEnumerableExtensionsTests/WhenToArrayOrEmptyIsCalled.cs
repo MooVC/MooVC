@@ -43,7 +43,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -70,7 +70,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         Action act = () => enumerable.ToArrayOrEmpty(order!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(order));
     }
 
@@ -85,7 +85,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         IEnumerable<int> result = original.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]

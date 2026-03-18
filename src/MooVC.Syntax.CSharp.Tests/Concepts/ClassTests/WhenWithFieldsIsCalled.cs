@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.ClassTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
@@ -19,9 +18,9 @@ public sealed class WhenWithFieldsIsCalled
         Class result = original.WithFields(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Fields).IsEqualTo(original.Fields.Concat(additional));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Fields).IsEquivalentTo([.. original.Fields, .. additional]);
         _ = await Assert.That(result.IsPartial).IsEqualTo(original.IsPartial);
-        _ = await Assert.That(original.Fields).IsEqualTo(existing);
+        _ = await Assert.That(original.Fields).IsEquivalentTo(existing);
     }
 }

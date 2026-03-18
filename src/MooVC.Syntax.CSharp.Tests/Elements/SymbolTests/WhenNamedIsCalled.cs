@@ -13,7 +13,7 @@ public sealed class WhenNamedIsCalled
         Symbol result = original.Named(name);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Name).IsEqualTo(name);
         _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
         _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);

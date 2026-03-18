@@ -10,7 +10,7 @@ public sealed class WhenToSnippetIsCalled
 {
     private const string ConstraintInterfaceName = "IComponent";
     private const string GenericName = "T";
-    private const string ParameterName = "value";
+    private const string ParameterName = "Value";
     private const string StructName = "Payload";
 
     [Test]

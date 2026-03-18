@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.RecordTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
@@ -27,9 +26,9 @@ public sealed class WhenAttributedWithIsCalled
         Record result = original.AttributedWith(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
-        _ = await Assert.That(result.Constructors).IsEqualTo(original.Constructors);
-        _ = await Assert.That(original.Attributes).IsEqualTo(existing);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Attributes).IsEquivalentTo([.. original.Attributes, .. additional]);
+        _ = await Assert.That(result.Constructors).IsEquivalentTo(original.Constructors);
+        _ = await Assert.That(original.Attributes).IsEquivalentTo(existing);
     }
 }

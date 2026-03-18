@@ -19,11 +19,11 @@ public sealed class WhenWithUnariesIsCalled
         Operators result = original.WithUnaries(updatedUnaries);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Binaries).IsEqualTo(original.Binaries);
-        _ = await Assert.That(result.Comparisons).IsEqualTo(original.Comparisons);
-        _ = await Assert.That(result.Conversions).IsEqualTo(original.Conversions);
-        _ = await Assert.That(result.Unaries).IsEqualTo(expectedUnaries);
-        _ = await Assert.That(original.Unaries).IsEqualTo(originalUnaries);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Binaries).IsEquivalentTo(original.Binaries);
+        _ = await Assert.That(result.Comparisons).IsEquivalentTo(original.Comparisons);
+        _ = await Assert.That(result.Conversions).IsEquivalentTo(original.Conversions);
+        _ = await Assert.That(result.Unaries).IsEquivalentTo([.. expectedUnaries]);
+        _ = await Assert.That(original.Unaries).IsEquivalentTo(originalUnaries);
     }
 }

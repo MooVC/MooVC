@@ -13,7 +13,7 @@ public sealed class WhenWithWhitespaceIsCalled
         Snippet.Options result = options.WithWhitespace(value);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
         _ = await Assert.That(result.Whitespace).IsEqualTo(value);
         _ = await Assert.That(options.Whitespace).IsNotEqualTo(value);
     }

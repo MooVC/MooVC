@@ -12,7 +12,7 @@ public sealed class WhenIsStaticIsCalled
         Class result = original.IsStatic(true);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.IsStatic).IsTrue();
         _ = await Assert.That(original.IsStatic).IsFalse();
     }

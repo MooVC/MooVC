@@ -58,7 +58,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(TargetTestsData.DefaultName));
         _ = await Assert.That(subject.Outputs).IsEqualTo(Snippet.From(TargetTestsData.DefaultOutputs));
         _ = await Assert.That(subject.Returns).IsEqualTo(Snippet.From(TargetTestsData.DefaultReturns));
-        _ = await Assert.That(subject.Tasks).IsEqualTo(new[] { task });
+        _ = await Assert.That(subject.Tasks).IsEquivalentTo([task]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

@@ -17,8 +17,8 @@ public sealed class WhenWithConstructorsIsCalled
         Record result = original.WithConstructors(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
-        _ = await Assert.That(result.Constructors).IsEqualTo(new[] { originalConstructor, updated });
+        _ = await Assert.That(result.Constructors).IsEquivalentTo([originalConstructor, updated]);
     }
 }

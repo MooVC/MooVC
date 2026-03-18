@@ -15,7 +15,7 @@ public sealed class WhenOfTypeIsCalled
         Property result = original.OfType(type);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
         _ = await Assert.That(result.Default).IsEqualTo(original.Default);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);

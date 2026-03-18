@@ -2,8 +2,8 @@
 
 public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 {
-    private static readonly Name alpha = new("Alpha");
-    private static readonly Name beta = new("Beta");
+    private static readonly Name _alpha = new("Alpha");
+    private static readonly Name _beta = new("Beta");
 
     [Test]
     public async Task GivenNullThenArgumentNullExceptionIsThrown()
@@ -30,28 +30,28 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         // Assert
         _ = await Assert.That(subject).IsNotNull();
         Name[] result = subject;
-        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEquivalentTo(values);
     }
 
     [Test]
     public async Task GivenSegmentsThenRoundTripsSuccessfully()
     {
         // Arrange
-        Name[] values = [alpha, beta];
+        Name[] values = [_alpha, _beta];
 
         // Act
         Qualifier subject = values;
         Name[] result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEquivalentTo(values);
     }
 
     [Test]
     public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        Name[] values = [alpha, beta];
+        Name[] values = [_alpha, _beta];
 
         // Act
         Qualifier first = values;
@@ -59,7 +59,7 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That((first == second)).IsTrue();
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

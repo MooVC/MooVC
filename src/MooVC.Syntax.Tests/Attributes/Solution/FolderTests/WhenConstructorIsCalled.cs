@@ -34,10 +34,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        _ = await Assert.That(subject.Files).IsEqualTo(new[] { file });
-        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Files).IsEquivalentTo([file]);
+        _ = await Assert.That(subject.Items).IsEquivalentTo([item]);
         _ = await Assert.That(subject.Name).IsEqualTo(new Folder.Path(FolderTestsData.DefaultName));
-        _ = await Assert.That(subject.Projects).IsEqualTo(new[] { project });
+        _ = await Assert.That(subject.Projects).IsEquivalentTo([project]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

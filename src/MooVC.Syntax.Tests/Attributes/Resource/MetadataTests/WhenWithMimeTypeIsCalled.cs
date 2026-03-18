@@ -15,7 +15,7 @@ public sealed class WhenWithMimeTypeIsCalled
         Metadata result = original.WithMimeType(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.MimeType).IsEqualTo(updated);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Type).IsEqualTo(original.Type);

@@ -18,7 +18,7 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
         _ = await Assert.That(source).IsEmpty();
     }
 

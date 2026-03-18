@@ -52,7 +52,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.KeepDuplicates).IsTrue();
         _ = await Assert.That(subject.MatchOnMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadata));
         _ = await Assert.That(subject.MatchOnMetadataOptions).IsEqualTo(Snippet.From(ItemTestsData.DefaultMatchOnMetadataOptions));
-        _ = await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
+        _ = await Assert.That(subject.Metadata).IsEquivalentTo([metadata]);
         _ = await Assert.That(subject.Remove).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemove));
         _ = await Assert.That(subject.RemoveMetadata).IsEqualTo(Snippet.From(ItemTestsData.DefaultRemoveMetadata));
         _ = await Assert.That(subject.Update).IsEqualTo(Snippet.From(ItemTestsData.DefaultUpdate));

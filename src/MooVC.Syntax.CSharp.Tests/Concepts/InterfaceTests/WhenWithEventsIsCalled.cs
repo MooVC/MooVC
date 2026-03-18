@@ -16,7 +16,7 @@ public sealed class WhenWithEventsIsCalled
         Interface result = original.WithEvents(@event);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Events).Contains(@event);
         _ = await Assert.That(original.Events).IsEmpty();
     }

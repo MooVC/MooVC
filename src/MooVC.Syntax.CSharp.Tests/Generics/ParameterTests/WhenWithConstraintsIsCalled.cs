@@ -28,7 +28,7 @@ public sealed class WhenWithConstraintsIsCalled
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
-        _ = await Assert.That(result.Constraints).IsEqualTo(new[] { originalConstraint, additionalConstraint });
-        _ = await Assert.That(original.Constraints).IsEqualTo(new[] { originalConstraint });
+        _ = await Assert.That(result.Constraints).IsEquivalentTo([originalConstraint, additionalConstraint]);
+        _ = await Assert.That(original.Constraints).IsEquivalentTo([originalConstraint]);
     }
 }

@@ -15,7 +15,7 @@ public sealed class WhenWithScopeIsCalled
         Interface result = original.WithScope(Scope.Internal);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Scope).IsEqualTo(Scope.Internal);
         _ = await Assert.That(original.Scope).IsEqualTo(Scope.Private);
     }

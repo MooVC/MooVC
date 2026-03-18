@@ -15,7 +15,7 @@ public sealed class WhenWithBodyIsCalled
         Method result = original.WithBody(replacement);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(replacement);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);

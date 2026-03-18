@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Project.PropertyGroupTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithPropertiesIsCalled
@@ -25,7 +24,7 @@ public sealed class WhenWithPropertiesIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Properties).IsEqualTo(original.Properties.Concat([additional]));
+        _ = await Assert.That(result.Properties).IsEquivalentTo([.. original.Properties, additional]);
         _ = await Assert.That(result.Condition).IsEqualTo(original.Condition);
         _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }

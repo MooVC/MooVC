@@ -15,7 +15,7 @@ public sealed class WhenWithBodyIsCalled
         Conversion result = original.WithBody(replacement);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(replacement);
         _ = await Assert.That(result.Direction).IsEqualTo(original.Direction);
         _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);

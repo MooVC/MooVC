@@ -12,7 +12,7 @@ public sealed class WhenWithCasingIsCalled
         Identifier.Options result = original.WithCasing(Identifier.Casing.Pascal);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Casing).IsEqualTo(Identifier.Casing.Pascal);
         _ = await Assert.That(original.Casing).IsEqualTo(Identifier.Casing.Camel);
     }

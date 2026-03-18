@@ -51,8 +51,8 @@ public sealed class WhenAndIfIsCalled
         // Assert
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
-        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
         _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
         _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
@@ -107,8 +107,8 @@ public sealed class WhenAndIfIsCalled
         // Assert
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
-        _ = await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
         _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
         _ = await Assert.That(firstAdditional.Calls).IsEqualTo(1);
         _ = await Assert.That(secondAdditional.Calls).IsEqualTo(1);
@@ -136,8 +136,8 @@ public sealed class WhenAndIfIsCalled
         // Assert
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
-        ValidationResult[] results = actual.Results.ToArray();
-        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
         _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
         _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }

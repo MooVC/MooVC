@@ -40,7 +40,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Name).IsEqualTo(Snippet.From(ItemTestsData.DefaultName));
         _ = await Assert.That(subject.Path).IsEqualTo(Snippet.From(ItemTestsData.DefaultPath));
         _ = await Assert.That(subject.Type).IsEqualTo(Snippet.From(ItemTestsData.DefaultType));
-        _ = await Assert.That(subject.Items).IsEqualTo(new[] { child });
+        _ = await Assert.That(subject.Items).IsEquivalentTo([child]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

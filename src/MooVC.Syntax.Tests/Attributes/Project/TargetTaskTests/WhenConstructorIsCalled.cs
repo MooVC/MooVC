@@ -40,8 +40,8 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(TargetTaskTestsData.DefaultCondition));
         _ = await Assert.That(subject.ContinueOnError).IsEqualTo(TargetTask.Options.WarnAndContinue);
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(TargetTaskTestsData.DefaultName));
-        _ = await Assert.That(subject.Outputs).IsEqualTo(new[] { output });
-        _ = await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
+        _ = await Assert.That(subject.Outputs).IsEquivalentTo([output]);
+        _ = await Assert.That(subject.Parameters).IsEquivalentTo([parameter]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

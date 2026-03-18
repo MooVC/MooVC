@@ -41,7 +41,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenReplaceIsCalled
         actual.Replace(expected);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]

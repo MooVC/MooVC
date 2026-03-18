@@ -14,7 +14,7 @@ public sealed class WhenNamedIsCalled
         Parameter result = original.Named(new Variable(NewName));
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Name).IsEqualTo(new Variable(NewName));
         _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
         _ = await Assert.That(result.Default).IsEqualTo(original.Default);

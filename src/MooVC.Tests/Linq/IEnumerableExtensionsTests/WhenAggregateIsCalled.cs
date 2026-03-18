@@ -52,7 +52,7 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        _ = await Assert.That(results).IsEqualTo(source.Values);
+        _ = await Assert.That(results).IsEquivalentTo(source.Values);
     }
 
     [Test]
@@ -71,6 +71,6 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        _ = await Assert.That(results).IsEqualTo(expected);
+        _ = await Assert.That(results).IsEquivalentTo(expected);
     }
 }

@@ -54,6 +54,6 @@ public sealed class WhenToStringIsCalled
         // Assert
         _ = await Assert.That(result).Contains(AttributeName);
         _ = await Assert.That(result).Contains(Parameter.Mode.Out);
-        _ = await Assert.That(result).Contains(ParameterTestsData.DefaultName);
+        _ = await Assert.That(result).Contains(ParameterTestsData.DefaultName.ToCamelCase());
     }
 }

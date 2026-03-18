@@ -55,7 +55,7 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 }
 #endif

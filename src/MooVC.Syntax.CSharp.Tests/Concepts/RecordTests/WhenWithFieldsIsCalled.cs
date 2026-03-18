@@ -17,8 +17,8 @@ public sealed class WhenWithFieldsIsCalled
         Record result = original.WithFields(appended);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Fields).IsEqualTo(new[] { existing, appended });
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Fields).IsEquivalentTo([existing, appended]);
         _ = await Assert.That(result.Indexers).IsEqualTo(original.Indexers);
     }
 }

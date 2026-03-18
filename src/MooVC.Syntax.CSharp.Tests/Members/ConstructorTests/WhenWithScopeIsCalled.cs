@@ -14,7 +14,7 @@ public sealed class WhenWithScopeIsCalled
         Constructor result = original.WithScope(Scope.Private);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(original.Body);
         _ = await Assert.That(result.Extensibility).IsEqualTo(original.Extensibility);
         _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);

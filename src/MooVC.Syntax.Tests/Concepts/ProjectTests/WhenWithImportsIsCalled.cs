@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Concepts.ProjectTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Project;
 using MooVC.Syntax.Elements;
 
@@ -18,8 +17,8 @@ public sealed class WhenWithImportsIsCalled
         Project result = original.WithImports(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Imports).IsEqualTo(original.Imports.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Imports).IsEquivalentTo([.. original.Imports, additional]);
         _ = await Assert.That(result.ItemGroups).IsEqualTo(original.ItemGroups);
     }
 }

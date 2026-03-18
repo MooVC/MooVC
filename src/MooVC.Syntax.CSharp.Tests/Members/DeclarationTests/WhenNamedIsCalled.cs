@@ -18,7 +18,7 @@ public sealed class WhenNamedIsCalled
         Declaration result = original.Named(name);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Name).IsEqualTo(name);
         _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
         _ = await Assert.That(original.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));

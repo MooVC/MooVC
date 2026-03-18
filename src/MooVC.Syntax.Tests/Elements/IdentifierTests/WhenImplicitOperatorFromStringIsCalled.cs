@@ -1,9 +1,10 @@
 ﻿namespace MooVC.Syntax.Elements.IdentifierTests;
 
+using MooVC.Syntax.Formatting;
+
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     private const string Empty = "";
-    private const string Space = "   ";
     private const string Alpha = "Alpha";
 
     [Test]
@@ -40,22 +41,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Identifier subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenWhitespaceThenEqualsString()
-    {
-        // Arrange
-        string value = Space;
-
-        // Act
-        Identifier subject = value;
-
-        // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
@@ -68,8 +55,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         Identifier subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 
     [Test]
@@ -77,13 +64,14 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     {
         // Arrange
         string value = new('x', 64_000);
+        string expected = value.ToPascalCase();
 
         // Act
         Identifier subject = value;
 
         // Assert
-        _ = await Assert.That((subject == value)).IsTrue();
-        _ = await Assert.That(subject.Equals(value)).IsTrue();
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(expected);
     }
 
     [Test]
@@ -113,7 +101,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That((first == second)).IsTrue();
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

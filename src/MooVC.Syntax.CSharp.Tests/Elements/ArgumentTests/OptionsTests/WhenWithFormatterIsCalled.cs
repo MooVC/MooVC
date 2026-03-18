@@ -13,7 +13,7 @@ public sealed class WhenWithFormatterIsCalled
         Argument.Options result = options.WithFormatter(value);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
         _ = await Assert.That(result.Formatter).IsEqualTo(value);
         _ = await Assert.That(options.Formatter).IsNotEqualTo(value);
     }

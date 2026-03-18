@@ -31,7 +31,7 @@ public sealed class WhenToCopyOrEmptyIsCalled
         int[] result = source.ToCopyOrEmpty();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(source);
+        _ = await Assert.That(result).IsEquivalentTo(source);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public sealed class WhenToCopyOrEmptyIsCalled
         int[] result = original.ToCopyOrEmpty(predicate: value => value != 2);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]

@@ -36,7 +36,7 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEquivalentTo(values);
         _ = await Assert.That(result.Count).IsEqualTo(values.Length);
         _ = await Assert.That(result.Directive).IsEqualTo(directive);
         _ = await Assert.That(result.HasTotal).IsFalse();
@@ -56,7 +56,7 @@ public sealed class WhenPageIsConstructed
         var result = new Page<int>(directive, values, total: total);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(values);
+        _ = await Assert.That(result).IsEquivalentTo(values);
         _ = await Assert.That(result.Count).IsEqualTo(values.Length);
         _ = await Assert.That(result.Directive).IsEqualTo(directive);
         _ = await Assert.That(result.HasTotal).IsTrue();

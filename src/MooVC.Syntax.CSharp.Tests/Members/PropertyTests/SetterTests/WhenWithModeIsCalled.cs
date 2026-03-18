@@ -12,7 +12,7 @@ public sealed class WhenWithModeIsCalled
         Property.Setter result = original.WithMode(Property.Mode.Init);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Behaviour).IsEqualTo(original.Behaviour);
         _ = await Assert.That(result.Mode).IsEqualTo(Property.Mode.Init);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);

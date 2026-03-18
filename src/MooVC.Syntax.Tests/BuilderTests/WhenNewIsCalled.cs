@@ -19,7 +19,7 @@ public sealed class WhenNewIsCalled
         _ = await Assert.That(second).IsNotNull();
         _ = await Assert.That(first).IsTypeOf<TestConstruct>();
         _ = await Assert.That(second).IsTypeOf<TestConstruct>();
-        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first).IsNotStrictlyEqualTo(second);
     }
 
     private sealed class TestConstruct

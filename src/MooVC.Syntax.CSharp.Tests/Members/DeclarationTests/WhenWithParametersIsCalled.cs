@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.CSharp.Members.DeclarationTests;
 
-using MooVC.Syntax.CSharp.Generics;
 using MooVC.Syntax.Elements;
 using Parameter = MooVC.Syntax.CSharp.Generics.Parameter;
 
@@ -17,9 +16,9 @@ public sealed class WhenWithParametersIsCalled
         Declaration result = original.WithParameters(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Parameters.Length).IsEqualTo(2);
-        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. original.Parameters, .. additional]);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
     }
 }

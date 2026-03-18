@@ -43,7 +43,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEqualTo([validatable.Results.Single()]);
+        _ = await Assert.That(results).IsEquivalentTo([validatable.Results.Single()]);
         _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
@@ -67,7 +67,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        _ = await Assert.That(combined).IsEqualTo([initial]);
+        _ = await Assert.That(combined).IsEquivalentTo([initial]);
         _ = await Assert.That(validatable.Calls).IsEqualTo(0);
     }
 
@@ -91,7 +91,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        _ = await Assert.That(combined).IsEqualTo([initial, validatable.Results.Single()]);
+        _ = await Assert.That(combined).IsEquivalentTo([initial, validatable.Results.Single()]);
         _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
@@ -134,7 +134,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEqualTo([first.Results.Single(), second.Results.Single()]);
+        _ = await Assert.That(results).IsEquivalentTo([first.Results.Single(), second.Results.Single()]);
         _ = await Assert.That(first.Calls).IsEqualTo(1);
         _ = await Assert.That(second.Calls).IsEqualTo(1);
     }
@@ -156,7 +156,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEqualTo([validatable.Results.Single()]);
+        _ = await Assert.That(results).IsEquivalentTo([validatable.Results.Single()]);
         _ = await Assert.That(validatable.Calls).IsEqualTo(1);
     }
 
@@ -180,7 +180,7 @@ public sealed class WhenIncludeIfIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] combined = [.. actual.Results];
-        _ = await Assert.That(combined).IsEqualTo([initial]);
+        _ = await Assert.That(combined).IsEquivalentTo([initial]);
         _ = await Assert.That(validatable.Calls).IsEqualTo(0);
     }
 

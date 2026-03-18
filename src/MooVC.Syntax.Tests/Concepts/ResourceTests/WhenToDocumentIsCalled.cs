@@ -58,7 +58,7 @@ public sealed class WhenToDocumentIsCalled
         XDocument result = subject.ToDocument();
 
         // Assert
-        _ = await Assert.That(XDeclaration declaration = result.Declaration).IsNotNull();
+        XDeclaration declaration = await Assert.That(result.Declaration).IsNotNull();
         _ = await Assert.That(declaration.Version).IsEqualTo("1.0");
         _ = await Assert.That(declaration.Encoding).IsEqualTo("utf-8");
         _ = await Assert.That(declaration.Standalone).IsEqualTo("yes");

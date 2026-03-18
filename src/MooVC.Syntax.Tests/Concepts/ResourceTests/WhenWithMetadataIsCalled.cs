@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Concepts.ResourceTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Resource;
 using Resource = MooVC.Syntax.Concepts.Resource;
 
@@ -18,8 +17,8 @@ public sealed class WhenWithMetadataIsCalled
         Resource result = original.WithMetadata(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Metadata).IsEqualTo(original.Metadata.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Metadata).IsEquivalentTo([.. original.Metadata, additional]);
         _ = await Assert.That(result.Headers).IsEqualTo(original.Headers);
     }
 }

@@ -17,7 +17,7 @@ public sealed class WhenNamedIsCalled
         Argument result = argument.Named(name);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(argument);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(argument);
         _ = await Assert.That(result.Name).IsEqualTo(name);
         _ = await Assert.That(argument.Name).IsNotEqualTo(name);
     }

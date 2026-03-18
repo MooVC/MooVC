@@ -38,10 +38,10 @@ public sealed class WhenConstructorIsCalled
         };
 
         // Assert
-        _ = await Assert.That(subject.Assemblies).IsEqualTo(new[] { assembly });
-        _ = await Assert.That(subject.Data).IsEqualTo(new[] { data });
-        _ = await Assert.That(subject.Headers).IsEqualTo(new[] { header });
-        _ = await Assert.That(subject.Metadata).IsEqualTo(new[] { metadata });
+        _ = await Assert.That(subject.Assemblies).IsEquivalentTo([assembly]);
+        _ = await Assert.That(subject.Data).IsEquivalentTo([data]);
+        _ = await Assert.That(subject.Headers).IsEquivalentTo([header]);
+        _ = await Assert.That(subject.Metadata).IsEquivalentTo([metadata]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

@@ -34,7 +34,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         _ = await Assert.That(subject.Condition).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultCondition));
         _ = await Assert.That(subject.Label).IsEqualTo(Snippet.From(ItemGroupTestsData.DefaultLabel));
-        _ = await Assert.That(subject.Items).IsEqualTo(new[] { item });
+        _ = await Assert.That(subject.Items).IsEquivalentTo([item]);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

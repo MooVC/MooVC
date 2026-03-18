@@ -22,13 +22,10 @@ public sealed class WhenToSpanIsCalled
     public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
     {
         // Act
-        ReadOnlySpan<int> actual = expected.ToSpan();
+        int[] actual = [.. expected.ToSpan()];
 
         // Assert
-        for (int index = 0; index < expected.Count(); index++)
-        {
-            _ = await Assert.That(actual[index]).IsEqualTo(expected.ElementAt(index));
-        }
+        _ = await Assert.That(actual).IsEquivalentTo([.. expected]);
     }
 
     [Test]

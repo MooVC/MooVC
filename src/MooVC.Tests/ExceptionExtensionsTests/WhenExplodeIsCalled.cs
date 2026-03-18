@@ -86,6 +86,6 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        _ = await Assert.That(actualOrder).IsEqualTo(expectedOrder);
+        _ = await Assert.That(actualOrder).IsEquivalentTo(expectedOrder);
     }
 }

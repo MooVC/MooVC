@@ -15,7 +15,7 @@ public sealed class WhenAtIsCalled
         Project result = original.At(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Path).IsEqualTo(updated);
         _ = await Assert.That(result.Id).IsEqualTo(original.Id);
         _ = await Assert.That(result.DisplayName).IsEqualTo(original.DisplayName);

@@ -17,7 +17,7 @@ public sealed class WhenWithOperatorsIsCalled
         Record result = record.WithOperators(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(record);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(record);
         _ = await Assert.That(result.Operators).IsEqualTo(updated);
         _ = await Assert.That(record.Operators).IsEqualTo(original);
     }

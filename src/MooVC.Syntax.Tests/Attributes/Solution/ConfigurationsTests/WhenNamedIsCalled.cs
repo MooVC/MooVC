@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Solution.ConfigurationsTests;
 
-using System.Linq;
 using MooVC.Syntax.Attributes.Solution;
 
 public sealed class WhenNamedIsCalled
@@ -16,8 +15,8 @@ public sealed class WhenNamedIsCalled
         Configurations result = original.Named(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Builds).IsEqualTo(original.Builds.Concat([updated]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Builds).IsEquivalentTo([.. original.Builds, updated]);
         _ = await Assert.That(result.Platforms).IsEqualTo(original.Platforms);
     }
 }

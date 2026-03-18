@@ -14,7 +14,7 @@ public sealed class WhenWithScopeIsCalled
         Indexer result = original.WithScope(Scope.Private);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Behaviours).IsEqualTo(original.Behaviours);
         _ = await Assert.That(result.Parameter).IsEqualTo(original.Parameter);
         _ = await Assert.That(result.Result).IsEqualTo(original.Result);

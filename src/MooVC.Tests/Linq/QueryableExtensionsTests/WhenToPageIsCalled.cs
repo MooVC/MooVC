@@ -19,7 +19,7 @@ public sealed class WhenToPageIsCalled
         // Assert
         _ = await Assert.That(result.Directive).IsEqualTo(Directive.All);
         _ = await Assert.That(result.Total).IsEqualTo((ulong)expected.LongLength);
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenToPageIsCalled
         // Assert
         _ = await Assert.That(result.Directive).IsEqualTo(directive);
         _ = await Assert.That(result.Total).IsEqualTo(total);
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]

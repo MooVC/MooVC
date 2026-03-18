@@ -90,7 +90,7 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([2, 4]);
+        _ = await Assert.That(result).IsEquivalentTo([2, 4]);
     }
 
     [Test]
@@ -108,7 +108,7 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([1, 2, 3, 4, 5]);
+        _ = await Assert.That(result).IsEquivalentTo([1, 2, 3, 4, 5]);
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)

@@ -16,7 +16,7 @@ public sealed class WhenNamedIsCalled
         Attribute result = original.Named(new Symbol { Name = NewName });
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Name).IsEqualTo(new Symbol { Name = NewName });
         _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
         _ = await Assert.That(result.Target).IsEqualTo(original.Target);

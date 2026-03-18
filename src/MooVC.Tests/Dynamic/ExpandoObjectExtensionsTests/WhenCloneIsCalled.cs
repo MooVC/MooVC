@@ -35,8 +35,8 @@ public sealed class WhenCloneIsCalled
         ExpandoObject clone = original.Clone();
 
         // Assert
-        _ = await Assert.That(clone).IsNotSameReferenceAs(original);
-        _ = await Assert.That(clone).IsEqualTo(original);
+        _ = await Assert.That(clone).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(clone).IsEquivalentTo(original);
     }
 
     [Test]
@@ -53,9 +53,9 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        _ = await Assert.That(((ExpandoObject)clone)).IsNotSameReferenceAs((ExpandoObject)parent);
-        _ = await Assert.That(((ExpandoObject)clone.Child)).IsNotSameReferenceAs((ExpandoObject)parent.Child);
-        _ = await Assert.That(((ExpandoObject)clone.Child)).IsEqualTo((ExpandoObject)parent.Child);
+        _ = await Assert.That((ExpandoObject)clone).IsNotStrictlyEqualTo((ExpandoObject)parent);
+        _ = await Assert.That((ExpandoObject)clone.Child).IsNotStrictlyEqualTo((ExpandoObject)parent.Child);
+        _ = await Assert.That((ExpandoObject)clone.Child).IsEquivalentTo((ExpandoObject)parent.Child);
     }
 
     [Test]
@@ -96,7 +96,7 @@ public sealed class WhenCloneIsCalled
         dynamic clone = ((ExpandoObject)parent).Clone();
 
         // Assert
-        _ = await Assert.That(((ExpandoObject)clone)).IsNotSameReferenceAs((ExpandoObject)parent);
-        _ = await Assert.That(((object)clone.Child)).IsSameReferenceAs((object)parent.Child);
+        _ = await Assert.That((ExpandoObject)clone).IsNotStrictlyEqualTo((ExpandoObject)parent);
+        _ = await Assert.That((object)clone.Child).IsSameReferenceAs((object)parent.Child);
     }
 }

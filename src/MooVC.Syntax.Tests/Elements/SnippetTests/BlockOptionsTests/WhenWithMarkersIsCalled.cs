@@ -16,7 +16,7 @@ public sealed class WhenWithMarkersIsCalled
         Snippet.BlockOptions result = options.WithMarkers(markers);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
         _ = await Assert.That(result.Markers).IsEqualTo(markers);
         _ = await Assert.That(options.Markers).IsNotEqualTo(markers);
     }

@@ -15,7 +15,7 @@ public sealed class WhenWithCommentIsCalled
         Data result = original.WithComment(updated);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Comment).IsEqualTo(updated);
         _ = await Assert.That(result.MimeType).IsEqualTo(original.MimeType);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);

@@ -41,7 +41,7 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(expected);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -56,7 +56,7 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -84,6 +84,6 @@ public sealed class WhenAddRangeIsCalled
         actual.AddRange(items);
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo([1, 2, 3]);
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
     }
 }

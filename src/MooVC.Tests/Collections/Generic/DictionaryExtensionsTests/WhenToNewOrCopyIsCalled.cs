@@ -30,8 +30,8 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = await Assert.That(snapshot).IsNotSameReferenceAs(original);
-        _ = await Assert.That(snapshot).IsEqualTo(original);
+        _ = await Assert.That(snapshot).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(snapshot).IsEquivalentTo(original);
     }
 
     [Test]
@@ -44,7 +44,7 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        _ = await Assert.That(snapshot).IsNotSameReferenceAs(original);
-        _ = await Assert.That(snapshot).IsEqualTo(original);
+        _ = await Assert.That(snapshot).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(snapshot).IsEquivalentTo(original);
     }
 }

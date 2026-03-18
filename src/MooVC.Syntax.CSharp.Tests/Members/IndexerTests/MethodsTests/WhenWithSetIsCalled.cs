@@ -19,7 +19,7 @@ public sealed class WhenWithSetIsCalled
         Indexer.Methods result = original.WithSet(set);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Get).IsEqualTo(original.Get);
         _ = await Assert.That(result.Set).IsEqualTo(set);
         _ = await Assert.That(original.Set).IsEqualTo(Snippet.Empty);

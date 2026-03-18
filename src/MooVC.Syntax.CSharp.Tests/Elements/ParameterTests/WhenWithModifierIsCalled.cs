@@ -14,7 +14,7 @@ public sealed class WhenWithModifierIsCalled
         Parameter result = original.WithModifier(Parameter.Mode.RefReadonly);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Modifier).IsEqualTo(Parameter.Mode.RefReadonly);
         _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes);
         _ = await Assert.That(result.Default).IsEqualTo(original.Default);

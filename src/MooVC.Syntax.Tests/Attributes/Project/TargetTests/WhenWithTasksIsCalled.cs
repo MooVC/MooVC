@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Syntax.Attributes.Project.TargetTests;
 
-using System.Linq;
 using MooVC.Syntax.Elements;
 
 public sealed class WhenWithTasksIsCalled
@@ -17,8 +16,8 @@ public sealed class WhenWithTasksIsCalled
         Target result = original.WithTasks(additional);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Tasks).IsEqualTo(original.Tasks.Concat([additional]));
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Tasks).IsEquivalentTo([.. original.Tasks, additional]);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Label).IsEqualTo(original.Label);
     }

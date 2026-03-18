@@ -57,8 +57,8 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = await Assert.That(index).IsNotNull();
-        _ = await Assert.That(index.Keys).IsEqualTo(source);
-        _ = await Assert.That(index.Values).IsEqualTo(source);
+        _ = await Assert.That(index.Keys).IsEquivalentTo(source);
+        _ = await Assert.That(index.Values).IsEquivalentTo(source);
     }
 
     [Test]
@@ -73,7 +73,7 @@ public sealed class WhenToIndexIsCalled
 
         // Assert
         _ = await Assert.That(index).IsNotNull();
-        _ = await Assert.That(index.Keys).IsEqualTo(source);
+        _ = await Assert.That(index.Keys).IsEquivalentTo(source);
         _ = await Assert.That(index.All(element => element.Value == transform(element.Key))).IsTrue();
     }
 

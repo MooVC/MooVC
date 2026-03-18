@@ -13,7 +13,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
+        await AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(encoding, DateTimeKind.Unspecified, serializer, settings);
+        await AssertEqual(encoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class WhenSerializerIsConstructed
         var settings = new JsonSerializerSettings();
 
         // Assert
-        AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
+        await AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
     }
 
     [Test]
@@ -56,23 +56,23 @@ public sealed class WhenSerializerIsConstructed
 
         var serializer = new Serializer(settings: settings);
 
-        AssertEqual(
+        await AssertEqual(
             Serializer.DefaultEncoding,
             DateTimeKind.Unspecified,
             serializer,
             settings);
     }
 
-    private static void AssertEqual(Encoding encoding, DateTimeKind kind, Serializer serializer, JsonSerializerSettings settings)
+    private static async Task AssertEqual(Encoding encoding, DateTimeKind kind, Serializer serializer, JsonSerializerSettings settings)
     {
         _ = await Assert.That(serializer.Encoding).IsEqualTo(encoding);
         _ = await Assert.That(serializer.Kind).IsEqualTo(kind);
         _ = await Assert.That(serializer.Json.DateFormatHandling).IsEqualTo(settings.DateFormatHandling);
 
-        AssertEqual(settings, serializer);
+        await AssertEqual(settings, serializer);
     }
 
-    private static void AssertEqual(JsonSerializerSettings expected, Serializer serializer)
+    private static async Task AssertEqual(JsonSerializerSettings expected, Serializer serializer)
     {
         _ = await Assert.That(serializer.Json.DefaultValueHandling).IsEqualTo(expected.DefaultValueHandling);
         _ = await Assert.That(serializer.Json.NullValueHandling).IsEqualTo(expected.NullValueHandling);

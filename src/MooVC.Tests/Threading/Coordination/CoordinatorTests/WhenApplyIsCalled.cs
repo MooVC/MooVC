@@ -12,7 +12,7 @@ public sealed class WhenApplyIsCalled
         _coordinator = new Coordinator<string>();
     }
 
-    public async Task Dispose()
+    public void Dispose()
     {
         _coordinator.Dispose();
     }
@@ -27,7 +27,7 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
     }
 

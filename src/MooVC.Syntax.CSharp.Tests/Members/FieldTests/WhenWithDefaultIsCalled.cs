@@ -15,7 +15,7 @@ public sealed class WhenWithDefaultIsCalled
         Field result = original.WithDefault(@default);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Default).IsEqualTo(@default);
         _ = await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
         _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);

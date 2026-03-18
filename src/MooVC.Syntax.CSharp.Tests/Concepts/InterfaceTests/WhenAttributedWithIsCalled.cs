@@ -1,7 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.Concepts.InterfaceTests;
 
 using System.Collections.Immutable;
-using System.Linq;
 using MooVC.Syntax.CSharp.Elements;
 using MooVC.Syntax.CSharp.Members;
 
@@ -28,8 +27,8 @@ public sealed class WhenAttributedWithIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
-        _ = await Assert.That(result.Events).IsEqualTo(original.Events);
-        _ = await Assert.That(original.Attributes).IsEqualTo(existing);
+        _ = await Assert.That(result.Attributes).IsEquivalentTo([.. original.Attributes, .. additional]);
+        _ = await Assert.That(result.Events).IsEquivalentTo(original.Events);
+        _ = await Assert.That(original.Attributes).IsEquivalentTo(existing);
     }
 }

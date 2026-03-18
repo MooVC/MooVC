@@ -13,7 +13,7 @@ public sealed class WhenWithDirectionIsCalled
         Conversion result = original.WithDirection(replacement);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Body).IsEqualTo(original.Body);
         _ = await Assert.That(result.Direction).IsEqualTo(replacement);
         _ = await Assert.That(result.Mode).IsEqualTo(original.Mode);

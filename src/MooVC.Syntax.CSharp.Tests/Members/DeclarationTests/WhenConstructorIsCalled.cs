@@ -34,7 +34,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
-        _ = await Assert.That(subject.Parameters).IsEqualTo(new[] { parameter });
+        _ = await Assert.That(subject.Parameters).IsEquivalentTo([parameter]);
         _ = await Assert.That(subject.IsUnspecified).IsFalse();
     }
 }

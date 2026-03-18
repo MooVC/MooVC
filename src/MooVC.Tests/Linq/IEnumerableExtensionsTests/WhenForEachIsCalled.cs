@@ -1,6 +1,5 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-
 public sealed class WhenForEachIsCalled
 {
     [Test]
@@ -19,7 +18,7 @@ public sealed class WhenForEachIsCalled
         enumeration.ForEach(Action);
 
         // Assert
-        _ = await Assert.That(invocations).IsEqualTo(enumeration);
+        _ = await Assert.That(invocations).IsEquivalentTo(enumeration);
     }
 
     [Test]
@@ -33,7 +32,7 @@ public sealed class WhenForEachIsCalled
         Action act = () => enumeration.ForEach(action!);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>();
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
     }
 

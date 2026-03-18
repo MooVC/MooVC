@@ -29,7 +29,7 @@ public sealed class WhenAndIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEqualTo([initial, additionalValidatable.Results.Single()]);
+        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public sealed class WhenAndIsCalled
         _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
 
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEqualTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        _ = await Assert.That(results).IsEquivalentTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
     }
 
     [Test]

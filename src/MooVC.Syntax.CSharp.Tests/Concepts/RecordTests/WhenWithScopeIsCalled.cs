@@ -15,7 +15,7 @@ public sealed class WhenWithScopeIsCalled
         Record result = original.WithScope(Scope.Protected);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Scope).IsEqualTo(Scope.Protected);
         _ = await Assert.That(original.Scope).IsEqualTo(Scope.Internal);
     }

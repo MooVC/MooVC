@@ -28,7 +28,7 @@ public sealed class WhenChainIsCalled
 
         // Assert
         _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -52,7 +52,7 @@ public sealed class WhenChainIsCalled
 
         // Assert
         _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -86,6 +86,6 @@ public sealed class WhenChainIsCalled
 
         // Assert
         _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
     }
 }

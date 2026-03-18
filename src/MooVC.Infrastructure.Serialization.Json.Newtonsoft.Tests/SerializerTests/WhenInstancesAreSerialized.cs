@@ -22,7 +22,7 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
@@ -48,7 +48,7 @@ public sealed class WhenInstancesAreSerialized
         SerializableClass deserialized = await serializer.Deserialize<SerializableClass>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
@@ -81,7 +81,7 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
@@ -213,7 +213,7 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
@@ -234,7 +234,7 @@ public sealed class WhenInstancesAreSerialized
         SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
@@ -269,7 +269,7 @@ public sealed class WhenInstancesAreSerialized
         ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(deserialized).IsNotSameReferenceAs(original);
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 

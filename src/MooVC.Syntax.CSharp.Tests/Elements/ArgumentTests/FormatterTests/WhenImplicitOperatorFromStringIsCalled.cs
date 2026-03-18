@@ -12,10 +12,9 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Act
         Argument.Formatter subject = provided!;
+        string result = subject;
 
         // Assert
-        _ = await Assert.That(subject).IsNotNull();
-        string result = subject;
         _ = await Assert.That(result).IsEqualTo(provided);
     }
 
@@ -45,7 +44,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That((first == second)).IsTrue();
-        _ = await Assert.That(first.Equals(second)).IsTrue();
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

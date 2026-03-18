@@ -27,7 +27,7 @@ public sealed class WhenAcceptsIsCalled
         _ = await Assert.That(result.Body).IsEqualTo(original.Body);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Parameters.Length).IsEqualTo(original.Parameters.Length + additional.Length);
-        _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters.Concat(additional));
+        _ = await Assert.That(result.Parameters).IsEquivalentTo([.. original.Parameters, .. additional]);
         _ = await Assert.That(result.Result).IsEqualTo(original.Result);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }

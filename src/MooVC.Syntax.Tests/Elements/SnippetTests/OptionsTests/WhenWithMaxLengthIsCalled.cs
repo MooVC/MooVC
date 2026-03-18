@@ -13,7 +13,7 @@ public sealed class WhenWithMaxLengthIsCalled
         Snippet.Options result = options.WithMaxLength(value);
 
         // Assert
-        _ = await Assert.That(result).IsNotSameReferenceAs(options);
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(options);
         _ = await Assert.That(result.MaxLength).IsEqualTo(value);
         _ = await Assert.That(options.MaxLength).IsNotEqualTo(value);
     }

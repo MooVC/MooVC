@@ -28,8 +28,8 @@ public sealed class WhenAttributedWithIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Attributes).IsEqualTo(original.Attributes.Concat(additional));
-        _ = await Assert.That(result.Constructors).IsEqualTo(original.Constructors);
-        _ = await Assert.That(original.Attributes).IsEqualTo(existing);
+        _ = await Assert.That(result.Attributes).IsEquivalentTo([.. original.Attributes, .. additional]);
+        _ = await Assert.That(result.Constructors).IsEquivalentTo(original.Constructors);
+        _ = await Assert.That(original.Attributes).IsEquivalentTo(existing);
     }
 }

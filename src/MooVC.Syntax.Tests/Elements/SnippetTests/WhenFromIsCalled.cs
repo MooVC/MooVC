@@ -25,9 +25,10 @@ public sealed class WhenFromIsCalled
         string[]? values = default;
 
         // Act
-        ArgumentNullException exception = await Assert.That(() => _ = Snippet.From(values!)).Throws<ArgumentNullException>();
+        Func<Snippet> act = () => _ = Snippet.From(values!);
 
         // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
     }
 
@@ -55,6 +56,6 @@ public sealed class WhenFromIsCalled
         ImmutableArray<string> converted = result;
 
         // Assert
-        _ = await Assert.That(converted).IsEqualTo([first, second]);
+        _ = await Assert.That(converted).IsEquivalentTo([first, second]);
     }
 }
