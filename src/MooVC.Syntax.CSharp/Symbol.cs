@@ -235,7 +235,10 @@
 
             string signature = Name;
 
-            signature = GetQualifiedSignature(options, signature);
+            if (!Aliases.IsSystem(signature))
+            {
+                signature = GetQualifiedSignature(options, signature);
+            }
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -261,7 +264,7 @@
             return Separator.Combine(arguments);
         }
 
-        private Snippet GetQualifiedSignature(Options options, Snippet signature)
+        private Snippet GetQualifiedSignature(Options options, string signature)
         {
             if (Qualifier.IsUnqualified || options.Qualification == Qualification.Minimum)
             {

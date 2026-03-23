@@ -87,12 +87,12 @@
 
             type = type.Chain(options);
 
-            Snippet @namespace = $"namespace {Namespace}";
+            string @namespace = $"namespace {Namespace}";
             var usings = Usings.ToSnippet(options);
 
             if (!usings.IsEmpty)
             {
-                type = type.Prepend(options, Snippet.Blank, usings);
+                type = type.Prepend(options, usings, Snippet.Blank);
             }
 
             if (options.Namespace.IsBlock)
@@ -100,9 +100,9 @@
                 return type.Block(options, @namespace);
             }
 
-            @namespace = @namespace.Append(";", Environment.NewLine);
+            @namespace = string.Concat(@namespace, ";");
 
-            return type.Prepend(options, @namespace);
+            return type.Prepend(options, @namespace, Environment.NewLine);
         }
 
         /// <summary>

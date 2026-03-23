@@ -41,17 +41,24 @@
             public Variable.Options Naming { get; internal set; } = Variable.Options.Camel;
 
             /// <summary>
+            /// Gets the options for the Snippets.
+            /// </summary>
+            /// <value>The behaviour.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+
+            /// <summary>
             /// Gets the types on the Options.
             /// </summary>
             /// <value>The types.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
 
-            public static implicit operator Variable.Options(Options options)
+            public static implicit operator Snippet.Options(Options options)
             {
-                Guard.Against.Conversion<Options, Variable.Options>(options);
+                Guard.Against.Conversion<Options, Snippet.Options>(options);
 
-                return options.Naming;
+                return options.Snippets;
             }
 
             public static implicit operator Symbol.Options(Options options)
@@ -59,6 +66,22 @@
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
 
                 return options.Types;
+            }
+
+            public static implicit operator Type.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Type.Options>(options);
+
+                return new Type.Options()
+                    .WithSnippets(options.Snippets)
+                    .WithTypes(options.Types);
+            }
+
+            public static implicit operator Variable.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Variable.Options>(options);
+
+                return options.Naming;
             }
         }
     }

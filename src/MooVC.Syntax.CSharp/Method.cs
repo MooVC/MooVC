@@ -195,7 +195,7 @@ namespace MooVC.Syntax.CSharp
         {
             string extensibility = Extensibility;
             string name = Name;
-            var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
+            var parameters = Parameters.ToSnippet(options);
             string result = Result.IsVoid ? "void" : Result;
             string scope = Scope.ToString(options);
             var clauses = Name.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);

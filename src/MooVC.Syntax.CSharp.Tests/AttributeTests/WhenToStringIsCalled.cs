@@ -29,7 +29,7 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"[{AttributeName}]");
+        _ = await Assert.That(result).IsEqualTo($"{AttributeName}");
     }
 
     [Test]
@@ -42,7 +42,7 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"[{Attribute.Specifier.Method}:{AttributeName}]");
+        _ = await Assert.That(result).IsEqualTo($"{Attribute.Specifier.Method}:{AttributeName}");
     }
 
     [Test]
@@ -60,6 +60,6 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"[{AttributeName}({ArgumentName} = {ArgumentValue})]");
+        _ = await Assert.That(result).IsEqualTo($"{AttributeName}({ArgumentName} = {ArgumentValue})");
     }
 }

@@ -121,6 +121,11 @@
                 return Empty;
             }
 
+            if (values.Length == 1 && values[0] == Environment.NewLine)
+            {
+                return Blank;
+            }
+
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(values.Length);
 
             foreach (string value in values)

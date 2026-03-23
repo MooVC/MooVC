@@ -26,6 +26,8 @@
         /// Gets the unspecified instance.
         /// </summary>
         public static readonly Attribute Unspecified = new Attribute();
+
+        private const int SuffixLength = 9;
         private static readonly string _separator = ", ";
 
         /// <summary>
@@ -115,7 +117,12 @@
                 value = value.Append($"{Target}:");
             }
 
-            var name = Name.ToSnippet(options);
+            string name = Name.ToSnippet(options);
+
+            if (options.Types.Qualification == Symbol.Qualification.Minimum && name.EndsWith(nameof(Attribute)))
+            {
+                name = name.Substring(0, name.Length - SuffixLength);
+            }
 
             value = value.Append(name);
 
@@ -124,7 +131,7 @@
                 value = AppendArguments(options, value);
             }
 
-            return Snippet.From(options, $"[{value}]");
+            return Snippet.From(options, value.ToString());
         }
 
         /// <summary>

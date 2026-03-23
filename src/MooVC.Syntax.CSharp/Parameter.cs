@@ -136,7 +136,7 @@
 
             const string separator = " ";
 
-            string attributes = GetAttributes();
+            string attributes = GetAttributes(options);
             string @default = GetDefault();
             string modifier = Modifier;
             var name = Name.ToSnippet(options);
@@ -176,7 +176,7 @@
                 .Results;
         }
 
-        private string GetAttributes()
+        private string GetAttributes(Options options)
         {
             if (Attributes.IsDefaultOrEmpty)
             {
@@ -185,7 +185,7 @@
 
             const string separator = ", ";
 
-            string attributes = separator.Combine(Attributes, attribute => attribute);
+            string attributes = separator.Combine(Attributes, attribute => attribute.ToSnippet(options));
 
             return $"[{attributes}]";
         }

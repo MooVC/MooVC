@@ -48,6 +48,15 @@ namespace MooVC.Syntax.CSharp
             /// <value>The types.</value>
             public Type.Options Types { get; internal set; } = Type.Options.Default;
 
+            public static implicit operator Parameter.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Parameter.Options>(options);
+
+                return Parameter.Options.Camel
+                    .WithSnippets(options.Snippets)
+                    .WithTypes(options.Types);
+            }
+
             public static implicit operator Scope(Options options)
             {
                 Guard.Against.Conversion<Options, Scope>(options);
