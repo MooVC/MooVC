@@ -12,6 +12,9 @@
 
     [Fluentify]
     [Valuify]
+    /// <summary>
+    /// Represents an MSBuild solution build mapping entry.
+    /// </summary>
     public sealed partial class Build
         : IProduceXml,
           IValidatableObject

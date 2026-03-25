@@ -265,6 +265,11 @@
             }
         }
 
+        /// <summary>
+        /// Applies configured chaining strategies to the current snippet.
+        /// </summary>
+        /// <param name="options">The snippet options controlling chain formatting.</param>
+        /// <returns>A chained snippet when chaining is applicable; otherwise the original snippet.</returns>
         public Snippet Chain(Options options)
         {
             _ = Guard.Against.Null(options, message: ChainOptionsRequired);

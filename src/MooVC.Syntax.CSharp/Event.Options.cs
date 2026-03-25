@@ -42,6 +42,11 @@ namespace MooVC.Syntax.CSharp
             /// <value>The behaviour.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
 
+            /// <summary>
+            /// Converts event options into a scope value.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The implied scope.</returns>
             public static implicit operator Scope(Options options)
             {
                 Guard.Against.Conversion<Options, Scope>(options);
@@ -49,6 +54,11 @@ namespace MooVC.Syntax.CSharp
                 return options.Implied;
             }
 
+            /// <summary>
+            /// Converts event options into snippet options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The snippet options.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);

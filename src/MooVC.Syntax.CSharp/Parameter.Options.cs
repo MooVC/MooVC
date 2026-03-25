@@ -54,6 +54,11 @@
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
 
+            /// <summary>
+            /// Converts parameter options into snippet options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The snippet options.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -61,6 +66,11 @@
                 return options.Snippets;
             }
 
+            /// <summary>
+            /// Converts parameter options into symbol options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The symbol options.</returns>
             public static implicit operator Symbol.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
@@ -68,6 +78,11 @@
                 return options.Types;
             }
 
+            /// <summary>
+            /// Converts parameter options into type options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The type options.</returns>
             public static implicit operator Type.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Type.Options>(options);
@@ -77,6 +92,11 @@
                     .WithTypes(options.Types);
             }
 
+            /// <summary>
+            /// Converts parameter options into variable naming options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The variable options.</returns>
             public static implicit operator Variable.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Variable.Options>(options);

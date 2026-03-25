@@ -3,15 +3,27 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
 
+    /// <summary>
+    /// Applies chaining by breaking method-call chains into one call per line.
+    /// </summary>
     public sealed class OneDotPerLine
         : Snippet.IChain
     {
+        /// <summary>
+        /// Gets the singleton instance.
+        /// </summary>
         public static readonly Snippet.IChain Instance = new OneDotPerLine();
 
         private OneDotPerLine()
         {
         }
 
+        /// <summary>
+        /// Chains a line based on dot-separated method call points.
+        /// </summary>
+        /// <param name="line">The source line.</param>
+        /// <param name="options">The snippet options.</param>
+        /// <returns>The chained line fragments.</returns>
         public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
             if (IsUnchainable(line, options))

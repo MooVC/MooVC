@@ -18,6 +18,9 @@
         [Monify(Type = typeof(ImmutableArray<IChain>))]
         public sealed partial class ChainingOptions
         {
+            /// <summary>
+            /// Gets the default chaining options.
+            /// </summary>
             public static readonly ChainingOptions Default = ImmutableArray<IChain>.Empty;
 
             internal ChainingOptions(ImmutableArray<IChain> value)
@@ -25,8 +28,16 @@
                 _value = value;
             }
 
+            /// <summary>
+            /// Gets a value indicating whether the current instance is the default options instance.
+            /// </summary>
             public bool IsDefault => this == Default;
 
+            /// <summary>
+            /// Converts a chain array into a <see cref="ChainingOptions"/> instance.
+            /// </summary>
+            /// <param name="options">The chain options to include.</param>
+            /// <returns>The created <see cref="ChainingOptions"/> instance.</returns>
             public static implicit operator ChainingOptions(IChain[] options)
             {
                 Guard.Against.Conversion<IChain[], ChainingOptions>(options);

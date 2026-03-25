@@ -6,6 +6,9 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents a C# type symbol.
+    /// </summary>
     public partial class Type
     {
         /// <summary>
@@ -40,6 +43,11 @@
             /// <value>The symbol options.</value>
             public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
 
+            /// <summary>
+            /// Converts type options into snippet options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The snippet options.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -47,6 +55,11 @@
                 return options.Snippets;
             }
 
+            /// <summary>
+            /// Converts type options into symbol options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The symbol options.</returns>
             public static implicit operator Symbol.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);

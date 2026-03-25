@@ -2,6 +2,9 @@
 
 using System.IO.Compression;
 
+/// <summary>
+/// Writes generated modelling files to a zip archive.
+/// </summary>
 public partial class ZipWriter
 {
     /// <summary>

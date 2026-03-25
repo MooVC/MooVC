@@ -57,6 +57,11 @@
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
             public Code.Options Snippet { get; internal set; } = Code.Options.Default;
 
+            /// <summary>
+            /// Converts argument options into formatter options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The formatter options.</returns>
             public static implicit operator Formatter(Options options)
             {
                 Guard.Against.Conversion<Options, Formatter>(options);
@@ -64,6 +69,11 @@
                 return options.Formatter;
             }
 
+            /// <summary>
+            /// Converts argument options into variable naming options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The variable options.</returns>
             public static implicit operator Variable.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Variable.Options>(options);
@@ -71,6 +81,11 @@
                 return options.Naming;
             }
 
+            /// <summary>
+            /// Converts argument options into code options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The code options.</returns>
             public static implicit operator Code.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Code.Options>(options);

@@ -223,6 +223,10 @@
             return CompareSegments(other);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the qualifier segments.
+        /// </summary>
+        /// <returns>An enumerator for the qualifier segments.</returns>
         public IEnumerator<Name> GetEnumerator()
         {
             return ((IEnumerable<Name>)_value).GetEnumerator();

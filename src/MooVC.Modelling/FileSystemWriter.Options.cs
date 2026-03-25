@@ -1,5 +1,8 @@
 namespace MooVC.Modelling;
 
+/// <summary>
+/// Writes generated modelling files to the local file system.
+/// </summary>
 public partial class FileSystemWriter
 {
     /// <summary>

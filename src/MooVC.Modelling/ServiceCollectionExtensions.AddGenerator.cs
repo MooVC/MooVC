@@ -4,6 +4,9 @@ using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
+/// <summary>
+/// Registers dependency injection services required by the modelling pipeline.
+/// </summary>
 public static partial class ServiceCollectionExtensions
 {
     /// <summary>

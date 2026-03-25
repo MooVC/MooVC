@@ -60,6 +60,11 @@
             /// </summary>
             /// <param name="options">The options.</param>
             /// <returns>The identifier options.</returns>
+            /// <summary>
+            /// Converts variable options into identifier options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The identifier options.</returns>
             public static implicit operator Identifier.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Identifier.Options>(options);
@@ -68,6 +73,11 @@
                     .WithCasing(options.Casing);
             }
 
+            /// <summary>
+            /// Converts variable options into identifier casing.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The identifier casing.</returns>
             public static implicit operator Identifier.Casing(Options options)
             {
                 Guard.Against.Conversion<Options, Identifier.Casing>(options);

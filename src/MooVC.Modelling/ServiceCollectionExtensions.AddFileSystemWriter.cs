@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
+/// <summary>
+/// Registers dependency injection services required by modelling writers.
+/// </summary>
 public static partial class ServiceCollectionExtensions
 {
     private const string FileSystemServiceKey = "FileSystem";
@@ -37,6 +40,7 @@ public static partial class ServiceCollectionExtensions
 
     private static IServiceCollection PerformAddFileSystemWriter(this IServiceCollection services, IConfiguration? configuration)
     {
+        // Use keyed registration so callers can choose this writer among other IWriter implementations.
         return services
             .AddOptions<FileSystemWriter.Options>()
             .ForkOn(
