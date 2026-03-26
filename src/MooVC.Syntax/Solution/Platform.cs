@@ -10,11 +10,11 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
-    [Fluentify]
-    [Valuify]
     /// <summary>
     /// Represents an MSBuild solution platform mapping entry.
     /// </summary>
+    [Fluentify]
+    [Valuify]
     public sealed partial class Platform
         : IProduceXml,
           IValidatableObject
