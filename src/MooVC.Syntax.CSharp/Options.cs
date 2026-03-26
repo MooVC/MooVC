@@ -49,6 +49,11 @@
         /// <value>The symbol options.</value>
         public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
 
+        /// <summary>
+        /// Converts the current options to namespace options.
+        /// </summary>
+        /// <param name="options">The source options.</param>
+        /// <returns>The namespace options.</returns>
         public static implicit operator Qualifier.Options(Options options)
         {
             Guard.Against.Conversion<Options, Qualifier.Options>(options);
@@ -56,6 +61,11 @@
             return options.Namespace;
         }
 
+        /// <summary>
+        /// Converts the current options to snippet options.
+        /// </summary>
+        /// <param name="options">The source options.</param>
+        /// <returns>The snippet options.</returns>
         public static implicit operator Snippet.Options(Options options)
         {
             Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -63,6 +73,11 @@
             return options.Snippets;
         }
 
+        /// <summary>
+        /// Converts the current options to symbol options.
+        /// </summary>
+        /// <param name="options">The source options.</param>
+        /// <returns>The symbol options.</returns>
         public static implicit operator Symbol.Options(Options options)
         {
             Guard.Against.Conversion<Options, Symbol.Options>(options);
@@ -70,6 +85,11 @@
             return options.Types;
         }
 
+        /// <summary>
+        /// Converts the current options to type options.
+        /// </summary>
+        /// <param name="options">The source options.</param>
+        /// <returns>The type options.</returns>
         public static implicit operator Type.Options(Options options)
         {
             Guard.Against.Conversion<Options, Type.Options>(options);

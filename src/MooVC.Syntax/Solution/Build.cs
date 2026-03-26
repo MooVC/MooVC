@@ -10,6 +10,9 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents an MSBuild solution build mapping entry.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Build

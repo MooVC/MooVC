@@ -11,6 +11,9 @@
     using static MooVC.Syntax.CSharp.Symbol_Resources;
     using Kind = System.Type;
 
+    /// <summary>
+    /// Represents a C# symbol declaration.
+    /// </summary>
     public partial class Symbol
     {
         /// <summary>

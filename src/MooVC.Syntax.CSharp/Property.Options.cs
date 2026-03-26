@@ -48,6 +48,11 @@ namespace MooVC.Syntax.CSharp
             /// <value>The types.</value>
             public Type.Options Types { get; internal set; } = MooVC.Syntax.CSharp.Type.Options.Default;
 
+            /// <summary>
+            /// Converts property options into scope options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The implied scope.</returns>
             public static implicit operator Scope(Options options)
             {
                 Guard.Against.Conversion<Options, Scope>(options);
@@ -55,6 +60,11 @@ namespace MooVC.Syntax.CSharp
                 return options.Implied;
             }
 
+            /// <summary>
+            /// Converts property options into snippet options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The snippet options.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -62,6 +72,11 @@ namespace MooVC.Syntax.CSharp
                 return options.Snippets;
             }
 
+            /// <summary>
+            /// Converts property options into type options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The type options.</returns>
             public static implicit operator Type.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Type.Options>(options);

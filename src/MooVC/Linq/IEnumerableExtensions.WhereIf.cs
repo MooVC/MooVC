@@ -19,9 +19,10 @@ public static partial class IEnumerableExtensions
     /// <param name="predicate">A function to test each element for a condition.</param>
     /// <returns>An <see cref="IEnumerable{T}" /> that contains elements from the input sequence that satisfy the condition.</returns>
     /// <remarks>
-    /// If <paramref name="enumeration" /> is null and <paramref name="isApplicable" /> is true, an exception is thrown.
-    /// If <paramref name="isApplicable" /> is false, the input sequence is returned unchanged.
+    /// Returns the original sequence unchanged when <paramref name="isApplicable" /> is <see langword="false" />.
+    /// Returns <see langword="null" /> when <paramref name="enumeration" /> is <see langword="null" />.
     /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate" /> is <see langword="null" /> and filtering is applied.</exception>
 #if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif
@@ -46,9 +47,13 @@ public static partial class IEnumerableExtensions
     /// <param name="predicate">A function to test each element for a condition.</param>
     /// <returns>An <see cref="IEnumerable{T}" /> that contains elements from the input sequence that satisfy the condition.</returns>
     /// <remarks>
-    /// If <paramref name="enumeration" /> is null and the result of <paramref name="condition" /> is true, an exception is thrown.
-    /// If the result of <paramref name="condition" /> is false, the input sequence is returned unchanged.
+    /// Returns <see langword="null" /> when <paramref name="enumeration" /> is <see langword="null" />.
+    /// Returns the original sequence unchanged when <paramref name="condition" /> evaluates to <see langword="false" />.
     /// </remarks>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="condition" /> is <see langword="null" />.
+    /// Thrown when <paramref name="predicate" /> is <see langword="null" /> and filtering is applied.
+    /// </exception>
 #if NET6_0_OR_GREATER
     [return: NotNullIfNotNull(nameof(enumeration))]
 #endif

@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static MooVC.Modelling.ServiceCollectionExtensions_Resources;
 
+/// <summary>
+/// Registers dependency injection services required by modelling writers.
+/// </summary>
 public static partial class ServiceCollectionExtensions
 {
     private const string ZipServiceKey = "Zip";
@@ -37,6 +40,7 @@ public static partial class ServiceCollectionExtensions
 
     private static IServiceCollection PerformAddZipWriter(this IServiceCollection services, IConfiguration? configuration)
     {
+        // Use keyed registration so callers can resolve this writer alongside other IWriter implementations.
         return services
             .AddOptions<ZipWriter.Options>()
             .ForkOn(

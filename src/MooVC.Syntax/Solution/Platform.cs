@@ -10,6 +10,9 @@
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
+    /// <summary>
+    /// Represents an MSBuild solution platform mapping entry.
+    /// </summary>
     [Fluentify]
     [Valuify]
     public sealed partial class Platform

@@ -3,15 +3,27 @@
     using System.Collections.Generic;
     using System.Collections.Immutable;
 
+    /// <summary>
+    /// Applies chaining by splitting multi-argument parenthesized calls across lines.
+    /// </summary>
     public sealed class Parentheses
         : Snippet.IChain
     {
+        /// <summary>
+        /// Gets the singleton instance.
+        /// </summary>
         public static readonly Snippet.IChain Instance = new Parentheses();
 
         private Parentheses()
         {
         }
 
+        /// <summary>
+        /// Chains a line by splitting argument lists when applicable.
+        /// </summary>
+        /// <param name="line">The source line.</param>
+        /// <param name="options">The snippet options.</param>
+        /// <returns>The chained line fragments.</returns>
         public ImmutableArray<string> Chain(string line, Snippet.Options options)
         {
             if (IsUnchainable(line, options))

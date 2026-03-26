@@ -3,8 +3,16 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Provides string helpers for C# syntax parsing.
+    /// </summary>
     internal static partial class StringExtensions
     {
+        /// <summary>
+        /// Decomposes a fully qualified type name into namespace, name, and generic arguments.
+        /// </summary>
+        /// <param name="fullyQualifiedName">The fully qualified type name.</param>
+        /// <returns>A decomposed fully qualified name model.</returns>
         public static FullyQualifiedName Decompose(this string fullyQualifiedName)
         {
             string value = RemoveGlobalQualifier(fullyQualifiedName);
