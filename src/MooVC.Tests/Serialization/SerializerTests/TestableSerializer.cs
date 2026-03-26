@@ -1,4 +1,4 @@
-﻿namespace MooVC.Serialization.SerializerTests;
+namespace MooVC.Serialization.SerializerTests;
 
 using System.IO;
 using MooVC.Compression;

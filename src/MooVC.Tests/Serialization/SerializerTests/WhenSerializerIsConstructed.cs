@@ -1,4 +1,4 @@
-﻿namespace MooVC.Serialization.SerializerTests;
+namespace MooVC.Serialization.SerializerTests;
 
 public sealed class WhenSerializerIsConstructed
 {

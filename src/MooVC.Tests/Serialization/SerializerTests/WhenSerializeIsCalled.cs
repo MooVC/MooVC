@@ -1,4 +1,4 @@
-﻿namespace MooVC.Serialization.SerializerTests;
+namespace MooVC.Serialization.SerializerTests;
 
 using System.IO;
 using System.Text;
@@ -6,8 +6,8 @@ using MooVC.Compression;
 
 public sealed class WhenSerializeIsCalled
 {
-    private static readonly byte[] SerializedPayload = Encoding.UTF8.GetBytes("Some payload.");
     private const string Instance = "Something something dark side...";
+    private static readonly byte[] SerializedPayload = Encoding.UTF8.GetBytes("Some payload.");
 
     [Test]
     public async Task GivenACompressorThenCompressAsyncIsInvoked()
@@ -17,13 +17,13 @@ public sealed class WhenSerializeIsCalled
 
         _ = compressor
             .Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
-            .Returns(async info =>
+            .Returns(info =>
             {
                 Stream source = info.Arg<Stream>();
-                using var copied = new MemoryStream();
-                await source.CopyToAsync(copied, CancellationToken.None);
+                var copied = new MemoryStream();
+                source.CopyTo(copied);
                 copied.Position = 0;
-                return copied;
+                return Task.FromResult<Stream>(copied);
             });
 
         var serializer = new TestableSerializer(
@@ -65,6 +65,7 @@ public sealed class WhenSerializeIsCalled
                 wasInvoked = true;
                 return Task.CompletedTask;
             });
+
         using var stream = new MemoryStream();
 
         // Act
