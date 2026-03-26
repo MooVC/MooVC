@@ -15,16 +15,11 @@ public sealed class WhenSerializeIsCalled
         // Arrange
         ICompressor compressor = Substitute.For<ICompressor>();
 
+        Stream compressed = new MemoryStream(SerializedPayload);
+
         _ = compressor
             .Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
-            .Returns(info =>
-            {
-                Stream source = info.Arg<Stream>();
-                var copied = new MemoryStream();
-                source.CopyTo(copied);
-                copied.Position = 0;
-                return Task.FromResult<Stream>(copied);
-            });
+            .Returns(Task.FromResult(compressed));
 
         var serializer = new TestableSerializer(
             compressor: compressor,
