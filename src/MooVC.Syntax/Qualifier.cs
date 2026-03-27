@@ -195,6 +195,21 @@
         }
 
         /// <summary>
+        /// Returns a new qualifier with the specified segment appended to the current sequence.
+        /// </summary>
+        /// <param name="segment">The segment to append to the qualifier sequence. Cannot be <see langword="null" />.</param>
+        /// <returns>A new qualifier that includes the specified segment appended to the end of the current sequence.</returns>
+        public Qualifier Append(Name segment)
+        {
+            _ = Guard.Against.Null(segment, message: AppendSegmentRequired.Format(typeof(Name)));
+            _ = Guard.Against.InvalidInput(segment, nameof(segment), _ => !segment.IsUnnamed, message: AppendSegmentRequired.Format(typeof(Name)));
+
+            return _value
+                .Append(segment)
+                .ToImmutableArray();
+        }
+
+        /// <summary>
         /// Compares this Qualifier to another instance.
         /// </summary>
         /// <param name="other">The other.</param>
@@ -235,6 +250,21 @@
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns a new qualifier with the specified segment prepended to the current sequence.
+        /// </summary>
+        /// <param name="segment">The segment to append to the qualifier sequence. Cannot be <see langword="null" />.</param>
+        /// <returns>A new qualifier that includes the specified segment prepended to the end of the current sequence.</returns>
+        public Qualifier Prepend(Name segment)
+        {
+            _ = Guard.Against.Null(segment, message: PrependSegmentRequired.Format(typeof(Name)));
+            _ = Guard.Against.InvalidInput(segment, nameof(segment), _ => !segment.IsUnnamed, message: PrependSegmentRequired.Format(typeof(Name)));
+
+            return _value
+                .Prepend(segment)
+                .ToImmutableArray();
         }
 
         /// <summary>

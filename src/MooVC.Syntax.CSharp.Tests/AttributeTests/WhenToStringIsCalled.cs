@@ -29,7 +29,7 @@ public sealed class WhenToStringIsCalled
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"{AttributeName}");
+        _ = await Assert.That(result).IsEqualTo(AttributeName);
     }
 
     [Test]

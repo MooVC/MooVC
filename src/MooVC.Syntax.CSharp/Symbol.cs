@@ -48,6 +48,12 @@
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
+        /// Gets a value indicating whether the Symbol is an array.
+        /// </summary>
+        /// <value>A value indicating whether the Symbol is an array.</value>
+        public bool IsArray { get; internal set; }
+
+        /// <summary>
         /// Gets a value indicating whether the Symbol is nullable.
         /// </summary>
         /// <value>A value indicating whether the Symbol is nullable.</value>
@@ -101,6 +107,8 @@
             Guard.Against.Conversion<Kind, Symbol>(type);
 
             return new Symbol()
+                .IsArray(type.IsArray)
+                .IsNullable(Nullable.GetUnderlyingType(type) != null)
                 .From(type)
                 .Named(type);
         }
@@ -115,6 +123,21 @@
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(symbol);
 
             return new Symbol()
+                .From(symbol.Qualifier)
+                .Named(symbol.Name);
+        }
+
+        /// <summary>
+        /// Implicitly converts a tuple containing a name and qualifier to an Symbol instance.
+        /// </summary>
+        /// <param name="symbol">The tuple containing the name and qualifier to be converted into an Symbol.</param>
+        /// <returns>The Symbol.</returns>
+        public static implicit operator Symbol((Moniker Name, bool IsArray, Qualifier Qualifier) symbol)
+        {
+            Guard.Against.Conversion<(Moniker Name, bool IsArray, Qualifier Qualifier), Symbol>(symbol);
+
+            return new Symbol()
+                .IsArray(symbol.IsArray)
                 .From(symbol.Qualifier)
                 .Named(symbol.Name);
         }

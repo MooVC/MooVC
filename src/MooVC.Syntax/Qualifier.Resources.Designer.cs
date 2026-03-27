@@ -61,6 +61,24 @@ namespace MooVC.Syntax {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to append must be provided..
+        /// </summary>
+        internal static string AppendSegmentRequired {
+            get {
+                return ResourceManager.GetString("AppendSegmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to prepend must be provided..
+        /// </summary>
+        internal static string PrependSegmentRequired {
+            get {
+                return ResourceManager.GetString("PrependSegmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` to format the `{1}` for `{2}` must be provided..
         /// </summary>
         internal static string ToSnippetOptionsRequired {
