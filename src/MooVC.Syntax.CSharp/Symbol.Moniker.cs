@@ -80,6 +80,11 @@
                     return alias;
                 }
 
+                if (type.IsArray)
+                {
+                    type = type.GetElementType();
+                }
+
                 string name = type.Name;
 
                 if (type.IsGenericType)
