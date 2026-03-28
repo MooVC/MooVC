@@ -105,9 +105,7 @@ public sealed partial class WhenToSnippetIsCalled
                 [Description("The Number of Passenger Doors")] byte Doors,
                 [Description("The Manufacturer of the Car")] string Make,
                 [Description("The Name Ascribed to the Car by the Manufacturer")] string Model)
-                : Aggregate
-            {
-            }
+                : Aggregate;
             """;
 
             Definition content = Builder

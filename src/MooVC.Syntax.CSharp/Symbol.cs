@@ -270,6 +270,11 @@
                 signature = $"{signature}<{arguments}>";
             }
 
+            if (IsArray)
+            {
+                signature = $"{signature}[]";
+            }
+
             if (IsNullable)
             {
                 return $"{signature}?";

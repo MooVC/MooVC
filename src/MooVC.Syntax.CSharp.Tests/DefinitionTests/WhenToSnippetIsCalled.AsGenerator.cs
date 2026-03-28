@@ -104,9 +104,7 @@ public sealed partial class WhenToSnippetIsCalled
                     [global::System.ComponentModel.DescriptionAttribute("The Number of Passenger Doors")] byte Doors,
                     [global::System.ComponentModel.DescriptionAttribute("The Manufacturer of the Car")] string Make,
                     [global::System.ComponentModel.DescriptionAttribute("The Name Ascribed to the Car by the Manufacturer")] string Model)
-                    : global::Mu.Modelling.State.Aggregate
-                {
-                }
+                    : global::Mu.Modelling.State.Aggregate;
             }
             """;
 

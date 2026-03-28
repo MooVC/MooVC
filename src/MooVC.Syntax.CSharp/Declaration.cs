@@ -100,7 +100,7 @@
         {
             Guard.Against.Conversion<Declaration, Snippet>(declaration);
 
-            return Snippet.From(declaration);
+            return declaration.ToSnippet(Snippet.Options.Default);
         }
 
         /// <summary>

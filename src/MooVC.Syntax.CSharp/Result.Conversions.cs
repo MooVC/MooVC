@@ -11,7 +11,7 @@
     public partial class Result
     {
         /// <summary>
-        /// Wraps the Result in a .
+        /// Wraps the Result in a type.
         /// </summary>
         /// <param name="wrapper">The wrapper.</param>
         /// <returns>The result.</returns>

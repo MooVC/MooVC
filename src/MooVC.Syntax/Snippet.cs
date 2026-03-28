@@ -72,6 +72,13 @@
         public int Lines => _value.IsDefaultOrEmpty ? 0 : _value.Length;
 
         /// <summary>
+        /// Gets the character at the specified zero-based index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the character to retrieve.</param>
+        /// <returns>The character at the specified index position.</returns>
+        public string this[int index] => _value[index];
+
+        /// <summary>
         /// Defines the Snippet operator for the Snippet.
         /// </summary>
         /// <param name="snippet">The snippet.</param>

@@ -24,7 +24,7 @@
             return attributes
                 .OrderBy(attribute => attribute.Name)
                 .Select(attribute => attribute.ToSnippet(options))
-                .Select(attribute => Snippet.From($"[{attribute}]"))
+                .Select(attribute => Snippet.From($"[{attribute[0]}]"))
                 .ToImmutableArray()
                 .Stack(options);
         }

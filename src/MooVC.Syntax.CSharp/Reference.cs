@@ -104,6 +104,22 @@
         }
 
         /// <summary>
+        /// Merges the specified attribute, body, and signature snippets into a single snippet using the provided
+        /// options.
+        /// </summary>
+        /// <param name="attributes">The snippet containing attribute information to be prepended to the merged result.</param>
+        /// <param name="body">The main body snippet to be merged.</param>
+        /// <param name="options">The options that control how the snippets are merged.</param>
+        /// <param name="signature">The snippet representing the signature to be included in the merged result.</param>
+        /// <returns>A new snippet that combines the attributes, body, and signature according to the specified options.</returns>
+        protected virtual Snippet Merge(Snippet attributes, Snippet body, Options options, Snippet signature)
+        {
+            return body
+                .Block(options, signature)
+                .Prepend(options, attributes);
+        }
+
+        /// <summary>
         /// Performs the perform to snippet operation for the C# type syntax.
         /// </summary>
         /// <param name="options">The options.</param>
@@ -124,9 +140,7 @@
             IEnumerable<Snippet> types = Types.Select(type => type.ToSnippet(options));
             Snippet body = Snippet.Blank.Combine(options, elements.Concat(types).ToArray());
 
-            return body
-                .Block(options, signature)
-                .Prepend(options, attributes);
+            return Merge(attributes, body, options, signature);
         }
 
         private Snippet GetSignature(Options options)
