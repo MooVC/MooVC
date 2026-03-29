@@ -28,7 +28,7 @@
             public static readonly Type Decrement = "--";
 
             /// <summary>
-            /// Represents the false for the Type.
+            /// Represents the <see langword="false" /> for the Type.
             /// </summary>
             public static readonly Type False = "false";
 
@@ -53,7 +53,7 @@
             public static readonly Type Plus = "+";
 
             /// <summary>
-            /// Represents the true for the Type.
+            /// Represents the <see langword="true" /> for the Type.
             /// </summary>
             public static readonly Type True = "true";
 
@@ -80,9 +80,9 @@
             public bool IsDecrement => this == Decrement;
 
             /// <summary>
-            /// Gets a value indicating whether the Type is false.
+            /// Gets a value indicating whether the Type is <see langword="false" />.
             /// </summary>
-            /// <value>A value indicating whether the Type is false.</value>
+            /// <value>A value indicating whether the Type is <see langword="false" />.</value>
             public bool IsFalse => this == False;
 
             /// <summary>
@@ -110,9 +110,9 @@
             public bool IsPlus => this == Plus;
 
             /// <summary>
-            /// Gets a value indicating whether the Type is true.
+            /// Gets a value indicating whether the Type is <see langword="true" />.
             /// </summary>
-            /// <value>A value indicating whether the Type is true.</value>
+            /// <value>A value indicating whether the Type is <see langword="true" />.</value>
             public bool IsTrue => this == True;
 
             /// <summary>

@@ -28,7 +28,7 @@ public sealed class Initializer<T>
     /// Gets a value indicating whether the resource has been initialized.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the resource has been initialized; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the resource has been initialized; otherwise, <see langword="false" />.
     /// </value>
     public bool IsInitialized { get; private set; }
 

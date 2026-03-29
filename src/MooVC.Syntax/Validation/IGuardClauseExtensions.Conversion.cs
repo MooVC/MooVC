@@ -4,15 +4,15 @@
     using static MooVC.Syntax.Validation.IGuardClauseExtensions_Resources;
 
     /// <summary>
-    /// Represents a validation helper i guard clause extensions.
+    /// Provides guard clause extensions related to conversion validation.
     /// </summary>
     public static partial class IGuardClauseExtensions
     {
         /// <summary>
-        /// Performs the t to operation for the validation helper.
+        /// Verifies that the source value for a conversion is not <see langword="null" />.
         /// </summary>
         /// <param name="clause">The clause.</param>
-        /// <param name="from">The from.</param>
+        /// <param name="from">The source value that is intended to be converted.</param>
         /// <typeparam name="TFrom">The type from which the conversion is to occur.</typeparam>
         /// <typeparam name="TTo">The type to which the conversion is to occur.</typeparam>
         public static void Conversion<TFrom, TTo>(this IGuardClause clause, TFrom from)

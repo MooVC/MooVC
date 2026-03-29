@@ -5,16 +5,18 @@
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Represents a validation helper validation result extensions.
+    /// Provides extension methods for conditionally chaining validation operations on existing validation results.
     /// </summary>
     public static partial class ValidationResultExtensions
     {
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates a child object and appends results when the supplied flag is satisfied.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="isSatisified">A value indicating whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -26,11 +28,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child objects and appends results when the supplied flag is satisfied.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="isSatisified">A value indicating whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -42,11 +46,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates a child object and appends results when the supplied delegate evaluates to <see langword="true" />.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="condition">A delegate that determines whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -58,11 +64,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child objects and appends results when the supplied delegate evaluates to <see langword="true" />.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="condition">A delegate that determines whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -74,11 +82,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates a child object, applies a predicate, and appends the produced results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="isSatisified">A value indicating whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="predicate">The predicate used to validate a post-validation condition.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -91,11 +102,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child objects, applies a predicate to each, and appends the produced results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="isSatisified">A value indicating whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="predicate">The predicate used to validate a post-validation condition.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             bool isSatisified,
@@ -108,11 +122,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates a child object, applies a predicate, and appends the produced results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="condition">A delegate that determines whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="predicate">The predicate used to validate a post-validation condition.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,
@@ -125,11 +142,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child objects, applies a predicate to each, and appends the produced results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="condition">A delegate that determines whether validation should run.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="predicate">The predicate used to validate a post-validation condition.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The updated validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) AndIf<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             Func<bool> condition,

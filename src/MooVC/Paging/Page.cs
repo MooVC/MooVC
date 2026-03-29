@@ -50,7 +50,7 @@ public sealed record Page<T>
     /// Gets a value indicating whether this result has a known total for the number of elements.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the total is known; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the total is known; otherwise, <see langword="false" />.
     /// </value>
     [MemberNotNullWhen(true, nameof(Total))]
     public bool HasTotal => Total.HasValue;

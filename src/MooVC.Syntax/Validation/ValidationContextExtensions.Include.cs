@@ -8,16 +8,17 @@
     using static MooVC.Syntax.Validation.ValidationContextExtensions_Resources;
 
     /// <summary>
-    /// Represents a validation helper validation context extensions.
+    /// Provides extension methods for validating child objects from a <see cref="ValidationContext" />.
     /// </summary>
     public static partial class ValidationContextExtensions
     {
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object and returns its validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to the child validation context.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -28,11 +29,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object and appends the results to an existing result sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to the child validation context.</param>
+        /// <param name="results">The existing validation results to append to.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -44,11 +47,12 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection and returns the combined validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to each child validation context.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -59,11 +63,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection and appends the results to an existing result sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to each child validation context.</param>
+        /// <param name="results">The existing validation results to append to.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -75,11 +81,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object, then applies a predicate to the validated object.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to the child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether the object satisfies an additional condition.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -91,11 +99,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object, applies a predicate, and appends the results to an existing sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to the child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether the object satisfies an additional condition.</param>
+        /// <param name="results">The existing validation results to append to.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -114,11 +125,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection, then applies a predicate to each validated object.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to each child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether each object satisfies an additional condition.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,
@@ -130,11 +143,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection, applies a predicate to each element, and appends the results to an existing sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The parent validation context.</param>
+        /// <param name="memberName">The member name assigned to each child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether each object satisfies an additional condition.</param>
+        /// <param name="results">The existing validation results to append to.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) Include<T>(
             this ValidationContext validationContext,
             string memberName,

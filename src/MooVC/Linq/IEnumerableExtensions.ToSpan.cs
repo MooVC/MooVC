@@ -15,7 +15,7 @@ public static partial class IEnumerableExtensions
     /// <param name="items">The sequence of values to convert.</param>
     /// <returns>A <see cref="ReadOnlySpan{T}" /> that contains the elements from the input sequence.</returns>
     /// <remarks>
-    /// If <paramref name="items" /> is null or empty, an empty <see cref="ReadOnlySpan{T}" /> is returned.
+    /// If <paramref name="items" /> is <see langword="null" /> or empty, an empty <see cref="ReadOnlySpan{T}" /> is returned.
     /// Otherwise, the input sequence is first converted to an array, and then the array is wrapped in a <see cref="ReadOnlySpan{T}" />.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

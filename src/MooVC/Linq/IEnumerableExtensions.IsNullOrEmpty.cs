@@ -10,11 +10,11 @@ using System.Runtime.CompilerServices;
 public static partial class IEnumerableExtensions
 {
     /// <summary>
-    /// Determines whether an enumerable sequence is null or empty.
+    /// Determines whether an enumerable sequence is <see langword="null" /> or empty.
     /// </summary>
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
-    /// <returns>True if the enumerable sequence is null or has no elements, or false if it is populated with at least one element.</returns>
+    /// <returns><see langword="true" /> if the enumerable sequence is <see langword="null" /> or has no elements, or <see langword="false" /> if it is populated with at least one element.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if NET6_0_OR_GREATER
     public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? source)
