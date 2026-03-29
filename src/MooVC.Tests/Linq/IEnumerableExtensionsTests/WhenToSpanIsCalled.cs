@@ -4,22 +4,25 @@ public sealed class WhenToSpanIsCalled
 {
     public static IEnumerable<object?[]> EmptyEnumerableTestData()
     {
-        yield return [default(IEnumerable<int>)];
-        yield return [(object)Array.Empty<int>()];
+        yield return [default(int[])];
+        yield return [Array.Empty<int>()];
     }
 
     public static IEnumerable<object?[]> EnumerableTestData()
     {
-        yield return [(object)Array.Empty<int>()];
-        yield return [(object)new[] { 1, 2, 3 }];
-        yield return [(object)new[] { 2 }];
-        yield return [(object)new[] { 3, 2, 1 }];
+        yield return [Array.Empty<int>()];
+        yield return [new[] { 1, 2, 3 }];
+        yield return [new[] { 2 }];
+        yield return [new[] { 3, 2, 1 }];
     }
 
     [Test]
     [MethodDataSource(nameof(EmptyEnumerableTestData))]
-    public async Task GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
+    public async Task GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(int[]? source)
     {
+        // Arrange
+        IEnumerable<int>? enumerable = source;
+
         // Act
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
@@ -29,13 +32,16 @@ public sealed class WhenToSpanIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerableTestData))]
-    public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
+    public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(int[] source)
     {
+        // Arrange
+        IEnumerable<int> enumerable = source;
+
         // Act
-        int[] actual = [.. expected.ToSpan()];
+        int[] actual = [.. enumerable.ToSpan()];
 
         // Assert
-        _ = await Assert.That(actual).IsEquivalentTo([.. expected]);
+        _ = await Assert.That(actual).IsEquivalentTo([.. enumerable]);
     }
 
     [Test]

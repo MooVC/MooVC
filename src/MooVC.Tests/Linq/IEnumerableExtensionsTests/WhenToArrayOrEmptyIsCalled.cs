@@ -4,41 +4,44 @@ public sealed class WhenToArrayOrEmptyIsCalled
 {
     public static IEnumerable<object?[]> EnumerableOrderTestData()
     {
-        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 1, 2, 3 }];
-        yield return [(object)new[] { 3, 2, 1 }, (object)new[] { 1, 2, 3 }];
-        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
-        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
+        yield return [new[] { 3, 1, 2 }, new[] { 1, 2, 3 }];
+        yield return [new[] { 3, 2, 1 }, new[] { 1, 2, 3 }];
+        yield return [new[] { 1 }, new[] { 1 }];
+        yield return [Array.Empty<int>(), Array.Empty<int>()];
     }
 
     public static IEnumerable<object?[]> EnumerablePredicateOrderTestData()
     {
-        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 1, 3 }];
-        yield return [(object)new[] { 3, 2, 1 }, (object)new[] { 1, 3 }];
-        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
-        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
+        yield return [new[] { 3, 1, 2 }, new[] { 1, 3 }];
+        yield return [new[] { 3, 2, 1 }, new[] { 1, 3 }];
+        yield return [new[] { 1 }, new[] { 1 }];
+        yield return [Array.Empty<int>(), Array.Empty<int>()];
     }
 
     public static IEnumerable<object?[]> EnumerableTestData()
     {
-        yield return [(object)new[] { 1, 2 }];
-        yield return [(object)new[] { 1 }];
-        yield return [(object)Array.Empty<int>()];
+        yield return [new[] { 1, 2 }];
+        yield return [new[] { 1 }];
+        yield return [Array.Empty<int>()];
     }
 
     public static IEnumerable<object?[]> EnumerablePredicateTestData()
     {
-        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 3, 1 }];
-        yield return [(object)new[] { 1, 2, 3 }, (object)new[] { 1, 3 }];
-        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
-        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
+        yield return [new[] { 3, 1, 2 }, new[] { 3, 1 }];
+        yield return [new[] { 1, 2, 3 }, new[] { 1, 3 }];
+        yield return [new[] { 1 }, new[] { 1 }];
+        yield return [Array.Empty<int>(), Array.Empty<int>()];
     }
 
     [Test]
     [MethodDataSource(nameof(EnumerableOrderTestData))]
-    public async Task GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
+    public async Task GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(int[] original, int[] expected)
     {
+        // Arrange
+        IEnumerable<int> enumerable = original;
+
         // Act
-        IEnumerable<int> result = original.ToArrayOrEmpty(element => element);
+        IEnumerable<int> result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
         _ = await Assert.That(result).IsEquivalentTo(expected);
@@ -46,10 +49,13 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerablePredicateOrderTestData))]
-    public async Task GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
+    public async Task GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(int[] original, int[] expected)
     {
+        // Arrange
+        IEnumerable<int> enumerable = original;
+
         // Act
-        IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);
+        IEnumerable<int> result = enumerable.ToArrayOrEmpty(element => element, predicate: value => value != 2);
 
         // Assert
         _ = await Assert.That(result).IsEquivalentTo(expected);
@@ -72,9 +78,10 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerableTestData))]
-    public async Task GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> enumerable)
+    public async Task GivenAnEnumerableWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(int[] source)
     {
         // Arrange
+        IEnumerable<int> enumerable = source;
         IEnumerable<int> expected = [.. enumerable];
 
         // Act
@@ -86,10 +93,13 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerablePredicateTestData))]
-    public async Task GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
+    public async Task GivenAnEnumerableAndAPredicateWhenNoOrderIsProvidedThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
+        // Arrange
+        IEnumerable<int> enumerable = original;
+
         // Act
-        IEnumerable<int> result = original.ToArrayOrEmpty(predicate: value => value != 2);
+        IEnumerable<int> result = enumerable.ToArrayOrEmpty(predicate: value => value != 2);
 
         // Assert
         _ = await Assert.That(result).IsEquivalentTo(expected);
