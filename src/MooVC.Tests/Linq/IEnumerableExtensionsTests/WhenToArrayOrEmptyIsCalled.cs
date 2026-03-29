@@ -2,35 +2,35 @@
 
 public sealed class WhenToArrayOrEmptyIsCalled
 {
-    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerablePredicateOrderTestData()
+    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerableOrderTestData()
     {
-        yield return () => ([3, 1, 2], [1, 3]);
-        yield return () => ([3, 2, 1], [1, 3]);
-        yield return () => ([1], [1]);
-        yield return () => ([], []);
+        yield return ([3, 1, 2], [1, 2, 3]);
+        yield return ([3, 2, 1], [1, 2, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
     }
 
-    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerableOrderTestData()
+    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerablePredicateOrderTestData()
     {
-        yield return () => ([3, 1, 2], [1, 2, 3]);
-        yield return () => ([3, 2, 1], [1, 2, 3]);
-        yield return () => ([1], [1]);
-        yield return () => ([], []);
+        yield return ([3, 1, 2], [1, 3]);
+        yield return ([3, 2, 1], [1, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
     }
 
-    public static IEnumerable<Func<IEnumerable<int>>> EnumerableTestData()
+    public static IEnumerable<IEnumerable<int>> EnumerableTestData()
     {
-        yield return () => [1, 2];
-        yield return () => [1];
-        yield return () => [];
+        yield return [1, 2];
+        yield return [1];
+        yield return [];
     }
 
-    public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerablePredicateTestData()
+    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerablePredicateTestData()
     {
-        yield return () => ([3, 1, 2], [3, 1]);
-        yield return () => ([1, 2, 3], [1, 3]);
-        yield return () => ([1], [1]);
-        yield return () => ([], []);
+        yield return ([3, 1, 2], [3, 1]);
+        yield return ([1, 2, 3], [1, 3]);
+        yield return ([1], [1]);
+        yield return ([], []);
     }
 
     [Test]
@@ -46,9 +46,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
     [Test]
     [MethodDataSource(nameof(EnumerablePredicateOrderTestData))]
-    public async Task GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(
-        IEnumerable<int> original,
-        IEnumerable<int> expected)
+    public async Task GivenAnEnumerableAndAPredicateWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned(IEnumerable<int> original, IEnumerable<int> expected)
     {
         // Act
         IEnumerable<int> result = original.ToArrayOrEmpty(element => element, predicate: value => value != 2);

@@ -2,9 +2,22 @@
 
 public sealed class WhenToSpanIsCalled
 {
+    public static IEnumerable<IEnumerable<int>?> EmptyEnumerableTestData()
+    {
+        yield return default;
+        yield return [];
+    }
+
+    public static IEnumerable<IEnumerable<int>> EnumerableTestData()
+    {
+        yield return [];
+        yield return [1, 2, 3];
+        yield return [2];
+        yield return [3, 2, 1];
+    }
+
     [Test]
-    [Arguments(default)]
-    [Arguments(new int[0])]
+    [MethodDataSource(nameof(EmptyEnumerableTestData))]
     public async Task GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
     {
         // Act
@@ -15,10 +28,7 @@ public sealed class WhenToSpanIsCalled
     }
 
     [Test]
-    [Arguments(new int[0])]
-    [Arguments(new[] { 1, 2, 3 })]
-    [Arguments(new[] { 2 })]
-    [Arguments(new[] { 3, 2, 1 })]
+    [MethodDataSource(nameof(EnumerableTestData))]
     public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
     {
         // Act
