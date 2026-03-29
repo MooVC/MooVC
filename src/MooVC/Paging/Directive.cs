@@ -42,7 +42,7 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
     /// Gets a value indicating whether this instance is the <see cref="All"/> instance.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the instance is the <see cref="All"/> instance; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the instance is the <see cref="All"/> instance; otherwise, <see langword="false" />.
     /// </value>
     [JsonIgnore]
     public bool IsAll => this == All;

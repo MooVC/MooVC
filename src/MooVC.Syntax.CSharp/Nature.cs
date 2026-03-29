@@ -28,7 +28,7 @@
         public static readonly Nature Unmanaged = "unmanaged";
 
         /// <summary>
-        /// Represents the not null for the Nature.
+        /// Represents the not <see langword="null" /> value for the Nature.
         /// </summary>
         public static readonly Nature NotNull = "notnull";
 

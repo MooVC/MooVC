@@ -8,12 +8,12 @@ using System.Runtime.CompilerServices;
 public static partial class ArrayExtensions
 {
     /// <summary>
-    /// Prepends elements to the beginning of an array.
+    /// Prepends one or more elements to the beginning of an array.
     /// </summary>
     /// <typeparam name="T">The type of the elements in the array.</typeparam>
-    /// <param name="source">The array to prepend to.</param>
-    /// <param name="others">The elements to prepend to the array.</param>
-    /// <returns>An array containing the original elements of the source array, with the other elements prepended at the beginning.</returns>
+    /// <param name="source">The source array that receives the prepended values.</param>
+    /// <param name="others">The values to place before the source items.</param>
+    /// <returns>A new array containing <paramref name="others" /> followed by <paramref name="source" />.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] Prepend<T>(this T[]? source, params T[]? others)
     {

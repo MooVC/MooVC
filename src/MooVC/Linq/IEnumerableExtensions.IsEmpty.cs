@@ -15,8 +15,8 @@ public static partial class IEnumerableExtensions
     /// </summary>
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for emptiness.</param>
-    /// <returns>True if the enumerable sequence has no elements, or false if it is populated with at least one element.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="source" /> is null.</exception>
+    /// <returns><see langword="true" /> if the enumerable sequence has no elements, or <see langword="false" /> if it is populated with at least one element.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="source" /> is <see langword="null" />.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsEmpty<T>(this IEnumerable<T> source)
     {
