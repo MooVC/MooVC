@@ -1,7 +1,5 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
-using System.Collections.Immutable;
-
 public sealed class WhenToArrayOrEmptyIsCalled
 {
     public static IEnumerable<Func<(IEnumerable<int> Original, IEnumerable<int> Expected)>> EnumerablePredicateOrderTestData()

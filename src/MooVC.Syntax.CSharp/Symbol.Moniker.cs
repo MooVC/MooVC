@@ -89,7 +89,9 @@
 
                 if (type.IsGenericType)
                 {
-                    int index = name.IndexOf(Separator);
+                    const char marker = '`';
+
+                    int index = name.IndexOf(marker);
 
                     return index > 0
                         ? name.Substring(0, index)

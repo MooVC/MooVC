@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.SymbolTests;
 
+using System.Collections.Immutable;
+
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
@@ -61,5 +63,24 @@ public sealed class WhenToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("Result?");
+    }
+
+    [Test]
+    public async Task GivenAWrappedSymbolThenTheArgumentsAreApplied()
+    {
+        // Arrange
+        Symbol argument = typeof(int);
+        Symbol wrapper = typeof(ImmutableArray<>);
+
+        Symbol wrapped = wrapper.WithArguments(symbol => symbol
+            .From(argument.Qualifier)
+            .IsNullable(argument.IsNullable)
+            .Named(argument.Name));
+
+        // Act
+        var representation = wrapped.ToSnippet(Symbol.Options.Default);
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo("ImmutableArray<int>");
     }
 }
