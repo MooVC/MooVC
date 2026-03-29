@@ -2,35 +2,35 @@
 
 public sealed class WhenToArrayOrEmptyIsCalled
 {
-    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerableOrderTestData()
+    public static IEnumerable<object?[]> EnumerableOrderTestData()
     {
-        yield return ([3, 1, 2], [1, 2, 3]);
-        yield return ([3, 2, 1], [1, 2, 3]);
-        yield return ([1], [1]);
-        yield return ([], []);
+        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 1, 2, 3 }];
+        yield return [(object)new[] { 3, 2, 1 }, (object)new[] { 1, 2, 3 }];
+        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
+        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
     }
 
-    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerablePredicateOrderTestData()
+    public static IEnumerable<object?[]> EnumerablePredicateOrderTestData()
     {
-        yield return ([3, 1, 2], [1, 3]);
-        yield return ([3, 2, 1], [1, 3]);
-        yield return ([1], [1]);
-        yield return ([], []);
+        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 1, 3 }];
+        yield return [(object)new[] { 3, 2, 1 }, (object)new[] { 1, 3 }];
+        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
+        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
     }
 
-    public static IEnumerable<IEnumerable<int>> EnumerableTestData()
+    public static IEnumerable<object?[]> EnumerableTestData()
     {
-        yield return [1, 2];
-        yield return [1];
-        yield return [];
+        yield return [(object)new[] { 1, 2 }];
+        yield return [(object)new[] { 1 }];
+        yield return [(object)Array.Empty<int>()];
     }
 
-    public static IEnumerable<(IEnumerable<int> Original, IEnumerable<int> Expected)> EnumerablePredicateTestData()
+    public static IEnumerable<object?[]> EnumerablePredicateTestData()
     {
-        yield return ([3, 1, 2], [3, 1]);
-        yield return ([1, 2, 3], [1, 3]);
-        yield return ([1], [1]);
-        yield return ([], []);
+        yield return [(object)new[] { 3, 1, 2 }, (object)new[] { 3, 1 }];
+        yield return [(object)new[] { 1, 2, 3 }, (object)new[] { 1, 3 }];
+        yield return [(object)new[] { 1 }, (object)new[] { 1 }];
+        yield return [(object)Array.Empty<int>(), (object)Array.Empty<int>()];
     }
 
     [Test]

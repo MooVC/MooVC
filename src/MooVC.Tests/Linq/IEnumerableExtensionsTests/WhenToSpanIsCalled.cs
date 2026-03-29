@@ -2,18 +2,18 @@
 
 public sealed class WhenToSpanIsCalled
 {
-    public static IEnumerable<IEnumerable<int>?> EmptyEnumerableTestData()
+    public static IEnumerable<object?[]> EmptyEnumerableTestData()
     {
-        yield return default;
-        yield return [];
+        yield return [default(IEnumerable<int>)];
+        yield return [(object)Array.Empty<int>()];
     }
 
-    public static IEnumerable<IEnumerable<int>> EnumerableTestData()
+    public static IEnumerable<object?[]> EnumerableTestData()
     {
-        yield return [];
-        yield return [1, 2, 3];
-        yield return [2];
-        yield return [3, 2, 1];
+        yield return [(object)Array.Empty<int>()];
+        yield return [(object)new[] { 1, 2, 3 }];
+        yield return [(object)new[] { 2 }];
+        yield return [(object)new[] { 3, 2, 1 }];
     }
 
     [Test]
