@@ -6,16 +6,18 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a validation helper validation context extensions.
+    /// Provides extension methods for conditionally validating child objects from a <see cref="ValidationContext" />.
     /// </summary>
     public static partial class ValidationContextExtensions
     {
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -27,11 +29,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -44,11 +49,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -60,11 +67,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -82,11 +92,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -98,11 +110,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -115,11 +130,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -131,11 +148,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -148,11 +168,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -170,11 +193,15 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -193,11 +220,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -215,11 +245,15 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="isSatisified">The isSatisified parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             bool isSatisified,
@@ -238,11 +272,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -255,11 +292,15 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatable">The validatable parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -273,11 +314,14 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,
@@ -290,11 +334,15 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Conditionally validates child value(s) and appends any produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="validationContext">The validationContext parameter.</param>
+        /// <param name="condition">The condition parameter.</param>
+        /// <param name="memberName">The memberName parameter.</param>
+        /// <param name="predicate">The predicate parameter.</param>
+        /// <param name="results">The results parameter.</param>
+        /// <param name="validatables">The validatables parameter.</param>
+        /// <returns>The validation results and validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) IncludeIf<T>(
             this ValidationContext validationContext,
             Func<bool> condition,

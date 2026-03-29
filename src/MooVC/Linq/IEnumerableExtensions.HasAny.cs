@@ -16,7 +16,7 @@ public static partial class IEnumerableExtensions
     /// </summary>
     /// <typeparam name="T">The type of the elements in the enumerable sequence.</typeparam>
     /// <param name="source">The enumerable sequence to check for elements.</param>
-    /// <returns>True if the enumerable sequence is populated with at least one element, or false if it is empty or null.</returns>
+    /// <returns><see langword="true" /> if the enumerable sequence is populated with at least one element, or <see langword="false" /> if it is empty or <see langword="null" />.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if NET6_0_OR_GREATER
     public static bool HasAny<T>([NotNullWhen(true)] this IEnumerable<T>? source)
@@ -34,9 +34,9 @@ public static partial class IEnumerableExtensions
     /// <param name="source">The enumerable sequence to check for elements that satisfy the condition.</param>
     /// <param name="predicate">A function to test each element for a condition.</param>
     /// <returns>
-    /// True if any elements in the enumerable sequence satisfy the condition, or false if none of the elements do or the sequence is empty or null.
+    /// <see langword="true" /> if any elements in the enumerable sequence satisfy the condition, or <see langword="false" /> if none of the elements do or the sequence is empty or <see langword="null" />.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate" /> is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate" /> is <see langword="null" />.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if NET6_0_OR_GREATER
     public static bool HasAny<T>([NotNullWhen(true)] this IEnumerable<T>? source, Func<T, bool> predicate)

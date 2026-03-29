@@ -5,16 +5,17 @@
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Represents a validation helper validation result extensions.
+    /// Provides extension methods for chaining validation operations on existing validation results.
     /// </summary>
     public static partial class ValidationResultExtensions
     {
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object and appends its validation results to the existing result sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The combined validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,
@@ -25,11 +26,12 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection and appends their validation results to the existing result sequence.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The combined validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,
@@ -40,11 +42,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child object, applies a predicate, and appends the produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="memberName">The member name used when creating the child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether the validated object satisfies a custom condition.</param>
+        /// <param name="validatable">The child object to validate.</param>
+        /// <returns>The combined validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,
@@ -56,11 +60,13 @@
         }
 
         /// <summary>
-        /// Performs the static operation for the validation helper.
+        /// Validates a child collection, applies a predicate to each element, and appends the produced validation results.
         /// </summary>
-        /// <param name="Results">The results.</param>
-        /// <param name="ValidationContext">The validation context.</param>
-        /// <returns>The public.</returns>
+        /// <param name="preceding">The existing validation results and validation context.</param>
+        /// <param name="memberName">The member name used when creating each child validation context.</param>
+        /// <param name="predicate">The predicate that determines whether each validated object satisfies a custom condition.</param>
+        /// <param name="validatables">The child objects to validate.</param>
+        /// <returns>The combined validation results and original validation context.</returns>
         public static (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) And<T>(
             this (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding,
             string memberName,

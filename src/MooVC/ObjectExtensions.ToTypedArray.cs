@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 /// <summary>
-/// Provides extensions relating to object.
+/// Provides extensions relating to <see cref="object" />.
 /// </summary>
 public static partial class ObjectExtensions
 {
@@ -23,10 +23,10 @@ public static partial class ObjectExtensions
     }
 
     /// <summary>
-    /// Returns the provided array without modification.
+    /// Returns the provided array instance.
     /// </summary>
     /// <typeparam name="T">The element type of the array.</typeparam>
-    /// <param name="values">The array to be returned.</param>
+    /// <param name="values">The array to return.</param>
     /// <returns>
     /// The same array provided in <paramref name="values"/>.
     /// If <paramref name="values"/> is <see langword="null"/> then <see langword="null"/> is returned.

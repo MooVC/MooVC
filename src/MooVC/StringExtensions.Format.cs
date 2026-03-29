@@ -6,17 +6,17 @@ using Ardalis.GuardClauses;
 using static MooVC.StringExtensions_Resources;
 
 /// <summary>
-/// Provides extensions relating to object.
+/// Provides extensions relating to <see cref="string" />.
 /// </summary>
 public static partial class StringExtensions
 {
     /// <summary>
-    /// A instance based implementation of string.Format that uses the current culture.
+    /// Formats a composite string using the current culture.
     /// </summary>
     /// <param name="value">A composite format string.</param>
     /// <param name="arguments">An object array that contains zero or more objects to format.</param>
     /// <returns>
-    /// A copy of format in which the format items have been replaced by the string representation of the corresponding objects in args.
+    /// A copy of <paramref name="value" /> in which the format items are replaced by the string representation of each object in <paramref name="arguments" />.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(this string value, params object[] arguments)

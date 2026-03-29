@@ -11,7 +11,7 @@ using static MooVC.Linq.IEnumerableExtensions_Resources;
 public static partial class IEnumerableExtensions
 {
     /// <summary>
-    /// Filters a sequence of values based on a predicate if a specified condition is true.
+    /// Filters a sequence of values based on a predicate if a specified condition is <see langword="true" />.
     /// </summary>
     /// <typeparam name="T">The type of the elements of <paramref name="enumeration" />.</typeparam>
     /// <param name="enumeration">The sequence of values to filter.</param>
@@ -39,7 +39,7 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Filters a sequence of values based on a predicate if a specified condition is true.
+    /// Filters a sequence of values based on a predicate if a specified condition is <see langword="true" />.
     /// </summary>
     /// <typeparam name="T">The type of the elements of <paramref name="enumeration" />.</typeparam>
     /// <param name="enumeration">The sequence of values to filter.</param>
