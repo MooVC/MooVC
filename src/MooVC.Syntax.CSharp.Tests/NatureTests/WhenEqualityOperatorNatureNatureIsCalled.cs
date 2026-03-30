@@ -20,6 +20,20 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Nature left = Same;
+        Nature right = Different;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
@@ -45,19 +59,5 @@ public sealed class WhenEqualityOperatorNatureNatureIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Nature left = Same;
-        Nature right = Different;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

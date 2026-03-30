@@ -15,6 +15,22 @@ public sealed class WhenStopAsyncIsCalled
     }
 
     [Test]
+    public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
+    {
+        // Arrange
+        await _host.StartAsync(CancellationToken.None);
+        await _host.StopAsync(CancellationToken.None);
+        await _host.StartAsync(CancellationToken.None);
+
+        // Act
+        await _host.StopAsync(CancellationToken.None);
+
+        // Assert
+        await _service.Received(2).StartAsync(Arg.Any<CancellationToken>());
+        await _service.Received(2).StopAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Test]
     public async Task GivenAStartedHostThenTheServiceStops()
     {
         // Arrange
@@ -36,22 +52,6 @@ public sealed class WhenStopAsyncIsCalled
 
         // Assert
         await _service.DidNotReceive().StopAsync(Arg.Any<CancellationToken>());
-    }
-
-    [Test]
-    public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
-    {
-        // Arrange
-        await _host.StartAsync(CancellationToken.None);
-        await _host.StopAsync(CancellationToken.None);
-        await _host.StartAsync(CancellationToken.None);
-
-        // Act
-        await _host.StopAsync(CancellationToken.None);
-
-        // Assert
-        await _service.Received(2).StartAsync(Arg.Any<CancellationToken>());
-        await _service.Received(2).StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Test]

@@ -7,79 +7,29 @@ public sealed class WhenToCamelCaseIsCalled
     private static readonly Faker _generator = new();
 
     [Test]
-    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenAlreadyCamelCaseThenResultIsUnchanged()
     {
         // Arrange
-        string? value = default;
+        string value = "alreadyCamel";
 
         // Act
-        Action act = () => value!.ToCamelCase();
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
-    {
-        // Arrange
-        string value = string.Empty;
-
-        // Act
-        Action act = () => value.ToCamelCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments(" ")]
-    [Arguments("   ")]
-    [Arguments("\t")]
-    [Arguments("\r\n")]
-    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
-    {
-        // Arrange & Act
-        Action act = () => value.ToCamelCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments("A", "a")]
-    [Arguments("a", "a")]
-    [Arguments("FooBar", "fooBar")]
-    [Arguments("fooBar", "fooBar")]
-    [Arguments("UpperCaseValue", "upperCaseValue")]
-    [Arguments("Éclair", "éclair")]
-    [Arguments("Σigma", "σigma")]
-    [Arguments("A1b2", "a1b2")]
-    public async Task GivenValidValuesThenFirstCharacterIsLowercased(string value, string expected)
-    {
-        // Arrange & Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
-    }
-
-    [Test]
-    [Arguments("1Example")]
-    [Arguments("_Example")]
-    [Arguments("-Example")]
-    [Arguments("😀Example")]
-    [Arguments(".Example")]
-    public async Task GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
-    {
-        // Arrange & Act
         string result = value.ToCamelCase();
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);
+    }
+
+    [Test]
+    public async Task GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
+    {
+        // Arrange
+        string value = "X.Foo";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("x.Foo");
     }
 
     [Test]
@@ -104,6 +54,123 @@ public sealed class WhenToCamelCaseIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo("istanbul");
+    }
+
+    [Test]
+    [Arguments("A", "a")]
+    [Arguments("a", "a")]
+    [Arguments("FooBar", "fooBar")]
+    [Arguments("fooBar", "fooBar")]
+    [Arguments("UpperCaseValue", "upperCaseValue")]
+    [Arguments("Éclair", "éclair")]
+    [Arguments("Σigma", "σigma")]
+    [Arguments("A1b2", "a1b2")]
+    public async Task GivenValidValuesThenFirstCharacterIsLowercased(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments(" ")]
+    [Arguments("   ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
+    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
+    {
+        // Arrange & Act
+        Action act = () => value.ToCamelCase();
+
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
+    {
+        // Arrange
+        string value = string.Empty;
+
+        // Act
+        Action act = () => value.ToCamelCase();
+
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        string? value = default;
+
+        // Act
+        Action act = () => value!.ToCamelCase();
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    [Arguments("1Example")]
+    [Arguments("_Example")]
+    [Arguments("-Example")]
+    [Arguments("😀Example")]
+    [Arguments(".Example")]
+    public async Task GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
+    {
+        // Arrange & Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(value);
+    }
+
+    [Test]
+    public async Task GivenValueWithInternalWhitespaceThenOnlyFirstCharacterIsChanged()
+    {
+        // Arrange
+        string value = "Hello World";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("hello World");
+    }
+
+    [Test]
+    public async Task GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
+    {
+        // Arrange
+        string value = " Hello";
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(value);
+    }
+
+    [Test]
+    public async Task GivenVeryLongValueThenOnlyFirstCharacterIsLowercased()
+    {
+        // Arrange
+        string value = new('A', 10_000);
+
+        // Act
+        string result = value.ToCamelCase();
+
+        // Assert
+        _ = await Assert.That(result[0]).IsEqualTo('a');
+        _ = await Assert.That(result.Length).IsEqualTo(value.Length);
+        _ = await Assert.That(result.Skip(1).All(character => character == 'A')).IsTrue();
     }
 
     [Test]
@@ -145,72 +212,5 @@ public sealed class WhenToCamelCaseIsCalled
 
             _ = await Assert.That(second).IsEqualTo(first);
         }
-    }
-
-    [Test]
-    public async Task GivenValueWithInternalWhitespaceThenOnlyFirstCharacterIsChanged()
-    {
-        // Arrange
-        string value = "Hello World";
-
-        // Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("hello World");
-    }
-
-    [Test]
-    public async Task GivenValueWithLeadingWhitespaceThenOriginalIsReturned()
-    {
-        // Arrange
-        string value = " Hello";
-
-        // Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenAlreadyCamelCaseThenResultIsUnchanged()
-    {
-        // Arrange
-        string value = "alreadyCamel";
-
-        // Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenVeryLongValueThenOnlyFirstCharacterIsLowercased()
-    {
-        // Arrange
-        string value = new('A', 10_000);
-
-        // Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result[0]).IsEqualTo('a');
-        _ = await Assert.That(result.Length).IsEqualTo(value.Length);
-        _ = await Assert.That(result.Skip(1).All(character => character == 'A')).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
-    {
-        // Arrange
-        string value = "X.Foo";
-
-        // Act
-        string result = value.ToCamelCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("x.Foo");
     }
 }

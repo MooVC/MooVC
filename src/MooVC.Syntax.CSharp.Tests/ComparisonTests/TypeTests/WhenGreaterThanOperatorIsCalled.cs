@@ -17,6 +17,20 @@ public sealed class WhenGreaterThanOperatorIsCalled
     }
 
     [Test]
+    public async Task GivenLargerLeftThenReturnsTrue()
+    {
+        // Arrange
+        Comparison.Type leftType = Comparison.Type.LessThan;
+        Comparison.Type rightType = Comparison.Type.Inequality;
+
+        // Act
+        bool result = leftType > rightType;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -56,19 +70,5 @@ public sealed class WhenGreaterThanOperatorIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenLargerLeftThenReturnsTrue()
-    {
-        // Arrange
-        Comparison.Type leftType = Comparison.Type.LessThan;
-        Comparison.Type rightType = Comparison.Type.Inequality;
-
-        // Act
-        bool result = leftType > rightType;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -7,6 +7,51 @@ using System.Linq;
 public sealed class WhenToArrayIsCalled
 {
     [Test]
+    public async Task GivenAGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
+    {
+        // Arrange
+        int[] expected = [4, 5, 6];
+        var list = new List<int>(expected);
+        IEnumerator<int> enumerator = list.GetEnumerator();
+
+        // Act
+        int[] actual = enumerator.ToArray();
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
+    public async Task GivenAnEmptyEnumeratorThenAnEmptyArrayIsReturned()
+    {
+        // Arrange
+        var list = new List<int>();
+        IEnumerator enumerator = list.GetEnumerator();
+
+        // Act
+        object[] actual = enumerator.ToArray();
+
+        // Assert
+        _ = await Assert.That(actual).IsEmpty();
+    }
+
+    [Test]
+    [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
+    public async Task GivenAnEmptyGenericEnumeratorThenAnEmptyArrayIsReturned()
+    {
+        // Arrange
+        var list = new List<int>();
+        IEnumerator<int> enumerator = list.GetEnumerator();
+
+        // Act
+        int[] actual = enumerator.ToArray();
+
+        // Assert
+        _ = await Assert.That(actual).IsEmpty();
+    }
+
+    [Test]
     public async Task GivenANonGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
     {
         // Arrange
@@ -17,21 +62,6 @@ public sealed class WhenToArrayIsCalled
 
         // Act
         object[] actual = enumerator.ToArray();
-
-        // Assert
-        _ = await Assert.That(actual).IsEquivalentTo(expected);
-    }
-
-    [Test]
-    public async Task GivenAGenericEnumeratorWhenNotEmptyThenAnArrayIsReturned()
-    {
-        // Arrange
-        int[] expected = [4, 5, 6];
-        var list = new List<int>(expected);
-        IEnumerator<int> enumerator = list.GetEnumerator();
-
-        // Act
-        int[] actual = enumerator.ToArray();
 
         // Assert
         _ = await Assert.That(actual).IsEquivalentTo(expected);
@@ -63,35 +93,5 @@ public sealed class WhenToArrayIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(enumerator));
-    }
-
-    [Test]
-    [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
-    public async Task GivenAnEmptyEnumeratorThenAnEmptyArrayIsReturned()
-    {
-        // Arrange
-        var list = new List<int>();
-        IEnumerator enumerator = list.GetEnumerator();
-
-        // Act
-        object[] actual = enumerator.ToArray();
-
-        // Assert
-        _ = await Assert.That(actual).IsEmpty();
-    }
-
-    [Test]
-    [SuppressMessage("Minor Bug", "S4158:Empty collections should not be accessed or iterated", Justification = "It is the objective of the test.")]
-    public async Task GivenAnEmptyGenericEnumeratorThenAnEmptyArrayIsReturned()
-    {
-        // Arrange
-        var list = new List<int>();
-        IEnumerator<int> enumerator = list.GetEnumerator();
-
-        // Act
-        int[] actual = enumerator.ToArray();
-
-        // Assert
-        _ = await Assert.That(actual).IsEmpty();
     }
 }

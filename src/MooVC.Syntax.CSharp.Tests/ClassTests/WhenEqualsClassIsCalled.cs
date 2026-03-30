@@ -3,6 +3,34 @@
 public sealed class WhenEqualsClassIsCalled
 {
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Class subject = ClassTestsData.Create(extensibility: Extensibility.Sealed);
+        Class value = ClassTestsData.Create(extensibility: Extensibility.Abstract);
+
+        // Act
+        bool result = subject.Equals(value);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Class subject = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
+        Class value = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
+
+        // Act
+        bool result = subject.Equals(value);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -27,33 +55,5 @@ public sealed class WhenEqualsClassIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Class subject = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
-        Class value = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
-
-        // Act
-        bool result = subject.Equals(value);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Class subject = ClassTestsData.Create(extensibility: Extensibility.Sealed);
-        Class value = ClassTestsData.Create(extensibility: Extensibility.Abstract);
-
-        // Act
-        bool result = subject.Equals(value);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -17,25 +17,11 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
-    {
-        // Arrange
-        Symbol? left = default;
-        Symbol right = SymbolTestsData.Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.Create();
-        Symbol? right = default;
+        Symbol right = SymbolTestsData.Create("Alternate");
 
         // Act
         bool result = left != right;
@@ -61,11 +47,25 @@ public sealed class WhenInequalityOperatorSymbolSymbolIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentNamesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Symbol? left = default;
+        Symbol right = SymbolTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Symbol left = SymbolTestsData.Create();
-        Symbol right = SymbolTestsData.Create("Alternate");
+        Symbol? right = default;
 
         // Act
         bool result = left != right;

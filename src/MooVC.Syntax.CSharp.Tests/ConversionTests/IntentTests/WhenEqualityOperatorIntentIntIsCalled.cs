@@ -20,25 +20,11 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
-    {
-        // Arrange
-        Conversion.Intent? left = default;
-        int right = Same;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
-        int? right = default;
+        int right = Different;
 
         // Act
         bool result = left == right;
@@ -62,11 +48,25 @@ public sealed class WhenEqualityOperatorIntentIntIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    {
+        // Arrange
+        Conversion.Intent? left = default;
+        int right = Same;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
-        int right = Different;
+        int? right = default;
 
         // Act
         bool result = left == right;

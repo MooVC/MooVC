@@ -3,48 +3,6 @@
 public sealed class WhenEqualsMethodIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
-    {
-        // Arrange
-        Method? subject = default;
-        Method target = MethodTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create();
-        Method target = subject;
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentValueThenReturnsTrue()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create();
-        Method target = MethodTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentBodyThenReturnsFalse()
     {
         // Arrange
@@ -117,5 +75,47 @@ public sealed class WhenEqualsMethodIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentValueThenReturnsTrue()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create();
+        Method target = MethodTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNullThenReturnsFalse()
+    {
+        // Arrange
+        Method? subject = default;
+        Method target = MethodTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create();
+        Method target = subject;
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

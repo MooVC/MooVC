@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Item? left = default;
-        Item right = ItemTestsData.Create();
+        Item left = ItemTestsData.Create();
+        Item right = ItemTestsData.Create(customToolNamespace: Snippet.From("Other"));
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Item left = ItemTestsData.Create();
-        Item right = ItemTestsData.Create(customToolNamespace: Snippet.From("Other"));
+        Item? left = default;
+        Item right = ItemTestsData.Create();
 
         // Act
         bool result = left != right;

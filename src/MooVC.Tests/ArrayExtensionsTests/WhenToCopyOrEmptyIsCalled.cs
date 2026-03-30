@@ -24,17 +24,6 @@ public sealed class WhenToCopyOrEmptyIsCalled
     }
 
     [Test]
-    [MethodDataSource(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
-    public async Task GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
-    {
-        // Act
-        int[] result = source.ToCopyOrEmpty();
-
-        // Assert
-        _ = await Assert.That(result).IsEquivalentTo(source);
-    }
-
-    [Test]
     [MethodDataSource(nameof(GivenAnArrayAndAPredicateThenAMatchingArrayIsReturnedData))]
     public async Task GivenAnArrayAndAPredicateThenAMatchingArrayIsReturned(int[] original, int[] expected)
     {
@@ -46,14 +35,14 @@ public sealed class WhenToCopyOrEmptyIsCalled
     }
 
     [Test]
-    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
-    public async Task GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
+    [MethodDataSource(nameof(GivenAnArrayThenAMatchingArrayIsReturnedData))]
+    public async Task GivenAnArrayThenAMatchingArrayIsReturned(int[] source)
     {
         // Act
-        string[] result = source.ToCopyOrEmpty();
+        int[] result = source.ToCopyOrEmpty();
 
         // Assert
-        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEquivalentTo(source);
     }
 
     [Test]
@@ -62,6 +51,17 @@ public sealed class WhenToCopyOrEmptyIsCalled
     {
         // Act
         string[] result = source.ToCopyOrEmpty(predicate: value => value != "Aarrgh!");
+
+        // Assert
+        _ = await Assert.That(result).IsEmpty();
+    }
+
+    [Test]
+    [MethodDataSource(nameof(GivenAnEmptyArrayThenAnEmptyArrayIsReturnedData))]
+    public async Task GivenAnEmptyArrayThenAnEmptyArrayIsReturned(string[]? source)
+    {
+        // Act
+        string[] result = source.ToCopyOrEmpty();
 
         // Assert
         _ = await Assert.That(result).IsEmpty();

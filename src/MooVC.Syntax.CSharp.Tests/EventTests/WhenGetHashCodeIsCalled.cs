@@ -7,36 +7,6 @@ public sealed class WhenGetHashCodeIsCalled
     private const string Behaviour = "value";
 
     [Test]
-    public async Task GivenEquivalentValuesThenHashesMatch()
-    {
-        // Arrange
-        Event first = EventTestsData.Create();
-        Event second = EventTestsData.Create();
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenHashesDiffer()
-    {
-        // Arrange
-        Event first = EventTestsData.Create();
-        Event second = EventTestsData.Create(name: AlternativeName);
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentBehavioursThenHashesDiffer()
     {
         // Arrange
@@ -72,6 +42,21 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentScopesThenHashesDiffer()
+    {
+        // Arrange
+        Event first = EventTestsData.Create();
+        Event second = EventTestsData.Create(scope: Scope.Internal);
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
     public async Task GivenDifferentStaticStatesThenHashesDiffer()
     {
         // Arrange
@@ -88,11 +73,11 @@ public sealed class WhenGetHashCodeIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentScopesThenHashesDiffer()
+    public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
         Event first = EventTestsData.Create();
-        Event second = EventTestsData.Create(scope: Scope.Internal);
+        Event second = EventTestsData.Create(name: AlternativeName);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -100,5 +85,20 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenEquivalentValuesThenHashesMatch()
+    {
+        // Arrange
+        Event first = EventTestsData.Create();
+        Event second = EventTestsData.Create();
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

@@ -3,24 +3,10 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Struct first = StructTestsData.Create();
-        object second = first;
-
-        // Act
-        bool result = first.Equals(second);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenOtherTypeThenReturnsFalse()
-    {
-        // Arrange
-        object other = new();
+        object other = StructTestsData.Create(name: new Declaration { Name = "Other" });
         Struct subject = StructTestsData.Create();
 
         // Act
@@ -45,10 +31,10 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
-        object other = StructTestsData.Create(name: new Declaration { Name = "Other" });
+        object other = new();
         Struct subject = StructTestsData.Create();
 
         // Act
@@ -56,5 +42,19 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Struct first = StructTestsData.Create();
+        object second = first;
+
+        // Act
+        bool result = first.Equals(second);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

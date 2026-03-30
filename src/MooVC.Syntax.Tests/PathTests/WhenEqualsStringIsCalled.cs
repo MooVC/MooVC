@@ -3,11 +3,11 @@
 public sealed class WhenEqualsStringIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
-        string? other = default;
+        string other = PathTestsData.DefaultAlternativePath;
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
-        string other = PathTestsData.DefaultAlternativePath;
+        string? other = default;
 
         // Act
         bool result = subject.Equals(other);

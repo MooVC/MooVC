@@ -6,19 +6,6 @@ public sealed class WhenToStringIsCalled
     private const string InterfaceName = "IExample";
 
     [Test]
-    public async Task GivenUnspecifiedConstraintThenReturnsEmpty()
-    {
-        // Arrange
-        Constraint constraint = Constraint.Unspecified;
-
-        // Act
-        string result = constraint.ToString();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenConstraintWithValuesThenReturnsFormattedString()
     {
         // Arrange
@@ -59,5 +46,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedConstraintThenReturnsEmpty()
+    {
+        // Arrange
+        Constraint constraint = Constraint.Unspecified;
+
+        // Act
+        string result = constraint.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

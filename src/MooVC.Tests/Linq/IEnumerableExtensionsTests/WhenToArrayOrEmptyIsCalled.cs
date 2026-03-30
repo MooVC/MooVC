@@ -3,32 +3,6 @@
 public sealed class WhenToArrayOrEmptyIsCalled
 {
     [Test]
-    public async Task GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
-    {
-        // Arrange
-        IEnumerable<string>? enumerable = default;
-
-        // Act
-        string[] result = enumerable.ToArrayOrEmpty(element => element);
-
-        // Assert
-        _ = await Assert.That(result).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
-    {
-        // Arrange
-        IEnumerable<string>? enumerable = default;
-
-        // Act
-        string[] result = enumerable.ToArrayOrEmpty();
-
-        // Assert
-        _ = await Assert.That(result).IsEmpty();
-    }
-
-    [Test]
     public async Task GivenAnEmptyEnumerableAndAPredicateWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
     {
         // Arrange
@@ -81,6 +55,19 @@ public sealed class WhenToArrayOrEmptyIsCalled
     }
 
     [Test]
+    public async Task GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> enumerable = [3, 1, 2, 0, -1];
+
+        // Act
+        int[] result = enumerable.ToArrayOrEmpty(element => element);
+
+        // Assert
+        _ = await Assert.That(result).IsEquivalentTo([-1, 0, 1, 2, 3]);
+    }
+
+    [Test]
     public async Task GivenAnEnumerableWhenANullOrderIsProvidedThenAnArgumentExceptionIsThrown()
     {
         // Arrange
@@ -93,19 +80,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(order));
-    }
-
-    [Test]
-    public async Task GivenAnEnumerableWhenAnOrderIsProvidedThenAnArrayMatchingTheOrderIsReturned()
-    {
-        // Arrange
-        IEnumerable<int> enumerable = [3, 1, 2, 0, -1];
-
-        // Act
-        int[] result = enumerable.ToArrayOrEmpty(element => element);
-
-        // Assert
-        _ = await Assert.That(result).IsEquivalentTo([-1, 0, 1, 2, 3]);
     }
 
     [Test]
@@ -132,5 +106,31 @@ public sealed class WhenToArrayOrEmptyIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEquivalentTo([3, 1, 2, 0, -1]);
+    }
+
+    [Test]
+    public async Task GivenANullEnumerableWhenAnOrderIsProvidedThenAnEmptyArrayIsReturned()
+    {
+        // Arrange
+        IEnumerable<string>? enumerable = default;
+
+        // Act
+        string[] result = enumerable.ToArrayOrEmpty(element => element);
+
+        // Assert
+        _ = await Assert.That(result).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenANullEnumerableWhenNoOrderIsProvidedThenAnEmptyArrayIsReturned()
+    {
+        // Arrange
+        IEnumerable<string>? enumerable = default;
+
+        // Act
+        string[] result = enumerable.ToArrayOrEmpty();
+
+        // Assert
+        _ = await Assert.That(result).IsEmpty();
     }
 }

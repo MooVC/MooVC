@@ -17,6 +17,20 @@ public sealed class WhenGreaterThanOperatorIsCalled
     }
 
     [Test]
+    public async Task GivenLargerLeftThenReturnsTrue()
+    {
+        // Arrange
+        Binary.Type leftType = Binary.Type.Subtract;
+        Binary.Type rightType = Binary.Type.Add;
+
+        // Act
+        bool result = leftType > rightType;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -56,19 +70,5 @@ public sealed class WhenGreaterThanOperatorIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenLargerLeftThenReturnsTrue()
-    {
-        // Arrange
-        Binary.Type leftType = Binary.Type.Subtract;
-        Binary.Type rightType = Binary.Type.Add;
-
-        // Act
-        bool result = leftType > rightType;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

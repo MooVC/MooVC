@@ -3,6 +3,22 @@
 public sealed class WhenCompareToIsCalled
 {
     [Test]
+    public async Task GivenDifferentValuesThenReturnsExpectedOrder()
+    {
+        // Arrange
+        Comparison.Type leftType = Comparison.Type.Inequality;
+        Comparison.Type rightType = Comparison.Type.LessThan;
+
+        // Act
+        int resultLeftRight = leftType.CompareTo(rightType);
+        int resultRightLeft = rightType.CompareTo(leftType);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsLessThan(0);
+        _ = await Assert.That(resultRightLeft).IsGreaterThan(0);
+    }
+
+    [Test]
     public async Task GivenNullOtherThenReturnsPositiveOne()
     {
         // Arrange
@@ -30,21 +46,5 @@ public sealed class WhenCompareToIsCalled
         // Assert
         _ = await Assert.That(resultLeftRight).IsEqualTo(0);
         _ = await Assert.That(resultRightLeft).IsEqualTo(0);
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsExpectedOrder()
-    {
-        // Arrange
-        Comparison.Type leftType = Comparison.Type.Inequality;
-        Comparison.Type rightType = Comparison.Type.LessThan;
-
-        // Act
-        int resultLeftRight = leftType.CompareTo(rightType);
-        int resultRightLeft = rightType.CompareTo(leftType);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsLessThan(0);
-        _ = await Assert.That(resultRightLeft).IsGreaterThan(0);
     }
 }

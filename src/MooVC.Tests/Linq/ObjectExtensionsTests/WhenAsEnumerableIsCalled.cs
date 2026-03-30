@@ -3,16 +3,16 @@
 public sealed class WhenAsEnumerableIsCalled
 {
     [Test]
-    public async Task GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
+    public async Task GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
     {
         // Arrange
-        var expected = TimeSpan.FromHours(1);
+        object? expected = default;
 
         // Act
-        IEnumerable<TimeSpan> value = expected.AsEnumerable();
+        IEnumerable<object?> value = expected.AsEnumerable();
 
         // Assert
-        _ = await Assert.That(value.Single()).IsEqualTo(expected);
+        _ = await Assert.That(value.Single()).IsNull();
     }
 
     [Test]
@@ -42,15 +42,15 @@ public sealed class WhenAsEnumerableIsCalled
     }
 
     [Test]
-    public async Task GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
+    public async Task GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
     {
         // Arrange
-        object? expected = default;
+        var expected = TimeSpan.FromHours(1);
 
         // Act
-        IEnumerable<object?> value = expected.AsEnumerable();
+        IEnumerable<TimeSpan> value = expected.AsEnumerable();
 
         // Assert
-        _ = await Assert.That(value.Single()).IsNull();
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 }

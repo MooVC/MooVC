@@ -17,6 +17,20 @@ public sealed class WhenEqualityOperatorNameNameIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Project.Name("ProjectName");
+        var right = new Project.Name("OtherProjectName");
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
@@ -29,19 +43,5 @@ public sealed class WhenEqualityOperatorNameNameIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Project.Name("ProjectName");
-        var right = new Project.Name("OtherProjectName");
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

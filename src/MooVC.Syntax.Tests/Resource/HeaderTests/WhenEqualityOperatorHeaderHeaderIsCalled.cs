@@ -17,11 +17,11 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Header? left = default;
-        Header right = HeaderTestsData.Create();
+        Header left = HeaderTestsData.Create();
+        Header right = HeaderTestsData.Create(value: Snippet.From("Other"));
 
         // Act
         bool result = left == right;
@@ -45,11 +45,11 @@ public sealed class WhenEqualityOperatorHeaderHeaderIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Header left = HeaderTestsData.Create();
-        Header right = HeaderTestsData.Create(value: Snippet.From("Other"));
+        Header? left = default;
+        Header right = HeaderTestsData.Create();
 
         // Act
         bool result = left == right;

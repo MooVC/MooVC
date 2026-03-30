@@ -3,11 +3,11 @@
 public sealed class WhenEqualsNameIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.Name("ProjectName");
-        Project.Name? other = default;
+        var other = new Project.Name("OtherProjectName");
 
         // Act
         bool result = subject.Equals(other);
@@ -32,11 +32,11 @@ public sealed class WhenEqualsNameIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.Name("ProjectName");
-        var other = new Project.Name("OtherProjectName");
+        Project.Name? other = default;
 
         // Act
         bool result = subject.Equals(other);

@@ -5,6 +5,17 @@ using System.Collections.Immutable;
 public sealed class WhenFromIsCalled
 {
     [Test]
+    public async Task GivenEmptyThenReturnsEmpty()
+    {
+        // Arrange & Act
+        var result = Snippet.From(string.Empty);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
+        _ = await Assert.That(result.IsEmpty).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -31,17 +42,6 @@ public sealed class WhenFromIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(values));
-    }
-
-    [Test]
-    public async Task GivenEmptyThenReturnsEmpty()
-    {
-        // Arrange & Act
-        var result = Snippet.From(string.Empty);
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
-        _ = await Assert.That(result.IsEmpty).IsTrue();
     }
 
     [Test]

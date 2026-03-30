@@ -3,19 +3,6 @@
 public sealed class WhenEqualsStringIsCalled
 {
     [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        TargetTask.Options subject = TargetTask.Options.WarnAndContinue;
-
-        // Act
-        bool result = subject.Equals("WarnAndContinue");
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -26,5 +13,18 @@ public sealed class WhenEqualsStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        TargetTask.Options subject = TargetTask.Options.WarnAndContinue;
+
+        // Act
+        bool result = subject.Equals("WarnAndContinue");
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

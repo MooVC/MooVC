@@ -3,11 +3,11 @@
 public sealed class WhenEqualsMetadataIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
-        Metadata? other = default;
+        Metadata other = MetadataTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsMetadataIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Metadata subject = MetadataTestsData.Create();
-        Metadata other = MetadataTestsData.Create(name: new Name("Other"));
+        Metadata? other = default;
 
         // Act
         bool result = subject.Equals(other);

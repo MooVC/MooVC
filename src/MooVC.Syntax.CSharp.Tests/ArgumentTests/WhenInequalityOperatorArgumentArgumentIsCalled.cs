@@ -20,6 +20,38 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Argument { Value = same };
+        var right = new Argument { Value = different };
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Argument { Value = same };
+        var right = new Argument { Value = same };
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -59,37 +91,5 @@ public sealed class WhenInequalityOperatorArgumentArgumentIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Argument { Value = same };
-        var right = new Argument { Value = same };
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Argument { Value = same };
-        var right = new Argument { Value = different };
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 }

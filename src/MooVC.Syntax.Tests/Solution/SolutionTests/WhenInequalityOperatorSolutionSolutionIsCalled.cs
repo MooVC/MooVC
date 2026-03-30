@@ -19,20 +19,6 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Solution left = SolutionTestsData.Create();
-        Solution right = SolutionTestsData.Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -44,5 +30,19 @@ public sealed class WhenInequalityOperatorSolutionSolutionIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Solution left = SolutionTestsData.Create();
+        Solution right = SolutionTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

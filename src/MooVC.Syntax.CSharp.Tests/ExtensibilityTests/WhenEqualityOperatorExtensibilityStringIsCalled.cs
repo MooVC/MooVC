@@ -6,13 +6,13 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     private const string OtherValue = "sealed";
 
     [Test]
-    public async Task GivenNullExtensibilityThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Extensibility? subject = default;
+        Extensibility subject = Extensibility.Static;
 
         // Act
-        bool result = subject == StaticValue;
+        bool result = subject == OtherValue;
 
         // Assert
         _ = await Assert.That(result).IsFalse();
@@ -32,13 +32,13 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenNullExtensibilityThenReturnsFalse()
     {
         // Arrange
-        Extensibility subject = Extensibility.Static;
+        Extensibility? subject = default;
 
         // Act
-        bool result = subject == OtherValue;
+        bool result = subject == StaticValue;
 
         // Assert
         _ = await Assert.That(result).IsFalse();

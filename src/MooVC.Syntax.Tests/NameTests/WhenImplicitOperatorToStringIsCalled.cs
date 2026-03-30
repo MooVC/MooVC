@@ -8,6 +8,32 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Unicode = "Álpha";
 
     [Test]
+    public async Task GivenAsciiThenMatchesValue()
+    {
+        // Arrange
+        var subject = new Name(Alpha);
+
+        // Act
+        string result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Alpha);
+    }
+
+    [Test]
+    public async Task GivenEmptyThenMatchesValue()
+    {
+        // Arrange
+        var subject = new Name(Empty);
+
+        // Act
+        string result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Empty);
+    }
+
+    [Test]
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -31,45 +57,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsNull();
-    }
-
-    [Test]
-    public async Task GivenEmptyThenMatchesValue()
-    {
-        // Arrange
-        var subject = new Name(Empty);
-
-        // Act
-        string result = subject;
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(Empty);
-    }
-
-    [Test]
-    public async Task GivenWhitespaceThenMatchesValue()
-    {
-        // Arrange
-        var subject = new Name(Space);
-
-        // Act
-        string result = subject;
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(Space);
-    }
-
-    [Test]
-    public async Task GivenAsciiThenMatchesValue()
-    {
-        // Arrange
-        var subject = new Name(Alpha);
-
-        // Act
-        string result = subject;
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(Alpha);
     }
 
     [Test]
@@ -97,5 +84,18 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);
+    }
+
+    [Test]
+    public async Task GivenWhitespaceThenMatchesValue()
+    {
+        // Arrange
+        var subject = new Name(Space);
+
+        // Act
+        string result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Space);
     }
 }

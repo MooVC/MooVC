@@ -19,6 +19,38 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Operators left = OperatorsSubjectData.Create();
+        Operators right = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Operators left = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
+        Operators right = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -44,37 +76,5 @@ public sealed class WhenEqualityOperatorOperatorsOperatorsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Operators left = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
-        Operators right = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Operators left = OperatorsSubjectData.Create();
-        Operators right = OperatorsSubjectData.Create(binaries: [BinaryTestsData.Create()]);
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

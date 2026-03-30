@@ -20,25 +20,11 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
-    {
-        // Arrange
-        Comparison.Type? left = default;
-        string right = Same;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Comparison.Type left = Comparison.Type.Equality;
-        string? right = default;
+        string right = Different;
 
         // Act
         bool result = left != right;
@@ -62,11 +48,25 @@ public sealed class WhenInequalityOperatorTypeStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Comparison.Type? left = default;
+        string right = Same;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Comparison.Type left = Comparison.Type.Equality;
-        string right = Different;
+        string? right = default;
 
         // Act
         bool result = left != right;

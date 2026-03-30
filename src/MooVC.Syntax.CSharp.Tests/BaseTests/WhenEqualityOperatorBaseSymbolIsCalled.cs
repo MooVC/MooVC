@@ -20,6 +20,20 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Base left = new Symbol { Name = Same };
+        var right = new Symbol { Name = Different };
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenEitherSideIsNullThenReturnsFalse()
     {
         // Arrange
@@ -45,19 +59,5 @@ public sealed class WhenEqualityOperatorBaseSymbolIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Base left = new Symbol { Name = Same };
-        var right = new Symbol { Name = Different };
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

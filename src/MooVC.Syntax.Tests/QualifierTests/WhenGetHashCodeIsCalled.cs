@@ -9,21 +9,6 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly ImmutableArray<Name> _second = ["Gamma", "Delta"];
 
     [Test]
-    public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
-    {
-        // Arrange
-        var left = new Qualifier(_first);
-        var right = new Qualifier(_first);
-
-        // Act
-        int leftHash = left.GetHashCode();
-        int rightHash = right.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenHashesAreNotEqual()
     {
         // Arrange
@@ -50,5 +35,20 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
+    {
+        // Arrange
+        var left = new Qualifier(_first);
+        var right = new Qualifier(_first);
+
+        // Act
+        int leftHash = left.GetHashCode();
+        int rightHash = right.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(leftHash).IsEqualTo(rightHash);
     }
 }

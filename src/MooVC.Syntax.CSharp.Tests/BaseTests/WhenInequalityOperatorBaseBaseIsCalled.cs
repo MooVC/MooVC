@@ -20,6 +20,20 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentBasesThenReturnsTrue()
+    {
+        // Arrange
+        Base left = new Symbol { Name = Same };
+        Base right = new Symbol { Name = Different };
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEitherBaseIsNullThenReturnsTrue()
     {
         // Arrange
@@ -47,19 +61,5 @@ public sealed class WhenInequalityOperatorBaseBaseIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentBasesThenReturnsTrue()
-    {
-        // Arrange
-        Base left = new Symbol { Name = Same };
-        Base right = new Symbol { Name = Different };
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -13,32 +13,6 @@ public sealed class WhenPrependIsCalled
     private const string Greeting = "Hello";
 
     [Test]
-    public async Task GivenNullBuilderWhenValueIsCharThenThrowsArgumentNullException()
-    {
-        // Arrange
-        StringBuilder? builder = default;
-
-        // Act
-        Action act = () => _ = builder!.Prepend(LetterChar);
-
-        // Assert
-        _ = await Assert.That(act).Throws<ArgumentNullException>();
-    }
-
-    [Test]
-    public async Task GivenNullBuilderWhenValueIsStringThenThrowsArgumentNullException()
-    {
-        // Arrange
-        StringBuilder? builder = default;
-
-        // Act
-        Action act = () => _ = builder!.Prepend(Greeting);
-
-        // Assert
-        _ = await Assert.That(act).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenDefaultCharWhenPrependThenBuilderIsUpdated()
     {
         // Arrange
@@ -53,17 +27,17 @@ public sealed class WhenPrependIsCalled
     }
 
     [Test]
-    public async Task GivenWhitespaceCharWhenPrependThenBuilderStartsWithWhitespace()
+    public async Task GivenEmptyStringWhenPrependThenBuilderIsUnchanged()
     {
         // Arrange
         var builder = new StringBuilder("abc");
 
         // Act
-        StringBuilder result = builder.Prepend(SpaceChar);
+        StringBuilder result = builder.Prepend(EmptyString);
 
         // Assert
         _ = await Assert.That(result).IsSameReferenceAs(builder);
-        _ = await Assert.That(builder.ToString()).IsEqualTo(" abc");
+        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
     }
 
     [Test]
@@ -95,62 +69,6 @@ public sealed class WhenPrependIsCalled
     }
 
     [Test]
-    public async Task GivenNullStringWhenPrependThenThrowsArgumentNullException()
-    {
-        // Arrange
-        var builder = new StringBuilder("abc");
-        string? value = default;
-
-        // Act
-        Action act = () => _ = builder.Prepend(value!);
-
-        // Assert
-        _ = await Assert.That(act).Throws<ArgumentNullException>();
-    }
-
-    [Test]
-    public async Task GivenEmptyStringWhenPrependThenBuilderIsUnchanged()
-    {
-        // Arrange
-        var builder = new StringBuilder("abc");
-
-        // Act
-        StringBuilder result = builder.Prepend(EmptyString);
-
-        // Assert
-        _ = await Assert.That(result).IsSameReferenceAs(builder);
-        _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
-    }
-
-    [Test]
-    public async Task GivenWhitespaceStringWhenPrependThenBuilderStartsWithWhitespace()
-    {
-        // Arrange
-        var builder = new StringBuilder("abc");
-
-        // Act
-        StringBuilder result = builder.Prepend(SpaceString);
-
-        // Assert
-        _ = await Assert.That(result).IsSameReferenceAs(builder);
-        _ = await Assert.That(builder.ToString()).IsEqualTo("   abc");
-    }
-
-    [Test]
-    public async Task GivenStringWhenPrependThenValueAppearsAtStart()
-    {
-        // Arrange
-        var builder = new StringBuilder(Word);
-
-        // Act
-        StringBuilder result = builder.Prepend(Greeting);
-
-        // Assert
-        _ = await Assert.That(result).IsSameReferenceAs(builder);
-        _ = await Assert.That(builder.ToString()).IsEqualTo("HelloWorld");
-    }
-
-    [Test]
     public async Task GivenMultipleStringsWhenPrependThenOrderIsReversed()
     {
         // Arrange
@@ -162,6 +80,46 @@ public sealed class WhenPrependIsCalled
 
         // Assert
         _ = await Assert.That(builder.ToString()).IsEqualTo("abc");
+    }
+
+    [Test]
+    public async Task GivenNullBuilderWhenValueIsCharThenThrowsArgumentNullException()
+    {
+        // Arrange
+        StringBuilder? builder = default;
+
+        // Act
+        Action act = () => _ = builder!.Prepend(LetterChar);
+
+        // Assert
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenNullBuilderWhenValueIsStringThenThrowsArgumentNullException()
+    {
+        // Arrange
+        StringBuilder? builder = default;
+
+        // Act
+        Action act = () => _ = builder!.Prepend(Greeting);
+
+        // Assert
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenNullStringWhenPrependThenThrowsArgumentNullException()
+    {
+        // Arrange
+        var builder = new StringBuilder("abc");
+        string? value = default;
+
+        // Act
+        Action act = () => _ = builder.Prepend(value!);
+
+        // Assert
+        _ = await Assert.That(act).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -179,5 +137,47 @@ public sealed class WhenPrependIsCalled
         // Assert
         _ = await Assert.That(result).IsSameReferenceAs(builder);
         _ = await Assert.That(builder.ToString()).IsEqualTo(head + tail);
+    }
+
+    [Test]
+    public async Task GivenStringWhenPrependThenValueAppearsAtStart()
+    {
+        // Arrange
+        var builder = new StringBuilder(Word);
+
+        // Act
+        StringBuilder result = builder.Prepend(Greeting);
+
+        // Assert
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("HelloWorld");
+    }
+
+    [Test]
+    public async Task GivenWhitespaceCharWhenPrependThenBuilderStartsWithWhitespace()
+    {
+        // Arrange
+        var builder = new StringBuilder("abc");
+
+        // Act
+        StringBuilder result = builder.Prepend(SpaceChar);
+
+        // Assert
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo(" abc");
+    }
+
+    [Test]
+    public async Task GivenWhitespaceStringWhenPrependThenBuilderStartsWithWhitespace()
+    {
+        // Arrange
+        var builder = new StringBuilder("abc");
+
+        // Act
+        StringBuilder result = builder.Prepend(SpaceString);
+
+        // Assert
+        _ = await Assert.That(result).IsSameReferenceAs(builder);
+        _ = await Assert.That(builder.ToString()).IsEqualTo("   abc");
     }
 }

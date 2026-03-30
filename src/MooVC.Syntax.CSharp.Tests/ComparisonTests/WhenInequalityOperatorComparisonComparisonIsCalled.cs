@@ -17,6 +17,38 @@ public sealed class WhenInequalityOperatorComparisonComparisonIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Comparison left = ComparisonTestsData.Create();
+        Comparison right = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan);
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Comparison left = ComparisonTestsData.Create();
+        Comparison right = ComparisonTestsData.Create();
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -42,37 +74,5 @@ public sealed class WhenInequalityOperatorComparisonComparisonIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Comparison left = ComparisonTestsData.Create();
-        Comparison right = ComparisonTestsData.Create();
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        Comparison left = ComparisonTestsData.Create();
-        Comparison right = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan);
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 }

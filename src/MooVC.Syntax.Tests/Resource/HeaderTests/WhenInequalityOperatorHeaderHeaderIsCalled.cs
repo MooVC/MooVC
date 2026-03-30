@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorHeaderHeaderIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Header? left = default;
-        Header right = HeaderTestsData.Create();
+        Header left = HeaderTestsData.Create();
+        Header right = HeaderTestsData.Create(value: Snippet.From("Other"));
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorHeaderHeaderIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Header left = HeaderTestsData.Create();
-        Header right = HeaderTestsData.Create(value: Snippet.From("Other"));
+        Header? left = default;
+        Header right = HeaderTestsData.Create();
 
         // Act
         bool result = left != right;

@@ -8,6 +8,34 @@ public sealed class WhenEqualsObjectIsCalled
     private const string DefaultName = "TValue";
 
     [Test]
+    public async Task GivenDifferentArgumentThenReturnsFalse()
+    {
+        // Arrange
+        Generic subject = Create();
+        object other = Create(AlternativeName);
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentArgumentThenReturnsTrue()
+    {
+        // Arrange
+        Generic subject = Create();
+        object other = Create();
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNonArgumentThenReturnsFalse()
     {
         // Arrange
@@ -47,34 +75,6 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentArgumentThenReturnsTrue()
-    {
-        // Arrange
-        Generic subject = Create();
-        object other = Create();
-
-        // Act
-        bool result = subject.Equals(other);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentArgumentThenReturnsFalse()
-    {
-        // Arrange
-        Generic subject = Create();
-        object other = Create(AlternativeName);
-
-        // Act
-        bool result = subject.Equals(other);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 
     private static Generic Create(string name = DefaultName)

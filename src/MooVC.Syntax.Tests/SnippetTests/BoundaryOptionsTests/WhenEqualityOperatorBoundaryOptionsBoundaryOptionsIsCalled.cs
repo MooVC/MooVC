@@ -17,6 +17,40 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Snippet.BoundaryOptions();
+
+        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
+            .WithClosing("]");
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Snippet.BoundaryOptions();
+        var right = new Snippet.BoundaryOptions();
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -56,39 +90,5 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Snippet.BoundaryOptions();
-        var right = new Snippet.BoundaryOptions();
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Snippet.BoundaryOptions();
-
-        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
-            .WithClosing("]");
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

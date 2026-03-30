@@ -3,34 +3,6 @@
 public sealed class WhenPlusOperatorIsCalled
 {
     [Test]
-    public async Task GivenPrivateProtectedThenCombinedScopeReturned()
-    {
-        // Arrange
-        Scope left = Scope.Private;
-        Scope right = Scope.Protected;
-
-        // Act
-        Scope result = left + right;
-
-        // Assert
-        _ = await Assert.That(result.ToString()).IsEqualTo("private protected");
-    }
-
-    [Test]
-    public async Task GivenProtectedInternalThenCombinedScopeReturned()
-    {
-        // Arrange
-        Scope left = Scope.Protected;
-        Scope right = Scope.Internal;
-
-        // Act
-        Scope result = left + right;
-
-        // Assert
-        _ = await Assert.That(result.ToString()).IsEqualTo("protected internal");
-    }
-
-    [Test]
     public async Task GivenInvalidCombinationThenThrows()
     {
         // Arrange
@@ -70,5 +42,33 @@ public sealed class WhenPlusOperatorIsCalled
 
         // Assert
         _ = await Assert.That(result).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenPrivateProtectedThenCombinedScopeReturned()
+    {
+        // Arrange
+        Scope left = Scope.Private;
+        Scope right = Scope.Protected;
+
+        // Act
+        Scope result = left + right;
+
+        // Assert
+        _ = await Assert.That(result.ToString()).IsEqualTo("private protected");
+    }
+
+    [Test]
+    public async Task GivenProtectedInternalThenCombinedScopeReturned()
+    {
+        // Arrange
+        Scope left = Scope.Protected;
+        Scope right = Scope.Internal;
+
+        // Act
+        Scope result = left + right;
+
+        // Assert
+        _ = await Assert.That(result.ToString()).IsEqualTo("protected internal");
     }
 }

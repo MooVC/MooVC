@@ -3,6 +3,36 @@
 public sealed class WhenEqualsFieldIsCalled
 {
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Field left = FieldTestsData.Create();
+        Field right = FieldTestsData.Create(isStatic: true);
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Field left = FieldTestsData.Create();
+        Field right = FieldTestsData.Create();
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -28,35 +58,5 @@ public sealed class WhenEqualsFieldIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Field left = FieldTestsData.Create();
-        Field right = FieldTestsData.Create();
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Field left = FieldTestsData.Create();
-        Field right = FieldTestsData.Create(isStatic: true);
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

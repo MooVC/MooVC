@@ -3,6 +3,34 @@
 public sealed class WhenEqualsModeIsCalled
 {
     [Test]
+    public async Task GivenDifferentInstanceThenFalseIsReturned()
+    {
+        // Arrange
+        Property.Mode subject = Property.Mode.Set;
+        Property.Mode target = Property.Mode.Init;
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentInstanceThenTrueIsReturned()
+    {
+        // Arrange
+        Property.Mode subject = Property.Mode.ReadOnly;
+        Property.Mode target = Property.Mode.ReadOnly;
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
@@ -28,33 +56,5 @@ public sealed class WhenEqualsModeIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentInstanceThenTrueIsReturned()
-    {
-        // Arrange
-        Property.Mode subject = Property.Mode.ReadOnly;
-        Property.Mode target = Property.Mode.ReadOnly;
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentInstanceThenFalseIsReturned()
-    {
-        // Arrange
-        Property.Mode subject = Property.Mode.Set;
-        Property.Mode target = Property.Mode.Init;
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

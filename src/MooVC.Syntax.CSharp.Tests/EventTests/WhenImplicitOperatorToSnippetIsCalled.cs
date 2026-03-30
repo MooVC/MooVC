@@ -6,19 +6,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Name = "Occurred";
 
     [Test]
-    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Event? subject = default;
-
-        // Act
-        Func<Snippet> result = () => subject;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenEventThenSnippetMatchesStringRepresentation()
     {
         // Arrange
@@ -33,5 +20,18 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Event? subject = default;
+
+        // Act
+        Func<Snippet> result = () => subject;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

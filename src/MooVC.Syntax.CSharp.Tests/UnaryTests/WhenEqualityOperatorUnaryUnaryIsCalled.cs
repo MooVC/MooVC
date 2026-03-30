@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorUnaryUnaryIsCalled
 {
     [Test]
-    public async Task GivenEquivalentUnaryOperatorsThenReturnsTrue()
-    {
-        // Arrange
-        Unary first = UnaryTestsData.Create();
-        Unary second = UnaryTestsData.Create();
-
-        // Act
-        bool result = first == second;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentUnaryOperatorsThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualityOperatorUnaryUnaryIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentUnaryOperatorsThenReturnsTrue()
+    {
+        // Arrange
+        Unary first = UnaryTestsData.Create();
+        Unary second = UnaryTestsData.Create();
+
+        // Act
+        bool result = first == second;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

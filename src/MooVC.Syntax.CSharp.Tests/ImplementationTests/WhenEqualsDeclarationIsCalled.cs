@@ -6,15 +6,15 @@ public sealed class WhenEqualsDeclarationIsCalled
     private const string Different = "IBeta";
 
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Implementation subject = new Declaration { Name = Same };
-        Declaration? other = default;
+        Implementation left = new Declaration { Name = Same };
+        var right = new Declaration { Name = Different };
 
         // Act
-        bool resultLeftRight = subject.Equals(other);
-        bool resultRightLeft = other?.Equals(subject) ?? false;
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();
@@ -38,15 +38,15 @@ public sealed class WhenEqualsDeclarationIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Implementation left = new Declaration { Name = Same };
-        var right = new Declaration { Name = Different };
+        Implementation subject = new Declaration { Name = Same };
+        Declaration? other = default;
 
         // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
+        bool resultLeftRight = subject.Equals(other);
+        bool resultRightLeft = other?.Equals(subject) ?? false;
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();

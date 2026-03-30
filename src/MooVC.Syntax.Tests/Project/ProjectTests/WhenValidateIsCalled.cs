@@ -7,22 +7,6 @@ using static MooVC.Syntax.Resource.Item;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public async Task GivenUndefinedThenReturnsEmptyResults()
-    {
-        // Arrange
-        Project subject = Project.Undefined;
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
     public async Task GivenUndefinedImportThenValidationErrorReturned()
     {
         // Arrange
@@ -40,23 +24,6 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenUnspecifiedSdkThenValidationErrorReturned()
-    {
-        // Arrange
-        Project subject = ProjectTestsData.Create(sdk: Sdk.Unspecified);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Sdks));
-    }
-
-    [Test]
     public async Task GivenUndefinedResourceThenValidationErrorReturned()
     {
         // Arrange
@@ -71,5 +38,38 @@ public sealed class WhenValidateIsCalled
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Resources));
+    }
+
+    [Test]
+    public async Task GivenUndefinedThenReturnsEmptyResults()
+    {
+        // Arrange
+        Project subject = Project.Undefined;
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedSdkThenValidationErrorReturned()
+    {
+        // Arrange
+        Project subject = ProjectTestsData.Create(sdk: Sdk.Unspecified);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Project.Sdks));
     }
 }

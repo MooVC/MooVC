@@ -6,20 +6,6 @@ using System.Text;
 public sealed class WhenGetBytesIsCalled
 {
     [Test]
-    public async Task GivenAStreamThenTheBytesWithinTheStreamAreReturned()
-    {
-        // Arrange
-        byte[] expected = [1, 2, 3];
-        using var stream = new MemoryStream(expected);
-
-        // Act
-        IEnumerable<byte> actual = stream.GetBytes();
-
-        // Assert
-        _ = await Assert.That(actual).IsEquivalentTo(expected);
-    }
-
-    [Test]
     public async Task GivenAnEmptyStreamThenAnEmptyByteCollectionIsReturned()
     {
         // Arrange
@@ -45,5 +31,19 @@ public sealed class WhenGetBytesIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(source));
+    }
+
+    [Test]
+    public async Task GivenAStreamThenTheBytesWithinTheStreamAreReturned()
+    {
+        // Arrange
+        byte[] expected = [1, 2, 3];
+        using var stream = new MemoryStream(expected);
+
+        // Act
+        IEnumerable<byte> actual = stream.GetBytes();
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 }

@@ -3,12 +3,12 @@
 public sealed class WhenInitializerIsConstructed
 {
     [Test]
-    public async Task GivenAnInitiazerThenAnInstanceIsReturned()
+    public async Task GivenAnEmptyInitiazerThenAnInstanceIsReturned()
     {
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
         {
-            return Task.FromResult(new object());
+            return Task.FromResult<object>(default!);
         }
 
         // Act
@@ -19,27 +19,12 @@ public sealed class WhenInitializerIsConstructed
     }
 
     [Test]
-    public async Task GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
-    {
-        // Arrange
-        Func<CancellationToken, Task<object>>? initializer = default;
-
-        // Act
-        Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
-    }
-
-    // Additional test cases
-    [Test]
-    public async Task GivenAnEmptyInitiazerThenAnInstanceIsReturned()
+    public async Task GivenAnInitiazerThenAnInstanceIsReturned()
     {
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
         {
-            return Task.FromResult<object>(default!);
+            return Task.FromResult(new object());
         }
 
         // Act
@@ -63,5 +48,19 @@ public sealed class WhenInitializerIsConstructed
 
         // Assert
         _ = await Assert.That(act).ThrowsNothing();
+    }
+
+    [Test]
+    public async Task GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
+    {
+        // Arrange
+        Func<CancellationToken, Task<object>>? initializer = default;
+
+        // Act
+        Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
     }
 }

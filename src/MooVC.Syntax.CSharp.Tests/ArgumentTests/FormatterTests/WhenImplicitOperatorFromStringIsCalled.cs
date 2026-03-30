@@ -19,20 +19,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenValueThenRoundTripsSuccessfully()
-    {
-        // Arrange
-        const string provided = Value;
-
-        // Act
-        Argument.Formatter subject = provided;
-        string result = subject;
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(provided);
-    }
-
-    [Test]
     public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
@@ -46,5 +32,19 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
         _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenValueThenRoundTripsSuccessfully()
+    {
+        // Arrange
+        const string provided = Value;
+
+        // Act
+        Argument.Formatter subject = provided;
+        string result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 }

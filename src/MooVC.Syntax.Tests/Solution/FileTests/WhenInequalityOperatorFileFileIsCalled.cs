@@ -17,20 +17,6 @@ public sealed class WhenInequalityOperatorFileFileIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new File(FileTestsData.DefaultPath);
-        var right = new File(FileTestsData.DefaultPath);
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenInequalityOperatorFileFileIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new File(FileTestsData.DefaultPath);
+        var right = new File(FileTestsData.DefaultPath);
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

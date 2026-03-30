@@ -20,6 +20,20 @@ public sealed class WhenInequalityOperatorImplementationDeclarationIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Implementation left = new Declaration { Name = Same };
+        var right = new Declaration { Name = Different };
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
@@ -45,19 +59,5 @@ public sealed class WhenInequalityOperatorImplementationDeclarationIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        Implementation left = new Declaration { Name = Same };
-        var right = new Declaration { Name = Different };
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

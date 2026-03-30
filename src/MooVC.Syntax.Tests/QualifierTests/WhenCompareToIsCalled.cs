@@ -3,20 +3,6 @@
 public sealed class WhenCompareToIsCalled
 {
     [Test]
-    public async Task GivenUnqualifiedAndQualifiedThenUnqualifiedIsLess()
-    {
-        // Arrange
-        Qualifier left = Qualifier.Unqualified;
-        var right = new Qualifier(["MooVC", "Syntax"]);
-
-        // Act
-        int result = left.CompareTo(right);
-
-        // Assert
-        _ = await Assert.That(result).IsLessThan(0);
-    }
-
-    [Test]
     public async Task GivenSystemQualifierThenSystemComesFirst()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenCompareToIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenUnqualifiedAndQualifiedThenUnqualifiedIsLess()
+    {
+        // Arrange
+        Qualifier left = Qualifier.Unqualified;
+        var right = new Qualifier(["MooVC", "Syntax"]);
+
+        // Act
+        int result = left.CompareTo(right);
+
+        // Assert
+        _ = await Assert.That(result).IsLessThan(0);
     }
 }

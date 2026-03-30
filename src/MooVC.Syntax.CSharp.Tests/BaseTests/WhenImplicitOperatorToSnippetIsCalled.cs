@@ -5,19 +5,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string Value = "BaseClass";
 
     [Test]
-    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Base? @base = default;
-
-        // Act
-        Func<Snippet> result = () => @base;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenBaseThenSnippetMatchesStringRepresentation()
     {
         // Arrange
@@ -31,5 +18,18 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Base? @base = default;
+
+        // Act
+        Func<Snippet> result = () => @base;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

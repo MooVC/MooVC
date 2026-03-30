@@ -7,20 +7,6 @@ public sealed class WhenToSnippetIsCalled
     private const string WhitespaceLine = " ";
 
     [Test]
-    public async Task GivenSingleValueThenSingleLineSnippetIsReturned()
-    {
-        // Arrange
-        const string value = FirstLine;
-
-        // Act
-        var result = value.ToSnippet();
-
-        // Assert
-        _ = await Assert.That(result.Lines).IsEqualTo(1);
-        _ = await Assert.That(result.ToString()).IsEqualTo(value);
-    }
-
-    [Test]
     public async Task GivenEmptyStringThenSnippetIsNotEmpty()
     {
         // Arrange
@@ -33,6 +19,39 @@ public sealed class WhenToSnippetIsCalled
         _ = await Assert.That(result.IsEmpty).IsFalse();
         _ = await Assert.That(result.Lines).IsEqualTo(1);
         _ = await Assert.That(result.ToString()).IsEqualTo(string.Empty);
+    }
+
+    [Test]
+    public async Task GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
+    {
+        // Arrange
+        string?[] nullable =
+        [
+            string.Empty,
+            default,
+        ];
+
+        IEnumerable<string> values = nullable!;
+
+        // Act
+        var result = values.ToSnippet();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
+    }
+
+    [Test]
+    public async Task GivenSingleValueThenSingleLineSnippetIsReturned()
+    {
+        // Arrange
+        const string value = FirstLine;
+
+        // Act
+        var result = value.ToSnippet();
+
+        // Assert
+        _ = await Assert.That(result.Lines).IsEqualTo(1);
+        _ = await Assert.That(result.ToString()).IsEqualTo(value);
     }
 
     [Test]
@@ -57,24 +76,5 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         _ = await Assert.That(result.Lines).IsEqualTo(3);
         _ = await Assert.That(result.ToString()).IsEqualTo(expected);
-    }
-
-    [Test]
-    public async Task GivenOnlyNullOrEmptyValuesThenEmptySnippetIsReturned()
-    {
-        // Arrange
-        string?[] nullable =
-        [
-            string.Empty,
-            default,
-        ];
-
-        IEnumerable<string> values = nullable!;
-
-        // Act
-        var result = values.ToSnippet();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
     }
 }

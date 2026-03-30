@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorOptionsStringIsCalled
 {
     [Test]
-    public async Task GivenMatchingValueThenReturnsTrue()
-    {
-        // Arrange
-        TargetTask.Options left = TargetTask.Options.WarnAndContinue;
-        const string Right = "WarnAndContinue";
-
-        // Act
-        bool result = left == Right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualityOperatorOptionsStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenMatchingValueThenReturnsTrue()
+    {
+        // Arrange
+        TargetTask.Options left = TargetTask.Options.WarnAndContinue;
+        const string Right = "WarnAndContinue";
+
+        // Act
+        bool result = left == Right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

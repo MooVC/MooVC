@@ -5,6 +5,20 @@ using System.Linq;
 public sealed class WhenCombineIsCalled
 {
     [Test]
+    public async Task GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
+    {
+        // Arrange
+        const int ExpectedValue = 9;
+        IEnumerable<int>? source = default;
+
+        // Act
+        IEnumerable<int> actual = source.Combine(ExpectedValue);
+
+        // Assert
+        _ = await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
+    }
+
+    [Test]
     public async Task GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
@@ -21,31 +35,17 @@ public sealed class WhenCombineIsCalled
     }
 
     [Test]
-    public async Task GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
-    {
-        // Arrange
-        const int ExpectedValue = 9;
-        IEnumerable<int>? source = default;
-
-        // Act
-        IEnumerable<int> actual = source.Combine(ExpectedValue);
-
-        // Assert
-        _ = await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
-    }
-
-    [Test]
-    public async Task GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
+    public async Task GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
         IEnumerable<int>? source = default;
-        IEnumerable<int>? expected = default;
+        IEnumerable<int>? expected = [4, 5, 6];
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        _ = await Assert.That(actual).IsEmpty();
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -65,16 +65,16 @@ public sealed class WhenCombineIsCalled
     }
 
     [Test]
-    public async Task GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
+    public async Task GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
-        IEnumerable<int>? expected = [4, 5, 6];
+        IEnumerable<int>? expected = default;
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        _ = await Assert.That(actual).IsEquivalentTo(expected);
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

@@ -20,25 +20,11 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
-    {
-        // Arrange
-        Unary.Type? left = default;
-        string right = Same;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Unary.Type left = Unary.Type.Not;
-        string? right = default;
+        string right = Different;
 
         // Act
         bool result = left == right;
@@ -62,11 +48,25 @@ public sealed class WhenEqualityOperatorTypeStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    {
+        // Arrange
+        Unary.Type? left = default;
+        string right = Same;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Unary.Type left = Unary.Type.Not;
-        string right = Different;
+        string? right = default;
 
         // Act
         bool result = left == right;

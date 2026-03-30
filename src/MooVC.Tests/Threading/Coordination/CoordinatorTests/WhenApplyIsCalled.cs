@@ -18,17 +18,24 @@ public sealed class WhenApplyIsCalled
     }
 
     [Test]
-    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
+    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
     {
         // Arrange
-        string? subject = default;
+        string expected = Guid.NewGuid().ToString();
+        ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
+        var subject = new Coordinator<ITestCoordinatable>();
+
+        _ = context.GetKey().Returns(expected);
 
         // Act
-        Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
+        IContext<ITestCoordinatable> coordination = await subject
+            .Apply(context, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
+        using (coordination)
+        {
+            _ = context.Received(1).GetKey();
+        }
     }
 
     [Test]
@@ -45,31 +52,34 @@ public sealed class WhenApplyIsCalled
     }
 
     [Test]
-    public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrown()
+    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
-        const int ExpectedCount = 5;
-        int counter = 0;
-        string subject = "Test";
-
-        Task[] tasks = CreateTasks(
-            async () =>
-            {
-                IContext<string> coordination = await _coordinator
-                    .Apply(subject, CancellationToken.None);
-
-                using (coordination)
-                {
-                    counter++;
-                }
-            },
-            ExpectedCount);
+        string? subject = default;
 
         // Act
-        await Task.WhenAll(tasks);
+        Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(counter).IsEqualTo(ExpectedCount);
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
+    }
+
+    [Test]
+    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
+    {
+        // Arrange
+        object context = Substitute.For<object>();
+        var subject = new Coordinator<object>();
+
+        // Act
+        IContext<object> coordination = await subject
+            .Apply(context, CancellationToken.None);
+
+        using (coordination)
+        {
+            _ = context.Received(1).GetHashCode();
+        }
     }
 
     [Test]
@@ -99,41 +109,31 @@ public sealed class WhenApplyIsCalled
     }
 
     [Test]
-    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
+    public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrown()
     {
         // Arrange
-        string expected = Guid.NewGuid().ToString();
-        ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
-        var subject = new Coordinator<ITestCoordinatable>();
+        const int ExpectedCount = 5;
+        int counter = 0;
+        string subject = "Test";
 
-        _ = context.GetKey().Returns(expected);
+        Task[] tasks = CreateTasks(
+            async () =>
+            {
+                IContext<string> coordination = await _coordinator
+                    .Apply(subject, CancellationToken.None);
+
+                using (coordination)
+                {
+                    counter++;
+                }
+            },
+            ExpectedCount);
 
         // Act
-        IContext<ITestCoordinatable> coordination = await subject
-            .Apply(context, CancellationToken.None);
+        await Task.WhenAll(tasks);
 
         // Assert
-        using (coordination)
-        {
-            _ = context.Received(1).GetKey();
-        }
-    }
-
-    [Test]
-    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
-    {
-        // Arrange
-        object context = Substitute.For<object>();
-        var subject = new Coordinator<object>();
-
-        // Act
-        IContext<object> coordination = await subject
-            .Apply(context, CancellationToken.None);
-
-        using (coordination)
-        {
-            _ = context.Received(1).GetHashCode();
-        }
+        _ = await Assert.That(counter).IsEqualTo(ExpectedCount);
     }
 
     private static Task[] CreateTasks(Func<Task> operation, int total)

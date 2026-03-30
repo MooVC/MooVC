@@ -3,21 +3,6 @@
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public async Task GivenEqualValuesThenReturnsSameHash()
-    {
-        // Arrange
-        Struct left = StructTestsData.Create(scope: Scope.Internal);
-        Struct right = StructTestsData.Create(scope: Scope.Internal);
-
-        // Act
-        int leftHash = left.GetHashCode();
-        int rightHash = right.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(rightHash).IsEqualTo(leftHash);
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
@@ -30,5 +15,20 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(rightHash).IsNotEqualTo(leftHash);
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsSameHash()
+    {
+        // Arrange
+        Struct left = StructTestsData.Create(scope: Scope.Internal);
+        Struct right = StructTestsData.Create(scope: Scope.Internal);
+
+        // Act
+        int leftHash = left.GetHashCode();
+        int rightHash = right.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(rightHash).IsEqualTo(leftHash);
     }
 }

@@ -3,11 +3,11 @@
 public sealed class WhenEqualsOptionsIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Options();
-        Options? other = default;
+        Options other = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsOptionsIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Options();
-        Options other = new Options().WithNamespace(Qualifier.Options.Block);
+        Options? other = default;
 
         // Act
         bool result = subject.Equals(other);

@@ -3,19 +3,6 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenRequiredThenReturnsNewConstraint()
-    {
-        // Arrange
-        New subject = New.Required;
-
-        // Act
-        string result = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("new()");
-    }
-
-    [Test]
     public async Task GivenNotRequiredThenReturnsEmpty()
     {
         // Arrange
@@ -26,5 +13,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(string.Empty);
+    }
+
+    [Test]
+    public async Task GivenRequiredThenReturnsNewConstraint()
+    {
+        // Arrange
+        New subject = New.Required;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("new()");
     }
 }

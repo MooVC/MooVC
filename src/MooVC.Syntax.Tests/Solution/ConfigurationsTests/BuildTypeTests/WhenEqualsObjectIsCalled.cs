@@ -3,16 +3,17 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenBuildTypeWithSameValueThenReturnsTrue()
     {
         // Arrange
         var subject = new Configurations.BuildType("Custom");
+        object other = new Configurations.BuildType("Custom");
 
         // Act
-        bool result = subject.Equals(default(object));
+        bool result = subject.Equals(other);
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
@@ -29,16 +30,15 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Test]
-    public async Task GivenBuildTypeWithSameValueThenReturnsTrue()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Configurations.BuildType("Custom");
-        object other = new Configurations.BuildType("Custom");
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = subject.Equals(default(object));
 
         // Assert
-        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsFalse();
     }
 }

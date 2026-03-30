@@ -7,35 +7,6 @@ public sealed class WhenToStringIsCalled
     private const string SecondArgumentName = "Other";
 
     [Test]
-    public async Task GivenUnspecifiedSymbolThenEmptyReturned()
-    {
-        // Arrange
-        Symbol subject = Symbol.Undefined;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
-    public async Task GivenNameThenNameReturned()
-    {
-        // Arrange
-        var subject = new Symbol
-        {
-            Name = Name,
-        };
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(Name);
-    }
-
-    [Test]
     public async Task GivenArgumentsThenNameAndArgumentListReturned()
     {
         // Arrange
@@ -57,6 +28,22 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
+    public async Task GivenNameThenNameReturned()
+    {
+        // Arrange
+        var subject = new Symbol
+        {
+            Name = Name,
+        };
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(Name);
+    }
+
+    [Test]
     public async Task GivenQualifierThenQualifierPrefixedToName()
     {
         // Arrange
@@ -67,5 +54,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo(Name);
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedSymbolThenEmptyReturned()
+    {
+        // Arrange
+        Symbol subject = Symbol.Undefined;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

@@ -3,11 +3,11 @@
 public sealed class WhenEqualsAssemblyIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Assembly subject = AssemblyTestsData.Create();
-        Assembly? other = default;
+        Assembly other = AssemblyTestsData.Create(name: Snippet.From("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsAssemblyIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Assembly subject = AssemblyTestsData.Create();
-        Assembly other = AssemblyTestsData.Create(name: Snippet.From("Other"));
+        Assembly? other = default;
 
         // Act
         bool result = subject.Equals(other);

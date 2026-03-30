@@ -6,17 +6,6 @@ using global::Newtonsoft.Json;
 public sealed class WhenSerializerIsConstructed
 {
     [Test]
-    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
-    {
-        // Arrange & Act
-        var serializer = new Serializer();
-        var settings = new JsonSerializerSettings();
-
-        // Assert
-        await AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
-    }
-
-    [Test]
     public async Task GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
@@ -39,6 +28,17 @@ public sealed class WhenSerializerIsConstructed
 
         // Assert
         await AssertEqual(Serializer.DefaultEncoding, kind, serializer, settings);
+    }
+
+    [Test]
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
+    {
+        // Arrange & Act
+        var serializer = new Serializer();
+        var settings = new JsonSerializerSettings();
+
+        // Assert
+        await AssertEqual(Serializer.DefaultEncoding, DateTimeKind.Unspecified, serializer, settings);
     }
 
     [Test]

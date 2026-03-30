@@ -8,18 +8,68 @@ public sealed class WhenIncludeIsCalled
     private const string SecondMessage = "Second";
 
     [Test]
-    public async Task GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenExistingResultsThenValidationResultsAreAppended()
     {
         // Arrange
-        ValidationContext? validationContext = default;
-        var validatable = new StubValidatable();
+        var initial = new ValidationResult(FirstMessage);
+        var validatable = new StubValidatable(new ValidationResult(SecondMessage));
+        var context = new ValidationContext(validatable);
+        IEnumerable<ValidationResult> results = [initial];
 
         // Act
-        Action action = () => validationContext!.Include(nameof(validatable), validatable);
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(validatable),
+            results,
+            validatable);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(validationContext));
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
+        ValidationResult[] combined = [.. actual.Results];
+        _ = await Assert.That(combined).IsEquivalentTo([initial, validatable.Results.Single()]);
+    }
+
+    [Test]
+    public async Task GivenMultipleValidatablesThenAllValidationResultsAreReturned()
+    {
+        // Arrange
+        var first = new StubValidatable(new ValidationResult(FirstMessage));
+        var second = new StubValidatable(new ValidationResult(SecondMessage));
+        var context = new ValidationContext(first);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(first),
+            [first, second]);
+
+        // Assert
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([first.Results.Single(), second.Results.Single()]);
+    }
+
+    [Test]
+    public async Task GivenResultsAndMultipleValidatablesThenAllValidationResultsAreAppended()
+    {
+        // Arrange
+        var initial = new ValidationResult(FirstMessage);
+        var first = new StubValidatable(new ValidationResult(SecondMessage));
+        var second = new StubValidatable(new ValidationResult("Third"));
+        var context = new ValidationContext(first);
+        IEnumerable<ValidationResult> results = [initial];
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
+            nameof(first),
+            results,
+            [first, second]);
+
+        // Assert
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
+        ValidationResult[] combined = [.. actual.Results];
+        _ = await Assert.That(combined).IsEquivalentTo([initial, first.Results.Single(), second.Results.Single()]);
     }
 
     [Test]
@@ -90,68 +140,18 @@ public sealed class WhenIncludeIsCalled
     }
 
     [Test]
-    public async Task GivenExistingResultsThenValidationResultsAreAppended()
+    public async Task GivenValidationContextIsNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        var initial = new ValidationResult(FirstMessage);
-        var validatable = new StubValidatable(new ValidationResult(SecondMessage));
-        var context = new ValidationContext(validatable);
-        IEnumerable<ValidationResult> results = [initial];
+        ValidationContext? validationContext = default;
+        var validatable = new StubValidatable();
 
         // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
-            nameof(validatable),
-            results,
-            validatable);
+        Action action = () => validationContext!.Include(nameof(validatable), validatable);
 
         // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
-        ValidationResult[] combined = [.. actual.Results];
-        _ = await Assert.That(combined).IsEquivalentTo([initial, validatable.Results.Single()]);
-    }
-
-    [Test]
-    public async Task GivenMultipleValidatablesThenAllValidationResultsAreReturned()
-    {
-        // Arrange
-        var first = new StubValidatable(new ValidationResult(FirstMessage));
-        var second = new StubValidatable(new ValidationResult(SecondMessage));
-        var context = new ValidationContext(first);
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
-            nameof(first),
-            [first, second]);
-
-        // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
-        ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEquivalentTo([first.Results.Single(), second.Results.Single()]);
-    }
-
-    [Test]
-    public async Task GivenResultsAndMultipleValidatablesThenAllValidationResultsAreAppended()
-    {
-        // Arrange
-        var initial = new ValidationResult(FirstMessage);
-        var first = new StubValidatable(new ValidationResult(SecondMessage));
-        var second = new StubValidatable(new ValidationResult("Third"));
-        var context = new ValidationContext(first);
-        IEnumerable<ValidationResult> results = [initial];
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = context.Include(
-            nameof(first),
-            results,
-            [first, second]);
-
-        // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
-        ValidationResult[] combined = [.. actual.Results];
-        _ = await Assert.That(combined).IsEquivalentTo([initial, first.Results.Single(), second.Results.Single()]);
+        ArgumentNullException exception = await Assert.That(action).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(validationContext));
     }
 
     private sealed class StubValidatable : IValidatableObject

@@ -3,6 +3,34 @@
 public sealed class WhenEqualsSpecifierIsCalled
 {
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Attribute.Specifier left = Attribute.Specifier.Method;
+        Attribute.Specifier right = Attribute.Specifier.Event;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Attribute.Specifier left = Attribute.Specifier.Method;
+        Attribute.Specifier right = Attribute.Specifier.Method;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -28,33 +56,5 @@ public sealed class WhenEqualsSpecifierIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Attribute.Specifier left = Attribute.Specifier.Method;
-        Attribute.Specifier right = Attribute.Specifier.Method;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Attribute.Specifier left = Attribute.Specifier.Method;
-        Attribute.Specifier right = Attribute.Specifier.Event;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

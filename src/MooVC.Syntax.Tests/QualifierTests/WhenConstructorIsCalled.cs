@@ -15,6 +15,22 @@ public sealed class WhenConstructorIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
+    {
+        // Arrange
+        ImmutableArray<Name> left = ["First"];
+        ImmutableArray<Name> right = ["Second"];
+
+        // Act
+        var first = new Qualifier(left);
+        var second = new Qualifier(right);
+
+        // Assert
+        _ = await Assert.That(first.Equals(second)).IsFalse();
+        _ = await Assert.That(first != second).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -38,21 +54,5 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(first).IsEqualTo(second);
         _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first.GetHashCode()).IsEqualTo(second.GetHashCode());
-    }
-
-    [Test]
-    public async Task GivenDifferentSegmentsTwiceThenInstancesAreNotEqual()
-    {
-        // Arrange
-        ImmutableArray<Name> left = ["First"];
-        ImmutableArray<Name> right = ["Second"];
-
-        // Act
-        var first = new Qualifier(left);
-        var second = new Qualifier(right);
-
-        // Assert
-        _ = await Assert.That(first.Equals(second)).IsFalse();
-        _ = await Assert.That(first != second).IsTrue();
     }
 }

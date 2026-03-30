@@ -7,6 +7,20 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Value = "in";
 
     [Test]
+    public async Task GivenEmptyThenEqualsString()
+    {
+        // Arrange
+        string value = Empty;
+
+        // Act
+        Parameter.Mode subject = value;
+
+        // Assert
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
+    }
+
+    [Test]
     public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -31,10 +45,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyThenEqualsString()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
-        string value = Empty;
+        string value = Value;
 
         // Act
         Parameter.Mode subject = value;
@@ -49,20 +63,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     {
         // Arrange
         string value = Space;
-
-        // Act
-        Parameter.Mode subject = value;
-
-        // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenValueThenEqualsString()
-    {
-        // Arrange
-        string value = Value;
 
         // Act
         Parameter.Mode subject = value;

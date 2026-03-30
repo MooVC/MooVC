@@ -3,21 +3,6 @@
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public async Task GivenEqualOptionsThenHashCodesAreEqual()
-    {
-        // Arrange
-        var first = new Identifier.Options();
-        var second = new Identifier.Options();
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentOptionsThenHashCodesAreDifferent()
     {
         // Arrange
@@ -30,5 +15,20 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenEqualOptionsThenHashCodesAreEqual()
+    {
+        // Arrange
+        var first = new Identifier.Options();
+        var second = new Identifier.Options();
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

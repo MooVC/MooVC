@@ -12,6 +12,30 @@ public sealed class WhenAddFileSystemWriterIsCalled
     private const string FileSystemKey = "FileSystem";
 
     [Test]
+    public async Task GivenConfigurationThenOptionsAreBound()
+    {
+        // Arrange
+        var settings = new Dictionary<string, string?>
+        {
+            { $"{FileSystemWriter.Options.SectionName}:{nameof(FileSystemWriter.Options.BufferSize)}", CustomBufferSize.ToString(CultureInfo.InvariantCulture) },
+        };
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(settings)
+            .Build();
+
+        ServiceCollection services = new();
+
+        // Act
+        _ = services.AddFileSystemWriter(configuration);
+        using ServiceProvider provider = services.BuildServiceProvider();
+        IOptionsSnapshot<FileSystemWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<FileSystemWriter.Options>>();
+
+        // Assert
+        _ = await Assert.That(options.Value.BufferSize).IsEqualTo(CustomBufferSize);
+    }
+
+    [Test]
     public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -41,29 +65,5 @@ public sealed class WhenAddFileSystemWriterIsCalled
         _ = await Assert.That(writer).IsTypeOf<FileSystemWriter>();
         _ = await Assert.That(fileSystem).IsNotNull();
         _ = await Assert.That(options.Value.BufferSize).IsEqualTo(FileSystemWriter.Options.Default.BufferSize);
-    }
-
-    [Test]
-    public async Task GivenConfigurationThenOptionsAreBound()
-    {
-        // Arrange
-        var settings = new Dictionary<string, string?>
-        {
-            { $"{FileSystemWriter.Options.SectionName}:{nameof(FileSystemWriter.Options.BufferSize)}", CustomBufferSize.ToString(CultureInfo.InvariantCulture) },
-        };
-
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(settings)
-            .Build();
-
-        ServiceCollection services = new();
-
-        // Act
-        _ = services.AddFileSystemWriter(configuration);
-        using ServiceProvider provider = services.BuildServiceProvider();
-        IOptionsSnapshot<FileSystemWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<FileSystemWriter.Options>>();
-
-        // Assert
-        _ = await Assert.That(options.Value.BufferSize).IsEqualTo(CustomBufferSize);
     }
 }

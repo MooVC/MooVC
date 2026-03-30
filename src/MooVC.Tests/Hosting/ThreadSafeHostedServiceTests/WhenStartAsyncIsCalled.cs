@@ -15,13 +15,18 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Test]
-    public async Task GivenAStoppedHostThenTheServiceStarts()
+    public async Task GivenARestartThenTheServiceIsStartedTheSecondTime()
     {
+        // Arrange
+        await _host.StartAsync(CancellationToken.None);
+        await _host.StopAsync(CancellationToken.None);
+
         // Act
         await _host.StartAsync(CancellationToken.None);
 
         // Assert
-        await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
+        await _service.Received(2).StartAsync(Arg.Any<CancellationToken>());
+        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }
 
     [Test]
@@ -38,21 +43,6 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Test]
-    public async Task GivenARestartThenTheServiceIsStartedTheSecondTime()
-    {
-        // Arrange
-        await _host.StartAsync(CancellationToken.None);
-        await _host.StopAsync(CancellationToken.None);
-
-        // Act
-        await _host.StartAsync(CancellationToken.None);
-
-        // Assert
-        await _service.Received(2).StartAsync(Arg.Any<CancellationToken>());
-        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
-    }
-
-    [Test]
     public async Task GivenAStoppedHostStartAsyncIsNotCalled()
     {
         // Assert
@@ -60,21 +50,13 @@ public sealed class WhenStartAsyncIsCalled
     }
 
     [Test]
-    public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStopped()
+    public async Task GivenAStoppedHostThenTheServiceStarts()
     {
-        // Arrange
-        var expected = new InvalidOperationException("Service failed to start.");
-        _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
-
         // Act
-        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
+        await _host.StartAsync(CancellationToken.None);
 
         // Assert
-        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
-
-        _ = await Assert.That(actual.InnerException).IsEqualTo(expected);
-
-        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
+        await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
     }
 
     [Test]
@@ -94,6 +76,24 @@ public sealed class WhenStartAsyncIsCalled
 
         _ = await Assert.That(actual.InnerException).IsEqualTo(start);
         _ = await Assert.That(actual.InnerExceptions).DoesNotContain(stop);
+
+        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Test]
+    public async Task GivenServiceStartAsyncThrowsExceptionThenHostIsStopped()
+    {
+        // Arrange
+        var expected = new InvalidOperationException("Service failed to start.");
+        _service.When(service => service.StartAsync(Arg.Any<CancellationToken>())).Do(_ => throw expected);
+
+        // Act
+        Func<Task> act = () => _host.StartAsync(CancellationToken.None);
+
+        // Assert
+        AggregateException actual = await Assert.That(act).Throws<AggregateException>().And.IsNotNull();
+
+        _ = await Assert.That(actual.InnerException).IsEqualTo(expected);
 
         await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
     }

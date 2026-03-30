@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public async Task GivenUndefinedThenValidationIsSkipped()
+    public async Task GivenItemWithoutPropertyThenValidationErrorReturned()
     {
         // Arrange
-        Output subject = Output.Undefined;
+        Output subject = OutputTestsData.Create(propertyName: Name.Unnamed);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -18,8 +18,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Output.PropertyName));
     }
 
     [Test]
@@ -40,23 +41,6 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenItemWithoutPropertyThenValidationErrorReturned()
-    {
-        // Arrange
-        Output subject = OutputTestsData.Create(propertyName: Name.Unnamed);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Output.PropertyName));
-    }
-
-    [Test]
     public async Task GivenPropertyWithoutItemThenValidationErrorReturned()
     {
         // Arrange
@@ -71,5 +55,21 @@ public sealed class WhenValidateIsCalled
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains(nameof(Output.ItemName));
+    }
+
+    [Test]
+    public async Task GivenUndefinedThenValidationIsSkipped()
+    {
+        // Arrange
+        Output subject = Output.Undefined;
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

@@ -17,11 +17,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Variable.Options? left = default;
-        var right = new Variable.Options();
+        var left = new Variable.Options();
+        var right = new Variable.Options { UseUnderscore = true };
 
         // Act
         bool result = left == right;
@@ -45,11 +45,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        var left = new Variable.Options();
-        var right = new Variable.Options { UseUnderscore = true };
+        Variable.Options? left = default;
+        var right = new Variable.Options();
 
         // Act
         bool result = left == right;

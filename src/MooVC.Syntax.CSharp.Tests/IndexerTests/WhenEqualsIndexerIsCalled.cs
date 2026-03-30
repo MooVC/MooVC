@@ -3,62 +3,6 @@
 public sealed class WhenEqualsIndexerIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
-    {
-        // Arrange
-        Indexer? subject = default;
-        Indexer target = IndexerTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        Indexer target = subject;
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentValueThenReturnsTrue()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        Indexer target = IndexerTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        Indexer target = IndexerTestsData.Create(parameter: new Parameter { Name = "alternative" });
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -109,5 +53,61 @@ public sealed class WhenEqualsIndexerIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        Indexer target = IndexerTestsData.Create(parameter: new Parameter { Name = "alternative" });
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentValueThenReturnsTrue()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        Indexer target = IndexerTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNullThenReturnsFalse()
+    {
+        // Arrange
+        Indexer? subject = default;
+        Indexer target = IndexerTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        Indexer target = subject;
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -3,6 +3,19 @@
 public sealed class WhenEqualsIntentIsCalled
 {
     [Test]
+    public async Task GivenADifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        Conversion.Intent intent = Conversion.Intent.From;
+
+        // Act
+        bool result = intent.Equals(Conversion.Intent.To);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -39,18 +52,5 @@ public sealed class WhenEqualsIntentIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenADifferentValueThenReturnsFalse()
-    {
-        // Arrange
-        Conversion.Intent intent = Conversion.Intent.From;
-
-        // Act
-        bool result = intent.Equals(Conversion.Intent.To);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

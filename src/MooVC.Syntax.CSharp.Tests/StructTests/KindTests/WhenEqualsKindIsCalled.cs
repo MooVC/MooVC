@@ -3,20 +3,6 @@
 public sealed class WhenEqualsKindIsCalled
 {
     [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Struct.Kind left = Struct.Kind.Record;
-        Struct.Kind right = Struct.Kind.Record;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualsKindIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Struct.Kind left = Struct.Kind.Record;
+        Struct.Kind right = Struct.Kind.Record;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -6,19 +6,6 @@ using System.Xml.Linq;
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
-    public async Task GivenUndefinedThenReturnsEmpty()
-    {
-        // Arrange
-        Item subject = Item.Undefined;
-
-        // Act
-        ImmutableArray<XElement> result = subject.ToFragments();
-
-        // Assert
-        _ = await Assert.That(result).IsEmpty();
-    }
-
-    [Test]
     public async Task GivenLocationThenReturnsCompileAndEmbeddedResource()
     {
         // Arrange
@@ -84,5 +71,18 @@ public sealed class WhenToFragmentsIsCalled
         _ = await Assert.That(result.Length).IsEqualTo(2);
         _ = await Assert.That(XNode.DeepEquals(expectedCompile, result[0])).IsTrue();
         _ = await Assert.That(XNode.DeepEquals(expectedEmbeddedResource, result[1])).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenUndefinedThenReturnsEmpty()
+    {
+        // Arrange
+        Item subject = Item.Undefined;
+
+        // Act
+        ImmutableArray<XElement> result = subject.ToFragments();
+
+        // Assert
+        _ = await Assert.That(result).IsEmpty();
     }
 }

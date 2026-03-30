@@ -3,62 +3,6 @@
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public async Task GivenSingleLineBracesThenBodyIsRenderedInline()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
-
-        Method.Options options = Method.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
-
-        // Act
-        string representation = subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) { return value; }");
-    }
-
-    [Test]
-    public async Task GivenLambdaInlineThenBodyIsRenderedInline()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
-
-        Method.Options options = Method.Options.Default
-            .WithSnippets(snippets => snippets
-                .WithBlock(block => block
-                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.Lambda))));
-
-        // Act
-        string representation = subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) => return value;");
-    }
-
-    [Test]
-    public async Task GivenBodyWhenSynchronousThenBlockIsRendered()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
-
-        // Act
-        string representation = subject.ToSnippet(Method.Options.Default);
-
-        // Assert
-        string expected = """
-            public string Perform(int value)
-            {
-                return value;
-            }
-            """;
-
-        _ = await Assert.That(representation).IsEqualTo(expected);
-    }
-
-    [Test]
     public async Task GivenBodyWhenAsynchronousThenBlockIsRendered()
     {
         // Arrange
@@ -76,6 +20,26 @@ public sealed class WhenToSnippetIsCalled
             public async Task<string> Perform(int value)
             {
                 return await value;
+            }
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenBodyWhenSynchronousThenBlockIsRendered()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        string expected = """
+            public string Perform(int value)
+            {
+                return value;
             }
             """;
 
@@ -112,5 +76,41 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         _ = await Assert.That(representation).Contains("Perform<T>");
         _ = await Assert.That(representation).Contains("where class, new()");
+    }
+
+    [Test]
+    public async Task GivenLambdaInlineThenBodyIsRenderedInline()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.Lambda))));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) => return value;");
+    }
+
+    [Test]
+    public async Task GivenSingleLineBracesThenBodyIsRenderedInline()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"));
+
+        Method.Options options = Method.Options.Default
+            .WithSnippets(snippets => snippets
+                .WithBlock(block => block
+                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo("public string Perform(int value) { return value; }");
     }
 }

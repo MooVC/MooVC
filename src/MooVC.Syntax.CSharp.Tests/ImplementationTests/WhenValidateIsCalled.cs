@@ -9,12 +9,12 @@ public sealed class WhenValidateIsCalled
     private const string InvalidImplementationName = "Invalid Name";
 
     [Test]
-    public async Task GivenValidImplementationThenNoValidationErrorsReturned()
+    public async Task GivenInvalidDeclarationThenValidationErrorsReturned()
     {
         // Arrange
         Implementation subject = new Declaration
         {
-            Name = ValidImplementationName,
+            Generics = [new Generic()],
         };
 
         var context = new ValidationContext(subject);
@@ -24,8 +24,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -73,12 +75,12 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenInvalidDeclarationThenValidationErrorsReturned()
+    public async Task GivenValidImplementationThenNoValidationErrorsReturned()
     {
         // Arrange
         Implementation subject = new Declaration
         {
-            Generics = [new Generic()],
+            Name = ValidImplementationName,
         };
 
         var context = new ValidationContext(subject);
@@ -88,9 +90,7 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 }

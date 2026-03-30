@@ -17,6 +17,38 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentNamesThenReturnsTrue()
+    {
+        // Arrange
+        Class left = ClassTestsData.Create();
+        Class right = ClassTestsData.Create(name: new Declaration { Name = "Other" });
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Class left = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
+        Class right = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -56,37 +88,5 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Class left = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
-        Class right = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentNamesThenReturnsTrue()
-    {
-        // Arrange
-        Class left = ClassTestsData.Create();
-        Class right = ClassTestsData.Create(name: new Declaration { Name = "Other" });
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 }

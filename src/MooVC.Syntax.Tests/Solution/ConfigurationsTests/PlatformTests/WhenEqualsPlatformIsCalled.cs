@@ -3,11 +3,11 @@
 public sealed class WhenEqualsPlatformIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Configurations.Platform("CustomPlatform");
-        Configurations.Platform? other = default;
+        var other = new Configurations.Platform("OtherPlatform");
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsPlatformIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Configurations.Platform("CustomPlatform");
-        var other = new Configurations.Platform("OtherPlatform");
+        Configurations.Platform? other = default;
 
         // Act
         bool result = subject.Equals(other);

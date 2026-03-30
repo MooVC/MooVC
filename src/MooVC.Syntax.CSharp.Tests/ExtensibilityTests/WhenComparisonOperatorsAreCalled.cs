@@ -3,14 +3,14 @@
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public async Task GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenEqualValuesThenLessThanOrEqualIsTrue()
     {
         // Arrange
-        Extensibility? left = default;
-        Extensibility right = Extensibility.Static;
+        Extensibility left = Extensibility.Virtual;
+        Extensibility right = Extensibility.Virtual;
 
         // Act
-        bool result = left < right;
+        bool result = left <= right;
 
         // Assert
         _ = await Assert.That(result).IsTrue();
@@ -45,14 +45,14 @@ public sealed class WhenComparisonOperatorsAreCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenLessThanOrEqualIsTrue()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
-        Extensibility left = Extensibility.Virtual;
-        Extensibility right = Extensibility.Virtual;
+        Extensibility? left = default;
+        Extensibility right = Extensibility.Static;
 
         // Act
-        bool result = left <= right;
+        bool result = left < right;
 
         // Assert
         _ = await Assert.That(result).IsTrue();

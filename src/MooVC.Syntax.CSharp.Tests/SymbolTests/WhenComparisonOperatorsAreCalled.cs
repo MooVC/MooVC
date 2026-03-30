@@ -3,10 +3,10 @@
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public async Task GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenDifferentNamesThenOrderingFollowsName()
     {
         // Arrange
-        Symbol? left = default;
+        Symbol left = SymbolTestsData.Create(name: "Alpha");
         Symbol right = SymbolTestsData.Create(name: "Beta");
 
         // Act
@@ -23,10 +23,10 @@ public sealed class WhenComparisonOperatorsAreCalled
     }
 
     [Test]
-    public async Task GivenDifferentNamesThenOrderingFollowsName()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
-        Symbol left = SymbolTestsData.Create(name: "Alpha");
+        Symbol? left = default;
         Symbol right = SymbolTestsData.Create(name: "Beta");
 
         // Act

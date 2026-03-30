@@ -6,19 +6,6 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     private static readonly Name _beta = new("Beta");
 
     [Test]
-    public async Task GivenNullThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Name[]? values = default;
-
-        // Act
-        Func<Qualifier> result = () => values;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenEmptyArrayThenInstanceIsCreated()
     {
         // Arrange
@@ -34,17 +21,16 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
     }
 
     [Test]
-    public async Task GivenSegmentsThenRoundTripsSuccessfully()
+    public async Task GivenNullThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Name[] values = [_alpha, _beta];
+        Name[]? values = default;
 
         // Act
-        Qualifier subject = values;
-        Name[] result = subject;
+        Func<Qualifier> result = () => values;
 
         // Assert
-        _ = await Assert.That(result).IsEquivalentTo(values);
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]
@@ -61,5 +47,19 @@ public sealed class WhenImplicitOperatorFromSegmentArrayIsCalled
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
         _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenSegmentsThenRoundTripsSuccessfully()
+    {
+        // Arrange
+        Name[] values = [_alpha, _beta];
+
+        // Act
+        Qualifier subject = values;
+        Name[] result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEquivalentTo(values);
     }
 }

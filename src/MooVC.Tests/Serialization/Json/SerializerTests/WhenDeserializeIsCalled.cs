@@ -6,6 +6,38 @@ using Serializer = MooVC.Serialization.Json.Serializer;
 public sealed class WhenDeserializeIsCalled
 {
     [Test]
+    public async Task GivenACancellationThenOperationCanceledExceptionIsThrown()
+    {
+        // Arrange
+        var serializer = new Serializer();
+        byte[] sequence = [1, 2, 3, 4];
+        using var cancellationTokenSource = new CancellationTokenSource();
+        await cancellationTokenSource.CancelAsync();
+
+        // Act
+        Func<Task> act = async () => await serializer.Deserialize<TestClass>(sequence, cancellationTokenSource.Token);
+
+        // Assert
+        _ = await Assert.That(act).Throws<OperationCanceledException>();
+    }
+
+    [Test]
+    public async Task GivenACancellationThenOperationCanceledExceptionIsThrownAsync()
+    {
+        // Arrange
+        var serializer = new Serializer();
+        using var stream = new MemoryStream([1, 2, 3, 4]);
+        using var cancellationTokenSource = new CancellationTokenSource();
+        await cancellationTokenSource.CancelAsync();
+
+        // Act
+        Func<Task> act = async () => await serializer.Deserialize<TestClass>(stream, cancellationTokenSource.Token);
+
+        // Assert
+        _ = await Assert.That(act).Throws<OperationCanceledException>();
+    }
+
+    [Test]
     public async Task GivenAValidSequenceThenAnInstanceIsReturned()
     {
         // Arrange
@@ -20,22 +52,6 @@ public sealed class WhenDeserializeIsCalled
         // Assert
         _ = await Assert.That(result).IsNotNull();
         _ = await Assert.That(result.Property).IsEqualTo(instance.Property);
-    }
-
-    [Test]
-    public async Task GivenACancellationThenOperationCanceledExceptionIsThrown()
-    {
-        // Arrange
-        var serializer = new Serializer();
-        byte[] sequence = [1, 2, 3, 4];
-        using var cancellationTokenSource = new CancellationTokenSource();
-        await cancellationTokenSource.CancelAsync();
-
-        // Act
-        Func<Task> act = async () => await serializer.Deserialize<TestClass>(sequence, cancellationTokenSource.Token);
-
-        // Assert
-        _ = await Assert.That(act).Throws<OperationCanceledException>();
     }
 
     [Test]
@@ -55,22 +71,6 @@ public sealed class WhenDeserializeIsCalled
         // Assert
         _ = await Assert.That(result).IsNotNull();
         _ = await Assert.That(result.Property).IsEqualTo(instance.Property);
-    }
-
-    [Test]
-    public async Task GivenACancellationThenOperationCanceledExceptionIsThrownAsync()
-    {
-        // Arrange
-        var serializer = new Serializer();
-        using var stream = new MemoryStream([1, 2, 3, 4]);
-        using var cancellationTokenSource = new CancellationTokenSource();
-        await cancellationTokenSource.CancelAsync();
-
-        // Act
-        Func<Task> act = async () => await serializer.Deserialize<TestClass>(stream, cancellationTokenSource.Token);
-
-        // Assert
-        _ = await Assert.That(act).Throws<OperationCanceledException>();
     }
 }
 #endif

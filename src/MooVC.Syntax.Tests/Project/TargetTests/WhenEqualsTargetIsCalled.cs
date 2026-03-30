@@ -3,11 +3,11 @@
 public sealed class WhenEqualsTargetIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Target subject = TargetTestsData.Create();
-        Target? other = default;
+        Target other = TargetTestsData.Create(label: Snippet.From("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsTargetIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Target subject = TargetTestsData.Create();
-        Target other = TargetTestsData.Create(label: Snippet.From("Other"));
+        Target? other = default;
 
         // Act
         bool result = subject.Equals(other);

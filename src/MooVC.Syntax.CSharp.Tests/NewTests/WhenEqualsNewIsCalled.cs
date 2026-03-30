@@ -6,6 +6,34 @@ public sealed class WhenEqualsNewIsCalled
     private const string Different = "";
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        New left = Same;
+        New right = Different;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        New left = Same;
+        New right = Same;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -31,33 +59,5 @@ public sealed class WhenEqualsNewIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        New left = Same;
-        New right = Same;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        New left = Same;
-        New right = Different;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

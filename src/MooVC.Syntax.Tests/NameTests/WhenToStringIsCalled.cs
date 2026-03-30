@@ -10,16 +10,31 @@ public sealed class WhenToStringIsCalled
     private const string WithPrefix = "@Alpha";
 
     [Test]
-    public async Task GivenNullValueThenResultIsNull()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
-        var subject = new Name(default);
+        var subject = new Name(Alpha);
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsEqualTo(Alpha);
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenDifferentResultsAreReturned()
+    {
+        // Arrange
+        var left = new Name("Alpha");
+        var right = new Name("Beta");
+
+        // Act
+        string leftString = left.ToString();
+        string rightString = right.ToString();
+
+        // Assert
+        _ = await Assert.That(leftString).IsNotEqualTo(rightString);
     }
 
     [Test]
@@ -36,29 +51,43 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenWhitespaceThenMatchesValue()
+    public async Task GivenNullValueThenResultIsNull()
     {
         // Arrange
-        var subject = new Name(Space);
+        var subject = new Name(default);
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(Space);
+        _ = await Assert.That(result).IsNull();
     }
 
     [Test]
-    public async Task GivenAsciiThenMatchesValue()
+    public async Task GivenRepeatedCallsThenResultIsStable()
     {
         // Arrange
         var subject = new Name(Alpha);
 
         // Act
+        string first = subject.ToString();
+        string second = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenReservedPrefixThenMatchesValue()
+    {
+        // Arrange
+        var subject = new Name(WithPrefix);
+
+        // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(Alpha);
+        _ = await Assert.That(result).IsEqualTo(WithPrefix);
     }
 
     [Test]
@@ -88,19 +117,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenReservedPrefixThenMatchesValue()
-    {
-        // Arrange
-        var subject = new Name(WithPrefix);
-
-        // Act
-        string result = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(WithPrefix);
-    }
-
-    [Test]
     public async Task GivenVeryLongThenMatchesValue()
     {
         // Arrange
@@ -115,31 +131,15 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenDifferentResultsAreReturned()
+    public async Task GivenWhitespaceThenMatchesValue()
     {
         // Arrange
-        var left = new Name("Alpha");
-        var right = new Name("Beta");
+        var subject = new Name(Space);
 
         // Act
-        string leftString = left.ToString();
-        string rightString = right.ToString();
+        string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(leftString).IsNotEqualTo(rightString);
-    }
-
-    [Test]
-    public async Task GivenRepeatedCallsThenResultIsStable()
-    {
-        // Arrange
-        var subject = new Name(Alpha);
-
-        // Act
-        string first = subject.ToString();
-        string second = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(result).IsEqualTo(Space);
     }
 }

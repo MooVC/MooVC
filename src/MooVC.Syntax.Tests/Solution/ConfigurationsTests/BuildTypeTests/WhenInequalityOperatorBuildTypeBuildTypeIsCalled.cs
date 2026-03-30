@@ -17,20 +17,6 @@ public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Configurations.BuildType("Custom");
-        var right = new Configurations.BuildType("Custom");
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenInequalityOperatorBuildTypeBuildTypeIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Configurations.BuildType("Custom");
+        var right = new Configurations.BuildType("Custom");
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

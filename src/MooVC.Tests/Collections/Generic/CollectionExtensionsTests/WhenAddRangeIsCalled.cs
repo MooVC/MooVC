@@ -3,6 +3,34 @@
 public sealed class WhenAddRangeIsCalled
 {
     [Test]
+    public async Task GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
+    {
+        // Arrange
+        ICollection<int> actual = [];
+        int[] items = [];
+
+        // Act
+        actual.AddRange(items);
+
+        // Assert
+        _ = await Assert.That(actual).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
+    {
+        // Arrange
+        ICollection<int> actual = [1, 2, 3];
+        int[] items = [];
+
+        // Act
+        actual.AddRange(items);
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
     public async Task GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -57,33 +85,5 @@ public sealed class WhenAddRangeIsCalled
 
         // Assert
         _ = await Assert.That(actual).IsEquivalentTo(expected);
-    }
-
-    [Test]
-    public async Task GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
-    {
-        // Arrange
-        ICollection<int> actual = [];
-        int[] items = [];
-
-        // Act
-        actual.AddRange(items);
-
-        // Assert
-        _ = await Assert.That(actual).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetRemainsUnchanged()
-    {
-        // Arrange
-        ICollection<int> actual = [1, 2, 3];
-        int[] items = [];
-
-        // Act
-        actual.AddRange(items);
-
-        // Assert
-        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
     }
 }

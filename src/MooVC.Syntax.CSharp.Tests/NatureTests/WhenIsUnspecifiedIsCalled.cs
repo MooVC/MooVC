@@ -3,19 +3,6 @@
 public sealed class WhenIsUnspecifiedIsCalled
 {
     [Test]
-    public async Task GivenUnspecifiedNatureThenReturnsTrue()
-    {
-        // Arrange
-        Nature subject = Nature.Unspecified;
-
-        // Act
-        bool result = subject.IsUnspecified;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     [Arguments(nameof(Nature.Class))]
     [Arguments(nameof(Nature.Struct))]
     [Arguments(nameof(Nature.Unmanaged))]
@@ -32,5 +19,18 @@ public sealed class WhenIsUnspecifiedIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedNatureThenReturnsTrue()
+    {
+        // Arrange
+        Nature subject = Nature.Unspecified;
+
+        // Act
+        bool result = subject.IsUnspecified;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

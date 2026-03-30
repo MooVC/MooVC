@@ -4,21 +4,20 @@ namespace MooVC.Paging.DirectiveTests;
 public sealed class WhenIncrementIsCalled
 {
     [Test]
-    [Arguments(0, 1, 25)]
-    [Arguments(1, 2, 1)]
-    [Arguments(4, 5, 10)]
-    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
-    public async Task GivenADirectiveWhenPostIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(ushort.MaxValue)]
+    public async Task GivenADirectiveAtMaxWhenIncrementedThenDirectiveIsNotIncremented(ushort increment)
     {
         // Arrange
-        Directive directive = new(Limit: limit, Page: current);
+        Directive expected = new(Limit: 10, Page: ushort.MaxValue);
 
         // Act
-        directive++;
+        Directive actual = expected + increment;
 
         // Assert
-        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
-        _ = await Assert.That(directive.Page).IsEqualTo(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -33,24 +32,6 @@ public sealed class WhenIncrementIsCalled
 
         // Assert
         _ = await Assert.That(actual).IsEqualTo(expected);
-    }
-
-    [Test]
-    [Arguments(0, 1, 25)]
-    [Arguments(1, 2, 1)]
-    [Arguments(4, 5, 10)]
-    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
-    public async Task GivenADirectiveWhenPreIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
-    {
-        // Arrange
-        Directive directive = new(Limit: limit, Page: current);
-
-        // Act
-        ++directive;
-
-        // Assert
-        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
-        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 
     [Test]
@@ -85,20 +66,39 @@ public sealed class WhenIncrementIsCalled
     }
 
     [Test]
-    [Arguments(0)]
-    [Arguments(1)]
-    [Arguments(10)]
-    [Arguments(ushort.MaxValue)]
-    public async Task GivenADirectiveAtMaxWhenIncrementedThenDirectiveIsNotIncremented(ushort increment)
+    [Arguments(0, 1, 25)]
+    [Arguments(1, 2, 1)]
+    [Arguments(4, 5, 10)]
+    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
+    public async Task GivenADirectiveWhenPostIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
-        Directive expected = new(Limit: 10, Page: ushort.MaxValue);
+        Directive directive = new(Limit: limit, Page: current);
 
         // Act
-        Directive actual = expected + increment;
+        directive++;
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments(0, 1, 25)]
+    [Arguments(1, 2, 1)]
+    [Arguments(4, 5, 10)]
+    [Arguments(ushort.MaxValue - 1, ushort.MaxValue, 5)]
+    public async Task GivenADirectiveWhenPreIncrementedThenDirectiveIsIncrementedByOne(ushort current, ushort expected, ushort limit)
+    {
+        // Arrange
+        Directive directive = new(Limit: limit, Page: current);
+
+        // Act
+        ++directive;
+
+        // Assert
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 }
 #endif

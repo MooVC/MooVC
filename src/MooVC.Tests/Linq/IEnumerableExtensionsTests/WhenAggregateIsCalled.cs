@@ -3,6 +3,39 @@
 public sealed class WhenAggregateIsCalled
 {
     [Test]
+    public async Task GivenAListThenResultsMatchingEachKeyAreReturned()
+    {
+        // Arrange
+        IEnumerable<int> items = [1, 2, 3];
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+
+        // Act
+        IEnumerable<string> results = items.Aggregate(source);
+
+        // Assert
+        _ = await Assert.That(results).IsEquivalentTo(source.Values);
+    }
+
+    [Test]
+    public async Task GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
+    {
+        // Arrange
+        var items = new List<int> { 1, 2, 3 };
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+
+        _ = items.Remove(2);
+        items.Add(4);
+
+        IEnumerable<string> expected = ["1", "3"];
+
+        // Act
+        IEnumerable<string> results = items.Aggregate(source);
+
+        // Assert
+        _ = await Assert.That(results).IsEquivalentTo(expected);
+    }
+
+    [Test]
     public async Task GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
     {
         // Arrange
@@ -39,38 +72,5 @@ public sealed class WhenAggregateIsCalled
 
         // Assert
         _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenAListThenResultsMatchingEachKeyAreReturned()
-    {
-        // Arrange
-        IEnumerable<int> items = [1, 2, 3];
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
-
-        // Act
-        IEnumerable<string> results = items.Aggregate(source);
-
-        // Assert
-        _ = await Assert.That(results).IsEquivalentTo(source.Values);
-    }
-
-    [Test]
-    public async Task GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
-    {
-        // Arrange
-        var items = new List<int> { 1, 2, 3 };
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
-
-        _ = items.Remove(2);
-        items.Add(4);
-
-        IEnumerable<string> expected = ["1", "3"];
-
-        // Act
-        IEnumerable<string> results = items.Aggregate(source);
-
-        // Assert
-        _ = await Assert.That(results).IsEquivalentTo(expected);
     }
 }

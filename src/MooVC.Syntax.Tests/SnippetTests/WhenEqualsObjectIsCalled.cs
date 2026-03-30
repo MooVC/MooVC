@@ -8,6 +8,52 @@ public sealed class WhenEqualsObjectIsCalled
     private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
+    public async Task GivenDifferentTypeThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Snippet(_same);
+        object right = _same;
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Snippet(_same);
+        object right = new Snippet(_different);
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Snippet(_same);
+        object right = new Snippet(_same);
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -33,51 +79,5 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Snippet(_same);
-        object right = new Snippet(_same);
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Snippet(_same);
-        object right = new Snippet(_different);
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentTypeThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Snippet(_same);
-        object right = _same;
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

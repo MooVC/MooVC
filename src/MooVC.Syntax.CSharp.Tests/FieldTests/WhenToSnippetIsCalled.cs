@@ -5,6 +5,25 @@ using MooVC.Syntax.CSharp.SymbolTests;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
+    public async Task GivenFieldWithDefaultThenSignatureIncludesAssignment()
+    {
+        // Arrange
+        Field subject = FieldTestsData.Create(
+            @default: Snippet.From("default"),
+            isReadOnly: false,
+            isStatic: true,
+            name: FieldTestsData.DefaultName,
+            scope: Scope.Public,
+            type: SymbolTestsData.Create("Result"));
+
+        // Act
+        string result = subject.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("public static Result Value = default;");
+    }
+
+    [Test]
     public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
@@ -30,24 +49,5 @@ public sealed class WhenToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenFieldWithDefaultThenSignatureIncludesAssignment()
-    {
-        // Arrange
-        Field subject = FieldTestsData.Create(
-            @default: Snippet.From("default"),
-            isReadOnly: false,
-            isStatic: true,
-            name: FieldTestsData.DefaultName,
-            scope: Scope.Public,
-            type: SymbolTestsData.Create("Result"));
-
-        // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("public static Result Value = default;");
     }
 }

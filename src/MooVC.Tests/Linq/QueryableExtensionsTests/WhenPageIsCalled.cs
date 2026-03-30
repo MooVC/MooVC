@@ -6,17 +6,24 @@ using MooVC.Paging;
 public sealed class WhenPageIsCalled
 {
     [Test]
-    public async Task GivenNoQueryableThenTheEmptyQueryableIsReturned()
+    public async Task GivenADirectiveThenTheSetIsFilteredIsCalled()
     {
         // Arrange
-        IQueryable<int>? queryable = default;
-        Directive directive = default;
+        var faker = new Faker();
+        Directive directive = new(Limit: 20, Page: 5);
+
+        IEnumerable<int> set = faker.Random.Digits(1000);
+        IQueryable<int> queryable = set.AsQueryable();
+
+        IEnumerable<int> expected = set
+            .Skip(directive.Skip)
+            .Take(directive.Limit);
 
         // Act
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        _ = await Assert.That(actual).IsNull();
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
     [Test]
@@ -38,24 +45,17 @@ public sealed class WhenPageIsCalled
     }
 
     [Test]
-    public async Task GivenADirectiveThenTheSetIsFilteredIsCalled()
+    public async Task GivenNoQueryableThenTheEmptyQueryableIsReturned()
     {
         // Arrange
-        var faker = new Faker();
-        Directive directive = new(Limit: 20, Page: 5);
-
-        IEnumerable<int> set = faker.Random.Digits(1000);
-        IQueryable<int> queryable = set.AsQueryable();
-
-        IEnumerable<int> expected = set
-            .Skip(directive.Skip)
-            .Take(directive.Limit);
+        IQueryable<int>? queryable = default;
+        Directive directive = default;
 
         // Act
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        _ = await Assert.That(actual).IsEquivalentTo(expected);
+        _ = await Assert.That(actual).IsNull();
     }
 }
 #endif

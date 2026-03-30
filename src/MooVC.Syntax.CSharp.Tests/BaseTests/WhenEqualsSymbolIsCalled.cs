@@ -6,6 +6,34 @@ public sealed class WhenEqualsSymbolIsCalled
     private const string Different = "Beta";
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Base subject = new Symbol { Name = Same };
+        var other = new Symbol { Name = Different };
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Base subject = new Symbol { Name = Same };
+        var other = new Symbol { Name = Same };
+
+        // Act
+        bool result = subject.Equals(other);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -32,33 +60,5 @@ public sealed class WhenEqualsSymbolIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Base subject = new Symbol { Name = Same };
-        var other = new Symbol { Name = Same };
-
-        // Act
-        bool result = subject.Equals(other);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Base subject = new Symbol { Name = Same };
-        var other = new Symbol { Name = Different };
-
-        // Act
-        bool result = subject.Equals(other);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorFileStringIsCalled
 {
     [Test]
-    public async Task GivenSameValueThenReturnsTrue()
-    {
-        // Arrange
-        var left = new File(FileTestsData.DefaultPath);
-        string right = FileTestsData.DefaultPath;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualityOperatorFileStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameValueThenReturnsTrue()
+    {
+        // Arrange
+        var left = new File(FileTestsData.DefaultPath);
+        string right = FileTestsData.DefaultPath;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

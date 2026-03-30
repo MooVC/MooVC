@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorConversionConversionIsCalled
 {
     [Test]
-    public async Task GivenEquivalentConversionsThenReturnsTrue()
-    {
-        // Arrange
-        Conversion first = ConversionTestsData.Create();
-        Conversion second = ConversionTestsData.Create();
-
-        // Act
-        bool result = first == second;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentConversionsThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualityOperatorConversionConversionIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentConversionsThenReturnsTrue()
+    {
+        // Arrange
+        Conversion first = ConversionTestsData.Create();
+        Conversion second = ConversionTestsData.Create();
+
+        // Act
+        bool result = first == second;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

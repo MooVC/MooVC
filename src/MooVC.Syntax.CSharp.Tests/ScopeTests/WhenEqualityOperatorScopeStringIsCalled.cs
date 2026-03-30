@@ -6,6 +6,38 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
     private const string Different = "public";
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Scope left = Same;
+        string right = Different;
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Scope left = Same;
+        string right = Same;
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenSubjectNullValueNullThenReturnsTrue()
     {
         // Arrange
@@ -45,37 +77,5 @@ public sealed class WhenEqualityOperatorScopeStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Scope left = Same;
-        string right = Same;
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Scope left = Same;
-        string right = Different;
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

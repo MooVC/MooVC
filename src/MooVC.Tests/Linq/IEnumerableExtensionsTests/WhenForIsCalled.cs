@@ -3,38 +3,6 @@
 public sealed class WhenForIsCalled
 {
     [Test]
-    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
-    {
-        // Arrange
-        IEnumerable<int>? enumeration = default;
-        bool wasInvoked = false;
-
-        void Action(int index, int value)
-        {
-            wasInvoked = true;
-        }
-
-        // Act
-        enumeration.For(Action);
-
-        // Assert
-        _ = await Assert.That(wasInvoked).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        IEnumerable<int>? enumeration = default;
-
-        // Act
-        Action act = () => enumeration.For(default!);
-
-        // Assert
-        _ = await Assert.That(act).ThrowsNothing();
-    }
-
-    [Test]
     public async Task GivenAnEnumerationThenTheCorrectIndexIsPassedToTheActionForEachEnumerationMember()
     {
         // Arrange
@@ -85,5 +53,37 @@ public sealed class WhenForIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
+    }
+
+    [Test]
+    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+    {
+        // Arrange
+        IEnumerable<int>? enumeration = default;
+        bool wasInvoked = false;
+
+        void Action(int index, int value)
+        {
+            wasInvoked = true;
+        }
+
+        // Act
+        enumeration.For(Action);
+
+        // Assert
+        _ = await Assert.That(wasInvoked).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        IEnumerable<int>? enumeration = default;
+
+        // Act
+        Action act = () => enumeration.For(default!);
+
+        // Assert
+        _ = await Assert.That(act).ThrowsNothing();
     }
 }

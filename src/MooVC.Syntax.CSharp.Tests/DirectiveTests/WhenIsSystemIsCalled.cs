@@ -3,22 +3,6 @@
 public sealed class WhenIsSystemIsCalled
 {
     [Test]
-    public async Task GivenSystemQualifierThenReturnsTrue()
-    {
-        // Arrange
-        var subject = new Directive
-        {
-            Qualifier = new Qualifier(["System", "Linq"]),
-        };
-
-        // Act
-        bool result = subject.IsSystem;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenNonSystemQualifierThenReturnsFalse()
     {
         // Arrange
@@ -32,5 +16,21 @@ public sealed class WhenIsSystemIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSystemQualifierThenReturnsTrue()
+    {
+        // Arrange
+        var subject = new Directive
+        {
+            Qualifier = new Qualifier(["System", "Linq"]),
+        };
+
+        // Act
+        bool result = subject.IsSystem;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -9,6 +9,27 @@ using MooVC.IO;
 public sealed class WhenStreamsAreCompressed
 {
     [Test]
+    public async Task GivenAnEmptyStreamThenTheResultMatches()
+    {
+        // Arrange
+        byte[] expected = [];
+
+        var compressor = new BrotliCompressor();
+        using var stream = new MemoryStream(expected);
+
+        // Act
+        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
+
+        compressed.Position = 0;
+
+        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
+
+        // Assert
+        IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
+        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
+    }
+
+    [Test]
     public async Task GivenAStreamThenTheResultMatches()
     {
         // Arrange
@@ -28,27 +49,6 @@ public sealed class WhenStreamsAreCompressed
 
         // Act
         compressed.Position = 0;
-        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
-
-        // Assert
-        IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
-        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
-    }
-
-    [Test]
-    public async Task GivenAnEmptyStreamThenTheResultMatches()
-    {
-        // Arrange
-        byte[] expected = [];
-
-        var compressor = new BrotliCompressor();
-        using var stream = new MemoryStream(expected);
-
-        // Act
-        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
-
-        compressed.Position = 0;
-
         using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert

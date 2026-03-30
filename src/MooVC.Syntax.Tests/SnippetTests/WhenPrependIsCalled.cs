@@ -8,36 +8,6 @@ public sealed class WhenPrependIsCalled
     private const string Phi = "phi";
 
     [Test]
-    public async Task GivenNullOptionsAndValuesThenThrows()
-    {
-        // Arrange
-        var subject = Snippet.From(Alpha);
-        Snippet.Options? options = default;
-
-        // Act
-        Func<Snippet> act = () => _ = subject.Prepend(options!, Beta);
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
-    }
-
-    [Test]
-    public async Task GivenStringValuesThenTheyArePrepended()
-    {
-        // Arrange
-        string expected = string.Join(Environment.NewLine, Beta, Gamma, Alpha);
-        var subject = Snippet.From(Alpha);
-
-        // Act
-        Snippet result = subject.Prepend(Beta, Gamma);
-
-        // Assert
-        string text = result.ToString();
-        _ = await Assert.That(text).IsEqualTo(expected);
-    }
-
-    [Test]
     public async Task GivenMultiLineValuesThenTheLinesArePrepended()
     {
         // Arrange
@@ -53,6 +23,21 @@ public sealed class WhenPrependIsCalled
     }
 
     [Test]
+    public async Task GivenNullOptionsAndValuesThenThrows()
+    {
+        // Arrange
+        var subject = Snippet.From(Alpha);
+        Snippet.Options? options = default;
+
+        // Act
+        Func<Snippet> act = () => _ = subject.Prepend(options!, Beta);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+    }
+
+    [Test]
     public async Task GivenSnippetsThenTheyArePrepended()
     {
         // Arrange
@@ -64,6 +49,21 @@ public sealed class WhenPrependIsCalled
 
         // Act
         Snippet result = subject.Prepend(first, second);
+
+        // Assert
+        string text = result.ToString();
+        _ = await Assert.That(text).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenStringValuesThenTheyArePrepended()
+    {
+        // Arrange
+        string expected = string.Join(Environment.NewLine, Beta, Gamma, Alpha);
+        var subject = Snippet.From(Alpha);
+
+        // Act
+        Snippet result = subject.Prepend(Beta, Gamma);
 
         // Assert
         string text = result.ToString();

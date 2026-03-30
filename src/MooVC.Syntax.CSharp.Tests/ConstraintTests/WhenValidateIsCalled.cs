@@ -12,10 +12,14 @@ public sealed class WhenValidateIsCalled
     private const string InvalidName = "Invalid Name";
 
     [Test]
-    public async Task GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
+    public async Task GivenInvalidBaseThenValidationErrorsReturned()
     {
         // Arrange
-        Constraint constraint = Constraint.Unspecified;
+        var constraint = new Constraint
+        {
+            Base = new Symbol { Name = InvalidName },
+        };
+
         var context = new ValidationContext(constraint);
         var results = new List<ValidationResult>();
 
@@ -23,8 +27,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -50,12 +56,13 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenInvalidBaseThenValidationErrorsReturned()
+    public async Task GivenMultipleInvalidValuesThenAllValidationErrorsReturned()
     {
         // Arrange
         var constraint = new Constraint
         {
             Base = new Symbol { Name = InvalidName },
+            Interfaces = [new Implementation(new Declaration { Name = InvalidInterfaceName })],
         };
 
         var context = new ValidationContext(constraint);
@@ -66,9 +73,25 @@ public sealed class WhenValidateIsCalled
 
         // Assert
         _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(results).IsNotEmpty();
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Implementation)));
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedConstraintThenNoValidationErrorsReturned()
+    {
+        // Arrange
+        Constraint constraint = Constraint.Unspecified;
+        var context = new ValidationContext(constraint);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -92,28 +115,5 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsTrue();
         _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenMultipleInvalidValuesThenAllValidationErrorsReturned()
-    {
-        // Arrange
-        var constraint = new Constraint
-        {
-            Base = new Symbol { Name = InvalidName },
-            Interfaces = [new Implementation(new Declaration { Name = InvalidInterfaceName })],
-        };
-
-        var context = new ValidationContext(constraint);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(constraint, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).IsNotEmpty();
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Implementation)));
     }
 }

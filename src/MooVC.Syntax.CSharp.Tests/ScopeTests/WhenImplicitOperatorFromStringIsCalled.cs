@@ -7,6 +7,20 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Name = "custom";
 
     [Test]
+    public async Task GivenEmptyThenEqualsString()
+    {
+        // Arrange
+        string value = Empty;
+
+        // Act
+        Scope subject = value;
+
+        // Assert
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
+    }
+
+    [Test]
     public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -31,31 +45,19 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyThenEqualsString()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        string value = Empty;
+        string value = Name;
 
         // Act
-        Scope subject = value;
+        Scope first = value;
+        Scope second = value;
 
         // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenWhitespaceThenEqualsString()
-    {
-        // Arrange
-        string value = Space;
-
-        // Act
-        Scope subject = value;
-
-        // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 
     [Test]
@@ -87,18 +89,16 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenWhitespaceThenEqualsString()
     {
         // Arrange
-        string value = Name;
+        string value = Space;
 
         // Act
-        Scope first = value;
-        Scope second = value;
+        Scope subject = value;
 
         // Assert
-        _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That(first == second).IsTrue();
-        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 }

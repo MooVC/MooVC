@@ -5,18 +5,22 @@ using System.Collections.Immutable;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
-    public async Task GivenNullOptionsThenThrows()
+    public async Task GivenAWrappedSymbolThenTheArgumentsAreApplied()
     {
         // Arrange
-        Symbol subject = SymbolTestsData.Create();
-        Symbol.Options? options = default;
+        Symbol argument = typeof(int);
+        Symbol wrapper = typeof(ImmutableArray<>);
+
+        Symbol wrapped = wrapper.WithArguments(symbol => symbol
+            .From(argument.Qualifier)
+            .IsNullable(argument.IsNullable)
+            .Named(argument.Name));
 
         // Act
-        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
+        var representation = wrapped.ToSnippet(Symbol.Options.Default);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(representation).IsEqualTo("ImmutableArray<int>");
     }
 
     [Test]
@@ -66,21 +70,17 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    public async Task GivenAWrappedSymbolThenTheArgumentsAreApplied()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
-        Symbol argument = typeof(int);
-        Symbol wrapper = typeof(ImmutableArray<>);
-
-        Symbol wrapped = wrapper.WithArguments(symbol => symbol
-            .From(argument.Qualifier)
-            .IsNullable(argument.IsNullable)
-            .Named(argument.Name));
+        Symbol subject = SymbolTestsData.Create();
+        Symbol.Options? options = default;
 
         // Act
-        var representation = wrapped.ToSnippet(Symbol.Options.Default);
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
 
         // Assert
-        _ = await Assert.That(representation).IsEqualTo("ImmutableArray<int>");
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 }

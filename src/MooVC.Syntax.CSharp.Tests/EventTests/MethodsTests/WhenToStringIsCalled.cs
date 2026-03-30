@@ -3,19 +3,6 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenDefaultInstanceThenReturnsEmpty()
-    {
-        // Arrange
-        Event.Methods subject = Event.Methods.Default;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenAutoImplementedMembersThenReturnsEmpty()
     {
         // Arrange
@@ -26,6 +13,19 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenDefaultInstanceThenReturnsEmpty()
+    {
+        // Arrange
+        Event.Methods subject = Event.Methods.Default;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 
     [Test]

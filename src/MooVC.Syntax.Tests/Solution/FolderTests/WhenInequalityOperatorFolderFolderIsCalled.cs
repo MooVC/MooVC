@@ -17,20 +17,6 @@ public sealed class WhenInequalityOperatorFolderFolderIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Folder left = FolderTestsData.Create();
-        Folder right = FolderTestsData.Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenInequalityOperatorFolderFolderIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Folder left = FolderTestsData.Create();
+        Folder right = FolderTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

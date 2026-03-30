@@ -17,20 +17,6 @@ public sealed class WhenInequalityOperatorKindKindIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Struct.Kind left = Struct.Kind.Record;
-        Struct.Kind right = Struct.Kind.Record;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenInequalityOperatorKindKindIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Struct.Kind left = Struct.Kind.Record;
+        Struct.Kind right = Struct.Kind.Record;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

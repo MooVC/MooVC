@@ -17,11 +17,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Identifier.Options? left = default;
-        var right = new Identifier.Options();
+        var left = new Identifier.Options { Casing = Identifier.Casing.Camel };
+        var right = new Identifier.Options { Casing = Identifier.Casing.Kebab };
 
         // Act
         bool result = left == right;
@@ -45,11 +45,11 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        var left = new Identifier.Options { Casing = Identifier.Casing.Camel };
-        var right = new Identifier.Options { Casing = Identifier.Casing.Kebab };
+        Identifier.Options? left = default;
+        var right = new Identifier.Options();
 
         // Act
         bool result = left == right;

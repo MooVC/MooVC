@@ -20,25 +20,11 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Property.Mode? left = default;
-        const int right = Same;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
-    {
-        // Arrange
-        Property.Mode left = Property.Mode.Init;
-        int? right = default;
+        Property.Mode left = Property.Mode.ReadOnly;
+        const int right = Different;
 
         // Act
         bool result = left != right;
@@ -62,11 +48,25 @@ public sealed class WhenInequalityOperatorModeIntIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Property.Mode left = Property.Mode.ReadOnly;
-        const int right = Different;
+        Property.Mode? left = default;
+        const int right = Same;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    {
+        // Arrange
+        Property.Mode left = Property.Mode.Init;
+        int? right = default;
 
         // Act
         bool result = left != right;

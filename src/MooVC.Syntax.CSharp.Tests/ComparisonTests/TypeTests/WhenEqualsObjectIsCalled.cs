@@ -3,6 +3,19 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
+    public async Task GivenADifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        Comparison.Type type = Comparison.Type.Equality;
+
+        // Act
+        bool result = type.Equals(Comparison.Type.Inequality as object);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -10,6 +23,19 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Act
         bool result = type.Equals(null as object);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenAnUnrecognisedTypeThenReturnsFalse()
+    {
+        // Arrange
+        Comparison.Type type = Comparison.Type.Equality;
+
+        // Act
+        bool result = type.Equals(new object());
 
         // Assert
         _ = await Assert.That(result).IsFalse();
@@ -39,31 +65,5 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenADifferentValueThenReturnsFalse()
-    {
-        // Arrange
-        Comparison.Type type = Comparison.Type.Equality;
-
-        // Act
-        bool result = type.Equals(Comparison.Type.Inequality as object);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenAnUnrecognisedTypeThenReturnsFalse()
-    {
-        // Arrange
-        Comparison.Type type = Comparison.Type.Equality;
-
-        // Act
-        bool result = type.Equals(new object());
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

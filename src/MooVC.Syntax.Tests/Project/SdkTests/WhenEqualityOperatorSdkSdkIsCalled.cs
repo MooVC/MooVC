@@ -17,20 +17,6 @@ public sealed class WhenEqualityOperatorSdkSdkIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Sdk left = SdkTestsData.Create();
-        Sdk right = SdkTestsData.Create();
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenEqualityOperatorSdkSdkIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Sdk left = SdkTestsData.Create();
+        Sdk right = SdkTestsData.Create();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

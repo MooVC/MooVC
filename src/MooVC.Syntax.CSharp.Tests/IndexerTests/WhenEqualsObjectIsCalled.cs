@@ -3,48 +3,6 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        object? target = default;
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        object target = subject;
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentValueThenReturnsTrue()
-    {
-        // Arrange
-        Indexer subject = IndexerTestsData.Create();
-        object target = IndexerTestsData.Create();
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentTypeThenReturnsFalse()
     {
         // Arrange
@@ -70,5 +28,47 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentValueThenReturnsTrue()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        object target = IndexerTestsData.Create();
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNullThenReturnsFalse()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        object? target = default;
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Indexer subject = IndexerTestsData.Create();
+        object target = subject;
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

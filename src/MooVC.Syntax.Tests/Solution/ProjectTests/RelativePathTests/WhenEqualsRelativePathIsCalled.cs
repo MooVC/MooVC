@@ -3,11 +3,11 @@
 public sealed class WhenEqualsRelativePathIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.RelativePath("src/Project.csproj");
-        Project.RelativePath? other = default;
+        var other = new Project.RelativePath("src/Other.csproj");
 
         // Act
         bool result = subject.Equals(other);
@@ -32,11 +32,11 @@ public sealed class WhenEqualsRelativePathIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new Project.RelativePath("src/Project.csproj");
-        var other = new Project.RelativePath("src/Other.csproj");
+        Project.RelativePath? other = default;
 
         // Act
         bool result = subject.Equals(other);

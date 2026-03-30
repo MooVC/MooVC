@@ -8,6 +8,38 @@ public sealed class WhenEqualsSnippetIsCalled
     private static readonly ImmutableArray<string> _same = ["Alpha", "Beta"];
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Snippet(_same);
+        var right = new Snippet(_different);
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Snippet(_same);
+        var right = new Snippet(_same);
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -33,37 +65,5 @@ public sealed class WhenEqualsSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Snippet(_same);
-        var right = new Snippet(_same);
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Snippet(_same);
-        var right = new Snippet(_different);
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

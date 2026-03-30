@@ -3,6 +3,20 @@
 public sealed class WhenGreaterThanOrEqualOperatorIsCalled
 {
     [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Binary.Type leftType = Binary.Type.Add;
+        Binary.Type rightType = Binary.Type.Add;
+
+        // Act
+        bool result = leftType >= rightType;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -22,20 +36,6 @@ public sealed class WhenGreaterThanOrEqualOperatorIsCalled
         // Arrange
         Binary.Type leftType = Binary.Type.Add;
         Binary.Type? rightType = default;
-
-        // Act
-        bool result = leftType >= rightType;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Binary.Type leftType = Binary.Type.Add;
-        Binary.Type rightType = Binary.Type.Add;
 
         // Act
         bool result = leftType >= rightType;
