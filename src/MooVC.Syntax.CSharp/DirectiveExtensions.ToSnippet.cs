@@ -24,16 +24,15 @@
             return directives
                 .Select(directive => new
                 {
-                    Rendering = directive.ToSnippet(options),
+                    Rendering = directive.Qualifier.ToString(),
                     Value = directive,
                 })
                 .OrderBy(directive => directive.Value.IsStatic)
                 .ThenByDescending(directive => directive.Value.Alias.IsUnnamed)
                 .ThenByDescending(directive => directive.Value.IsSystem)
                 .ThenBy(directive => directive.Value.Alias)
-                .ThenBy(directive => directive.Value.Qualifier)
                 .ThenBy(directive => directive.Rendering)
-                .Select(directive => Snippet.From(options, directive.Rendering))
+                .Select(directive => directive.Value.ToSnippet(options))
                 .ToImmutableArray()
                 .Stack(options);
         }

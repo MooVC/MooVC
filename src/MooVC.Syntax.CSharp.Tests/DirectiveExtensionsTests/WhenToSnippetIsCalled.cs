@@ -5,10 +5,6 @@ using System.Collections.Immutable;
 
 public sealed class WhenToSnippetIsCalled
 {
-    private const string Alias = "Collections";
-    private const string CustomQualifier = "MooVC.Syntax";
-    private const string SystemQualifier = "System";
-
     [Test]
     [Arguments(true)]
     [Arguments(false)]
@@ -30,7 +26,7 @@ public sealed class WhenToSnippetIsCalled
     public async Task GivenNullOptionsThenAnExceptionIsThrown()
     {
         // Arrange
-        ImmutableArray<Directive> directives = [Create(SystemQualifier)];
+        ImmutableArray<Directive> directives = [Create("System")];
         Snippet.Options? options = default;
 
         // Act
@@ -45,17 +41,23 @@ public sealed class WhenToSnippetIsCalled
     public async Task GivenValuesThenTheyAreOrderedCorrectly()
     {
         // Arrange
-        Directive alias = Create(CustomQualifier, alias: Alias);
-        Directive @using = Create(CustomQualifier);
-        Directive system = Create(SystemQualifier);
-        Directive @static = Create($"{SystemQualifier}.Console", isStatic: true);
+        Directive alias1 = Create("System.Collections", alias: "Collections");
+        Directive alias2 = Create("MooVC.Syntax", alias: "Syntax");
+        Directive @using = Create("Mu.Modelling.State");
+        Directive system1 = Create("System");
+        Directive system2 = Create("System.Collections.Immutable");
+        Directive system3 = Create("System.ComponentModel");
+        Directive @static = Create("System.Console", isStatic: true);
 
-        ImmutableArray<Directive> directives = [@static, system, @using, alias];
+        ImmutableArray<Directive> directives = [@static, system3, system2, system1, alias2, alias1, @using];
 
         const string expected = """
             using System;
-            using MooVC.Syntax;
-            using Collections = MooVC.Syntax;
+            using System.Collections.Immutable;
+            using System.ComponentModel;
+            using Mu.Modelling.State;
+            using Collections = System.Collections;
+            using Syntax = MooVC.Syntax;
             using static System.Console;
             """;
 

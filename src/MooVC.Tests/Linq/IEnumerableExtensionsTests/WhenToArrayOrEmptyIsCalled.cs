@@ -10,19 +10,19 @@ public sealed class WhenToArrayOrEmptyIsCalled
         yield return [Array.Empty<int>(), Array.Empty<int>()];
     }
 
-    public static IEnumerable<object?[]> EnumerablePredicateOrderTestData()
+    public static IEnumerable<(int[] Original, int[] Expected)> EnumerablePredicateOrderTestData()
     {
-        yield return [new[] { 3, 1, 2 }, new[] { 1, 3 }];
-        yield return [new[] { 3, 2, 1 }, new[] { 1, 3 }];
-        yield return [new[] { 1 }, new[] { 1 }];
-        yield return [Array.Empty<int>(), Array.Empty<int>()];
+        yield return (new int[] { 3, 1, 2 }, new int[] { 1, 3 });
+        yield return (new int[] { 3, 2, 1 }, new int[] { 1, 3 });
+        yield return (new int[] { 1 }, new int[] { 1 });
+        yield return (Array.Empty<int>(), Array.Empty<int>());
     }
 
-    public static IEnumerable<object?[]> EnumerableTestData()
+    public static IEnumerable<int[]> EnumerableTestData()
     {
-        yield return [new[] { 1, 2 }];
-        yield return [new[] { 1 }];
-        yield return [Array.Empty<int>()];
+        yield return new int[] { 1, 2 };
+        yield return new int[] { 1 };
+        yield return Array.Empty<int>();
     }
 
     public static IEnumerable<object?[]> EnumerablePredicateTestData()
