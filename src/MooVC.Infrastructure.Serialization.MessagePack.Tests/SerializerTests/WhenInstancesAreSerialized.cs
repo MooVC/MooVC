@@ -350,5 +350,4 @@ public sealed class WhenInstancesAreSerialized
         // Assert
         _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
-
 }
