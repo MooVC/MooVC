@@ -17,11 +17,11 @@ public sealed class WhenEqualityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Item? left = default;
-        Item right = ItemTestsData.Create();
+        Item left = ItemTestsData.Create();
+        Item right = ItemTestsData.Create(customToolNamespace: Snippet.From("Other"));
 
         // Act
         bool result = left == right;
@@ -45,11 +45,11 @@ public sealed class WhenEqualityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Item left = ItemTestsData.Create();
-        Item right = ItemTestsData.Create(customToolNamespace: Snippet.From("Other"));
+        Item? left = default;
+        Item right = ItemTestsData.Create();
 
         // Act
         bool result = left == right;

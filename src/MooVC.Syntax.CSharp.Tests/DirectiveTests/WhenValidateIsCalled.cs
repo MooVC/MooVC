@@ -9,46 +9,6 @@ public sealed class WhenValidateIsCalled
     private const string InvalidAlias = "alias";
 
     [Test]
-    public async Task GivenUndefinedDirectiveThenValidationIsSkipped()
-    {
-        // Arrange
-        Directive subject = Directive.Undefined;
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenStaticAliasThenValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Directive
-        {
-            Alias = new Name(Alias),
-            IsStatic = true,
-            Qualifier = new Qualifier(["System", "Console"]),
-        };
-
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Directive.Alias));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
     public async Task GivenInvalidAliasThenValidationErrorReturned()
     {
         // Arrange
@@ -91,6 +51,46 @@ public sealed class WhenValidateIsCalled
         _ = await Assert.That(results).HasSingleItem();
         _ = await Assert.That(results[0].MemberNames).Contains("Qualifier[0]");
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenStaticAliasThenValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Directive
+        {
+            Alias = new Name(Alias),
+            IsStatic = true,
+            Qualifier = new Qualifier(["System", "Console"]),
+        };
+
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Directive.Alias));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenUndefinedDirectiveThenValidationIsSkipped()
+    {
+        // Arrange
+        Directive subject = Directive.Undefined;
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]

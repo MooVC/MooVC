@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorKindStringIsCalled
 {
     [Test]
-    public async Task GivenKindMatchesStringThenReturnsTrue()
-    {
-        // Arrange
-        Struct.Kind left = Struct.Kind.Record;
-        const string Right = "record";
-
-        // Act
-        bool result = left == Right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenKindDiffersFromStringThenReturnsFalse()
     {
         // Arrange
@@ -28,6 +14,20 @@ public sealed class WhenEqualityOperatorKindStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenKindMatchesStringThenReturnsTrue()
+    {
+        // Arrange
+        Struct.Kind left = Struct.Kind.Record;
+        const string Right = "record";
+
+        // Act
+        bool result = left == Right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 
     [Test]

@@ -5,19 +5,6 @@ public sealed class WhenToStringIsCalled
     private const string ValueType = "Value";
 
     [Test]
-    public async Task GivenUndefinedResultThenReturnsEmpty()
-    {
-        // Arrange
-        Result subject = Result.Undefined;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenModifierAndTypeThenCombinedSignatureReturned()
     {
         // Arrange
@@ -33,5 +20,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("async ref Value");
+    }
+
+    [Test]
+    public async Task GivenUndefinedResultThenReturnsEmpty()
+    {
+        // Arrange
+        Result subject = Result.Undefined;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

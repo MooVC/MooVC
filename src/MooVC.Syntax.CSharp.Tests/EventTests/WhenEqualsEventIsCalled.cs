@@ -7,62 +7,6 @@ public sealed class WhenEqualsEventIsCalled
     private const string Behaviour = "value";
 
     [Test]
-    public async Task GivenNullThenReturnsFalse()
-    {
-        // Arrange
-        Event? subject = default;
-        Event target = EventTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
-    {
-        // Arrange
-        Event subject = EventTestsData.Create();
-        Event target = subject;
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentValueThenReturnsTrue()
-    {
-        // Arrange
-        Event subject = EventTestsData.Create();
-        Event target = EventTestsData.Create();
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
-    {
-        // Arrange
-        Event subject = EventTestsData.Create();
-        Event target = EventTestsData.Create(name: AlternativeName);
-
-        // Act
-        bool result = target.Equals(subject);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -96,6 +40,20 @@ public sealed class WhenEqualsEventIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentScopesThenReturnsFalse()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        Event target = EventTestsData.Create(scope: Scope.Internal);
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenDifferentStaticStatesThenReturnsFalse()
     {
         // Arrange
@@ -112,16 +70,58 @@ public sealed class WhenEqualsEventIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentScopesThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Event subject = EventTestsData.Create();
-        Event target = EventTestsData.Create(scope: Scope.Internal);
+        Event target = EventTestsData.Create(name: AlternativeName);
 
         // Act
         bool result = target.Equals(subject);
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentValueThenReturnsTrue()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        Event target = EventTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNullThenReturnsFalse()
+    {
+        // Arrange
+        Event? subject = default;
+        Event target = EventTestsData.Create();
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Event subject = EventTestsData.Create();
+        Event target = subject;
+
+        // Act
+        bool result = target.Equals(subject);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

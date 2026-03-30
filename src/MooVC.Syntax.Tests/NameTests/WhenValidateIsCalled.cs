@@ -15,6 +15,40 @@ public sealed class WhenValidateIsCalled
     private const string WithHyphen = "My-Segment";
 
     [Test]
+    public async Task GivenEmptyThenNoValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Name(Empty);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenLowercaseThenValidationErrorsReturned()
+    {
+        // Arrange
+        var subject = new Name(Lowercase);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
     public async Task GivenNullValueThenValidationErrorReturned()
     {
         // Arrange
@@ -33,10 +67,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyThenNoValidationErrorReturned()
+    public async Task GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Name(Empty);
+        var subject = new Name(Numeric);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -44,8 +78,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -62,6 +98,40 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsTrue();
         _ = await Assert.That(results.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Name(UpperWithDigits);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task GivenPascalCaseWithHyphenThenValidationErrorsReturned()
+    {
+        // Arrange
+        var subject = new Name(WithHyphen);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -97,80 +167,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenPascalCaseWithDigitsThenNoValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Name(UpperWithDigits);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results.Count).IsEqualTo(0);
-    }
-
-    [Test]
     public async Task GivenUnicodeTitleCaseThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Name(UnicodePascal);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
-    public async Task GivenLowercaseThenValidationErrorsReturned()
-    {
-        // Arrange
-        var subject = new Name(Lowercase);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
-    public async Task GivenPascalCaseWithHyphenThenValidationErrorsReturned()
-    {
-        // Arrange
-        var subject = new Name(WithHyphen);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
-    public async Task GivenNumericOnlyThenValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Name(Numeric);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

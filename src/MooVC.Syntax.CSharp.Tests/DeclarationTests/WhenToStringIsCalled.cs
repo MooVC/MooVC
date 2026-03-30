@@ -7,19 +7,6 @@ public sealed class WhenToStringIsCalled
     private const string SecondParameterName = "TSecond";
 
     [Test]
-    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
-    {
-        // Arrange
-        Declaration subject = Declaration.Unspecified;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenNameThenNameReturned()
     {
         // Arrange
@@ -54,5 +41,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo($"{Name}<{FirstParameterName}, {SecondParameterName}>");
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
+    {
+        // Arrange
+        Declaration subject = Declaration.Unspecified;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

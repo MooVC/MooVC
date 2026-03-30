@@ -3,29 +3,6 @@
 public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
 {
     [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Configurations
-        {
-            Builds = [Configurations.BuildType.Debug],
-            Platforms = [Configurations.Platform.AnyCPU],
-        };
-
-        var right = new Configurations
-        {
-            Builds = [Configurations.BuildType.Debug],
-            Platforms = [Configurations.Platform.AnyCPU],
-        };
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -46,5 +23,28 @@ public sealed class WhenEqualityOperatorConfigurationsConfigurationsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Configurations
+        {
+            Builds = [Configurations.BuildType.Debug],
+            Platforms = [Configurations.Platform.AnyCPU],
+        };
+
+        var right = new Configurations
+        {
+            Builds = [Configurations.BuildType.Debug],
+            Platforms = [Configurations.Platform.AnyCPU],
+        };
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

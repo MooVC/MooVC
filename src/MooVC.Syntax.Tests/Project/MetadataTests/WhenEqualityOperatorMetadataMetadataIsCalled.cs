@@ -17,20 +17,6 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Metadata left = MetadataTestsData.Create();
-        Metadata right = MetadataTestsData.Create();
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenEqualityOperatorMetadataMetadataIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Metadata left = MetadataTestsData.Create();
+        Metadata right = MetadataTestsData.Create();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

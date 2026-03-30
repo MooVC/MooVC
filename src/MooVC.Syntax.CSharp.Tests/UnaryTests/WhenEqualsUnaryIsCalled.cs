@@ -3,11 +3,11 @@
 public sealed class WhenEqualsUnaryIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Unary? subject = default;
-        Unary target = UnaryTestsData.Create();
+        Unary subject = UnaryTestsData.Create();
+        Unary target = UnaryTestsData.Create(@operator: Unary.Type.Minus);
 
         // Act
         bool result = target.Equals(subject);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsUnaryIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Unary subject = UnaryTestsData.Create();
-        Unary target = UnaryTestsData.Create(@operator: Unary.Type.Minus);
+        Unary? subject = default;
+        Unary target = UnaryTestsData.Create();
 
         // Act
         bool result = target.Equals(subject);

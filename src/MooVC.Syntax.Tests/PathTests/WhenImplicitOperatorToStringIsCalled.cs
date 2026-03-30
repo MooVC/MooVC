@@ -5,29 +5,17 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Alpha = "Assets";
 
     [Test]
-    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    public async Task GivenAsciiThenMatchesValue()
     {
         // Arrange
-        Path? path = default;
-
-        // Act
-        Func<string> result = () => path;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
-    public async Task GivenMemberWithNullValueThenResultIsEmpty()
-    {
-        // Arrange
-        var subject = new Path(default);
+        var subject = new Path(Alpha);
+        string expected = Alpha;
 
         // Act
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEmpty();
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
     [Test]
@@ -44,17 +32,29 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Test]
-    public async Task GivenAsciiThenMatchesValue()
+    public async Task GivenMemberWithNullValueThenResultIsEmpty()
     {
         // Arrange
-        var subject = new Path(Alpha);
-        string expected = Alpha;
+        var subject = new Path(default);
 
         // Act
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Path? path = default;
+
+        // Act
+        Func<string> result = () => path;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 
     [Test]

@@ -6,13 +6,15 @@ using System.IO.Compression;
 public sealed class WhenDeflateCompressorIsConstructed
 {
     [Test]
-    public async Task GivenNoLevelThenAnInstanceIsCreated()
+    [Arguments((CompressionLevel)9)]
+    [Arguments((CompressionLevel)27)]
+    public async Task GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
     {
         // Act
-        Func<ICompressor> act = () => new DeflateCompressor();
+        Func<ICompressor> act = () => new DeflateCompressor(level: level);
 
         // Assert
-        _ = await Assert.That(act).ThrowsNothing();
+        _ = await Assert.That(act).Throws<InvalidEnumArgumentException>();
     }
 
     [Test]
@@ -29,14 +31,12 @@ public sealed class WhenDeflateCompressorIsConstructed
     }
 
     [Test]
-    [Arguments((CompressionLevel)9)]
-    [Arguments((CompressionLevel)27)]
-    public async Task GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
+    public async Task GivenNoLevelThenAnInstanceIsCreated()
     {
         // Act
-        Func<ICompressor> act = () => new DeflateCompressor(level: level);
+        Func<ICompressor> act = () => new DeflateCompressor();
 
         // Assert
-        _ = await Assert.That(act).Throws<InvalidEnumArgumentException>();
+        _ = await Assert.That(act).ThrowsNothing();
     }
 }

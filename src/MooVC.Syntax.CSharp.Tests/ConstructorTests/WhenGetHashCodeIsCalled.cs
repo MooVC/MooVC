@@ -3,21 +3,6 @@
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public async Task GivenEqualConstructorsThenHashCodesAreEqual()
-    {
-        // Arrange
-        Constructor first = ConstructorTestsData.Create();
-        Constructor second = ConstructorTestsData.Create();
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentConstructorsThenHashCodesAreDifferent()
     {
         // Arrange
@@ -30,5 +15,20 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenEqualConstructorsThenHashCodesAreEqual()
+    {
+        // Arrange
+        Constructor first = ConstructorTestsData.Create();
+        Constructor second = ConstructorTestsData.Create();
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

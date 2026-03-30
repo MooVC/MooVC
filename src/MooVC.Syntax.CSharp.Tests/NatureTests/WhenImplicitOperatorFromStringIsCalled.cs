@@ -3,10 +3,10 @@
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public async Task GivenNonEmptyValueThenCreatesNature()
+    public async Task GivenEmptyValueThenCreatesNature()
     {
         // Arrange
-        const string Value = "unmanaged";
+        const string Value = "";
 
         // Act
         Nature result = Value;
@@ -16,10 +16,10 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyValueThenCreatesNature()
+    public async Task GivenNonEmptyValueThenCreatesNature()
     {
         // Arrange
-        const string Value = "";
+        const string Value = "unmanaged";
 
         // Act
         Nature result = Value;

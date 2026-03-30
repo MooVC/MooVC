@@ -29,30 +29,6 @@ public sealed class WhenDeserializeIsCalled
     }
 
     [Test]
-    public async Task GivenDataThenDataDeserializationIsRequested()
-    {
-        // Arrange
-        byte[] expected = [1, 2, 3];
-        string instance = "Something something dark side...";
-        bool wasInvoked = false;
-
-        object Deserializer(object input)
-        {
-            wasInvoked = true;
-            return instance;
-        }
-
-        var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
-
-        // Act
-        string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(wasInvoked).IsTrue();
-        _ = await Assert.That(deserialized).IsEqualTo(instance);
-    }
-
-    [Test]
     public async Task GivenAStreamThenStreamDeserializationIsRequested()
     {
         // Arrange
@@ -71,6 +47,30 @@ public sealed class WhenDeserializeIsCalled
 
         // Act
         string deserialized = await serializer.Deserialize<string>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(deserialized).IsEqualTo(instance);
+    }
+
+    [Test]
+    public async Task GivenDataThenDataDeserializationIsRequested()
+    {
+        // Arrange
+        byte[] expected = [1, 2, 3];
+        string instance = "Something something dark side...";
+        bool wasInvoked = false;
+
+        object Deserializer(object input)
+        {
+            wasInvoked = true;
+            return instance;
+        }
+
+        var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
+
+        // Act
+        string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
 
         // Assert
         _ = await Assert.That(wasInvoked).IsTrue();

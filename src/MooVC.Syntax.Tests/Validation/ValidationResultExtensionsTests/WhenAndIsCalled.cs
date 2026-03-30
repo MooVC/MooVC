@@ -8,38 +8,13 @@ public sealed class WhenAndIsCalled
     private const string SecondMessage = "Second";
 
     [Test]
-    public async Task GivenValidatableThenItsResultsAreAppended()
+    public async Task GivenPredicateAndValidatablesThenPredicateFailuresAreIncluded()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
         var precedingValidatable = new StubValidatable(initial);
-        var additionalValidatable = new StubValidatable(new ValidationResult(SecondMessage));
-        var context = new ValidationContext(precedingValidatable);
-
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
-            nameof(precedingValidatable),
-            precedingValidatable);
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
-            nameof(additionalValidatable),
-            additionalValidatable);
-
-        // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
-        ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
-    }
-
-    [Test]
-    public async Task GivenValidatablesThenAllResultsAreAppended()
-    {
-        // Arrange
-        var initial = new ValidationResult(FirstMessage);
-        var precedingValidatable = new StubValidatable(initial);
-        var firstAdditional = new StubValidatable(new ValidationResult(SecondMessage));
-        var secondAdditional = new StubValidatable(new ValidationResult("Third"));
+        var firstAdditional = new StubValidatable();
+        var secondAdditional = new StubValidatable();
         var context = new ValidationContext(precedingValidatable);
 
         (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
@@ -49,13 +24,16 @@ public sealed class WhenAndIsCalled
         // Act
         (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
             nameof(firstAdditional),
+            validatable => validatable == firstAdditional,
             [firstAdditional, secondAdditional]);
 
         // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEquivalentTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+        _ = await Assert.That(results.Length).IsEqualTo(2);
+        _ = await Assert.That(results).Contains(initial);
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(firstAdditional)));
+        _ = await Assert.That(firstAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(secondAdditional.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -85,13 +63,13 @@ public sealed class WhenAndIsCalled
     }
 
     [Test]
-    public async Task GivenPredicateAndValidatablesThenPredicateFailuresAreIncluded()
+    public async Task GivenValidatablesThenAllResultsAreAppended()
     {
         // Arrange
         var initial = new ValidationResult(FirstMessage);
         var precedingValidatable = new StubValidatable(initial);
-        var firstAdditional = new StubValidatable();
-        var secondAdditional = new StubValidatable();
+        var firstAdditional = new StubValidatable(new ValidationResult(SecondMessage));
+        var secondAdditional = new StubValidatable(new ValidationResult("Third"));
         var context = new ValidationContext(precedingValidatable);
 
         (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
@@ -101,16 +79,38 @@ public sealed class WhenAndIsCalled
         // Act
         (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
             nameof(firstAdditional),
-            validatable => validatable == firstAdditional,
             [firstAdditional, secondAdditional]);
 
         // Assert
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
         ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results.Length).IsEqualTo(2);
-        _ = await Assert.That(results).Contains(initial);
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(firstAdditional)));
-        _ = await Assert.That(firstAdditional.Calls).IsEqualTo(1);
-        _ = await Assert.That(secondAdditional.Calls).IsEqualTo(1);
+        _ = await Assert.That(results).IsEquivalentTo([initial, firstAdditional.Results.Single(), secondAdditional.Results.Single()]);
+    }
+
+    [Test]
+    public async Task GivenValidatableThenItsResultsAreAppended()
+    {
+        // Arrange
+        var initial = new ValidationResult(FirstMessage);
+        var precedingValidatable = new StubValidatable(initial);
+        var additionalValidatable = new StubValidatable(new ValidationResult(SecondMessage));
+        var context = new ValidationContext(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.And(
+            nameof(additionalValidatable),
+            additionalValidatable);
+
+        // Assert
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
     }
 
     private sealed class StubValidatable : IValidatableObject

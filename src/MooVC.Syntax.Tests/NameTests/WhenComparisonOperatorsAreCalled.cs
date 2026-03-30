@@ -3,11 +3,11 @@
 public sealed class WhenComparisonOperatorsAreCalled
 {
     [Test]
-    public async Task GivenNullLeftThenLessThanIsTrue()
+    public async Task GivenAlphabeticalValuesThenOrderingMatchesOrdinalComparison()
     {
         // Arrange
-        Name? left = default;
-        Name right = "Alpha";
+        Name left = "Alpha";
+        Name right = "Beta";
 
         // Act
         bool lessThan = left < right;
@@ -23,11 +23,11 @@ public sealed class WhenComparisonOperatorsAreCalled
     }
 
     [Test]
-    public async Task GivenAlphabeticalValuesThenOrderingMatchesOrdinalComparison()
+    public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
-        Name left = "Alpha";
-        Name right = "Beta";
+        Name? left = default;
+        Name right = "Alpha";
 
         // Act
         bool lessThan = left < right;

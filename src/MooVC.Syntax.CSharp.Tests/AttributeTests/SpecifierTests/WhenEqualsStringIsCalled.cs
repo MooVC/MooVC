@@ -8,17 +8,20 @@ public sealed class WhenEqualsStringIsCalled
     private const string Different = "struct";
 
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion would defeat the purpose of the test.")]
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Assembly;
-        string? other = default;
+        string other = Different;
 
         // Act
-        bool result = subject.Equals(other);
+        bool resultLeftRight = subject.Equals(other);
+        bool resultRightLeft = other.Equals(subject);
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     [Test]
@@ -39,19 +42,16 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Test]
-    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion would defeat the purpose of the test.")]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Attribute.Specifier subject = Attribute.Specifier.Assembly;
-        string other = Different;
+        string? other = default;
 
         // Act
-        bool resultLeftRight = subject.Equals(other);
-        bool resultRightLeft = other.Equals(subject);
+        bool result = subject.Equals(other);
 
         // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
+        _ = await Assert.That(result).IsFalse();
     }
 }

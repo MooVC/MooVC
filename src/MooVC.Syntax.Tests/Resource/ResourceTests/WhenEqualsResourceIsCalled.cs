@@ -3,11 +3,11 @@
 public sealed class WhenEqualsResourceIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
-        Resource? other = default;
+        Resource other = ResourceTestsData.Create(data: Data.Undefined);
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsResourceIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Resource subject = ResourceTestsData.Create();
-        Resource other = ResourceTestsData.Create(data: Data.Undefined);
+        Resource? other = default;
 
         // Act
         bool result = subject.Equals(other);

@@ -6,14 +6,17 @@ using global::Newtonsoft.Json;
 public sealed class WhenSerializerIsConstructed
 {
     [Test]
-    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
+    [Arguments(0)]
+    [Arguments(-1)]
+    [Arguments(1)]
+    public async Task GivenABelowMinimumBufferSizeThenASerializerIsCreatedWithTheMinimumBufferSizeApplied(int bufferSize)
     {
         // Arrange & Act
-        var serializer = new Serializer();
+        var serializer = new Serializer(bufferSize: bufferSize);
         var settings = new JsonSerializerSettings();
 
         // Assert
-        await AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
+        await AssertEqual(Serializer.MinimumBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
     [Test]
@@ -29,20 +32,6 @@ public sealed class WhenSerializerIsConstructed
     }
 
     [Test]
-    [Arguments(0)]
-    [Arguments(-1)]
-    [Arguments(1)]
-    public async Task GivenABelowMinimumBufferSizeThenASerializerIsCreatedWithTheMinimumBufferSizeApplied(int bufferSize)
-    {
-        // Arrange & Act
-        var serializer = new Serializer(bufferSize: bufferSize);
-        var settings = new JsonSerializerSettings();
-
-        // Assert
-        await AssertEqual(Serializer.MinimumBufferSize, Serializer.DefaultEncoding, serializer, settings);
-    }
-
-    [Test]
     public async Task GivenAEncodingThenASerializerIsCreatedWithTheEncodingApplied()
     {
         // Arrange & Act
@@ -52,6 +41,17 @@ public sealed class WhenSerializerIsConstructed
 
         // Assert
         await AssertEqual(Serializer.DefaultBufferSize, encoding, serializer, settings);
+    }
+
+    [Test]
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
+    {
+        // Arrange & Act
+        var serializer = new Serializer();
+        var settings = new JsonSerializerSettings();
+
+        // Assert
+        await AssertEqual(Serializer.DefaultBufferSize, Serializer.DefaultEncoding, serializer, settings);
     }
 
     [Test]

@@ -17,22 +17,6 @@ public sealed class WhenInequalityOperatorTypeTypeIsCalled
     }
 
     [Test]
-    public async Task GivenSameValuesThenReturnsFalse()
-    {
-        // Arrange
-        Comparison.Type left = Comparison.Type.Equality;
-        Comparison.Type right = Comparison.Type.Equality;
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -46,5 +30,21 @@ public sealed class WhenInequalityOperatorTypeTypeIsCalled
         // Assert
         _ = await Assert.That(resultLeftRight).IsTrue();
         _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenSameValuesThenReturnsFalse()
+    {
+        // Arrange
+        Comparison.Type left = Comparison.Type.Equality;
+        Comparison.Type right = Comparison.Type.Equality;
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 }

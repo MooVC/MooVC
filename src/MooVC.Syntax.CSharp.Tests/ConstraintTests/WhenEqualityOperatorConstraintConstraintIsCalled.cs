@@ -19,6 +19,34 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
+        var right = new Constraint { Nature = Nature.Class };
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -58,33 +86,5 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
-        var right = new Constraint { Nature = Nature.Class };
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

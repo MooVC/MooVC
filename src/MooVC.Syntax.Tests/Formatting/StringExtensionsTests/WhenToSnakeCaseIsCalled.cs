@@ -7,73 +7,6 @@ public sealed class WhenToSnakeCaseIsCalled
     private static readonly Faker _generator = new();
 
     [Test]
-    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        string? value = default;
-
-        // Act
-        Action act = () => value!.ToSnakeCase();
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
-    {
-        // Arrange
-        string value = string.Empty;
-
-        // Act
-        Action act = () => value.ToSnakeCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments(" ")]
-    [Arguments("\t")]
-    [Arguments("\r\n")]
-    [Arguments("   ")]
-    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
-    {
-        // Arrange & Act
-        Action act = () => value.ToSnakeCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments("already_snake_case", "already_snake_case")]
-    [Arguments("simple", "simple")]
-    [Arguments("Single", "single")]
-    [Arguments("PascalCase", "pascal_case")]
-    [Arguments("camelCaseValue", "camel_case_value")]
-    [Arguments("Hello World", "hello_world")]
-    [Arguments("Hello-World", "hello_world")]
-    [Arguments("Hello__World", "hello_world")]
-    [Arguments("_Hello", "hello")]
-    [Arguments("-Hello", "hello")]
-    [Arguments(" Hello ", "hello")]
-    [Arguments("Section2Update", "section2_update")]
-    [Arguments("ÉclairDeluxe", "éclair_deluxe")]
-    [Arguments("ΣigmaValue", "σigma_value")]
-    public async Task GivenValuesThenExpectedSnakeCaseIsReturned(string value, string expected)
-    {
-        // Arrange & Act
-        string result = value.ToSnakeCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
-    }
-
-    [Test]
     [Arguments("A", "a")]
     [Arguments("ABC", "abc")]
     [Arguments("XMLHttpRequest", "xml_http_request")]
@@ -84,32 +17,6 @@ public sealed class WhenToSnakeCaseIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(expected);
-    }
-
-    [Test]
-    public async Task GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
-    {
-        // Arrange
-        string value = "alpha  beta---gamma___delta";
-
-        // Act
-        string result = value.ToSnakeCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("alpha_beta_gamma_delta");
-    }
-
-    [Test]
-    public async Task GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
-    {
-        // Arrange
-        string value = "  _Alpha__Beta- ";
-
-        // Act
-        string result = value.ToSnakeCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("alpha_beta");
     }
 
     [Test]
@@ -126,10 +33,36 @@ public sealed class WhenToSnakeCaseIsCalled
     }
 
     [Test]
-    [Arguments("__", "")]
-    [Arguments("---", "")]
-    [Arguments("___---___", "")]
-    public async Task GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
+    public async Task GivenMixedWhitespaceAndSeparatorsThenLeadingAndTrailingAreRemoved()
+    {
+        // Arrange
+        string value = "  _Alpha__Beta- ";
+
+        // Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("alpha_beta");
+    }
+
+    [Test]
+    public async Task GivenMultipleSeparatorsThenSeparatorsAreCollapsed()
+    {
+        // Arrange
+        string value = "alpha  beta---gamma___delta";
+
+        // Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("alpha_beta_gamma_delta");
+    }
+
+    [Test]
+    [Arguments("123", "123")]
+    [Arguments("9lives", "9lives")]
+    [Arguments("Version2Alpha3", "version2_alpha3")]
+    public async Task GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
@@ -139,10 +72,10 @@ public sealed class WhenToSnakeCaseIsCalled
     }
 
     [Test]
-    [Arguments("123", "123")]
-    [Arguments("9lives", "9lives")]
-    [Arguments("Version2Alpha3", "version2_alpha3")]
-    public async Task GivenNumericScenariosThenDigitsArePreserved(string value, string expected)
+    [Arguments("__", "")]
+    [Arguments("---", "")]
+    [Arguments("___---___", "")]
+    public async Task GivenOnlySeparatorsThenResultIsEmpty(string value, string expected)
     {
         // Arrange & Act
         string result = value.ToSnakeCase();
@@ -173,6 +106,86 @@ public sealed class WhenToSnakeCaseIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo("istanbul_city");
+    }
+
+    [Test]
+    [Arguments(" ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
+    [Arguments("   ")]
+    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
+    {
+        // Arrange & Act
+        Action act = () => value.ToSnakeCase();
+
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
+    {
+        // Arrange
+        string value = string.Empty;
+
+        // Act
+        Action act = () => value.ToSnakeCase();
+
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        string? value = default;
+
+        // Act
+        Action act = () => value!.ToSnakeCase();
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    [Arguments("already_snake_case", "already_snake_case")]
+    [Arguments("simple", "simple")]
+    [Arguments("Single", "single")]
+    [Arguments("PascalCase", "pascal_case")]
+    [Arguments("camelCaseValue", "camel_case_value")]
+    [Arguments("Hello World", "hello_world")]
+    [Arguments("Hello-World", "hello_world")]
+    [Arguments("Hello__World", "hello_world")]
+    [Arguments("_Hello", "hello")]
+    [Arguments("-Hello", "hello")]
+    [Arguments(" Hello ", "hello")]
+    [Arguments("Section2Update", "section2_update")]
+    [Arguments("ÉclairDeluxe", "éclair_deluxe")]
+    [Arguments("ΣigmaValue", "σigma_value")]
+    public async Task GivenValuesThenExpectedSnakeCaseIsReturned(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
+    {
+        // Arrange
+        string value = new('A', 16_384);
+
+        // Act
+        string result = value.ToSnakeCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 
     [Test]
@@ -213,18 +226,5 @@ public sealed class WhenToSnakeCaseIsCalled
             string secondResult = firstResult.ToSnakeCase();
             _ = await Assert.That(secondResult).IsEqualTo(firstResult);
         }
-    }
-
-    [Test]
-    public async Task GivenVeryLongValueThenProcessorHandlesLengthAndProducesExpectedResult()
-    {
-        // Arrange
-        string value = new('A', 16_384);
-
-        // Act
-        string result = value.ToSnakeCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(new string('a', 16_384));
     }
 }

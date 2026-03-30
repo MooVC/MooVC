@@ -3,20 +3,6 @@
 public sealed class WhenToNewOrCopyIsCalled
 {
     [Test]
-    public async Task GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
-    {
-        // Arrange
-        IDictionary<string, object>? original = default;
-
-        // Act
-        IDictionary<string, object>? snapshot = original.ToNewOrCopy();
-
-        // Assert
-        _ = await Assert.That(snapshot).IsNotNull();
-        _ = await Assert.That(snapshot).IsEmpty();
-    }
-
-    [Test]
     public async Task GivenADictionaryThenACloneIsReturned()
     {
         // Arrange
@@ -46,5 +32,19 @@ public sealed class WhenToNewOrCopyIsCalled
         // Assert
         _ = await Assert.That(snapshot).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(snapshot).IsEquivalentTo(original);
+    }
+
+    [Test]
+    public async Task GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
+    {
+        // Arrange
+        IDictionary<string, object>? original = default;
+
+        // Act
+        IDictionary<string, object>? snapshot = original.ToNewOrCopy();
+
+        // Assert
+        _ = await Assert.That(snapshot).IsNotNull();
+        _ = await Assert.That(snapshot).IsEmpty();
     }
 }

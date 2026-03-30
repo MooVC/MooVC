@@ -59,6 +59,21 @@ public sealed class WhenCloneIsCalled
     }
 
     [Test]
+    public async Task GivenAnInitializedObjectWithNonExpandoChildThenTheChildIsNotCloned()
+    {
+        // Arrange
+        dynamic parent = new ExpandoObject();
+        parent.Child = new object();
+
+        // Act
+        dynamic clone = ((ExpandoObject)parent).Clone();
+
+        // Assert
+        _ = await Assert.That((ExpandoObject)clone).IsNotStrictlyEqualTo((ExpandoObject)parent);
+        _ = await Assert.That((object)clone.Child).IsSameReferenceAs((object)parent.Child);
+    }
+
+    [Test]
     public async Task GivenANullObjectWithDefaultIfNullSetToFalseThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -83,20 +98,5 @@ public sealed class WhenCloneIsCalled
         // Assert
         _ = await Assert.That(value).IsNotNull();
         _ = await Assert.That(value).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenAnInitializedObjectWithNonExpandoChildThenTheChildIsNotCloned()
-    {
-        // Arrange
-        dynamic parent = new ExpandoObject();
-        parent.Child = new object();
-
-        // Act
-        dynamic clone = ((ExpandoObject)parent).Clone();
-
-        // Assert
-        _ = await Assert.That((ExpandoObject)clone).IsNotStrictlyEqualTo((ExpandoObject)parent);
-        _ = await Assert.That((object)clone.Child).IsSameReferenceAs((object)parent.Child);
     }
 }

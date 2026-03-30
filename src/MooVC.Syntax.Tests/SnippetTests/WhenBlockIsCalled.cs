@@ -7,42 +7,6 @@ public sealed class WhenBlockIsCalled
     private static readonly ImmutableArray<string> _lines = ["if (condition)", "return true;"];
 
     [Test]
-    public async Task GivenNullOptionsThenThrows()
-    {
-        // Arrange
-        var subject = new Snippet(_lines);
-        Snippet.Options? options = default;
-
-        // Act
-        Func<Snippet> act = () => _ = subject.Block(options!);
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
-    }
-
-    [Test]
-    public async Task GivenNoOpeningThenTheWholeSnippetIsBlocked()
-    {
-        // Arrange
-        const string expected = """
-            {
-                if (condition)
-                return true;
-            }
-            """;
-
-        var subject = new Snippet(_lines);
-
-        // Act
-        Snippet result = subject.Block(Snippet.Options.Default);
-
-        // Assert
-        string text = result.ToString();
-        _ = await Assert.That(text).IsEqualTo(expected);
-    }
-
-    [Test]
     public async Task GivenAllmanStyleAndOpeningThenBlockIsExpanded()
     {
         // Arrange
@@ -116,6 +80,42 @@ public sealed class WhenBlockIsCalled
         string text = result.ToString();
 
         _ = await Assert.That(text).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenNoOpeningThenTheWholeSnippetIsBlocked()
+    {
+        // Arrange
+        const string expected = """
+            {
+                if (condition)
+                return true;
+            }
+            """;
+
+        var subject = new Snippet(_lines);
+
+        // Act
+        Snippet result = subject.Block(Snippet.Options.Default);
+
+        // Assert
+        string text = result.ToString();
+        _ = await Assert.That(text).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenNullOptionsThenThrows()
+    {
+        // Arrange
+        var subject = new Snippet(_lines);
+        Snippet.Options? options = default;
+
+        // Act
+        Func<Snippet> act = () => _ = subject.Block(options!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 
     [Test]

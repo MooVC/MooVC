@@ -8,6 +8,20 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Alpha = "Alpha";
 
     [Test]
+    public async Task GivenEmptyThenEqualsString()
+    {
+        // Arrange
+        string value = Empty;
+
+        // Act
+        Identifier subject = value;
+
+        // Assert
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
+    }
+
+    [Test]
     public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -32,17 +46,19 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyThenEqualsString()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        string value = Empty;
+        string value = Alpha;
 
         // Act
-        Identifier subject = value;
+        Identifier first = value;
+        Identifier second = value;
 
         // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 
     [Test]
@@ -57,21 +73,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         // Assert
         _ = await Assert.That(subject == value).IsTrue();
         _ = await Assert.That(subject).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenVeryLongThenEqualsString()
-    {
-        // Arrange
-        string value = new('x', 64_000);
-        string expected = value.ToPascalCase();
-
-        // Act
-        Identifier subject = value;
-
-        // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(expected);
     }
 
     [Test]
@@ -90,18 +91,17 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
+    public async Task GivenVeryLongThenEqualsString()
     {
         // Arrange
-        string value = Alpha;
+        string value = new('x', 64_000);
+        string expected = value.ToPascalCase();
 
         // Act
-        Identifier first = value;
-        Identifier second = value;
+        Identifier subject = value;
 
         // Assert
-        _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That(first == second).IsTrue();
-        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(expected);
     }
 }

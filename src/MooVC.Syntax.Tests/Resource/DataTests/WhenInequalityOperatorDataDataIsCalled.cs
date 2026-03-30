@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorDataDataIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Data? left = default;
-        Data right = DataTestsData.Create();
+        Data left = DataTestsData.Create();
+        Data right = DataTestsData.Create(name: Snippet.From("Other"));
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorDataDataIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Data left = DataTestsData.Create();
-        Data right = DataTestsData.Create(name: Snippet.From("Other"));
+        Data? left = default;
+        Data right = DataTestsData.Create();
 
         // Act
         bool result = left != right;

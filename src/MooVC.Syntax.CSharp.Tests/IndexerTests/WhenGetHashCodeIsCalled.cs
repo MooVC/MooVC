@@ -3,36 +3,6 @@
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public async Task GivenEquivalentValuesThenHashesMatch()
-    {
-        // Arrange
-        Indexer first = IndexerTestsData.Create();
-        Indexer second = IndexerTestsData.Create();
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenHashesDiffer()
-    {
-        // Arrange
-        Indexer first = IndexerTestsData.Create();
-        Indexer second = IndexerTestsData.Create(parameter: new Parameter { Name = "alternative" });
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentBehavioursThenHashesDiffer()
     {
         // Arrange
@@ -71,5 +41,35 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenHashesDiffer()
+    {
+        // Arrange
+        Indexer first = IndexerTestsData.Create();
+        Indexer second = IndexerTestsData.Create(parameter: new Parameter { Name = "alternative" });
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenEquivalentValuesThenHashesMatch()
+    {
+        // Arrange
+        Indexer first = IndexerTestsData.Create();
+        Indexer second = IndexerTestsData.Create();
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

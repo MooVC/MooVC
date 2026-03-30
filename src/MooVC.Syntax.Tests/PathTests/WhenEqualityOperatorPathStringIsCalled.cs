@@ -3,25 +3,11 @@
 public sealed class WhenEqualityOperatorPathStringIsCalled
 {
     [Test]
-    public async Task GivenLeftNullRightNullThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Path? left = default;
-        string? right = default;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
-    {
-        // Arrange
-        Path? left = default;
-        string right = PathTestsData.DefaultPath;
+        var left = new Path(PathTestsData.DefaultPath);
+        string right = PathTestsData.DefaultAlternativePath;
 
         // Act
         bool result = left == right;
@@ -45,11 +31,25 @@ public sealed class WhenEqualityOperatorPathStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Path(PathTestsData.DefaultPath);
-        string right = PathTestsData.DefaultAlternativePath;
+        Path? left = default;
+        string? right = default;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    {
+        // Arrange
+        Path? left = default;
+        string right = PathTestsData.DefaultPath;
 
         // Act
         bool result = left == right;

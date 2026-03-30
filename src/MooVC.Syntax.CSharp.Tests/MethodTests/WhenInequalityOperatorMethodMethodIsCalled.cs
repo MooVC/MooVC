@@ -3,20 +3,6 @@
 public sealed class WhenInequalityOperatorMethodMethodIsCalled
 {
     [Test]
-    public async Task GivenEquivalentMethodsThenReturnsFalse()
-    {
-        // Arrange
-        Method first = MethodTestsData.Create();
-        Method second = MethodTestsData.Create();
-
-        // Act
-        bool result = first != second;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentMethodsThenReturnsTrue()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenInequalityOperatorMethodMethodIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEquivalentMethodsThenReturnsFalse()
+    {
+        // Arrange
+        Method first = MethodTestsData.Create();
+        Method second = MethodTestsData.Create();
+
+        // Act
+        bool result = first != second;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

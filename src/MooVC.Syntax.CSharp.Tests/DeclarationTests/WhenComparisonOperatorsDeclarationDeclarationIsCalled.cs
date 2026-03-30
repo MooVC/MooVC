@@ -6,28 +6,14 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
     private const string Beta = "Beta";
 
     [Test]
-    public async Task GivenLeftNullThenLessThanReturnsTrue()
+    public async Task GivenEqualNamesThenGreaterThanOrEqualReturnsTrue()
     {
         // Arrange
-        Declaration? left = default;
+        Declaration left = DeclarationTestsData.Create(Alpha);
         Declaration right = DeclarationTestsData.Create(Alpha);
 
         // Act
-        bool result = left < right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenGreaterNameThenGreaterThanReturnsTrue()
-    {
-        // Arrange
-        Declaration left = DeclarationTestsData.Create(Beta);
-        Declaration right = DeclarationTestsData.Create(Alpha);
-
-        // Act
-        bool result = left > right;
+        bool result = left >= right;
 
         // Assert
         _ = await Assert.That(result).IsTrue();
@@ -48,14 +34,28 @@ public sealed class WhenComparisonOperatorsDeclarationDeclarationIsCalled
     }
 
     [Test]
-    public async Task GivenEqualNamesThenGreaterThanOrEqualReturnsTrue()
+    public async Task GivenGreaterNameThenGreaterThanReturnsTrue()
     {
         // Arrange
-        Declaration left = DeclarationTestsData.Create(Alpha);
+        Declaration left = DeclarationTestsData.Create(Beta);
         Declaration right = DeclarationTestsData.Create(Alpha);
 
         // Act
-        bool result = left >= right;
+        bool result = left > right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftNullThenLessThanReturnsTrue()
+    {
+        // Arrange
+        Declaration? left = default;
+        Declaration right = DeclarationTestsData.Create(Alpha);
+
+        // Act
+        bool result = left < right;
 
         // Assert
         _ = await Assert.That(result).IsTrue();

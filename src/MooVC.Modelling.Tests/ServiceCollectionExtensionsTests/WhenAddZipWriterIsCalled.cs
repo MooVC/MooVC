@@ -12,6 +12,28 @@ public sealed class WhenAddZipWriterIsCalled
     private const string ZipKey = "Zip";
 
     [Test]
+    public async Task GivenConfigurationThenOptionsAreBound()
+    {
+        // Arrange
+        var settings = new Dictionary<string, string?>
+        {
+            { $"{ZipWriter.Options.SectionName}:{nameof(ZipWriter.Options.Compression)}", CustomCompressionLevel.ToString() },
+        };
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(settings)
+            .Build();
+        ServiceCollection services = new();
+
+        // Act
+        _ = services.AddZipWriter(configuration);
+        using ServiceProvider provider = services.BuildServiceProvider();
+        IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
+
+        // Assert
+        _ = await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
+    }
+
+    [Test]
     public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -39,27 +61,5 @@ public sealed class WhenAddZipWriterIsCalled
         // Assert
         _ = await Assert.That(writer).IsTypeOf<ZipWriter>();
         _ = await Assert.That(options.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
-    }
-
-    [Test]
-    public async Task GivenConfigurationThenOptionsAreBound()
-    {
-        // Arrange
-        var settings = new Dictionary<string, string?>
-        {
-            { $"{ZipWriter.Options.SectionName}:{nameof(ZipWriter.Options.Compression)}", CustomCompressionLevel.ToString() },
-        };
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(settings)
-            .Build();
-        ServiceCollection services = new();
-
-        // Act
-        _ = services.AddZipWriter(configuration);
-        using ServiceProvider provider = services.BuildServiceProvider();
-        IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
-
-        // Assert
-        _ = await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
     }
 }

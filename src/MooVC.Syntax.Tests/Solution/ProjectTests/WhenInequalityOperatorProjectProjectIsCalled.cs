@@ -17,20 +17,6 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
     }
 
     [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Project left = ProjectTestsData.Create();
-        Project right = ProjectTestsData.Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
@@ -42,5 +28,19 @@ public sealed class WhenInequalityOperatorProjectProjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Project left = ProjectTestsData.Create();
+        Project right = ProjectTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

@@ -3,6 +3,52 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
+    public async Task GivenDifferentTypeThenReturnsFalse()
+    {
+        // Arrange
+        Argument.Formatter left = Argument.Formatter.Call;
+        object right = "{0}: {1}";
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Argument.Formatter left = Argument.Formatter.Call;
+        object right = Argument.Formatter.Declaration;
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Argument.Formatter left = Argument.Formatter.Declaration;
+        object right = Argument.Formatter.Declaration;
+
+        // Act
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
@@ -28,51 +74,5 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Argument.Formatter left = Argument.Formatter.Declaration;
-        object right = Argument.Formatter.Declaration;
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Argument.Formatter left = Argument.Formatter.Call;
-        object right = Argument.Formatter.Declaration;
-
-        // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = ((Argument.Formatter)right).Equals(left);
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentTypeThenReturnsFalse()
-    {
-        // Arrange
-        Argument.Formatter left = Argument.Formatter.Call;
-        object right = "{0}: {1}";
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

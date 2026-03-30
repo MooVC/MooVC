@@ -3,6 +3,19 @@
 public sealed class WhenIndexOfIsCalled
 {
     [Test]
+    public async Task GivenAListContainingNullsWhenAPredicateForNullIsProvidedThenTheIndexOfTheFirstNullIsReturned()
+    {
+        // Arrange
+        int?[] enumeration = [1, null, 3];
+
+        // Act
+        int actualIndex = enumeration.IndexOf(item => item == default);
+
+        // Assert
+        _ = await Assert.That(actualIndex).IsEqualTo(1);
+    }
+
+    [Test]
     public async Task GivenAListWhenAPredicateThatYeildsNoMatchingEntryThenNegativeOneIsReturned()
     {
         // Arrange
@@ -83,18 +96,5 @@ public sealed class WhenIndexOfIsCalled
 
         // Assert
         _ = await Assert.That(actualIndex).IsEqualTo(-1);
-    }
-
-    [Test]
-    public async Task GivenAListContainingNullsWhenAPredicateForNullIsProvidedThenTheIndexOfTheFirstNullIsReturned()
-    {
-        // Arrange
-        int?[] enumeration = [1, null, 3];
-
-        // Act
-        int actualIndex = enumeration.IndexOf(item => item == default);
-
-        // Assert
-        _ = await Assert.That(actualIndex).IsEqualTo(1);
     }
 }

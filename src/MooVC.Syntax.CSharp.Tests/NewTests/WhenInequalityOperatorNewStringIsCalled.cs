@@ -20,6 +20,22 @@ public sealed class WhenInequalityOperatorNewStringIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        New left = Same;
+        string right = Different;
+
+        // Act
+        bool resultLeftRight = left != right;
+        bool resultRightLeft = right != left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
@@ -49,21 +65,5 @@ public sealed class WhenInequalityOperatorNewStringIsCalled
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();
         _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        New left = Same;
-        string right = Different;
-
-        // Act
-        bool resultLeftRight = left != right;
-        bool resultRightLeft = right != left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
     }
 }

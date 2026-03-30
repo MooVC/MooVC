@@ -3,19 +3,6 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public async Task GivenNonConversionObjectThenReturnsFalse()
-    {
-        // Arrange
-        Conversion subject = ConversionTestsData.Create();
-
-        // Act
-        bool result = subject.Equals(new object());
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenConversionObjectThenReturnsResultOfConversionEquals()
     {
         // Arrange
@@ -27,5 +14,18 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNonConversionObjectThenReturnsFalse()
+    {
+        // Arrange
+        Conversion subject = ConversionTestsData.Create();
+
+        // Act
+        bool result = subject.Equals(new object());
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

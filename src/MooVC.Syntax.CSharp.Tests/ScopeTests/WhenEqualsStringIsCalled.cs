@@ -6,11 +6,11 @@ public sealed class WhenEqualsStringIsCalled
     private const string Different = "public";
 
     [Test]
-    public async Task GivenLeftValueRightNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Scope left = Same;
-        string? right = default;
+        string right = Different;
 
         // Act
         bool result = left.Equals(right);
@@ -34,11 +34,11 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
         Scope left = Same;
-        string right = Different;
+        string? right = default;
 
         // Act
         bool result = left.Equals(right);

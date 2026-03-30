@@ -3,6 +3,34 @@
 public sealed class WhenEqualsPathIsCalled
 {
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        var left = new Path(PathTestsData.DefaultPath);
+        var right = new Path(PathTestsData.DefaultAlternativePath);
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Path(PathTestsData.DefaultPath);
+        var right = new Path(PathTestsData.DefaultPath);
+
+        // Act
+        bool result = left.Equals(right);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenRightNullThenReturnsFalse()
     {
         // Arrange
@@ -28,33 +56,5 @@ public sealed class WhenEqualsPathIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Path(PathTestsData.DefaultPath);
-        var right = new Path(PathTestsData.DefaultPath);
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        var left = new Path(PathTestsData.DefaultPath);
-        var right = new Path(PathTestsData.DefaultAlternativePath);
-
-        // Act
-        bool result = left.Equals(right);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

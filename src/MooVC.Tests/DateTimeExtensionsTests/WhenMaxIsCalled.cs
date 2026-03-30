@@ -12,10 +12,12 @@ public sealed class WhenMaxIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
-    public async Task GivenDifferentDatesWhenTheFirstDateIsTheOldestThenTheDateFurthestInTheFuturetIsReturnedData(DateTime oldest, DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstDateIsTheNewestThenTheDateFurthestInTheFuturetIsReturned(
+        DateTime oldest,
+        DateTime newest)
     {
         // Act
-        DateTime selected = oldest.Max(newest);
+        DateTime selected = newest.Max(oldest);
 
         // Assert
         _ = await Assert.That(selected).IsEqualTo(newest);
@@ -23,12 +25,10 @@ public sealed class WhenMaxIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFuturetIsReturnedData))]
-    public async Task GivenDifferentDatesWhenTheFirstDateIsTheNewestThenTheDateFurthestInTheFuturetIsReturned(
-        DateTime oldest,
-        DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstDateIsTheOldestThenTheDateFurthestInTheFuturetIsReturnedData(DateTime oldest, DateTime newest)
     {
         // Act
-        DateTime selected = newest.Max(oldest);
+        DateTime selected = oldest.Max(newest);
 
         // Assert
         _ = await Assert.That(selected).IsEqualTo(newest);

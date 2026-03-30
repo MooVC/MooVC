@@ -3,20 +3,6 @@
 public sealed class WhenPlusOperatorIsCalled
 {
     [Test]
-    public async Task GivenReadonlyRecordThenCombinedKindReturned()
-    {
-        // Arrange
-        Struct.Kind left = Struct.Kind.ReadOnly;
-        Struct.Kind right = Struct.Kind.Record;
-
-        // Act
-        Struct.Kind result = left + right;
-
-        // Assert
-        _ = await Assert.That(result.ToString()).IsEqualTo("readonly record");
-    }
-
-    [Test]
     public async Task GivenInvalidCombinationThenThrows()
     {
         // Arrange
@@ -56,5 +42,19 @@ public sealed class WhenPlusOperatorIsCalled
 
         // Assert
         _ = await Assert.That(result).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenReadonlyRecordThenCombinedKindReturned()
+    {
+        // Arrange
+        Struct.Kind left = Struct.Kind.ReadOnly;
+        Struct.Kind right = Struct.Kind.Record;
+
+        // Act
+        Struct.Kind result = left + right;
+
+        // Assert
+        _ = await Assert.That(result.ToString()).IsEqualTo("readonly record");
     }
 }

@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Resource? left = default;
-        Resource right = ResourceTestsData.Create();
+        Resource left = ResourceTestsData.Create();
+        Resource right = ResourceTestsData.Create(data: Data.Undefined);
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorResourceResourceIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Resource left = ResourceTestsData.Create();
-        Resource right = ResourceTestsData.Create(data: Data.Undefined);
+        Resource? left = default;
+        Resource right = ResourceTestsData.Create();
 
         // Act
         bool result = left != right;

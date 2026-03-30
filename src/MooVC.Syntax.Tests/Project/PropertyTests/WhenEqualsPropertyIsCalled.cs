@@ -3,11 +3,11 @@
 public sealed class WhenEqualsPropertyIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
-        Property? other = default;
+        Property other = PropertyTestsData.Create(name: new Name("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsPropertyIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Property subject = PropertyTestsData.Create();
-        Property other = PropertyTestsData.Create(name: new Name("Other"));
+        Property? other = default;
 
         // Act
         bool result = subject.Equals(other);

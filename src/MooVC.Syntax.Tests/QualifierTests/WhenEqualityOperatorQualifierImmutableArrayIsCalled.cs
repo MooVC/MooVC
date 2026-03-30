@@ -8,11 +8,11 @@ public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
     private static readonly ImmutableArray<Name> _same = ["Alpha", "Beta"];
 
     [Test]
-    public async Task GivenLeftValueRightDefaultThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(_same);
-        ImmutableArray<Name> right = default;
+        ImmutableArray<Name> right = _different;
 
         // Act
         bool result = left == right;
@@ -36,11 +36,11 @@ public sealed class WhenEqualityOperatorQualifierImmutableArrayIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftValueRightDefaultThenReturnsFalse()
     {
         // Arrange
         var left = new Qualifier(_same);
-        ImmutableArray<Name> right = _different;
+        ImmutableArray<Name> right = default;
 
         // Act
         bool result = left == right;

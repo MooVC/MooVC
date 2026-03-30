@@ -19,25 +19,11 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
-    {
-        // Arrange
-        Declaration? left = default;
-        Declaration right = DeclarationTestsData.Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenDifferentNamesThenReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
-        Declaration? right = default;
+        Declaration right = DeclarationTestsData.Create(AlternativeName);
 
         // Act
         bool result = left != right;
@@ -63,11 +49,25 @@ public sealed class WhenInequalityOperatorDeclarationDeclarationIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentNamesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Declaration? left = default;
+        Declaration right = DeclarationTestsData.Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Declaration left = DeclarationTestsData.Create();
-        Declaration right = DeclarationTestsData.Create(AlternativeName);
+        Declaration? right = default;
 
         // Act
         bool result = left != right;

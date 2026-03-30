@@ -13,72 +13,6 @@ public sealed class WhenValidateIsCalled
     private const string UnicodePascal = "Álpha";
 
     [Test]
-    public async Task GivenNullValueThenNoValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Identifier(default);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenEmptyThenNoValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Identifier(Empty);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenPascalCaseThenNoValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Identifier(Pascal);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results.Count).IsEqualTo(0);
-    }
-
-    [Test]
-    public async Task GivenUnicodeTitleCaseThenValidationErrorReturned()
-    {
-        // Arrange
-        var subject = new Identifier(UnicodePascal);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
     public async Task GivenCamelCaseThenValidationErrorsReturned()
     {
         // Arrange
@@ -97,10 +31,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenSnakeCaseThenNoValidationErrorsReturned()
+    public async Task GivenEmptyThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Identifier(Snake);
+        var subject = new Identifier(Empty);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -108,10 +42,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]
@@ -133,10 +65,78 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
+    public async Task GivenNullValueThenNoValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Identifier(default);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
     public async Task GivenNumericOnlyThenValidationErrorReturned()
     {
         // Arrange
         var subject = new Identifier(Numeric);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenPascalCaseThenNoValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Identifier(Pascal);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task GivenSnakeCaseThenNoValidationErrorsReturned()
+    {
+        // Arrange
+        var subject = new Identifier(Snake);
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Identifier));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+    }
+
+    [Test]
+    public async Task GivenUnicodeTitleCaseThenValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Identifier(UnicodePascal);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

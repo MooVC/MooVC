@@ -3,10 +3,10 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenDefaultInstanceThenReturnsReadOnlyProperty()
+    public async Task GivenAutoImplementedMembersThenReturnsReadOnlyProperty()
     {
         // Arrange
-        Indexer.Methods subject = Indexer.Methods.Default;
+        var subject = new Indexer.Methods();
         const string expected = "get;";
 
         // Act
@@ -17,10 +17,10 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenAutoImplementedMembersThenReturnsReadOnlyProperty()
+    public async Task GivenDefaultInstanceThenReturnsReadOnlyProperty()
     {
         // Arrange
-        var subject = new Indexer.Methods();
+        Indexer.Methods subject = Indexer.Methods.Default;
         const string expected = "get;";
 
         // Act

@@ -3,11 +3,11 @@
 public sealed class WhenEqualsHeaderIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Header subject = HeaderTestsData.Create();
-        Header? other = default;
+        Header other = HeaderTestsData.Create(value: Snippet.From("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsHeaderIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Header subject = HeaderTestsData.Create();
-        Header other = HeaderTestsData.Create(value: Snippet.From("Other"));
+        Header? other = default;
 
         // Act
         bool result = subject.Equals(other);

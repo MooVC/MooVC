@@ -3,11 +3,11 @@
 public sealed class WhenEqualsImportIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Import subject = ImportTestsData.Create();
-        Import? other = default;
+        Import other = ImportTestsData.Create(project: Snippet.From("Other"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsImportIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Import subject = ImportTestsData.Create();
-        Import other = ImportTestsData.Create(project: Snippet.From("Other"));
+        Import? other = default;
 
         // Act
         bool result = subject.Equals(other);

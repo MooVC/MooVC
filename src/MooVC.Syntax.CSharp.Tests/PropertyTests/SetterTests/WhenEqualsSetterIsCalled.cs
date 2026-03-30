@@ -3,31 +3,19 @@
 public sealed class WhenEqualsSetterIsCalled
 {
     [Test]
-    public async Task GivenNullThenFalseIsReturned()
+    public async Task GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange
         var subject = new Property.Setter { Behaviour = Snippet.From("value") };
-        Property.Setter? target = default!;
+        var target = new Property.Setter { Behaviour = Snippet.From("alternative") };
 
         // Act
-        bool result = subject.Equals(target);
+        bool resultSubjectTarget = subject.Equals(target);
+        bool resultTargetSubject = target.Equals(subject);
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenTrueIsReturned()
-    {
-        // Arrange
-        var subject = new Property.Setter { Behaviour = Snippet.From("value") };
-        Property.Setter target = subject;
-
-        // Act
-        bool result = subject.Equals(target);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(resultSubjectTarget).IsFalse();
+        _ = await Assert.That(resultTargetSubject).IsFalse();
     }
 
     [Test]
@@ -58,18 +46,30 @@ public sealed class WhenEqualsSetterIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentInstanceThenFalseIsReturned()
+    public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
         var subject = new Property.Setter { Behaviour = Snippet.From("value") };
-        var target = new Property.Setter { Behaviour = Snippet.From("alternative") };
+        Property.Setter? target = default!;
 
         // Act
-        bool resultSubjectTarget = subject.Equals(target);
-        bool resultTargetSubject = target.Equals(subject);
+        bool result = subject.Equals(target);
 
         // Assert
-        _ = await Assert.That(resultSubjectTarget).IsFalse();
-        _ = await Assert.That(resultTargetSubject).IsFalse();
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenTrueIsReturned()
+    {
+        // Arrange
+        var subject = new Property.Setter { Behaviour = Snippet.From("value") };
+        Property.Setter target = subject;
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

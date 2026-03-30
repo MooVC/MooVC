@@ -3,11 +3,11 @@
 public sealed class WhenEqualsConversionIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Conversion? subject = default;
-        Conversion target = ConversionTestsData.Create();
+        Conversion subject = ConversionTestsData.Create();
+        Conversion target = ConversionTestsData.Create(mode: Conversion.Type.Explicit);
 
         // Act
         bool result = target.Equals(subject);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsConversionIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Conversion subject = ConversionTestsData.Create();
-        Conversion target = ConversionTestsData.Create(mode: Conversion.Type.Explicit);
+        Conversion? subject = default;
+        Conversion target = ConversionTestsData.Create();
 
         // Act
         bool result = target.Equals(subject);

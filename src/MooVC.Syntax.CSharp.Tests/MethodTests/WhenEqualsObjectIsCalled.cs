@@ -3,19 +3,6 @@
 public sealed class WhenEqualsObjectIsCalled
 {
     [Test]
-    public async Task GivenNonMethodObjectThenReturnsFalse()
-    {
-        // Arrange
-        Method subject = MethodTestsData.Create();
-
-        // Act
-        bool result = subject.Equals(new object());
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenMethodObjectThenReturnsResultOfMethodEquals()
     {
         // Arrange
@@ -27,5 +14,18 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNonMethodObjectThenReturnsFalse()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create();
+
+        // Act
+        bool result = subject.Equals(new object());
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 }

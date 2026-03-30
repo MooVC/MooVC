@@ -3,6 +3,19 @@
 public sealed class WhenEqualsTypeIsCalled
 {
     [Test]
+    public async Task GivenADifferentInstanceThenReturnsFalse()
+    {
+        // Arrange
+        Binary.Type type = Binary.Type.Add;
+
+        // Act
+        bool result = type.Equals(Binary.Type.Subtract);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -26,18 +39,5 @@ public sealed class WhenEqualsTypeIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenADifferentInstanceThenReturnsFalse()
-    {
-        // Arrange
-        Binary.Type type = Binary.Type.Add;
-
-        // Act
-        bool result = type.Equals(Binary.Type.Subtract);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

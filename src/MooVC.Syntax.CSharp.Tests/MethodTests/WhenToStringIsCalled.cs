@@ -3,16 +3,20 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenUndefinedMethodThenEmptyReturned()
+    public async Task GivenEmptyBodyWhenAsynchronousThenSignatureIsRendered()
     {
         // Arrange
-        Method subject = Method.Undefined;
+        Method subject = MethodTestsData
+            .Create()
+            .Returns(result => result
+                .As(typeof(Task))
+                .WithMode(Result.Modality.Asynchronous));
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
+        _ = await Assert.That(representation).IsEqualTo("public async Task<string> Perform(int value);");
     }
 
     [Test]
@@ -29,19 +33,15 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyBodyWhenAsynchronousThenSignatureIsRendered()
+    public async Task GivenUndefinedMethodThenEmptyReturned()
     {
         // Arrange
-        Method subject = MethodTestsData
-            .Create()
-            .Returns(result => result
-                .As(typeof(Task))
-                .WithMode(Result.Modality.Asynchronous));
+        Method subject = Method.Undefined;
 
         // Act
         string representation = subject.ToString();
 
         // Assert
-        _ = await Assert.That(representation).IsEqualTo("public async Task<string> Perform(int value);");
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

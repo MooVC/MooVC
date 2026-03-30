@@ -6,36 +6,6 @@ public sealed class WhenToStringIsCalled
     private const string Name = "Occurred";
 
     [Test]
-    public async Task GivenUndefinedEventThenEmptyReturned()
-    {
-        // Arrange
-        Event subject = Event.Undefined;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
-    public async Task GivenNoBehavioursThenDeclarationReturned()
-    {
-        // Arrange
-        var subject = new Event
-        {
-            Handler = new Symbol { Name = Handler },
-            Name = new Name(Name),
-        };
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo($"public event {Handler} {Name};");
-    }
-
-    [Test]
     public async Task GivenBehavioursThenBodyIsRendered()
     {
         // Arrange
@@ -60,5 +30,35 @@ public sealed class WhenToStringIsCalled
             """;
 
         _ = await Assert.That(representation).IsEqualTo(expected.ToString());
+    }
+
+    [Test]
+    public async Task GivenNoBehavioursThenDeclarationReturned()
+    {
+        // Arrange
+        var subject = new Event
+        {
+            Handler = new Symbol { Name = Handler },
+            Name = new Name(Name),
+        };
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo($"public event {Handler} {Name};");
+    }
+
+    [Test]
+    public async Task GivenUndefinedEventThenEmptyReturned()
+    {
+        // Arrange
+        Event subject = Event.Undefined;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

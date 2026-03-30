@@ -5,19 +5,6 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     private const string Name = "TArgument";
 
     [Test]
-    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Generic? subject = default;
-
-        // Act
-        Func<string> result = () => subject;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenArgumentThenMatchesToString()
     {
         // Arrange
@@ -31,5 +18,18 @@ public sealed class WhenImplicitOperatorToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(subject.ToString());
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Generic? subject = default;
+
+        // Act
+        Func<string> result = () => subject;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

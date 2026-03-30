@@ -3,13 +3,14 @@
 public sealed class WhenEqualsFileIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         var subject = new File(FileTestsData.DefaultPath);
+        var other = new File("other.cs");
 
         // Act
-        bool result = subject.Equals(default(File));
+        bool result = subject.Equals(other);
 
         // Assert
         _ = await Assert.That(result).IsFalse();
@@ -30,14 +31,13 @@ public sealed class WhenEqualsFileIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         var subject = new File(FileTestsData.DefaultPath);
-        var other = new File("other.cs");
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = subject.Equals(default(File));
 
         // Assert
         _ = await Assert.That(result).IsFalse();

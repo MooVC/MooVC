@@ -16,10 +16,10 @@ public sealed class WhenIsEmptyIsCalled
     }
 
     [Test]
-    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
+    public async Task GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new int[1];
+        IEnumerable<int> source = new int[3];
 
         // Act
         bool isEmpty = source.IsEmpty();
@@ -29,10 +29,10 @@ public sealed class WhenIsEmptyIsCalled
     }
 
     [Test]
-    public async Task GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
+    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new int[3];
+        IEnumerable<int> source = new int[1];
 
         // Act
         bool isEmpty = source.IsEmpty();

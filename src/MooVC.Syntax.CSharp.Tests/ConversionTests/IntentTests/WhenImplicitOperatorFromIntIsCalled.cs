@@ -5,20 +5,6 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     private const int Value = 1;
 
     [Test]
-    public async Task GivenValueThenEqualsInteger()
-    {
-        // Arrange
-        int value = Value;
-
-        // Act
-        Conversion.Intent subject = value;
-
-        // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
-    }
-
-    [Test]
     public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
@@ -32,5 +18,19 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
         _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenValueThenEqualsInteger()
+    {
+        // Arrange
+        int value = Value;
+
+        // Act
+        Conversion.Intent subject = value;
+
+        // Assert
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
     }
 }

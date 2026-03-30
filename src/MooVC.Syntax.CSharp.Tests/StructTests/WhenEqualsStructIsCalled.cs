@@ -3,17 +3,17 @@
 public sealed class WhenEqualsStructIsCalled
 {
     [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Struct first = StructTestsData.Create();
-        Struct second = first;
+        Struct left = StructTestsData.Create(behavior: Struct.Kind.Ref);
+        Struct right = StructTestsData.Create();
 
         // Act
-        bool result = first.Equals(second);
+        bool result = left.Equals(right);
 
         // Assert
-        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -31,16 +31,16 @@ public sealed class WhenEqualsStructIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Struct left = StructTestsData.Create(behavior: Struct.Kind.Ref);
-        Struct right = StructTestsData.Create();
+        Struct first = StructTestsData.Create();
+        Struct second = first;
 
         // Act
-        bool result = left.Equals(right);
+        bool result = first.Equals(second);
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsTrue();
     }
 }

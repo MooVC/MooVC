@@ -8,10 +8,15 @@ public sealed class WhenValidateIsCalled
     private const string Name = "Result";
 
     [Test]
-    public async Task GivenUnspecifiedDeclarationThenNoValidationErrorsReturned()
+    public async Task GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange
-        Declaration declaration = Declaration.Unspecified;
+        var declaration = new Declaration
+        {
+            Name = Name,
+            Generics = [new Generic { Name = "Invalid Name" }],
+        };
+
         var context = new ValidationContext(declaration);
         var results = new List<ValidationResult>();
 
@@ -19,8 +24,10 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(declaration, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
     [Test]
@@ -46,15 +53,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenInvalidParameterThenValidationErrorReturned()
+    public async Task GivenUnspecifiedDeclarationThenNoValidationErrorsReturned()
     {
         // Arrange
-        var declaration = new Declaration
-        {
-            Name = Name,
-            Generics = [new Generic { Name = "Invalid Name" }],
-        };
-
+        Declaration declaration = Declaration.Unspecified;
         var context = new ValidationContext(declaration);
         var results = new List<ValidationResult>();
 
@@ -62,10 +64,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(declaration, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]

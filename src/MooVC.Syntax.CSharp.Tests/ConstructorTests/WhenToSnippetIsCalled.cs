@@ -5,6 +5,35 @@ using MooVC.Syntax.CSharp.ParameterTests;
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
+    public async Task GivenBodyThenBlockIsRendered()
+    {
+        // Arrange
+        Parameter[] parameters =
+        [
+            ParameterTestsData.Create(),
+        ];
+
+        Constructor subject = ConstructorTestsData.Create(
+            body: Snippet.From("Initialize();"),
+            parameters: [.. parameters]);
+
+        Type type = ConstructorTestsData.CreateType();
+
+        // Act
+        string representation = subject.ToSnippet(Type.Options.Default, type);
+
+        // Assert
+        string expected = """
+            public Widget(Version value)
+            {
+                Initialize();
+            }
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
     public async Task GivenNullConstructThenThrows()
     {
         // Arrange
@@ -47,34 +76,5 @@ public sealed class WhenToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenBodyThenBlockIsRendered()
-    {
-        // Arrange
-        Parameter[] parameters =
-        [
-            ParameterTestsData.Create(),
-        ];
-
-        Constructor subject = ConstructorTestsData.Create(
-            body: Snippet.From("Initialize();"),
-            parameters: [.. parameters]);
-
-        Type type = ConstructorTestsData.CreateType();
-
-        // Act
-        string representation = subject.ToSnippet(Type.Options.Default, type);
-
-        // Assert
-        string expected = """
-            public Widget(Version value)
-            {
-                Initialize();
-            }
-            """;
-
-        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 }

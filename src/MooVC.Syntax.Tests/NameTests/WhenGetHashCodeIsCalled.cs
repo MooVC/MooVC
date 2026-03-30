@@ -5,22 +5,6 @@ public sealed class WhenGetHashCodeIsCalled
     private static readonly Faker _generator = new();
 
     [Test]
-    public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
-    {
-        // Arrange
-        string value = _generator.Lorem.Word();
-        var first = new Name(value);
-        var second = new Name(value);
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentValueThenHashesAreNotEqual()
     {
         // Arrange
@@ -54,5 +38,21 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenSameValueWhenInstantiatedTwiceThenHashesAreEqual()
+    {
+        // Arrange
+        string value = _generator.Lorem.Word();
+        var first = new Name(value);
+        var second = new Name(value);
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

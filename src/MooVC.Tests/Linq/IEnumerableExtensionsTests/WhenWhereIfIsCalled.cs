@@ -68,11 +68,21 @@ public sealed class WhenWhereIfIsCalled
     }
 
     [Test]
-    public async Task GivenPassingApplicabilityThenThePredicateIsApplied()
+    public async Task GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
     {
-        bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
+        // Arrange
+        int[] enumeration = [1, 2, 3, 4, 5];
 
-        _ = await Assert.That(wasInvoked).IsTrue();
+        static bool Predicate(int value)
+        {
+            return value % 2 == 0;
+        }
+
+        // Act
+        IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
+
+        // Assert
+        _ = await Assert.That(result).IsEquivalentTo([1, 2, 3, 4, 5]);
     }
 
     [Test]
@@ -94,21 +104,11 @@ public sealed class WhenWhereIfIsCalled
     }
 
     [Test]
-    public async Task GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
+    public async Task GivenPassingApplicabilityThenThePredicateIsApplied()
     {
-        // Arrange
-        int[] enumeration = [1, 2, 3, 4, 5];
+        bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
 
-        static bool Predicate(int value)
-        {
-            return value % 2 == 0;
-        }
-
-        // Act
-        IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
-
-        // Assert
-        _ = await Assert.That(result).IsEquivalentTo([1, 2, 3, 4, 5]);
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)

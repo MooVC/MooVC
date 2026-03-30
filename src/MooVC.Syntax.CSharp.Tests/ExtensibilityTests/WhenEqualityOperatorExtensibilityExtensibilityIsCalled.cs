@@ -17,6 +17,20 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Extensibility left = Extensibility.Static;
+        Extensibility right = Extensibility.Abstract;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -56,19 +70,5 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Extensibility left = Extensibility.Static;
-        Extensibility right = Extensibility.Abstract;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

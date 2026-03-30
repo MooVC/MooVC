@@ -3,13 +3,14 @@
 public sealed class WhenEqualsFolderIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Folder subject = FolderTestsData.Create();
+        Folder other = FolderTestsData.Create(name: new Folder.Path("/Other/"));
 
         // Act
-        bool result = subject.Equals(default);
+        bool result = subject.Equals(other);
 
         // Assert
         _ = await Assert.That(result).IsFalse();
@@ -30,14 +31,13 @@ public sealed class WhenEqualsFolderIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Folder subject = FolderTestsData.Create();
-        Folder other = FolderTestsData.Create(name: new Folder.Path("/Other/"));
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = subject.Equals(default);
 
         // Assert
         _ = await Assert.That(result).IsFalse();

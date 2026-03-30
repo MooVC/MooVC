@@ -6,6 +6,20 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     private const string Method = "method";
 
     [Test]
+    public async Task GivenNoneThenEqualsString()
+    {
+        // Arrange
+        string value = None;
+
+        // Act
+        Attribute.Specifier subject = value;
+
+        // Assert
+        _ = await Assert.That(subject == value).IsTrue();
+        _ = await Assert.That(subject).IsEqualTo(value);
+    }
+
+    [Test]
     public async Task GivenNullThenInstanceIsCreated()
     {
         // Arrange
@@ -30,17 +44,19 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenNoneThenEqualsString()
+    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        string value = None;
+        string value = Method;
 
         // Act
-        Attribute.Specifier subject = value;
+        Attribute.Specifier first = value;
+        Attribute.Specifier second = value;
 
         // Assert
-        _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(value);
+        _ = await Assert.That(first).IsNotSameReferenceAs(second);
+        _ = await Assert.That(first == second).IsTrue();
+        _ = await Assert.That(first).IsEqualTo(second);
     }
 
     [Test]
@@ -69,21 +85,5 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);
-    }
-
-    [Test]
-    public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
-    {
-        // Arrange
-        string value = Method;
-
-        // Act
-        Attribute.Specifier first = value;
-        Attribute.Specifier second = value;
-
-        // Assert
-        _ = await Assert.That(first).IsNotSameReferenceAs(second);
-        _ = await Assert.That(first == second).IsTrue();
-        _ = await Assert.That(first).IsEqualTo(second);
     }
 }

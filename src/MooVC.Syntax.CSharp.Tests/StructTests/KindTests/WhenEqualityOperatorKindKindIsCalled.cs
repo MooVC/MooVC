@@ -17,17 +17,17 @@ public sealed class WhenEqualityOperatorKindKindIsCalled
     }
 
     [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Struct.Kind left = Struct.Kind.Record;
-        Struct.Kind right = left;
+        Struct.Kind left = Struct.Kind.ReadOnly;
+        Struct.Kind right = Struct.Kind.Record;
 
         // Act
         bool result = left == right;
 
         // Assert
-        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -45,16 +45,16 @@ public sealed class WhenEqualityOperatorKindKindIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Struct.Kind left = Struct.Kind.ReadOnly;
-        Struct.Kind right = Struct.Kind.Record;
+        Struct.Kind left = Struct.Kind.Record;
+        Struct.Kind right = left;
 
         // Act
         bool result = left == right;
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -5,19 +5,6 @@ public sealed class WhenToStringIsCalled
     private const string BaseName = "BaseType";
 
     [Test]
-    public async Task GivenUnspecifiedBaseThenReturnsEmpty()
-    {
-        // Arrange
-        Base subject = Base.Unspecified;
-
-        // Act
-        string result = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenSpecifiedBaseThenReturnsName()
     {
         // Arrange
@@ -28,5 +15,18 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(BaseName);
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedBaseThenReturnsEmpty()
+    {
+        // Arrange
+        Base subject = Base.Unspecified;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

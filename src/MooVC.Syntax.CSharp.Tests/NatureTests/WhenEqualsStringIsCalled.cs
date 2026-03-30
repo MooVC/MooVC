@@ -8,15 +8,16 @@ public sealed class WhenEqualsStringIsCalled
     private const string Different = "struct";
 
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Nature subject = Same;
-        string? other = default;
+        Nature left = Same;
+        string right = Different;
 
         // Act
-        bool resultLeftRight = subject.Equals(other);
-        bool resultRightLeft = ((Nature?)other)?.Equals(subject) ?? false;
+        bool resultLeftRight = left.Equals(right);
+        bool resultRightLeft = right.Equals(left);
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();
@@ -41,16 +42,15 @@ public sealed class WhenEqualsStringIsCalled
     }
 
     [Test]
-    [SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Suggestion defeats the purpose of the test.")]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
-        string right = Different;
+        Nature subject = Same;
+        string? other = default;
 
         // Act
-        bool resultLeftRight = left.Equals(right);
-        bool resultRightLeft = right.Equals(left);
+        bool resultLeftRight = subject.Equals(other);
+        bool resultRightLeft = ((Nature?)other)?.Equals(subject) ?? false;
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();

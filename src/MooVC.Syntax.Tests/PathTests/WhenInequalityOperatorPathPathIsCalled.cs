@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorPathPathIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Path? left = default;
-        var right = new Path(PathTestsData.DefaultPath);
+        var left = new Path(PathTestsData.DefaultPath);
+        var right = new Path(PathTestsData.DefaultAlternativePath);
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorPathPathIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        var left = new Path(PathTestsData.DefaultPath);
-        var right = new Path(PathTestsData.DefaultAlternativePath);
+        Path? left = default;
+        var right = new Path(PathTestsData.DefaultPath);
 
         // Act
         bool result = left != right;

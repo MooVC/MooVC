@@ -12,10 +12,10 @@ public sealed class WhenMinIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Act
-        DateTime selected = oldest.Min(newest);
+        DateTime selected = newest.Min(oldest);
 
         // Assert
         _ = await Assert.That(selected).IsEqualTo(oldest);
@@ -23,10 +23,10 @@ public sealed class WhenMinIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInThePastIsReturnedData))]
-    public async Task GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
+    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInThePastIsReturned(DateTime oldest, DateTime newest)
     {
         // Act
-        DateTime selected = newest.Min(oldest);
+        DateTime selected = oldest.Min(newest);
 
         // Assert
         _ = await Assert.That(selected).IsEqualTo(oldest);

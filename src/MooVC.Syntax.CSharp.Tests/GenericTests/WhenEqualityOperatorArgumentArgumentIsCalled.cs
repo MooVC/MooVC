@@ -22,6 +22,50 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentConstraintsThenReturnsFalse()
+    {
+        // Arrange
+        Generic left = Create();
+        Generic right = Create(constraint: Constraint.Unspecified);
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentNamesThenReturnsFalse()
+    {
+        // Arrange
+        Generic left = Create();
+        Generic right = Create(AlternativeName);
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Generic left = Create();
+        Generic right = Create();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
@@ -61,50 +105,6 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Generic left = Create();
-        Generic right = Create();
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentNamesThenReturnsFalse()
-    {
-        // Arrange
-        Generic left = Create();
-        Generic right = Create(AlternativeName);
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentConstraintsThenReturnsFalse()
-    {
-        // Arrange
-        Generic left = Create();
-        Generic right = Create(constraint: Constraint.Unspecified);
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
     }
 
     private static Generic Create(string name = DefaultName, Constraint? constraint = default)

@@ -5,19 +5,6 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     private const string IdentifierName = "Identifier";
 
     [Test]
-    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Identifier? identifier = default;
-
-        // Act
-        Func<Snippet> result = () => identifier;
-
-        // Assert
-        _ = await Assert.That(result).Throws<ArgumentNullException>();
-    }
-
-    [Test]
     public async Task GivenIdentifierThenSnippetMatchesStringRepresentation()
     {
         // Arrange
@@ -28,5 +15,18 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Identifier? identifier = default;
+
+        // Act
+        Func<Snippet> result = () => identifier;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
     }
 }

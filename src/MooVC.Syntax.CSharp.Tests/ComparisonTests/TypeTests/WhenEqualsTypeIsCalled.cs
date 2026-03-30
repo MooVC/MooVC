@@ -3,6 +3,19 @@
 public sealed class WhenEqualsTypeIsCalled
 {
     [Test]
+    public async Task GivenADifferentValueThenReturnsFalse()
+    {
+        // Arrange
+        Comparison.Type type = Comparison.Type.Equality;
+
+        // Act
+        bool result = type.Equals(Comparison.Type.Inequality);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenANullReferenceThenReturnsFalse()
     {
         // Arrange
@@ -39,18 +52,5 @@ public sealed class WhenEqualsTypeIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenADifferentValueThenReturnsFalse()
-    {
-        // Arrange
-        Comparison.Type type = Comparison.Type.Equality;
-
-        // Act
-        bool result = type.Equals(Comparison.Type.Inequality);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 }

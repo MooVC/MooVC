@@ -3,16 +3,18 @@
 public sealed class WhenToSpanIsCalled
 {
     [Test]
-    public async Task GivenANullEnumerableThenAnEmptySpanIsReturned()
+    public async Task GivenAListWhenTheListMutatesAfterToSpanIsCalledThenTheSpanValuesRemainUnchanged()
     {
         // Arrange
-        IEnumerable<int>? enumerable = default;
+        List<int> source = [1, 2, 3];
 
         // Act
-        ReadOnlySpan<int> actual = enumerable.ToSpan();
+        ReadOnlySpan<int> span = source.ToSpan();
+        source[0] = 99;
+        int[] actual = [.. span];
 
         // Assert
-        _ = await Assert.That(actual.IsEmpty).IsTrue();
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
     }
 
     [Test]
@@ -68,17 +70,15 @@ public sealed class WhenToSpanIsCalled
     }
 
     [Test]
-    public async Task GivenAListWhenTheListMutatesAfterToSpanIsCalledThenTheSpanValuesRemainUnchanged()
+    public async Task GivenANullEnumerableThenAnEmptySpanIsReturned()
     {
         // Arrange
-        List<int> source = [1, 2, 3];
+        IEnumerable<int>? enumerable = default;
 
         // Act
-        ReadOnlySpan<int> span = source.ToSpan();
-        source[0] = 99;
-        int[] actual = [.. span];
+        ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
+        _ = await Assert.That(actual.IsEmpty).IsTrue();
     }
 }

@@ -16,16 +16,16 @@ public sealed class WhenIsNullOrEmptyIsCalled
     }
 
     [Test]
-    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
+    public async Task GivenANullSourceThenAPositiveResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int> source = new int[1];
+        IEnumerable<int>? source = default;
 
         // Act
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = await Assert.That(isEmpty).IsFalse();
+        _ = await Assert.That(isEmpty).IsTrue();
     }
 
     [Test]
@@ -42,15 +42,15 @@ public sealed class WhenIsNullOrEmptyIsCalled
     }
 
     [Test]
-    public async Task GivenANullSourceThenAPositiveResponseIsReturned()
+    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
     {
         // Arrange
-        IEnumerable<int>? source = default;
+        IEnumerable<int> source = new int[1];
 
         // Act
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        _ = await Assert.That(isEmpty).IsTrue();
+        _ = await Assert.That(isEmpty).IsFalse();
     }
 }

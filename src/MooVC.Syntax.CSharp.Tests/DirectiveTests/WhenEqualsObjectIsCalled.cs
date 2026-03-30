@@ -6,6 +6,48 @@ public sealed class WhenEqualsObjectIsCalled
     private const string AlternativeAlias = "Other";
 
     [Test]
+    public async Task GivenDifferentDirectiveThenReturnsFalse()
+    {
+        // Arrange
+        Directive subject = Create();
+        object comparison = Create(alias: AlternativeAlias);
+
+        // Act
+        bool result = subject.Equals(comparison);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentDirectiveThenReturnsTrue()
+    {
+        // Arrange
+        Directive subject = Create();
+        object comparison = Create();
+
+        // Act
+        bool result = subject.Equals(comparison);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNonDirectiveThenReturnsFalse()
+    {
+        // Arrange
+        Directive subject = Create();
+        object comparison = new();
+
+        // Act
+        bool result = subject.Equals(comparison);
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
@@ -31,48 +73,6 @@ public sealed class WhenEqualsObjectIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEquivalentDirectiveThenReturnsTrue()
-    {
-        // Arrange
-        Directive subject = Create();
-        object comparison = Create();
-
-        // Act
-        bool result = subject.Equals(comparison);
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentDirectiveThenReturnsFalse()
-    {
-        // Arrange
-        Directive subject = Create();
-        object comparison = Create(alias: AlternativeAlias);
-
-        // Act
-        bool result = subject.Equals(comparison);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenNonDirectiveThenReturnsFalse()
-    {
-        // Arrange
-        Directive subject = Create();
-        object comparison = new();
-
-        // Act
-        bool result = subject.Equals(comparison);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
     }
 
     private static Directive Create(string alias = Alias)

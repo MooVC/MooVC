@@ -5,10 +5,14 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public async Task GivenUndefinedThenNoValidationErrorReturned()
+    public async Task GivenEmptyLocationThenValidationErrorReturned()
     {
         // Arrange
-        Item subject = Item.Undefined;
+        var subject = new Item
+        {
+            CustomToolNamespace = Snippet.From(ItemTestsData.DefaultCustomToolNamespace),
+        };
+
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -16,8 +20,9 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Location));
     }
 
     [Test]
@@ -43,14 +48,10 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenEmptyLocationThenValidationErrorReturned()
+    public async Task GivenUndefinedThenNoValidationErrorReturned()
     {
         // Arrange
-        var subject = new Item
-        {
-            CustomToolNamespace = Snippet.From(ItemTestsData.DefaultCustomToolNamespace),
-        };
-
+        Item subject = Item.Undefined;
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -58,9 +59,8 @@ public sealed class WhenValidateIsCalled
         bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
 
         // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Item.Location));
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]

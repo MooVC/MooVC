@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorMetadataMetadataIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Metadata? left = default;
-        Metadata right = MetadataTestsData.Create();
+        Metadata left = MetadataTestsData.Create();
+        Metadata right = MetadataTestsData.Create(name: Snippet.From("Other"));
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorMetadataMetadataIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Metadata left = MetadataTestsData.Create();
-        Metadata right = MetadataTestsData.Create(name: Snippet.From("Other"));
+        Metadata? left = default;
+        Metadata right = MetadataTestsData.Create();
 
         // Act
         bool result = left != right;

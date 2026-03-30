@@ -20,6 +20,20 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Nature left = Same;
+        Nature right = Different;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
@@ -45,19 +59,5 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        Nature left = Same;
-        Nature right = Different;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

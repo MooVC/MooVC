@@ -3,6 +3,34 @@
 public sealed class WhenReplaceIsCalled
 {
     [Test]
+    public async Task GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
+    {
+        // Arrange
+        ICollection<int> actual = [];
+        int[] items = [];
+
+        // Act
+        actual.Replace(items);
+
+        // Assert
+        _ = await Assert.That(actual).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetBecomesEmpty()
+    {
+        // Arrange
+        ICollection<int> actual = [1, 2, 3];
+        int[] items = [];
+
+        // Act
+        actual.Replace(items);
+
+        // Assert
+        _ = await Assert.That(actual).IsEmpty();
+    }
+
+    [Test]
     public async Task GivenANullListThenNoArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -56,33 +84,5 @@ public sealed class WhenReplaceIsCalled
 
         // Assert
         _ = await Assert.That(actual).IsEquivalentTo(expected);
-    }
-
-    [Test]
-    public async Task GivenAnEmptyItemListWhenTargetIsEmptyThenTargetRemainsEmpty()
-    {
-        // Arrange
-        ICollection<int> actual = [];
-        int[] items = [];
-
-        // Act
-        actual.Replace(items);
-
-        // Assert
-        _ = await Assert.That(actual).IsEmpty();
-    }
-
-    [Test]
-    public async Task GivenAnEmptyItemListWhenTargetIsNotEmptyThenTargetBecomesEmpty()
-    {
-        // Arrange
-        ICollection<int> actual = [1, 2, 3];
-        int[] items = [];
-
-        // Act
-        actual.Replace(items);
-
-        // Assert
-        _ = await Assert.That(actual).IsEmpty();
     }
 }

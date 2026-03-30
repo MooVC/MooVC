@@ -3,17 +3,17 @@
 public sealed class WhenEqualsObjectForKindIsCalled
 {
     [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
+    public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.Record;
-        object other = subject;
+        object other = Struct.Kind.Ref;
 
         // Act
         bool result = subject.Equals(other);
 
         // Assert
-        _ = await Assert.That(result).IsTrue();
+        _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
@@ -30,16 +30,16 @@ public sealed class WhenEqualsObjectForKindIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValueThenReturnsFalse()
+    public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
         Struct.Kind subject = Struct.Kind.Record;
-        object other = Struct.Kind.Ref;
+        object other = subject;
 
         // Act
         bool result = subject.Equals(other);
 
         // Assert
-        _ = await Assert.That(result).IsFalse();
+        _ = await Assert.That(result).IsTrue();
     }
 }

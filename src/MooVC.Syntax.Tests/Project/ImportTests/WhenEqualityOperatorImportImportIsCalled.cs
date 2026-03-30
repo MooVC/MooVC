@@ -17,11 +17,11 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Import? left = default;
-        Import right = ImportTestsData.Create();
+        Import left = ImportTestsData.Create();
+        Import right = ImportTestsData.Create(sdk: Snippet.From("Other"));
 
         // Act
         bool result = left == right;
@@ -45,11 +45,11 @@ public sealed class WhenEqualityOperatorImportImportIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Import left = ImportTestsData.Create();
-        Import right = ImportTestsData.Create(sdk: Snippet.From("Other"));
+        Import? left = default;
+        Import right = ImportTestsData.Create();
 
         // Act
         bool result = left == right;

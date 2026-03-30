@@ -3,11 +3,11 @@
 public sealed class WhenEqualsSdkIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
-        Sdk? other = default;
+        Sdk other = SdkTestsData.Create(version: Snippet.From("2.0.0"));
 
         // Act
         bool result = subject.Equals(other);
@@ -31,11 +31,11 @@ public sealed class WhenEqualsSdkIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Sdk subject = SdkTestsData.Create();
-        Sdk other = SdkTestsData.Create(version: Snippet.From("2.0.0"));
+        Sdk? other = default;
 
         // Act
         bool result = subject.Equals(other);

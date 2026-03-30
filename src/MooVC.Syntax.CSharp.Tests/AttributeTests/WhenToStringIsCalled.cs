@@ -7,16 +7,21 @@ public sealed class WhenToStringIsCalled
     private const string AttributeName = AttributeTestsData.DefaultName;
 
     [Test]
-    public async Task GivenUnspecifiedAttributeThenReturnsEmpty()
+    public async Task GivenArgumentsThenReturnsAttributeStringWithArguments()
     {
         // Arrange
-        var attribute = new Attribute();
+        Attribute attribute = AttributeTestsData.Create(
+            arguments: new Argument
+            {
+                Name = new Identifier(ArgumentName),
+                Value = Snippet.From(ArgumentValue),
+            });
 
         // Act
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo($"{AttributeName}({ArgumentName} = {ArgumentValue})");
     }
 
     [Test]
@@ -46,20 +51,15 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenArgumentsThenReturnsAttributeStringWithArguments()
+    public async Task GivenUnspecifiedAttributeThenReturnsEmpty()
     {
         // Arrange
-        Attribute attribute = AttributeTestsData.Create(
-            arguments: new Argument
-            {
-                Name = new Identifier(ArgumentName),
-                Value = Snippet.From(ArgumentValue),
-            });
+        var attribute = new Attribute();
 
         // Act
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"{AttributeName}({ArgumentName} = {ArgumentValue})");
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

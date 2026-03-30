@@ -6,20 +6,6 @@ using Microsoft.Extensions.Logging;
 public sealed class WhenThreadSafeHostedServiceIsConstructed
 {
     [Test]
-    public async Task GivenALoggerAndServicesThenAnInstanceIsCreated()
-    {
-        // Arrange
-        ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
-        IHostedService service = Substitute.For<IHostedService>();
-
-        // Act
-        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
-
-        // Assert
-        _ = await Assert.That(act).ThrowsNothing();
-    }
-
-    [Test]
     public async Task GivenALoggerAndNoServicesThenAnInstanceIsCreated()
     {
         // Arrange
@@ -46,6 +32,20 @@ public sealed class WhenThreadSafeHostedServiceIsConstructed
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(services));
+    }
+
+    [Test]
+    public async Task GivenALoggerAndServicesThenAnInstanceIsCreated()
+    {
+        // Arrange
+        ILogger<ThreadSafeHostedService> logger = Substitute.For<ILogger<ThreadSafeHostedService>>();
+        IHostedService service = Substitute.For<IHostedService>();
+
+        // Act
+        Func<IHostedService> act = () => new ThreadSafeHostedService(logger, [service]);
+
+        // Assert
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]

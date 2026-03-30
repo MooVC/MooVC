@@ -12,21 +12,6 @@ public sealed class WhenMaxIsCalled
 
     [Test]
     [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
-    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
-    {
-        // Arrange
-        var first = new DateTimeOffset(oldest);
-        var second = new DateTimeOffset(newest);
-
-        // Act
-        DateTimeOffset selected = first.Max(second);
-
-        // Assert
-        _ = await Assert.That(selected).IsEqualTo(second);
-    }
-
-    [Test]
-    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
     public async Task GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
@@ -38,6 +23,21 @@ public sealed class WhenMaxIsCalled
 
         // Assert
         _ = await Assert.That(selected).IsEqualTo(first);
+    }
+
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
+    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
+    {
+        // Arrange
+        var first = new DateTimeOffset(oldest);
+        var second = new DateTimeOffset(newest);
+
+        // Act
+        DateTimeOffset selected = first.Max(second);
+
+        // Assert
+        _ = await Assert.That(selected).IsEqualTo(second);
     }
 
     [Test]

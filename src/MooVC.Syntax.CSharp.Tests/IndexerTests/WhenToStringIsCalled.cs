@@ -3,32 +3,6 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenUndefinedIndexerThenEmptyReturned()
-    {
-        // Arrange
-        Indexer subject = Indexer.Undefined;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
-    public async Task GivenDefaultBehavioursThenEmptyReturned()
-    {
-        // Arrange
-        Indexer subject = Indexer.Undefined;
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(string.Empty);
-    }
-
-    [Test]
     public async Task GivenBehavioursWhenGetAndSetThenBodyIsRendered()
     {
         // Arrange
@@ -53,5 +27,31 @@ public sealed class WhenToStringIsCalled
             """;
 
         _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenDefaultBehavioursThenEmptyReturned()
+    {
+        // Arrange
+        Indexer subject = Indexer.Undefined;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
+    }
+
+    [Test]
+    public async Task GivenUndefinedIndexerThenEmptyReturned()
+    {
+        // Arrange
+        Indexer subject = Indexer.Undefined;
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo(string.Empty);
     }
 }

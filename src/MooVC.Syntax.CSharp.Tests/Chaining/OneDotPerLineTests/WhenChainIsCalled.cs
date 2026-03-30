@@ -6,17 +6,25 @@ using MooVC.Syntax.CSharp.Chaining;
 public sealed class WhenChainIsCalled
 {
     [Test]
-    public async Task GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
+    public async Task GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
     {
         // Arrange
-        const string value = "var result = query.Where(item => item.IsActive).OrderBy(item => item.Name).Select(item => item.Id).ToList();";
+        const string value = "var result = query" +
+            ".Where(unit => unit.IsDefined)" +
+            ".OrderBy(unit => unit.Name)" +
+            ".SelectMany(unit => unit.Features" +
+                ".Where(feature => feature.IsDefined)" +
+                ".Select(feature => feature.Name))" +
+            ".Distinct()" +
+            ".ToList();";
 
         string[] expected =
         [
             "var result = query",
-            "    .Where(item => item.IsActive)",
-            "    .OrderBy(item => item.Name)",
-            "    .Select(item => item.Id)",
+            "    .Where(unit => unit.IsDefined)",
+            "    .OrderBy(unit => unit.Name)",
+            "    .SelectMany(unit => unit.Features.Where(feature => feature.IsDefined).Select(feature => feature.Name))",
+            "    .Distinct()",
             "    .ToList();",
         ];
 
@@ -56,25 +64,17 @@ public sealed class WhenChainIsCalled
     }
 
     [Test]
-    public async Task GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
+    public async Task GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
     {
         // Arrange
-        const string value = "var result = query" +
-            ".Where(unit => unit.IsDefined)" +
-            ".OrderBy(unit => unit.Name)" +
-            ".SelectMany(unit => unit.Features" +
-                ".Where(feature => feature.IsDefined)" +
-                ".Select(feature => feature.Name))" +
-            ".Distinct()" +
-            ".ToList();";
+        const string value = "var result = query.Where(item => item.IsActive).OrderBy(item => item.Name).Select(item => item.Id).ToList();";
 
         string[] expected =
         [
             "var result = query",
-            "    .Where(unit => unit.IsDefined)",
-            "    .OrderBy(unit => unit.Name)",
-            "    .SelectMany(unit => unit.Features.Where(feature => feature.IsDefined).Select(feature => feature.Name))",
-            "    .Distinct()",
+            "    .Where(item => item.IsActive)",
+            "    .OrderBy(item => item.Name)",
+            "    .Select(item => item.Id)",
             "    .ToList();",
         ];
 

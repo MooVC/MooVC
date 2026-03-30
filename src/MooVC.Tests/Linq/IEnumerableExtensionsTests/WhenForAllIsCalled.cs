@@ -30,74 +30,6 @@ public sealed class WhenForAllIsCalled
     }
 
     [Test]
-    public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
-    {
-        // Arrange
-        List<int> enumeration = [1, 2, 3];
-        var invocations = new ConcurrentBag<int>();
-
-        void Action(int value)
-        {
-            invocations.Add(value);
-        }
-
-        // Act
-        enumeration.ForAll(Action);
-
-        // Assert
-        _ = await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
-        _ = await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
-    }
-
-    [Test]
-    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        int[] enumeration = [1, 2, 3];
-        Action<int>? action = default;
-
-        // Act
-        Action act = () => enumeration.ForAll(action!);
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
-    }
-
-    [Test]
-    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
-    {
-        // Arrange
-        IEnumerable<int>? enumeration = default;
-        bool wasInvoked = false;
-
-        void Action(int value)
-        {
-            wasInvoked = true;
-        }
-
-        // Act
-        enumeration.ForAll(Action);
-
-        // Assert
-        _ = await Assert.That(wasInvoked).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
-    {
-        // Arrange
-        Action<int>? action = default;
-        IEnumerable<int>? enumeration = default;
-
-        // Act
-        Action act = () => enumeration.ForAll(action!);
-
-        // Assert
-        _ = await Assert.That(act).ThrowsNothing();
-    }
-
-    [Test]
     [Arguments(1, 3)]
     [Arguments(2, 6)]
     [Arguments(3, 9)]
@@ -125,6 +57,26 @@ public sealed class WhenForAllIsCalled
     }
 
     [Test]
+    public async Task GivenAnEnumerationWhenAnActionIsProvidedThenTheActionIsInvokedForEachEnumerationMember()
+    {
+        // Arrange
+        List<int> enumeration = [1, 2, 3];
+        var invocations = new ConcurrentBag<int>();
+
+        void Action(int value)
+        {
+            invocations.Add(value);
+        }
+
+        // Act
+        enumeration.ForAll(Action);
+
+        // Assert
+        _ = await Assert.That(enumeration.TrueForAll(value => invocations.Contains(value))).IsTrue();
+        _ = await Assert.That(invocations.Count).IsEqualTo(enumeration.Count);
+    }
+
+    [Test]
     public async Task GivenAnEnumerationWhenAnAsyncActionIsProvidedThenTheActionIsInvokedForEachEnumerationMemberTask()
     {
         // Arrange
@@ -147,6 +99,21 @@ public sealed class WhenForAllIsCalled
     }
 
     [Test]
+    public async Task GivenAnEnumerationWhenNoActionIsProvidedThenAnArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        int[] enumeration = [1, 2, 3];
+        Action<int>? action = default;
+
+        // Act
+        Action act = () => enumeration.ForAll(action!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(action));
+    }
+
+    [Test]
     public async Task GivenAnEnumerationWhenNoAsyncActionIsProvidedThenAnArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -159,6 +126,25 @@ public sealed class WhenForAllIsCalled
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
         _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(operation));
+    }
+
+    [Test]
+    public async Task GivenANullEnumerationWhenAnActionIsProvidedThenTheActionIsGracefullyIgnored()
+    {
+        // Arrange
+        IEnumerable<int>? enumeration = default;
+        bool wasInvoked = false;
+
+        void Action(int value)
+        {
+            wasInvoked = true;
+        }
+
+        // Act
+        enumeration.ForAll(Action);
+
+        // Assert
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
     [Test]
@@ -180,6 +166,20 @@ public sealed class WhenForAllIsCalled
 
         // Assert
         _ = await Assert.That(wasInvoked).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenANullEnumerationWhenNoActionIsProvidedThenNoArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Action<int>? action = default;
+        IEnumerable<int>? enumeration = default;
+
+        // Act
+        Action act = () => enumeration.ForAll(action!);
+
+        // Assert
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
     [Test]

@@ -5,16 +5,20 @@ public sealed class WhenToStringIsCalled
     private const string Alias = "Alias";
 
     [Test]
-    public async Task GivenUndefinedDirectiveThenReturnsEmptyString()
+    public async Task GivenAliasThenReturnsAliasDirectiveRepresentation()
     {
         // Arrange
-        Directive subject = Directive.Undefined;
+        var subject = new Directive
+        {
+            Alias = new Name(Alias),
+            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+        };
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(string.Empty);
+        _ = await Assert.That(result).IsEqualTo("using Alias = MooVC.Syntax;");
     }
 
     [Test]
@@ -35,19 +39,15 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenAliasThenReturnsAliasDirectiveRepresentation()
+    public async Task GivenUndefinedDirectiveThenReturnsEmptyString()
     {
         // Arrange
-        var subject = new Directive
-        {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
-        };
+        Directive subject = Directive.Undefined;
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo("using Alias = MooVC.Syntax;");
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 }

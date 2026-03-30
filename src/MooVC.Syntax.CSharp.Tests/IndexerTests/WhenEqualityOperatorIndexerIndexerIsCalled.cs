@@ -17,80 +17,6 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsFalse()
-    {
-        // Arrange
-        Indexer? left = default;
-        Indexer right = IndexerTestsData.Create();
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsFalse()
-    {
-        // Arrange
-        Indexer left = IndexerTestsData.Create();
-        Indexer? right = default;
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsTrue()
-    {
-        // Arrange
-        Indexer first = IndexerTestsData.Create();
-        Indexer second = first;
-
-        // Act
-        bool result = first == second;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Indexer left = IndexerTestsData.Create();
-        Indexer right = IndexerTestsData.Create();
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsTrue();
-        _ = await Assert.That(resultRightLeft).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
-    {
-        // Arrange
-        Indexer left = IndexerTestsData.Create();
-        Indexer right = IndexerTestsData.Create(parameter: new Parameter { Name = "alternate" });
-
-        // Act
-        bool resultLeftRight = left == right;
-        bool resultRightLeft = right == left;
-
-        // Assert
-        _ = await Assert.That(resultLeftRight).IsFalse();
-        _ = await Assert.That(resultRightLeft).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentBehavioursThenReturnsFalse()
     {
         // Arrange
@@ -146,5 +72,79 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();
         _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Indexer left = IndexerTestsData.Create();
+        Indexer right = IndexerTestsData.Create(parameter: new Parameter { Name = "alternate" });
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsFalse();
+        _ = await Assert.That(resultRightLeft).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Indexer left = IndexerTestsData.Create();
+        Indexer right = IndexerTestsData.Create();
+
+        // Act
+        bool resultLeftRight = left == right;
+        bool resultRightLeft = right == left;
+
+        // Assert
+        _ = await Assert.That(resultLeftRight).IsTrue();
+        _ = await Assert.That(resultRightLeft).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftNullRightValueThenReturnsFalse()
+    {
+        // Arrange
+        Indexer? left = default;
+        Indexer right = IndexerTestsData.Create();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsFalse()
+    {
+        // Arrange
+        Indexer left = IndexerTestsData.Create();
+        Indexer? right = default;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsTrue()
+    {
+        // Arrange
+        Indexer first = IndexerTestsData.Create();
+        Indexer second = first;
+
+        // Act
+        bool result = first == second;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }

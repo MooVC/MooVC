@@ -20,25 +20,11 @@ public sealed class WhenInequalityOperatorFormatterStringIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
-    {
-        // Arrange
-        Argument.Formatter? left = default;
-        const string right = Same;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
-        string? right = default;
+        const string right = Different;
 
         // Act
         bool result = left != right;
@@ -62,11 +48,25 @@ public sealed class WhenInequalityOperatorFormatterStringIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Argument.Formatter? left = default;
+        const string right = Same;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
         Argument.Formatter left = Argument.Formatter.Call;
-        const string right = Different;
+        string? right = default;
 
         // Act
         bool result = left != right;

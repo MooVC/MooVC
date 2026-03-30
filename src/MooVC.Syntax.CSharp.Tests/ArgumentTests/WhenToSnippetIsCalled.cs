@@ -8,18 +8,27 @@ public sealed class WhenToSnippetIsCalled
     private const string Value = "42";
 
     [Test]
-    public async Task GivenNullOptionsThenThrows()
+    public async Task GivenModifierThenModifierIsPrefixed()
     {
         // Arrange
-        var subject = new Argument { Name = "Value" };
-        Argument.Options? options = default;
+        var subject = new Argument
+        {
+            Modifier = Argument.Mode.Ref,
+            Name = new Identifier(Name),
+            Value = Snippet.From(Value),
+        };
+
+        var options = new Argument.Options
+        {
+            Naming = Variable.Options.Camel,
+            Formatter = Argument.Formatter.Call,
+        };
 
         // Act
-        Func<Snippet> act = () => subject.ToSnippet(options!);
+        string result = subject.ToSnippet(options);
 
         // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+        _ = await Assert.That(result).IsEqualTo("value: ref 42");
     }
 
     [Test]
@@ -46,26 +55,17 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    public async Task GivenModifierThenModifierIsPrefixed()
+    public async Task GivenNullOptionsThenThrows()
     {
         // Arrange
-        var subject = new Argument
-        {
-            Modifier = Argument.Mode.Ref,
-            Name = new Identifier(Name),
-            Value = Snippet.From(Value),
-        };
-
-        var options = new Argument.Options
-        {
-            Naming = Variable.Options.Camel,
-            Formatter = Argument.Formatter.Call,
-        };
+        var subject = new Argument { Name = "Value" };
+        Argument.Options? options = default;
 
         // Act
-        string result = subject.ToSnippet(options);
+        Func<Snippet> act = () => subject.ToSnippet(options!);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo("value: ref 42");
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
     }
 }

@@ -6,22 +6,6 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
-    public async Task GivenUndefinedThenValidationSucceeds()
-    {
-        // Arrange
-        Conversion subject = Conversion.Undefined;
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsTrue();
-        _ = await Assert.That(results).IsEmpty();
-    }
-
-    [Test]
     public async Task GivenMissingBodyThenValidationFails()
     {
         // Arrange
@@ -53,6 +37,22 @@ public sealed class WhenValidateIsCalled
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).IsNotEmpty();
         _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Conversion.Target)));
+    }
+
+    [Test]
+    public async Task GivenUndefinedThenValidationSucceeds()
+    {
+        // Arrange
+        Conversion subject = Conversion.Undefined;
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
     }
 
     [Test]

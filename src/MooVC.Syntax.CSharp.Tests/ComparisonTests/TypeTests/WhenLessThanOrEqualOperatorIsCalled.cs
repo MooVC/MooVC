@@ -3,6 +3,20 @@
 public sealed class WhenLessThanOrEqualOperatorIsCalled
 {
     [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Comparison.Type leftType = Comparison.Type.Equality;
+        Comparison.Type rightType = Comparison.Type.Equality;
+
+        // Act
+        bool result = leftType <= rightType;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
@@ -28,19 +42,5 @@ public sealed class WhenLessThanOrEqualOperatorIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsTrue()
-    {
-        // Arrange
-        Comparison.Type leftType = Comparison.Type.Equality;
-        Comparison.Type rightType = Comparison.Type.Equality;
-
-        // Act
-        bool result = leftType <= rightType;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -3,50 +3,6 @@
 public sealed class WhenGetHashCodeIsCalled
 {
     [Test]
-    public async Task GivenEquivalentValuesThenHashesMatch()
-    {
-        // Arrange
-        var first = new Event.Methods
-        {
-            Add = Snippet.From("value"),
-        };
-
-        var second = new Event.Methods
-        {
-            Add = Snippet.From("value"),
-        };
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenHashesDiffer()
-    {
-        // Arrange
-        var first = new Event.Methods
-        {
-            Add = Snippet.From("value"),
-        };
-
-        var second = new Event.Methods
-        {
-            Remove = Snippet.From("value"),
-        };
-
-        // Act
-        int firstHash = first.GetHashCode();
-        int secondHash = second.GetHashCode();
-
-        // Assert
-        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
-    }
-
-    [Test]
     public async Task GivenDifferentAddValuesThenHashesDiffer()
     {
         // Arrange
@@ -88,5 +44,49 @@ public sealed class WhenGetHashCodeIsCalled
 
         // Assert
         _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenHashesDiffer()
+    {
+        // Arrange
+        var first = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var second = new Event.Methods
+        {
+            Remove = Snippet.From("value"),
+        };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsNotEqualTo(secondHash);
+    }
+
+    [Test]
+    public async Task GivenEquivalentValuesThenHashesMatch()
+    {
+        // Arrange
+        var first = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        var second = new Event.Methods
+        {
+            Add = Snippet.From("value"),
+        };
+
+        // Act
+        int firstHash = first.GetHashCode();
+        int secondHash = second.GetHashCode();
+
+        // Assert
+        _ = await Assert.That(firstHash).IsEqualTo(secondHash);
     }
 }

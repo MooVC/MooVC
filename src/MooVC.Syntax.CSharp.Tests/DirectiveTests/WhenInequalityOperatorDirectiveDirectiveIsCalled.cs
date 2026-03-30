@@ -20,62 +20,6 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
-    {
-        // Arrange
-        Directive? left = default;
-        Directive right = Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenLeftValueRightNullThenReturnsTrue()
-    {
-        // Arrange
-        Directive left = Create();
-        Directive? right = default;
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
-    public async Task GivenSameReferenceThenReturnsFalse()
-    {
-        // Arrange
-        Directive first = Create();
-        Directive second = first;
-
-        // Act
-        bool result = first != second;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenEqualValuesThenReturnsFalse()
-    {
-        // Arrange
-        Directive left = Create();
-        Directive right = Create();
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenDifferentAliasesThenReturnsTrue()
     {
         // Arrange
@@ -117,6 +61,62 @@ public sealed class WhenInequalityOperatorDirectiveDirectiveIsCalled
 
         // Assert
         _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsFalse()
+    {
+        // Arrange
+        Directive left = Create();
+        Directive right = Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    {
+        // Arrange
+        Directive? left = default;
+        Directive right = Create();
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenLeftValueRightNullThenReturnsTrue()
+    {
+        // Arrange
+        Directive left = Create();
+        Directive? right = default;
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenSameReferenceThenReturnsFalse()
+    {
+        // Arrange
+        Directive first = Create();
+        Directive second = first;
+
+        // Act
+        bool result = first != second;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
     }
 
     private static Directive Create(string alias = Alias, Qualifier? qualifier = default, bool isStatic = false)

@@ -23,10 +23,13 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenWhitespaceThenValidationErrorReturned()
+    public async Task GivenInvalidFileNameCharacterThenValidationErrorReturned()
     {
         // Arrange
-        var subject = new Path("   ");
+        char invalidFileNameCharacter = SystemPath.GetInvalidFileNameChars()
+            .First(character => character != SystemPath.DirectorySeparatorChar && character != SystemPath.AltDirectorySeparatorChar);
+        string value = SystemPath.Combine("src", $"file{invalidFileNameCharacter}.txt");
+        var subject = new Path(value);
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 
@@ -61,27 +64,6 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenInvalidFileNameCharacterThenValidationErrorReturned()
-    {
-        // Arrange
-        char invalidFileNameCharacter = SystemPath.GetInvalidFileNameChars()
-            .First(character => character != SystemPath.DirectorySeparatorChar && character != SystemPath.AltDirectorySeparatorChar);
-        string value = SystemPath.Combine("src", $"file{invalidFileNameCharacter}.txt");
-        var subject = new Path(value);
-        var context = new ValidationContext(subject);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Path));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
     public async Task GivenValidPathThenNoValidationErrorReturned()
     {
         // Arrange
@@ -95,5 +77,23 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsTrue();
         _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenWhitespaceThenValidationErrorReturned()
+    {
+        // Arrange
+        var subject = new Path("   ");
+        var context = new ValidationContext(subject);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, context, results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsFalse();
+        _ = await Assert.That(results).HasSingleItem();
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Path));
+        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 }

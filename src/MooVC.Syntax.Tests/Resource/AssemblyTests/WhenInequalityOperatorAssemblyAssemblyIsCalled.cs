@@ -17,11 +17,11 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
     }
 
     [Test]
-    public async Task GivenLeftNullRightValueThenReturnsTrue()
+    public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Assembly? left = default;
-        Assembly right = AssemblyTestsData.Create();
+        Assembly left = AssemblyTestsData.Create();
+        Assembly right = AssemblyTestsData.Create(name: Snippet.From("Other"));
 
         // Act
         bool result = left != right;
@@ -45,11 +45,11 @@ public sealed class WhenInequalityOperatorAssemblyAssemblyIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
+    public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Assembly left = AssemblyTestsData.Create();
-        Assembly right = AssemblyTestsData.Create(name: Snippet.From("Other"));
+        Assembly? left = default;
+        Assembly right = AssemblyTestsData.Create();
 
         // Act
         bool result = left != right;

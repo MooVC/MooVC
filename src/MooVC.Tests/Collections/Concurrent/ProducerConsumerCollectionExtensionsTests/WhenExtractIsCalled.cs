@@ -6,23 +6,6 @@ using System.Linq;
 public sealed class WhenExtractIsCalled
 {
     [Test]
-    public async Task GivenACollectionThenAnEnumerableContainingAllMembersIsReturnedAndTheCollectionIsEmptied()
-    {
-        // Arrange
-        IEnumerable<int> expected = Enumerable.Range(0, 50);
-        IProducerConsumerCollection<int> source = new ConcurrentBag<int>(expected);
-
-        // Act
-        IEnumerable<int> actual = source
-            .Extract()
-            .OrderBy(element => element);
-
-        // Assert
-        _ = await Assert.That(actual).IsEquivalentTo(expected);
-        _ = await Assert.That(source).IsEmpty();
-    }
-
-    [Test]
     [Arguments(1)]
     [Arguments(10)]
     [Arguments(25)]
@@ -43,6 +26,23 @@ public sealed class WhenExtractIsCalled
         _ = await Assert.That(source.Intersect(actual)).IsEmpty();
         _ = await Assert.That(source.Count).IsEqualTo(Total - (int)count);
         _ = await Assert.That(actual.Count()).IsEqualTo((int)count);
+    }
+
+    [Test]
+    public async Task GivenACollectionThenAnEnumerableContainingAllMembersIsReturnedAndTheCollectionIsEmptied()
+    {
+        // Arrange
+        IEnumerable<int> expected = Enumerable.Range(0, 50);
+        IProducerConsumerCollection<int> source = new ConcurrentBag<int>(expected);
+
+        // Act
+        IEnumerable<int> actual = source
+            .Extract()
+            .OrderBy(element => element);
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
+        _ = await Assert.That(source).IsEmpty();
     }
 
     [Test]

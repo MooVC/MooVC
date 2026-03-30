@@ -22,20 +22,6 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
     }
 
     [Test]
-    public async Task GivenValuesThenRoundTripsSuccessfully()
-    {
-        // Arrange
-        ImmutableArray<string> provided = _values;
-
-        // Act
-        Snippet subject = provided;
-        ImmutableArray<string> result = subject;
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(provided);
-    }
-
-    [Test]
     public async Task GivenSameArrayTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
@@ -49,5 +35,19 @@ public sealed class WhenImplicitOperatorFromImmutableArrayIsCalled
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
         _ = await Assert.That(first == second).IsTrue();
         _ = await Assert.That(first).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenValuesThenRoundTripsSuccessfully()
+    {
+        // Arrange
+        ImmutableArray<string> provided = _values;
+
+        // Act
+        Snippet subject = provided;
+        ImmutableArray<string> result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(provided);
     }
 }

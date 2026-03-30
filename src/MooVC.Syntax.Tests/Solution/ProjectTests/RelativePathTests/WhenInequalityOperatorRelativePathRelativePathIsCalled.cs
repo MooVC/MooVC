@@ -17,6 +17,20 @@ public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
     }
 
     [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Project.RelativePath("src/Project.csproj");
+        var right = new Project.RelativePath("src/Other.csproj");
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
@@ -29,19 +43,5 @@ public sealed class WhenInequalityOperatorRelativePathRelativePathIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    public async Task GivenDifferentValuesThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Project.RelativePath("src/Project.csproj");
-        var right = new Project.RelativePath("src/Other.csproj");
-
-        // Act
-        bool result = left != right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
     }
 }

@@ -9,20 +9,6 @@ public sealed class WhenStackIsCalled
     private const string ThirdLine = "Third";
 
     [Test]
-    public async Task GivenSingleSnippetThenOriginalSnippetIsReturned()
-    {
-        // Arrange
-        var snippet = Snippet.From(FirstLine);
-        var snippets = ImmutableArray.Create(snippet);
-
-        // Act
-        Snippet result = snippets.Stack(Snippet.Options.Default);
-
-        // Assert
-        _ = await Assert.That(result).IsStrictlyEqualTo(snippet);
-    }
-
-    [Test]
     public async Task GivenMultipleSnippetsThenTheyAreStackedInOrder()
     {
         // Arrange
@@ -37,5 +23,19 @@ public sealed class WhenStackIsCalled
 
         // Assert
         _ = await Assert.That(result.ToString()).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenSingleSnippetThenOriginalSnippetIsReturned()
+    {
+        // Arrange
+        var snippet = Snippet.From(FirstLine);
+        var snippets = ImmutableArray.Create(snippet);
+
+        // Act
+        Snippet result = snippets.Stack(Snippet.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsStrictlyEqualTo(snippet);
     }
 }

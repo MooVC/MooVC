@@ -3,13 +3,14 @@
 public sealed class WhenEqualsItemIsCalled
 {
     [Test]
-    public async Task GivenNullThenReturnsFalse()
+    public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
         Item subject = ItemTestsData.Create();
+        Item other = ItemTestsData.Create(path: Snippet.From("Other"));
 
         // Act
-        bool result = subject.Equals(default);
+        bool result = subject.Equals(other);
 
         // Assert
         _ = await Assert.That(result).IsFalse();
@@ -30,14 +31,13 @@ public sealed class WhenEqualsItemIsCalled
     }
 
     [Test]
-    public async Task GivenDifferentValuesThenReturnsFalse()
+    public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
         Item subject = ItemTestsData.Create();
-        Item other = ItemTestsData.Create(path: Snippet.From("Other"));
 
         // Act
-        bool result = subject.Equals(other);
+        bool result = subject.Equals(default);
 
         // Assert
         _ = await Assert.That(result).IsFalse();

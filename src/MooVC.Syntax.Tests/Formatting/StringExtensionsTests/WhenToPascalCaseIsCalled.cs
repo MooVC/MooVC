@@ -7,79 +7,29 @@ public sealed class WhenToPascalCaseIsCalled
     private static readonly Faker _generator = new();
 
     [Test]
-    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    public async Task GivenAlreadyPascalCaseThenResultIsUnchanged()
     {
         // Arrange
-        string? value = default;
+        string value = "AlreadyPascal";
 
         // Act
-        Action act = () => value!.ToPascalCase();
-
-        // Assert
-        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
-    {
-        // Arrange
-        string value = string.Empty;
-
-        // Act
-        Action act = () => value.ToPascalCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments(" ")]
-    [Arguments("   ")]
-    [Arguments("\t")]
-    [Arguments("\r\n")]
-    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
-    {
-        // Arrange & Act
-        Action act = () => value.ToPascalCase();
-
-        // Assert
-        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
-        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
-    }
-
-    [Test]
-    [Arguments("A", "A")]
-    [Arguments("a", "A")]
-    [Arguments("FooBar", "FooBar")]
-    [Arguments("fooBar", "FooBar")]
-    [Arguments("upperCaseValue", "UpperCaseValue")]
-    [Arguments("éclair", "Éclair")]
-    [Arguments("σigma", "Σigma")]
-    [Arguments("a1b2", "A1b2")]
-    public async Task GivenValidValuesThenFirstCharacterIsUppercased(string value, string expected)
-    {
-        // Arrange & Act
-        string result = value.ToPascalCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
-    }
-
-    [Test]
-    [Arguments("1Example")]
-    [Arguments("_Example")]
-    [Arguments("-Example")]
-    [Arguments("😀Example")]
-    [Arguments(".example")]
-    public async Task GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
-    {
-        // Arrange & Act
         string result = value.ToPascalCase();
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);
+    }
+
+    [Test]
+    public async Task GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
+    {
+        // Arrange
+        string value = "x.Foo";
+
+        // Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("X.Foo");
     }
 
     [Test]
@@ -107,24 +57,79 @@ public sealed class WhenToPascalCaseIsCalled
     }
 
     [Test]
-    public async Task GivenWordsWhenInvokedTwiceThenResultIsIdempotent()
+    [Arguments("A", "A")]
+    [Arguments("a", "A")]
+    [Arguments("FooBar", "FooBar")]
+    [Arguments("fooBar", "FooBar")]
+    [Arguments("upperCaseValue", "UpperCaseValue")]
+    [Arguments("éclair", "Éclair")]
+    [Arguments("σigma", "Σigma")]
+    [Arguments("a1b2", "A1b2")]
+    public async Task GivenValidValuesThenFirstCharacterIsUppercased(string value, string expected)
+    {
+        // Arrange & Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments(" ")]
+    [Arguments("   ")]
+    [Arguments("\t")]
+    [Arguments("\r\n")]
+    public async Task GivenValueContainsOnlyWhitespaceThenArgumentExceptionIsThrown(string value)
+    {
+        // Arrange & Act
+        Action act = () => value.ToPascalCase();
+
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    public async Task GivenValueIsEmptyThenArgumentExceptionIsThrown()
     {
         // Arrange
-        const int wordCount = 10;
+        string value = string.Empty;
 
-        string[] words = [.. Enumerable
-            .Range(0, wordCount)
-            .Select(_ => _generator.Lorem.Word())];
+        // Act
+        Action act = () => value.ToPascalCase();
 
-        // Act & Assert
-        foreach (string word in words)
-        {
-            string first = word.ToPascalCase();
-            string second = first.ToPascalCase();
+        // Assert
+        ArgumentException exception = await Assert.That(act).Throws<ArgumentException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
 
-            // Assert
-            _ = await Assert.That(second).IsEqualTo(first);
-        }
+    [Test]
+    public async Task GivenValueIsNullThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        string? value = default;
+
+        // Act
+        Action act = () => value!.ToPascalCase();
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(value));
+    }
+
+    [Test]
+    [Arguments("1Example")]
+    [Arguments("_Example")]
+    [Arguments("-Example")]
+    [Arguments("😀Example")]
+    [Arguments(".example")]
+    public async Task GivenValueStartsWithNonLetterThenOriginalIsReturned(string value)
+    {
+        // Arrange & Act
+        string result = value.ToPascalCase();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 
     [Test]
@@ -154,19 +159,6 @@ public sealed class WhenToPascalCaseIsCalled
     }
 
     [Test]
-    public async Task GivenAlreadyPascalCaseThenResultIsUnchanged()
-    {
-        // Arrange
-        string value = "AlreadyPascal";
-
-        // Act
-        string result = value.ToPascalCase();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(value);
-    }
-
-    [Test]
     public async Task GivenVeryLongValueThenOnlyFirstCharacterIsUppercased()
     {
         // Arrange
@@ -182,15 +174,23 @@ public sealed class WhenToPascalCaseIsCalled
     }
 
     [Test]
-    public async Task GivenPunctuationAfterFirstLetterThenOnlyFirstCharacterIsChanged()
+    public async Task GivenWordsWhenInvokedTwiceThenResultIsIdempotent()
     {
         // Arrange
-        string value = "x.Foo";
+        const int wordCount = 10;
 
-        // Act
-        string result = value.ToPascalCase();
+        string[] words = [.. Enumerable
+            .Range(0, wordCount)
+            .Select(_ => _generator.Lorem.Word())];
 
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("X.Foo");
+        // Act & Assert
+        foreach (string word in words)
+        {
+            string first = word.ToPascalCase();
+            string second = first.ToPascalCase();
+
+            // Assert
+            _ = await Assert.That(second).IsEqualTo(first);
+        }
     }
 }

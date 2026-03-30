@@ -78,6 +78,185 @@ public sealed class WhenInstancesAreSerialized
         _ = await Assert.That(deserialized).IsEquivalentTo(original);
     }
 
+#if NET5_0_OR_GREATER
+    [Test]
+    public async Task GivenAnInstanceOfARecordThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        var original = new SerializableRecord(
+            [1, 2, 3],
+            25,
+            default,
+            "Something something dark side...");
+
+        var serializer = new Serializer();
+
+        // Act
+        IEnumerable<byte> stream = await serializer.Serialize(original, CancellationToken.None);
+        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
+    }
+
+    [Test]
+    public async Task GivenAnInstanceOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        var original = new SerializableRecord(
+            [1, 2, 3],
+            25,
+            default,
+            "Something something dark side...");
+
+        using var stream = new MemoryStream();
+        var serializer = new Serializer();
+
+        // Act
+        await serializer.Serialize(original, stream, CancellationToken.None);
+
+        stream.Position = 0;
+
+        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
+    }
+
+    [Test]
+    public async Task GivenAnInstanceOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        var original = new SerializableRecord(
+            [1, 2, 3],
+            25,
+            new SerializableRecord(
+                [1, 5],
+                3,
+                default,
+                "Something else..."),
+            "Something something dark side...");
+
+        using var stream = new MemoryStream();
+
+        var serializer = new Serializer();
+
+        // Act
+        await serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
+
+        stream.Position = 0;
+
+        ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(deserialized).IsEquivalentTo(original);
+    }
+
+    [Test]
+    public async Task GivenAnInstancesOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        SerializableRecord[] originals =
+        [
+            new SerializableRecord(
+                [1, 2, 3],
+                25,
+                default,
+                "dark side..."),
+            new SerializableRecord(
+                [4, 5, 6],
+                3,
+                default,
+                "dark side..."),
+        ];
+
+        using var stream = new MemoryStream();
+        var serializer = new Serializer();
+
+        // Act
+        await serializer.Serialize(originals, stream, CancellationToken.None);
+
+        stream.Position = 0;
+
+        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
+    }
+
+    [Test]
+    public async Task GivenAnInstancesOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        ISerializableInstance[] originals =
+        [
+            new SerializableRecord(
+                [1, 2, 3],
+                25,
+                new SerializableRecord(
+                    [1, 5],
+                    3,
+                    default,
+                    "Something else..."),
+                "Something something"),
+            new SerializableRecord(
+                [4, 5, 6],
+                5,
+                new SerializableRecord(
+                    [2, 4],
+                    2,
+                    default,
+                    "Something else..."),
+                "dark side..."),
+        ];
+
+        using var stream = new MemoryStream();
+
+        var serializer = new Serializer();
+
+        // Act
+        await serializer.Serialize(originals, stream, CancellationToken.None);
+
+        stream.Position = 0;
+
+        IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<ISerializableInstance[]>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
+    }
+
+    [Test]
+    public async Task GivenAnInstancseOfARecordThenACloneOfThatInstanceIsDeserialized()
+    {
+        // Arrange
+        SerializableRecord[] originals =
+        [
+            new SerializableRecord(
+                [1, 2, 3],
+                25,
+                default,
+                "Something something"),
+            new SerializableRecord(
+                [4, 5, 6],
+                7,
+                default,
+                "dark side..."),
+        ];
+
+        var serializer = new Serializer();
+
+        // Act
+        IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
+        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
+    }
+#endif
+
     [Test]
     public async Task GivenAnInstancesOfAClassThenACloneOfThatInstanceIsDeserialized()
     {
@@ -171,183 +350,4 @@ public sealed class WhenInstancesAreSerialized
         // Assert
         _ = await Assert.That(deserialized).IsEquivalentTo(originals);
     }
-
-#if NET5_0_OR_GREATER
-    [Test]
-    public async Task GivenAnInstanceOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        var original = new SerializableRecord(
-            [1, 2, 3],
-            25,
-            default,
-            "Something something dark side...");
-
-        using var stream = new MemoryStream();
-        var serializer = new Serializer();
-
-        // Act
-        await serializer.Serialize(original, stream, CancellationToken.None);
-
-        stream.Position = 0;
-
-        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(deserialized).IsEquivalentTo(original);
-    }
-
-    [Test]
-    public async Task GivenAnInstanceOfARecordThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        var original = new SerializableRecord(
-            [1, 2, 3],
-            25,
-            default,
-            "Something something dark side...");
-
-        var serializer = new Serializer();
-
-        // Act
-        IEnumerable<byte> stream = await serializer.Serialize(original, CancellationToken.None);
-        SerializableRecord deserialized = await serializer.Deserialize<SerializableRecord>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(deserialized).IsEquivalentTo(original);
-    }
-
-    [Test]
-    public async Task GivenAnInstanceOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        var original = new SerializableRecord(
-            [1, 2, 3],
-            25,
-            new SerializableRecord(
-                [1, 5],
-                3,
-                default,
-                "Something else..."),
-            "Something something dark side...");
-
-        using var stream = new MemoryStream();
-
-        var serializer = new Serializer();
-
-        // Act
-        await serializer.Serialize<ISerializableInstance>(original, stream, CancellationToken.None);
-
-        stream.Position = 0;
-
-        ISerializableInstance deserialized = await serializer.Deserialize<ISerializableInstance>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(deserialized).IsEquivalentTo(original);
-    }
-
-    [Test]
-    public async Task GivenAnInstancseOfARecordThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        SerializableRecord[] originals =
-        [
-            new SerializableRecord(
-                [1, 2, 3],
-                25,
-                default,
-                "Something something"),
-            new SerializableRecord(
-                [4, 5, 6],
-                7,
-                default,
-                "dark side..."),
-        ];
-
-        var serializer = new Serializer();
-
-        // Act
-        IEnumerable<byte> stream = await serializer.Serialize(originals, CancellationToken.None);
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
-    }
-
-    [Test]
-    public async Task GivenAnInstancesOfARecordWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        SerializableRecord[] originals =
-        [
-            new SerializableRecord(
-                [1, 2, 3],
-                25,
-                default,
-                "dark side..."),
-            new SerializableRecord(
-                [4, 5, 6],
-                3,
-                default,
-                "dark side..."),
-        ];
-
-        using var stream = new MemoryStream();
-        var serializer = new Serializer();
-
-        // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
-
-        stream.Position = 0;
-
-        IEnumerable<SerializableRecord> deserialized = await serializer.Deserialize<SerializableRecord[]>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
-    }
-
-    [Test]
-    public async Task GivenAnInstancesOfARecordWithAReferencedObjectWhenSerializedToAStreamThenACloneOfThatInstanceIsDeserialized()
-    {
-        // Arrange
-        ISerializableInstance[] originals =
-        [
-            new SerializableRecord(
-                [1, 2, 3],
-                25,
-                new SerializableRecord(
-                    [1, 5],
-                    3,
-                    default,
-                    "Something else..."),
-                "Something something"),
-            new SerializableRecord(
-                [4, 5, 6],
-                5,
-                new SerializableRecord(
-                    [2, 4],
-                    2,
-                    default,
-                    "Something else..."),
-                "dark side..."),
-        ];
-
-        using var stream = new MemoryStream();
-
-        var serializer = new Serializer();
-
-        // Act
-        await serializer.Serialize(originals, stream, CancellationToken.None);
-
-        stream.Position = 0;
-
-        IEnumerable<ISerializableInstance> deserialized = await serializer.Deserialize<ISerializableInstance[]>(stream, CancellationToken.None);
-
-        // Assert
-        _ = await Assert.That(deserialized).IsEquivalentTo(originals);
-    }
-#endif
 }

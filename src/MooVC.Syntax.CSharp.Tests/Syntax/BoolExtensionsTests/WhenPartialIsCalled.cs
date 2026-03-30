@@ -3,19 +3,6 @@
 public sealed class WhenPartialIsCalled
 {
     [Test]
-    public async Task GivenTrueThenReturnsPartialKeyword()
-    {
-        // Arrange
-        bool subject = true;
-
-        // Act
-        string result = subject.Partial();
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo("partial");
-    }
-
-    [Test]
     public async Task GivenFalseThenReturnsEmpty()
     {
         // Arrange
@@ -26,5 +13,18 @@ public sealed class WhenPartialIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(string.Empty);
+    }
+
+    [Test]
+    public async Task GivenTrueThenReturnsPartialKeyword()
+    {
+        // Arrange
+        bool subject = true;
+
+        // Act
+        string result = subject.Partial();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("partial");
     }
 }

@@ -7,57 +7,6 @@ public sealed class WhenAndIfIsCalled
     private const string Message = "Validated";
 
     [Test]
-    public async Task GivenFalseConditionThenPrecedingResultIsReturned()
-    {
-        // Arrange
-        var initial = new ValidationResult(Message);
-        var validatable = new TrackingValidatable(initial);
-        var context = new ValidationContext(validatable);
-
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
-            nameof(preceding),
-            validatable);
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
-            false,
-            nameof(validatable),
-            validatable);
-
-        // Assert
-        _ = await Assert.That(actual).IsEqualTo(preceding);
-        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
-    }
-
-    [Test]
-    public async Task GivenTrueConditionThenValidationIsAppended()
-    {
-        // Arrange
-        var initial = new ValidationResult(Message);
-        var precedingValidatable = new TrackingValidatable(initial);
-        var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
-        var context = new ValidationContext(precedingValidatable);
-
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
-            nameof(precedingValidatable),
-            precedingValidatable);
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
-            true,
-            nameof(additionalValidatable),
-            additionalValidatable);
-
-        // Assert
-        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
-
-        ValidationResult[] results = [.. actual.Results];
-        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
-        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
-    }
-
-    [Test]
     public async Task GivenFalseConditionAndMultipleValidatablesThenPrecedingResultIsReturned()
     {
         // Arrange
@@ -82,6 +31,82 @@ public sealed class WhenAndIfIsCalled
         _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
         _ = await Assert.That(firstAdditional.Calls).IsEqualTo(0);
         _ = await Assert.That(secondAdditional.Calls).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task GivenFalseConditionThenPrecedingResultIsReturned()
+    {
+        // Arrange
+        var initial = new ValidationResult(Message);
+        var validatable = new TrackingValidatable(initial);
+        var context = new ValidationContext(validatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(preceding),
+            validatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            false,
+            nameof(validatable),
+            validatable);
+
+        // Assert
+        _ = await Assert.That(actual).IsEqualTo(preceding);
+        _ = await Assert.That(validatable.Calls).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task GivenFunctionConditionAndValidatablesThenItDeterminesWhetherValidationOccurs()
+    {
+        // Arrange
+        var initial = new ValidationResult(Message);
+        var precedingValidatable = new TrackingValidatable(initial);
+        var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
+        var context = new ValidationContext(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            () => false,
+            nameof(additionalValidatable),
+            [additionalValidatable]);
+
+        // Assert
+        _ = await Assert.That(actual).IsEqualTo(preceding);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task GivenFunctionConditionThenItDeterminesWhetherValidationOccurs()
+    {
+        // Arrange
+        var initial = new ValidationResult(Message);
+        var precedingValidatable = new TrackingValidatable(initial);
+        var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
+        var context = new ValidationContext(precedingValidatable);
+
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
+            nameof(precedingValidatable),
+            precedingValidatable);
+
+        // Act
+        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
+            () => true,
+            nameof(additionalValidatable),
+            additionalValidatable);
+
+        // Assert
+        _ = await Assert.That(actual.ValidationContext).IsSameReferenceAs(context);
+
+        ValidationResult[] results = [.. actual.Results];
+        _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
+        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
+        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
     }
 
     [Test]
@@ -115,7 +140,7 @@ public sealed class WhenAndIfIsCalled
     }
 
     [Test]
-    public async Task GivenFunctionConditionThenItDeterminesWhetherValidationOccurs()
+    public async Task GivenTrueConditionThenValidationIsAppended()
     {
         // Arrange
         var initial = new ValidationResult(Message);
@@ -129,7 +154,7 @@ public sealed class WhenAndIfIsCalled
 
         // Act
         (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
-            () => true,
+            true,
             nameof(additionalValidatable),
             additionalValidatable);
 
@@ -140,31 +165,6 @@ public sealed class WhenAndIfIsCalled
         _ = await Assert.That(results).IsEquivalentTo([initial, additionalValidatable.Results.Single()]);
         _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
         _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(1);
-    }
-
-    [Test]
-    public async Task GivenFunctionConditionAndValidatablesThenItDeterminesWhetherValidationOccurs()
-    {
-        // Arrange
-        var initial = new ValidationResult(Message);
-        var precedingValidatable = new TrackingValidatable(initial);
-        var additionalValidatable = new TrackingValidatable(new ValidationResult("Additional"));
-        var context = new ValidationContext(precedingValidatable);
-
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) preceding = context.Include(
-            nameof(precedingValidatable),
-            precedingValidatable);
-
-        // Act
-        (IEnumerable<ValidationResult> Results, ValidationContext ValidationContext) actual = preceding.AndIf(
-            () => false,
-            nameof(additionalValidatable),
-            [additionalValidatable]);
-
-        // Assert
-        _ = await Assert.That(actual).IsEqualTo(preceding);
-        _ = await Assert.That(precedingValidatable.Calls).IsEqualTo(1);
-        _ = await Assert.That(additionalValidatable.Calls).IsEqualTo(0);
     }
 
     private sealed class TrackingValidatable : IValidatableObject

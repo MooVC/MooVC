@@ -47,21 +47,6 @@ public sealed class WhenToIndexIsCalled
     }
 
     [Test]
-    public async Task GivenASourceThenAMatchingDictionaryIsReturned()
-    {
-        // Arrange
-        IEnumerable<int> source = [1, 2, 3];
-
-        // Act
-        IDictionary<int, int> index = source.ToIndex(value => value);
-
-        // Assert
-        _ = await Assert.That(index).IsNotNull();
-        _ = await Assert.That(index.Keys).IsEquivalentTo(source);
-        _ = await Assert.That(index.Values).IsEquivalentTo(source);
-    }
-
-    [Test]
     public async Task GivenASourceAndATransformThenAMatchingDictionaryIsReturned()
     {
         // Arrange
@@ -75,6 +60,21 @@ public sealed class WhenToIndexIsCalled
         _ = await Assert.That(index).IsNotNull();
         _ = await Assert.That(index.Keys).IsEquivalentTo(source);
         _ = await Assert.That(index.All(element => element.Value == transform(element.Key))).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenASourceThenAMatchingDictionaryIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> source = [1, 2, 3];
+
+        // Act
+        IDictionary<int, int> index = source.ToIndex(value => value);
+
+        // Assert
+        _ = await Assert.That(index).IsNotNull();
+        _ = await Assert.That(index.Keys).IsEquivalentTo(source);
+        _ = await Assert.That(index.Values).IsEquivalentTo(source);
     }
 
     [Test]

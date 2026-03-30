@@ -3,20 +3,6 @@
 public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 {
     [Test]
-    public async Task GivenEquivalentOptionsThenReturnsTrue()
-    {
-        // Arrange
-        var left = new Options();
-        var right = new Options();
-
-        // Act
-        bool result = left == right;
-
-        // Assert
-        _ = await Assert.That(result).IsTrue();
-    }
-
-    [Test]
     public async Task GivenDifferentOptionsThenReturnsFalse()
     {
         // Arrange
@@ -28,5 +14,19 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
 
         // Assert
         _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEquivalentOptionsThenReturnsTrue()
+    {
+        // Arrange
+        var left = new Options();
+        var right = new Options();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
     }
 }
