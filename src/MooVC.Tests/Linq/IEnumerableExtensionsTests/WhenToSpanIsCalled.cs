@@ -25,7 +25,7 @@ public sealed class WhenToSpanIsCalled
         int[] actual = [.. enumerable.ToSpan()];
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo([1, 2, 3]);
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
     }
 
     [Test]
@@ -51,7 +51,7 @@ public sealed class WhenToSpanIsCalled
         int[] actual = [.. enumerable.ToSpan()];
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo([3, 2, 1]);
+        _ = await Assert.That(actual).IsEquivalentTo([3, 2, 1]);
     }
 
     [Test]
@@ -79,6 +79,6 @@ public sealed class WhenToSpanIsCalled
         int[] actual = [.. span];
 
         // Assert
-        _ = await Assert.That(actual).IsEqualTo([1, 2, 3]);
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
     }
 }

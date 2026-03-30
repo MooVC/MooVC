@@ -64,7 +64,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty(element => element, predicate: value => value % 2 != 0);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([1, 3]);
+        _ = await Assert.That(result).IsEquivalentTo([1, 3]);
     }
 
     [Test]
@@ -77,7 +77,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty(predicate: value => value % 2 != 0);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([3, 1]);
+        _ = await Assert.That(result).IsEquivalentTo([3, 1]);
     }
 
     [Test]
@@ -105,7 +105,7 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty(element => element);
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([-1, 0, 1, 2, 3]);
+        _ = await Assert.That(result).IsEquivalentTo([-1, 0, 1, 2, 3]);
     }
 
     [Test]
@@ -131,6 +131,6 @@ public sealed class WhenToArrayOrEmptyIsCalled
         int[] result = enumerable.ToArrayOrEmpty();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo([3, 1, 2, 0, -1]);
+        _ = await Assert.That(result).IsEquivalentTo([3, 1, 2, 0, -1]);
     }
 }
