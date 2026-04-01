@@ -14,7 +14,7 @@
         /// <param name="fields">The fields.</param>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Field> fields, Snippet.Options options)
+        internal static Snippet ToSnippet(this ImmutableArray<Field> fields, Type.Options options)
         {
             if (fields.IsDefaultOrEmpty)
             {

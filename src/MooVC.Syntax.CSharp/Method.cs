@@ -185,7 +185,8 @@ namespace MooVC.Syntax.CSharp
             }
 
             return validationContext
-                .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, results, Parameters)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .And(nameof(Result), Result)
                 .Results;

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Immutable;
+using Options = MooVC.Syntax.CSharp.Type.Options;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -20,7 +21,7 @@ public sealed class WhenToSnippetIsCalled
             : [];
 
         // Act
-        var snippet = fields.ToSnippet(Snippet.Options.Default);
+        var snippet = fields.ToSnippet(Options.Default);
 
         // Assert
         _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
@@ -31,7 +32,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         ImmutableArray<Field> fields = [Create(name: FirstFieldName)];
-        Snippet.Options? options = default;
+        Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = fields.ToSnippet(options!);
@@ -63,7 +64,7 @@ public sealed class WhenToSnippetIsCalled
             """;
 
         // Act
-        var snippet = fields.ToSnippet(Snippet.Options.Default);
+        var snippet = fields.ToSnippet(Options.Default);
 
         // Assert
         _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);

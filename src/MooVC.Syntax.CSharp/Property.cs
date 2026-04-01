@@ -199,7 +199,8 @@
             }
 
             return validationContext
-                .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
         }

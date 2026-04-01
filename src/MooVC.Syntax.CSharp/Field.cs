@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Ardalis.GuardClauses;
@@ -34,6 +35,13 @@
         internal Field()
         {
         }
+
+        /// <summary>
+        /// Gets the attributes associated with the Property.
+        /// </summary>
+        /// <value>The attributes.</value>
+        [Descriptor("AttributedWith")]
+        public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>
         /// Gets the default on the Field.
@@ -124,7 +132,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -132,15 +140,16 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Type.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Field)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Field)));
 
             if (IsUndefined)
             {
                 return Snippet.Empty;
             }
 
+            var attributes = Attributes.ToSnippet(options);
             string signature = GetSignature();
 
             if (!Default.IsEmpty)
@@ -150,7 +159,9 @@
 
             signature = string.Concat(signature, ';');
 
-            return Snippet.From(options, signature);
+            return Snippet
+                .From(options, signature)
+                .Prepend(options, attributes);
         }
 
         /// <summary>

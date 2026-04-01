@@ -17,7 +17,7 @@ public sealed class WhenToSnippetIsCalled
             type: SymbolTestsData.Create("Result"));
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         _ = await Assert.That(result).IsEqualTo("public static Result Value = default;");
@@ -28,7 +28,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Field subject = FieldTestsData.Create();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = subject.ToSnippet(options!);
@@ -45,7 +45,7 @@ public sealed class WhenToSnippetIsCalled
         Field subject = Field.Undefined;
 
         // Act
-        string result = subject.ToSnippet(Snippet.Options.Default);
+        string result = subject.ToSnippet(Type.Options.Default);
 
         // Assert
         _ = await Assert.That(result).IsEmpty();
