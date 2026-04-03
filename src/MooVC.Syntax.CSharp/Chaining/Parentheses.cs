@@ -7,12 +7,12 @@
     /// Applies chaining by splitting multi-argument parenthesized calls across lines.
     /// </summary>
     public sealed class Parentheses
-        : Snippet.IChain
+        : Snippet.Options.IChain
     {
         /// <summary>
         /// Gets the singleton instance.
         /// </summary>
-        public static readonly Snippet.IChain Instance = new Parentheses();
+        public static readonly Snippet.Options.IChain Instance = new Parentheses();
 
         private Parentheses()
         {
@@ -88,7 +88,7 @@
 
         private static bool IsUnchainable(string line, Snippet.Options options)
         {
-            return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength;
+            return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLineLength;
         }
 
         private static List<string> Split(string content)

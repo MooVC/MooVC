@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SnippetTests.BlockOptionsTests.StyleTypeTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests.StyleTests;
 
 public sealed class WhenIsAllmanIsCalled
 {
@@ -6,7 +6,7 @@ public sealed class WhenIsAllmanIsCalled
     public async Task GivenAllmanThenReturnsTrue()
     {
         // Arrange
-        Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.Allman;
+        Snippet.Options.Blocks.Layouts style = Snippet.Options.Blocks.Layouts.Allman;
 
         // Act
         bool result = style.IsAllman;
@@ -19,7 +19,7 @@ public sealed class WhenIsAllmanIsCalled
     public async Task GivenKAndRThenReturnsFalse()
     {
         // Arrange
-        Snippet.BlockOptions.StyleType style = Snippet.BlockOptions.StyleType.KAndR;
+        Snippet.Options.Blocks.Layouts style = Snippet.Options.Blocks.Layouts.KAndR;
 
         // Act
         bool result = style.IsAllman;

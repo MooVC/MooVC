@@ -55,14 +55,14 @@
             /// </summary>
             /// <value>The block.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsBlockRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public BlockOptions Block { get; internal set; } = BlockOptions.Default;
+            public Blocks Block { get; internal set; } = Blocks.Default;
 
             /// <summary>
             /// Gets the chaining on the Options.
             /// </summary>
             /// <value>The block.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsChainingRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public ChainingOptions Chaining { get; internal set; } = ChainingOptions.Default;
+            public Strategies Chaining { get; internal set; } = Strategies.Default;
 
             /// <summary>
             /// Gets a value indicating whether the Options is default.
@@ -84,8 +84,8 @@
             /// Gets the max length on the Options.
             /// </summary>
             /// <value>The max length.</value>
-            [Range(120, 255, ErrorMessageResourceName = nameof(OptionsMaxLengthOutOfRange), ErrorMessageResourceType = typeof(Snippet_Resources))]
-            public byte MaxLength { get; internal set; } = 155;
+            [Range(120, 255, ErrorMessageResourceName = nameof(OptionsMaxLineLengthOutOfRange), ErrorMessageResourceType = typeof(Snippet_Resources))]
+            public byte MaxLineLength { get; internal set; } = 155;
 
             /// <summary>
             /// Gets the whitespace on the Options.

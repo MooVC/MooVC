@@ -28,8 +28,8 @@ public sealed class WhenChainIsCalled
             "    .ToList();",
         ];
 
-        Snippet.IChain subject = OneDotPerLine.Instance;
-        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
 
         // Act
         ImmutableArray<string> result = subject.Chain(value, options);
@@ -52,8 +52,8 @@ public sealed class WhenChainIsCalled
             "    .ToList();",
         ];
 
-        Snippet.IChain subject = OneDotPerLine.Instance;
-        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
 
         // Act
         ImmutableArray<string> result = subject.Chain(value, options);
@@ -78,8 +78,8 @@ public sealed class WhenChainIsCalled
             "    .ToList();",
         ];
 
-        Snippet.IChain subject = OneDotPerLine.Instance;
-        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
 
         // Act
         ImmutableArray<string> result = subject.Chain(value, options);

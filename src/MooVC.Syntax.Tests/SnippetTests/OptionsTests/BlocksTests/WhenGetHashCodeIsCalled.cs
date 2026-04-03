@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,10 +6,10 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        var first = new Snippet.BlockOptions();
+        var first = new Snippet.Options.Blocks();
 
-        Snippet.BlockOptions second = new Snippet.BlockOptions()
-            .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
+        Snippet.Options.Blocks second = new Snippet.Options.Blocks()
+            .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act
         int firstHash = first.GetHashCode();
@@ -23,8 +23,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        var first = new Snippet.BlockOptions();
-        var second = new Snippet.BlockOptions();
+        var first = new Snippet.Options.Blocks();
+        var second = new Snippet.Options.Blocks();
 
         // Act
         int firstHash = first.GetHashCode();

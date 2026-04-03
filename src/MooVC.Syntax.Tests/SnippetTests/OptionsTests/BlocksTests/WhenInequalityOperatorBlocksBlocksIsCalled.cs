@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests;
 
-public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
+public sealed class WhenInequalityOperatorBlocksBlocksIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Snippet.BoundaryOptions? left = default;
-        Snippet.BoundaryOptions? right = default;
+        Snippet.Options.Blocks? left = default;
+        Snippet.Options.Blocks? right = default;
 
         // Act
         bool result = left != right;
@@ -20,10 +20,10 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks();
 
-        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
-            .WithClosing("]");
+        Snippet.Options.Blocks right = new Snippet.Options.Blocks()
+            .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act
         bool resultLeftRight = left != right;
@@ -38,8 +38,8 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        var right = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks();
+        var right = new Snippet.Options.Blocks();
 
         // Act
         bool resultLeftRight = left != right;
@@ -54,8 +54,8 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Snippet.BoundaryOptions? left = default;
-        var right = new Snippet.BoundaryOptions();
+        Snippet.Options.Blocks? left = default;
+        var right = new Snippet.Options.Blocks();
 
         // Act
         bool result = left != right;
@@ -68,8 +68,8 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions? right = default;
+        var left = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks? right = default;
 
         // Act
         bool result = left != right;
@@ -82,8 +82,8 @@ public sealed class WhenInequalityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions second = first;
+        var first = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks second = first;
 
         // Act
         bool result = first != second;

@@ -9,7 +9,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Indexer_Resources;
-    using static MooVC.Syntax.Snippet.BlockOptions;
+    using static MooVC.Syntax.Snippet.Options.Blocks;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -173,15 +173,15 @@
                 .Results;
         }
 
-        private static Snippet.Options FormatBlockStyle(Snippet methods, Options options)
+        private static Snippet.Options FormatBlockStyle(Snippet methods, Snippet.Options options)
         {
-            InlineStyle style = methods.IsSingleLine && options.Snippets.Block.Inline.Properties.IsLambda
-                ? InlineStyle.SingleLineBraces
-                : options.Snippets.Block.Inline.Properties;
+            if (methods.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                return options.WithBlock(block => block
+                   .WithInline(Styles.SingleLine));
+            }
 
-            return options.Snippets
-                .WithBlock(block => block
-                    .WithInline(inline => inline.WithCode(style)));
+            return options;
         }
 
         private Snippet GetSignature(Options options)

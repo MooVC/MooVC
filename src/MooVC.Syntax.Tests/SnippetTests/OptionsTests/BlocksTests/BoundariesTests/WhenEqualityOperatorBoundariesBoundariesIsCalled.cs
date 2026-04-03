@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests.BoundariesTests;
 
-public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
+public sealed class WhenEqualityOperatorBoundariesBoundariesIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Snippet.BoundaryOptions? left = default;
-        Snippet.BoundaryOptions? right = default;
+        Snippet.Options.Blocks.Boundaries? left = default;
+        Snippet.Options.Blocks.Boundaries? right = default;
 
         // Act
         bool result = left == right;
@@ -20,9 +20,9 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks.Boundaries();
 
-        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
+        Snippet.Options.Blocks.Boundaries right = new Snippet.Options.Blocks.Boundaries()
             .WithClosing("]");
 
         // Act
@@ -38,8 +38,8 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        var right = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks.Boundaries();
+        var right = new Snippet.Options.Blocks.Boundaries();
 
         // Act
         bool resultLeftRight = left == right;
@@ -54,8 +54,8 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Snippet.BoundaryOptions? left = default;
-        var right = new Snippet.BoundaryOptions();
+        Snippet.Options.Blocks.Boundaries? left = default;
+        var right = new Snippet.Options.Blocks.Boundaries();
 
         // Act
         bool result = left == right;
@@ -68,8 +68,8 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions? right = default;
+        var left = new Snippet.Options.Blocks.Boundaries();
+        Snippet.Options.Blocks.Boundaries? right = default;
 
         // Act
         bool result = left == right;
@@ -82,8 +82,8 @@ public sealed class WhenEqualityOperatorBoundaryOptionsBoundaryOptionsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions second = first;
+        var first = new Snippet.Options.Blocks.Boundaries();
+        Snippet.Options.Blocks.Boundaries second = first;
 
         // Act
         bool result = first == second;

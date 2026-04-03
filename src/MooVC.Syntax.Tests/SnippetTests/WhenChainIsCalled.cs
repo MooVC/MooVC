@@ -24,7 +24,7 @@ public sealed class WhenChainIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithChaining(new[] { Parentheses.Instance })
-            .WithMaxLength(20);
+            .WithMaxLineLength(20);
 
         var subject = Snippet.From(value);
 
@@ -63,7 +63,7 @@ public sealed class WhenChainIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithChaining(new[] { OneDotPerLine.Instance })
-            .WithMaxLength(20);
+            .WithMaxLineLength(20);
 
         var subject = Snippet.From(value);
 
@@ -99,7 +99,7 @@ public sealed class WhenChainIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithChaining(new[] { OneDotPerLine.Instance, Parentheses.Instance })
-            .WithMaxLength(20);
+            .WithMaxLineLength(20);
 
         var subject = Snippet.From(value);
 
@@ -128,7 +128,7 @@ public sealed class WhenChainIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithChaining(new[] { Parentheses.Instance })
-            .WithMaxLength(20);
+            .WithMaxLineLength(20);
 
         var subject = Snippet.From(value);
 
@@ -157,7 +157,7 @@ public sealed class WhenChainIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithChaining(new[] { OneDotPerLine.Instance })
-            .WithMaxLength(20);
+            .WithMaxLineLength(20);
 
         var subject = Snippet.From(value);
 

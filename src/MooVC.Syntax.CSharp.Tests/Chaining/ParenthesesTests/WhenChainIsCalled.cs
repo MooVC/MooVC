@@ -9,8 +9,8 @@ public sealed class WhenChainIsCalled
     public async Task GivenMethodSignatureWhenLineIsLongThenEachParameterIsOnNewLine()
     {
         // Arrange
-        Snippet.IChain subject = Parentheses.Instance;
-        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+        Snippet.Options.IChain subject = Parentheses.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
 
         const string value = "public Task Execute(Order order, Customer customer, DateTime timestamp, CancellationToken cancellationToken);";
 
@@ -35,8 +35,8 @@ public sealed class WhenChainIsCalled
     public async Task GivenNestedMethodCallWhenLineIsLongThenOutterParenthesesIsChainedFirst()
     {
         // Arrange
-        Snippet.IChain subject = Parentheses.Instance;
-        Snippet.Options options = Snippet.Options.Default.WithMaxLength(20);
+        Snippet.Options.IChain subject = Parentheses.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
 
         const string value = "await instance.Execute(order, GetCustomerById(customerId, cancellationToken), timestamp, cancellationToken);";
 

@@ -87,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         Method.Options options = Method.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.Lambda))));
+                    .WithInline(Snippet.Options.Blocks.Styles.Lambda)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -105,7 +105,7 @@ public sealed class WhenToSnippetIsCalled
         Method.Options options = Method.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(inline => inline.WithMethods(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
+                    .WithInline(Snippet.Options.Blocks.Styles.SingleLine)));
 
         // Act
         string representation = subject.ToSnippet(options);

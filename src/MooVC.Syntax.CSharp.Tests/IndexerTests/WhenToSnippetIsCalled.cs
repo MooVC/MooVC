@@ -36,7 +36,7 @@ public sealed class WhenToSnippetIsCalled
         Indexer.Options options = Indexer.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(inline => inline.WithProperties(Snippet.BlockOptions.InlineStyle.MultiLineBraces))));
+                    .WithInline(Snippet.Options.Blocks.Styles.MultiLine)));
 
         // Act
         string representation = subject.ToSnippet(options);
@@ -69,7 +69,7 @@ public sealed class WhenToSnippetIsCalled
         Indexer.Options options = Indexer.Options.Default
             .WithSnippets(snippets => snippets
                 .WithBlock(block => block
-                    .WithInline(inline => inline.WithProperties(Snippet.BlockOptions.InlineStyle.SingleLineBraces))));
+                    .WithInline(Snippet.Options.Blocks.Styles.SingleLine)));
 
         // Act
         string representation = subject.ToSnippet(options);

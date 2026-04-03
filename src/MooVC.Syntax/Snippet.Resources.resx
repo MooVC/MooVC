@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BlockOptionsMarkersRequired" xml:space="preserve">
+  <data name="OptionsBlocksMarkersRequired" xml:space="preserve">
     <value>The boundary Markers for the Block must be provided.</value>
-  </data>
-  <data name="BlockOpeningRequired" xml:space="preserve">
-    <value>The snippet to combine with the block must be provided.</value>
   </data>
   <data name="BlockOptionsRequired" xml:space="preserve">
     <value>The options required to format the block.</value>
   </data>
-  <data name="BoundaryClosingRequired" xml:space="preserve">
+  <data name="OptionsBlockBoundariesClosingRequired" xml:space="preserve">
     <value>The Opening Marker for the Boundary of the Block must be provided.</value>
   </data>
-  <data name="BoundaryOpeningRequired" xml:space="preserve">
+  <data name="OptionsBlockBoundariesOpeningRequired" xml:space="preserve">
     <value>The Closing Marker for the Boundary of the Block must be provided.</value>
   </data>
   <data name="FromOptionsRequired" xml:space="preserve">
@@ -141,7 +138,7 @@
   <data name="OptionsBlockRequired" xml:space="preserve">
     <value>The Block configuration must be provided.</value>
   </data>
-  <data name="OptionsMaxLengthOutOfRange" xml:space="preserve">
+  <data name="OptionsMaxLineLengthOutOfRange" xml:space="preserve">
     <value>The maximum length of a single line must be within the acceptable range.</value>
   </data>
   <data name="OptionsWhitespaceRequired" xml:space="preserve">
@@ -150,10 +147,10 @@
   <data name="ShiftOptionsRequired" xml:space="preserve">
     <value>The options required to direct the shift must be provided.</value>
   </data>
-  <data name="BlockOptionsInlineRequired" xml:space="preserve">
+  <data name="OptionsBlocksInlineRequired" xml:space="preserve">
     <value>The style to use for Inline statements must be provided.</value>
   </data>
-  <data name="BlockOptionsStyleRequired" xml:space="preserve">
+  <data name="OptionsBlocksLayoutRequired" xml:space="preserve">
     <value>The bracing style must be provided.</value>
   </data>
   <data name="CombineSnippetsRequired" xml:space="preserve">
@@ -165,16 +162,13 @@
   <data name="ValidateLinesMismatch" xml:space="preserve">
     <value>The number of `{0}` totaling `{1}` does not match the required amount of `{2}`.</value>
   </data>
-  <data name="InlineMethodsRequired" xml:space="preserve">
-    <value>The style to use for Inline methods must be provided.</value>
-  </data>
-  <data name="InlinePropertiesRequired" xml:space="preserve">
-    <value>The style to use for Inline properties must be provided.</value>
-  </data>
   <data name="OptionsChainingRequired" xml:space="preserve">
     <value>The Chaining configuration must be provided.</value>
   </data>
   <data name="ChainOptionsRequired" xml:space="preserve">
     <value>The options for chaining must be provided.</value>
+  </data>
+  <data name="BlockOpeningRequired" xml:space="preserve">
+    <value>The opening snippet for the block must be provided.</value>
   </data>
 </root>

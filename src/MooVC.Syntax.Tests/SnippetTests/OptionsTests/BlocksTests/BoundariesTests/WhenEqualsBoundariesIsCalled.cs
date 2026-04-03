@@ -1,15 +1,15 @@
-﻿namespace MooVC.Syntax.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests.BoundariesTests;
 
-public sealed class WhenEqualsBlockOptionsIsCalled
+public sealed class WhenEqualsBoundariesIsCalled
 {
     [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
+        var left = new Snippet.Options.Blocks.Boundaries();
 
-        Snippet.BlockOptions right = new Snippet.BlockOptions()
-            .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
+        Snippet.Options.Blocks.Boundaries right = new Snippet.Options.Blocks.Boundaries()
+            .WithClosing("]");
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -24,8 +24,8 @@ public sealed class WhenEqualsBlockOptionsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
-        var right = new Snippet.BlockOptions();
+        var left = new Snippet.Options.Blocks.Boundaries();
+        var right = new Snippet.Options.Blocks.Boundaries();
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -40,8 +40,8 @@ public sealed class WhenEqualsBlockOptionsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
-        Snippet.BlockOptions? right = default;
+        var left = new Snippet.Options.Blocks.Boundaries();
+        Snippet.Options.Blocks.Boundaries? right = default;
 
         // Act
         bool result = left.Equals(right);
@@ -54,8 +54,8 @@ public sealed class WhenEqualsBlockOptionsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Snippet.BlockOptions();
-        Snippet.BlockOptions second = first;
+        var first = new Snippet.Options.Blocks.Boundaries();
+        Snippet.Options.Blocks.Boundaries second = first;
 
         // Act
         bool result = first.Equals(second);

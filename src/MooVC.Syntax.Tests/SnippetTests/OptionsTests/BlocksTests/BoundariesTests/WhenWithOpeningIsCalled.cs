@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests.BoundariesTests;
 
 public sealed class WhenWithOpeningIsCalled
 {
@@ -6,11 +6,11 @@ public sealed class WhenWithOpeningIsCalled
     public async Task GivenValueThenReturnsUpdatedInstance()
     {
         // Arrange
-        var options = new Snippet.BoundaryOptions();
+        var options = new Snippet.Options.Blocks.Boundaries();
         const string value = "[";
 
         // Act
-        Snippet.BoundaryOptions result = options.WithOpening(value);
+        Snippet.Options.Blocks.Boundaries result = options.WithOpening(value);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(options);

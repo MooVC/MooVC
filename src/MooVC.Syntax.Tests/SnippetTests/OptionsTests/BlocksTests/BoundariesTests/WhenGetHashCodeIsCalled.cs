@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests.BoundariesTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -6,9 +6,9 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        var first = new Snippet.BoundaryOptions();
+        var first = new Snippet.Options.Blocks.Boundaries();
 
-        Snippet.BoundaryOptions second = new Snippet.BoundaryOptions()
+        Snippet.Options.Blocks.Boundaries second = new Snippet.Options.Blocks.Boundaries()
             .WithClosing("]");
 
         // Act
@@ -23,8 +23,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        var first = new Snippet.BoundaryOptions();
-        var second = new Snippet.BoundaryOptions();
+        var first = new Snippet.Options.Blocks.Boundaries();
+        var second = new Snippet.Options.Blocks.Boundaries();
 
         // Act
         int firstHash = first.GetHashCode();

@@ -61,29 +61,11 @@ namespace MooVC.Syntax {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The snippet to combine with the block must be provided..
+        ///   Looks up a localized string similar to The opening snippet for the block must be provided..
         /// </summary>
         internal static string BlockOpeningRequired {
             get {
                 return ResourceManager.GetString("BlockOpeningRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The style to use for Inline statements must be provided..
-        /// </summary>
-        internal static string BlockOptionsInlineRequired {
-            get {
-                return ResourceManager.GetString("BlockOptionsInlineRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The boundary Markers for the Block must be provided..
-        /// </summary>
-        internal static string BlockOptionsMarkersRequired {
-            get {
-                return ResourceManager.GetString("BlockOptionsMarkersRequired", resourceCulture);
             }
         }
         
@@ -93,33 +75,6 @@ namespace MooVC.Syntax {
         internal static string BlockOptionsRequired {
             get {
                 return ResourceManager.GetString("BlockOptionsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The bracing style must be provided..
-        /// </summary>
-        internal static string BlockOptionsStyleRequired {
-            get {
-                return ResourceManager.GetString("BlockOptionsStyleRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Opening Marker for the Boundary of the Block must be provided..
-        /// </summary>
-        internal static string BoundaryClosingRequired {
-            get {
-                return ResourceManager.GetString("BoundaryClosingRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Closing Marker for the Boundary of the Block must be provided..
-        /// </summary>
-        internal static string BoundaryOpeningRequired {
-            get {
-                return ResourceManager.GetString("BoundaryOpeningRequired", resourceCulture);
             }
         }
         
@@ -169,20 +124,20 @@ namespace MooVC.Syntax {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The style to use for Inline methods must be provided..
+        ///   Looks up a localized string similar to The Opening Marker for the Boundary of the Block must be provided..
         /// </summary>
-        internal static string InlineMethodsRequired {
+        internal static string OptionsBlockBoundariesClosingRequired {
             get {
-                return ResourceManager.GetString("InlineMethodsRequired", resourceCulture);
+                return ResourceManager.GetString("OptionsBlockBoundariesClosingRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The style to use for Inline properties must be provided..
+        ///   Looks up a localized string similar to The Closing Marker for the Boundary of the Block must be provided..
         /// </summary>
-        internal static string InlinePropertiesRequired {
+        internal static string OptionsBlockBoundariesOpeningRequired {
             get {
-                return ResourceManager.GetString("InlinePropertiesRequired", resourceCulture);
+                return ResourceManager.GetString("OptionsBlockBoundariesOpeningRequired", resourceCulture);
             }
         }
         
@@ -192,6 +147,33 @@ namespace MooVC.Syntax {
         internal static string OptionsBlockRequired {
             get {
                 return ResourceManager.GetString("OptionsBlockRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The style to use for Inline statements must be provided..
+        /// </summary>
+        internal static string OptionsBlocksInlineRequired {
+            get {
+                return ResourceManager.GetString("OptionsBlocksInlineRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bracing style must be provided..
+        /// </summary>
+        internal static string OptionsBlocksLayoutRequired {
+            get {
+                return ResourceManager.GetString("OptionsBlocksLayoutRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The boundary Markers for the Block must be provided..
+        /// </summary>
+        internal static string OptionsBlocksMarkersRequired {
+            get {
+                return ResourceManager.GetString("OptionsBlocksMarkersRequired", resourceCulture);
             }
         }
         
@@ -207,9 +189,9 @@ namespace MooVC.Syntax {
         /// <summary>
         ///   Looks up a localized string similar to The maximum length of a single line must be within the acceptable range..
         /// </summary>
-        internal static string OptionsMaxLengthOutOfRange {
+        internal static string OptionsMaxLineLengthOutOfRange {
             get {
-                return ResourceManager.GetString("OptionsMaxLengthOutOfRange", resourceCulture);
+                return ResourceManager.GetString("OptionsMaxLineLengthOutOfRange", resourceCulture);
             }
         }
         

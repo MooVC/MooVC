@@ -12,6 +12,7 @@
     using Monify;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.Snippet_Resources;
+    using static MooVC.Syntax.Snippet.Options;
 
     /// <summary>
     /// Represents a syntax element snippet.
@@ -203,7 +204,7 @@
         /// <returns>The snippet.</returns>
         public Snippet Append(params Snippet[] values)
         {
-            return Append(Options.Default, values);
+            return Append(Default, values);
         }
 
         /// <summary>
@@ -225,7 +226,7 @@
         /// <returns>The snippet.</returns>
         public Snippet Block()
         {
-            return Block(Options.Default, Empty);
+            return Block(Default, Empty);
         }
 
         /// <summary>
@@ -259,7 +260,7 @@
             {
                 FormatBlockOpening(opening, openingLines, blocked);
 
-                if (IsSingleLine && !options.Block.Inline.Code.IsMultiLineBraces)
+                if (IsSingleLine && !options.Block.Inline.IsMultiLine)
                 {
                     return FormatSingleLineBlock(options, blocked, openingLines);
                 }
@@ -281,7 +282,7 @@
         {
             _ = Guard.Against.Null(options, message: ChainOptionsRequired);
 
-            if (IsEmpty || options.Chaining.IsDefault || (_value.Length == 1 && _value[0].Length < options.MaxLength))
+            if (IsEmpty || options.Chaining.IsDefault || (_value.Length == 1 && _value[0].Length < options.MaxLineLength))
             {
                 return this;
             }
@@ -357,7 +358,7 @@
         /// <returns>The snippet.</returns>
         public Snippet Prepend(params Snippet[] values)
         {
-            return Prepend(Options.Default, values);
+            return Prepend(Default, values);
         }
 
         /// <summary>
@@ -459,7 +460,7 @@
 
             foreach (string line in values)
             {
-                if (string.IsNullOrEmpty(line) || line.Length < options.MaxLength)
+                if (string.IsNullOrEmpty(line) || line.Length < options.MaxLineLength)
                 {
                     lines.Add(line);
 
@@ -594,7 +595,7 @@
 
         private Snippet FormatMultipleLineBlock(Options options, int openingLines, string[] blocked, int index)
         {
-            if (options.Block.Style.IsKAndR && openingLines > 0)
+            if (options.Block.Layout.IsKAndR && openingLines > 0)
             {
                 blocked[index - 1] = string.Concat(blocked[index - 1], $" {options.Block.Markers.Opening}");
             }
@@ -624,11 +625,11 @@
 
         private Snippet FormatSingleLineBlock(Options options, string[] blocked, int index)
         {
-            if (options.Block.Inline.Code.IsLambda)
+            if (options.Block.Inline.IsLambda)
             {
                 blocked[index - 1] = string.Concat(blocked[index - 1], $" => {_value[0]}");
             }
-            else if (options.Block.Inline.Code.IsSingleLineBraces)
+            else if (options.Block.Inline.IsSingleLine)
             {
                 blocked[index - 1] = string.Concat(
                     blocked[index - 1],

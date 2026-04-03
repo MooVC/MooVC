@@ -22,7 +22,7 @@ public sealed class WhenBlockIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithStyle(Snippet.BlockOptions.StyleType.Allman));
+                .WithLayout(Snippet.Options.Blocks.Layouts.Allman));
 
         // Act
         Snippet result = subject.Block(options, opening);
@@ -48,7 +48,7 @@ public sealed class WhenBlockIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithStyle(Snippet.BlockOptions.StyleType.KAndR));
+                .WithLayout(Snippet.Options.Blocks.Layouts.KAndR));
 
         // Act
         Snippet result = subject.Block(options, opening);
@@ -70,8 +70,7 @@ public sealed class WhenBlockIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(inline => inline
-                    .WithCode(Snippet.BlockOptions.InlineStyle.Lambda)));
+                .WithInline(Snippet.Options.Blocks.Styles.Lambda));
 
         // Act
         Snippet result = subject.Block(options, opening);
@@ -129,8 +128,7 @@ public sealed class WhenBlockIsCalled
 
         Snippet.Options options = Snippet.Options.Default
             .WithBlock(block => block
-                .WithInline(inline => inline
-                    .WithCode(Snippet.BlockOptions.InlineStyle.SingleLineBraces)));
+                .WithInline(Snippet.Options.Blocks.Styles.SingleLine));
 
         // Act
         Snippet result = subject.Block(options, opening);

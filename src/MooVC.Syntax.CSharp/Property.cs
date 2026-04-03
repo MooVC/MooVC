@@ -10,7 +10,7 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Property_Resources;
-    using static MooVC.Syntax.Snippet.BlockOptions;
+    using static MooVC.Syntax.Snippet.Options.Blocks;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -208,16 +208,17 @@
         private Snippet.Options FormatBlockStyle(Snippet behaviours, Options options)
         {
             bool isSingleLineBraces = behaviours.IsSingleLine
-                && options.Snippets.Block.Inline.Properties.IsLambda
+                && options.Snippets.Block.Inline.IsLambda
                 && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly);
 
-            InlineStyle style = isSingleLineBraces
-                ? InlineStyle.SingleLineBraces
-                : options.Snippets.Block.Inline.Properties;
+            if (isSingleLineBraces)
+            {
+                return options.Snippets
+                    .WithBlock(block => block
+                        .WithInline(Styles.SingleLine));
+            }
 
-            return options.Snippets
-                .WithBlock(block => block
-                    .WithInline(inline => inline.WithCode(style)));
+            return options.Snippets;
         }
 
         private Snippet GetSignature(Options options)

@@ -7,12 +7,12 @@
     /// Applies chaining by breaking method-call chains into one call per line.
     /// </summary>
     public sealed class OneDotPerLine
-        : Snippet.IChain
+        : Snippet.Options.IChain
     {
         /// <summary>
         /// Gets the singleton instance.
         /// </summary>
-        public static readonly Snippet.IChain Instance = new OneDotPerLine();
+        public static readonly Snippet.Options.IChain Instance = new OneDotPerLine();
 
         private OneDotPerLine()
         {
@@ -174,7 +174,7 @@
 
         private static bool IsUnchainable(string line, Snippet.Options options)
         {
-            return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLength;
+            return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLineLength;
         }
 
         private static bool ShouldSplitInnerDot(string line, int index, char character, int parenthesisDepth, int bracketDepth, int braceDepth)

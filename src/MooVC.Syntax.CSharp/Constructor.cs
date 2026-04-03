@@ -10,7 +10,7 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Constructor_Resources;
-    using static MooVC.Syntax.Snippet.BlockOptions;
+    using static MooVC.Syntax.Snippet.Options.Blocks;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -168,12 +168,13 @@ namespace MooVC.Syntax.CSharp
 
         private Snippet.Options FormatBlockStyle(Snippet.Options options)
         {
-            InlineStyle style = Body.IsSingleLine && options.Block.Inline.Methods.IsLambda
-                ? InlineStyle.SingleLineBraces
-                : options.Block.Inline.Methods;
+            if (Body.IsSingleLine && options.Block.Inline.IsLambda)
+            {
+                return options.WithBlock(block => block
+                    .WithInline(Styles.SingleLine));
+            }
 
-            return options.WithBlock(block => block
-                .WithInline(inline => inline.WithCode(style)));
+            return options;
         }
     }
 }

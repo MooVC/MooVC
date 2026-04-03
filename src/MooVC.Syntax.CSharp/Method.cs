@@ -145,12 +145,8 @@ namespace MooVC.Syntax.CSharp
                 return signature.Append(';');
             }
 
-            Snippet.Options snippets = options.Snippets
-                .WithBlock(block => block
-                    .WithInline(inline => inline.WithCode(inline.Methods)));
-
             return Body
-                .Block(snippets, signature)
+                .Block(options, signature)
                 .Prepend(options, attributes);
         }
 

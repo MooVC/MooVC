@@ -9,7 +9,7 @@ public sealed class WhenEqualsOptionsIsCalled
         var left = new Snippet.Options();
 
         Snippet.Options right = new Snippet.Options()
-            .WithMaxLength((byte)(Snippet.Options.Default.MaxLength - 1));
+            .WithMaxLineLength((byte)(Snippet.Options.Default.MaxLineLength - 1));
 
         // Act
         bool resultLeftRight = left.Equals(right);

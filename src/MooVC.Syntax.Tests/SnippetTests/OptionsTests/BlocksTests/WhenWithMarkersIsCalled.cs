@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests;
 
 public sealed class WhenWithMarkersIsCalled
 {
@@ -6,14 +6,14 @@ public sealed class WhenWithMarkersIsCalled
     public async Task GivenMarkersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var options = new Snippet.BlockOptions();
+        var options = new Snippet.Options.Blocks();
 
-        Snippet.BoundaryOptions markers = options.Markers
+        Snippet.Options.Blocks.Boundaries markers = options.Markers
             .WithOpening("[")
             .WithClosing("]");
 
         // Act
-        Snippet.BlockOptions result = options.WithMarkers(markers);
+        Snippet.Options.Blocks result = options.WithMarkers(markers);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(options);

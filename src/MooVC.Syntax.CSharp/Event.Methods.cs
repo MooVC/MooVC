@@ -121,9 +121,6 @@
                     return Snippet.From(options, $"{keyword};");
                 }
 
-                options = options.WithBlock(block => block
-                    .WithInline(inline => inline.WithCode(inline.Properties)));
-
                 return snippet.Block(options, opening: Snippet.From(options, keyword));
             }
         }

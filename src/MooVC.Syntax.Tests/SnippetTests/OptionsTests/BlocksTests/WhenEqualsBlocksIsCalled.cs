@@ -1,15 +1,15 @@
-﻿namespace MooVC.Syntax.SnippetTests.BoundaryOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests;
 
-public sealed class WhenEqualsBoundaryOptionsIsCalled
+public sealed class WhenEqualsBlocksIsCalled
 {
     [Test]
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks();
 
-        Snippet.BoundaryOptions right = new Snippet.BoundaryOptions()
-            .WithClosing("]");
+        Snippet.Options.Blocks right = new Snippet.Options.Blocks()
+            .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -24,8 +24,8 @@ public sealed class WhenEqualsBoundaryOptionsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        var right = new Snippet.BoundaryOptions();
+        var left = new Snippet.Options.Blocks();
+        var right = new Snippet.Options.Blocks();
 
         // Act
         bool resultLeftRight = left.Equals(right);
@@ -40,8 +40,8 @@ public sealed class WhenEqualsBoundaryOptionsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions? right = default;
+        var left = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks? right = default;
 
         // Act
         bool result = left.Equals(right);
@@ -54,8 +54,8 @@ public sealed class WhenEqualsBoundaryOptionsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Snippet.BoundaryOptions();
-        Snippet.BoundaryOptions second = first;
+        var first = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks second = first;
 
         // Act
         bool result = first.Equals(second);

@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.SnippetTests.BlockOptionsTests;
+﻿namespace MooVC.Syntax.SnippetTests.OptionsTests.BlocksTests;
 
-public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
+public sealed class WhenEqualityOperatorBlocksBlocksIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Snippet.BlockOptions? left = default;
-        Snippet.BlockOptions? right = default;
+        Snippet.Options.Blocks? left = default;
+        Snippet.Options.Blocks? right = default;
 
         // Act
         bool result = left == right;
@@ -20,10 +20,10 @@ public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
+        var left = new Snippet.Options.Blocks();
 
-        Snippet.BlockOptions right = new Snippet.BlockOptions()
-            .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
+        Snippet.Options.Blocks right = new Snippet.Options.Blocks()
+            .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act
         bool resultLeftRight = left == right;
@@ -38,8 +38,8 @@ public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
-        var right = new Snippet.BlockOptions();
+        var left = new Snippet.Options.Blocks();
+        var right = new Snippet.Options.Blocks();
 
         // Act
         bool resultLeftRight = left == right;
@@ -54,8 +54,8 @@ public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Snippet.BlockOptions? left = default;
-        var right = new Snippet.BlockOptions();
+        Snippet.Options.Blocks? left = default;
+        var right = new Snippet.Options.Blocks();
 
         // Act
         bool result = left == right;
@@ -68,8 +68,8 @@ public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Snippet.BlockOptions();
-        Snippet.BlockOptions? right = default;
+        var left = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks? right = default;
 
         // Act
         bool result = left == right;
@@ -82,8 +82,8 @@ public sealed class WhenEqualityOperatorBlockOptionsBlockOptionsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Snippet.BlockOptions();
-        Snippet.BlockOptions second = first;
+        var first = new Snippet.Options.Blocks();
+        Snippet.Options.Blocks second = first;
 
         // Act
         bool result = first == second;

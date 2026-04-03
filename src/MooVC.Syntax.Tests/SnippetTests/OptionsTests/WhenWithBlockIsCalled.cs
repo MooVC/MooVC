@@ -8,8 +8,8 @@ public sealed class WhenWithBlockIsCalled
         // Arrange
         var options = new Snippet.Options();
 
-        Snippet.BlockOptions block = options.Block
-            .WithStyle(Snippet.BlockOptions.StyleType.KAndR);
+        Snippet.Options.Blocks block = options.Block
+            .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act
         Snippet.Options result = options.WithBlock(block);
