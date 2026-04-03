@@ -11,31 +11,31 @@
         /// <summary>
         /// Represents a syntax element casing.
         /// </summary>
-        [Monify(Type = typeof(int))]
+        [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Casing
         {
             /// <summary>
             /// Represents the camel for the Casing.
             /// </summary>
-            public static readonly Casing Camel = 1;
+            public static readonly Casing Camel = "Camel";
 
             /// <summary>
             /// Represents the kebab for the Casing.
             /// </summary>
-            public static readonly Casing Kebab = 2;
+            public static readonly Casing Kebab = "Kebab";
 
             /// <summary>
             /// Represents the pascal for the Casing.
             /// </summary>
-            public static readonly Casing Pascal = 0;
+            public static readonly Casing Pascal = "Pascal";
 
             /// <summary>
             /// Represents the snake for the Casing.
             /// </summary>
-            public static readonly Casing Snake = 3;
+            public static readonly Casing Snake = "Snake";
 
-            private Casing(int value)
+            private Casing(string value)
             {
                 _value = value;
             }
@@ -70,20 +70,7 @@
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                switch (_value)
-                {
-                    case 1:
-                        return nameof(Camel);
-
-                    case 2:
-                        return nameof(Kebab);
-
-                    case 3:
-                        return nameof(Snake);
-
-                    default:
-                        return nameof(Pascal);
-                }
+                return _value;
             }
         }
     }

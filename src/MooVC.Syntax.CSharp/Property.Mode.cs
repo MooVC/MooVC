@@ -11,26 +11,26 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents a C# member syntax mode.
         /// </summary>
-        [Monify(Type = typeof(int))]
+        [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Mode
         {
             /// <summary>
             /// Represents the init for the Mode.
             /// </summary>
-            public static readonly Mode Init = 2;
+            public static readonly Mode Init = "Init";
 
             /// <summary>
             /// Represents the read only for the Mode.
             /// </summary>
-            public static readonly Mode ReadOnly = 1;
+            public static readonly Mode ReadOnly = "ReadOnly";
 
             /// <summary>
             /// Represents the set for the Mode.
             /// </summary>
-            public static readonly Mode Set = 0;
+            public static readonly Mode Set = "Set";
 
-            private Mode(int value)
+            private Mode(string value)
             {
                 _value = value;
             }

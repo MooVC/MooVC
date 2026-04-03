@@ -1,15 +1,15 @@
 ﻿namespace MooVC.Syntax.QualifierTests.OptionsTests;
 
-public sealed class WhenImplicitOperatorFromIntIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const int FileValue = 0;
-    private const int BlockValue = 1;
+    private const string FileValue = "File";
+    private const string BlockValue = "Block";
 
     [Test]
-    public async Task GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
-        int value = BlockValue;
+        string value = BlockValue;
 
         // Act
         Qualifier.Options subject = value;
@@ -23,11 +23,11 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
-        int value = FileValue;
+        string value = FileValue;
 
         // Act
         Qualifier.Options subject = value;
-        int result = subject;
+        string result = subject;
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);

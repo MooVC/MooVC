@@ -56,10 +56,10 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    [Arguments(1)]
-    [Arguments(2)]
-    [Arguments(3)]
-    public async Task GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(int casing)
+    [Arguments("Camel")]
+    [Arguments("Kebab")]
+    [Arguments("Snake")]
+    public async Task GivenOptionsWithoutUnderscoreWhenReservedThenResultIsPrefixed(string casing)
     {
         // Arrange
         int element = Random.Shared.Next(Keywords.Reserved.Count);
@@ -125,21 +125,5 @@ public sealed class WhenToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(result).IsEqualTo("_myValue");
-    }
-
-    [Test]
-    public async Task GivenUnsupportedCasingThenThrows()
-    {
-        // Arrange
-        var subject = new Variable(MultiWord);
-
-        Options options = new Options()
-            .WithCasing((Casing)999);
-
-        // Act
-        Func<string> act = () => subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(act).Throws<NotSupportedException>();
     }
 }

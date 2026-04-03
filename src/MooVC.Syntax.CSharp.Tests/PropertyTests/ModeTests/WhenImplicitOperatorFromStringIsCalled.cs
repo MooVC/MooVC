@@ -1,15 +1,15 @@
 ﻿namespace MooVC.Syntax.CSharp.PropertyTests.ModeTests;
 
-public sealed class WhenImplicitOperatorFromIntIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const int SetValue = 0;
-    private const int ReadOnlyValue = 1;
+    private const string SetValue = "Set";
+    private const string ReadOnlyValue = "ReadOnly";
 
     [Test]
-    public async Task GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
-        int value = ReadOnlyValue;
+        string value = ReadOnlyValue;
 
         // Act
         Property.Mode subject = value;
@@ -23,11 +23,11 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
-        int value = SetValue;
+        string value = SetValue;
 
         // Act
         Property.Mode subject = value;
-        int result = subject;
+        string result = subject;
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);

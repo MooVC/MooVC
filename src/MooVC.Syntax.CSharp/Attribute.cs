@@ -84,7 +84,7 @@
         {
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
 
-            return attribute.ToSnippet(Type.Options.Default);
+            return attribute.ToSnippet(Options.Separate);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Type.Options.Default);
+            return ToSnippet(Options.Separate);
         }
 
         /// <summary>
@@ -101,9 +101,9 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Type.Options options)
+        public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Type.Options), nameof(Arguments), nameof(Attribute)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Arguments), nameof(Attribute)));
 
             if (Name.IsUndefined)
             {

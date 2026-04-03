@@ -1,14 +1,14 @@
 ﻿namespace MooVC.Syntax.CSharp.ConversionTests.IntentTests;
 
-public sealed class WhenImplicitOperatorFromIntIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const int Value = 1;
+    private const string Value = "From";
 
     [Test]
     public async Task GivenSameValueTwiceThenInstancesAreEqualButNotSameReference()
     {
         // Arrange
-        int value = Value;
+        string value = Value;
 
         // Act
         Conversion.Intent first = value;
@@ -21,10 +21,10 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     }
 
     [Test]
-    public async Task GivenValueThenEqualsInteger()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
-        int value = Value;
+        string value = Value;
 
         // Act
         Conversion.Intent subject = value;

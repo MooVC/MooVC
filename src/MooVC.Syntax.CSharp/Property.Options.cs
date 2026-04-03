@@ -1,9 +1,12 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Property_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -24,9 +27,41 @@ namespace MooVC.Syntax.CSharp
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets the mode on the Setter.
+            /// Represents an options instance with unspecified or default values.
             /// </summary>
-            /// <value>The mode.</value>
+            /// <remarks>
+            /// Use this field to indicate that no specific options have been set. This can
+            /// be useful as a sentinel value or when an explicit 'unspecified' state is required.
+            /// </remarks>
+            public static readonly Options Unspecified = new Options(true);
+
+            [SuppressMessage("Style", "IDE0032:Use auto property", Justification = "Fields are not set by Fluentify")]
+            private readonly bool _isUnspecified;
+
+            /// <summary>
+            /// Initializes a new instance of the Options class.
+            /// </summary>
+            public Options()
+            {
+            }
+
+            private Options(bool isUnspecified)
+            {
+                _isUnspecified = isUnspecified;
+            }
+
+            /// <summary>
+            /// Gets the Attribute options.
+            /// </summary>
+            /// <value>The Attribute options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsAttributesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Attribute.Options Attributes { get; internal set; } = Attribute.Options.Separate;
+
+            /// <summary>
+            /// Gets the implicit scope for the Property.
+            /// </summary>
+            /// <value>The implicit scope.</value>
+            /// <remarks>If the Property is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
             public Scope Implied { get; internal set; } = Scope.Unspecified;
 
             /// <summary>
@@ -35,6 +70,15 @@ namespace MooVC.Syntax.CSharp
             /// <value>A value indicating whether the Setter is default.</value>
             [Ignore]
             public bool IsDefault => this == Default;
+
+            /// <summary>
+            /// Gets a value indicating whether the current instance is unspecified.
+            /// </summary>
+            /// <value>
+            /// A value indicating whether the current instance is unspecified.
+            /// </value>
+            [Ignore]
+            public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
             /// Gets the options for the Snippets.
@@ -46,7 +90,19 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Types.
             /// </summary>
             /// <value>The types.</value>
-            public Type.Options Types { get; internal set; } = MooVC.Syntax.CSharp.Type.Options.Default;
+            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+
+            /// <summary>
+            /// Converts Property options into Attribute options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Attribute options.</returns>
+            public static implicit operator Attribute.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Attribute.Options>(options);
+
+                return options.Attributes;
+            }
 
             /// <summary>
             /// Converts property options into scope options.
@@ -77,9 +133,9 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <param name="options">The source options.</param>
             /// <returns>The type options.</returns>
-            public static implicit operator Type.Options(Options options)
+            public static implicit operator Symbol.Options(Options options)
             {
-                Guard.Against.Conversion<Options, Type.Options>(options);
+                Guard.Against.Conversion<Options, Symbol.Options>(options);
 
                 return options.Types;
             }

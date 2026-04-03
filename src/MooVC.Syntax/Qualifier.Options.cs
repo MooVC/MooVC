@@ -11,21 +11,21 @@
         /// <summary>
         /// Defines options for the Qualifier syntax element.
         /// </summary>
-        [Monify(Type = typeof(int))]
+        [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Options
         {
             /// <summary>
             /// Represents the block for the Options.
             /// </summary>
-            public static readonly Options Block = 1;
+            public static readonly Options Block = "Block";
 
             /// <summary>
             /// Represents the file for the Options.
             /// </summary>
-            public static readonly Options File = 0;
+            public static readonly Options File = "File";
 
-            private Options(int value)
+            private Options(string value)
             {
                 _value = value;
             }
@@ -48,12 +48,7 @@
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                if (IsBlock)
-                {
-                    return nameof(Block);
-                }
-
-                return nameof(File);
+                return _value;
             }
         }
     }

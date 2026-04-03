@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax
 {
+    using Fluentify;
     using Monify;
 
     /// <summary>
@@ -15,20 +16,21 @@
             /// <summary>
             /// Represents a syntax element style type.
             /// </summary>
-            [Monify(Type = typeof(int))]
+            [Monify(Type = typeof(string))]
+            [SkipAutoInitialization]
             public sealed partial class StyleType
             {
                 /// <summary>
                 /// Represents the allman for the StyleType.
                 /// </summary>
-                public static readonly StyleType Allman = 0;
+                public static readonly StyleType Allman = "Allman";
 
                 /// <summary>
                 /// Represents the k and r for the StyleType.
                 /// </summary>
-                public static readonly StyleType KAndR = 1;
+                public static readonly StyleType KAndR = "KAndR";
 
-                private StyleType(int value)
+                private StyleType(string value)
                 {
                     _value = value;
                 }
@@ -44,6 +46,15 @@
                 /// </summary>
                 /// <value>A value indicating whether the StyleType is k and r.</value>
                 public bool IsKAndR => this == KAndR;
+
+                /// <summary>
+                /// Returns a string that represents the current object.
+                /// </summary>
+                /// <returns>A string representation of the current object.</returns>
+                public override string ToString()
+                {
+                    return _value;
+                }
             }
         }
     }

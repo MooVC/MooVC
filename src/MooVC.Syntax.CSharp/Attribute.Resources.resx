@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="OptionsStyleRequired" xml:space="preserve">
+    <value>The Style options must be provided.</value>
+  </data>
+  <data name="OptionsSnippetsRequired" xml:space="preserve">
+    <value>The Snippet options must be provided.</value>
+  </data>
+  <data name="OptionsTypesRequired" xml:space="preserve">
+    <value>The Type options must be provided.</value>
+  </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
     <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>

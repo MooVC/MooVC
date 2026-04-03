@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -24,9 +25,34 @@ namespace MooVC.Syntax.CSharp
             public static readonly Options Default = new Options();
 
             /// <summary>
-            /// Gets the mode on the Setter.
+            /// Represents an options instance with unspecified or default values.
             /// </summary>
-            /// <value>The mode.</value>
+            /// <remarks>
+            /// Use this field to indicate that no specific options have been set. This can
+            /// be useful as a sentinel value or when an explicit 'unspecified' state is required.
+            /// </remarks>
+            public static readonly Options Unspecified = new Options(true);
+
+            [SuppressMessage("Style", "IDE0032:Use auto property", Justification = "Fields are not set by Fluentify")]
+            private readonly bool _isUnspecified;
+
+            /// <summary>
+            /// Initializes a new instance of the Options class.
+            /// </summary>
+            public Options()
+            {
+            }
+
+            private Options(bool isUnspecified)
+            {
+                _isUnspecified = isUnspecified;
+            }
+
+            /// <summary>
+            /// Gets the implicit scope for the Indexer.
+            /// </summary>
+            /// <value>The implicit scope.</value>
+            /// <remarks>If the Indexer is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
             public Scope Implied { get; internal set; } = Scope.Unspecified;
 
             /// <summary>
@@ -35,6 +61,15 @@ namespace MooVC.Syntax.CSharp
             /// <value>A value indicating whether the Setter is default.</value>
             [Ignore]
             public bool IsDefault => this == Default;
+
+            /// <summary>
+            /// Gets a value indicating whether the current instance is unspecified.
+            /// </summary>
+            /// <value>
+            /// A value indicating whether the current instance is unspecified.
+            /// </value>
+            [Ignore]
+            public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
             /// Gets the options for the Snippets.

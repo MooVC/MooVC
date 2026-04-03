@@ -84,20 +84,4 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         _ = await Assert.That(result).IsEqualTo("my_value");
     }
-
-    [Test]
-    public async Task GivenUnsupportedCasingThenThrows()
-    {
-        // Arrange
-        var subject = new Identifier(MultiWord);
-
-        Options options = new Options()
-            .WithCasing((Casing)999);
-
-        // Act
-        Func<string> act = () => subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(act).Throws<NotSupportedException>();
-    }
 }

@@ -2,6 +2,7 @@
 {
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.CSharp.Chaining;
     using MooVC.Syntax.Validation;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -32,16 +33,127 @@
             public bool IsDefault => this == Default;
 
             /// <summary>
-            /// Gets the snippets options.
+            /// Gets the Attribute options.
             /// </summary>
-            /// <value>The snippets options.</value>
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            /// <value>The Attribute options.</value>
+            public Attribute.Options Attributes { get; internal set; } = Attribute.Options.Unspecified;
 
             /// <summary>
-            /// Gets the symbol options.
+            /// Gets the Event options.
             /// </summary>
-            /// <value>The symbol options.</value>
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+            /// <value>The Event options.</value>
+            public Event.Options Events { get; internal set; } = Event.Options.Unspecified;
+
+            /// <summary>
+            /// Gets the Indexer options.
+            /// </summary>
+            /// <value>The Indexer options.</value>
+            public Indexer.Options Indexers { get; internal set; } = Indexer.Options.Unspecified;
+
+            /// <summary>
+            /// Gets the Method options.
+            /// </summary>
+            /// <value>The Method options.</value>
+            public Method.Options Methods { get; internal set; } = Method.Options.Unspecified;
+
+            /// <summary>
+            /// Gets the Property options.
+            /// </summary>
+            /// <value>The Property options.</value>
+            public Property.Options Properties { get; internal set; } = Property.Options.Unspecified;
+
+            /// <summary>
+            /// Gets the Snippets options.
+            /// </summary>
+            /// <value>The Snippets options.</value>
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
+
+            /// <summary>
+            /// Gets the Symbol options.
+            /// </summary>
+            /// <value>The Symbol options.</value>
+            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
+
+            /// <summary>
+            /// Converts type options into Attribute options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Attribute options.</returns>
+            public static implicit operator Attribute.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Attribute.Options>(options);
+
+                return options.Attributes.ForkOn(
+                    attributes => attributes.IsUnspecified,
+                    attributes => attributes
+                        .WithSnippets(options.Snippets)
+                        .WithTypes(options.Symbols),
+                    _ => _);
+            }
+
+            /// <summary>
+            /// Converts type options into Event options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Event options.</returns>
+            public static implicit operator Event.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Event.Options>(options);
+
+                return options.Events.ForkOn(
+                    events => events.IsUnspecified,
+                    events => events.WithSnippets(options.Snippets),
+                    _ => _);
+            }
+
+            /// <summary>
+            /// Converts type options into Indexer options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Indexer options.</returns>
+            public static implicit operator Indexer.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Indexer.Options>(options);
+
+                return options.Indexers.ForkOn(
+                    indexers => indexers.IsUnspecified,
+                    indexers => indexers.WithSnippets(options.Snippets),
+                    _ => _);
+            }
+
+            /// <summary>
+            /// Converts type options into Method options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Method options.</returns>
+            public static implicit operator Method.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Method.Options>(options);
+
+                return options.Methods.ForkOn(
+                    methods => methods.IsUnspecified,
+                    methods => methods
+                        .WithSnippets(options.Snippets)
+                        .WithTypes(options.Symbols),
+                    _ => _);
+            }
+
+            /// <summary>
+            /// Converts type options into Property options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The Property options.</returns>
+            public static implicit operator Property.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Property.Options>(options);
+
+                return options.Properties.ForkOn(
+                    properties => properties.IsUnspecified,
+                    properties => properties
+                        .WithSnippets(options.Snippets)
+                        .WithTypes(options.Symbols),
+                    _ => _);
+            }
 
             /// <summary>
             /// Converts type options into snippet options.
@@ -64,7 +176,7 @@
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
 
-                return options.Types;
+                return options.Symbols;
             }
         }
     }

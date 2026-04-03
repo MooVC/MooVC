@@ -11,26 +11,26 @@
         /// <summary>
         /// Represents a C# syntax element qualification.
         /// </summary>
-        [Monify(Type = typeof(byte))]
+        [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Qualification
         {
             /// <summary>
             /// Represents the full for the Qualification.
             /// </summary>
-            public static readonly Qualification Full = 1;
+            public static readonly Qualification Full = "Full";
 
             /// <summary>
             /// Represents the minimum for the Qualification.
             /// </summary>
-            public static readonly Qualification Minimum = 0;
+            public static readonly Qualification Minimum = "Minimum";
 
             /// <summary>
             /// Represents the global for the Qualification.
             /// </summary>
-            public static readonly Qualification Global = 2;
+            public static readonly Qualification Global = "Global";
 
-            private Qualification(byte value)
+            private Qualification(string value)
             {
                 _value = value;
             }
@@ -52,6 +52,15 @@
             /// </summary>
             /// <value>A value indicating whether the Qualification is global.</value>
             public bool IsGlobal => this == Global;
+
+            /// <summary>
+            /// Returns a string that represents the current object.
+            /// </summary>
+            /// <returns>A string representation of the current object.</returns>
+            public override string ToString()
+            {
+                return _value;
+            }
         }
     }
 }

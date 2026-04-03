@@ -34,9 +34,9 @@
         public Qualifier.Options Namespace { get; internal set; } = Qualifier.Options.File;
 
         /// <summary>
-        /// Gets the snippets options.
+        /// Gets the Snippets options.
         /// </summary>
-        /// <value>The snippets options.</value>
+        /// <value>The Snippets options.</value>
         public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default.WithChaining(new[]
         {
             OneDotPerLine.Instance,
@@ -47,7 +47,7 @@
         /// Gets the symbol options.
         /// </summary>
         /// <value>The symbol options.</value>
-        public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+        public Type.Options Types { get; internal set; } = Type.Options.Default;
 
         /// <summary>
         /// Converts the current options to namespace options.
@@ -62,7 +62,7 @@
         }
 
         /// <summary>
-        /// Converts the current options to snippet options.
+        /// Converts type options into snippet options.
         /// </summary>
         /// <param name="options">The source options.</param>
         /// <returns>The snippet options.</returns>
@@ -74,31 +74,15 @@
         }
 
         /// <summary>
-        /// Converts the current options to symbol options.
+        /// Converts the current options to Type options.
         /// </summary>
         /// <param name="options">The source options.</param>
-        /// <returns>The symbol options.</returns>
-        public static implicit operator Symbol.Options(Options options)
-        {
-            Guard.Against.Conversion<Options, Symbol.Options>(options);
-
-            return options.Types;
-        }
-
-        /// <summary>
-        /// Converts the current options to type options.
-        /// </summary>
-        /// <param name="options">The source options.</param>
-        /// <returns>The type options.</returns>
+        /// <returns>The Type options.</returns>
         public static implicit operator Type.Options(Options options)
         {
             Guard.Against.Conversion<Options, Type.Options>(options);
 
-            return new Type.Options
-            {
-                Snippets = options.Snippets,
-                Types = options.Types,
-            };
+            return options.Types.ForkOn(types => types.Snippets.IsUnspecified, types => types.WithSnippets(options.Snippets), _ => _);
         }
     }
 }

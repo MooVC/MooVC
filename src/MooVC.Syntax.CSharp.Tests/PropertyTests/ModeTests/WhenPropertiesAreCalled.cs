@@ -3,10 +3,10 @@
 public sealed class WhenPropertiesAreCalled
 {
     [Test]
-    [Arguments(0, false, false, true)]
-    [Arguments(1, false, true, false)]
-    [Arguments(2, true, false, false)]
-    public async Task GivenModeThenFlagsMatch(int value, bool expectedInit, bool expectedReadOnly, bool expectedSet)
+    [Arguments("Set", false, false, true)]
+    [Arguments("ReadOnly", false, true, false)]
+    [Arguments("Init", true, false, false)]
+    public async Task GivenModeThenFlagsMatch(string value, bool expectedInit, bool expectedReadOnly, bool expectedSet)
     {
         // Arrange
         Property.Mode subject = value;
@@ -18,10 +18,10 @@ public sealed class WhenPropertiesAreCalled
     }
 
     [Test]
-    [Arguments(0, "set")]
-    [Arguments(1, "")]
-    [Arguments(2, "init")]
-    public async Task GivenModeThenToStringMatches(int value, string expected)
+    [Arguments("Set", "set")]
+    [Arguments("ReadOnly", "")]
+    [Arguments("Init", "init")]
+    public async Task GivenModeThenToStringMatches(string value, string expected)
     {
         // Arrange
         Property.Mode subject = value;

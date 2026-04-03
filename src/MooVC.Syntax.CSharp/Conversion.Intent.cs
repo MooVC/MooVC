@@ -12,7 +12,7 @@
         /// <summary>
         /// Represents a C# operator syntax intent.
         /// </summary>
-        [Monify(Type = typeof(int))]
+        [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Intent
             : IComparable<Intent>
@@ -20,14 +20,14 @@
             /// <summary>
             /// Represents the from for the Intent.
             /// </summary>
-            public static readonly Intent From = 1;
+            public static readonly Intent From = "From";
 
             /// <summary>
             /// Represents the to for the Intent.
             /// </summary>
-            public static readonly Intent To = 0;
+            public static readonly Intent To = "To";
 
-            private Intent(int value)
+            private Intent(string value)
             {
                 _value = value;
             }
@@ -105,9 +105,17 @@
             /// <returns>A signed integer indicating relative order.</returns>
             public int CompareTo(Intent other)
             {
-                return other is null
-                    ? 1
-                    : _value.CompareTo(other._value);
+                if (other == this)
+                {
+                    return 0;
+                }
+
+                if (other is null || (other.IsFrom && IsTo))
+                {
+                    return 1;
+                }
+
+                return -1;
             }
 
             /// <summary>
@@ -116,12 +124,7 @@
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                if (_value == From._value)
-                {
-                    return nameof(From);
-                }
-
-                return nameof(To);
+                return _value;
             }
         }
     }

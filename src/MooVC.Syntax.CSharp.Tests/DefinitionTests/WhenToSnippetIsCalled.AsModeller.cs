@@ -12,7 +12,9 @@ public sealed partial class WhenToSnippetIsCalled
     {
         private static readonly Options _options = new Options()
             .WithNamespace(Qualifier.Options.File)
-            .WithTypes(types => types.WithQualification(Qualification.Minimum));
+            .WithTypes(types => types
+                .WithSymbols(symbols => symbols
+                    .WithQualification(Qualification.Minimum)));
 
         [Test]
         public async Task GivenInstructionsWhenAttributeThenAttributeIsCreated()

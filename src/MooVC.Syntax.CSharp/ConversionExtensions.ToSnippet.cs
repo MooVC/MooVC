@@ -26,7 +26,7 @@
             Snippet[] content = conversions
                 .OrderByDescending(conversion => conversion.Scope)
                 .ThenBy(conversion => conversion.Target)
-                .ThenBy(conversion => conversion.Direction)
+                .ThenByDescending(conversion => conversion.Direction)
                 .Select(conversion => conversion.ToSnippet(options, type))
                 .ToArray();
 

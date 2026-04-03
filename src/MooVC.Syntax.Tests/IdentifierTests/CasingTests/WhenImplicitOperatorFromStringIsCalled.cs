@@ -1,15 +1,15 @@
 ﻿namespace MooVC.Syntax.IdentifierTests.CasingTests;
 
-public sealed class WhenImplicitOperatorFromIntIsCalled
+public sealed class WhenImplicitOperatorFromStringIsCalled
 {
-    private const int PascalValue = 0;
-    private const int CamelValue = 1;
+    private const string PascalValue = "Pascal";
+    private const string CamelValue = "Camel";
 
     [Test]
-    public async Task GivenValueThenEqualsInt()
+    public async Task GivenValueThenEqualsString()
     {
         // Arrange
-        int value = CamelValue;
+        string value = CamelValue;
 
         // Act
         Identifier.Casing subject = value;
@@ -23,11 +23,11 @@ public sealed class WhenImplicitOperatorFromIntIsCalled
     public async Task GivenValueWhenRoundTrippedThenMatchesOriginal()
     {
         // Arrange
-        int value = PascalValue;
+        string value = PascalValue;
 
         // Act
         Identifier.Casing subject = value;
-        int result = subject;
+        string result = subject;
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(value);

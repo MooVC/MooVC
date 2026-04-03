@@ -1,16 +1,16 @@
 ﻿namespace MooVC.Syntax.CSharp.PropertyTests.ModeTests;
 
-public sealed class WhenEqualityOperatorModeIntIsCalled
+public sealed class WhenEqualityOperatorModeStringIsCalled
 {
-    private const int Same = 1;
-    private const int Different = 0;
+    private const string Same = "Init";
+    private const string Different = "Set";
 
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
         Property.Mode? left = default;
-        int? right = default;
+        string? right = default;
 
         // Act
         bool result = left == right;
@@ -24,7 +24,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
     {
         // Arrange
         Property.Mode left = Property.Mode.Init;
-        const int right = Different;
+        const string right = Different;
 
         // Act
         bool result = left == right;
@@ -37,8 +37,8 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Property.Mode left = Property.Mode.ReadOnly;
-        const int right = Same;
+        Property.Mode left = Property.Mode.Init;
+        const string right = Same;
 
         // Act
         bool result = left == right;
@@ -52,7 +52,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
     {
         // Arrange
         Property.Mode? left = default;
-        const int right = Same;
+        const string right = Same;
 
         // Act
         bool result = left == right;
@@ -66,7 +66,7 @@ public sealed class WhenEqualityOperatorModeIntIsCalled
     {
         // Arrange
         Property.Mode left = Property.Mode.ReadOnly;
-        int? right = default;
+        string? right = default;
 
         // Act
         bool result = left == right;

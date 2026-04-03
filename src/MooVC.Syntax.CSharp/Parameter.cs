@@ -136,7 +136,7 @@
 
             const string separator = " ";
 
-            string attributes = GetAttributes(options);
+            string attributes = Attributes.ToSnippet(options);
             string @default = GetDefault();
             string modifier = Modifier;
             var name = Name.ToSnippet(options);
@@ -174,20 +174,6 @@
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
-        }
-
-        private string GetAttributes(Options options)
-        {
-            if (Attributes.IsDefaultOrEmpty)
-            {
-                return string.Empty;
-            }
-
-            const string separator = ", ";
-
-            string attributes = separator.Combine(Attributes, attribute => attribute.ToSnippet(options));
-
-            return $"[{attributes}]";
         }
 
         private string GetDefault()

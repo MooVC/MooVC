@@ -3,9 +3,9 @@
 public sealed class WhenPropertiesAreCalled
 {
     [Test]
-    [Arguments(0, false, true, "File")]
-    [Arguments(1, true, false, "Block")]
-    public async Task GivenOptionThenFlagsAndStringMatch(int value, bool expectedBlock, bool expectedFile, string expectedText)
+    [Arguments(false, true, "File")]
+    [Arguments(true, false, "Block")]
+    public async Task GivenOptionThenFlagsAndStringMatch(bool expectedBlock, bool expectedFile, string value)
     {
         // Arrange
         Qualifier.Options subject = value;
@@ -18,6 +18,6 @@ public sealed class WhenPropertiesAreCalled
         // Assert
         _ = await Assert.That(isBlock).IsEqualTo(expectedBlock);
         _ = await Assert.That(isFile).IsEqualTo(expectedFile);
-        _ = await Assert.That(text).IsEqualTo(expectedText);
+        _ = await Assert.That(text).IsEqualTo(value);
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace MooVC.Syntax.CSharp.ConversionTests.IntentTests;
 
-public sealed class WhenEqualsIntIsCalled
+public sealed class WhenEqualsStringIsCalled
 {
-    private const int Value = 1;
-    private const int Other = 0;
+    private const string Value = "From";
+    private const string Other = "To";
 
     [Test]
     public async Task GivenADifferentValueThenReturnsFalse()
@@ -25,7 +25,7 @@ public sealed class WhenEqualsIntIsCalled
         Conversion.Intent intent = Conversion.Intent.From;
 
         // Act
-        bool result = intent.Equals(default(int?));
+        bool result = intent.Equals(default(string?));
 
         // Assert
         _ = await Assert.That(result).IsFalse();

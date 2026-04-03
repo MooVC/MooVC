@@ -61,6 +61,15 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Attribute options must be provided..
+        /// </summary>
+        internal static string OptionsAttributesRequired {
+            get {
+                return ResourceManager.GetString("OptionsAttributesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Naming options must be provided..
         /// </summary>
         internal static string OptionsNamingRequired {

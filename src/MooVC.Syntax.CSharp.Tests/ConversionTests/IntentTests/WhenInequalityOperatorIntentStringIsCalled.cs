@@ -1,16 +1,16 @@
 ﻿namespace MooVC.Syntax.CSharp.ConversionTests.IntentTests;
 
-public sealed class WhenInequalityOperatorIntentIntIsCalled
+public sealed class WhenInequalityOperatorIntentStringIsCalled
 {
-    private const int Same = 1;
-    private const int Different = 0;
+    private const string Same = "From";
+    private const string Different = "To";
 
     [Test]
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
         Conversion.Intent? left = default;
-        int? right = default;
+        string? right = default;
 
         // Act
         bool result = left != right;
@@ -24,7 +24,7 @@ public sealed class WhenInequalityOperatorIntentIntIsCalled
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
-        int right = Different;
+        string right = Different;
 
         // Act
         bool result = left != right;
@@ -38,7 +38,7 @@ public sealed class WhenInequalityOperatorIntentIntIsCalled
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
-        int right = Same;
+        string right = Same;
 
         // Act
         bool result = left != right;
@@ -52,7 +52,7 @@ public sealed class WhenInequalityOperatorIntentIntIsCalled
     {
         // Arrange
         Conversion.Intent? left = default;
-        int right = Same;
+        string right = Same;
 
         // Act
         bool result = left != right;
@@ -66,7 +66,7 @@ public sealed class WhenInequalityOperatorIntentIntIsCalled
     {
         // Arrange
         Conversion.Intent left = Conversion.Intent.From;
-        int? right = default;
+        string? right = default;
 
         // Act
         bool result = left != right;

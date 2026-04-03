@@ -3,11 +3,11 @@
 public sealed class WhenPropertiesAreCalled
 {
     [Test]
-    [Arguments(0, true, false, false, false)]
-    [Arguments(1, false, true, false, false)]
-    [Arguments(2, false, false, true, false)]
-    [Arguments(3, false, false, false, true)]
-    public async Task GivenCasingThenFlagsMatch(int value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
+    [Arguments("Pascal", true, false, false, false)]
+    [Arguments("Camel", false, true, false, false)]
+    [Arguments("Kebab", false, false, true, false)]
+    [Arguments("Snake", false, false, false, true)]
+    public async Task GivenCasingThenFlagsMatch(string value, bool expectedPascal, bool expectedCamel, bool expectedKebab, bool expectedSnake)
     {
         // Arrange
         Identifier.Casing subject = value;
@@ -20,11 +20,11 @@ public sealed class WhenPropertiesAreCalled
     }
 
     [Test]
-    [Arguments(0, "Pascal")]
-    [Arguments(1, "Camel")]
-    [Arguments(2, "Kebab")]
-    [Arguments(3, "Snake")]
-    public async Task GivenCasingThenToStringMatches(int value, string expected)
+    [Arguments("Pascal")]
+    [Arguments("Camel")]
+    [Arguments("Kebab")]
+    [Arguments("Snake")]
+    public async Task GivenCasingThenToStringMatches(string value)
     {
         // Arrange
         Identifier.Casing subject = value;
@@ -33,6 +33,6 @@ public sealed class WhenPropertiesAreCalled
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(expected);
+        _ = await Assert.That(result).IsEqualTo(value);
     }
 }
