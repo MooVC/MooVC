@@ -146,5 +146,58 @@ public sealed partial class WhenToSnippetIsCalled
             // Assert
             _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
         }
+
+        [Test]
+        public async Task GivenInstructionsWhenClassWithPropertiesThenClassIsCreated()
+        {
+            // Arrange
+            const string expected = """
+            namespace MooVC.Testing.Mechanics.Car;
+            
+            using System.ComponentModel;
+            using Muify.Domain;
+
+            [Description("Represents a Wheel Attached to the Car")]
+            public sealed partial class Wheel
+            {
+                [Description("The Location of the Wheel on the Car")]
+                [Identity]
+                public Location Location { get; init; }
+            
+                [Description("The Pressure of the Tyre on the Wheel")]
+                public Pressure Pressure { get; init; }
+            }
+            """;
+
+            Definition content = Builder
+                .New<Definition>()
+                .From("MooVC.Testing.Mechanics.Car")
+                .For<Class>(@class => @class
+                    .AttributedWith(description => description
+                        .Named(typeof(DescriptionAttribute))
+                        .WithArguments((Name: string.Empty, Value: "\"Represents a Wheel Attached to the Car\"")))
+                    .Named("Wheel")
+                    .WithProperties(location => location
+                        .AttributedWith(description => description
+                            .Named(typeof(DescriptionAttribute))
+                            .WithArguments((Name: string.Empty, Value: "\"The Location of the Wheel on the Car\"")))
+                        .AttributedWith(identity => identity.Named((Name: "IdentityAttribute", Qualifier: "Muify.Domain")))
+                        .Named("Location")
+                        .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car")))
+                    .WithProperties(pressure => pressure
+                        .AttributedWith(description => description
+                            .Named(typeof(DescriptionAttribute))
+                            .WithArguments((Name: string.Empty, Value: "\"The Pressure of the Tyre on the Wheel\"")))
+                        .Named("Pressure")
+                        .OfType((Name: "Pressure", Qualifier: "MooVC.Testing.Mechanics.Car"))))
+                .Referencing(directive => directive.From(typeof(DescriptionAttribute)))
+                .Referencing(directive => directive.From("Muify.Domain"));
+
+            // Act
+            var actual = content.ToSnippet(_options);
+
+            // Assert
+            _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
+        }
     }
 }
