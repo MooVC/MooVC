@@ -52,7 +52,7 @@
             /// </summary>
             /// <value>The behaviour.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
             /// Gets the types on the Options.
@@ -70,7 +70,9 @@
             {
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
-                return options.Attributes;
+                return options.Attributes
+                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Types), _ => _);
             }
 
             /// <summary>

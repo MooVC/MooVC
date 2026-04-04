@@ -81,7 +81,7 @@
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                return ToSnippet(Snippet.Options.Default);
+                return ToSnippet(Options.Default);
             }
 
             /// <summary>

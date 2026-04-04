@@ -84,7 +84,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The snippets.</value>
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
             /// Gets the options for the Types.
@@ -101,7 +101,9 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
-                return options.Attributes;
+                return options.Attributes
+                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Types), _ => _);
             }
 
             public static implicit operator Parameter.Options(Options options)

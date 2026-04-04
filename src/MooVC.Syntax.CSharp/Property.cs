@@ -226,10 +226,10 @@
             string extensibility = Extensibility;
             string name = Name;
             string scope = Scope.ToString(options.Implied);
-            string type = Type;
+            string type = Type.ToSnippet(options);
             string signature = Separator.Combine(scope, extensibility, type, name);
 
-            return Snippet.From(signature);
+            return Snippet.From(options, signature);
         }
     }
 }

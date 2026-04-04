@@ -98,14 +98,14 @@
             /// </summary>
             /// <value>The behaviour.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
             /// Gets the types on the Options.
             /// </summary>
             /// <value>The types.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+            public Symbol.Options Types { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts parameter options into snippet options.

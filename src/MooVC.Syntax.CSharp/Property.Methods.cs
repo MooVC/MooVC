@@ -81,7 +81,7 @@ namespace MooVC.Syntax.CSharp
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                return ToSnippet(Snippet.Options.Default, Scope.Public);
+                return ToSnippet(Options.Default, Scope.Public);
             }
 
             /// <summary>

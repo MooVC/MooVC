@@ -155,7 +155,7 @@
 
         private StringBuilder AppendArguments(Snippet.Options options, StringBuilder value)
         {
-            Argument.Options declaration = Argument.Options.Declaration.WithSnippet(options);
+            Argument.Options declaration = Argument.Options.Declaration.WithSnippets(options);
 
             string[] arguments = Arguments
                 .Select(argument => argument

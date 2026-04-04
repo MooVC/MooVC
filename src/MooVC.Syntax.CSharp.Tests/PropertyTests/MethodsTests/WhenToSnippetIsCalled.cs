@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Property.Methods();
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
+        string representation = subject.ToSnippet(Property.Options.Default, Scope.Public);
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("get; init;");
@@ -29,7 +29,7 @@ public sealed class WhenToSnippetIsCalled
         };
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
+        string representation = subject.ToSnippet(Property.Options.Default, Scope.Public);
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("value;");
@@ -50,7 +50,7 @@ public sealed class WhenToSnippetIsCalled
         };
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default, Scope.Public);
+        string representation = subject.ToSnippet(Property.Options.Default, Scope.Public);
 
         // Assert
         _ = await Assert.That(representation).Contains("private init");

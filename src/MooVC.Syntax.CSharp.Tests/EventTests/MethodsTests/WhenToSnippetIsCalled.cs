@@ -31,7 +31,10 @@ public sealed class WhenToSnippetIsCalled
         };
 
         // Act
-        string representation = subject.ToSnippet(Snippet.Options.Default);
+        string representation = subject
+            .ToSnippet(Snippet.Options.Default
+                .WithBlock(blocks => blocks
+                    .WithInline(Snippet.Options.Blocks.Styles.Lambda)));
 
         // Assert
         const string expected = """

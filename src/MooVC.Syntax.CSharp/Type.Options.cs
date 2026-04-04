@@ -42,25 +42,25 @@
             /// Gets the Event options.
             /// </summary>
             /// <value>The Event options.</value>
-            public Event.Options Events { get; internal set; } = Event.Options.Unspecified;
+            public Event.Options Events { get; internal set; } = Event.Options.Default;
 
             /// <summary>
             /// Gets the Indexer options.
             /// </summary>
             /// <value>The Indexer options.</value>
-            public Indexer.Options Indexers { get; internal set; } = Indexer.Options.Unspecified;
+            public Indexer.Options Indexers { get; internal set; } = Indexer.Options.Default;
 
             /// <summary>
             /// Gets the Method options.
             /// </summary>
             /// <value>The Method options.</value>
-            public Method.Options Methods { get; internal set; } = Method.Options.Unspecified;
+            public Method.Options Methods { get; internal set; } = Method.Options.Default;
 
             /// <summary>
             /// Gets the Property options.
             /// </summary>
             /// <value>The Property options.</value>
-            public Property.Options Properties { get; internal set; } = Property.Options.Unspecified;
+            public Property.Options Properties { get; internal set; } = Property.Options.Default;
 
             /// <summary>
             /// Gets the Snippets options.
@@ -83,12 +83,9 @@
             {
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
-                return options.Attributes.ForkOn(
-                    attributes => attributes.IsUnspecified,
-                    attributes => attributes
-                        .WithSnippets(options.Snippets)
-                        .WithTypes(options.Symbols),
-                    _ => _);
+                return options.Attributes
+                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Symbols), _ => _);
             }
 
             /// <summary>
@@ -100,10 +97,7 @@
             {
                 Guard.Against.Conversion<Options, Event.Options>(options);
 
-                return options.Events.ForkOn(
-                    events => events.IsUnspecified,
-                    events => events.WithSnippets(options.Snippets),
-                    _ => _);
+                return options.Events.ForkOn(events => events.Snippets.IsUnspecified, events => events.WithSnippets(options.Snippets), _ => _);
             }
 
             /// <summary>
@@ -116,7 +110,7 @@
                 Guard.Against.Conversion<Options, Indexer.Options>(options);
 
                 return options.Indexers.ForkOn(
-                    indexers => indexers.IsUnspecified,
+                    indexers => indexers.Snippets.IsUnspecified,
                     indexers => indexers.WithSnippets(options.Snippets),
                     _ => _);
             }
@@ -130,12 +124,9 @@
             {
                 Guard.Against.Conversion<Options, Method.Options>(options);
 
-                return options.Methods.ForkOn(
-                    methods => methods.IsUnspecified,
-                    methods => methods
-                        .WithSnippets(options.Snippets)
-                        .WithTypes(options.Symbols),
-                    _ => _);
+                return options.Methods
+                    .ForkOn(methods => methods.Snippets.IsUnspecified, methods => methods.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(methods => methods.Types.IsUnspecified, methods => methods.WithTypes(options.Symbols), _ => _);
             }
 
             /// <summary>
@@ -147,12 +138,9 @@
             {
                 Guard.Against.Conversion<Options, Property.Options>(options);
 
-                return options.Properties.ForkOn(
-                    properties => properties.IsUnspecified,
-                    properties => properties
-                        .WithSnippets(options.Snippets)
-                        .WithTypes(options.Symbols),
-                    _ => _);
+                return options.Properties
+                    .ForkOn(properties => properties.Snippets.IsUnspecified, properties => properties.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(properties => properties.Types.IsUnspecified, properties => properties.WithTypes(options.Symbols), _ => _);
             }
 
             /// <summary>

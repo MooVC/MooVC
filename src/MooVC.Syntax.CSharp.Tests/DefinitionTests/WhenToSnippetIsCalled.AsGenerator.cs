@@ -157,10 +157,10 @@ public sealed partial class WhenToSnippetIsCalled
                 {
                     [global::System.ComponentModel.DescriptionAttribute("The Location of the Wheel on the Car")]
                     [global::Muify.Domain.IdentityAttribute]
-                    public Location Location { get; init; }
+                    public global::MooVC.Testing.Mechanics.Car.Location Location { get; init; }
             
                     [global::System.ComponentModel.DescriptionAttribute("The Pressure of the Tyre on the Wheel")]
-                    public Pressure Pressure { get; init; }
+                    public global::MooVC.Testing.Mechanics.Car.Pressure Pressure { get; init; }
                 }
             }
             """;

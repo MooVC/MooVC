@@ -75,7 +75,9 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default
+                .WithBlock(blocks => blocks
+                    .WithInline(Snippet.Options.Blocks.Styles.Lambda));
 
             /// <summary>
             /// Converts event options into a scope value.

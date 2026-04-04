@@ -84,13 +84,15 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
-            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default
+                .WithBlock(blocks => blocks
+                    .WithInline(Snippet.Options.Blocks.Styles.Lambda));
 
             /// <summary>
             /// Gets the options for the Types.
             /// </summary>
             /// <value>The types.</value>
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+            public Symbol.Options Types { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts Property options into Attribute options.
@@ -101,7 +103,9 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
-                return options.Attributes;
+                return options.Attributes
+                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
+                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Types), _ => _);
             }
 
             /// <summary>

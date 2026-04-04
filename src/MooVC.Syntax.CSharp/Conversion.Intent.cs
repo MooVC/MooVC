@@ -105,17 +105,17 @@
             /// <returns>A signed integer indicating relative order.</returns>
             public int CompareTo(Intent other)
             {
-                if (other == this)
-                {
-                    return 0;
-                }
-
-                if (other is null || (other.IsFrom && IsTo))
+                if (this == To && other == From)
                 {
                     return 1;
                 }
 
-                return -1;
+                if (this == From && other == To)
+                {
+                    return -1;
+                }
+
+                return 0;
             }
 
             /// <summary>

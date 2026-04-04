@@ -43,14 +43,14 @@
         {
             Snippet signature = GetSignature(options);
 
-            var events = Events.ToSnippet(new Event.Options { Implied = Scope.Public, Snippets = options });
-            var indexers = Indexers.ToSnippet(new Indexer.Options { Implied = Scope.Public, Snippets = options });
-            var properties = Properties.ToSnippet(new Property.Options { Implied = Scope.Public, Snippets = options });
+            var events = Events.ToSnippet(options.Events.WithImplied(Scope.Public));
+            var indexers = Indexers.ToSnippet(options.Indexers.WithImplied(Scope.Public));
+            var properties = Properties.ToSnippet(options.Properties.WithImplied(Scope.Public));
 
             var methods = Methods
                 .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
                 .ToImmutableArray()
-                .ToSnippet(new Method.Options { Implied = Scope.Public, Snippets = options });
+                .ToSnippet(options.Methods.WithImplied(Scope.Public));
 
             var elements = new Snippet[] { events, properties, indexers, methods };
             IEnumerable<Snippet> types = Types.Select(type => type.ToSnippet(options));

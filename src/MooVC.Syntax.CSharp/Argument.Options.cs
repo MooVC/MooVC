@@ -6,7 +6,6 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Argument_Resources;
-    using Code = MooVC.Syntax.Snippet;
 
     /// <summary>
     /// Represents a C# syntax element argument.
@@ -33,7 +32,7 @@
             {
                 Formatter = Formatter.Declaration,
                 Naming = Variable.Options.Pascal,
-                Snippet = Code.Options.Default,
+                Snippets = Snippet.Options.Default,
             };
 
             /// <summary>
@@ -55,7 +54,7 @@
             /// </summary>
             /// <value>The snippet.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Code.Options Snippet { get; internal set; } = Code.Options.Default;
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
             /// Converts argument options into formatter options.
@@ -86,11 +85,11 @@
             /// </summary>
             /// <param name="options">The source options.</param>
             /// <returns>The code options.</returns>
-            public static implicit operator Code.Options(Options options)
+            public static implicit operator Snippet.Options(Options options)
             {
-                Guard.Against.Conversion<Options, Code.Options>(options);
+                Guard.Against.Conversion<Options, Snippet.Options>(options);
 
-                return options.Snippet;
+                return options.Snippets;
             }
         }
     }
