@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.ArgumentTests.OptionsTests.FormattersTests;
 
-public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
+public sealed class WhenEqualityOperatorFormattersFormattersIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Property.Methods? left = default!;
-        Property.Methods? right = default!;
+        Argument.Options.Formatters? left = default;
+        Argument.Options.Formatters? right = default;
 
         // Act
         bool result = left == right;
@@ -20,15 +20,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("alternative"),
-        };
+        Argument.Options.Formatters left = Argument.Options.Formatters.Call;
+        Argument.Options.Formatters right = Argument.Options.Formatters.Declaration;
 
         // Act
         bool resultLeftRight = left == right;
@@ -43,17 +36,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
-        };
-
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
-        };
+        Argument.Options.Formatters left = Argument.Options.Formatters.Call;
+        Argument.Options.Formatters right = Argument.Options.Formatters.Call;
 
         // Act
         bool resultLeftRight = left == right;
@@ -68,11 +52,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Property.Methods? left = default!;
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
+        Argument.Options.Formatters? left = default;
+        Argument.Options.Formatters right = Argument.Options.Formatters.Call;
 
         // Act
         bool result = left == right;
@@ -85,12 +66,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods? right = default!;
+        Argument.Options.Formatters left = Argument.Options.Formatters.Call;
+        Argument.Options.Formatters? right = default;
 
         // Act
         bool result = left == right;
@@ -103,12 +80,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods second = first;
+        Argument.Options.Formatters first = Argument.Options.Formatters.Declaration;
+        Argument.Options.Formatters second = first;
 
         // Act
         bool result = first == second;

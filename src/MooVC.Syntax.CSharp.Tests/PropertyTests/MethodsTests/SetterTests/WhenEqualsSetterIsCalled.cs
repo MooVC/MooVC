@@ -1,20 +1,13 @@
-﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests.SetterTests;
 
-public sealed class WhenEqualsMethodsIsCalled
+public sealed class WhenEqualsSetterIsCalled
 {
     [Test]
     public async Task GivenDifferentInstanceThenFalseIsReturned()
     {
         // Arrange
-        var subject = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        var target = new Property.Methods
-        {
-            Get = Snippet.From("alternative"),
-        };
+        var subject = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        var target = new Property.Methods.Setter { Behaviour = Snippet.From("alternative") };
 
         // Act
         bool resultSubjectTarget = subject.Equals(target);
@@ -29,16 +22,18 @@ public sealed class WhenEqualsMethodsIsCalled
     public async Task GivenEquivalentInstanceThenTrueIsReturned()
     {
         // Arrange
-        var subject = new Property.Methods
+        var subject = new Property.Methods.Setter
         {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
+            Behaviour = Snippet.From("value"),
+            Mode = Property.Methods.Setter.Modes.Init,
+            Scope = Scope.Internal,
         };
 
-        var target = new Property.Methods
+        var target = new Property.Methods.Setter
         {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
+            Behaviour = Snippet.From("value"),
+            Mode = Property.Methods.Setter.Modes.Init,
+            Scope = Scope.Internal,
         };
 
         // Act
@@ -54,8 +49,8 @@ public sealed class WhenEqualsMethodsIsCalled
     public async Task GivenNullThenFalseIsReturned()
     {
         // Arrange
-        var subject = new Property.Methods { Get = Snippet.From("value") };
-        Property.Methods? target = default!;
+        var subject = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        Property.Methods.Setter? target = default!;
 
         // Act
         bool result = subject.Equals(target);
@@ -68,13 +63,8 @@ public sealed class WhenEqualsMethodsIsCalled
     public async Task GivenSameReferenceThenTrueIsReturned()
     {
         // Arrange
-        var subject = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
-        };
-
-        Property.Methods target = subject;
+        var subject = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        Property.Methods.Setter target = subject;
 
         // Act
         bool result = subject.Equals(target);

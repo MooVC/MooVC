@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
 
         var valueB = new Property
         {
-            Behaviours = new Property.Methods { Set = new Property.Setter { Mode = Property.Mode.ReadOnly } },
+            Behaviours = new() { Set = new() { Mode = Property.Methods.Setter.Modes.ReadOnly } },
             Name = "ValueB",
             Type = typeof(int),
         };

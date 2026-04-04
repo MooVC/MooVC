@@ -23,7 +23,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Property.Methods
         {
             Get = Snippet.From("value;"),
-            Set = new Property.Setter { Mode = Property.Mode.ReadOnly },
+            Set = new Property.Methods.Setter { Mode = Property.Methods.Setter.Modes.ReadOnly },
         };
 
         // Act

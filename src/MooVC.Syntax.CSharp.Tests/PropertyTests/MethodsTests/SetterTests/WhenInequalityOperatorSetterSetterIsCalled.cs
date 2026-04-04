@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests.SetterTests;
 
-public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
+public sealed class WhenInequalityOperatorSetterSetterIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsFalse()
     {
         // Arrange
-        Property.Methods? left = default!;
-        Property.Methods? right = default!;
+        Property.Methods.Setter? left = default!;
+        Property.Methods.Setter? right = default!;
 
         // Act
         bool result = left != right;
@@ -20,15 +20,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("alternative"),
-        };
+        var left = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        var right = new Property.Methods.Setter { Behaviour = Snippet.From("alternative") };
 
         // Act
         bool resultLeftRight = left != right;
@@ -43,16 +36,18 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Property.Methods
+        var left = new Property.Methods.Setter
         {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
+            Behaviour = Snippet.From("value"),
+            Mode = Property.Methods.Setter.Modes.Init,
+            Scope = Scope.Private,
         };
 
-        var right = new Property.Methods
+        var right = new Property.Methods.Setter
         {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
+            Behaviour = Snippet.From("value"),
+            Mode = Property.Methods.Setter.Modes.Init,
+            Scope = Scope.Private,
         };
 
         // Act
@@ -68,11 +63,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsTrue()
     {
         // Arrange
-        Property.Methods? left = default!;
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
+        Property.Methods.Setter? left = default!;
+        var right = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
 
         // Act
         bool result = left != right;
@@ -85,12 +77,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods? right = default!;
+        var left = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        Property.Methods.Setter? right = default!;
 
         // Act
         bool result = left != right;
@@ -103,12 +91,8 @@ public sealed class WhenInequalityOperatorMethodsMethodsIsCalled
     public async Task GivenSameReferenceThenReturnsFalse()
     {
         // Arrange
-        var first = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods second = first;
+        var first = new Property.Methods.Setter { Behaviour = Snippet.From("value") };
+        Property.Methods.Setter second = first;
 
         // Act
         bool result = first != second;

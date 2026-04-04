@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests;
+﻿namespace MooVC.Syntax.CSharp.PropertyTests.MethodsTests.SetterTests.ModesTests;
 
-public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
+public sealed class WhenEqualityOperatorModesModesIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Property.Methods? left = default!;
-        Property.Methods? right = default!;
+        Property.Methods.Setter.Modes? left = default;
+        Property.Methods.Setter.Modes? right = default;
 
         // Act
         bool result = left == right;
@@ -20,15 +20,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("alternative"),
-        };
+        Property.Methods.Setter.Modes left = Property.Methods.Setter.Modes.Set;
+        Property.Methods.Setter.Modes right = Property.Methods.Setter.Modes.Init;
 
         // Act
         bool resultLeftRight = left == right;
@@ -43,17 +36,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
-        };
-
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-            Set = new() { Behaviour = Snippet.From("value = input") },
-        };
+        Property.Methods.Setter.Modes left = Property.Methods.Setter.Modes.Init;
+        Property.Methods.Setter.Modes right = Property.Methods.Setter.Modes.Init;
 
         // Act
         bool resultLeftRight = left == right;
@@ -68,11 +52,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Property.Methods? left = default!;
-        var right = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
+        Property.Methods.Setter.Modes? left = default;
+        Property.Methods.Setter.Modes right = Property.Methods.Setter.Modes.Init;
 
         // Act
         bool result = left == right;
@@ -85,12 +66,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods? right = default!;
+        Property.Methods.Setter.Modes left = Property.Methods.Setter.Modes.Set;
+        Property.Methods.Setter.Modes? right = default;
 
         // Act
         bool result = left == right;
@@ -103,12 +80,8 @@ public sealed class WhenEqualityOperatorMethodsMethodsIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Property.Methods
-        {
-            Get = Snippet.From("value"),
-        };
-
-        Property.Methods second = first;
+        Property.Methods.Setter.Modes first = Property.Methods.Setter.Modes.ReadOnly;
+        Property.Methods.Setter.Modes second = first;
 
         // Act
         bool result = first == second;

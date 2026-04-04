@@ -30,7 +30,7 @@
             /// </summary>
             public static readonly Options Declaration = new Options
             {
-                Formatter = Formatter.Declaration,
+                Formatter = Formatters.Declaration,
                 Naming = Variable.Options.Pascal,
                 Snippets = Snippet.Options.Default,
             };
@@ -40,7 +40,7 @@
             /// </summary>
             /// <value>The formatter.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsFormatterRequired), ErrorMessageResourceType = typeof(Argument_Resources))]
-            public Formatter Formatter { get; internal set; } = Formatter.Call;
+            public Formatters Formatter { get; internal set; } = Formatters.Call;
 
             /// <summary>
             /// Gets the naming on the Options.
@@ -61,9 +61,9 @@
             /// </summary>
             /// <param name="options">The source options.</param>
             /// <returns>The formatter options.</returns>
-            public static implicit operator Formatter(Options options)
+            public static implicit operator Formatters(Options options)
             {
-                Guard.Against.Conversion<Options, Formatter>(options);
+                Guard.Against.Conversion<Options, Formatters>(options);
 
                 return options.Formatter;
             }

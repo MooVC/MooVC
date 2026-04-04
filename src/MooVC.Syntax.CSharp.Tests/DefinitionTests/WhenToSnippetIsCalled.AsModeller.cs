@@ -82,7 +82,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .Named("Name")
                         .OfType(typeof(string))
                         .WithBehaviours(behaviors => behaviors
-                            .WithSet(set => set.WithMode(Property.Mode.Set))))
+                            .WithSet(set => set.WithMode(Property.Methods.Setter.Modes.Set))))
                     .WithScope(Scope.Internal));
 
             // Act

@@ -11,7 +11,7 @@ public sealed class WhenConstructorIsCalled
         // Assert
         _ = await Assert.That(subject.Get).IsEqualTo(Snippet.Empty);
         _ = await Assert.That(subject.IsDefault).IsTrue();
-        _ = await Assert.That(subject.Set).IsEqualTo(Property.Setter.Default);
+        _ = await Assert.That(subject.Set).IsEqualTo(Property.Methods.Setter.Default);
     }
 
     [Test]
@@ -19,7 +19,7 @@ public sealed class WhenConstructorIsCalled
     {
         // Arrange
         var get = Snippet.From("value");
-        var set = new Property.Setter { Behaviour = Snippet.From("value = input"), Mode = Property.Mode.Set };
+        var set = new Property.Methods.Setter { Behaviour = Snippet.From("value = input"), Mode = Property.Methods.Setter.Modes.Set };
 
         // Act
         var subject = new Property.Methods

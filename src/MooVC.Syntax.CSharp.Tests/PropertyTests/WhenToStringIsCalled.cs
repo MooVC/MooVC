@@ -9,7 +9,7 @@ public sealed class WhenToStringIsCalled
         var behaviours = new Property.Methods
         {
             Get = Snippet.From("value;"),
-            Set = new Property.Setter { Behaviour = Snippet.From("_value = value;") },
+            Set = new() { Behaviour = Snippet.From("_value = value;") },
         };
 
         Property subject = PropertyTestsData.Create(behaviours: behaviours);

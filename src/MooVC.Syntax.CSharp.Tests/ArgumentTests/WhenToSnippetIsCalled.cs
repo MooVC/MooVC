@@ -21,7 +21,7 @@ public sealed class WhenToSnippetIsCalled
         var options = new Argument.Options
         {
             Naming = Variable.Options.Camel,
-            Formatter = Argument.Formatter.Call,
+            Formatter = Argument.Options.Formatters.Call,
         };
 
         // Act
@@ -44,7 +44,7 @@ public sealed class WhenToSnippetIsCalled
         var options = new Argument.Options
         {
             Naming = Variable.Options.Camel,
-            Formatter = Argument.Formatter.Call,
+            Formatter = Argument.Options.Formatters.Call,
         };
 
         // Act

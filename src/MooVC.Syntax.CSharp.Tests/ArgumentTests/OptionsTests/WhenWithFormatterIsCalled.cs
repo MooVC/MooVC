@@ -7,7 +7,7 @@ public sealed class WhenWithFormatterIsCalled
     {
         // Arrange
         var options = new Argument.Options();
-        Argument.Formatter value = Argument.Formatter.Declaration;
+        Argument.Options.Formatters value = Argument.Options.Formatters.Declaration;
 
         // Act
         Argument.Options result = options.WithFormatter(value);

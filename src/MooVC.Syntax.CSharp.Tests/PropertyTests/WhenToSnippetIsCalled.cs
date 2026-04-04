@@ -9,7 +9,7 @@ public sealed class WhenToSnippetIsCalled
         var behaviours = new Property.Methods
         {
             Get = Snippet.From("value;"),
-            Set = new Property.Setter { Mode = Property.Mode.ReadOnly },
+            Set = new Property.Methods.Setter { Mode = Property.Methods.Setter.Modes.ReadOnly },
         };
 
         Property subject = PropertyTestsData.Create(behaviours: behaviours);

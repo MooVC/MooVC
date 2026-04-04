@@ -8,7 +8,7 @@ public sealed class WhenWithGetIsCalled
         // Arrange
         var original = new Property.Methods
         {
-            Set = new Property.Setter { Behaviour = Snippet.From("value = input") },
+            Set = new() { Behaviour = Snippet.From("value = input") },
         };
 
         var get = Snippet.From("result");

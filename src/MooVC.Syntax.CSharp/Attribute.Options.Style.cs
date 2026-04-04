@@ -1,0 +1,59 @@
+﻿namespace MooVC.Syntax.CSharp
+{
+    using Fluentify;
+    using Monify;
+
+    /// <summary>
+    /// Represents a C# syntax element parameter.
+    /// </summary>
+    public partial class Attribute
+    {
+        /// <summary>
+        /// Defines options for the Attribute C# syntax element.
+        /// </summary>
+        public partial class Options
+        {
+            /// <summary>
+            /// Defines options for the Style C# syntax element.
+            /// </summary>
+            [Monify(Type = typeof(string))]
+            [SkipAutoInitialization]
+            public sealed partial class Style
+            {
+                /// <summary>
+                /// Represents the inline style option.
+                /// </summary>
+                public static readonly Style Inline = "Inline";
+
+                /// <summary>
+                /// Represents a style that separates elements or content according to a predefined rule.
+                /// </summary>
+                public static readonly Style Separate = "Separate";
+
+                private Style(string value)
+                {
+                    _value = value;
+                }
+
+                /// <summary>
+                /// Gets a value indicating whether the current instance represents inline content.
+                /// </summary>
+                public bool IsInline => this == Inline;
+
+                /// <summary>
+                /// Gets a value indicating whether the current instance represents a separate value.
+                /// </summary>
+                public bool IsSeparate => this == Separate;
+
+                /// <summary>
+                /// Returns a string that represents the current object.
+                /// </summary>
+                /// <returns>A string representation of the current object.</returns>
+                public override string ToString()
+                {
+                    return _value;
+                }
+            }
+        }
+    }
+}
