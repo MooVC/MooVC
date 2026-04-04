@@ -59,7 +59,7 @@
             /// </summary>
             /// <value>The types.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Default;
+            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts Parameter options into Attribute options.
@@ -72,7 +72,7 @@
 
                 return options.Attributes
                     .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Types), _ => _);
+                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Symbols), _ => _);
             }
 
             /// <summary>
@@ -96,7 +96,7 @@
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
 
-                return options.Types;
+                return options.Symbols;
             }
 
             /// <summary>

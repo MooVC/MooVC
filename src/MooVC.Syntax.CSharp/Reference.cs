@@ -148,7 +148,7 @@
             var clauses = Declaration.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
-            var parameters = Parameters.ToSnippet(_options.WithSnippets(options.Snippets).WithTypes(options.Symbols));
+            var parameters = Parameters.ToSnippet(_options.WithSnippets(options.Snippets).WithSymbols(options.Symbols));
             string partial = IsPartial.Partial();
             string scope = Scope;
             string signature = GetSignature(extensibility, partial, name, scope);

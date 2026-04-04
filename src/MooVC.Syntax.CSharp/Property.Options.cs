@@ -92,7 +92,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Types.
             /// </summary>
             /// <value>The types.</value>
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Unspecified;
+            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts Property options into Attribute options.
@@ -105,7 +105,7 @@ namespace MooVC.Syntax.CSharp
 
                 return options.Attributes
                     .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Types), _ => _);
+                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Symbols), _ => _);
             }
 
             /// <summary>
@@ -141,7 +141,7 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
 
-                return options.Types;
+                return options.Symbols;
             }
         }
     }

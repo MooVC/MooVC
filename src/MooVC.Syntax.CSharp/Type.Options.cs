@@ -126,7 +126,7 @@
 
                 return options.Methods
                     .ForkOn(methods => methods.Snippets.IsUnspecified, methods => methods.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(methods => methods.Types.IsUnspecified, methods => methods.WithTypes(options.Symbols), _ => _);
+                    .ForkOn(methods => methods.Symbols.IsUnspecified, methods => methods.WithSymbols(options.Symbols), _ => _);
             }
 
             /// <summary>
@@ -140,7 +140,7 @@
 
                 return options.Properties
                     .ForkOn(properties => properties.Snippets.IsUnspecified, properties => properties.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(properties => properties.Types.IsUnspecified, properties => properties.WithTypes(options.Symbols), _ => _);
+                    .ForkOn(properties => properties.Symbols.IsUnspecified, properties => properties.WithSymbols(options.Symbols), _ => _);
             }
 
             /// <summary>
