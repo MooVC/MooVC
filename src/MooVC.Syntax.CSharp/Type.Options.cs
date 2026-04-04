@@ -85,7 +85,7 @@
 
                 return options.Attributes
                     .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Symbols), _ => _);
+                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Symbols), _ => _);
             }
 
             /// <summary>

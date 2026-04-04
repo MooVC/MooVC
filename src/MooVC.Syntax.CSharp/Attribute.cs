@@ -119,7 +119,7 @@
 
             string name = Name.ToSnippet(options);
 
-            if (options.Types.Qualification == Symbol.Qualification.Minimum && name.EndsWith(nameof(Attribute)))
+            if (options.Symbols.Qualification == Symbol.Qualification.Minimum && name.EndsWith(nameof(Attribute)))
             {
                 name = name.Substring(0, name.Length - SuffixLength);
             }

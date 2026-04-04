@@ -104,8 +104,8 @@
             /// Gets the types on the Options.
             /// </summary>
             /// <value>The types.</value>
-            [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Types { get; internal set; } = Symbol.Options.Unspecified;
+            [Required(ErrorMessageResourceName = nameof(OptionsSymbolsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts parameter options into snippet options.
@@ -143,7 +143,7 @@
             {
                 Guard.Against.Conversion<Options, Symbol.Options>(options);
 
-                return options.Types;
+                return options.Symbols;
             }
         }
     }

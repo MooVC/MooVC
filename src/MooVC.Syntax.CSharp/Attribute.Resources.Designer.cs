@@ -81,9 +81,9 @@ namespace MooVC.Syntax.CSharp {
         /// <summary>
         ///   Looks up a localized string similar to The Type options must be provided..
         /// </summary>
-        internal static string OptionsTypesRequired {
+        internal static string OptionsSymbolsRequired {
             get {
-                return ResourceManager.GetString("OptionsTypesRequired", resourceCulture);
+                return ResourceManager.GetString("OptionsSymbolsRequired", resourceCulture);
             }
         }
         

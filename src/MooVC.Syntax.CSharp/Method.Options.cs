@@ -103,7 +103,7 @@ namespace MooVC.Syntax.CSharp
 
                 return options.Attributes
                     .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Types.IsUnspecified, attributes => attributes.WithTypes(options.Types), _ => _);
+                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Types), _ => _);
             }
 
             public static implicit operator Parameter.Options(Options options)

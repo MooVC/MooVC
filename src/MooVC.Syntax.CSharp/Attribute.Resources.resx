@@ -123,7 +123,7 @@
   <data name="OptionsSnippetsRequired" xml:space="preserve">
     <value>The Snippet options must be provided.</value>
   </data>
-  <data name="OptionsTypesRequired" xml:space="preserve">
+  <data name="OptionsSymbolsRequired" xml:space="preserve">
     <value>The Type options must be provided.</value>
   </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
