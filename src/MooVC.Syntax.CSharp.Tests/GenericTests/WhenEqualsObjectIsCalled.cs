@@ -39,7 +39,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenNonArgumentThenReturnsFalse()
     {
         // Arrange
-        object other = new();
+        var other = new object();
         Generic subject = Create();
 
         // Act

@@ -8,7 +8,7 @@ public sealed class WhenEqualsBoundariesIsCalled
         // Arrange
         var left = new Snippet.Options.Blocks.Boundaries();
 
-        Snippet.Options.Blocks.Boundaries right = new()
+        var right = new Snippet.Options.Blocks.Boundaries()
             .WithClosing("]");
 
         // Act

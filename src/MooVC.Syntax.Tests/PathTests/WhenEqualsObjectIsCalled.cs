@@ -48,7 +48,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         var subject = new Path(PathTestsData.DefaultPath);
-        object other = new();
+        var other = new object();
 
         // Act
         bool result = subject.Equals(other);

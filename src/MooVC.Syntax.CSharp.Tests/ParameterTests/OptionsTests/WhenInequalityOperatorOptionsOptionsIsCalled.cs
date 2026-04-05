@@ -22,7 +22,7 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
         // Arrange
         var left = new Parameter.Options();
 
-        Parameter.Options right = new()
+        var right = new Parameter.Options()
             .WithNaming(Variable.Options.Pascal);
 
         // Act

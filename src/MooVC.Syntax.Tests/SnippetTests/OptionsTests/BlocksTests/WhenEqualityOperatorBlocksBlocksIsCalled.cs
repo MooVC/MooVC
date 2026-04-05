@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorBlocksBlocksIsCalled
         // Arrange
         var left = new Snippet.Options.Blocks();
 
-        Snippet.Options.Blocks right = new()
+        var right = new Snippet.Options.Blocks()
             .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act

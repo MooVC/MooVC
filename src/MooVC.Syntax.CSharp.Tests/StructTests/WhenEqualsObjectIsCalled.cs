@@ -34,7 +34,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenOtherTypeThenReturnsFalse()
     {
         // Arrange
-        object other = new();
+        var other = new object();
         Struct subject = StructTestsData.Create();
 
         // Act

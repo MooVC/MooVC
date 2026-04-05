@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         // Arrange
         var left = new Argument.Options();
 
-        Argument.Options right = new()
+        var right = new Argument.Options()
             .WithNaming(Variable.Options.Pascal);
 
         // Act

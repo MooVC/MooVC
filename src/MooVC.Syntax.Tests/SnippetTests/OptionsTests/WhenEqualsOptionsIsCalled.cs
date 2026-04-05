@@ -8,7 +8,7 @@ public sealed class WhenEqualsOptionsIsCalled
         // Arrange
         var left = new Snippet.Options();
 
-        Snippet.Options right = new()
+        var right = new Snippet.Options()
             .WithMaxLineLength((byte)(Snippet.Options.Default.MaxLineLength - 1));
 
         // Act

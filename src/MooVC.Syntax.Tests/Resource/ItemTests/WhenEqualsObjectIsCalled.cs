@@ -48,7 +48,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Item subject = ItemTestsData.Create();
-        object other = new();
+        var other = new object();
 
         // Act
         bool result = subject.Equals(other);
