@@ -59,7 +59,9 @@ public sealed class WhenToSnippetIsCalled
 
         const string expected = """
             public static readonly string Gamma;
+
             private static string Beta;
+
             public readonly string Alpha;
             """;
 

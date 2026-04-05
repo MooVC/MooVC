@@ -150,7 +150,7 @@
             }
 
             var attributes = Attributes.ToSnippet(options);
-            string signature = GetSignature();
+            string signature = GetSignature(options);
 
             if (!Default.IsEmpty)
             {
@@ -192,11 +192,11 @@
                 .Results;
         }
 
-        private string GetSignature()
+        private string GetSignature(Type.Options options)
         {
             var name = Name.ToSnippet(Variable.Options.Pascal);
             string scope = Scope;
-            string type = Type;
+            string type = Type.ToSnippet(options);
             string @static = IsStatic.Static();
             string @readonly = IsReadOnly.ReadOnly();
 

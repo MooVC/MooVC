@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.DefinitionTests;
 
 using System.ComponentModel;
+using Monify;
 using MooVC.Syntax;
 using static MooVC.Syntax.CSharp.Symbol;
 using Attribute = System.Attribute;
@@ -186,6 +187,97 @@ public sealed partial class WhenToSnippetIsCalled
                             .WithArguments((Name: string.Empty, Value: "\"The Pressure of the Tyre on the Wheel\"")))
                         .Named("Pressure")
                         .OfType((Name: "Pressure", Qualifier: "MooVC.Testing.Mechanics.Car"))));
+
+            // Act
+            var actual = content.ToSnippet(_options);
+
+            // Assert
+            _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
+        }
+
+        [Test]
+        public async Task GivenInstructionsWhenListThenAnnotatedRecordIsCreated()
+        {
+            // Arrange
+            const string expected = """
+            namespace MooVC.Testing.Mechanics.Car
+            {
+                [global::System.ComponentModel.DescriptionAttribute("Represents the Location of the Wheel on the Car")]
+                [global::Monify.MonifyAttribute<byte>]
+                public sealed partial record Location
+                {
+                    [global::System.ComponentModel.DescriptionAttribute("The Front Left Wheel")]
+                    public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontLeft = 0;
+
+                    [global::System.ComponentModel.DescriptionAttribute("The Front Right Wheel")]
+                    public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontRight = 1;
+
+                    [global::System.ComponentModel.DescriptionAttribute("The Rear Left Wheel")]
+                    public static readonly global::MooVC.Testing.Mechanics.Car.Location RearLeft = 2;
+
+                    [global::System.ComponentModel.DescriptionAttribute("The Rear Right Wheel")]
+                    public static readonly global::MooVC.Testing.Mechanics.Car.Location RearRight = 3;
+
+                    private Location(byte value)
+                    {
+                        _value = value;
+                    }
+
+                    public bool IsFrontLeft => this == FrontLeft;
+
+                    public bool IsFrontRight => this == FrontRight;
+
+                    public bool IsRearLeft => this == RearLeft;
+
+                    public bool IsRearRight => this == RearRight;
+                }
+            }
+            """;
+
+            var members = new (string Name, string Description, int Index)[]
+            {
+                (Name: "FrontLeft", Description: "The Front Left Wheel", Index: 0),
+                (Name: "FrontRight", Description: "The Front Right Wheel", Index: 1),
+                (Name: "RearLeft", Description: "The Rear Left Wheel", Index: 2),
+                (Name: "RearRight", Description: "The Rear Right Wheel", Index: 3),
+            };
+
+            Definition content = Builder
+                .New<Definition>()
+                .For<Record>(record => record
+                    .AttributedWith(description => description
+                        .Named(typeof(DescriptionAttribute))
+                        .WithArguments((Name: string.Empty, Value: "\"Represents the Location of the Wheel on the Car\"")))
+                    .AttributedWith(monify => monify.Named(monify => monify
+                        .From(typeof(MonifyAttribute))
+                        .Named(nameof(MonifyAttribute))
+                        .WithArguments(type => type.Named(typeof(byte)))))
+                    .Named("Location")
+                    .Enumerate(
+                        (member, record) => record.WithFields(field => field
+                            .AttributedWith(description => description
+                                .Named(typeof(DescriptionAttribute))
+                                .WithArguments((Name: string.Empty, Value: $"\"{member.Description}\"")))
+                            .IsReadOnly(true)
+                            .IsStatic(true)
+                            .Named(member.Name)
+                            .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car"))
+                            .WithDefault(member.Index.ToString())
+                            .WithScope(Scope.Public)),
+                        members)
+                    .Enumerate(
+                        (member, record) => record.WithProperties(property => property
+                            .WithBehaviours(methods => methods
+                                .WithGet($"this == {member.Name};")
+                                .WithSet(setter => setter.WithMode(Property.Methods.Setter.Modes.ReadOnly)))
+                            .Named($"Is{member.Name}")
+                            .OfType(typeof(bool))),
+                        members)
+                    .WithConstructors(constructor => constructor
+                        .WithBody("_value = value;")
+                        .WithParameters((Name: "Value", Type: typeof(byte)))
+                        .WithScope(Scope.Private)))
+               .From("MooVC.Testing.Mechanics.Car");
 
             // Act
             var actual = content.ToSnippet(_options);

@@ -11,8 +11,8 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Validation;
-    using static MooVC.Syntax.Snippet.Options;
     using static MooVC.Syntax.Snippet_Resources;
+    using static MooVC.Syntax.Snippet.Options;
 
     /// <summary>
     /// Represents a syntax element snippet.

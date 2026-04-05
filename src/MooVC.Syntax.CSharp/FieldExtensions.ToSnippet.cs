@@ -21,14 +21,15 @@
                 return Snippet.Empty;
             }
 
-            return fields
+            Snippet[] content = fields
                 .OrderByDescending(field => field.IsStatic)
                 .ThenByDescending(field => field.IsReadOnly)
                 .ThenByDescending(field => field.Scope)
                 .ThenBy(field => field.Name)
                 .Select(field => field.ToSnippet(options))
-                .ToImmutableArray()
-                .Stack(options);
+                .ToArray();
+
+            return Snippet.Blank.Combine(options, content);
         }
     }
 }
