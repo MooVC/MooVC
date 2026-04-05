@@ -12,8 +12,8 @@ public sealed class WhenToStringIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Class,
-            Base = new Symbol { Name = BaseName },
-            Interfaces = [new Implementation(new Declaration { Name = InterfaceName })],
+            Base = new() { Name = BaseName },
+            Interfaces = [new(new() { Name = InterfaceName })],
             New = New.Required,
         };
 
@@ -33,7 +33,7 @@ public sealed class WhenToStringIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = BaseName },
+            Base = new() { Name = BaseName },
             Interfaces =
             [
                 new Implementation(new Declaration { Name = InterfaceName }),

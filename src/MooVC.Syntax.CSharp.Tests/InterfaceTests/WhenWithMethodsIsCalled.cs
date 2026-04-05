@@ -6,7 +6,7 @@ public sealed class WhenWithMethodsIsCalled
     public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var method = new Method { Name = new Declaration { Name = "Execute" } };
+        var method = new Method { Name = new() { Name = "Execute" } };
         Interface original = InterfaceTestsData.Create();
 
         // Act

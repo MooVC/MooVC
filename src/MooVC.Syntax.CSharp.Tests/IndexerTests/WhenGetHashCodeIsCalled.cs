@@ -32,7 +32,7 @@ public sealed class WhenGetHashCodeIsCalled
             result: new Result
             {
                 Mode = Result.Modality.Synchronous,
-                Type = new Symbol { Name = "int" },
+                Type = new() { Name = "int" },
             });
 
         // Act

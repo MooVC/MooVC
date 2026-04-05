@@ -7,7 +7,7 @@ public sealed class WhenWithGenericsIsCalled
     {
         // Arrange
         Declaration original = DeclarationTestsData.Create(parameterNames: "T");
-        Generic[] additional = [new Generic { Name = new Name("U") }];
+        Generic[] additional = [new() { Name = new("U") }];
 
         // Act
         Declaration result = original.WithGenerics(additional);

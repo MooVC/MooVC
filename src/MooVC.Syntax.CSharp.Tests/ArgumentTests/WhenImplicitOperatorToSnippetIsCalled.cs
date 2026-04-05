@@ -11,7 +11,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Argument
         {
-            Name = new Identifier(Name),
+            Name = new(Name),
             Value = Snippet.From(Content),
         };
 

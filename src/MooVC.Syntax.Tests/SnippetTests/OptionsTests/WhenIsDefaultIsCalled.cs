@@ -19,7 +19,7 @@ public sealed class WhenIsDefaultIsCalled
     public async Task GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = new()
             .WithWhitespace("\t");
 
         // Act

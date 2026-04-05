@@ -10,14 +10,14 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Directive
         {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         var second = new Directive
         {
-            Alias = new Name(Alias + "Alternative"),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias + "Alternative"),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act
@@ -34,14 +34,14 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Directive
         {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         var second = new Directive
         {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act

@@ -11,11 +11,11 @@ public sealed class WhenNamedIsCalled
     public async Task GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
-        var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var constraint = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
 
         var original = new Generic
         {
-            Name = new Name(DefaultName),
+            Name = new(DefaultName),
             Constraints = [constraint],
         };
 

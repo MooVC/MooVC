@@ -44,15 +44,15 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Indexer publicVirtual = IndexerTestsData.Create(
             parameter: new Parameter { Name = "Beta", Type = typeof(Version) },
-            result: new Result { Type = new Symbol { Name = "int" } });
+            result: new Result { Type = new() { Name = "int" } });
 
         Indexer publicStatic = IndexerTestsData.Create(
             parameter: new Parameter { Name = "Alpha", Type = typeof(Version) },
-            result: new Result { Type = new Symbol { Name = "string" } });
+            result: new Result { Type = new() { Name = "string" } });
 
         Indexer protectedVirtual = IndexerTestsData.Create(
             parameter: new Parameter { Name = "Gamma", Type = typeof(Version) },
-            result: new Result { Type = new Symbol { Name = "int" } },
+            result: new Result { Type = new() { Name = "int" } },
             scope: Scope.Protected);
 
         publicVirtual.Extensibility = Extensibility.Virtual;

@@ -31,13 +31,13 @@ public sealed class WhenConstructorIsCalled
     public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
+        var attribute = new Attribute { Name = new() { Name = AttributeName } };
         var constructor = new Constructor();
-        var @event = new Event { Name = new Name("Created") };
-        var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
-        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
-        var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
+        var @event = new Event { Name = new("Created") };
+        var field = new Field { Name = new("_value"), Type = typeof(int) };
+        var indexer = new Indexer { Parameter = new() { Name = "Item" } };
+        var method = new Method { Name = new() { Name = "Execute" } };
+        var property = new Property { Name = new("Value"), Type = typeof(string) };
 
         // Act
         Record subject = RecordTestsData.Create(
@@ -50,8 +50,8 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = RecordTestsData.DefaultName },
-            operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
-            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }],
+            operators: new Operators { Conversions = [new() { Target = Symbol.Undefined }] },
+            parameters: [new Parameter { Name = new("input"), Type = typeof(string) }],
             properties: [property],
             scope: Scope.Internal);
 

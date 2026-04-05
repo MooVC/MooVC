@@ -6,8 +6,8 @@ public sealed class WhenWithEventsIsCalled
     public async Task GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var created = new Event { Name = new Name("Created") };
-        var updated = new Event { Name = new Name("Updated") };
+        var created = new Event { Name = new("Created") };
+        var updated = new Event { Name = new("Updated") };
         Record original = RecordTestsData.Create(events: [created]);
 
         // Act

@@ -11,8 +11,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol { Name = "Invalid Handler Name" },
-            Name = new Name(EventTestsData.DefaultName),
+            Handler = new() { Name = "Invalid Handler Name" },
+            Name = new(EventTestsData.DefaultName),
         };
 
         var context = new ValidationContext(subject);
@@ -50,7 +50,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol { Name = EventTestsData.DefaultHandler },
+            Handler = new() { Name = EventTestsData.DefaultHandler },
         };
 
         var context = new ValidationContext(subject);

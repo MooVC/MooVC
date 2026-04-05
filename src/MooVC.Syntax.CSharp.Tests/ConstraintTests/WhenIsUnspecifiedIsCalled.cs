@@ -8,7 +8,7 @@ public sealed class WhenIsUnspecifiedIsCalled
         // Arrange
         var subject = new Constraint
         {
-            Base = new Symbol { Name = "Result" },
+            Base = new() { Name = "Result" },
         };
 
         // Act

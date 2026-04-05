@@ -10,7 +10,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Generic
         {
-            Name = new Name(Name),
+            Name = new(Name),
         };
 
         // Act

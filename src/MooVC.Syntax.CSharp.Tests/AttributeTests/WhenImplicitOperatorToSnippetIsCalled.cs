@@ -10,8 +10,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         // Arrange
         var subject = new Attribute
         {
-            Name = new Symbol
-            {
+            Name = new() {
                 Name = Name,
             },
         };

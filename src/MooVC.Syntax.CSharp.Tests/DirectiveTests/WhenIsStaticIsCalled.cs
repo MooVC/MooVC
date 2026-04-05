@@ -8,7 +8,7 @@ public sealed class WhenIsStaticIsCalled
         // Arrange
         var original = new Directive
         {
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act

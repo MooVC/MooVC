@@ -10,7 +10,7 @@ public sealed class WhenAttributedWithIsCalled
         [
             new Attribute
             {
-                Name = new Symbol { Name = "Existing" },
+                Name = new() { Name = "Existing" },
             },
         ];
 
@@ -18,7 +18,7 @@ public sealed class WhenAttributedWithIsCalled
         [
             new Attribute
             {
-                Name = new Symbol { Name = "Additional" },
+                Name = new() { Name = "Additional" },
             },
         ];
 

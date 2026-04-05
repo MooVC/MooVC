@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var left = new Parameter.Options();
 
-        Parameter.Options right = new Parameter.Options()
+        Parameter.Options right = new()
             .WithNaming(Variable.Options.Pascal);
 
         // Act

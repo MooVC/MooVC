@@ -109,9 +109,9 @@ public sealed class WhenEqualsArgumentIsCalled
     {
         return new Generic
         {
-            Name = new Name(name),
+            Name = new(name),
             Constraints = constraint is null
-                ? [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }]
+                ? [new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) }]
                 : [constraint],
         };
     }

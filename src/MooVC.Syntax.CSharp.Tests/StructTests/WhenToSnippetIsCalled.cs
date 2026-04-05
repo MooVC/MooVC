@@ -44,8 +44,7 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Struct
         {
             Behavior = Struct.Kind.ReadOnly,
-            Declaration = new Declaration
-            {
+            Declaration = new() {
                 Name = StructName,
                 Generics =
                 [
@@ -54,7 +53,7 @@ public sealed class WhenToSnippetIsCalled
             },
             Parameters =
             [
-                new Parameter { Name = new Identifier(ParameterName), Type = typeof(int) },
+                new Parameter { Name = new(ParameterName), Type = typeof(int) },
             ],
         };
 

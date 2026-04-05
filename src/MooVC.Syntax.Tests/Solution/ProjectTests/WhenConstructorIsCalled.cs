@@ -30,8 +30,8 @@ public sealed class WhenConstructorIsCalled
         var subject = new Project
         {
             Id = ProjectTestsData.DefaultId,
-            DisplayName = new Project.Name(ProjectTestsData.DefaultName),
-            Path = new Project.RelativePath(ProjectTestsData.DefaultPath),
+            DisplayName = new(ProjectTestsData.DefaultName),
+            Path = new(ProjectTestsData.DefaultPath),
             Type = Snippet.From(ProjectTestsData.DefaultType),
             Builds = [build],
             Platforms = [platform],

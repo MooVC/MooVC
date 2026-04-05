@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Snippet.Options();
 
-        Snippet.Options second = new Snippet.Options()
+        Snippet.Options second = new()
             .WithWhitespace("\t");
 
         // Act

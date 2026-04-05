@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
-            Arguments = [new Symbol { Name = "Invalid Name" }],
+            Arguments = [new() { Name = "Invalid Name" }],
             Name = Name,
         };
 
@@ -60,7 +60,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var symbol = new Symbol
         {
-            Arguments = [new Symbol { Name = "Test" }],
+            Arguments = [new() { Name = "Test" }],
         };
 
         var context = new ValidationContext(symbol);
@@ -122,7 +122,7 @@ public sealed class WhenValidateIsCalled
         var symbol = new Symbol
         {
             Name = Name,
-            Arguments = [new Symbol { Name = ArgumentName }],
+            Arguments = [new() { Name = ArgumentName }],
         };
 
         var context = new ValidationContext(symbol);

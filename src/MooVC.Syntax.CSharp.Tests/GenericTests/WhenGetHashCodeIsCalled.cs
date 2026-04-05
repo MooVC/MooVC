@@ -40,8 +40,8 @@ public sealed class WhenGetHashCodeIsCalled
     {
         return new Generic
         {
-            Name = new Name(name),
-            Constraints = [new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) }],
+            Name = new(name),
+            Constraints = [new() { Base = new(SymbolTestsData.CreateWithArgumentNames()) }],
         };
     }
 }

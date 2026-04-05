@@ -11,7 +11,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol { Name = Handler },
+            Handler = new() { Name = Handler },
             Name = Name,
         };
 

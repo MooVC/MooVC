@@ -6,7 +6,7 @@ public sealed class WhenWithParametersIsCalled
     public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var parameter = new Parameter { Name = new Variable("input"), Type = typeof(int) };
+        var parameter = new Parameter { Name = new("input"), Type = typeof(int) };
         Struct original = StructTestsData.Create();
 
         // Act

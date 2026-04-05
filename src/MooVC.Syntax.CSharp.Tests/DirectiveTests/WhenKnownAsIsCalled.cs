@@ -11,8 +11,8 @@ public sealed class WhenKnownAsIsCalled
         // Arrange
         var original = new Directive
         {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act

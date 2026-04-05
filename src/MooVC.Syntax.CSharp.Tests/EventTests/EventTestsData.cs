@@ -13,7 +13,7 @@ internal static class EventTestsData
     {
         var subject = new Event
         {
-            Handler = new Symbol { Name = handler },
+            Handler = new() { Name = handler },
             Name = name,
         };
 

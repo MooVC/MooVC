@@ -53,7 +53,7 @@ public sealed class WhenEqualsMethodIsCalled
         Method target = MethodTestsData.Create(result: new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = "bool" },
+            Type = new() { Name = "bool" },
         });
 
         // Act

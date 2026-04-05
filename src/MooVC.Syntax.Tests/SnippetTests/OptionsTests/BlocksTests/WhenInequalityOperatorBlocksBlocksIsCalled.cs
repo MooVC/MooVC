@@ -22,7 +22,7 @@ public sealed class WhenInequalityOperatorBlocksBlocksIsCalled
         // Arrange
         var left = new Snippet.Options.Blocks();
 
-        Snippet.Options.Blocks right = new Snippet.Options.Blocks()
+        Snippet.Options.Blocks right = new()
             .WithLayout(Snippet.Options.Blocks.Layouts.KAndR);
 
         // Act

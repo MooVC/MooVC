@@ -27,7 +27,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Identifier(MultiWord);
 
-        Options options = new Options()
+        Options options = new()
             .WithCasing(Casing.Camel);
 
         // Act
@@ -43,7 +43,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Identifier(MultiWord);
 
-        Options options = new Options()
+        Options options = new()
             .WithCasing(Casing.Kebab);
 
         // Act
@@ -59,7 +59,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Identifier(Mixed);
 
-        Options options = new Options()
+        Options options = new()
             .WithCasing(Casing.Pascal);
 
         // Act
@@ -75,7 +75,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Identifier(MultiWord);
 
-        Options options = new Options()
+        Options options = new()
             .WithCasing(Casing.Snake);
 
         // Act

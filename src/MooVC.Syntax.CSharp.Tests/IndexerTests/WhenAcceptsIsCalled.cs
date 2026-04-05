@@ -13,7 +13,7 @@ public sealed class WhenAcceptsIsCalled
         var parameter = new Parameter
         {
             Name = ParameterName,
-            Type = new Symbol { Name = IndexerTestsData.DefaultParameterType },
+            Type = new() { Name = IndexerTestsData.DefaultParameterType },
         };
 
         // Act

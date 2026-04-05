@@ -38,8 +38,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Event
         {
-            Handler = new Symbol { Name = Handler },
-            Name = new Name(Name),
+            Handler = new() { Name = Handler },
+            Name = new(Name),
         };
 
         // Act

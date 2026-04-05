@@ -28,7 +28,7 @@ internal static class ConstructorTestsData
     {
         return new Class
         {
-            Declaration = new Declaration { Name = name ?? string.Empty },
+            Declaration = new() { Name = name ?? string.Empty },
         };
     }
 }

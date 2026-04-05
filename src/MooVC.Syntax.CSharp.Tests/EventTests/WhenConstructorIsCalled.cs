@@ -34,8 +34,8 @@ public sealed class WhenConstructorIsCalled
         var subject = new Event
         {
             Behaviours = behaviours,
-            Handler = new Symbol { Name = Handler },
-            Name = new Name(Name),
+            Handler = new() { Name = Handler },
+            Name = new(Name),
             Scope = Scope.Private,
         };
 

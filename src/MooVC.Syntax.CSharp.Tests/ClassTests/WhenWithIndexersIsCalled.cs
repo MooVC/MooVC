@@ -8,8 +8,8 @@ public sealed class WhenWithIndexersIsCalled
     public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
-        Indexer[] existing = [new Indexer { Parameter = new Parameter { Name = "Item" } }];
-        Indexer[] additional = [new Indexer { Parameter = new Parameter { Name = "Entry" } }];
+        Indexer[] existing = [new() { Parameter = new() { Name = "Item" } }];
+        Indexer[] additional = [new() { Parameter = new() { Name = "Entry" } }];
         Class original = ClassTestsData.Create(indexers: existing.ToImmutableArray());
 
         // Act

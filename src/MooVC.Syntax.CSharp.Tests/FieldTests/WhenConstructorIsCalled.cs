@@ -33,7 +33,7 @@ public sealed class WhenConstructorIsCalled
             Default = @default,
             IsReadOnly = false,
             IsStatic = true,
-            Name = new Identifier(FieldTestsData.DefaultName),
+            Name = new(FieldTestsData.DefaultName),
             Scope = Scope.Internal,
             Type = type,
         };

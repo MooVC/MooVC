@@ -17,12 +17,12 @@ internal static class IndexerTestsData
             Parameter = parameter ?? new Parameter
             {
                 Name = DefaultParameterName,
-                Type = new Symbol { Name = DefaultParameterType },
+                Type = new() { Name = DefaultParameterType },
             },
             Result = result ?? new Result
             {
                 Mode = Result.Modality.Synchronous,
-                Type = new Symbol { Name = DefaultResultType },
+                Type = new() { Name = DefaultResultType },
             },
         };
 

@@ -33,7 +33,7 @@ public sealed class WhenValidateIsCalled
             {
                 Default = Snippet.From($"first{Environment.NewLine}second"),
                 Name = IndexerTestsData.DefaultParameterName,
-                Type = new Symbol { Name = IndexerTestsData.DefaultParameterType },
+                Type = new() { Name = IndexerTestsData.DefaultParameterType },
             });
 
         var context = new ValidationContext(subject);

@@ -31,8 +31,8 @@ internal static class FolderTestsData
         return new Project
         {
             Id = Guid.Parse("F720AF0F-8F5D-4C77-A4D0-804B9E8BAE89"),
-            DisplayName = new Project.Name("ProjectName"),
-            Path = new Project.RelativePath("src/Project.csproj"),
+            DisplayName = new("ProjectName"),
+            Path = new("src/Project.csproj"),
             Type = Snippet.From("CSharp"),
         };
     }

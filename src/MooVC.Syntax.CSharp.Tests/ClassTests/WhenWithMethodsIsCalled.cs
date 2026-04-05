@@ -8,8 +8,8 @@ public sealed class WhenWithMethodsIsCalled
     public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Method[] existing = [new Method { Name = new Declaration { Name = "First" } }];
-        Method[] additional = [new Method { Name = new Declaration { Name = "Second" } }];
+        Method[] existing = [new() { Name = new() { Name = "First" } }];
+        Method[] additional = [new() { Name = new() { Name = "Second" } }];
         Class original = ClassTestsData.Create(methods: existing.ToImmutableArray());
 
         // Act

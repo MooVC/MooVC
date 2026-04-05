@@ -9,7 +9,7 @@ public sealed class WhenWithOperatorsIsCalled
         Class original = ClassTestsData.Create();
         var operators = new Operators
         {
-            Conversions = [new Conversion { Target = Symbol.Undefined }],
+            Conversions = [new() { Target = Symbol.Undefined }],
         };
 
         // Act

@@ -14,7 +14,7 @@ public sealed class WhenToStringIsCalled
         Parameter parameter = ParameterTestsData.Create(
             attributes: new Attribute
             {
-                Name = new Symbol { Name = AttributeName },
+                Name = new() { Name = AttributeName },
             },
             modifier: Parameter.Mode.Out);
 

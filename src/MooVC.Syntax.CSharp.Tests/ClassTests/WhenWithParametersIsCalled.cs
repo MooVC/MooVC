@@ -8,8 +8,8 @@ public sealed class WhenWithParametersIsCalled
     public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        Parameter[] existing = [new Parameter { Name = new Variable("value"), Type = typeof(int) }];
-        Parameter[] additional = [new Parameter { Name = new Variable("text"), Type = typeof(string) }];
+        Parameter[] existing = [new() { Name = new("value"), Type = typeof(int) }];
+        Parameter[] additional = [new() { Name = new("text"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(parameters: existing.ToImmutableArray());
 
         // Act

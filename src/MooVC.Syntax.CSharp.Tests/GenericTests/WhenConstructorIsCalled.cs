@@ -23,13 +23,13 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Base(SymbolTestsData.CreateWithArgumentNames()),
+            Base = new(SymbolTestsData.CreateWithArgumentNames()),
         };
 
         // Act
         var subject = new Generic
         {
-            Name = new Name(ArgumentName),
+            Name = new(ArgumentName),
             Constraints = [constraint],
         };
 

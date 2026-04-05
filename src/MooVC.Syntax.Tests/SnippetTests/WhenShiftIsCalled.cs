@@ -33,7 +33,7 @@ public sealed class WhenShiftIsCalled
         const string whitespace = "\t";
         var subject = new Snippet(_lines);
 
-        Snippet.Options options = new Snippet.Options()
+        Snippet.Options options = new()
             .WithWhitespace(whitespace);
 
         // Act

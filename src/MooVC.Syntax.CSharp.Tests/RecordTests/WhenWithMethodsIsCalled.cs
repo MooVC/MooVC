@@ -6,8 +6,8 @@ public sealed class WhenWithMethodsIsCalled
     public async Task GivenMethodsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var execute = new Method { Name = new Declaration { Name = "Execute" } };
-        var undo = new Method { Name = new Declaration { Name = "Undo" } };
+        var execute = new Method { Name = new() { Name = "Execute" } };
+        var undo = new Method { Name = new() { Name = "Undo" } };
         Record original = RecordTestsData.Create(methods: [execute]);
 
         // Act

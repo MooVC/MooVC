@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorBoundariesBoundariesIsCalled
         // Arrange
         var left = new Snippet.Options.Blocks.Boundaries();
 
-        Snippet.Options.Blocks.Boundaries right = new Snippet.Options.Blocks.Boundaries()
+        Snippet.Options.Blocks.Boundaries right = new()
             .WithClosing("]");
 
         // Act

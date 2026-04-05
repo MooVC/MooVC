@@ -31,8 +31,7 @@ public sealed class WhenToSnippetIsCalled
         var subject = new TestReference
         {
             IsUndefinedValue = false,
-            Declaration = new Declaration
-            {
+            Declaration = new() {
                 Name = TypeName,
                 Generics =
                 [
@@ -41,7 +40,7 @@ public sealed class WhenToSnippetIsCalled
             },
             Parameters =
             [
-                new Parameter { Name = new Identifier(ParameterName), Type = typeof(int) },
+                new Parameter { Name = new(ParameterName), Type = typeof(int) },
             ],
         };
 

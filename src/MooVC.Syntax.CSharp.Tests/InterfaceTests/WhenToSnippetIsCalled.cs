@@ -26,7 +26,7 @@ public sealed class WhenToSnippetIsCalled
 
         var valueB = new Property
         {
-            Behaviours = new Property.Methods { Set = new() { Mode = Property.Methods.Setter.Modes.ReadOnly } },
+            Behaviours = new() { Set = new() { Mode = Property.Methods.Setter.Modes.ReadOnly } },
             Name = "ValueB",
             Type = typeof(int),
         };
