@@ -28,7 +28,8 @@ public sealed class WhenConstructorIsCalled
         var behaviours = new Property.Methods
         {
             Get = Snippet.From(DefaultValue),
-            Set = new() {
+            Set = new()
+            {
                 Behaviour = Snippet.From("value = input"),
                 Mode = Property.Methods.Setter.Modes.Init,
                 Scope = Scope.Private,

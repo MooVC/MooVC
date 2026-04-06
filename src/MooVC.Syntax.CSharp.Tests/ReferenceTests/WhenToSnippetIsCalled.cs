@@ -31,7 +31,8 @@ public sealed class WhenToSnippetIsCalled
         var subject = new TestReference
         {
             IsUndefinedValue = false,
-            Declaration = new() {
+            Declaration = new()
+            {
                 Name = TypeName,
                 Generics =
                 [

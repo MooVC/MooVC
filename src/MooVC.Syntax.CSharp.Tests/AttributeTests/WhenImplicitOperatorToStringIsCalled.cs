@@ -10,7 +10,8 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         // Arrange
         var subject = new Attribute
         {
-            Name = new() {
+            Name = new()
+            {
                 Name = Name,
             },
         };

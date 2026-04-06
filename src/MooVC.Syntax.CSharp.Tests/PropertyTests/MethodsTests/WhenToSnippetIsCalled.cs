@@ -22,7 +22,8 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Property.Methods
         {
             Get = Snippet.From("value;"),
-            Set = new() {
+            Set = new()
+            {
                 Mode = Property.Methods.Setter.Modes.ReadOnly,
             },
         };
@@ -41,7 +42,8 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Property.Methods
         {
             Get = Snippet.From("value;"),
-            Set = new() {
+            Set = new()
+            {
                 Behaviour = Snippet.From("_value = value;"),
                 Scope = Scope.Private,
             },

@@ -44,7 +44,8 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Struct
         {
             Behavior = Struct.Kind.ReadOnly,
-            Declaration = new() {
+            Declaration = new()
+            {
                 Name = StructName,
                 Generics =
                 [

@@ -34,11 +34,13 @@ public sealed class WhenConstructorIsCalled
         var subject = new Indexer
         {
             Behaviours = behaviours,
-            Parameter = new() {
+            Parameter = new()
+            {
                 Name = ParameterName,
                 Type = new() { Name = ParameterType },
             },
-            Result = new() {
+            Result = new()
+            {
                 Mode = Result.Modality.Synchronous,
                 Type = new() { Name = ResultType },
             },
