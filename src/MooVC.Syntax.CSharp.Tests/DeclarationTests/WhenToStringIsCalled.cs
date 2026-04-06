@@ -31,8 +31,8 @@ public sealed class WhenToStringIsCalled
             Name = Name,
             Generics =
             [
-                new Generic { Name = new Name(FirstParameterName) },
-                new Generic { Name = new Name(SecondParameterName) },
+                new Generic { Name = new(FirstParameterName) },
+                new Generic { Name = new(SecondParameterName) },
             ],
         };
 

@@ -20,8 +20,8 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     public async Task GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "Left" } });
-        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "Right" } });
+        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new() { Name = "Left" } });
+        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new() { Name = "Right" } });
 
         // Act
         bool resultLeftRight = left == right;

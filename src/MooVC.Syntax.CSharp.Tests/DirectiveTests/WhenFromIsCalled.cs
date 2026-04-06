@@ -8,7 +8,7 @@ public sealed class WhenFromIsCalled
         // Arrange
         var original = new Directive
         {
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         var qualifier = new Qualifier(["MooVC", "Syntax", "CSharp"]);

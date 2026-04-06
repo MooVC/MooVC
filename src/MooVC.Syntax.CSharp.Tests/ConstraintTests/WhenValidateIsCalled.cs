@@ -17,7 +17,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol { Name = InvalidName },
+            Base = new Symbol() { Name = InvalidName },
         };
 
         var context = new ValidationContext(constraint);
@@ -39,7 +39,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new Implementation(new Declaration { Name = InvalidInterfaceName })],
+            Interfaces = [new(new() { Name = InvalidInterfaceName })],
         };
 
         var context = new ValidationContext(constraint);
@@ -61,8 +61,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol { Name = InvalidName },
-            Interfaces = [new Implementation(new Declaration { Name = InvalidInterfaceName })],
+            Base = new Symbol() { Name = InvalidName },
+            Interfaces = [new(new() { Name = InvalidInterfaceName })],
         };
 
         var context = new ValidationContext(constraint);
@@ -101,8 +101,8 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Nature = Nature.Struct,
-            Base = new Symbol { Name = BaseName },
-            Interfaces = [new Implementation(new Declaration { Name = InterfaceName })],
+            Base = new Symbol() { Name = BaseName },
+            Interfaces = [new(new() { Name = InterfaceName })],
             New = New.Required,
         };
 

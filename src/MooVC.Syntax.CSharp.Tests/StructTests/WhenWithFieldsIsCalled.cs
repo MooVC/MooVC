@@ -6,7 +6,7 @@ public sealed class WhenWithFieldsIsCalled
     public async Task GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var field = new Field { Name = new Variable("_value"), Type = typeof(int) };
+        var field = new Field { Name = new("_value"), Type = typeof(int) };
         Struct original = StructTestsData.Create();
 
         // Act

@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = Name,
-            Generics = [new Generic { Name = "Invalid Name" }],
+            Generics = [new() { Name = "Invalid Name" }],
         };
 
         var context = new ValidationContext(declaration);
@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var declaration = new Declaration
         {
-            Generics = [new Generic { Name = "T" }],
+            Generics = [new() { Name = "T" }],
         };
 
         var context = new ValidationContext(declaration);
@@ -75,7 +75,7 @@ public sealed class WhenValidateIsCalled
         var declaration = new Declaration
         {
             Name = Name,
-            Generics = [new Generic { Name = "T" }],
+            Generics = [new() { Name = "T" }],
         };
 
         var context = new ValidationContext(declaration);

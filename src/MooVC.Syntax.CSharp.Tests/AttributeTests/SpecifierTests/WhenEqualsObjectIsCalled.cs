@@ -34,7 +34,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenNonMatchingTypeThenReturnsFalse()
     {
         // Arrange
-        object value = new();
+        var value = new object();
         Attribute.Specifier subject = Attribute.Specifier.Class;
 
         // Act

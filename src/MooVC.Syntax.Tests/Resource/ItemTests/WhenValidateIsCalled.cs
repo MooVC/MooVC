@@ -32,7 +32,7 @@ public sealed class WhenValidateIsCalled
         var subject = new Item
         {
             CustomToolNamespace = Snippet.From($"Line1{Environment.NewLine}Line2"),
-            Location = new Path(ItemTestsData.DefaultLocationPath),
+            Location = new(ItemTestsData.DefaultLocationPath),
         };
 
         var context = new ValidationContext(subject);

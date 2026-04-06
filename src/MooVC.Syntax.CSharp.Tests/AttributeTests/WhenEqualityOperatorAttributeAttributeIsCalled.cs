@@ -21,10 +21,10 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
     {
         // Arrange
         Attribute left = AttributeTestsData.Create(
-            arguments: new Argument { Name = new Identifier("Left"), Value = Snippet.From("value") });
+            arguments: new Argument { Name = new("Left"), Value = Snippet.From("value") });
 
         Attribute right = AttributeTestsData.Create(
-            arguments: new Argument { Name = new Identifier("Right"), Value = Snippet.From("value") });
+            arguments: new Argument { Name = new("Right"), Value = Snippet.From("value") });
 
         // Act
         bool resultLeftRight = left == right;

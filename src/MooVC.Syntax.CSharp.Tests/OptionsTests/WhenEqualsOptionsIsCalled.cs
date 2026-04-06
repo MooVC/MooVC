@@ -7,7 +7,7 @@ public sealed class WhenEqualsOptionsIsCalled
     {
         // Arrange
         var subject = new Options();
-        Options other = new Options().WithNamespace(Qualifier.Options.Block);
+        var other = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act
         bool result = subject.Equals(other);

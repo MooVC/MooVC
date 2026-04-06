@@ -6,7 +6,7 @@ public sealed class WhenWithIndexersIsCalled
     public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
+        var indexer = new Indexer { Parameter = new() { Name = "Item" } };
         Struct original = StructTestsData.Create();
 
         // Act

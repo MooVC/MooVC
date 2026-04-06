@@ -28,7 +28,7 @@ public sealed class WhenConstructorIsCalled
         var behaviours = new Property.Methods
         {
             Get = Snippet.From(DefaultValue),
-            Set = new Property.Methods.Setter
+            Set = new()
             {
                 Behaviour = Snippet.From("value = input"),
                 Mode = Property.Methods.Setter.Modes.Init,
@@ -43,7 +43,7 @@ public sealed class WhenConstructorIsCalled
             Default = Snippet.From(DefaultValue),
             Name = PropertyName,
             Scope = Scope.Internal,
-            Type = new Symbol { Name = PropertyType },
+            Type = new() { Name = PropertyType },
         };
 
         // Assert

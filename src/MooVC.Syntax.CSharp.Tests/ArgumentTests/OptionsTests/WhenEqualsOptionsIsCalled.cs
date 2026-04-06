@@ -8,7 +8,7 @@ public sealed class WhenEqualsOptionsIsCalled
         // Arrange
         var left = new Argument.Options();
 
-        Argument.Options right = new Argument.Options()
+        var right = new Argument.Options()
             .WithNaming(Variable.Options.Pascal);
 
         // Act

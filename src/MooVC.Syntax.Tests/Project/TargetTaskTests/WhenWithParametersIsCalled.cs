@@ -10,7 +10,7 @@ public sealed class WhenWithParametersIsCalled
 
         var additional = new Parameter
         {
-            Name = new Name("Other"),
+            Name = new("Other"),
             Value = Snippet.From("Value"),
         };
 

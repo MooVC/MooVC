@@ -10,11 +10,11 @@ public sealed class WhenWithConstraintsIsCalled
     public async Task GivenAdditionalConstraintsThenReturnsNewInstanceWithCombinedValues()
     {
         // Arrange
-        var originalConstraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var originalConstraint = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
 
         var original = new Generic
         {
-            Name = new Name(Name),
+            Name = new(Name),
             Constraints = [originalConstraint],
         };
 

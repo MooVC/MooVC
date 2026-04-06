@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorOptionsOptionsIsCalled
         // Arrange
         var left = new Snippet.Options();
 
-        Snippet.Options right = new Snippet.Options()
+        var right = new Snippet.Options()
             .WithWhitespace("\t");
 
         // Act

@@ -44,7 +44,7 @@ public sealed class WhenToKebabCaseIsCalled
 
         try
         {
-            CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
+            CultureInfo.CurrentCulture = new("tr-TR");
             result = value.ToKebabCase();
         }
         finally

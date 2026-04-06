@@ -78,7 +78,7 @@ public sealed class WhenToSnippetIsCalled
         {
             IsReadOnly = isReadOnly,
             IsStatic = isStatic,
-            Name = new Identifier(name),
+            Name = new(name),
             Scope = scope ?? Scope.Public,
             Type = typeof(string),
         };

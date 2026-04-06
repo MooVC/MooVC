@@ -7,7 +7,7 @@ public sealed class WhenWithArgumentsIsCalled
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Container", arguments: new Symbol { Name = "First" });
-        Symbol[] additional = [new Symbol { Name = "Second" }];
+        Symbol[] additional = [new() { Name = "Second" }];
 
         // Act
         Symbol result = original.WithArguments(additional);

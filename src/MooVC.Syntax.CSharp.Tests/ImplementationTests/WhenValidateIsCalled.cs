@@ -14,7 +14,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         Implementation subject = new Declaration
         {
-            Generics = [new Generic()],
+            Generics = [new()],
         };
 
         var context = new ValidationContext(subject);

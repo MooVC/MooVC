@@ -6,8 +6,8 @@ public sealed class WhenWithIndexersIsCalled
     public async Task GivenIndexersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Indexer { Parameter = new Parameter { Name = "Item" } };
-        var appended = new Indexer { Parameter = new Parameter { Name = "Other" } };
+        var existing = new Indexer { Parameter = new() { Name = "Item" } };
+        var appended = new Indexer { Parameter = new() { Name = "Other" } };
         Record original = RecordTestsData.Create(indexers: [existing]);
 
         // Act

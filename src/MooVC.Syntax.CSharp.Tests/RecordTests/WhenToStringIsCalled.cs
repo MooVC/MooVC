@@ -25,7 +25,7 @@ public sealed class WhenToStringIsCalled
             extensibility: Extensibility.Abstract,
             isPartial: true,
             name: new Declaration { Name = RecordTestsData.DefaultName },
-            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(int) }],
+            parameters: [new Parameter { Name = new("input"), Type = typeof(int) }],
             scope: Scope.Internal);
 
         // Act

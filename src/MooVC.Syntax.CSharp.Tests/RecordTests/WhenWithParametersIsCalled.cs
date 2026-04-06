@@ -6,8 +6,8 @@ public sealed class WhenWithParametersIsCalled
     public async Task GivenParametersThenReturnsUpdatedInstance()
     {
         // Arrange
-        var existing = new Parameter { Name = new Variable("first"), Type = typeof(string) };
-        var appended = new Parameter { Name = new Variable("second"), Type = typeof(int) };
+        var existing = new Parameter { Name = new("first"), Type = typeof(string) };
+        var appended = new Parameter { Name = new("second"), Type = typeof(int) };
         Record original = RecordTestsData.Create(parameters: [existing]);
 
         // Act

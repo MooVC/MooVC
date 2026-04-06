@@ -34,15 +34,15 @@ public sealed class WhenConstructorIsCalled
         var subject = new Indexer
         {
             Behaviours = behaviours,
-            Parameter = new Parameter
+            Parameter = new()
             {
                 Name = ParameterName,
-                Type = new Symbol { Name = ParameterType },
+                Type = new() { Name = ParameterType },
             },
-            Result = new Result
+            Result = new()
             {
                 Mode = Result.Modality.Synchronous,
-                Type = new Symbol { Name = ResultType },
+                Type = new() { Name = ResultType },
             },
             Scope = Scope.Private,
         };
@@ -54,13 +54,13 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Parameter).IsEqualTo(new Parameter
         {
             Name = ParameterName,
-            Type = new Symbol { Name = ParameterType },
+            Type = new() { Name = ParameterType },
         });
 
         _ = await Assert.That(subject.Result).IsEqualTo(new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = ResultType },
+            Type = new() { Name = ResultType },
         });
 
         _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);

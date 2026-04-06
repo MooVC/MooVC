@@ -13,8 +13,8 @@ public sealed class WhenWithProjectsIsCalled
         var additional = new Project
         {
             Id = Guid.Parse("9D9B238E-46E7-4B65-944F-3FC5A25E85B1"),
-            DisplayName = new Project.Name("OtherName"),
-            Path = new Project.RelativePath("src/Other.csproj"),
+            DisplayName = new("OtherName"),
+            Path = new("src/Other.csproj"),
             Type = Snippet.From("OtherType"),
         };
 

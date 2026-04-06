@@ -46,7 +46,7 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
             result: new Result
             {
                 Mode = Result.Modality.Synchronous,
-                Type = new Symbol { Name = "int" },
+                Type = new() { Name = "int" },
             });
 
         // Act

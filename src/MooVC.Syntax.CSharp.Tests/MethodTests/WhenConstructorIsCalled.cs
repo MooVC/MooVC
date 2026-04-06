@@ -27,20 +27,20 @@ public sealed class WhenConstructorIsCalled
         [
             new Parameter
             {
-                Name = new Identifier(MethodTestsData.DefaultParameterName),
-                Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
+                Name = new(MethodTestsData.DefaultParameterName),
+                Type = new() { Name = MethodTestsData.DefaultParameterType },
             },
             new Parameter
             {
-                Name = new Identifier("other"),
-                Type = new Symbol { Name = "bool" },
+                Name = new("other"),
+                Type = new() { Name = "bool" },
             },
         ];
 
         var result = new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = MethodTestsData.DefaultResultType },
+            Type = new() { Name = MethodTestsData.DefaultResultType },
         };
 
         const string body = "return value;";
@@ -49,7 +49,7 @@ public sealed class WhenConstructorIsCalled
         var subject = new Method
         {
             Body = Snippet.From(body),
-            Name = new Declaration { Name = MethodTestsData.DefaultName },
+            Name = new() { Name = MethodTestsData.DefaultName },
             Parameters = parameters,
             Result = result,
             Scope = Scope.Internal,

@@ -8,8 +8,8 @@ public sealed class WhenWithEventsIsCalled
     public async Task GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Event[] existing = [new Event { Name = new Name("Created") }];
-        Event[] additional = [new Event { Name = new Name("Updated") }];
+        Event[] existing = [new() { Name = new("Created") }];
+        Event[] additional = [new() { Name = new("Updated") }];
         Class original = ClassTestsData.Create(events: existing.ToImmutableArray());
 
         // Act

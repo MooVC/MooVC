@@ -10,7 +10,7 @@ public sealed class WhenReturnsIsCalled
         var result = new Result
         {
             Mode = Result.Modality.Synchronous,
-            Type = new Symbol { Name = "bool" },
+            Type = new() { Name = "bool" },
         };
 
         // Act

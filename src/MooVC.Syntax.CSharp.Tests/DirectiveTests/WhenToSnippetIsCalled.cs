@@ -8,7 +8,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         Snippet.Options? options = default;

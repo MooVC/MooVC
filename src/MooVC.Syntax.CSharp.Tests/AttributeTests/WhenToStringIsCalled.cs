@@ -13,7 +13,7 @@ public sealed class WhenToStringIsCalled
         Attribute attribute = AttributeTestsData.Create(
             arguments: new Argument
             {
-                Name = new Identifier(ArgumentName),
+                Name = new(ArgumentName),
                 Value = Snippet.From(ArgumentValue),
             });
 

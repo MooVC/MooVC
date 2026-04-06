@@ -10,11 +10,11 @@ public sealed class WhenToStringIsCalled
     public async Task GivenValueThenReturnsFormattedString()
     {
         // Arrange
-        var constraint = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var constraint = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
 
         var subject = new Generic
         {
-            Name = new Name(Name),
+            Name = new(Name),
             Constraints = [constraint],
         };
 

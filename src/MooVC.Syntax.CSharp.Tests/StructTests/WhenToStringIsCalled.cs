@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
             constructors: [constructor],
             isPartial: true,
             name: new Declaration { Name = StructTestsData.DefaultName },
-            parameters: [new Parameter { Name = new Variable("input"), Type = typeof(int) }],
+            parameters: [new Parameter { Name = new("input"), Type = typeof(int) }],
             scope: Scope.Internal);
 
         // Act

@@ -14,7 +14,7 @@ public sealed class WhenToSnippetIsCalled
         var subject = new Argument
         {
             Modifier = Argument.Mode.Ref,
-            Name = new Identifier(Name),
+            Name = new(Name),
             Value = Snippet.From(Value),
         };
 
@@ -37,7 +37,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Argument
         {
-            Name = new Identifier(Name),
+            Name = new(Name),
             Value = Snippet.From(Value),
         };
 

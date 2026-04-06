@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Argument.Options();
 
-        Argument.Options second = new Argument.Options()
+        var second = new Argument.Options()
             .WithNaming(Variable.Options.Pascal);
 
         // Act

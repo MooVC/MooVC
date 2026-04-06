@@ -11,7 +11,7 @@ public sealed class WhenEqualsObjectIsCalled
             Add = Snippet.From("value"),
         };
 
-        object target = new();
+        var target = new object();
 
         // Act
         bool result = subject.Equals(target);

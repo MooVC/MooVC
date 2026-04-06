@@ -6,7 +6,7 @@ public sealed class WhenWithPropertiesIsCalled
     public async Task GivenPropertiesThenReturnsUpdatedInstance()
     {
         // Arrange
-        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
+        var property = new Property { Name = new("Value"), Type = typeof(string) };
         Struct original = StructTestsData.Create();
 
         // Act

@@ -45,7 +45,7 @@ internal static class SolutionTestsData
     {
         return new Folder
         {
-            Name = new Folder.Path(DefaultFolderName),
+            Name = new(DefaultFolderName),
         };
     }
 
@@ -65,8 +65,8 @@ internal static class SolutionTestsData
         return new Project
         {
             Id = DefaultProjectId,
-            DisplayName = new Project.Name(DefaultProjectName),
-            Path = new Project.RelativePath(DefaultProjectPath),
+            DisplayName = new(DefaultProjectName),
+            Path = new(DefaultProjectPath),
             Type = Snippet.From(DefaultProjectType),
         };
     }

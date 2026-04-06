@@ -13,7 +13,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var attribute = new Attribute
         {
-            Name = new Symbol { Name = AttributeTestsData.DefaultName },
+            Name = new() { Name = AttributeTestsData.DefaultName },
             Arguments =
             [
                 new Argument
@@ -43,7 +43,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var attribute = new Attribute
         {
-            Arguments = [new Argument { Name = new Identifier(ArgumentName), Value = Snippet.From("value") }],
+            Arguments = [new() { Name = new(ArgumentName), Value = Snippet.From("value") }],
         };
 
         var context = new ValidationContext(attribute);
@@ -81,7 +81,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         Attribute attribute = AttributeTestsData.Create(arguments: new Argument
         {
-            Name = new Identifier(ArgumentName),
+            Name = new(ArgumentName),
             Value = Snippet.From("value"),
         });
 

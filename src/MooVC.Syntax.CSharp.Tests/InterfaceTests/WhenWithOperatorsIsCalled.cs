@@ -6,7 +6,7 @@ public sealed class WhenWithOperatorsIsCalled
     public async Task GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var operators = new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] };
+        var operators = new Operators { Conversions = [new() { Target = Symbol.Undefined }] };
         Interface original = InterfaceTestsData.Create();
 
         // Act

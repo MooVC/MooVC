@@ -38,7 +38,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Directive subject = Create();
-        object comparison = new();
+        var comparison = new object();
 
         // Act
         bool result = subject.Equals(comparison);
@@ -80,7 +80,7 @@ public sealed class WhenEqualsObjectIsCalled
         return new Directive
         {
             Alias = alias,
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
     }
 }

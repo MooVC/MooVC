@@ -22,8 +22,8 @@ public sealed class WhenEqualsParameterIsCalled
     public async Task GivenDifferentAttributesThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "First" } });
-        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new Symbol { Name = "Second" } });
+        Parameter left = ParameterTestsData.Create(attributes: new Attribute { Name = new() { Name = "First" } });
+        Parameter right = ParameterTestsData.Create(attributes: new Attribute { Name = new() { Name = "Second" } });
 
         // Act
         bool result = left.Equals(right);

@@ -158,7 +158,7 @@ public sealed class WhenIncludeIsCalled
     {
         public StubValidatable(params ValidationResult[] results)
         {
-            Results = [.. results.DefaultIfEmpty(new ValidationResult(FirstMessage))];
+            Results = [.. results.DefaultIfEmpty(new(FirstMessage))];
         }
 
         public IReadOnlyCollection<ValidationResult> Results { get; }

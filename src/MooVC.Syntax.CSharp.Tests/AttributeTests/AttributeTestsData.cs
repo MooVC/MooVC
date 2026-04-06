@@ -15,7 +15,7 @@ public static class AttributeTestsData
         return new Attribute
         {
             Arguments = provided,
-            Name = new Symbol
+            Name = new()
             {
                 Name = name is null
                     ? Symbol.Moniker.Unnamed

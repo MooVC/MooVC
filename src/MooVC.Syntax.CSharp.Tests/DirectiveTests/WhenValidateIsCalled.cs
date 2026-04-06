@@ -14,8 +14,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Name(InvalidAlias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(InvalidAlias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         var context = new ValidationContext(subject);
@@ -37,7 +37,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier([Name.Unnamed, "Syntax"]),
+            Qualifier = new([Name.Unnamed, "Syntax"]),
         };
 
         var context = new ValidationContext(subject);
@@ -59,9 +59,9 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Name(Alias),
+            Alias = new(Alias),
             IsStatic = true,
-            Qualifier = new Qualifier(["System", "Console"]),
+            Qualifier = new(["System", "Console"]),
         };
 
         var context = new ValidationContext(subject);
@@ -99,7 +99,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         var context = new ValidationContext(subject);

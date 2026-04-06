@@ -7,7 +7,7 @@ public sealed class WhenWithTasksIsCalled
     {
         // Arrange
         TargetTask existing = TargetTestsData.CreateTask();
-        var additional = new TargetTask { Name = new Name("Other") };
+        var additional = new TargetTask { Name = new("Other") };
         Target original = TargetTestsData.Create(task: existing);
 
         // Act

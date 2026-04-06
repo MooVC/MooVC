@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Argument
         {
-            Name = new Identifier(Name),
+            Name = new(Name),
             Value = Snippet.From($"line1{Environment.NewLine}line2"),
         };
 
@@ -75,7 +75,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Argument
         {
-            Name = new Identifier(Name),
+            Name = new(Name),
             Value = Snippet.From(Value),
         };
 

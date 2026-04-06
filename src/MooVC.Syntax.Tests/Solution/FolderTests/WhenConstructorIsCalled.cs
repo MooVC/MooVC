@@ -29,7 +29,7 @@ public sealed class WhenConstructorIsCalled
         {
             Files = [file],
             Items = [item],
-            Name = new Folder.Path(FolderTestsData.DefaultName),
+            Name = new(FolderTestsData.DefaultName),
             Projects = [project],
         };
 

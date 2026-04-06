@@ -10,8 +10,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Directive
         {
-            Alias = new Name(Alias),
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Alias = new(Alias),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act
@@ -28,7 +28,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Directive
         {
             IsStatic = true,
-            Qualifier = new Qualifier(["System", "Console"]),
+            Qualifier = new(["System", "Console"]),
         };
 
         // Act

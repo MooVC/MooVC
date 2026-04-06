@@ -31,7 +31,7 @@ public sealed class WhenEqualsIndexerIsCalled
             result: new Result
             {
                 Mode = Result.Modality.Synchronous,
-                Type = new Symbol { Name = "int" },
+                Type = new() { Name = "int" },
             });
 
         // Act

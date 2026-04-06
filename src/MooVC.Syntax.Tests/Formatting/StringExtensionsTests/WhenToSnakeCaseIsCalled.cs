@@ -96,7 +96,7 @@ public sealed class WhenToSnakeCaseIsCalled
 
         try
         {
-            CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
+            CultureInfo.CurrentCulture = new("tr-TR");
             result = value.ToSnakeCase();
         }
         finally

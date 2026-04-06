@@ -6,7 +6,7 @@ public sealed class WhenWithEventsIsCalled
     public async Task GivenEventsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var @event = new Event { Name = new Name("Created") };
+        var @event = new Event { Name = new("Created") };
         Interface original = InterfaceTestsData.Create();
 
         // Act

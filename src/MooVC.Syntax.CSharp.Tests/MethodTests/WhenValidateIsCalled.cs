@@ -15,7 +15,7 @@ public sealed class WhenValidateIsCalled
             {
                 Default = Snippet.From($"first{Environment.NewLine}second"),
                 Name = MethodTestsData.DefaultParameterName,
-                Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
+                Type = new() { Name = MethodTestsData.DefaultParameterType },
             },
         ]);
 
@@ -94,7 +94,7 @@ public sealed class WhenValidateIsCalled
                 new Parameter
                 {
                     Name = MethodTestsData.DefaultParameterName,
-                    Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
+                    Type = new() { Name = MethodTestsData.DefaultParameterType },
                 },
             ],
             body: Snippet.From("return value;"));

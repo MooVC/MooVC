@@ -44,7 +44,7 @@ public sealed class WhenToCamelCaseIsCalled
 
         try
         {
-            CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
+            CultureInfo.CurrentCulture = new("tr-TR");
             result = value.ToCamelCase();
         }
         finally

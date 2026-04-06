@@ -47,7 +47,7 @@ public sealed class WhenEqualsRecordIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(methods: [new Method { Name = new Declaration { Name = "Execute" } }]);
+        Record subject = RecordTestsData.Create(methods: [new Method { Name = new() { Name = "Execute" } }]);
 
         // Act
         bool result = subject.Equals(subject);

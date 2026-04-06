@@ -20,8 +20,8 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         var created = new Event { Name = "Created" };
-        var execute = new Method { Name = new Declaration { Name = "Execute" } };
-        var indexer = new Indexer { Parameter = new Parameter { Name = "item", Type = typeof(string) }, Result = typeof(int) };
+        var execute = new Method { Name = new() { Name = "Execute" } };
+        var indexer = new Indexer { Parameter = new() { Name = "item", Type = typeof(string) }, Result = typeof(int) };
         var valueA = new Property { Name = "ValueA", Type = typeof(string) };
 
         var valueB = new Property

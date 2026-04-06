@@ -10,7 +10,7 @@ public sealed class WhenWithFoldersIsCalled
 
         var additional = new Folder
         {
-            Name = new Folder.Path("/other/"),
+            Name = new("/other/"),
         };
 
         Solution original = SolutionTestsData.Create(folder: existing);

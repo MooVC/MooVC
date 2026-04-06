@@ -12,8 +12,8 @@ public sealed class WhenAcceptsIsCalled
         [
             new Parameter
             {
-                Name = new Variable("other"),
-                Type = new Symbol { Name = MethodTestsData.DefaultParameterType },
+                Name = new("other"),
+                Type = new() { Name = MethodTestsData.DefaultParameterType },
             },
         ];
 

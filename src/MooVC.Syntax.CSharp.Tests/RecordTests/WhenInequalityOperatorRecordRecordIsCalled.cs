@@ -48,8 +48,8 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Record left = RecordTestsData.Create(parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }]);
-        Record right = RecordTestsData.Create(parameters: [new Parameter { Name = new Variable("input"), Type = typeof(string) }]);
+        Record left = RecordTestsData.Create(parameters: [new Parameter { Name = new("input"), Type = typeof(string) }]);
+        Record right = RecordTestsData.Create(parameters: [new Parameter { Name = new("input"), Type = typeof(string) }]);
 
         // Act
         bool resultLeftRight = left != right;

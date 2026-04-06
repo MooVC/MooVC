@@ -10,12 +10,12 @@ public sealed class WhenAttributedWithIsCalled
         // Arrange
         Attribute[] existing =
         [
-            new Attribute { Name = new Symbol { Name = "Existing" } },
+            new Attribute { Name = new() { Name = "Existing" } },
         ];
 
         Attribute[] additional =
         [
-            new Attribute { Name = new Symbol { Name = "Additional" } },
+            new Attribute { Name = new() { Name = "Additional" } },
         ];
 
         Struct original = StructTestsData.Create(attributes: existing.ToImmutableArray());

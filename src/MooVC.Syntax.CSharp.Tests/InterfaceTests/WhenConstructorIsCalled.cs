@@ -27,11 +27,11 @@ public sealed class WhenConstructorIsCalled
     public async Task GivenValuesThenPropertiesAreAssigned()
     {
         // Arrange
-        var attribute = new Attribute { Name = new Symbol { Name = AttributeName } };
-        var @event = new Event { Name = new Name("Created") };
-        var indexer = new Indexer { Parameter = new Parameter { Name = "Item" } };
-        var method = new Method { Name = new Declaration { Name = "Execute" } };
-        var property = new Property { Name = new Name("Value"), Type = typeof(string) };
+        var attribute = new Attribute { Name = new() { Name = AttributeName } };
+        var @event = new Event { Name = new("Created") };
+        var indexer = new Indexer { Parameter = new() { Name = "Item" } };
+        var method = new Method { Name = new() { Name = "Execute" } };
+        var property = new Property { Name = new("Value"), Type = typeof(string) };
 
         // Act
         Interface subject = InterfaceTestsData.Create(
@@ -41,7 +41,7 @@ public sealed class WhenConstructorIsCalled
             isPartial: true,
             methods: [method],
             name: new Declaration { Name = InterfaceTestsData.DefaultName },
-            operators: new Operators { Conversions = [new Conversion { Target = Symbol.Undefined }] },
+            operators: new Operators { Conversions = [new() { Target = Symbol.Undefined }] },
             properties: [property],
             scope: Scope.Internal);
 

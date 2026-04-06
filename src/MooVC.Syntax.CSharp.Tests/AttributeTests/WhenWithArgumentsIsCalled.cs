@@ -8,11 +8,11 @@ public sealed class WhenWithArgumentsIsCalled
         // Arrange
         Attribute original = AttributeTestsData.Create(arguments: new Argument
         {
-            Name = new Identifier("Original"),
+            Name = new("Original"),
             Value = Snippet.From("alpha"),
         });
 
-        Argument[] additional = [new Argument { Name = new Identifier("Updated"), Value = Snippet.From("beta") }];
+        Argument[] additional = [new() { Name = new("Updated"), Value = Snippet.From("beta") }];
 
         // Act
         Attribute result = original.WithArguments(additional);

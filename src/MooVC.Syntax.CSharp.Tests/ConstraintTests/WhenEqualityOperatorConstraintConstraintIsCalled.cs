@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
+        var left = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName)) };
         var right = new Constraint { Nature = Nature.Class };
 
         // Act
@@ -36,8 +36,8 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
-        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var left = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
+        var right = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
 
         // Act
         bool result = left == right;
@@ -51,7 +51,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     {
         // Arrange
         Constraint? left = default;
-        var right = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var right = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
 
         // Act
         bool result = left == right;
@@ -64,7 +64,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        var left = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var left = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
         Constraint? right = default;
 
         // Act
@@ -78,7 +78,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        var first = new Constraint { Base = new Base(SymbolTestsData.CreateWithArgumentNames()) };
+        var first = new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) };
         Constraint second = first;
 
         // Act

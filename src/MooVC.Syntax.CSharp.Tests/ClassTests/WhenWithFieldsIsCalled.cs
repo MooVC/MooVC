@@ -8,8 +8,8 @@ public sealed class WhenWithFieldsIsCalled
     public async Task GivenFieldsThenReturnsUpdatedInstance()
     {
         // Arrange
-        Field[] existing = [new Field { Name = new Variable("_first"), Type = typeof(int) }];
-        Field[] additional = [new Field { Name = new Variable("_second"), Type = typeof(string) }];
+        Field[] existing = [new() { Name = new("_first"), Type = typeof(int) }];
+        Field[] additional = [new() { Name = new("_second"), Type = typeof(string) }];
         Class original = ClassTestsData.Create(fields: existing.ToImmutableArray());
 
         // Act

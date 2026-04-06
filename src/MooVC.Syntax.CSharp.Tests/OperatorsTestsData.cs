@@ -16,7 +16,7 @@ internal static class OperatorsTestsData
     {
         public TestType(string name, bool isUndefined)
         {
-            Declaration = new Declaration { Name = name };
+            Declaration = new() { Name = name };
             IsUndefined = isUndefined;
         }
 

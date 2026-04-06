@@ -8,7 +8,7 @@ public sealed class WhenIsSystemIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier(["MooVC", "Syntax"]),
+            Qualifier = new(["MooVC", "Syntax"]),
         };
 
         // Act
@@ -24,7 +24,7 @@ public sealed class WhenIsSystemIsCalled
         // Arrange
         var subject = new Directive
         {
-            Qualifier = new Qualifier(["System", "Linq"]),
+            Qualifier = new(["System", "Linq"]),
         };
 
         // Act

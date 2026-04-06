@@ -7,7 +7,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
-        object target = new();
+        var target = new object();
 
         // Act
         bool result = subject.Equals(target);

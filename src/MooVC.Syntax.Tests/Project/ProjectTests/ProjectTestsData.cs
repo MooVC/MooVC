@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Project.ProjectTests;
 
 using MooVC.Syntax.Resource;
-using Item = MooVC.Syntax.Project.Item;
 using Resource = MooVC.Syntax.Resource.Item;
 
 internal static class ProjectTestsData
@@ -82,7 +81,7 @@ internal static class ProjectTestsData
     {
         return new ItemGroup
         {
-            Items = [new Item { Include = Snippet.From(DefaultItemInclude) }],
+            Items = [new() { Include = Snippet.From(DefaultItemInclude) }],
         };
     }
 
@@ -90,7 +89,7 @@ internal static class ProjectTestsData
     {
         return new PropertyGroup
         {
-            Properties = [new Property { Name = DefaultPropertyName, Value = Snippet.From(DefaultPropertyValue) }],
+            Properties = [new() { Name = DefaultPropertyName, Value = Snippet.From(DefaultPropertyValue) }],
         };
     }
 
