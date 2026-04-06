@@ -1,7 +1,6 @@
 namespace MooVC.Syntax.Project.ProjectTests;
 
 using MooVC.Syntax.Resource;
-using Item = MooVC.Syntax.Project.Item;
 using Resource = MooVC.Syntax.Resource.Item;
 
 internal static class ProjectTestsData

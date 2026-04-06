@@ -97,7 +97,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new() { Name = "Base" },
+            Base = new Symbol() { Name = "Base" },
             Interfaces = [new(new() { Name = InterfaceName })],
             New = New.Required,
         };
