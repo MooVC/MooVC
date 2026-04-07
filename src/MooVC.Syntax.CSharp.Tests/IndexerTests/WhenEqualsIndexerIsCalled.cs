@@ -30,7 +30,7 @@ public sealed class WhenEqualsIndexerIsCalled
         Indexer target = IndexerTestsData.Create(
             result: new Result
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = "int" },
             });
 
@@ -46,7 +46,7 @@ public sealed class WhenEqualsIndexerIsCalled
     {
         // Arrange
         Indexer subject = IndexerTestsData.Create();
-        Indexer target = IndexerTestsData.Create(scope: Scope.Internal);
+        Indexer target = IndexerTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = target.Equals(subject);

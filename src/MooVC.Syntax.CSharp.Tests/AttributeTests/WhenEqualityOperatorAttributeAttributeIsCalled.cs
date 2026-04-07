@@ -39,8 +39,8 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
     public async Task GivenDifferentTargetsThenReturnsFalse()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Method);
-        Attribute right = AttributeTestsData.Create(target: Attribute.Specifier.Property);
+        Attribute left = AttributeTestsData.Create(target: Attribute.Specifiers.Method);
+        Attribute right = AttributeTestsData.Create(target: Attribute.Specifiers.Property);
 
         // Act
         bool result = left == right;
@@ -53,8 +53,8 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Method);
-        Attribute right = AttributeTestsData.Create(target: Attribute.Specifier.Method);
+        Attribute left = AttributeTestsData.Create(target: Attribute.Specifiers.Method);
+        Attribute right = AttributeTestsData.Create(target: Attribute.Specifiers.Method);
 
         // Act
         bool resultLeftRight = left == right;
@@ -97,7 +97,7 @@ public sealed class WhenEqualityOperatorAttributeAttributeIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Attribute first = AttributeTestsData.Create(target: Attribute.Specifier.Method);
+        Attribute first = AttributeTestsData.Create(target: Attribute.Specifiers.Method);
         Attribute second = first;
 
         // Act

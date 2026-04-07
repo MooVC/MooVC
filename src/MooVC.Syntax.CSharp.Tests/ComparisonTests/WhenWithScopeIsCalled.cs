@@ -7,7 +7,7 @@ public sealed class WhenWithScopeIsCalled
     {
         // Arrange
         Comparison original = ComparisonTestsData.Create();
-        Scope replacement = Scope.Private;
+        Scopes replacement = Scopes.Private;
 
         // Act
         Comparison result = original.WithScope(replacement);

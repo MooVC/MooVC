@@ -23,7 +23,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Operators).IsEqualTo(new Operators());
         _ = await Assert.That(subject.Parameters).IsEmpty();
         _ = await Assert.That(subject.Properties).IsEmpty();
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
         _ = await Assert.That(subject.IsUndefined).IsTrue();
     }
 
@@ -53,7 +53,7 @@ public sealed class WhenConstructorIsCalled
             operators: new Operators { Conversions = [new() { Target = Symbol.Undefined }] },
             parameters: [new Parameter { Name = new("input"), Type = typeof(string) }],
             properties: [property],
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Assert
         _ = await Assert.That(subject.Attributes).IsEquivalentTo([attribute]);
@@ -68,7 +68,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Operators.Conversions).IsNotEmpty();
         _ = await Assert.That(subject.Parameters).HasSingleItem();
         _ = await Assert.That(subject.Properties).IsEquivalentTo([property]);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Internal);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
     }
 }

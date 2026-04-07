@@ -7,9 +7,9 @@ public static class StructTestsData
     public const string DefaultName = "Sample";
 
     public static Struct Create(
-        Struct.Kind? behavior = default,
+        Struct.Kinds? behavior = default,
         bool? isPartial = default,
-        Scope? scope = default,
+        Scopes? scope = default,
         Operators? operators = default,
         Declaration? name = default,
         ImmutableArray<Attribute>? attributes = default,
@@ -24,18 +24,18 @@ public static class StructTestsData
         return new Struct
         {
             Attributes = attributes ?? [],
-            Behavior = behavior ?? Struct.Kind.Default,
+            Behavior = behavior ?? Struct.Kinds.Default,
             Constructors = constructors ?? [],
+            Declaration = name ?? new Declaration { Name = DefaultName },
             Events = events ?? [],
             Fields = fields ?? [],
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,
             Methods = methods ?? [],
-            Declaration = name ?? new Declaration { Name = DefaultName },
             Operators = operators ?? new Operators(),
             Parameters = parameters ?? [],
             Properties = properties ?? [],
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
         };
     }
 }

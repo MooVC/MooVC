@@ -7,7 +7,7 @@ public sealed class WhenWithScopeIsCalled
     {
         // Arrange
         Unary original = UnaryTestsData.Create();
-        Scope replacement = Scope.Private;
+        Scopes replacement = Scopes.Private;
 
         // Act
         Unary result = original.WithScope(replacement);

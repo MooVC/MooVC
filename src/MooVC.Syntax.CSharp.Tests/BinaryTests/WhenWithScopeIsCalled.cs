@@ -7,7 +7,7 @@ public sealed class WhenWithScopeIsCalled
     {
         // Arrange
         Binary original = BinaryTestsData.Create();
-        Scope replacement = Scope.Internal;
+        Scopes replacement = Scopes.Internal;
 
         // Act
         Binary result = original.WithScope(replacement);

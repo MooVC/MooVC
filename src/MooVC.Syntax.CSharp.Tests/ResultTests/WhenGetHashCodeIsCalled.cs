@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Result first = ResultTestsData.Create();
-        Result second = ResultTestsData.Create(modifier: Result.Kind.Ref);
+        Result second = ResultTestsData.Create(modifier: Result.Modifiers.Ref);
 
         // Act
         int firstHash = first.GetHashCode();

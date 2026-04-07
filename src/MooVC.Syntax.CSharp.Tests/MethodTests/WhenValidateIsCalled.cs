@@ -36,7 +36,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenInvalidResultThenValidationErrorReturned()
     {
         // Arrange
-        Method subject = MethodTestsData.Create(result: new Result { Modifier = Result.Kind.Ref });
+        Method subject = MethodTestsData.Create(result: new Result { Modifier = Result.Modifiers.Ref });
         var context = new ValidationContext(subject);
         var results = new List<ValidationResult>();
 

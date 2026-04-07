@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Operators
-        : IValidatableObject
+        : IEnumerable<Symbol>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -64,6 +66,18 @@
         /// </summary>
         /// <value>The unaries.</value>
         public ImmutableArray<Unary> Unaries { get; internal set; } = ImmutableArray<Unary>.Empty;
+
+        /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the collection of conversions.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the symbols in the collection.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            foreach (Symbol symbol in Conversions.SelectMany(conversion => conversion))
+            {
+                yield return symbol;
+            }
+        }
 
         /// <summary>
         /// Returns the string representation of the Operators.
@@ -117,6 +131,15 @@
                 .AndIf(!Conversions.IsDefaultOrEmpty, nameof(Conversions), Conversions)
                 .AndIf(!Unaries.IsDefaultOrEmpty, nameof(Unaries), Unaries)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

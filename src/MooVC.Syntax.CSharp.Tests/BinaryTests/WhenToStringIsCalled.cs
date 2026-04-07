@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
     public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
-        Binary subject = BinaryTestsData.Create(body: Snippet.Empty, @operator: Binary.Type.Unspecified);
+        Binary subject = BinaryTestsData.Create(body: Snippet.Empty, @operator: Binary.Types.Unspecified);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
         // Act

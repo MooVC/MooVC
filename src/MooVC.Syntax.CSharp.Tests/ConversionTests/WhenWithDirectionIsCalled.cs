@@ -7,7 +7,7 @@ public sealed class WhenWithDirectionIsCalled
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
-        Conversion.Intent replacement = Conversion.Intent.From;
+        Conversion.Intents replacement = Conversion.Intents.From;
 
         // Act
         Conversion result = original.WithDirection(replacement);

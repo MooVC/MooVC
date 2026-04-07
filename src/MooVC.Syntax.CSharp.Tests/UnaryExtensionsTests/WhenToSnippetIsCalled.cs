@@ -79,9 +79,9 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Unary publicIncrement = UnaryTestsData.Create(@operator: Unary.Type.Increment, scope: Scope.Public);
-        Unary publicDecrement = UnaryTestsData.Create(@operator: Unary.Type.Decrement, scope: Scope.Public);
-        Unary protectedNegate = UnaryTestsData.Create(@operator: Unary.Type.Not, scope: Scope.Protected);
+        Unary publicIncrement = UnaryTestsData.Create(@operator: Unary.Types.Increment, scope: Scopes.Public);
+        Unary publicDecrement = UnaryTestsData.Create(@operator: Unary.Types.Decrement, scope: Scopes.Public);
+        Unary protectedNegate = UnaryTestsData.Create(@operator: Unary.Types.Not, scope: Scopes.Protected);
 
         ImmutableArray<Unary> unaries = [publicDecrement, protectedNegate, publicIncrement];
 

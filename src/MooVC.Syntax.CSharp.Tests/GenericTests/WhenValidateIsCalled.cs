@@ -15,7 +15,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new(new() { Name = InvalidInterfaceName })],
+            Interfaces = [new() { Name = InvalidInterfaceName }],
         };
 
         var subject = new Generic
@@ -97,8 +97,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol() { Name = "Base" },
-            Interfaces = [new(new() { Name = InterfaceName })],
+            Base = new() { Name = "Base" },
+            Interfaces = [new() { Name = InterfaceName }],
             New = New.Required,
         };
 

@@ -6,14 +6,14 @@ public sealed class WhenWithScopeIsCalled
     public async Task GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Struct original = StructTestsData.Create(scope: Scope.Private);
+        Struct original = StructTestsData.Create(scope: Scopes.Private);
 
         // Act
-        Struct result = original.WithScope(Scope.Internal);
+        Struct result = original.WithScope(Scopes.Internal);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Internal);
-        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scopes.Internal);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scopes.Private);
     }
 }

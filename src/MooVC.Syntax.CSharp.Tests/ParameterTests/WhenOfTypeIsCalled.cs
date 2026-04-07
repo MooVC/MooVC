@@ -6,7 +6,7 @@ public sealed class WhenOfTypeIsCalled
     public async Task GivenValueThenReturnsNewInstanceWithUpdatedType()
     {
         // Arrange
-        Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter original = ParameterTestsData.Create(modifier: Parameter.Modes.In);
 
         var type = new Symbol
         {

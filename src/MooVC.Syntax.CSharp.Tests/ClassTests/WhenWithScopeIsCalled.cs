@@ -6,14 +6,14 @@ public sealed class WhenWithScopeIsCalled
     public async Task GivenScopeThenReturnsUpdatedInstance()
     {
         // Arrange
-        Class original = ClassTestsData.Create(scope: Scope.Public);
+        Class original = ClassTestsData.Create(scope: Scopes.Public);
 
         // Act
-        Class result = original.WithScope(Scope.Private);
+        Class result = original.WithScope(Scopes.Private);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Private);
-        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scopes.Private);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scopes.Public);
     }
 }

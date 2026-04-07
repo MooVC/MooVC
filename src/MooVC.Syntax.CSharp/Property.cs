@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Property
-        : IValidatableObject
+        : IEnumerable<Symbol>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -79,7 +81,7 @@
         /// Gets the scope on the Property.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Gets the type on the Property.
@@ -124,6 +126,25 @@
             return new Property()
                 .Named(property.Name)
                 .OfType(property.Type);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the attributes and the type.
+        /// </summary>
+        /// <remarks>
+        /// The enumerator yields all symbols from each attribute in order, followed by the type symbol.
+        /// The order of enumeration is consistent with the order of the attributes and type as stored in the collection.
+        /// </remarks>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols, including those from the
+        /// attributes and the type.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            foreach (Symbol symbol in Attributes.SelectMany(attribute => attribute))
+            {
+                yield return symbol;
+            }
+
+            yield return Type;
         }
 
         /// <summary>
@@ -203,6 +224,15 @@
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private Snippet.Options FormatBlockStyle(Snippet behaviours, Options options)

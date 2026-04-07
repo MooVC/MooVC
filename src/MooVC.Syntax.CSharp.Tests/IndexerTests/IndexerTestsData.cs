@@ -10,7 +10,7 @@ internal static class IndexerTestsData
         Parameter? parameter = default,
         Result? result = default,
         Indexer.Methods? behaviours = default,
-        Scope? scope = default)
+        Scopes? scope = default)
     {
         var subject = new Indexer
         {
@@ -21,7 +21,7 @@ internal static class IndexerTestsData
             },
             Result = result ?? new Result
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = DefaultResultType },
             },
         };

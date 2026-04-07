@@ -74,7 +74,7 @@
             return new Declaration
             {
                 Name = fullyQualifiedName.Name,
-                Generics = parameters.ToImmutableArray(),
+                Arguments = parameters.ToImmutableArray(),
             };
         }
 

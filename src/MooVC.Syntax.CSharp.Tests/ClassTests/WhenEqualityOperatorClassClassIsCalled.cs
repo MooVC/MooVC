@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorClassClassIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Class left = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
-        Class right = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
+        Class left = ClassTestsData.Create(isStatic: true, scope: Scopes.Internal);
+        Class right = ClassTestsData.Create(isStatic: true, scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left == right;

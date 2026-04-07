@@ -9,7 +9,7 @@ public sealed class WhenWithScopeIsCalled
         Method original = MethodTestsData.Create();
 
         // Act
-        Method result = original.WithScope(Scope.Internal);
+        Method result = original.WithScope(Scopes.Internal);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
@@ -17,6 +17,6 @@ public sealed class WhenWithScopeIsCalled
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Parameters).IsEqualTo(original.Parameters);
         _ = await Assert.That(result.Result).IsEqualTo(original.Result);
-        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scopes.Internal);
     }
 }

@@ -61,11 +61,11 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{1}` constraint requires that `{0}` begin with an I, be PascalCase with a leading uppercase letter, consisting only of letters or digits, and avoid underscores, spaces, or reserved keywords. When specifying generic arguments, ensure each argument is either a valid PascalCase type name or begins with T in PascalCase form, using only letters or digits..
+        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
         /// </summary>
-        internal static string ValidateValueRequired {
+        internal static string ToSnippetOptionsRequired {
             get {
-                return ResourceManager.GetString("ValidateValueRequired", resourceCulture);
+                return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
             }
         }
     }

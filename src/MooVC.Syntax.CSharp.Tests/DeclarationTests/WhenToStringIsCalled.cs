@@ -29,7 +29,7 @@ public sealed class WhenToStringIsCalled
         var subject = new Declaration
         {
             Name = Name,
-            Generics =
+            Arguments =
             [
                 new Generic { Name = new(FirstParameterName) },
                 new Generic { Name = new(SecondParameterName) },

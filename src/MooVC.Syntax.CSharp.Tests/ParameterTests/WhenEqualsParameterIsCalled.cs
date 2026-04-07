@@ -92,7 +92,7 @@ public sealed class WhenEqualsParameterIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Parameter first = ParameterTestsData.Create(modifier: Parameter.Mode.RefReadonly);
+        Parameter first = ParameterTestsData.Create(modifier: Parameter.Modes.RefReadonly);
         Parameter second = first;
 
         // Act

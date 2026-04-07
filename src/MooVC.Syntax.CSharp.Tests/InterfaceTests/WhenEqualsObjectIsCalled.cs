@@ -20,8 +20,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Interface subject = InterfaceTestsData.Create(scope: Scope.Internal);
-        object value = InterfaceTestsData.Create(scope: Scope.Internal);
+        Interface subject = InterfaceTestsData.Create(scope: Scopes.Internal);
+        object value = InterfaceTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = subject.Equals(value);

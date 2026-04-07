@@ -32,7 +32,7 @@
             /// </summary>
             public static readonly Options Inline = new Options
             {
-                Format = Style.Inline,
+                Format = Styles.Inline,
             };
 
             /// <summary>
@@ -64,7 +64,7 @@
             /// </summary>
             /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsStyleRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Style Format { get; internal set; } = Style.Separate;
+            public Styles Format { get; internal set; } = Styles.Separate;
 
             /// <summary>
             /// Gets a value indicating whether the format style is set to separate.
@@ -73,7 +73,7 @@
             /// A value indicating whether the format style is set to separate.
             /// </value>
             [Ignore]
-            public bool IsSeparate => Format == Style.Separate;
+            public bool IsSeparate => Format == Styles.Separate;
 
             /// <summary>
             /// Gets a value indicating whether the format is inline.
@@ -82,7 +82,7 @@
             /// A value indicating whether the format is inline.
             /// </value>
             [Ignore]
-            public bool IsInline => Format == Style.Inline;
+            public bool IsInline => Format == Styles.Inline;
 
             /// <summary>
             /// Gets a value indicating whether the current instance is unspecified.
@@ -127,9 +127,9 @@
             /// This operator enables seamless assignment of an Options object where a Style
             /// is expected, by extracting the Format property from the Options instance.
             /// </remarks>
-            public static implicit operator Style(Options options)
+            public static implicit operator Styles(Options options)
             {
-                Guard.Against.Conversion<Options, Style>(options);
+                Guard.Against.Conversion<Options, Styles>(options);
 
                 return options.Format;
             }

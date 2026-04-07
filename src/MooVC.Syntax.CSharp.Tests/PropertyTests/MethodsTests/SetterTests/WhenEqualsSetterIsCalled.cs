@@ -26,14 +26,14 @@ public sealed class WhenEqualsSetterIsCalled
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Methods.Setter.Modes.Init,
-            Scope = Scope.Internal,
+            Scope = Scopes.Internal,
         };
 
         var target = new Property.Methods.Setter
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Methods.Setter.Modes.Init,
-            Scope = Scope.Internal,
+            Scope = Scopes.Internal,
         };
 
         // Act

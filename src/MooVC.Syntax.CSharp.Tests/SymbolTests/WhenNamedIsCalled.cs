@@ -7,7 +7,7 @@ public sealed class WhenNamedIsCalled
     {
         // Arrange
         Symbol original = SymbolTestsData.Create(name: "Original");
-        var name = new Symbol.Moniker("Updated");
+        var name = new Moniker("Updated");
 
         // Act
         Symbol result = original.Named(name);

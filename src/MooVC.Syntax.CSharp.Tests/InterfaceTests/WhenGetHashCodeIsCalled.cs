@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Interface left = InterfaceTestsData.Create(scope: Scope.Internal);
-        Interface right = InterfaceTestsData.Create(scope: Scope.Internal);
+        Interface left = InterfaceTestsData.Create(scope: Scopes.Internal);
+        Interface right = InterfaceTestsData.Create(scope: Scopes.Internal);
 
         // Act
         int leftHash = left.GetHashCode();

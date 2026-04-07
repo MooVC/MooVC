@@ -8,7 +8,7 @@ public sealed class WhenToStringIsCalled
     public async Task GivenConversionFromDeclarationThenSignatureIsRendered()
     {
         // Arrange
-        Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.From);
+        Conversion subject = ConversionTestsData.Create(direction: Conversion.Intents.From);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
@@ -29,7 +29,7 @@ public sealed class WhenToStringIsCalled
     public async Task GivenConversionToDeclarationThenSignatureIsRendered()
     {
         // Arrange
-        Conversion subject = ConversionTestsData.Create(direction: Conversion.Intent.To);
+        Conversion subject = ConversionTestsData.Create(direction: Conversion.Intents.To);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act

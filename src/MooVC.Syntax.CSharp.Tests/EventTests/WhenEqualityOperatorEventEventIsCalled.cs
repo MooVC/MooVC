@@ -58,7 +58,7 @@ public sealed class WhenEqualityOperatorEventEventIsCalled
     {
         // Arrange
         Event left = EventTestsData.Create();
-        Event right = EventTestsData.Create(scope: Scope.Internal);
+        Event right = EventTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left == right;

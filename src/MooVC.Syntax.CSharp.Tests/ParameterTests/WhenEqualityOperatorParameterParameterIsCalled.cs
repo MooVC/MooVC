@@ -36,8 +36,8 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     public async Task GivenDifferentModifiersThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.Ref);
-        Parameter right = ParameterTestsData.Create(modifier: Parameter.Mode.Out);
+        Parameter left = ParameterTestsData.Create(modifier: Parameter.Modes.Ref);
+        Parameter right = ParameterTestsData.Create(modifier: Parameter.Modes.Out);
 
         // Act
         bool result = left == right;
@@ -66,8 +66,8 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.In);
-        Parameter right = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter left = ParameterTestsData.Create(modifier: Parameter.Modes.In);
+        Parameter right = ParameterTestsData.Create(modifier: Parameter.Modes.In);
 
         // Act
         bool resultLeftRight = left == right;
@@ -110,7 +110,7 @@ public sealed class WhenEqualityOperatorParameterParameterIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Parameter first = ParameterTestsData.Create(modifier: Parameter.Mode.Ref);
+        Parameter first = ParameterTestsData.Create(modifier: Parameter.Modes.Ref);
         Parameter second = first;
 
         // Act

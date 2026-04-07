@@ -43,7 +43,7 @@ public sealed partial class WhenToSnippetIsCalled
                             (Name: nameof(AttributeUsageAttribute.Inherited), Value: "false")))
                     .DerivesFrom(typeof(Attribute))
                     .Named("IdentityAttribute")
-                    .WithScope(Scope.Internal))
+                    .WithScope(Scopes.Internal))
                 .From("Muify.Domain");
 
             // Act
@@ -85,7 +85,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .OfType(typeof(string))
                         .WithBehaviours(behaviors => behaviors
                             .WithSet(set => set.WithMode(Property.Methods.Setter.Modes.Set))))
-                    .WithScope(Scope.Internal))
+                    .WithScope(Scopes.Internal))
                 .From("Muify.Domain");
 
             // Act
@@ -263,7 +263,7 @@ public sealed partial class WhenToSnippetIsCalled
                             .Named(member.Name)
                             .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car"))
                             .WithDefault(member.Index.ToString())
-                            .WithScope(Scope.Public)),
+                            .WithScope(Scopes.Public)),
                         members)
                     .Enumerate(
                         (member, record) => record.WithProperties(property => property
@@ -276,7 +276,7 @@ public sealed partial class WhenToSnippetIsCalled
                     .WithConstructors(constructor => constructor
                         .WithBody("_value = value;")
                         .WithParameters((Name: "Value", Type: typeof(byte)))
-                        .WithScope(Scope.Private)))
+                        .WithScope(Scopes.Private)))
                .From("MooVC.Testing.Mechanics.Car");
 
             // Act

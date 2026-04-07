@@ -7,7 +7,7 @@ public sealed class WhenEqualsComparisonIsCalled
     {
         // Arrange
         Comparison subject = ComparisonTestsData.Create();
-        Comparison target = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan);
+        Comparison target = ComparisonTestsData.Create(@operator: Comparison.Types.GreaterThan);
 
         // Act
         bool result = target.Equals(subject);

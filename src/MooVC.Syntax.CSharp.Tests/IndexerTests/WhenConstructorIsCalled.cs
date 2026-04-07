@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.IsUndefined).IsTrue();
         _ = await Assert.That(subject.Parameter).IsEqualTo(Parameter.Undefined);
         _ = await Assert.That(subject.Result).IsEqualTo(Result.Void);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
     }
 
     [Test]
@@ -41,10 +41,10 @@ public sealed class WhenConstructorIsCalled
             },
             Result = new()
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = ResultType },
             },
-            Scope = Scope.Private,
+            Scope = Scopes.Private,
         };
 
         // Assert
@@ -59,10 +59,10 @@ public sealed class WhenConstructorIsCalled
 
         _ = await Assert.That(subject.Result).IsEqualTo(new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = ResultType },
         });
 
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Private);
     }
 }

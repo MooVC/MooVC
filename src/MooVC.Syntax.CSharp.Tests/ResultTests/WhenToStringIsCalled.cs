@@ -10,8 +10,8 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var subject = new Result
         {
-            Modifier = Result.Kind.Ref,
-            Mode = Result.Modality.Asynchronous,
+            Modifier = Result.Modifiers.Ref,
+            Mode = Result.Modes.Asynchronous,
             Type = new() { Name = ValueType },
         };
 

@@ -68,10 +68,10 @@ public sealed class WhenToSnippetIsCalled
         Constructor protectedWithMultipleParameters = Create(
             parameters: [
                 ParameterTestsData.Create(name: "Second"),
-                ParameterTestsData.Create(name: "Third", modifier: Parameter.Mode.Params, type: typeof(Version[])),
+                ParameterTestsData.Create(name: "Third", modifier: Parameter.Modes.Params, type: typeof(Version[])),
                 ParameterTestsData.Create(name: "First"),
             ],
-            scope: Scope.Protected);
+            scope: Scopes.Protected);
 
         ImmutableArray<Constructor> constructors =
         [
@@ -104,14 +104,14 @@ public sealed class WhenToSnippetIsCalled
         _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 
-    private static Constructor Create(ImmutableArray<Parameter> parameters, Scope? scope = default)
+    private static Constructor Create(ImmutableArray<Parameter> parameters, Scopes? scope = default)
     {
         return new Constructor
         {
             Body = OperatorsTestsData.DefaultBody,
             Extensibility = Extensibility.Implicit,
             Parameters = parameters,
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
         };
     }
 }

@@ -12,7 +12,7 @@ public sealed class WhenAsIsCalled
         // Arrange
         var subject = new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = ValueType },
         };
 
@@ -29,7 +29,7 @@ public sealed class WhenAsIsCalled
         // Arrange
         var subject = new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = ValueType },
         };
 

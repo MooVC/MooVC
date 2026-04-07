@@ -42,7 +42,7 @@ public sealed partial class WhenToSnippetIsCalled
                             (Name: nameof(AttributeUsageAttribute.Inherited), Value: "false")))
                     .DerivesFrom(typeof(Attribute))
                     .Named("IdentityAttribute")
-                    .WithScope(Scope.Internal));
+                    .WithScope(Scopes.Internal));
 
             // Act
             var actual = content.ToSnippet(_options);
@@ -83,7 +83,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .OfType(typeof(string))
                         .WithBehaviours(behaviors => behaviors
                             .WithSet(set => set.WithMode(Property.Methods.Setter.Modes.Set))))
-                    .WithScope(Scope.Internal));
+                    .WithScope(Scopes.Internal));
 
             // Act
             var actual = content.ToSnippet(_options);

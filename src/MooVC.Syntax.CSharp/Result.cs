@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -20,7 +21,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Result
-        : IValidatableObject
+        : IEnumerable<Symbol>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets a default Task-based return signature for asynchronous methods.
@@ -35,7 +37,7 @@
         /// <summary>
         /// Gets a synchronous void return signature for methods with no value.
         /// </summary>
-        public static readonly Result Void = new Result { Mode = Modality.Synchronous };
+        public static readonly Result Void = new Result { Mode = Modes.Synchronous };
 
         private const string Separator = " ";
 
@@ -71,13 +73,13 @@
         /// Gets the return modifier that precedes the return type.
         /// </summary>
         /// <value>The return modifier (for example, ref or ref readonly).</value>
-        public Kind Modifier { get; internal set; } = Kind.None;
+        public Modifiers Modifier { get; internal set; } = Modifiers.None;
 
         /// <summary>
         /// Gets the async modality that determines whether async is emitted.
         /// </summary>
         /// <value>The async modality (async or synchronous).</value>
-        public Modality Mode { get; internal set; } = Modality.Asynchronous;
+        public Modes Mode { get; internal set; } = Modes.Asynchronous;
 
         /// <summary>
         /// Gets the return type symbol that will be emitted in the signature.
@@ -120,6 +122,15 @@
             Guard.Against.Conversion<Result, Snippet>(result);
 
             return Snippet.From(result);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            yield return Type;
         }
 
         /// <summary>
@@ -167,7 +178,7 @@
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Modifier == Kind.None && Type == Symbol.Undefined)
+            if (Modifier == Modifiers.None && Type == Symbol.Undefined)
             {
                 return Enumerable.Empty<ValidationResult>();
             }
@@ -175,6 +186,15 @@
             return validationContext
                 .Include(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

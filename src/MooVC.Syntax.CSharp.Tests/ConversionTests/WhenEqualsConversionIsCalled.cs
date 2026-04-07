@@ -7,7 +7,7 @@ public sealed class WhenEqualsConversionIsCalled
     {
         // Arrange
         Conversion subject = ConversionTestsData.Create();
-        Conversion target = ConversionTestsData.Create(mode: Conversion.Type.Explicit);
+        Conversion target = ConversionTestsData.Create(mode: Conversion.Types.Explicit);
 
         // Act
         bool result = target.Equals(subject);

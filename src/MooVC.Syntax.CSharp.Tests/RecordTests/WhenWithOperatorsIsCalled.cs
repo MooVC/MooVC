@@ -6,8 +6,8 @@ public sealed class WhenWithOperatorsIsCalled
     public async Task GivenOperatorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var original = new Operators { Binaries = [new() { Scope = Scope.Public }] };
-        var updated = new Operators { Unaries = [new() { Scope = Scope.Internal }] };
+        var original = new Operators { Binaries = [new() { Scope = Scopes.Public }] };
+        var updated = new Operators { Unaries = [new() { Scope = Scopes.Internal }] };
         Record record = RecordTestsData.Create(operators: original);
 
         // Act

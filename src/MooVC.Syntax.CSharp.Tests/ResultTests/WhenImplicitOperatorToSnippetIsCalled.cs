@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public async Task GivenResultThenSnippetMatchesToString()
     {
         // Arrange
-        Result subject = ResultTestsData.Create(modifier: Result.Kind.Ref, mode: Result.Modality.Asynchronous);
+        Result subject = ResultTestsData.Create(modifier: Result.Modifiers.Ref, mode: Result.Modes.Asynchronous);
 
         // Act
         Snippet result = subject;

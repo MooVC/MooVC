@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
     public async Task GivenUnspecifiedDeclarationThenEmptyReturned()
     {
         // Arrange
-        Comparison subject = ComparisonTestsData.Create(body: Snippet.Empty, @operator: Comparison.Type.Unspecified);
+        Comparison subject = ComparisonTestsData.Create(body: Snippet.Empty, @operator: Comparison.Types.Unspecified);
         OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
         // Act

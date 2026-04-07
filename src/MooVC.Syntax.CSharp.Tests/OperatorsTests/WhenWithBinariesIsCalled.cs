@@ -12,7 +12,7 @@ public sealed class WhenWithBinariesIsCalled
         // Arrange
         ImmutableArray<Binary> originalBinaries = [BinaryTestsData.Create()];
         Operators original = OperatorsSubjectData.Create(binaries: originalBinaries);
-        Binary[] updatedBinaries = [BinaryTestsData.Create(@operator: Binary.Type.Multiply)];
+        Binary[] updatedBinaries = [BinaryTestsData.Create(@operator: Binary.Types.Multiply)];
         IEnumerable<Binary> expectedBinaries = originalBinaries.Union(updatedBinaries);
 
         // Act

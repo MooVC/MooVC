@@ -20,8 +20,8 @@ public sealed class WhenEqualsClassIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Class subject = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
-        Class value = ClassTestsData.Create(isStatic: true, scope: Scope.Internal);
+        Class subject = ClassTestsData.Create(isStatic: true, scope: Scopes.Internal);
+        Class value = ClassTestsData.Create(isStatic: true, scope: Scopes.Internal);
 
         // Act
         bool result = subject.Equals(value);

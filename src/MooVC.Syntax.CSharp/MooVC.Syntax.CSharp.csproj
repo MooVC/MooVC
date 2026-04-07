@@ -31,10 +31,25 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
+    <Compile Update="Base.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Base.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Definition.Resources.Designer.cs">
       <DependentUpon>Definition.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Implementation.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Implementation.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Token.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Token.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Type.Resources.Designer.cs">
       <DependentUpon>Type.Resources.resx</DependentUpon>
@@ -55,11 +70,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Variable.Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Implementation.Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Implementation.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Attribute.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -126,10 +136,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Result.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Scope.Resources.Designer.cs">
+    <Compile Update="Scopes.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Scope.Resources.resx</DependentUpon>
+      <DependentUpon>Scopes.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Symbol.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -163,9 +173,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Base.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Base.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Definition.Resources.resx">
       <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Implementation.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Implementation.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Token.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Token.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Type.Resources.resx">
       <LastGenOutput>Type.Resources.Designer.cs</LastGenOutput>
@@ -182,10 +204,6 @@
     <EmbeddedResource Update="Variable.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Variable.Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Implementation.Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Implementation.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Attribute.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -239,9 +257,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Result.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Scope.Resources.resx">
+    <EmbeddedResource Update="Scopes.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Scope.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Scopes.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Symbol.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

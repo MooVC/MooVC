@@ -42,14 +42,14 @@
         {
             Snippet signature = GetSignature(options);
 
-            var events = Events.ToSnippet(options.Events.WithImplied(Scope.Public));
-            var indexers = Indexers.ToSnippet(options.Indexers.WithImplied(Scope.Public));
-            var properties = Properties.ToSnippet(options.Properties.WithImplied(Scope.Public));
+            var events = Events.ToSnippet(options.Events.WithImplied(Scopes.Public));
+            var indexers = Indexers.ToSnippet(options.Indexers.WithImplied(Scopes.Public));
+            var properties = Properties.ToSnippet(options.Properties.WithImplied(Scopes.Public));
 
             var methods = Methods
-                .Select(method => method.Returns(result => result.WithMode(Result.Modality.Synchronous)))
+                .Select(method => method.Returns(result => result.WithMode(Result.Modes.Synchronous)))
                 .ToImmutableArray()
-                .ToSnippet(options.Methods.WithImplied(Scope.Public));
+                .ToSnippet(options.Methods.WithImplied(Scopes.Public));
 
             var elements = new Snippet[] { events, properties, indexers, methods };
             IEnumerable<Snippet> types = Types.Select(type => type.ToSnippet(options));
@@ -61,7 +61,7 @@
         private Snippet GetSignature(Options options)
         {
             var attributes = Attributes.ToSnippet(options);
-            var clauses = Declaration.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string name = Declaration;
             string partial = IsPartial.Partial();
             string scope = Scope;

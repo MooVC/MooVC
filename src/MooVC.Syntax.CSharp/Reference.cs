@@ -33,7 +33,7 @@
         /// <value>The base type.</value>
         [Descriptor("DerivesFrom")]
         [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
-        public Symbol Base { get; internal set; } = Symbol.Undefined;
+        public Base Base { get; internal set; } = Base.Unspecified;
 
         /// <summary>
         /// Gets the constructors on the Reference.
@@ -60,6 +60,28 @@
         public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public override IEnumerator<Symbol> GetEnumerator()
+        {
+            IEnumerator<Symbol> @base = base.GetEnumerator();
+
+            while (@base.MoveNext())
+            {
+                yield return @base.Current;
+            }
+
+            foreach (Symbol symbol in Base
+                .Concat(Constructors.SelectMany(constructor => constructor))
+                .Concat(Fields.SelectMany(field => field))
+                .Concat(Parameters.SelectMany(parameter => parameter)))
+            {
+                yield return symbol;
+            }
+        }
+
+        /// <summary>
         /// Validates the Reference.
         /// </summary>
         /// <remarks>Required members include: Extensibility, Constructors, Fields, Parameters.</remarks>
@@ -82,7 +104,7 @@
             }
 
             return validationContext
-                .IncludeIf(!Base.IsUndefined, nameof(Base), results, Base)
+                .IncludeIf(!Base.IsUnspecified, nameof(Base), results, Base)
                 .AndIf(!Constructors.IsDefaultOrEmpty, nameof(Constructors), Constructors)
                 .AndIf(!Fields.IsDefaultOrEmpty, nameof(Fields), Fields)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), Parameters)
@@ -144,7 +166,7 @@
 
         private Snippet GetSignature(Options options)
         {
-            var clauses = Declaration.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
             var parameters = Parameters.ToSnippet(_options.WithSnippets(options.Snippets).WithSymbols(options.Symbols));
@@ -159,7 +181,7 @@
 
             var declaration = Snippet.From(options, signature);
 
-            if (!Base.IsUndefined)
+            if (!Base.IsUnspecified)
             {
                 var @base = Base.ToSnippet(options);
 

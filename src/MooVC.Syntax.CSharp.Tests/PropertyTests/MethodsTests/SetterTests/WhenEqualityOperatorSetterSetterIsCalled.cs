@@ -40,14 +40,14 @@ public sealed class WhenEqualityOperatorSetterSetterIsCalled
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Methods.Setter.Modes.Init,
-            Scope = Scope.Private,
+            Scope = Scopes.Private,
         };
 
         var right = new Property.Methods.Setter
         {
             Behaviour = Snippet.From("value"),
             Mode = Property.Methods.Setter.Modes.Init,
-            Scope = Scope.Private,
+            Scope = Scopes.Private,
         };
 
         // Act

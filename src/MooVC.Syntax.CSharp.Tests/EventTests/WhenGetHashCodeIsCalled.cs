@@ -46,7 +46,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Event first = EventTestsData.Create();
-        Event second = EventTestsData.Create(scope: Scope.Internal);
+        Event second = EventTestsData.Create(scope: Scopes.Internal);
 
         // Act
         int firstHash = first.GetHashCode();

@@ -28,7 +28,7 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
         Symbol subject = value;
 
         // Assert
-        _ = await Assert.That(subject.Name).IsEqualTo(new Symbol.Moniker(nameof(StringBuilder)));
+        _ = await Assert.That(subject.Name).IsEqualTo(new Moniker(nameof(StringBuilder)));
         _ = await Assert.That(subject.Qualifier).IsEqualTo(new Qualifier(["System", "Text"]));
     }
 }

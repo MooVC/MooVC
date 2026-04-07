@@ -4,12 +4,12 @@ internal static class ResultTestsData
 {
     public const string DefaultTypeName = "Value";
 
-    public static Result Create(Result.Kind? modifier = default, Result.Modality? mode = default, Symbol? type = default)
+    public static Result Create(Result.Modifiers? modifier = default, Result.Modes? mode = default, Symbol? type = default)
     {
         return new Result
         {
-            Modifier = modifier ?? Result.Kind.None,
-            Mode = mode ?? Result.Modality.Asynchronous,
+            Modifier = modifier ?? Result.Modifiers.None,
+            Mode = mode ?? Result.Modes.Asynchronous,
             Type = type ?? new Symbol { Name = DefaultTypeName },
         };
     }

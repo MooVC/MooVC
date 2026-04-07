@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -18,7 +19,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Conversion
-        : IValidatableObject
+        : IEnumerable<Symbol>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -42,7 +44,7 @@
         /// Gets the direction on the Conversion.
         /// </summary>
         /// <value>The direction.</value>
-        public Intent Direction { get; internal set; } = Intent.To;
+        public Intents Direction { get; internal set; } = Intents.To;
 
         /// <summary>
         /// Gets a value indicating whether the Conversion is undefined.
@@ -55,13 +57,13 @@
         /// Gets the mode on the Conversion.
         /// </summary>
         /// <value>The mode.</value>
-        public Type Mode { get; internal set; } = Type.Implicit;
+        public Types Mode { get; internal set; } = Types.Implicit;
 
         /// <summary>
         /// Gets the scope on the Conversion.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Gets the target for the Conversion.
@@ -69,6 +71,15 @@
         /// <value>The target for conversion.</value>
         [Descriptor("ForType")]
         public Symbol Target { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            yield return Target;
+        }
 
         /// <summary>
         /// Returns the string representation of the Conversion.
@@ -99,7 +110,7 @@
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Conversion)));
-            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Conversion)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Conversion)));
 
             return ToSnippet(type.Declaration, options);
         }
@@ -126,7 +137,9 @@
 
             if (Target.IsUndefined)
             {
-                results = results.Append(new ValidationResult(ValidateSubjectRequired.Format(nameof(Target), nameof(Conversion)), new[] { nameof(Target) }));
+                results = results.Append(new ValidationResult(
+                    ValidateSubjectRequired.Format(nameof(Target), nameof(Conversion)),
+                    new[] { nameof(Target) }));
             }
 
             return validationContext
@@ -134,9 +147,21 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <remarks>This method is an explicit interface implementation for <see
+        /// cref="IEnumerable.GetEnumerator"/>. Use the generic <see cref="GetEnumerator"/> method for type-safe
+        /// enumeration.</remarks>
+        /// <returns>An <see cref="IEnumerator"/> object that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         private void GetInputAndResult(Declaration declaration, out string input, out string result)
         {
-            if (Direction == Intent.To)
+            if (Direction == Intents.To)
             {
                 input = declaration;
                 result = Target;

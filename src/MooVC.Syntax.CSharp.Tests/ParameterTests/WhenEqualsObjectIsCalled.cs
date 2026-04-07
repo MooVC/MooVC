@@ -20,8 +20,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Parameter subject = ParameterTestsData.Create(modifier: Parameter.Mode.Out);
-        object comparison = ParameterTestsData.Create(modifier: Parameter.Mode.Out);
+        Parameter subject = ParameterTestsData.Create(modifier: Parameter.Modes.Out);
+        object comparison = ParameterTestsData.Create(modifier: Parameter.Modes.Out);
 
         // Act
         bool result = subject.Equals(comparison);

@@ -41,13 +41,13 @@ public sealed class WhenToStringIsCalled
     public async Task GivenTargetThenReturnsAttributeStringWithTarget()
     {
         // Arrange
-        Attribute attribute = AttributeTestsData.Create(target: Attribute.Specifier.Method);
+        Attribute attribute = AttributeTestsData.Create(target: Attribute.Specifiers.Method);
 
         // Act
         string result = attribute.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"{Attribute.Specifier.Method}:{AttributeName}");
+        _ = await Assert.That(result).IsEqualTo($"{Attribute.Specifiers.Method}:{AttributeName}");
     }
 
     [Test]

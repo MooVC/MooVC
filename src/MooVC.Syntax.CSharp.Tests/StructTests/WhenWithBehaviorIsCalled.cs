@@ -6,14 +6,14 @@ public sealed class WhenWithBehaviorIsCalled
     public async Task GivenBehaviorThenReturnsUpdatedInstance()
     {
         // Arrange
-        Struct original = StructTestsData.Create(behavior: Struct.Kind.Ref);
+        Struct original = StructTestsData.Create(behavior: Struct.Kinds.Ref);
 
         // Act
-        Struct result = original.WithBehavior(Struct.Kind.ReadOnly);
+        Struct result = original.WithBehavior(Struct.Kinds.ReadOnly);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(result.Behavior).IsEqualTo(Struct.Kind.ReadOnly);
-        _ = await Assert.That(original.Behavior).IsEqualTo(Struct.Kind.Ref);
+        _ = await Assert.That(result.Behavior).IsEqualTo(Struct.Kinds.ReadOnly);
+        _ = await Assert.That(original.Behavior).IsEqualTo(Struct.Kinds.Ref);
     }
 }

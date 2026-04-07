@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -19,7 +20,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Indexer
-        : IValidatableObject
+        : IEnumerable<Symbol>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -71,7 +73,7 @@
         /// Gets the scope on the Indexer.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Defines the string operator for the Indexer.
@@ -95,6 +97,18 @@
             Guard.Against.Conversion<Indexer, Snippet>(indexer);
 
             return Snippet.From(indexer);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols, including both parameters and results.
+        /// </summary>
+        /// <returns>An enumerator for the combined sequence of parameter and result symbols.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            foreach (Symbol symbol in Parameter.Concat(Result))
+            {
+                yield return symbol;
+            }
         }
 
         /// <summary>
@@ -173,6 +187,15 @@
                 .Results;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         private static Snippet.Options FormatBlockStyle(Snippet methods, Snippet.Options options)
         {
             if (methods.IsSingleLine && options.Block.Inline.IsLambda)
@@ -188,7 +211,7 @@
         {
             string extensibility = Extensibility;
             string parameter = Parameter;
-            string result = Result.WithMode(Result.Modality.Synchronous);
+            string result = Result.WithMode(Result.Modes.Synchronous);
             string scope = Scope.ToString(options);
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 

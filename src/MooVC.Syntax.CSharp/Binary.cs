@@ -47,13 +47,13 @@
         /// Gets the operator on the Binary.
         /// </summary>
         /// <value>The operator.</value>
-        public Type Operator { get; internal set; } = Type.Unspecified;
+        public Types Operator { get; internal set; } = Types.Unspecified;
 
         /// <summary>
         /// Gets the scope on the Binary.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Returns the string representation of the Binary.
@@ -84,7 +84,7 @@
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Binary)));
-            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Binary)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Binary)));
 
             return ToSnippet(type.Declaration, options);
         }

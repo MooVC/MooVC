@@ -20,8 +20,8 @@ public sealed class WhenEqualsAttributeIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Property);
-        Attribute right = AttributeTestsData.Create(target: Attribute.Specifier.Property);
+        Attribute left = AttributeTestsData.Create(target: Attribute.Specifiers.Property);
+        Attribute right = AttributeTestsData.Create(target: Attribute.Specifiers.Property);
 
         // Act
         bool result = left.Equals(right);

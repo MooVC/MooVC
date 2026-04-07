@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Return);
-        Attribute right = AttributeTestsData.Create(target: Attribute.Specifier.Return);
+        Attribute left = AttributeTestsData.Create(target: Attribute.Specifiers.Return);
+        Attribute right = AttributeTestsData.Create(target: Attribute.Specifiers.Return);
 
         // Act
         int leftHash = left.GetHashCode();

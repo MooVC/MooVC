@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.IsStatic).IsFalse();
         _ = await Assert.That(subject.IsUndefined).IsTrue();
         _ = await Assert.That(subject.Name).IsEqualTo(Variable.Unnamed);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Private);
         _ = await Assert.That(subject.Type).IsEqualTo(Symbol.Undefined);
     }
 
@@ -34,7 +34,7 @@ public sealed class WhenConstructorIsCalled
             IsReadOnly = false,
             IsStatic = true,
             Name = new(FieldTestsData.DefaultName),
-            Scope = Scope.Internal,
+            Scope = Scopes.Internal,
             Type = type,
         };
 
@@ -44,7 +44,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.IsStatic).IsTrue();
         _ = await Assert.That(subject.IsUndefined).IsFalse();
         _ = await Assert.That(subject.Name).IsEqualTo(new Variable(FieldTestsData.DefaultName));
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Internal);
         _ = await Assert.That(subject.Type).IsEqualTo(type);
     }
 }

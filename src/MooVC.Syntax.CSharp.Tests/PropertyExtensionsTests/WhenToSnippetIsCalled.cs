@@ -42,9 +42,9 @@ public sealed class WhenToSnippetIsCalled
     public async Task GivenValuesThenTheyAreOrderedByStaticScopeExtensibilityAndName()
     {
         // Arrange
-        Property staticProperty = PropertyTestsData.Create(name: "Beta", scope: Scope.Public, type: typeof(int));
-        Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scope.Public, type: typeof(Version));
-        Property protectedVirtual = PropertyTestsData.Create(name: "Gamma", scope: Scope.Protected, type: typeof(string));
+        Property staticProperty = PropertyTestsData.Create(name: "Beta", scope: Scopes.Public, type: typeof(int));
+        Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scopes.Public, type: typeof(Version));
+        Property protectedVirtual = PropertyTestsData.Create(name: "Gamma", scope: Scopes.Protected, type: typeof(string));
 
         staticProperty.Extensibility = Extensibility.Static;
         publicVirtual.Extensibility = Extensibility.Virtual;

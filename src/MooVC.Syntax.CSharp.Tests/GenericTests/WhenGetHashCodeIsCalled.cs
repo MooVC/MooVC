@@ -41,7 +41,7 @@ public sealed class WhenGetHashCodeIsCalled
         return new Generic
         {
             Name = new(name),
-            Constraints = [new() { Base = new(SymbolTestsData.CreateWithArgumentNames()) }],
+            Constraints = [new() { Base = SymbolTestsData.CreateWithArgumentNames() }],
         };
     }
 }

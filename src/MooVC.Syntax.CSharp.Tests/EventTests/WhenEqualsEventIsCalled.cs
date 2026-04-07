@@ -44,7 +44,7 @@ public sealed class WhenEqualsEventIsCalled
     {
         // Arrange
         Event subject = EventTestsData.Create();
-        Event target = EventTestsData.Create(scope: Scope.Internal);
+        Event target = EventTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = target.Equals(subject);

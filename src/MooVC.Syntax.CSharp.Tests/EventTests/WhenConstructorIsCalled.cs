@@ -18,7 +18,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Handler).IsEqualTo(Symbol.Undefined);
         _ = await Assert.That(subject.IsUndefind).IsTrue();
         _ = await Assert.That(subject.Name).IsEqualTo(Unnamed);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
     }
 
     [Test]
@@ -36,7 +36,7 @@ public sealed class WhenConstructorIsCalled
             Behaviours = behaviours,
             Handler = new() { Name = Handler },
             Name = new(Name),
-            Scope = Scope.Private,
+            Scope = Scopes.Private,
         };
 
         // Assert
@@ -44,6 +44,6 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Handler).IsEqualTo(new Symbol { Name = Handler });
         _ = await Assert.That(subject.IsUndefind).IsFalse();
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(Name));
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Private);
     }
 }

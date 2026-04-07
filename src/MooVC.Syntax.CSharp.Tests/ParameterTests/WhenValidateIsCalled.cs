@@ -88,7 +88,7 @@ public sealed class WhenValidateIsCalled
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
-            modifier: Parameter.Mode.Out,
+            modifier: Parameter.Modes.Out,
             attributes: new Attribute
             {
                 Name = new() { Name = AttributeName },

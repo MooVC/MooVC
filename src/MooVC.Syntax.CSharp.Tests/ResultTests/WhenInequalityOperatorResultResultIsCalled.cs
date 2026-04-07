@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorResultResultIsCalled
     {
         // Arrange
         Result left = ResultTestsData.Create();
-        Result right = ResultTestsData.Create(mode: Result.Modality.Synchronous);
+        Result right = ResultTestsData.Create(mode: Result.Modes.Synchronous);
 
         // Act
         bool result = left != right;

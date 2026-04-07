@@ -4,12 +4,12 @@ internal static class ComparisonTestsData
 {
     public const string DefaultBody = "return left == right;";
 
-    public static Comparison Create(Snippet? body = default, Comparison.Type? @operator = default, Scope? scope = default)
+    public static Comparison Create(Snippet? body = default, Comparison.Types? @operator = default, Scopes? scope = default)
     {
         var subject = new Comparison
         {
             Body = body ?? Snippet.From(DefaultBody),
-            Operator = @operator ?? Comparison.Type.Equality,
+            Operator = @operator ?? Comparison.Types.Equality,
         };
 
         if (scope is not null)

@@ -6,7 +6,7 @@ public sealed class WhenWithDefaultIsCalled
     public async Task GivenValueThenReturnsNewInstanceWithUpdatedDefault()
     {
         // Arrange
-        Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter original = ParameterTestsData.Create(modifier: Parameter.Modes.In);
         var @default = Snippet.From("value");
 
         // Act

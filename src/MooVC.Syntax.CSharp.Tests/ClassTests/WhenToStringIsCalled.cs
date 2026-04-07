@@ -25,7 +25,7 @@ public sealed class WhenToStringIsCalled
             extensibility: Extensibility.Abstract,
             isPartial: true,
             name: new Declaration { Name = ClassTestsData.DefaultName },
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Act
         string result = subject.ToString();

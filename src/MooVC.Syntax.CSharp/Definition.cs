@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Definition
-        : Construct
+        : Construct,
+          IEnumerable<Symbol>
     {
         /// <summary>
         /// Gets the empty instance.
@@ -54,6 +56,15 @@
         /// <value>The usings.</value>
         [Descriptor("Referencing")]
         public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            return Type.GetEnumerator();
+        }
 
         /// <summary>
         /// Returns the string representation of the Definition.
@@ -123,6 +134,15 @@
                 .And(nameof(Namespace), _ => !Namespace.IsUnqualified, Namespace)
                 .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), @using => !@using.IsUndefined, Usings)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

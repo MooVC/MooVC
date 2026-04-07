@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,7 @@
     [Valuify]
     public sealed partial class Symbol
         : IComparable<Symbol>,
+          IEnumerable<Symbol>,
           IValidatableObject
     {
         /// <summary>
@@ -209,6 +211,18 @@
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the arguments.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            foreach (Symbol symbol in Arguments.SelectMany(argument => argument))
+            {
+                yield return symbol;
+            }
+        }
+
+        /// <summary>
         /// Returns the string representation of the Symbol.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -245,6 +259,15 @@
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Qualifier), Qualifier)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private string ToString(Options options)
@@ -296,6 +319,13 @@
         {
             if (Qualifier.IsUnqualified || options.Qualification == Qualification.Minimum)
             {
+                const int SuffixLength = 9;
+
+                if (signature.EndsWith(nameof(Attribute)))
+                {
+                    signature = signature.Substring(0, signature.Length - SuffixLength);
+                }
+
                 return signature;
             }
 

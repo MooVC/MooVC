@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,7 @@
     [Valuify]
     public sealed partial class Declaration
         : IComparable<Declaration>,
+          IEnumerable<Symbol>,
           IValidatableObject
     {
         /// <summary>
@@ -38,7 +40,7 @@
         /// Gets the generics on the Declaration.
         /// </summary>
         /// <value>The generics.</value>
-        public ImmutableArray<Generic> Generics { get; internal set; } = ImmutableArray<Generic>.Empty;
+        public ImmutableArray<Generic> Arguments { get; internal set; } = ImmutableArray<Generic>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Declaration is unspecified.
@@ -169,6 +171,20 @@
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the generics collections.
+        /// </summary>
+        /// <remarks>The enumerator iterates over each symbol in all generics collections in sequence. The
+        /// order of enumeration matches the order of the generics collections and their contained symbols.</remarks>
+        /// <returns>An enumerator that can be used to iterate through the symbols in all generics collections.</returns>
+        public IEnumerator<Symbol> GetEnumerator()
+        {
+            foreach (Symbol symbol in Arguments.SelectMany(generic => generic))
+            {
+                yield return symbol;
+            }
+        }
+
+        /// <summary>
         /// Returns the string representation of the Declaration.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -193,9 +209,9 @@
 
             string signature = Name;
 
-            if (!Generics.IsDefaultOrEmpty)
+            if (!Arguments.IsDefaultOrEmpty)
             {
-                var parameters = Generics.ToSnippet(Generic.Names, options);
+                var parameters = Arguments.ToSnippet(Generic.Names, options);
 
                 signature = $"{signature}<{parameters}>";
             }
@@ -217,9 +233,18 @@
             }
 
             return validationContext
-                .IncludeIf(!Generics.IsDefaultOrEmpty, nameof(Generics), parameter => !parameter.IsUndefined, Generics)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), generic => !generic.IsUndefined, Arguments)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

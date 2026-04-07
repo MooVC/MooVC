@@ -7,7 +7,7 @@ public sealed class WhenWithScopeIsCalled
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
-        Scope replacement = Scope.Internal;
+        Scopes replacement = Scopes.Internal;
 
         // Act
         Conversion result = original.WithScope(replacement);

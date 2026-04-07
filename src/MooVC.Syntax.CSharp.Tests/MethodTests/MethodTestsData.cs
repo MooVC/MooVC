@@ -15,7 +15,7 @@ internal static class MethodTestsData
         Declaration? name = default,
         IEnumerable<Parameter>? parameters = default,
         Result? result = default,
-        Scope? scope = default,
+        Scopes? scope = default,
         Snippet? body = default)
     {
         var subject = new Method
@@ -23,7 +23,7 @@ internal static class MethodTestsData
             Name = name ?? new Declaration { Name = DefaultName },
             Result = result ?? new Result
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = DefaultResultType },
             },
             Parameters = Create(parameters),

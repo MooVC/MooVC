@@ -12,7 +12,7 @@ internal static class FieldTestsData
         bool? isReadOnly = default,
         bool? isStatic = default,
         string? name = DefaultName,
-        Scope? scope = default,
+        Scopes? scope = default,
         Symbol? type = default)
     {
         return new Field
@@ -23,7 +23,7 @@ internal static class FieldTestsData
             Name = name is null
                 ? Variable.Unnamed
                 : new Variable(name),
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
             Type = type ?? DefaultType,
         };
     }

@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorUnaryUnaryIsCalled
     {
         // Arrange
         Unary first = UnaryTestsData.Create();
-        Unary second = UnaryTestsData.Create(@operator: Unary.Type.Decrement);
+        Unary second = UnaryTestsData.Create(@operator: Unary.Types.Decrement);
 
         // Act
         bool result = first != second;

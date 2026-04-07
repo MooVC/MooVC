@@ -36,8 +36,8 @@ public sealed class WhenInequalityOperatorAttributeAttributeIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Attribute left = AttributeTestsData.Create(target: Attribute.Specifier.Constructor);
-        Attribute right = AttributeTestsData.Create(target: Attribute.Specifier.Constructor);
+        Attribute left = AttributeTestsData.Create(target: Attribute.Specifiers.Constructor);
+        Attribute right = AttributeTestsData.Create(target: Attribute.Specifiers.Constructor);
 
         // Act
         bool resultLeftRight = left != right;

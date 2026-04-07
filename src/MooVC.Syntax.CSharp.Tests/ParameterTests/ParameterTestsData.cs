@@ -9,7 +9,7 @@ public static class ParameterTestsData
 
     public static Parameter Create(
         string? name = DefaultName,
-        Parameter.Mode? modifier = default,
+        Parameter.Modes? modifier = default,
         Snippet? @default = default,
         Symbol? type = default,
         params Attribute[] attributes)
@@ -22,7 +22,7 @@ public static class ParameterTestsData
         {
             Attributes = provided,
             Default = @default ?? Snippet.Empty,
-            Modifier = modifier ?? Parameter.Mode.None,
+            Modifier = modifier ?? Parameter.Modes.None,
             Name = name is null
                 ? Variable.Unnamed
                 : new Variable(name),

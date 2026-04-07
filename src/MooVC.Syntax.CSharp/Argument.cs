@@ -42,7 +42,7 @@
         /// Gets the argument modifier (in, ref, out, or none).
         /// </summary>
         /// <value>The modifier that affects how the argument is passed.</value>
-        public Mode Modifier { get; internal set; } = Mode.None;
+        public Modes Modifier { get; internal set; } = Modes.None;
 
         /// <summary>
         /// Gets the argument name used for named arguments.

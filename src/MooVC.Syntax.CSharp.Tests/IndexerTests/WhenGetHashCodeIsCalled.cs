@@ -31,7 +31,7 @@ public sealed class WhenGetHashCodeIsCalled
         Indexer second = IndexerTestsData.Create(
             result: new Result
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = "int" },
             });
 

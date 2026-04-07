@@ -9,7 +9,7 @@ internal static class PropertyTestsData
         Property.Methods? behaviours = default,
         Snippet? @default = default,
         string? name = DefaultName,
-        Scope? scope = default,
+        Scopes? scope = default,
         Symbol? type = default)
     {
         return new Property
@@ -17,7 +17,7 @@ internal static class PropertyTestsData
             Behaviours = behaviours ?? new Property.Methods { Get = Snippet.From("value;") },
             Default = @default ?? Snippet.Empty,
             Name = name ?? Name.Unnamed,
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
             Type = type ?? DefaultType,
         };
     }

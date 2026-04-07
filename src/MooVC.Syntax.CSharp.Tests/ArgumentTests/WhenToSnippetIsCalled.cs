@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var subject = new Argument
         {
-            Modifier = Argument.Mode.Ref,
+            Modifier = Argument.Modes.Ref,
             Name = new(Name),
             Value = Snippet.From(Value),
         };

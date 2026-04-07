@@ -12,7 +12,7 @@ public sealed class WhenWithUnariesIsCalled
         // Arrange
         ImmutableArray<Unary> originalUnaries = [UnaryTestsData.Create()];
         Operators original = OperatorsSubjectData.Create(unaries: originalUnaries);
-        Unary[] updatedUnaries = [UnaryTestsData.Create(@operator: Unary.Type.Minus)];
+        Unary[] updatedUnaries = [UnaryTestsData.Create(@operator: Unary.Types.Minus)];
         IEnumerable<Unary> expectedUnaries = originalUnaries.Union(updatedUnaries);
 
         // Act

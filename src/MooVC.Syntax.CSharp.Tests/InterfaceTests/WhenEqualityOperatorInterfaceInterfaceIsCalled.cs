@@ -34,8 +34,8 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
     public async Task GivenDifferentScopesThenReturnsFalse()
     {
         // Arrange
-        Interface left = InterfaceTestsData.Create(scope: Scope.Internal);
-        Interface right = InterfaceTestsData.Create(scope: Scope.Private);
+        Interface left = InterfaceTestsData.Create(scope: Scopes.Internal);
+        Interface right = InterfaceTestsData.Create(scope: Scopes.Private);
 
         // Act
         bool result = left == right;
@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorInterfaceInterfaceIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Interface left = InterfaceTestsData.Create(scope: Scope.Internal);
-        Interface right = InterfaceTestsData.Create(scope: Scope.Internal);
+        Interface left = InterfaceTestsData.Create(scope: Scopes.Internal);
+        Interface right = InterfaceTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left == right;

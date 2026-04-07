@@ -9,7 +9,7 @@ internal static class EventTestsData
         string handler = DefaultHandler,
         string name = DefaultName,
         Event.Methods? behaviours = default,
-        Scope? scope = default)
+        Scopes? scope = default)
     {
         var subject = new Event
         {

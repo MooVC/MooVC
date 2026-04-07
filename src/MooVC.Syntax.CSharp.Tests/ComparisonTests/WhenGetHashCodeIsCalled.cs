@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Comparison first = ComparisonTestsData.Create();
-        Comparison second = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan);
+        Comparison second = ComparisonTestsData.Create(@operator: Comparison.Types.GreaterThan);
 
         // Act
         int firstHash = first.GetHashCode();

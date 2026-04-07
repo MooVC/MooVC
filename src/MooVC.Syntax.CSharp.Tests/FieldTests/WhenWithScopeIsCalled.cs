@@ -9,7 +9,7 @@ public sealed class WhenWithScopeIsCalled
         Field original = FieldTestsData.Create();
 
         // Act
-        Field result = original.WithScope(Scope.Internal);
+        Field result = original.WithScope(Scopes.Internal);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
@@ -17,9 +17,9 @@ public sealed class WhenWithScopeIsCalled
         _ = await Assert.That(result.IsReadOnly).IsEqualTo(original.IsReadOnly);
         _ = await Assert.That(result.IsStatic).IsEqualTo(original.IsStatic);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
-        _ = await Assert.That(result.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(result.Scope).IsEqualTo(Scopes.Internal);
         _ = await Assert.That(result.Type).IsEqualTo(original.Type);
 
-        _ = await Assert.That(original.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(original.Scope).IsEqualTo(Scopes.Public);
     }
 }

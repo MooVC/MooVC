@@ -9,7 +9,7 @@ public sealed class WhenReturnsIsCalled
         Method original = MethodTestsData.Create();
         var result = new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = "bool" },
         };
 
