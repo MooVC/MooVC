@@ -94,18 +94,18 @@
             public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
+            /// Gets the types on the Options.
+            /// </summary>
+            /// <value>The types.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsQualificationsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
+
+            /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
-
-            /// <summary>
-            /// Gets the types on the Options.
-            /// </summary>
-            /// <value>The types.</value>
-            [Required(ErrorMessageResourceName = nameof(OptionsSymbolsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts parameter options into snippet options.
@@ -117,6 +117,18 @@
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            /// <summary>
+            /// Converts parameter options into symbol options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The symbol options.</returns>
+            public static implicit operator Qualification.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Qualification.Options>(options);
+
+                return options.Qualifications;
             }
 
             /// <summary>
@@ -132,18 +144,6 @@
                 Guard.Against.Conversion<Options, Styles>(options);
 
                 return options.Format;
-            }
-
-            /// <summary>
-            /// Converts parameter options into symbol options.
-            /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The symbol options.</returns>
-            public static implicit operator Symbol.Options(Options options)
-            {
-                Guard.Against.Conversion<Options, Symbol.Options>(options);
-
-                return options.Symbols;
             }
         }
     }

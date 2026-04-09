@@ -47,7 +47,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Moniker Name { get; internal set; } = Moniker.Unnamed;
+        public Qualification Name { get; internal set; } = Qualification.Unnamed;
 
         /// <summary>
         /// Gets a value indicating whether the Implementation is undefined.
@@ -55,13 +55,6 @@
         /// <value>A value indicating whether the Implementation is undefined.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
-
-        /// <summary>
-        /// Gets the qualifier on the Symbol.
-        /// </summary>
-        /// <value>The qualifier.</value>
-        [Descriptor("From")]
-        public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
         /// Defines the string operator for the Implementation.
@@ -98,22 +91,20 @@
 
             return new Implementation()
                 .Enumerate((argument, implementation) => implementation.WithArguments(argument), type.GetGenericArguments())
-                .From(type)
                 .Named(type);
         }
 
         /// <summary>
         /// Implicitly converts a tuple containing a name and qualifier to an Implementation instance.
         /// </summary>
-        /// <param name="implementation">The tuple containing the name and qualifier to be converted into an Implementation.</param>
+        /// <param name="qualification">The tuple containing the name and qualifier to be converted into an Implementation.</param>
         /// <returns>The Implementation.</returns>
-        public static implicit operator Implementation((Moniker Name, Qualifier Qualifier) implementation)
+        public static implicit operator Implementation(Qualification qualification)
         {
-            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Implementation>(implementation);
+            Guard.Against.Conversion<Qualification, Implementation>(qualification);
 
             return new Implementation()
-                .From(implementation.Qualifier)
-                .Named(implementation.Name);
+                .Named(qualification);
         }
 
         /// <summary>
@@ -127,7 +118,6 @@
 
             return new Implementation()
                 .Enumerate((argument, implementation) => implementation.WithArguments(argument), symbol.Arguments)
-                .From(symbol.Qualifier)
                 .Named(symbol.Name);
         }
 
@@ -146,7 +136,7 @@
                 yield return symbol;
             }
 
-            yield return (Name, Qualifier);
+            yield return Name;
         }
 
         /// <summary>
@@ -163,7 +153,7 @@
                 return Snippet.Empty;
             }
 
-            string signature = Name;
+            string signature = Name.ToSnippet(options);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -178,7 +168,7 @@
                 signature = $"{signature}<{list}>";
             }
 
-            return Snippet.From(options, $"{Qualifier}.{signature}");
+            return Snippet.From(options, signature);
         }
 
         /// <summary>
@@ -218,7 +208,7 @@
             return GetEnumerator();
         }
 
-        private static bool IsNameValid(Moniker name)
+        private static bool IsNameValid(Qualification name)
         {
             if (name.IsUnnamed)
             {
@@ -226,6 +216,7 @@
             }
 
             return name
+                .Moniker
                 .ToString()
                 .StartsWith("I", StringComparison.Ordinal);
         }

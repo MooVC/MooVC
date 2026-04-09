@@ -22,14 +22,14 @@ namespace MooVC.Syntax.CSharp {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Symbol_Resources {
+    internal class Moniker_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Symbol_Resources() {
+        internal Moniker_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC.Syntax.CSharp {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Symbol.Resources", typeof(Symbol_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.Moniker.Resources", typeof(Moniker_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
+        ///   Looks up a localized string similar to The value &apos;{0}&apos; is not valid for &apos;{1}&apos;. Please use a valid C# identifier, starting with an uppercase letter, containing letters, digits, or underscores, and excluding spaces or reserved keywords..
         /// </summary>
-        internal static string ToStringOptionsRequired {
+        internal static string MonikerValidateValueRequired {
             get {
-                return ResourceManager.GetString("ToStringOptionsRequired", resourceCulture);
+                return ResourceManager.GetString("MonikerValidateValueRequired", resourceCulture);
             }
         }
     }

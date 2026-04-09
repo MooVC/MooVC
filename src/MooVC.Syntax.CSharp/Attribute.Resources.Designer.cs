@@ -61,6 +61,15 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Type options must be provided..
+        /// </summary>
+        internal static string OptionsQualificationsRequired {
+            get {
+                return ResourceManager.GetString("OptionsQualificationsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Snippet options must be provided..
         /// </summary>
         internal static string OptionsSnippetsRequired {
@@ -75,15 +84,6 @@ namespace MooVC.Syntax.CSharp {
         internal static string OptionsStyleRequired {
             get {
                 return ResourceManager.GetString("OptionsStyleRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Type options must be provided..
-        /// </summary>
-        internal static string OptionsSymbolsRequired {
-            get {
-                return ResourceManager.GetString("OptionsSymbolsRequired", resourceCulture);
             }
         }
         

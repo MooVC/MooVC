@@ -169,7 +169,7 @@
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
-            var parameters = Parameters.ToSnippet(_options.WithSnippets(options.Snippets).WithSymbols(options.Symbols));
+            var parameters = Parameters.ToSnippet(_options);
             string partial = IsPartial.Partial();
             string scope = Scope;
             string signature = GetSignature(extensibility, partial, name, scope);

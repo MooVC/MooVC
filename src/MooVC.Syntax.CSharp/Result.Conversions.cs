@@ -20,7 +20,6 @@
             _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Modifiers), typeof(Result)));
 
             Symbol wrapped = new Symbol()
-                .From(wrapper)
                 .Named(wrapper)
                 .WithArguments(Type);
 

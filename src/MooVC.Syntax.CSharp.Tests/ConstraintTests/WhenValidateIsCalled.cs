@@ -51,7 +51,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Moniker));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -75,7 +75,7 @@ public sealed class WhenValidateIsCalled
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).IsNotEmpty();
         _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Moniker)));
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Implementation)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Moniker)));
     }
 
     [Test]

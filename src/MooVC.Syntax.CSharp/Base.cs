@@ -46,7 +46,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Moniker Name { get; internal set; } = Moniker.Unnamed;
+        public Qualification Name { get; internal set; } = Qualification.Unnamed;
 
         /// <summary>
         /// Gets a value indicating whether the Base is undefined.
@@ -54,13 +54,6 @@
         /// <value>A value indicating whether the Base is undefined.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
-
-        /// <summary>
-        /// Gets the qualifier on the Symbol.
-        /// </summary>
-        /// <value>The qualifier.</value>
-        [Descriptor("From")]
-        public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
         /// Defines the string operator for the Base.
@@ -97,22 +90,20 @@
 
             return new Base()
                 .Enumerate((argument, @base) => @base.WithArguments(argument), type.GetGenericArguments())
-                .From(type)
                 .Named(type);
         }
 
         /// <summary>
         /// Implicitly converts a tuple containing a name and qualifier to an Base instance.
         /// </summary>
-        /// <param name="base">The tuple containing the name and qualifier to be converted into an Base.</param>
+        /// <param name="qualification">The tuple containing the name and qualifier to be converted into an Base.</param>
         /// <returns>The Base.</returns>
-        public static implicit operator Base((Name Name, Qualifier Qualifier) @base)
+        public static implicit operator Base(Qualification qualification)
         {
-            Guard.Against.Conversion<(Name Name, Qualifier Qualifier), Base>(@base);
+            Guard.Against.Conversion<Qualification, Base>(qualification);
 
             return new Base()
-                .From(@base.Qualifier)
-                .Named(@base.Name);
+                .Named(qualification);
         }
 
         /// <summary>
@@ -126,7 +117,6 @@
 
             return new Base()
                 .Enumerate((argument, @base) => @base.WithArguments(argument), symbol.Arguments)
-                .From(symbol.Qualifier)
                 .Named(symbol.Name);
         }
 
@@ -145,7 +135,7 @@
                 yield return symbol;
             }
 
-            yield return (Name, Qualifier);
+            yield return Name;
         }
 
         /// <summary>
@@ -162,7 +152,7 @@
                 return Snippet.Empty;
             }
 
-            string signature = Name;
+            string signature = Name.ToSnippet(options);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -177,7 +167,7 @@
                 signature = $"{signature}<{list}>";
             }
 
-            return Snippet.From(options, $"{Qualifier}.{signature}");
+            return Snippet.From(options, signature);
         }
 
         /// <summary>
@@ -205,7 +195,6 @@
             return validationContext
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, Arguments)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
-                .And(nameof(Qualifier), Qualifier)
                 .Results;
         }
 

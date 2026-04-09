@@ -8,7 +8,7 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Validation;
-    using static MooVC.Syntax.CSharp.Symbol_Resources;
+    using static MooVC.Syntax.CSharp.Moniker_Resources;
     using Kind = System.Type;
 
     /// <summary>

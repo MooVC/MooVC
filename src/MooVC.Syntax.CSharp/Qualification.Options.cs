@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents a C# syntax element symbol.
     /// </summary>
-    public partial class Symbol
+    public partial class Qualification
     {
         /// <summary>
         /// Defines options for the Symbol C# syntax element.
@@ -66,16 +66,16 @@
             public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
-            /// Gets the qualification on the Options.
+            /// Gets the Format on the Options.
             /// </summary>
-            /// <value>The qualification.</value>
-            public Qualification Qualification { get; internal set; } = Qualification.Minimum;
+            /// <value>The Format.</value>
+            public Formats Format { get; internal set; } = Formats.Minimum;
 
-            public static implicit operator Qualification(Options options)
+            public static implicit operator Formats(Options options)
             {
-                Guard.Against.Conversion<Options, Qualification>(options);
+                Guard.Against.Conversion<Options, Formats>(options);
 
-                return options.Qualification;
+                return options.Format;
             }
         }
     }
