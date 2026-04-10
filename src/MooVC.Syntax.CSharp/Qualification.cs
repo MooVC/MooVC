@@ -73,7 +73,7 @@
         {
             Guard.Against.Conversion<Qualification, Snippet>(symbol);
 
-            return Snippet.From(symbol);
+            return Snippet.From(symbol.ToString());
         }
 
         /// <summary>

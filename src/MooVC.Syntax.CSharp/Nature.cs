@@ -69,7 +69,7 @@
         {
             Guard.Against.Conversion<Nature, Snippet>(nature);
 
-            return Snippet.From(nature);
+            return Snippet.From(nature.ToString());
         }
 
         /// <summary>

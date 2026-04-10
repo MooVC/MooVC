@@ -80,20 +80,6 @@
         }
 
         /// <summary>
-        /// Defines the Base operator for the Base.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The Base.</returns>
-        public static implicit operator Base(Kind type)
-        {
-            Guard.Against.Conversion<Kind, Base>(type);
-
-            return new Base()
-                .Enumerate((argument, @base) => @base.WithArguments(argument), type.GetGenericArguments())
-                .Named(type);
-        }
-
-        /// <summary>
         /// Implicitly converts a tuple containing a name and qualifier to an Base instance.
         /// </summary>
         /// <param name="qualification">The tuple containing the name and qualifier to be converted into an Base.</param>
@@ -118,6 +104,20 @@
             return new Base()
                 .Enumerate((argument, @base) => @base.WithArguments(argument), symbol.Arguments)
                 .Named(symbol.Name);
+        }
+
+        /// <summary>
+        /// Defines the Base operator for the Base.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The Base.</returns>
+        public static implicit operator Base(Kind type)
+        {
+            Guard.Against.Conversion<Kind, Base>(type);
+
+            return new Base()
+                .Enumerate((argument, @base) => @base.WithArguments(argument), type.GetGenericArguments())
+                .Named(type);
         }
 
         /// <summary>

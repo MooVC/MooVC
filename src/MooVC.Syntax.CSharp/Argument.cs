@@ -84,15 +84,15 @@
         /// <summary>
         /// Implicitly converts a tuple containing a name and snippet to an Argument instance.
         /// </summary>
-        /// <param name="attribute">The tuple containing the name and snippet to be converted into an Argument.</param>
+        /// <param name="argument">The tuple containing the name and snippet to be converted into an Argument.</param>
         /// <returns>The Argument.</returns>
-        public static implicit operator Argument((Name Name, Snippet Value) attribute)
+        public static implicit operator Argument((Name Name, Snippet Value) argument)
         {
-            Guard.Against.Conversion<(Name Name, Snippet Value), Argument>(attribute);
+            Guard.Against.Conversion<(Name Name, Snippet Value), Argument>(argument);
 
             return new Argument()
-                .Named(attribute.Name)
-                .WithValue(attribute.Value);
+                .Named(argument.Name)
+                .WithValue(argument.Value);
         }
 
         /// <summary>

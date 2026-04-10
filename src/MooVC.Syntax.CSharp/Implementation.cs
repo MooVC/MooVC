@@ -59,39 +59,25 @@
         /// <summary>
         /// Defines the string operator for the Implementation.
         /// </summary>
-        /// <param name="base">The base.</param>
+        /// <param name="implementation">The base.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Implementation @base)
+        public static implicit operator string(Implementation implementation)
         {
-            Guard.Against.Conversion<Implementation, string>(@base);
+            Guard.Against.Conversion<Implementation, string>(implementation);
 
-            return @base.ToString();
+            return implementation.ToString();
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Base.
+        /// Defines the Snippet operator for the Implementation.
         /// </summary>
-        /// <param name="base">The base.</param>
+        /// <param name="implementation">The base.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Implementation @base)
+        public static implicit operator Snippet(Implementation implementation)
         {
-            Guard.Against.Conversion<Implementation, Snippet>(@base);
+            Guard.Against.Conversion<Implementation, Snippet>(implementation);
 
-            return Snippet.From(@base);
-        }
-
-        /// <summary>
-        /// Defines the Implementation operator for the Implementation.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The Implementation.</returns>
-        public static implicit operator Implementation(Kind type)
-        {
-            Guard.Against.Conversion<Kind, Implementation>(type);
-
-            return new Implementation()
-                .Enumerate((argument, implementation) => implementation.WithArguments(argument), type.GetGenericArguments())
-                .Named(type);
+            return Snippet.From(implementation);
         }
 
         /// <summary>
@@ -119,6 +105,20 @@
             return new Implementation()
                 .Enumerate((argument, implementation) => implementation.WithArguments(argument), symbol.Arguments)
                 .Named(symbol.Name);
+        }
+
+        /// <summary>
+        /// Defines the Implementation operator for the Implementation.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The Implementation.</returns>
+        public static implicit operator Implementation(Kind type)
+        {
+            Guard.Against.Conversion<Kind, Implementation>(type);
+
+            return new Implementation()
+                .Enumerate((argument, implementation) => implementation.WithArguments(argument), type.GetGenericArguments())
+                .Named(type);
         }
 
         /// <summary>

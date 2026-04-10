@@ -115,25 +115,25 @@
             /// <summary>
             /// Defines the string operator for the Specifier.
             /// </summary>
-            /// <param name="specifier">The specifier.</param>
+            /// <param name="specifiers">The specifier.</param>
             /// <returns>The string.</returns>
-            public static implicit operator string(Specifiers specifier)
+            public static implicit operator string(Specifiers specifiers)
             {
-                Guard.Against.Conversion<Specifiers, string>(specifier);
+                Guard.Against.Conversion<Specifiers, string>(specifiers);
 
-                return specifier.ToString();
+                return specifiers.ToString();
             }
 
             /// <summary>
             /// Defines the Snippet operator for the Specifier.
             /// </summary>
-            /// <param name="specifier">The specifier.</param>
+            /// <param name="specifiers">The specifier.</param>
             /// <returns>The snippet.</returns>
-            public static implicit operator Snippet(Specifiers specifier)
+            public static implicit operator Snippet(Specifiers specifiers)
             {
-                Guard.Against.Conversion<Specifiers, Snippet>(specifier);
+                Guard.Against.Conversion<Specifiers, Snippet>(specifiers);
 
-                return Snippet.From(specifier);
+                return Snippet.From(specifiers);
             }
 
             /// <summary>

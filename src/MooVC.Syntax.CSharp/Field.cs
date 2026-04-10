@@ -119,9 +119,9 @@
         /// </summary>
         /// <param name="field">The tuple containing the name and type to be converted into an Field.</param>
         /// <returns>The Field.</returns>
-        public static implicit operator Field((Name Name, Symbol Type) field)
+        public static implicit operator Field((Variable Name, Symbol Type) field)
         {
-            Guard.Against.Conversion<(Name Name, Symbol Type), Field>(field);
+            Guard.Against.Conversion<(Variable Name, Symbol Type), Field>(field);
 
             return new Field()
                 .Named(field.Name)

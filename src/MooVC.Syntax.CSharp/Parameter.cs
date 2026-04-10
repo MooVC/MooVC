@@ -96,7 +96,7 @@
         {
             Guard.Against.Conversion<Parameter, Snippet>(parameter);
 
-            return Snippet.From(parameter);
+            return Snippet.From(parameter.ToString());
         }
 
         /// <summary>

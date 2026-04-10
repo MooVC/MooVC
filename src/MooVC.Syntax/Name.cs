@@ -52,7 +52,7 @@
         {
             Guard.Against.Conversion<Name, Snippet>(name);
 
-            return Snippet.From(name);
+            return Snippet.From(name.ToString());
         }
 
         /// <summary>

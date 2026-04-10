@@ -89,18 +89,6 @@
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Creates a return signature from the specified runtime type, using the type name as the return symbol.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The return signature.</returns>
-        public static implicit operator Result(CType type)
-        {
-            Guard.Against.Conversion<CType, Result>(type);
-
-            return new Result { Type = type };
-        }
-
-        /// <summary>
         /// Converts the return signature to its C# source representation, including modifiers and type.
         /// </summary>
         /// <param name="result">The result.</param>
@@ -121,7 +109,20 @@
         {
             Guard.Against.Conversion<Result, Snippet>(result);
 
-            return Snippet.From(result);
+            return Snippet.From(result.ToString());
+        }
+
+        /// <summary>
+        /// Creates a return signature from the specified runtime type, using the type name as the return symbol.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The return signature.</returns>
+        public static implicit operator Result(CType type)
+        {
+            Guard.Against.Conversion<CType, Result>(type);
+
+            return new Result()
+                .OfType(type);
         }
 
         /// <summary>

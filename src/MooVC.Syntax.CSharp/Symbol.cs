@@ -12,8 +12,8 @@
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Symbol_Resources;
+    using CType = System.Type;
     using Ignore = Valuify.IgnoreAttribute;
-    using Kind = System.Type;
 
     /// <summary>
     /// Represents a C# syntax element symbol.
@@ -89,7 +89,7 @@
         {
             Guard.Against.Conversion<Symbol, Snippet>(symbol);
 
-            return Snippet.From(symbol);
+            return Snippet.From(symbol.ToString());
         }
 
         /// <summary>
@@ -97,9 +97,9 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The symbol.</returns>
-        public static implicit operator Symbol(Kind type)
+        public static implicit operator Symbol(CType type)
         {
-            Guard.Against.Conversion<Kind, Symbol>(type);
+            Guard.Against.Conversion<CType, Symbol>(type);
 
             return new Symbol()
                 .IsArray(type.IsArray)

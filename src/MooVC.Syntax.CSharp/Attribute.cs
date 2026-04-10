@@ -89,6 +89,19 @@
         }
 
         /// <summary>
+        /// Defines the Symbol operator for the Attribute.
+        /// </summary>
+        /// <param name="name">The Symbol representing the Name of the Attribute.</param>
+        /// <returns>The Attribute.</returns>
+        public static implicit operator Attribute(Symbol name)
+        {
+            Guard.Against.Conversion<Symbol, Attribute>(name);
+
+            return new Attribute()
+                .Named(name);
+        }
+
+        /// <summary>
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>

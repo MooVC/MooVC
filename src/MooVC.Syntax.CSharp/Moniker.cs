@@ -62,6 +62,18 @@
         }
 
         /// <summary>
+        /// Defines the Name operator for the Moniker.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The moniker.</returns>
+        public static implicit operator Moniker(Name name)
+        {
+            Guard.Against.Conversion<Name, Moniker>(name);
+
+            return new Moniker(name);
+        }
+
+        /// <summary>
         /// Defines the Type operator for the Moniker.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -94,18 +106,6 @@
             }
 
             return name;
-        }
-
-        /// <summary>
-        /// Defines the Name operator for the Moniker.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The moniker.</returns>
-        public static implicit operator Moniker(Name name)
-        {
-            Guard.Against.Conversion<Name, Moniker>(name);
-
-            return new Moniker(name);
         }
 
         /// <summary>

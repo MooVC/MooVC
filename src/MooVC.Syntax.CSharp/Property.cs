@@ -111,7 +111,7 @@
         {
             Guard.Against.Conversion<Property, Snippet>(property);
 
-            return Snippet.From(property);
+            return Snippet.From(property.ToString());
         }
 
         /// <summary>

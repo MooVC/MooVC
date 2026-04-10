@@ -100,10 +100,8 @@
         {
             Guard.Against.Conversion<Qualifier, Directive>(qualifier);
 
-            return new Directive
-            {
-                Qualifier = qualifier,
-            };
+            return new Directive()
+                .From(qualifier);
         }
 
         /// <summary>

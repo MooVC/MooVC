@@ -59,30 +59,6 @@
         /// <summary>
         /// Defines the string operator for the Declaration.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The declaration.</returns>
-        public static implicit operator Declaration(string name)
-        {
-            Guard.Against.Conversion<string, Declaration>(name);
-
-            return new Declaration { Name = name };
-        }
-
-        /// <summary>
-        /// Defines the Name operator for the Declaration.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The declaration.</returns>
-        public static implicit operator Declaration(Name name)
-        {
-            Guard.Against.Conversion<Name, Declaration>(name);
-
-            return new Declaration { Name = name };
-        }
-
-        /// <summary>
-        /// Defines the string operator for the Declaration.
-        /// </summary>
         /// <param name="declaration">The declaration.</param>
         /// <returns>The string.</returns>
         public static implicit operator string(Declaration declaration)
@@ -102,6 +78,32 @@
             Guard.Against.Conversion<Declaration, Snippet>(declaration);
 
             return declaration.ToSnippet(Snippet.Options.Default);
+        }
+
+        /// <summary>
+        /// Defines the string operator for the Declaration.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The declaration.</returns>
+        public static implicit operator Declaration(string name)
+        {
+            Guard.Against.Conversion<string, Declaration>(name);
+
+            return new Declaration()
+                .Named(name);
+        }
+
+        /// <summary>
+        /// Defines the Name operator for the Declaration.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The declaration.</returns>
+        public static implicit operator Declaration(Name name)
+        {
+            Guard.Against.Conversion<Name, Declaration>(name);
+
+            return new Declaration()
+                .Named(name);
         }
 
         /// <summary>

@@ -72,7 +72,7 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Methods, Snippet>(methods);
 
-                return Snippet.From(methods);
+                return Snippet.From(methods.ToString());
             }
 
             /// <summary>
@@ -92,7 +92,7 @@ namespace MooVC.Syntax.CSharp
             /// <returns>The generated snippet.</returns>
             public Snippet ToSnippet(Snippet.Options options, Scopes scope)
             {
-                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Methods)));
 
                 if (options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
                 {

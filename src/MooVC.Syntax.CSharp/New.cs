@@ -60,7 +60,7 @@
         {
             Guard.Against.Conversion<New, Snippet>(@new);
 
-            return Snippet.From(@new);
+            return Snippet.From(@new.ToString());
         }
 
         /// <summary>

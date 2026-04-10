@@ -131,7 +131,7 @@
             {
                 Guard.Against.Conversion<Modes, Snippet>(mode);
 
-                return Snippet.From(mode);
+                return Snippet.From(mode.ToString());
             }
 
             /// <summary>

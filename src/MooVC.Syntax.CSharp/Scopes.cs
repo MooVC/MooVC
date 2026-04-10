@@ -71,7 +71,7 @@
         {
             Guard.Against.Conversion<Scopes, Snippet>(scope);
 
-            return Snippet.From(scope);
+            return Snippet.From(scope.ToString());
         }
 
         /// <summary>

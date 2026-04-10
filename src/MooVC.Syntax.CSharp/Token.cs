@@ -7,7 +7,7 @@
     using Ardalis.GuardClauses;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Base_Resources;
-    using Kind = System.Type;
+    using CType = System.Type;
 
     public sealed class Token
         : IEnumerable<Qualifier>,
@@ -26,6 +26,20 @@
         public Name Name { get; private set; } = Name.Unnamed;
 
         public Symbol Symbol { get; private set; } = Symbol.Undefined;
+
+        public static implicit operator string(Token token)
+        {
+            Guard.Against.Conversion<Token, string>(token);
+
+            return token.ToString();
+        }
+
+        public static implicit operator Snippet(Token token)
+        {
+            Guard.Against.Conversion<Token, Snippet>(token);
+
+            return token.ToSnippet(Type.Options.Default);
+        }
 
         public static implicit operator Token(Name name)
         {
@@ -47,23 +61,9 @@
             return new Token(Name.Unnamed, symbol);
         }
 
-        public static implicit operator string(Token token)
+        public static implicit operator Token(CType type)
         {
-            Guard.Against.Conversion<Token, string>(token);
-
-            return token.ToString();
-        }
-
-        public static implicit operator Snippet(Token token)
-        {
-            Guard.Against.Conversion<Token, Snippet>(token);
-
-            return token.ToSnippet(Type.Options.Default);
-        }
-
-        public static implicit operator Token(Kind type)
-        {
-            Guard.Against.Conversion<Kind, Token>(type);
+            Guard.Against.Conversion<CType, Token>(type);
 
             return (Symbol)type;
         }

@@ -71,7 +71,7 @@
         {
             Guard.Against.Conversion<Identifier, Snippet>(identifier);
 
-            return Snippet.From(identifier);
+            return Snippet.From(identifier.ToString());
         }
 
         /// <summary>
