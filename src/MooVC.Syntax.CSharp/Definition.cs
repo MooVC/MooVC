@@ -22,7 +22,7 @@
     [Valuify]
     public sealed partial class Definition
         : Construct,
-          IEnumerable<Symbol>
+          IEnumerable<Qualifier>
     {
         /// <summary>
         /// Gets the empty instance.
@@ -61,7 +61,7 @@
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
             return Type.GetEnumerator();
         }
@@ -99,7 +99,7 @@
             type = type.Chain(options);
 
             string @namespace = $"namespace {Namespace}";
-            var usings = Usings.ToSnippet(options);
+            var usings = Usings.ToSnippet(Namespace, options);
 
             if (!usings.IsEmpty)
             {

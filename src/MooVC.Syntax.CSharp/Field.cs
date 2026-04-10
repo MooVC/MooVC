@@ -21,7 +21,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Field
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -137,14 +137,13 @@
         /// the type.</remarks>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols, including all attribute symbols
         /// and the type symbol.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Attributes.SelectMany(attribute => attribute))
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+                .Concat(Type))
             {
-                yield return symbol;
+                yield return qualifier;
             }
-
-            yield return Type;
         }
 
         /// <summary>

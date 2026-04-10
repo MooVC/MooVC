@@ -18,10 +18,10 @@
         : Type
     {
         private const string Separator = " ";
-        private readonly Parameter.Options _options;
+        private readonly Variable.Options _options;
         private readonly string _type;
 
-        private protected Reference(Parameter.Options options, string type)
+        private protected Reference(Variable.Options options, string type)
         {
             _options = options;
             _type = type;
@@ -63,21 +63,21 @@
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public override IEnumerator<Symbol> GetEnumerator()
+        public override IEnumerator<Qualifier> GetEnumerator()
         {
-            IEnumerator<Symbol> @base = base.GetEnumerator();
+            IEnumerator<Qualifier> @base = base.GetEnumerator();
 
             while (@base.MoveNext())
             {
                 yield return @base.Current;
             }
 
-            foreach (Symbol symbol in Base
+            foreach (Qualifier qualifier in Base
                 .Concat(Constructors.SelectMany(constructor => constructor))
                 .Concat(Fields.SelectMany(field => field))
                 .Concat(Parameters.SelectMany(parameter => parameter)))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 
@@ -169,7 +169,7 @@
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
-            var parameters = Parameters.ToSnippet(_options);
+            Snippet parameters = GetParameters(options);
             string partial = IsPartial.Partial();
             string scope = Scope;
             string signature = GetSignature(extensibility, partial, name, scope);
@@ -200,6 +200,15 @@
             }
 
             return declaration;
+        }
+
+        private Snippet GetParameters(Options options)
+        {
+            return Parameters.ToSnippet(Parameter.Options.Pascal
+                .WithAttributes(options)
+                .WithNaming(_options)
+                .WithQualifications(options)
+                .WithSnippets(options));
         }
     }
 }

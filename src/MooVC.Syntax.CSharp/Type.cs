@@ -17,7 +17,7 @@
     /// Represents a C# type syntax type.
     /// </summary>
     public abstract partial class Type
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -129,17 +129,18 @@
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public virtual IEnumerator<Symbol> GetEnumerator()
+        public virtual IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Attributes.SelectMany(attribute => attribute)
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
                 .Concat(Events.SelectMany(@event => @event))
                 .Concat(Indexers.SelectMany(indexer => indexer))
-                .Concat(Interfaces)
+                .Concat(Interfaces.SelectMany(@interface => @interface))
                 .Concat(Methods.SelectMany(method => method))
+                .Concat(Properties.SelectMany(method => method))
                 .Concat(Operators)
                 .Concat(Types.SelectMany(type => type)))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

@@ -12,47 +12,14 @@ public sealed class WhenToSnippetIsCalled
         Symbol wrapper = typeof(ImmutableArray<>);
 
         Symbol wrapped = wrapper.WithArguments(symbol => symbol
-            .From(argument.Qualifier)
             .IsNullable(argument.IsNullable)
             .Named(argument.Name));
 
         // Act
-        var representation = wrapped.ToSnippet(Symbol.Options.Default);
+        var representation = wrapped.ToSnippet(Qualification.Options.Default);
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("ImmutableArray<int>");
-    }
-
-    [Test]
-    public async Task GivenFullQualificationThenQualifierIsIncluded()
-    {
-        // Arrange
-        Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
-
-        Symbol.Options options = Symbol.Options.Default
-            .WithQualification(Symbol.Qualification.Full);
-
-        // Act
-        string representation = subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo("System.Text.Result");
-    }
-
-    [Test]
-    public async Task GivenGlobalQualificationThenGlobalPrefixIsAdded()
-    {
-        // Arrange
-        Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["System", "Text"]));
-
-        Symbol.Options options = Symbol.Options.Default
-            .WithQualification(Symbol.Qualification.Global);
-
-        // Act
-        string representation = subject.ToSnippet(options);
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo("global::System.Text.Result");
     }
 
     [Test]
@@ -63,7 +30,7 @@ public sealed class WhenToSnippetIsCalled
         subject.IsNullable = true;
 
         // Act
-        string representation = subject.ToSnippet(Symbol.Options.Default);
+        string representation = subject.ToSnippet(Qualification.Options.Default);
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo("Result?");
@@ -74,7 +41,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Symbol subject = SymbolTestsData.Create();
-        Symbol.Options? options = default;
+        Qualification.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = subject.ToSnippet(options!);

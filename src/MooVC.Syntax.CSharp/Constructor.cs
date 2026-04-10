@@ -21,7 +21,7 @@ namespace MooVC.Syntax.CSharp
     [Fluentify]
     [Valuify]
     public sealed partial class Constructor
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -104,12 +104,12 @@ namespace MooVC.Syntax.CSharp
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Attributes.SelectMany(attribute => attribute)
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
                 .Concat(Parameters.SelectMany(parameter => parameter)))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

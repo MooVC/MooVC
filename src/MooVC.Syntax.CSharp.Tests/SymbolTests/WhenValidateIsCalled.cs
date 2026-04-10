@@ -32,29 +32,6 @@ public sealed class WhenValidateIsCalled
     }
 
     [Test]
-    public async Task GivenQualifierWithValidationErrorsThenValidationErrorsReturned()
-    {
-        // Arrange
-        var symbol = new Symbol
-        {
-            Name = Name,
-            Qualifier = new Name[] { "invalid" },
-        };
-
-        var context = new ValidationContext(symbol);
-        var results = new List<ValidationResult>();
-
-        // Act
-        bool valid = Validator.TryValidateObject(symbol, context, results, validateAllProperties: true);
-
-        // Assert
-        _ = await Assert.That(valid).IsFalse();
-        _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
-        _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
-    }
-
-    [Test]
     public async Task GivenUnnamedSymbolThenValidationErrorReturned()
     {
         // Arrange

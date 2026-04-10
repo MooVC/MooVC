@@ -11,7 +11,6 @@ public sealed class WhenOfTypeIsCalled
         var type = new Symbol
         {
             Name = "Foo",
-            Qualifier = "Bar",
         };
 
         // Act

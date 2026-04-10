@@ -20,7 +20,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Event
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -102,9 +102,9 @@
         /// Returns an enumerator that iterates through the collection of symbols, starting with the handler symbol.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            yield return Handler;
+            return Handler.GetEnumerator();
         }
 
         /// <summary>

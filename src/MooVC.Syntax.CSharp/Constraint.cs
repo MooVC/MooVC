@@ -19,7 +19,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Constraint
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -94,11 +94,11 @@
         /// Returns an enumerator that iterates through all symbols provided by the interfaces.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Interfaces.SelectMany(@interface => @interface))
+            foreach (Qualifier qualifier in Interfaces.SelectMany(@interface => @interface))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

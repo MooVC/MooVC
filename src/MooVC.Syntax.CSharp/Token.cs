@@ -10,7 +10,7 @@
     using Kind = System.Type;
 
     public sealed class Token
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         public static readonly Token Unspecified = new Token(Name.Unnamed, Symbol.Undefined);
@@ -68,11 +68,14 @@
             return (Symbol)type;
         }
 
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
             if (!Symbol.IsUndefined)
             {
-                yield return Symbol;
+                foreach (Qualifier qualifier in Symbol)
+                {
+                    yield return qualifier;
+                }
             }
         }
 

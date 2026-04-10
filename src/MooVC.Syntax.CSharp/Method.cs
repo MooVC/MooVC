@@ -21,7 +21,7 @@ namespace MooVC.Syntax.CSharp
     [Fluentify]
     [Valuify]
     public sealed partial class Method
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -125,13 +125,13 @@ namespace MooVC.Syntax.CSharp
         /// <returns>
         /// An enumerator that can be used to iterate through the collection of symbols in order: name, parameters, and result.
         /// </returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Name
+            foreach (Qualifier qualifier in Name
                 .Concat(Parameters.SelectMany(parameter => parameter))
                 .Concat(Result))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

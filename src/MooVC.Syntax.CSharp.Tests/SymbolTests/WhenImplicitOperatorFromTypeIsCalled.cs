@@ -23,12 +23,12 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
     {
         // Arrange
         Type value = typeof(StringBuilder);
+        Qualification expected = value;
 
         // Act
         Symbol subject = value;
 
         // Assert
-        _ = await Assert.That(subject.Name).IsEqualTo(new Moniker(nameof(StringBuilder)));
-        _ = await Assert.That(subject.Qualifier).IsEqualTo(new Qualifier(["System", "Text"]));
+        _ = await Assert.That(subject.Name).IsEqualTo(expected);
     }
 }

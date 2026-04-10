@@ -77,6 +77,32 @@
         }
 
         /// <summary>
+        /// Defines the Name operator for the moniker.
+        /// </summary>
+        /// <param name="moniker">The moniker.</param>
+        /// <returns>The qualification.</returns>
+        public static implicit operator Qualification(string moniker)
+        {
+            Guard.Against.Conversion<string, Qualification>(moniker);
+
+            return new Qualification()
+                .KnownAs(moniker);
+        }
+
+        /// <summary>
+        /// Defines the Name operator for the moniker.
+        /// </summary>
+        /// <param name="moniker">The moniker.</param>
+        /// <returns>The qualification.</returns>
+        public static implicit operator Qualification(Moniker moniker)
+        {
+            Guard.Against.Conversion<Moniker, Qualification>(moniker);
+
+            return new Qualification()
+                .KnownAs(moniker);
+        }
+
+        /// <summary>
         /// Defines the Name operator for the Name.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -233,7 +259,7 @@
             {
                 const int SuffixLength = 9;
 
-                if (signature.EndsWith(nameof(Attribute)))
+                if (signature.Length > SuffixLength && signature.EndsWith(nameof(Attribute)))
                 {
                     signature = signature.Substring(0, signature.Length - SuffixLength);
                 }
@@ -243,7 +269,7 @@
 
             signature = $"{Qualifier}.{signature}";
 
-            if (options.Format == Options.Formats.Minimum)
+            if (options.Format == Options.Formats.Global)
             {
                 return $"global::{signature}";
             }

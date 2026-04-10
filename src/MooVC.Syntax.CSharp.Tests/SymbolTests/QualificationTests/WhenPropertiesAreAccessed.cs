@@ -6,7 +6,7 @@ public sealed class WhenPropertiesAreAccessed
     public async Task GivenFullQualificationThenFlagsReflectValue()
     {
         // Arrange
-        Symbol.Qualification subject = Symbol.Qualification.Full;
+        Qualification.Options.Formats subject = Qualification.Options.Formats.Full;
 
         // Act
         bool isFull = subject.IsFull;
@@ -23,7 +23,7 @@ public sealed class WhenPropertiesAreAccessed
     public async Task GivenGlobalQualificationThenFlagsReflectValue()
     {
         // Arrange
-        Symbol.Qualification subject = Symbol.Qualification.Global;
+        Qualification.Options.Formats subject = Qualification.Options.Formats.Global;
 
         // Act
         bool isFull = subject.IsFull;
@@ -40,7 +40,7 @@ public sealed class WhenPropertiesAreAccessed
     public async Task GivenMinimumQualificationThenFlagsReflectValue()
     {
         // Arrange
-        Symbol.Qualification subject = Symbol.Qualification.Minimum;
+        Qualification.Options.Formats subject = Qualification.Options.Formats.Minimum;
 
         // Act
         bool isFull = subject.IsFull;

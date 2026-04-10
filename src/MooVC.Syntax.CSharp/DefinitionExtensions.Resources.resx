@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ForkOnPredicateRequired" xml:space="preserve">
-    <value>The Predicate for which the path is dictated must be provided.</value>
-  </data>
-  <data name="ForkOnSubjectRequired" xml:space="preserve">
-    <value>The Subject upon which to Fork must be provided.</value>
-  </data>
-  <data name="ForkOnPathsRequired" xml:space="preserve">
-    <value>At least one path must be provided.</value>
-  </data>
-  <data name="EnumerateEnumerableRequired" xml:space="preserve">
-    <value>The Enumerable to enumerate must be provided.</value>
-  </data>
-  <data name="EnumerateActionRequired" xml:space="preserve">
-    <value>The Action to invoke for each Element of the Enumerable must be provided.</value>
-  </data>
-  <data name="EnumerateSubjectRequired" xml:space="preserve">
-    <value>The Subject upon which the enumeration is to be applied must be provided.</value>
+  <data name="ImportReferencesDefinitionRequired" xml:space="preserve">
+    <value>The Definition to which the references are to be applied must be provided.</value>
   </data>
 </root>

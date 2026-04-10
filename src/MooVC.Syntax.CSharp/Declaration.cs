@@ -21,7 +21,7 @@
     [Valuify]
     public sealed partial class Declaration
         : IComparable<Declaration>,
-          IEnumerable<Symbol>,
+          IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -176,11 +176,11 @@
         /// <remarks>The enumerator iterates over each symbol in all generics collections in sequence. The
         /// order of enumeration matches the order of the generics collections and their contained symbols.</remarks>
         /// <returns>An enumerator that can be used to iterate through the symbols in all generics collections.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Arguments.SelectMany(generic => generic))
+            foreach (Qualifier qualifier in Arguments.SelectMany(generic => generic))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

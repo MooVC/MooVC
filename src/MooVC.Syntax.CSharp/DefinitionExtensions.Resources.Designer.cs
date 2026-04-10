@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MooVC {
+namespace MooVC.Syntax.CSharp {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MooVC {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ObjectExtensions_Resources {
+    internal class DefinitionExtensions_Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ObjectExtensions_Resources() {
+        internal DefinitionExtensions_Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MooVC {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.ObjectExtensions.Resources", typeof(ObjectExtensions_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MooVC.Syntax.CSharp.DefinitionExtensions.Resources", typeof(DefinitionExtensions_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,11 @@ namespace MooVC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Action to invoke for each Element of the Enumerable must be provided..
+        ///   Looks up a localized string similar to The Definition to which the references are to be applied must be provided..
         /// </summary>
-        internal static string EnumerateActionRequired {
+        internal static string ImportReferencesDefinitionRequired {
             get {
-                return ResourceManager.GetString("EnumerateActionRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Enumerable to enumerate must be provided..
-        /// </summary>
-        internal static string EnumerateEnumerableRequired {
-            get {
-                return ResourceManager.GetString("EnumerateEnumerableRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Subject upon which the enumeration is to be applied must be provided..
-        /// </summary>
-        internal static string EnumerateSubjectRequired {
-            get {
-                return ResourceManager.GetString("EnumerateSubjectRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to At least one path must be provided..
-        /// </summary>
-        internal static string ForkOnPathsRequired {
-            get {
-                return ResourceManager.GetString("ForkOnPathsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Predicate for which the path is dictated must be provided..
-        /// </summary>
-        internal static string ForkOnPredicateRequired {
-            get {
-                return ResourceManager.GetString("ForkOnPredicateRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Subject upon which to Fork must be provided..
-        /// </summary>
-        internal static string ForkOnSubjectRequired {
-            get {
-                return ResourceManager.GetString("ForkOnSubjectRequired", resourceCulture);
+                return ResourceManager.GetString("ImportReferencesDefinitionRequired", resourceCulture);
             }
         }
     }

@@ -32,7 +32,7 @@
 
             string snippet = Separator.Combine(ordered, parameter => parameter.ToSnippet(options));
 
-            return Snippet.From(snippet);
+            return Snippet.From(options, snippet);
         }
     }
 }

@@ -20,7 +20,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Indexer
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -103,11 +103,11 @@
         /// Returns an enumerator that iterates through the collection of symbols, including both parameters and results.
         /// </summary>
         /// <returns>An enumerator for the combined sequence of parameter and result symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Parameter.Concat(Result))
+            foreach (Qualifier qualifier in Parameter.Concat(Result))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

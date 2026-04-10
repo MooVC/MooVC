@@ -21,7 +21,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Operators
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -71,11 +71,11 @@
         /// Returns an enumerator that iterates through all symbols contained in the collection of conversions.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the symbols in the collection.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Conversions.SelectMany(conversion => conversion))
+            foreach (Qualifier qualifier in Conversions.SelectMany(conversion => conversion))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

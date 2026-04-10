@@ -62,20 +62,20 @@
         /// Returns an enumerator that iterates through the collection of symbols.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public override IEnumerator<Symbol> GetEnumerator()
+        public override IEnumerator<Qualifier> GetEnumerator()
         {
-            IEnumerator<Symbol> @base = base.GetEnumerator();
+            IEnumerator<Qualifier> @base = base.GetEnumerator();
 
             while (@base.MoveNext())
             {
                 yield return @base.Current;
             }
 
-            foreach (Symbol symbol in Constructors.SelectMany(constructor => constructor)
+            foreach (Qualifier qualifier in Constructors.SelectMany(constructor => constructor)
                 .Concat(Fields.SelectMany(field => field))
                 .Concat(Parameters.SelectMany(parameter => parameter)))
             {
-                yield return symbol;
+                yield return qualifier;
             }
         }
 

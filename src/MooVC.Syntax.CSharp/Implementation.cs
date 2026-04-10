@@ -21,7 +21,7 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Implementation
-        : IEnumerable<Symbol>,
+        : IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -122,6 +122,19 @@
         }
 
         /// <summary>
+        /// Implicitly converts a tuple containing a name and qualifier to an Name instance.
+        /// </summary>
+        /// <param name="name">The tuple containing the name and qualifier to be converted into an Name.</param>
+        /// <returns>The Name.</returns>
+        public static implicit operator Implementation((Moniker Name, Qualifier Qualifier) name)
+        {
+            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Implementation>(name);
+
+            return new Implementation()
+                .Named((Moniker: name.Name, name.Qualifier));
+        }
+
+        /// <summary>
         /// Returns an enumerator that iterates through all symbols contained in the constraints.
         /// </summary>
         /// <remarks>
@@ -129,14 +142,17 @@
         /// The collection should not be modified during enumeration.
         /// </remarks>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Symbol symbol in Arguments.SelectMany(argument => argument))
+            foreach (Qualifier qualifier in Arguments.SelectMany(argument => argument))
             {
-                yield return symbol;
+                yield return qualifier;
             }
 
-            yield return Name;
+            if (!Name.Qualifier.IsUnqualified)
+            {
+                yield return Name.Qualifier;
+            }
         }
 
         /// <summary>
