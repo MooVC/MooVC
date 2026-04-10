@@ -24,8 +24,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        Natures first = Same;
-        Natures second = Same;
+        Argument.Modes first = Argument.Modes.Ref;
+        Argument.Modes second = Argument.Modes.Ref;
 
         // Act
         int firstHash = first.GetHashCode();
