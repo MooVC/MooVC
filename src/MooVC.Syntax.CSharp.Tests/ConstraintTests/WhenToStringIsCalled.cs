@@ -11,7 +11,7 @@ public sealed class WhenToStringIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Nature = Nature.Class,
+            Nature = Natures.Class,
             Base = new() { Name = BaseName },
             Interfaces = [new() { Name = InterfaceName }],
             New = New.Required,
@@ -32,7 +32,7 @@ public sealed class WhenToStringIsCalled
 
         var constraint = new Constraint
         {
-            Nature = Nature.Struct,
+            Nature = Natures.Struct,
             Base = new() { Name = BaseName },
             Interfaces =
             [

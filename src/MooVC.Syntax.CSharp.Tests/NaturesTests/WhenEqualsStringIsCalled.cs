@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
 using System.Diagnostics.CodeAnalysis;
 
@@ -12,7 +12,7 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
+        Natures left = Same;
         string right = Different;
 
         // Act
@@ -29,7 +29,7 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Nature left = Same;
+        Natures left = Same;
         string right = Same;
 
         // Act
@@ -45,12 +45,12 @@ public sealed class WhenEqualsStringIsCalled
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Nature subject = Same;
+        Natures subject = Same;
         string? other = default;
 
         // Act
         bool resultLeftRight = subject.Equals(other);
-        bool resultRightLeft = ((Nature?)other)?.Equals(subject) ?? false;
+        bool resultRightLeft = ((Natures?)other)?.Equals(subject) ?? false;
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();

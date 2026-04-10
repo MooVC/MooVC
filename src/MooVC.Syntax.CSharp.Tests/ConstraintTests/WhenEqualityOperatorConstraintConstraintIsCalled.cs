@@ -23,7 +23,7 @@ public sealed class WhenEqualityOperatorConstraintConstraintIsCalled
     {
         // Arrange
         var left = new Constraint { Base = SymbolTestsData.CreateWithArgumentNames(SymbolTestsData.DefaultName) };
-        var right = new Constraint { Nature = Nature.Class };
+        var right = new Constraint { Nature = Natures.Class };
 
         // Act
         bool result = left == right;

@@ -1,28 +1,28 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
     [Test]
-    public async Task GivenEmptyValueThenCreatesNature()
+    public async Task GivenEmptyValueThenCreatesNatures()
     {
         // Arrange
         const string Value = "";
 
         // Act
-        Nature result = Value;
+        Natures result = Value;
 
         // Assert
         _ = await Assert.That(result.ToString()).IsEqualTo(Value);
     }
 
     [Test]
-    public async Task GivenNonEmptyValueThenCreatesNature()
+    public async Task GivenNonEmptyValueThenCreatesNatures()
     {
         // Arrange
         const string Value = "unmanaged";
 
         // Act
-        Nature result = Value;
+        Natures result = Value;
 
         // Assert
         _ = await Assert.That(result.ToString()).IsEqualTo(Value);

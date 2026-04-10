@@ -10,7 +10,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
         {
             Base = Base.Unspecified,
             Interfaces = [Implementation.Unspecified],
-            Nature = Nature.Unspecified,
+            Nature = Natures.Unspecified,
         };
 
         // Act

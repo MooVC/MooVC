@@ -58,7 +58,7 @@
         /// Gets the nature on the Constraint.
         /// </summary>
         /// <value>The nature.</value>
-        public Nature Nature { get; internal set; } = Nature.Unspecified;
+        public Natures Nature { get; internal set; } = Natures.Unspecified;
 
         /// <summary>
         /// Gets the new on the Constraint.

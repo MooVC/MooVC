@@ -100,7 +100,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Nature = Nature.Struct,
+            Nature = Natures.Struct,
             Base = new Symbol() { Name = BaseName },
             Interfaces = [new() { Name = InterfaceName }],
             New = New.Required,

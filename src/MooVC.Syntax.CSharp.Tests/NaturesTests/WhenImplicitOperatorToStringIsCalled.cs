@@ -1,12 +1,12 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public async Task GivenNatureThenReturnsValue()
+    public async Task GivenNaturesThenReturnsValue()
     {
         // Arrange
-        Nature subject = "struct";
+        Natures subject = "struct";
 
         // Act
         string result = subject;

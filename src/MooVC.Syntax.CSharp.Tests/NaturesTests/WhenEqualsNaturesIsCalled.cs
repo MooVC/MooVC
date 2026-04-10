@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
-public sealed class WhenEqualsObjectIsCalled
+public sealed class WhenEqualsNaturesIsCalled
 {
     private const string Same = "class";
     private const string Different = "struct";
@@ -9,8 +9,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
-        object right = (Nature)Different;
+        Natures left = Same;
+        Natures right = Different;
 
         // Act
         bool result = left.Equals(right);
@@ -23,8 +23,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Nature left = Same;
-        object right = (Nature)Same;
+        Natures left = Same;
+        Natures right = Same;
 
         // Act
         bool result = left.Equals(right);
@@ -34,25 +34,11 @@ public sealed class WhenEqualsObjectIsCalled
     }
 
     [Test]
-    public async Task GivenNonNatureThenReturnsFalse()
-    {
-        // Arrange
-        Nature subject = Same;
-        object other = Same;
-
-        // Act
-        bool result = subject.Equals(other);
-
-        // Assert
-        _ = await Assert.That(result).IsFalse();
-    }
-
-    [Test]
     public async Task GivenNullThenReturnsFalse()
     {
         // Arrange
-        Nature subject = Same;
-        object? other = default;
+        Natures subject = Same;
+        Natures? other = default;
 
         // Act
         bool result = subject.Equals(other);
@@ -65,8 +51,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Nature subject = Same;
-        object other = subject;
+        Natures subject = Same;
+        Natures other = subject;
 
         // Act
         bool result = subject.Equals(other);

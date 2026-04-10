@@ -9,7 +9,7 @@
     using Monify;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Moniker_Resources;
-    using Kind = System.Type;
+    using CType = System.Type;
 
     /// <summary>
     /// Represents a syntax element segment.
@@ -78,9 +78,9 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The moniker.</returns>
-        public static implicit operator Moniker(Kind type)
+        public static implicit operator Moniker(CType type)
         {
-            Guard.Against.Conversion<Kind, Moniker>(type);
+            Guard.Against.Conversion<CType, Moniker>(type);
 
             if (Aliases.TryGet(type, out string alias))
             {

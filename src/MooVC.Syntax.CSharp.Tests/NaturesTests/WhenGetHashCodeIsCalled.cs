@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
 public sealed class WhenGetHashCodeIsCalled
 {
@@ -9,8 +9,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        Nature first = Same;
-        Nature second = Different;
+        Natures first = Same;
+        Natures second = Different;
 
         // Act
         int firstHash = first.GetHashCode();
@@ -24,8 +24,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenMatchingValuesThenReturnsSameHash()
     {
         // Arrange
-        Nature first = Same;
-        Nature second = Same;
+        Natures first = Same;
+        Natures second = Same;
 
         // Act
         int firstHash = first.GetHashCode();

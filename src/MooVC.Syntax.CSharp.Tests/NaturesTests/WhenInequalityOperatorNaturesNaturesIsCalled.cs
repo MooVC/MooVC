@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
-public sealed class WhenInequalityOperatorNatureNatureIsCalled
+public sealed class WhenInequalityOperatorNaturesNaturesIsCalled
 {
     private const string Same = "class";
     private const string Different = "struct";
@@ -9,8 +9,8 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
     public async Task GivenBothSidesNullThenReturnsFalse()
     {
         // Arrange
-        Nature? left = default;
-        Nature? right = default;
+        Natures? left = default;
+        Natures? right = default;
 
         // Act
         bool result = left != right;
@@ -23,8 +23,8 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
     public async Task GivenDifferentValuesThenReturnsTrue()
     {
         // Arrange
-        Nature left = Same;
-        Nature right = Different;
+        Natures left = Same;
+        Natures right = Different;
 
         // Act
         bool result = left != right;
@@ -37,8 +37,8 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
     public async Task GivenEitherSideNullThenReturnsTrue()
     {
         // Arrange
-        Nature left = Same;
-        Nature? right = default;
+        Natures left = Same;
+        Natures? right = default;
 
         // Act
         bool result = left != right;
@@ -51,8 +51,8 @@ public sealed class WhenInequalityOperatorNatureNatureIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
-        Nature right = Same;
+        Natures left = Same;
+        Natures right = Same;
 
         // Act
         bool result = left != right;

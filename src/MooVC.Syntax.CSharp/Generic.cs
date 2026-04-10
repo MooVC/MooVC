@@ -84,6 +84,14 @@
             return Snippet.From(generic);
         }
 
+        public static implicit operator Generic(Name name)
+        {
+            Guard.Against.Conversion<Name, Generic>(name);
+
+            return new Generic()
+                .Named(name);
+        }
+
         /// <summary>
         /// Returns an enumerator that iterates through all symbols contained in the constraints.
         /// </summary>

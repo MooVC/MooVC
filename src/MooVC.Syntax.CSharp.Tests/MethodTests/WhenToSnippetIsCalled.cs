@@ -52,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         var constraints = new Constraint
         {
-            Nature = Nature.Class,
+            Nature = Natures.Class,
             New = New.Required,
         };
 

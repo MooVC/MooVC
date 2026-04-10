@@ -104,6 +104,15 @@
                 .From(qualifier);
         }
 
+        public static implicit operator Directive((string Alias, Qualifier Qualifier) directive)
+        {
+            Guard.Against.Conversion<(string Alias, Qualifier Qualifier), Directive>(directive);
+
+            return new Directive()
+                .From(directive.Qualifier)
+                .KnownAs(directive.Alias);
+        }
+
         /// <summary>
         /// Returns the string representation of the Directive.
         /// </summary>

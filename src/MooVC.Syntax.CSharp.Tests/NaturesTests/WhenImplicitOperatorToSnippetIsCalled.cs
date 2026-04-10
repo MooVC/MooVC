@@ -1,12 +1,12 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
 public sealed class WhenImplicitOperatorToSnippetIsCalled
 {
     [Test]
-    public async Task GivenNatureThenSnippetMatchesStringRepresentation()
+    public async Task GivenNaturesThenSnippetMatchesStringRepresentation()
     {
         // Arrange
-        Nature subject = Nature.Class;
+        Natures subject = Natures.Class;
 
         // Act
         Snippet result = subject;
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToSnippetIsCalled
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Nature? subject = default;
+        Natures? subject = default;
 
         // Act
         Func<Snippet> result = () => subject;

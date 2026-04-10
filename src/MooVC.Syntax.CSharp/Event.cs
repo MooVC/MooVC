@@ -98,6 +98,15 @@
             return Snippet.From(@event);
         }
 
+        public static implicit operator Event((Name Name, Symbol Handler) @event)
+        {
+            Guard.Against.Conversion<(Name Name, Symbol Handler), Event>(@event);
+
+            return new Event()
+                .Named(@event.Name)
+                .WithHandler(@event.Handler);
+        }
+
         /// <summary>
         /// Returns an enumerator that iterates through the collection of symbols, starting with the handler symbol.
         /// </summary>

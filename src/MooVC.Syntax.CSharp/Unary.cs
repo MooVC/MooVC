@@ -5,6 +5,7 @@
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Formatting;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Unary_Resources;
     using Concept = MooVC.Syntax.CSharp.Type;
@@ -55,6 +56,15 @@
         /// </summary>
         /// <value>The scope.</value>
         public Scopes Scope { get; internal set; } = Scopes.Public;
+
+        public static implicit operator Unary((Snippet Body, Types Type) unary)
+        {
+            Guard.Against.Conversion<(Snippet Body, Types Type), Unary>(unary);
+
+            return new Unary()
+                .WithBody(unary.Body)
+                .WithOperator(unary.Type);
+        }
 
         /// <summary>
         /// Returns the string representation of the Unary.

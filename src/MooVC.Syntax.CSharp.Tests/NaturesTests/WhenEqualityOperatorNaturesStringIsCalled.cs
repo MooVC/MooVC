@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.NatureTests;
+﻿namespace MooVC.Syntax.CSharp.NaturesTests;
 
-public sealed class WhenEqualityOperatorNatureStringIsCalled
+public sealed class WhenEqualityOperatorNaturesStringIsCalled
 {
     private const string Same = "class";
     private const string Different = "struct";
@@ -9,7 +9,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     public async Task GivenBothSidesNullThenReturnsTrue()
     {
         // Arrange
-        Nature? left = default;
+        Natures? left = default;
         string? right = default;
 
         // Act
@@ -23,7 +23,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
+        Natures left = Same;
         string right = Different;
 
         // Act
@@ -39,7 +39,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     public async Task GivenEitherSideNullThenReturnsFalse()
     {
         // Arrange
-        Nature left = Same;
+        Natures left = Same;
         string? right = default;
 
         // Act
@@ -55,7 +55,7 @@ public sealed class WhenEqualityOperatorNatureStringIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Nature left = Same;
+        Natures left = Same;
         string right = Same;
 
         // Act

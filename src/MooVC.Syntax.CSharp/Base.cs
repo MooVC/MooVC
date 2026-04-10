@@ -11,7 +11,7 @@
     using Valuify;
     using static MooVC.Syntax.CSharp.Base_Resources;
     using Ignore = Valuify.IgnoreAttribute;
-    using Kind = System.Type;
+    using CType = System.Type;
 
     /// <summary>
     /// Represents a C# base syntax base.
@@ -111,9 +111,9 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The Base.</returns>
-        public static implicit operator Base(Kind type)
+        public static implicit operator Base(CType type)
         {
-            Guard.Against.Conversion<Kind, Base>(type);
+            Guard.Against.Conversion<CType, Base>(type);
 
             return new Base()
                 .Enumerate((argument, @base) => @base.WithArguments(argument), type.GetGenericArguments())

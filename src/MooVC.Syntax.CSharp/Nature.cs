@@ -10,34 +10,34 @@
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
-    public sealed partial class Nature
+    public sealed partial class Natures
     {
         /// <summary>
         /// Represents the class for the Nature.
         /// </summary>
-        public static readonly Nature Class = "class";
+        public static readonly Natures Class = "class";
 
         /// <summary>
         /// Represents the struct for the Nature.
         /// </summary>
-        public static readonly Nature Struct = "struct";
+        public static readonly Natures Struct = "struct";
 
         /// <summary>
         /// Represents the unmanaged for the Nature.
         /// </summary>
-        public static readonly Nature Unmanaged = "unmanaged";
+        public static readonly Natures Unmanaged = "unmanaged";
 
         /// <summary>
         /// Represents the not <see langword="null" /> value for the Nature.
         /// </summary>
-        public static readonly Nature NotNull = "notnull";
+        public static readonly Natures NotNull = "notnull";
 
         /// <summary>
         /// Gets the unspecified instance.
         /// </summary>
-        public static readonly Nature Unspecified = string.Empty;
+        public static readonly Natures Unspecified = string.Empty;
 
-        private Nature(string value)
+        private Natures(string value)
         {
             _value = value;
         }
@@ -53,9 +53,9 @@
         /// </summary>
         /// <param name="nature">The nature.</param>
         /// <returns>The string.</returns>
-        public static implicit operator string(Nature nature)
+        public static implicit operator string(Natures nature)
         {
-            Guard.Against.Conversion<Nature, string>(nature);
+            Guard.Against.Conversion<Natures, string>(nature);
 
             return nature.ToString();
         }
@@ -65,9 +65,9 @@
         /// </summary>
         /// <param name="nature">The nature.</param>
         /// <returns>The snippet.</returns>
-        public static implicit operator Snippet(Nature nature)
+        public static implicit operator Snippet(Natures nature)
         {
-            Guard.Against.Conversion<Nature, Snippet>(nature);
+            Guard.Against.Conversion<Natures, Snippet>(nature);
 
             return Snippet.From(nature.ToString());
         }

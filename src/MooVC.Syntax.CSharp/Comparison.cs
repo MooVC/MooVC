@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Comparison_Resources;
     using Concept = MooVC.Syntax.CSharp.Type;
@@ -54,6 +55,15 @@
         /// </summary>
         /// <value>The scope.</value>
         public Scopes Scope { get; internal set; } = Scopes.Public;
+
+        public static implicit operator Comparison((Snippet Body, Types Type) comparison)
+        {
+            Guard.Against.Conversion<(Snippet Body, Types Type), Comparison>(comparison);
+
+            return new Comparison()
+                .WithBody(comparison.Body)
+                .WithOperator(comparison.Type);
+        }
 
         /// <summary>
         /// Returns the string representation of the Comparison.

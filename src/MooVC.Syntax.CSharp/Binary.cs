@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Binary_Resources;
     using Concept = MooVC.Syntax.CSharp.Type;
@@ -54,6 +55,15 @@
         /// </summary>
         /// <value>The scope.</value>
         public Scopes Scope { get; internal set; } = Scopes.Public;
+
+        public static implicit operator Binary((Snippet Body, Types Type) binary)
+        {
+            Guard.Against.Conversion<(Snippet Body, Types Type), Binary>(binary);
+
+            return new Binary()
+                .WithBody(binary.Body)
+                .WithOperator(binary.Type);
+        }
 
         /// <summary>
         /// Returns the string representation of the Binary.
