@@ -79,9 +79,9 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Comparison publicEquality = ComparisonTestsData.Create(@operator: Comparison.Type.Equality, scope: Scope.Public);
-        Comparison publicLessThan = ComparisonTestsData.Create(@operator: Comparison.Type.LessThan, scope: Scope.Public);
-        Comparison protectedGreaterThan = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan, scope: Scope.Protected);
+        Comparison publicEquality = ComparisonTestsData.Create(@operator: Comparison.Types.Equality, scope: Scopes.Public);
+        Comparison publicLessThan = ComparisonTestsData.Create(@operator: Comparison.Types.LessThan, scope: Scopes.Public);
+        Comparison protectedGreaterThan = ComparisonTestsData.Create(@operator: Comparison.Types.GreaterThan, scope: Scopes.Protected);
 
         ImmutableArray<Comparison> comparisons = [publicLessThan, protectedGreaterThan, publicEquality];
 

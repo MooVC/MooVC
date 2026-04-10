@@ -44,19 +44,19 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Method staticMethod = MethodTestsData.Create(
             name: new Declaration { Name = "Beta" },
-            scope: Scope.Public,
+            scope: Scopes.Public,
             result: new Result { Type = typeof(int) }.AsTask(),
             body: Snippet.From("return 1;"));
 
         Method publicVirtual = MethodTestsData.Create(
             name: new Declaration { Name = "Alpha" },
-            scope: Scope.Public,
+            scope: Scopes.Public,
             result: Result.Void,
             body: Snippet.From("return;"));
 
         Method protectedVirtual = MethodTestsData.Create(
             name: new Declaration { Name = "Gamma" },
-            scope: Scope.Protected,
+            scope: Scopes.Protected,
             body: Snippet.From("return 3;"));
 
         staticMethod.Extensibility = Extensibility.Static;

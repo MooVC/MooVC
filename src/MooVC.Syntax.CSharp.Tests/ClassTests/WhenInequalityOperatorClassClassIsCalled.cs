@@ -36,8 +36,8 @@ public sealed class WhenInequalityOperatorClassClassIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Class left = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
-        Class right = ClassTestsData.Create(isPartial: true, scope: Scope.Private);
+        Class left = ClassTestsData.Create(isPartial: true, scope: Scopes.Private);
+        Class right = ClassTestsData.Create(isPartial: true, scope: Scopes.Private);
 
         // Act
         bool resultLeftRight = left != right;

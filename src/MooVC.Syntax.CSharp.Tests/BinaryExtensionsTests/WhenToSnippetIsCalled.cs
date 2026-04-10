@@ -79,9 +79,9 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Binary publicAdd = BinaryTestsData.Create(@operator: Binary.Type.Add, scope: Scope.Public);
-        Binary publicSubtract = BinaryTestsData.Create(@operator: Binary.Type.Subtract, scope: Scope.Public);
-        Binary protectedMultiply = BinaryTestsData.Create(@operator: Binary.Type.Multiply, scope: Scope.Protected);
+        Binary publicAdd = BinaryTestsData.Create(@operator: Binary.Types.Add, scope: Scopes.Public);
+        Binary publicSubtract = BinaryTestsData.Create(@operator: Binary.Types.Subtract, scope: Scopes.Public);
+        Binary protectedMultiply = BinaryTestsData.Create(@operator: Binary.Types.Multiply, scope: Scopes.Protected);
 
         ImmutableArray<Binary> binaries = [publicSubtract, protectedMultiply, publicAdd];
 

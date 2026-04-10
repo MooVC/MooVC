@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -19,7 +20,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Event
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -70,7 +72,7 @@
         /// Gets the scope on the Event.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Defines the string operator for the Event.
@@ -94,6 +96,15 @@
             Guard.Against.Conversion<Event, Snippet>(@event);
 
             return Snippet.From(@event);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols, starting with the handler symbol.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            return Handler.GetEnumerator();
         }
 
         /// <summary>
@@ -167,6 +178,18 @@
                 .Include(nameof(Handler), results, Handler)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <remarks>This method is an explicit interface implementation for <see
+        /// cref="IEnumerable.GetEnumerator"/>. Use the generic <see cref="GetEnumerator"/> method for type-safe
+        /// enumeration.</remarks>
+        /// <returns>An <see cref="IEnumerator"/> object that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private static Snippet.Options FormatBlockStyle(Snippet methods, Snippet.Options options)

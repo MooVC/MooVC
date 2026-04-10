@@ -62,16 +62,16 @@
             public Property.Options Properties { get; internal set; } = Property.Options.Default;
 
             /// <summary>
+            /// Gets the Symbol options.
+            /// </summary>
+            /// <value>The Symbol options.</value>
+            public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
+
+            /// <summary>
             /// Gets the Snippets options.
             /// </summary>
             /// <value>The Snippets options.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
-
-            /// <summary>
-            /// Gets the Symbol options.
-            /// </summary>
-            /// <value>The Symbol options.</value>
-            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts type options into Attribute options.
@@ -83,8 +83,14 @@
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
                 return options.Attributes
-                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Symbols), _ => _);
+                    .ForkOn(
+                        attributes => attributes.Qualifications.IsUnspecified,
+                        attributes => attributes.WithQualifications(options.Qualifications),
+                        _ => _)
+                    .ForkOn(
+                        attributes => attributes.Snippets.IsUnspecified,
+                        attributes => attributes.WithSnippets(options.Snippets),
+                        _ => _);
             }
 
             /// <summary>
@@ -124,8 +130,8 @@
                 Guard.Against.Conversion<Options, Method.Options>(options);
 
                 return options.Methods
-                    .ForkOn(methods => methods.Snippets.IsUnspecified, methods => methods.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(methods => methods.Symbols.IsUnspecified, methods => methods.WithSymbols(options.Symbols), _ => _);
+                    .ForkOn(methods => methods.Qualifications.IsUnspecified, methods => methods.WithQualifications(options.Qualifications), _ => _)
+                    .ForkOn(methods => methods.Snippets.IsUnspecified, methods => methods.WithSnippets(options.Snippets), _ => _);
             }
 
             /// <summary>
@@ -138,8 +144,26 @@
                 Guard.Against.Conversion<Options, Property.Options>(options);
 
                 return options.Properties
-                    .ForkOn(properties => properties.Snippets.IsUnspecified, properties => properties.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(properties => properties.Symbols.IsUnspecified, properties => properties.WithSymbols(options.Symbols), _ => _);
+                    .ForkOn(
+                        properties => properties.Qualifications.IsUnspecified,
+                        properties => properties.WithQualifications(options.Qualifications),
+                        _ => _)
+                    .ForkOn(
+                        properties => properties.Snippets.IsUnspecified,
+                        properties => properties.WithSnippets(options.Snippets),
+                        _ => _);
+            }
+
+            /// <summary>
+            /// Converts type options into symbol options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The symbol options.</returns>
+            public static implicit operator Qualification.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Qualification.Options>(options);
+
+                return options.Qualifications;
             }
 
             /// <summary>
@@ -152,18 +176,6 @@
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
-            }
-
-            /// <summary>
-            /// Converts type options into symbol options.
-            /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The symbol options.</returns>
-            public static implicit operator Symbol.Options(Options options)
-            {
-                Guard.Against.Conversion<Options, Symbol.Options>(options);
-
-                return options.Symbols;
             }
         }
     }

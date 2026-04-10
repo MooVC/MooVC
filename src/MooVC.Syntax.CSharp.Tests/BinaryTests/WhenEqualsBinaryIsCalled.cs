@@ -7,7 +7,7 @@ public sealed class WhenEqualsBinaryIsCalled
     {
         // Arrange
         Binary subject = BinaryTestsData.Create();
-        Binary target = BinaryTestsData.Create(@operator: Binary.Type.Multiply);
+        Binary target = BinaryTestsData.Create(@operator: Binary.Types.Multiply);
 
         // Act
         bool result = target.Equals(subject);

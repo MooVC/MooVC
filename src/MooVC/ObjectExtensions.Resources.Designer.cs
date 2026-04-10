@@ -61,6 +61,33 @@ namespace MooVC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Action to invoke for each Element of the Enumerable must be provided..
+        /// </summary>
+        internal static string EnumerateActionRequired {
+            get {
+                return ResourceManager.GetString("EnumerateActionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Enumerable to enumerate must be provided..
+        /// </summary>
+        internal static string EnumerateEnumerableRequired {
+            get {
+                return ResourceManager.GetString("EnumerateEnumerableRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Subject upon which the enumeration is to be applied must be provided..
+        /// </summary>
+        internal static string EnumerateSubjectRequired {
+            get {
+                return ResourceManager.GetString("EnumerateSubjectRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one path must be provided..
         /// </summary>
         internal static string ForkOnPathsRequired {

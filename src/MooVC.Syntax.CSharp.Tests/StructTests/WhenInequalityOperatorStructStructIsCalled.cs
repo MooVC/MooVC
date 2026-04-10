@@ -20,8 +20,8 @@ public sealed class WhenInequalityOperatorStructStructIsCalled
     public async Task GivenDifferentBehaviorsThenReturnsTrue()
     {
         // Arrange
-        Struct left = StructTestsData.Create(behavior: Struct.Kind.Record);
-        Struct right = StructTestsData.Create(behavior: Struct.Kind.Ref);
+        Struct left = StructTestsData.Create(behavior: Struct.Kinds.Record);
+        Struct right = StructTestsData.Create(behavior: Struct.Kinds.Ref);
 
         // Act
         bool result = left != right;
@@ -48,8 +48,8 @@ public sealed class WhenInequalityOperatorStructStructIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Struct left = StructTestsData.Create(scope: Scope.Internal);
-        Struct right = StructTestsData.Create(scope: Scope.Internal);
+        Struct left = StructTestsData.Create(scope: Scopes.Internal);
+        Struct right = StructTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left != right;

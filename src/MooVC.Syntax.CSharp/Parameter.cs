@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Parameter
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined parameter instance used as a placeholder.
@@ -57,7 +59,7 @@
         /// Gets the parameter modifier (in, ref, out, params, scoped, this).
         /// </summary>
         /// <value>The parameter modifier that affects passing semantics.</value>
-        public Mode Modifier { get; internal set; } = Mode.None;
+        public Modes Modifier { get; internal set; } = Modes.None;
 
         /// <summary>
         /// Gets the parameter name.
@@ -109,6 +111,24 @@
             return new Parameter()
                 .Named(parameter.Name)
                 .OfType(parameter.Type);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the attributes collection, followed by
+        /// the type symbol.
+        /// </summary>
+        /// <remarks>The enumerator yields all symbols from each attribute in the order they appear, and
+        /// then yields the type symbol as the final element. The returned enumerator reflects the state of the
+        /// collection at the time of enumeration.</remarks>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols, including all attribute symbols
+        /// and the type symbol.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+                .Concat(Type))
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -174,6 +194,15 @@
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private string GetDefault()

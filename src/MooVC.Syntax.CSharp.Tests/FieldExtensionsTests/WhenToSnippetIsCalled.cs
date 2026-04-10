@@ -47,8 +47,8 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Field staticReadonly = Create(name: ThirdFieldName, isStatic: true, isReadOnly: true);
-        Field staticMutable = Create(name: SecondFieldName, isStatic: true, isReadOnly: false, scope: Scope.Private);
-        Field instanceReadonly = Create(name: FirstFieldName, isStatic: false, isReadOnly: true, scope: Scope.Public);
+        Field staticMutable = Create(name: SecondFieldName, isStatic: true, isReadOnly: false, scope: Scopes.Private);
+        Field instanceReadonly = Create(name: FirstFieldName, isStatic: false, isReadOnly: true, scope: Scopes.Public);
 
         ImmutableArray<Field> fields =
         [
@@ -72,14 +72,14 @@ public sealed class WhenToSnippetIsCalled
         _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
     }
 
-    private static Field Create(string name, bool isStatic = false, bool isReadOnly = true, Scope? scope = default)
+    private static Field Create(string name, bool isStatic = false, bool isReadOnly = true, Scopes? scope = default)
     {
         return new Field
         {
             IsReadOnly = isReadOnly,
             IsStatic = isStatic,
             Name = new(name),
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
             Type = typeof(string),
         };
     }

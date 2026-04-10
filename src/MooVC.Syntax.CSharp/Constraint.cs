@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Constraint
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the unspecified instance.
@@ -89,6 +91,18 @@
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through all symbols provided by the interfaces.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Interfaces.SelectMany(@interface => @interface))
+            {
+                yield return qualifier;
+            }
+        }
+
+        /// <summary>
         /// Returns the string representation of the Constraint.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -131,8 +145,17 @@
 
             return validationContext
                 .Include(nameof(Base), Base)
-                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUndefined, Interfaces)
+                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUnspecified, Interfaces)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

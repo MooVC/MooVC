@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorBinaryBinaryIsCalled
     {
         // Arrange
         Binary left = BinaryTestsData.Create();
-        Binary right = BinaryTestsData.Create(@operator: Binary.Type.Multiply);
+        Binary right = BinaryTestsData.Create(@operator: Binary.Types.Multiply);
 
         // Act
         bool resultLeftRight = left == right;

@@ -57,7 +57,7 @@ namespace MooVC.Syntax.CSharp
                 /// Gets the scope on the Setter.
                 /// </summary>
                 /// <value>The scope.</value>
-                public Scope Scope { get; internal set; } = Scope.Unspecified;
+                public Scopes Scope { get; internal set; } = Scopes.Unspecified;
             }
         }
     }

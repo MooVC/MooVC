@@ -7,16 +7,16 @@ internal static class ConversionTestsData
 
     public static Conversion Create(
         Snippet? body = default,
-        Conversion.Intent? direction = default,
-        Conversion.Type? mode = default,
-        Scope? scope = default,
+        Conversion.Intents? direction = default,
+        Conversion.Types? mode = default,
+        Scopes? scope = default,
         Symbol? subject = default)
     {
         var conversion = new Conversion
         {
             Body = body ?? Snippet.From(DefaultBody),
-            Direction = direction ?? Conversion.Intent.To,
-            Mode = mode ?? Conversion.Type.Implicit,
+            Direction = direction ?? Conversion.Intents.To,
+            Mode = mode ?? Conversion.Types.Implicit,
             Target = subject ?? new Symbol { Name = DefaultSubject },
         };
 

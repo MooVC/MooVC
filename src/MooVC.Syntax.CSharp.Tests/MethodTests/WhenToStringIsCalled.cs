@@ -10,7 +10,7 @@ public sealed class WhenToStringIsCalled
             .Create()
             .Returns(result => result
                 .As(typeof(Task))
-                .WithMode(Result.Modality.Asynchronous));
+                .WithMode(Result.Modes.Asynchronous));
 
         // Act
         string representation = subject.ToString();

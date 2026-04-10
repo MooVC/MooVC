@@ -7,7 +7,7 @@ public sealed class WhenWithModeIsCalled
     {
         // Arrange
         Conversion original = ConversionTestsData.Create();
-        Conversion.Type replacement = Conversion.Type.Explicit;
+        Conversion.Types replacement = Conversion.Types.Explicit;
 
         // Act
         Conversion result = original.WithMode(replacement);

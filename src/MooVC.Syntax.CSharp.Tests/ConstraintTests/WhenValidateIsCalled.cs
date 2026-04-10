@@ -29,7 +29,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Symbol.Moniker));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Moniker));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -39,7 +39,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new(new() { Name = InvalidInterfaceName })],
+            Interfaces = [new() { Name = InvalidInterfaceName }],
         };
 
         var context = new ValidationContext(constraint);
@@ -51,7 +51,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Moniker));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -62,7 +62,7 @@ public sealed class WhenValidateIsCalled
         var constraint = new Constraint
         {
             Base = new Symbol() { Name = InvalidName },
-            Interfaces = [new(new() { Name = InvalidInterfaceName })],
+            Interfaces = [new() { Name = InvalidInterfaceName }],
         };
 
         var context = new ValidationContext(constraint);
@@ -74,8 +74,8 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).IsNotEmpty();
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Symbol.Moniker)));
-        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Implementation)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Moniker)));
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Moniker)));
     }
 
     [Test]
@@ -102,7 +102,7 @@ public sealed class WhenValidateIsCalled
         {
             Nature = Nature.Struct,
             Base = new Symbol() { Name = BaseName },
-            Interfaces = [new(new() { Name = InterfaceName })],
+            Interfaces = [new() { Name = InterfaceName }],
             New = New.Required,
         };
 

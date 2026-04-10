@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorRecordRecordIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Record left = RecordTestsData.Create(scope: Scope.Internal);
-        Record right = RecordTestsData.Create(scope: Scope.Internal);
+        Record left = RecordTestsData.Create(scope: Scopes.Internal);
+        Record right = RecordTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left == right;

@@ -7,7 +7,7 @@ public sealed class WhenEqualsUnaryIsCalled
     {
         // Arrange
         Unary subject = UnaryTestsData.Create();
-        Unary target = UnaryTestsData.Create(@operator: Unary.Type.Minus);
+        Unary target = UnaryTestsData.Create(@operator: Unary.Types.Minus);
 
         // Act
         bool result = target.Equals(subject);

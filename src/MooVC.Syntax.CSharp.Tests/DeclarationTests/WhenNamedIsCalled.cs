@@ -17,7 +17,7 @@ public sealed class WhenNamedIsCalled
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
         _ = await Assert.That(result.Name).IsEqualTo(name);
-        _ = await Assert.That(result.Generics).IsEqualTo(original.Generics);
+        _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
         _ = await Assert.That(original.Name).IsEqualTo(new Name(DeclarationTestsData.DefaultName));
     }
 }

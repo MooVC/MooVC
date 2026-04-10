@@ -53,7 +53,7 @@ public sealed class WhenToSnippetIsCalled
         Indexer protectedVirtual = IndexerTestsData.Create(
             parameter: new Parameter { Name = "Gamma", Type = typeof(Version) },
             result: new Result { Type = new() { Name = "int" } },
-            scope: Scope.Protected);
+            scope: Scopes.Protected);
 
         publicVirtual.Extensibility = Extensibility.Virtual;
         publicStatic.Extensibility = Extensibility.Static;

@@ -8,7 +8,7 @@ public sealed class WhenNamedIsCalled
     public async Task GivenValueThenReturnsNewInstanceWithUpdatedName()
     {
         // Arrange
-        Parameter original = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter original = ParameterTestsData.Create(modifier: Parameter.Modes.In);
 
         // Act
         Parameter result = original.Named(new Variable(NewName));

@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Field
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -79,7 +81,7 @@
         /// Gets the scope on the Field.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Private;
+        public Scopes Scope { get; internal set; } = Scopes.Private;
 
         /// <summary>
         /// Gets the type on the Field.
@@ -124,6 +126,24 @@
             return new Field()
                 .Named(field.Name)
                 .OfType(field.Type);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the attributes collection, followed by
+        /// the type symbol.
+        /// </summary>
+        /// <remarks>The enumerator yields each symbol from the attributes in order, and then yields the
+        /// type symbol as the final element. The order of enumeration is determined by the order of the attributes and
+        /// the type.</remarks>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols, including all attribute symbols
+        /// and the type symbol.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+                .Concat(Type))
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -190,6 +210,15 @@
                 .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private string GetSignature(Type.Options options)

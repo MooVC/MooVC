@@ -17,10 +17,9 @@
         /// <returns>The result.</returns>
         public Result As(CType wrapper)
         {
-            _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Kind), typeof(Result)));
+            _ = Guard.Against.Null(wrapper, message: AsWrapperRequired.Format(typeof(Modifiers), typeof(Result)));
 
             Symbol wrapped = new Symbol()
-                .From(wrapper)
                 .Named(wrapper)
                 .WithArguments(Type);
 

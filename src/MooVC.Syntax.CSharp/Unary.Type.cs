@@ -14,55 +14,55 @@
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
-        public sealed partial class Type
-            : IComparable<Type>
+        public sealed partial class Types
+            : IComparable<Types>
         {
             /// <summary>
             /// Represents the complement for the Type.
             /// </summary>
-            public static readonly Type Complement = "~";
+            public static readonly Types Complement = "~";
 
             /// <summary>
             /// Represents the decrement for the Type.
             /// </summary>
-            public static readonly Type Decrement = "--";
+            public static readonly Types Decrement = "--";
 
             /// <summary>
             /// Represents the <see langword="false" /> for the Type.
             /// </summary>
-            public static readonly Type False = "false";
+            public static readonly Types False = "false";
 
             /// <summary>
             /// Represents the increment for the Type.
             /// </summary>
-            public static readonly Type Increment = "++";
+            public static readonly Types Increment = "++";
 
             /// <summary>
             /// Represents the minus for the Type.
             /// </summary>
-            public static readonly Type Minus = "-";
+            public static readonly Types Minus = "-";
 
             /// <summary>
             /// Represents the not for the Type.
             /// </summary>
-            public static readonly Type Not = "!";
+            public static readonly Types Not = "!";
 
             /// <summary>
             /// Represents the plus for the Type.
             /// </summary>
-            public static readonly Type Plus = "+";
+            public static readonly Types Plus = "+";
 
             /// <summary>
             /// Represents the <see langword="true" /> for the Type.
             /// </summary>
-            public static readonly Type True = "true";
+            public static readonly Types True = "true";
 
             /// <summary>
             /// Gets the unspecified instance.
             /// </summary>
-            public static readonly Type Unspecified = string.Empty;
+            public static readonly Types Unspecified = string.Empty;
 
-            private Type(string value)
+            private Types(string value)
             {
                 _value = value;
             }
@@ -127,7 +127,7 @@
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
             /// <returns>The .</returns>
-            public static bool operator <(Type left, Type right)
+            public static bool operator <(Types left, Types right)
             {
                 if (left is null)
                 {
@@ -143,7 +143,7 @@
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
             /// <returns>The .</returns>
-            public static bool operator >(Type left, Type right)
+            public static bool operator >(Types left, Types right)
             {
                 if (left is null)
                 {
@@ -159,7 +159,7 @@
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
             /// <returns>The .</returns>
-            public static bool operator <=(Type left, Type right)
+            public static bool operator <=(Types left, Types right)
             {
                 return !(left > right);
             }
@@ -170,7 +170,7 @@
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
             /// <returns>The .</returns>
-            public static bool operator >=(Type left, Type right)
+            public static bool operator >=(Types left, Types right)
             {
                 return !(left < right);
             }
@@ -180,7 +180,7 @@
             /// </summary>
             /// <param name="other">The other.</param>
             /// <returns>A signed integer indicating relative order.</returns>
-            public int CompareTo(Type other)
+            public int CompareTo(Types other)
             {
                 return other is null
                     ? 1

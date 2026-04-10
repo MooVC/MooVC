@@ -21,7 +21,7 @@ public sealed class WhenEqualityOperatorComparisonComparisonIsCalled
     {
         // Arrange
         Comparison left = ComparisonTestsData.Create();
-        Comparison right = ComparisonTestsData.Create(@operator: Comparison.Type.GreaterThan);
+        Comparison right = ComparisonTestsData.Create(@operator: Comparison.Types.GreaterThan);
 
         // Act
         bool resultLeftRight = left == right;

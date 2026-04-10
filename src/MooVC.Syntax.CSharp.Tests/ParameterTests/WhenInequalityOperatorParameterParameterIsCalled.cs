@@ -36,8 +36,8 @@ public sealed class WhenInequalityOperatorParameterParameterIsCalled
     public async Task GivenEqualValuesThenReturnsFalse()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.In);
-        Parameter right = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter left = ParameterTestsData.Create(modifier: Parameter.Modes.In);
+        Parameter right = ParameterTestsData.Create(modifier: Parameter.Modes.In);
 
         // Act
         bool resultLeftRight = left != right;

@@ -81,7 +81,7 @@ namespace MooVC.Syntax.CSharp
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                return ToSnippet(Options.Default, Scope.Public);
+                return ToSnippet(Options.Default, Scopes.Public);
             }
 
             /// <summary>
@@ -90,7 +90,7 @@ namespace MooVC.Syntax.CSharp
             /// <param name="options">The options.</param>
             /// <param name="scope">The scope.</param>
             /// <returns>The generated snippet.</returns>
-            public Snippet ToSnippet(Snippet.Options options, Scope scope)
+            public Snippet ToSnippet(Snippet.Options options, Scopes scope)
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
 
@@ -120,14 +120,14 @@ namespace MooVC.Syntax.CSharp
                 return set.Prepend(options, get);
             }
 
-            private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scope scope = default)
+            private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scopes scope = default)
             {
                 if (snippet.IsEmpty)
                 {
                     return Snippet.From(options, $"{keyword};");
                 }
 
-                keyword = scope is null || scope == Scope.Unspecified
+                keyword = scope is null || scope == Scopes.Unspecified
                     ? keyword
                     : $"{scope} {keyword}";
 

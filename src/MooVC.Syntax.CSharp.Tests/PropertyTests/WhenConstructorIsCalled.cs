@@ -17,7 +17,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Default).IsEqualTo(Snippet.Empty);
         _ = await Assert.That(subject.IsUndefined).IsTrue();
         _ = await Assert.That(subject.Name).IsEqualTo(Name.Unnamed);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
         _ = await Assert.That(subject.Type).IsEqualTo(Symbol.Undefined);
     }
 
@@ -32,7 +32,7 @@ public sealed class WhenConstructorIsCalled
             {
                 Behaviour = Snippet.From("value = input"),
                 Mode = Property.Methods.Setter.Modes.Init,
-                Scope = Scope.Private,
+                Scope = Scopes.Private,
             },
         };
 
@@ -42,7 +42,7 @@ public sealed class WhenConstructorIsCalled
             Behaviours = behaviours,
             Default = Snippet.From(DefaultValue),
             Name = PropertyName,
-            Scope = Scope.Internal,
+            Scope = Scopes.Internal,
             Type = new() { Name = PropertyType },
         };
 
@@ -51,7 +51,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Default).IsEqualTo(Snippet.From(DefaultValue));
         _ = await Assert.That(subject.IsUndefined).IsFalse();
         _ = await Assert.That(subject.Name).IsEqualTo(new Name(PropertyName));
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Internal);
         _ = await Assert.That(subject.Type).IsEqualTo(new Symbol { Name = PropertyType });
     }
 }

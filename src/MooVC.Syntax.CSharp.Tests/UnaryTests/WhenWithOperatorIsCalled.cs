@@ -7,7 +7,7 @@ public sealed class WhenWithOperatorIsCalled
     {
         // Arrange
         Unary original = UnaryTestsData.Create();
-        Unary.Type replacement = Unary.Type.Decrement;
+        Unary.Types replacement = Unary.Types.Decrement;
 
         // Act
         Unary result = original.WithOperator(replacement);

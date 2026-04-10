@@ -61,15 +61,6 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value &apos;{0}&apos; is not valid for &apos;{1}&apos;. Please use a valid C# identifier, starting with an uppercase letter, containing letters, digits, or underscores, and excluding spaces or reserved keywords..
-        /// </summary>
-        internal static string MonikerValidateValueRequired {
-            get {
-                return ResourceManager.GetString("MonikerValidateValueRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
         /// </summary>
         internal static string ToStringOptionsRequired {

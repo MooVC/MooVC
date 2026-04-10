@@ -23,7 +23,7 @@ public sealed class WhenConstructorIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new(SymbolTestsData.CreateWithArgumentNames()),
+            Base = SymbolTestsData.CreateWithArgumentNames(),
         };
 
         // Act

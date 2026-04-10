@@ -10,7 +10,7 @@ public static class ClassTestsData
         bool? isStatic = default,
         bool? isPartial = default,
         Extensibility? extensibility = default,
-        Scope? scope = default,
+        Scopes? scope = default,
         Operators? operators = default,
         Declaration? name = default,
         ImmutableArray<Attribute>? attributes = default,
@@ -37,7 +37,7 @@ public static class ClassTestsData
             Operators = operators ?? new Operators(),
             Parameters = parameters ?? [],
             Properties = properties ?? [],
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
         };
     }
 }

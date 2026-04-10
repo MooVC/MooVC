@@ -46,7 +46,7 @@ public sealed class WhenToSnippetIsCalled
 
         Event @protected = EventTestsData.Create(
             name: "Beta",
-            scope: Scope.Protected,
+            scope: Scopes.Protected,
             behaviours: new Event.Methods { Remove = Snippet.From("b-=1;") });
 
         Event @virtual = EventTestsData.Create(name: "Gamma", behaviours: new Event.Methods { Remove = Snippet.From("g();") });

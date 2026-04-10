@@ -15,7 +15,7 @@ public sealed class WhenToSnippetIsCalled
         {
             Interfaces =
             [
-                new Declaration { Name = ConstraintInterfaceName },
+                new() { Name = ConstraintInterfaceName },
             ],
         };
 
@@ -34,7 +34,7 @@ public sealed class WhenToSnippetIsCalled
             Declaration = new()
             {
                 Name = TypeName,
-                Generics =
+                Arguments =
                 [
                     argument,
                 ],

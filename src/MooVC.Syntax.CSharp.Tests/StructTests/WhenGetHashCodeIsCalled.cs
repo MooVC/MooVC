@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenReturnsDifferentHashes()
     {
         // Arrange
-        Struct left = StructTestsData.Create(behavior: Struct.Kind.ReadOnly);
-        Struct right = StructTestsData.Create(behavior: Struct.Kind.Record);
+        Struct left = StructTestsData.Create(behavior: Struct.Kinds.ReadOnly);
+        Struct right = StructTestsData.Create(behavior: Struct.Kinds.Record);
 
         // Act
         int leftHash = left.GetHashCode();
@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenEqualValuesThenReturnsSameHash()
     {
         // Arrange
-        Struct left = StructTestsData.Create(scope: Scope.Internal);
-        Struct right = StructTestsData.Create(scope: Scope.Internal);
+        Struct left = StructTestsData.Create(scope: Scopes.Internal);
+        Struct right = StructTestsData.Create(scope: Scopes.Internal);
 
         // Act
         int leftHash = left.GetHashCode();

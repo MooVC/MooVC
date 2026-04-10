@@ -1,10 +1,12 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Ardalis.GuardClauses;
     using MooVC.Syntax.Validation;
     using static MooVC.Syntax.CSharp.Type_Resources;
@@ -15,8 +17,15 @@
     /// Represents a C# type syntax type.
     /// </summary>
     public abstract partial class Type
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
+        /// <summary>
+        /// Initializes a new instance of the Type class.
+        /// </summary>
+        /// <remarks>This constructor is accessible only within its containing class and derived classes
+        /// within the same assembly. It is typically used to restrict instantiation to specific scenarios, such as
+        /// controlled inheritance or factory patterns.</remarks>
         private protected Type()
         {
         }
@@ -93,7 +102,7 @@
         /// Gets the scope.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Gets the types defined within the type.
@@ -114,6 +123,25 @@
             where T : Type, new()
         {
             return new T();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public virtual IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+                .Concat(Events.SelectMany(@event => @event))
+                .Concat(Indexers.SelectMany(indexer => indexer))
+                .Concat(Interfaces.SelectMany(@interface => @interface))
+                .Concat(Methods.SelectMany(method => method))
+                .Concat(Properties.SelectMany(method => method))
+                .Concat(Operators)
+                .Concat(Types.SelectMany(type => type)))
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -165,6 +193,15 @@
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .AndIf(!Types.IsDefaultOrEmpty, nameof(Types), type => !type.IsUndefined, Types)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         /// <summary>

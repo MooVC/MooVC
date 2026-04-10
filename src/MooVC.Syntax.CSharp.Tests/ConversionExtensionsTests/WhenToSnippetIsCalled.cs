@@ -79,9 +79,9 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Conversion publicAlphaTo = ConversionTestsData.Create(scope: Scope.Public, subject: new Symbol { Name = "Alpha" });
-        Conversion publicAlphaFrom = ConversionTestsData.Create(direction: Conversion.Intent.From, scope: Scope.Public, subject: new Symbol { Name = "Alpha" });
-        Conversion protectedBetaTo = ConversionTestsData.Create(scope: Scope.Protected, subject: new Symbol { Name = "Beta" });
+        Conversion publicAlphaTo = ConversionTestsData.Create(scope: Scopes.Public, subject: new Symbol { Name = "Alpha" });
+        Conversion publicAlphaFrom = ConversionTestsData.Create(direction: Conversion.Intents.From, scope: Scopes.Public, subject: new Symbol { Name = "Alpha" });
+        Conversion protectedBetaTo = ConversionTestsData.Create(scope: Scopes.Protected, subject: new Symbol { Name = "Beta" });
 
         ImmutableArray<Conversion> conversions = [protectedBetaTo, publicAlphaFrom, publicAlphaTo];
 

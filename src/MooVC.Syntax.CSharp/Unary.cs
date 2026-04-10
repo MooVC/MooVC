@@ -48,13 +48,13 @@
         /// Gets the operator on the Unary.
         /// </summary>
         /// <value>The operator.</value>
-        public Type Operator { get; internal set; } = Type.Unspecified;
+        public Types Operator { get; internal set; } = Types.Unspecified;
 
         /// <summary>
         /// Gets the scope on the Unary.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Returns the string representation of the Unary.
@@ -85,7 +85,7 @@
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Unary)));
-            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Type), nameof(Unary)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Unary)));
 
             return ToSnippet(type.Declaration, options);
         }

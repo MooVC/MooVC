@@ -20,8 +20,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenEqualValuesThenReturnsTrue()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(scope: Scope.Internal);
-        object value = RecordTestsData.Create(scope: Scope.Internal);
+        Record subject = RecordTestsData.Create(scope: Scopes.Internal);
+        object value = RecordTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = subject.Equals(value);

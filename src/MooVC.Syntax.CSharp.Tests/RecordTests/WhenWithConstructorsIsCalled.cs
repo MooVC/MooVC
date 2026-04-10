@@ -7,7 +7,7 @@ public sealed class WhenWithConstructorsIsCalled
     {
         // Arrange
         var originalConstructor = new Constructor();
-        var updated = new Constructor { Scope = Scope.Protected };
+        var updated = new Constructor { Scope = Scopes.Protected };
         Record original = RecordTestsData.Create(constructors: [originalConstructor]);
 
         // Act

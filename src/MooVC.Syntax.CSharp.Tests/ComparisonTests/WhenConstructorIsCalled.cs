@@ -11,8 +11,8 @@ public sealed class WhenConstructorIsCalled
         // Assert
         _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
         _ = await Assert.That(subject.IsUndefined).IsTrue();
-        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.Unspecified);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Types.Unspecified);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
     }
 
     [Test]
@@ -25,14 +25,14 @@ public sealed class WhenConstructorIsCalled
         var subject = new Comparison
         {
             Body = body,
-            Operator = Comparison.Type.GreaterThan,
-            Scope = Scope.Private,
+            Operator = Comparison.Types.GreaterThan,
+            Scope = Scopes.Private,
         };
 
         // Assert
         _ = await Assert.That(subject.Body).IsEqualTo(body);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
-        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Type.GreaterThan);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Private);
+        _ = await Assert.That(subject.Operator).IsEqualTo(Comparison.Types.GreaterThan);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Private);
     }
 }

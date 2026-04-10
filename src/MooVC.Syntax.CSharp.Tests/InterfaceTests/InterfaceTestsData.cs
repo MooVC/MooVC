@@ -8,7 +8,7 @@ public static class InterfaceTestsData
 
     public static Interface Create(
         bool? isPartial = default,
-        Scope? scope = default,
+        Scopes? scope = default,
         Operators? operators = default,
         Declaration? name = default,
         ImmutableArray<Attribute>? attributes = default,
@@ -27,7 +27,7 @@ public static class InterfaceTestsData
             Declaration = name ?? new Declaration { Name = DefaultName },
             Operators = operators ?? new Operators(),
             Properties = properties ?? [],
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
         };
     }
 }

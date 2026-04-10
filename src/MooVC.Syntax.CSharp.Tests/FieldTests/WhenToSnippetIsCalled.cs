@@ -13,7 +13,7 @@ public sealed class WhenToSnippetIsCalled
             isReadOnly: false,
             isStatic: true,
             name: FieldTestsData.DefaultName,
-            scope: Scope.Public,
+            scope: Scopes.Public,
             type: SymbolTestsData.Create("Result"));
 
         // Act

@@ -22,12 +22,12 @@ public sealed class WhenToStringIsCalled
         var constructor = new Constructor();
 
         Struct subject = StructTestsData.Create(
-            behavior: Struct.Kind.Ref,
+            behavior: Struct.Kinds.Ref,
             constructors: [constructor],
             isPartial: true,
             name: new Declaration { Name = StructTestsData.DefaultName },
             parameters: [new Parameter { Name = new("input"), Type = typeof(int) }],
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Act
         string result = subject.ToString();

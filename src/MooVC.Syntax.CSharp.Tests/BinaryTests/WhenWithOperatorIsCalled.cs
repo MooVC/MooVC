@@ -7,7 +7,7 @@ public sealed class WhenWithOperatorIsCalled
     {
         // Arrange
         Binary original = BinaryTestsData.Create();
-        Binary.Type replacement = Binary.Type.Subtract;
+        Binary.Types replacement = Binary.Types.Subtract;
 
         // Act
         Binary result = original.WithOperator(replacement);

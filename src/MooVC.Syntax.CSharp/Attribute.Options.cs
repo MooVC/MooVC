@@ -32,7 +32,7 @@
             /// </summary>
             public static readonly Options Inline = new Options
             {
-                Format = Style.Inline,
+                Format = Styles.Inline,
             };
 
             /// <summary>
@@ -64,7 +64,7 @@
             /// </summary>
             /// <value>The naming.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsStyleRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Style Format { get; internal set; } = Style.Separate;
+            public Styles Format { get; internal set; } = Styles.Separate;
 
             /// <summary>
             /// Gets a value indicating whether the format style is set to separate.
@@ -73,7 +73,7 @@
             /// A value indicating whether the format style is set to separate.
             /// </value>
             [Ignore]
-            public bool IsSeparate => Format == Style.Separate;
+            public bool IsSeparate => Format == Styles.Separate;
 
             /// <summary>
             /// Gets a value indicating whether the format is inline.
@@ -82,7 +82,7 @@
             /// A value indicating whether the format is inline.
             /// </value>
             [Ignore]
-            public bool IsInline => Format == Style.Inline;
+            public bool IsInline => Format == Styles.Inline;
 
             /// <summary>
             /// Gets a value indicating whether the current instance is unspecified.
@@ -94,18 +94,18 @@
             public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
+            /// Gets the types on the Options.
+            /// </summary>
+            /// <value>The types.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsQualificationsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
+
+            /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
             [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
-
-            /// <summary>
-            /// Gets the types on the Options.
-            /// </summary>
-            /// <value>The types.</value>
-            [Required(ErrorMessageResourceName = nameof(OptionsSymbolsRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
-            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts parameter options into snippet options.
@@ -120,6 +120,18 @@
             }
 
             /// <summary>
+            /// Converts parameter options into symbol options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The symbol options.</returns>
+            public static implicit operator Qualification.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Qualification.Options>(options);
+
+                return options.Qualifications;
+            }
+
+            /// <summary>
             /// Defines an implicit conversion from an Options instance to a Style instance.
             /// </summary>
             /// <param name="options">The Options instance to convert to a Style.</param>
@@ -127,23 +139,11 @@
             /// This operator enables seamless assignment of an Options object where a Style
             /// is expected, by extracting the Format property from the Options instance.
             /// </remarks>
-            public static implicit operator Style(Options options)
+            public static implicit operator Styles(Options options)
             {
-                Guard.Against.Conversion<Options, Style>(options);
+                Guard.Against.Conversion<Options, Styles>(options);
 
                 return options.Format;
-            }
-
-            /// <summary>
-            /// Converts parameter options into symbol options.
-            /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The symbol options.</returns>
-            public static implicit operator Symbol.Options(Options options)
-            {
-                Guard.Against.Conversion<Options, Symbol.Options>(options);
-
-                return options.Symbols;
             }
         }
     }

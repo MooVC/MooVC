@@ -74,7 +74,7 @@ public sealed class WhenEqualityOperatorPropertyPropertyIsCalled
     {
         // Arrange
         Property left = PropertyTestsData.Create();
-        Property right = PropertyTestsData.Create(scope: Scope.Private);
+        Property right = PropertyTestsData.Create(scope: Scopes.Private);
 
         // Act
         bool resultLeftRight = left == right;

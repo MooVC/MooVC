@@ -53,7 +53,7 @@ public sealed class WhenToStringIsCalled
             methods: [execute],
             name: new Declaration { Name = InterfaceTestsData.DefaultName },
             properties: [valueA, valueB],
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Act
         string result = subject.ToString();

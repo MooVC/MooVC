@@ -39,7 +39,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenNonArgumentThenReturnsFalse()
     {
         // Arrange
-        var other = new object();
+        object other = new();
         Generic subject = Create();
 
         // Act
@@ -82,7 +82,7 @@ public sealed class WhenEqualsObjectIsCalled
         return new Generic
         {
             Name = new(name),
-            Constraints = [new() { Base = new(SymbolTestsData.CreateWithArgumentNames()) }],
+            Constraints = [new() { Base = SymbolTestsData.CreateWithArgumentNames() }],
         };
     }
 }

@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         Binary first = BinaryTestsData.Create();
-        Binary second = BinaryTestsData.Create(@operator: Binary.Type.Multiply);
+        Binary second = BinaryTestsData.Create(@operator: Binary.Types.Multiply);
 
         // Act
         int firstHash = first.GetHashCode();

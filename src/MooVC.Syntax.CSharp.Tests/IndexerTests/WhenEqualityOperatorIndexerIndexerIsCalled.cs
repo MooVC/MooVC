@@ -45,7 +45,7 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
         Indexer right = IndexerTestsData.Create(
             result: new Result
             {
-                Mode = Result.Modality.Synchronous,
+                Mode = Result.Modes.Synchronous,
                 Type = new() { Name = "int" },
             });
 
@@ -63,7 +63,7 @@ public sealed class WhenEqualityOperatorIndexerIndexerIsCalled
     {
         // Arrange
         Indexer left = IndexerTestsData.Create();
-        Indexer right = IndexerTestsData.Create(scope: Scope.Internal);
+        Indexer right = IndexerTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool resultLeftRight = left == right;

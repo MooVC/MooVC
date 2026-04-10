@@ -62,7 +62,7 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>The implicit scope.</value>
             /// <remarks>If the Property is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
-            public Scope Implied { get; internal set; } = Scope.Unspecified;
+            public Scopes Implied { get; internal set; } = Scopes.Unspecified;
 
             /// <summary>
             /// Gets a value indicating whether the Setter is default.
@@ -81,18 +81,18 @@ namespace MooVC.Syntax.CSharp
             public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
+            /// Gets the options for the Types.
+            /// </summary>
+            /// <value>The types.</value>
+            public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
+
+            /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default
                 .WithBlock(blocks => blocks
                     .WithInline(Snippet.Options.Blocks.Styles.Lambda));
-
-            /// <summary>
-            /// Gets the options for the Types.
-            /// </summary>
-            /// <value>The types.</value>
-            public Symbol.Options Symbols { get; internal set; } = Symbol.Options.Unspecified;
 
             /// <summary>
             /// Converts Property options into Attribute options.
@@ -104,8 +104,26 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
 
                 return options.Attributes
-                    .ForkOn(attributes => attributes.Snippets.IsUnspecified, attributes => attributes.WithSnippets(options.Snippets), _ => _)
-                    .ForkOn(attributes => attributes.Symbols.IsUnspecified, attributes => attributes.WithSymbols(options.Symbols), _ => _);
+                    .ForkOn(
+                        attributes => attributes.Qualifications.IsUnspecified,
+                        attributes => attributes.WithQualifications(options.Qualifications),
+                        _ => _)
+                    .ForkOn(
+                        attributes => attributes.Snippets.IsUnspecified,
+                        attributes => attributes.WithSnippets(options.Snippets),
+                        _ => _);
+            }
+
+            /// <summary>
+            /// Converts property options into type options.
+            /// </summary>
+            /// <param name="options">The source options.</param>
+            /// <returns>The type options.</returns>
+            public static implicit operator Qualification.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Qualification.Options>(options);
+
+                return options.Qualifications;
             }
 
             /// <summary>
@@ -113,9 +131,9 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <param name="options">The source options.</param>
             /// <returns>The implied scope.</returns>
-            public static implicit operator Scope(Options options)
+            public static implicit operator Scopes(Options options)
             {
-                Guard.Against.Conversion<Options, Scope>(options);
+                Guard.Against.Conversion<Options, Scopes>(options);
 
                 return options.Implied;
             }
@@ -130,18 +148,6 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
-            }
-
-            /// <summary>
-            /// Converts property options into type options.
-            /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The type options.</returns>
-            public static implicit operator Symbol.Options(Options options)
-            {
-                Guard.Against.Conversion<Options, Symbol.Options>(options);
-
-                return options.Symbols;
             }
         }
     }

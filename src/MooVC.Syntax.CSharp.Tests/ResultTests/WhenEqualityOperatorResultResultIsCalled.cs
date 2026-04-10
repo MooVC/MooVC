@@ -7,7 +7,7 @@ public sealed class WhenEqualityOperatorResultResultIsCalled
     {
         // Arrange
         Result left = ResultTestsData.Create();
-        Result right = ResultTestsData.Create(modifier: Result.Kind.Ref);
+        Result right = ResultTestsData.Create(modifier: Result.Modifiers.Ref);
 
         // Act
         bool result = left == right;

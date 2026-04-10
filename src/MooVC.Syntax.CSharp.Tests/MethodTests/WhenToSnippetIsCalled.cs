@@ -10,7 +10,7 @@ public sealed class WhenToSnippetIsCalled
             .Create(body: Snippet.From("return await value;"))
             .Returns(result => result
                 .As(typeof(Task))
-                .WithMode(Result.Modality.Asynchronous));
+                .WithMode(Result.Modes.Asynchronous));
 
         // Act
         string representation = subject.ToSnippet(Method.Options.Default);
@@ -65,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         var declaration = new Declaration
         {
             Name = "Perform",
-            Generics = [generic],
+            Arguments = [generic],
         };
 
         Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);

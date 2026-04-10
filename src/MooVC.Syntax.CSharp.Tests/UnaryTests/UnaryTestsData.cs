@@ -4,12 +4,12 @@ internal static class UnaryTestsData
 {
     public const string DefaultBody = "return +value;";
 
-    public static Unary Create(Snippet? body = default, Unary.Type? @operator = default, Scope? scope = default)
+    public static Unary Create(Snippet? body = default, Unary.Types? @operator = default, Scopes? scope = default)
     {
         var subject = new Unary
         {
             Body = body ?? Snippet.From(DefaultBody),
-            Operator = @operator ?? Unary.Type.Plus,
+            Operator = @operator ?? Unary.Types.Plus,
         };
 
         if (scope is not null)

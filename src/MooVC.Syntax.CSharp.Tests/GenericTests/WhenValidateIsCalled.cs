@@ -15,7 +15,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Interfaces = [new(new() { Name = InvalidInterfaceName })],
+            Interfaces = [new() { Name = InvalidInterfaceName }],
         };
 
         var subject = new Generic
@@ -33,7 +33,7 @@ public sealed class WhenValidateIsCalled
         // Assert
         _ = await Assert.That(valid).IsFalse();
         _ = await Assert.That(results).HasSingleItem();
-        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Implementation));
+        _ = await Assert.That(results[0].MemberNames).Contains(nameof(Name));
         _ = await Assert.That(results[0].ErrorMessage).IsNotNull().And.IsNotEmpty();
     }
 
@@ -97,8 +97,8 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var constraint = new Constraint
         {
-            Base = new Symbol() { Name = "Base" },
-            Interfaces = [new(new() { Name = InterfaceName })],
+            Base = new() { Name = "Base" },
+            Interfaces = [new() { Name = InterfaceName }],
             New = New.Required,
         };
 

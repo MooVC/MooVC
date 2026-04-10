@@ -53,7 +53,7 @@ public sealed class WhenToSnippetIsCalled
             methods: [execute],
             name: new Declaration { Name = InterfaceTestsData.DefaultName },
             properties: [valueA, valueB],
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Act
         var result = subject.ToSnippet(Type.Options.Default);

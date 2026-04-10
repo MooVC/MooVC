@@ -27,7 +27,7 @@ public sealed class WhenValidateIsCalled
         // Arrange
         var subject = new Result
         {
-            Modifier = Result.Kind.Ref,
+            Modifier = Result.Modifiers.Ref,
         };
 
         var context = new ValidationContext(subject);

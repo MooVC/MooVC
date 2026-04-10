@@ -113,7 +113,7 @@ public sealed class WhenEqualityOperatorArgumentArgumentIsCalled
         {
             Name = new(name),
             Constraints = constraint is null
-                ? [new Constraint { Base = new(SymbolTestsData.CreateWithArgumentNames()) }]
+                ? [new Constraint { Base = SymbolTestsData.CreateWithArgumentNames() }]
                 : [constraint],
         };
     }

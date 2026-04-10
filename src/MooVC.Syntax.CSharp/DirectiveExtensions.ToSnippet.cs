@@ -16,12 +16,30 @@
         /// <returns>The generated snippet.</returns>
         internal static Snippet ToSnippet(this ImmutableArray<Directive> directives, Snippet.Options options)
         {
+            return directives.ToSnippet(Qualifier.Unqualified, options);
+        }
+
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="directives">The directives.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        internal static Snippet ToSnippet(this ImmutableArray<Directive> directives, Qualifier @namespace, Snippet.Options options)
+        {
             if (directives.IsDefaultOrEmpty)
             {
                 return Snippet.Empty;
             }
 
+            bool IsInSameNamespace(Directive directive)
+            {
+                return directive.Alias.IsUnnamed && !directive.IsStatic && directive.Qualifier == @namespace;
+            }
+
             return directives
+                .Distinct()
+                .Where(directive => !(directive.IsUndefined || IsInSameNamespace(directive)))
                 .Select(directive => new
                 {
                     Rendering = directive.Qualifier.ToString(),

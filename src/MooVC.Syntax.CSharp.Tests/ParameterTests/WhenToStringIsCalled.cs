@@ -16,14 +16,14 @@ public sealed class WhenToStringIsCalled
             {
                 Name = new() { Name = AttributeName },
             },
-            modifier: Parameter.Mode.Out);
+            modifier: Parameter.Modes.Out);
 
         // Act
         string result = parameter.ToString();
 
         // Assert
         _ = await Assert.That(result).Contains(AttributeName);
-        _ = await Assert.That(result).Contains(Parameter.Mode.Out);
+        _ = await Assert.That(result).Contains(Parameter.Modes.Out);
         _ = await Assert.That(result).Contains(ParameterTestsData.DefaultName.ToCamelCase());
     }
 
@@ -45,13 +45,13 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         Parameter parameter = ParameterTestsData.Create(
-            modifier: Parameter.Mode.Ref,
+            modifier: Parameter.Modes.Ref,
             @default: Snippet.From(Default));
 
         // Act
         string result = parameter.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"{Parameter.Mode.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
+        _ = await Assert.That(result).IsEqualTo($"{Parameter.Modes.Ref} {ParameterTestsData.DefaultType} {ParameterTestsData.DefaultName.ToCamelCase()} = {Default}");
     }
 }

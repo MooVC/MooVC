@@ -49,7 +49,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         Parameter noDefault = ParameterTestsData.Create(name: FirstName);
         Parameter withDefault = ParameterTestsData.Create(name: SecondName, @default: Snippet.From("42"));
-        Parameter @params = ParameterTestsData.Create(name: ThirdName, modifier: Parameter.Mode.Params, type: typeof(Version[]));
+        Parameter @params = ParameterTestsData.Create(name: ThirdName, modifier: Parameter.Modes.Params, type: typeof(Version[]));
         Parameter later = ParameterTestsData.Create(name: FourthName);
 
         ImmutableArray<Parameter> parameters = [withDefault, @params, later, noDefault];

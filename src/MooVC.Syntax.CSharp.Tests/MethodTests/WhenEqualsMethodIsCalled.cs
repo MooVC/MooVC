@@ -52,7 +52,7 @@ public sealed class WhenEqualsMethodIsCalled
 
         Method target = MethodTestsData.Create(result: new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = "bool" },
         });
 
@@ -68,7 +68,7 @@ public sealed class WhenEqualsMethodIsCalled
     {
         // Arrange
         Method subject = MethodTestsData.Create();
-        Method target = MethodTestsData.Create(scope: Scope.Internal);
+        Method target = MethodTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = target.Equals(subject);

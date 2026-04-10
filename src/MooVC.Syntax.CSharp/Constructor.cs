@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@ namespace MooVC.Syntax.CSharp
     [Fluentify]
     [Valuify]
     public sealed partial class Constructor
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -72,7 +74,7 @@ namespace MooVC.Syntax.CSharp
         /// Gets the scope on the Constructor.
         /// </summary>
         /// <value>The scope.</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Defines the string operator for the Constructor.
@@ -96,6 +98,19 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<Constructor, Snippet>(constructor);
 
             return Snippet.From(constructor);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+                .Concat(Parameters.SelectMany(parameter => parameter)))
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -136,6 +151,11 @@ namespace MooVC.Syntax.CSharp
             return validationContext
                 .IncludeIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .Results;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private Snippet GetSignature(Name name, Type.Options options)

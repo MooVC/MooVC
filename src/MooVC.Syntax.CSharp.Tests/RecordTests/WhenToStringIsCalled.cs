@@ -26,7 +26,7 @@ public sealed class WhenToStringIsCalled
             isPartial: true,
             name: new Declaration { Name = RecordTestsData.DefaultName },
             parameters: [new Parameter { Name = new("input"), Type = typeof(int) }],
-            scope: Scope.Internal);
+            scope: Scopes.Internal);
 
         // Act
         string result = subject.ToString();

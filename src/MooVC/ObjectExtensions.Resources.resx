@@ -126,4 +126,13 @@
   <data name="ForkOnPathsRequired" xml:space="preserve">
     <value>At least one path must be provided.</value>
   </data>
+  <data name="EnumerateEnumerableRequired" xml:space="preserve">
+    <value>The Enumerable to enumerate must be provided.</value>
+  </data>
+  <data name="EnumerateActionRequired" xml:space="preserve">
+    <value>The Action to invoke for each Element of the Enumerable must be provided.</value>
+  </data>
+  <data name="EnumerateSubjectRequired" xml:space="preserve">
+    <value>The Subject upon which the enumeration is to be applied must be provided.</value>
+  </data>
 </root>

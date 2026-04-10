@@ -9,11 +9,11 @@ public sealed class WhenWithTargetIsCalled
         Attribute original = AttributeTestsData.Create();
 
         // Act
-        Attribute result = original.WithTarget(Attribute.Specifier.Return);
+        Attribute result = original.WithTarget(Attribute.Specifiers.Return);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
-        _ = await Assert.That(result.Target).IsEqualTo(Attribute.Specifier.Return);
+        _ = await Assert.That(result.Target).IsEqualTo(Attribute.Specifiers.Return);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
         _ = await Assert.That(result.Arguments).IsEqualTo(original.Arguments);
     }

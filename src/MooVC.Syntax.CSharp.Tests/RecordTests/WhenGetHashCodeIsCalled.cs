@@ -6,8 +6,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValuesThenHashesDiffer()
     {
         // Arrange
-        Record left = RecordTestsData.Create(scope: Scope.Internal);
-        Record right = RecordTestsData.Create(scope: Scope.Private);
+        Record left = RecordTestsData.Create(scope: Scopes.Internal);
+        Record right = RecordTestsData.Create(scope: Scopes.Private);
 
         // Act
         int leftHash = left.GetHashCode();

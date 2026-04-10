@@ -6,7 +6,7 @@ public sealed class WhenWithConstructorsIsCalled
     public async Task GivenConstructorsThenReturnsUpdatedInstance()
     {
         // Arrange
-        var constructor = new Constructor { Scope = Scope.Protected };
+        var constructor = new Constructor { Scope = Scopes.Protected };
         Struct original = StructTestsData.Create();
 
         // Act

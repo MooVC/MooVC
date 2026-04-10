@@ -6,7 +6,7 @@ public sealed class WhenEqualsStructIsCalled
     public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Struct left = StructTestsData.Create(behavior: Struct.Kind.Ref);
+        Struct left = StructTestsData.Create(behavior: Struct.Kinds.Ref);
         Struct right = StructTestsData.Create();
 
         // Act
@@ -20,8 +20,8 @@ public sealed class WhenEqualsStructIsCalled
     public async Task GivenEqualValueThenReturnsTrue()
     {
         // Arrange
-        Struct left = StructTestsData.Create(scope: Scope.Internal);
-        Struct right = StructTestsData.Create(scope: Scope.Internal);
+        Struct left = StructTestsData.Create(scope: Scopes.Internal);
+        Struct right = StructTestsData.Create(scope: Scopes.Internal);
 
         // Act
         bool result = left.Equals(right);

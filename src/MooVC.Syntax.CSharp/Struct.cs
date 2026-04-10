@@ -31,7 +31,7 @@
         /// Gets the behavior on the Struct.
         /// </summary>
         /// <value>The behavior.</value>
-        public Kind Behavior { get; internal set; } = Kind.Default;
+        public Kinds Behavior { get; internal set; } = Kinds.Default;
 
         /// <summary>
         /// Gets the constructors on the Struct.
@@ -57,6 +57,27 @@
         /// <value>A value indicating whether the Struct is undefined.</value>
         [Ignore]
         public override bool IsUndefined => this == Undefined;
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public override IEnumerator<Qualifier> GetEnumerator()
+        {
+            IEnumerator<Qualifier> @base = base.GetEnumerator();
+
+            while (@base.MoveNext())
+            {
+                yield return @base.Current;
+            }
+
+            foreach (Qualifier qualifier in Constructors.SelectMany(constructor => constructor)
+                .Concat(Fields.SelectMany(field => field))
+                .Concat(Parameters.SelectMany(parameter => parameter)))
+            {
+                yield return qualifier;
+            }
+        }
 
         /// <summary>
         /// Validates the Struct.
@@ -108,8 +129,8 @@
 
         private Snippet GetSignature(Snippet.Options options)
         {
-            Kind behavior = Behavior;
-            var clauses = Declaration.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            Kinds behavior = Behavior;
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string partial = IsPartial.Partial();
             string name = Declaration;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);

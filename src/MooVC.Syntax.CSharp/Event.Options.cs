@@ -53,7 +53,7 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>The implicit scope.</value>
             /// <remarks>If the Event is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
-            public Scope Implied { get; internal set; } = Scope.Unspecified;
+            public Scopes Implied { get; internal set; } = Scopes.Unspecified;
 
             /// <summary>
             /// Gets a value indicating whether the Setter is default.
@@ -84,9 +84,9 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <param name="options">The source options.</param>
             /// <returns>The implied scope.</returns>
-            public static implicit operator Scope(Options options)
+            public static implicit operator Scopes(Options options)
             {
-                Guard.Against.Conversion<Options, Scope>(options);
+                Guard.Against.Conversion<Options, Scopes>(options);
 
                 return options.Implied;
             }

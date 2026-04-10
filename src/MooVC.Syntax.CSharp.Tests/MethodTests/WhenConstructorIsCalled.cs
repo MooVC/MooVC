@@ -16,7 +16,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Name).IsEqualTo(Declaration.Unspecified);
         _ = await Assert.That(subject.Parameters).IsEmpty();
         _ = await Assert.That(subject.Result).IsEqualTo(Result.Task);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Public);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
     }
 
     [Test]
@@ -39,7 +39,7 @@ public sealed class WhenConstructorIsCalled
 
         var result = new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = MethodTestsData.DefaultResultType },
         };
 
@@ -52,7 +52,7 @@ public sealed class WhenConstructorIsCalled
             Name = new() { Name = MethodTestsData.DefaultName },
             Parameters = parameters,
             Result = result,
-            Scope = Scope.Internal,
+            Scope = Scopes.Internal,
         };
 
         // Assert
@@ -61,6 +61,6 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Name).IsEqualTo(new Declaration { Name = MethodTestsData.DefaultName });
         _ = await Assert.That(subject.Parameters).IsEqualTo(parameters);
         _ = await Assert.That(subject.Result).IsEqualTo(result);
-        _ = await Assert.That(subject.Scope).IsEqualTo(Scope.Internal);
+        _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Internal);
     }
 }

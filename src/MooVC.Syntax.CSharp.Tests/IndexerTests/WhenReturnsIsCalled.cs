@@ -10,7 +10,7 @@ public sealed class WhenReturnsIsCalled
 
         var result = new Result
         {
-            Mode = Result.Modality.Synchronous,
+            Mode = Result.Modes.Synchronous,
             Type = new() { Name = "int" },
         };
 

@@ -17,7 +17,7 @@ internal static class DeclarationTestsData
 
         if (parameterNames?.Length > 0)
         {
-            declaration.Generics = [.. parameterNames.Select(parameter => new Generic() { Name = parameter })];
+            declaration.Arguments = [.. parameterNames.Select(parameter => new Generic() { Name = parameter })];
         }
 
         return declaration;

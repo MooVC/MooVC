@@ -3,7 +3,6 @@
 using System.ComponentModel;
 using Monify;
 using MooVC.Syntax;
-using static MooVC.Syntax.CSharp.Symbol;
 using Attribute = System.Attribute;
 using Options = MooVC.Syntax.CSharp.Options;
 
@@ -14,23 +13,23 @@ public sealed partial class WhenToSnippetIsCalled
         private static readonly Options _options = new Options()
             .WithNamespace(Qualifier.Options.Block)
             .WithTypes(types => types
-                .WithSymbols(symbols => symbols
-                    .WithQualification(Qualification.Global)));
+                .WithQualifications(qualifications => qualifications
+                    .WithFormat(Qualification.Options.Formats.Global)));
 
         [Test]
         public async Task GivenInstructionsWhenAttributeThenAttributeIsCreated()
         {
             // Arrange
             const string expected = """
-            namespace Muify.Domain
-            {
-                [global::System.AttributeUsageAttribute(global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-                internal sealed partial class IdentityAttribute
-                    : global::System.Attribute
+                namespace Muify.Domain
                 {
+                    [global::System.AttributeUsageAttribute(global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+                    internal sealed partial class IdentityAttribute
+                        : global::System.Attribute
+                    {
+                    }
                 }
-            }
-            """;
+                """;
 
             Definition content = Builder
                 .New<Definition>()
@@ -43,7 +42,7 @@ public sealed partial class WhenToSnippetIsCalled
                             (Name: nameof(AttributeUsageAttribute.Inherited), Value: "false")))
                     .DerivesFrom(typeof(Attribute))
                     .Named("IdentityAttribute")
-                    .WithScope(Scope.Internal))
+                    .WithScope(Scopes.Internal))
                 .From("Muify.Domain");
 
             // Act
@@ -58,16 +57,16 @@ public sealed partial class WhenToSnippetIsCalled
         {
             // Arrange
             const string expected = """
-            namespace Muify.Domain
-            {
-                [global::System.AttributeUsageAttribute(global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-                internal sealed partial class RaisesAttribute
-                    : global::System.Attribute
+                namespace Muify.Domain
                 {
-                    public string Name { get; set; }
+                    [global::System.AttributeUsageAttribute(global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+                    internal sealed partial class RaisesAttribute
+                        : global::System.Attribute
+                    {
+                        public string Name { get; set; }
+                    }
                 }
-            }
-            """;
+                """;
 
             Definition content = Builder
                 .New<Definition>()
@@ -85,7 +84,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .OfType(typeof(string))
                         .WithBehaviours(behaviors => behaviors
                             .WithSet(set => set.WithMode(Property.Methods.Setter.Modes.Set))))
-                    .WithScope(Scope.Internal))
+                    .WithScope(Scopes.Internal))
                 .From("Muify.Domain");
 
             // Act
@@ -100,16 +99,16 @@ public sealed partial class WhenToSnippetIsCalled
         {
             // Arrange
             const string expected = """
-            namespace MooVC.Testing.Mechanics.Car
-            {
-                [global::System.ComponentModel.DescriptionAttribute("Represents a Vehicle that has utilizes the services of the Mechanics")]
-                public sealed partial record Car(
-                    [global::System.ComponentModel.DescriptionAttribute("The Number of Passenger Doors")] byte Doors,
-                    [global::System.ComponentModel.DescriptionAttribute("The Manufacturer of the Car")] string Make,
-                    [global::System.ComponentModel.DescriptionAttribute("The Name Ascribed to the Car by the Manufacturer")] string Model)
-                    : global::Mu.Modelling.State.Aggregate;
-            }
-            """;
+                namespace MooVC.Testing.Mechanics.Car
+                {
+                    [global::System.ComponentModel.DescriptionAttribute("Represents a Vehicle that has utilizes the services of the Mechanics")]
+                    public sealed partial record Car(
+                        [global::System.ComponentModel.DescriptionAttribute("The Number of Passenger Doors")] byte Doors,
+                        [global::System.ComponentModel.DescriptionAttribute("The Manufacturer of the Car")] string Make,
+                        [global::System.ComponentModel.DescriptionAttribute("The Name Ascribed to the Car by the Manufacturer")] string Model)
+                        : global::Mu.Modelling.State.Aggregate;
+                }
+                """;
 
             Definition content = Builder
                 .New<Definition>()
@@ -151,20 +150,20 @@ public sealed partial class WhenToSnippetIsCalled
         {
             // Arrange
             const string expected = """
-            namespace MooVC.Testing.Mechanics.Car
-            {
-                [global::System.ComponentModel.DescriptionAttribute("Represents a Wheel Attached to the Car")]
-                public sealed partial class Wheel
+                namespace MooVC.Testing.Mechanics.Car
                 {
-                    [global::System.ComponentModel.DescriptionAttribute("The Location of the Wheel on the Car")]
-                    [global::Muify.Domain.IdentityAttribute]
-                    public global::MooVC.Testing.Mechanics.Car.Location Location { get; init; }
+                    [global::System.ComponentModel.DescriptionAttribute("Represents a Wheel Attached to the Car")]
+                    public sealed partial class Wheel
+                    {
+                        [global::System.ComponentModel.DescriptionAttribute("The Location of the Wheel on the Car")]
+                        [global::Muify.Domain.IdentityAttribute]
+                        public global::MooVC.Testing.Mechanics.Car.Location Location { get; init; }
             
-                    [global::System.ComponentModel.DescriptionAttribute("The Pressure of the Tyre on the Wheel")]
-                    public global::MooVC.Testing.Mechanics.Car.Pressure Pressure { get; init; }
+                        [global::System.ComponentModel.DescriptionAttribute("The Pressure of the Tyre on the Wheel")]
+                        public global::MooVC.Testing.Mechanics.Car.Pressure Pressure { get; init; }
+                    }
                 }
-            }
-            """;
+                """;
 
             Definition content = Builder
                 .New<Definition>()
@@ -200,39 +199,39 @@ public sealed partial class WhenToSnippetIsCalled
         {
             // Arrange
             const string expected = """
-            namespace MooVC.Testing.Mechanics.Car
-            {
-                [global::System.ComponentModel.DescriptionAttribute("Represents the Location of the Wheel on the Car")]
-                [global::Monify.MonifyAttribute<byte>]
-                public sealed partial record Location
+                namespace MooVC.Testing.Mechanics.Car
                 {
-                    [global::System.ComponentModel.DescriptionAttribute("The Front Left Wheel")]
-                    public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontLeft = 0;
-
-                    [global::System.ComponentModel.DescriptionAttribute("The Front Right Wheel")]
-                    public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontRight = 1;
-
-                    [global::System.ComponentModel.DescriptionAttribute("The Rear Left Wheel")]
-                    public static readonly global::MooVC.Testing.Mechanics.Car.Location RearLeft = 2;
-
-                    [global::System.ComponentModel.DescriptionAttribute("The Rear Right Wheel")]
-                    public static readonly global::MooVC.Testing.Mechanics.Car.Location RearRight = 3;
-
-                    private Location(byte value)
+                    [global::System.ComponentModel.DescriptionAttribute("Represents the Location of the Wheel on the Car")]
+                    [global::Monify.MonifyAttribute<byte>]
+                    public sealed partial record Location
                     {
-                        _value = value;
+                        [global::System.ComponentModel.DescriptionAttribute("The Front Left Wheel")]
+                        public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontLeft = 0;
+
+                        [global::System.ComponentModel.DescriptionAttribute("The Front Right Wheel")]
+                        public static readonly global::MooVC.Testing.Mechanics.Car.Location FrontRight = 1;
+
+                        [global::System.ComponentModel.DescriptionAttribute("The Rear Left Wheel")]
+                        public static readonly global::MooVC.Testing.Mechanics.Car.Location RearLeft = 2;
+
+                        [global::System.ComponentModel.DescriptionAttribute("The Rear Right Wheel")]
+                        public static readonly global::MooVC.Testing.Mechanics.Car.Location RearRight = 3;
+
+                        private Location(byte value)
+                        {
+                            _value = value;
+                        }
+
+                        public bool IsFrontLeft => this == FrontLeft;
+
+                        public bool IsFrontRight => this == FrontRight;
+
+                        public bool IsRearLeft => this == RearLeft;
+
+                        public bool IsRearRight => this == RearRight;
                     }
-
-                    public bool IsFrontLeft => this == FrontLeft;
-
-                    public bool IsFrontRight => this == FrontRight;
-
-                    public bool IsRearLeft => this == RearLeft;
-
-                    public bool IsRearRight => this == RearRight;
                 }
-            }
-            """;
+                """;
 
             var members = new (string Name, string Description, int Index)[]
             {
@@ -249,8 +248,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .Named(typeof(DescriptionAttribute))
                         .WithArguments((Name: string.Empty, Value: "\"Represents the Location of the Wheel on the Car\"")))
                     .AttributedWith(monify => monify.Named(monify => monify
-                        .From(typeof(MonifyAttribute))
-                        .Named(nameof(MonifyAttribute))
+                        .Named(typeof(MonifyAttribute))
                         .WithArguments(type => type.Named(typeof(byte)))))
                     .Named("Location")
                     .Enumerate(
@@ -263,7 +261,7 @@ public sealed partial class WhenToSnippetIsCalled
                             .Named(member.Name)
                             .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car"))
                             .WithDefault(member.Index.ToString())
-                            .WithScope(Scope.Public)),
+                            .WithScope(Scopes.Public)),
                         members)
                     .Enumerate(
                         (member, record) => record.WithProperties(property => property
@@ -276,7 +274,7 @@ public sealed partial class WhenToSnippetIsCalled
                     .WithConstructors(constructor => constructor
                         .WithBody("_value = value;")
                         .WithParameters((Name: "Value", Type: typeof(byte)))
-                        .WithScope(Scope.Private)))
+                        .WithScope(Scopes.Private)))
                .From("MooVC.Testing.Mechanics.Car");
 
             // Act

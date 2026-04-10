@@ -16,7 +16,6 @@ public sealed class WhenWithArgumentsIsCalled
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
         _ = await Assert.That(result.Arguments).IsEquivalentTo([.. original.Arguments, .. additional]);
         _ = await Assert.That(result.Name).IsEqualTo(original.Name);
-        _ = await Assert.That(result.Qualifier).IsEqualTo(original.Qualifier);
         _ = await Assert.That(result.IsNullable).IsEqualTo(original.IsNullable);
     }
 }

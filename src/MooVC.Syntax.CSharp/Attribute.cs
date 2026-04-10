@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,14 +21,14 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Attribute
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the unspecified instance.
         /// </summary>
         public static readonly Attribute Unspecified = new Attribute();
 
-        private const int SuffixLength = 9;
         private static readonly string _separator = ", ";
 
         /// <summary>
@@ -61,7 +62,7 @@
         /// Gets the target on the Attribute.
         /// </summary>
         /// <value>The target.</value>
-        public Specifier Target { get; internal set; } = Specifier.None;
+        public Specifiers Target { get; internal set; } = Specifiers.None;
 
         /// <summary>
         /// Defines the string operator for the Attribute.
@@ -85,6 +86,18 @@
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
 
             return attribute.ToSnippet(Options.Separate);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Name)
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -112,17 +125,12 @@
 
             var value = new StringBuilder();
 
-            if (Target != Specifier.None)
+            if (Target != Specifiers.None)
             {
                 value = value.Append($"{Target}:");
             }
 
             string name = Name.ToSnippet(options);
-
-            if (options.Symbols.Qualification == Symbol.Qualification.Minimum && name.EndsWith(nameof(Attribute)))
-            {
-                name = name.Substring(0, name.Length - SuffixLength);
-            }
 
             value = value.Append(name);
 
@@ -151,6 +159,15 @@
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
                 .And(nameof(Name), _ => !Name.IsUndefined, Name)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private StringBuilder AppendArguments(Snippet.Options options, StringBuilder value)

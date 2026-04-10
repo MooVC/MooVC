@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,8 @@
     [Fluentify]
     [Valuify]
     public sealed partial class Generic
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined instance.
@@ -83,6 +85,22 @@
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the constraints.
+        /// </summary>
+        /// <remarks>
+        /// The enumerator iterates over all symbols from each constraint in the order they appear.
+        /// The collection should not be modified during enumeration.
+        /// </remarks>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Constraints.SelectMany(constraint => constraint))
+            {
+                yield return qualifier;
+            }
+        }
+
+        /// <summary>
         /// Returns the string representation of the Generic.
         /// </summary>
         /// <returns>The string representation.</returns>
@@ -108,6 +126,15 @@
                 .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), constraint => !constraint.IsUnspecified, Constraints)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

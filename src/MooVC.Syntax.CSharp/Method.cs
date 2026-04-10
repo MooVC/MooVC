@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@ namespace MooVC.Syntax.CSharp
     [Fluentify]
     [Valuify]
     public sealed partial class Method
-        : IValidatableObject
+        : IEnumerable<Qualifier>,
+          IValidatableObject
     {
         /// <summary>
         /// Gets the undefined method declaration, used as a placeholder in builders.
@@ -87,7 +89,7 @@ namespace MooVC.Syntax.CSharp
         /// Gets the accessibility scope applied to the method declaration.
         /// </summary>
         /// <value>The accessibility modifier (public, internal, etc.).</value>
-        public Scope Scope { get; internal set; } = Scope.Public;
+        public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
         /// Converts the method declaration to its C# source representation.
@@ -111,6 +113,26 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<Method, Snippet>(method);
 
             return Snippet.From(method);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the sequence of symbols representing the name, parameters, and result.
+        /// </summary>
+        /// <remarks>
+        /// The enumerator yields symbols in the order they appear in the name, followed by all parameter symbols, and then
+        /// the result symbols. The returned enumerator supports only forward iteration.
+        /// </remarks>
+        /// <returns>
+        /// An enumerator that can be used to iterate through the collection of symbols in order: name, parameters, and result.
+        /// </returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Name
+                .Concat(Parameters.SelectMany(parameter => parameter))
+                .Concat(Result))
+            {
+                yield return qualifier;
+            }
         }
 
         /// <summary>
@@ -187,6 +209,15 @@ namespace MooVC.Syntax.CSharp
                 .Results;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
@@ -194,7 +225,7 @@ namespace MooVC.Syntax.CSharp
             var parameters = Parameters.ToSnippet(options);
             string result = Result.IsVoid ? "void" : Result;
             string scope = Scope.ToString(options);
-            var clauses = Name.Generics.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Name.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
             if (!clauses.IsEmpty)

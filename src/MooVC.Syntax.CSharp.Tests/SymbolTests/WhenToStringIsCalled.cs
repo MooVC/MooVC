@@ -44,19 +44,6 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenQualifierThenQualifierPrefixedToName()
-    {
-        // Arrange
-        Symbol subject = SymbolTestsData.Create(qualifier: new Qualifier(["MooVC", "Syntax"]));
-
-        // Act
-        string representation = subject.ToString();
-
-        // Assert
-        _ = await Assert.That(representation).IsEqualTo(Name);
-    }
-
-    [Test]
     public async Task GivenUnspecifiedSymbolThenEmptyReturned()
     {
         // Arrange

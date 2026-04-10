@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,7 @@
     [Valuify]
     public sealed partial class Symbol
         : IComparable<Symbol>,
+          IEnumerable<Qualifier>,
           IValidatableObject
     {
         /// <summary>
@@ -64,14 +66,7 @@
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        public Moniker Name { get; internal set; } = Moniker.Unnamed;
-
-        /// <summary>
-        /// Gets the qualifier on the Symbol.
-        /// </summary>
-        /// <value>The qualifier.</value>
-        [Descriptor("From")]
-        public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
+        public Qualification Name { get; internal set; } = Qualification.Unnamed;
 
         /// <summary>
         /// Defines the string operator for the Symbol.
@@ -109,37 +104,34 @@
             return new Symbol()
                 .IsArray(type.IsArray)
                 .IsNullable(Nullable.GetUnderlyingType(type) != null)
-                .From(type)
                 .Named(type);
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and qualifier to an Symbol instance.
+        /// Implicitly converts a QualifiedName to a Symbol instance.
         /// </summary>
-        /// <param name="symbol">The tuple containing the name and qualifier to be converted into an Symbol.</param>
+        /// <param name="name">The QualifiedName to convert.</param>
         /// <returns>The Symbol.</returns>
-        public static implicit operator Symbol((Moniker Name, Qualifier Qualifier) symbol)
+        public static implicit operator Symbol(Qualification name)
         {
-            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(symbol);
+            Guard.Against.Conversion<Qualification, Symbol>(name);
 
             return new Symbol()
-                .From(symbol.Qualifier)
-                .Named(symbol.Name);
+                .Named(name);
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and qualifier to an Symbol instance.
+        /// Implicitly converts a tuple containing a name and qualifier to an Name instance.
         /// </summary>
-        /// <param name="symbol">The tuple containing the name and qualifier to be converted into an Symbol.</param>
-        /// <returns>The Symbol.</returns>
-        public static implicit operator Symbol((Moniker Name, bool IsArray, Qualifier Qualifier) symbol)
+        /// <param name="name">The tuple containing the name and qualifier to be converted into an Name.</param>
+        /// <returns>The Name.</returns>
+        public static implicit operator Symbol((Moniker Name, Qualifier Qualifier) name)
         {
-            Guard.Against.Conversion<(Moniker Name, bool IsArray, Qualifier Qualifier), Symbol>(symbol);
+            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(name);
 
-            return new Symbol()
-                .IsArray(symbol.IsArray)
-                .From(symbol.Qualifier)
-                .Named(symbol.Name);
+            return new Qualification()
+                .From(name.Qualifier)
+                .KnownAs(name.Name);
         }
 
         /// <summary>
@@ -209,12 +201,29 @@
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through all symbols contained in the arguments.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Arguments.SelectMany(argument => argument))
+            {
+                yield return qualifier;
+            }
+
+            if (!Name.Qualifier.IsUnqualified)
+            {
+                yield return Name.Qualifier;
+            }
+        }
+
+        /// <summary>
         /// Returns the string representation of the Symbol.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToString(Options.Default);
+            return ToString(Qualification.Options.Default);
         }
 
         /// <summary>
@@ -222,7 +231,7 @@
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
             return ToString(options);
         }
@@ -243,11 +252,19 @@
             return validationContext
                 .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUndefined, Arguments)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
-                .And(nameof(Qualifier), Qualifier)
                 .Results;
         }
 
-        private string ToString(Options options)
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private string ToString(Qualification.Options options)
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
 
@@ -256,12 +273,7 @@
                 return string.Empty;
             }
 
-            string signature = Name;
-
-            if (!Aliases.IsSystem(signature))
-            {
-                signature = GetQualifiedSignature(options, signature);
-            }
+            string signature = Name.ToSnippet(options);
 
             if (!Arguments.IsDefaultOrEmpty)
             {
@@ -283,30 +295,13 @@
             return signature;
         }
 
-        private string GetArgumentDeclarations(Options options)
+        private string GetArgumentDeclarations(Qualification.Options options)
         {
             string[] arguments = Arguments
                 .Select(argument => (string)argument.ToSnippet(options))
                 .ToArray();
 
             return Separator.Combine(arguments);
-        }
-
-        private Snippet GetQualifiedSignature(Options options, string signature)
-        {
-            if (Qualifier.IsUnqualified || options.Qualification == Qualification.Minimum)
-            {
-                return signature;
-            }
-
-            signature = $"{Qualifier}.{signature}";
-
-            if (options.Qualification == Qualification.Global)
-            {
-                return $"global::{signature}";
-            }
-
-            return signature;
         }
     }
 }

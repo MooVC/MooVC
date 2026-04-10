@@ -7,7 +7,7 @@ public sealed class WhenWithOperatorIsCalled
     {
         // Arrange
         Comparison original = ComparisonTestsData.Create();
-        Comparison.Type replacement = Comparison.Type.LessThan;
+        Comparison.Types replacement = Comparison.Types.LessThan;
 
         // Act
         Comparison result = original.WithOperator(replacement);

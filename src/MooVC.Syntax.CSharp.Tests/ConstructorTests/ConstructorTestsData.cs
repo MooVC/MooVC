@@ -11,7 +11,7 @@ internal static class ConstructorTestsData
         Snippet? body = default,
         Extensibility? extensibility = default,
         ImmutableArray<Parameter> parameters = default,
-        Scope? scope = default)
+        Scopes? scope = default)
     {
         return new Constructor
         {
@@ -20,7 +20,7 @@ internal static class ConstructorTestsData
             Parameters = parameters.IsDefault
                 ? []
                 : parameters,
-            Scope = scope ?? Scope.Public,
+            Scope = scope ?? Scopes.Public,
         };
     }
 

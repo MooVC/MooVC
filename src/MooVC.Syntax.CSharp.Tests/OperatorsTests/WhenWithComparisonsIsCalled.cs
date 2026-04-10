@@ -12,7 +12,7 @@ public sealed class WhenWithComparisonsIsCalled
         // Arrange
         ImmutableArray<Comparison> originalComparisons = [ComparisonTestsData.Create()];
         Operators original = OperatorsSubjectData.Create(comparisons: originalComparisons);
-        Comparison[] updatedComparisons = [ComparisonTestsData.Create(@operator: Comparison.Type.Inequality)];
+        Comparison[] updatedComparisons = [ComparisonTestsData.Create(@operator: Comparison.Types.Inequality)];
         IEnumerable<Comparison> expectedComparisons = originalComparisons.Union(updatedComparisons);
 
         // Act

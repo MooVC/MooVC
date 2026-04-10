@@ -6,7 +6,7 @@ public static class AttributeTestsData
 {
     public const string DefaultName = "Obsolete";
 
-    public static Attribute Create(string? name = DefaultName, Attribute.Specifier? target = default, params Argument[] arguments)
+    public static Attribute Create(string? name = DefaultName, Attribute.Specifiers? target = default, params Argument[] arguments)
     {
         ImmutableArray<Argument> provided = arguments.Length == 0
             ? []
@@ -18,10 +18,10 @@ public static class AttributeTestsData
             Name = new()
             {
                 Name = name is null
-                    ? Symbol.Moniker.Unnamed
-                    : new Symbol.Moniker(name),
+                    ? Moniker.Unnamed
+                    : new Moniker(name),
             },
-            Target = target ?? Attribute.Specifier.None,
+            Target = target ?? Attribute.Specifiers.None,
         };
     }
 }

@@ -15,7 +15,7 @@ public sealed class WhenWithSetIsCalled
         {
             Behaviour = Snippet.From("value = input"),
             Mode = Property.Methods.Setter.Modes.Init,
-            Scope = Scope.Private,
+            Scope = Scopes.Private,
         };
 
         // Act

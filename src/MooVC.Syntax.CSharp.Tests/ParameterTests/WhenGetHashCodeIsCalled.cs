@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Parameter left = ParameterTestsData.Create(modifier: Parameter.Mode.In);
-        Parameter right = ParameterTestsData.Create(modifier: Parameter.Mode.In);
+        Parameter left = ParameterTestsData.Create(modifier: Parameter.Modes.In);
+        Parameter right = ParameterTestsData.Create(modifier: Parameter.Modes.In);
 
         // Act
         int leftHash = left.GetHashCode();

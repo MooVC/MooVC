@@ -4,12 +4,12 @@ internal static class BinaryTestsData
 {
     public const string DefaultBody = "return left + right;";
 
-    public static Binary Create(Snippet? body = default, Binary.Type? @operator = default, Scope? scope = default)
+    public static Binary Create(Snippet? body = default, Binary.Types? @operator = default, Scopes? scope = default)
     {
         var subject = new Binary
         {
             Body = body ?? Snippet.From(DefaultBody),
-            Operator = @operator ?? Binary.Type.Add,
+            Operator = @operator ?? Binary.Types.Add,
         };
 
         if (scope is not null)
