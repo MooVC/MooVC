@@ -9,7 +9,7 @@ public static class ClassTestsData
     public static Class Create(
         bool? isStatic = default,
         bool? isPartial = default,
-        Extensibility? extensibility = default,
+        Modifiers? extensibility = default,
         Scopes? scope = default,
         Operators? operators = default,
         Declaration? name = default,
@@ -27,7 +27,7 @@ public static class ClassTestsData
             Attributes = attributes ?? [],
             Constructors = constructors ?? [],
             Events = events ?? [],
-            Extensibility = extensibility ?? Extensibility.Sealed,
+            Extensibility = extensibility ?? Modifiers.Sealed,
             Fields = fields ?? [],
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,

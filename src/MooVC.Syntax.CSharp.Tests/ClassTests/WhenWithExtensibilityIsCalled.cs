@@ -6,15 +6,15 @@ public sealed class WhenWithExtensibilityIsCalled
     public async Task GivenExtensibilityThenReturnsUpdatedInstance()
     {
         // Arrange
-        Class original = ClassTestsData.Create(extensibility: Extensibility.Sealed);
+        Class original = ClassTestsData.Create(extensibility: Modifiers.Sealed);
 
         // Act
-        Class result = original.WithExtensibility(Extensibility.Abstract);
+        Class result = original.WithExtensibility(Modifiers.Abstract);
 
         // Assert
         _ = await Assert.That(result).IsNotSameReferenceAs(original);
-        _ = await Assert.That(result.Extensibility).IsEqualTo(Extensibility.Abstract);
+        _ = await Assert.That(result.Extensibility).IsEqualTo(Modifiers.Abstract);
         _ = await Assert.That(result.Declaration).IsEqualTo(original.Declaration);
-        _ = await Assert.That(original.Extensibility).IsEqualTo(Extensibility.Sealed);
+        _ = await Assert.That(original.Extensibility).IsEqualTo(Modifiers.Sealed);
     }
 }

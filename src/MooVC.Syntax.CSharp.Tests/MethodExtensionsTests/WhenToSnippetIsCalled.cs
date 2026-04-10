@@ -59,9 +59,9 @@ public sealed class WhenToSnippetIsCalled
             scope: Scopes.Protected,
             body: Snippet.From("return 3;"));
 
-        staticMethod.Extensibility = Extensibility.Static;
-        publicVirtual.Extensibility = Extensibility.Virtual;
-        protectedVirtual.Extensibility = Extensibility.Virtual;
+        staticMethod.Extensibility = Modifiers.Static;
+        publicVirtual.Extensibility = Modifiers.Virtual;
+        protectedVirtual.Extensibility = Modifiers.Virtual;
 
         ImmutableArray<Method> methods =
         [

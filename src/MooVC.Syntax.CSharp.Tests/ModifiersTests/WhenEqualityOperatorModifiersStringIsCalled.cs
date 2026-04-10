@@ -1,6 +1,6 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
-public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
+public sealed class WhenEqualityOperatorModifiersStringIsCalled
 {
     private const string StaticValue = "static";
     private const string OtherValue = "sealed";
@@ -9,7 +9,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     public async Task GivenDifferentValueThenReturnsFalse()
     {
         // Arrange
-        Extensibility subject = Extensibility.Static;
+        Modifiers subject = Modifiers.Static;
 
         // Act
         bool result = subject == OtherValue;
@@ -22,7 +22,7 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     public async Task GivenMatchingValueThenReturnsTrue()
     {
         // Arrange
-        Extensibility subject = Extensibility.Static;
+        Modifiers subject = Modifiers.Static;
 
         // Act
         bool result = subject == StaticValue;
@@ -32,10 +32,10 @@ public sealed class WhenEqualityOperatorExtensibilityStringIsCalled
     }
 
     [Test]
-    public async Task GivenNullExtensibilityThenReturnsFalse()
+    public async Task GivenNullModifiersThenReturnsFalse()
     {
         // Arrange
-        Extensibility? subject = default;
+        Modifiers? subject = default;
 
         // Act
         bool result = subject == StaticValue;

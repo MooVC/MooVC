@@ -8,7 +8,7 @@ public static class RecordTestsData
 
     public static Record Create(
         bool? isPartial = default,
-        Extensibility? extensibility = default,
+        Modifiers? extensibility = default,
         Scopes? scope = default,
         Operators? operators = default,
         Declaration? name = default,
@@ -26,7 +26,7 @@ public static class RecordTestsData
             Attributes = attributes ?? [],
             Constructors = constructors ?? [],
             Events = events ?? [],
-            Extensibility = extensibility ?? Extensibility.Sealed,
+            Extensibility = extensibility ?? Modifiers.Sealed,
             Fields = fields ?? [],
             Indexers = indexers ?? [],
             IsPartial = isPartial ?? false,

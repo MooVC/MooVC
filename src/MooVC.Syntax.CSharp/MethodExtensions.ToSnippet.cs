@@ -23,7 +23,7 @@
             }
 
             Snippet[] content = methods
-                .OrderByDescending(property => property.Extensibility == Extensibility.Static)
+                .OrderByDescending(property => property.Extensibility == Modifiers.Static)
                 .ThenByDescending(method => method.Scope)
                 .ThenByDescending(method => method.Extensibility)
                 .ThenBy(method => method.Name)

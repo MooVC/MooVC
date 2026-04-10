@@ -22,7 +22,7 @@ public sealed class WhenToStringIsCalled
         var constructor = new Constructor();
         Class subject = ClassTestsData.Create(
             constructors: [constructor],
-            extensibility: Extensibility.Abstract,
+            extensibility: Modifiers.Abstract,
             isPartial: true,
             name: new Declaration { Name = ClassTestsData.DefaultName },
             scope: Scopes.Internal);

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
 public sealed class WhenImplicitOperatorFromStringIsCalled
 {
@@ -13,7 +13,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Empty;
 
         // Act
-        Extensibility subject = value;
+        Modifiers subject = value;
 
         // Assert
         _ = await Assert.That(subject == value).IsTrue();
@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act & Assert
-        _ = await Assert.That(() => _ = (Extensibility)value).ThrowsNothing();
+        _ = await Assert.That(() => _ = (Modifiers)value).ThrowsNothing();
     }
 
     [Test]
@@ -37,7 +37,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? value = default;
 
         // Act
-        Extensibility subject = value;
+        Modifiers subject = value;
         string result = subject;
 
         // Assert
@@ -51,8 +51,8 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Value;
 
         // Act
-        Extensibility first = value;
-        Extensibility second = value;
+        Modifiers first = value;
+        Modifiers second = value;
 
         // Assert
         _ = await Assert.That(first).IsNotSameReferenceAs(second);
@@ -67,7 +67,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Value;
 
         // Act
-        Extensibility subject = value;
+        Modifiers subject = value;
 
         // Assert
         _ = await Assert.That(subject == value).IsTrue();
@@ -81,7 +81,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Value;
 
         // Act
-        Extensibility subject = value;
+        Modifiers subject = value;
         string result = subject;
 
         // Assert
@@ -95,7 +95,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string value = Space;
 
         // Act
-        Extensibility subject = value;
+        Modifiers subject = value;
 
         // Assert
         _ = await Assert.That(subject == value).IsTrue();

@@ -13,7 +13,7 @@ public sealed class WhenConstructorIsCalled
 
         // Assert
         _ = await Assert.That(subject.Body).IsEqualTo(Snippet.Empty);
-        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Implicit);
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Modifiers.Implicit);
         _ = await Assert.That(subject.IsUndefined).IsTrue();
         _ = await Assert.That(subject.Parameters).IsEmpty();
         _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Public);
@@ -30,14 +30,14 @@ public sealed class WhenConstructorIsCalled
         var subject = new Constructor
         {
             Body = Snippet.From(body),
-            Extensibility = Extensibility.Static,
+            Extensibility = Modifiers.Static,
             Parameters = parameters,
             Scope = Scopes.Internal,
         };
 
         // Assert
         _ = await Assert.That(subject.Body).IsEqualTo(Snippet.From(body));
-        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Static);
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Modifiers.Static);
         _ = await Assert.That(subject.IsUndefined).IsFalse();
         _ = await Assert.That(subject.Parameters).IsEqualTo(parameters);
         _ = await Assert.That(subject.Scope).IsEqualTo(Scopes.Internal);

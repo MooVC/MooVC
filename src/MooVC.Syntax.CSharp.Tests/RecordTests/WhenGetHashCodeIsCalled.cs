@@ -21,8 +21,8 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenEqualValuesThenHashesMatch()
     {
         // Arrange
-        Record left = RecordTestsData.Create(extensibility: Extensibility.Implicit);
-        Record right = RecordTestsData.Create(extensibility: Extensibility.Implicit);
+        Record left = RecordTestsData.Create(extensibility: Modifiers.Implicit);
+        Record right = RecordTestsData.Create(extensibility: Modifiers.Implicit);
 
         // Act
         int leftHash = left.GetHashCode();

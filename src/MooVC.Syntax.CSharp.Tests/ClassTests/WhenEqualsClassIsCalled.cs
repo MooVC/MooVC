@@ -6,8 +6,8 @@ public sealed class WhenEqualsClassIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Class subject = ClassTestsData.Create(extensibility: Extensibility.Sealed);
-        Class value = ClassTestsData.Create(extensibility: Extensibility.Abstract);
+        Class subject = ClassTestsData.Create(extensibility: Modifiers.Sealed);
+        Class value = ClassTestsData.Create(extensibility: Modifiers.Abstract);
 
         // Act
         bool result = subject.Equals(value);
@@ -48,7 +48,7 @@ public sealed class WhenEqualsClassIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Class subject = ClassTestsData.Create(extensibility: Extensibility.Implicit);
+        Class subject = ClassTestsData.Create(extensibility: Modifiers.Implicit);
 
         // Act
         bool result = subject.Equals(subject);

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
 public sealed class WhenComparisonOperatorsAreCalled
 {
@@ -6,8 +6,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public async Task GivenEqualValuesThenLessThanOrEqualIsTrue()
     {
         // Arrange
-        Extensibility left = Extensibility.Virtual;
-        Extensibility right = Extensibility.Virtual;
+        Modifiers left = Modifiers.Virtual;
+        Modifiers right = Modifiers.Virtual;
 
         // Act
         bool result = left <= right;
@@ -20,8 +20,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public async Task GivenHigherRankThenGreaterThanIsTrue()
     {
         // Arrange
-        Extensibility left = Extensibility.Static;
-        Extensibility right = Extensibility.Abstract;
+        Modifiers left = Modifiers.Static;
+        Modifiers right = Modifiers.Abstract;
 
         // Act
         bool result = left > right;
@@ -34,8 +34,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public async Task GivenLowerRankThenLessThanIsTrue()
     {
         // Arrange
-        Extensibility left = Extensibility.Override;
-        Extensibility right = Extensibility.Sealed;
+        Modifiers left = Modifiers.Override;
+        Modifiers right = Modifiers.Sealed;
 
         // Act
         bool result = left < right;
@@ -48,8 +48,8 @@ public sealed class WhenComparisonOperatorsAreCalled
     public async Task GivenNullLeftThenLessThanIsTrue()
     {
         // Arrange
-        Extensibility? left = default;
-        Extensibility right = Extensibility.Static;
+        Modifiers? left = default;
+        Modifiers right = Modifiers.Static;
 
         // Act
         bool result = left < right;

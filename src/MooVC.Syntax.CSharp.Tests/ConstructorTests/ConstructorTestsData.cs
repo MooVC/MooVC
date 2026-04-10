@@ -9,14 +9,14 @@ internal static class ConstructorTestsData
 
     public static Constructor Create(
         Snippet? body = default,
-        Extensibility? extensibility = default,
+        Modifiers? extensibility = default,
         ImmutableArray<Parameter> parameters = default,
         Scopes? scope = default)
     {
         return new Constructor
         {
             Body = body ?? Snippet.From(DefaultBody),
-            Extensibility = extensibility ?? Extensibility.Implicit,
+            Extensibility = extensibility ?? Modifiers.Implicit,
             Parameters = parameters.IsDefault
                 ? []
                 : parameters,

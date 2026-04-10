@@ -5,47 +5,47 @@
     using Fluentify;
     using Monify;
     using MooVC.Syntax.Validation;
-    using static MooVC.Syntax.CSharp.Extensibility_Resources;
+    using static MooVC.Syntax.CSharp.Modifiers_Resources;
 
     /// <summary>
     /// Represents C# extensibility modifiers that describe inheritance and override behavior.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
-    public sealed partial class Extensibility
-        : IComparable<Extensibility>
+    public sealed partial class Modifiers
+        : IComparable<Modifiers>
     {
         /// <summary>
         /// Gets the abstract modifier for abstract members and types.
         /// </summary>
-        public static readonly Extensibility Abstract = "abstract";
+        public static readonly Modifiers Abstract = "abstract";
 
         /// <summary>
         /// Gets the absence of an extensibility modifier.
         /// </summary>
-        public static readonly Extensibility Implicit = string.Empty;
+        public static readonly Modifiers Implicit = string.Empty;
 
         /// <summary>
         /// Gets the override modifier for overridden members.
         /// </summary>
-        public static readonly Extensibility Override = "override";
+        public static readonly Modifiers Override = "override";
 
         /// <summary>
         /// Gets the static modifier for static members.
         /// </summary>
-        public static readonly Extensibility Static = "static";
+        public static readonly Modifiers Static = "static";
 
         /// <summary>
         /// Gets the sealed modifier for sealed members or types.
         /// </summary>
-        public static readonly Extensibility Sealed = "sealed";
+        public static readonly Modifiers Sealed = "sealed";
 
         /// <summary>
         /// Gets the virtual modifier for virtual members.
         /// </summary>
-        public static readonly Extensibility Virtual = "virtual";
+        public static readonly Modifiers Virtual = "virtual";
 
-        private Extensibility(string value)
+        private Modifiers(string value)
         {
             _value = value;
         }
@@ -53,25 +53,25 @@
         /// <summary>
         /// Converts the extensibility modifier to its C# source representation.
         /// </summary>
-        /// <param name="extensibility">The extensibility modifier to render.</param>
+        /// <param name="modifiers">The extensibility modifier to render.</param>
         /// <returns>The modifier text.</returns>
-        public static implicit operator string(Extensibility extensibility)
+        public static implicit operator string(Modifiers modifiers)
         {
-            Guard.Against.Conversion<Extensibility, string>(extensibility);
+            Guard.Against.Conversion<Modifiers, string>(modifiers);
 
-            return extensibility.ToString();
+            return modifiers.ToString();
         }
 
         /// <summary>
         /// Converts the extensibility modifier to a snippet.
         /// </summary>
-        /// <param name="extensibility">The extensibility modifier to convert.</param>
+        /// <param name="modifiers">The extensibility modifier to convert.</param>
         /// <returns>The snippet containing the modifier.</returns>
-        public static implicit operator Snippet(Extensibility extensibility)
+        public static implicit operator Snippet(Modifiers modifiers)
         {
-            Guard.Against.Conversion<Extensibility, Snippet>(extensibility);
+            Guard.Against.Conversion<Modifiers, Snippet>(modifiers);
 
-            return Snippet.From(extensibility);
+            return Snippet.From(modifiers.ToString());
         }
 
         /// <summary>
@@ -80,7 +80,7 @@
         /// <param name="left">The left-hand modifier.</param>
         /// <param name="right">The right-hand modifier.</param>
         /// <returns>True if the left-hand modifier sorts before the right-hand modifier.</returns>
-        public static bool operator <(Extensibility left, Extensibility right)
+        public static bool operator <(Modifiers left, Modifiers right)
         {
             if (left is null)
             {
@@ -96,7 +96,7 @@
         /// <param name="left">The left-hand modifier.</param>
         /// <param name="right">The right-hand modifier.</param>
         /// <returns>True if the left-hand modifier sorts after the right-hand modifier.</returns>
-        public static bool operator >(Extensibility left, Extensibility right)
+        public static bool operator >(Modifiers left, Modifiers right)
         {
             if (left is null)
             {
@@ -112,7 +112,7 @@
         /// <param name="left">The left-hand modifier.</param>
         /// <param name="right">The right-hand modifier.</param>
         /// <returns>True if the left-hand modifier sorts before or equal to the right-hand modifier.</returns>
-        public static bool operator <=(Extensibility left, Extensibility right)
+        public static bool operator <=(Modifiers left, Modifiers right)
         {
             return !(left > right);
         }
@@ -123,7 +123,7 @@
         /// <param name="left">The left-hand modifier.</param>
         /// <param name="right">The right-hand modifier.</param>
         /// <returns>True if the left-hand modifier sorts after or equal to the right-hand modifier.</returns>
-        public static bool operator >=(Extensibility left, Extensibility right)
+        public static bool operator >=(Modifiers left, Modifiers right)
         {
             return !(left < right);
         }
@@ -134,14 +134,14 @@
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The .</returns>
-        public static Extensibility operator +(Extensibility left, Extensibility right)
+        public static Modifiers operator +(Modifiers left, Modifiers right)
         {
-            _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Extensibility), right));
-            _ = Guard.Against.Null(right, message: PlusOperatorRightRequired.Format(nameof(Extensibility), left));
+            _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Modifiers), right));
+            _ = Guard.Against.Null(right, message: PlusOperatorRightRequired.Format(nameof(Modifiers), left));
 
             if (IsStatic(left, right) || IsOverride(left, right))
             {
-                return new Extensibility($"{left} {right}");
+                return new Modifiers($"{left} {right}");
             }
 
             throw new InvalidOperationException(PlusOperatorNotSupported.Format(left, right));
@@ -152,7 +152,7 @@
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>A signed integer indicating relative order.</returns>
-        public int CompareTo(Extensibility other)
+        public int CompareTo(Modifiers other)
         {
             if (other is null)
             {
@@ -174,7 +174,7 @@
         /// </summary>
         /// <param name="permissable">The permissable.</param>
         /// <returns>The bool.</returns>
-        public bool IsPermitted(params Extensibility[] permissable)
+        public bool IsPermitted(params Modifiers[] permissable)
         {
             return Array.Exists(permissable, extensibility => extensibility == this);
         }
@@ -218,12 +218,12 @@
             return 1;
         }
 
-        private static bool IsStatic(Extensibility left, Extensibility right)
+        private static bool IsStatic(Modifiers left, Modifiers right)
         {
             return left == Static && right == Abstract;
         }
 
-        private static bool IsOverride(Extensibility left, Extensibility right)
+        private static bool IsOverride(Modifiers left, Modifiers right)
         {
             return (left == Sealed || left == Abstract) && right == Override;
         }

@@ -45,7 +45,7 @@
         /// Gets the extensibility on the Reference.
         /// </summary>
         /// <value>The extensibility.</value>
-        public Extensibility Extensibility { get; internal set; } = Extensibility.Sealed;
+        public Modifiers Extensibility { get; internal set; } = Modifiers.Sealed;
 
         /// <summary>
         /// Gets the fields on the Reference.
@@ -96,7 +96,7 @@
 
             IEnumerable<ValidationResult> results = base.Validate(validationContext);
 
-            if (!Extensibility.IsPermitted(Extensibility.Abstract, Extensibility.Implicit, Extensibility.Sealed))
+            if (!Extensibility.IsPermitted(Modifiers.Abstract, Modifiers.Implicit, Modifiers.Sealed))
             {
                 results = results.Append(new ValidationResult(
                     ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, GetType()),

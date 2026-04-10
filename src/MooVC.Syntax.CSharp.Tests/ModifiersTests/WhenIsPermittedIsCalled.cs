@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
 public sealed class WhenIsPermittedIsCalled
 {
@@ -6,10 +6,10 @@ public sealed class WhenIsPermittedIsCalled
     public async Task GivenPermittedValuesThenReturnsTrue()
     {
         // Arrange
-        Extensibility subject = Extensibility.Static;
+        Modifiers subject = Modifiers.Static;
 
         // Act
-        bool result = subject.IsPermitted(Extensibility.Abstract, Extensibility.Static);
+        bool result = subject.IsPermitted(Modifiers.Abstract, Modifiers.Static);
 
         // Assert
         _ = await Assert.That(result).IsTrue();
@@ -19,10 +19,10 @@ public sealed class WhenIsPermittedIsCalled
     public async Task GivenUnpermittedValuesThenReturnsFalse()
     {
         // Arrange
-        Extensibility subject = Extensibility.Virtual;
+        Modifiers subject = Modifiers.Virtual;
 
         // Act
-        bool result = subject.IsPermitted(Extensibility.Override, Extensibility.Sealed);
+        bool result = subject.IsPermitted(Modifiers.Override, Modifiers.Sealed);
 
         // Assert
         _ = await Assert.That(result).IsFalse();

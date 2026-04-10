@@ -1,13 +1,13 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
-public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
+public sealed class WhenEqualityOperatorModifiersModifiersIsCalled
 {
     [Test]
     public async Task GivenBothNullThenReturnsTrue()
     {
         // Arrange
-        Extensibility? left = default;
-        Extensibility? right = default;
+        Modifiers? left = default;
+        Modifiers? right = default;
 
         // Act
         bool result = left == right;
@@ -20,8 +20,8 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Extensibility left = Extensibility.Static;
-        Extensibility right = Extensibility.Abstract;
+        Modifiers left = Modifiers.Static;
+        Modifiers right = Modifiers.Abstract;
 
         // Act
         bool result = left == right;
@@ -34,8 +34,8 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
     public async Task GivenLeftNullRightValueThenReturnsFalse()
     {
         // Arrange
-        Extensibility? left = default;
-        Extensibility right = Extensibility.Static;
+        Modifiers? left = default;
+        Modifiers right = Modifiers.Static;
 
         // Act
         bool result = left == right;
@@ -48,8 +48,8 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
     public async Task GivenLeftValueRightNullThenReturnsFalse()
     {
         // Arrange
-        Extensibility left = Extensibility.Static;
-        Extensibility? right = default;
+        Modifiers left = Modifiers.Static;
+        Modifiers? right = default;
 
         // Act
         bool result = left == right;
@@ -62,8 +62,8 @@ public sealed class WhenEqualityOperatorExtensibilityExtensibilityIsCalled
     public async Task GivenSameReferenceThenReturnsTrue()
     {
         // Arrange
-        Extensibility first = Extensibility.Static;
-        Extensibility second = first;
+        Modifiers first = Modifiers.Static;
+        Modifiers second = first;
 
         // Act
         bool result = first == second;

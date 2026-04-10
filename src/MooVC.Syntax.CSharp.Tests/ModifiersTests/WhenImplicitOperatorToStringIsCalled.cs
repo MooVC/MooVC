@@ -1,12 +1,12 @@
-﻿namespace MooVC.Syntax.CSharp.ExtensibilityTests;
+﻿namespace MooVC.Syntax.CSharp.ModifiersTests;
 
 public sealed class WhenImplicitOperatorToStringIsCalled
 {
     [Test]
-    public async Task GivenExtensibilityThenStringMatchesToString()
+    public async Task GivenModifiersThenStringMatchesToString()
     {
         // Arrange
-        Extensibility subject = Extensibility.Static;
+        Modifiers subject = Modifiers.Static;
 
         // Act
         string result = subject;
@@ -19,7 +19,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
     {
         // Arrange
-        Extensibility? subject = default;
+        Modifiers? subject = default;
 
         // Act
         Func<string> result = () => subject;

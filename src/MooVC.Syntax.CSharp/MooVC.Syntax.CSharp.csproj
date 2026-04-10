@@ -96,10 +96,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Declaration.Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Extensibility.Resources.Designer.cs">
+    <Compile Update="Modifiers.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Extensibility.Resources.resx</DependentUpon>
+      <DependentUpon>Modifiers.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Field.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -240,9 +240,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Declaration.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Extensibility.Resources.resx">
+    <EmbeddedResource Update="Modifiers.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Extensibility.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Modifiers.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Field.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

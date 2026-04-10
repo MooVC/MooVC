@@ -6,8 +6,8 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenDifferentValuesThenReturnsFalse()
     {
         // Arrange
-        Record subject = RecordTestsData.Create(extensibility: Extensibility.Abstract);
-        object value = RecordTestsData.Create(extensibility: Extensibility.Sealed);
+        Record subject = RecordTestsData.Create(extensibility: Modifiers.Abstract);
+        object value = RecordTestsData.Create(extensibility: Modifiers.Sealed);
 
         // Act
         bool result = subject.Equals(value);

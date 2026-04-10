@@ -51,7 +51,7 @@ public sealed class WhenToSnippetIsCalled
 
         Event @virtual = EventTestsData.Create(name: "Gamma", behaviours: new Event.Methods { Remove = Snippet.From("g();") });
 
-        @virtual.Extensibility = Extensibility.Virtual;
+        @virtual.Extensibility = Modifiers.Virtual;
 
         ImmutableArray<Event> events =
         [

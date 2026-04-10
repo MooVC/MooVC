@@ -22,7 +22,7 @@ public sealed class WhenToStringIsCalled
         var constructor = new Constructor();
         Record subject = RecordTestsData.Create(
             constructors: [constructor],
-            extensibility: Extensibility.Abstract,
+            extensibility: Modifiers.Abstract,
             isPartial: true,
             name: new Declaration { Name = RecordTestsData.DefaultName },
             parameters: [new Parameter { Name = new("input"), Type = typeof(int) }],

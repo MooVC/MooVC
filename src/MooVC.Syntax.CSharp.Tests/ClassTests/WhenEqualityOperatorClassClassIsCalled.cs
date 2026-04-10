@@ -20,8 +20,8 @@ public sealed class WhenEqualityOperatorClassClassIsCalled
     public async Task GivenDifferentExtensibilitiesThenReturnsFalse()
     {
         // Arrange
-        Class left = ClassTestsData.Create(extensibility: Extensibility.Abstract);
-        Class right = ClassTestsData.Create(extensibility: Extensibility.Sealed);
+        Class left = ClassTestsData.Create(extensibility: Modifiers.Abstract);
+        Class right = ClassTestsData.Create(extensibility: Modifiers.Sealed);
 
         // Act
         bool result = left == right;

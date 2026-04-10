@@ -53,7 +53,7 @@
         /// Gets the extensibility on the Indexer.
         /// </summary>
         /// <value>The extensibility.</value>
-        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
+        public Modifiers Extensibility { get; internal set; } = Modifiers.Implicit;
 
         /// <summary>
         /// Gets the parameter on the Indexer.
@@ -164,11 +164,11 @@
             }
 
             if (!Extensibility.IsPermitted(
-                Extensibility.Abstract,
-                Extensibility.Implicit,
-                Extensibility.Override,
-                Extensibility.Sealed + Extensibility.Override,
-                Extensibility.Virtual))
+                Modifiers.Abstract,
+                Modifiers.Implicit,
+                Modifiers.Override,
+                Modifiers.Sealed + Modifiers.Override,
+                Modifiers.Virtual))
             {
                 results = results.Append(new ValidationResult(
                     ValidateExtensibilityInvalid.Format(nameof(Extensibility), Extensibility, nameof(Event)),

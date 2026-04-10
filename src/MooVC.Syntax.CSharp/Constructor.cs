@@ -55,7 +55,7 @@ namespace MooVC.Syntax.CSharp
         /// Gets the extensibility on the Constructor.
         /// </summary>
         /// <value>The extensibility.</value>
-        public Extensibility Extensibility { get; internal set; } = Extensibility.Implicit;
+        public Modifiers Extensibility { get; internal set; } = Modifiers.Implicit;
 
         /// <summary>
         /// Gets a value indicating whether the Constructor is undefined.

@@ -15,7 +15,7 @@ public sealed class WhenValidateIsCalled
         var subject = new TestReference
         {
             IsUndefinedValue = false,
-            Extensibility = Extensibility.Static,
+            Extensibility = Modifiers.Static,
             Declaration = new() { Name = TypeName },
         };
         var validationContext = new ValidationContext(subject);

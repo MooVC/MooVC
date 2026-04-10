@@ -55,9 +55,9 @@ public sealed class WhenToSnippetIsCalled
             result: new Result { Type = new() { Name = "int" } },
             scope: Scopes.Protected);
 
-        publicVirtual.Extensibility = Extensibility.Virtual;
-        publicStatic.Extensibility = Extensibility.Static;
-        protectedVirtual.Extensibility = Extensibility.Virtual;
+        publicVirtual.Extensibility = Modifiers.Virtual;
+        publicStatic.Extensibility = Modifiers.Static;
+        protectedVirtual.Extensibility = Modifiers.Virtual;
 
         ImmutableArray<Indexer> indexers =
         [

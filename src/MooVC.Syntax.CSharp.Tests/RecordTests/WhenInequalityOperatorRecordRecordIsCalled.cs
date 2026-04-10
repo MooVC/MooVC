@@ -20,8 +20,8 @@ public sealed class WhenInequalityOperatorRecordRecordIsCalled
     public async Task GivenDifferentExtensibilitiesThenReturnsTrue()
     {
         // Arrange
-        Record left = RecordTestsData.Create(extensibility: Extensibility.Abstract);
-        Record right = RecordTestsData.Create(extensibility: Extensibility.Sealed);
+        Record left = RecordTestsData.Create(extensibility: Modifiers.Abstract);
+        Record right = RecordTestsData.Create(extensibility: Modifiers.Sealed);
 
         // Act
         bool result = left != right;

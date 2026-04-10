@@ -109,7 +109,7 @@ public sealed class WhenToSnippetIsCalled
         return new Constructor
         {
             Body = OperatorsTestsData.DefaultBody,
-            Extensibility = Extensibility.Implicit,
+            Extensibility = Modifiers.Implicit,
             Parameters = parameters,
             Scope = scope ?? Scopes.Public,
         };

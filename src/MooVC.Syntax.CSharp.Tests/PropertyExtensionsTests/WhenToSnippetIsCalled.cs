@@ -46,9 +46,9 @@ public sealed class WhenToSnippetIsCalled
         Property publicVirtual = PropertyTestsData.Create(name: "Alpha", scope: Scopes.Public, type: typeof(Version));
         Property protectedVirtual = PropertyTestsData.Create(name: "Gamma", scope: Scopes.Protected, type: typeof(string));
 
-        staticProperty.Extensibility = Extensibility.Static;
-        publicVirtual.Extensibility = Extensibility.Virtual;
-        protectedVirtual.Extensibility = Extensibility.Virtual;
+        staticProperty.Extensibility = Modifiers.Static;
+        publicVirtual.Extensibility = Modifiers.Virtual;
+        protectedVirtual.Extensibility = Modifiers.Virtual;
 
         ImmutableArray<Property> properties =
         [

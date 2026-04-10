@@ -14,7 +14,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Attributes).IsEmpty();
         _ = await Assert.That(subject.Constructors).IsEmpty();
         _ = await Assert.That(subject.Events).IsEmpty();
-        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Sealed);
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Modifiers.Sealed);
         _ = await Assert.That(subject.Fields).IsEmpty();
         _ = await Assert.That(subject.Indexers).IsEmpty();
         _ = await Assert.That(subject.IsPartial).IsTrue();
@@ -44,7 +44,7 @@ public sealed class WhenConstructorIsCalled
             attributes: [attribute],
             constructors: [constructor],
             events: [@event],
-            extensibility: Extensibility.Abstract,
+            extensibility: Modifiers.Abstract,
             fields: [field],
             indexers: [indexer],
             isPartial: true,
@@ -59,7 +59,7 @@ public sealed class WhenConstructorIsCalled
         _ = await Assert.That(subject.Attributes).IsEquivalentTo([attribute]);
         _ = await Assert.That(subject.Constructors).IsEquivalentTo([constructor]);
         _ = await Assert.That(subject.Events).IsEquivalentTo([@event]);
-        _ = await Assert.That(subject.Extensibility).IsEqualTo(Extensibility.Abstract);
+        _ = await Assert.That(subject.Extensibility).IsEqualTo(Modifiers.Abstract);
         _ = await Assert.That(subject.Fields).IsEquivalentTo([field]);
         _ = await Assert.That(subject.Indexers).IsEquivalentTo([indexer]);
         _ = await Assert.That(subject.IsPartial).IsTrue();
