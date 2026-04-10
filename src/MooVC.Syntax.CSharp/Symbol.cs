@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Collections;
@@ -110,7 +110,7 @@
         /// <summary>
         /// Implicitly converts a QualifiedName to a Symbol instance.
         /// </summary>
-        /// <param name="name">The QualifiedName to convert.</param>
+        /// <param name="name">The qualified name to convert. Cannot be <see langword="null" />.</param>
         /// <returns>The Symbol.</returns>
         public static implicit operator Symbol(Qualification name)
         {
@@ -121,10 +121,10 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and qualifier to an Name instance.
+        /// Converts a tuple containing a moniker and qualifier into a symbol.
         /// </summary>
-        /// <param name="name">The tuple containing the name and qualifier to be converted into an Name.</param>
-        /// <returns>The Name.</returns>
+        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
+        /// <returns>The symbol.</returns>
         public static implicit operator Symbol((Moniker Name, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(name);
@@ -139,7 +139,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is less than <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator <(Symbol left, Symbol right)
         {
             if (left is null)
@@ -155,7 +158,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is greater than <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator >(Symbol left, Symbol right)
         {
             if (left is null)
@@ -171,7 +177,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is less than or equal to <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator <=(Symbol left, Symbol right)
         {
             return !(left > right);
@@ -182,7 +191,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is greater than or equal to <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator >=(Symbol left, Symbol right)
         {
             return !(left < right);
