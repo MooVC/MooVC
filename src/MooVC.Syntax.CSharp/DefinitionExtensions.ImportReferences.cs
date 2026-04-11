@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Linq;
@@ -14,7 +14,7 @@
         /// Imports all referenced qualifiers from the definition's type into the definition reference list.
         /// </summary>
         /// <param name="definition">The definition to update. Cannot be <see langword="null" />.</param>
-        /// <param name="exclusions">The qualifiers to exclude from the import. Cannot be <see langword="null" />.</param>
+        /// <param name="exclusions">The qualifiers to exclude. Cannot be <see langword="null" />.</param>
         /// <returns>The updated definition.</returns>
         public static Definition ImportReferences(this Definition definition, params Qualifier[] exclusions)
         {
@@ -35,12 +35,12 @@
                 return current.Referencing(qualifier);
             }
 
-            Func<Qualifier, Definition, Definition> without = ApplyWithoutExclusions;
-            Func<Qualifier, Definition, Definition> with = ApplyWithExclusions;
+            Func<Qualifier, Definition, Definition> action = ApplyWithExclusions;
 
-            Func<Qualifier, Definition, Definition> action = exclusions is null || exclusions.Length == 0
-                ? without
-                : with;
+            if (exclusions is null || exclusions.Length == 0)
+            {
+                action = ApplyWithoutExclusions;
+            }
 
             return definition.Enumerate(action, qualifiers => qualifiers);
         }

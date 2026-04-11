@@ -8,7 +8,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# type syntax options.
+    /// Represents top-level rendering options for type declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Default))]
     [Fluentify]

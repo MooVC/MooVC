@@ -6,12 +6,12 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# syntax element argument.
+    /// Represents an argument expression used in generated C# member invocations.
     /// </summary>
     public partial class Argument
     {
         /// <summary>
-        /// Represents a C# syntax element mode.
+        /// Represents the pass-by modifier applied to an argument expression.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]

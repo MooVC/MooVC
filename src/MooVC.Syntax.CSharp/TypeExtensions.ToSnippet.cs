@@ -5,7 +5,7 @@
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# type syntax type extensions.
+    /// Provides snippet conversion helpers for <see cref="Type"/> values.
     /// </summary>
     public static partial class TypeExtensions
     {

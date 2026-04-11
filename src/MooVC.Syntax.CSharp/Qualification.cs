@@ -13,7 +13,7 @@ namespace MooVC.Syntax.CSharp
     using Kind = System.Type;
 
     /// <summary>
-    /// Represents a C# syntax element symbol.
+    /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     [AutoInitializeWith(nameof(Unnamed))]
     [Fluentify]

@@ -4,7 +4,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# generic syntax constraint extensions.
+    /// Provides snippet conversion helpers for <see cref="Constraint"/> values.
     /// </summary>
     public static partial class ConstraintExtensions
     {

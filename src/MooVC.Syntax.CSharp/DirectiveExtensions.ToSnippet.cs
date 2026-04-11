@@ -4,7 +4,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax directive extensions.
+    /// Provides snippet conversion helpers for <see cref="Directive"/> values.
     /// </summary>
     public static partial class DirectiveExtensions
     {

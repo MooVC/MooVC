@@ -5,12 +5,12 @@ namespace MooVC.Syntax.CSharp
     using Monify;
 
     /// <summary>
-    /// Represents a C# operator syntax comparison.
+    /// Represents a comparison operator declaration model.
     /// </summary>
     public partial class Comparison
     {
         /// <summary>
-        /// Represents a C# operator syntax type.
+        /// Represents an operator token category used by operator declarations.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]

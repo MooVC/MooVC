@@ -5,7 +5,7 @@
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# operator syntax conversion extensions.
+    /// Provides snippet conversion helpers for <see cref="Conversion"/> values.
     /// </summary>
     public static partial class ConversionExtensions
     {

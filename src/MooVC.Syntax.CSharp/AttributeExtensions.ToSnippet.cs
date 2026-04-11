@@ -5,7 +5,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax attribute extensions.
+    /// Provides snippet conversion helpers for <see cref="Attribute"/> values.
     /// </summary>
     public static partial class AttributeExtensions
     {

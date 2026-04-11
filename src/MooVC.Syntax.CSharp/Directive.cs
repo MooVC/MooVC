@@ -12,7 +12,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax directive.
+    /// Represents a preprocessor directive emitted in generated C# code.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

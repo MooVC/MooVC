@@ -5,7 +5,7 @@
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax constructor extensions.
+    /// Provides snippet conversion helpers for <see cref="Constructor"/> values.
     /// </summary>
     public static partial class ConstructorExtensions
     {

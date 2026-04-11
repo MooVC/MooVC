@@ -8,12 +8,12 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax event.
+    /// Represents an event declaration model.
     /// </summary>
     public partial class Event
     {
         /// <summary>
-        /// Represents a C# member syntax methods.
+        /// Represents accessor methods used by indexers, properties, and events.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
         [Fluentify]

@@ -5,7 +5,7 @@
     using MooVC.Syntax.Formatting;
 
     /// <summary>
-    /// Represents a C# generic syntax generic extensions.
+    /// Provides snippet conversion helpers for <see cref="Generic"/> values.
     /// </summary>
     public static partial class GenericExtensions
     {

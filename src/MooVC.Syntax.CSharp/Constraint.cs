@@ -13,7 +13,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# generic syntax constraint.
+    /// Represents a generic type-parameter constraint clause.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]

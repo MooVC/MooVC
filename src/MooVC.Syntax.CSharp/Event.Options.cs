@@ -8,12 +8,12 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax event.
+    /// Represents an event declaration model.
     /// </summary>
     public partial class Event
     {
         /// <summary>
-        /// Represents the rendering options for a event.
+        /// Defines rendering options for event declarations.
         /// </summary>
         [Fluentify]
         [Valuify]

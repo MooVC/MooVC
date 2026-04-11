@@ -5,7 +5,7 @@
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax property extensions.
+    /// Provides snippet conversion helpers for <see cref="Property"/> values.
     /// </summary>
     public static partial class PropertyExtensions
     {
