@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -82,9 +82,9 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and snippet to an Argument instance.
+        /// Converts a tuple containing an argument name and value into an argument expression.
         /// </summary>
-        /// <param name="argument">The tuple containing the name and snippet to be converted into an Argument.</param>
+        /// <param name="argument">The tuple that provides the argument name and value.</param>
         /// <returns>The Argument.</returns>
         public static implicit operator Argument((Name Name, Snippet Value) argument)
         {

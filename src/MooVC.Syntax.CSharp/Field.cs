@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -115,9 +115,9 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and type to an Field instance.
+        /// Converts a tuple containing a field name and type into a field declaration.
         /// </summary>
-        /// <param name="field">The tuple containing the name and type to be converted into an Field.</param>
+        /// <param name="field">The tuple that provides the field name and type.</param>
         /// <returns>The Field.</returns>
         public static implicit operator Field((Variable Name, Symbol Type) field)
         {
@@ -147,7 +147,7 @@
         }
 
         /// <summary>
-        /// Returns the string representation of the Field.
+        /// Returns the string representation of the field declaration.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()

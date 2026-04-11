@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using Ardalis.GuardClauses;
@@ -133,7 +133,7 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>A value that combines <paramref name="left" /> and <paramref name="right" />.</returns>
         public static Modifiers operator +(Modifiers left, Modifiers right)
         {
             _ = Guard.Against.Null(left, message: PlusOperatorLeftRequired.Format(nameof(Modifiers), right));

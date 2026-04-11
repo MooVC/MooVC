@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Collections.Generic;
@@ -113,7 +113,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is less than <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator <(Moniker left, Moniker right)
         {
             if (left is null)
@@ -129,7 +132,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is greater than <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator >(Moniker left, Moniker right)
         {
             if (left is null)
@@ -145,7 +151,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is less than or equal to <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator <=(Moniker left, Moniker right)
         {
             return !(left > right);
@@ -156,7 +165,10 @@
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
+        /// <returns>
+        /// <see langword="true" /> when <paramref name="left" /> is greater than or equal to <paramref name="right" />;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool operator >=(Moniker left, Moniker right)
         {
             return !(left < right);

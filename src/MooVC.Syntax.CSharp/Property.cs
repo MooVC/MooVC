@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -115,9 +115,9 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and type to an Property instance.
+        /// Converts a tuple containing a property name and type into a property declaration.
         /// </summary>
-        /// <param name="property">The tuple containing the name and type to be converted into an Property.</param>
+        /// <param name="property">The tuple that provides the property name and type.</param>
         /// <returns>The Property.</returns>
         public static implicit operator Property((Name Name, Symbol Type) property)
         {
@@ -147,7 +147,7 @@
         }
 
         /// <summary>
-        /// Returns the string representation of the Property.
+        /// Returns the string representation of the property declaration.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()

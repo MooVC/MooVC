@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -100,9 +100,9 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and type to an Parameter instance.
+        /// Converts a tuple containing a parameter name and type into a parameter declaration.
         /// </summary>
-        /// <param name="parameter">The tuple containing the name and type to be converted into an Parameter.</param>
+        /// <param name="parameter">The tuple that provides the parameter name and type.</param>
         /// <returns>The Parameter.</returns>
         public static implicit operator Parameter((Variable Name, Symbol Type) parameter)
         {

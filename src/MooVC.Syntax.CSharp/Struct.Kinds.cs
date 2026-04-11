@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using Ardalis.GuardClauses;
@@ -46,7 +46,7 @@
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
-            /// <returns>The .</returns>
+        /// <returns>A value that combines <paramref name="left" /> and <paramref name="right" />.</returns>
             public static Kinds operator +(Kinds left, Kinds right)
             {
                 _ = Guard.Against.Null(left, message: KindPlusOperatorLeftRequired.Format(nameof(Kinds), right));

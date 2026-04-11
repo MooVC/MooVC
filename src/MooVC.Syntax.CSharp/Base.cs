@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -80,9 +80,9 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and qualifier to an Base instance.
+        /// Converts a tuple containing a moniker and qualifier into a base type reference.
         /// </summary>
-        /// <param name="qualification">The tuple containing the name and qualifier to be converted into an Base.</param>
+        /// <param name="qualification">The tuple that provides the moniker and qualifier.</param>
         /// <returns>The Base.</returns>
         public static implicit operator Base(Qualification qualification)
         {
@@ -121,10 +121,10 @@
         }
 
         /// <summary>
-        /// Implicitly converts a tuple containing a name and qualifier to an Name instance.
+        /// Converts a tuple containing a moniker and qualifier into a base type reference.
         /// </summary>
-        /// <param name="name">The tuple containing the name and qualifier to be converted into an Name.</param>
-        /// <returns>The Name.</returns>
+        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
+        /// <returns>The base type reference.</returns>
         public static implicit operator Base((Moniker Name, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Base>(name);
@@ -187,7 +187,7 @@
         }
 
         /// <summary>
-        /// Returns the string representation of the Base.
+        /// Returns the string representation of the base type reference.
         /// </summary>
         /// <returns>The string representation.</returns>
         public override string ToString()
@@ -196,9 +196,9 @@
         }
 
         /// <summary>
-        /// Validates the Base.
+        /// Validates the base type reference.
         /// </summary>
-        /// <remarks>Required members include: Constraints, Name.</remarks>
+        /// <remarks>Required members include: Arguments, Name.</remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
