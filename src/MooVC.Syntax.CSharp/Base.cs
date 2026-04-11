@@ -10,8 +10,8 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Base_Resources;
-    using Ignore = Valuify.IgnoreAttribute;
     using CType = System.Type;
+    using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
     /// Represents a C# base syntax base.
