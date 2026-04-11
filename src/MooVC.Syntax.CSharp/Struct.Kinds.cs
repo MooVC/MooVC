@@ -6,12 +6,12 @@ namespace MooVC.Syntax.CSharp
     using static MooVC.Syntax.CSharp.Struct_Resources;
 
     /// <summary>
-    /// Represents a C# type syntax struct.
+    /// Represents a C# struct declaration model.
     /// </summary>
     public partial class Struct
     {
         /// <summary>
-        /// Represents a C# type syntax kind.
+        /// Represents the struct shape keyword (`struct`, `readonly struct`, or `ref struct`).
         /// </summary>
         [Monify(Type = typeof(string))]
         public sealed partial class Kinds

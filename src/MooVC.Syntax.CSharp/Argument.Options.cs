@@ -8,12 +8,12 @@
     using static MooVC.Syntax.CSharp.Argument_Resources;
 
     /// <summary>
-    /// Represents a C# syntax element argument.
+    /// Represents an argument expression used in generated C# member invocations.
     /// </summary>
     public partial class Argument
     {
         /// <summary>
-        /// Defines options for the Argument C# syntax element.
+        /// Defines formatting and naming options used when rendering arguments.
         /// </summary>
         [AutoInitializeWith(nameof(Call))]
         [Fluentify]

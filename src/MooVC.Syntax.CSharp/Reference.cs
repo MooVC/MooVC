@@ -12,7 +12,7 @@
     using static MooVC.Syntax.CSharp.Reference_Resources;
 
     /// <summary>
-    /// Represents a C# type syntax reference.
+    /// Represents a referenced namespace or type used by a definition.
     /// </summary>
     public abstract partial class Reference
         : Type

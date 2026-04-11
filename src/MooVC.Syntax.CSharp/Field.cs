@@ -15,7 +15,7 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax field.
+    /// Represents a field declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

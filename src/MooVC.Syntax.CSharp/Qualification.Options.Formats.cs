@@ -4,17 +4,17 @@
     using Monify;
 
     /// <summary>
-    /// Represents a C# syntax element symbol.
+    /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     public partial class Qualification
     {
         /// <summary>
-        /// Defines options for the Symbol C# syntax element.
+        /// Defines rendering options used when composing symbol references.
         /// </summary>
         public partial class Options
         {
             /// <summary>
-            /// Represents a C# syntax element qualification.
+            /// Represents formatting options for qualified symbol names.
             /// </summary>
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]

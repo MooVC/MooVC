@@ -4,17 +4,17 @@
     using Monify;
 
     /// <summary>
-    /// Represents a C# syntax element parameter.
+    /// Represents a parameter signature component used by members and delegates.
     /// </summary>
     public partial class Attribute
     {
         /// <summary>
-        /// Defines options for the Attribute C# syntax element.
+        /// Defines rendering options for attribute declarations.
         /// </summary>
         public partial class Options
         {
             /// <summary>
-            /// Defines options for the Style C# syntax element.
+            /// Defines formatting styles for rendering attributes.
             /// </summary>
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]

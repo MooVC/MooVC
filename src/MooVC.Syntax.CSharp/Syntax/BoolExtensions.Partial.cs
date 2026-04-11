@@ -1,7 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.Syntax
 {
     /// <summary>
-    /// Represents a C# keyword syntax bool extensions.
+    /// Provides fluent helpers for emitting C# boolean-related keywords.
     /// </summary>
     internal static partial class BoolExtensions
     {

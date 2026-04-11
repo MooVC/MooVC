@@ -10,12 +10,12 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax property.
+    /// Represents a property declaration model.
     /// </summary>
     public partial class Property
     {
         /// <summary>
-        /// Represents the rendering options for a method.
+        /// Defines rendering options for property declarations.
         /// </summary>
         [Fluentify]
         [Valuify]

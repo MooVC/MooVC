@@ -15,7 +15,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax attribute.
+    /// Represents a C# attribute usage that can be attached to declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]

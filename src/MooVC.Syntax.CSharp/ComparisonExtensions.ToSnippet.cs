@@ -4,7 +4,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# operator syntax comparison extensions.
+    /// Provides snippet conversion helpers for <see cref="Comparison"/> values.
     /// </summary>
     public static partial class ComparisonExtensions
     {

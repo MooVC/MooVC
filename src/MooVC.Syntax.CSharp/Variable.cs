@@ -13,7 +13,7 @@ namespace MooVC.Syntax.CSharp
     using static MooVC.Syntax.CSharp.Variable_Resources;
 
     /// <summary>
-    /// Represents a C# syntax element variable.
+    /// Represents an identifier token used for names in generated C# code.
     /// </summary>
     [Monify(Type = typeof(Identifier))]
     [SkipAutoInitialization]

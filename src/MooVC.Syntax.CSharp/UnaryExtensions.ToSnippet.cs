@@ -5,7 +5,7 @@
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# operator syntax unary extensions.
+    /// Provides snippet conversion helpers for <see cref="Unary"/> values.
     /// </summary>
     public static partial class UnaryExtensions
     {

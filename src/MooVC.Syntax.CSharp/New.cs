@@ -6,7 +6,7 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# generic syntax new.
+    /// Represents the `new()` constructor constraint in generic clauses.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]

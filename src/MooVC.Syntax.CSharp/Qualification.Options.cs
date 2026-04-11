@@ -8,12 +8,12 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element symbol.
+    /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     public partial class Qualification
     {
         /// <summary>
-        /// Defines options for the Symbol C# syntax element.
+        /// Defines rendering options used when composing symbol references.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
         [Fluentify]

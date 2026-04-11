@@ -5,7 +5,7 @@
     using MooVC.Syntax.Formatting;
 
     /// <summary>
-    /// Represents a C# syntax element parameter extensions.
+    /// Provides snippet conversion helpers for <see cref="Parameter"/> values.
     /// </summary>
     public static partial class ParameterExtensions
     {

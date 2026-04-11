@@ -15,7 +15,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# operator syntax operators.
+    /// Represents the operator section of a type declaration.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

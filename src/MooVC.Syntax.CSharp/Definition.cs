@@ -15,7 +15,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# type syntax definition.
+    /// Represents a complete C# type definition including namespace and imports.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
