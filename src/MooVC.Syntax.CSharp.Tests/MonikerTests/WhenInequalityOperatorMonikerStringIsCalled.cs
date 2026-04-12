@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorMonikerStringIsCalled
     {
         // Arrange
         Moniker left = "Value";
-        const string right = "Other";
+        string right = "Other";
 
         // Act
         bool resultLeftRight = left != right;
@@ -23,7 +23,7 @@ public sealed class WhenInequalityOperatorMonikerStringIsCalled
     {
         // Arrange
         Moniker left = "Value";
-        const string right = "Value";
+        string right = "Value";
 
         // Act
         bool resultLeftRight = left != right;
