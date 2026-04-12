@@ -166,7 +166,7 @@
 
         private Snippet GetSignature(Options options)
         {
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(parameter.Name, options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToConstraintsSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
             Snippet parameters = GetParameters(options);

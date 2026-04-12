@@ -127,7 +127,7 @@
                 .Append(@new)
                 .ToArray();
 
-            return $"where {Separator.Combine(constraints)}";
+            return Separator.Combine(constraints);
         }
 
         /// <summary>
@@ -147,16 +147,6 @@
                 .Include(nameof(Base), Base)
                 .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUnspecified, Interfaces)
                 .Results;
-        }
-
-        internal string ToString(Name parameter)
-        {
-            Guard.Against.Null(parameter);
-
-            string constraints = ToString();
-
-            return constraints
-                .Replace("where ", $"where {parameter} : ");
         }
 
         /// <summary>

@@ -136,6 +136,20 @@
                 .Results;
         }
 
+        internal Snippet ToConstraintsSnippet(Snippet.Options options)
+        {
+            if (Constraints.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            string[] clauses = Constraints
+                .Select(constraint => $"where {Name} : {constraint}")
+                .ToArray();
+
+            return Snippet.From(options, clauses);
+        }
+
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
