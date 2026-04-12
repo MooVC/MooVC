@@ -47,6 +47,20 @@ public sealed class WhenAddZipWriterIsCalled
     }
 
     [Test]
+    public async Task GivenNullConfigurationThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        ServiceCollection services = new();
+        IConfiguration configuration = default!;
+
+        // Act
+        Action action = () => services.AddZipWriter(configuration);
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
+    [Test]
     public async Task GivenServicesThenWriterIsRegistered()
     {
         // Arrange

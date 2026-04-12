@@ -12,8 +12,8 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Attribute_Resources;
-    using Ignore = Valuify.IgnoreAttribute;
     using CType = System.Type;
+    using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
     /// Represents a C# attribute usage that can be attached to declarations.

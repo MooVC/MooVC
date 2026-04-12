@@ -68,6 +68,33 @@ public sealed class WhenAddModellingIsCalled
         _ = await Assert.That(zipOptions.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
     }
 
+    [Test]
+    public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        IServiceCollection services = default!;
+
+        // Act
+        Action action = () => services.AddModelling();
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenNullConfigurationThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        ServiceCollection services = new();
+        IConfiguration configuration = default!;
+
+        // Act
+        Action action = () => services.AddModelling(configuration);
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
     [SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "Class is empty for the purposes of the test.")]
     public sealed class TestModel;
 }
