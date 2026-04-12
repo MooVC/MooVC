@@ -75,7 +75,37 @@ public sealed class WhenToSnippetIsCalled
 
         // Assert
         _ = await Assert.That(representation).Contains("Perform<T>");
-        _ = await Assert.That(representation).Contains("where class, new()");
+        _ = await Assert.That(representation).Contains("where T : class, new()");
+    }
+
+    [Test]
+    public async Task GivenStructConstraintThenWhereClauseIncludesGenericParameter()
+    {
+        // Arrange
+        var constraints = new Constraint
+        {
+            Nature = Natures.Struct,
+        };
+
+        var generic = new Generic
+        {
+            Name = "T",
+            Constraints = [constraints],
+        };
+
+        var declaration = new Declaration
+        {
+            Name = "Perform",
+            Arguments = [generic],
+        };
+
+        Method subject = MethodTestsData.Create(name: declaration, body: Snippet.Empty);
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        _ = await Assert.That(representation).Contains("where T : struct");
     }
 
     [Test]
