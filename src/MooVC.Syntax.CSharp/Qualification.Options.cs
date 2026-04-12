@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;

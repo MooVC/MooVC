@@ -7,6 +7,9 @@ using System.IO.Compression;
 /// <summary>
 /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
 /// </summary>
+/// <remarks>
+/// This implementation delegates stream wrapping to <see cref="BrotliStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
+/// </remarks>
 public sealed class BrotliCompressor
     : StreamCompressor
 {

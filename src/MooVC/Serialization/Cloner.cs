@@ -6,6 +6,9 @@ using static MooVC.Serialization.Cloner_Resources;
 /// <summary>
 /// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.
 /// </summary>
+/// <remarks>
+/// This implementation performs clone operations by serializing and then deserializing the source instance.
+/// </remarks>
 public sealed class Cloner
     : ICloner
 {

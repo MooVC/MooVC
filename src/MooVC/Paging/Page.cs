@@ -11,6 +11,14 @@ using MooVC.Paging.Serialization;
 /// Represents the result of a request to page a sequence of type <see cref="T" />.
 /// </summary>
 /// <typeparam name="T">The type of the elements paged.</typeparam>
+/// <remarks>
+/// <para>
+/// This type is immutable and materializes the supplied value sequence into an internal array at construction time.
+/// </para>
+/// <para>
+/// Use <see cref="Directive" /> to identify the paging request that produced this result and <see cref="Total" /> when the source sequence size is known.
+/// </para>
+/// </remarks>
 [JsonConverter(typeof(PageConverter))]
 public sealed record Page<T>
     : IReadOnlyList<T>
@@ -23,8 +31,12 @@ public sealed record Page<T>
     /// <param name="directive">The request that was used to page the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <param name="total">The total number of elements in the sequence (if known).</param>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="values" /> is <see langword="null" />.
+    /// </exception>
     public Page(Directive directive, IReadOnlyList<T> values, ulong? total = default)
     {
+        values = values ?? throw new ArgumentNullException(nameof(values));
         Directive = directive;
         Total = total;
         _values = values.ToArrayOrEmpty();
@@ -92,6 +104,9 @@ public sealed record Page<T>
     /// <returns>
     /// The <see cref="Directive"/> required to retrieve the next page in the sequence.
     /// </returns>
+    /// <remarks>
+    /// This method preserves <see cref="Directive.Limit" /> and increments <see cref="Directive.Page" /> by one.
+    /// </remarks>
     public Directive Next()
     {
         return Directive + 1;
@@ -103,6 +118,9 @@ public sealed record Page<T>
     /// <returns>
     /// The <see cref="Directive"/> required to retrieve the next page in the sequence.
     /// </returns>
+    /// <remarks>
+    /// This method preserves <see cref="Directive.Limit" /> and decrements <see cref="Directive.Page" /> by one.
+    /// </remarks>
     public Directive Previous()
     {
         return Directive - 1;

@@ -8,6 +8,9 @@ using Base = MooVC.Serialization.Serializer;
 /// <summary>
 /// Provides an implementation of type <see cref="ISerializer"/> that utilizes the <see cref="JsonSerializer"/>.
 /// </summary>
+/// <remarks>
+/// Uses <see cref="JsonSerializerOptions.Default" /> on .NET 7+ and web defaults on earlier target frameworks when options are not provided.
+/// </remarks>
 public sealed class Serializer
     : Base
 {

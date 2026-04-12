@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+namespace MooVC.Syntax
 {
     /// <summary>
     /// Provides helpers for string analysis used by syntax generation.

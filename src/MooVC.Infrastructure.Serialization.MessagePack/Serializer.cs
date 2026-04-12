@@ -9,6 +9,9 @@ using Base = MooVC.Serialization.Serializer;
 /// <summary>
 /// Provides MessagePack serialization.
 /// </summary>
+/// <remarks>
+/// Delegates serialization to <see cref="MessagePackSerializer" /> using configured <see cref="MessagePackSerializerOptions" /> and optional stream compression.
+/// </remarks>
 public sealed class Serializer
     : Base
 {

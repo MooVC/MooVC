@@ -12,6 +12,9 @@ using static MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Resources;
 /// <summary>
 /// Provides BSON serialization using Newtonsoft.Json.
 /// </summary>
+/// <remarks>
+/// Serializes through <see cref="BsonDataWriter" /> and deserializes through <see cref="BsonDataReader" />, while honoring configured encoding and date/time kind handling.
+/// </remarks>
 public sealed class Serializer
     : SynchronousSerializer
 {

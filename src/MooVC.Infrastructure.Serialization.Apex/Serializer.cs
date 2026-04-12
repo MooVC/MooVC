@@ -8,6 +8,9 @@ using static global::Apex.Serialization.Binary;
 /// <summary>
 /// Provides Apex binary serialization.
 /// </summary>
+/// <remarks>
+/// Wraps the Apex <see cref="IBinary" /> serializer and integrates with MooVC compression via <see cref="SynchronousSerializer" />.
+/// </remarks>
 public sealed class Serializer
     : SynchronousSerializer,
       IDisposable

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Validation
+namespace MooVC.Syntax.Validation
 {
     using System;
     using System.Collections.Generic;
