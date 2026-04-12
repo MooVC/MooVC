@@ -31,12 +31,8 @@ public sealed record Page<T>
     /// <param name="directive">The request that was used to page the sequence.</param>
     /// <param name="values">The paged sequence of elements.</param>
     /// <param name="total">The total number of elements in the sequence (if known).</param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="values" /> is <see langword="null" />.
-    /// </exception>
     public Page(Directive directive, IReadOnlyList<T> values, ulong? total = default)
     {
-        values = values ?? throw new ArgumentNullException(nameof(values));
         Directive = directive;
         Total = total;
         _values = values.ToArrayOrEmpty();
