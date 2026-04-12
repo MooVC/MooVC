@@ -12,8 +12,12 @@ namespace MooVC.Syntax.Resource
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a resource file attribute metadata.
+    /// Represents metadata associated with a resource entry in a .resx document.
     /// </summary>
+    /// <remarks>
+    /// Metadata is serialized as a <c>metadata</c> element with optional attributes and an optional
+    /// nested <c>value</c> element.
+    /// </remarks>
     [Fluentify]
     [Valuify]
     public sealed partial class Metadata
@@ -40,35 +44,35 @@ namespace MooVC.Syntax.Resource
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Gets the mime type on the Metadata.
+        /// Gets the MIME type metadata value.
         /// </summary>
-        /// <value>The mime type.</value>
+        /// <value>The MIME type metadata value.</value>
         public Snippet MimeType { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets the name on the Metadata.
+        /// Gets the metadata name.
         /// </summary>
-        /// <value>The name.</value>
+        /// <value>The metadata name.</value>
         [Descriptor("Named")]
         public Snippet Name { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets the type on the Metadata.
+        /// Gets the CLR type metadata value.
         /// </summary>
-        /// <value>The type.</value>
+        /// <value>The CLR type metadata value.</value>
         [Descriptor("OfType")]
         public Snippet Type { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Gets the value on the Metadata.
+        /// Gets the metadata payload.
         /// </summary>
-        /// <value>The value.</value>
+        /// <value>The metadata payload.</value>
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Performs the to fragments operation for the resource file attribute.
+        /// Creates the XML fragments for the metadata element.
         /// </summary>
-        /// <returns>The immutable array x element.</returns>
+        /// <returns>An immutable array containing a single <see cref="XElement"/> when defined; otherwise an empty array.</returns>
         public ImmutableArray<XElement> ToFragments()
         {
             if (IsUndefined)
@@ -85,9 +89,9 @@ namespace MooVC.Syntax.Resource
         }
 
         /// <summary>
-        /// Returns the string representation of the Metadata.
+        /// Returns the string representation of the metadata element.
         /// </summary>
-        /// <returns>The string representation.</returns>
+        /// <returns>The XML representation, or <see cref="string.Empty"/> when undefined.</returns>
         public override string ToString()
         {
             if (IsUndefined)
@@ -99,9 +103,11 @@ namespace MooVC.Syntax.Resource
         }
 
         /// <summary>
-        /// Validates the Metadata.
+        /// Validates the metadata.
         /// </summary>
-        /// <remarks>Required members include: MimeType, Name, Type.</remarks>
+        /// <remarks>
+        /// Required members include <see cref="MimeType"/>, <see cref="Name"/>, and <see cref="Type"/>.
+        /// </remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
