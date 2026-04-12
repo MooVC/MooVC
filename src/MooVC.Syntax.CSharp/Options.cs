@@ -10,6 +10,10 @@
     /// <summary>
     /// Represents top-level rendering options for type declarations.
     /// </summary>
+    /// <remarks>
+    /// This type provides implicit conversions to common option subsets so APIs can accept either
+    /// aggregate or specialized options.
+    /// </remarks>
     [AutoInitializeWith(nameof(Default))]
     [Fluentify]
     [Valuify]
@@ -30,13 +34,13 @@
         /// <summary>
         /// Gets the namespace options.
         /// </summary>
-        /// <value>The namespace options.</value>
+        /// <value>The namespace rendering options.</value>
         public Qualifier.Options Namespace { get; internal set; } = Qualifier.Options.File;
 
         /// <summary>
-        /// Gets the Snippets options.
+        /// Gets the snippet options.
         /// </summary>
-        /// <value>The Snippets options.</value>
+        /// <value>The snippet formatting options used during rendering.</value>
         public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default.WithChaining(new[]
         {
             OneDotPerLine.Instance,
@@ -44,9 +48,9 @@
         });
 
         /// <summary>
-        /// Gets the symbol options.
+        /// Gets the type options.
         /// </summary>
-        /// <value>The symbol options.</value>
+        /// <value>The type rendering options.</value>
         public Type.Options Types { get; internal set; } = Type.Options.Default;
 
         /// <summary>
@@ -54,6 +58,9 @@
         /// </summary>
         /// <param name="options">The source options.</param>
         /// <returns>The namespace options.</returns>
+        /// <remarks>
+        /// Conversion fails when <paramref name="options"/> is null.
+        /// </remarks>
         public static implicit operator Qualifier.Options(Options options)
         {
             Guard.Against.Conversion<Options, Qualifier.Options>(options);
@@ -66,6 +73,9 @@
         /// </summary>
         /// <param name="options">The source options.</param>
         /// <returns>The snippet options.</returns>
+        /// <remarks>
+        /// Conversion fails when <paramref name="options"/> is null.
+        /// </remarks>
         public static implicit operator Snippet.Options(Options options)
         {
             Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -74,10 +84,14 @@
         }
 
         /// <summary>
-        /// Converts the current options to Type options.
+        /// Converts the current options to type options.
         /// </summary>
         /// <param name="options">The source options.</param>
-        /// <returns>The Type options.</returns>
+        /// <returns>The type options.</returns>
+        /// <remarks>
+        /// Conversion fails when <paramref name="options"/> is null. Missing snippet options in
+        /// <see cref="Types"/> are automatically populated from <see cref="Snippets"/>.
+        /// </remarks>
         public static implicit operator Type.Options(Options options)
         {
             Guard.Against.Conversion<Options, Type.Options>(options);
