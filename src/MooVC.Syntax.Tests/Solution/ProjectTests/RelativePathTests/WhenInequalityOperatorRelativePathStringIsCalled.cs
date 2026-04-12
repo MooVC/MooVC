@@ -27,7 +27,8 @@ public sealed class WhenInequalityOperatorRelativePathStringIsCalled
 
         // Act
         bool resultLeftRight = left != Different;
-        bool resultRightLeft = Different != left;
+        string right = Different;
+        bool resultRightLeft = right != left;
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsTrue();
@@ -42,7 +43,8 @@ public sealed class WhenInequalityOperatorRelativePathStringIsCalled
 
         // Act
         bool resultLeftRight = left != Same;
-        bool resultRightLeft = Same != left;
+        string right = Same;
+        bool resultRightLeft = right != left;
 
         // Assert
         _ = await Assert.That(resultLeftRight).IsFalse();
