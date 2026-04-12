@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax property extensions.
+    /// Provides snippet conversion helpers for <see cref="Property"/> values.
     /// </summary>
     public static partial class PropertyExtensions
     {

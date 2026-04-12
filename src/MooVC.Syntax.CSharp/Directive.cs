@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,7 +12,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax directive.
+    /// Represents a preprocessor directive emitted in generated C# code.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

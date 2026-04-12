@@ -21,7 +21,7 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"where class, {BaseName}, {InterfaceName}, new()");
+        _ = await Assert.That(result).IsEqualTo($"class, {BaseName}, {InterfaceName}, new()");
     }
 
     [Test]
@@ -45,7 +45,7 @@ public sealed class WhenToStringIsCalled
         string result = constraint.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"where struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
+        _ = await Assert.That(result).IsEqualTo($"struct, {BaseName}, {InterfaceName}, {AdditionalInterfaceName}");
     }
 
     [Test]

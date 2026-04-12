@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# type syntax type extensions.
+    /// Provides snippet conversion helpers for <see cref="Type"/> values.
     /// </summary>
     public static partial class TypeExtensions
     {

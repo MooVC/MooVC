@@ -1,15 +1,15 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Fluentify;
     using Monify;
 
     /// <summary>
-    /// Represents a C# operator syntax conversion.
+    /// Represents a user-defined conversion operator declaration model.
     /// </summary>
     public partial class Conversion
     {
         /// <summary>
-        /// Represents a C# operator syntax type.
+        /// Represents an operator token category used by operator declarations.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]

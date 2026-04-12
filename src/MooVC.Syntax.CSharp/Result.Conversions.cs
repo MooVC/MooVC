@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Threading.Tasks;
     using Ardalis.GuardClauses;
@@ -6,7 +6,7 @@
     using CType = System.Type;
 
     /// <summary>
-    /// Represents a C# syntax element result.
+    /// Represents the return signature for methods, operators, and delegates.
     /// </summary>
     public partial class Result
     {

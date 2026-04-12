@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Formatting
+namespace MooVC.Syntax.Formatting
 {
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.Formatting.StringExtensions_Resources;

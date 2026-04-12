@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -7,12 +7,12 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element variable.
+    /// Represents an identifier token used for names in generated C# code.
     /// </summary>
     public partial class Variable
     {
         /// <summary>
-        /// Defines options for the Variable C# syntax element.
+        /// Defines naming options used when rendering identifiers.
         /// </summary>
         [AutoInitializeWith(nameof(Camel))]
         [Fluentify]

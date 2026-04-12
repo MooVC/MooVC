@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
@@ -8,12 +8,12 @@
     using static MooVC.Syntax.CSharp.Parameter_Resources;
 
     /// <summary>
-    /// Represents a C# syntax element parameter.
+    /// Represents a parameter signature component used by members and delegates.
     /// </summary>
     public partial class Parameter
     {
         /// <summary>
-        /// Defines options for the Parameter C# syntax element.
+        /// Defines formatting and naming options used when rendering parameters.
         /// </summary>
         [AutoInitializeWith(nameof(Camel))]
         [Fluentify]

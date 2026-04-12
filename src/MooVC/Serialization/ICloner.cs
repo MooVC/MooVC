@@ -3,6 +3,9 @@
 /// <summary>
 /// Defines a contract for cloning objects.
 /// </summary>
+/// <remarks>
+/// Implementations are expected to produce deep copies so the returned instance can evolve independently from the source object graph.
+/// </remarks>
 public interface ICloner
 {
     /// <summary>

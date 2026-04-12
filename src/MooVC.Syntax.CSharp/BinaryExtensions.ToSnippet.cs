@@ -1,10 +1,10 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
 
     /// <summary>
-    /// Represents a C# operator syntax binary extensions.
+    /// Provides snippet conversion helpers for <see cref="Binary"/> values.
     /// </summary>
     public static partial class BinaryExtensions
     {

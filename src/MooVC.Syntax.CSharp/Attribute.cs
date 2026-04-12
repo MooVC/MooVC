@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -16,7 +16,7 @@
     using CType = System.Type;
 
     /// <summary>
-    /// Represents a C# member syntax attribute.
+    /// Represents a C# attribute usage that can be attached to declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]

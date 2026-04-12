@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Collections;
@@ -13,7 +13,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# generic syntax generic.
+    /// Represents a generic type-parameter declaration.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
@@ -115,6 +115,27 @@
         public override string ToString()
         {
             return Name;
+        }
+
+        /// <summary>
+        /// Creates a snippet representation of generic constraints.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options);
+
+            if (Constraints.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            string[] clauses = Constraints
+                .Select(constraint => $"where {Name} : {constraint}")
+                .ToArray();
+
+            return Snippet.From(options, clauses);
         }
 
         /// <summary>

@@ -10,6 +10,9 @@ using static MooVC.Threading.Coordination.Coordinator_Resources;
 /// <see cref="ICoordinatable" /> implementation of the context instance provided, or via its hashcode.
 /// </summary>
 /// <typeparam name="T">The type to which the context applies.</typeparam>
+/// <remarks>
+/// Each resolved coordination key maps to an independent semaphore, allowing mutual exclusion per key instead of per type.
+/// </remarks>
 public sealed class Coordinator<T>
     : ICoordinator<T>
     where T : notnull

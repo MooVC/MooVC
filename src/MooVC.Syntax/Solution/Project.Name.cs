@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Solution
+namespace MooVC.Syntax.Solution
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,6 +12,9 @@
     /// </summary>
     public partial class Project
     {
+        /// <summary>
+        /// Represents the display name of a solution project entry.
+        /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Name

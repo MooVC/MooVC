@@ -16,7 +16,7 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element symbol.
+    /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

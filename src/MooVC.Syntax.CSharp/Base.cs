@@ -14,7 +14,7 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# base syntax base.
+    /// Represents a base-type clause entry used in class and record declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
     [Fluentify]

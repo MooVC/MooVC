@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Resource
+namespace MooVC.Syntax.Resource
 {
     using System;
     using System.Collections.Generic;

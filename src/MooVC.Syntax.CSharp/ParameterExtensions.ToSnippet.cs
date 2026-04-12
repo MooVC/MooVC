@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Syntax.Formatting;
 
     /// <summary>
-    /// Represents a C# syntax element parameter extensions.
+    /// Provides snippet conversion helpers for <see cref="Parameter"/> values.
     /// </summary>
     public static partial class ParameterExtensions
     {

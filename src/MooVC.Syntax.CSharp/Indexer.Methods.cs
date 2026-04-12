@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -8,12 +8,12 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# member syntax indexer.
+    /// Represents an indexer declaration model.
     /// </summary>
     public partial class Indexer
     {
         /// <summary>
-        /// Represents a C# member syntax methods.
+        /// Represents accessor methods used by indexers, properties, and events.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
         [Fluentify]

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Formatting
+namespace MooVC.Syntax.Formatting
 {
     using System;
     using System.Text;

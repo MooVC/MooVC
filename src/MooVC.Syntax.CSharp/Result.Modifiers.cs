@@ -1,10 +1,10 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Fluentify;
     using Monify;
 
     /// <summary>
-    /// Represents a C# member return signature.
+    /// Represents method return signature settings.
     /// </summary>
     public partial class Result
     {

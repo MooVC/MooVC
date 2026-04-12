@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -12,7 +12,7 @@
     public partial class Type
     {
         /// <summary>
-        /// Represents a C# type syntax options.
+        /// Represents top-level rendering options for type declarations.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
         [Fluentify]

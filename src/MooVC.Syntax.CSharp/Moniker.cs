@@ -12,7 +12,7 @@ namespace MooVC.Syntax.CSharp
     using CType = System.Type;
 
     /// <summary>
-    /// Represents a syntax element segment.
+    /// Represents one segment in a qualified identifier.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]

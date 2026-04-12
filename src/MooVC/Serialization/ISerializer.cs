@@ -5,6 +5,9 @@ using System.IO;
 /// <summary>
 /// Defines a contract for serializing and deserializing objects.
 /// </summary>
+/// <remarks>
+/// Implementations should support round-tripping between <c>Serialize</c> and <c>Deserialize</c> for the same serialized representation.
+/// </remarks>
 public interface ISerializer
 {
     /// <summary>

@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax constructor extensions.
+    /// Provides snippet conversion helpers for <see cref="Constructor"/> values.
     /// </summary>
     public static partial class ConstructorExtensions
     {

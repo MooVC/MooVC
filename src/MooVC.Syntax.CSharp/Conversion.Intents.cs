@@ -5,12 +5,12 @@ namespace MooVC.Syntax.CSharp
     using Monify;
 
     /// <summary>
-    /// Represents a C# operator syntax conversion.
+    /// Represents a user-defined conversion operator declaration model.
     /// </summary>
     public partial class Conversion
     {
         /// <summary>
-        /// Represents a C# operator syntax intent.
+        /// Represents whether a conversion operator is implicit or explicit.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]

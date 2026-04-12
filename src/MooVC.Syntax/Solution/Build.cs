@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Solution
+namespace MooVC.Syntax.Solution
 {
     using System.Collections.Generic;
     using System.Collections.Immutable;

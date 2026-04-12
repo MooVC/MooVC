@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+namespace MooVC.Syntax
 {
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;

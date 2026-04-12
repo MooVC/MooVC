@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# type syntax class.
+    /// Represents a C# class declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]

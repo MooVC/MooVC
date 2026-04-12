@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -6,17 +6,17 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# syntax element argument.
+    /// Represents an argument expression used in generated C# member invocations.
     /// </summary>
     public partial class Argument
     {
         /// <summary>
-        /// Defines options for the Argument C# syntax element.
+        /// Defines formatting and naming options used when rendering arguments.
         /// </summary>
         public partial class Options
         {
             /// <summary>
-            /// Represents a C# syntax element formatter.
+            /// Represents the argument formatting strategy used during snippet generation.
             /// </summary>
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]

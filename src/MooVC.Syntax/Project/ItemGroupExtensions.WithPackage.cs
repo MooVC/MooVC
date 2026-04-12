@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Project
+namespace MooVC.Syntax.Project
 {
     using System;
 

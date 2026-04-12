@@ -1,11 +1,11 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
 
     /// <summary>
-    /// Represents a C# member syntax method extensions.
+    /// Provides snippet conversion helpers for <see cref="Method"/> values.
     /// </summary>
     public static partial class MethodExtensions
     {

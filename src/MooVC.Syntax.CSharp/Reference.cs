@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.Collections.Immutable;
@@ -12,7 +12,7 @@
     using static MooVC.Syntax.CSharp.Reference_Resources;
 
     /// <summary>
-    /// Represents a C# type syntax reference.
+    /// Represents a referenced namespace or type used by a definition.
     /// </summary>
     public abstract partial class Reference
         : Type
@@ -166,7 +166,7 @@
 
         private Snippet GetSignature(Options options)
         {
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string extensibility = Extensibility;
             string name = Declaration;
             Snippet parameters = GetParameters(options);

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
@@ -10,12 +10,12 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# syntax element parameter.
+    /// Represents a parameter signature component used by members and delegates.
     /// </summary>
     public partial class Attribute
     {
         /// <summary>
-        /// Defines options for the Attribute C# syntax element.
+        /// Defines rendering options for attribute declarations.
         /// </summary>
         [AutoInitializeWith(nameof(Separate))]
         [Fluentify]

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -6,7 +6,7 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# generic syntax nature.
+    /// Represents class/struct constraints applied to generic type parameters.
     /// </summary>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]

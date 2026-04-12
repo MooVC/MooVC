@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Collections;
@@ -14,7 +14,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# type syntax type.
+    /// Represents the common base model for C# type declarations.
     /// </summary>
     public abstract partial class Type
         : IEnumerable<Qualifier>,

@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a C# type syntax struct.
+    /// Represents a C# struct declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
     [Fluentify]
@@ -130,7 +130,7 @@
         private Snippet GetSignature(Snippet.Options options)
         {
             Kinds behavior = Behavior;
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.Constraints.ToSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string partial = IsPartial.Partial();
             string name = Declaration;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);

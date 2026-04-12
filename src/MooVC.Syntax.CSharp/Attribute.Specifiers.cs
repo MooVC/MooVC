@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -6,12 +6,12 @@
     using MooVC.Syntax.Validation;
 
     /// <summary>
-    /// Represents a C# member syntax attribute.
+    /// Represents a C# attribute usage that can be attached to declarations.
     /// </summary>
     public partial class Attribute
     {
         /// <summary>
-        /// Represents a C# member syntax specifier.
+        /// Represents a target specifier that controls where an attribute is emitted.
         /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]

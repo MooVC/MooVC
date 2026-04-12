@@ -4,6 +4,9 @@
 /// Represents the context in which coordination has been applied.
 /// </summary>
 /// <typeparam name="T">The type in which the coordination context applies.</typeparam>
+/// <remarks>
+/// Dispose the context to release the associated coordination lock for the current subject.
+/// </remarks>
 public interface IContext<out T>
     : IDisposable
     where T : notnull
