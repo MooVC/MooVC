@@ -80,10 +80,10 @@ namespace MooVC.Syntax.CSharp
                     .WithInline(Snippet.Options.Blocks.Styles.Lambda));
 
             /// <summary>
-            /// Converts indexer options into scope options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Scopes" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The implied scope.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Scopes" /> value.</returns>
             public static implicit operator Scopes(Options options)
             {
                 Guard.Against.Conversion<Options, Scopes>(options);
@@ -92,10 +92,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts indexer options into snippet options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The snippet options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);

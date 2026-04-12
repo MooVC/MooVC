@@ -74,10 +74,10 @@ namespace MooVC.Syntax.CSharp
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
-            /// Converts type options into Attribute options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Attribute.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The Attribute options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Attribute.Options" /> value.</returns>
             public static implicit operator Attribute.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Attribute.Options>(options);
@@ -94,10 +94,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into Event options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Event.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The Event options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Event.Options" /> value.</returns>
             public static implicit operator Event.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Event.Options>(options);
@@ -106,10 +106,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into Indexer options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Indexer.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The Indexer options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Indexer.Options" /> value.</returns>
             public static implicit operator Indexer.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Indexer.Options>(options);
@@ -121,10 +121,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into Method options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Method.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The Method options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Method.Options" /> value.</returns>
             public static implicit operator Method.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Method.Options>(options);
@@ -135,10 +135,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into Property options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Property.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The Property options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Property.Options" /> value.</returns>
             public static implicit operator Property.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Property.Options>(options);
@@ -155,10 +155,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into symbol options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Qualification.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The symbol options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Qualification.Options" /> value.</returns>
             public static implicit operator Qualification.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Qualification.Options>(options);
@@ -167,10 +167,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts type options into snippet options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The snippet options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);

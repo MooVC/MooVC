@@ -49,10 +49,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Defines the string operator for the Nature.
+        /// Defines an implicit conversion from <see cref="Natures" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="nature">The nature.</param>
-        /// <returns>The string.</returns>
+        /// <param name="nature">The <see cref="Natures" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Natures nature)
         {
             Guard.Against.Conversion<Natures, string>(nature);
@@ -61,10 +61,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Nature.
+        /// Defines an implicit conversion from <see cref="Natures" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="nature">The nature.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="nature">The <see cref="Natures" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Natures nature)
         {
             Guard.Against.Conversion<Natures, Snippet>(nature);

@@ -69,10 +69,10 @@ namespace MooVC.Syntax.CSharp
         public Qualification Name { get; internal set; } = Qualification.Unnamed;
 
         /// <summary>
-        /// Defines the string operator for the Symbol.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="symbol">The symbol.</param>
-        /// <returns>The string.</returns>
+        /// <param name="symbol">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Symbol symbol)
         {
             Guard.Against.Conversion<Symbol, string>(symbol);
@@ -81,10 +81,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Symbol.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="symbol">The symbol.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="symbol">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Symbol symbol)
         {
             Guard.Against.Conversion<Symbol, Snippet>(symbol);
@@ -93,10 +93,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Symbol operator for the Symbol.
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Symbol" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The symbol.</returns>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Symbol" /> value.</returns>
         public static implicit operator Symbol(CType type)
         {
             Guard.Against.Conversion<CType, Symbol>(type);
@@ -108,10 +108,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Implicitly converts a QualifiedName to a Symbol instance.
+        /// Defines an implicit conversion from <see cref="Qualification" /> to <see cref="Symbol" />.
         /// </summary>
-        /// <param name="name">The qualified name to convert. Cannot be <see langword="null" />.</param>
-        /// <returns>The Symbol.</returns>
+        /// <param name="name">The <see cref="Qualification" /> value to convert.</param>
+        /// <returns>The converted <see cref="Symbol" /> value.</returns>
         public static implicit operator Symbol(Qualification name)
         {
             Guard.Against.Conversion<Qualification, Symbol>(name);
@@ -121,10 +121,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into a symbol.
+        /// Defines an implicit conversion to <see cref="Symbol" />.
         /// </summary>
-        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The symbol.</returns>
+        /// <param name="name">The value to convert.</param>
+        /// <returns>The converted <see cref="Symbol" /> value.</returns>
         public static implicit operator Symbol((Moniker Name, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Symbol>(name);

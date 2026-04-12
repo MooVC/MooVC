@@ -113,10 +113,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Defines the string operator for the Specifier.
+            /// Defines an implicit conversion from <see cref="Specifiers" /> to <see cref="string" />.
             /// </summary>
-            /// <param name="specifiers">The specifier.</param>
-            /// <returns>The string.</returns>
+            /// <param name="specifiers">The <see cref="Specifiers" /> value to convert.</param>
+            /// <returns>The converted <see cref="string" /> value.</returns>
             public static implicit operator string(Specifiers specifiers)
             {
                 Guard.Against.Conversion<Specifiers, string>(specifiers);
@@ -125,10 +125,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Defines the Snippet operator for the Specifier.
+            /// Defines an implicit conversion from <see cref="Specifiers" /> to <see cref="Snippet" />.
             /// </summary>
-            /// <param name="specifiers">The specifier.</param>
-            /// <returns>The snippet.</returns>
+            /// <param name="specifiers">The <see cref="Specifiers" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet" /> value.</returns>
             public static implicit operator Snippet(Specifiers specifiers)
             {
                 Guard.Against.Conversion<Specifiers, Snippet>(specifiers);

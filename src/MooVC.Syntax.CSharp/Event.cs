@@ -75,10 +75,10 @@ namespace MooVC.Syntax.CSharp
         public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
-        /// Defines the string operator for the Event.
+        /// Defines an implicit conversion from <see cref="Event" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="event">The event.</param>
-        /// <returns>The string.</returns>
+        /// <param name="@event">The <see cref="Event" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Event @event)
         {
             Guard.Against.Conversion<Event, string>(@event);
@@ -87,10 +87,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Event.
+        /// Defines an implicit conversion from <see cref="Event" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="event">The event.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="@event">The <see cref="Event" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Event @event)
         {
             Guard.Against.Conversion<Event, Snippet>(@event);

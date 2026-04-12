@@ -58,10 +58,10 @@ namespace MooVC.Syntax.CSharp
         public Snippet Value { get; internal set; } = Snippet.Empty;
 
         /// <summary>
-        /// Converts the argument expression to its C# source representation.
+        /// Defines an implicit conversion from <see cref="Argument" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="argument">The argument to render.</param>
-        /// <returns>The rendered argument text.</returns>
+        /// <param name="argument">The <see cref="Argument" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Argument argument)
         {
             Guard.Against.Conversion<Argument, string>(argument);
@@ -70,10 +70,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the argument expression to a snippet for composition.
+        /// Defines an implicit conversion from <see cref="Argument" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="argument">The argument to convert.</param>
-        /// <returns>The snippet representing the argument.</returns>
+        /// <param name="argument">The <see cref="Argument" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Argument argument)
         {
             Guard.Against.Conversion<Argument, Snippet>(argument);
@@ -82,10 +82,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing an argument name and value into an argument expression.
+        /// Defines an implicit conversion to <see cref="Argument" />.
         /// </summary>
-        /// <param name="argument">The tuple that provides the argument name and value.</param>
-        /// <returns>The Argument.</returns>
+        /// <param name="argument">The value to convert.</param>
+        /// <returns>The converted <see cref="Argument" /> value.</returns>
         public static implicit operator Argument((Name Name, Snippet Value) argument)
         {
             Guard.Against.Conversion<(Name Name, Snippet Value), Argument>(argument);

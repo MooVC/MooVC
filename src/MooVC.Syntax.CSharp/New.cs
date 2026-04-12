@@ -40,10 +40,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsNotRequired => this == NotRequired;
 
         /// <summary>
-        /// Defines the string operator for the New.
+        /// Defines an implicit conversion from <see cref="New" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="new">The new instance.</param>
-        /// <returns>The string.</returns>
+        /// <param name="@new">The <see cref="New" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(New @new)
         {
             Guard.Against.Conversion<New, string>(@new);
@@ -52,10 +52,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the New.
+        /// Defines an implicit conversion from <see cref="New" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="new">The new instance.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="@new">The <see cref="New" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(New @new)
         {
             Guard.Against.Conversion<New, Snippet>(@new);

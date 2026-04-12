@@ -56,10 +56,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Defines the string operator for the Base.
+        /// Defines an implicit conversion from <see cref="Base" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="base">The base.</param>
-        /// <returns>The string.</returns>
+        /// <param name="@base">The <see cref="Base" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Base @base)
         {
             Guard.Against.Conversion<Base, string>(@base);
@@ -68,10 +68,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Base.
+        /// Defines an implicit conversion from <see cref="Base" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="base">The base.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="@base">The <see cref="Base" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Base @base)
         {
             Guard.Against.Conversion<Base, Snippet>(@base);
@@ -80,10 +80,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into a base type reference.
+        /// Defines an implicit conversion from <see cref="Qualification" /> to <see cref="Base" />.
         /// </summary>
-        /// <param name="qualification">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The Base.</returns>
+        /// <param name="qualification">The <see cref="Qualification" /> value to convert.</param>
+        /// <returns>The converted <see cref="Base" /> value.</returns>
         public static implicit operator Base(Qualification qualification)
         {
             Guard.Against.Conversion<Qualification, Base>(qualification);
@@ -93,10 +93,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Symbol operator for the Base.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="Base" />.
         /// </summary>
-        /// <param name="symbol">The Symbol.</param>
-        /// <returns>The Base.</returns>
+        /// <param name="symbol">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Base" /> value.</returns>
         public static implicit operator Base(Symbol symbol)
         {
             Guard.Against.Conversion<Symbol, Base>(symbol);
@@ -107,10 +107,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Base operator for the Base.
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Base" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The Base.</returns>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Base" /> value.</returns>
         public static implicit operator Base(CType type)
         {
             Guard.Against.Conversion<CType, Base>(type);
@@ -121,10 +121,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into a base type reference.
+        /// Defines an implicit conversion to <see cref="Base" />.
         /// </summary>
-        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The base type reference.</returns>
+        /// <param name="name">The value to convert.</param>
+        /// <returns>The converted <see cref="Base" /> value.</returns>
         public static implicit operator Base((Moniker Name, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Base>(name);

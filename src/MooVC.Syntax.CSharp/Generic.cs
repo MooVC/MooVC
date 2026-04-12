@@ -61,10 +61,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Generic.
+        /// Defines an implicit conversion from <see cref="Generic" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="generic">The generic.</param>
-        /// <returns>The string.</returns>
+        /// <param name="generic">The <see cref="Generic" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Generic generic)
         {
             Guard.Against.Conversion<Generic, string>(generic);
@@ -73,10 +73,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Generic.
+        /// Defines an implicit conversion from <see cref="Generic" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="generic">The generic.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="generic">The <see cref="Generic" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Generic generic)
         {
             Guard.Against.Conversion<Generic, Snippet>(generic);

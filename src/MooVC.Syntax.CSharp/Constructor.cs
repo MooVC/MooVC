@@ -77,10 +77,10 @@ namespace MooVC.Syntax.CSharp
         public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
-        /// Defines the string operator for the Constructor.
+        /// Defines an implicit conversion from <see cref="Constructor" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="constructor">The constructor.</param>
-        /// <returns>The string.</returns>
+        /// <param name="constructor">The <see cref="Constructor" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Constructor constructor)
         {
             Guard.Against.Conversion<Constructor, string>(constructor);
@@ -89,10 +89,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Constructor.
+        /// Defines an implicit conversion from <see cref="Constructor" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="constructor">The constructor.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="constructor">The <see cref="Constructor" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Constructor constructor)
         {
             Guard.Against.Conversion<Constructor, Snippet>(constructor);

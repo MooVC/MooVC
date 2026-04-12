@@ -51,10 +51,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the extensibility modifier to its C# source representation.
+        /// Defines an implicit conversion from <see cref="Modifiers" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="modifiers">The extensibility modifier to render.</param>
-        /// <returns>The modifier text.</returns>
+        /// <param name="modifiers">The <see cref="Modifiers" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Modifiers modifiers)
         {
             Guard.Against.Conversion<Modifiers, string>(modifiers);
@@ -63,10 +63,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the extensibility modifier to a snippet.
+        /// Defines an implicit conversion from <see cref="Modifiers" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="modifiers">The extensibility modifier to convert.</param>
-        /// <returns>The snippet containing the modifier.</returns>
+        /// <param name="modifiers">The <see cref="Modifiers" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Modifiers modifiers)
         {
             Guard.Against.Conversion<Modifiers, Snippet>(modifiers);

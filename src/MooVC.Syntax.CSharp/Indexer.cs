@@ -76,10 +76,10 @@ namespace MooVC.Syntax.CSharp
         public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
-        /// Defines the string operator for the Indexer.
+        /// Defines an implicit conversion from <see cref="Indexer" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="indexer">The indexer.</param>
-        /// <returns>The string.</returns>
+        /// <param name="indexer">The <see cref="Indexer" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Indexer indexer)
         {
             Guard.Against.Conversion<Indexer, string>(indexer);
@@ -88,10 +88,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Indexer.
+        /// Defines an implicit conversion from <see cref="Indexer" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="indexer">The indexer.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="indexer">The <see cref="Indexer" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Indexer indexer)
         {
             Guard.Against.Conversion<Indexer, Snippet>(indexer);

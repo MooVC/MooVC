@@ -68,10 +68,10 @@ namespace MooVC.Syntax.CSharp
         public Qualifier Qualifier { get; internal set; }
 
         /// <summary>
-        /// Defines the string operator for the Directive.
+        /// Defines an implicit conversion from <see cref="Directive" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="directive">The directive.</param>
-        /// <returns>The string.</returns>
+        /// <param name="directive">The <see cref="Directive" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Directive directive)
         {
             Guard.Against.Conversion<Directive, string>(directive);
@@ -80,10 +80,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Directive.
+        /// Defines an implicit conversion from <see cref="Directive" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="directive">The directive.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="directive">The <see cref="Directive" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Directive directive)
         {
             Guard.Against.Conversion<Directive, Snippet>(directive);
@@ -92,10 +92,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Qualifier operator for the Directive.
+        /// Defines an implicit conversion from <see cref="Qualifier" /> to <see cref="Directive" />.
         /// </summary>
-        /// <param name="qualifier">The qualifer.</param>
-        /// <returns>The directive.</returns>
+        /// <param name="qualifier">The <see cref="Qualifier" /> value to convert.</param>
+        /// <returns>The converted <see cref="Directive" /> value.</returns>
         public static implicit operator Directive(Qualifier qualifier)
         {
             Guard.Against.Conversion<Qualifier, Directive>(qualifier);

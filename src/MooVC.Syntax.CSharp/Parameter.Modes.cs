@@ -111,10 +111,10 @@ namespace MooVC.Syntax.CSharp
             public bool IsThis => this == This;
 
             /// <summary>
-            /// Defines the string operator for the Mode.
+            /// Defines an implicit conversion from <see cref="Modes" /> to <see cref="string" />.
             /// </summary>
-            /// <param name="mode">The mode.</param>
-            /// <returns>The string.</returns>
+            /// <param name="mode">The <see cref="Modes" /> value to convert.</param>
+            /// <returns>The converted <see cref="string" /> value.</returns>
             public static implicit operator string(Modes mode)
             {
                 Guard.Against.Conversion<Modes, string>(mode);
@@ -123,10 +123,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Defines the Snippet operator for the Mode.
+            /// Defines an implicit conversion from <see cref="Modes" /> to <see cref="Snippet" />.
             /// </summary>
-            /// <param name="mode">The mode.</param>
-            /// <returns>The snippet.</returns>
+            /// <param name="mode">The <see cref="Modes" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet" /> value.</returns>
             public static implicit operator Snippet(Modes mode)
             {
                 Guard.Against.Conversion<Modes, Snippet>(mode);

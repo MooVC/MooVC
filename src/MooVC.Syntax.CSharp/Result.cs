@@ -89,10 +89,10 @@ namespace MooVC.Syntax.CSharp
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Converts the return signature to its C# source representation, including modifiers and type.
+        /// Defines an implicit conversion from <see cref="Result" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="result">The result.</param>
-        /// <returns>The C# return signature text.</returns>
+        /// <param name="result">The <see cref="Result" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Result result)
         {
             Guard.Against.Conversion<Result, string>(result);
@@ -101,10 +101,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the return signature to a snippet for composing a method signature.
+        /// Defines an implicit conversion from <see cref="Result" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="result">The result.</param>
-        /// <returns>The return signature snippet.</returns>
+        /// <param name="result">The <see cref="Result" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Result result)
         {
             Guard.Against.Conversion<Result, Snippet>(result);
@@ -113,10 +113,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Creates a return signature from the specified runtime type, using the type name as the return symbol.
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Result" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The return signature.</returns>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Result" /> value.</returns>
         public static implicit operator Result(CType type)
         {
             Guard.Against.Conversion<CType, Result>(type);

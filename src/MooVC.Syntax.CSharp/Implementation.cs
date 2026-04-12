@@ -57,10 +57,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
-        /// Defines the string operator for the Implementation.
+        /// Defines an implicit conversion from <see cref="Implementation" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="implementation">The base.</param>
-        /// <returns>The string.</returns>
+        /// <param name="implementation">The <see cref="Implementation" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Implementation implementation)
         {
             Guard.Against.Conversion<Implementation, string>(implementation);
@@ -69,10 +69,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Implementation.
+        /// Defines an implicit conversion from <see cref="Implementation" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="implementation">The base.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="implementation">The <see cref="Implementation" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Implementation implementation)
         {
             Guard.Against.Conversion<Implementation, Snippet>(implementation);
@@ -81,10 +81,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into an implemented interface reference.
+        /// Defines an implicit conversion from <see cref="Qualification" /> to <see cref="Implementation" />.
         /// </summary>
-        /// <param name="qualification">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The Implementation.</returns>
+        /// <param name="qualification">The <see cref="Qualification" /> value to convert.</param>
+        /// <returns>The converted <see cref="Implementation" /> value.</returns>
         public static implicit operator Implementation(Qualification qualification)
         {
             Guard.Against.Conversion<Qualification, Implementation>(qualification);
@@ -94,10 +94,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Symbol operator for the Implementation.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="Implementation" />.
         /// </summary>
-        /// <param name="symbol">The Symbol.</param>
-        /// <returns>The Implementation.</returns>
+        /// <param name="symbol">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Implementation" /> value.</returns>
         public static implicit operator Implementation(Symbol symbol)
         {
             Guard.Against.Conversion<Symbol, Implementation>(symbol);
@@ -108,10 +108,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Implementation operator for the Implementation.
+        /// Defines an implicit conversion from <see cref="Kind" /> to <see cref="Implementation" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The Implementation.</returns>
+        /// <param name="type">The <see cref="Kind" /> value to convert.</param>
+        /// <returns>The converted <see cref="Implementation" /> value.</returns>
         public static implicit operator Implementation(Kind type)
         {
             Guard.Against.Conversion<Kind, Implementation>(type);
@@ -122,10 +122,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into an implemented interface reference.
+        /// Defines an implicit conversion to <see cref="Implementation" />.
         /// </summary>
-        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The implementation reference.</returns>
+        /// <param name="name">The value to convert.</param>
+        /// <returns>The converted <see cref="Implementation" /> value.</returns>
         public static implicit operator Implementation((Moniker Name, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Implementation>(name);

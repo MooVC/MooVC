@@ -108,10 +108,10 @@ namespace MooVC.Syntax.CSharp
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
-            /// Converts parameter options into snippet options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The snippet options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -120,10 +120,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts parameter options into symbol options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Qualification.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The symbol options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Qualification.Options" /> value.</returns>
             public static implicit operator Qualification.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Qualification.Options>(options);
@@ -132,13 +132,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Defines an implicit conversion from an Options instance to a Style instance.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Styles" />.
             /// </summary>
-            /// <param name="options">The Options instance to convert to a Style.</param>
-            /// <remarks>
-            /// This operator enables seamless assignment of an Options object where a Style
-            /// is expected, by extracting the Format property from the Options instance.
-            /// </remarks>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Styles" /> value.</returns>
             public static implicit operator Styles(Options options)
             {
                 Guard.Against.Conversion<Options, Styles>(options);

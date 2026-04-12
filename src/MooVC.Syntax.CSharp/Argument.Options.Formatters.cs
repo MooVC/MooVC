@@ -50,10 +50,10 @@ namespace MooVC.Syntax.CSharp
                 public bool IsDeclaration => this == Declaration;
 
                 /// <summary>
-                /// Defines the string operator for the Formatter.
+                /// Defines an implicit conversion from <see cref="Formatters" /> to <see cref="string" />.
                 /// </summary>
-                /// <param name="formatter">The formatter.</param>
-                /// <returns>The string.</returns>
+                /// <param name="formatter">The <see cref="Formatters" /> value to convert.</param>
+                /// <returns>The converted <see cref="string" /> value.</returns>
                 public static implicit operator string(Formatters formatter)
                 {
                     Guard.Against.Conversion<Formatters, string>(formatter);
@@ -62,10 +62,10 @@ namespace MooVC.Syntax.CSharp
                 }
 
                 /// <summary>
-                /// Defines the Snippet operator for the Formatter.
+                /// Defines an implicit conversion from <see cref="Formatters" /> to <see cref="Snippet" />.
                 /// </summary>
-                /// <param name="formatter">The formatter.</param>
-                /// <returns>The snippet.</returns>
+                /// <param name="formatter">The <see cref="Formatters" /> value to convert.</param>
+                /// <returns>The converted <see cref="Snippet" /> value.</returns>
                 public static implicit operator Snippet(Formatters formatter)
                 {
                     Guard.Against.Conversion<Formatters, Snippet>(formatter);

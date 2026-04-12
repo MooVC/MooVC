@@ -91,10 +91,10 @@ namespace MooVC.Syntax.CSharp
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Field.
+        /// Defines an implicit conversion from <see cref="Field" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="field">The field.</param>
-        /// <returns>The string.</returns>
+        /// <param name="field">The <see cref="Field" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Field field)
         {
             Guard.Against.Conversion<Field, string>(field);
@@ -103,10 +103,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Field.
+        /// Defines an implicit conversion from <see cref="Field" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="field">The field.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="field">The <see cref="Field" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Field field)
         {
             Guard.Against.Conversion<Field, Snippet>(field);
@@ -115,10 +115,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a field name and type into a field declaration.
+        /// Defines an implicit conversion to <see cref="Field" />.
         /// </summary>
-        /// <param name="field">The tuple that provides the field name and type.</param>
-        /// <returns>The Field.</returns>
+        /// <param name="field">The value to convert.</param>
+        /// <returns>The converted <see cref="Field" /> value.</returns>
         public static implicit operator Field((Variable Name, Symbol Type) field)
         {
             Guard.Against.Conversion<(Variable Name, Symbol Type), Field>(field);

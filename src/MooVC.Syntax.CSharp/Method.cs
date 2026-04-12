@@ -92,10 +92,10 @@ namespace MooVC.Syntax.CSharp
         public Scopes Scope { get; internal set; } = Scopes.Public;
 
         /// <summary>
-        /// Converts the method declaration to its C# source representation.
+        /// Defines an implicit conversion from <see cref="Method" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="method">The method declaration to render.</param>
-        /// <returns>The rendered C# source text.</returns>
+        /// <param name="method">The <see cref="Method" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Method method)
         {
             Guard.Against.Conversion<Method, string>(method);
@@ -104,10 +104,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the method declaration to a snippet for composition.
+        /// Defines an implicit conversion from <see cref="Method" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="method">The method declaration to convert.</param>
-        /// <returns>The snippet representing the method declaration.</returns>
+        /// <param name="method">The <see cref="Method" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Method method)
         {
             Guard.Against.Conversion<Method, Snippet>(method);

@@ -76,10 +76,10 @@ namespace MooVC.Syntax.CSharp
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Converts the parameter declaration to its C# source representation.
+        /// Defines an implicit conversion from <see cref="Parameter" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="parameter">The parameter declaration to render.</param>
-        /// <returns>The rendered parameter text.</returns>
+        /// <param name="parameter">The <see cref="Parameter" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Parameter parameter)
         {
             Guard.Against.Conversion<Parameter, string>(parameter);
@@ -88,10 +88,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the parameter declaration to a snippet for composition.
+        /// Defines an implicit conversion from <see cref="Parameter" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="parameter">The parameter declaration to convert.</param>
-        /// <returns>The snippet representing the parameter declaration.</returns>
+        /// <param name="parameter">The <see cref="Parameter" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Parameter parameter)
         {
             Guard.Against.Conversion<Parameter, Snippet>(parameter);
@@ -100,10 +100,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a parameter name and type into a parameter declaration.
+        /// Defines an implicit conversion to <see cref="Parameter" />.
         /// </summary>
-        /// <param name="parameter">The tuple that provides the parameter name and type.</param>
-        /// <returns>The Parameter.</returns>
+        /// <param name="parameter">The value to convert.</param>
+        /// <returns>The converted <see cref="Parameter" /> value.</returns>
         public static implicit operator Parameter((Variable Name, Symbol Type) parameter)
         {
             Guard.Against.Conversion<(Variable Name, Symbol Type), Parameter>(parameter);

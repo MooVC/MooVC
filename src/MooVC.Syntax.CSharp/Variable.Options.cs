@@ -56,15 +56,10 @@ namespace MooVC.Syntax.CSharp
             public bool UseUnderscore { get; internal set; }
 
             /// <summary>
-            /// Defines the Identifier.Options operator for the Options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Identifier.Options" />.
             /// </summary>
-            /// <param name="options">The options.</param>
-            /// <returns>The identifier options.</returns>
-            /// <summary>
-            /// Converts variable options into identifier options.
-            /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The identifier options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Identifier.Options" /> value.</returns>
             public static implicit operator Identifier.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Identifier.Options>(options);
@@ -74,10 +69,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts variable options into identifier casing.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Identifier.Casing" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The identifier casing.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Identifier.Casing" /> value.</returns>
             public static implicit operator Identifier.Casing(Options options)
             {
                 Guard.Against.Conversion<Options, Identifier.Casing>(options);

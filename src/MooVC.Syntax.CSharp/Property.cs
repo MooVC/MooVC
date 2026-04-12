@@ -91,10 +91,10 @@ namespace MooVC.Syntax.CSharp
         public Symbol Type { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Defines the string operator for the Property.
+        /// Defines an implicit conversion from <see cref="Property" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="property">The property.</param>
-        /// <returns>The string.</returns>
+        /// <param name="property">The <see cref="Property" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Property property)
         {
             Guard.Against.Conversion<Property, string>(property);
@@ -103,10 +103,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Property.
+        /// Defines an implicit conversion from <see cref="Property" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="property">The property.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="property">The <see cref="Property" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Property property)
         {
             Guard.Against.Conversion<Property, Snippet>(property);
@@ -115,10 +115,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a property name and type into a property declaration.
+        /// Defines an implicit conversion to <see cref="Property" />.
         /// </summary>
-        /// <param name="property">The tuple that provides the property name and type.</param>
-        /// <returns>The Property.</returns>
+        /// <param name="property">The value to convert.</param>
+        /// <returns>The converted <see cref="Property" /> value.</returns>
         public static implicit operator Property((Name Name, Symbol Type) property)
         {
             Guard.Against.Conversion<(Name Name, Symbol Type), Property>(property);
