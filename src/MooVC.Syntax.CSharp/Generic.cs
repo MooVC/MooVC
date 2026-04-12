@@ -118,6 +118,27 @@
         }
 
         /// <summary>
+        /// Creates a snippet representation of generic constraints.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options);
+
+            if (Constraints.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            string[] clauses = Constraints
+                .Select(constraint => $"where {Name} : {constraint}")
+                .ToArray();
+
+            return Snippet.From(options, clauses);
+        }
+
+        /// <summary>
         /// Validates the Generic.
         /// </summary>
         /// <remarks>Required members include: Constraints, Name.</remarks>
@@ -134,20 +155,6 @@
                 .IncludeIf(!Constraints.IsDefaultOrEmpty, nameof(Constraints), constraint => !constraint.IsUnspecified, Constraints)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
-        }
-
-        internal Snippet ToConstraintsSnippet(Snippet.Options options)
-        {
-            if (Constraints.IsDefaultOrEmpty)
-            {
-                return Snippet.Empty;
-            }
-
-            string[] clauses = Constraints
-                .Select(constraint => $"where {Name} : {constraint}")
-                .ToArray();
-
-            return Snippet.From(options, clauses);
         }
 
         /// <summary>

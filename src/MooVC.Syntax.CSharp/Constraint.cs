@@ -108,9 +108,21 @@
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
+            return ToSnippet(Snippet.Options.Default);
+        }
+
+        /// <summary>
+        /// Creates a snippet representation of generic constraint conditions.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options);
+
             if (IsUnspecified)
             {
-                return string.Empty;
+                return Snippet.Empty;
             }
 
             string @base = Base;
@@ -127,7 +139,7 @@
                 .Append(@new)
                 .ToArray();
 
-            return Separator.Combine(constraints);
+            return Snippet.From(options, Separator.Combine(constraints));
         }
 
         /// <summary>

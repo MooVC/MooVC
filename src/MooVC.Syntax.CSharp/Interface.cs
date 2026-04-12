@@ -61,7 +61,7 @@
         private Snippet GetSignature(Options options)
         {
             var attributes = Attributes.ToSnippet(options);
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToConstraintsSnippet(options), options);
+            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string name = Declaration;
             string partial = IsPartial.Partial();
             string scope = Scope;
