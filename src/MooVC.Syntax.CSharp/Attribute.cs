@@ -13,6 +13,7 @@
     using Valuify;
     using static MooVC.Syntax.CSharp.Attribute_Resources;
     using Ignore = Valuify.IgnoreAttribute;
+    using CType = System.Type;
 
     /// <summary>
     /// Represents a C# member syntax attribute.
@@ -86,6 +87,19 @@
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
 
             return attribute.ToSnippet(Options.Separate);
+        }
+
+        /// <summary>
+        /// Defines the Type operator for the Attribute.
+        /// </summary>
+        /// <param name="type">The Type representing the Name of the Attribute.</param>
+        /// <returns>The Attribute.</returns>
+        public static implicit operator Attribute(CType type)
+        {
+            Guard.Against.Conversion<CType, Attribute>(type);
+
+            return new Attribute()
+                .Named(type);
         }
 
         /// <summary>
