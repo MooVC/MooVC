@@ -39,6 +39,22 @@ public sealed class WhenGenerateIsCalled
         _ = navigator.Received(1).Navigate<File>(model, Arg.Any<CancellationToken>());
     }
 
+    [Test]
+    public async Task GivenNavigatorIsNotRegisteredThenInvalidOperationExceptionIsThrown()
+    {
+        // Arrange
+        TestModel model = new();
+        ServiceCollection services = new();
+        IServiceProvider provider = services.BuildServiceProvider();
+        IGenerator<TestModel> generator = new Generator<TestModel>(provider);
+
+        // Act
+        Func<IAsyncEnumerable<File>> action = () => generator.Generate(model, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(action).Throws<InvalidOperationException>();
+    }
+
     private static async IAsyncEnumerable<File> CreateFiles(params File[] files)
     {
         foreach (File file in files)

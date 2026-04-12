@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
 - A `ForkOn` extension method that allows for branching logic based on a predicate evaluation within a LINQ call chain.
+- Extended MooVC.Modelling test coverage to include the file system abstraction and additional registration/options behaviors.
+
+## Changed
+
+- Improved NuGet package metadata for MooVC.Modelling to enhance visibility on nuget.org.
 
 # [9.2.0] - 2025-11-14
 
