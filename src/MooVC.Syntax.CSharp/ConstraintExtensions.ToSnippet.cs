@@ -27,5 +27,19 @@
 
             return Snippet.From(options, clauses);
         }
+
+        internal static Snippet ToSnippet(this ImmutableArray<Constraint> constraints, Name parameter, Snippet.Options options)
+        {
+            if (constraints.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            string[] clauses = constraints
+                .Select(constraint => constraint.ToString(parameter))
+                .ToArray();
+
+            return Snippet.From(options, clauses);
+        }
     }
 }

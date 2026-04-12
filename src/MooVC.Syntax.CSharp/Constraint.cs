@@ -130,6 +130,16 @@
             return $"where {Separator.Combine(constraints)}";
         }
 
+        internal string ToString(Name parameter)
+        {
+            Guard.Against.Null(parameter);
+
+            string constraints = ToString();
+
+            return constraints
+                .Replace("where ", $"where {parameter} : ");
+        }
+
         /// <summary>
         /// Validates the Constraint.
         /// </summary>
