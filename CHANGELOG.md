@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - Improved NuGet package metadata for MooVC.Modelling to enhance visibility on nuget.org.
+- Normalized `ZipWriter` archive entry paths to forward slashes for cross-platform consistency.
 
 # [9.2.0] - 2025-11-14
 

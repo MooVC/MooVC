@@ -40,9 +40,7 @@ public sealed partial class ZipWriter(IOptionsSnapshot<ZipWriter.Options> option
 
     private static string BuildEntryPath(File file)
     {
-        return file.FullPath
-            .Replace(Path.DirectorySeparatorChar, '/')
-            .Replace(Path.AltDirectorySeparatorChar, '/');
+        return file.FullPath.Replace('\\', '/');
     }
 
     [SuppressMessage("Major Code Smell", "S6966:Awaitable method should be used", Justification = "Option not available in all supported versions.")]

@@ -86,7 +86,8 @@ public sealed class WhenWriteIsCalled
         await writer.Write(files, stream, CancellationToken.None);
 
         // Assert
-        _ = await Assert.That(fileSystem.CreatedDirectories).IsEmpty();
+        _ = await Assert.That(fileSystem.CreatedDirectories).Contains(Environment.CurrentDirectory);
+        _ = await Assert.That(fileSystem.CreatedDirectories).HasSingleItem();
     }
 
     private static IOptionsSnapshot<FileSystemWriter.Options> CreateOptionsSnapshot()
