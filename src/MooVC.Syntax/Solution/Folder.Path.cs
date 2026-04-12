@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Solution
+namespace MooVC.Syntax.Solution
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,6 +12,9 @@
     /// </summary>
     public partial class Folder
     {
+        /// <summary>
+        /// Represents the logical folder path inside a solution folder hierarchy.
+        /// </summary>
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Path

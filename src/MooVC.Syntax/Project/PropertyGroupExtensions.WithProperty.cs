@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Project
+namespace MooVC.Syntax.Project
 {
     /// <summary>
     /// Provides property-group helper extensions.

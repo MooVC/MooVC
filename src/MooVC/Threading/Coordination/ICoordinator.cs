@@ -6,6 +6,9 @@
 /// It is essentially the difference between locking a database table or locking a single row.
 /// </summary>
 /// <typeparam name="T">The type to which the context applies.</typeparam>
+/// <remarks>
+/// Callers should dispose the returned <see cref="IContext{T}" /> when protected work is complete to avoid starvation.
+/// </remarks>
 public interface ICoordinator<T>
     : IDisposable
     where T : notnull

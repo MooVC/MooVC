@@ -10,6 +10,9 @@ using static MooVC.Infrastructure.Serialization.Json.Newtonsoft.Resources;
 /// <summary>
 /// Provides JSON serialization using Newtonsoft.Json.
 /// </summary>
+/// <remarks>
+/// Uses streaming readers/writers to avoid unnecessary intermediate buffers and supports optional compression via the base serializer abstraction.
+/// </remarks>
 public sealed class Serializer
     : SynchronousSerializer
 {

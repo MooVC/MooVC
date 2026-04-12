@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Resource
+namespace MooVC.Syntax.Resource
 {
     /// <summary>
     /// Represents a resource file attribute resource.

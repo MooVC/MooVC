@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.Chaining
+namespace MooVC.Syntax.CSharp.Chaining
 {
     using System.Collections.Generic;
     using System.Collections.Immutable;

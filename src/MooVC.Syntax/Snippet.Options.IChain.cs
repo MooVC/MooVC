@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+namespace MooVC.Syntax
 {
     using System.Collections.Immutable;
 
@@ -12,6 +12,9 @@
         /// </summary>
         public partial class Options
         {
+            /// <summary>
+            /// Defines a strategy for chaining snippet lines during formatting.
+            /// </summary>
             public interface IChain
             {
                 ImmutableArray<string> Chain(string line, Options options);

@@ -7,6 +7,9 @@ using static MooVC.Threading.Initializer_Resources;
 /// Provides support for asynchronous lazy initialization of a resource.
 /// </summary>
 /// <typeparam name="T">The type of the resource to be initialized.</typeparam>
+/// <remarks>
+/// Concurrent callers are coordinated so that only one initializer execution can populate the resource instance.
+/// </remarks>
 public sealed class Initializer<T>
     where T : notnull
 {

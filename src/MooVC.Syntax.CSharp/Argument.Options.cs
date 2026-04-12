@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;

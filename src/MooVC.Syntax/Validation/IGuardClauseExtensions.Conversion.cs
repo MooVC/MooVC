@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.Validation
+namespace MooVC.Syntax.Validation
 {
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.Validation.IGuardClauseExtensions_Resources;

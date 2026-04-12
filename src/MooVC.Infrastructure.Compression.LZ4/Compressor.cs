@@ -7,6 +7,9 @@ using MooVC.Compression;
 /// <summary>
 /// Compresses and decompresses payloads using the LZ4 algorithm.
 /// </summary>
+/// <remarks>
+/// Uses <see cref="LZ4Stream" /> wrappers for stream transformation and materializes results in memory for compatibility with synchronous abstractions.
+/// </remarks>
 public sealed class Compressor
     : SynchronousCompressor
 {

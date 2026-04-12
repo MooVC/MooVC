@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+namespace MooVC.Syntax
 {
     /// <summary>
     /// Provides constants used by syntax modelling extensions.
