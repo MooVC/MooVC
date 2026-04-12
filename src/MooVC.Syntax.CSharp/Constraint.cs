@@ -67,10 +67,10 @@ namespace MooVC.Syntax.CSharp
         public New New { get; internal set; } = New.NotRequired;
 
         /// <summary>
-        /// Defines the string operator for the Constraint.
+        /// Defines an implicit conversion from <see cref="Constraint" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="constraint">The constraint.</param>
-        /// <returns>The string.</returns>
+        /// <param name="constraint">The <see cref="Constraint" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Constraint constraint)
         {
             Guard.Against.Conversion<Constraint, string>(constraint);
@@ -79,10 +79,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Constraint.
+        /// Defines an implicit conversion from <see cref="Constraint" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="constraint">The constraint.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="constraint">The <see cref="Constraint" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Constraint constraint)
         {
             Guard.Against.Conversion<Constraint, Snippet>(constraint);

@@ -66,10 +66,10 @@ namespace MooVC.Syntax.CSharp
         public Specifiers Target { get; internal set; } = Specifiers.None;
 
         /// <summary>
-        /// Defines the string operator for the Attribute.
+        /// Defines an implicit conversion from <see cref="Attribute" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="attribute">The attribute.</param>
-        /// <returns>The string.</returns>
+        /// <param name="attribute">The <see cref="Attribute" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Attribute attribute)
         {
             Guard.Against.Conversion<Attribute, string>(attribute);
@@ -78,10 +78,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Attribute.
+        /// Defines an implicit conversion from <see cref="Attribute" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="attribute">The attribute.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="attribute">The <see cref="Attribute" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Attribute attribute)
         {
             Guard.Against.Conversion<Attribute, Snippet>(attribute);
@@ -90,10 +90,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Type operator for the Attribute.
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Attribute" />.
         /// </summary>
-        /// <param name="type">The Type representing the Name of the Attribute.</param>
-        /// <returns>The Attribute.</returns>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Attribute" /> value.</returns>
         public static implicit operator Attribute(CType type)
         {
             Guard.Against.Conversion<CType, Attribute>(type);
@@ -103,10 +103,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Symbol operator for the Attribute.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="Attribute" />.
         /// </summary>
-        /// <param name="name">The Symbol representing the Name of the Attribute.</param>
-        /// <returns>The Attribute.</returns>
+        /// <param name="name">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Attribute" /> value.</returns>
         public static implicit operator Attribute(Symbol name)
         {
             Guard.Against.Conversion<Symbol, Attribute>(name);

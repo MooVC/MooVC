@@ -57,10 +57,10 @@ namespace MooVC.Syntax.CSharp
         public Name Name { get; internal set; } = Name.Unnamed;
 
         /// <summary>
-        /// Defines the string operator for the Declaration.
+        /// Defines an implicit conversion from <see cref="Declaration" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="declaration">The declaration.</param>
-        /// <returns>The string.</returns>
+        /// <param name="declaration">The <see cref="Declaration" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Declaration declaration)
         {
             Guard.Against.Conversion<Declaration, string>(declaration);
@@ -69,10 +69,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Declaration.
+        /// Defines an implicit conversion from <see cref="Declaration" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="declaration">The declaration.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="declaration">The <see cref="Declaration" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Declaration declaration)
         {
             Guard.Against.Conversion<Declaration, Snippet>(declaration);
@@ -81,10 +81,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the string operator for the Declaration.
+        /// Defines an implicit conversion from <see cref="string" /> to <see cref="Declaration" />.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The declaration.</returns>
+        /// <param name="name">The <see cref="string" /> value to convert.</param>
+        /// <returns>The converted <see cref="Declaration" /> value.</returns>
         public static implicit operator Declaration(string name)
         {
             Guard.Against.Conversion<string, Declaration>(name);
@@ -94,10 +94,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Name operator for the Declaration.
+        /// Defines an implicit conversion from <see cref="Name" /> to <see cref="Declaration" />.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The declaration.</returns>
+        /// <param name="name">The <see cref="Name" /> value to convert.</param>
+        /// <returns>The converted <see cref="Declaration" /> value.</returns>
         public static implicit operator Declaration(Name name)
         {
             Guard.Against.Conversion<Name, Declaration>(name);

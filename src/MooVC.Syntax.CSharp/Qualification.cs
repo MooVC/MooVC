@@ -53,10 +53,10 @@ namespace MooVC.Syntax.CSharp
         public Qualifier Qualifier { get; internal set; } = Qualifier.Unqualified;
 
         /// <summary>
-        /// Defines the string operator for the Name.
+        /// Defines an implicit conversion from <see cref="Qualification" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="symbol">The symbol.</param>
-        /// <returns>The string.</returns>
+        /// <param name="symbol">The <see cref="Qualification" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Qualification symbol)
         {
             Guard.Against.Conversion<Qualification, string>(symbol);
@@ -65,10 +65,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Name.
+        /// Defines an implicit conversion from <see cref="Qualification" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="symbol">The symbol.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="symbol">The <see cref="Qualification" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Qualification symbol)
         {
             Guard.Against.Conversion<Qualification, Snippet>(symbol);
@@ -77,10 +77,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Name operator for the moniker.
+        /// Defines an implicit conversion from <see cref="string" /> to <see cref="Qualification" />.
         /// </summary>
-        /// <param name="moniker">The moniker.</param>
-        /// <returns>The qualification.</returns>
+        /// <param name="moniker">The <see cref="string" /> value to convert.</param>
+        /// <returns>The converted <see cref="Qualification" /> value.</returns>
         public static implicit operator Qualification(string moniker)
         {
             Guard.Against.Conversion<string, Qualification>(moniker);
@@ -90,10 +90,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Name operator for the moniker.
+        /// Defines an implicit conversion from <see cref="Moniker" /> to <see cref="Qualification" />.
         /// </summary>
-        /// <param name="moniker">The moniker.</param>
-        /// <returns>The qualification.</returns>
+        /// <param name="moniker">The <see cref="Moniker" /> value to convert.</param>
+        /// <returns>The converted <see cref="Qualification" /> value.</returns>
         public static implicit operator Qualification(Moniker moniker)
         {
             Guard.Against.Conversion<Moniker, Qualification>(moniker);
@@ -103,10 +103,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Name operator for the Name.
+        /// Defines an implicit conversion from <see cref="Kind" /> to <see cref="Qualification" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The symbol.</returns>
+        /// <param name="type">The <see cref="Kind" /> value to convert.</param>
+        /// <returns>The converted <see cref="Qualification" /> value.</returns>
         public static implicit operator Qualification(Kind type)
         {
             Guard.Against.Conversion<Kind, Qualification>(type);
@@ -117,10 +117,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a tuple containing a moniker and qualifier into a qualified name.
+        /// Defines an implicit conversion to <see cref="Qualification" />.
         /// </summary>
-        /// <param name="name">The tuple that provides the moniker and qualifier.</param>
-        /// <returns>The Name.</returns>
+        /// <param name="name">The value to convert.</param>
+        /// <returns>The converted <see cref="Qualification" /> value.</returns>
         public static implicit operator Qualification((Moniker Moniker, Qualifier Qualifier) name)
         {
             Guard.Against.Conversion<(Moniker Moniker, Qualifier Qualifier), Qualification>(name);

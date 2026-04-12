@@ -54,13 +54,10 @@
         public Type.Options Types { get; internal set; } = Type.Options.Default;
 
         /// <summary>
-        /// Converts the current options to namespace options.
+        /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Qualifier.Options" />.
         /// </summary>
-        /// <param name="options">The source options.</param>
-        /// <returns>The namespace options.</returns>
-        /// <remarks>
-        /// Conversion fails when <paramref name="options"/> is null.
-        /// </remarks>
+        /// <param name="options">The <see cref="Options" /> value to convert.</param>
+        /// <returns>The converted <see cref="Qualifier.Options" /> value.</returns>
         public static implicit operator Qualifier.Options(Options options)
         {
             Guard.Against.Conversion<Options, Qualifier.Options>(options);
@@ -69,13 +66,10 @@
         }
 
         /// <summary>
-        /// Converts type options into snippet options.
+        /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
         /// </summary>
-        /// <param name="options">The source options.</param>
-        /// <returns>The snippet options.</returns>
-        /// <remarks>
-        /// Conversion fails when <paramref name="options"/> is null.
-        /// </remarks>
+        /// <param name="options">The <see cref="Options" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
         public static implicit operator Snippet.Options(Options options)
         {
             Guard.Against.Conversion<Options, Snippet.Options>(options);
@@ -84,14 +78,10 @@
         }
 
         /// <summary>
-        /// Converts the current options to type options.
+        /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Type.Options" />.
         /// </summary>
-        /// <param name="options">The source options.</param>
-        /// <returns>The type options.</returns>
-        /// <remarks>
-        /// Conversion fails when <paramref name="options"/> is null. Missing snippet options in
-        /// <see cref="Types"/> are automatically populated from <see cref="Snippets"/>.
-        /// </remarks>
+        /// <param name="options">The <see cref="Options" /> value to convert.</param>
+        /// <returns>The converted <see cref="Type.Options" /> value.</returns>
         public static implicit operator Type.Options(Options options)
         {
             Guard.Against.Conversion<Options, Type.Options>(options);

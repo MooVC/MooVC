@@ -43,9 +43,10 @@ namespace MooVC.Syntax.CSharp
         public Symbol Symbol { get; private set; } = Symbol.Undefined;
 
         /// <summary>
-        /// Converts the <see cref="Token" /> instance into its string representation.
+        /// Defines an implicit conversion from <see cref="Token" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="token">The token to convert. Cannot be <see langword="null" />.</param>
+        /// <param name="token">The <see cref="Token" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Token token)
         {
             Guard.Against.Conversion<Token, string>(token);
@@ -54,9 +55,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the <see cref="Token" /> instance into a <see cref="Snippet" />.
+        /// Defines an implicit conversion from <see cref="Token" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="token">The token to convert. Cannot be <see langword="null" />.</param>
+        /// <param name="token">The <see cref="Token" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Token token)
         {
             Guard.Against.Conversion<Token, Snippet>(token);
@@ -65,9 +67,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a <see cref="Name" /> into a <see cref="Token" />.
+        /// Defines an implicit conversion from <see cref="Name" /> to <see cref="Token" />.
         /// </summary>
-        /// <param name="name">The name to convert. <see langword="null" /> or unnamed values return <see cref="Unspecified" />.</param>
+        /// <param name="name">The <see cref="Name" /> value to convert.</param>
+        /// <returns>The converted <see cref="Token" /> value.</returns>
         public static implicit operator Token(Name name)
         {
             if (name is null || name.IsUnnamed)
@@ -79,9 +82,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a <see cref="Symbol" /> into a <see cref="Token" />.
+        /// Defines an implicit conversion from <see cref="Symbol" /> to <see cref="Token" />.
         /// </summary>
-        /// <param name="symbol">The symbol to convert. <see langword="null" /> or undefined values return <see cref="Unspecified" />.</param>
+        /// <param name="symbol">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Token" /> value.</returns>
         public static implicit operator Token(Symbol symbol)
         {
             if (symbol is null || symbol.IsUndefined)
@@ -93,9 +97,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts a <see cref="CType" /> into a <see cref="Token" />.
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Token" />.
         /// </summary>
-        /// <param name="type">The CLR type to convert. Cannot be <see langword="null" />.</param>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Token" /> value.</returns>
         public static implicit operator Token(CType type)
         {
             Guard.Against.Conversion<CType, Token>(type);

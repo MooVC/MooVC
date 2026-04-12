@@ -51,10 +51,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the accessibility scope to its C# source representation.
+        /// Defines an implicit conversion from <see cref="Scopes" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="scope">The scope to render.</param>
-        /// <returns>The accessibility modifier text.</returns>
+        /// <param name="scope">The <see cref="Scopes" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Scopes scope)
         {
             Guard.Against.Conversion<Scopes, string>(scope);
@@ -63,10 +63,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Converts the accessibility scope to a snippet.
+        /// Defines an implicit conversion from <see cref="Scopes" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="scope">The scope to convert.</param>
-        /// <returns>The snippet containing the accessibility modifier.</returns>
+        /// <param name="scope">The <see cref="Scopes" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Scopes scope)
         {
             Guard.Against.Conversion<Scopes, Snippet>(scope);

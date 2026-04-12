@@ -57,10 +57,10 @@ namespace MooVC.Syntax.CSharp
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
-            /// Converts argument options into formatter options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Formatters" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The formatter options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Formatters" /> value.</returns>
             public static implicit operator Formatters(Options options)
             {
                 Guard.Against.Conversion<Options, Formatters>(options);
@@ -69,10 +69,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts argument options into variable naming options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Variable.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The variable options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Variable.Options" /> value.</returns>
             public static implicit operator Variable.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Variable.Options>(options);
@@ -81,10 +81,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Converts argument options into code options.
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
             /// </summary>
-            /// <param name="options">The source options.</param>
-            /// <returns>The code options.</returns>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
             public static implicit operator Snippet.Options(Options options)
             {
                 Guard.Against.Conversion<Options, Snippet.Options>(options);

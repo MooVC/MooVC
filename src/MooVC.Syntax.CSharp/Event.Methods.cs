@@ -52,10 +52,10 @@ namespace MooVC.Syntax.CSharp
             public Snippet Remove { get; internal set; } = Snippet.Empty;
 
             /// <summary>
-            /// Defines the string operator for the Methods.
+            /// Defines an implicit conversion from <see cref="Methods" /> to <see cref="string" />.
             /// </summary>
-            /// <param name="methods">The methods.</param>
-            /// <returns>The string.</returns>
+            /// <param name="methods">The <see cref="Methods" /> value to convert.</param>
+            /// <returns>The converted <see cref="string" /> value.</returns>
             public static implicit operator string(Methods methods)
             {
                 Guard.Against.Conversion<Methods, string>(methods);
@@ -64,10 +64,10 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
-            /// Defines the Snippet operator for the Methods.
+            /// Defines an implicit conversion from <see cref="Methods" /> to <see cref="Snippet" />.
             /// </summary>
-            /// <param name="methods">The methods.</param>
-            /// <returns>The snippet.</returns>
+            /// <param name="methods">The <see cref="Methods" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet" /> value.</returns>
             public static implicit operator Snippet(Methods methods)
             {
                 Guard.Against.Conversion<Methods, Snippet>(methods);

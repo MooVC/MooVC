@@ -42,10 +42,10 @@ namespace MooVC.Syntax.CSharp
         public bool IsUnnamed => this == Unnamed;
 
         /// <summary>
-        /// Defines the string operator for the Variable.
+        /// Defines an implicit conversion from <see cref="Variable" /> to <see cref="string" />.
         /// </summary>
-        /// <param name="variable">The variable.</param>
-        /// <returns>The string.</returns>
+        /// <param name="variable">The <see cref="Variable" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
         public static implicit operator string(Variable variable)
         {
             Guard.Against.Conversion<Variable, string>(variable);
@@ -54,10 +54,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Snippet operator for the Variable.
+        /// Defines an implicit conversion from <see cref="Variable" /> to <see cref="Snippet" />.
         /// </summary>
-        /// <param name="variable">The variable.</param>
-        /// <returns>The snippet.</returns>
+        /// <param name="variable">The <see cref="Variable" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
         public static implicit operator Snippet(Variable variable)
         {
             Guard.Against.Conversion<Variable, Snippet>(variable);
@@ -66,10 +66,10 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Defines the Name operator for the Variable.
+        /// Defines an implicit conversion from <see cref="Name" /> to <see cref="Variable" />.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The variable.</returns>
+        /// <param name="name">The <see cref="Name" /> value to convert.</param>
+        /// <returns>The converted <see cref="Variable" /> value.</returns>
         public static implicit operator Variable(Name name)
         {
             Guard.Against.Conversion<Name, Variable>(name);
