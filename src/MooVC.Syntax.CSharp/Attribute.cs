@@ -12,6 +12,7 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Attribute_Resources;
+    using CAttribute = System.Attribute;
     using CType = System.Type;
     using Ignore = Valuify.IgnoreAttribute;
 
@@ -98,6 +99,12 @@ namespace MooVC.Syntax.CSharp
         {
             Guard.Against.Conversion<CType, Attribute>(type);
 
+            _ = Guard.Against.InvalidInput(
+                type,
+                nameof(type),
+                _ => typeof(CAttribute).IsAssignableFrom(type),
+                message: AttributeTypeInvalid.Format(type));
+
             return new Attribute()
                 .Named(type);
         }
@@ -121,10 +128,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Name)
-            {
-                yield return qualifier;
-            }
+            return Name.GetEnumerator();
         }
 
         /// <summary>

@@ -36,9 +36,9 @@ public sealed partial class WhenToSnippetIsCalled
                 .New<Definition>()
                 .From("Muify.Domain")
                 .For<Class>(@class => @class
-                    .AttributedWith(attribute => attribute
-                        .Named(typeof(AttributeUsageAttribute))
-                        .WithArguments(
+                    .AttributedWith(
+                        typeof(AttributeUsageAttribute),
+                        attribute => attribute.WithArguments(
                             (Name: string.Empty, Value: "AttributeTargets.Property"),
                             (Name: nameof(AttributeUsageAttribute.AllowMultiple), Value: "false"),
                             (Name: nameof(AttributeUsageAttribute.Inherited), Value: "false")))
@@ -75,9 +75,9 @@ public sealed partial class WhenToSnippetIsCalled
                 .New<Definition>()
                 .From("Muify.Domain")
                 .For<Class>(@class => @class
-                    .AttributedWith(attribute => attribute
-                        .Named(typeof(AttributeUsageAttribute))
-                        .WithArguments(
+                    .AttributedWith(
+                        typeof(AttributeUsageAttribute),
+                        attribute => attribute.WithArguments(
                             (Name: string.Empty, Value: "AttributeTargets.Property"),
                             (Name: nameof(AttributeUsageAttribute.AllowMultiple), Value: "false"),
                             (Name: nameof(AttributeUsageAttribute.Inherited), Value: "false")))
@@ -121,27 +121,27 @@ public sealed partial class WhenToSnippetIsCalled
                 .New<Definition>()
                 .From("MooVC.Testing.Mechanics.Car")
                 .For<Record>(record => record
-                    .AttributedWith(attribute => attribute
-                        .Named(typeof(DescriptionAttribute))
-                        .WithArguments((Name: string.Empty, Value: "\"Represents a Vehicle that has utilizes the services of the Mechanics\"")))
+                    .AttributedWith(
+                        typeof(DescriptionAttribute),
+                        attribute => attribute.WithArguments((Name: string.Empty, Value: "\"Represents a Vehicle that has utilizes the services of the Mechanics\"")))
                     .DerivesFrom((Name: "Aggregate", Qualifier: "Mu.Modelling.State"))
                     .Named("Car")
                     .WithParameters(doors => doors
-                        .AttributedWith(description => description
-                            .Named(typeof(DescriptionAttribute))
-                            .WithArguments((Name: string.Empty, Value: "\"The Number of Passenger Doors\"")))
+                        .AttributedWith(
+                            typeof(DescriptionAttribute),
+                            attribute => attribute.WithArguments((Name: string.Empty, Value: "\"The Number of Passenger Doors\"")))
                         .Named("Doors")
                         .OfType(typeof(byte)))
                     .WithParameters(make => make
-                        .AttributedWith(description => description
-                            .Named(typeof(DescriptionAttribute))
-                            .WithArguments((Name: string.Empty, Value: "\"The Manufacturer of the Car\"")))
+                        .AttributedWith(
+                            typeof(DescriptionAttribute),
+                            attribute => attribute.WithArguments((Name: string.Empty, Value: "\"The Manufacturer of the Car\"")))
                         .Named("Make")
                         .OfType(typeof(string)))
                     .WithParameters(model => model
-                        .AttributedWith(description => description
-                            .Named(typeof(DescriptionAttribute))
-                            .WithArguments((Name: string.Empty, Value: "\"The Name Ascribed to the Car by the Manufacturer\"")))
+                        .AttributedWith(
+                            typeof(DescriptionAttribute),
+                            attribute => attribute.WithArguments((Name: string.Empty, Value: "\"The Name Ascribed to the Car by the Manufacturer\"")))
                         .Named("Model")
                         .OfType(typeof(string))))
                 .ImportReferences();
@@ -179,21 +179,21 @@ public sealed partial class WhenToSnippetIsCalled
                 .New<Definition>()
                 .From("MooVC.Testing.Mechanics.Car")
                 .For<Class>(@class => @class
-                    .AttributedWith(description => description
-                        .Named(typeof(DescriptionAttribute))
-                        .WithArguments((Name: string.Empty, Value: "\"Represents a Wheel Attached to the Car\"")))
+                    .AttributedWith(
+                        typeof(DescriptionAttribute),
+                        attribute => attribute.WithArguments((Name: string.Empty, Value: "\"Represents a Wheel Attached to the Car\"")))
                     .Named("Wheel")
                     .WithProperties(location => location
-                        .AttributedWith(description => description
-                            .Named(typeof(DescriptionAttribute))
-                            .WithArguments((Name: string.Empty, Value: "\"The Location of the Wheel on the Car\"")))
+                        .AttributedWith(
+                            typeof(DescriptionAttribute),
+                            attribute => attribute.WithArguments((Name: string.Empty, Value: "\"The Location of the Wheel on the Car\"")))
                         .AttributedWith(identity => identity.Named((Name: "IdentityAttribute", Qualifier: "Muify.Domain")))
                         .Named("Location")
                         .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car")))
                     .WithProperties(pressure => pressure
-                        .AttributedWith(description => description
-                            .Named(typeof(DescriptionAttribute))
-                            .WithArguments((Name: string.Empty, Value: "\"The Pressure of the Tyre on the Wheel\"")))
+                        .AttributedWith(
+                            typeof(DescriptionAttribute),
+                            description => description.WithArguments((Name: string.Empty, Value: "\"The Pressure of the Tyre on the Wheel\"")))
                         .Named("Pressure")
                         .OfType((Name: "Pressure", Qualifier: "MooVC.Testing.Mechanics.Car"))))
                .ImportReferences();
@@ -258,18 +258,18 @@ public sealed partial class WhenToSnippetIsCalled
             Definition content = Builder
                 .New<Definition>()
                 .For<Record>(record => record
-                    .AttributedWith(description => description
-                        .Named(typeof(DescriptionAttribute))
-                        .WithArguments((Name: string.Empty, Value: "\"Represents the Location of the Wheel on the Car\"")))
+                    .AttributedWith(
+                        typeof(DescriptionAttribute),
+                        description => description.WithArguments((Name: string.Empty, Value: "\"Represents the Location of the Wheel on the Car\"")))
                     .AttributedWith(monify => monify.Named(monify => monify
                         .Named(typeof(MonifyAttribute))
                         .WithArguments(type => type.Named(typeof(byte)))))
                     .Named("Location")
                     .Enumerate(
                         (member, record) => record.WithFields(field => field
-                            .AttributedWith(description => description
-                                .Named(typeof(DescriptionAttribute))
-                                .WithArguments((Name: string.Empty, Value: $"\"{member.Description}\"")))
+                            .AttributedWith(
+                                typeof(DescriptionAttribute),
+                                description => description.WithArguments((Name: string.Empty, Value: $"\"{member.Description}\"")))
                             .IsReadOnly(true)
                             .IsStatic(true)
                             .Named(member.Name)

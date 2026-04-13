@@ -61,6 +61,15 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type `{0}` does not derive from System.Attribute..
+        /// </summary>
+        internal static string AttributeTypeInvalid {
+            get {
+                return ResourceManager.GetString("AttributeTypeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Type options must be provided..
         /// </summary>
         internal static string OptionsQualificationsRequired {

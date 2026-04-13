@@ -61,6 +61,15 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type to serve as the wrapper to `{0}` must be provided..
+        /// </summary>
+        internal static string AsWrapperRequired {
+            get {
+                return ResourceManager.GetString("AsWrapperRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The formatting options for type `{0}` must be provided..
         /// </summary>
         internal static string ToStringOptionsRequired {

@@ -114,13 +114,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator over the symbol qualifiers.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            if (!Symbol.IsUndefined)
-            {
-                foreach (Qualifier qualifier in Symbol)
-                {
-                    yield return qualifier;
-                }
-            }
+            return Symbol.GetEnumerator();
         }
 
         /// <summary>
