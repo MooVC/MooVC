@@ -3,7 +3,7 @@
 public sealed class WhenToStringIsCalled
 {
     [Test]
-    public async Task GivenValueThenReturnsUnderlyingValueToString()
+    public async Task GivenValueThenReturnsMonifyFormattedString()
     {
         // Arrange
         var subject = new Snippet.Options.Strategies(StrategiesTestsData.Primary);
@@ -12,6 +12,6 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(StrategiesTestsData.Primary.ToString());
+        _ = await Assert.That(result).IsEqualTo($"Strategies {{ {StrategiesTestsData.Primary} }}");
     }
 }
