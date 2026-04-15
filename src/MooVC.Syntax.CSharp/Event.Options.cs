@@ -1,10 +1,12 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Event_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -53,6 +55,7 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>The implicit scope.</value>
             /// <remarks>If the Event is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
+            [Required(ErrorMessageResourceName = nameof(OptionsImpliedRequired), ErrorMessageResourceType = typeof(Event_Resources))]
             public Scopes Implied { get; internal set; } = Scopes.Unspecified;
 
             /// <summary>
@@ -75,6 +78,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Event_Resources))]
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default
                 .WithBlock(blocks => blocks
                     .WithInline(Snippet.Options.Blocks.Styles.Lambda));

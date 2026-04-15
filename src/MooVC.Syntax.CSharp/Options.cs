@@ -1,10 +1,12 @@
 ﻿namespace MooVC.Syntax.CSharp
 {
+    using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Chaining;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Options_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -35,12 +37,14 @@
         /// Gets the namespace options.
         /// </summary>
         /// <value>The namespace rendering options.</value>
+        [Required(ErrorMessageResourceName = nameof(OptionsNamespaceRequired), ErrorMessageResourceType = typeof(Options_Resources))]
         public Qualifier.Options Namespace { get; internal set; } = Qualifier.Options.File;
 
         /// <summary>
         /// Gets the snippet options.
         /// </summary>
         /// <value>The snippet formatting options used during rendering.</value>
+        [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Options_Resources))]
         public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default.WithChaining(new[]
         {
             OneDotPerLine.Instance,
@@ -51,6 +55,7 @@
         /// Gets the type options.
         /// </summary>
         /// <value>The type rendering options.</value>
+        [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Options_Resources))]
         public Type.Options Types { get; internal set; } = Type.Options.Default;
 
         /// <summary>

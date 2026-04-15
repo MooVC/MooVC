@@ -54,7 +54,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the Attribute options.
             /// </summary>
             /// <value>The Attribute options.</value>
-            [Required(ErrorMessageResourceName = nameof(OptionsAttributesRequired), ErrorMessageResourceType = typeof(Parameter_Resources))]
+            [Required(ErrorMessageResourceName = nameof(OptionsAttributesRequired), ErrorMessageResourceType = typeof(Property_Resources))]
             public Attribute.Options Attributes { get; internal set; } = Attribute.Options.Separate;
 
             /// <summary>
@@ -62,6 +62,7 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>The implicit scope.</value>
             /// <remarks>If the Property is configured to have the same scope as the implicit scope, the keyword will not be rendered.</remarks>
+            [Required(ErrorMessageResourceName = nameof(OptionsImpliedRequired), ErrorMessageResourceType = typeof(Property_Resources))]
             public Scopes Implied { get; internal set; } = Scopes.Unspecified;
 
             /// <summary>
@@ -84,12 +85,14 @@ namespace MooVC.Syntax.CSharp
             /// Gets the options for the Types.
             /// </summary>
             /// <value>The types.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsQualificationsRequired), ErrorMessageResourceType = typeof(Property_Resources))]
             public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
 
             /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Property_Resources))]
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Default
                 .WithBlock(blocks => blocks
                     .WithInline(Snippet.Options.Blocks.Styles.Lambda));

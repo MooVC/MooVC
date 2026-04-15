@@ -120,4 +120,25 @@
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
     <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>
+  <data name="OptionsAttributesRequired" xml:space="preserve">
+    <value>The attribute options must be provided.</value>
+  </data>
+  <data name="OptionsEventsRequired" xml:space="preserve">
+    <value>The event options must be provided.</value>
+  </data>
+  <data name="OptionsIndexersRequired" xml:space="preserve">
+    <value>The indexer options must be provided.</value>
+  </data>
+  <data name="OptionsMethodsRequired" xml:space="preserve">
+    <value>The method options must be provided.</value>
+  </data>
+  <data name="OptionsPropertiesRequired" xml:space="preserve">
+    <value>The property options must be provided.</value>
+  </data>
+  <data name="OptionsQualificationsRequired" xml:space="preserve">
+    <value>The qualification options must be provided.</value>
+  </data>
+  <data name="OptionsSnippetsRequired" xml:space="preserve">
+    <value>The snippet options must be provided.</value>
+  </data>
 </root>
