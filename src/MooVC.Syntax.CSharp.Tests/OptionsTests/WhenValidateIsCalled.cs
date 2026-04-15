@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenNamespaceIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Qualifier.Options optionsNamespace = default;
+        Qualifier.Options? optionsNamespace = default;
         Options subject = Options.Default.WithNamespace(optionsNamespace!);
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenSnippetsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Snippet.Options snippets = default;
+        Snippet.Options? snippets = default;
         Options subject = Options.Default.WithSnippets(snippets!);
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenTypesIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Type.Options typeOptions = default;
+        Type.Options? typeOptions = default;
         Options subject = Options.Default.WithTypes(typeOptions!);
 
         // Act
