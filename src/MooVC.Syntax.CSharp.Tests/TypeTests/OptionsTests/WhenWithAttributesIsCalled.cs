@@ -7,7 +7,7 @@ public sealed class WhenWithAttributesIsCalled
     {
         // Arrange
         var options = new Type.Options();
-        Attribute.Options value = Attribute.Options.Default.WithSnippets(Snippet.Options.Default.WithWhitespace("  "));
+        Attribute.Options value = Attribute.Options.Separate.WithSnippets(Snippet.Options.Default.WithWhitespace("  "));
 
         // Act
         Type.Options result = options.WithAttributes(value);
