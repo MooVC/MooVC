@@ -12,7 +12,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result.TrimEnd()).IsEqualTo("<BuildType Name=\"Debug\" />");
+        _ = await Assert.That(result).IsEqualTo("<BuildType Name=\"Debug\" />");
     }
 
     [Test]
