@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenAttributesIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Attribute.Options attributes = default;
+        Attribute.Options? attributes = null;
         Type.Options subject = Type.Options.Default.WithAttributes(attributes!);
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenEventsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Event.Options events = default;
+        Event.Options? events = null;
         Type.Options subject = Type.Options.Default.WithEvents(events!);
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenIndexersIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Indexer.Options indexers = default;
+        Indexer.Options? indexers = null;
         Type.Options subject = Type.Options.Default.WithIndexers(indexers!);
 
         // Act
@@ -57,7 +57,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenMethodsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Method.Options methods = default;
+        Method.Options? methods = null;
         Type.Options subject = Type.Options.Default.WithMethods(methods!);
 
         // Act
@@ -73,7 +73,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenPropertiesIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Property.Options properties = default;
+        Property.Options? properties = null;
         Type.Options subject = Type.Options.Default.WithProperties(properties!);
 
         // Act
@@ -89,7 +89,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenQualificationsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Qualification.Options qualifications = default;
+        Qualification.Options? qualifications = null;
         Type.Options subject = Type.Options.Default.WithQualifications(qualifications!);
 
         // Act
@@ -105,7 +105,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenSnippetsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Snippet.Options snippets = default;
+        Snippet.Options? snippets = null;
         Type.Options subject = Type.Options.Default.WithSnippets(snippets!);
 
         // Act

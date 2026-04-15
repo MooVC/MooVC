@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenImpliedIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Scopes implied = default;
+        Scopes? implied = null;
         Event.Options subject = Event.Options.Default.WithImplied(implied!);
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenSnippetsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Snippet.Options snippets = default;
+        Snippet.Options? snippets = null;
         Event.Options subject = Event.Options.Default.WithSnippets(snippets!);
 
         // Act

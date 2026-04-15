@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenAttributesIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Attribute.Options attributes = default;
+        Attribute.Options? attributes = null;
         Method.Options subject = Method.Options.Default.WithAttributes(attributes!);
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenImpliedIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Scopes implied = default;
+        Scopes? implied = null;
         Method.Options subject = Method.Options.Default.WithImplied(implied!);
 
         // Act
@@ -41,7 +41,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenQualificationsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Qualification.Options qualifications = default;
+        Qualification.Options? qualifications = null;
         Method.Options subject = Method.Options.Default.WithQualifications(qualifications!);
 
         // Act
@@ -57,7 +57,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenSnippetsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Snippet.Options snippets = default;
+        Snippet.Options? snippets = null;
         Method.Options subject = Method.Options.Default.WithSnippets(snippets!);
 
         // Act
