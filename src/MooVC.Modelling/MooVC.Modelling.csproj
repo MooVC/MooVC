@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Description>Provides model-driven file generation with dependency injection support and output writers for the local file system or zip archives.</Description>
     <ImplicitUsings>disable</ImplicitUsings>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <Nullable>disable</Nullable>
     <RunAnalyzers>false</RunAnalyzers>
     <PackageReleaseNotes>Improves NuGet discoverability metadata for MooVC.Modelling.</PackageReleaseNotes>

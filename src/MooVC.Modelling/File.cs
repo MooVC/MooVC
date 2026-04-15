@@ -35,24 +35,12 @@ namespace MooVC.Modelling
         /// <summary>
         /// Gets the file name including the extension.
         /// </summary>
-        public string FullName
-        {
-            get
-            {
-                return string.Concat(Name, ".", Extension);
-            }
-        }
+        public string FullName => string.Concat(Name, ".", Extension);
 
         /// <summary>
         /// Gets the file path including the file name.
         /// </summary>
-        public string FullPath
-        {
-            get
-            {
-                return Combine(Path, FullName);
-            }
-        }
+        public string FullPath => Combine(Path, FullName);
 
         /// <summary>
         /// Gets the file name without extension.
