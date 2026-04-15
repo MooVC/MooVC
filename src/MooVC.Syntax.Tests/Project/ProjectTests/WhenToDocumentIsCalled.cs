@@ -56,11 +56,6 @@ public sealed class WhenToDocumentIsCalled
 
         var propertyGroupElement = new XElement(nameof(PropertyGroup), propertyElement);
 
-        var sdkElement = new XElement(
-            nameof(Sdk),
-            new XAttribute(nameof(Sdk.Name), ProjectTestsData.DefaultSdkName.ToString()),
-            new XAttribute(nameof(Sdk.Version), ProjectTestsData.DefaultSdkVersion));
-
         var targetElement = new XElement(
             nameof(Target),
             new XAttribute(nameof(Target.Name), ProjectTestsData.DefaultTargetName));
@@ -69,11 +64,11 @@ public sealed class WhenToDocumentIsCalled
             new XDeclaration("1.0", "utf-8", "yes"),
             new XElement(
                 nameof(Project),
+                new XAttribute("Sdk", $"{ProjectTestsData.DefaultSdkName}/{ProjectTestsData.DefaultSdkVersion}"),
                 propertyGroupElement,
                 itemGroupElement,
                 resourceItemGroupElement,
                 importElement,
-                sdkElement,
                 targetElement));
 
         // Act
@@ -85,5 +80,20 @@ public sealed class WhenToDocumentIsCalled
         _ = await Assert.That(declaration.Encoding).IsEqualTo("utf-8");
         _ = await Assert.That(declaration.Standalone).IsEqualTo("yes");
         _ = await Assert.That(XNode.DeepEquals(expected, result)).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenUnspecifiedSdkThenDefaultsToMicrosoftNetSdk()
+    {
+        // Arrange
+        Project subject = ProjectTestsData.Create(sdk: Sdk.Unspecified);
+
+        // Act
+        XDocument result = subject.ToDocument();
+
+        // Assert
+        XElement project = await Assert.That(result.Root).IsNotNull();
+        XAttribute sdk = await Assert.That(project.Attribute("Sdk")).IsNotNull();
+        _ = await Assert.That(sdk.Value).IsEqualTo("Microsoft.NET.Sdk");
     }
 }
