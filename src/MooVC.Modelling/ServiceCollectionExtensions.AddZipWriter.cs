@@ -40,7 +40,6 @@ public static partial class ServiceCollectionExtensions
 
     private static IServiceCollection PerformAddZipWriter(this IServiceCollection services, IConfiguration? configuration)
     {
-        // Use keyed registration so callers can resolve this writer alongside other IWriter implementations.
         return services
             .AddOptions<ZipWriter.Options>()
             .ForkOn(
