@@ -46,6 +46,7 @@ namespace MooVC.Syntax.CSharp
         /// Gets the default value snippet for optional parameters.
         /// </summary>
         /// <value>The default value expression snippet.</value>
+        [Descriptor("DefaultedTo")]
         public Snippet Default { get; internal set; } = Snippet.Empty;
 
         /// <summary>

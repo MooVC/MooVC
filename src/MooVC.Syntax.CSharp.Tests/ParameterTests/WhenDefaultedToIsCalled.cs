@@ -1,6 +1,6 @@
 ﻿namespace MooVC.Syntax.CSharp.ParameterTests;
 
-public sealed class WhenWithDefaultIsCalled
+public sealed class WhenDefaultedToIsCalled
 {
     [Test]
     public async Task GivenValueThenReturnsNewInstanceWithUpdatedDefault()
@@ -10,7 +10,7 @@ public sealed class WhenWithDefaultIsCalled
         var @default = Snippet.From("value");
 
         // Act
-        Parameter result = original.WithDefault(@default);
+        Parameter result = original.DefaultedTo(@default);
 
         // Assert
         _ = await Assert.That(result).IsNotStrictlyEqualTo(original);

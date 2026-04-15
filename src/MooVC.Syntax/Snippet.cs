@@ -17,8 +17,8 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element snippet.
     /// </summary>
+    [AutoInitializeWith(nameof(Empty))]
     [Monify(Type = typeof(ImmutableArray<string>))]
-    [SkipAutoInitialization]
     public sealed partial class Snippet
         : IValidatableObject
     {
