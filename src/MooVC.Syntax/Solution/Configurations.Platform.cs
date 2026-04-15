@@ -93,7 +93,7 @@ namespace MooVC.Syntax.Solution
                     return string.Empty;
                 }
 
-                return ToFragments().Merge();
+                return ToFragments().Merge().TrimEnd();
             }
 
             /// <summary>
