@@ -27,6 +27,8 @@ namespace MooVC.Syntax.Project
         /// </summary>
         public static readonly Project Undefined = new Project();
 
+        private const string DefaultSdk = "Microsoft.NET.Sdk";
+
         /// <summary>
         /// Gets the imports on the Project.
         /// </summary>
@@ -133,10 +135,11 @@ namespace MooVC.Syntax.Project
                 .SelectMany(group => group.ToFragments())
                 .ToArray();
 
-            XElement[] sdks = Sdks
-                .Where(sdk => !sdk.IsUnspecified)
-                .SelectMany(sdk => sdk.ToFragments())
-                .ToArray();
+            string monikers = Sdks
+                .Where(candidate => !candidate.IsUnspecified)
+                .Select(ToSdkMoniker)
+                .ToArray()
+                .ForkOn(values => values.Length > 0, @true: values => string.Join(";", values), @false: _ => DefaultSdk);
 
             XElement[] targets = Targets
                 .Where(target => !target.IsUndefined)
@@ -147,11 +150,11 @@ namespace MooVC.Syntax.Project
 
             var project = new XElement(
                 nameof(Project),
+                monikers.ToXmlAttribute("Sdk"),
                 propertyGroups,
                 itemGroups,
                 resourceItemGroups,
                 imports,
-                sdks,
                 targets);
 
             return new XDocument(declaration, project);
@@ -174,6 +177,13 @@ namespace MooVC.Syntax.Project
         private static IEnumerable<XElement> CreateResourcesGroup(IEnumerable<XElement> resources)
         {
             yield return new XElement(nameof(ItemGroup), resources);
+        }
+
+        private static string ToSdkMoniker(Sdk sdk)
+        {
+            return sdk.Version.IsEmpty
+                ? sdk.Name.ToString()
+                : $"{sdk.Name}/{sdk.Version}";
         }
     }
 }
