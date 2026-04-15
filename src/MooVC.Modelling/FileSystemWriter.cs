@@ -1,74 +1,87 @@
-namespace MooVC.Modelling;
-
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-
-/// <summary>
-/// Writes modelling files to the local file system.
-/// </summary>
-/// <param name="fileSystem">The file system abstraction to use.</param>
-/// <param name="options">The configured writer options.</param>
-public sealed partial class FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
-    : IWriter
+namespace MooVC.Modelling
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.Options;
+
     /// <summary>
-    /// Writes the provided files to the target stream location.
+    /// Writes modelling files to the local file system.
     /// </summary>
-    /// <param name="files">The files to write.</param>
-    /// <param name="stream">The stream associated with the output location.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task representing the asynchronous write operation.</returns>
-    public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
+    public sealed partial class FileSystemWriter : IWriter
     {
-        string rootPath = ResolveRootPath(stream);
+        private readonly IFileSystem _fileSystem;
+        private readonly IOptionsSnapshot<FileSystemWriter.Options> _options;
 
-        ConfiguredCancelableAsyncEnumerable<File> enumerable = files
-            .WithCancellation(cancellationToken)
-            .ConfigureAwait(false);
-
-        await foreach (File file in enumerable)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemWriter"/> class.
+        /// </summary>
+        /// <param name="fileSystem">The file system abstraction to use.</param>
+        /// <param name="options">The configured writer options.</param>
+        public FileSystemWriter(IFileSystem fileSystem, IOptionsSnapshot<FileSystemWriter.Options> options)
         {
-            await Write(file, rootPath, cancellationToken)
-                .ConfigureAwait(false);
+            _fileSystem = fileSystem;
+            _options = options;
         }
-    }
 
-    private string ResolveRootPath(Stream stream)
-    {
-        if (stream is FileStream fileStream)
+        /// <summary>
+        /// Writes the provided files to the target stream location.
+        /// </summary>
+        public async Task Write(IAsyncEnumerable<File> files, Stream stream, CancellationToken cancellationToken)
         {
-            string? directoryPath = fileSystem.GetDirectoryName(fileStream.Name);
+            string rootPath = ResolveRootPath(stream);
+            IAsyncEnumerator<File> enumerator = files.GetAsyncEnumerator(cancellationToken);
 
-            if (!string.IsNullOrWhiteSpace(directoryPath))
+            try
             {
-                return directoryPath;
+                while (await enumerator.MoveNextAsync().ConfigureAwait(false))
+                {
+                    await Write(enumerator.Current, rootPath, cancellationToken)
+                        .ConfigureAwait(false);
+                }
+            }
+            finally
+            {
+                await enumerator.DisposeAsync().ConfigureAwait(false);
             }
         }
 
-        return fileSystem.GetCurrentDirectory();
-    }
-
-    private async Task Write(File file, string rootPath, CancellationToken cancellationToken)
-    {
-        string filePath = fileSystem.GetFullPath(Path.Combine(rootPath, file.FullPath));
-        string? directoryPath = fileSystem.GetDirectoryName(filePath);
-
-        if (!string.IsNullOrWhiteSpace(directoryPath))
+        private string ResolveRootPath(Stream stream)
         {
-            fileSystem.CreateDirectory(directoryPath);
+            FileStream fileStream = stream as FileStream;
+
+            if (fileStream != null)
+            {
+                string directoryPath = _fileSystem.GetDirectoryName(fileStream.Name);
+
+                if (!string.IsNullOrWhiteSpace(directoryPath))
+                {
+                    return directoryPath;
+                }
+            }
+
+            return _fileSystem.GetCurrentDirectory();
         }
 
-        byte[] contentBytes = Encoding.UTF8.GetBytes(file.Content);
+        private async Task Write(File file, string rootPath, CancellationToken cancellationToken)
+        {
+            string filePath = _fileSystem.GetFullPath(Path.Combine(rootPath, file.FullPath));
+            string directoryPath = _fileSystem.GetDirectoryName(filePath);
 
-        await using Stream stream = fileSystem.CreateFileStream(filePath, options.Value.BufferSize);
+            if (!string.IsNullOrWhiteSpace(directoryPath))
+            {
+                _fileSystem.CreateDirectory(directoryPath);
+            }
 
-        await stream
-            .WriteAsync(contentBytes, cancellationToken)
-            .ConfigureAwait(false);
+            byte[] contentBytes = Encoding.UTF8.GetBytes(file.Content);
+
+            using (Stream stream = _fileSystem.CreateFileStream(filePath, _options.Value.BufferSize))
+            {
+                await stream.WriteAsync(contentBytes, 0, contentBytes.Length, cancellationToken)
+                    .ConfigureAwait(false);
+            }
+        }
     }
 }

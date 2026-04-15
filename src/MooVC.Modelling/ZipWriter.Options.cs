@@ -1,33 +1,48 @@
-﻿namespace MooVC.Modelling;
-
-using System.IO.Compression;
-
-/// <summary>
-/// Writes generated modelling files to a zip archive.
-/// </summary>
-public partial class ZipWriter
+namespace MooVC.Modelling
 {
+    using System.IO.Compression;
+
     /// <summary>
-    /// Represents configuration options for <see cref="ZipWriter"/>.
+    /// Writes generated modelling files to a zip archive.
     /// </summary>
-    public sealed record Options(CompressionLevel Compression)
+    public partial class ZipWriter
     {
         /// <summary>
-        /// Gets the configuration section name for these options.
+        /// Represents configuration options for <see cref="ZipWriter"/>.
         /// </summary>
-        public const string SectionName = nameof(ZipWriter);
-
-        /// <summary>
-        /// Gets the default options instance.
-        /// </summary>
-        public static readonly Options Default = new(CompressionLevel.Optimal);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Options"/> record.
-        /// </summary>
-        public Options()
-            : this(Default.Compression)
+        public sealed class Options
         {
+            /// <summary>
+            /// Gets the configuration section name for these options.
+            /// </summary>
+            public const string SectionName = nameof(ZipWriter);
+
+            /// <summary>
+            /// Gets the default options instance.
+            /// </summary>
+            public static readonly Options Default = new Options(CompressionLevel.Optimal);
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Options"/> class.
+            /// </summary>
+            public Options()
+                : this(Default.Compression)
+            {
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Options"/> class.
+            /// </summary>
+            /// <param name="compression">The compression level to use for archive entries.</param>
+            public Options(CompressionLevel compression)
+            {
+                Compression = compression;
+            }
+
+            /// <summary>
+            /// Gets or sets the compression level to use for archive entries.
+            /// </summary>
+            public CompressionLevel Compression { get; set; }
         }
     }
 }
