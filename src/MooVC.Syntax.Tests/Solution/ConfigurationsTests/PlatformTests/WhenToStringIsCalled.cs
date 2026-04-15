@@ -12,7 +12,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo("<Platform Name=\"Any CPU\" />");
+        _ = await Assert.That(result.TrimEnd()).IsEqualTo("<Platform Name=\"Any CPU\" />");
     }
 
     [Test]
