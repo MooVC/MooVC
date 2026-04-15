@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenFormatIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Qualification.Options.Formats? format = null;
+        Qualification.Options.Formats? format = default;
         Qualification.Options subject = Qualification.Options.Default.WithFormat(format!);
 
         // Act

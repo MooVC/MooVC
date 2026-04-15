@@ -35,7 +35,7 @@ public sealed class WhenEqualsOptionsIsCalled
     {
         // Arrange
         var subject = new Type.Options();
-        Type.Options? other = null;
+        Type.Options? other = default;
 
         // Act
         bool result = subject.Equals(other);

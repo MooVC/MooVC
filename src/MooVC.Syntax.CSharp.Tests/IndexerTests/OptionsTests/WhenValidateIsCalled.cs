@@ -9,7 +9,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenImpliedIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Scopes? implied = null;
+        Scopes? implied = default;
         Indexer.Options subject = Indexer.Options.Default.WithImplied(implied!);
 
         // Act
@@ -25,7 +25,7 @@ public sealed class WhenValidateIsCalled
     public async Task GivenSnippetsIsNullThenValidationErrorReturned()
     {
         // Arrange
-        Snippet.Options? snippets = null;
+        Snippet.Options? snippets = default;
         Indexer.Options subject = Indexer.Options.Default.WithSnippets(snippets!);
 
         // Act
