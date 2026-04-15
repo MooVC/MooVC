@@ -120,6 +120,15 @@
   <data name="OptionsAttributesRequired" xml:space="preserve">
     <value>The Attribute options must be provided.</value>
   </data>
+  <data name="OptionsImpliedRequired" xml:space="preserve">
+    <value>The implied scope options must be provided.</value>
+  </data>
+  <data name="OptionsQualificationsRequired" xml:space="preserve">
+    <value>The qualification options must be provided.</value>
+  </data>
+  <data name="OptionsSnippetsRequired" xml:space="preserve">
+    <value>The snippet options must be provided.</value>
+  </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
     <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
   </data>

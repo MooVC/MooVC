@@ -1,10 +1,12 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Qualification_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -69,6 +71,7 @@ namespace MooVC.Syntax.CSharp
             /// Gets the Format on the Options.
             /// </summary>
             /// <value>The Format.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsFormatRequired), ErrorMessageResourceType = typeof(Qualification_Resources))]
             public Formats Format { get; internal set; } = Formats.Minimum;
 
             public static implicit operator Formats(Options options)

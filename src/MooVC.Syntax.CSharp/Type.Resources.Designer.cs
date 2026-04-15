@@ -68,5 +68,68 @@ namespace MooVC.Syntax.CSharp {
                 return ResourceManager.GetString("ToSnippetOptionsRequired", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The attribute options must be provided..
+        /// </summary>
+        internal static string OptionsAttributesRequired {
+            get {
+                return ResourceManager.GetString("OptionsAttributesRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The event options must be provided..
+        /// </summary>
+        internal static string OptionsEventsRequired {
+            get {
+                return ResourceManager.GetString("OptionsEventsRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The indexer options must be provided..
+        /// </summary>
+        internal static string OptionsIndexersRequired {
+            get {
+                return ResourceManager.GetString("OptionsIndexersRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The method options must be provided..
+        /// </summary>
+        internal static string OptionsMethodsRequired {
+            get {
+                return ResourceManager.GetString("OptionsMethodsRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The property options must be provided..
+        /// </summary>
+        internal static string OptionsPropertiesRequired {
+            get {
+                return ResourceManager.GetString("OptionsPropertiesRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The qualification options must be provided..
+        /// </summary>
+        internal static string OptionsQualificationsRequired {
+            get {
+                return ResourceManager.GetString("OptionsQualificationsRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The snippet options must be provided..
+        /// </summary>
+        internal static string OptionsSnippetsRequired {
+            get {
+                return ResourceManager.GetString("OptionsSnippetsRequired", resourceCulture);
+            }
+        }
     }
 }

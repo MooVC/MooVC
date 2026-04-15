@@ -1,9 +1,11 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.ComponentModel.DataAnnotations;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Type_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -35,42 +37,49 @@ namespace MooVC.Syntax.CSharp
             /// Gets the Attribute options.
             /// </summary>
             /// <value>The Attribute options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsAttributesRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Attribute.Options Attributes { get; internal set; } = Attribute.Options.Unspecified;
 
             /// <summary>
             /// Gets the Event options.
             /// </summary>
             /// <value>The Event options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsEventsRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Event.Options Events { get; internal set; } = Event.Options.Default;
 
             /// <summary>
             /// Gets the Indexer options.
             /// </summary>
             /// <value>The Indexer options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsIndexersRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Indexer.Options Indexers { get; internal set; } = Indexer.Options.Default;
 
             /// <summary>
             /// Gets the Method options.
             /// </summary>
             /// <value>The Method options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsMethodsRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Method.Options Methods { get; internal set; } = Method.Options.Default;
 
             /// <summary>
             /// Gets the Property options.
             /// </summary>
             /// <value>The Property options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsPropertiesRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Property.Options Properties { get; internal set; } = Property.Options.Default;
 
             /// <summary>
             /// Gets the Symbol options.
             /// </summary>
             /// <value>The Symbol options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsQualificationsRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
 
             /// <summary>
             /// Gets the Snippets options.
             /// </summary>
             /// <value>The Snippets options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Type_Resources))]
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
