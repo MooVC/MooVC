@@ -1,0 +1,18 @@
+﻿namespace MooVC.Syntax.Project.MetadataTests;
+
+public sealed class WhenInequalityOperatorMetadataMetadataIsCalled
+{
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsTrue()
+    {
+        // Arrange
+        Metadata left = MetadataTestsData.Create();
+        Metadata right = MetadataTestsData.Create(name: new Name("Other"));
+
+        // Act
+        bool result = left != right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+}

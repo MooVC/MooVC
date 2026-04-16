@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 public sealed class WhenBytesAreCompressed
 {
-    [Fact]
+    [Test]
     public async Task GivenBytesThenTheResultMatches()
     {
         // Arrange
@@ -18,16 +18,16 @@ public sealed class WhenBytesAreCompressed
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
 
         // Assert
-        compressed.ShouldNotBe(expected);
+        _ = await Assert.That(compressed).IsNotEquivalentTo(expected);
 
         // Act
         IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
-        decompressed.ShouldBe(expected);
+        _ = await Assert.That(decompressed).IsEquivalentTo(expected);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNoBytesThenTheResultMatches()
     {
         // Arrange
@@ -40,6 +40,6 @@ public sealed class WhenBytesAreCompressed
         IEnumerable<byte> decompressed = await compressor.Decompress(compressed, CancellationToken.None);
 
         // Assert
-        decompressed.ShouldBe(expected);
+        _ = await Assert.That(decompressed).IsEquivalentTo(expected);
     }
 }

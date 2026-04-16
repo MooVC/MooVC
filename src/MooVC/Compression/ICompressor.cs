@@ -3,6 +3,9 @@
 /// <summary>
 /// Represents a compressor that can compress and decompress data.
 /// </summary>
+/// <remarks>
+/// Implementations should preserve payload fidelity between <c>Compress</c> and <c>Decompress</c> for the same algorithm and configuration.
+/// </remarks>
 public interface ICompressor
 {
     /// <summary>

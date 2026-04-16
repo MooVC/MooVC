@@ -1,0 +1,27 @@
+namespace MooVC.Syntax.CSharp.AttributeTests;
+
+using System.Collections.Immutable;
+
+public static class AttributeTestsData
+{
+    public const string DefaultName = "Obsolete";
+
+    public static Attribute Create(string? name = DefaultName, Attribute.Specifiers? target = default, params Argument[] arguments)
+    {
+        ImmutableArray<Argument> provided = arguments.Length == 0
+            ? []
+            : [.. arguments];
+
+        return new Attribute
+        {
+            Arguments = provided,
+            Name = new()
+            {
+                Name = name is null
+                    ? Moniker.Unnamed
+                    : new Moniker(name),
+            },
+            Target = target ?? Attribute.Specifiers.None,
+        };
+    }
+}

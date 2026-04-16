@@ -2,39 +2,8 @@
 
 public sealed class WhenInitializerIsConstructed
 {
-    [Fact]
-    public void GivenAnInitiazerThenAnInstanceIsReturned()
-    {
-        // Arrange
-        static Task<object> Initializer(CancellationToken cancellationToken)
-        {
-            return Task.FromResult(new object());
-        }
-
-        // Act
-        Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
-
-        // Assert
-        Should.NotThrow(act);
-    }
-
-    [Fact]
-    public void GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
-    {
-        // Arrange
-        Func<CancellationToken, Task<object>>? initializer = default;
-
-        // Act
-        Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
-
-        // Assert
-        ArgumentNullException exception = Should.Throw<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(initializer));
-    }
-
-    // Additional test cases
-    [Fact]
-    public void GivenAnEmptyInitiazerThenAnInstanceIsReturned()
+    [Test]
+    public async Task GivenAnEmptyInitiazerThenAnInstanceIsReturned()
     {
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
@@ -46,11 +15,27 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 
-    [Fact]
-    public void GivenAnInitiazerWithExceptionThenAnInstanceIsReturned()
+    [Test]
+    public async Task GivenAnInitiazerThenAnInstanceIsReturned()
+    {
+        // Arrange
+        static Task<object> Initializer(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(new object());
+        }
+
+        // Act
+        Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
+
+        // Assert
+        _ = await Assert.That(act).ThrowsNothing();
+    }
+
+    [Test]
+    public async Task GivenAnInitiazerWithExceptionThenAnInstanceIsReturned()
     {
         // Arrange
         static Task<object> Initializer(CancellationToken cancellationToken)
@@ -62,6 +47,20 @@ public sealed class WhenInitializerIsConstructed
         Func<Initializer<object>> act = () => new Initializer<object>(Initializer);
 
         // Assert
-        Should.NotThrow(act);
+        _ = await Assert.That(act).ThrowsNothing();
+    }
+
+    [Test]
+    public async Task GivenAnNullInitiazerThenAnArgumentExceptionIsThrown()
+    {
+        // Arrange
+        Func<CancellationToken, Task<object>>? initializer = default;
+
+        // Act
+        Func<Initializer<object>> act = () => new Initializer<object>(initializer!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(initializer));
     }
 }

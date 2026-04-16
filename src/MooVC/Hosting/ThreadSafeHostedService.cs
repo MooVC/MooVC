@@ -9,6 +9,9 @@ using static MooVC.Hosting.ThreadSafeHostedService_Resources;
 /// <summary>
 /// Allows for the thread-safe start/stop of one or more <see cref="IHostedService" /> implementations.
 /// </summary>
+/// <remarks>
+/// State transitions are guarded with atomic operations to prevent duplicate start or stop execution under concurrent callers.
+/// </remarks>
 public sealed class ThreadSafeHostedService
     : IHostedService
 {

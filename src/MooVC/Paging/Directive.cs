@@ -13,6 +13,14 @@ using static System.Math;
 /// <param name="Page">
 /// The requested page number, starting from <see cref="FirstPage" />.
 /// </param>
+/// <remarks>
+/// <para>
+/// This type uses zero-based page numbering. The <see cref="Skip" /> and <see cref="Take" /> members can be directly composed with LINQ operators.
+/// </para>
+/// <para>
+/// Use <see cref="All" /> to indicate that paging should not be applied.
+/// </para>
+/// </remarks>
 public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, ushort Page = Directive.FirstPage)
 {
     /// <summary>
@@ -42,7 +50,7 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
     /// Gets a value indicating whether this instance is the <see cref="All"/> instance.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the instance is the <see cref="All"/> instance; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the instance is the <see cref="All"/> instance; otherwise, <see langword="false" />.
     /// </value>
     [JsonIgnore]
     public bool IsAll => this == All;
@@ -53,6 +61,9 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
     /// <value>
     /// The number of entries in the sequence to be skipped to read the beginning of the desired page.
     /// </value>
+    /// <remarks>
+    /// This value is computed as <c>(Page - FirstPage) * Limit</c>.
+    /// </remarks>
     [JsonIgnore]
     public int Skip => (Page - FirstPage) * Limit;
 
@@ -62,6 +73,9 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
     /// <value>
     /// The number of entries in the sequence to return for the desired page.
     /// </value>
+    /// <remarks>
+    /// Returns <see cref="int.MaxValue" /> when <see cref="IsAll" /> is <see langword="true" />.
+    /// </remarks>
     [JsonIgnore]
     public int Take => Limit == All.Limit
         ? int.MaxValue

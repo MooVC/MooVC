@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 public static partial class DateTimeOffsetExtensions
 {
     /// <summary>
-    /// Returns the minimum of two dates.
+    /// Returns the earlier of two <see cref="DateTimeOffset" /> values.
     /// </summary>
     /// <param name="first">The first date to compare.</param>
     /// <param name="second">The second date to compare.</param>

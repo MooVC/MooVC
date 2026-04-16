@@ -1,17 +1,17 @@
-namespace MooVC.Linq.IEnumerableExtensionsTests;
+﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
 public sealed class WhenWhereIfIsCalled
 {
-    [Fact]
-    public void GivenAFailingConditionThenThePredicateIsNotApplied()
+    [Test]
+    public async Task GivenAFailingConditionThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(false);
 
-        wasInvoked.ShouldBeFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
-    [Fact]
-    public void GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
+    [Test]
+    public async Task GivenANullEnumerationWhenAConditionIsSpecifiedThenTheEnumerationIsReturnedWithoutEvaluatingTheConditionOrThePredicate()
     {
         IEnumerable<int>? enumeration = default;
         bool wasEvaluated = false;
@@ -29,12 +29,12 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(Condition, Predicate);
 
-        result.ShouldBeNull();
-        wasEvaluated.ShouldBeFalse();
+        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(wasEvaluated).IsFalse();
     }
 
-    [Fact]
-    public void GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
+    [Test]
+    public async Task GivenANullEnumerationWhenApplicabilityIsSpecifiedThenTheEnumerationIsReturnedWithoutInvokingThePredicate()
     {
         IEnumerable<int>? enumeration = default;
         bool wasEvaluated = false;
@@ -47,54 +47,28 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration
             .WhereIf(true, Predicate);
 
-        result.ShouldBeNull();
-        wasEvaluated.ShouldBeFalse();
+        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(wasEvaluated).IsFalse();
     }
 
-    [Fact]
-    public void GivenAPassingConditionThenThePredicateIsApplied()
+    [Test]
+    public async Task GivenAPassingConditionThenThePredicateIsApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithCondition(true);
 
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
-    [Fact]
-    public void GivenFailingApplicabilityThenThePredicateIsNotApplied()
+    [Test]
+    public async Task GivenFailingApplicabilityThenThePredicateIsNotApplied()
     {
         bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(false);
 
-        wasInvoked.ShouldBeFalse();
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 
-    [Fact]
-    public void GivenPassingApplicabilityThenThePredicateIsApplied()
-    {
-        bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
-
-        wasInvoked.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
-    {
-        // Arrange
-        int[] enumeration = [1, 2, 3, 4, 5];
-
-        static bool Predicate(int value)
-        {
-            return value % 2 == 0;
-        }
-
-        // Act
-        IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
-
-        // Assert
-        result.ShouldBe([2, 4]);
-    }
-
-    [Fact]
-    public void GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
+    [Test]
+    public async Task GivenNonEmptyEnumerationAndFailingConditionThenUnfilteredEnumerationIsReturned()
     {
         // Arrange
         int[] enumeration = [1, 2, 3, 4, 5];
@@ -108,7 +82,33 @@ public sealed class WhenWhereIfIsCalled
         IEnumerable<int>? result = enumeration.WhereIf(() => false, Predicate);
 
         // Assert
-        result.ShouldBe([1, 2, 3, 4, 5]);
+        _ = await Assert.That(result).IsEquivalentTo([1, 2, 3, 4, 5]);
+    }
+
+    [Test]
+    public async Task GivenNonEmptyEnumerationAndPassingConditionThenFilteredEnumerationIsReturned()
+    {
+        // Arrange
+        int[] enumeration = [1, 2, 3, 4, 5];
+
+        static bool Predicate(int value)
+        {
+            return value % 2 == 0;
+        }
+
+        // Act
+        IEnumerable<int>? result = enumeration.WhereIf(() => true, Predicate);
+
+        // Assert
+        _ = await Assert.That(result).IsEquivalentTo([2, 4]);
+    }
+
+    [Test]
+    public async Task GivenPassingApplicabilityThenThePredicateIsApplied()
+    {
+        bool wasInvoked = VerifyPredicateInvocationWithExplicitApplicability(true);
+
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
     private bool VerifyPredicateInvocation(Func<IEnumerable<int>, Func<int, bool>, IEnumerable<int>?> invocation)

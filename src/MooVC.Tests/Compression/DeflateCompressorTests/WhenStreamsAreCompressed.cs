@@ -7,34 +7,7 @@ using MooVC.IO;
 
 public sealed class WhenStreamsAreCompressed
 {
-    [Fact]
-    public async Task GivenAStreamThenTheResultMatches()
-    {
-        // Arrange
-        byte[] expected = new byte[32768];
-        var random = RandomNumberGenerator.Create();
-        random.GetNonZeroBytes(expected);
-
-        var compressor = new DeflateCompressor();
-        using var stream = new MemoryStream(expected);
-
-        // Act
-        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
-
-        // Assert
-        IEnumerable<byte> compressedBytes = compressed.GetBytes();
-        compressedBytes.ShouldNotBe(expected);
-
-        // Act
-        compressed.Position = 0;
-        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
-
-        // Assert
-        IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
-        decompressedBytes.ShouldBe(expected);
-    }
-
-    [Fact]
+    [Test]
     public async Task GivenAnEmptyStreamThenTheResultMatches()
     {
         // Arrange
@@ -52,6 +25,33 @@ public sealed class WhenStreamsAreCompressed
 
         // Assert
         IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
-        decompressedBytes.ShouldBe(expected);
+        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenAStreamThenTheResultMatches()
+    {
+        // Arrange
+        byte[] expected = new byte[32768];
+        var random = RandomNumberGenerator.Create();
+        random.GetNonZeroBytes(expected);
+
+        var compressor = new DeflateCompressor();
+        using var stream = new MemoryStream(expected);
+
+        // Act
+        using Stream compressed = await compressor.Compress(stream, CancellationToken.None);
+
+        // Assert
+        IEnumerable<byte> compressedBytes = compressed.GetBytes();
+        _ = await Assert.That(compressedBytes).IsNotEquivalentTo(expected);
+
+        // Act
+        compressed.Position = 0;
+        using Stream decompressed = await compressor.Decompress(compressed, CancellationToken.None);
+
+        // Assert
+        IEnumerable<byte> decompressedBytes = decompressed.GetBytes();
+        _ = await Assert.That(decompressedBytes).IsEquivalentTo(expected);
     }
 }

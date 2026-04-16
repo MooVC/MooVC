@@ -1,0 +1,33 @@
+﻿namespace MooVC.Syntax.CSharp.EventTests.MethodsTests;
+
+public sealed class WhenImplicitOperatorToSnippetIsCalled
+{
+    [Test]
+    public async Task GivenMethodsThenSnippetMatchesStringRepresentation()
+    {
+        // Arrange
+        var subject = new Event.Methods
+        {
+            Add = Snippet.From("add => value"),
+        };
+
+        // Act
+        Snippet result = subject;
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(Snippet.From(subject.ToString()));
+    }
+
+    [Test]
+    public async Task GivenNullSubjectThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Event.Methods? subject = default;
+
+        // Act
+        Func<Snippet> result = () => subject;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
+    }
+}

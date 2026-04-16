@@ -6,6 +6,9 @@ using System.IO.Compression;
 /// <summary>
 /// Represents a class that uses the GZip algorithm to compress and decompress streams.
 /// </summary>
+/// <remarks>
+/// This implementation delegates stream wrapping to <see cref="GZipStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
+/// </remarks>
 public sealed class GZipCompressor
     : StreamCompressor
 {

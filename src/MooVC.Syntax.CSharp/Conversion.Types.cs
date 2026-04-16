@@ -1,0 +1,55 @@
+namespace MooVC.Syntax.CSharp
+{
+    using Fluentify;
+    using Monify;
+
+    /// <summary>
+    /// Represents a user-defined conversion operator declaration model.
+    /// </summary>
+    public partial class Conversion
+    {
+        /// <summary>
+        /// Represents an operator token category used by operator declarations.
+        /// </summary>
+        [Monify(Type = typeof(string))]
+        [SkipAutoInitialization]
+        public sealed partial class Types
+        {
+            /// <summary>
+            /// Represents the explicit for the Type.
+            /// </summary>
+            public static readonly Types Explicit = "explicit";
+
+            /// <summary>
+            /// Represents the implicit for the Type.
+            /// </summary>
+            public static readonly Types Implicit = "implicit";
+
+            private Types(string value)
+            {
+                _value = value;
+            }
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is explicit.
+            /// </summary>
+            /// <value>A value indicating whether the Type is explicit.</value>
+            public bool IsExplicit => this == Explicit;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is implicit.
+            /// </summary>
+            /// <value>A value indicating whether the Type is implicit.</value>
+            public bool IsImplicit => this == Implicit;
+
+            /// <summary>
+            /// Returns the string representation of the Type.
+            /// </summary>
+            /// <returns>The string representation.</returns>
+            public override string ToString()
+            {
+                return _value;
+            }
+        }
+    }
+}

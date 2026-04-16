@@ -3,26 +3,25 @@ namespace MooVC.Paging.DirectiveTests;
 
 public sealed class WhenDecrementIsCalled
 {
-    [Theory]
-    [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
-    [InlineData(2, 1, 1)]
-    [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
-    public void GivenADirectiveWhenPostDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(ushort.MaxValue)]
+    public async Task GivenADirectiveAtMinWhenDecrementedThenDirectiveIsNotDecremented(ushort decrement)
     {
         // Arrange
-        Directive directive = new(Limit: limit, Page: current);
+        Directive expected = new(Limit: 10, Page: ushort.MinValue);
 
         // Act
-        directive--;
+        Directive actual = expected - decrement;
 
         // Assert
-        directive.Limit.ShouldBe(limit);
-        directive.Page.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
-    [Fact]
-    public void GivenADirectiveAtMinWhenPostDecrementedThenDirectiveIsNotDecremented()
+    [Test]
+    public async Task GivenADirectiveAtMinWhenPostDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
         Directive expected = new(Limit: 10, Page: ushort.MinValue);
@@ -32,29 +31,11 @@ public sealed class WhenDecrementIsCalled
         actual--;
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
-    [Theory]
-    [InlineData(ushort.MaxValue, ushort.MaxValue - 1, 25)]
-    [InlineData(2, 1, 1)]
-    [InlineData(5, 4, 10)]
-    [InlineData(ushort.MinValue + 1, Directive.FirstPage, 5)]
-    public void GivenADirectiveWhenPreDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
-    {
-        // Arrange
-        Directive directive = new(Limit: limit, Page: current);
-
-        // Act
-        --directive;
-
-        // Assert
-        directive.Limit.ShouldBe(limit);
-        directive.Page.ShouldBe(expected);
-    }
-
-    [Fact]
-    public void GivenADirectiveAtMinWhenPreDecrementedThenDirectiveIsNotDecremented()
+    [Test]
+    public async Task GivenADirectiveAtMinWhenPreDecrementedThenDirectiveIsNotDecremented()
     {
         // Arrange
         Directive expected = new(Limit: 10, Page: ushort.MinValue);
@@ -64,14 +45,14 @@ public sealed class WhenDecrementIsCalled
         --actual;
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEqualTo(expected);
     }
 
-    [Theory]
-    [InlineData(2, 0, 2, 25)]
-    [InlineData(3, 1, 2, 1)]
-    [InlineData(9, 4, 5, 10)]
-    public void GivenADirectiveWhenDecrementedThenDirectiveIsDecrementedByTheAmount(ushort current, ushort expected, ushort decrement, ushort limit)
+    [Test]
+    [Arguments(2, 0, 2, 25)]
+    [Arguments(3, 1, 2, 1)]
+    [Arguments(9, 4, 5, 10)]
+    public async Task GivenADirectiveWhenDecrementedThenDirectiveIsDecrementedByTheAmount(ushort current, ushort expected, ushort decrement, ushort limit)
     {
         // Arrange
         Directive original = new(Limit: limit, Page: current);
@@ -80,25 +61,44 @@ public sealed class WhenDecrementIsCalled
         Directive actual = original - decrement;
 
         // Assert
-        actual.Page.ShouldBe(expected);
-        original.Limit.ShouldBe(limit);
+        _ = await Assert.That(actual.Page).IsEqualTo(expected);
+        _ = await Assert.That(original.Limit).IsEqualTo(limit);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(10)]
-    [InlineData(ushort.MaxValue)]
-    public void GivenADirectiveAtMinWhenDecrementedThenDirectiveIsNotDecremented(ushort decrement)
+    [Test]
+    [Arguments(ushort.MaxValue, ushort.MaxValue - 1, 25)]
+    [Arguments(2, 1, 1)]
+    [Arguments(5, 4, 10)]
+    [Arguments(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    public async Task GivenADirectiveWhenPostDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
     {
         // Arrange
-        Directive expected = new(Limit: 10, Page: ushort.MinValue);
+        Directive directive = new(Limit: limit, Page: current);
 
         // Act
-        Directive actual = expected - decrement;
+        directive--;
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments(ushort.MaxValue, ushort.MaxValue - 1, 25)]
+    [Arguments(2, 1, 1)]
+    [Arguments(5, 4, 10)]
+    [Arguments(ushort.MinValue + 1, Directive.FirstPage, 5)]
+    public async Task GivenADirectiveWhenPreDecrementedThenDirectiveIsDecrementedByOne(ushort current, ushort expected, ushort limit)
+    {
+        // Arrange
+        Directive directive = new(Limit: limit, Page: current);
+
+        // Act
+        --directive;
+
+        // Assert
+        _ = await Assert.That(directive.Limit).IsEqualTo(limit);
+        _ = await Assert.That(directive.Page).IsEqualTo(expected);
     }
 }
 #endif
