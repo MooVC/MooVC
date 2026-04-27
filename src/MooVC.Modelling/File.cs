@@ -7,7 +7,7 @@ namespace MooVC.Modelling
     /// Represents a file to be written by a modelling writer.
     /// </summary>
     [Valuify]
-    public sealed class File
+    public sealed partial class File
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="File"/> class.
