@@ -1,10 +1,12 @@
 namespace MooVC.Modelling
 {
+    using Valuify;
     using static System.IO.Path;
 
     /// <summary>
     /// Represents a file to be written by a modelling writer.
     /// </summary>
+    [Valuify]
     public sealed class File
     {
         /// <summary>
@@ -35,11 +37,13 @@ namespace MooVC.Modelling
         /// <summary>
         /// Gets the file name including the extension.
         /// </summary>
+        [Ignore]
         public string FullName => string.Concat(Name, ".", Extension);
 
         /// <summary>
         /// Gets the file path including the file name.
         /// </summary>
+        [Ignore]
         public string FullPath => Combine(Path, FullName);
 
         /// <summary>
