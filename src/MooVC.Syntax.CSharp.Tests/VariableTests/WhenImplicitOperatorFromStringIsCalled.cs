@@ -73,7 +73,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEquivalentTo(expected);
+        _ = await Assert.That(subject.ToString()).IsEquivalentTo(expected);
     }
 
     [Test]

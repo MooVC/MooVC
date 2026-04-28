@@ -22,11 +22,12 @@ public sealed class WhenImplicitOperatorFromTypeIsCalled
     {
         // Arrange
         Type value = typeof(Guid);
+        Qualification expected = value;
 
         // Act
         Result result = value;
 
         // Assert
-        _ = await Assert.That(result.Type.Name).IsEqualTo(new Moniker(nameof(Guid)));
+        _ = await Assert.That(result.Type.Name).IsEqualTo(expected);
     }
 }

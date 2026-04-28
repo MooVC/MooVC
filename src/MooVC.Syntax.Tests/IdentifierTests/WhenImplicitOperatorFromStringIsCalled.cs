@@ -102,6 +102,6 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
 
         // Assert
         _ = await Assert.That(subject == value).IsTrue();
-        _ = await Assert.That(subject).IsEqualTo(expected);
+        _ = await Assert.That(subject.ToString()).IsEqualTo(expected);
     }
 }
