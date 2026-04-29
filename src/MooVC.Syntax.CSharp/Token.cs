@@ -3,16 +3,20 @@ namespace MooVC.Syntax.CSharp
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using MooVC.Syntax.Validation;
+    using Valuify;
     using static MooVC.Syntax.CSharp.Base_Resources;
     using CType = System.Type;
 
     /// <summary>
     /// Represents a token that can be expressed as either a <see cref="Name" /> or a <see cref="Symbol" />.
     /// </summary>
-    public sealed class Token
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    [Valuify]
+    public sealed partial class Token
         : IEnumerable<Qualifier>,
           IValidatableObject
     {
@@ -30,6 +34,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Gets a value indicating whether this instance is <see cref="Unspecified" />.
         /// </summary>
+        [Ignore]
         public bool IsUnspecified => this == Unspecified;
 
         /// <summary>
@@ -166,6 +171,11 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Token)} {{ {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Symbol)} = {DebuggerDisplayFormatter.Format(Symbol)} }}";
         }
     }
 }

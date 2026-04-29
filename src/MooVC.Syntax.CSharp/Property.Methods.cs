@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
         /// Represents accessor methods used by indexers, properties, and events.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Methods
@@ -132,6 +134,11 @@ namespace MooVC.Syntax.CSharp
                     : $"{scope} {keyword}";
 
                 return snippet.Block(options, opening: Snippet.From(options, keyword));
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Methods)} {{ {nameof(Get)} = {DebuggerDisplayFormatter.Format(Get)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Set)} = {DebuggerDisplayFormatter.Format(Set)} }}";
             }
         }
     }

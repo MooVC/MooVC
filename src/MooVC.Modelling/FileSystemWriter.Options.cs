@@ -1,5 +1,7 @@
 namespace MooVC.Modelling
 {
+    using System.Diagnostics;
+
     /// <summary>
     /// Writes generated modelling files to the local file system.
     /// </summary>
@@ -8,6 +10,7 @@ namespace MooVC.Modelling
         /// <summary>
         /// Represents configuration options for <see cref="FileSystemWriter"/>.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         public sealed class Options
         {
             /// <summary>
@@ -41,6 +44,11 @@ namespace MooVC.Modelling
             /// Gets or sets the size of the file buffer to use.
             /// </summary>
             public int BufferSize { get; set; }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(BufferSize)} = {DebuggerDisplayFormatter.Format(BufferSize)} }}";
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.Solution
         /// Represents a platform identifier, such as a processor architecture or target runtime, for use in build
         /// configurations and solution attributes.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Platform
@@ -113,6 +115,11 @@ namespace MooVC.Syntax.Solution
                 {
                     yield return new ValidationResult(ValidateValueInvalid.Format(nameof(Platform), _value), new[] { nameof(Platform) });
                 }
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Platform)} {{ {_value} }}";
             }
         }
     }

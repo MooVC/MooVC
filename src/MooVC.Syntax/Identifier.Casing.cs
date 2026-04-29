@@ -1,5 +1,6 @@
 namespace MooVC.Syntax
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -11,6 +12,7 @@ namespace MooVC.Syntax
         /// <summary>
         /// Represents a syntax element casing.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Casing
@@ -71,6 +73,11 @@ namespace MooVC.Syntax
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Casing)} {{ {_value} }}";
             }
         }
     }

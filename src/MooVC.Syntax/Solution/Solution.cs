@@ -4,6 +4,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.Solution
     /// Represents a syntax construct solution.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Solution
@@ -169,6 +171,11 @@ namespace MooVC.Syntax.Solution
             {
                 elements.Add(new XElement(nameof(Projects), projects));
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Solution)} {{ {nameof(Configurations)} = {DebuggerDisplayFormatter.Format(Configurations)}, {nameof(Files)} = {DebuggerDisplayFormatter.Format(Files)}, {nameof(Folders)} = {DebuggerDisplayFormatter.Format(Folders)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, {nameof(Projects)} = {DebuggerDisplayFormatter.Format(Projects)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)} }}";
         }
     }
 }

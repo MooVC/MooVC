@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Resource
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Resource
     /// <summary>
     /// Represents a resource file attribute assembly.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Assembly
@@ -101,6 +103,11 @@ namespace MooVC.Syntax.Resource
                 .Include(nameof(Alias), _ => !Alias.IsMultiLine, Alias)
                 .And(nameof(Name), _ => !Name.IsMultiLine, Name)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Assembly)} {{ {nameof(Alias)} = {DebuggerDisplayFormatter.Format(Alias)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
         }
     }
 }

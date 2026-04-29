@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.CSharp
         /// Defines naming options used when rendering identifiers.
         /// </summary>
         [AutoInitializeWith(nameof(Camel))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -78,6 +80,11 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Options, Identifier.Casing>(options);
 
                 return options.Casing;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Casing)} = {DebuggerDisplayFormatter.Format(Casing)}, {nameof(IsCamel)} = {DebuggerDisplayFormatter.Format(IsCamel)}, {nameof(IsPascal)} = {DebuggerDisplayFormatter.Format(IsPascal)}, {nameof(UseUnderscore)} = {DebuggerDisplayFormatter.Format(UseUnderscore)} }}";
             }
         }
     }

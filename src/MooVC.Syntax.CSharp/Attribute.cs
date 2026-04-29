@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
@@ -20,6 +21,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# attribute usage that can be attached to declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Attribute
@@ -215,6 +217,11 @@ namespace MooVC.Syntax.CSharp
             string snippet = Snippet.From(options, content);
 
             return value.Append($"({snippet})");
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Attribute)} {{ {nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Target)} = {DebuggerDisplayFormatter.Format(Target)} }}";
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace MooVC.Modelling
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Text;
     using System.Threading;
@@ -10,6 +11,7 @@ namespace MooVC.Modelling
     /// <summary>
     /// Writes modelling files to the local file system.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed partial class FileSystemWriter
         : IWriter
     {
@@ -83,6 +85,11 @@ namespace MooVC.Modelling
                 await stream.WriteAsync(contentBytes, 0, contentBytes.Length, cancellationToken)
                     .ConfigureAwait(false);
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(FileSystemWriter)} {{ {GetHashCode()} }}";
         }
     }
 }

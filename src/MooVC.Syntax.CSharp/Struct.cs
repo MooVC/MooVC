@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Syntax;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# struct declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Struct
@@ -151,6 +153,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return Snippet.From(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Class)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Behavior)} = {DebuggerDisplayFormatter.Format(Behavior)}, {nameof(Constructors)} = {DebuggerDisplayFormatter.Format(Constructors)}, {nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, {nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, {nameof(Fields)} = {DebuggerDisplayFormatter.Format(Fields)}, {nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, {nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, {nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, {nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, {nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
         }
     }
 }

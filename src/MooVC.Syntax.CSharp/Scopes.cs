@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -10,6 +11,7 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# accessibility scope used to qualify type and member declarations.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Scopes
@@ -227,6 +229,11 @@ namespace MooVC.Syntax.CSharp
         private static bool IsProtectedInternal(Scopes left, Scopes right)
         {
             return left._value == Protected._value && right._value == Internal._value;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Scopes)} {{ {_value} }}";
         }
     }
 }

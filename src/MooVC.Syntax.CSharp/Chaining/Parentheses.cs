@@ -2,10 +2,12 @@ namespace MooVC.Syntax.CSharp.Chaining
 {
     using System.Collections.Generic;
     using System.Collections.Immutable;
+    using System.Diagnostics;
 
     /// <summary>
     /// Applies chaining by splitting multi-argument parenthesized calls across lines.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed class Parentheses
         : Snippet.Options.IChain
     {
@@ -200,6 +202,11 @@ namespace MooVC.Syntax.CSharp.Chaining
             {
                 arguments.Add(last);
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Parentheses)} {{ {GetHashCode()} }}";
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Project
     /// <summary>
     /// Represents a MSBuild project attribute item.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Item
@@ -174,6 +176,11 @@ namespace MooVC.Syntax.Project
                 .And(nameof(RemoveMetadata), _ => !RemoveMetadata.IsMultiLine, RemoveMetadata)
                 .And(nameof(Update), _ => !Update.IsMultiLine, Update)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Item)} {{ {nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, {nameof(Exclude)} = {DebuggerDisplayFormatter.Format(Exclude)}, {nameof(Include)} = {DebuggerDisplayFormatter.Format(Include)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(KeepDuplicates)} = {DebuggerDisplayFormatter.Format(KeepDuplicates)}, {nameof(MatchOnMetadata)} = {DebuggerDisplayFormatter.Format(MatchOnMetadata)}, {nameof(MatchOnMetadataOptions)} = {DebuggerDisplayFormatter.Format(MatchOnMetadataOptions)}, {nameof(Metadata)} = {DebuggerDisplayFormatter.Format(Metadata)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Remove)} = {DebuggerDisplayFormatter.Format(Remove)}, {nameof(RemoveMetadata)} = {DebuggerDisplayFormatter.Format(RemoveMetadata)}, {nameof(Update)} = {DebuggerDisplayFormatter.Format(Update)} }}";
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -13,6 +14,7 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element segment.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Name
@@ -150,6 +152,11 @@ namespace MooVC.Syntax
                     ValidateValueRequired.Format(_value, nameof(Name)),
                     new[] { nameof(Name) });
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Name)} {{ {_value} }}";
         }
     }
 }

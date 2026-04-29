@@ -1,6 +1,7 @@
 namespace MooVC.Syntax
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Fluentify;
     using Valuify;
     using static MooVC.Syntax.Snippet_Resources;
@@ -25,6 +26,7 @@ namespace MooVC.Syntax
                 /// Represents a syntax element boundary options.
                 /// </summary>
                 [AutoInitializeWith(nameof(Default))]
+                [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
                 [Fluentify]
                 [Valuify]
                 public sealed partial class Boundaries
@@ -67,6 +69,11 @@ namespace MooVC.Syntax
                     /// <value>The opening.</value>
                     [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(OptionsBlockBoundariesOpeningRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
                     public string Opening { get; internal set; } = "{";
+
+                    private string GetDebuggerDisplay()
+                    {
+                        return $"{nameof(Boundaries)} {{ {nameof(Closing)} = {DebuggerDisplayFormatter.Format(Closing)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Opening)} = {DebuggerDisplayFormatter.Format(Opening)} }}";
+                    }
                 }
             }
         }

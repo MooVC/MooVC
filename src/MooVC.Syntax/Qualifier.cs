@@ -5,6 +5,7 @@ namespace MooVC.Syntax
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element qualifier.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(ImmutableArray<Name>))]
     [SkipAutoInitialization]
     public partial class Qualifier
@@ -408,6 +410,11 @@ namespace MooVC.Syntax
             }
 
             return 0;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Qualifier)} {{ {nameof(IsUnqualified)} = {DebuggerDisplayFormatter.Format(IsUnqualified)}, {nameof(Length)} = {DebuggerDisplayFormatter.Format(Length)} }}";
         }
     }
 }

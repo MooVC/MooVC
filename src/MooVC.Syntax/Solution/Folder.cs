@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents a MSBuild solution attribute folder.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Folder
@@ -119,6 +121,11 @@ namespace MooVC.Syntax.Solution
                 .AndIf(!Items.IsDefaultOrEmpty, nameof(Items), item => !item.IsUndefined, Items)
                 .And(nameof(Name), Name)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Folder)} {{ {nameof(Files)} = {DebuggerDisplayFormatter.Format(Files)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Projects)} = {DebuggerDisplayFormatter.Format(Projects)} }}";
         }
     }
 }

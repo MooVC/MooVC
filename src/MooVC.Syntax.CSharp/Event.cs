@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents an event declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Event
@@ -210,6 +212,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return options;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Event)} {{ {nameof(Behaviours)} = {DebuggerDisplayFormatter.Format(Behaviours)}, {nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, {nameof(Handler)} = {DebuggerDisplayFormatter.Format(Handler)}, {nameof(IsUndefind)} = {DebuggerDisplayFormatter.Format(IsUndefind)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
         }
     }
 }

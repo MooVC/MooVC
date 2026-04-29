@@ -1,8 +1,11 @@
-﻿namespace MooVC.Serialization;
+namespace MooVC.Serialization;
+
+using System.Diagnostics;
 
 /// <summary>
 /// Faciliates implementation of a synchronous implementation of the <see cref="ICloner" /> contract for cloning objects.
 /// </summary>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public abstract class SynchronousCloner
     : ICloner
 {
@@ -30,4 +33,9 @@ public abstract class SynchronousCloner
     /// <returns>The cloned object.</returns>
     protected abstract T PerformClone<T>(T original)
         where T : notnull;
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(SynchronousCloner)} {{ {GetHashCode()} }}";
+    }
 }

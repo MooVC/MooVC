@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax
+namespace MooVC.Syntax
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

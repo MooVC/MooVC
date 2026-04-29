@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -11,6 +12,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents the async/sync modality applied to a member signature.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Modes
@@ -37,6 +39,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Modes)} {{ {_value} }}";
             }
         }
     }

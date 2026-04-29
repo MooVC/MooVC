@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.CSharp
         /// Represents the pass-by modifier applied to an argument expression.
         /// </summary>
         [Monify(Type = typeof(string))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [SkipAutoInitialization]
         public sealed partial class Modes
         {
@@ -102,6 +104,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Modes)} {{ {_value} }}";
             }
         }
     }

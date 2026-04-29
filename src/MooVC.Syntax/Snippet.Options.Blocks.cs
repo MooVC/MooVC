@@ -1,6 +1,7 @@
 namespace MooVC.Syntax
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Fluentify;
     using Valuify;
     using static MooVC.Syntax.Snippet_Resources;
@@ -20,6 +21,7 @@ namespace MooVC.Syntax
             /// Represents a syntax element block options.
             /// </summary>
             [AutoInitializeWith(nameof(Default))]
+            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Fluentify]
             [Valuify]
             public sealed partial class Blocks
@@ -70,6 +72,11 @@ namespace MooVC.Syntax
                 /// <value>The style.</value>
                 [Required(ErrorMessageResourceName = nameof(OptionsBlocksLayoutRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
                 public Layouts Layout { get; internal set; } = Layouts.Allman;
+
+                private string GetDebuggerDisplay()
+                {
+                    return $"{nameof(Blocks)} {{ {nameof(Inline)} = {DebuggerDisplayFormatter.Format(Inline)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Layout)} = {DebuggerDisplayFormatter.Format(Layout)}, {nameof(Markers)} = {DebuggerDisplayFormatter.Format(Markers)} }}";
+                }
             }
         }
     }

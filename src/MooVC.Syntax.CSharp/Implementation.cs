@@ -5,6 +5,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a base-type clause entry used in class and record declarations.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Implementation
@@ -235,6 +237,11 @@ namespace MooVC.Syntax.CSharp
                 .Moniker
                 .ToString()
                 .StartsWith("I", StringComparison.Ordinal);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Implementation)} {{ {nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
         }
     }
 }

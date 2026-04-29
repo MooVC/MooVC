@@ -1,11 +1,13 @@
 namespace MooVC.Modelling
 {
+    using System.Diagnostics;
     using Valuify;
     using static System.IO.Path;
 
     /// <summary>
     /// Represents a file to be written by a modelling writer.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Valuify]
     public sealed partial class File
     {
@@ -55,5 +57,10 @@ namespace MooVC.Modelling
         /// Gets the file path relative to the output root.
         /// </summary>
         public string Path { get; }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(File)} {{ {nameof(Content)} = {DebuggerDisplayFormatter.Format(Content)}, {nameof(Extension)} = {DebuggerDisplayFormatter.Format(Extension)}, {nameof(FullName)} = {DebuggerDisplayFormatter.Format(FullName)}, {nameof(FullPath)} = {DebuggerDisplayFormatter.Format(FullPath)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Path)} = {DebuggerDisplayFormatter.Format(Path)} }}";
+        }
     }
 }

@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a preprocessor directive emitted in generated C# code.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Directive
@@ -189,6 +191,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return string.Empty;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Directive)} {{ {nameof(Alias)} = {DebuggerDisplayFormatter.Format(Alias)}, {nameof(IsStatic)} = {DebuggerDisplayFormatter.Format(IsStatic)}, {nameof(IsSystem)} = {DebuggerDisplayFormatter.Format(IsSystem)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
         }
     }
 }

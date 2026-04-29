@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents a MSBuild solution attribute configuration.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Configurations
@@ -101,6 +103,11 @@ namespace MooVC.Syntax.Solution
                 .IncludeIf(!Builds.IsDefaultOrEmpty, nameof(Builds), Builds)
                 .AndIf(!Platforms.IsDefaultOrEmpty, nameof(Platforms), Platforms)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Configurations)} {{ {nameof(Builds)} = {DebuggerDisplayFormatter.Format(Builds)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Platforms)} = {DebuggerDisplayFormatter.Format(Platforms)} }}";
         }
     }
 }

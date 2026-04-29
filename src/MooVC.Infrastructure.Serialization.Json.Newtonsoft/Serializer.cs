@@ -1,5 +1,6 @@
-﻿namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft;
+namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft;
 
+using System.Diagnostics;
 using System.Text;
 using global::Newtonsoft.Json;
 using MooVC.Compression;
@@ -13,6 +14,7 @@ using static MooVC.Infrastructure.Serialization.Json.Newtonsoft.Resources;
 /// <remarks>
 /// Uses streaming readers/writers to avoid unnecessary intermediate buffers and supports optional compression via the base serializer abstraction.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Serializer
     : SynchronousSerializer
 {
@@ -83,5 +85,10 @@ public sealed class Serializer
 
         text.Flush();
         writer.Flush();
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Serializer)} {{ {nameof(BufferSize)} = {DebuggerDisplayFormatter.Format(BufferSize)}, {nameof(Encoding)} = {DebuggerDisplayFormatter.Format(Encoding)}, {nameof(Json)} = {DebuggerDisplayFormatter.Format(Json)} }}";
     }
 }

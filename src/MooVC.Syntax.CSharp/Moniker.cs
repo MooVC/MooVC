@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents one segment in a qualified identifier.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Moniker
@@ -215,6 +217,11 @@ namespace MooVC.Syntax.CSharp
                     MonikerValidateValueRequired.Format(_value, nameof(Moniker)),
                     new[] { nameof(Moniker) });
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Moniker)} {{ {_value} }}";
         }
     }
 }

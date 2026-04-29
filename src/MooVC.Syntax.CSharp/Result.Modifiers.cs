@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -11,6 +12,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents return modifiers that precede the return type in a C# signature.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Modifiers
@@ -47,6 +49,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Modifiers)} {{ {_value} }}";
             }
         }
     }

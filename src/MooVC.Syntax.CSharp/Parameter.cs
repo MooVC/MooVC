@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# parameter declaration, including modifier, type, name, and default value.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Parameter
@@ -211,6 +213,11 @@ namespace MooVC.Syntax.CSharp
             return Default.IsSingleLine
                 ? $"= {Default}"
                 : string.Empty;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Parameter)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Default)} = {DebuggerDisplayFormatter.Format(Default)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

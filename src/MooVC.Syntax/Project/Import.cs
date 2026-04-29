@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Project
     /// <summary>
     /// Represents a MSBuild project attribute import.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Import
@@ -118,6 +120,11 @@ namespace MooVC.Syntax.Project
                 .And(nameof(Project), _ => Project.IsSingleLine, Project)
                 .And(nameof(Sdk), _ => !Sdk.IsMultiLine, Sdk)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Import)} {{ {nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)}, {nameof(Project)} = {DebuggerDisplayFormatter.Format(Project)}, {nameof(Sdk)} = {DebuggerDisplayFormatter.Format(Sdk)} }}";
         }
     }
 }

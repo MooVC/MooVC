@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Ardalis.GuardClauses;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# member return signature, combining async modality, ref modifiers, and the return type symbol.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Result
@@ -196,6 +198,11 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Result)} {{ {nameof(IsTask)} = {DebuggerDisplayFormatter.Format(IsTask)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(IsVoid)} = {DebuggerDisplayFormatter.Format(IsVoid)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace MooVC.Modelling
 {
+    using System.Diagnostics;
     using System.IO.Compression;
 
     /// <summary>
@@ -10,6 +11,7 @@ namespace MooVC.Modelling
         /// <summary>
         /// Represents configuration options for <see cref="ZipWriter"/>.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         public sealed class Options
         {
             /// <summary>
@@ -43,6 +45,11 @@ namespace MooVC.Modelling
             /// Gets or sets the compression level to use for archive entries.
             /// </summary>
             public CompressionLevel Compression { get; set; }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Compression)} = {DebuggerDisplayFormatter.Format(Compression)} }}";
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents the operator section of a type declaration.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Operators
@@ -140,6 +142,11 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Operators)} {{ {nameof(Binaries)} = {DebuggerDisplayFormatter.Format(Binaries)}, {nameof(Comparisons)} = {DebuggerDisplayFormatter.Format(Comparisons)}, {nameof(Conversions)} = {DebuggerDisplayFormatter.Format(Conversions)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Unaries)} = {DebuggerDisplayFormatter.Format(Unaries)} }}";
         }
     }
 }

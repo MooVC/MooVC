@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents an identifier token used for names in generated C# code.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(Identifier))]
     [SkipAutoInitialization]
     public sealed partial class Variable
@@ -213,6 +215,11 @@ namespace MooVC.Syntax.CSharp
             {
                 yield return new ValidationResult(result.ErrorMessage, new[] { nameof(Variable) });
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Variable)} {{ {_value} }}";
         }
     }
 }

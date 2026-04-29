@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Project
     /// <summary>
     /// Represents a MSBuild project attribute property group.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class PropertyGroup
@@ -110,6 +112,11 @@ namespace MooVC.Syntax.Project
                 .AndIf(!Properties.IsDefaultOrEmpty, nameof(Properties), property => !property.IsUndefined, Properties)
                 .And(nameof(Label), _ => !Label.IsMultiLine, Label)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(PropertyGroup)} {{ {nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)} }}";
         }
     }
 }

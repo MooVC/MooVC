@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Project
 {
+    using System.Diagnostics;
     using Monify;
 
     /// <summary>
@@ -10,6 +11,7 @@ namespace MooVC.Syntax.Project
         /// <summary>
         /// Defines options for the TargetTask MSBuild project attribute.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         public sealed partial class Options
         {
@@ -41,6 +43,11 @@ namespace MooVC.Syntax.Project
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {_value} }}";
             }
         }
     }

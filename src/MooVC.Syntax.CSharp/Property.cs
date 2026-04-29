@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a property declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Property
@@ -259,6 +261,11 @@ namespace MooVC.Syntax.CSharp
             string signature = Separator.Combine(scope, extensibility, type, name);
 
             return Snippet.From(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Property)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Behaviours)} = {DebuggerDisplayFormatter.Format(Behaviours)}, {nameof(Default)} = {DebuggerDisplayFormatter.Format(Default)}, {nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

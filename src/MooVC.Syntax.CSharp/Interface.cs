@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
+    using System.Diagnostics;
     using System.Linq;
     using Fluentify;
     using MooVC.Syntax.CSharp.Syntax;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# interface declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Interface
@@ -77,6 +79,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return Snippet.From(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Interface)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, {nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, {nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, {nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, {nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, {nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
         }
     }
 }

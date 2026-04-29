@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -13,6 +14,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents the modifier applied to a C# parameter that changes passing semantics.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Modes
@@ -141,6 +143,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Modes)} {{ {nameof(IsIn)} = {DebuggerDisplayFormatter.Format(IsIn)}, {nameof(IsNone)} = {DebuggerDisplayFormatter.Format(IsNone)}, {nameof(IsOut)} = {DebuggerDisplayFormatter.Format(IsOut)}, {nameof(IsParams)} = {DebuggerDisplayFormatter.Format(IsParams)}, {nameof(IsRef)} = {DebuggerDisplayFormatter.Format(IsRef)}, {nameof(IsRefReadonly)} = {DebuggerDisplayFormatter.Format(IsRefReadonly)}, {nameof(IsScoped)} = {DebuggerDisplayFormatter.Format(IsScoped)}, {nameof(IsThis)} = {DebuggerDisplayFormatter.Format(IsThis)} }}";
             }
         }
     }

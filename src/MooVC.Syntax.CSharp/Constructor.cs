@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a constructor declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Constructor
@@ -195,6 +197,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return options;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Constructor)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, {nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
         }
     }
 }

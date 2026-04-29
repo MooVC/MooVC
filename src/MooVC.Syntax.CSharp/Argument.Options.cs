@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
         /// Defines formatting and naming options used when rendering arguments.
         /// </summary>
         [AutoInitializeWith(nameof(Call))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -90,6 +92,11 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Formatter)} = {DebuggerDisplayFormatter.Format(Formatter)}, {nameof(Naming)} = {DebuggerDisplayFormatter.Format(Naming)}, {nameof(Snippets)} = {DebuggerDisplayFormatter.Format(Snippets)} }}";
             }
         }
     }

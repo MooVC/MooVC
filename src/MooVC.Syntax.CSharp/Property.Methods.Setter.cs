@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
             /// Represents a property setter accessor configuration.
             /// </summary>
             [AutoInitializeWith(nameof(Default))]
+            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Fluentify]
             [Valuify]
             public sealed partial class Setter
@@ -58,6 +60,11 @@ namespace MooVC.Syntax.CSharp
                 /// </summary>
                 /// <value>The scope.</value>
                 public Scopes Scope { get; internal set; } = Scopes.Unspecified;
+
+                private string GetDebuggerDisplay()
+                {
+                    return $"{nameof(Setter)} {{ {nameof(Behaviour)} = {DebuggerDisplayFormatter.Format(Behaviour)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
+                }
             }
         }
     }

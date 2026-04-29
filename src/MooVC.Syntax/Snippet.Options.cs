@@ -1,6 +1,7 @@
 namespace MooVC.Syntax
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using Fluentify;
     using Valuify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax
         /// Defines options for the Snippet syntax element.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -93,6 +95,11 @@ namespace MooVC.Syntax
             /// <value>The whitespace.</value>
             [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(OptionsWhitespaceRequired), ErrorMessageResourceType = typeof(Snippet_Resources))]
             public Snippet Whitespace { get; internal set; } = Strings.ToSnippet("    ");
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Block)} = {DebuggerDisplayFormatter.Format(Block)}, {nameof(Chaining)} = {DebuggerDisplayFormatter.Format(Chaining)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(MaxLineLength)} = {DebuggerDisplayFormatter.Format(MaxLineLength)}, {nameof(Whitespace)} = {DebuggerDisplayFormatter.Format(Whitespace)} }}";
+            }
         }
     }
 }

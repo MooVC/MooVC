@@ -5,6 +5,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -19,6 +20,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Symbol
@@ -314,6 +316,11 @@ namespace MooVC.Syntax.CSharp
                 .ToArray();
 
             return Separator.Combine(arguments);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Symbol)} {{ {nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, {nameof(IsArray)} = {DebuggerDisplayFormatter.Format(IsArray)}, {nameof(IsNullable)} = {DebuggerDisplayFormatter.Format(IsNullable)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.CSharp
         /// Represents top-level rendering options for type declarations.
         /// </summary>
         [AutoInitializeWith(nameof(Default))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -185,6 +187,11 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Options, Snippet.Options>(options);
 
                 return options.Snippets;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, {nameof(Qualifications)} = {DebuggerDisplayFormatter.Format(Qualifications)}, {nameof(Snippets)} = {DebuggerDisplayFormatter.Format(Snippets)} }}";
             }
         }
     }

@@ -1,6 +1,7 @@
-﻿namespace MooVC.Syntax.CSharp
+namespace MooVC.Syntax.CSharp
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.CSharp.Chaining;
@@ -17,6 +18,7 @@
     /// aggregate or specialized options.
     /// </remarks>
     [AutoInitializeWith(nameof(Default))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Options
@@ -92,6 +94,11 @@
             Guard.Against.Conversion<Options, Type.Options>(options);
 
             return options.Types.ForkOn(types => types.Snippets.IsUnspecified, types => types.WithSnippets(options.Snippets), _ => _);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Options)} {{ {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Namespace)} = {DebuggerDisplayFormatter.Format(Namespace)}, {nameof(Snippets)} = {DebuggerDisplayFormatter.Format(Snippets)}, {nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
         }
     }
 }

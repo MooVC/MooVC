@@ -1,10 +1,12 @@
 namespace MooVC.Modelling
 {
+    using System.Diagnostics;
     using System.IO;
 
     /// <summary>
     /// Provides file system operations for modelling writers.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed class FileSystem
         : IFileSystem
     {
@@ -61,6 +63,11 @@ namespace MooVC.Modelling
         public string GetFullPath(string path)
         {
             return Path.GetFullPath(path);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(FileSystem)} {{ {GetHashCode()} }}";
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
     using Fluentify;
@@ -13,6 +14,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents a MSBuild solution attribute file.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class File
@@ -79,6 +81,11 @@ namespace MooVC.Syntax.Solution
             {
                 yield return new ValidationResult(ValidateValueInvalid.Format(nameof(Path), nameof(File), _value), new[] { nameof(File) });
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(File)} {{ {_value} }}";
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿namespace MooVC.Infrastructure.Compression.LZ4;
+namespace MooVC.Infrastructure.Compression.LZ4;
 
+using System.Diagnostics;
 using System.IO;
 using K4os.Compression.LZ4.Streams;
 using MooVC.Compression;
@@ -10,6 +11,7 @@ using MooVC.Compression;
 /// <remarks>
 /// Uses <see cref="LZ4Stream" /> wrappers for stream transformation and materializes results in memory for compatibility with synchronous abstractions.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Compressor
     : SynchronousCompressor
 {
@@ -66,5 +68,10 @@ public sealed class Compressor
         decoded.CopyTo(result);
 
         return result;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Compressor)} {{ {nameof(Decoder)} = {DebuggerDisplayFormatter.Format(Decoder)}, {nameof(Encoder)} = {DebuggerDisplayFormatter.Format(Encoder)} }}";
     }
 }

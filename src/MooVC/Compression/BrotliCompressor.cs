@@ -1,6 +1,7 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Compression;
 
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
@@ -10,6 +11,7 @@ using System.IO.Compression;
 /// <remarks>
 /// This implementation delegates stream wrapping to <see cref="BrotliStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class BrotliCompressor
     : StreamCompressor
 {
@@ -43,6 +45,11 @@ public sealed class BrotliCompressor
     protected override Stream CreateDecompressor(CompressionLevel level, Stream source)
     {
         return new BrotliStream(source, CompressionMode.Decompress, true);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(BrotliCompressor)} {{ {GetHashCode()} }}";
     }
 }
 #endif

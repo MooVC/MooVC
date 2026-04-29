@@ -1,6 +1,7 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Serialization.Json;
 
+using System.Diagnostics;
 using System.Text.Json;
 using static MooVC.Serialization.Json.Serializer_Resources;
 using Base = MooVC.Serialization.Serializer;
@@ -11,6 +12,7 @@ using Base = MooVC.Serialization.Serializer;
 /// <remarks>
 /// Uses <see cref="JsonSerializerOptions.Default" /> on .NET 7+ and web defaults on earlier target frameworks when options are not provided.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Serializer
     : Base
 {
@@ -43,6 +45,11 @@ public sealed class Serializer
     protected override Task PerformSerialize<T>(T instance, Stream target, CancellationToken cancellationToken)
     {
         return JsonSerializer.SerializeAsync(target, instance, options: _options, cancellationToken: cancellationToken);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Serializer)} {{ {GetHashCode()} }}";
     }
 }
 #endif

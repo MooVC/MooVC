@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a generic type-parameter constraint clause.
     /// </summary>
     [AutoInitializeWith(nameof(Unspecified))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Constraint
@@ -168,6 +170,11 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Constraint)} {{ {nameof(Base)} = {DebuggerDisplayFormatter.Format(Base)}, {nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(Nature)} = {DebuggerDisplayFormatter.Format(Nature)}, {nameof(New)} = {DebuggerDisplayFormatter.Format(New)} }}";
         }
     }
 }

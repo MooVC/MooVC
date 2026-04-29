@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -21,6 +22,7 @@ namespace MooVC.Syntax.CSharp
                 /// <summary>
                 /// Represents the setter access mode used by property accessors.
                 /// </summary>
+                [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
                 [Monify(Type = typeof(string))]
                 [SkipAutoInitialization]
                 public sealed partial class Modes
@@ -80,6 +82,11 @@ namespace MooVC.Syntax.CSharp
                         }
 
                         return string.Empty;
+                    }
+
+                    private string GetDebuggerDisplay()
+                    {
+                        return $"{nameof(Modes)} {{ {_value} }}";
                     }
                 }
             }

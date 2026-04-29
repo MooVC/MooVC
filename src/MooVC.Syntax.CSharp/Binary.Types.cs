@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -12,6 +13,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents an operator token category used by operator declarations.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Types
@@ -228,6 +230,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Types)} {{ {nameof(IsAdd)} = {DebuggerDisplayFormatter.Format(IsAdd)}, {nameof(IsAnd)} = {DebuggerDisplayFormatter.Format(IsAnd)}, {nameof(IsDivide)} = {DebuggerDisplayFormatter.Format(IsDivide)}, {nameof(IsLeft)} = {DebuggerDisplayFormatter.Format(IsLeft)}, {nameof(IsModulus)} = {DebuggerDisplayFormatter.Format(IsModulus)}, {nameof(IsMultiply)} = {DebuggerDisplayFormatter.Format(IsMultiply)}, {nameof(IsOr)} = {DebuggerDisplayFormatter.Format(IsOr)}, {nameof(IsRight)} = {DebuggerDisplayFormatter.Format(IsRight)}, {nameof(IsSubtract)} = {DebuggerDisplayFormatter.Format(IsSubtract)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(IsXOR)} = {DebuggerDisplayFormatter.Format(IsXOR)} }}";
             }
         }
     }

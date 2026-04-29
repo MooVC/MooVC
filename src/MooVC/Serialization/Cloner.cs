@@ -1,5 +1,6 @@
-﻿namespace MooVC.Serialization;
+namespace MooVC.Serialization;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using static MooVC.Serialization.Cloner_Resources;
 
@@ -9,6 +10,7 @@ using static MooVC.Serialization.Cloner_Resources;
 /// <remarks>
 /// This implementation performs clone operations by serializing and then deserializing the source instance.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Cloner
     : ICloner
 {
@@ -46,5 +48,10 @@ public sealed class Cloner
         return await _serializer
             .Deserialize<T>(data, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Cloner)} {{ {GetHashCode()} }}";
     }
 }

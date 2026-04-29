@@ -1,5 +1,6 @@
-﻿namespace MooVC.Threading;
+namespace MooVC.Threading;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using static MooVC.Threading.Initializer_Resources;
 
@@ -10,6 +11,7 @@ using static MooVC.Threading.Initializer_Resources;
 /// <remarks>
 /// Concurrent callers are coordinated so that only one initializer execution can populate the resource instance.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Initializer<T>
     where T : notnull
 {
@@ -88,5 +90,10 @@ public sealed class Initializer<T>
 
             IsInitialized = true;
         }
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ {nameof(IsInitialized)} = {DebuggerDisplayFormatter.Format(IsInitialized)} }}";
     }
 }

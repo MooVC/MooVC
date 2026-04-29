@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Project
     /// <summary>
     /// Represents a MSBuild project attribute target.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Target
@@ -175,6 +177,11 @@ namespace MooVC.Syntax.Project
                 .And(nameof(Returns), _ => !Returns.IsMultiLine, Returns)
                 .AndIf(!Tasks.IsDefaultOrEmpty, nameof(Tasks), task => !task.IsUndefined, Tasks)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Target)} {{ {nameof(AfterTargets)} = {DebuggerDisplayFormatter.Format(AfterTargets)}, {nameof(BeforeTargets)} = {DebuggerDisplayFormatter.Format(BeforeTargets)}, {nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, {nameof(DependsOnTargets)} = {DebuggerDisplayFormatter.Format(DependsOnTargets)}, {nameof(Inputs)} = {DebuggerDisplayFormatter.Format(Inputs)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(KeepDuplicateOutputs)} = {DebuggerDisplayFormatter.Format(KeepDuplicateOutputs)}, {nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Outputs)} = {DebuggerDisplayFormatter.Format(Outputs)}, {nameof(Returns)} = {DebuggerDisplayFormatter.Format(Returns)}, {nameof(Tasks)} = {DebuggerDisplayFormatter.Format(Tasks)} }}";
         }
     }
 }

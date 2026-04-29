@@ -1,5 +1,6 @@
 namespace MooVC.Syntax
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -21,6 +22,7 @@ namespace MooVC.Syntax
                 /// <summary>
                 /// Represents a syntax element inline style.
                 /// </summary>
+                [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
                 [Monify(Type = typeof(string))]
                 [SkipAutoInitialization]
                 public partial class Styles
@@ -70,6 +72,11 @@ namespace MooVC.Syntax
                     public override string ToString()
                     {
                         return _value;
+                    }
+
+                    private string GetDebuggerDisplay()
+                    {
+                        return $"{nameof(Styles)} {{ {_value} }}";
                     }
                 }
             }

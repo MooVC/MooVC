@@ -1,7 +1,8 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Paging.Serialization;
 
 using System.Collections;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,6 +15,7 @@ using static MooVC.Paging.Serialization.PageConverter_Resources;
 /// <remarks>
 /// This converter serializes page items under the <c>$values</c> property and emits <see cref="Page{T}.Total" /> only when available.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class PageConverter
     : JsonConverter<object>
 {
@@ -108,6 +110,11 @@ public sealed class PageConverter
             ?? throw new JsonException(GetValueFailure.Format(key, type));
 
         return (T)property.GetValue(value)!;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(PageConverter)} {{ {GetHashCode()} }}";
     }
 }
 #endif

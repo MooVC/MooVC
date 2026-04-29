@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents a MSBuild solution attribute item.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Item
@@ -128,6 +130,11 @@ namespace MooVC.Syntax.Solution
                 .And(nameof(Path), _ => Path.IsSingleLine, Path)
                 .And(nameof(Type), _ => Type.IsSingleLine, Type)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Item)} {{ {nameof(Id)} = {DebuggerDisplayFormatter.Format(Id)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Path)} = {DebuggerDisplayFormatter.Format(Path)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

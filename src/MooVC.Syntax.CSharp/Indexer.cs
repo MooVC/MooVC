@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents an indexer declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Indexer
@@ -216,6 +218,11 @@ namespace MooVC.Syntax.CSharp
             string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
 
             return Snippet.From(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Indexer)} {{ {nameof(Behaviours)} = {DebuggerDisplayFormatter.Format(Behaviours)}, {nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Parameter)} = {DebuggerDisplayFormatter.Format(Parameter)}, {nameof(Result)} = {DebuggerDisplayFormatter.Format(Result)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
         }
     }
 }

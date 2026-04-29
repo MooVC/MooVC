@@ -1,6 +1,7 @@
 namespace MooVC.Syntax.CSharp
 {
     using System;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -10,6 +11,7 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents C# extensibility modifiers that describe inheritance and override behavior.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Modifiers
@@ -226,6 +228,11 @@ namespace MooVC.Syntax.CSharp
         private static bool IsOverride(Modifiers left, Modifiers right)
         {
             return (left == Sealed || left == Abstract) && right == Override;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Modifiers)} {{ {_value} }}";
         }
     }
 }

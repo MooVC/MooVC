@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Solution
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using Fluentify;
     using Monify;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.Solution
         /// <summary>
         /// Represents the logical folder path inside a solution folder hierarchy.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Path
@@ -67,6 +69,11 @@ namespace MooVC.Syntax.Solution
                 {
                     yield return new ValidationResult(PathValidateValueInvalid.Format(nameof(Path), _value), new[] { nameof(Path) });
                 }
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Path)} {{ {_value} }}";
             }
         }
     }

@@ -1,5 +1,6 @@
-﻿namespace MooVC.Compression;
+namespace MooVC.Compression;
 
+using System.Diagnostics;
 using System.IO.Compression;
 using Ardalis.GuardClauses;
 using static MooVC.Compression.StreamCompressor_Resources;
@@ -7,6 +8,7 @@ using static MooVC.Compression.StreamCompressor_Resources;
 /// <summary>
 /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
 /// </summary>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public abstract class StreamCompressor
     : Compressor
 {
@@ -84,4 +86,9 @@ public abstract class StreamCompressor
     /// <param name="source">The <see cref="Stream" /> to compress.</param>
     /// <returns>The wrapped <paramref name="source" /> configured for decompression based on the <paramref name="level" />.</returns>
     protected abstract Stream CreateDecompressor(CompressionLevel level, Stream source);
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(StreamCompressor)} {{ {GetHashCode()} }}";
+    }
 }

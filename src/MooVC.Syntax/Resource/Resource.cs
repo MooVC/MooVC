@@ -4,6 +4,7 @@ namespace MooVC.Syntax.Resource
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.Resource
     /// Represents a syntax construct resource.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Resource
@@ -127,6 +129,11 @@ namespace MooVC.Syntax.Resource
                 .AndIf(!Metadata.IsDefaultOrEmpty, nameof(Metadata), entry => !entry.IsUndefined, Metadata)
                 .AndIf(!Headers.IsDefaultOrEmpty, nameof(Headers), header => !header.IsUndefined, Headers)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Resource)} {{ {nameof(Assemblies)} = {DebuggerDisplayFormatter.Format(Assemblies)}, {nameof(Data)} = {DebuggerDisplayFormatter.Format(Data)}, {nameof(Headers)} = {DebuggerDisplayFormatter.Format(Headers)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Metadata)} = {DebuggerDisplayFormatter.Format(Metadata)} }}";
         }
     }
 }

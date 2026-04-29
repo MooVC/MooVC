@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a comparison operator declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Comparison
@@ -126,6 +128,11 @@ namespace MooVC.Syntax.CSharp
             var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({type} left, {type} right)");
 
             return Body.Block(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Comparison)} {{ {nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Operator)} = {DebuggerDisplayFormatter.Format(Operator)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿namespace MooVC.Serialization;
+namespace MooVC.Serialization;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using MooVC.Compression;
 using static MooVC.Serialization.Serializer_Resources;
@@ -7,6 +8,7 @@ using static MooVC.Serialization.Serializer_Resources;
 /// <summary>
 /// Provides a default implementation of the <see cref="ISerializer" /> contract for serializing and deserializing objects.
 /// </summary>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public abstract class Serializer
     : ISerializer
 {
@@ -209,4 +211,9 @@ public abstract class Serializer
     /// <returns>A <see cref="Task" /> that represents the asynchronous serialization operation.</returns>
     protected abstract Task PerformSerialize<T>(T instance, Stream target, CancellationToken cancellationToken)
         where T : notnull;
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Serializer)} {{ {GetHashCode()} }}";
+    }
 }

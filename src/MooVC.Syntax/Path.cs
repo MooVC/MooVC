@@ -2,6 +2,7 @@ namespace MooVC.Syntax
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -12,6 +13,7 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element path.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Path
@@ -120,6 +122,11 @@ namespace MooVC.Syntax
             {
                 yield return new ValidationResult(ValidateValueRequired.Format(_value, nameof(Path)), new[] { nameof(Path) });
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Path)} {{ {nameof(DirectoryName)} = {DebuggerDisplayFormatter.Format(DirectoryName)}, {nameof(Extension)} = {DebuggerDisplayFormatter.Format(Extension)}, {nameof(FileName)} = {DebuggerDisplayFormatter.Format(FileName)}, {nameof(FileNameWithoutExtension)} = {DebuggerDisplayFormatter.Format(FileNameWithoutExtension)}, {nameof(IsEmpty)} = {DebuggerDisplayFormatter.Format(IsEmpty)} }}";
         }
     }
 }

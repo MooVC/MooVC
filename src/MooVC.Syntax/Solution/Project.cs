@@ -4,6 +4,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents a MSBuild solution attribute project.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Project
@@ -141,6 +143,11 @@ namespace MooVC.Syntax.Solution
                 .AndIf(!Platforms.IsDefaultOrEmpty, nameof(Platforms), platform => !platform.IsUndefined, Platforms)
                 .And(nameof(Type), _ => !Type.IsMultiLine, Type)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Project)} {{ {nameof(Builds)} = {DebuggerDisplayFormatter.Format(Builds)}, {nameof(DisplayName)} = {DebuggerDisplayFormatter.Format(DisplayName)}, {nameof(Id)} = {DebuggerDisplayFormatter.Format(Id)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Path)} = {DebuggerDisplayFormatter.Format(Path)}, {nameof(Platforms)} = {DebuggerDisplayFormatter.Format(Platforms)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

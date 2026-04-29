@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
     [AutoInitializeWith(nameof(Unnamed))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Qualification
@@ -287,6 +289,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return signature;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Qualification)} {{ {nameof(IsUnnamed)} = {DebuggerDisplayFormatter.Format(IsUnnamed)}, {nameof(Moniker)} = {DebuggerDisplayFormatter.Format(Moniker)}, {nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
         }
     }
 }

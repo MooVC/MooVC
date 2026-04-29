@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Resource
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.Resource
     /// Metadata is serialized as a <c>metadata</c> element with optional attributes and an optional
     /// nested <c>value</c> element.
     /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Metadata
@@ -122,6 +124,11 @@ namespace MooVC.Syntax.Resource
                 .And(nameof(Name), _ => !Name.IsMultiLine, Name)
                 .And(nameof(Type), _ => !Type.IsMultiLine, Type)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Metadata)} {{ {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(MimeType)} = {DebuggerDisplayFormatter.Format(MimeType)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)}, {nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
         }
     }
 }

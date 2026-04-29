@@ -4,6 +4,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a field declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Field
@@ -230,6 +232,11 @@ namespace MooVC.Syntax.CSharp
             string @readonly = IsReadOnly.ReadOnly();
 
             return Separator.Combine(scope, @static, @readonly, type, name);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Field)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Default)} = {DebuggerDisplayFormatter.Format(Default)}, {nameof(IsReadOnly)} = {DebuggerDisplayFormatter.Format(IsReadOnly)}, {nameof(IsStatic)} = {DebuggerDisplayFormatter.Format(IsStatic)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }

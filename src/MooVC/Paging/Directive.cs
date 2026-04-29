@@ -1,6 +1,7 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Paging;
 
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 using static System.Math;
 
@@ -21,6 +22,7 @@ using static System.Math;
 /// Use <see cref="All" /> to indicate that paging should not be applied.
 /// </para>
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, ushort Page = Directive.FirstPage)
 {
     /// <summary>
@@ -190,6 +192,11 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
     public static Directive operator --(Directive directive)
     {
         return directive - 1;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Directive)} {{ {nameof(IsAll)} = {DebuggerDisplayFormatter.Format(IsAll)}, {nameof(Skip)} = {DebuggerDisplayFormatter.Format(Skip)}, {nameof(Take)} = {DebuggerDisplayFormatter.Format(Take)} }}";
     }
 }
 #endif

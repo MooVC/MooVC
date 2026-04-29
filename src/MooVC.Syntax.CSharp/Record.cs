@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -8,6 +9,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# record declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Record
@@ -52,6 +54,11 @@ namespace MooVC.Syntax.CSharp
             }
 
             return base.Merge(attributes, body, options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Record)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Constructors)} = {DebuggerDisplayFormatter.Format(Constructors)}, {nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, {nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, {nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, {nameof(Fields)} = {DebuggerDisplayFormatter.Format(Fields)}, {nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, {nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, {nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, {nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, {nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
         }
     }
 }

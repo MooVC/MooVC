@@ -1,6 +1,7 @@
-﻿namespace MooVC.Infrastructure.Serialization.Bson.Newtonsoft;
+namespace MooVC.Infrastructure.Serialization.Bson.Newtonsoft;
 
 using System.Collections;
+using System.Diagnostics;
 using System.Text;
 using global::Newtonsoft.Json;
 using global::Newtonsoft.Json.Bson;
@@ -15,6 +16,7 @@ using static MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Resources;
 /// <remarks>
 /// Serializes through <see cref="BsonDataWriter" /> and deserializes through <see cref="BsonDataReader" />, while honoring configured encoding and date/time kind handling.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Serializer
     : SynchronousSerializer
 {
@@ -82,5 +84,10 @@ public sealed class Serializer
 
         writer.Flush();
         binary.Flush();
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Serializer)} {{ {nameof(Encoding)} = {DebuggerDisplayFormatter.Format(Encoding)}, {nameof(Json)} = {DebuggerDisplayFormatter.Format(Json)}, {nameof(Kind)} = {DebuggerDisplayFormatter.Format(Kind)} }}";
     }
 }

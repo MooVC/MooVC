@@ -1,5 +1,6 @@
-﻿namespace MooVC.Compression;
+namespace MooVC.Compression;
 
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
@@ -9,6 +10,7 @@ using System.IO.Compression;
 /// <remarks>
 /// This implementation delegates stream wrapping to <see cref="GZipStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class GZipCompressor
     : StreamCompressor
 {
@@ -42,5 +44,10 @@ public sealed class GZipCompressor
     protected override Stream CreateDecompressor(CompressionLevel level, Stream source)
     {
         return new GZipStream(source, CompressionMode.Decompress, true);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(GZipCompressor)} {{ {GetHashCode()} }}";
     }
 }

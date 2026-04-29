@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -11,6 +12,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents an operator token category used by operator declarations.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Types
@@ -49,6 +51,11 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Types)} {{ {_value} }}";
             }
         }
     }

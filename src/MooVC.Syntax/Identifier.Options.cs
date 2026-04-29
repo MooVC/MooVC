@@ -1,5 +1,6 @@
 namespace MooVC.Syntax
 {
+    using System.Diagnostics;
     using Fluentify;
     using Valuify;
     using Ignore = Valuify.IgnoreAttribute;
@@ -13,6 +14,7 @@ namespace MooVC.Syntax
         /// Defines options for the Identifier syntax element.
         /// </summary>
         [AutoInitializeWith(nameof(Pascal))]
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Fluentify]
         [Valuify]
         public sealed partial class Options
@@ -46,6 +48,11 @@ namespace MooVC.Syntax
             /// <value>A value indicating whether the Options is pascal.</value>
             [Ignore]
             public bool IsPascal => Casing == Casing.Pascal;
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Options)} {{ {nameof(Casing)} = {DebuggerDisplayFormatter.Format(Casing)}, {nameof(IsCamel)} = {DebuggerDisplayFormatter.Format(IsCamel)}, {nameof(IsPascal)} = {DebuggerDisplayFormatter.Format(IsPascal)} }}";
+            }
         }
     }
 }

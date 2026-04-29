@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -13,6 +14,7 @@ namespace MooVC.Syntax.Solution
     /// <summary>
     /// Represents an MSBuild solution build mapping entry.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Build
@@ -107,6 +109,11 @@ namespace MooVC.Syntax.Solution
                 .Include(nameof(Project), _ => !Project.IsMultiLine, Project)
                 .And(nameof(Solution), _ => !Solution.IsMultiLine, Solution)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Build)} {{ {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Project)} = {DebuggerDisplayFormatter.Format(Project)}, {nameof(Solution)} = {DebuggerDisplayFormatter.Format(Solution)} }}";
         }
     }
 }

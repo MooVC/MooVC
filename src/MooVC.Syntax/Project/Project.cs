@@ -4,6 +4,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -17,6 +18,7 @@ namespace MooVC.Syntax.Project
     /// Represents a syntax construct project.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Project
@@ -184,6 +186,11 @@ namespace MooVC.Syntax.Project
             return sdk.Version.IsEmpty
                 ? sdk.Name.ToString()
                 : $"{sdk.Name}/{sdk.Version}";
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Project)} {{ {nameof(Imports)} = {DebuggerDisplayFormatter.Format(Imports)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(ItemGroups)} = {DebuggerDisplayFormatter.Format(ItemGroups)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(PropertyGroups)} = {DebuggerDisplayFormatter.Format(PropertyGroups)}, {nameof(Resources)} = {DebuggerDisplayFormatter.Format(Resources)}, {nameof(Sdks)} = {DebuggerDisplayFormatter.Format(Sdks)}, {nameof(Targets)} = {DebuggerDisplayFormatter.Format(Targets)} }}";
         }
     }
 }

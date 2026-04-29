@@ -1,6 +1,7 @@
 namespace MooVC.Modelling
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.IO.Compression;
@@ -12,6 +13,7 @@ namespace MooVC.Modelling
     /// <summary>
     /// Writes modelling files to a zip archive.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed partial class ZipWriter
         : IWriter
     {
@@ -66,6 +68,11 @@ namespace MooVC.Modelling
                 await stream.WriteAsync(contentBytes, 0, contentBytes.Length, cancellationToken)
                     .ConfigureAwait(false);
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(ZipWriter)} {{ {GetHashCode()} }}";
         }
     }
 }

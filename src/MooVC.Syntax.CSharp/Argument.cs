@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a C# argument expression, including optional name and modifier.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Argument
@@ -165,6 +167,11 @@ namespace MooVC.Syntax.CSharp
             return validationContext
                 .Include(nameof(Name), _ => !Name.IsUnnamed, results, Name)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Argument)} {{ {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
         }
     }
 }

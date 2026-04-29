@@ -1,5 +1,6 @@
-﻿namespace MooVC.Infrastructure.Serialization.MessagePack;
+namespace MooVC.Infrastructure.Serialization.MessagePack;
 
+using System.Diagnostics;
 using global::MessagePack;
 using MooVC.Compression;
 using static System.String;
@@ -12,6 +13,7 @@ using Base = MooVC.Serialization.Serializer;
 /// <remarks>
 /// Delegates serialization to <see cref="MessagePackSerializer" /> using configured <see cref="MessagePackSerializerOptions" /> and optional stream compression.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Serializer
     : Base
 {
@@ -46,5 +48,10 @@ public sealed class Serializer
             instance,
             options: Options,
             cancellationToken: cancellationToken);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Serializer)} {{ {nameof(Options)} = {DebuggerDisplayFormatter.Format(Options)} }}";
     }
 }

@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using MooVC.Syntax.Formatting;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a unary operator declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Unary
@@ -128,6 +130,11 @@ namespace MooVC.Syntax.CSharp
             var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} {name})");
 
             return Body.Block(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Unary)} {{ {nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Operator)} = {DebuggerDisplayFormatter.Format(Operator)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
         }
     }
 }

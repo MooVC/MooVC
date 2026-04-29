@@ -1,5 +1,6 @@
-﻿namespace MooVC.Hosting;
+namespace MooVC.Hosting;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -12,13 +13,14 @@ using static MooVC.Hosting.ThreadSafeHostedService_Resources;
 /// <remarks>
 /// State transitions are guarded with atomic operations to prevent duplicate start or stop execution under concurrent callers.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class ThreadSafeHostedService
     : IHostedService
 {
     private const int Started = 1;
     private const int Stopped = 0;
 
-    private static readonly Action<ILogger, Exception> logTryStopFailure = LoggerMessage.Define(
+    private static readonly Action<ILogger, Exception> _logTryStopFailure = LoggerMessage.Define(
         LogLevel.Warning,
         new EventId(1, name: nameof(TryStop)),
         TryStopFailure);
@@ -110,7 +112,12 @@ public sealed class ThreadSafeHostedService
         }
         catch (Exception ex)
         {
-            logTryStopFailure(_logger, ex);
+            _logTryStopFailure(_logger, ex);
         }
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(ThreadSafeHostedService)} {{ Started: {_state == Started} }}";
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Project
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Project
     /// <summary>
     /// Represents a MSBuild project attribute task output.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Output
@@ -119,6 +121,11 @@ namespace MooVC.Syntax.Project
                 .AndIf(!PropertyName.IsUnnamed, nameof(PropertyName), PropertyName)
                 .AndIf(!TaskParameter.IsUnnamed, nameof(TaskParameter), TaskParameter)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Output)} {{ {nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(ItemName)} = {DebuggerDisplayFormatter.Format(ItemName)}, {nameof(PropertyName)} = {DebuggerDisplayFormatter.Format(PropertyName)}, {nameof(TaskParameter)} = {DebuggerDisplayFormatter.Format(TaskParameter)} }}";
         }
     }
 }

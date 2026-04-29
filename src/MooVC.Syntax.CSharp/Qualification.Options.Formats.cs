@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Represents formatting options for qualified symbol names.
             /// </summary>
+            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]
             public sealed partial class Formats
@@ -65,6 +67,11 @@ namespace MooVC.Syntax.CSharp
                 public override string ToString()
                 {
                     return _value;
+                }
+
+                private string GetDebuggerDisplay()
+                {
+                    return $"{nameof(Formats)} {{ {nameof(IsFull)} = {DebuggerDisplayFormatter.Format(IsFull)}, {nameof(IsGlobal)} = {DebuggerDisplayFormatter.Format(IsGlobal)}, {nameof(IsMinimum)} = {DebuggerDisplayFormatter.Format(IsMinimum)} }}";
                 }
             }
         }

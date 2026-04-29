@@ -1,7 +1,8 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Paging;
 
 using System.Collections;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using MooVC.Linq;
@@ -20,6 +21,7 @@ using MooVC.Paging.Serialization;
 /// </para>
 /// </remarks>
 [JsonConverter(typeof(PageConverter))]
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed record Page<T>
     : IReadOnlyList<T>
 {
@@ -142,6 +144,11 @@ public sealed record Page<T>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return _values.GetEnumerator();
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ {nameof(Count)} = {DebuggerDisplayFormatter.Format(Count)}, {nameof(Directive)} = {DebuggerDisplayFormatter.Format(Directive)}, {nameof(HasTotal)} = {DebuggerDisplayFormatter.Format(HasTotal)}, {nameof(Total)} = {DebuggerDisplayFormatter.Format(Total)} }}";
     }
 }
 #endif

@@ -2,6 +2,7 @@ namespace MooVC.Syntax.Solution
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using Fluentify;
     using Monify;
@@ -15,6 +16,7 @@ namespace MooVC.Syntax.Solution
         /// <summary>
         /// Represents the display name of a solution project entry.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Name
@@ -50,6 +52,11 @@ namespace MooVC.Syntax.Solution
                         NameValidateValueInvalid.Format(nameof(DisplayName), nameof(Project), _value),
                         new[] { nameof(Name) });
                 }
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Name)} {{ {_value} }}";
             }
         }
     }

@@ -1,8 +1,11 @@
-﻿namespace MooVC.Compression;
+namespace MooVC.Compression;
+
+using System.Diagnostics;
 
 /// <summary>
 /// Abstract base class for implementing a synchronous data compressor.
 /// </summary>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public abstract class SynchronousCompressor
     : Compressor
 {
@@ -47,4 +50,9 @@ public abstract class SynchronousCompressor
     /// <param name="source">The stream to decompress.</param>
     /// <returns>The decompressed stream.</returns>
     protected abstract Stream PerformDecompress(Stream source);
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(SynchronousCompressor)} {{ {GetHashCode()} }}";
+    }
 }

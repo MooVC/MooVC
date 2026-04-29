@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Solution
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
     using Fluentify;
@@ -19,6 +20,7 @@ namespace MooVC.Syntax.Solution
         /// Represents a build configuration type, such as Debug or Release, used to distinguish different build
         /// variants in a solution.
         /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class BuildType
@@ -95,6 +97,11 @@ namespace MooVC.Syntax.Solution
                 {
                     yield return new ValidationResult(ValidateValueInvalid.Format(nameof(BuildType), _value), new[] { nameof(BuildType) });
                 }
+            }
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(BuildType)} {{ {_value} }}";
             }
         }
     }

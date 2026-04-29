@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Defines formatting styles for rendering attributes.
             /// </summary>
+            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]
             public sealed partial class Styles
@@ -52,6 +54,11 @@ namespace MooVC.Syntax.CSharp
                 public override string ToString()
                 {
                     return _value;
+                }
+
+                private string GetDebuggerDisplay()
+                {
+                    return $"{nameof(Styles)} {{ {_value} }}";
                 }
             }
         }

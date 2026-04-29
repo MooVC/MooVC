@@ -2,10 +2,12 @@ namespace MooVC.Syntax.CSharp.Chaining
 {
     using System.Collections.Generic;
     using System.Collections.Immutable;
+    using System.Diagnostics;
 
     /// <summary>
     /// Applies chaining by breaking method-call chains into one call per line.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed class OneDotPerLine
         : Snippet.Options.IChain
     {
@@ -298,6 +300,11 @@ namespace MooVC.Syntax.CSharp.Chaining
             {
                 braceDepth--;
             }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(OneDotPerLine)} {{ {GetHashCode()} }}";
         }
     }
 }

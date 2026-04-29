@@ -4,6 +4,7 @@ namespace MooVC.Syntax.Resource
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Xml.Linq;
     using Fluentify;
     using MooVC.Syntax.Validation;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Resource
     /// <summary>
     /// Represents a resource file attribute resource.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Item
@@ -139,6 +141,11 @@ namespace MooVC.Syntax.Resource
                 .AndIf(!Designer.IsEmpty, nameof(Designer), path => !path.IsEmpty, Designer)
                 .And(nameof(Location), path => !path.IsEmpty, Location)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Item)} {{ {nameof(CustomToolNamespace)} = {DebuggerDisplayFormatter.Format(CustomToolNamespace)}, {nameof(Designer)} = {DebuggerDisplayFormatter.Format(Designer)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Location)} = {DebuggerDisplayFormatter.Format(Location)}, {nameof(Visibility)} = {DebuggerDisplayFormatter.Format(Visibility)} }}";
         }
     }
 }

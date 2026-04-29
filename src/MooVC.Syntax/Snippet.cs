@@ -5,6 +5,7 @@ namespace MooVC.Syntax
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Ardalis.GuardClauses;
@@ -18,6 +19,7 @@ namespace MooVC.Syntax
     /// Represents a syntax element snippet.
     /// </summary>
     [AutoInitializeWith(nameof(Empty))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(ImmutableArray<string>))]
     public sealed partial class Snippet
         : IValidatableObject
@@ -637,6 +639,11 @@ namespace MooVC.Syntax
             }
 
             return new Snippet(ImmutableArray.Create(blocked, 0, index));
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Snippet)} {{ {nameof(IsEmpty)} = {DebuggerDisplayFormatter.Format(IsEmpty)}, {nameof(IsMultiLine)} = {DebuggerDisplayFormatter.Format(IsMultiLine)}, {nameof(IsSingleLine)} = {DebuggerDisplayFormatter.Format(IsSingleLine)}, {nameof(Lines)} = {DebuggerDisplayFormatter.Format(Lines)} }}";
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -16,6 +17,7 @@ namespace MooVC.Syntax.CSharp
     /// Represents a user-defined conversion operator declaration model.
     /// </summary>
     [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Conversion
@@ -187,6 +189,11 @@ namespace MooVC.Syntax.CSharp
             var signature = Snippet.From($"{scope} static {mode} operator {result}({input} subject)");
 
             return Body.Block(options, signature);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Conversion)} {{ {nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, {nameof(Direction)} = {DebuggerDisplayFormatter.Format(Direction)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Target)} = {DebuggerDisplayFormatter.Format(Target)} }}";
         }
     }
 }

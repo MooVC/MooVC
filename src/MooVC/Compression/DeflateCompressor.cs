@@ -1,5 +1,6 @@
-﻿namespace MooVC.Compression;
+namespace MooVC.Compression;
 
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
@@ -9,6 +10,7 @@ using System.IO.Compression;
 /// <remarks>
 /// This implementation delegates stream wrapping to <see cref="DeflateStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
 /// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class DeflateCompressor
     : StreamCompressor
 {
@@ -42,5 +44,10 @@ public sealed class DeflateCompressor
     protected override Stream CreateDecompressor(CompressionLevel level, Stream source)
     {
         return new DeflateStream(source, CompressionMode.Decompress, true);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ }}";
     }
 }

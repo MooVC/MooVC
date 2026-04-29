@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -8,6 +9,7 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents class/struct constraints applied to generic type parameters.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Natures
@@ -79,6 +81,11 @@ namespace MooVC.Syntax.CSharp
         public override string ToString()
         {
             return _value;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Natures)} {{ {_value} }}";
         }
     }
 }

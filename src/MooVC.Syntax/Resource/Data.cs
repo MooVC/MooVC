@@ -3,6 +3,7 @@ namespace MooVC.Syntax.Resource
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml.Linq;
     using Fluentify;
@@ -14,6 +15,7 @@ namespace MooVC.Syntax.Resource
     /// <summary>
     /// Represents a resource file attribute data.
     /// </summary>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]
     [Valuify]
     public sealed partial class Data
@@ -129,6 +131,11 @@ namespace MooVC.Syntax.Resource
                 .And(nameof(Name), _ => !Name.IsMultiLine, Name)
                 .And(nameof(Type), _ => !Type.IsMultiLine, Type)
                 .Results;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Data)} {{ {nameof(Comment)} = {DebuggerDisplayFormatter.Format(Comment)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(MimeType)} = {DebuggerDisplayFormatter.Format(MimeType)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)}, {nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace MooVC.Syntax
 {
     using System.Collections.Immutable;
+    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;
@@ -20,6 +21,7 @@ namespace MooVC.Syntax
             /// Represents a syntax element boundary options.
             /// </summary>
             [AutoInitializeWith(nameof(Default))]
+            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(ImmutableArray<IChain>))]
             public sealed partial class Strategies
             {
@@ -53,6 +55,11 @@ namespace MooVC.Syntax
                     }
 
                     return options.ToImmutableArray();
+                }
+
+                private string GetDebuggerDisplay()
+                {
+                    return $"{nameof(Strategies)} {{ {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, Length: {_value.Length} }}";
                 }
             }
         }
