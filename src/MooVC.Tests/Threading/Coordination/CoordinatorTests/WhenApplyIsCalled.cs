@@ -17,21 +17,28 @@ public sealed class WhenApplyIsCalled
         _coordinator.Dispose();
     }
 
-    [Fact]
-    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
+    [Test]
+    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
     {
         // Arrange
-        string? subject = default;
+        string expected = Guid.NewGuid().ToString();
+        ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
+        var subject = new Coordinator<ITestCoordinatable>();
+
+        _ = context.GetKey().Returns(expected);
 
         // Act
-        Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
+        IContext<ITestCoordinatable> coordination = await subject
+            .Apply(context, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(subject));
+        using (coordination)
+        {
+            _ = context.Received(1).GetKey();
+        }
     }
 
-    [Fact]
+    [Test]
     public async Task GivenADisposedCoordinatorThenAnObjectDisposedExceptionIsThrown()
     {
         // Arrange
@@ -41,10 +48,67 @@ public sealed class WhenApplyIsCalled
         Func<Task> act = async () => await _coordinator.Apply("N/A", CancellationToken.None);
 
         // Assert
-        await Should.ThrowAsync<ObjectDisposedException>(act);
+        _ = await Assert.That(act).Throws<ObjectDisposedException>();
     }
 
-    [Fact]
+    [Test]
+    public async Task GivenAnEmptyContextThenAnArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        string? subject = default;
+
+        // Act
+        Func<Task> act = async () => await _coordinator.Apply(subject!, CancellationToken.None);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(subject));
+    }
+
+    [Test]
+    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
+    {
+        // Arrange
+        object context = Substitute.For<object>();
+        var subject = new Coordinator<object>();
+
+        // Act
+        IContext<object> coordination = await subject
+            .Apply(context, CancellationToken.None);
+
+        using (coordination)
+        {
+            _ = context.Received(1).GetHashCode();
+        }
+    }
+
+    [Test]
+    public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrown()
+    {
+        // Arrange
+        string subject = "Test";
+        using var semaphore = new SemaphoreSlim(0, 1);
+
+        // Act
+        _ = Task.Run(async () =>
+        {
+            using (await _coordinator.Apply(subject, CancellationToken.None))
+            {
+                _ = semaphore.Release();
+                await Task.Delay(TimeSpan.FromSeconds(10));
+            }
+        });
+
+        await semaphore.WaitAsync();
+
+        // Act
+        Func<Task> act = async () => await _coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
+
+        // Assert
+        _ = await Assert.That(act).Throws<TimeoutException>();
+    }
+
+    [Test]
     public async Task GivenMultipleThreadsNoConcurrencyExceptionsAreThrown()
     {
         // Arrange
@@ -69,71 +133,7 @@ public sealed class WhenApplyIsCalled
         await Task.WhenAll(tasks);
 
         // Assert
-        counter.ShouldBe(ExpectedCount);
-    }
-
-    [Fact]
-    public async Task GivenATimedOutRequestThenATimeoutExceptionIsThrown()
-    {
-        // Arrange
-        string subject = "Test";
-        using var semaphore = new SemaphoreSlim(0, 1);
-
-        // Act
-        _ = Task.Run(async () =>
-        {
-            using (await _coordinator.Apply(subject, CancellationToken.None))
-            {
-                _ = semaphore.Release();
-                await Task.Delay(TimeSpan.FromSeconds(10));
-            }
-        });
-
-        await semaphore.WaitAsync();
-
-        // Act
-        Func<Task> act = async () => await _coordinator.Apply(subject, CancellationToken.None, TimeSpan.FromMilliseconds(250));
-
-        // Assert
-        await Should.ThrowAsync<TimeoutException>(act);
-    }
-
-    [Fact]
-    public async Task GivenACoordinatableContextThenItsKeyIsUsedForCoordination()
-    {
-        // Arrange
-        string expected = Guid.NewGuid().ToString();
-        ITestCoordinatable context = Substitute.For<ITestCoordinatable>();
-        var subject = new Coordinator<ITestCoordinatable>();
-
-        _ = context.GetKey().Returns(expected);
-
-        // Act
-        IContext<ITestCoordinatable> coordination = await subject
-            .Apply(context, CancellationToken.None);
-
-        // Assert
-        using (coordination)
-        {
-            _ = context.Received(1).GetKey();
-        }
-    }
-
-    [Fact]
-    public async Task GivenANonCoordinatableContextThenItsStringIsUsedForCoordination()
-    {
-        // Arrange
-        object context = Substitute.For<object>();
-        var subject = new Coordinator<object>();
-
-        // Act
-        IContext<object> coordination = await subject
-            .Apply(context, CancellationToken.None);
-
-        using (coordination)
-        {
-            _ = context.Received(1).GetHashCode();
-        }
+        _ = await Assert.That(counter).IsEqualTo(ExpectedCount);
     }
 
     private static Task[] CreateTasks(Func<Task> operation, int total)

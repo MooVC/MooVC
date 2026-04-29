@@ -4,8 +4,22 @@ using System.Linq;
 
 public sealed class WhenCombineIsCalled
 {
-    [Fact]
-    public void GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
+    [Test]
+    public async Task GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
+    {
+        // Arrange
+        const int ExpectedValue = 9;
+        IEnumerable<int>? source = default;
+
+        // Act
+        IEnumerable<int> actual = source.Combine(ExpectedValue);
+
+        // Assert
+        _ = await Assert.That(actual.Single()).IsEqualTo(ExpectedValue);
+    }
+
+    [Test]
+    public async Task GivenAnInstanceAndASourceThenTheInstanceIsCombinedWithTheSource()
     {
         // Arrange
         const int ExpectedValue = 9;
@@ -16,40 +30,26 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(ExpectedValue);
 
         // Assert
-        actual.Count().ShouldBe(ExpectedCount);
-        actual.ShouldContain(ExpectedValue);
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).Contains(ExpectedValue);
     }
 
-    [Fact]
-    public void GivenAnInstanceAndANullSourceThenTheInstanceIsCombinedWithTheSource()
-    {
-        // Arrange
-        const int ExpectedValue = 9;
-        IEnumerable<int>? source = default;
-
-        // Act
-        IEnumerable<int> actual = source.Combine(ExpectedValue);
-
-        // Assert
-        actual.ShouldHaveSingleItem().ShouldBe(ExpectedValue);
-    }
-
-    [Fact]
-    public void GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
+    [Test]
+    public async Task GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
         IEnumerable<int>? source = default;
-        IEnumerable<int>? expected = default;
+        IEnumerable<int>? expected = [4, 5, 6];
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
     }
 
-    [Fact]
-    public void GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
+    [Test]
+    public async Task GivenInstancesAndASourceThenTheInstancesAreCombinedWithTheSource()
     {
         // Arrange
         const int ExpectedCount = 6;
@@ -60,21 +60,21 @@ public sealed class WhenCombineIsCalled
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.Count().ShouldBe(ExpectedCount);
-        actual.ShouldBe(source!.Concat(expected!));
+        _ = await Assert.That(actual.Count()).IsEqualTo(ExpectedCount);
+        _ = await Assert.That(actual).IsEquivalentTo(source!.Concat(expected!));
     }
 
-    [Fact]
-    public void GivenInstancesAndANullSourceThenTheInstancesAreCombinedWithTheSource()
+    [Test]
+    public async Task GivenNoInstancesAndNoSourceThenAnEmptyEnumerationIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
-        IEnumerable<int>? expected = [4, 5, 6];
+        IEnumerable<int>? expected = default;
 
         // Act
         IEnumerable<int> actual = source.Combine(expected);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

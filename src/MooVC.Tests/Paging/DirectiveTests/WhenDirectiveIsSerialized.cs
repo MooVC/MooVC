@@ -6,7 +6,7 @@ using Serializer = MooVC.Serialization.Json.Serializer;
 
 public sealed class WhenDirectiveIsSerialized
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenTheInstanceIsSerialized()
     {
         // Arrange
@@ -17,7 +17,7 @@ public sealed class WhenDirectiveIsSerialized
         Directive cloned = await cloner.Clone(original, CancellationToken.None);
 
         // Assert
-        cloned.ShouldBe(original);
+        _ = await Assert.That(cloned).IsEqualTo(original);
     }
 }
 #endif

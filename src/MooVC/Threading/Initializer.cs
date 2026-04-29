@@ -1,5 +1,6 @@
-﻿namespace MooVC.Threading;
+namespace MooVC.Threading;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using static MooVC.Threading.Initializer_Resources;
 
@@ -7,6 +8,10 @@ using static MooVC.Threading.Initializer_Resources;
 /// Provides support for asynchronous lazy initialization of a resource.
 /// </summary>
 /// <typeparam name="T">The type of the resource to be initialized.</typeparam>
+/// <remarks>
+/// Concurrent callers are coordinated so that only one initializer execution can populate the resource instance.
+/// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Initializer<T>
     where T : notnull
 {
@@ -28,7 +33,7 @@ public sealed class Initializer<T>
     /// Gets a value indicating whether the resource has been initialized.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the resource has been initialized; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the resource has been initialized; otherwise, <see langword="false" />.
     /// </value>
     public bool IsInitialized { get; private set; }
 
@@ -85,5 +90,10 @@ public sealed class Initializer<T>
 
             IsInitialized = true;
         }
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ {nameof(IsInitialized)} = {DebuggerDisplayFormatter.Format(IsInitialized)} }}";
     }
 }

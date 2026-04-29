@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Provides model-driven file generation with dependency injection support and output writers for the local file system or zip archives.</Description>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <RunAnalyzers>false</RunAnalyzers>
+    <PackageReleaseNotes>Improves NuGet discoverability metadata for MooVC.Modelling.</PackageReleaseNotes>
+    <PackageTags>moovc;modelling;code-generation;graph;templates;dotnet</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Graphify" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+    <PackageReference Include="Valuify">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MooVC\MooVC.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ServiceCollectionExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceCollectionExtensions.Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="ServiceCollectionExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceCollectionExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

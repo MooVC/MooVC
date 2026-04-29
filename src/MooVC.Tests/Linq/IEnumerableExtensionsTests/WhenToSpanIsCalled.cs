@@ -2,50 +2,62 @@
 
 public sealed class WhenToSpanIsCalled
 {
-    [Theory]
-    [InlineData(default)]
-    [InlineData(new int[0])]
-    public void GivenAnEmptyEnumerableThenAnEmptySpanIsReturned(IEnumerable<int>? enumerable)
-    {
-        // Act
-        ReadOnlySpan<int> actual = enumerable.ToSpan();
-
-        // Assert
-        actual.IsEmpty.ShouldBeTrue();
-    }
-
-    [Theory]
-    [InlineData(new int[0])]
-    [InlineData(new[] { 1, 2, 3 })]
-    [InlineData(new[] { 2 })]
-    [InlineData(new[] { 3, 2, 1 })]
-    public void GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned(IEnumerable<int> expected)
-    {
-        // Act
-        ReadOnlySpan<int> actual = expected.ToSpan();
-
-        // Assert
-        for (int index = 0; index < expected.Count(); index++)
-        {
-            actual[index].ShouldBe(expected.ElementAt(index));
-        }
-    }
-
-    [Fact]
-    public void GivenANullEnumerableThenAnEmptySpanIsReturned()
+    [Test]
+    public async Task GivenAListWhenTheListMutatesAfterToSpanIsCalledThenTheSpanValuesRemainUnchanged()
     {
         // Arrange
-        IEnumerable<int>? enumerable = null;
+        List<int> source = [1, 2, 3];
+
+        // Act
+        ReadOnlySpan<int> span = source.ToSpan();
+        source[0] = 99;
+        int[] actual = [.. span];
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
+    public async Task GivenAnArrayThenASpanContainingTheElementsOfTheArrayIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        // Act
+        int[] actual = [.. enumerable.ToSpan()];
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
+    public async Task GivenAnEmptyEnumerableThenAnEmptySpanIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> enumerable = [];
 
         // Act
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        actual.IsEmpty.ShouldBeTrue();
+        _ = await Assert.That(actual.IsEmpty).IsTrue();
     }
 
-    [Fact]
-    public void GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
+    [Test]
+    public async Task GivenAnEnumerableThenASpanContainingTheElementsOfTheEnumerableIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> enumerable = new List<int> { 3, 2, 1 };
+
+        // Act
+        int[] actual = [.. enumerable.ToSpan()];
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo([3, 2, 1]);
+    }
+
+    [Test]
+    public async Task GivenAnEnumerableThenTheSpanLengthShouldMatchEnumerableCount()
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3, 4];
@@ -54,6 +66,19 @@ public sealed class WhenToSpanIsCalled
         ReadOnlySpan<int> actual = enumerable.ToSpan();
 
         // Assert
-        actual.Length.ShouldBe(enumerable.Count());
+        _ = await Assert.That(actual.Length).IsEqualTo(enumerable.Count());
+    }
+
+    [Test]
+    public async Task GivenANullEnumerableThenAnEmptySpanIsReturned()
+    {
+        // Arrange
+        IEnumerable<int>? enumerable = default;
+
+        // Act
+        ReadOnlySpan<int> actual = enumerable.ToSpan();
+
+        // Assert
+        _ = await Assert.That(actual.IsEmpty).IsTrue();
     }
 }

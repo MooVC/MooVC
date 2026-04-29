@@ -1,0 +1,185 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
+    using System.Linq;
+    using Ardalis.GuardClauses;
+    using Fluentify;
+    using MooVC.Syntax.Formatting;
+    using MooVC.Syntax.Validation;
+    using Valuify;
+    using Ignore = Valuify.IgnoreAttribute;
+
+    /// <summary>
+    /// Represents a generic type-parameter constraint clause.
+    /// </summary>
+    [AutoInitializeWith(nameof(Unspecified))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Constraint
+        : IEnumerable<Qualifier>,
+          IValidatableObject
+    {
+        /// <summary>
+        /// Gets the unspecified instance.
+        /// </summary>
+        public static readonly Constraint Unspecified = new Constraint();
+        private const string Separator = ", ";
+
+        /// <summary>
+        /// Initializes a new instance of the Constraint class.
+        /// </summary>
+        internal Constraint()
+        {
+        }
+
+        /// <summary>
+        /// Gets the base on the Constraint.
+        /// </summary>
+        /// <value>The base.</value>
+        public Base Base { get; internal set; } = Base.Unspecified;
+
+        /// <summary>
+        /// Gets the interfaces on the Constraint.
+        /// </summary>
+        /// <value>The interfaces.</value>
+        public ImmutableArray<Implementation> Interfaces { get; internal set; } = ImmutableArray<Implementation>.Empty;
+
+        /// <summary>
+        /// Gets a value indicating whether the Constraint is unspecified.
+        /// </summary>
+        /// <value>A value indicating whether the Constraint is unspecified.</value>
+        [Ignore]
+        public bool IsUnspecified => this == Unspecified;
+
+        /// <summary>
+        /// Gets the nature on the Constraint.
+        /// </summary>
+        /// <value>The nature.</value>
+        public Natures Nature { get; internal set; } = Natures.Unspecified;
+
+        /// <summary>
+        /// Gets the new on the Constraint.
+        /// </summary>
+        /// <value>The new.</value>
+        public New New { get; internal set; } = New.NotRequired;
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="Constraint" /> to <see cref="string" />.
+        /// </summary>
+        /// <param name="constraint">The <see cref="Constraint" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
+        public static implicit operator string(Constraint constraint)
+        {
+            Guard.Against.Conversion<Constraint, string>(constraint);
+
+            return constraint.ToString();
+        }
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="Constraint" /> to <see cref="Snippet" />.
+        /// </summary>
+        /// <param name="constraint">The <see cref="Constraint" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
+        public static implicit operator Snippet(Constraint constraint)
+        {
+            Guard.Against.Conversion<Constraint, Snippet>(constraint);
+
+            return Snippet.From(constraint);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through all symbols provided by the interfaces.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            foreach (Qualifier qualifier in Interfaces.SelectMany(@interface => @interface))
+            {
+                yield return qualifier;
+            }
+        }
+
+        /// <summary>
+        /// Returns the string representation of the Constraint.
+        /// </summary>
+        /// <returns>The string representation.</returns>
+        public override string ToString()
+        {
+            return ToSnippet(Snippet.Options.Default);
+        }
+
+        /// <summary>
+        /// Creates a snippet representation of generic constraint conditions.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options);
+
+            if (IsUnspecified)
+            {
+                return Snippet.Empty;
+            }
+
+            string @base = Base;
+            string nature = Nature;
+            string @new = New;
+
+            IEnumerable<string> interfaces = Interfaces.IsDefaultOrEmpty
+                ? Enumerable.Empty<string>()
+                : Interfaces.Select(@interface => @interface.ToString());
+
+            string[] constraints = interfaces
+                .Prepend(@base)
+                .Prepend(nature)
+                .Append(@new)
+                .ToArray();
+
+            return Snippet.From(options, Separator.Combine(constraints));
+        }
+
+        /// <summary>
+        /// Validates the Constraint.
+        /// </summary>
+        /// <remarks>Required members include: Base, Interfaces.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (IsUnspecified)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .Include(nameof(Base), Base)
+                .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUnspecified, Interfaces)
+                .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Constraint)} {{ " +
+                $"{nameof(Base)} = {DebuggerDisplayFormatter.Format(Base)}, " +
+                $"{nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, " +
+                $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, " +
+                $"{nameof(Nature)} = {DebuggerDisplayFormatter.Format(Nature)}, " +
+                $"{nameof(New)} = {DebuggerDisplayFormatter.Format(New)} }}";
+        }
+    }
+}

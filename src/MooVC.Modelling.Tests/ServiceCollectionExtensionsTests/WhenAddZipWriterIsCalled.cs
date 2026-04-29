@@ -1,0 +1,79 @@
+﻿namespace MooVC.Modelling.ServiceCollectionExtensionsTests;
+
+using System.Collections.Generic;
+using System.IO.Compression;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+public sealed class WhenAddZipWriterIsCalled
+{
+    private const CompressionLevel CustomCompressionLevel = CompressionLevel.NoCompression;
+    private const string ZipKey = "Zip";
+
+    [Test]
+    public async Task GivenConfigurationThenOptionsAreBound()
+    {
+        // Arrange
+        var settings = new Dictionary<string, string?>
+        {
+            { $"{ZipWriter.Options.SectionName}:{nameof(ZipWriter.Options.Compression)}", CustomCompressionLevel.ToString() },
+        };
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(settings)
+            .Build();
+        ServiceCollection services = new();
+
+        // Act
+        _ = services.AddZipWriter(configuration);
+        using ServiceProvider provider = services.BuildServiceProvider();
+        IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
+
+        // Assert
+        _ = await Assert.That(options.Value.Compression).IsEqualTo(CustomCompressionLevel);
+    }
+
+    [Test]
+    public async Task GivenNullServicesThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        IServiceCollection services = default!;
+
+        // Act
+        Action action = () => services.AddZipWriter();
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenNullConfigurationThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        ServiceCollection services = new();
+        IConfiguration configuration = default!;
+
+        // Act
+        Action action = () => services.AddZipWriter(configuration);
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenServicesThenWriterIsRegistered()
+    {
+        // Arrange
+        ServiceCollection services = new();
+
+        // Act
+        _ = services.AddZipWriter();
+        using ServiceProvider provider = services.BuildServiceProvider();
+        IWriter writer = provider.GetRequiredKeyedService<IWriter>(ZipKey);
+        IOptionsSnapshot<ZipWriter.Options> options = provider.GetRequiredService<IOptionsSnapshot<ZipWriter.Options>>();
+
+        // Assert
+        _ = await Assert.That(writer).IsTypeOf<ZipWriter>();
+        _ = await Assert.That(options.Value.Compression).IsEqualTo(ZipWriter.Options.Default.Compression);
+    }
+}

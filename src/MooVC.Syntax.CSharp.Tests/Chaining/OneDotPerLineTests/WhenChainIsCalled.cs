@@ -1,0 +1,91 @@
+﻿namespace MooVC.Syntax.CSharp.Chaining.OneDotPerLineTests;
+
+using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Chaining;
+
+public sealed class WhenChainIsCalled
+{
+    [Test]
+    public async Task GivenMultiLineChainWhenLineIsLongThenOutterQuerySplitsByDots()
+    {
+        // Arrange
+        const string value = "var result = query" +
+            ".Where(unit => unit.IsDefined)" +
+            ".OrderBy(unit => unit.Name)" +
+            ".SelectMany(unit => unit.Features" +
+                ".Where(feature => feature.IsDefined)" +
+                ".Select(feature => feature.Name))" +
+            ".Distinct()" +
+            ".ToList();";
+
+        string[] expected =
+        [
+            "var result = query",
+            "    .Where(unit => unit.IsDefined)",
+            "    .OrderBy(unit => unit.Name)",
+            "    .SelectMany(unit => unit.Features.Where(feature => feature.IsDefined).Select(feature => feature.Name))",
+            "    .Distinct()",
+            "    .ToList();",
+        ];
+
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenPropertyAccessWhenLineIsLongThenDoesNotSplitByDots()
+    {
+        // Arrange
+        const string value = "var result = source.Select(item => item.TimeStamp).ToList();";
+
+        string[] expected =
+        [
+            "var result = source",
+            "    .Select(item => item.TimeStamp)",
+            "    .ToList();",
+        ];
+
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
+    {
+        // Arrange
+        const string value = "var result = query.Where(item => item.IsActive).OrderBy(item => item.Name).Select(item => item.Id).ToList();";
+
+        string[] expected =
+        [
+            "var result = query",
+            "    .Where(item => item.IsActive)",
+            "    .OrderBy(item => item.Name)",
+            "    .Select(item => item.Id)",
+            "    .ToList();",
+        ];
+
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+}

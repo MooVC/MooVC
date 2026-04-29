@@ -1,7 +1,8 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Paging;
 
 using System.Collections;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using MooVC.Linq;
@@ -11,7 +12,16 @@ using MooVC.Paging.Serialization;
 /// Represents the result of a request to page a sequence of type <see cref="T" />.
 /// </summary>
 /// <typeparam name="T">The type of the elements paged.</typeparam>
+/// <remarks>
+/// <para>
+/// This type is immutable and materializes the supplied value sequence into an internal array at construction time.
+/// </para>
+/// <para>
+/// Use <see cref="Directive" /> to identify the paging request that produced this result and <see cref="Total" /> when the source sequence size is known.
+/// </para>
+/// </remarks>
 [JsonConverter(typeof(PageConverter))]
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed record Page<T>
     : IReadOnlyList<T>
 {
@@ -50,7 +60,7 @@ public sealed record Page<T>
     /// Gets a value indicating whether this result has a known total for the number of elements.
     /// </summary>
     /// <value>
-    /// <c>true</c> if the total is known; otherwise, <c>false</c>.
+    /// <see langword="true" /> if the total is known; otherwise, <see langword="false" />.
     /// </value>
     [MemberNotNullWhen(true, nameof(Total))]
     public bool HasTotal => Total.HasValue;
@@ -92,6 +102,9 @@ public sealed record Page<T>
     /// <returns>
     /// The <see cref="Directive"/> required to retrieve the next page in the sequence.
     /// </returns>
+    /// <remarks>
+    /// This method preserves <see cref="Directive.Limit" /> and increments <see cref="Directive.Page" /> by one.
+    /// </remarks>
     public Directive Next()
     {
         return Directive + 1;
@@ -103,6 +116,9 @@ public sealed record Page<T>
     /// <returns>
     /// The <see cref="Directive"/> required to retrieve the next page in the sequence.
     /// </returns>
+    /// <remarks>
+    /// This method preserves <see cref="Directive.Limit" /> and decrements <see cref="Directive.Page" /> by one.
+    /// </remarks>
     public Directive Previous()
     {
         return Directive - 1;
@@ -128,6 +144,15 @@ public sealed record Page<T>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return _values.GetEnumerator();
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ " +
+            $"{nameof(Count)} = {DebuggerDisplayFormatter.Format(Count)}, " +
+            $"{nameof(Directive)} = {DebuggerDisplayFormatter.Format(Directive)}, " +
+            $"{nameof(HasTotal)} = {DebuggerDisplayFormatter.Format(HasTotal)}, " +
+            $"{nameof(Total)} = {DebuggerDisplayFormatter.Format(Total)} }}";
     }
 }
 #endif

@@ -1,0 +1,159 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
+    using System.Linq;
+    using Ardalis.GuardClauses;
+    using Fluentify;
+    using MooVC.Syntax;
+    using MooVC.Syntax.Validation;
+    using Valuify;
+    using static MooVC.Syntax.CSharp.Definition_Resources;
+    using Ignore = Valuify.IgnoreAttribute;
+
+    /// <summary>
+    /// Represents a complete C# type definition including namespace and imports.
+    /// </summary>
+    [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Definition
+        : Construct,
+          IEnumerable<Qualifier>
+    {
+        /// <summary>
+        /// Gets the empty instance.
+        /// </summary>
+        public static readonly Definition Undefined = new Definition();
+
+        /// <summary>
+        /// Gets a value indicating whether the Definition is empty.
+        /// </summary>
+        /// <value>A value indicating whether the Definition is empty.</value>
+        [Ignore]
+        public override bool IsUndefined => this == Undefined;
+
+        /// <summary>
+        /// Gets the namespace on the Definition.
+        /// </summary>
+        /// <value>The namespace.</value>
+        [Descriptor("From")]
+        public Qualifier Namespace { get; internal set; } = Qualifier.Unqualified;
+
+        /// <summary>
+        /// Gets the type on the Definition.
+        /// </summary>
+        /// <value>The type.</value>
+        [Hide]
+        public Type Type { get; internal set; }
+
+        /// <summary>
+        /// Gets the usings on the Definition.
+        /// </summary>
+        /// <value>The usings.</value>
+        [Descriptor("Referencing")]
+        public ImmutableArray<Directive> Usings { get; internal set; } = ImmutableArray<Directive>.Empty;
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            return Type.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns the string representation of the Definition.
+        /// </summary>
+        /// <returns>The string representation.</returns>
+        public override string ToString()
+        {
+            return ToSnippet(Options.Default);
+        }
+
+        /// <summary>
+        /// Creates a snippet representation of the C# type syntax.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        public Snippet ToSnippet(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Definition)));
+
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            var type = Type.ToSnippet(options);
+
+            if (type.IsEmpty)
+            {
+                return type;
+            }
+
+            type = type.Chain(options);
+
+            string @namespace = $"namespace {Namespace}";
+            var usings = Usings.ToSnippet(Namespace, options);
+
+            if (!usings.IsEmpty)
+            {
+                type = type.Prepend(options, usings, Snippet.Blank);
+            }
+
+            if (options.Namespace.IsBlock)
+            {
+                return type.Block(options, @namespace);
+            }
+
+            @namespace = string.Concat(@namespace, ";");
+
+            return type.Prepend(options, @namespace, Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Validates the Definition.
+        /// </summary>
+        /// <remarks>Required members include: Type, Namespace, Usings.</remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (IsUndefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .Include(nameof(Type), _ => !Type.IsUndefined, Type)
+                .And(nameof(Namespace), _ => !Namespace.IsUnqualified, Namespace)
+                .AndIf(!Usings.IsDefaultOrEmpty, nameof(Usings), @using => !@using.IsUndefined, Usings)
+                .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Definition)} {{ " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Namespace)} = {DebuggerDisplayFormatter.Format(Namespace)}, " +
+                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)}, " +
+                $"{nameof(Usings)} = {DebuggerDisplayFormatter.Format(Usings)} }}";
+        }
+    }
+}

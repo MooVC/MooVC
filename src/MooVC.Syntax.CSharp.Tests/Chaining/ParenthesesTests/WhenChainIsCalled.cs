@@ -1,0 +1,59 @@
+﻿namespace MooVC.Syntax.CSharp.Chaining.ParenthesesTests;
+
+using System.Collections.Immutable;
+using MooVC.Syntax.CSharp.Chaining;
+
+public sealed class WhenChainIsCalled
+{
+    [Test]
+    public async Task GivenMethodSignatureWhenLineIsLongThenEachParameterIsOnNewLine()
+    {
+        // Arrange
+        Snippet.Options.IChain subject = Parentheses.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        const string value = "public Task Execute(Order order, Customer customer, DateTime timestamp, CancellationToken cancellationToken);";
+
+        string[] expected =
+        [
+            "public Task Execute(",
+            "    Order order,",
+            "    Customer customer,",
+            "    DateTime timestamp,",
+            "    CancellationToken cancellationToken);",
+        ];
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenNestedMethodCallWhenLineIsLongThenOutterParenthesesIsChainedFirst()
+    {
+        // Arrange
+        Snippet.Options.IChain subject = Parentheses.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        const string value = "await instance.Execute(order, GetCustomerById(customerId, cancellationToken), timestamp, cancellationToken);";
+
+        string[] expected =
+        [
+            "await instance.Execute(",
+            "    order,",
+            "    GetCustomerById(customerId, cancellationToken),",
+            "    timestamp,",
+            "    cancellationToken);",
+        ];
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+}

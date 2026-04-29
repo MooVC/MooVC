@@ -5,40 +5,8 @@ using MooVC.Paging;
 
 public sealed class WhenPageIsCalled
 {
-    [Fact]
-    public void GivenNoQueryableThenTheEmptyQueryableIsReturned()
-    {
-        // Arrange
-        IQueryable<int>? queryable = default;
-        Directive directive = default;
-
-        // Act
-        IQueryable<int>? actual = queryable.Page(directive);
-
-        // Assert
-        actual.ShouldBeNull();
-    }
-
-    [Fact]
-    public void GivenAnAllDirectiveThenTheQueryAbleIsReturned()
-    {
-        // Arrange
-        var faker = new Faker();
-
-        IQueryable<int> expected = faker
-            .Random
-            .Digits(1000)
-            .AsQueryable();
-
-        // Act
-        IQueryable<int>? actual = expected.Page(Directive.All);
-
-        // Assert
-        actual.ShouldBe(expected);
-    }
-
-    [Fact]
-    public void GivenADirectiveThenTheSetIsFilteredIsCalled()
+    [Test]
+    public async Task GivenADirectiveThenTheSetIsFilteredIsCalled()
     {
         // Arrange
         var faker = new Faker();
@@ -55,7 +23,39 @@ public sealed class WhenPageIsCalled
         IQueryable<int>? actual = queryable.Page(directive);
 
         // Assert
-        actual.ShouldBe(expected);
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenAnAllDirectiveThenTheQueryAbleIsReturned()
+    {
+        // Arrange
+        var faker = new Faker();
+
+        IQueryable<int> expected = faker
+            .Random
+            .Digits(1000)
+            .AsQueryable();
+
+        // Act
+        IQueryable<int>? actual = expected.Page(Directive.All);
+
+        // Assert
+        _ = await Assert.That(actual).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenNoQueryableThenTheEmptyQueryableIsReturned()
+    {
+        // Arrange
+        IQueryable<int>? queryable = default;
+        Directive directive = default;
+
+        // Act
+        IQueryable<int>? actual = queryable.Page(directive);
+
+        // Assert
+        _ = await Assert.That(actual).IsNull();
     }
 }
 #endif

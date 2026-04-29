@@ -1,11 +1,16 @@
-﻿namespace MooVC.Serialization;
+namespace MooVC.Serialization;
 
+using System.Diagnostics;
 using Ardalis.GuardClauses;
 using static MooVC.Serialization.Cloner_Resources;
 
 /// <summary>
 /// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.
 /// </summary>
+/// <remarks>
+/// This implementation performs clone operations by serializing and then deserializing the source instance.
+/// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Cloner
     : ICloner
 {
@@ -34,7 +39,7 @@ public sealed class Cloner
     public async Task<T> Clone<T>(T original, CancellationToken cancellationToken)
         where T : notnull
     {
-        _ = Guard.Against.Null(original,  message: CloneAsyncOriginalRequired);
+        _ = Guard.Against.Null(original, message: CloneAsyncOriginalRequired);
 
         IEnumerable<byte> data = await _serializer
             .Serialize(original, cancellationToken)
@@ -43,5 +48,10 @@ public sealed class Cloner
         return await _serializer
             .Deserialize<T>(data, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(Cloner)} {{ {GetHashCode()} }}";
     }
 }

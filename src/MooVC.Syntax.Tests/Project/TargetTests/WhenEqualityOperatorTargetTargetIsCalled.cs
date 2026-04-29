@@ -1,0 +1,46 @@
+﻿namespace MooVC.Syntax.Project.TargetTests;
+
+public sealed class WhenEqualityOperatorTargetTargetIsCalled
+{
+    [Test]
+    public async Task GivenBothNullThenReturnsTrue()
+    {
+        // Arrange
+        Target? left = default;
+        Target? right = default;
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenDifferentValuesThenReturnsFalse()
+    {
+        // Arrange
+        Target left = TargetTestsData.Create();
+        Target right = TargetTestsData.Create(label: Snippet.From("Other"));
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenEqualValuesThenReturnsTrue()
+    {
+        // Arrange
+        Target left = TargetTestsData.Create();
+        Target right = TargetTestsData.Create();
+
+        // Act
+        bool result = left == right;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+}

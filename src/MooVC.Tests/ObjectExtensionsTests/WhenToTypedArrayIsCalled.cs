@@ -2,77 +2,21 @@
 
 public sealed class WhenToTypedArrayIsCalled
 {
-    [Fact]
-    public void GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
+    [Test]
+    public async Task GivenAnArrayThenTheSameArrayIsReturned()
     {
         // Arrange
-        var expected = TimeSpan.FromHours(1);
+        int[] expected = [1, 2, 3];
 
         // Act
-        TimeSpan[] value = expected.ToTypedArray();
+        int[]? value = expected.ToTypedArray();
 
         // Assert
-        value.Length.ShouldBe(1);
-        value.Single().ShouldBe(expected);
+        _ = await Assert.That(value).IsSameReferenceAs(expected);
     }
 
-    [Fact]
-    public void GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
-    {
-        // Arrange
-        TimeSpan? expected = default;
-
-        // Act
-        TimeSpan?[] value = expected.ToTypedArray();
-
-        // Assert
-        value.Length.ShouldBe(1);
-        value.Single().ShouldBeNull();
-    }
-
-    [Fact]
-    public void GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
-    {
-        // Arrange
-        object expected = new();
-
-        // Act
-        object[] value = expected.ToTypedArray();
-
-        // Assert
-        value.Length.ShouldBe(1);
-        value.Single().ShouldBeSameAs(expected);
-    }
-
-    [Fact]
-    public void GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
-    {
-        // Arrange
-        object? expected = default;
-
-        // Act
-        object?[] value = expected.ToTypedArray();
-
-        // Assert
-        value.Length.ShouldBe(1);
-        value.Single().ShouldBeNull();
-    }
-
-    [Fact]
-    public void GivenAnArrayThenTheSameArrayIsReturned()
-    {
-        // Arrange
-        int[] expected = { 1, 2, 3 };
-
-        // Act
-        int[] value = expected.ToTypedArray();
-
-        // Assert
-        value.ShouldBeSameAs(expected);
-    }
-
-    [Fact]
-    public void GivenANullArrayThenNullIsReturned()
+    [Test]
+    public async Task GivenANullArrayThenNullIsReturned()
     {
         // Arrange
         int[]? expected = default;
@@ -81,6 +25,62 @@ public sealed class WhenToTypedArrayIsCalled
         int[]? value = expected.ToTypedArray();
 
         // Assert
-        value.ShouldBeNull();
+        _ = await Assert.That(value).IsNull();
+    }
+
+    [Test]
+    public async Task GivenANullReferenceTypeThenAnArrayContainingTheNullValueIsReturned()
+    {
+        // Arrange
+        object? expected = default;
+
+        // Act
+        object?[] value = expected.ToTypedArray();
+
+        // Assert
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsNull();
+    }
+
+    [Test]
+    public async Task GivenANullValueTypeThenAnArrayContainingTheNullValueIsReturned()
+    {
+        // Arrange
+        TimeSpan? expected = default;
+
+        // Act
+        TimeSpan?[] value = expected.ToTypedArray();
+
+        // Assert
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsNull();
+    }
+
+    [Test]
+    public async Task GivenAReferenceTypeThenAnArrayContainingTheValueIsReturned()
+    {
+        // Arrange
+        object expected = new();
+
+        // Act
+        object[] value = expected.ToTypedArray();
+
+        // Assert
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsSameReferenceAs(expected);
+    }
+
+    [Test]
+    public async Task GivenAValueTypeThenAnArrayContainingTheValueIsReturned()
+    {
+        // Arrange
+        var expected = TimeSpan.FromHours(1);
+
+        // Act
+        TimeSpan[] value = expected.ToTypedArray();
+
+        // Assert
+        _ = await Assert.That(value.Length).IsEqualTo(1);
+        _ = await Assert.That(value.Single()).IsEqualTo(expected);
     }
 }

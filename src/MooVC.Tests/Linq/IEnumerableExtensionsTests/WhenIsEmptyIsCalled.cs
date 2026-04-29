@@ -2,8 +2,8 @@
 
 public sealed class WhenIsEmptyIsCalled
 {
-    [Fact]
-    public void GivenAnEmptySourceThenAPositiveResponseIsReturned()
+    [Test]
+    public async Task GivenAnEmptySourceThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [];
@@ -12,24 +12,11 @@ public sealed class WhenIsEmptyIsCalled
         bool isEmpty = source.IsEmpty();
 
         // Assert
-        isEmpty.ShouldBeTrue();
+        _ = await Assert.That(isEmpty).IsTrue();
     }
 
-    [Fact]
-    public void GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
-    {
-        // Arrange
-        IEnumerable<int> source = new int[1];
-
-        // Act
-        bool isEmpty = source.IsEmpty();
-
-        // Assert
-        isEmpty.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
+    [Test]
+    public async Task GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = new int[3];
@@ -38,6 +25,19 @@ public sealed class WhenIsEmptyIsCalled
         bool isEmpty = source.IsEmpty();
 
         // Assert
-        isEmpty.ShouldBeFalse();
+        _ = await Assert.That(isEmpty).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> source = new int[1];
+
+        // Act
+        bool isEmpty = source.IsEmpty();
+
+        // Assert
+        _ = await Assert.That(isEmpty).IsFalse();
     }
 }

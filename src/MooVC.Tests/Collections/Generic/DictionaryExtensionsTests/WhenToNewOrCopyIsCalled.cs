@@ -1,23 +1,9 @@
-namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
+﻿namespace MooVC.Collections.Generic.DictionaryExtensionsTests;
 
 public sealed class WhenToNewOrCopyIsCalled
 {
-    [Fact]
-    public void GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
-    {
-        // Arrange
-        IDictionary<string, object>? original = default;
-
-        // Act
-        IDictionary<string, object>? snapshot = original.ToNewOrCopy();
-
-        // Assert
-        snapshot.ShouldNotBeNull();
-        snapshot.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void GivenADictionaryThenACloneIsReturned()
+    [Test]
+    public async Task GivenADictionaryThenACloneIsReturned()
     {
         // Arrange
         IDictionary<string, int>? original = new Dictionary<string, int>
@@ -30,12 +16,12 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        snapshot.ShouldNotBeSameAs(original);
-        snapshot.ShouldBe(original);
+        _ = await Assert.That(snapshot).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(snapshot).IsEquivalentTo(original);
     }
 
-    [Fact]
-    public void GivenAnEmptyDictionaryThenAnEmptyCloneIsReturned()
+    [Test]
+    public async Task GivenAnEmptyDictionaryThenAnEmptyCloneIsReturned()
     {
         // Arrange
         IDictionary<string, int>? original = new Dictionary<string, int>();
@@ -44,7 +30,21 @@ public sealed class WhenToNewOrCopyIsCalled
         IDictionary<string, int>? snapshot = original.ToNewOrCopy();
 
         // Assert
-        snapshot.ShouldNotBeSameAs(original);
-        snapshot.ShouldBe(original);
+        _ = await Assert.That(snapshot).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(snapshot).IsEquivalentTo(original);
+    }
+
+    [Test]
+    public async Task GivenANullDictionaryThenAnEmptyDictionaryIsReturned()
+    {
+        // Arrange
+        IDictionary<string, object>? original = default;
+
+        // Act
+        IDictionary<string, object>? snapshot = original.ToNewOrCopy();
+
+        // Assert
+        _ = await Assert.That(snapshot).IsNotNull();
+        _ = await Assert.That(snapshot).IsEmpty();
     }
 }

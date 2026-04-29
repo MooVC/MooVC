@@ -1,0 +1,53 @@
+﻿namespace MooVC.Syntax.CSharp.FieldTests;
+
+using MooVC.Syntax.CSharp.SymbolTests;
+
+public sealed class WhenToSnippetIsCalled
+{
+    [Test]
+    public async Task GivenFieldWithDefaultThenSignatureIncludesAssignment()
+    {
+        // Arrange
+        Field subject = FieldTestsData.Create(
+            @default: Snippet.From("default"),
+            isReadOnly: false,
+            isStatic: true,
+            name: FieldTestsData.DefaultName,
+            scope: Scopes.Public,
+            type: SymbolTestsData.Create("Result"));
+
+        // Act
+        string result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo("public static Result Value = default;");
+    }
+
+    [Test]
+    public async Task GivenNullOptionsThenThrows()
+    {
+        // Arrange
+        Field subject = FieldTestsData.Create();
+        Type.Options? options = default;
+
+        // Act
+        Func<Snippet> act = () => _ = subject.ToSnippet(options!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+    }
+
+    [Test]
+    public async Task GivenUndefinedFieldThenEmptyReturned()
+    {
+        // Arrange
+        Field subject = Field.Undefined;
+
+        // Act
+        string result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEmpty();
+    }
+}

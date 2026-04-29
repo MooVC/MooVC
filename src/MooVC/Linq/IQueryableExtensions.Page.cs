@@ -17,7 +17,7 @@ public static partial class IQueryableExtensions
     /// <param name="queryable">The IQueryable sequence to apply paging to.</param>
     /// <param name="directive">The paging parameters to apply to the IQueryable sequence.</param>
     /// <returns>
-    /// The original IQueryable sequence with paging applied, or null if the original IQueryable was null.
+    /// The original IQueryable sequence with paging applied, or <see langword="null" /> if the original IQueryable was <see langword="null" />.
     /// </returns>
     [return: NotNullIfNotNull(nameof(queryable))]
     public static IQueryable<T>? Page<T>(this IQueryable<T>? queryable, Directive directive)

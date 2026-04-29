@@ -1,10 +1,12 @@
-﻿namespace MooVC.Serialization;
+namespace MooVC.Serialization;
 
+using System.Diagnostics;
 using MooVC.Compression;
 
 /// <summary>
 /// Faciliates implementation of a synchronous implementation of the <see cref="ISerializer" /> contract for serializing and deserializing objects.
 /// </summary>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public abstract class SynchronousSerializer
     : Serializer
 {
@@ -67,4 +69,9 @@ public abstract class SynchronousSerializer
     /// <param name="target">The target stream to which to serialize the object.</param>
     protected abstract void PerformSerialize<T>(T instance, Stream target)
         where T : notnull;
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(SynchronousSerializer)} {{ {GetHashCode()} }}";
+    }
 }

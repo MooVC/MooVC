@@ -1,6 +1,7 @@
-﻿namespace MooVC.Threading.Coordination;
+namespace MooVC.Threading.Coordination;
 
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using MooVC;
 using MooVC.Linq;
 using static MooVC.Threading.Coordination.Coordinator_Resources;
@@ -10,6 +11,10 @@ using static MooVC.Threading.Coordination.Coordinator_Resources;
 /// <see cref="ICoordinatable" /> implementation of the context instance provided, or via its hashcode.
 /// </summary>
 /// <typeparam name="T">The type to which the context applies.</typeparam>
+/// <remarks>
+/// Each resolved coordination key maps to an independent semaphore, allowing mutual exclusion per key instead of per type.
+/// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class Coordinator<T>
     : ICoordinator<T>
     where T : notnull
@@ -106,5 +111,10 @@ public sealed class Coordinator<T>
 
             _isDisposed = true;
         }
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{GetType().Name} {{ Contexts = {_contexts.Count} }}";
     }
 }

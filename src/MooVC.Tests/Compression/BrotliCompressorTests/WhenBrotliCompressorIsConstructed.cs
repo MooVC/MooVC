@@ -6,40 +6,40 @@ using System.IO.Compression;
 
 public sealed class WhenBrotliCompressorIsConstructed
 {
-    [Fact]
-    public void GivenNoLevelThenAnInstanceIsCreated()
+    [Test]
+    [Arguments((CompressionLevel)9)]
+    [Arguments((CompressionLevel)27)]
+    public async Task GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
+    {
+        // Act
+        Func<ICompressor> act = () => new BrotliCompressor(level: level);
+
+        // Assert
+        _ = await Assert.That(act).Throws<InvalidEnumArgumentException>();
+    }
+
+    [Test]
+    [Arguments(CompressionLevel.Optimal)]
+    [Arguments(CompressionLevel.Fastest)]
+    [Arguments(CompressionLevel.NoCompression)]
+    [Arguments(CompressionLevel.SmallestSize)]
+    public async Task GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
+    {
+        // Act
+        Func<ICompressor> act = () => new BrotliCompressor(level: level);
+
+        // Assert
+        _ = await Assert.That(act).ThrowsNothing();
+    }
+
+    [Test]
+    public async Task GivenNoLevelThenAnInstanceIsCreated()
     {
         // Act
         Func<ICompressor> act = () => new BrotliCompressor();
 
         // Assert
-        Should.NotThrow(act);
-    }
-
-    [Theory]
-    [InlineData(CompressionLevel.Optimal)]
-    [InlineData(CompressionLevel.Fastest)]
-    [InlineData(CompressionLevel.NoCompression)]
-    [InlineData(CompressionLevel.SmallestSize)]
-    public void GivenAValidLevelThenAnInstanceIsCreated(CompressionLevel level)
-    {
-        // Act
-        Func<ICompressor> act = () => new BrotliCompressor(level: level);
-
-        // Assert
-        Should.NotThrow(act);
-    }
-
-    [Theory]
-    [InlineData((CompressionLevel)9)]
-    [InlineData((CompressionLevel)27)]
-    public void GivenAnInvalidValidLevelThenAnInvalidEnumArgumentExceptionIsThrown(CompressionLevel level)
-    {
-        // Act
-        Func<ICompressor> act = () => new BrotliCompressor(level: level);
-
-        // Assert
-        Should.Throw<InvalidEnumArgumentException>(act);
+        _ = await Assert.That(act).ThrowsNothing();
     }
 }
 #endif

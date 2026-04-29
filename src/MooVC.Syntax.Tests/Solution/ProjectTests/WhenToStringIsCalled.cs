@@ -1,0 +1,46 @@
+﻿namespace MooVC.Syntax.Solution.ProjectTests;
+
+using System;
+using System.Xml.Linq;
+
+public sealed class WhenToStringIsCalled
+{
+    [Test]
+    public async Task GivenUndefinedThenReturnsEmpty()
+    {
+        // Arrange
+        Project subject = Project.Undefined;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
+    }
+
+    [Test]
+    public async Task GivenValuesThenReturnsFragment()
+    {
+        // Arrange
+        var build = new Build { Project = nameof(Configurations.BuildType.Debug) };
+        var platform = new Platform { Solution = nameof(Configurations.Platform.AnyCPU) };
+        Project subject = ProjectTestsData.Create(build: build, platform: platform);
+
+        var element = new XElement(
+            nameof(Project),
+            new XElement(nameof(Build), new XAttribute(nameof(Build.Project), nameof(Configurations.BuildType.Debug))),
+            new XAttribute(nameof(Project.DisplayName), ProjectTestsData.DefaultName),
+            new XAttribute(nameof(Project.Id), ProjectTestsData.DefaultId),
+            new XAttribute(nameof(Project.Path), ProjectTestsData.DefaultPath),
+            new XElement(nameof(Platform), new XAttribute(nameof(Platform.Solution), nameof(Configurations.Platform.AnyCPU))),
+            new XAttribute(nameof(Project.Type), ProjectTestsData.DefaultType));
+
+        string expected = element + Environment.NewLine;
+
+        // Act
+        string result = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+}

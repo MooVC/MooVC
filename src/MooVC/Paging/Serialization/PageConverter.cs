@@ -1,7 +1,8 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace MooVC.Paging.Serialization;
 
 using System.Collections;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,6 +12,10 @@ using static MooVC.Paging.Serialization.PageConverter_Resources;
 /// <summary>
 /// Provides serialization support for <see cref="Page{T}"/>.
 /// </summary>
+/// <remarks>
+/// This converter serializes page items under the <c>$values</c> property and emits <see cref="Page{T}.Total" /> only when available.
+/// </remarks>
+[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 public sealed class PageConverter
     : JsonConverter<object>
 {
@@ -19,12 +24,18 @@ public sealed class PageConverter
     private const string ValuesKey = "$values";
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// Only closed generic instances of <see cref="Page{T}" /> are supported.
+    /// </remarks>
     public override bool CanConvert(Type typeToConvert)
     {
         return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Page<>);
     }
 
     /// <inheritdoc/>
+    /// <exception cref="JsonException">
+    /// The payload does not contain a valid serialized page representation.
+    /// </exception>
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         ulong? total = default;
@@ -65,6 +76,9 @@ public sealed class PageConverter
     }
 
     /// <inheritdoc/>
+    /// <exception cref="JsonException">
+    /// A required property cannot be retrieved from the page instance.
+    /// </exception>
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         Type type = value.GetType();
@@ -96,6 +110,11 @@ public sealed class PageConverter
             ?? throw new JsonException(GetValueFailure.Format(key, type));
 
         return (T)property.GetValue(value)!;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{nameof(PageConverter)} {{ {GetHashCode()} }}";
     }
 }
 #endif

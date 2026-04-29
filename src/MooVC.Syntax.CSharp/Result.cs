@@ -1,0 +1,214 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using Fluentify;
+    using MooVC.Syntax.Formatting;
+    using MooVC.Syntax.Validation;
+    using Valuify;
+    using static MooVC.Syntax.CSharp.Result_Resources;
+    using CType = System.Type;
+    using Ignore = Valuify.IgnoreAttribute;
+
+    /// <summary>
+    /// Represents a C# member return signature, combining async modality, ref modifiers, and the return type symbol.
+    /// </summary>
+    [AutoInitializeWith(nameof(Undefined))]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    [Fluentify]
+    [Valuify]
+    public sealed partial class Result
+        : IEnumerable<Qualifier>,
+          IValidatableObject
+    {
+        /// <summary>
+        /// Gets a default Task-based return signature for asynchronous methods.
+        /// </summary>
+        public static readonly Result Task = new Result { Type = typeof(Task) };
+
+        /// <summary>
+        /// Gets an unspecified return signature that renders as empty.
+        /// </summary>
+        public static readonly Result Undefined = new Result();
+
+        /// <summary>
+        /// Gets a synchronous void return signature for methods with no value.
+        /// </summary>
+        public static readonly Result Void = new Result { Mode = Modes.Synchronous };
+
+        private const string Separator = " ";
+
+        /// <summary>
+        /// Initializes a new instance of the Result class.
+        /// </summary>
+        internal Result()
+        {
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the return signature is Task-based.
+        /// </summary>
+        /// <value>A value indicating whether the return signature is Task-based.</value>
+        [Ignore]
+        public bool IsTask => this == Task;
+
+        /// <summary>
+        /// Gets a value indicating whether the return signature is unspecified.
+        /// </summary>
+        /// <value>A value indicating whether the return signature is unspecified.</value>
+        [Ignore]
+        public bool IsUndefined => this == Undefined;
+
+        /// <summary>
+        /// Gets a value indicating whether the return signature is void.
+        /// </summary>
+        /// <value>A value indicating whether the return signature is void.</value>
+        [Ignore]
+        public bool IsVoid => this == Void;
+
+        /// <summary>
+        /// Gets the return modifier that precedes the return type.
+        /// </summary>
+        /// <value>The return modifier (for example, ref or ref readonly).</value>
+        public Modifiers Modifier { get; internal set; } = Modifiers.None;
+
+        /// <summary>
+        /// Gets the async modality that determines whether async is emitted.
+        /// </summary>
+        /// <value>The async modality (async or synchronous).</value>
+        public Modes Mode { get; internal set; } = Modes.Asynchronous;
+
+        /// <summary>
+        /// Gets the return type symbol that will be emitted in the signature.
+        /// </summary>
+        /// <value>The return type symbol.</value>
+        [Descriptor("OfType")]
+        public Symbol Type { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="Result" /> to <see cref="string" />.
+        /// </summary>
+        /// <param name="result">The <see cref="Result" /> value to convert.</param>
+        /// <returns>The converted <see cref="string" /> value.</returns>
+        public static implicit operator string(Result result)
+        {
+            Guard.Against.Conversion<Result, string>(result);
+
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="Result" /> to <see cref="Snippet" />.
+        /// </summary>
+        /// <param name="result">The <see cref="Result" /> value to convert.</param>
+        /// <returns>The converted <see cref="Snippet" /> value.</returns>
+        public static implicit operator Snippet(Result result)
+        {
+            Guard.Against.Conversion<Result, Snippet>(result);
+
+            return Snippet.From(result.ToString());
+        }
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Result" />.
+        /// </summary>
+        /// <param name="type">The <see cref="CType" /> value to convert.</param>
+        /// <returns>The converted <see cref="Result" /> value.</returns>
+        public static implicit operator Result(CType type)
+        {
+            Guard.Against.Conversion<CType, Result>(type);
+
+            return new Result()
+                .OfType(type);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection of symbols.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
+        public IEnumerator<Qualifier> GetEnumerator()
+        {
+            return Type.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns the C# return signature text.
+        /// </summary>
+        /// <returns>The return signature text.</returns>
+        public override string ToString()
+        {
+            if (IsUndefined)
+            {
+                return string.Empty;
+            }
+
+            string modifier = Modifier;
+            string mode = Mode;
+            string type = Type;
+
+            return Separator.Combine(mode, modifier, type);
+        }
+
+        /// <summary>
+        /// Creates a snippet representing the return type portion of a signature.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The return signature snippet.</returns>
+        public Snippet ToSnippet(Snippet.Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Result)));
+
+            if (IsUndefined)
+            {
+                return Snippet.Empty;
+            }
+
+            return Snippet.From(options, ToString());
+        }
+
+        /// <summary>
+        /// Validates the return signature before it is rendered.
+        /// </summary>
+        /// <remarks>
+        /// Ensures a return type is provided when a modifier or modality is specified.
+        /// </remarks>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation results.</returns>
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Modifier == Modifiers.None && Type == Symbol.Undefined)
+            {
+                return Enumerable.Empty<ValidationResult>();
+            }
+
+            return validationContext
+                .Include(nameof(Type), _ => !Type.IsUndefined, Type)
+                .Results;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Result)} {{ " +
+                $"{nameof(IsTask)} = {DebuggerDisplayFormatter.Format(IsTask)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(IsVoid)} = {DebuggerDisplayFormatter.Format(IsVoid)}, " +
+                $"{nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, " +
+                $"{nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, " +
+                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
+        }
+    }
+}
