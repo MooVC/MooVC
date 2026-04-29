@@ -85,7 +85,10 @@ namespace MooVC.Syntax.CSharp
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Options)} {{ {nameof(Format)} = {DebuggerDisplayFormatter.Format(Format)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)} }}";
+                return $"{nameof(Options)} {{ " +
+                    $"{nameof(Format)} = {DebuggerDisplayFormatter.Format(Format)}, " +
+                    $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
+                    $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)} }}";
             }
         }
     }

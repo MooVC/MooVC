@@ -643,7 +643,11 @@ namespace MooVC.Syntax
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Snippet)} {{ {nameof(IsEmpty)} = {DebuggerDisplayFormatter.Format(IsEmpty)}, {nameof(IsMultiLine)} = {DebuggerDisplayFormatter.Format(IsMultiLine)}, {nameof(IsSingleLine)} = {DebuggerDisplayFormatter.Format(IsSingleLine)}, {nameof(Lines)} = {DebuggerDisplayFormatter.Format(Lines)} }}";
+            return $"{nameof(Snippet)} {{ " +
+                $"{nameof(IsEmpty)} = {DebuggerDisplayFormatter.Format(IsEmpty)}, " +
+                $"{nameof(IsMultiLine)} = {DebuggerDisplayFormatter.Format(IsMultiLine)}, " +
+                $"{nameof(IsSingleLine)} = {DebuggerDisplayFormatter.Format(IsSingleLine)}, " +
+                $"{nameof(Lines)} = {DebuggerDisplayFormatter.Format(Lines)} }}";
         }
     }
 }

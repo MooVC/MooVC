@@ -72,6 +72,8 @@ public sealed class Compressor
 
     private string GetDebuggerDisplay()
     {
-        return $"{nameof(Compressor)} {{ {nameof(Decoder)} = {DebuggerDisplayFormatter.Format(Decoder)}, {nameof(Encoder)} = {DebuggerDisplayFormatter.Format(Encoder)} }}";
+        return $"{nameof(Compressor)} {{ " +
+            $"{nameof(Decoder)} = {DebuggerDisplayFormatter.Format(Decoder)}, " +
+            $"{nameof(Encoder)} = {DebuggerDisplayFormatter.Format(Encoder)} }}";
     }
 }

@@ -414,7 +414,9 @@ namespace MooVC.Syntax
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Qualifier)} {{ {nameof(IsUnqualified)} = {DebuggerDisplayFormatter.Format(IsUnqualified)}, {nameof(Length)} = {DebuggerDisplayFormatter.Format(Length)} }}";
+            return $"{nameof(Qualifier)} {{ " +
+                $"{nameof(IsUnqualified)} = {DebuggerDisplayFormatter.Format(IsUnqualified)}, " +
+                $"{nameof(Length)} = {DebuggerDisplayFormatter.Format(Length)} }}";
         }
     }
 }

@@ -195,7 +195,12 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Directive)} {{ {nameof(Alias)} = {DebuggerDisplayFormatter.Format(Alias)}, {nameof(IsStatic)} = {DebuggerDisplayFormatter.Format(IsStatic)}, {nameof(IsSystem)} = {DebuggerDisplayFormatter.Format(IsSystem)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
+            return $"{nameof(Directive)} {{ " +
+                $"{nameof(Alias)} = {DebuggerDisplayFormatter.Format(Alias)}, " +
+                $"{nameof(IsStatic)} = {DebuggerDisplayFormatter.Format(IsStatic)}, " +
+                $"{nameof(IsSystem)} = {DebuggerDisplayFormatter.Format(IsSystem)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
         }
     }
 }

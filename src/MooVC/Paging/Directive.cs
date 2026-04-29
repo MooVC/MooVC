@@ -196,7 +196,10 @@ public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, u
 
     private string GetDebuggerDisplay()
     {
-        return $"{nameof(Directive)} {{ {nameof(IsAll)} = {DebuggerDisplayFormatter.Format(IsAll)}, {nameof(Skip)} = {DebuggerDisplayFormatter.Format(Skip)}, {nameof(Take)} = {DebuggerDisplayFormatter.Format(Take)} }}";
+        return $"{nameof(Directive)} {{ " +
+            $"{nameof(IsAll)} = {DebuggerDisplayFormatter.Format(IsAll)}, " +
+            $"{nameof(Skip)} = {DebuggerDisplayFormatter.Format(Skip)}, " +
+            $"{nameof(Take)} = {DebuggerDisplayFormatter.Format(Take)} }}";
     }
 }
 #endif

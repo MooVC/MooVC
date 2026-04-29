@@ -148,7 +148,11 @@ public sealed record Page<T>
 
     private string GetDebuggerDisplay()
     {
-        return $"{GetType().Name} {{ {nameof(Count)} = {DebuggerDisplayFormatter.Format(Count)}, {nameof(Directive)} = {DebuggerDisplayFormatter.Format(Directive)}, {nameof(HasTotal)} = {DebuggerDisplayFormatter.Format(HasTotal)}, {nameof(Total)} = {DebuggerDisplayFormatter.Format(Total)} }}";
+        return $"{GetType().Name} {{ " +
+            $"{nameof(Count)} = {DebuggerDisplayFormatter.Format(Count)}, " +
+            $"{nameof(Directive)} = {DebuggerDisplayFormatter.Format(Directive)}, " +
+            $"{nameof(HasTotal)} = {DebuggerDisplayFormatter.Format(HasTotal)}, " +
+            $"{nameof(Total)} = {DebuggerDisplayFormatter.Format(Total)} }}";
     }
 }
 #endif

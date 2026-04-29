@@ -107,7 +107,10 @@ namespace MooVC.Syntax.Solution
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Configurations)} {{ {nameof(Builds)} = {DebuggerDisplayFormatter.Format(Builds)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Platforms)} = {DebuggerDisplayFormatter.Format(Platforms)} }}";
+            return $"{nameof(Configurations)} {{ " +
+                $"{nameof(Builds)} = {DebuggerDisplayFormatter.Format(Builds)}, " +
+                $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
+                $"{nameof(Platforms)} = {DebuggerDisplayFormatter.Format(Platforms)} }}";
         }
     }
 }

@@ -89,6 +89,9 @@ public sealed class Serializer
 
     private string GetDebuggerDisplay()
     {
-        return $"{nameof(Serializer)} {{ {nameof(BufferSize)} = {DebuggerDisplayFormatter.Format(BufferSize)}, {nameof(Encoding)} = {DebuggerDisplayFormatter.Format(Encoding)}, {nameof(Json)} = {DebuggerDisplayFormatter.Format(Json)} }}";
+        return $"{nameof(Serializer)} {{ " +
+            $"{nameof(BufferSize)} = {DebuggerDisplayFormatter.Format(BufferSize)}, " +
+            $"{nameof(Encoding)} = {DebuggerDisplayFormatter.Format(Encoding)}, " +
+            $"{nameof(Json)} = {DebuggerDisplayFormatter.Format(Json)} }}";
     }
 }

@@ -106,7 +106,10 @@ namespace MooVC.Syntax.Project
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Parameter)} {{ {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, {nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
+            return $"{nameof(Parameter)} {{ " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
+                $"{nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
         }
     }
 }

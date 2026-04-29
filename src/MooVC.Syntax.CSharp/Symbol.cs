@@ -320,7 +320,12 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Symbol)} {{ {nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, {nameof(IsArray)} = {DebuggerDisplayFormatter.Format(IsArray)}, {nameof(IsNullable)} = {DebuggerDisplayFormatter.Format(IsNullable)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
+            return $"{nameof(Symbol)} {{ " +
+                $"{nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, " +
+                $"{nameof(IsArray)} = {DebuggerDisplayFormatter.Format(IsArray)}, " +
+                $"{nameof(IsNullable)} = {DebuggerDisplayFormatter.Format(IsNullable)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
         }
     }
 }

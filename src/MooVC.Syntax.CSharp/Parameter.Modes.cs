@@ -147,7 +147,15 @@ namespace MooVC.Syntax.CSharp
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Modes)} {{ {nameof(IsIn)} = {DebuggerDisplayFormatter.Format(IsIn)}, {nameof(IsNone)} = {DebuggerDisplayFormatter.Format(IsNone)}, {nameof(IsOut)} = {DebuggerDisplayFormatter.Format(IsOut)}, {nameof(IsParams)} = {DebuggerDisplayFormatter.Format(IsParams)}, {nameof(IsRef)} = {DebuggerDisplayFormatter.Format(IsRef)}, {nameof(IsRefReadonly)} = {DebuggerDisplayFormatter.Format(IsRefReadonly)}, {nameof(IsScoped)} = {DebuggerDisplayFormatter.Format(IsScoped)}, {nameof(IsThis)} = {DebuggerDisplayFormatter.Format(IsThis)} }}";
+                return $"{nameof(Modes)} {{ " +
+                    $"{nameof(IsIn)} = {DebuggerDisplayFormatter.Format(IsIn)}, " +
+                    $"{nameof(IsNone)} = {DebuggerDisplayFormatter.Format(IsNone)}, " +
+                    $"{nameof(IsOut)} = {DebuggerDisplayFormatter.Format(IsOut)}, " +
+                    $"{nameof(IsParams)} = {DebuggerDisplayFormatter.Format(IsParams)}, " +
+                    $"{nameof(IsRef)} = {DebuggerDisplayFormatter.Format(IsRef)}, " +
+                    $"{nameof(IsRefReadonly)} = {DebuggerDisplayFormatter.Format(IsRefReadonly)}, " +
+                    $"{nameof(IsScoped)} = {DebuggerDisplayFormatter.Format(IsScoped)}, " +
+                    $"{nameof(IsThis)} = {DebuggerDisplayFormatter.Format(IsThis)} }}";
             }
         }
     }

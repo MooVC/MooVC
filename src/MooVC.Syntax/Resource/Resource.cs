@@ -133,7 +133,12 @@ namespace MooVC.Syntax.Resource
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Resource)} {{ {nameof(Assemblies)} = {DebuggerDisplayFormatter.Format(Assemblies)}, {nameof(Data)} = {DebuggerDisplayFormatter.Format(Data)}, {nameof(Headers)} = {DebuggerDisplayFormatter.Format(Headers)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Metadata)} = {DebuggerDisplayFormatter.Format(Metadata)} }}";
+            return $"{nameof(Resource)} {{ " +
+                $"{nameof(Assemblies)} = {DebuggerDisplayFormatter.Format(Assemblies)}, " +
+                $"{nameof(Data)} = {DebuggerDisplayFormatter.Format(Data)}, " +
+                $"{nameof(Headers)} = {DebuggerDisplayFormatter.Format(Headers)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Metadata)} = {DebuggerDisplayFormatter.Format(Metadata)} }}";
         }
     }
 }

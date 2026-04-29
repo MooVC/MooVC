@@ -193,7 +193,13 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Conversion)} {{ {nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, {nameof(Direction)} = {DebuggerDisplayFormatter.Format(Direction)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Target)} = {DebuggerDisplayFormatter.Format(Target)} }}";
+            return $"{nameof(Conversion)} {{ " +
+                $"{nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, " +
+                $"{nameof(Direction)} = {DebuggerDisplayFormatter.Format(Direction)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, " +
+                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, " +
+                $"{nameof(Target)} = {DebuggerDisplayFormatter.Format(Target)} }}";
         }
     }
 }

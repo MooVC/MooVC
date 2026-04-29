@@ -71,7 +71,10 @@ namespace MooVC.Syntax.CSharp
 
                 private string GetDebuggerDisplay()
                 {
-                    return $"{nameof(Formats)} {{ {nameof(IsFull)} = {DebuggerDisplayFormatter.Format(IsFull)}, {nameof(IsGlobal)} = {DebuggerDisplayFormatter.Format(IsGlobal)}, {nameof(IsMinimum)} = {DebuggerDisplayFormatter.Format(IsMinimum)} }}";
+                    return $"{nameof(Formats)} {{ " +
+                        $"{nameof(IsFull)} = {DebuggerDisplayFormatter.Format(IsFull)}, " +
+                        $"{nameof(IsGlobal)} = {DebuggerDisplayFormatter.Format(IsGlobal)}, " +
+                        $"{nameof(IsMinimum)} = {DebuggerDisplayFormatter.Format(IsMinimum)} }}";
                 }
             }
         }

@@ -83,7 +83,19 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Interface)} {{ {nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, {nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, {nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, {nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, {nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, {nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, {nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, {nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, {nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
+            return $"{nameof(Interface)} {{ " +
+                $"{nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, " +
+                $"{nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, " +
+                $"{nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, " +
+                $"{nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, " +
+                $"{nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, " +
+                $"{nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, " +
+                $"{nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, " +
+                $"{nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, " +
+                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, " +
+                $"{nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
         }
     }
 }

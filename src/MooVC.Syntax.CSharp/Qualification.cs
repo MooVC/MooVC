@@ -293,7 +293,10 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Qualification)} {{ {nameof(IsUnnamed)} = {DebuggerDisplayFormatter.Format(IsUnnamed)}, {nameof(Moniker)} = {DebuggerDisplayFormatter.Format(Moniker)}, {nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
+            return $"{nameof(Qualification)} {{ " +
+                $"{nameof(IsUnnamed)} = {DebuggerDisplayFormatter.Format(IsUnnamed)}, " +
+                $"{nameof(Moniker)} = {DebuggerDisplayFormatter.Format(Moniker)}, " +
+                $"{nameof(Qualifier)} = {DebuggerDisplayFormatter.Format(Qualifier)} }}";
         }
     }
 }

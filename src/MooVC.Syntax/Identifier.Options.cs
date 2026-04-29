@@ -51,7 +51,10 @@ namespace MooVC.Syntax
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Options)} {{ {nameof(Casing)} = {DebuggerDisplayFormatter.Format(Casing)}, {nameof(IsCamel)} = {DebuggerDisplayFormatter.Format(IsCamel)}, {nameof(IsPascal)} = {DebuggerDisplayFormatter.Format(IsPascal)} }}";
+                return $"{nameof(Options)} {{ " +
+                    $"{nameof(Casing)} = {DebuggerDisplayFormatter.Format(Casing)}, " +
+                    $"{nameof(IsCamel)} = {DebuggerDisplayFormatter.Format(IsCamel)}, " +
+                    $"{nameof(IsPascal)} = {DebuggerDisplayFormatter.Format(IsPascal)} }}";
             }
         }
     }

@@ -63,7 +63,11 @@ namespace MooVC.Syntax.CSharp
 
                 private string GetDebuggerDisplay()
                 {
-                    return $"{nameof(Setter)} {{ {nameof(Behaviour)} = {DebuggerDisplayFormatter.Format(Behaviour)}, {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
+                    return $"{nameof(Setter)} {{ " +
+                        $"{nameof(Behaviour)} = {DebuggerDisplayFormatter.Format(Behaviour)}, " +
+                        $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
+                        $"{nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, " +
+                        $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
                 }
             }
         }

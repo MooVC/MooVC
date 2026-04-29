@@ -234,7 +234,18 @@ namespace MooVC.Syntax.CSharp
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Types)} {{ {nameof(IsAdd)} = {DebuggerDisplayFormatter.Format(IsAdd)}, {nameof(IsAnd)} = {DebuggerDisplayFormatter.Format(IsAnd)}, {nameof(IsDivide)} = {DebuggerDisplayFormatter.Format(IsDivide)}, {nameof(IsLeft)} = {DebuggerDisplayFormatter.Format(IsLeft)}, {nameof(IsModulus)} = {DebuggerDisplayFormatter.Format(IsModulus)}, {nameof(IsMultiply)} = {DebuggerDisplayFormatter.Format(IsMultiply)}, {nameof(IsOr)} = {DebuggerDisplayFormatter.Format(IsOr)}, {nameof(IsRight)} = {DebuggerDisplayFormatter.Format(IsRight)}, {nameof(IsSubtract)} = {DebuggerDisplayFormatter.Format(IsSubtract)}, {nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, {nameof(IsXOR)} = {DebuggerDisplayFormatter.Format(IsXOR)} }}";
+                return $"{nameof(Types)} {{ " +
+                    $"{nameof(IsAdd)} = {DebuggerDisplayFormatter.Format(IsAdd)}, " +
+                    $"{nameof(IsAnd)} = {DebuggerDisplayFormatter.Format(IsAnd)}, " +
+                    $"{nameof(IsDivide)} = {DebuggerDisplayFormatter.Format(IsDivide)}, " +
+                    $"{nameof(IsLeft)} = {DebuggerDisplayFormatter.Format(IsLeft)}, " +
+                    $"{nameof(IsModulus)} = {DebuggerDisplayFormatter.Format(IsModulus)}, " +
+                    $"{nameof(IsMultiply)} = {DebuggerDisplayFormatter.Format(IsMultiply)}, " +
+                    $"{nameof(IsOr)} = {DebuggerDisplayFormatter.Format(IsOr)}, " +
+                    $"{nameof(IsRight)} = {DebuggerDisplayFormatter.Format(IsRight)}, " +
+                    $"{nameof(IsSubtract)} = {DebuggerDisplayFormatter.Format(IsSubtract)}, " +
+                    $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, " +
+                    $"{nameof(IsXOR)} = {DebuggerDisplayFormatter.Format(IsXOR)} }}";
             }
         }
     }

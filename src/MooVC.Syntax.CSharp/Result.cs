@@ -202,7 +202,13 @@ namespace MooVC.Syntax.CSharp
 
         private string GetDebuggerDisplay()
         {
-            return $"{nameof(Result)} {{ {nameof(IsTask)} = {DebuggerDisplayFormatter.Format(IsTask)}, {nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, {nameof(IsVoid)} = {DebuggerDisplayFormatter.Format(IsVoid)}, {nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, {nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, {nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
+            return $"{nameof(Result)} {{ " +
+                $"{nameof(IsTask)} = {DebuggerDisplayFormatter.Format(IsTask)}, " +
+                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
+                $"{nameof(IsVoid)} = {DebuggerDisplayFormatter.Format(IsVoid)}, " +
+                $"{nameof(Mode)} = {DebuggerDisplayFormatter.Format(Mode)}, " +
+                $"{nameof(Modifier)} = {DebuggerDisplayFormatter.Format(Modifier)}, " +
+                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
         }
     }
 }
