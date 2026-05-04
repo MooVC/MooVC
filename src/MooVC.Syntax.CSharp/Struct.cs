@@ -131,13 +131,13 @@ namespace MooVC.Syntax.CSharp
 
         private Snippet GetSignature(Snippet.Options options)
         {
-            Kinds behavior = Behavior;
+            Behavior.ToString(out string left, out string right);
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string partial = IsPartial.Partial();
             string name = Declaration;
             var parameters = Parameters.ToSnippet(Parameter.Options.Pascal);
             string scope = Scope;
-            string signature = Separator.Combine(scope, behavior, partial, "struct", $"{name}");
+            string signature = Separator.Combine(scope, left, partial, right, "struct", $"{name}");
 
             if (!parameters.IsEmpty)
             {

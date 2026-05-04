@@ -44,17 +44,42 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
+            /// Gets a value indicating whether or not this is a compound instance.
+            /// </summary>
+            public bool IsCompound => _value.Contains(" ");
+
+            /// <summary>
+            /// Gets a value indicating whether or not this is the default instance.
+            /// </summary>
+            public bool IsDefault => this == Default;
+
+            /// <summary>
+            /// Gets a value indicating whether or not this is a read only instance.
+            /// </summary>
+            public bool IsReadOnly => _value.StartsWith("readonly", StringComparison.Ordinal);
+
+            /// <summary>
+            /// Gets a value indicating whether or not this is a record instance.
+            /// </summary>
+            public bool IsRecord => _value.EndsWith("record", StringComparison.Ordinal);
+
+            /// <summary>
+            /// Gets a value indicating whether or not this is a ref instance.
+            /// </summary>
+            public bool IsRef => _value.EndsWith("ref", StringComparison.Ordinal);
+
+            /// <summary>
             /// Defines the + operator for the Kind.
             /// </summary>
             /// <param name="left">The left.</param>
             /// <param name="right">The right.</param>
-        /// <returns>A value that combines <paramref name="left" /> and <paramref name="right" />.</returns>
+            /// <returns>A value that combines <paramref name="left" /> and <paramref name="right" />.</returns>
             public static Kinds operator +(Kinds left, Kinds right)
             {
                 _ = Guard.Against.Null(left, message: KindPlusOperatorLeftRequired.Format(nameof(Kinds), right));
                 _ = Guard.Against.Null(right, message: KindPlusOperatorRightRequired.Format(nameof(Kinds), left));
 
-                if (left == ReadOnly && right == Record)
+                if (left == ReadOnly && (right == Record || right == Ref))
                 {
                     return new Kinds($"{left} {right}");
                 }
@@ -69,6 +94,25 @@ namespace MooVC.Syntax.CSharp
             public override string ToString()
             {
                 return _value;
+            }
+
+            /// <summary>
+            /// Returns the string representation of the Kind.
+            /// </summary>
+            /// <param name="left">The left part of the Kind.</param>
+            /// <param name="right">The right part of the Kind.</param>
+            public void ToString(out string left, out string right)
+            {
+                left = _value;
+                right = string.Empty;
+
+                if (IsCompound && IsRecord)
+                {
+                    string[] parts = _value.Split(' ');
+
+                    left = parts[0];
+                    right = parts[1];
+                }
             }
 
             private string GetDebuggerDisplay()

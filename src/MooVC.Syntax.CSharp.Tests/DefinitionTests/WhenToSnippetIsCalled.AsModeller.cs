@@ -218,7 +218,7 @@ public sealed partial class WhenToSnippetIsCalled
 
                 [Description("Represents the Location of the Wheel on the Car")]
                 [Monify<byte>]
-                public sealed partial record Location
+                public readonly partial record struct Location
                 {
                     [Description("The Front Left Wheel")]
                     public static readonly Location FrontLeft = 0;
@@ -257,7 +257,7 @@ public sealed partial class WhenToSnippetIsCalled
 
             Definition content = Builder
                 .New<Definition>()
-                .For<Record>(record => record
+                .For<Struct>(@struct => @struct
                     .AttributedWith(
                         typeof(DescriptionAttribute),
                         description => description.WithArguments((Name: string.Empty, Value: "\"Represents the Location of the Wheel on the Car\"")))
@@ -266,7 +266,7 @@ public sealed partial class WhenToSnippetIsCalled
                         .WithArguments(type => type.Named(typeof(byte)))))
                     .Named("Location")
                     .Enumerate(
-                        (member, record) => record.WithFields(field => field
+                        (member, @struct) => @struct.WithFields(field => field
                             .AttributedWith(
                                 typeof(DescriptionAttribute),
                                 description => description.WithArguments((Name: string.Empty, Value: $"\"{member.Description}\"")))
@@ -278,13 +278,14 @@ public sealed partial class WhenToSnippetIsCalled
                             .WithScope(Scopes.Public)),
                         members)
                     .Enumerate(
-                        (member, record) => record.WithProperties(property => property
+                        (member, @struct) => @struct.WithProperties(property => property
                             .WithBehaviours(methods => methods
                                 .WithGet($"this == {member.Name};")
                                 .WithSet(setter => setter.WithMode(Property.Methods.Setter.Modes.ReadOnly)))
                             .Named($"Is{member.Name}")
                             .OfType(typeof(bool))),
                         members)
+                    .WithBehavior(Struct.Kinds.ReadOnly + Struct.Kinds.Record)
                     .WithConstructors(constructor => constructor
                         .WithBody("_value = value;")
                         .WithParameters((Name: "Value", Type: typeof(byte)))
