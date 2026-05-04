@@ -76,10 +76,10 @@ namespace MooVC.Syntax
                 private string GetDebuggerDisplay()
                 {
                     return $"{nameof(Blocks)} {{ " +
-                        $"{nameof(Inline)} = {DebuggerDisplayFormatter.Format(Inline)}, " +
-                        $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
-                        $"{nameof(Layout)} = {DebuggerDisplayFormatter.Format(Layout)}, " +
-                        $"{nameof(Markers)} = {DebuggerDisplayFormatter.Format(Markers)} }}";
+                        $"{nameof(Inline)} = `{DebuggerDisplayFormatter.Format(Inline)}`, " +
+                        $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
+                        $"{nameof(Layout)} = `{DebuggerDisplayFormatter.Format(Layout)}`, " +
+                        $"{nameof(Markers)} = `{DebuggerDisplayFormatter.Format(Markers)}` }}";
                 }
             }
         }

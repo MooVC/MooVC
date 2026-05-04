@@ -125,11 +125,11 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Import)} {{ " +
-                $"{nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)}, " +
-                $"{nameof(Project)} = {DebuggerDisplayFormatter.Format(Project)}, " +
-                $"{nameof(Sdk)} = {DebuggerDisplayFormatter.Format(Sdk)} }}";
+                $"{nameof(Condition)} = `{DebuggerDisplayFormatter.Format(Condition)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Label)} = `{DebuggerDisplayFormatter.Format(Label)}`, " +
+                $"{nameof(Project)} = `{DebuggerDisplayFormatter.Format(Project)}`, " +
+                $"{nameof(Sdk)} = `{DebuggerDisplayFormatter.Format(Sdk)}` }}";
         }
     }
 }

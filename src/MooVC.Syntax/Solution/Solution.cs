@@ -176,13 +176,13 @@ namespace MooVC.Syntax.Solution
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Solution)} {{ " +
-                $"{nameof(Configurations)} = {DebuggerDisplayFormatter.Format(Configurations)}, " +
-                $"{nameof(Files)} = {DebuggerDisplayFormatter.Format(Files)}, " +
-                $"{nameof(Folders)} = {DebuggerDisplayFormatter.Format(Folders)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, " +
-                $"{nameof(Projects)} = {DebuggerDisplayFormatter.Format(Projects)}, " +
-                $"{nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)} }}";
+                $"{nameof(Configurations)} = `{DebuggerDisplayFormatter.Format(Configurations)}`, " +
+                $"{nameof(Files)} = `{DebuggerDisplayFormatter.Format(Files)}`, " +
+                $"{nameof(Folders)} = `{DebuggerDisplayFormatter.Format(Folders)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Items)} = `{DebuggerDisplayFormatter.Format(Items)}`, " +
+                $"{nameof(Projects)} = `{DebuggerDisplayFormatter.Format(Projects)}`, " +
+                $"{nameof(Properties)} = `{DebuggerDisplayFormatter.Format(Properties)}` }}";
         }
     }
 }

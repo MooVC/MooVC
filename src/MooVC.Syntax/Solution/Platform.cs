@@ -114,9 +114,9 @@ namespace MooVC.Syntax.Solution
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Platform)} {{ " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Project)} = {DebuggerDisplayFormatter.Format(Project)}, " +
-                $"{nameof(Solution)} = {DebuggerDisplayFormatter.Format(Solution)} }}";
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Project)} = `{DebuggerDisplayFormatter.Format(Project)}`, " +
+                $"{nameof(Solution)} = `{DebuggerDisplayFormatter.Format(Solution)}` }}";
         }
     }
 }

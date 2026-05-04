@@ -47,7 +47,7 @@ namespace MooVC.Modelling
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Options)} {{ {nameof(BufferSize)} = {DebuggerDisplayFormatter.Format(BufferSize)} }}";
+                return $"{nameof(Options)} {{ {nameof(BufferSize)} = `{DebuggerDisplayFormatter.Format(BufferSize)}` }}";
             }
         }
     }

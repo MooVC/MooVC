@@ -52,6 +52,6 @@ public sealed class Serializer
 
     private string GetDebuggerDisplay()
     {
-        return $"{nameof(Serializer)} {{ {nameof(Options)} = {DebuggerDisplayFormatter.Format(Options)} }}";
+        return $"{nameof(Serializer)} {{ {nameof(Options)} = `{DebuggerDisplayFormatter.Format(Options)}` }}";
     }
 }

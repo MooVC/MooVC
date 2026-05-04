@@ -73,9 +73,9 @@ namespace MooVC.Syntax
                     private string GetDebuggerDisplay()
                     {
                         return $"{nameof(Boundaries)} {{ " +
-                            $"{nameof(Closing)} = {DebuggerDisplayFormatter.Format(Closing)}, " +
-                            $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
-                            $"{nameof(Opening)} = {DebuggerDisplayFormatter.Format(Opening)} }}";
+                            $"{nameof(Closing)} = `{DebuggerDisplayFormatter.Format(Closing)}`, " +
+                            $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
+                            $"{nameof(Opening)} = `{DebuggerDisplayFormatter.Format(Opening)}` }}";
                     }
                 }
             }

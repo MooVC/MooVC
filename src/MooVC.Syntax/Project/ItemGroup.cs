@@ -118,10 +118,10 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(ItemGroup)} {{ " +
-                $"{nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, " +
-                $"{nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)} }}";
+                $"{nameof(Condition)} = `{DebuggerDisplayFormatter.Format(Condition)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Items)} = `{DebuggerDisplayFormatter.Format(Items)}`, " +
+                $"{nameof(Label)} = `{DebuggerDisplayFormatter.Format(Label)}` }}";
         }
     }
 }

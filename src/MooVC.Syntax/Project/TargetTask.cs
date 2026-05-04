@@ -137,12 +137,12 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(TargetTask)} {{ " +
-                $"{nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, " +
-                $"{nameof(ContinueOnError)} = {DebuggerDisplayFormatter.Format(ContinueOnError)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Outputs)} = {DebuggerDisplayFormatter.Format(Outputs)}, " +
-                $"{nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)} }}";
+                $"{nameof(Condition)} = `{DebuggerDisplayFormatter.Format(Condition)}`, " +
+                $"{nameof(ContinueOnError)} = `{DebuggerDisplayFormatter.Format(ContinueOnError)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Outputs)} = `{DebuggerDisplayFormatter.Format(Outputs)}`, " +
+                $"{nameof(Parameters)} = `{DebuggerDisplayFormatter.Format(Parameters)}` }}";
         }
     }
 }

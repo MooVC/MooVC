@@ -127,11 +127,11 @@ namespace MooVC.Syntax
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Path)} {{ " +
-                $"{nameof(DirectoryName)} = {DebuggerDisplayFormatter.Format(DirectoryName)}, " +
-                $"{nameof(Extension)} = {DebuggerDisplayFormatter.Format(Extension)}, " +
-                $"{nameof(FileName)} = {DebuggerDisplayFormatter.Format(FileName)}, " +
-                $"{nameof(FileNameWithoutExtension)} = {DebuggerDisplayFormatter.Format(FileNameWithoutExtension)}, " +
-                $"{nameof(IsEmpty)} = {DebuggerDisplayFormatter.Format(IsEmpty)} }}";
+                $"{nameof(DirectoryName)} = `{DebuggerDisplayFormatter.Format(DirectoryName)}`, " +
+                $"{nameof(Extension)} = `{DebuggerDisplayFormatter.Format(Extension)}`, " +
+                $"{nameof(FileName)} = `{DebuggerDisplayFormatter.Format(FileName)}`, " +
+                $"{nameof(FileNameWithoutExtension)} = `{DebuggerDisplayFormatter.Format(FileNameWithoutExtension)}`, " +
+                $"{nameof(IsEmpty)} = `{DebuggerDisplayFormatter.Format(IsEmpty)}` }}";
         }
     }
 }

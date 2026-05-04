@@ -147,11 +147,11 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Operators)} {{ " +
-                $"{nameof(Binaries)} = {DebuggerDisplayFormatter.Format(Binaries)}, " +
-                $"{nameof(Comparisons)} = {DebuggerDisplayFormatter.Format(Comparisons)}, " +
-                $"{nameof(Conversions)} = {DebuggerDisplayFormatter.Format(Conversions)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Unaries)} = {DebuggerDisplayFormatter.Format(Unaries)} }}";
+                $"{nameof(Binaries)} = `{DebuggerDisplayFormatter.Format(Binaries)}`, " +
+                $"{nameof(Comparisons)} = `{DebuggerDisplayFormatter.Format(Comparisons)}`, " +
+                $"{nameof(Conversions)} = `{DebuggerDisplayFormatter.Format(Conversions)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Unaries)} = `{DebuggerDisplayFormatter.Format(Unaries)}` }}";
         }
     }
 }

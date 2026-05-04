@@ -136,12 +136,12 @@ namespace MooVC.Syntax.Resource
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Data)} {{ " +
-                $"{nameof(Comment)} = {DebuggerDisplayFormatter.Format(Comment)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(MimeType)} = {DebuggerDisplayFormatter.Format(MimeType)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)}, " +
-                $"{nameof(Value)} = {DebuggerDisplayFormatter.Format(Value)} }}";
+                $"{nameof(Comment)} = `{DebuggerDisplayFormatter.Format(Comment)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(MimeType)} = `{DebuggerDisplayFormatter.Format(MimeType)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Type)} = `{DebuggerDisplayFormatter.Format(Type)}`, " +
+                $"{nameof(Value)} = `{DebuggerDisplayFormatter.Format(Value)}` }}";
         }
     }
 }

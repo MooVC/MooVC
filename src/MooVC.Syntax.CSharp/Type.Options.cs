@@ -192,13 +192,13 @@ namespace MooVC.Syntax.CSharp
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Options)} {{ " +
-                    $"{nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, " +
-                    $"{nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, " +
-                    $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
-                    $"{nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, " +
-                    $"{nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, " +
-                    $"{nameof(Qualifications)} = {DebuggerDisplayFormatter.Format(Qualifications)}, " +
-                    $"{nameof(Snippets)} = {DebuggerDisplayFormatter.Format(Snippets)} }}";
+                    $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
+                    $"{nameof(Indexers)} = `{DebuggerDisplayFormatter.Format(Indexers)}`, " +
+                    $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
+                    $"{nameof(Methods)} = `{DebuggerDisplayFormatter.Format(Methods)}`, " +
+                    $"{nameof(Properties)} = `{DebuggerDisplayFormatter.Format(Properties)}`, " +
+                    $"{nameof(Qualifications)} = `{DebuggerDisplayFormatter.Format(Qualifications)}`, " +
+                    $"{nameof(Snippets)} = `{DebuggerDisplayFormatter.Format(Snippets)}` }}";
             }
         }
     }

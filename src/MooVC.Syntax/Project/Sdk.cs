@@ -115,10 +115,10 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Sdk)} {{ " +
-                $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, " +
-                $"{nameof(MinimumVersion)} = {DebuggerDisplayFormatter.Format(MinimumVersion)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Version)} = {DebuggerDisplayFormatter.Format(Version)} }}";
+                $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                $"{nameof(MinimumVersion)} = `{DebuggerDisplayFormatter.Format(MinimumVersion)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Version)} = `{DebuggerDisplayFormatter.Format(Version)}` }}";
         }
     }
 }

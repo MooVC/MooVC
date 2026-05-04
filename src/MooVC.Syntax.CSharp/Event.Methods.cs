@@ -129,9 +129,9 @@ namespace MooVC.Syntax.CSharp
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Methods)} {{ " +
-                    $"{nameof(Add)} = {DebuggerDisplayFormatter.Format(Add)}, " +
-                    $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
-                    $"{nameof(Remove)} = {DebuggerDisplayFormatter.Format(Remove)} }}";
+                    $"{nameof(Add)} = `{DebuggerDisplayFormatter.Format(Add)}`, " +
+                    $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
+                    $"{nameof(Remove)} = `{DebuggerDisplayFormatter.Format(Remove)}` }}";
             }
         }
     }

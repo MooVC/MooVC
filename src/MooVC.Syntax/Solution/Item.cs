@@ -135,12 +135,12 @@ namespace MooVC.Syntax.Solution
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Item)} {{ " +
-                $"{nameof(Id)} = {DebuggerDisplayFormatter.Format(Id)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Path)} = {DebuggerDisplayFormatter.Format(Path)}, " +
-                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
+                $"{nameof(Id)} = `{DebuggerDisplayFormatter.Format(Id)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Items)} = `{DebuggerDisplayFormatter.Format(Items)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Path)} = `{DebuggerDisplayFormatter.Format(Path)}`, " +
+                $"{nameof(Type)} = `{DebuggerDisplayFormatter.Format(Type)}` }}";
         }
     }
 }

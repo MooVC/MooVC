@@ -244,14 +244,14 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Method)} {{ " +
-                $"{nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, " +
-                $"{nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, " +
-                $"{nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)}, " +
-                $"{nameof(Result)} = {DebuggerDisplayFormatter.Format(Result)}, " +
-                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
+                $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
+                $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
+                $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Parameters)} = `{DebuggerDisplayFormatter.Format(Parameters)}`, " +
+                $"{nameof(Result)} = `{DebuggerDisplayFormatter.Format(Result)}`, " +
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }
     }
 }

@@ -59,7 +59,7 @@ namespace MooVC.Syntax
 
                 private string GetDebuggerDisplay()
                 {
-                    return $"{nameof(Strategies)} {{ {nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, Length: {_value.Length} }}";
+                    return $"{nameof(Strategies)} {{ {nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, Length: {_value.Length} }}";
                 }
             }
         }

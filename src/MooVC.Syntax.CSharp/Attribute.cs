@@ -222,10 +222,10 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Attribute)} {{ " +
-                $"{nameof(Arguments)} = {DebuggerDisplayFormatter.Format(Arguments)}, " +
-                $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Target)} = {DebuggerDisplayFormatter.Format(Target)} }}";
+                $"{nameof(Arguments)} = `{DebuggerDisplayFormatter.Format(Arguments)}`, " +
+                $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Target)} = `{DebuggerDisplayFormatter.Format(Target)}` }}";
         }
     }
 }

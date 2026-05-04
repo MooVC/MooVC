@@ -48,7 +48,7 @@ namespace MooVC.Modelling
 
             private string GetDebuggerDisplay()
             {
-                return $"{nameof(Options)} {{ {nameof(Compression)} = {DebuggerDisplayFormatter.Format(Compression)} }}";
+                return $"{nameof(Options)} {{ {nameof(Compression)} = `{DebuggerDisplayFormatter.Format(Compression)}` }}";
             }
         }
     }

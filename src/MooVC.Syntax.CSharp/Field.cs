@@ -237,14 +237,14 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Field)} {{ " +
-                $"{nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, " +
-                $"{nameof(Default)} = {DebuggerDisplayFormatter.Format(Default)}, " +
-                $"{nameof(IsReadOnly)} = {DebuggerDisplayFormatter.Format(IsReadOnly)}, " +
-                $"{nameof(IsStatic)} = {DebuggerDisplayFormatter.Format(IsStatic)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, " +
-                $"{nameof(Type)} = {DebuggerDisplayFormatter.Format(Type)} }}";
+                $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
+                $"{nameof(Default)} = `{DebuggerDisplayFormatter.Format(Default)}`, " +
+                $"{nameof(IsReadOnly)} = `{DebuggerDisplayFormatter.Format(IsReadOnly)}`, " +
+                $"{nameof(IsStatic)} = `{DebuggerDisplayFormatter.Format(IsStatic)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}`, " +
+                $"{nameof(Type)} = `{DebuggerDisplayFormatter.Format(Type)}` }}";
         }
     }
 }

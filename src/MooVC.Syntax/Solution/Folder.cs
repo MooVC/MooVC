@@ -126,11 +126,11 @@ namespace MooVC.Syntax.Solution
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Folder)} {{ " +
-                $"{nameof(Files)} = {DebuggerDisplayFormatter.Format(Files)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Items)} = {DebuggerDisplayFormatter.Format(Items)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Projects)} = {DebuggerDisplayFormatter.Format(Projects)} }}";
+                $"{nameof(Files)} = `{DebuggerDisplayFormatter.Format(Files)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Items)} = `{DebuggerDisplayFormatter.Format(Items)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Projects)} = `{DebuggerDisplayFormatter.Format(Projects)}` }}";
         }
     }
 }

@@ -158,22 +158,22 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Class)} {{ " +
-                $"{nameof(Attributes)} = {DebuggerDisplayFormatter.Format(Attributes)}, " +
-                $"{nameof(Behavior)} = {DebuggerDisplayFormatter.Format(Behavior)}, " +
-                $"{nameof(Constructors)} = {DebuggerDisplayFormatter.Format(Constructors)}, " +
-                $"{nameof(Declaration)} = {DebuggerDisplayFormatter.Format(Declaration)}, " +
-                $"{nameof(Events)} = {DebuggerDisplayFormatter.Format(Events)}, " +
-                $"{nameof(Fields)} = {DebuggerDisplayFormatter.Format(Fields)}, " +
-                $"{nameof(Indexers)} = {DebuggerDisplayFormatter.Format(Indexers)}, " +
-                $"{nameof(Interfaces)} = {DebuggerDisplayFormatter.Format(Interfaces)}, " +
-                $"{nameof(IsPartial)} = {DebuggerDisplayFormatter.Format(IsPartial)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Methods)} = {DebuggerDisplayFormatter.Format(Methods)}, " +
-                $"{nameof(Operators)} = {DebuggerDisplayFormatter.Format(Operators)}, " +
-                $"{nameof(Parameters)} = {DebuggerDisplayFormatter.Format(Parameters)}, " +
-                $"{nameof(Properties)} = {DebuggerDisplayFormatter.Format(Properties)}, " +
-                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)}, " +
-                $"{nameof(Types)} = {DebuggerDisplayFormatter.Format(Types)} }}";
+                $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
+                $"{nameof(Behavior)} = `{DebuggerDisplayFormatter.Format(Behavior)}`, " +
+                $"{nameof(Constructors)} = `{DebuggerDisplayFormatter.Format(Constructors)}`, " +
+                $"{nameof(Declaration)} = `{DebuggerDisplayFormatter.Format(Declaration)}`, " +
+                $"{nameof(Events)} = `{DebuggerDisplayFormatter.Format(Events)}`, " +
+                $"{nameof(Fields)} = `{DebuggerDisplayFormatter.Format(Fields)}`, " +
+                $"{nameof(Indexers)} = `{DebuggerDisplayFormatter.Format(Indexers)}`, " +
+                $"{nameof(Interfaces)} = `{DebuggerDisplayFormatter.Format(Interfaces)}`, " +
+                $"{nameof(IsPartial)} = `{DebuggerDisplayFormatter.Format(IsPartial)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Methods)} = `{DebuggerDisplayFormatter.Format(Methods)}`, " +
+                $"{nameof(Operators)} = `{DebuggerDisplayFormatter.Format(Operators)}`, " +
+                $"{nameof(Parameters)} = `{DebuggerDisplayFormatter.Format(Parameters)}`, " +
+                $"{nameof(Properties)} = `{DebuggerDisplayFormatter.Format(Properties)}`, " +
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}`, " +
+                $"{nameof(Types)} = `{DebuggerDisplayFormatter.Format(Types)}` }}";
         }
     }
 }

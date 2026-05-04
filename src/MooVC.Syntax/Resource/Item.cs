@@ -146,11 +146,11 @@ namespace MooVC.Syntax.Resource
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Item)} {{ " +
-                $"{nameof(CustomToolNamespace)} = {DebuggerDisplayFormatter.Format(CustomToolNamespace)}, " +
-                $"{nameof(Designer)} = {DebuggerDisplayFormatter.Format(Designer)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Location)} = {DebuggerDisplayFormatter.Format(Location)}, " +
-                $"{nameof(Visibility)} = {DebuggerDisplayFormatter.Format(Visibility)} }}";
+                $"{nameof(CustomToolNamespace)} = `{DebuggerDisplayFormatter.Format(CustomToolNamespace)}`, " +
+                $"{nameof(Designer)} = `{DebuggerDisplayFormatter.Format(Designer)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Location)} = `{DebuggerDisplayFormatter.Format(Location)}`, " +
+                $"{nameof(Visibility)} = `{DebuggerDisplayFormatter.Format(Visibility)}` }}";
         }
     }
 }

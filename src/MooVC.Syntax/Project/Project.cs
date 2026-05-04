@@ -191,14 +191,14 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Project)} {{ " +
-                $"{nameof(Imports)} = {DebuggerDisplayFormatter.Format(Imports)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(ItemGroups)} = {DebuggerDisplayFormatter.Format(ItemGroups)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(PropertyGroups)} = {DebuggerDisplayFormatter.Format(PropertyGroups)}, " +
-                $"{nameof(Resources)} = {DebuggerDisplayFormatter.Format(Resources)}, " +
-                $"{nameof(Sdks)} = {DebuggerDisplayFormatter.Format(Sdks)}, " +
-                $"{nameof(Targets)} = {DebuggerDisplayFormatter.Format(Targets)} }}";
+                $"{nameof(Imports)} = `{DebuggerDisplayFormatter.Format(Imports)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(ItemGroups)} = `{DebuggerDisplayFormatter.Format(ItemGroups)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(PropertyGroups)} = `{DebuggerDisplayFormatter.Format(PropertyGroups)}`, " +
+                $"{nameof(Resources)} = `{DebuggerDisplayFormatter.Format(Resources)}`, " +
+                $"{nameof(Sdks)} = `{DebuggerDisplayFormatter.Format(Sdks)}`, " +
+                $"{nameof(Targets)} = `{DebuggerDisplayFormatter.Format(Targets)}` }}";
         }
     }
 }

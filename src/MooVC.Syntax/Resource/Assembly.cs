@@ -108,9 +108,9 @@ namespace MooVC.Syntax.Resource
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Assembly)} {{ " +
-                $"{nameof(Alias)} = {DebuggerDisplayFormatter.Format(Alias)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)} }}";
+                $"{nameof(Alias)} = `{DebuggerDisplayFormatter.Format(Alias)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}` }}";
         }
     }
 }

@@ -94,6 +94,6 @@ public sealed class Initializer<T>
 
     private string GetDebuggerDisplay()
     {
-        return $"{GetType().Name} {{ {nameof(IsInitialized)} = {DebuggerDisplayFormatter.Format(IsInitialized)} }}";
+        return $"{GetType().Name} {{ {nameof(IsInitialized)} = `{DebuggerDisplayFormatter.Format(IsInitialized)}` }}";
     }
 }

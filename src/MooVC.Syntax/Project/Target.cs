@@ -182,18 +182,18 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Target)} {{ " +
-                $"{nameof(AfterTargets)} = {DebuggerDisplayFormatter.Format(AfterTargets)}, " +
-                $"{nameof(BeforeTargets)} = {DebuggerDisplayFormatter.Format(BeforeTargets)}, " +
-                $"{nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, " +
-                $"{nameof(DependsOnTargets)} = {DebuggerDisplayFormatter.Format(DependsOnTargets)}, " +
-                $"{nameof(Inputs)} = {DebuggerDisplayFormatter.Format(Inputs)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(KeepDuplicateOutputs)} = {DebuggerDisplayFormatter.Format(KeepDuplicateOutputs)}, " +
-                $"{nameof(Label)} = {DebuggerDisplayFormatter.Format(Label)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Outputs)} = {DebuggerDisplayFormatter.Format(Outputs)}, " +
-                $"{nameof(Returns)} = {DebuggerDisplayFormatter.Format(Returns)}, " +
-                $"{nameof(Tasks)} = {DebuggerDisplayFormatter.Format(Tasks)} }}";
+                $"{nameof(AfterTargets)} = `{DebuggerDisplayFormatter.Format(AfterTargets)}`, " +
+                $"{nameof(BeforeTargets)} = `{DebuggerDisplayFormatter.Format(BeforeTargets)}`, " +
+                $"{nameof(Condition)} = `{DebuggerDisplayFormatter.Format(Condition)}`, " +
+                $"{nameof(DependsOnTargets)} = `{DebuggerDisplayFormatter.Format(DependsOnTargets)}`, " +
+                $"{nameof(Inputs)} = `{DebuggerDisplayFormatter.Format(Inputs)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(KeepDuplicateOutputs)} = `{DebuggerDisplayFormatter.Format(KeepDuplicateOutputs)}`, " +
+                $"{nameof(Label)} = `{DebuggerDisplayFormatter.Format(Label)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Outputs)} = `{DebuggerDisplayFormatter.Format(Outputs)}`, " +
+                $"{nameof(Returns)} = `{DebuggerDisplayFormatter.Format(Returns)}`, " +
+                $"{nameof(Tasks)} = `{DebuggerDisplayFormatter.Format(Tasks)}` }}";
         }
     }
 }

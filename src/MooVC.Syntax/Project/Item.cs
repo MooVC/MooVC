@@ -181,18 +181,18 @@ namespace MooVC.Syntax.Project
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Item)} {{ " +
-                $"{nameof(Condition)} = {DebuggerDisplayFormatter.Format(Condition)}, " +
-                $"{nameof(Exclude)} = {DebuggerDisplayFormatter.Format(Exclude)}, " +
-                $"{nameof(Include)} = {DebuggerDisplayFormatter.Format(Include)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(KeepDuplicates)} = {DebuggerDisplayFormatter.Format(KeepDuplicates)}, " +
-                $"{nameof(MatchOnMetadata)} = {DebuggerDisplayFormatter.Format(MatchOnMetadata)}, " +
-                $"{nameof(MatchOnMetadataOptions)} = {DebuggerDisplayFormatter.Format(MatchOnMetadataOptions)}, " +
-                $"{nameof(Metadata)} = {DebuggerDisplayFormatter.Format(Metadata)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Remove)} = {DebuggerDisplayFormatter.Format(Remove)}, " +
-                $"{nameof(RemoveMetadata)} = {DebuggerDisplayFormatter.Format(RemoveMetadata)}, " +
-                $"{nameof(Update)} = {DebuggerDisplayFormatter.Format(Update)} }}";
+                $"{nameof(Condition)} = `{DebuggerDisplayFormatter.Format(Condition)}`, " +
+                $"{nameof(Exclude)} = `{DebuggerDisplayFormatter.Format(Exclude)}`, " +
+                $"{nameof(Include)} = `{DebuggerDisplayFormatter.Format(Include)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(KeepDuplicates)} = `{DebuggerDisplayFormatter.Format(KeepDuplicates)}`, " +
+                $"{nameof(MatchOnMetadata)} = `{DebuggerDisplayFormatter.Format(MatchOnMetadata)}`, " +
+                $"{nameof(MatchOnMetadataOptions)} = `{DebuggerDisplayFormatter.Format(MatchOnMetadataOptions)}`, " +
+                $"{nameof(Metadata)} = `{DebuggerDisplayFormatter.Format(Metadata)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Remove)} = `{DebuggerDisplayFormatter.Format(Remove)}`, " +
+                $"{nameof(RemoveMetadata)} = `{DebuggerDisplayFormatter.Format(RemoveMetadata)}`, " +
+                $"{nameof(Update)} = `{DebuggerDisplayFormatter.Format(Update)}` }}";
         }
     }
 }

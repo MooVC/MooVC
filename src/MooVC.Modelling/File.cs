@@ -61,12 +61,12 @@ namespace MooVC.Modelling
         private string GetDebuggerDisplay()
         {
             return $"{nameof(File)} {{ " +
-                $"{nameof(Content)} = {DebuggerDisplayFormatter.Format(Content)}, " +
-                $"{nameof(Extension)} = {DebuggerDisplayFormatter.Format(Extension)}, " +
-                $"{nameof(FullName)} = {DebuggerDisplayFormatter.Format(FullName)}, " +
-                $"{nameof(FullPath)} = {DebuggerDisplayFormatter.Format(FullPath)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Path)} = {DebuggerDisplayFormatter.Format(Path)} }}";
+                $"{nameof(Content)} = `{DebuggerDisplayFormatter.Format(Content)}`, " +
+                $"{nameof(Extension)} = `{DebuggerDisplayFormatter.Format(Extension)}`, " +
+                $"{nameof(FullName)} = `{DebuggerDisplayFormatter.Format(FullName)}`, " +
+                $"{nameof(FullPath)} = `{DebuggerDisplayFormatter.Format(FullPath)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Path)} = `{DebuggerDisplayFormatter.Format(Path)}` }}";
         }
     }
 }

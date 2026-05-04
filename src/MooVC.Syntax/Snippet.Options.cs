@@ -99,12 +99,12 @@ namespace MooVC.Syntax
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Options)} {{ " +
-                    $"{nameof(Block)} = {DebuggerDisplayFormatter.Format(Block)}, " +
-                    $"{nameof(Chaining)} = {DebuggerDisplayFormatter.Format(Chaining)}, " +
-                    $"{nameof(IsDefault)} = {DebuggerDisplayFormatter.Format(IsDefault)}, " +
-                    $"{nameof(IsUnspecified)} = {DebuggerDisplayFormatter.Format(IsUnspecified)}, " +
-                    $"{nameof(MaxLineLength)} = {DebuggerDisplayFormatter.Format(MaxLineLength)}, " +
-                    $"{nameof(Whitespace)} = {DebuggerDisplayFormatter.Format(Whitespace)} }}";
+                    $"{nameof(Block)} = `{DebuggerDisplayFormatter.Format(Block)}`, " +
+                    $"{nameof(Chaining)} = `{DebuggerDisplayFormatter.Format(Chaining)}`, " +
+                    $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
+                    $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                    $"{nameof(MaxLineLength)} = `{DebuggerDisplayFormatter.Format(MaxLineLength)}`, " +
+                    $"{nameof(Whitespace)} = `{DebuggerDisplayFormatter.Format(Whitespace)}` }}";
             }
         }
     }

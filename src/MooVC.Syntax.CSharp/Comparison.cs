@@ -133,10 +133,10 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Comparison)} {{ " +
-                $"{nameof(Body)} = {DebuggerDisplayFormatter.Format(Body)}, " +
-                $"{nameof(IsUndefined)} = {DebuggerDisplayFormatter.Format(IsUndefined)}, " +
-                $"{nameof(Operator)} = {DebuggerDisplayFormatter.Format(Operator)}, " +
-                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
+                $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
+                $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Operator)} = `{DebuggerDisplayFormatter.Format(Operator)}`, " +
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }
     }
 }

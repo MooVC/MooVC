@@ -217,12 +217,12 @@ namespace MooVC.Syntax.CSharp
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Event)} {{ " +
-                $"{nameof(Behaviours)} = {DebuggerDisplayFormatter.Format(Behaviours)}, " +
-                $"{nameof(Extensibility)} = {DebuggerDisplayFormatter.Format(Extensibility)}, " +
-                $"{nameof(Handler)} = {DebuggerDisplayFormatter.Format(Handler)}, " +
-                $"{nameof(IsUndefind)} = {DebuggerDisplayFormatter.Format(IsUndefind)}, " +
-                $"{nameof(Name)} = {DebuggerDisplayFormatter.Format(Name)}, " +
-                $"{nameof(Scope)} = {DebuggerDisplayFormatter.Format(Scope)} }}";
+                $"{nameof(Behaviours)} = `{DebuggerDisplayFormatter.Format(Behaviours)}`, " +
+                $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
+                $"{nameof(Handler)} = `{DebuggerDisplayFormatter.Format(Handler)}`, " +
+                $"{nameof(IsUndefind)} = `{DebuggerDisplayFormatter.Format(IsUndefind)}`, " +
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }
     }
 }
