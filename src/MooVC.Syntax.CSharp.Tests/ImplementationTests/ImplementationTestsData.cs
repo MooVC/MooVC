@@ -6,7 +6,7 @@ public static class ImplementationTestsData
         Qualification? name = default,
         Token? argument = default)
     {
-        Implementation result = new Implementation
+        var result = new Implementation
         {
             Name = name ?? (Qualification)"IComparable",
         };

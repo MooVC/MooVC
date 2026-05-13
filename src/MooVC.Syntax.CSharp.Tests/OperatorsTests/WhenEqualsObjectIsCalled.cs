@@ -34,7 +34,7 @@ public sealed class WhenEqualsObjectIsCalled
     public async Task GivenWrongTypeThenReturnsFalse()
     {
         // Arrange
-        var subject = new object();
+        object subject = new object();
         Operators target = OperatorsSubjectData.Create();
 
         // Act

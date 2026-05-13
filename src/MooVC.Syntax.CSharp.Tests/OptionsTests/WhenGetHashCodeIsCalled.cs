@@ -7,7 +7,7 @@ public sealed class WhenGetHashCodeIsCalled
     {
         // Arrange
         var left = new Options();
-        var right = new Options().WithNamespace(Qualifier.Options.Block);
+        Options right = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act
         int leftHash = left.GetHashCode();

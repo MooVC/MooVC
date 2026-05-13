@@ -8,7 +8,7 @@ public sealed class WhenGetHashCodeIsCalled
         // Arrange
         var first = new Snippet.Options.Blocks.Boundaries();
 
-        var second = new Snippet.Options.Blocks.Boundaries()
+        Snippet.Options.Blocks.Boundaries second = new Snippet.Options.Blocks.Boundaries()
             .WithClosing("]");
 
         // Act

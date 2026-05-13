@@ -13,7 +13,7 @@ public sealed class WhenValidateIsCalled
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
         _ = await Assert.That(results).IsEmpty();
@@ -32,7 +32,7 @@ public sealed class WhenValidateIsCalled
         var validationContext = new ValidationContext(subject);
 
         // Act
-        var results = subject.Validate(validationContext).ToArray();
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
 
         // Assert
         _ = await Assert.That(results).IsNotEmpty();

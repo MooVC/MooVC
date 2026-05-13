@@ -7,7 +7,7 @@ public sealed class WhenEqualsObjectIsCalled
     {
         // Arrange
         Event subject = EventTestsData.Create();
-        var target = new object();
+        object target = new object();
 
         // Act
         bool result = subject.Equals(target);

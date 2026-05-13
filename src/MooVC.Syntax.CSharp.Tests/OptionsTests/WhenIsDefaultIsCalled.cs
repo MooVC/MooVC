@@ -19,7 +19,7 @@ public sealed class WhenIsDefaultIsCalled
     public async Task GivenNonDefaultValuesThenReturnsFalse()
     {
         // Arrange
-        var subject = new Options()
+        Options subject = new Options()
             .WithNamespace(Qualifier.Options.Block);
 
         // Act

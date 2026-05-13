@@ -1,5 +1,8 @@
 namespace MooVC.Syntax.Solution.BuildTests;
 
+using System.Collections.Immutable;
+using System.Xml.Linq;
+
 public sealed class WhenToFragmentsIsCalled
 {
     [Test]
@@ -9,7 +12,7 @@ public sealed class WhenToFragmentsIsCalled
         var subject = new Build();
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
         _ = await Assert.That(result).IsEmpty();
@@ -22,7 +25,7 @@ public sealed class WhenToFragmentsIsCalled
         Build subject = BuildTestsData.Create();
 
         // Act
-        var result = subject.ToFragments();
+        ImmutableArray<XElement> result = subject.ToFragments();
 
         // Assert
         _ = await Assert.That(result).HasSingleItem();

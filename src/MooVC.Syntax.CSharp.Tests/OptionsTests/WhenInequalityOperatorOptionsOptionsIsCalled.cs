@@ -7,7 +7,7 @@ public sealed class WhenInequalityOperatorOptionsOptionsIsCalled
     {
         // Arrange
         var left = new Options();
-        var right = new Options().WithNamespace(Qualifier.Options.Block);
+        Options right = new Options().WithNamespace(Qualifier.Options.Block);
 
         // Act
         bool result = left != right;

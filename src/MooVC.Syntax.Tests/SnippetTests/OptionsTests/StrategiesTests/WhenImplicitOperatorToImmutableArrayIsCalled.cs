@@ -8,7 +8,7 @@ public sealed class WhenImplicitOperatorToImmutableArrayIsCalled
     public async Task GivenStrategiesThenReturnsEncapsulatedValue()
     {
         // Arrange
-        Snippet.Options.Strategies value = new Snippet.Options.Strategies(StrategiesTestsData.Primary);
+        var value = new Snippet.Options.Strategies(StrategiesTestsData.Primary);
 
         // Act
         ImmutableArray<Snippet.Options.IChain> result = value;

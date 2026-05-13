@@ -6,7 +6,7 @@ public static class BaseTestsData
         Qualification? name = default,
         Token? argument = default)
     {
-        Base result = new Base
+        var result = new Base
         {
             Name = name ?? (Qualification)"Comparable",
         };

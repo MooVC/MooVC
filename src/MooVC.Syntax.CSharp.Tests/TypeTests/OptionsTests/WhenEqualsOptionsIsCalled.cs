@@ -7,7 +7,7 @@ public sealed class WhenEqualsOptionsIsCalled
     {
         // Arrange
         var left = new Type.Options();
-        var right = new Type.Options().WithSnippets(Snippet.Options.Default.WithWhitespace("  "));
+        Type.Options right = new Type.Options().WithSnippets(Snippet.Options.Default.WithWhitespace("  "));
 
         // Act
         bool result = left.Equals(right);
