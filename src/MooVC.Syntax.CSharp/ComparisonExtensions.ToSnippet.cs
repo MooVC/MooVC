@@ -15,7 +15,7 @@ namespace MooVC.Syntax.CSharp
         /// <param name="options">The options.</param>
         /// <param name="type">The type.</param>
         /// <returns>The generated snippet.</returns>
-        internal static Snippet ToSnippet(this ImmutableArray<Comparison> comparisons, Snippet.Options options, Type type)
+        internal static Snippet ToSnippet(this ImmutableArray<Comparison> comparisons, Type.Options options, Type type)
         {
             if (comparisons.IsDefaultOrEmpty)
             {

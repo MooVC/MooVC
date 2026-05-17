@@ -25,7 +25,7 @@ public sealed class WhenToStringIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create(isUndefined: true);
 
         // Act
-        string representation = subject.ToString(Snippet.Options.Default, type);
+        string representation = subject.ToString(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo(string.Empty);
@@ -39,7 +39,7 @@ public sealed class WhenToStringIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        string representation = subject.ToString(Snippet.Options.Default, type);
+        string representation = subject.ToString(Type.Options.Default, type);
 
         // Assert
         string expected = """

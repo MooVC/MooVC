@@ -8,7 +8,6 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Comparison_Resources;
-    using Concept = MooVC.Syntax.CSharp.Type;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -58,6 +57,13 @@ namespace MooVC.Syntax.CSharp
         /// <value>The scope.</value>
         public Scopes Scope { get; internal set; } = Scopes.Public;
 
+        /// <summary>
+        /// Gets the subject symbol.
+        /// </summary>
+        /// <remarks>When set to Symbol.Undefined, the containing type is used.</remarks>
+        [Descriptor("To")]
+        public Symbol Subject { get; internal set; } = Symbol.Undefined;
+
         public static implicit operator Comparison((Snippet Body, Types Type) comparison)
         {
             Guard.Against.Conversion<(Snippet Body, Types Type), Comparison>(comparison);
@@ -73,7 +79,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Declaration.Unspecified, Type.Options.Default);
         }
 
         /// <summary>
@@ -82,7 +88,7 @@ namespace MooVC.Syntax.CSharp
         /// <param name="options">The options.</param>
         /// <param name="type">The type.</param>
         /// <returns>The string representation.</returns>
-        public string ToString(Snippet.Options options, Concept type)
+        public string ToString(Type.Options options, Type type)
         {
             return ToSnippet(options, type);
         }
@@ -93,7 +99,7 @@ namespace MooVC.Syntax.CSharp
         /// <param name="options">The options.</param>
         /// <param name="type">The type.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options, Concept type)
+        public Snippet ToSnippet(Type.Options options, Type type)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Comparison)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Comparison)));
@@ -115,7 +121,7 @@ namespace MooVC.Syntax.CSharp
             }
         }
 
-        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
+        private Snippet ToSnippet(Declaration declaration, Type.Options options)
         {
             if (IsUndefined || declaration.IsUnspecified)
             {
@@ -124,8 +130,15 @@ namespace MooVC.Syntax.CSharp
 
             string @operator = Operator;
             string scope = Scope;
-            var type = declaration.ToSnippet(options);
-            var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({type} left, {type} right)");
+            var left = declaration.ToSnippet(options);
+            Snippet right = left;
+
+            if (!Subject.IsUndefined)
+            {
+                right = Subject.ToSnippet(options);
+            }
+
+            var signature = Snippet.From(options, $"{scope} static bool operator {@operator}({left} left, {right} right)");
 
             return Body.Block(options, signature);
         }
@@ -136,7 +149,8 @@ namespace MooVC.Syntax.CSharp
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
                 $"{nameof(Operator)} = `{DebuggerDisplayFormatter.Format(Operator)}`, " +
-                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
+                $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}`, " +
+                $"{nameof(Subject)} = `{DebuggerDisplayFormatter.Format(Subject)}` }}";
         }
     }
 }

@@ -39,7 +39,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var snippet = subject.ToSnippet(Snippet.Options.Default, type);
+        var snippet = subject.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
@@ -62,7 +62,7 @@ public sealed class WhenToSnippetIsCalled
             unaries: unaries);
 
         // Act
-        var snippet = subject.ToSnippet(Snippet.Options.Default, type);
+        var snippet = subject.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenSnippetReturnedExpected);

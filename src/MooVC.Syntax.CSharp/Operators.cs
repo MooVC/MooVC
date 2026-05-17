@@ -87,7 +87,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default, Class.Undefined);
+            return ToSnippet(Type.Options.Default, Class.Undefined);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace MooVC.Syntax.CSharp
         /// <param name="options">The options.</param>
         /// <param name="type">The type.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options, Type type)
+        public Snippet ToSnippet(Type.Options options, Type type)
         {
             _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Operators)));
             _ = Guard.Against.Null(type, message: ToStringTypeRequired.Format(nameof(Construct), nameof(Binary)));
