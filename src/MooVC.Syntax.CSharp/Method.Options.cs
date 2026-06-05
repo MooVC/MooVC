@@ -98,6 +98,13 @@ namespace MooVC.Syntax.CSharp
             public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
 
             /// <summary>
+            /// Gets the type options.
+            /// </summary>
+            /// <value>The type rendering options.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsTypesRequired), ErrorMessageResourceType = typeof(Method_Resources))]
+            public Type.Options Types { get; internal set; } = Type.Options.Default;
+
+            /// <summary>
             /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Attribute.Options" />.
             /// </summary>
             /// <param name="options">The <see cref="Options" /> value to convert.</param>
@@ -162,6 +169,18 @@ namespace MooVC.Syntax.CSharp
                 return options.Qualifications;
             }
 
+            /// <summary>
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Type.Options" />.
+            /// </summary>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Type.Options" /> value.</returns>
+            public static implicit operator Type.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Type.Options>(options);
+
+                return options.Types.ForkOn(types => types.Snippets.IsUnspecified, types => types.WithSnippets(options.Snippets), _ => _);
+            }
+
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Options)} {{ " +
@@ -170,7 +189,8 @@ namespace MooVC.Syntax.CSharp
                     $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
                     $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
                     $"{nameof(Qualifications)} = `{DebuggerDisplayFormatter.Format(Qualifications)}`, " +
-                    $"{nameof(Snippets)} = `{DebuggerDisplayFormatter.Format(Snippets)}` }}";
+                    $"{nameof(Snippets)} = `{DebuggerDisplayFormatter.Format(Snippets)}`, " +
+                    $"{nameof(Types)} = `{DebuggerDisplayFormatter.Format(Types)}` }}";
             }
         }
     }

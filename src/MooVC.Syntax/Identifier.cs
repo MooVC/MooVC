@@ -19,8 +19,7 @@ namespace MooVC.Syntax
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Identifier
-        : IComparable<Identifier>,
-          IValidatableObject
+        : IValidatableObject
     {
         /// <summary>
         /// Represents the unnamed for the Identifier.
@@ -74,72 +73,6 @@ namespace MooVC.Syntax
             Guard.Against.Conversion<Identifier, Snippet>(identifier);
 
             return Snippet.From(identifier.ToString());
-        }
-
-        /// <summary>
-        /// Defines the less than operator for the Identifier.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator <(Identifier left, Identifier right)
-        {
-            if (left is null)
-            {
-                return right is object;
-            }
-
-            return left.CompareTo(right) < 0;
-        }
-
-        /// <summary>
-        /// Defines the greater than operator for the Identifier.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator >(Identifier left, Identifier right)
-        {
-            if (left is null)
-            {
-                return false;
-            }
-
-            return left.CompareTo(right) > 0;
-        }
-
-        /// <summary>
-        /// Defines the less than or equal to operator for the Identifier.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator <=(Identifier left, Identifier right)
-        {
-            return !(left > right);
-        }
-
-        /// <summary>
-        /// Defines the greater than or equal to operator for the Identifier.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator >=(Identifier left, Identifier right)
-        {
-            return !(left < right);
-        }
-
-        /// <summary>
-        /// Compares this Identifier to another instance.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns>A signed integer indicating relative order.</returns>
-        public int CompareTo(Identifier other)
-        {
-            return other is null
-                ? 1
-                : string.CompareOrdinal(_value, other._value);
         }
 
         /// <summary>

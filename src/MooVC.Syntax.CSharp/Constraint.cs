@@ -110,7 +110,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Snippet.Options.Default);
+            return ToSnippet(Type.Options.Default);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Type.Options options)
         {
             _ = Guard.Against.Null(options);
 
@@ -127,13 +127,15 @@ namespace MooVC.Syntax.CSharp
                 return Snippet.Empty;
             }
 
-            string @base = Base;
+            string @base = Base.ToSnippet(options);
             string nature = Nature;
             string @new = New;
 
             IEnumerable<string> interfaces = Interfaces.IsDefaultOrEmpty
                 ? Enumerable.Empty<string>()
-                : Interfaces.Select(@interface => @interface.ToString());
+                : Interfaces.Select(@interface => @interface
+                    .ToSnippet(options)
+                    .ToString());
 
             string[] constraints = interfaces
                 .Prepend(@base)

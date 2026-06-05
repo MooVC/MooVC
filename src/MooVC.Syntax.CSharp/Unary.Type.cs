@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp
 {
-    using System;
     using System.Diagnostics;
     using Fluentify;
     using Monify;
@@ -17,7 +16,6 @@ namespace MooVC.Syntax.CSharp
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Types
-            : IComparable<Types>
         {
             /// <summary>
             /// Represents the complement for the Type.
@@ -122,84 +120,6 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>A value indicating whether the Type is unspecified.</value>
             public bool IsUnspecified => this == Unspecified;
-
-            /// <summary>
-            /// Defines the less than operator for the Type.
-            /// </summary>
-            /// <param name="left">The left.</param>
-            /// <param name="right">The right.</param>
-            /// <returns>
-            /// <see langword="true" /> when <paramref name="left" /> is less than <paramref name="right" />;
-            /// otherwise, <see langword="false" />.
-            /// </returns>
-            public static bool operator <(Types left, Types right)
-            {
-                if (left is null)
-                {
-                    return right is object;
-                }
-
-                return left.CompareTo(right) < 0;
-            }
-
-            /// <summary>
-            /// Defines the greater than operator for the Type.
-            /// </summary>
-            /// <param name="left">The left.</param>
-            /// <param name="right">The right.</param>
-            /// <returns>
-            /// <see langword="true" /> when <paramref name="left" /> is greater than <paramref name="right" />;
-            /// otherwise, <see langword="false" />.
-            /// </returns>
-            public static bool operator >(Types left, Types right)
-            {
-                if (left is null)
-                {
-                    return false;
-                }
-
-                return left.CompareTo(right) > 0;
-            }
-
-            /// <summary>
-            /// Defines the less than or equal to operator for the Type.
-            /// </summary>
-            /// <param name="left">The left.</param>
-            /// <param name="right">The right.</param>
-            /// <returns>
-            /// <see langword="true" /> when <paramref name="left" /> is less than or equal to <paramref name="right" />;
-            /// otherwise, <see langword="false" />.
-            /// </returns>
-            public static bool operator <=(Types left, Types right)
-            {
-                return !(left > right);
-            }
-
-            /// <summary>
-            /// Defines the greater than or equal to operator for the Type.
-            /// </summary>
-            /// <param name="left">The left.</param>
-            /// <param name="right">The right.</param>
-            /// <returns>
-            /// <see langword="true" /> when <paramref name="left" /> is greater than or equal to <paramref name="right" />;
-            /// otherwise, <see langword="false" />.
-            /// </returns>
-            public static bool operator >=(Types left, Types right)
-            {
-                return !(left < right);
-            }
-
-            /// <summary>
-            /// Compares this Type to another instance.
-            /// </summary>
-            /// <param name="other">The other.</param>
-            /// <returns>A signed integer indicating relative order.</returns>
-            public int CompareTo(Types other)
-            {
-                return other is null
-                    ? 1
-                    : string.CompareOrdinal(_value, other._value);
-            }
 
             /// <summary>
             /// Returns the string representation of the Type.

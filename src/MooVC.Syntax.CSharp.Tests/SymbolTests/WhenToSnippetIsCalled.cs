@@ -19,7 +19,7 @@ public sealed class WhenToSnippetIsCalled
         var representation = wrapped.ToSnippet(Qualification.Options.Default);
 
         // Assert
-        _ = await Assert.That(representation).IsEqualTo("ImmutableArray<int>");
+        _ = await Assert.That(representation).IsEqualTo(Snippet.From("ImmutableArray<int>"));
     }
 
     [Test]

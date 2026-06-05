@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
@@ -19,8 +18,7 @@ namespace MooVC.Syntax.CSharp
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Moniker
-        : IComparable<Moniker>,
-          IValidatableObject
+        : IValidatableObject
     {
         /// <summary>
         /// Gets the empty instance.
@@ -108,84 +106,6 @@ namespace MooVC.Syntax.CSharp
             }
 
             return name;
-        }
-
-        /// <summary>
-        /// Defines the less than operator for the Moniker.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// <see langword="true" /> when <paramref name="left" /> is less than <paramref name="right" />;
-        /// otherwise, <see langword="false" />.
-        /// </returns>
-        public static bool operator <(Moniker left, Moniker right)
-        {
-            if (left is null)
-            {
-                return right is object;
-            }
-
-            return left.CompareTo(right) < 0;
-        }
-
-        /// <summary>
-        /// Defines the greater than operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// <see langword="true" /> when <paramref name="left" /> is greater than <paramref name="right" />;
-        /// otherwise, <see langword="false" />.
-        /// </returns>
-        public static bool operator >(Moniker left, Moniker right)
-        {
-            if (left is null)
-            {
-                return false;
-            }
-
-            return left.CompareTo(right) > 0;
-        }
-
-        /// <summary>
-        /// Defines the less than or equal to operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// <see langword="true" /> when <paramref name="left" /> is less than or equal to <paramref name="right" />;
-        /// otherwise, <see langword="false" />.
-        /// </returns>
-        public static bool operator <=(Moniker left, Moniker right)
-        {
-            return !(left > right);
-        }
-
-        /// <summary>
-        /// Defines the greater than or equal to operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// <see langword="true" /> when <paramref name="left" /> is greater than or equal to <paramref name="right" />;
-        /// otherwise, <see langword="false" />.
-        /// </returns>
-        public static bool operator >=(Moniker left, Moniker right)
-        {
-            return !(left < right);
-        }
-
-        /// <summary>
-        /// Compares this Segment to another instance.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns>A signed integer indicating relative order.</returns>
-        public int CompareTo(Moniker other)
-        {
-            return other is null
-                ? 1
-                : string.CompareOrdinal(_value, other._value);
         }
 
         /// <summary>

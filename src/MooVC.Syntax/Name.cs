@@ -1,6 +1,5 @@
 namespace MooVC.Syntax
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
@@ -18,8 +17,7 @@ namespace MooVC.Syntax
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Name
-        : IComparable<Name>,
-          IValidatableObject
+        : IValidatableObject
     {
         /// <summary>
         /// Gets the empty instance.
@@ -55,72 +53,6 @@ namespace MooVC.Syntax
             Guard.Against.Conversion<Name, Snippet>(name);
 
             return Snippet.From(name.ToString());
-        }
-
-        /// <summary>
-        /// Defines the less than operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator <(Name left, Name right)
-        {
-            if (left is null)
-            {
-                return right is object;
-            }
-
-            return left.CompareTo(right) < 0;
-        }
-
-        /// <summary>
-        /// Defines the greater than operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator >(Name left, Name right)
-        {
-            if (left is null)
-            {
-                return false;
-            }
-
-            return left.CompareTo(right) > 0;
-        }
-
-        /// <summary>
-        /// Defines the less than or equal to operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator <=(Name left, Name right)
-        {
-            return !(left > right);
-        }
-
-        /// <summary>
-        /// Defines the greater than or equal to operator for the Segment.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The .</returns>
-        public static bool operator >=(Name left, Name right)
-        {
-            return !(left < right);
-        }
-
-        /// <summary>
-        /// Compares this Segment to another instance.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns>A signed integer indicating relative order.</returns>
-        public int CompareTo(Name other)
-        {
-            return other is null
-                ? 1
-                : string.CompareOrdinal(_value, other._value);
         }
 
         /// <summary>

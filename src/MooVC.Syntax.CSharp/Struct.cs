@@ -129,7 +129,7 @@ namespace MooVC.Syntax.CSharp
                 .Prepend(attributes);
         }
 
-        private Snippet GetSignature(Snippet.Options options)
+        private Snippet GetSignature(Options options)
         {
             Behavior.ToString(out string left, out string right);
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);

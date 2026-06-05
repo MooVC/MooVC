@@ -124,7 +124,7 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Type.Options options)
         {
             _ = Guard.Against.Null(options);
 
@@ -134,7 +134,7 @@ namespace MooVC.Syntax.CSharp
             }
 
             string[] clauses = Constraints
-                .Select(constraint => $"where {Name} : {constraint}")
+                .Select(constraint => $"where {Name} : {constraint.ToSnippet(options)}")
                 .ToArray();
 
             return Snippet.From(options, clauses);

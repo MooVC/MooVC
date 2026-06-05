@@ -13,6 +13,7 @@ namespace MooVC.Syntax
         /// <summary>
         /// Creates XML attributes for the syntax element.
         /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
         /// <param name="name">The name.</param>
         /// <param name="include">An optional predicate that determines if the attrbibute should be added.</param>
