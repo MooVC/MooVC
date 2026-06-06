@@ -13,7 +13,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents whether a conversion operator is implicit or explicit.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Intents
@@ -130,20 +129,6 @@ namespace MooVC.Syntax.CSharp
                 }
 
                 return 0;
-            }
-
-            /// <summary>
-            /// Returns the string representation of the Intent.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Intents)} {{ {_value} }}";
             }
         }
     }

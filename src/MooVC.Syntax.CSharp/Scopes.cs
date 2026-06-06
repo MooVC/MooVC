@@ -11,7 +11,6 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# accessibility scope used to qualify type and member declarations.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Scopes
@@ -170,15 +169,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Returns the string representation of the Scope.
         /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        /// <summary>
-        /// Returns the string representation of the Scope.
-        /// </summary>
         /// <param name="implied">The implied scope.</param>
         /// <returns>The string representation of the scope, or string.Empty if the instance matches the implied.</returns>
         public string ToString(Scopes implied)
@@ -229,11 +219,6 @@ namespace MooVC.Syntax.CSharp
         private static bool IsProtectedInternal(Scopes left, Scopes right)
         {
             return left._value == Protected._value && right._value == Internal._value;
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(Scopes)} {{ {_value} }}";
         }
     }
 }

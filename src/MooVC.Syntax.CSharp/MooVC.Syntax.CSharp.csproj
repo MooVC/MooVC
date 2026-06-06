@@ -36,6 +36,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Base.Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Constraint.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Constraint.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Definition.Resources.Designer.cs">
       <DependentUpon>Definition.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -45,6 +50,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DefinitionExtensions.Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Generic.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Generic.Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Implementation.Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -192,6 +202,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Base.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Constraint.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Constraint.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Definition.Resources.resx">
       <LastGenOutput>Definition.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -199,6 +213,10 @@
     <EmbeddedResource Update="DefinitionExtensions.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DefinitionExtensions.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Generic.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Generic.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Implementation.Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -12,7 +12,6 @@ namespace MooVC.Syntax
         /// <summary>
         /// Defines options for the Qualifier syntax element.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Options
@@ -43,20 +42,6 @@ namespace MooVC.Syntax
             /// </summary>
             /// <value>A value indicating whether the Options is file.</value>
             public bool IsFile => this == File;
-
-            /// <summary>
-            /// Returns the string representation of the Options.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Options)} {{ {_value} }}";
-            }
         }
     }
 }

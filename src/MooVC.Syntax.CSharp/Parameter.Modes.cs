@@ -136,15 +136,6 @@ namespace MooVC.Syntax.CSharp
                 return Snippet.From(mode.ToString());
             }
 
-            /// <summary>
-            /// Returns the string representation of the Mode.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Modes)} {{ " +

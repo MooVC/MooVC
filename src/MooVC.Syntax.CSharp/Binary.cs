@@ -95,7 +95,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Binary)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Binary)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Binary)));
 
             return ToSnippet(type.Declaration, options);

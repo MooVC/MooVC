@@ -12,7 +12,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents the async/sync modality applied to a member signature.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Modes
@@ -30,20 +29,6 @@ namespace MooVC.Syntax.CSharp
             private Modes(string value)
             {
                 _value = value;
-            }
-
-            /// <summary>
-            /// Returns the C# async modifier text.
-            /// </summary>
-            /// <returns>The async modifier text.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Modes)} {{ {_value} }}";
             }
         }
     }

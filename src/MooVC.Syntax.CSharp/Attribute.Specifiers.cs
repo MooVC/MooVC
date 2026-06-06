@@ -14,7 +14,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents a target specifier that controls where an attribute is emitted.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Specifiers
@@ -136,20 +135,6 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Specifiers, Snippet>(specifiers);
 
                 return Snippet.From(specifiers);
-            }
-
-            /// <summary>
-            /// Returns the string representation of the Specifier.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Specifiers)} {{ {_value} }}";
             }
         }
     }

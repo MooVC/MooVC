@@ -143,15 +143,6 @@ namespace MooVC.Syntax.CSharp
             /// <value>A value indicating whether the Type is xor.</value>
             public bool IsXOR => this == XOR;
 
-            /// <summary>
-            /// Returns the string representation of the Type.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Types)} {{ " +

@@ -121,6 +121,6 @@
     <value>The casing type `{0:G}` is not supported by `{1}`.</value>
   </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
-    <value>The formatting options for type `{0}` must be provided.</value>
+    <value>The `{0}` formatting options must be provided.</value>
   </data>
 </root>

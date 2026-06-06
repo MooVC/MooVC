@@ -127,7 +127,7 @@
     <value>The Type options must be provided.</value>
   </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
-    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
+    <value>The `{0}` formatting options must be provided.</value>
   </data>
   <data name="AttributeTypeInvalid" xml:space="preserve">
     <value>Type `{0}` does not derive from System.Attribute.</value>

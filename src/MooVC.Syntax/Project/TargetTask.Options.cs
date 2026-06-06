@@ -11,7 +11,6 @@ namespace MooVC.Syntax.Project
         /// <summary>
         /// Defines options for the TargetTask MSBuild project attribute.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         public sealed partial class Options
         {
@@ -34,20 +33,6 @@ namespace MooVC.Syntax.Project
             private Options(string value)
             {
                 _value = value;
-            }
-
-            /// <summary>
-            /// Returns the string representation of the Options.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Options)} {{ {_value} }}";
             }
         }
     }

@@ -91,7 +91,7 @@ namespace MooVC.Syntax
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Identifier)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Identifier)));
 
             if (IsUnnamed)
             {

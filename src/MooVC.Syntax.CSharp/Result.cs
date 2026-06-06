@@ -161,7 +161,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The return signature snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Result)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Result)));
 
             if (IsUndefined)
             {

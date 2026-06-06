@@ -96,8 +96,8 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options, Concept type)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Unary)));
-            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Unary)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Unary)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(typeof(Types), typeof(Unary)));
 
             return ToSnippet(type.Declaration, options);
         }
@@ -112,7 +112,7 @@ namespace MooVC.Syntax.CSharp
         {
             if (Body.IsEmpty)
             {
-                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Unary)), new[] { nameof(Body) });
+                yield return new ValidationResult(ValidateBodyRequired.Format(nameof(Body), typeof(Unary)), new[] { nameof(Body) });
             }
         }
 

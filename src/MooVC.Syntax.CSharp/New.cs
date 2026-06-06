@@ -9,7 +9,6 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents the `new()` constructor constraint in generic clauses.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class New
@@ -63,20 +62,6 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<New, Snippet>(@new);
 
             return Snippet.From(@new.ToString());
-        }
-
-        /// <summary>
-        /// Returns the string representation of the New.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(New)} {{ {_value} }}";
         }
     }
 }

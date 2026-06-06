@@ -9,7 +9,6 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents class/struct constraints applied to generic type parameters.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Natures
@@ -72,20 +71,6 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<Natures, Snippet>(nature);
 
             return Snippet.From(nature.ToString());
-        }
-
-        /// <summary>
-        /// Returns the string representation of the Nature.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(Natures)} {{ {_value} }}";
         }
     }
 }

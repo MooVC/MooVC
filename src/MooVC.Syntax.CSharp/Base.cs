@@ -78,7 +78,7 @@ namespace MooVC.Syntax.CSharp
         {
             Guard.Against.Conversion<Base, Snippet>(@base);
 
-            return @base.ToSnippet(Type.Options.Default);
+            return @base.ToSnippet(Qualification.Options.Default);
         }
 
         /// <summary>
@@ -161,9 +161,9 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Type.Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Type.Options), nameof(Type), nameof(Declaration)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Base)));
 
             if (IsUnspecified)
             {
@@ -194,7 +194,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Type.Options.Default);
+            return ToSnippet(Qualification.Options.Default);
         }
 
         /// <summary>

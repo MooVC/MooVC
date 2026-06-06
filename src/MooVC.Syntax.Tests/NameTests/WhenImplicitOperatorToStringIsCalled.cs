@@ -47,7 +47,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Test]
-    public async Task GivenSegmentWithNullValueThenResultIsNull()
+    public async Task GivenSegmentWithNullValueThenResultIsEmpty()
     {
         // Arrange
         var subject = new Name(default);
@@ -56,7 +56,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNullOrEmpty();
     }
 
     [Test]

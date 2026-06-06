@@ -120,7 +120,7 @@
   <data name="AsWrapperRequired" xml:space="preserve">
     <value>The type to serve as the wrapper to `{0}` must be provided.</value>
   </data>
-  <data name="ToStringOptionsRequired" xml:space="preserve">
-    <value>The formatting options for type `{0}` must be provided.</value>
+  <data name="ToSnippetOptionsRequired" xml:space="preserve">
+    <value>The `{0}` formatting options must be provided.</value>
   </data>
 </root>

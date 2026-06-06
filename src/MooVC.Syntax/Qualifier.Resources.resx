@@ -124,7 +124,7 @@
     <value>The `{0}` to prepend must be provided.</value>
   </data>
   <data name="ToSnippetOptionsRequired" xml:space="preserve">
-    <value>The `{0}` to format the `{1}` for `{2}` must be provided.</value>
+    <value>The `{0}` formatting options must be provided.</value>
   </data>
   <data name="ValidateSegmentRequired" xml:space="preserve">
     <value>`{1}` `{0}` for `{2}` with a preceding value of `{3}` is not defined.</value>

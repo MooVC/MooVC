@@ -13,7 +13,6 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element segment.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Name
@@ -56,15 +55,6 @@ namespace MooVC.Syntax
         }
 
         /// <summary>
-        /// Returns the string representation of the Segment.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        /// <summary>
         /// Validates the Segment.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>
@@ -84,11 +74,6 @@ namespace MooVC.Syntax
                     ValidateValueRequired.Format(_value, nameof(Name)),
                     new[] { nameof(Name) });
             }
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(Name)} {{ {_value} }}";
         }
     }
 }

@@ -51,7 +51,7 @@ public sealed class WhenToStringIsCalled
     }
 
     [Test]
-    public async Task GivenNullValueThenResultIsNull()
+    public async Task GivenNullValueThenResultIsEmpty()
     {
         // Arrange
         var subject = new Name(default);
@@ -60,7 +60,7 @@ public sealed class WhenToStringIsCalled
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNullOrEmpty();
     }
 
     [Test]

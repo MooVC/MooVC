@@ -17,7 +17,6 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Defines formatting styles for rendering attributes.
             /// </summary>
-            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]
             public sealed partial class Styles
@@ -46,20 +45,6 @@ namespace MooVC.Syntax.CSharp
                 /// Gets a value indicating whether the current instance represents a separate value.
                 /// </summary>
                 public bool IsSeparate => this == Separate;
-
-                /// <summary>
-                /// Returns a string that represents the current object.
-                /// </summary>
-                /// <returns>A string representation of the current object.</returns>
-                public override string ToString()
-                {
-                    return _value;
-                }
-
-                private string GetDebuggerDisplay()
-                {
-                    return $"{nameof(Styles)} {{ {_value} }}";
-                }
             }
         }
     }

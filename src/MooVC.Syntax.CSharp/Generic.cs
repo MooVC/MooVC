@@ -11,6 +11,7 @@ namespace MooVC.Syntax.CSharp
     using Fluentify;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Generic_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -124,9 +125,9 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Type.Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
-            _ = Guard.Against.Null(options);
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Generic)));
 
             if (Constraints.IsDefaultOrEmpty)
             {

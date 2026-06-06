@@ -14,7 +14,6 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents one segment in a qualified identifier.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Moniker
@@ -109,15 +108,6 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Returns the string representation of the Segment.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        /// <summary>
         /// Validates the Segment.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>
@@ -137,11 +127,6 @@ namespace MooVC.Syntax.CSharp
                     MonikerValidateValueRequired.Format(_value, nameof(Moniker)),
                     new[] { nameof(Moniker) });
             }
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(Moniker)} {{ {_value} }}";
         }
     }
 }

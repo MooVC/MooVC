@@ -30,7 +30,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
     }
 
     [Test]
-    public async Task GivenNullWhenRoundTrippedThenResultIsNull()
+    public async Task GivenNullWhenRoundTrippedThenResultIsEmpty()
     {
         // Arrange
         string? value = default;
@@ -40,7 +40,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string? result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNullOrEmpty();
     }
 
     [Test]

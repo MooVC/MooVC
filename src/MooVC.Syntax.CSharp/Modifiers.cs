@@ -11,7 +11,6 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents C# extensibility modifiers that describe inheritance and override behavior.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Modifiers
@@ -181,15 +180,6 @@ namespace MooVC.Syntax.CSharp
             return Array.Exists(permissable, extensibility => extensibility == this);
         }
 
-        /// <summary>
-        /// Returns the string representation of the Extensibility.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
         private static int GetRank(string value)
         {
             if (value == Static._value)
@@ -228,11 +218,6 @@ namespace MooVC.Syntax.CSharp
         private static bool IsOverride(Modifiers left, Modifiers right)
         {
             return (left == Sealed || left == Abstract) && right == Override;
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return $"{nameof(Modifiers)} {{ {_value} }}";
         }
     }
 }

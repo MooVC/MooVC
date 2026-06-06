@@ -12,7 +12,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents an operator token category used by operator declarations.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Types
@@ -98,20 +97,6 @@ namespace MooVC.Syntax.CSharp
             /// </summary>
             /// <value>A value indicating whether the Type is unspecified.</value>
             public bool IsUnspecified => this == Unspecified;
-
-            /// <summary>
-            /// Returns the string representation of the Type.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Types)} {{ {_value} }}";
-            }
         }
     }
 }

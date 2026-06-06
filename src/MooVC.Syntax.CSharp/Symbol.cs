@@ -247,7 +247,9 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Qualification.Options options)
         {
-            return ToString(options);
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Symbol)));
+
+            return Snippet.From(options, ToString(options));
         }
 
         /// <summary>
@@ -280,8 +282,6 @@ namespace MooVC.Syntax.CSharp
 
         private string ToString(Qualification.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Symbol)));
-
             if (IsUndefined)
             {
                 return string.Empty;

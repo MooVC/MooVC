@@ -12,7 +12,6 @@ namespace MooVC.Syntax
         /// <summary>
         /// Represents a syntax element casing.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Casing
@@ -65,20 +64,6 @@ namespace MooVC.Syntax
             /// </summary>
             /// <value>A value indicating whether the Casing is snake.</value>
             public bool IsSnake => this == Snake;
-
-            /// <summary>
-            /// Returns the string representation of the Casing.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Casing)} {{ {_value} }}";
-            }
         }
     }
 }

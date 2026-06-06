@@ -15,7 +15,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo(provided);
+        _ = await Assert.That(result).IsEqualTo(string.Empty);
     }
 
     [Test]

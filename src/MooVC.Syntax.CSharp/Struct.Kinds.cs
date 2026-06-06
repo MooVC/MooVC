@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System;
     using System.Diagnostics;
     using Ardalis.GuardClauses;
+    using Fluentify;
     using Monify;
     using static MooVC.Syntax.CSharp.Struct_Resources;
 
@@ -14,8 +15,8 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents the struct shape keyword (`struct`, `readonly struct`, or `ref struct`).
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
+        [SkipAutoInitialization]
         public sealed partial class Kinds
         {
             /// <summary>
@@ -90,15 +91,6 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Returns the string representation of the Kind.
             /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            /// <summary>
-            /// Returns the string representation of the Kind.
-            /// </summary>
             /// <param name="left">The left part of the Kind.</param>
             /// <param name="right">The right part of the Kind.</param>
             public void ToString(out string left, out string right)
@@ -113,11 +105,6 @@ namespace MooVC.Syntax.CSharp
                     left = parts[0];
                     right = parts[1];
                 }
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Kinds)} {{ {_value} }}";
             }
         }
     }

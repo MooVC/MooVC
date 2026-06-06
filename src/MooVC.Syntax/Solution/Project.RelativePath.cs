@@ -16,7 +16,6 @@ namespace MooVC.Syntax.Solution
         /// <summary>
         /// Represents a file system path that is relative to a base directory, excluding absolute or root-based paths.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class RelativePath
@@ -38,15 +37,6 @@ namespace MooVC.Syntax.Solution
             /// A value indicating whether the current instance represents an unspecified value.
             /// </value>
             public bool IsUnspecified => this == Unspecified;
-
-            /// <summary>
-            /// Returns the path verbatim.
-            /// </summary>
-            /// <returns>The path verbatim.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
 
             /// <summary>
             /// Validates the current object and returns a collection of validation results that describe any validation errors.
@@ -71,11 +61,6 @@ namespace MooVC.Syntax.Solution
                         RelativePathValidateValueInvalid.Format(nameof(Path), nameof(Project), _value),
                         new[] { nameof(RelativePath) });
                 }
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(RelativePath)} {{ {_value} }}";
             }
         }
     }

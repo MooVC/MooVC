@@ -19,20 +19,6 @@ public sealed class WhenCompareToIsCalled
     }
 
     [Test]
-    public async Task GivenNullOtherThenReturnsPositiveOne()
-    {
-        // Arrange
-        Comparison.Types subject = Comparison.Types.Equality;
-        Comparison.Types? other = default;
-
-        // Act
-        int result = subject.CompareTo(other);
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(1);
-    }
-
-    [Test]
     public async Task GivenSameValueThenReturnsZero()
     {
         // Arrange

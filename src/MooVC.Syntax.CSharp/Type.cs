@@ -160,7 +160,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Options), nameof(Snippet), GetType()));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Type)));
 
             if (IsUndefined)
             {

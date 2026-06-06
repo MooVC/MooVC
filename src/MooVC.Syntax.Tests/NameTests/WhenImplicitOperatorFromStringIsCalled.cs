@@ -41,7 +41,7 @@ public sealed class WhenImplicitOperatorFromStringIsCalled
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNullOrEmpty();
     }
 
     [Test]

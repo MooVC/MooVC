@@ -19,7 +19,6 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Represents the argument formatting strategy used during snippet generation.
             /// </summary>
-            [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(string))]
             [SkipAutoInitialization]
             public sealed partial class Formatters
@@ -73,20 +72,6 @@ namespace MooVC.Syntax.CSharp
                     Guard.Against.Conversion<Formatters, Snippet>(formatter);
 
                     return Snippet.From(formatter);
-                }
-
-                /// <summary>
-                /// Returns the string representation of the Formatter.
-                /// </summary>
-                /// <returns>The string representation.</returns>
-                public override string ToString()
-                {
-                    return _value;
-                }
-
-                private string GetDebuggerDisplay()
-                {
-                    return $"{nameof(Formatters)} {{ {_value} }}";
                 }
             }
         }

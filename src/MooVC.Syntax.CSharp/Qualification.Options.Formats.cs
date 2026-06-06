@@ -60,15 +60,6 @@ namespace MooVC.Syntax.CSharp
                 /// <value>A value indicating whether the Format is global.</value>
                 public bool IsGlobal => this == Global;
 
-                /// <summary>
-                /// Returns a string that represents the current object.
-                /// </summary>
-                /// <returns>A string representation of the current object.</returns>
-                public override string ToString()
-                {
-                    return _value;
-                }
-
                 private string GetDebuggerDisplay()
                 {
                     return $"{nameof(Formats)} {{ " +

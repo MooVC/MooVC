@@ -94,7 +94,7 @@ namespace MooVC.Syntax.CSharp
             /// <returns>The generated snippet.</returns>
             public Snippet ToSnippet(Snippet.Options options, Scopes scope)
             {
-                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Options), nameof(Snippet), nameof(Methods)));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(typeof(Methods)));
 
                 if (options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
                 {

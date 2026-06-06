@@ -250,7 +250,7 @@ namespace MooVC.Syntax.CSharp
 
         private string ToString(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Qualification)));
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(typeof(Qualification)));
 
             if (IsUnnamed)
             {

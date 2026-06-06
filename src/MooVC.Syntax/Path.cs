@@ -86,15 +86,6 @@ namespace MooVC.Syntax
         }
 
         /// <summary>
-        /// Returns the string representation of the Path.
-        /// </summary>
-        /// <returns>The string representation.</returns>
-        public override string ToString()
-        {
-            return _value;
-        }
-
-        /// <summary>
         /// Validates the Path.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>

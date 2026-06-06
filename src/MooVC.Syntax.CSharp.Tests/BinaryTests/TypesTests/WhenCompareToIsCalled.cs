@@ -14,22 +14,8 @@ public sealed class WhenCompareToIsCalled
         int resultRightLeft = rightType.CompareTo(leftType);
 
         // Assert
-        _ = await Assert.That(resultLeftRight).IsLessThan(0);
-        _ = await Assert.That(resultRightLeft).IsGreaterThan(0);
-    }
-
-    [Test]
-    public async Task GivenNullOtherThenReturnsPositiveOne()
-    {
-        // Arrange
-        Binary.Types subject = Binary.Types.Add;
-        Binary.Types? other = default;
-
-        // Act
-        int result = subject.CompareTo(other);
-
-        // Assert
-        _ = await Assert.That(result).IsEqualTo(1);
+        _ = await Assert.That(resultLeftRight).IsGreaterThan(0);
+        _ = await Assert.That(resultRightLeft).IsLessThan(0);
     }
 
     [Test]

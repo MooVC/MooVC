@@ -93,7 +93,7 @@ namespace MooVC.Syntax.CSharp
             /// <returns>The generated snippet.</returns>
             public Snippet ToSnippet(Snippet.Options options)
             {
-                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Snippet.Options), nameof(Snippet), nameof(Methods)));
+                _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(nameof(Methods)));
 
                 Snippet add = Format("get", options, Get);
 

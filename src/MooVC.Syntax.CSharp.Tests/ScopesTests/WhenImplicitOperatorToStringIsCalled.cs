@@ -18,7 +18,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
     }
 
     [Test]
-    public async Task GivenScopeWithNullValueThenResultIsNull()
+    public async Task GivenScopeWithNullValueThenResultIsEmpty()
     {
         // Arrange
         Scopes subject = (string?)null;
@@ -27,7 +27,7 @@ public sealed class WhenImplicitOperatorToStringIsCalled
         string result = subject;
 
         // Assert
-        _ = await Assert.That(result).IsNull();
+        _ = await Assert.That(result).IsNullOrEmpty();
     }
 
     [Test]

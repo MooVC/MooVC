@@ -76,6 +76,13 @@ namespace MooVC.Syntax.CSharp
             [Required(ErrorMessageResourceName = nameof(OptionsFormatRequired), ErrorMessageResourceType = typeof(Qualification_Resources))]
             public Formats Format { get; internal set; } = Formats.Minimum;
 
+            /// <summary>
+            /// Gets the options for the Snippets.
+            /// </summary>
+            /// <value>The behaviour.</value>
+            [Required(ErrorMessageResourceName = nameof(OptionsSnippetsRequired), ErrorMessageResourceType = typeof(Property_Resources))]
+            public Snippet.Options Snippets { get; internal set; } = Snippet.Options.Unspecified;
+
             public static implicit operator Formats(Options options)
             {
                 Guard.Against.Conversion<Options, Formats>(options);
@@ -83,12 +90,25 @@ namespace MooVC.Syntax.CSharp
                 return options.Format;
             }
 
+            /// <summary>
+            /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
+            /// </summary>
+            /// <param name="options">The <see cref="Options" /> value to convert.</param>
+            /// <returns>The converted <see cref="Snippet.Options" /> value.</returns>
+            public static implicit operator Snippet.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Snippet.Options>(options);
+
+                return options.Snippets;
+            }
+
             private string GetDebuggerDisplay()
             {
                 return $"{nameof(Options)} {{ " +
                     $"{nameof(Format)} = `{DebuggerDisplayFormatter.Format(Format)}`, " +
                     $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
-                    $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}` }}";
+                    $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                    $"{nameof(Snippets)} = `{DebuggerDisplayFormatter.Format(Snippets)}` }}";
             }
         }
     }

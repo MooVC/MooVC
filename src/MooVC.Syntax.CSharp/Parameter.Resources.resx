@@ -130,7 +130,7 @@
     <value>The Type options must be provided.</value>
   </data>
   <data name="ToStringOptionsRequired" xml:space="preserve">
-    <value>The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided.</value>
+    <value>The `{0}` formatting options must be provided.</value>
   </data>
   <data name="ValidateDefaultInvalid" xml:space="preserve">
     <value>The `{0}` for `{1}` with a `{2}` of `{3}` and a `{4}` of `{5}` cannot contain more than one line.</value>

@@ -11,6 +11,7 @@ namespace MooVC.Syntax.CSharp
     using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
+    using static MooVC.Syntax.CSharp.Constraint_Resources;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -110,7 +111,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Type.Options.Default);
+            return ToSnippet(Qualification.Options.Default);
         }
 
         /// <summary>
@@ -118,9 +119,9 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Type.Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
-            _ = Guard.Against.Null(options);
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Constraint)));
 
             if (IsUnspecified)
             {

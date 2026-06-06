@@ -175,7 +175,7 @@ namespace MooVC.Syntax.CSharp
 
         private string ToSnippet(Name name, Type.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Snippet.Options), nameof(Body), nameof(Constructor)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Constructor)));
 
             if (IsUndefined)
             {

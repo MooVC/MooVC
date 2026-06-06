@@ -22,7 +22,6 @@ namespace MooVC.Syntax
                 /// <summary>
                 /// Represents a syntax element inline style.
                 /// </summary>
-                [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
                 [Monify(Type = typeof(string))]
                 [SkipAutoInitialization]
                 public partial class Styles
@@ -64,20 +63,6 @@ namespace MooVC.Syntax
                     /// </summary>
                     /// <value>A value indicating whether the InlineStyle is multi line braces.</value>
                     public bool IsMultiLine => this == MultiLine;
-
-                    /// <summary>
-                    /// Returns a string that represents the current object.
-                    /// </summary>
-                    /// <returns>A string representation of the current object.</returns>
-                    public override string ToString()
-                    {
-                        return _value;
-                    }
-
-                    private string GetDebuggerDisplay()
-                    {
-                        return $"{nameof(Styles)} {{ {_value} }}";
-                    }
                 }
             }
         }

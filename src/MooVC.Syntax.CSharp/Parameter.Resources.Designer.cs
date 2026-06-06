@@ -97,7 +97,7 @@ namespace MooVC.Syntax.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The `{0}` required for format the `{1}` with `{2}` of `{3}` must be provided..
+        ///   Looks up a localized string similar to The `{0}` formatting options must be provided..
         /// </summary>
         internal static string ToStringOptionsRequired {
             get {

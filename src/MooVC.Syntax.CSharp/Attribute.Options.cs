@@ -130,7 +130,10 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Options, Qualification.Options>(options);
 
-                return options.Qualifications;
+                return options.Qualifications.ForkOn(
+                    _ => options.Snippets.IsUnspecified,
+                    attributes => attributes.WithSnippets(options.Snippets),
+                    _ => _);
             }
 
             /// <summary>

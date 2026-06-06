@@ -15,7 +15,6 @@ namespace MooVC.Syntax.CSharp
         /// Represents the pass-by modifier applied to an argument expression.
         /// </summary>
         [Monify(Type = typeof(string))]
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [SkipAutoInitialization]
         public sealed partial class Modes
         {
@@ -95,20 +94,6 @@ namespace MooVC.Syntax.CSharp
                 Guard.Against.Conversion<Modes, Snippet>(mode);
 
                 return Snippet.From(mode);
-            }
-
-            /// <summary>
-            /// Returns the string representation of the Mode.
-            /// </summary>
-            /// <returns>The string representation.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Modes)} {{ {_value} }}";
             }
         }
     }

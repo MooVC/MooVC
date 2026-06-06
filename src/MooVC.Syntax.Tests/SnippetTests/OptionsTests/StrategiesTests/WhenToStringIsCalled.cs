@@ -7,11 +7,12 @@ public sealed class WhenToStringIsCalled
     {
         // Arrange
         var subject = new Snippet.Options.Strategies(StrategiesTestsData.Primary);
+        string? expected = StrategiesTestsData.Primary.ToString();
 
         // Act
         string result = subject.ToString();
 
         // Assert
-        _ = await Assert.That(result).IsEqualTo($"Strategies {{ {StrategiesTestsData.Primary} }}");
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 }

@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System;
     using System.Collections.Immutable;
     using System.Linq;
     using MooVC.Linq;
@@ -25,7 +26,7 @@ namespace MooVC.Syntax.CSharp
 
             Snippet[] content = unaries
                 .OrderByDescending(unary => unary.Scope)
-                .ThenBy(unary => unary.Operator)
+                .ThenBy(unary => unary.Operator.ToString(), StringComparer.Ordinal)
                 .Select(unary => unary.ToSnippet(options, type))
                 .ToArray();
 

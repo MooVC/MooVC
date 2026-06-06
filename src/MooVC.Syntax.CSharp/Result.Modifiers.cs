@@ -12,7 +12,6 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Represents return modifiers that precede the return type in a C# signature.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Modifiers
@@ -40,20 +39,6 @@ namespace MooVC.Syntax.CSharp
             private Modifiers(string value)
             {
                 _value = value;
-            }
-
-            /// <summary>
-            /// Returns the C# return modifier text.
-            /// </summary>
-            /// <returns>The return modifier text.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Modifiers)} {{ {_value} }}";
             }
         }
     }

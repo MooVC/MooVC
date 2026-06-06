@@ -162,9 +162,9 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The generated snippet.</returns>
-        public Snippet ToSnippet(Type.Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(nameof(Type.Options), nameof(Type), nameof(Declaration)));
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Implementation)));
 
             if (IsUnspecified)
             {

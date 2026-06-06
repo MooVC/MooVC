@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System;
     using System.Collections.Immutable;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace MooVC.Syntax.CSharp
 
             Snippet[] content = binaries
                 .OrderByDescending(binary => binary.Scope)
-                .ThenBy(binary => binary.Operator)
+                .ThenBy(binary => binary.Operator.ToString(), StringComparer.Ordinal)
                 .Select(binary => binary.ToSnippet(options, type))
                 .ToArray();
 

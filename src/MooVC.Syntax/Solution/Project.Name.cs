@@ -16,7 +16,6 @@ namespace MooVC.Syntax.Solution
         /// <summary>
         /// Represents the display name of a solution project entry.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Name
@@ -29,15 +28,6 @@ namespace MooVC.Syntax.Solution
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
             public bool IsUnnamed => this == Unnamed;
-
-            /// <summary>
-            /// Returns the name of the project verbatim.
-            /// </summary>
-            /// <returns>The name of the project verbatim.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
@@ -52,11 +42,6 @@ namespace MooVC.Syntax.Solution
                         NameValidateValueInvalid.Format(nameof(DisplayName), nameof(Project), _value),
                         new[] { nameof(Name) });
                 }
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Name)} {{ {_value} }}";
             }
         }
     }

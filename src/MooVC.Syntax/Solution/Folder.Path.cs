@@ -16,7 +16,6 @@ namespace MooVC.Syntax.Solution
         /// <summary>
         /// Represents the logical folder path inside a solution folder hierarchy.
         /// </summary>
-        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
         [Monify(Type = typeof(string))]
         [SkipAutoInitialization]
         public sealed partial class Path
@@ -40,15 +39,6 @@ namespace MooVC.Syntax.Solution
             public bool IsRoot => this == Root;
 
             /// <summary>
-            /// Returns the encapsulated value verbatim.
-            /// </summary>
-            /// <returns>A string representation the encapsulated value verbatim.</returns>
-            public override string ToString()
-            {
-                return _value;
-            }
-
-            /// <summary>
             /// Validates the current object's state and returns a collection of validation errors, if any.
             /// </summary>
             /// <param name="validationContext">
@@ -69,11 +59,6 @@ namespace MooVC.Syntax.Solution
                 {
                     yield return new ValidationResult(PathValidateValueInvalid.Format(nameof(Path), _value), new[] { nameof(Path) });
                 }
-            }
-
-            private string GetDebuggerDisplay()
-            {
-                return $"{nameof(Path)} {{ {_value} }}";
             }
         }
     }

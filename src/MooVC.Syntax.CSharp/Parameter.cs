@@ -150,7 +150,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The parameter declaration snippet.</returns>
         public Snippet ToSnippet(Options options)
         {
-            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(nameof(Options), nameof(Parameter), nameof(Name), Name));
+            _ = Guard.Against.Null(options, message: ToStringOptionsRequired.Format(typeof(Parameter)));
 
             if (IsUndefined)
             {
