@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.CSharp
 {
-    using System.Diagnostics;
     using Ardalis.GuardClauses;
     using Fluentify;
     using Monify;

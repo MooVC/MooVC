@@ -1,6 +1,5 @@
 namespace MooVC.Syntax.Project
 {
-    using System.Diagnostics;
     using Monify;
 
     /// <summary>

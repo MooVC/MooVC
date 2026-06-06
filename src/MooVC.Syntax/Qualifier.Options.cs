@@ -1,6 +1,5 @@
 namespace MooVC.Syntax
 {
-    using System.Diagnostics;
     using Fluentify;
     using Monify;
 
