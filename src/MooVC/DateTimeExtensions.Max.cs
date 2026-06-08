@@ -1,23 +1,30 @@
-﻿namespace MooVC;
-
-using System.Runtime.CompilerServices;
-
-/// <summary>
-/// Provides the Max extension for <see cref="DateTime" />.
-/// </summary>
-public static partial class DateTimeExtensions
+namespace MooVC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Returns the later of two <see cref="DateTime" /> values.
+    /// Provides the Max extension for <see cref="DateTime" />.
     /// </summary>
-    /// <param name="first">The first date to compare.</param>
-    /// <param name="second">The second date to compare.</param>
-    /// <returns>The later of the two dates.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static DateTime Max(this DateTime first, DateTime second)
+    public static partial class DateTimeExtensions
     {
-        return first.Ticks > second.Ticks
-            ? first
-            : second;
+        /// <summary>
+        /// Returns the later of two <see cref="DateTime" /> values.
+        /// </summary>
+        /// <param name="first">The first date to compare.</param>
+        /// <param name="second">The second date to compare.</param>
+        /// <returns>The later of the two dates.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static DateTime Max(this DateTime first, DateTime second)
+        {
+            return first.Ticks > second.Ticks
+                ? first
+                : second;
+        }
     }
 }

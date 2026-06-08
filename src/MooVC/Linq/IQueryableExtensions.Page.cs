@@ -1,35 +1,43 @@
-﻿#if NET6_0_OR_GREATER
-namespace MooVC.Linq;
-
-using System.Diagnostics.CodeAnalysis;
-using MooVC.Paging;
-
-/// <summary>
-/// Provides extensions relating to <see cref="IQueryable{T}" />.
-/// </summary>
-/// <typeparam name="T">Specifies the type of elements in the sequence.</typeparam>
-public static partial class IQueryableExtensions
+#if NET6_0_OR_GREATER
+#nullable enable
+namespace MooVC.Linq
 {
-    /// <summary>
-    /// Applies paging to an IQueryable sequence.
-    /// </summary>
-    /// <typeparam name="T">The type of the elements in the IQueryable sequence.</typeparam>
-    /// <param name="queryable">The IQueryable sequence to apply paging to.</param>
-    /// <param name="directive">The paging parameters to apply to the IQueryable sequence.</param>
-    /// <returns>
-    /// The original IQueryable sequence with paging applied, or <see langword="null" /> if the original IQueryable was <see langword="null" />.
-    /// </returns>
-    [return: NotNullIfNotNull(nameof(queryable))]
-    public static IQueryable<T>? Page<T>(this IQueryable<T>? queryable, Directive directive)
-    {
-        if (queryable is null || directive.IsAll)
-        {
-            return queryable;
-        }
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using MooVC.Paging;
 
-        return queryable
-            .Skip(directive.Skip)
-            .Take(directive.Take);
+    /// <summary>
+    /// Provides extensions relating to <see cref="IQueryable{T}" />.
+    /// </summary>
+    /// <typeparam name="T">Specifies the type of elements in the sequence.</typeparam>
+    public static partial class IQueryableExtensions
+    {
+        /// <summary>
+        /// Applies paging to an IQueryable sequence.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the IQueryable sequence.</typeparam>
+        /// <param name="queryable">The IQueryable sequence to apply paging to.</param>
+        /// <param name="directive">The paging parameters to apply to the IQueryable sequence.</param>
+        /// <returns>
+        /// The original IQueryable sequence with paging applied, or <see langword="null" /> if the original IQueryable was <see langword="null" />.
+        /// </returns>
+        [return: NotNullIfNotNull(nameof(queryable))]
+        public static IQueryable<T>? Page<T>(this IQueryable<T>? queryable, Directive directive)
+        {
+            if (queryable is null || directive.IsAll)
+            {
+                return queryable;
+            }
+
+            return queryable
+                .Skip(directive.Skip)
+                .Take(directive.Take);
+        }
     }
 }
 #endif

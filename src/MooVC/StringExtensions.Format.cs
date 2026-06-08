@@ -1,28 +1,35 @@
-﻿namespace MooVC;
-
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using Ardalis.GuardClauses;
-using static MooVC.StringExtensions_Resources;
-
-/// <summary>
-/// Provides extensions relating to <see cref="string" />.
-/// </summary>
-public static partial class StringExtensions
+namespace MooVC
 {
-    /// <summary>
-    /// Formats a composite string using the current culture.
-    /// </summary>
-    /// <param name="value">A composite format string.</param>
-    /// <param name="arguments">An object array that contains zero or more objects to format.</param>
-    /// <returns>
-    /// A copy of <paramref name="value" /> in which the format items are replaced by the string representation of each object in <paramref name="arguments" />.
-    /// </returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(this string value, params object[] arguments)
-    {
-        _ = Guard.Against.Null(value, message: FormatValueRequired);
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using static MooVC.StringExtensions_Resources;
 
-        return string.Format(CultureInfo.CurrentCulture, value, arguments);
+    /// <summary>
+    /// Provides extensions relating to <see cref="string" />.
+    /// </summary>
+    public static partial class StringExtensions
+    {
+        /// <summary>
+        /// Formats a composite string using the current culture.
+        /// </summary>
+        /// <param name="value">A composite format string.</param>
+        /// <param name="arguments">An object array that contains zero or more objects to format.</param>
+        /// <returns>
+        /// A copy of <paramref name="value" /> in which the format items are replaced by the string representation of each object in <paramref name="arguments" />.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Format(this string value, params object[] arguments)
+        {
+            _ = Guard.Against.Null(value, message: FormatValueRequired);
+
+            return string.Format(CultureInfo.CurrentCulture, value, arguments);
+        }
     }
 }

@@ -1,49 +1,55 @@
-namespace MooVC;
-
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
-
-public static class DebuggerDisplayFormatter
+namespace MooVC
 {
-    private const int MaximumStringLength = 16;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-    [SuppressMessage("Style", "IDE0057:Use range operator", Justification = "Range operator is not available.")]
-    public static object Format(string? value)
+    public static class DebuggerDisplayFormatter
     {
-        if (value is null)
+        private const int MaximumStringLength = 16;
+
+        [SuppressMessage("Style", "IDE0057:Use range operator", Justification = "Range operator is not available.")]
+        public static object Format(string value)
         {
-            return "null";
+            if (value is null)
+            {
+                return "null";
+            }
+
+            return value.Length > MaximumStringLength
+                ? value.Substring(0, MaximumStringLength)
+                : value;
         }
 
-        return value.Length > MaximumStringLength
-            ? value.Substring(0, MaximumStringLength)
-            : value;
-    }
+        public static object Format(ICollection value)
+        {
+            return value?.Count ?? 0;
+        }
 
-    public static object Format(ICollection value)
-    {
-        return value?.Count ?? 0;
-    }
+        public static object Format<T>(ICollection<T> value)
+        {
+            return value?.Count ?? 0;
+        }
 
-    public static object Format<T>(ICollection<T> value)
-    {
-        return value?.Count ?? 0;
-    }
+        public static object Format<T>(in ImmutableArray<T> value)
+        {
+            return value.IsDefaultOrEmpty ? 0 : value.Length;
+        }
 
-    public static object Format<T>(in ImmutableArray<T> value)
-    {
-        return value.IsDefaultOrEmpty ? 0 : value.Length;
-    }
+        public static object Format<T>(IReadOnlyCollection<T> value)
+        {
+            return value?.Count ?? 0;
+        }
 
-    public static object Format<T>(IReadOnlyCollection<T> value)
-    {
-        return value?.Count ?? 0;
-    }
-
-    public static object Format<T>(T? value)
-    {
-        return Format(value?.ToString());
+        public static object Format<T>(T value)
+        {
+            return Format(value?.ToString());
+        }
     }
 }

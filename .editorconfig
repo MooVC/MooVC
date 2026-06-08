@@ -112,6 +112,9 @@ csharp_style_unused_value_expression_statement_preference = discard_variable:err
 # 'using' directive preferences
 csharp_using_directive_placement = inside_namespace:error
 
+[src/{MooVC,MooVC.Modelling,MooVC.Syntax,MooVC.Syntax.CSharp,MooVC.Infrastructure.Compression.LZ4,MooVC.Infrastructure.Serialization.Bson.Newtonsoft,MooVC.Infrastructure.Serialization.Json.Newtonsoft,MooVC.Infrastructure.Serialization.MessagePack}/**/*.cs]
+csharp_style_namespace_declarations = block_scoped:error
+
 #### C# Formatting Rules ####
 
 # New line preferences

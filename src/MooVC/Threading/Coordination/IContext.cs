@@ -1,37 +1,44 @@
-﻿namespace MooVC.Threading.Coordination;
-
-/// <summary>
-/// Represents the context in which coordination has been applied.
-/// </summary>
-/// <typeparam name="T">The type in which the coordination context applies.</typeparam>
-/// <remarks>
-/// Dispose the context to release the associated coordination lock for the current subject.
-/// </remarks>
-public interface IContext<out T>
-    : IDisposable
-    where T : notnull
+namespace MooVC.Threading.Coordination
 {
-    /// <summary>
-    /// Gets the duration for which coordination has been applied.
-    /// </summary>
-    /// <value>
-    /// The duration for which coordination has been applied.
-    /// </value>
-    TimeSpan Duration { get; }
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
-    /// Gets the instance on which coordination has been applied.
+    /// Represents the context in which coordination has been applied.
     /// </summary>
-    /// <value>
-    /// The instance on which coordination has been applied.
-    /// </value>
-    T Subject { get; }
+    /// <typeparam name="T">The type in which the coordination context applies.</typeparam>
+    /// <remarks>
+    /// Dispose the context to release the associated coordination lock for the current subject.
+    /// </remarks>
+    public interface IContext<out T>
+        : IDisposable
+    {
+        /// <summary>
+        /// Gets the duration for which coordination has been applied.
+        /// </summary>
+        /// <value>
+        /// The duration for which coordination has been applied.
+        /// </value>
+        TimeSpan Duration { get; }
 
-    /// <summary>
-    /// Gets the timestamp when the coordination started.
-    /// </summary>
-    /// <value>
-    /// The timestamp when the coordination started.
-    /// </value>
-    DateTimeOffset TimeStamp { get; }
+        /// <summary>
+        /// Gets the instance on which coordination has been applied.
+        /// </summary>
+        /// <value>
+        /// The instance on which coordination has been applied.
+        /// </value>
+        T Subject { get; }
+
+        /// <summary>
+        /// Gets the timestamp when the coordination started.
+        /// </summary>
+        /// <value>
+        /// The timestamp when the coordination started.
+        /// </value>
+        DateTimeOffset TimeStamp { get; }
+    }
 }

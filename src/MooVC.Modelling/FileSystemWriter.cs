@@ -55,14 +55,16 @@ namespace MooVC.Modelling
         {
             FileStream fileStream = stream as FileStream;
 
-            if (fileStream != null)
+            if (fileStream is null)
             {
-                string directoryPath = _fileSystem.GetDirectoryName(fileStream.Name);
+                return _fileSystem.GetCurrentDirectory();
+            }
 
-                if (!string.IsNullOrWhiteSpace(directoryPath))
-                {
-                    return directoryPath;
-                }
+            string directoryPath = _fileSystem.GetDirectoryName(fileStream.Name);
+
+            if (!string.IsNullOrWhiteSpace(directoryPath))
+            {
+                return directoryPath;
             }
 
             return _fileSystem.GetCurrentDirectory();

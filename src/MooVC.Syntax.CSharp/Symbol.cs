@@ -105,7 +105,7 @@ namespace MooVC.Syntax.CSharp
 
             return new Symbol()
                 .IsArray(type.IsArray)
-                .IsNullable(Nullable.GetUnderlyingType(type) != null)
+                .IsNullable(Nullable.GetUnderlyingType(type) is object)
                 .Named(type);
         }
 

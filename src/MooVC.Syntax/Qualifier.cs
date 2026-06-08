@@ -335,7 +335,7 @@ namespace MooVC.Syntax
             return !value.IsDefaultOrEmpty && value.Length > 0 && value[0].ToString() == "System";
         }
 
-        private static IEnumerable<ValidationResult> Validate(ImmutableArray<Name> segments, ValidationContext validationContext)
+        private static List<ValidationResult> Validate(ImmutableArray<Name> segments, ValidationContext validationContext)
         {
             var processed = new List<Name>();
             var results = new List<ValidationResult>();

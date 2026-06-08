@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using System.Globalization;
+
 public sealed class WhenToIndexIsCalled
 {
     [Test]
@@ -51,7 +53,7 @@ public sealed class WhenToIndexIsCalled
     {
         // Arrange
         IEnumerable<int> source = [1, 2, 3];
-        Func<int, string> transform = value => value.ToString();
+        Func<int, string> transform = value => value.ToString(CultureInfo.InvariantCulture);
 
         // Act
         IDictionary<int, string> index = source.ToIndex(value => value, transform);

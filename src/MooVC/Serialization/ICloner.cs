@@ -1,23 +1,30 @@
-﻿namespace MooVC.Serialization;
-
-/// <summary>
-/// Defines a contract for cloning objects.
-/// </summary>
-/// <remarks>
-/// Implementations are expected to produce deep copies so the returned instance can evolve independently from the source object graph.
-/// </remarks>
-public interface ICloner
+namespace MooVC.Serialization
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Asynchronously clones the specified object.
+    /// Defines a contract for cloning objects.
     /// </summary>
-    /// <typeparam name="T">The type of the object to clone.</typeparam>
-    /// <param name="original">The original object to clone.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
-    /// <returns>
-    /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
-    /// The task result contains the cloned object.
-    /// </returns>
-    Task<T> Clone<T>(T original, CancellationToken cancellationToken)
-        where T : notnull;
+    /// <remarks>
+    /// Implementations are expected to produce deep copies so the returned instance can evolve independently from the source object graph.
+    /// </remarks>
+    public interface ICloner
+    {
+        /// <summary>
+        /// Asynchronously clones the specified object.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to clone.</typeparam>
+        /// <param name="original">The original object to clone.</param>
+        /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+        /// <returns>
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
+        /// The task result contains the cloned object.
+        /// </returns>
+        Task<T> Clone<T>(T original, CancellationToken cancellationToken);
+    }
 }

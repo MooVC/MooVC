@@ -1,57 +1,63 @@
-namespace MooVC.Serialization;
-
-using System.Diagnostics;
-using Ardalis.GuardClauses;
-using static MooVC.Serialization.Cloner_Resources;
-
-/// <summary>
-/// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.
-/// </summary>
-/// <remarks>
-/// This implementation performs clone operations by serializing and then deserializing the source instance.
-/// </remarks>
-[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-public sealed class Cloner
-    : ICloner
+namespace MooVC.Serialization
 {
-    private readonly ISerializer _serializer;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using static MooVC.Serialization.Cloner_Resources;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Cloner" /> class with the specified <see cref="ISerializer" />.
+    /// Defines a default implementation of the <see cref="ICloner" /> interface, supporting object cloning via <see cref="ISerializer" />.
     /// </summary>
-    /// <param name="serializer">The serializer to use for cloning objects.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="serializer" /> is <see langword="null" />.</exception>
-    public Cloner(ISerializer serializer)
+    /// <remarks>
+    /// This implementation performs clone operations by serializing and then deserializing the source instance.
+    /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public sealed class Cloner
+        : ICloner
     {
-        _serializer = Guard.Against.Null(serializer, message: SerializerRequired);
-    }
+        private readonly ISerializer _serializer;
 
-    /// <summary>
-    /// Asynchronously clones the specified object.
-    /// </summary>
-    /// <typeparam name="T">The type of the object to clone.</typeparam>
-    /// <param name="original">The original object to clone.</param>
-    /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
-    /// <returns>
-    /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
-    /// The task result contains the cloned object.
-    /// </returns>
-    public async Task<T> Clone<T>(T original, CancellationToken cancellationToken)
-        where T : notnull
-    {
-        _ = Guard.Against.Null(original, message: CloneAsyncOriginalRequired);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cloner" /> class with the specified <see cref="ISerializer" />.
+        /// </summary>
+        /// <param name="serializer">The serializer to use for cloning objects.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="serializer" /> is <see langword="null" />.</exception>
+        public Cloner(ISerializer serializer)
+        {
+            _serializer = Guard.Against.Null(serializer, message: SerializerRequired);
+        }
 
-        IEnumerable<byte> data = await _serializer
-            .Serialize(original, cancellationToken)
-            .ConfigureAwait(false);
+        /// <summary>
+        /// Asynchronously clones the specified object.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to clone.</typeparam>
+        /// <param name="original">The original object to clone.</param>
+        /// <param name="cancellationToken">An optional <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+        /// <returns>
+        /// A <see cref="Task{TResult}" /> that represents the asynchronous clone operation.
+        /// The task result contains the cloned object.
+        /// </returns>
+        public async Task<T> Clone<T>(T original, CancellationToken cancellationToken)
+        {
+            _ = Guard.Against.Null(original, message: CloneAsyncOriginalRequired);
 
-        return await _serializer
-            .Deserialize<T>(data, cancellationToken)
-            .ConfigureAwait(false);
-    }
+            IEnumerable<byte> data = await _serializer
+                .Serialize(original, cancellationToken)
+                .ConfigureAwait(false);
 
-    private string GetDebuggerDisplay()
-    {
-        return $"{nameof(Cloner)} {{ {GetHashCode()} }}";
+            return await _serializer
+                .Deserialize<T>(data, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Cloner)} {{ {GetHashCode()} }}";
+        }
     }
 }

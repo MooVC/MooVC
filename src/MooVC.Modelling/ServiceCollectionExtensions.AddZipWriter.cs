@@ -42,7 +42,7 @@ namespace MooVC.Modelling
         {
             var optionsBuilder = services.AddOptions<ZipWriter.Options>();
 
-            if (configuration != null)
+            if (configuration is object)
             {
                 _ = optionsBuilder.Bind(configuration.GetSection(ZipWriter.Options.SectionName));
             }

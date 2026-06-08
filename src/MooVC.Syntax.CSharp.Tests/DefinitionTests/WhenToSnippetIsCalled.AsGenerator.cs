@@ -1,6 +1,7 @@
 ﻿namespace MooVC.Syntax.CSharp.DefinitionTests;
 
 using System.ComponentModel;
+using System.Globalization;
 using Monify;
 using MooVC.Syntax;
 using Attribute = System.Attribute;
@@ -260,7 +261,7 @@ public sealed partial class WhenToSnippetIsCalled
                             .IsStatic(true)
                             .Named(member.Name)
                             .OfType((Name: "Location", Qualifier: "MooVC.Testing.Mechanics.Car"))
-                            .WithDefault(member.Index.ToString())
+                            .WithDefault(member.Index.ToString(CultureInfo.InvariantCulture))
                             .WithScope(Scopes.Public)),
                         members)
                     .Enumerate(

@@ -32,41 +32,41 @@ internal static class ProjectTestsData
                 _ => import is null,
                 @true: project => project.WithImports(import => import
                     .ForProject(DefaultImportProject)),
-                @false: project => project.WithImports(import))
+                @false: project => project.WithImports(import!))
             .ForkOn(
                 _ => itemGroup is null,
                 @true: project => project.WithItemGroups(group => group
                     .WithItems(item => item
                         .WithInclude(DefaultItemInclude))),
-                @false: project => project.WithItemGroups(itemGroup))
+                @false: project => project.WithItemGroups(itemGroup!))
             .ForkOn(
                 _ => name is null,
                 @true: project => project.Named(DefaultName),
-                @false: project => project.Named(name))
+                @false: project => project.Named(name!))
             .ForkOn(
                 _ => propertyGroup is null,
                 @true: project => project.WithPropertyGroups(group => group
                     .WithProperties(property => property
                         .Named(DefaultPropertyName)
                         .WithValue(DefaultPropertyValue))),
-                @false: project => project.WithPropertyGroups(propertyGroup))
+                @false: project => project.WithPropertyGroups(propertyGroup!))
             .ForkOn(
                 _ => resource is null,
                 @true: project => project.WithResources(resource => resource
                     .WithCustomToolNamespace(DefaultResourceToolNamespace)
                     .WithLocation(DefaultLocation)),
-                @false: project => project.WithResources(resource))
+                @false: project => project.WithResources(resource!))
             .ForkOn(
                 _ => sdk is null,
                 @true: project => project.WithSdks(sdk => sdk
                     .Named(DefaultSdkName)
                     .WithVersion(DefaultSdkVersion)),
-                @false: project => project.WithSdks(sdk))
+                @false: project => project.WithSdks(sdk!))
             .ForkOn(
                 _ => target is null,
                 @true: project => project.WithTargets(target => target
                     .Named(DefaultTargetName)),
-                @false: project => project.WithTargets(target));
+                @false: project => project.WithTargets(target!));
     }
 
     public static Import CreateImport()

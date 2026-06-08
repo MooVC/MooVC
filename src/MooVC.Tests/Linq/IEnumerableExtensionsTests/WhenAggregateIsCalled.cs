@@ -1,5 +1,7 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using System.Globalization;
+
 public sealed class WhenAggregateIsCalled
 {
     [Test]
@@ -7,7 +9,7 @@ public sealed class WhenAggregateIsCalled
     {
         // Arrange
         IEnumerable<int> items = [1, 2, 3];
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString(CultureInfo.InvariantCulture));
 
         // Act
         IEnumerable<string> results = items.Aggregate(source);
@@ -21,7 +23,7 @@ public sealed class WhenAggregateIsCalled
     {
         // Arrange
         var items = new List<int> { 1, 2, 3 };
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString(CultureInfo.InvariantCulture));
 
         _ = items.Remove(2);
         items.Add(4);

@@ -1,123 +1,130 @@
-namespace MooVC.Hosting;
-
-using System.Diagnostics;
-using Ardalis.GuardClauses;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using MooVC.Linq;
-using static MooVC.Hosting.ThreadSafeHostedService_Resources;
-
-/// <summary>
-/// Allows for the thread-safe start/stop of one or more <see cref="IHostedService" /> implementations.
-/// </summary>
-/// <remarks>
-/// State transitions are guarded with atomic operations to prevent duplicate start or stop execution under concurrent callers.
-/// </remarks>
-[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-public sealed class ThreadSafeHostedService
-    : IHostedService
+namespace MooVC.Hosting
 {
-    private const int Started = 1;
-    private const int Stopped = 0;
-
-    private static readonly Action<ILogger, Exception> _logTryStopFailure = LoggerMessage.Define(
-        LogLevel.Warning,
-        new EventId(1, name: nameof(TryStop)),
-        TryStopFailure);
-
-    private readonly ILogger<ThreadSafeHostedService> _logger;
-    private readonly IEnumerable<IHostedService> _services;
-    private int _state = Stopped;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ThreadSafeHostedService" /> class.
-    /// </summary>
-    /// <param name="logger">
-    /// The logger provider, used to inform observers of happenings within the service that do not directly result in an outcome being propagated to the caller.
-    /// </param>
-    /// <param name="services">
-    /// The instances of <see cref="IHostedService" /> to be managed by the <see cref="ThreadSafeHostedService" />.
-    /// </param>
-    public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
-    {
-        _logger = Guard.Against.Null(logger, message: LoggerRequired);
-        _services = Guard.Against.Null(services, message: ServicesRequired);
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using MooVC.Linq;
+    using static MooVC.Hosting.ThreadSafeHostedService_Resources;
 
     /// <summary>
-    /// Starts the contained services asynchronously, ensuring no more than one caller can trigger start at the same time.
+    /// Allows for the thread-safe start/stop of one or more <see cref="IHostedService" /> implementations.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
-    /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    public async Task StartAsync(CancellationToken cancellationToken)
+    /// <remarks>
+    /// State transitions are guarded with atomic operations to prevent duplicate start or stop execution under concurrent callers.
+    /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public sealed class ThreadSafeHostedService
+        : IHostedService
     {
-        if (Interlocked.CompareExchange(ref _state, Started, Stopped) == Stopped)
+        private const int Started = 1;
+        private const int Stopped = 0;
+
+        private static readonly Action<ILogger, Exception> _logTryStopFailure = LoggerMessage.Define(
+            LogLevel.Warning,
+            new EventId(1, name: nameof(TryStop)),
+            TryStopFailure);
+
+        private readonly ILogger<ThreadSafeHostedService> _logger;
+        private readonly IEnumerable<IHostedService> _services;
+        private int _state = Stopped;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadSafeHostedService" /> class.
+        /// </summary>
+        /// <param name="logger">
+        /// The logger provider, used to inform observers of happenings within the service that do not directly result in an outcome being propagated to the caller.
+        /// </param>
+        /// <param name="services">
+        /// The instances of <see cref="IHostedService" /> to be managed by the <see cref="ThreadSafeHostedService" />.
+        /// </param>
+        public ThreadSafeHostedService(ILogger<ThreadSafeHostedService> logger, IEnumerable<IHostedService> services)
         {
-            try
-            {
-                await PerformStart(cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            catch
-            {
-                await TryStop(cancellationToken)
-                    .ConfigureAwait(false);
+            _logger = Guard.Against.Null(logger, message: LoggerRequired);
+            _services = Guard.Against.Null(services, message: ServicesRequired);
+        }
 
-                _ = Interlocked.Exchange(ref _state, Stopped);
+        /// <summary>
+        /// Starts the contained services asynchronously, ensuring no more than one caller can trigger start at the same time.
+        /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        public async Task StartAsync(CancellationToken cancellationToken)
+        {
+            if (Interlocked.CompareExchange(ref _state, Started, Stopped) == Stopped)
+            {
+                try
+                {
+                    await PerformStart(cancellationToken)
+                        .ConfigureAwait(false);
+                }
+                catch
+                {
+                    await TryStop(cancellationToken)
+                        .ConfigureAwait(false);
 
-                throw;
+                    _ = Interlocked.Exchange(ref _state, Stopped);
+
+                    throw;
+                }
             }
         }
-    }
 
-    /// <summary>
-    /// Stops the contained services asynchronously, ensuring no more than one caller can trigger start at the same time.
-    /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
-    /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    public async Task StopAsync(CancellationToken cancellationToken)
-    {
-        if (Interlocked.CompareExchange(ref _state, Stopped, Started) == Started)
+        /// <summary>
+        /// Stops the contained services asynchronously, ensuring no more than one caller can trigger start at the same time.
+        /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /> that can be used to cancel the operation.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        public async Task StopAsync(CancellationToken cancellationToken)
+        {
+            if (Interlocked.CompareExchange(ref _state, Stopped, Started) == Started)
+            {
+                try
+                {
+                    await PerformStop(cancellationToken)
+                        .ConfigureAwait(false);
+                }
+                catch
+                {
+                    _ = Interlocked.Exchange(ref _state, Started);
+
+                    throw;
+                }
+            }
+        }
+
+        private Task PerformStart(CancellationToken cancellationToken)
+        {
+            return _services.ForAll(service => service.StartAsync(cancellationToken));
+        }
+
+        private Task PerformStop(CancellationToken cancellationToken)
+        {
+            return _services.ForAll(service => service.StopAsync(cancellationToken));
+        }
+
+        private async Task TryStop(CancellationToken cancellationToken)
         {
             try
             {
                 await PerformStop(cancellationToken)
                     .ConfigureAwait(false);
             }
-            catch
+            catch (Exception ex)
             {
-                _ = Interlocked.Exchange(ref _state, Started);
-
-                throw;
+                _logTryStopFailure(_logger, ex);
             }
         }
-    }
 
-    private Task PerformStart(CancellationToken cancellationToken)
-    {
-        return _services.ForAll(service => service.StartAsync(cancellationToken));
-    }
-
-    private Task PerformStop(CancellationToken cancellationToken)
-    {
-        return _services.ForAll(service => service.StopAsync(cancellationToken));
-    }
-
-    private async Task TryStop(CancellationToken cancellationToken)
-    {
-        try
+        private string GetDebuggerDisplay()
         {
-            await PerformStop(cancellationToken)
-                .ConfigureAwait(false);
+            return $"{nameof(ThreadSafeHostedService)} {{ Started: {_state == Started} }}";
         }
-        catch (Exception ex)
-        {
-            _logTryStopFailure(_logger, ex);
-        }
-    }
-
-    private string GetDebuggerDisplay()
-    {
-        return $"{nameof(ThreadSafeHostedService)} {{ Started: {_state == Started} }}";
     }
 }

@@ -29,6 +29,9 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         public static readonly Qualification Unnamed = new Qualification();
 
+        /// <summary>
+        /// Initializes a new instance of the Qualification class.
+        /// </summary>
         internal Qualification()
         {
         }

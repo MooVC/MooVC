@@ -38,11 +38,17 @@ namespace MooVC.Syntax.CSharp
                 /// <summary>
                 /// Gets a value indicating whether the current instance represents inline content.
                 /// </summary>
+                /// <value>
+                /// A value indicating whether the current instance represents inline content.
+                /// </value>
                 public bool IsInline => this == Inline;
 
                 /// <summary>
                 /// Gets a value indicating whether the current instance represents a separate value.
                 /// </summary>
+                /// <value>
+                /// A value indicating whether the current instance represents a separate value.
+                /// </value>
                 public bool IsSeparate => this == Separate;
             }
         }

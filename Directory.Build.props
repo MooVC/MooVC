@@ -5,11 +5,8 @@
     <Company>MooVC</Company>
     <Copyright>MooVC © 2019-$([System.DateTime]::Now.Year)</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>latest</LangVersion>
     <NeutralLanguage>en</NeutralLanguage>
-    <NoWarn>$(NoWarn);CS0618;NU5105</NoWarn>
-    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CS0618;NU5105;S3218</NoWarn>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MooVC/moovc</PackageProjectUrl>

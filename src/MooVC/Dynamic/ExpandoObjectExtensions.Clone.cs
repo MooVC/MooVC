@@ -1,51 +1,58 @@
-namespace MooVC.Dynamic;
-
-using System.Dynamic;
-
-/// <summary>
-/// Provides extensions relating to ExpandoObject.
-/// </summary>
-public static class ExpandoObjectExtensions
+namespace MooVC.Dynamic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Clones the given ExpandoObject.
-    /// If the original object is <see langword="null" /> and defaultIfNull is <see langword="true" />, a default ExpandoObject is returned.
-    /// If defaultIfNull is <see langword="false" /> and the original object is <see langword="null" />, an ArgumentNullException is thrown.
+    /// Provides extensions relating to ExpandoObject.
     /// </summary>
-    /// <param name="original">The original ExpandoObject to clone.</param>
-    /// <param name="defaultIfNull">
-    /// Whether to return a default ExpandoObject if the original object is <see langword="null" />.
-    /// If this is set to <see langword="false" /> and the original object is <see langword="null" />, an ArgumentNullException is thrown.
-    /// </param>
-    /// <exception cref="ArgumentNullException">Thrown if defaultIfNull is <see langword="false" /> and the original object is <see langword="null" />.</exception>
-    /// <returns>A clone of the original ExpandoObject.</returns>
-    public static ExpandoObject Clone(this ExpandoObject? original, bool defaultIfNull = true)
+    public static class ExpandoObjectExtensions
     {
-        if (original is null)
+        /// <summary>
+        /// Clones the given ExpandoObject.
+        /// If the original object is <see langword="null" /> and defaultIfNull is <see langword="true" />, a default ExpandoObject is returned.
+        /// If defaultIfNull is <see langword="false" /> and the original object is <see langword="null" />, an ArgumentNullException is thrown.
+        /// </summary>
+        /// <param name="original">The original ExpandoObject to clone.</param>
+        /// <param name="defaultIfNull">
+        /// Whether to return a default ExpandoObject if the original object is <see langword="null" />.
+        /// If this is set to <see langword="false" /> and the original object is <see langword="null" />, an ArgumentNullException is thrown.
+        /// </param>
+        /// <exception cref="ArgumentNullException">Thrown if defaultIfNull is <see langword="false" /> and the original object is <see langword="null" />.</exception>
+        /// <returns>A clone of the original ExpandoObject.</returns>
+        public static ExpandoObject Clone(this ExpandoObject original, bool defaultIfNull = true)
         {
-            if (defaultIfNull)
+            if (original is null)
             {
-                return new ExpandoObject();
+                if (defaultIfNull)
+                {
+                    return new ExpandoObject();
+                }
+
+                throw new ArgumentNullException(nameof(original));
             }
 
-            throw new ArgumentNullException(nameof(original));
+            var clone = new ExpandoObject();
+            var target = (IDictionary<string, object>)clone;
+
+            foreach (KeyValuePair<string, object> value in original)
+            {
+                if (value.Value is ExpandoObject child)
+                {
+                    target.Add(value.Key, child.Clone());
+                }
+                else
+                {
+                    target.Add(value);
+                }
+            }
+
+            return clone;
         }
-
-        var clone = new ExpandoObject();
-        var target = (IDictionary<string, object?>)clone;
-
-        foreach (KeyValuePair<string, object?> value in original)
-        {
-            if (value.Value is ExpandoObject child)
-            {
-                target.Add(value.Key, child.Clone());
-            }
-            else
-            {
-                target.Add(value);
-            }
-        }
-
-        return clone;
     }
 }

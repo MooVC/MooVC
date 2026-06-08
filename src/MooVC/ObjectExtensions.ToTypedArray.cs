@@ -1,42 +1,50 @@
-﻿namespace MooVC;
-
-#if NET6_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
-#endif
-using System.Runtime.CompilerServices;
-
-/// <summary>
-/// Provides extensions relating to <see cref="object" />.
-/// </summary>
-public static partial class ObjectExtensions
+namespace MooVC
 {
-    /// <summary>
-    /// Returns an array containing the single specified value.
-    /// </summary>
-    /// <typeparam name="T">The type of the value to be returned in the array.</typeparam>
-    /// <param name="value">The value to be returned in the array.</param>
-    /// <returns>An array containing the single specified value.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T[] ToTypedArray<T>(this T value)
-    {
-        return [value];
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+#if NET6_0_OR_GREATER
+    using System.Diagnostics.CodeAnalysis;
+#endif
+    using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Returns the provided array instance.
+    /// Provides extensions relating to <see cref="object" />.
     /// </summary>
-    /// <typeparam name="T">The element type of the array.</typeparam>
-    /// <param name="values">The array to return.</param>
-    /// <returns>
-    /// The same array provided in <paramref name="values"/>.
-    /// If <paramref name="values"/> is <see langword="null"/> then <see langword="null"/> is returned.
-    /// </returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET6_0_OR_GREATER
-    [return: NotNullIfNotNull(nameof(values))]
-#endif
-    public static T[]? ToTypedArray<T>(this T[]? values)
+    public static partial class ObjectExtensions
     {
-        return values;
+        /// <summary>
+        /// Returns an array containing the single specified value.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to be returned in the array.</typeparam>
+        /// <param name="value">The value to be returned in the array.</param>
+        /// <returns>An array containing the single specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T[] ToTypedArray<T>(this T value)
+        {
+            return new[] { value };
+        }
+
+        /// <summary>
+        /// Returns the provided array instance.
+        /// </summary>
+        /// <typeparam name="T">The element type of the array.</typeparam>
+        /// <param name="values">The array to return.</param>
+        /// <returns>
+        /// The same array provided in <paramref name="values"/>.
+        /// If <paramref name="values"/> is <see langword="null"/> then <see langword="null"/> is returned.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if NET6_0_OR_GREATER
+        [return: NotNullIfNotNull(nameof(values))]
+#endif
+        public static T[] ToTypedArray<T>(this T[] values)
+        {
+            return values;
+        }
     }
 }

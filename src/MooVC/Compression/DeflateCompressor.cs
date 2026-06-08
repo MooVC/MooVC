@@ -1,53 +1,59 @@
-namespace MooVC.Compression;
-
-using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
-
-/// <summary>
-/// Represents a class that uses the Deflate algorithm to compress and decompress streams.
-/// </summary>
-/// <remarks>
-/// This implementation delegates stream wrapping to <see cref="DeflateStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
-/// </remarks>
-[DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-public sealed class DeflateCompressor
-    : StreamCompressor
+namespace MooVC.Compression
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DeflateCompressor" /> class.
-    /// </summary>
-    /// <param name="bufferSize">The buffer size to use when copying from one stream to another.</param>
-    /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
-    public DeflateCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
-        : base(bufferSize: bufferSize, level: level)
-    {
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
-    /// Wraps the <paramref name="source" /> in a new <see cref="DeflateStream" /> that is configured for compression based on the <paramref name="level" />.
+    /// Represents a class that uses the Deflate algorithm to compress and decompress streams.
     /// </summary>
-    /// <param name="level">The <see cref="CompressionLevel" /> to use for compression.</param>
-    /// <param name="source">The <see cref="Stream" /> to compress.</param>
-    /// <returns>The wrapped <paramref name="source" /> configured for compression based on the <paramref name="level" />.</returns>
-    protected override Stream CreateCompressor(CompressionLevel level, Stream source)
+    /// <remarks>
+    /// This implementation delegates stream wrapping to <see cref="DeflateStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
+    /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public sealed class DeflateCompressor
+        : StreamCompressor
     {
-        return new DeflateStream(source, level, true);
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeflateCompressor" /> class.
+        /// </summary>
+        /// <param name="bufferSize">The buffer size to use when copying from one stream to another.</param>
+        /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
+        public DeflateCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
+            : base(bufferSize: bufferSize, level: level)
+        {
+        }
 
-    /// <summary>
-    /// Wraps the <paramref name="source" /> in a new <see cref="DeflateStream" /> that is configured for decompression.
-    /// </summary>
-    /// <param name="level">The <see cref="CompressionLevel" /> to use for decompression.</param>
-    /// <param name="source">The <see cref="Stream" /> to compress.</param>
-    /// <returns>The wrapped <paramref name="source" /> configured for decompression based on the <paramref name="level" />.</returns>
-    protected override Stream CreateDecompressor(CompressionLevel level, Stream source)
-    {
-        return new DeflateStream(source, CompressionMode.Decompress, true);
-    }
+        /// <summary>
+        /// Wraps the <paramref name="source" /> in a new <see cref="DeflateStream" /> that is configured for compression based on the <paramref name="level" />.
+        /// </summary>
+        /// <param name="level">The <see cref="CompressionLevel" /> to use for compression.</param>
+        /// <param name="source">The <see cref="Stream" /> to compress.</param>
+        /// <returns>The wrapped <paramref name="source" /> configured for compression based on the <paramref name="level" />.</returns>
+        protected override Stream CreateCompressor(CompressionLevel level, Stream source)
+        {
+            return new DeflateStream(source, level, true);
+        }
 
-    private string GetDebuggerDisplay()
-    {
-        return $"{GetType().Name} {{ }}";
+        /// <summary>
+        /// Wraps the <paramref name="source" /> in a new <see cref="DeflateStream" /> that is configured for decompression.
+        /// </summary>
+        /// <param name="level">The <see cref="CompressionLevel" /> to use for decompression.</param>
+        /// <param name="source">The <see cref="Stream" /> to compress.</param>
+        /// <returns>The wrapped <paramref name="source" /> configured for decompression based on the <paramref name="level" />.</returns>
+        protected override Stream CreateDecompressor(CompressionLevel level, Stream source)
+        {
+            return new DeflateStream(source, CompressionMode.Decompress, true);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{GetType().Name} {{ }}";
+        }
     }
 }
