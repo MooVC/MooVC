@@ -32,7 +32,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>The base type.</value>
         [Descriptor("DerivesFrom")]
-        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
         public Base Base { get; internal set; } = Base.Unspecified;
 
         /// <summary>

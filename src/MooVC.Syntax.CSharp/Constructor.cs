@@ -31,8 +31,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         public static readonly Constructor Undefined = new Constructor();
 
-        private const string Separator = " ";
-
         /// <summary>
         /// Initializes a new instance of the Constructor class.
         /// </summary>
@@ -46,6 +44,12 @@ namespace MooVC.Syntax.CSharp
         /// <value>The attributes.</value>
         [Descriptor("AttributedWith")]
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
+
+        /// <summary>
+        /// Gets the arguments associated with the Base.
+        /// </summary>
+        /// <value>The arguments.</value>
+        public ImmutableArray<Snippet> Arguments { get; internal set; } = ImmutableArray<Snippet>.Empty;
 
         /// <summary>
         /// Gets the body on the Constructor.
@@ -162,6 +166,8 @@ namespace MooVC.Syntax.CSharp
 
         private Snippet GetSignature(Name name, Type.Options options)
         {
+            const string Separator = " ";
+
             var attributes = Attributes.ToSnippet(options);
             string extensibility = Extensibility;
             var parameters = Parameters.ToSnippet(Parameter.Options.Camel);
@@ -185,6 +191,16 @@ namespace MooVC.Syntax.CSharp
             Snippet signature = GetSignature(name, options);
             Snippet.Options snippets = FormatBlockStyle(options);
 
+            if (!Arguments.IsDefaultOrEmpty)
+            {
+                const string Separator = ", ";
+
+                string arguments = Separator.Combine(Arguments, argument => argument);
+                string @base = string.Concat(snippets.Whitespace, $": base({arguments})");
+
+                signature = signature.Append(options, @base);
+            }
+
             return Body.Block(snippets, signature);
         }
 
@@ -203,6 +219,7 @@ namespace MooVC.Syntax.CSharp
         {
             return $"{nameof(Constructor)} {{ " +
                 $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
+                $"{nameof(Arguments)} = `{DebuggerDisplayFormatter.Format(Arguments)}`, " +
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
                 $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +

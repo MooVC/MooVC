@@ -7,7 +7,7 @@ public sealed class WhenWithArgumentsIsCalled
     {
         // Arrange
         Base original = BaseTestsData.Create();
-        Token argument = (Name)"T";
+        Snippet argument = "Guid.NewGuid()";
 
         // Act
         Base result = original.WithArguments(argument);

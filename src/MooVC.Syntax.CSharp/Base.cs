@@ -8,6 +8,8 @@ namespace MooVC.Syntax.CSharp
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
+    using MooVC.Linq;
+    using MooVC.Syntax.Formatting;
     using MooVC.Syntax.Validation;
     using Valuify;
     using static MooVC.Syntax.CSharp.Base_Resources;
@@ -38,17 +40,16 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Gets the arguments on the Base.
+        /// Gets the arguments associated with the Base.
         /// </summary>
         /// <value>The arguments.</value>
-        public ImmutableArray<Token> Arguments { get; internal set; } = ImmutableArray<Token>.Empty;
+        public ImmutableArray<Snippet> Arguments { get; internal set; } = ImmutableArray<Snippet>.Empty;
 
         /// <summary>
-        /// Gets the name on the Base.
+        /// Gets the generics on the Base.
         /// </summary>
-        /// <value>The name.</value>
-        [Descriptor("Named")]
-        public Qualification Name { get; internal set; } = Qualification.Unnamed;
+        /// <value>The generics.</value>
+        public ImmutableArray<Token> Generics { get; internal set; } = ImmutableArray<Token>.Empty;
 
         /// <summary>
         /// Gets a value indicating whether the Base is undefined.
@@ -56,6 +57,13 @@ namespace MooVC.Syntax.CSharp
         /// <value>A value indicating whether the Base is undefined.</value>
         [Ignore]
         public bool IsUnspecified => this == Unspecified;
+
+        /// <summary>
+        /// Gets the name on the Base.
+        /// </summary>
+        /// <value>The name.</value>
+        [Descriptor("Named")]
+        public Qualification Name { get; internal set; } = Qualification.Unnamed;
 
         /// <summary>
         /// Defines an implicit conversion from <see cref="Base" /> to <see cref="string" />.
@@ -118,7 +126,7 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<CType, Base>(type);
 
             return new Base()
-                .Enumerate((argument, @base) => @base.WithArguments(argument), type.GetGenericArguments())
+                .Enumerate((generic, @base) => @base.WithGenerics(generic), type.GetGenericArguments())
                 .Named(type);
         }
 
@@ -132,7 +140,7 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Base>(name);
 
             return new Base()
-                .Named((Moniker: name.Name, name.Qualifier));
+                .Named((name.Name, name.Qualifier));
         }
 
         /// <summary>
@@ -145,7 +153,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Arguments.SelectMany(argument => argument))
+            foreach (Qualifier qualifier in Generics.SelectMany(argument => argument))
             {
                 yield return qualifier;
             }
@@ -171,18 +179,20 @@ namespace MooVC.Syntax.CSharp
             }
 
             string signature = Name.ToSnippet(options);
+            const string Separator = ", ";
+
+            if (!Generics.IsDefaultOrEmpty)
+            {
+                string list = Separator.Combine(Generics, argument => argument.ToSnippet(options));
+
+                signature = $"{signature}<{list}>";
+            }
 
             if (!Arguments.IsDefaultOrEmpty)
             {
-                const string Separator = ", ";
+                string list = Separator.Combine(Arguments, argument => argument);
 
-                IEnumerable<string> arguments = Arguments.Select(argument => argument
-                    .ToSnippet(options)
-                    .ToString());
-
-                string list = string.Join(Separator, arguments);
-
-                signature = $"{signature}<{list}>";
+                signature = $"{signature}({list})";
             }
 
             return Snippet.From(options, signature);
@@ -211,7 +221,8 @@ namespace MooVC.Syntax.CSharp
             }
 
             return validationContext
-                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), argument => !argument.IsUnspecified, Arguments)
+                .IncludeIf(!Arguments.IsDefaultOrEmpty, nameof(Arguments), parameter => parameter.IsSingleLine, Arguments)
+                .AndIf(!Generics.IsDefaultOrEmpty, nameof(Generics), argument => !argument.IsUnspecified, Generics)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .Results;
         }
@@ -229,6 +240,7 @@ namespace MooVC.Syntax.CSharp
         {
             return $"{nameof(Base)} {{ " +
                 $"{nameof(Arguments)} = `{DebuggerDisplayFormatter.Format(Arguments)}`, " +
+                $"{nameof(Generics)} = `{DebuggerDisplayFormatter.Format(Generics)}`, " +
                 $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
                 $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}` }}";
         }

@@ -126,13 +126,13 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="name">The value to convert.</param>
         /// <returns>The converted <see cref="Qualification" /> value.</returns>
-        public static implicit operator Qualification((Moniker Moniker, Qualifier Qualifier) name)
+        public static implicit operator Qualification((Moniker Name, Qualifier Qualifier) name)
         {
-            Guard.Against.Conversion<(Moniker Moniker, Qualifier Qualifier), Qualification>(name);
+            Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Qualification>(name);
 
             return new Qualification()
                 .From(name.Qualifier)
-                .KnownAs(name.Moniker);
+                .KnownAs(name.Name);
         }
 
         /// <summary>

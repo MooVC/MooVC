@@ -35,7 +35,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>The attributes.</value>
         [Descriptor("AttributedWith")]
-        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
         public ImmutableArray<Attribute> Attributes { get; internal set; } = ImmutableArray<Attribute>.Empty;
 
         /// <summary>
@@ -43,7 +42,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>The name.</value>
         [Descriptor("Named")]
-        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
         public Declaration Declaration { get; internal set; } = Declaration.Unspecified;
 
         /// <summary>
@@ -63,7 +61,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>The interfaces.</value>
         [Descriptor("Implements")]
-        [SuppressMessage("Usage", "FLTFY03:Type does not utilize Fluentify", Justification = "The derived class will be annotated with it.")]
         public ImmutableArray<Symbol> Interfaces { get; internal set; } = ImmutableArray<Symbol>.Empty;
 
         /// <summary>
@@ -77,7 +74,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>A value indicating whether the Construct is undefined.</value>
         [Ignore]
-        [SuppressMessage("Usage", "VALFY04:Type does not utilize Valuify", Justification = "The derived class will be annotated with it.")]
         public abstract bool IsUndefined { get; }
 
         /// <summary>
