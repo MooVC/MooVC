@@ -5,7 +5,7 @@ using MooVC.Compression;
 
 public sealed class WhenDeserializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenACompressorThenCompressAsyncIsInvoked()
     {
         // Arrange
@@ -28,31 +28,7 @@ public sealed class WhenDeserializeIsCalled
         _ = await compressor.Received(1).Decompress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
-    [Fact]
-    public async Task GivenDataThenDataDeserializationIsRequested()
-    {
-        // Arrange
-        byte[] expected = [1, 2, 3];
-        string instance = "Something something dark side...";
-        bool wasInvoked = false;
-
-        object Deserializer(object input)
-        {
-            wasInvoked = true;
-            return instance;
-        }
-
-        var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
-
-        // Act
-        string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
-
-        // Assert
-        wasInvoked.ShouldBeTrue();
-        deserialized.ShouldBe(instance);
-    }
-
-    [Fact]
+    [Test]
     public async Task GivenAStreamThenStreamDeserializationIsRequested()
     {
         // Arrange
@@ -73,7 +49,31 @@ public sealed class WhenDeserializeIsCalled
         string deserialized = await serializer.Deserialize<string>(stream, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
-        deserialized.ShouldBe(instance);
+        _ = await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(deserialized).IsEqualTo(instance);
+    }
+
+    [Test]
+    public async Task GivenDataThenDataDeserializationIsRequested()
+    {
+        // Arrange
+        byte[] expected = [1, 2, 3];
+        string instance = "Something something dark side...";
+        bool wasInvoked = false;
+
+        object Deserializer(object input)
+        {
+            wasInvoked = true;
+            return instance;
+        }
+
+        var serializer = new TestableSynchronousSerializer(onDeserialize: Deserializer);
+
+        // Act
+        string deserialized = await serializer.Deserialize<string>(expected, CancellationToken.None);
+
+        // Assert
+        _ = await Assert.That(wasInvoked).IsTrue();
+        _ = await Assert.That(deserialized).IsEqualTo(instance);
     }
 }

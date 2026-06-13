@@ -7,6 +7,20 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFrameworks.Contains('netstandard2.0'))">
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup Condition="!$(TargetFrameworks.Contains('netstandard2.0'))">
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     <PackageReference Update="SonarAnalyzer.CSharp">

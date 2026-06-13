@@ -1,0 +1,29 @@
+﻿namespace MooVC.Syntax.CSharp.ReferenceTests;
+
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using MooVC.Syntax.CSharp;
+
+public sealed class WhenValidateIsCalled
+{
+    private const string TypeName = "Widget";
+
+    [Test]
+    public async Task GivenInvalidExtensibilityThenReturnsValidationResults()
+    {
+        // Arrange
+        var subject = new TestReference
+        {
+            IsUndefinedValue = false,
+            Extensibility = Modifiers.Static,
+            Declaration = new() { Name = TypeName },
+        };
+        var validationContext = new ValidationContext(subject);
+
+        // Act
+        ValidationResult[] results = subject.Validate(validationContext).ToArray();
+
+        // Assert
+        _ = await Assert.That(results).Contains(result => result.MemberNames.Contains(nameof(Reference.Extensibility)));
+    }
+}

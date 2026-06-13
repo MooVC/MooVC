@@ -4,18 +4,18 @@ using global::Apex.Serialization;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
-    public void GivenNoSettingsThenADefaultSerializerIsCreated()
+    [Test]
+    public async Task GivenNoSettingsThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
         using var serializer = new Serializer();
 
         // Assert
-        serializer.ShouldNotBeNull();
+        _ = await Assert.That(serializer).IsNotNull();
     }
 
-    [Fact]
-    public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    [Test]
+    public async Task GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
     {
         // Arrange
         var settings = new Settings
@@ -32,6 +32,6 @@ public sealed class WhenSerializerIsConstructed
         using var serializer = new Serializer(settings: settings);
 
         // Assert
-        serializer.ShouldNotBeNull();
+        _ = await Assert.That(serializer).IsNotNull();
     }
 }

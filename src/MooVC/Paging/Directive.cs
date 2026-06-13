@@ -1,181 +1,212 @@
-﻿#if NET6_0_OR_GREATER
-namespace MooVC.Paging;
-
-using System.Text.Json.Serialization;
-using static System.Math;
-
-/// <summary>
-/// Represents a directive to apply paging to a query.
-/// </summary>
-/// <param name="Limit">
-/// The maximum number of items to return per page.
-/// </param>
-/// <param name="Page">
-/// The requested page number, starting from <see cref="FirstPage" />.
-/// </param>
-public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, ushort Page = Directive.FirstPage)
+#if NET6_0_OR_GREATER
+namespace MooVC.Paging
 {
-    /// <summary>
-    /// The default maximum number of items to return per page.
-    /// </summary>
-    public const ushort DefaultLimit = 10;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text.Json.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using static System.Math;
 
     /// <summary>
-    /// The index assigned to the first page of a sequence.
+    /// Represents a directive to apply paging to a query.
     /// </summary>
-    public const ushort FirstPage = 0;
-
-    /// <summary>
-    /// The minimum restriction to place upon the number of items per page.
-    /// </summary>
-    public const ushort MinimumLimit = 0;
-
-    /// <summary>
-    /// Gets the <see cref="Directive" /> instance that indicates that no paging be applied (i.e. return all).
-    /// </summary>
-    /// <value>
-    /// The <see cref="Directive" /> instance that indicates that no paging be applied (i.e. return all).
-    /// </value>
-    public static Directive All { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is the <see cref="All"/> instance.
-    /// </summary>
-    /// <value>
-    /// <c>true</c> if the instance is the <see cref="All"/> instance; otherwise, <c>false</c>.
-    /// </value>
-    [JsonIgnore]
-    public bool IsAll => this == All;
-
-    /// <summary>
-    /// Gets the number of entries in the sequence to be skipped to read the beginning of the desired page.
-    /// </summary>
-    /// <value>
-    /// The number of entries in the sequence to be skipped to read the beginning of the desired page.
-    /// </value>
-    [JsonIgnore]
-    public int Skip => (Page - FirstPage) * Limit;
-
-    /// <summary>
-    /// Gets the number of entries in the sequence to return for the desired page.
-    /// </summary>
-    /// <value>
-    /// The number of entries in the sequence to return for the desired page.
-    /// </value>
-    [JsonIgnore]
-    public int Take => Limit == All.Limit
-        ? int.MaxValue
-        : Limit;
-
-    /// <summary>
-    /// Implicitly converts a <see cref="ushort" /> value to a <see cref="Directive" /> instance that requests the first page of a sequence with
-    /// a <see cref="Page" /> matching the value specified or <see cref="FirstPage" /> if a zero value is provided.
-    /// </summary>
-    /// <param name="page">
-    /// The size associated with a page.
+    /// <param name="Limit">
+    /// The maximum number of items to return per page.
     /// </param>
-    /// <returns>
-    /// A new <see cref="Directive" /> instance that requests the first page of a sequence sized at the value specified.
-    /// </returns>
-    public static implicit operator Directive(ushort page)
-    {
-        return new(Page: page);
-    }
-
-    /// <summary>
-    /// Adds the specified number to the <see cref="Page"/> number.
-    /// </summary>
-    /// <param name="directive">
-    /// The <see cref="Directive"/> to increment.
+    /// <param name="Page">
+    /// The requested page number, starting from <see cref="FirstPage" />.
     /// </param>
-    /// <param name="increment">
-    /// The number to add to the <see cref="Page"/>.
-    /// </param>
-    /// <returns>
-    /// A new <see cref="Directive"/> with the <see cref="Page"/> incremented by the specified number,
-    /// with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
-    /// </returns>
     /// <remarks>
-    /// If the page number has already reached <see cref="ushort.MaxValue"/>, then the same <paramref name="directive"/> is returned.
+    /// <para>
+    /// This type uses zero-based page numbering. The <see cref="Skip" /> and <see cref="Take" /> members can be directly composed with LINQ operators.
+    /// </para>
+    /// <para>
+    /// Use <see cref="All" /> to indicate that paging should not be applied.
+    /// </para>
     /// </remarks>
-    public static Directive operator +(Directive directive, int increment)
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public readonly record struct Directive(ushort Limit = Directive.DefaultLimit, ushort Page = Directive.FirstPage)
     {
-        if (directive.Page == ushort.MaxValue)
+        /// <summary>
+        /// The default maximum number of items to return per page.
+        /// </summary>
+        public const ushort DefaultLimit = 10;
+
+        /// <summary>
+        /// The index assigned to the first page of a sequence.
+        /// </summary>
+        public const ushort FirstPage = 0;
+
+        /// <summary>
+        /// The minimum restriction to place upon the number of items per page.
+        /// </summary>
+        public const ushort MinimumLimit = 0;
+
+        /// <summary>
+        /// Gets the <see cref="Directive" /> instance that indicates that no paging be applied (i.e. return all).
+        /// </summary>
+        /// <value>
+        /// The <see cref="Directive" /> instance that indicates that no paging be applied (i.e. return all).
+        /// </value>
+        public static Directive All { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is the <see cref="All"/> instance.
+        /// </summary>
+        /// <value>
+        /// <see langword="true" /> if the instance is the <see cref="All"/> instance; otherwise, <see langword="false" />.
+        /// </value>
+        [JsonIgnore]
+        public bool IsAll => this == All;
+
+        /// <summary>
+        /// Gets the number of entries in the sequence to be skipped to read the beginning of the desired page.
+        /// </summary>
+        /// <value>
+        /// The number of entries in the sequence to be skipped to read the beginning of the desired page.
+        /// </value>
+        /// <remarks>
+        /// This value is computed as <c>(Page - FirstPage) * Limit</c>.
+        /// </remarks>
+        [JsonIgnore]
+        public int Skip => (Page - FirstPage) * Limit;
+
+        /// <summary>
+        /// Gets the number of entries in the sequence to return for the desired page.
+        /// </summary>
+        /// <value>
+        /// The number of entries in the sequence to return for the desired page.
+        /// </value>
+        /// <remarks>
+        /// Returns <see cref="int.MaxValue" /> when <see cref="IsAll" /> is <see langword="true" />.
+        /// </remarks>
+        [JsonIgnore]
+        public int Take => Limit == All.Limit
+            ? int.MaxValue
+            : Limit;
+
+        /// <summary>
+        /// Implicitly converts a <see cref="ushort" /> value to a <see cref="Directive" /> instance that requests the first page of a sequence with
+        /// a <see cref="Page" /> matching the value specified or <see cref="FirstPage" /> if a zero value is provided.
+        /// </summary>
+        /// <param name="page">
+        /// The size associated with a page.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Directive" /> instance that requests the first page of a sequence sized at the value specified.
+        /// </returns>
+        public static implicit operator Directive(ushort page)
         {
-            return directive;
+            return new(Page: page);
         }
 
-        ushort page = (ushort)(directive.Page + increment);
-
-        return directive with
+        /// <summary>
+        /// Adds the specified number to the <see cref="Page"/> number.
+        /// </summary>
+        /// <param name="directive">
+        /// The <see cref="Directive"/> to increment.
+        /// </param>
+        /// <param name="increment">
+        /// The number to add to the <see cref="Page"/>.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Directive"/> with the <see cref="Page"/> incremented by the specified number,
+        /// with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
+        /// </returns>
+        /// <remarks>
+        /// If the page number has already reached <see cref="ushort.MaxValue"/>, then the same <paramref name="directive"/> is returned.
+        /// </remarks>
+        public static Directive operator +(Directive directive, int increment)
         {
-            Page = page,
-        };
-    }
+            if (directive.Page == ushort.MaxValue)
+            {
+                return directive;
+            }
 
-    /// <summary>
-    /// Increments the <see cref="Page"/> number by one.
-    /// </summary>
-    /// <param name="directive">
-    /// The <see cref="Directive"/> to increment.
-    /// </param>
-    /// <returns>
-    /// A new <see cref="Directive"/> with the <see cref="Page"/> incremented by one, with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
-    /// </returns>
-    /// <remarks>
-    /// If the page number has already reached <see cref="ushort.MaxValue"/>, then the same <paramref name="directive"/> is returned.
-    /// </remarks>
-    public static Directive operator ++(Directive directive)
-    {
-        return directive + 1;
-    }
+            ushort page = (ushort)(directive.Page + increment);
 
-    /// <summary>
-    /// Subtracts the specified number to the <see cref="Page"/> number.
-    /// </summary>
-    /// <param name="directive">
-    /// The <see cref="Directive"/> to decrement.
-    /// </param>
-    /// <param name="decrement">
-    /// The number to subtract from the <see cref="Page"/>.
-    /// </param>
-    /// <returns>
-    /// A new <see cref="Directive"/> with the <see cref="Page"/> decremented by the specified number,
-    /// with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
-    /// </returns>
-    /// <remarks>
-    /// If the page number has already reached <see cref="FirstPage"/>, then the same <paramref name="directive"/> is returned.
-    /// </remarks>
-    public static Directive operator -(Directive directive, int decrement)
-    {
-        if (directive.Page == FirstPage)
-        {
-            return directive;
+            return directive with
+            {
+                Page = page,
+            };
         }
 
-        ushort page = (ushort)(directive.Page - decrement);
-
-        return directive with
+        /// <summary>
+        /// Increments the <see cref="Page"/> number by one.
+        /// </summary>
+        /// <param name="directive">
+        /// The <see cref="Directive"/> to increment.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Directive"/> with the <see cref="Page"/> incremented by one, with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
+        /// </returns>
+        /// <remarks>
+        /// If the page number has already reached <see cref="ushort.MaxValue"/>, then the same <paramref name="directive"/> is returned.
+        /// </remarks>
+        public static Directive operator ++(Directive directive)
         {
-            Page = page,
-        };
-    }
+            return directive + 1;
+        }
 
-    /// <summary>
-    /// Decrements the <see cref="Page"/> number by one.
-    /// </summary>
-    /// <param name="directive">
-    /// The <see cref="Directive"/> to decrement.
-    /// </param>
-    /// <returns>
-    /// A new <see cref="Directive"/> with the <see cref="Page"/> decremented by one, with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
-    /// </returns>
-    /// <remarks>
-    /// If the page number has already reached <see cref="FirstPage"/>, then the same <paramref name="directive"/> is returned.
-    /// </remarks>
-    public static Directive operator --(Directive directive)
-    {
-        return directive - 1;
+        /// <summary>
+        /// Subtracts the specified number to the <see cref="Page"/> number.
+        /// </summary>
+        /// <param name="directive">
+        /// The <see cref="Directive"/> to decrement.
+        /// </param>
+        /// <param name="decrement">
+        /// The number to subtract from the <see cref="Page"/>.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Directive"/> with the <see cref="Page"/> decremented by the specified number,
+        /// with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
+        /// </returns>
+        /// <remarks>
+        /// If the page number has already reached <see cref="FirstPage"/>, then the same <paramref name="directive"/> is returned.
+        /// </remarks>
+        public static Directive operator -(Directive directive, int decrement)
+        {
+            if (directive.Page == FirstPage)
+            {
+                return directive;
+            }
+
+            ushort page = (ushort)(directive.Page - decrement);
+
+            return directive with
+            {
+                Page = page,
+            };
+        }
+
+        /// <summary>
+        /// Decrements the <see cref="Page"/> number by one.
+        /// </summary>
+        /// <param name="directive">
+        /// The <see cref="Directive"/> to decrement.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Directive"/> with the <see cref="Page"/> decremented by one, with the same <see cref="Limit"/> as the original <paramref name="directive"/>.
+        /// </returns>
+        /// <remarks>
+        /// If the page number has already reached <see cref="FirstPage"/>, then the same <paramref name="directive"/> is returned.
+        /// </remarks>
+        public static Directive operator --(Directive directive)
+        {
+            return directive - 1;
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Directive)} {{ " +
+                $"{nameof(IsAll)} = `{DebuggerDisplayFormatter.Format(IsAll)}`, " +
+                $"{nameof(Skip)} = `{DebuggerDisplayFormatter.Format(Skip)}`, " +
+                $"{nameof(Take)} = `{DebuggerDisplayFormatter.Format(Take)}` }}";
+        }
     }
 }
 #endif
