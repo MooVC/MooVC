@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System.Buffers;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -168,7 +169,7 @@ namespace MooVC.Syntax.CSharp
         {
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string extensibility = Extensibility;
-            string inheritance = GetInheritance(options);
+            Snippet inheritance = GetInheritance(options);
             string name = Declaration;
             Snippet parameters = GetParameters(options);
             string partial = IsPartial.Partial();
@@ -182,11 +183,9 @@ namespace MooVC.Syntax.CSharp
 
             var declaration = Snippet.From(options, signature);
 
-            if (!string.IsNullOrEmpty(inheritance))
+            if (!inheritance.IsEmpty)
             {
-                var baseTypeClause = Snippet.From(options, $": {inheritance}");
-
-                declaration = baseTypeClause
+                declaration = inheritance
                     .Shift(options)
                     .Prepend(options, signature);
             }
@@ -201,12 +200,41 @@ namespace MooVC.Syntax.CSharp
             return declaration;
         }
 
-        private string GetInheritance(Options options)
+        private Snippet GetInheritance(Options options)
         {
-            const string Separator = ", ";
-            string interfaces = Separator.Combine(Interfaces, @interface => @interface.ToSnippet(options));
+            var declarations = Base.ToSnippet(options);
 
-            return Separator.Combine(Base.ToSnippet(options), interfaces);
+            foreach (Symbol @interface in Interfaces)
+            {
+                declarations = declarations.Append(options, @interface.ToSnippet(options));
+            }
+
+            if (declarations.Length == 0)
+            {
+                return Snippet.Empty;
+            }
+
+            if (declarations.Length == 1)
+            {
+                return Snippet.From(options, $": {declarations[0]}");
+            }
+
+            string[] values = new string[declarations.Length];
+            int lastIndex = declarations.Length - 1;
+            string prefix = ": ";
+
+            for (int index = 0; index < declarations.Length; index++)
+            {
+                string suffix = index < lastIndex
+                    ? ","
+                    : string.Empty;
+
+                values[index] = $"{prefix}{declarations[index]}{suffix}";
+
+                prefix = "  ";
+            }
+
+            return Snippet.From(options, values);
         }
 
         private Snippet GetParameters(Options options)
