@@ -17,7 +17,6 @@ namespace MooVC.Syntax.CSharp
     public abstract partial class Reference
         : Type
     {
-        private const string Separator = " ";
         private readonly Variable.Options _options;
         private readonly string _type;
 
@@ -120,6 +119,8 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string.</returns>
         protected virtual string GetSignature(string extensibility, string partial, string name, string scope)
         {
+            const string Separator = " ";
+
             return Separator.Combine(scope, extensibility, partial, _type, $"{name}");
         }
 
@@ -167,6 +168,7 @@ namespace MooVC.Syntax.CSharp
         {
             var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string extensibility = Extensibility;
+            string inheritance = GetInheritance(options);
             string name = Declaration;
             Snippet parameters = GetParameters(options);
             string partial = IsPartial.Partial();
@@ -180,13 +182,11 @@ namespace MooVC.Syntax.CSharp
 
             var declaration = Snippet.From(options, signature);
 
-            if (!Base.IsUnspecified)
+            if (!string.IsNullOrEmpty(inheritance))
             {
-                var @base = Base.ToSnippet(options);
+                var baseTypeClause = Snippet.From(options, $": {inheritance}");
 
-                @base = Snippet.From(options, $": {@base}");
-
-                declaration = @base
+                declaration = baseTypeClause
                     .Shift(options)
                     .Prepend(options, signature);
             }
@@ -199,6 +199,14 @@ namespace MooVC.Syntax.CSharp
             }
 
             return declaration;
+        }
+
+        private string GetInheritance(Options options)
+        {
+            const string Separator = ", ";
+            string interfaces = Separator.Combine(Interfaces, @interface => @interface.ToSnippet(options));
+
+            return Separator.Combine(Base.ToSnippet(options), interfaces);
         }
 
         private Snippet GetParameters(Options options)
