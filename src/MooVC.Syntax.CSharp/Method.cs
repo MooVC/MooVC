@@ -225,7 +225,7 @@ namespace MooVC.Syntax.CSharp
             string extensibility = Extensibility;
             string name = Name;
             var parameters = Parameters.ToSnippet(options);
-            string result = Result.IsVoid ? "void" : Result;
+            string result = Result.IsVoid ? Snippet.From(options, "void") : Result.ToSnippet(options);
             string scope = Scope.ToString(options);
             var clauses = Name.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
