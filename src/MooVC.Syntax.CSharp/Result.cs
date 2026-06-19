@@ -41,8 +41,6 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         public static readonly Result Void = new Result { Mode = Modes.Synchronous };
 
-        private const string Separator = " ";
-
         /// <summary>
         /// Initializes a new instance of the Result class.
         /// </summary>
@@ -147,11 +145,7 @@ namespace MooVC.Syntax.CSharp
                 return string.Empty;
             }
 
-            string modifier = Modifier;
-            string mode = Mode;
-            string type = Type;
-
-            return Separator.Combine(mode, modifier, type);
+            return ToSnippet(Qualification.Options.Default);
         }
 
         /// <summary>
@@ -159,7 +153,7 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The return signature snippet.</returns>
-        public Snippet ToSnippet(Snippet.Options options)
+        public Snippet ToSnippet(Qualification.Options options)
         {
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Result)));
 
@@ -168,7 +162,14 @@ namespace MooVC.Syntax.CSharp
                 return Snippet.Empty;
             }
 
-            return Snippet.From(options, ToString());
+            const string Separator = " ";
+
+            string modifier = Modifier;
+            string mode = Mode;
+            string type = Type.ToSnippet(options);
+            string signature = Separator.Combine(mode, modifier, type);
+
+            return Snippet.From(options, signature);
         }
 
         /// <summary>

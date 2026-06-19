@@ -285,5 +285,51 @@ public sealed partial class WhenToSnippetIsCalled
             // Assert
             _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
         }
+
+        [Test]
+        public async Task GivenInstructionsWhenClassImplementingInterfaceThenDefinitionIsCreated()
+        {
+            // Arrange
+            const string expected = """
+                namespace MooVC.Testing.Mechanics.Car.Register
+                {
+                    public sealed partial record Register
+                        : global::Mu.Composition.IRegistrar
+                    {
+                        public static global::SimpleInjector.Container Register(
+                            global::Microsoft.Extensions.Configuration.IConfiguration configuration,
+                            global::SimpleInjector.Container container)
+                        {
+                            return container;
+                        }
+                    }
+                }
+                """;
+
+            Symbol configuration = (Name: "IConfiguration", Qualifier: "Microsoft.Extensions.Configuration");
+            Symbol container = (Name: "Container", Qualifier: "SimpleInjector");
+
+            Definition content = Builder
+                .New<Definition>()
+                .For<Record>(record => record
+                    .Implements((Name: "IRegistrar", Qualifier: "Mu.Composition"))
+                    .Named("Register")
+                    .WithMethods(register => register
+                        .Accepts((Name: "Configuration", Type: configuration))
+                        .Accepts((Name: "Container", Type: container))
+                        .Named("Register")
+                        .Returns(result => result
+                            .OfType(container)
+                            .WithMode(Result.Modes.Synchronous))
+                        .WithExtensibility(Modifiers.Static)
+                        .WithBody("return container;")))
+                .From("MooVC.Testing.Mechanics.Car.Register");
+
+            // Act
+            var actual = content.ToSnippet(_options);
+
+            // Assert
+            _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
+        }
     }
 }

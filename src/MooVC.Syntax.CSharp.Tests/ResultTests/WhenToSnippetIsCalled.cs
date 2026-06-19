@@ -7,7 +7,7 @@ public sealed class WhenToSnippetIsCalled
     {
         // Arrange
         Result subject = Result.Task;
-        Snippet.Options? options = default;
+        Qualification.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = subject.ToSnippet(options!);
