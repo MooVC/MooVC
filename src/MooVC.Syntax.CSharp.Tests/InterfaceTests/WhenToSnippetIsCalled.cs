@@ -1,0 +1,64 @@
+﻿namespace MooVC.Syntax.CSharp.InterfaceTests;
+
+public sealed class WhenToSnippetIsCalled
+{
+    [Test]
+    public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
+    {
+        // Arrange
+        Interface subject = InterfaceTestsData.Create();
+
+        // Act
+        Func<string> action = () => subject.ToSnippet(options: default);
+
+        // Assert
+        _ = await Assert.That(action).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenValuesThenReturnsInterfaceSignature()
+    {
+        // Arrange
+        var created = new Event { Name = "Created" };
+        var execute = new Method { Name = new() { Name = "Execute" } };
+        var indexer = new Indexer { Parameter = new() { Name = "item", Type = typeof(string) }, Result = typeof(int) };
+        var valueA = new Property { Name = "ValueA", Type = typeof(string) };
+
+        var valueB = new Property
+        {
+            Behaviours = new() { Set = new() { Mode = Property.Methods.Setter.Modes.ReadOnly } },
+            Name = "ValueB",
+            Type = typeof(int),
+        };
+
+        Snippet expected = """
+            internal partial interface Sample
+            {
+                event Created;
+
+                string ValueA { get; init; }
+
+                int ValueB { get; }
+
+                int this[string item] { get; }
+
+                Task Execute();
+            }
+            """;
+
+        Interface subject = InterfaceTestsData.Create(
+            events: [created],
+            indexers: [indexer],
+            isPartial: true,
+            methods: [execute],
+            name: new Declaration { Name = InterfaceTestsData.DefaultName },
+            properties: [valueA, valueB],
+            scope: Scopes.Internal);
+
+        // Act
+        var result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+}

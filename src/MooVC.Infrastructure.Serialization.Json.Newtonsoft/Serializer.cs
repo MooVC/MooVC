@@ -1,54 +1,113 @@
-﻿namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft;
-
-using System.Text;
-using global::Newtonsoft.Json;
-using MooVC.Compression;
-using MooVC.Serialization;
-using static System.String;
-using static MooVC.Infrastructure.Serialization.Json.Newtonsoft.Resources;
-
-public sealed class Serializer
-    : SynchronousSerializer
+namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft
 {
-    public new const int DefaultBufferSize = 1024;
-    public const int MinimumBufferSize = 8;
-    public static readonly Encoding DefaultEncoding = Encoding.UTF8;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using global::Newtonsoft.Json;
+    using MooVC.Compression;
+    using MooVC.Serialization;
+    using static System.String;
+    using static MooVC.Infrastructure.Serialization.Json.Newtonsoft.Resources;
 
-    public Serializer(
-        int bufferSize = DefaultBufferSize,
-        ICompressor? compressor = default,
-        Encoding? encoding = default,
-        JsonSerializerSettings? settings = default)
-        : base(compressor: compressor)
+    /// <summary>
+    /// Provides JSON serialization using Newtonsoft.Json.
+    /// </summary>
+    /// <remarks>
+    /// Uses streaming readers/writers to avoid unnecessary intermediate buffers and supports optional compression via the base serializer abstraction.
+    /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public sealed class Serializer
+        : SynchronousSerializer
     {
-        BufferSize = Math.Max(bufferSize, MinimumBufferSize);
-        Encoding = encoding ?? DefaultEncoding;
-        Json = JsonSerializer.CreateDefault(settings);
-    }
+        /// <summary>
+        /// Represents the default write buffer size.
+        /// </summary>
+        public new const int DefaultBufferSize = 1024;
 
-    public int BufferSize { get; }
+        /// <summary>
+        /// Represents the minimum allowed write buffer size.
+        /// </summary>
+        public const int MinimumBufferSize = 8;
 
-    public Encoding Encoding { get; }
+        /// <summary>
+        /// Gets the default text encoding used by the serializer.
+        /// </summary>
+        public static readonly Encoding DefaultEncoding = Encoding.UTF8;
 
-    public JsonSerializer Json { get; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Serializer"/> class.
+        /// </summary>
+        /// <param name="bufferSize">The write buffer size.</param>
+        /// <param name="compressor">The optional stream compressor.</param>
+        /// <param name="encoding">The optional text encoding.</param>
+        /// <param name="settings">The optional JSON serializer settings.</param>
+        public Serializer(
+            int bufferSize = DefaultBufferSize,
+            ICompressor compressor = default,
+            Encoding encoding = default,
+            JsonSerializerSettings settings = default)
+            : base(compressor: compressor)
+        {
+            BufferSize = Math.Max(bufferSize, MinimumBufferSize);
+            Encoding = encoding ?? DefaultEncoding;
+            Json = JsonSerializer.CreateDefault(settings);
+        }
 
-    protected override T PerformDeserialize<T>(Stream source)
-    {
-        using var reader = new StreamReader(source);
-        using var text = new JsonTextReader(reader);
+        /// <summary>
+        /// Gets the configured write buffer size.
+        /// </summary>
+        public int BufferSize { get; }
 
-        return Json.Deserialize<T>(text)
-            ?? throw new JsonSerializationException(Format(SerializerDeserializeFailure, typeof(T)));
-    }
+        /// <summary>
+        /// Gets the configured text encoding.
+        /// </summary>
+        public Encoding Encoding { get; }
 
-    protected override void PerformSerialize<T>(T instance, Stream target)
-    {
-        using var writer = new StreamWriter(target, Encoding, BufferSize, true);
-        using var text = new JsonTextWriter(writer);
+        /// <summary>
+        /// Gets the underlying Newtonsoft JSON serializer instance.
+        /// </summary>
+        public JsonSerializer Json { get; }
 
-        Json.Serialize(text, instance);
+        protected override T PerformDeserialize<T>(Stream source)
+        {
+            using (var reader = new StreamReader(source))
+            using (var text = new JsonTextReader(reader))
+            {
+                var result = Json.Deserialize<T>(text);
 
-        text.Flush();
-        writer.Flush();
+                if (ReferenceEquals(result, null))
+                {
+                    throw new JsonSerializationException(Format(CultureInfo.InvariantCulture, SerializerDeserializeFailure, typeof(T)));
+                }
+
+                return result;
+            }
+        }
+
+        protected override void PerformSerialize<T>(T instance, Stream target)
+        {
+            using (var writer = new StreamWriter(target, Encoding, BufferSize, true))
+            using (var text = new JsonTextWriter(writer))
+            {
+                Json.Serialize(text, instance);
+
+                text.Flush();
+                writer.Flush();
+            }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(Serializer)} {{ " +
+                $"{nameof(BufferSize)} = `{DebuggerDisplayFormatter.Format(BufferSize)}`, " +
+                $"{nameof(Encoding)} = `{DebuggerDisplayFormatter.Format(Encoding)}`, " +
+                $"{nameof(Json)} = `{DebuggerDisplayFormatter.Format(Json)}` }}";
+        }
     }
 }

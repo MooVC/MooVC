@@ -2,32 +2,17 @@
 
 public sealed class WhenMaxIsCalled
 {
-    public static readonly TheoryData<DateTime, DateTime> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData = new()
+    public static IEnumerable<(DateTime Oldest, DateTime Newest)> GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData()
     {
-        { new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc) },
-        { new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-    };
-
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
-    {
-        // Arrange
-        var first = new DateTimeOffset(oldest);
-        var second = new DateTimeOffset(newest);
-
-        // Act
-        DateTimeOffset selected = first.Max(second);
-
-        // Assert
-        selected.ShouldBe(second);
+        yield return (new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 12, 1, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 1, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 31, 0, 0, 0, DateTimeKind.Utc));
+        yield return (new(2018, 12, 31, 0, 0, 0, DateTimeKind.Utc), new(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
-    [Theory]
-    [MemberData(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
-    public void GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
+    public async Task GivenDifferentDatesWhenTheFirstIsTheNewestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
     {
         // Arrange
         var first = new DateTimeOffset(newest);
@@ -37,11 +22,26 @@ public sealed class WhenMaxIsCalled
         DateTimeOffset selected = first.Max(second);
 
         // Assert
-        selected.ShouldBe(first);
+        _ = await Assert.That(selected).IsEqualTo(first);
     }
 
-    [Fact]
-    public void GivenSameDatesThenTheSameDateIsReturned()
+    [Test]
+    [MethodDataSource(nameof(GivenDifferentDatesThenTheDateFurthestInTheFutureIsReturnedData))]
+    public async Task GivenDifferentDatesWhenTheFirstIsTheOldestThenTheDateFurthestInTheFutureIsReturned(DateTime oldest, DateTime newest)
+    {
+        // Arrange
+        var first = new DateTimeOffset(oldest);
+        var second = new DateTimeOffset(newest);
+
+        // Act
+        DateTimeOffset selected = first.Max(second);
+
+        // Assert
+        _ = await Assert.That(selected).IsEqualTo(second);
+    }
+
+    [Test]
+    public async Task GivenSameDatesThenTheSameDateIsReturned()
     {
         // Arrange
         var sameDate = new DateTimeOffset(new DateTime(2019, 1, 1, 0, 0, 0, DateTimeKind.Utc));
@@ -50,6 +50,6 @@ public sealed class WhenMaxIsCalled
         DateTimeOffset selected = sameDate.Max(sameDate);
 
         // Assert
-        selected.ShouldBe(sameDate);
+        _ = await Assert.That(selected).IsEqualTo(sameDate);
     }
 }

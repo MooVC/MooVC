@@ -2,47 +2,8 @@
 
 public sealed class WhenExplodeIsCalled
 {
-    [Fact]
-    public void GivenANullExceptionThenTheActionIsGracefullyIgnored()
-    {
-        // Arrange
-        Exception? exception = default;
-        bool wasInvoked = false;
-
-        void Action(Exception value)
-        {
-            wasInvoked = true;
-        }
-
-        // Act
-        exception.Explode(Action);
-
-        // Assert
-        wasInvoked.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenAnExceptionWithNoInnerExceptionThenTheActionIsInvokedForTheParent()
-    {
-        // Arrange
-        const int ExpectedInvocationCount = 1;
-        Exception exception = new InvalidOperationException("The message is not relevant.");
-        int invocationCount = 0;
-
-        void Action(Exception value)
-        {
-            invocationCount++;
-        }
-
-        // Act
-        exception.Explode(Action);
-
-        // Assert
-        invocationCount.ShouldBe(ExpectedInvocationCount);
-    }
-
-    [Fact]
-    public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedForEachExceptionInHierarchicalOrder()
+    [Test]
+    public async Task GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedForEachExceptionInHierarchicalOrder()
     {
         // Arrange
         const int ExpectedInvocationCount = 4;
@@ -62,11 +23,11 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        invocationCount.ShouldBe(ExpectedInvocationCount);
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
     }
 
-    [Fact]
-    public void GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedInCorrectOrder()
+    [Test]
+    public async Task GivenAnExceptionWithAnInnerExceptionThenTheActionIsInvokedInCorrectOrder()
     {
         // Arrange
         var tier3 = new InvalidOperationException();
@@ -86,6 +47,45 @@ public sealed class WhenExplodeIsCalled
         tier1.Explode(Action);
 
         // Assert
-        actualOrder.ShouldBe(expectedOrder);
+        _ = await Assert.That(actualOrder).IsEquivalentTo(expectedOrder);
+    }
+
+    [Test]
+    public async Task GivenAnExceptionWithNoInnerExceptionThenTheActionIsInvokedForTheParent()
+    {
+        // Arrange
+        const int ExpectedInvocationCount = 1;
+        Exception exception = new InvalidOperationException("The message is not relevant.");
+        int invocationCount = 0;
+
+        void Action(Exception value)
+        {
+            invocationCount++;
+        }
+
+        // Act
+        exception.Explode(Action);
+
+        // Assert
+        _ = await Assert.That(invocationCount).IsEqualTo(ExpectedInvocationCount);
+    }
+
+    [Test]
+    public async Task GivenANullExceptionThenTheActionIsGracefullyIgnored()
+    {
+        // Arrange
+        Exception? exception = default;
+        bool wasInvoked = false;
+
+        void Action(Exception value)
+        {
+            wasInvoked = true;
+        }
+
+        // Act
+        exception.Explode(Action);
+
+        // Assert
+        _ = await Assert.That(wasInvoked).IsFalse();
     }
 }

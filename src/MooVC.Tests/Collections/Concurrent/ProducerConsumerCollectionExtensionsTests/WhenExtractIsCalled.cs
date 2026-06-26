@@ -5,29 +5,12 @@ using System.Linq;
 
 public sealed class WhenExtractIsCalled
 {
-    [Fact]
-    public void GivenACollectionThenAnEnumerableContainingAllMembersIsReturnedAndTheCollectionIsEmptied()
-    {
-        // Arrange
-        IEnumerable<int> expected = Enumerable.Range(0, 50);
-        IProducerConsumerCollection<int> source = new ConcurrentBag<int>(expected);
-
-        // Act
-        IEnumerable<int> actual = source
-            .Extract()
-            .OrderBy(element => element);
-
-        // Assert
-        actual.ShouldBe(expected);
-        source.ShouldBeEmpty();
-    }
-
-    [Theory]
-    [InlineData(1)]
-    [InlineData(10)]
-    [InlineData(25)]
-    [InlineData(50)]
-    public void GivenACollectionAndACountThenAnEnumerableContainingTheSpecifiedNumberOfMembersIsReturned(ulong count)
+    [Test]
+    [Arguments(1)]
+    [Arguments(10)]
+    [Arguments(25)]
+    [Arguments(50)]
+    public async Task GivenACollectionAndACountThenAnEnumerableContainingTheSpecifiedNumberOfMembersIsReturned(ulong count)
     {
         // Arrange
         const int Total = 50;
@@ -40,13 +23,30 @@ public sealed class WhenExtractIsCalled
             .OrderBy(element => element);
 
         // Assert
-        source.Intersect(actual).ShouldBeEmpty();
-        source.Count.ShouldBe(Total - (int)count);
-        actual.Count().ShouldBe((int)count);
+        _ = await Assert.That(source.Intersect(actual)).IsEmpty();
+        _ = await Assert.That(source.Count).IsEqualTo(Total - (int)count);
+        _ = await Assert.That(actual.Count()).IsEqualTo((int)count);
     }
 
-    [Fact]
-    public void GivenANullCollectionAndACountThenAnEmptyEnumerableIsReturned()
+    [Test]
+    public async Task GivenACollectionThenAnEnumerableContainingAllMembersIsReturnedAndTheCollectionIsEmptied()
+    {
+        // Arrange
+        IEnumerable<int> expected = Enumerable.Range(0, 50);
+        IProducerConsumerCollection<int> source = new ConcurrentBag<int>(expected);
+
+        // Act
+        IEnumerable<int> actual = source
+            .Extract()
+            .OrderBy(element => element);
+
+        // Assert
+        _ = await Assert.That(actual).IsEquivalentTo(expected);
+        _ = await Assert.That(source).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenANullCollectionAndACountThenAnEmptyEnumerableIsReturned()
     {
         // Arrange
         IProducerConsumerCollection<int>? source = default;
@@ -55,11 +55,11 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract(count: 50);
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 
-    [Fact]
-    public void GivenANullCollectionThenAnEmptyEnumerableIsReturned()
+    [Test]
+    public async Task GivenANullCollectionThenAnEmptyEnumerableIsReturned()
     {
         // Arrange
         IProducerConsumerCollection<int>? source = default;
@@ -68,6 +68,6 @@ public sealed class WhenExtractIsCalled
         IEnumerable<int> actual = source.Extract();
 
         // Assert
-        actual.ShouldBeEmpty();
+        _ = await Assert.That(actual).IsEmpty();
     }
 }

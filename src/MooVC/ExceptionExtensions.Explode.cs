@@ -1,36 +1,45 @@
-﻿namespace MooVC;
-
-using Ardalis.GuardClauses;
-using MooVC.Linq;
-using static MooVC.ExceptionExtensions_Resources;
-
-/// <summary>
-/// Provides extensions relating to <see cref="Exception" />.
-/// </summary>
-public static partial class ExceptionExtensions
+namespace MooVC
 {
-    /// <summary>
-    /// Performs an action on the given <see cref="Exception" /> and any of its inner exceptions, recursively.
-    /// </summary>
-    /// <param name="exception">The <see cref="Exception" /> to perform the action on.</param>
-    /// <param name="handler">The <see cref="Action{T}" /> to perform on the given exception.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="handler" /> parameter is <see langword="null" />.</exception>
-    public static void Explode(this Exception? exception, Action<Exception> handler)
-    {
-        _ = Guard.Against.Null(handler, message: ExplodeHandlerRequired);
-
-        exception.PerformExplode(handler);
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using MooVC.Linq;
+    using static MooVC.ExceptionExtensions_Resources;
 
     /// <summary>
-    /// Performs an action on the given <see cref="Exception" /> and any of its inner exceptions, recursively.
+    /// Provides extensions relating to <see cref="Exception" />.
     /// </summary>
-    /// <param name="exception">The <see cref="Exception" /> to perform the action on.</param>
-    /// <param name="handler">The <see cref="Action{T}" /> to perform on the given exception.</param>
-    private static void PerformExplode(this Exception? exception, Action<Exception> handler)
+    public static partial class ExceptionExtensions
     {
-        if (exception is not null)
+        /// <summary>
+        /// Performs an action on the given <see cref="Exception" /> and any of its inner exceptions, recursively.
+        /// </summary>
+        /// <param name="exception">The <see cref="Exception" /> to perform the action on.</param>
+        /// <param name="handler">The <see cref="Action{T}" /> to perform on the given exception.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="handler" /> parameter is <see langword="null" />.</exception>
+        public static void Explode(this Exception exception, Action<Exception> handler)
         {
+            _ = Guard.Against.Null(handler, message: ExplodeHandlerRequired);
+
+            exception.PerformExplode(handler);
+        }
+
+        /// <summary>
+        /// Performs an action on the given <see cref="Exception" /> and any of its inner exceptions, recursively.
+        /// </summary>
+        /// <param name="exception">The <see cref="Exception" /> to perform the action on.</param>
+        /// <param name="handler">The <see cref="Action{T}" /> to perform on the given exception.</param>
+        private static void PerformExplode(this Exception exception, Action<Exception> handler)
+        {
+            if (exception is null)
+            {
+                return;
+            }
+
             handler(exception);
 
             if (exception is AggregateException aggregate)
