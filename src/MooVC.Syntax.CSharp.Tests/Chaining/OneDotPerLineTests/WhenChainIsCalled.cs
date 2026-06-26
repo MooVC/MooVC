@@ -64,6 +64,28 @@ public sealed class WhenChainIsCalled
     }
 
     [Test]
+    public async Task GivenSingleMethodCallWhenLineIsLongThenDoesNotSplitByDots()
+    {
+        // Arrange
+        const string value = "query.Call(reallyLongParameterName, anotherReallyLongParameterName);";
+
+        string[] expected =
+        [
+            value,
+        ];
+
+        Snippet.Options.IChain subject = OneDotPerLine.Instance;
+        Snippet.Options options = Snippet.Options.Default.WithMaxLineLength(20);
+
+        // Act
+        ImmutableArray<string> result = subject.Chain(value, options);
+
+        // Assert
+        _ = await Assert.That(result.Length).IsEqualTo(expected.Length);
+        _ = await Assert.That(result).IsEquivalentTo(expected);
+    }
+
+    [Test]
     public async Task GivenSingleLineChainWhenLineIsLongThenSplitsByDots()
     {
         // Arrange

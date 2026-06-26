@@ -16,6 +16,8 @@ namespace MooVC.Syntax.CSharp.Chaining
         /// </summary>
         public static readonly Snippet.Options.IChain Instance = new OneDotPerLine();
 
+        private const int MinimumChainPoints = 3;
+
         private OneDotPerLine()
         {
         }
@@ -35,7 +37,7 @@ namespace MooVC.Syntax.CSharp.Chaining
 
             List<string> chainPoints = IdentifyChainPoints(line);
 
-            if (chainPoints.Count < 2)
+            if (chainPoints.Count < MinimumChainPoints)
             {
                 return ImmutableArray.Create(line);
             }
@@ -65,7 +67,7 @@ namespace MooVC.Syntax.CSharp.Chaining
         {
             List<string> outerChainPoints = IdentifyOuterChainPoints(line);
 
-            if (outerChainPoints.Count > 1)
+            if (outerChainPoints.Count >= MinimumChainPoints)
             {
                 return outerChainPoints;
             }
@@ -93,6 +95,7 @@ namespace MooVC.Syntax.CSharp.Chaining
                 }
 
                 AddCurrentSegment(line, start, index, segments);
+
                 start = index;
             }
 
