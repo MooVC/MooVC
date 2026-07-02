@@ -15,7 +15,7 @@
     <PackageReference Remove="SonarAnalyzer.CSharp" />
     <PackageReference Remove="StyleCop.Analyzers" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300"  PrivateAssets="All" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.27.0.140913">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.28.0.143324">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
