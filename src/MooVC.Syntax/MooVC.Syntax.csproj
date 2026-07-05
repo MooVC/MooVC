@@ -88,6 +88,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="StringExtensions.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StringExtensions.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="TypeExtensions.Resources.Designer.cs">
       <DependentUpon>TypeExtensions.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -152,6 +157,10 @@
     <EmbeddedResource Update="Formatting\StringExtensions.Resources.resx">
       <LastGenOutput>StringExtensions.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StringExtensions.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringExtensions.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="TypeExtensions.Resources.resx">
       <LastGenOutput>TypeExtensions.Resources.Designer.cs</LastGenOutput>

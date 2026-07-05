@@ -6,7 +6,6 @@
     <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
     <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
     <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
-    <ExcludeByFile>**/*.Designer.cs</ExcludeByFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <NoWarn>CA1859;CA1861;IDE0039;xUnit1044;</NoWarn>
