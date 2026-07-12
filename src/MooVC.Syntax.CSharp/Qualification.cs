@@ -84,14 +84,13 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Defines an implicit conversion from <see cref="string" /> to <see cref="Qualification" />.
         /// </summary>
-        /// <param name="moniker">The <see cref="string" /> value to convert.</param>
+        /// <param name="name">The <see cref="string" /> value to convert.</param>
         /// <returns>The converted <see cref="Qualification" /> value.</returns>
-        public static implicit operator Qualification(string moniker)
+        public static implicit operator Qualification(string name)
         {
-            Guard.Against.Conversion<string, Qualification>(moniker);
+            Guard.Against.Conversion<string, Qualification>(name);
 
-            return new Qualification()
-                .KnownAs(moniker);
+            return Create(name);
         }
 
         /// <summary>
@@ -249,6 +248,37 @@ namespace MooVC.Syntax.CSharp
                 .Include(nameof(Moniker), _ => !Moniker.IsUnnamed, Moniker)
                 .And(nameof(Qualifier), Qualifier)
                 .Results;
+        }
+
+        private static Qualification Create(string name)
+        {
+            string qualifiedName = RemoveGlobalPrefix(name);
+            int separator = qualifiedName.LastIndexOf('.');
+
+            if (separator < 0)
+            {
+                return new Qualification()
+                    .KnownAs(qualifiedName);
+            }
+
+            string moniker = qualifiedName.Substring(separator + 1);
+
+            string qualifier = separator == 0
+                ? string.Empty
+                : qualifiedName.Substring(0, separator);
+
+            return new Qualification()
+                .From(qualifier)
+                .KnownAs(moniker);
+        }
+
+        private static string RemoveGlobalPrefix(string name)
+        {
+            const string GlobalPrefix = "global::";
+
+            return name.StartsWith(GlobalPrefix, StringComparison.Ordinal)
+                ? name.Substring(GlobalPrefix.Length)
+                : name;
         }
 
         private string ToString(Options options)

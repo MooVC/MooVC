@@ -94,12 +94,13 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through all symbols provided by the interfaces.
+        /// Returns an enumerator that iterates through all symbols provided by the base type and interfaces.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Interfaces.SelectMany(@interface => @interface))
+            foreach (Qualifier qualifier in Base
+                .Concat(Interfaces.SelectMany(@interface => @interface)))
             {
                 yield return qualifier;
             }

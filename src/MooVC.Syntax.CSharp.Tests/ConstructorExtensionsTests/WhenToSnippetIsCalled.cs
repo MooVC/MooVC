@@ -91,7 +91,7 @@ public sealed class WhenToSnippetIsCalled
                 return default;
             }
 
-            protected Test(Version first, Version second, params Version[] third)
+            protected Test(Version second, Version first, params Version[] third)
             {
                 return default;
             }

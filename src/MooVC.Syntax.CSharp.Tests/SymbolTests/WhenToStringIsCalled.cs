@@ -4,6 +4,7 @@ public sealed class WhenToStringIsCalled
 {
     private const string Name = "Result";
     private const string FirstArgumentName = "Inner";
+    private const string QualifiedArgumentName = "Example.Namespace.Inner";
     private const string SecondArgumentName = "Other";
 
     [Test]
@@ -25,6 +26,26 @@ public sealed class WhenToStringIsCalled
 
         // Assert
         _ = await Assert.That(representation).IsEqualTo($"{Name}<{FirstArgumentName}, {SecondArgumentName}>");
+    }
+
+    [Test]
+    public async Task GivenQualifiedArgumentNameThenArgumentMonikerReturned()
+    {
+        // Arrange
+        var subject = new Symbol
+        {
+            Arguments =
+            [
+                new Symbol { Name = QualifiedArgumentName },
+            ],
+            Name = Name,
+        };
+
+        // Act
+        string representation = subject.ToString();
+
+        // Assert
+        _ = await Assert.That(representation).IsEqualTo($"{Name}<{FirstArgumentName}>");
     }
 
     [Test]

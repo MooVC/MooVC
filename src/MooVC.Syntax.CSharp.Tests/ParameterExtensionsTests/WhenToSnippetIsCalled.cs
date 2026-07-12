@@ -44,7 +44,7 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    public async Task GivenValuesThenTheyAreOrderedByDefaultParamsAndName()
+    public async Task GivenValuesThenRequiredParameterOrderIsPreserved()
     {
         // Arrange
         Parameter noDefault = ParameterTestsData.Create(name: FirstName);
@@ -54,7 +54,7 @@ public sealed class WhenToSnippetIsCalled
 
         ImmutableArray<Parameter> parameters = [withDefault, @params, later, noDefault];
 
-        const string expected = "Version bravo, Version charlie, Version alpha = 42, params Version[] delta";
+        const string expected = "Version charlie, Version bravo, Version alpha = 42, params Version[] delta";
 
         // Act
         var snippet = parameters.ToSnippet(Parameter.Options.Camel);

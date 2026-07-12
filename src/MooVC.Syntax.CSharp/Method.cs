@@ -234,7 +234,6 @@ namespace MooVC.Syntax.CSharp
             {
                 return clauses
                     .Shift(options)
-                    .Prepend(options, Environment.NewLine)
                     .Prepend(options, signature);
             }
 

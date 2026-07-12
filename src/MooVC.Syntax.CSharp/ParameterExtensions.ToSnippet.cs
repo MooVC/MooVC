@@ -27,7 +27,6 @@ namespace MooVC.Syntax.CSharp
             var ordered = parameters
                 .OrderBy(parameter => parameter.Modifier.IsParams)
                 .ThenByDescending(parameter => parameter.Default.IsEmpty)
-                .ThenBy(parameter => parameter.Name)
                 .ToImmutableArray();
 
             string snippet = Separator.Combine(ordered, parameter => parameter.ToSnippet(options));

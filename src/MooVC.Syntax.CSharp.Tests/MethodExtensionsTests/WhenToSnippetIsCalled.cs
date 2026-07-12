@@ -39,7 +39,7 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    public async Task GivenValuesThenTheyAreOrderedByStaticScopeExtensibilityAndName()
+    public async Task GivenValuesThenTheyAreOrderedByStaticScopeAndExtensibility()
     {
         // Arrange
         Method staticMethod = MethodTestsData.Create(

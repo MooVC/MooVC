@@ -37,6 +37,11 @@ namespace MooVC.Syntax.CSharp
         public static readonly Result Undefined = new Result();
 
         /// <summary>
+        /// Gets a default ValueTask-based return signature for asynchronous methods.
+        /// </summary>
+        public static readonly Result ValueTask = new Result { Type = typeof(ValueTask) };
+
+        /// <summary>
         /// Gets a synchronous void return signature for methods with no value.
         /// </summary>
         public static readonly Result Void = new Result { Mode = Modes.Synchronous };
@@ -61,6 +66,13 @@ namespace MooVC.Syntax.CSharp
         /// <value>A value indicating whether the return signature is unspecified.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
+
+        /// <summary>
+        /// Gets a value indicating whether the return signature is ValueTask-based.
+        /// </summary>
+        /// <value>A value indicating whether the return signature is ValueTask-based.</value>
+        [Ignore]
+        public bool IsValueTask => this == ValueTask;
 
         /// <summary>
         /// Gets a value indicating whether the return signature is void.
@@ -206,6 +218,7 @@ namespace MooVC.Syntax.CSharp
             return $"{nameof(Result)} {{ " +
                 $"{nameof(IsTask)} = `{DebuggerDisplayFormatter.Format(IsTask)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(IsValueTask)} = `{DebuggerDisplayFormatter.Format(IsValueTask)}`, " +
                 $"{nameof(IsVoid)} = `{DebuggerDisplayFormatter.Format(IsVoid)}`, " +
                 $"{nameof(Mode)} = `{DebuggerDisplayFormatter.Format(Mode)}`, " +
                 $"{nameof(Modifier)} = `{DebuggerDisplayFormatter.Format(Modifier)}`, " +
