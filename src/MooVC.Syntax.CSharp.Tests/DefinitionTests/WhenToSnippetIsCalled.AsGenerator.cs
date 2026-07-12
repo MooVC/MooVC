@@ -331,5 +331,98 @@ public sealed partial class WhenToSnippetIsCalled
             // Assert
             _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
         }
+
+        [Test]
+        public async Task GivenInstructionsWhenClassImplementingInterfaceWithMultipleMethodsThenDefinitionIsCreated()
+        {
+            // Arrange
+            const string expected = """
+                namespace MooVC.Testing.Mechanics.Car
+                {
+                    public sealed partial class Allocator
+                        : global::Mu.Modelling.Services.IAllocator<global::MooVC.Testing.Mechanics.Car.Registration>
+                    {
+                        public override global::System.Threading.Tasks.ValueTask<global::MooVC.Testing.Mechanics.Car.Registration> Allocate<TUseCase>(
+                            TUseCase useCase,
+                            global::System.Threading.CancellationToken cancellationToken)
+                            where TUseCase : global::Mu.Modelling.Behavior.UseCase
+                        {
+                            throw new NotImplementedException();
+                        }
+
+                        public override global::System.Threading.Tasks.ValueTask Confirm(
+                            global::MooVC.Testing.Mechanics.Car.Registration identity,
+                            global::System.Threading.CancellationToken cancellationToken)
+                        {
+                            return ValueTask.CompletedTask;
+                        }
+
+                        public override global::System.Threading.Tasks.ValueTask Surrender(
+                            global::MooVC.Testing.Mechanics.Car.Registration identity,
+                            global::System.Threading.CancellationToken cancellationToken)
+                        {
+                            return ValueTask.CompletedTask;
+                        }
+                    }
+                }
+                """;
+
+            Definition content = Builder
+                .New<Definition>()
+                .For<Class>(@class => @class
+                    .Implements(
+                        (Name: "IAllocator", Qualifier: "Mu.Modelling.Services"),
+                        @base => @base.WithArguments((Name: "Registration", Qualifier: "MooVC.Testing.Mechanics.Car")))
+                    .Named("Allocator")
+                    .WithMethods(allocate => allocate
+                        .Accepts(useCase => useCase
+                            .Named("UseCase")
+                            .OfType((Name: "TUseCase", Qualifier: Qualifier.Unqualified)))
+                        .Accepts(cancellationToken => cancellationToken
+                            .Named("CancellationToken")
+                            .OfType(typeof(CancellationToken)))
+                        .Named("Allocate", declaration => declaration
+                            .WithArguments(useCase => useCase
+                                .Named("TUseCase")
+                                .WithConstraints(constraint => constraint
+                                    .WithBase((Name: "UseCase", Qualifier: "Mu.Modelling.Behavior")))))
+                        .Returns(result => result
+                            .OfType(typeof(ValueTask), task => task.WithArguments((Name: "Registration", Qualifier: "MooVC.Testing.Mechanics.Car")))
+                            .WithMode(Result.Modes.Synchronous))
+                        .WithExtensibility(Modifiers.Override)
+                        .WithBody("throw new NotImplementedException();")
+                        .WithScope(Scopes.Public))
+                    .WithMethods(confirm => confirm
+                        .Accepts(identity => identity
+                            .Named("Identity")
+                            .OfType((Name: "Registration", Qualifier: "MooVC.Testing.Mechanics.Car")))
+                        .Accepts(cancellationToken => cancellationToken
+                            .Named("CancellationToken")
+                            .OfType(typeof(CancellationToken)))
+                        .Named("Confirm")
+                        .Returns(typeof(ValueTask), task => task.WithMode(Result.Modes.Synchronous))
+                        .WithExtensibility(Modifiers.Override)
+                        .WithBody("return ValueTask.CompletedTask;")
+                        .WithScope(Scopes.Public))
+                    .WithMethods(surrender => surrender
+                        .Accepts(identity => identity
+                            .Named("Identity")
+                            .OfType((Name: "Registration", Qualifier: "MooVC.Testing.Mechanics.Car")))
+                        .Accepts(cancellationToken => cancellationToken
+                            .Named("CancellationToken")
+                            .OfType(typeof(CancellationToken)))
+                        .Named("Surrender")
+                        .Returns(typeof(ValueTask), task => task.WithMode(Result.Modes.Synchronous))
+                        .WithExtensibility(Modifiers.Override)
+                        .WithBody("return ValueTask.CompletedTask;")
+                        .WithScope(Scopes.Public)))
+                .From("MooVC.Testing.Mechanics.Car");
+
+            // Act
+            var actual = content.ToSnippet(_options);
+
+            // Assert
+            _ = await Assert.That(actual.ToString()).IsEqualTo(expected);
+        }
     }
 }
