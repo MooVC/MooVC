@@ -133,7 +133,7 @@ namespace MooVC.Syntax.CSharp
             Guard.Against.Conversion<(Moniker Name, Qualifier Qualifier), Implementation>(name);
 
             return new Implementation()
-                .Named((Moniker: name.Name, name.Qualifier));
+                .Named((name.Name, name.Qualifier));
         }
 
         /// <summary>
@@ -233,10 +233,9 @@ namespace MooVC.Syntax.CSharp
                 return false;
             }
 
-            return name
-                .Moniker
-                .ToString()
-                .StartsWith("I", StringComparison.Ordinal);
+            string moniker = name.Moniker.ToString();
+
+            return moniker.Length > 0 && moniker[0] == 'I';
         }
 
         private string GetDebuggerDisplay()

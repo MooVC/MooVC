@@ -3,6 +3,7 @@ namespace MooVC.Syntax.CSharp
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
     using Ardalis.GuardClauses;
     using Fluentify;
@@ -133,7 +134,7 @@ namespace MooVC.Syntax.CSharp
                 value = $"{Modifier} {value}";
             }
 
-            return Snippet.From(options, string.Format(options.Formatter, name, value));
+            return Snippet.From(options, string.Format(CultureInfo.InvariantCulture, options.Formatter, name, value));
         }
 
         /// <summary>

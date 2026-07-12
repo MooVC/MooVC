@@ -46,7 +46,11 @@ namespace MooVC.Syntax.CSharp
             /// <summary>
             /// Gets a value indicating whether or not this is a compound instance.
             /// </summary>
-            public bool IsCompound => _value.Contains(" ");
+#if NETSTANDARD2_0
+            public bool IsCompound => _value.IndexOf(' ') >= 0;
+#else
+            public bool IsCompound => _value.Contains(' ');
+#endif
 
             /// <summary>
             /// Gets a value indicating whether or not this is the default instance.

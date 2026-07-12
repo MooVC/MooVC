@@ -160,7 +160,11 @@ namespace MooVC.Syntax.CSharp
 
             if (Target != Specifiers.None)
             {
-                value = value.Append($"{Target}:");
+                string target = Target;
+
+                value = value
+                    .Append(target)
+                    .Append(':');
             }
 
             string name = Name.ToSnippet(options);
@@ -216,7 +220,7 @@ namespace MooVC.Syntax.CSharp
             string content = string.Join(_separator, arguments);
             string snippet = Snippet.From(options, content);
 
-            return value.Append($"({snippet})");
+            return value.Append('(').Append(snippet).Append(')');
         }
 
         private string GetDebuggerDisplay()

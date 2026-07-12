@@ -276,7 +276,7 @@ namespace MooVC.Syntax.CSharp
             {
                 const int SuffixLength = 9;
 
-                if (signature.Length > SuffixLength && signature.EndsWith(nameof(Attribute)))
+                if (signature.Length > SuffixLength && signature.EndsWith(nameof(Attribute), StringComparison.Ordinal))
                 {
                     signature = signature.Substring(0, signature.Length - SuffixLength);
                 }
