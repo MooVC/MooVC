@@ -16,8 +16,13 @@ namespace MooVC.Syntax.CSharp
     using Kind = System.Type;
 
     /// <summary>
-    /// Represents a base-type clause entry used in class and record declarations.
+    /// Represents an interface implementation clause entry used in class and record declarations.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a qualification, symbol, CLR type metadata, or
+    /// <c>(Moniker Name, Qualifier Qualifier)</c> tuple. Symbols and CLR metadata preserve generic arguments, while
+    /// the tuple supplies the implemented interface moniker and namespace path.
+    /// </remarks>
     [AutoInitializeWith(nameof(Unspecified))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

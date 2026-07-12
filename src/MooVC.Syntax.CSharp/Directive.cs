@@ -13,8 +13,13 @@ namespace MooVC.Syntax.CSharp
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
-    /// Represents a preprocessor directive emitted in generated C# code.
+    /// Represents a using directive emitted in generated C# code.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a namespace qualifier or a <c>(string Alias, Qualifier Qualifier)</c>
+    /// tuple. The alias text models a C# using alias directive, while the qualifier supplies the imported namespace
+    /// path.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

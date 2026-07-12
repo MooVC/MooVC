@@ -17,6 +17,11 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element qualifier.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from CLR type metadata (<see cref="Type" />), a dot-separated qualifier
+    /// path (<see langword="string" />), or an ordered array of <see cref="Name" /> segments. CLR metadata contributes
+    /// the type namespace, and an empty segment array becomes <see cref="Unqualified" />.
+    /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(ImmutableArray<Name>))]
     [SkipAutoInitialization]
@@ -267,6 +272,34 @@ namespace MooVC.Syntax
             return _value
                 .Prepend(segment)
                 .ToImmutableArray();
+        }
+
+        /// <summary>
+        /// Determines whether the current qualifier starts with the specified qualifier.
+        /// </summary>
+        /// <param name="other">The qualifier to compare against the start of the current qualifier.</param>
+        /// <returns>
+        /// <see langword="true" /> when the current qualifier starts with <paramref name="other" />; otherwise,
+        /// <see langword="false" />.
+        /// </returns>
+        public bool StartsWith(Qualifier other)
+        {
+            _ = Guard.Against.Null(other, message: StartsWithOtherRequired.Format(typeof(Qualifier)));
+
+            if (other._value.Length > _value.Length)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < other._value.Length; index++)
+            {
+                if (!EqualityComparer<Name>.Default.Equals(_value[index], other._value[index]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

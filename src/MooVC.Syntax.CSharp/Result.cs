@@ -18,6 +18,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# member return signature, combining async modality, ref modifiers, and the return type symbol.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from CLR type metadata (<see cref="CType" />). The metadata becomes
+    /// the return type symbol; async modality and ref-style modifiers remain explicit state on the result.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

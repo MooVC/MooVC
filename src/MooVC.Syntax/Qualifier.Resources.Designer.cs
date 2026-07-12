@@ -79,6 +79,15 @@ namespace MooVC.Syntax {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The `{0}` to compare must be provided..
+        /// </summary>
+        internal static string StartsWithOtherRequired {
+            get {
+                return ResourceManager.GetString("StartsWithOtherRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The `{0}` formatting options must be provided..
         /// </summary>
         internal static string ToSnippetOptionsRequired {

@@ -14,6 +14,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a binary operator declaration model.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Snippet Body, Types Type)</c> tuple. The body supplies the
+    /// operator implementation, and the type selects the C# binary operator token to declare.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

@@ -15,6 +15,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a unary operator declaration model.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Snippet Body, Types Type)</c> tuple. The body supplies the
+    /// operator implementation, and the type selects the C# unary operator token to declare.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

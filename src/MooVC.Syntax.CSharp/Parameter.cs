@@ -17,6 +17,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# parameter declaration, including modifier, type, name, and default value.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Variable Name, Symbol Type)</c> tuple. The tuple sets the
+    /// declared parameter identifier and type while attributes, modifiers, and default value remain explicit state.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

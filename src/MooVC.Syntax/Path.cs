@@ -13,6 +13,10 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element path.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from path text (<see langword="string" />). The value represents the
+    /// file-system path used by generated MSBuild or solution artifacts.
+    /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]

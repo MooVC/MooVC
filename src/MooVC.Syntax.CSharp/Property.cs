@@ -18,6 +18,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a property declaration model.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Name Name, Symbol Type)</c> tuple. The tuple sets the
+    /// property identifier and type while attributes, accessors, scope, and modifiers remain explicit state.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

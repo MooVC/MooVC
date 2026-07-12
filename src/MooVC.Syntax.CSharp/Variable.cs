@@ -15,6 +15,11 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents an identifier token used for names in generated C# code.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a variable identifier (<see cref="Identifier" />) or syntax name
+    /// (<see cref="Name" />). Rendering applies variable casing options rather than treating the input as arbitrary
+    /// source text.
+    /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(Identifier))]
     [SkipAutoInitialization]

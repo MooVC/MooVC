@@ -17,6 +17,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a generic type-parameter declaration.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a type-parameter name (<see cref="Name" />). Constraint symbols
+    /// remain explicit state on the generic declaration.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

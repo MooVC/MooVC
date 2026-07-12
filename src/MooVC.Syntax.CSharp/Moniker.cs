@@ -13,6 +13,11 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents one segment in a qualified identifier.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a syntax name (<see cref="Name" />) or CLR type metadata
+    /// (<see cref="CType" />). CLR aliases are preserved, array types use the element type name, and generic arity
+    /// markers are removed.
+    /// </remarks>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Moniker

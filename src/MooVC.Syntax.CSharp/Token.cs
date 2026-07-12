@@ -14,6 +14,11 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a token that can be expressed as either a <see cref="Name" /> or a <see cref="Symbol" />.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a bare generic parameter name (<see cref="Name" />), symbol
+    /// reference, or CLR type metadata (<see cref="CType" />). Empty names or undefined symbols become
+    /// <see cref="Unspecified" />, and CLR metadata is first converted to a symbol.
+    /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Valuify]
     public sealed partial class Token

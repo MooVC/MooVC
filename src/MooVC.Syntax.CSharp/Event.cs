@@ -17,6 +17,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents an event declaration model.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Name Name, Symbol Handler)</c> tuple. The tuple sets the
+    /// event identifier and the delegate type symbol, including namespace or generic information.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

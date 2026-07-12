@@ -20,6 +20,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# attribute usage that can be attached to declarations.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from CLR attribute metadata (<see cref="CType" />) or a symbol reference.
+    /// CLR metadata must identify an attribute type, and either path stores the attribute as a C# symbol name.
+    /// </remarks>
     [AutoInitializeWith(nameof(Unspecified))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

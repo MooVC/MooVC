@@ -14,8 +14,13 @@ namespace MooVC.Syntax.CSharp
     using Kind = System.Type;
 
     /// <summary>
-    /// Represents a symbol reference, including qualification and generic arguments.
+    /// Represents a qualified C# symbol name.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from qualified name text, a moniker, CLR type metadata, or
+    /// <c>(Moniker Name, Qualifier Qualifier)</c> tuple. Name text with a global prefix is normalized before it is
+    /// split into moniker and qualifier components.
+    /// </remarks>
     [AutoInitializeWith(nameof(Unnamed))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

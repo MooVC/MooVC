@@ -19,6 +19,11 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a symbol reference, including qualification and generic arguments.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from CLR type metadata, a qualification, or
+    /// <c>(Moniker Name, Qualifier Qualifier)</c> tuple. CLR metadata records array and nullable shape in addition to
+    /// the qualified name, while tuple input supplies only the name and qualifier.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

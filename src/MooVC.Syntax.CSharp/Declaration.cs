@@ -17,6 +17,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a declaration statement used inside type bodies.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from declaration name text (<see langword="string" />) or a syntax name.
+    /// The input becomes the declaration moniker; generic arguments and qualifiers remain explicit declaration state.
+    /// </remarks>
     [AutoInitializeWith(nameof(Unspecified))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

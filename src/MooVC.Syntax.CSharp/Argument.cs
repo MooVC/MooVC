@@ -15,6 +15,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a C# argument expression, including optional name and modifier.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Name Name, Snippet Value)</c> tuple. The tuple sets the
+    /// optional named argument label and the expression snippet to emit at the call site.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

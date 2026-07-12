@@ -20,6 +20,10 @@ namespace MooVC.Syntax
             /// <summary>
             /// Represents a syntax element boundary options.
             /// </summary>
+            /// <remarks>
+            /// Implicit conversions create an instance from an array of formatting chain steps. An empty array becomes
+            /// <see cref="Default" />; otherwise, the steps are stored in order for snippet composition.
+            /// </remarks>
             [AutoInitializeWith(nameof(Default))]
             [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
             [Monify(Type = typeof(ImmutableArray<IChain>))]

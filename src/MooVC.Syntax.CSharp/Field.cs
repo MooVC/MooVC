@@ -18,6 +18,10 @@ namespace MooVC.Syntax.CSharp
     /// <summary>
     /// Represents a field declaration model.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from a <c>(Variable Name, Symbol Type)</c> tuple. The tuple sets the
+    /// declared field identifier and type while attributes, scope, and modifiers remain explicit field state.
+    /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Fluentify]

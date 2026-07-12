@@ -18,6 +18,10 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element snippet.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from raw syntax text (<see langword="string" />). Empty text becomes
+    /// <see cref="Empty" />, a single newline becomes <see cref="Blank" />, and other text is stored as snippet lines.
+    /// </remarks>
     [AutoInitializeWith(nameof(Empty))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(ImmutableArray<string>))]

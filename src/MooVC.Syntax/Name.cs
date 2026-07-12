@@ -12,6 +12,10 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element segment.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from syntax name segment text (<see langword="string" />), such as a
+    /// type or member name. The value is validated as a Pascal-cased source identifier segment.
+    /// </remarks>
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
     public sealed partial class Name

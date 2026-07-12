@@ -15,6 +15,11 @@ namespace MooVC.Syntax
     /// <summary>
     /// Represents a syntax element identifier.
     /// </summary>
+    /// <remarks>
+    /// Implicit conversions create an instance from identifier text (<see langword="string" />). The value stores
+    /// the canonical syntax name, and rendering applies Pascal, camel, snake, or kebab casing according to the
+    /// requested options.
+    /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     [Monify(Type = typeof(string))]
     [SkipAutoInitialization]
