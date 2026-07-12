@@ -3,6 +3,29 @@
 public sealed class WhenToSnippetIsCalled
 {
     [Test]
+    public async Task GivenAttributesAndNoBodyThenAttributesAreRendered()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.Empty);
+
+        subject.Attributes =
+        [
+            new Attribute { Name = new Symbol { Name = "MarkerAttribute" } },
+        ];
+
+        // Act
+        string representation = subject.ToSnippet(Method.Options.Default);
+
+        // Assert
+        string expected = """
+            [Marker]
+            public string Perform(int value);
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
     public async Task GivenBodyWhenAsynchronousThenBlockIsRendered()
     {
         // Arrange

@@ -118,18 +118,21 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the sequence of symbols representing the name, parameters, and result.
+        /// Returns an enumerator that iterates through the sequence of symbols representing attributes, name, parameters, and result.
         /// </summary>
         /// <remarks>
-        /// The enumerator yields symbols in the order they appear in the name, followed by all parameter symbols, and then
-        /// the result symbols. The returned enumerator supports only forward iteration.
+        /// The enumerator yields symbols in the order they appear in the attributes, then the name, followed by all parameter
+        /// symbols, and then the result symbols. The returned enumerator supports only forward iteration.
         /// </remarks>
         /// <returns>
-        /// An enumerator that can be used to iterate through the collection of symbols in order: name, parameters, and result.
+        /// An enumerator that can be used to iterate through the collection of symbols in order: attributes, name, parameters,
+        /// and result.
         /// </returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Name
+            foreach (Qualifier qualifier in Attributes
+                .SelectMany(attribute => attribute)
+                .Concat(Name)
                 .Concat(Parameters.SelectMany(parameter => parameter))
                 .Concat(Result))
             {
@@ -165,7 +168,9 @@ namespace MooVC.Syntax.CSharp
 
             if (Body.IsEmpty)
             {
-                return signature.Append(';');
+                return signature
+                    .Append(';')
+                    .Prepend(options, attributes);
             }
 
             return Body

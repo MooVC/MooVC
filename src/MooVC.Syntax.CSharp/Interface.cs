@@ -69,16 +69,19 @@ namespace MooVC.Syntax.CSharp
             string scope = Scope;
             string signature = Separator.Combine(scope, partial, $"interface {name}");
 
+            Snippet declaration = Snippet
+                .From(options, signature)
+                .Prepend(options, attributes);
+
             if (!clauses.IsEmpty)
             {
                 return clauses
                     .Shift(options)
                     .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature)
-                    .Prepend(options, attributes);
+                    .Prepend(options, declaration);
             }
 
-            return Snippet.From(options, signature);
+            return declaration;
         }
 
         private string GetDebuggerDisplay()

@@ -70,12 +70,14 @@ namespace MooVC.Syntax.CSharp
         public ImmutableArray<Unary> Unaries { get; internal set; } = ImmutableArray<Unary>.Empty;
 
         /// <summary>
-        /// Returns an enumerator that iterates through all symbols contained in the collection of conversions.
+        /// Returns an enumerator that iterates through all symbols contained in rendered operators.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the symbols in the collection.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Conversions.SelectMany(conversion => conversion))
+            foreach (Qualifier qualifier in Comparisons
+                .SelectMany(comparison => comparison.Subject)
+                .Concat(Conversions.SelectMany(conversion => conversion)))
             {
                 yield return qualifier;
             }

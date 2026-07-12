@@ -141,7 +141,8 @@ namespace MooVC.Syntax.CSharp
         /// attributes and the type.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+            foreach (Qualifier qualifier in Attributes
+                .SelectMany(attribute => attribute)
                 .Concat(Type))
             {
                 yield return qualifier;

@@ -73,7 +73,8 @@ namespace MooVC.Syntax.CSharp
                 yield return @base.Current;
             }
 
-            foreach (Qualifier qualifier in Constructors.SelectMany(constructor => constructor)
+            foreach (Qualifier qualifier in Constructors
+                .SelectMany(constructor => constructor)
                 .Concat(Fields.SelectMany(field => field))
                 .Concat(Parameters.SelectMany(parameter => parameter)))
             {

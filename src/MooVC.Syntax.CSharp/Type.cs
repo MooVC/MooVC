@@ -127,7 +127,9 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
         public virtual IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+            foreach (Qualifier qualifier in Attributes
+                .SelectMany(attribute => attribute)
+                .Concat(Declaration)
                 .Concat(Events.SelectMany(@event => @event))
                 .Concat(Indexers.SelectMany(indexer => indexer))
                 .Concat(Interfaces.SelectMany(@interface => @interface))

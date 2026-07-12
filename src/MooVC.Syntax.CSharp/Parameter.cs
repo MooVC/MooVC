@@ -127,7 +127,8 @@ namespace MooVC.Syntax.CSharp
         /// and the type symbol.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Attributes.SelectMany(attribute => attribute)
+            foreach (Qualifier qualifier in Attributes
+                .SelectMany(attribute => attribute)
                 .Concat(Type))
             {
                 yield return qualifier;

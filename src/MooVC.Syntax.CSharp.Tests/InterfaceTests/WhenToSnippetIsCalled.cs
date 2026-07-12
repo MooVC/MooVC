@@ -16,6 +16,30 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
+    public async Task GivenAttributesThenAttributesAreRendered()
+    {
+        // Arrange
+        Snippet expected = """
+            [Marker]
+            public interface Sample
+            {
+            }
+            """;
+
+        Interface subject = InterfaceTestsData.Create(
+            attributes:
+            [
+                new Attribute { Name = new Symbol { Name = "MarkerAttribute" } },
+            ]);
+
+        // Act
+        var result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
     public async Task GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange
