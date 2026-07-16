@@ -1,0 +1,36 @@
+﻿namespace MooVC.Syntax.CSharp.DirectiveTests;
+
+public sealed class WhenIsSystemIsCalled
+{
+    [Test]
+    public async Task GivenNonSystemQualifierThenReturnsFalse()
+    {
+        // Arrange
+        var subject = new Directive
+        {
+            Qualifier = new(["MooVC", "Syntax"]),
+        };
+
+        // Act
+        bool result = subject.IsSystem;
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenSystemQualifierThenReturnsTrue()
+    {
+        // Arrange
+        var subject = new Directive
+        {
+            Qualifier = new(["System", "Linq"]),
+        };
+
+        // Act
+        bool result = subject.IsSystem;
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+}

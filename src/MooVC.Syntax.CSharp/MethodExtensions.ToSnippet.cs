@@ -1,0 +1,36 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Collections.Immutable;
+    using System.Linq;
+    using MooVC.Linq;
+
+    /// <summary>
+    /// Provides snippet conversion helpers for <see cref="Method"/> values.
+    /// </summary>
+    public static partial class MethodExtensions
+    {
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="methods">The methods.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        internal static Snippet ToSnippet(this ImmutableArray<Method> methods, Method.Options options)
+        {
+            if (methods.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            Snippet[] content = methods
+                .OrderByDescending(property => property.Extensibility == Modifiers.Static)
+                .ThenByDescending(method => method.Scope)
+                .ThenByDescending(method => method.Extensibility)
+                .ThenBy(method => method.Name)
+                .Select(method => method.ToSnippet(options))
+                .ToArray();
+
+            return Snippet.Blank.Combine(options, content);
+        }
+    }
+}
