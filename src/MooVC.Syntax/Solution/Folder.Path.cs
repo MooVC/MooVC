@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Solution
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
@@ -27,7 +28,8 @@ namespace MooVC.Syntax.Solution
 
             private static readonly Regex _rule = new Regex(
                 @"^\/(?!\/)(?:(?!\.{1,2}\/)[^\/\x00-\x1F]+\/)+$",
-                RegexOptions.Compiled | RegexOptions.CultureInvariant);
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                TimeSpan.FromSeconds(1));
 
             /// <summary>
             /// Gets a value indicating whether the current node is the root node of the hierarchy.

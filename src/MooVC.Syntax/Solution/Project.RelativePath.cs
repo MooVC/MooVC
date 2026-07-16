@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Solution
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
@@ -27,7 +28,8 @@ namespace MooVC.Syntax.Solution
 
             private static readonly Regex _rule = new Regex(
                 @"^(?![\\/])(?![A-Za-z]:)(?!\\\\)(?:(?:[^<>:""|?*\x00-\x1F\\/]+[\\/])*[^<>:""|?*\x00-\x1F\\/]+\.[^<>:""|?*\x00-\x1F\\/\.]+)$",
-                RegexOptions.Compiled | RegexOptions.CultureInvariant);
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                TimeSpan.FromSeconds(1));
 
             /// <summary>
             /// Gets a value indicating whether the current instance represents an unspecified value.

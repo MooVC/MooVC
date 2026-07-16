@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Solution
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
@@ -60,7 +61,10 @@ namespace MooVC.Syntax.Solution
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 
-            private static readonly Regex _rule = new Regex(@"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$", RegexOptions.Compiled);
+            private static readonly Regex _rule = new Regex(
+                @"^(?!\s)[^\x00-\x1F\x7F""<>]{1,64}(?<!\s)$",
+                RegexOptions.Compiled,
+                TimeSpan.FromSeconds(1));
 
             /// <summary>
             /// Gets a value indicating whether the current instance represents an unspecified value.

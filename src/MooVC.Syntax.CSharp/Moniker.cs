@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.CSharp
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
@@ -27,7 +28,10 @@ namespace MooVC.Syntax.CSharp
         /// Gets the empty instance.
         /// </summary>
         public static readonly Moniker Unnamed = string.Empty;
-        private static readonly Regex _rule = new Regex(@"^@?[A-Za-z][A-Za-z0-9_]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex _rule = new Regex(
+            @"^@?[A-Za-z][A-Za-z0-9_]*$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant,
+            TimeSpan.FromSeconds(1));
 
         internal Moniker(string value)
         {

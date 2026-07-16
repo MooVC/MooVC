@@ -1,5 +1,6 @@
 namespace MooVC.Syntax.Solution
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
@@ -24,7 +25,8 @@ namespace MooVC.Syntax.Solution
 
             private static readonly Regex _rule = new Regex(
                 @"^(?![ .])(?!.*[ .]$)[^\\/:*?""<>|]+$",
-                RegexOptions.Compiled | RegexOptions.CultureInvariant);
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                TimeSpan.FromSeconds(1));
 
             public bool IsUnnamed => this == Unnamed;
 

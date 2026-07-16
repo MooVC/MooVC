@@ -31,7 +31,10 @@ namespace MooVC.Syntax
         /// </summary>
         public static readonly Identifier Unnamed = string.Empty;
 
-        private static readonly Regex _rule = new Regex(@"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+        private static readonly Regex _rule = new Regex(
+            @"^(?!\d)(?!.*[^A-Za-z0-9])(?:[A-Z][a-zA-Z0-9]*)$",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant,
+            TimeSpan.FromSeconds(1));
 
         private static readonly Dictionary<Casing, Func<string, string>> _strategies = new Dictionary<Casing, Func<string, string>>
         {
