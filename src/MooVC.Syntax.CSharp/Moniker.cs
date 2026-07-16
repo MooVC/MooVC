@@ -77,6 +77,18 @@ namespace MooVC.Syntax.CSharp
         }
 
         /// <summary>
+        /// Defines an implicit conversion from <see cref="Moniker" /> to <see cref="Name" />.
+        /// </summary>
+        /// <param name="moniker">The <see cref="Moniker" /> value to convert.</param>
+        /// <returns>The converted <see cref="Name" /> value.</returns>
+        public static implicit operator Name(Moniker moniker)
+        {
+            Guard.Against.Conversion<Moniker, Name>(moniker);
+
+            return new Name(moniker);
+        }
+
+        /// <summary>
         /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Moniker" />.
         /// </summary>
         /// <param name="type">The <see cref="CType" /> value to convert.</param>
