@@ -131,6 +131,19 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Result" />.
         /// </summary>
+        /// <param name="type">The <see cref="Symbol" /> value to convert.</param>
+        /// <returns>The converted <see cref="Result" /> value.</returns>
+        public static implicit operator Result(Symbol type)
+        {
+            Guard.Against.Conversion<Symbol, Result>(type);
+
+            return new Result()
+                .OfType(type);
+        }
+
+        /// <summary>
+        /// Defines an implicit conversion from <see cref="CType" /> to <see cref="Result" />.
+        /// </summary>
         /// <param name="type">The <see cref="CType" /> value to convert.</param>
         /// <returns>The converted <see cref="Result" /> value.</returns>
         public static implicit operator Result(CType type)
