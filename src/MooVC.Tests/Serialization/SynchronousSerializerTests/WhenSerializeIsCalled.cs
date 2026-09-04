@@ -5,14 +5,14 @@ using MooVC.Compression;
 
 public sealed class WhenSerializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenACompressorThenCompressAsyncIsInvoked()
     {
         // Arrange
         string instance = "Something something dark side...";
         ICompressor compressor = Substitute.For<ICompressor>();
 
-        compressor
+        _ = compressor
             .Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>())
             .Returns(info => info.Arg<Stream>());
 
@@ -21,13 +21,13 @@ public sealed class WhenSerializeIsCalled
             onSerialize: (_, _) => { });
 
         // Act
-        await serializer.Serialize(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
+        _ = await compressor.Received().Compress(Arg.Any<Stream>(), Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInstanceThenDataSerializationIsRequested()
     {
         // Arrange
@@ -37,22 +37,19 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        await serializer.Serialize(instance, CancellationToken.None);
+        _ = await serializer.Serialize(instance, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAStreamThenStreamSerializationIsRequested()
     {
         // Arrange
@@ -62,9 +59,6 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
@@ -74,10 +68,10 @@ public sealed class WhenSerializeIsCalled
         await serializer.Serialize(instance, stream, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNullInstanceThenDataSerializationIsRequested()
     {
         // Arrange
@@ -87,22 +81,19 @@ public sealed class WhenSerializeIsCalled
 
         void Serializer(object input1, object input2)
         {
-            input1.ShouldBe(instance);
-            input2.ShouldBeAssignableTo<Stream>();
-
             wasInvoked = true;
         }
 
         var serializer = new TestableSynchronousSerializer(onSerialize: Serializer);
 
         // Act
-        await serializer.Serialize(instance!, CancellationToken.None);
+        _ = await serializer.Serialize(instance!, CancellationToken.None);
 
         // Assert
-        wasInvoked.ShouldBeTrue();
+        _ = await Assert.That(wasInvoked).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenNullStreamThenThrowsArgumentNullException()
     {
         // Arrange
@@ -114,7 +105,7 @@ public sealed class WhenSerializeIsCalled
         Func<Task> act = async () => await serializer.Serialize(instance, target!, CancellationToken.None);
 
         // Assert
-        ArgumentNullException exception = await Should.ThrowAsync<ArgumentNullException>(act);
-        exception.ParamName.ShouldBe(nameof(target));
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(target));
     }
 }

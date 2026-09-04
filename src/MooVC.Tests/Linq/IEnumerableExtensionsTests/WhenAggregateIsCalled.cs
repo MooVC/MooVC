@@ -1,66 +1,29 @@
 ﻿namespace MooVC.Linq.IEnumerableExtensionsTests;
 
+using System.Globalization;
+
 public sealed class WhenAggregateIsCalled
 {
-    [Fact]
-    public void GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
-    {
-        // Arrange
-        IEnumerable<int>? items = default;
-
-        // Act
-        IEnumerable<string> results = items.Aggregate<int, string>(default);
-
-        // Assert
-        results.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void GivenAnNullListThenAnEmptyListOfResultsIsReturned()
-    {
-        // Arrange
-        IEnumerable<int>? items = default;
-
-        // Act
-        IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
-
-        // Assert
-        results.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
+    [Test]
+    public async Task GivenAListThenResultsMatchingEachKeyAreReturned()
     {
         // Arrange
         IEnumerable<int> items = [1, 2, 3];
-
-        // Act
-        IEnumerable<string> results = items.Aggregate<int, string>(default);
-
-        // Assert
-        results.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void GivenAListThenResultsMatchingEachKeyAreReturned()
-    {
-        // Arrange
-        IEnumerable<int> items = [1, 2, 3];
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString(CultureInfo.InvariantCulture));
 
         // Act
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        results.ShouldBe(source.Values);
+        _ = await Assert.That(results).IsEquivalentTo(source.Values);
     }
 
-    [Fact]
-    public void GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
+    [Test]
+    public async Task GivenAListWhenSomeValuesAreNotPresentThenResultsForMatchingKeysAreReturned()
     {
         // Arrange
         var items = new List<int> { 1, 2, 3 };
-        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString());
+        IDictionary<int, string> source = items.ToDictionary(item => item, item => item.ToString(CultureInfo.InvariantCulture));
 
         _ = items.Remove(2);
         items.Add(4);
@@ -71,6 +34,45 @@ public sealed class WhenAggregateIsCalled
         IEnumerable<string> results = items.Aggregate(source);
 
         // Assert
-        results.ShouldBe(expected);
+        _ = await Assert.That(results).IsEquivalentTo(expected);
+    }
+
+    [Test]
+    public async Task GivenAnNullListAndANullSourceThenAnEmptyListOfResultsIsReturned()
+    {
+        // Arrange
+        IEnumerable<int>? items = default;
+
+        // Act
+        IEnumerable<string> results = items.Aggregate<int, string>(default);
+
+        // Assert
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenAnNullListThenAnEmptyListOfResultsIsReturned()
+    {
+        // Arrange
+        IEnumerable<int>? items = default;
+
+        // Act
+        IEnumerable<string> results = items.Aggregate(new Dictionary<int, string>());
+
+        // Assert
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
+    public async Task GivenAnNullSourceThenAnEmptyListOfResultsIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> items = [1, 2, 3];
+
+        // Act
+        IEnumerable<string> results = items.Aggregate<int, string>(default);
+
+        // Assert
+        _ = await Assert.That(results).IsEmpty();
     }
 }

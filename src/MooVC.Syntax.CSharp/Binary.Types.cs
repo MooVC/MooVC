@@ -1,0 +1,163 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Diagnostics;
+    using Fluentify;
+    using Monify;
+
+    /// <summary>
+    /// Represents a binary operator declaration model.
+    /// </summary>
+    public partial class Binary
+    {
+        /// <summary>
+        /// Represents an operator token category used by operator declarations.
+        /// </summary>
+        [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+        [Monify(Type = typeof(string))]
+        [SkipAutoInitialization]
+        public sealed partial class Types
+        {
+            /// <summary>
+            /// Represents the add for the Type.
+            /// </summary>
+            public static readonly Types Add = "+";
+
+            /// <summary>
+            /// Represents the and for the Type.
+            /// </summary>
+            public static readonly Types And = "&";
+
+            /// <summary>
+            /// Represents the divide for the Type.
+            /// </summary>
+            public static readonly Types Divide = "/";
+
+            /// <summary>
+            /// Represents the left for the Type.
+            /// </summary>
+            public static readonly Types Left = "<<";
+
+            /// <summary>
+            /// Represents the modulus for the Type.
+            /// </summary>
+            public static readonly Types Modulus = "%";
+
+            /// <summary>
+            /// Represents the multiply for the Type.
+            /// </summary>
+            public static readonly Types Multiply = "*";
+
+            /// <summary>
+            /// Represents the or for the Type.
+            /// </summary>
+            public static readonly Types Or = "|";
+
+            /// <summary>
+            /// Represents the right for the Type.
+            /// </summary>
+            public static readonly Types Right = ">>";
+
+            /// <summary>
+            /// Represents the subtract for the Type.
+            /// </summary>
+            public static readonly Types Subtract = "-";
+
+            /// <summary>
+            /// Gets the unspecified instance.
+            /// </summary>
+            public static readonly Types Unspecified = string.Empty;
+
+            /// <summary>
+            /// Represents the xor for the Type.
+            /// </summary>
+            public static readonly Types XOR = "^";
+
+            private Types(string value)
+            {
+                _value = value;
+            }
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is add.
+            /// </summary>
+            /// <value>A value indicating whether the Type is add.</value>
+            public bool IsAdd => this == Add;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is and.
+            /// </summary>
+            /// <value>A value indicating whether the Type is and.</value>
+            public bool IsAnd => this == And;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is divide.
+            /// </summary>
+            /// <value>A value indicating whether the Type is divide.</value>
+            public bool IsDivide => this == Divide;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is left.
+            /// </summary>
+            /// <value>A value indicating whether the Type is left.</value>
+            public bool IsLeft => this == Left;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is modulus.
+            /// </summary>
+            /// <value>A value indicating whether the Type is modulus.</value>
+            public bool IsModulus => this == Modulus;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is multiply.
+            /// </summary>
+            /// <value>A value indicating whether the Type is multiply.</value>
+            public bool IsMultiply => this == Multiply;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is or.
+            /// </summary>
+            /// <value>A value indicating whether the Type is or.</value>
+            public bool IsOr => this == Or;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is right.
+            /// </summary>
+            /// <value>A value indicating whether the Type is right.</value>
+            public bool IsRight => this == Right;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is subtract.
+            /// </summary>
+            /// <value>A value indicating whether the Type is subtract.</value>
+            public bool IsSubtract => this == Subtract;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is unspecified.
+            /// </summary>
+            /// <value>A value indicating whether the Type is unspecified.</value>
+            public bool IsUnspecified => this == Unspecified;
+
+            /// <summary>
+            /// Gets a value indicating whether the Type is xor.
+            /// </summary>
+            /// <value>A value indicating whether the Type is xor.</value>
+            public bool IsXOR => this == XOR;
+
+            private string GetDebuggerDisplay()
+            {
+                return $"{nameof(Types)} {{ " +
+                    $"{nameof(IsAdd)} = `{DebuggerDisplayFormatter.Format(IsAdd)}`, " +
+                    $"{nameof(IsAnd)} = `{DebuggerDisplayFormatter.Format(IsAnd)}`, " +
+                    $"{nameof(IsDivide)} = `{DebuggerDisplayFormatter.Format(IsDivide)}`, " +
+                    $"{nameof(IsLeft)} = `{DebuggerDisplayFormatter.Format(IsLeft)}`, " +
+                    $"{nameof(IsModulus)} = `{DebuggerDisplayFormatter.Format(IsModulus)}`, " +
+                    $"{nameof(IsMultiply)} = `{DebuggerDisplayFormatter.Format(IsMultiply)}`, " +
+                    $"{nameof(IsOr)} = `{DebuggerDisplayFormatter.Format(IsOr)}`, " +
+                    $"{nameof(IsRight)} = `{DebuggerDisplayFormatter.Format(IsRight)}`, " +
+                    $"{nameof(IsSubtract)} = `{DebuggerDisplayFormatter.Format(IsSubtract)}`, " +
+                    $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                    $"{nameof(IsXOR)} = `{DebuggerDisplayFormatter.Format(IsXOR)}` }}";
+            }
+        }
+    }
+}

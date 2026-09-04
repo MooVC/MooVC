@@ -2,8 +2,8 @@
 
 public sealed class WhenIsNullOrEmptyIsCalled
 {
-    [Fact]
-    public void GivenAnEmptySourceThenAPositiveResponseIsReturned()
+    [Test]
+    public async Task GivenAnEmptySourceThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int> source = [];
@@ -12,37 +12,11 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        isEmpty.ShouldBeTrue();
+        _ = await Assert.That(isEmpty).IsTrue();
     }
 
-    [Fact]
-    public void GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
-    {
-        // Arrange
-        IEnumerable<int> source = new int[1];
-
-        // Act
-        bool isEmpty = source.IsNullOrEmpty();
-
-        // Assert
-        isEmpty.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
-    {
-        // Arrange
-        IEnumerable<int> source = new int[3];
-
-        // Act
-        bool isEmpty = source.IsNullOrEmpty();
-
-        // Assert
-        isEmpty.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void GivenANullSourceThenAPositiveResponseIsReturned()
+    [Test]
+    public async Task GivenANullSourceThenAPositiveResponseIsReturned()
     {
         // Arrange
         IEnumerable<int>? source = default;
@@ -51,6 +25,32 @@ public sealed class WhenIsNullOrEmptyIsCalled
         bool isEmpty = source.IsNullOrEmpty();
 
         // Assert
-        isEmpty.ShouldBeTrue();
+        _ = await Assert.That(isEmpty).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenAPopulatedSourceWithMultipleElementsThenANegativeResponseIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> source = new int[3];
+
+        // Act
+        bool isEmpty = source.IsNullOrEmpty();
+
+        // Assert
+        _ = await Assert.That(isEmpty).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenAPopulatedSourceWithSingleElementThenANegativeResponseIsReturned()
+    {
+        // Arrange
+        IEnumerable<int> source = new int[1];
+
+        // Act
+        bool isEmpty = source.IsNullOrEmpty();
+
+        // Assert
+        _ = await Assert.That(isEmpty).IsFalse();
     }
 }

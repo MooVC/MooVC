@@ -1,34 +1,42 @@
-﻿namespace MooVC;
-
-/// <summary>
-/// Provides extensions relating to <see cref="Array" />.
-/// </summary>
-public static partial class ArrayExtensions
+namespace MooVC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Extends an array by appending the elements of another array.
+    /// Provides extensions relating to <see cref="Array" />.
     /// </summary>
-    /// <typeparam name="T">The type of the elements in the arrays.</typeparam>
-    /// <param name="source">The array to extend.</param>
-    /// <param name="others">The array containing the elements to append to the source array.</param>
-    /// <returns>An array containing the original elements of the source array, with the elements of the other array appended at the end.</returns>
-    public static T[] Append<T>(this T[]? source, params T[]? others)
+    public static partial class ArrayExtensions
     {
-        if (source is null)
+        /// <summary>
+        /// Extends an array by appending the elements of another array.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the arrays.</typeparam>
+        /// <param name="source">The array to extend.</param>
+        /// <param name="others">The array containing the elements to append to the source array.</param>
+        /// <returns>An array containing the original elements of the source array, with the elements of the other array appended at the end.</returns>
+        public static T[] Append<T>(this T[] source, params T[] others)
         {
-            return others.ToCopyOrEmpty();
+            if (source is null)
+            {
+                return others.ToCopyOrEmpty();
+            }
+
+            if (others is null)
+            {
+                return source.ToCopyOrEmpty();
+            }
+
+            var destination = new T[source.Length + others.Length];
+
+            Array.Copy(source, 0, destination, 0, source.Length);
+            Array.Copy(others, 0, destination, source.Length, others.Length);
+
+            return destination;
         }
-
-        if (others is null)
-        {
-            return source.ToCopyOrEmpty();
-        }
-
-        var destination = new T[source.Length + others.Length];
-
-        Array.Copy(source, 0, destination, 0, source.Length);
-        Array.Copy(others, 0, destination, source.Length, others.Length);
-
-        return destination;
     }
 }

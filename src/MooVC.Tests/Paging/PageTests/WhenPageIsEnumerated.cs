@@ -3,8 +3,8 @@ namespace MooVC.Paging.PageTests;
 
 public sealed class WhenPageIsEnumerated
 {
-    [Fact]
-    public void GivenValuesThenTheEnumeratedValuesAreReturnedInOrder()
+    [Test]
+    public async Task GivenValuesThenTheEnumeratedValuesAreReturnedInOrder()
     {
         // Arrange
         int[] values = [1, 2, 3, 4, 5];
@@ -16,7 +16,7 @@ public sealed class WhenPageIsEnumerated
 
         foreach (int value in result)
         {
-            value.ShouldBe(values[index++]);
+            _ = await Assert.That(value).IsEqualTo(values[index++]);
         }
     }
 }

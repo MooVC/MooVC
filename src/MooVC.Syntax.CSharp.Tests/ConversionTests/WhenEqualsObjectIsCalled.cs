@@ -1,0 +1,31 @@
+﻿namespace MooVC.Syntax.CSharp.ConversionTests;
+
+public sealed class WhenEqualsObjectIsCalled
+{
+    [Test]
+    public async Task GivenConversionObjectThenReturnsResultOfConversionEquals()
+    {
+        // Arrange
+        Conversion subject = ConversionTestsData.Create();
+        object target = ConversionTestsData.Create();
+
+        // Act
+        bool result = subject.Equals(target);
+
+        // Assert
+        _ = await Assert.That(result).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenNonConversionObjectThenReturnsFalse()
+    {
+        // Arrange
+        Conversion subject = ConversionTestsData.Create();
+
+        // Act
+        bool result = subject.Equals(new object());
+
+        // Assert
+        _ = await Assert.That(result).IsFalse();
+    }
+}

@@ -1,101 +1,128 @@
-﻿#if NET6_0_OR_GREATER
-namespace MooVC.Paging.Serialization;
-
-using System.Collections;
-using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using MooVC.Linq;
-using static MooVC.Paging.Serialization.PageConverter_Resources;
-
-/// <summary>
-/// Provides serialization support for <see cref="Page{T}"/>.
-/// </summary>
-public sealed class PageConverter
-    : JsonConverter<object>
+#if NET6_0_OR_GREATER
+#nullable enable
+namespace MooVC.Paging.Serialization
 {
-    private const string DirectiveKey = nameof(Page<object>.Directive);
-    private const string TotalKey = nameof(Page<object>.Total);
-    private const string ValuesKey = "$values";
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using MooVC.Linq;
+    using static MooVC.Paging.Serialization.PageConverter_Resources;
 
-    /// <inheritdoc/>
-    public override bool CanConvert(Type typeToConvert)
+    /// <summary>
+    /// Provides serialization support for <see cref="Page{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// This converter serializes page items under the <c>$values</c> property and emits <see cref="Page{T}.Total" /> only when available.
+    /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    public sealed class PageConverter
+        : JsonConverter<object>
     {
-        return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Page<>);
-    }
+        private const string DirectiveKey = nameof(Page<object>.Directive);
+        private const string TotalKey = nameof(Page<object>.Total);
+        private const string ValuesKey = "$values";
 
-    /// <inheritdoc/>
-    public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        ulong? total = default;
-        Directive directive = default;
-        object? values = default;
-        Type type = typeToConvert.GetGenericArguments()[0];
-
-        while (reader.Read())
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Only closed generic instances of <see cref="Page{T}" /> are supported.
+        /// </remarks>
+        public override bool CanConvert(Type typeToConvert)
         {
-            if (reader.TokenType == JsonTokenType.EndObject)
-            {
-                break;
-            }
+            return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Page<>);
+        }
 
-            if (reader.TokenType == JsonTokenType.PropertyName)
-            {
-                string? name = reader.GetString();
-                _ = reader.Read();
+        /// <inheritdoc/>
+        /// <exception cref="JsonException">
+        /// The payload does not contain a valid serialized page representation.
+        /// </exception>
+        public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            ulong? total = default;
+            Directive directive = default;
+            object? values = default;
+            Type type = typeToConvert.GetGenericArguments()[0];
 
-                switch (name)
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndObject)
                 {
-                    case DirectiveKey:
-                        directive = JsonSerializer.Deserialize<Directive>(ref reader, options);
-                        break;
+                    break;
+                }
 
-                    case TotalKey:
-                        total = reader.GetUInt64();
-                        break;
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                    string? name = reader.GetString();
+                    _ = reader.Read();
 
-                    case ValuesKey:
-                        values = JsonSerializer.Deserialize(ref reader, type.MakeArrayType(), options)!;
-                        break;
+                    switch (name)
+                    {
+                        case DirectiveKey:
+                            directive = JsonSerializer.Deserialize<Directive>(ref reader, options);
+                            break;
+
+                        case TotalKey:
+                            total = reader.GetUInt64();
+                            break;
+
+                        case ValuesKey:
+                            values = JsonSerializer.Deserialize(ref reader, type.MakeArrayType(), options)!;
+                            break;
+                    }
                 }
             }
+
+            return Activator.CreateInstance(typeToConvert, directive, values, total)!;
         }
 
-        return Activator.CreateInstance(typeToConvert, directive, values, total)!;
-    }
-
-    /// <inheritdoc/>
-    public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
-    {
-        Type type = value.GetType();
-        Directive directive = GetValue<Directive>(DirectiveKey, type, value);
-        ulong? total = GetValue<ulong?>(TotalKey, type, value);
-        IEnumerator enumerator = ((IEnumerable)value).GetEnumerator();
-        object[] values = enumerator.ToArray();
-
-        writer.WriteStartObject();
-
-        writer.WritePropertyName(DirectiveKey);
-        JsonSerializer.Serialize(writer, directive, options);
-
-        if (total.HasValue)
+        /// <inheritdoc/>
+        /// <exception cref="JsonException">
+        /// A required property cannot be retrieved from the page instance.
+        /// </exception>
+        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
-            writer.WritePropertyName(TotalKey);
-            writer.WriteNumberValue(total.Value);
+            Type type = value.GetType();
+            Directive directive = GetValue<Directive>(DirectiveKey, type, value);
+            ulong? total = GetValue<ulong?>(TotalKey, type, value);
+            IEnumerator enumerator = ((IEnumerable)value).GetEnumerator();
+            object[] values = enumerator.ToArray();
+
+            writer.WriteStartObject();
+
+            writer.WritePropertyName(DirectiveKey);
+            JsonSerializer.Serialize(writer, directive, options);
+
+            if (total.HasValue)
+            {
+                writer.WritePropertyName(TotalKey);
+                writer.WriteNumberValue(total.Value);
+            }
+
+            writer.WritePropertyName(ValuesKey);
+            JsonSerializer.Serialize(writer, values, options);
+
+            writer.WriteEndObject();
         }
 
-        writer.WritePropertyName(ValuesKey);
-        JsonSerializer.Serialize(writer, values, options);
+        private static T GetValue<T>(string key, Type type, object value)
+        {
+            PropertyInfo? property = type.GetProperty(key)
+                ?? throw new JsonException(GetValueFailure.Format(key, type));
 
-        writer.WriteEndObject();
-    }
+            return (T)property.GetValue(value)!;
+        }
 
-    private static T GetValue<T>(string key, Type type, object value)
-    {
-        PropertyInfo? property = type.GetProperty(key)
-            ?? throw new JsonException(GetValueFailure.Format(key, type));
-
-        return (T)property.GetValue(value)!;
+        private string GetDebuggerDisplay()
+        {
+            return $"{nameof(PageConverter)} {{ {GetHashCode()} }}";
+        }
     }
 }
 #endif

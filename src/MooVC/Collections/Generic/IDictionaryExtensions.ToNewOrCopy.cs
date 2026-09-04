@@ -1,30 +1,36 @@
-﻿namespace MooVC.Collections.Generic;
-
-using System.Runtime.CompilerServices;
-
-/// <summary>
-/// Provides extensions relating to <see cref="IDictionary{TKey, TValue}" />.
-/// </summary>
-/// <typeparam name="TKey">Specifies the type of keys in the dictionary.</typeparam>
-/// <typeparam name="TValue">Specifies the type of values in the dictionary.</typeparam>
-public static partial class IDictionaryExtensions
+namespace MooVC.Collections.Generic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Populates a new dictionary instance with the contents of the <paramref name="source" /> dictionary.
+    /// Provides extensions relating to <see cref="IDictionary{TKey, TValue}" />.
     /// </summary>
     /// <typeparam name="TKey">Specifies the type of keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">Specifies the type of values in the dictionary.</typeparam>
-    /// <param name="source">The dictionary from which the contents are to be copied.</param>
-    /// <returns>A new dictionary instance that contains the contents of the <paramref name="source" /> dictionary.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IDictionary<TKey, TValue> ToNewOrCopy<TKey, TValue>(this IDictionary<TKey, TValue>? source)
-        where TKey : notnull
+    public static partial class IDictionaryExtensions
     {
-        if (source is null)
+        /// <summary>
+        /// Populates a new dictionary instance with the contents of the <paramref name="source" /> dictionary.
+        /// </summary>
+        /// <typeparam name="TKey">Specifies the type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">Specifies the type of values in the dictionary.</typeparam>
+        /// <param name="source">The dictionary from which the contents are to be copied.</param>
+        /// <returns>A new dictionary instance that contains the contents of the <paramref name="source" /> dictionary.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IDictionary<TKey, TValue> ToNewOrCopy<TKey, TValue>(this IDictionary<TKey, TValue> source)
         {
-            return new Dictionary<TKey, TValue>();
-        }
+            if (source is null)
+            {
+                return new Dictionary<TKey, TValue>();
+            }
 
-        return new Dictionary<TKey, TValue>(source);
+            return new Dictionary<TKey, TValue>(source);
+        }
     }
 }

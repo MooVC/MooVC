@@ -1,0 +1,21 @@
+﻿namespace MooVC.Syntax.CSharp.BinaryTests;
+
+public sealed class WhenWithScopeIsCalled
+{
+    [Test]
+    public async Task GivenScopeThenReturnsNewInstanceWithUpdatedScope()
+    {
+        // Arrange
+        Binary original = BinaryTestsData.Create();
+        Scopes replacement = Scopes.Internal;
+
+        // Act
+        Binary result = original.WithScope(replacement);
+
+        // Assert
+        _ = await Assert.That(result).IsNotStrictlyEqualTo(original);
+        _ = await Assert.That(result.Body).IsEqualTo(original.Body);
+        _ = await Assert.That(result.Operator).IsEqualTo(original.Operator);
+        _ = await Assert.That(result.Scope).IsEqualTo(replacement);
+    }
+}

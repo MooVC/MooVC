@@ -3,21 +3,8 @@ namespace MooVC.Paging.DirectiveTests;
 
 public sealed class WhenIsAllIsCalled
 {
-    [Fact]
-    public void GivenTheAllDirectiveThenAPositiveResponseIsReturned()
-    {
-        // Arrange
-        Directive directive = Directive.All;
-
-        // Act
-        bool isAll = directive.IsAll;
-
-        // Assert
-        isAll.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void GivenADefaultDirectiveThenAPositiveResponseIsReturned()
+    [Test]
+    public async Task GivenADefaultDirectiveThenAPositiveResponseIsReturned()
     {
         // Arrange
         Directive directive = default;
@@ -26,24 +13,11 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeTrue();
+        _ = await Assert.That(isAll).IsTrue();
     }
 
-    [Fact]
-    public void GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
-    {
-        // Arrange
-        Directive directive = new(Limit: Directive.MinimumLimit, Page: Directive.FirstPage);
-
-        // Act
-        bool isAll = directive.IsAll;
-
-        // Assert
-        isAll.ShouldBeTrue();
-    }
-
-    [Fact]
-    public void GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
+    [Test]
+    public async Task GivenADirectiveInstanceThatDoesNotUseAllSettingsThenANegativeResponseIsReturned()
     {
         // Arrange
         Directive directive = new(Limit: 5, Page: 2);
@@ -52,7 +26,33 @@ public sealed class WhenIsAllIsCalled
         bool isAll = directive.IsAll;
 
         // Assert
-        isAll.ShouldBeFalse();
+        _ = await Assert.That(isAll).IsFalse();
+    }
+
+    [Test]
+    public async Task GivenADirectiveThatIsConfiguredForAllThenAPositiveResponseIsReturned()
+    {
+        // Arrange
+        Directive directive = new(Limit: Directive.MinimumLimit, Page: Directive.FirstPage);
+
+        // Act
+        bool isAll = directive.IsAll;
+
+        // Assert
+        _ = await Assert.That(isAll).IsTrue();
+    }
+
+    [Test]
+    public async Task GivenTheAllDirectiveThenAPositiveResponseIsReturned()
+    {
+        // Arrange
+        Directive directive = Directive.All;
+
+        // Act
+        bool isAll = directive.IsAll;
+
+        // Assert
+        _ = await Assert.That(isAll).IsTrue();
     }
 }
 #endif

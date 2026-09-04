@@ -1,0 +1,60 @@
+﻿namespace MooVC.Syntax.QualifierExtensionsTests;
+
+using System;
+using System.Collections.Immutable;
+
+public sealed class WhenToSnippetIsCalled
+{
+    private const string FirstQualifier = "MooVC.Sandbox";
+    private const string SecondQualifier = "MooVC.Core";
+
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async Task GivenEmptyArrayThenEmptySnippetReturned(bool isDefault)
+    {
+        // Arrange
+        ImmutableArray<Qualifier> qualifiers = isDefault
+            ? default
+            : [];
+
+        // Act
+        var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        _ = await Assert.That(snippet).IsEqualTo(Snippet.Empty);
+    }
+
+    [Test]
+    public async Task GivenNullOptionsThenAnExceptionIsThrown()
+    {
+        // Arrange
+        ImmutableArray<Qualifier> qualifiers = [FirstQualifier];
+        Snippet.Options? options = default;
+
+        // Act
+        Func<Snippet> act = () => _ = qualifiers.ToSnippet(options!);
+
+        // Assert
+        ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
+        _ = await Assert.That(exception.ParamName).IsEqualTo(nameof(options));
+    }
+
+    [Test]
+    public async Task GivenValuesThenTheyAreOrderedAlphabetically()
+    {
+        // Arrange
+        ImmutableArray<Qualifier> qualifiers = [FirstQualifier, SecondQualifier];
+
+        const string expected = """
+            MooVC.Core
+            MooVC.Sandbox
+            """;
+
+        // Act
+        var snippet = qualifiers.ToSnippet(Snippet.Options.Default);
+
+        // Assert
+        _ = await Assert.That(snippet.ToString()).IsEqualTo(expected);
+    }
+}

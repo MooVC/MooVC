@@ -1,0 +1,35 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Collections.Immutable;
+    using System.Linq;
+
+    /// <summary>
+    /// Provides snippet conversion helpers for <see cref="Field"/> values.
+    /// </summary>
+    public static partial class FieldExtensions
+    {
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="fields">The fields.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        internal static Snippet ToSnippet(this ImmutableArray<Field> fields, Type.Options options)
+        {
+            if (fields.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            Snippet[] content = fields
+                .OrderByDescending(field => field.IsStatic)
+                .ThenByDescending(field => field.IsReadOnly)
+                .ThenByDescending(field => field.Scope)
+                .ThenBy(field => field.Name)
+                .Select(field => field.ToSnippet(options))
+                .ToArray();
+
+            return Snippet.Blank.Combine(options, content);
+        }
+    }
+}

@@ -1,51 +1,58 @@
-﻿namespace MooVC.Linq;
-
-using System.Collections;
-using System.Runtime.CompilerServices;
-using Ardalis.GuardClauses;
-using static MooVC.Linq.IEnumeratorExtensions_Resources;
-
-/// <summary>
-/// Provides extensions relating to <see cref="IEnumerator" />.
-/// </summary>
-public static partial class IEnumeratorExtensions
+namespace MooVC.Linq
 {
-    /// <summary>
-    /// Enumerates an instance of <paramref name="enumerator"/> to return an array with its contents.
-    /// </summary>
-    /// <param name="enumerator">The <see cref="IEnumerator"/> to enumerate.</param>
-    /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static object[] ToArray(this IEnumerator enumerator)
-    {
-        return enumerator.PerformToArray(enumerator => enumerator.Current);
-    }
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Ardalis.GuardClauses;
+    using static MooVC.Linq.IEnumeratorExtensions_Resources;
 
     /// <summary>
-    /// Enumerates an instance of <paramref name="enumerator"/> to return an array with its contents.
+    /// Provides extensions relating to <see cref="IEnumerator" />.
     /// </summary>
-    /// <param name="enumerator">The <see cref="IEnumerator{T}"/> to enumerate.</param>
-    /// <typeparam name="T">The type of the elements contained within the <paramref name="enumerator"/>.</typeparam>
-    /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T[] ToArray<T>(this IEnumerator<T> enumerator)
+    public static partial class IEnumeratorExtensions
     {
-        return enumerator.PerformToArray(enumerator => enumerator.Current);
-    }
-
-    private static T[] PerformToArray<T, TEnumerator>(this TEnumerator enumerator, Func<TEnumerator, T> selector)
-        where TEnumerator : IEnumerator
-    {
-        _ = Guard.Against.Null(enumerator, message: PerformToArrayEnumeratorRequired);
-        var list = new List<T>();
-
-        while (enumerator.MoveNext())
+        /// <summary>
+        /// Enumerates an instance of <paramref name="enumerator"/> to return an array with its contents.
+        /// </summary>
+        /// <param name="enumerator">The <see cref="IEnumerator"/> to enumerate.</param>
+        /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static object[] ToArray(this IEnumerator enumerator)
         {
-            T current = selector(enumerator);
-
-            list.Add(current);
+            return enumerator.PerformToArray(source => source.Current);
         }
 
-        return [.. list];
+        /// <summary>
+        /// Enumerates an instance of <paramref name="enumerator"/> to return an array with its contents.
+        /// </summary>
+        /// <param name="enumerator">The <see cref="IEnumerator{T}"/> to enumerate.</param>
+        /// <typeparam name="T">The type of the elements contained within the <paramref name="enumerator"/>.</typeparam>
+        /// <returns>An array of elements contained within the <paramref name="enumerator"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T[] ToArray<T>(this IEnumerator<T> enumerator)
+        {
+            return enumerator.PerformToArray(source => source.Current);
+        }
+
+        private static T[] PerformToArray<T, TEnumerator>(this TEnumerator enumerator, Func<TEnumerator, T> selector)
+            where TEnumerator : IEnumerator
+        {
+            _ = Guard.Against.Null(enumerator, message: PerformToArrayEnumeratorRequired);
+            var list = new List<T>();
+
+            while (enumerator.MoveNext())
+            {
+                T current = selector(enumerator);
+
+                list.Add(current);
+            }
+
+            return list.ToArray();
+        }
     }
 }

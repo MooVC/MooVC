@@ -4,18 +4,18 @@ using global::MessagePack;
 
 public sealed class WhenSerializerIsConstructed
 {
-    [Fact]
-    public void GivenNoOptionsConfigurationThenADefaultSerializerIsCreated()
+    [Test]
+    public async Task GivenNoOptionsConfigurationThenADefaultSerializerIsCreated()
     {
         // Arrange & Act
         var serializer = new Serializer();
 
         // Assert
-        serializer.Options.ShouldBeEquivalentTo(MessagePackSerializerOptions.Standard);
+        _ = await Assert.That(serializer.Options).IsEquivalentTo(MessagePackSerializerOptions.Standard);
     }
 
-    [Fact]
-    public void GivenOptionsThenASerializerIsCreatedWithTheOptionsApplied()
+    [Test]
+    public async Task GivenOptionsThenASerializerIsCreatedWithTheOptionsApplied()
     {
         // Arrange & Act
         MessagePackSerializerOptions options = MessagePackSerializerOptions
@@ -26,6 +26,6 @@ public sealed class WhenSerializerIsConstructed
         var serializer = new Serializer(options: options);
 
         // Assert
-        serializer.Options.ShouldBeEquivalentTo(serializer.Options);
+        _ = await Assert.That(serializer.Options).IsEquivalentTo(serializer.Options);
     }
 }

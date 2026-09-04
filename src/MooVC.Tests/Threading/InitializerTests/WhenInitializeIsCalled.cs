@@ -2,7 +2,7 @@
 
 public sealed class WhenInitializeIsCalled
 {
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerThenTheInitializerIsOnlyCalledOnceAndTheInstanceIsAlwaysTheSame()
     {
         // Arrange
@@ -24,14 +24,14 @@ public sealed class WhenInitializeIsCalled
         object? third = await initializer.Initialize(CancellationToken.None);
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
-        first.ShouldNotBeNull();
-        first.ShouldBe(second);
-        first.ShouldBe(third);
-        second.ShouldBe(third);
+        _ = await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
+        _ = await Assert.That(first).IsNotNull();
+        _ = await Assert.That(first).IsEqualTo(second);
+        _ = await Assert.That(first).IsEqualTo(third);
+        _ = await Assert.That(second).IsEqualTo(third);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnce()
     {
         // Arrange
@@ -53,10 +53,10 @@ public sealed class WhenInitializeIsCalled
         await act();
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
+        _ = await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenAnInitializerWithDelayThenTheInitializerIsStillCalledOnlyOnce()
     {
         // Arrange
@@ -80,7 +80,7 @@ public sealed class WhenInitializeIsCalled
         _ = await Task.WhenAll(tasks);
 
         // Assert
-        invocations.ShouldBe(ExpectedInvocations);
+        _ = await Assert.That(invocations).IsEqualTo(ExpectedInvocations);
     }
 
     private static async Task GivenAnInitializerWhenContinueOnCapturedContextIsFalseThenTheInitializerIsOnlyCalledOnceActionAsync(

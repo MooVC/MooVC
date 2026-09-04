@@ -5,7 +5,7 @@
     "add": {
       "pathSegment": {
         "add": {
-          ".*": [ ".cs" ]
+          ".*": [ ".cs" ],
         }
       },
       "fileSuffixToExtension": {

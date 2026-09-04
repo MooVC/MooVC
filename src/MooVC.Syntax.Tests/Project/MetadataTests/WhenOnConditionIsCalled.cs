@@ -1,0 +1,23 @@
+﻿namespace MooVC.Syntax.Project.MetadataTests;
+
+public sealed class WhenOnConditionIsCalled
+{
+    private const string UpdatedCondition = "UpdatedCondition";
+
+    [Test]
+    public async Task GivenConditionThenReturnsUpdatedInstance()
+    {
+        // Arrange
+        Metadata original = MetadataTestsData.Create();
+        var updated = Snippet.From(UpdatedCondition);
+
+        // Act
+        Metadata result = original.OnCondition(updated);
+
+        // Assert
+        _ = await Assert.That(result).IsNotSameReferenceAs(original);
+        _ = await Assert.That(result.Condition).IsEqualTo(updated);
+        _ = await Assert.That(result.Name).IsEqualTo(original.Name);
+        _ = await Assert.That(result.Value).IsEqualTo(original.Value);
+    }
+}

@@ -1,0 +1,33 @@
+namespace MooVC.Syntax.CSharp
+{
+    using System.Collections.Immutable;
+    using System.Linq;
+
+    /// <summary>
+    /// Provides snippet conversion helpers for <see cref="Event"/> values.
+    /// </summary>
+    public static partial class EventExtensions
+    {
+        /// <summary>
+        /// Creates a snippet representation of the C# member syntax.
+        /// </summary>
+        /// <param name="events">The events.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet.</returns>
+        internal static Snippet ToSnippet(this ImmutableArray<Event> events, Event.Options options)
+        {
+            if (events.IsDefaultOrEmpty)
+            {
+                return Snippet.Empty;
+            }
+
+            Snippet[] content = events
+                .OrderByDescending(@event => @event.Scope)
+                .ThenBy(@event => @event.Name)
+                .Select(@event => @event.ToSnippet(options))
+                .ToArray();
+
+            return Snippet.Blank.Combine(options.Snippets, content);
+        }
+    }
+}

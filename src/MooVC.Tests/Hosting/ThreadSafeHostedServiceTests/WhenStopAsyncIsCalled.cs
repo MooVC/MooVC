@@ -14,31 +14,7 @@ public sealed class WhenStopAsyncIsCalled
         _host = new ThreadSafeHostedService(Substitute.For<ILogger<ThreadSafeHostedService>>(), [_service]);
     }
 
-    [Fact]
-    public async Task GivenAStartedHostThenTheServiceStops()
-    {
-        // Arrange
-        await _host.StartAsync(CancellationToken.None);
-
-        // Act
-        await _host.StopAsync(CancellationToken.None);
-
-        // Assert
-        await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
-        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
-    }
-
-    [Fact]
-    public async Task GivenAStoppedHostThenTheServiceIsNotStopped()
-    {
-        // Act
-        await _host.StopAsync(CancellationToken.None);
-
-        // Assert
-        await _service.DidNotReceive().StopAsync(Arg.Any<CancellationToken>());
-    }
-
-    [Fact]
+    [Test]
     public async Task GivenARestartThenTheServiceIsStoppedTheSecondTime()
     {
         // Arrange
@@ -54,7 +30,31 @@ public sealed class WhenStopAsyncIsCalled
         await _service.Received(2).StopAsync(Arg.Any<CancellationToken>());
     }
 
-    [Fact]
+    [Test]
+    public async Task GivenAStartedHostThenTheServiceStops()
+    {
+        // Arrange
+        await _host.StartAsync(CancellationToken.None);
+
+        // Act
+        await _host.StopAsync(CancellationToken.None);
+
+        // Assert
+        await _service.Received(1).StartAsync(Arg.Any<CancellationToken>());
+        await _service.Received(1).StopAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Test]
+    public async Task GivenAStoppedHostThenTheServiceIsNotStopped()
+    {
+        // Act
+        await _host.StopAsync(CancellationToken.None);
+
+        // Assert
+        await _service.DidNotReceive().StopAsync(Arg.Any<CancellationToken>());
+    }
+
+    [Test]
     public async Task GivenMultipleStartsAndStopsThenServiceIsStartedAndStoppedCorrectNumberOfTimes()
     {
         // Arrange

@@ -1,0 +1,34 @@
+﻿namespace MooVC.Syntax.CSharp.SymbolTests;
+
+using System.Text;
+using Type = System.Type;
+
+public sealed class WhenImplicitOperatorFromTypeIsCalled
+{
+    [Test]
+    public async Task GivenNullThenThrows()
+    {
+        // Arrange
+        Type? value = default;
+
+        // Act
+        Func<Symbol> result = () => value!;
+
+        // Assert
+        _ = await Assert.That(result).Throws<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task GivenTypeThenSymbolUsesNameAndQualifier()
+    {
+        // Arrange
+        Type value = typeof(StringBuilder);
+        Qualification expected = value;
+
+        // Act
+        Symbol subject = value;
+
+        // Assert
+        _ = await Assert.That(subject.Name).IsEqualTo(expected);
+    }
+}
