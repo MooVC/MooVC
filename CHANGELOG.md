@@ -4,26 +4,17 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# [9.3.0] - TBC
+# [9.3.0] - 2026-09-04
 
 ## Added
 
 - A CSharp Syntax generator based on the [Fluent Builder](https://github.com/MooVC/Fluentify) pattern.
 - A `ForkOn` extension method that allows for branching logic based on a predicate evaluation within a LINQ call chain.
-- Extended MooVC.Modelling test coverage to include the file system abstraction and additional registration/options behaviors.
 
 ## Changed
 
 - Improved NuGet package metadata for MooVC.Modelling to enhance visibility on nuget.org.
 - Normalized `ZipWriter` archive entry paths to forward slashes for cross-platform consistency.
-
-## Fixed
-
-- Included implemented interfaces when rendering C# class and record declarations.
-
-## Removed
-
-- Manual self-comparison contracts and relational operators from Monify-backed syntax value wrappers (**Breaking Change**).
 
 # [9.2.0] - 2025-11-14
 
