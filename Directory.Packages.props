@@ -33,7 +33,7 @@
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.Collections.Immutable" Version="10.0.11" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageVersion Include="TUnit" Version="1.66.0" />
+    <PackageVersion Include="TUnit" Version="1.66.27" />
     <PackageVersion Include="Valuify" Version="1.9.0" />
   </ItemGroup>
 </Project>
