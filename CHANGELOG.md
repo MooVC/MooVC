@@ -4,6 +4,12 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [9.3.4] - 2026-09-22
+
+## Fixed
+
+- C# snippet chaining preserves commas within generic type arguments when splitting parameter and argument lists across lines.
+
 # [9.3.3] - 2026-09-18
 
 ## Fixed

@@ -62,6 +62,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Options.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Options.Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Qualification.Resources.Designer.cs">
       <DependentUpon>Qualification.Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -221,6 +226,10 @@
     <EmbeddedResource Update="Moniker.Resources.resx">
       <LastGenOutput>Moniker.Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Options.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Qualification.Resources.resx">
       <LastGenOutput>Qualification.Resources.Designer.cs</LastGenOutput>

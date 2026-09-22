@@ -88,6 +88,27 @@ namespace MooVC.Syntax.CSharp.Chaining
             return string.Concat(leading, options.Whitespace);
         }
 
+        private static bool IsGenericArgumentCharacter(char character)
+        {
+            switch (character)
+            {
+                case '_':
+                case '@':
+                case '.':
+                case ':':
+                case ',':
+                case '?':
+                case '[':
+                case ']':
+                case '(':
+                case ')':
+                case '*':
+                    return true;
+                default:
+                    return char.IsLetterOrDigit(character) || char.IsWhiteSpace(character);
+            }
+        }
+
         private static bool IsUnchainable(string line, Snippet.Options options)
         {
             return string.IsNullOrWhiteSpace(line) || line.Length < options.MaxLineLength;
@@ -97,11 +118,17 @@ namespace MooVC.Syntax.CSharp.Chaining
         {
             var lines = new List<string>();
             int depth = 0;
+            int genericClosing = -1;
             int start = 0;
 
             for (int index = 0; index < content.Length; index++)
             {
                 char character = content[index];
+
+                if (index <= genericClosing || (character == '<' && TryGetGenericClosing(content, index, out genericClosing)))
+                {
+                    continue;
+                }
 
                 UpdateDepthCounter(character, ref depth);
 
@@ -129,6 +156,45 @@ namespace MooVC.Syntax.CSharp.Chaining
         private static bool ShouldSplitArgument(char character, int depth)
         {
             return character == ',' && depth == 0;
+        }
+
+        private static bool TryGetGenericClosing(string content, int opening, out int closing)
+        {
+            closing = -1;
+
+            if (opening == 0 || (!char.IsLetterOrDigit(content[opening - 1]) && content[opening - 1] != '_'))
+            {
+                return false;
+            }
+
+            int depth = 0;
+
+            for (int index = opening; index < content.Length; index++)
+            {
+                char character = content[index];
+
+                if (character == '<')
+                {
+                    depth++;
+                }
+                else if (character == '>')
+                {
+                    depth--;
+
+                    if (depth == 0)
+                    {
+                        closing = index;
+
+                        return true;
+                    }
+                }
+                else if (!IsGenericArgumentCharacter(character))
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         private static bool TryGetParenthesisRange(string line, out int opening, out int closing)
