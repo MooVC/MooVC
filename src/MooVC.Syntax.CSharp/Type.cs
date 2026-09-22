@@ -181,8 +181,15 @@ namespace MooVC.Syntax.CSharp
                 return Array.Empty<ValidationResult>();
             }
 
+            IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
+
+            if (Types.OfType<Class>().Any(type => !type.Extensions.IsDefaultOrEmpty))
+            {
+                results = results.Append(new ValidationResult(Extension_Resources.ValidateContainerInvalid, new[] { nameof(Types) }));
+            }
+
             return validationContext
-                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, Attributes)
+                .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
                 .AndIf(!Events.IsDefaultOrEmpty, nameof(Events), @event => !@event.IsUndefind, Events)
                 .AndIf(!Indexers.IsDefaultOrEmpty, nameof(Indexers), indexer => !indexer.IsUndefined, Indexers)
                 .AndIf(!Interfaces.IsDefaultOrEmpty, nameof(Interfaces), @interface => !@interface.IsUndefined, Interfaces)

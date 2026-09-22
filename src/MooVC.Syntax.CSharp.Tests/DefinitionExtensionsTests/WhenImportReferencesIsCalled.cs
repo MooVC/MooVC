@@ -8,6 +8,43 @@ public sealed class WhenImportReferencesIsCalled
     private const string RulesNamespace = "MooVC.Testing.Rules";
 
     [Test]
+    public async Task GivenExtensionBlockThenReceiverConstraintAndMethodReferencesAreImported()
+    {
+        // Arrange
+        var subject = new Definition
+        {
+            Namespace = DefaultNamespace,
+            Type = Type
+                .New<Class>()
+                .Named("SampleExtensions")
+                .IsStatic(true)
+                .WithExtensions(extension => extension
+                    .Extends(parameter => parameter
+                        .Named("Value")
+                        .OfType(CreateSymbol("Model", ModelNamespace)))
+                    .WithArguments(Generic.Undefined
+                        .Named("T")
+                        .WithConstraints(new Constraint
+                        {
+                            Base = new Base { Name = CreateQualification("Rule", RulesNamespace) },
+                        }))
+                    .WithMethods(method => method
+                        .Named("Perform")
+                        .Returns(Result.Void.OfType(CreateSymbol("Trace", DiagnosticsNamespace)))
+                        .WithBody("return default;"))),
+        };
+
+        // Act
+        Definition result = subject.ImportReferences();
+
+        // Assert
+        string representation = result.ToSnippet(Options.Default);
+        _ = await Assert.That(representation).Contains($"using {ModelNamespace};");
+        _ = await Assert.That(representation).Contains($"using {RulesNamespace};");
+        _ = await Assert.That(representation).Contains($"using {DiagnosticsNamespace};");
+    }
+
+    [Test]
     public async Task GivenComparisonSubjectThenReferenceIsImported()
     {
         // Arrange

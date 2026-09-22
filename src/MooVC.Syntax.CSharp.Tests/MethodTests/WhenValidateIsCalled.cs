@@ -6,6 +6,21 @@ using System.ComponentModel.DataAnnotations;
 public sealed class WhenValidateIsCalled
 {
     [Test]
+    public async Task GivenStaticMethodThenNoValidationErrorsReturned()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create().WithExtensibility(Modifiers.Static);
+        var results = new List<ValidationResult>();
+
+        // Act
+        bool valid = Validator.TryValidateObject(subject, new(subject), results, validateAllProperties: true);
+
+        // Assert
+        _ = await Assert.That(valid).IsTrue();
+        _ = await Assert.That(results).IsEmpty();
+    }
+
+    [Test]
     public async Task GivenInvalidParameterThenValidationErrorReturned()
     {
         // Arrange

@@ -201,6 +201,7 @@ namespace MooVC.Syntax.CSharp
                 Modifiers.Implicit,
                 Modifiers.Override,
                 Modifiers.Sealed + Modifiers.Override,
+                Modifiers.Static,
                 Modifiers.Virtual))
             {
                 results = results.Append(new ValidationResult(
