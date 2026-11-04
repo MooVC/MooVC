@@ -4,6 +4,7 @@ using System.Diagnostics;
 using global::Apex.Serialization;
 using MooVC.Compression;
 using MooVC.Serialization;
+using MooVC.Serialization.Configuration;
 using static global::Apex.Serialization.Binary;
 
 /// <summary>
@@ -13,10 +14,12 @@ using static global::Apex.Serialization.Binary;
 /// Wraps the Apex <see cref="IBinary" /> serializer and integrates with MooVC compression via <see cref="SynchronousSerializer" />.
 /// </remarks>
 [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-public sealed class Serializer
+public sealed partial class Serializer
     : SynchronousSerializer,
       IDisposable
 {
+    public static readonly Type Apex = "Apex";
+
     private readonly IBinary _binary;
     private bool _isDisposed;
 

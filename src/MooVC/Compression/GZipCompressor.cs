@@ -1,13 +1,10 @@
 namespace MooVC.Compression
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.IO.Compression;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using Type = MooVC.Compression.Configuration.Type;
 
     /// <summary>
     /// Represents a class that uses the GZip algorithm to compress and decompress streams.
@@ -16,9 +13,14 @@ namespace MooVC.Compression
     /// This implementation delegates stream wrapping to <see cref="GZipStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class GZipCompressor
+    public sealed partial class GZipCompressor
         : StreamCompressor
     {
+        /// <summary>
+        /// Gets the type representing the GZip compression algorithm.
+        /// </summary>
+        public static readonly Type GZip = "GZip";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GZipCompressor" /> class.
         /// </summary>
@@ -26,6 +28,15 @@ namespace MooVC.Compression
         /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
         public GZipCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
             : base(bufferSize: bufferSize, level: level)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GZipCompressor" /> class.
+        /// </summary>
+        /// <param name="options">The options for configuring the compressor.</param>
+        public GZipCompressor(Options options)
+            : base(options)
         {
         }
 

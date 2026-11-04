@@ -26,6 +26,6 @@ public sealed class WhenSerializerIsConstructed
         var serializer = new Serializer(options: options);
 
         // Assert
-        _ = await Assert.That(serializer.Options).IsEquivalentTo(serializer.Options);
+        _ = await Assert.That(ReferenceEquals(serializer.Options, options)).IsTrue();
     }
 }

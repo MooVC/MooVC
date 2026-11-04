@@ -1,14 +1,10 @@
 #if NET6_0_OR_GREATER
 namespace MooVC.Compression
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.IO.Compression;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using Type = MooVC.Compression.Configuration.Type;
 
     /// <summary>
     /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
@@ -17,9 +13,14 @@ namespace MooVC.Compression
     /// This implementation delegates stream wrapping to <see cref="BrotliStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class BrotliCompressor
+    public sealed partial class BrotliCompressor
         : StreamCompressor
     {
+        /// <summary>
+        /// Gets the type representing the Brotli compression algorithm.
+        /// </summary>
+        public static readonly Type Brotli = "Brotli";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BrotliCompressor" /> class.
         /// </summary>
@@ -27,6 +28,15 @@ namespace MooVC.Compression
         /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
         public BrotliCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
             : base(bufferSize: bufferSize, level: level)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrotliCompressor" /> class.
+        /// </summary>
+        /// <param name="options">The options for configuring the compressor.</param>
+        public BrotliCompressor(Options options)
+            : base(options)
         {
         }
 

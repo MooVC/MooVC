@@ -1,13 +1,9 @@
 namespace MooVC.Compression
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.IO.Compression;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using Type = MooVC.Compression.Configuration.Type;
 
     /// <summary>
     /// Represents a class that uses the Deflate algorithm to compress and decompress streams.
@@ -16,9 +12,14 @@ namespace MooVC.Compression
     /// This implementation delegates stream wrapping to <see cref="DeflateStream" /> and relies on <see cref="StreamCompressor" /> for orchestration.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class DeflateCompressor
+    public sealed partial class DeflateCompressor
         : StreamCompressor
     {
+        /// <summary>
+        /// Gets the type representing the Deflate compression algorithm.
+        /// </summary>
+        public static readonly Type Deflate = "Deflate";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeflateCompressor" /> class.
         /// </summary>
@@ -26,6 +27,15 @@ namespace MooVC.Compression
         /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
         public DeflateCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
             : base(bufferSize: bufferSize, level: level)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeflateCompressor" /> class.
+        /// </summary>
+        /// <param name="options">The options for configuring the compressor.</param>
+        public DeflateCompressor(Options options)
+            : base(options)
         {
         }
 

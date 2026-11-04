@@ -14,7 +14,7 @@ public sealed class WhenBytesAreCompressed
         var random = RandomNumberGenerator.Create();
         random.GetNonZeroBytes(expected);
 
-        var compressor = new BrotliCompressor(level: CompressionLevel.Fastest);
+        var compressor = new BrotliCompressor(new StreamCompressor.Options { Level = CompressionLevel.Fastest });
 
         // Act
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
@@ -35,7 +35,7 @@ public sealed class WhenBytesAreCompressed
         // Arrange
         byte[] expected = [];
 
-        var compressor = new BrotliCompressor(level: CompressionLevel.Fastest);
+        var compressor = new BrotliCompressor(new StreamCompressor.Options { Level = CompressionLevel.Fastest });
 
         // Act
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);

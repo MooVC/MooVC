@@ -1,19 +1,16 @@
 namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
     using global::Newtonsoft.Json;
     using MooVC.Compression;
     using MooVC.Serialization;
     using static System.String;
     using static MooVC.Infrastructure.Serialization.Json.Newtonsoft.Resources;
+    using Type = MooVC.Serialization.Configuration.Type;
 
     /// <summary>
     /// Provides JSON serialization using Newtonsoft.Json.
@@ -22,7 +19,7 @@ namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft
     /// Uses streaming readers/writers to avoid unnecessary intermediate buffers and supports optional compression via the base serializer abstraction.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class Serializer
+    public sealed partial class Serializer
         : SynchronousSerializer
     {
         /// <summary>
@@ -34,6 +31,11 @@ namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft
         /// Represents the minimum allowed write buffer size.
         /// </summary>
         public const int MinimumBufferSize = 8;
+
+        /// <summary>
+        /// Gets the type identifier for the Newtonsoft JSON serializer.
+        /// </summary>
+        public static readonly Type NewtonsoftJson = "Newtonsoft.Json";
 
         /// <summary>
         /// Gets the default text encoding used by the serializer.
@@ -79,7 +81,7 @@ namespace MooVC.Infrastructure.Serialization.Json.Newtonsoft
             using (var reader = new StreamReader(source))
             using (var text = new JsonTextReader(reader))
             {
-                var result = Json.Deserialize<T>(text);
+                T result = Json.Deserialize<T>(text);
 
                 if (ReferenceEquals(result, null))
                 {
