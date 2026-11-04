@@ -123,4 +123,7 @@
   <data name="LevelRequired" xml:space="preserve">
     <value>The compression level must be provided.</value>
   </data>
+  <data name="OptionsRequired" xml:space="preserve">
+    <value>The configuration options must be provided.</value>
+  </data>
 </root>

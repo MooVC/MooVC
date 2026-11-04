@@ -2,16 +2,15 @@
 #nullable enable
 namespace MooVC.Serialization.Json
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
+    using MooVC.Compression;
     using static MooVC.Serialization.Json.Serializer_Resources;
     using Base = MooVC.Serialization.Serializer;
+    using Type = MooVC.Serialization.Configuration.Type;
 
     /// <summary>
     /// Provides an implementation of type <see cref="ISerializer"/> that utilizes the <see cref="JsonSerializer"/>.
@@ -20,9 +19,14 @@ namespace MooVC.Serialization.Json
     /// Uses <see cref="JsonSerializerOptions.Default" /> on .NET 7+ and web defaults on earlier target frameworks when options are not provided.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class Serializer
+    public sealed partial class Serializer
         : Base
     {
+        /// <summary>
+        /// Gets the type identifier for the JSON serializer.
+        /// </summary>
+        public static readonly Type Json = "Json";
+
         private readonly JsonSerializerOptions _options;
 
         /// <summary>
@@ -30,12 +34,23 @@ namespace MooVC.Serialization.Json
         /// </summary>
         /// <param name="options">The serialization options to use with <see cref="JsonSerializer"/>.</param>
         public Serializer(JsonSerializerOptions? options = default)
+            : this(compressor: default, options: options)
         {
-#if NET7_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Constructs a new instance of <see cref="Serializer"/> with optional compression.
+        /// </summary>
+        /// <param name="compressor">The compressor to use when serializing and deserializing.</param>
+        /// <param name="options">The serialization options to use with <see cref="JsonSerializer"/>.</param>
+        public Serializer(ICompressor? compressor, JsonSerializerOptions? options)
+            : base(compressor: compressor)
+        {
+            #if NET7_0_OR_GREATER
             _options = options ?? JsonSerializerOptions.Default;
-#else
+            #else
             _options = options ?? new JsonSerializerOptions(JsonSerializerDefaults.Web);
-#endif
+            #endif
         }
 
         /// <inheritdoc/>

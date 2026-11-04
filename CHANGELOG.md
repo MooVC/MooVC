@@ -4,6 +4,45 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [9.6.0] - 2026-11-04
+
+## Added
+
+- Added standardized Instance and Collection factory support to facilitate the instantiation of infrastructural components without requiring direct knowledge of their concrete types.
+
+## Fixed
+
+- Updated [Graphify](https://github.com/MooVC/graphify) from `1.1.2` to `1.1.3`.
+- Updated [Microsoft.Bcl.AsyncInterfaces](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.Configuration](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.DependencyInjection](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.DependencyInjection.Abstractions](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.Hosting.Abstractions](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Microsoft.Extensions.Options.ConfigurationExtensions](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+- Updated [Monify](https://github.com/MooVC/monify) from `1.6.2` to `1.6.3`.
+- Updated [System.Collections.Immutable](https://github.com/dotnet/dotnet) from `10.0.13` to `10.0.14`.
+
+# [9.5.2] - 2026-10-14
+
+## Fixed
+
+- Updated [Graphify](https://github.com/MooVC/graphify) from `1.1.1` to `1.1.2`.
+- Updated [System.Collections.Immutable](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Bcl.AsyncInterfaces](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.Configuration](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.DependencyInjection](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.DependencyInjection.Abstractions](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.Hosting.Abstractions](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+- Updated [Microsoft.Extensions.Options.ConfigurationExtensions](https://github.com/dotnet/dotnet) from `10.0.12` to `10.0.13`.
+
+# [9.5.1] - 2026-10-14
+
+## Fixed
+
+- Updated [MessagePack](https://github.com/MessagePack-CSharp/MessagePack-CSharp) from `3.1.11` to `3.1.12`.
+
 # [9.5.0] - 2026-10-05
 
 ## Changed

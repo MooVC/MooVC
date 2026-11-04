@@ -1,11 +1,8 @@
 namespace MooVC.Infrastructure.Serialization.MessagePack
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using global::MessagePack;
@@ -13,6 +10,7 @@ namespace MooVC.Infrastructure.Serialization.MessagePack
     using static System.String;
     using static MooVC.Infrastructure.Serialization.MessagePack.Resources;
     using Base = MooVC.Serialization.Serializer;
+    using Type = MooVC.Serialization.Configuration.Type;
 
     /// <summary>
     /// Provides MessagePack serialization.
@@ -21,9 +19,14 @@ namespace MooVC.Infrastructure.Serialization.MessagePack
     /// Delegates serialization to <see cref="MessagePackSerializer" /> using configured <see cref="MessagePackSerializerOptions" /> and optional stream compression.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class Serializer
+    public sealed partial class Serializer
         : Base
     {
+        /// <summary>
+        /// MessagePack serialization format identifier.
+        /// </summary>
+        public static readonly Type MessagePack = "MessagePack";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Serializer"/> class.
         /// </summary>
@@ -42,7 +45,7 @@ namespace MooVC.Infrastructure.Serialization.MessagePack
 
         protected override async Task<T> PerformDeserialize<T>(Stream source, CancellationToken cancellationToken)
         {
-            var result = await MessagePackSerializer
+            T result = await MessagePackSerializer
                 .DeserializeAsync<T>(source, options: Options, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 

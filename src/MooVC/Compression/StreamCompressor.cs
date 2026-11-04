@@ -15,26 +15,37 @@ namespace MooVC.Compression
     /// Represents a class that uses the Brotli algorithm to compress and decompress streams.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public abstract class StreamCompressor
+    public abstract partial class StreamCompressor
         : Compressor
     {
         /// <summary>
         /// The default buffer size for stream copy operations.
         /// </summary>
-        public const int DefaultBufferSize = 81920;
+        public const int DefaultBufferSize = Options.DefaultBufferSize;
 
         private readonly int _bufferSize;
         private readonly CompressionLevel _level;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrotliCompressor" /> class.
+        /// Initializes a new instance of the <see cref="StreamCompressor" /> class.
+        /// </summary>
+        /// <param name="options">The options for configuring the compressor.</param>
+        protected StreamCompressor(Options options)
+            : this(
+                  bufferSize: Guard.Against.Null(options, nameof(options), message: OptionsRequired).BufferSize,
+                  level: options.Level)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StreamCompressor" /> class.
         /// </summary>
         /// <param name="bufferSize">The buffer size to use when copying from one stream to another.</param>
         /// <param name="level">The <see cref="CompressionLevel" /> to use for compression and decompression.</param>
         protected StreamCompressor(int bufferSize = DefaultBufferSize, CompressionLevel level = CompressionLevel.Optimal)
         {
-            _bufferSize = Guard.Against.NegativeOrZero(bufferSize, message: BufferSizeRequired);
-            _level = Guard.Against.EnumOutOfRange(level, message: LevelRequired);
+            _bufferSize = Guard.Against.NegativeOrZero(bufferSize, nameof(bufferSize), message: BufferSizeRequired);
+            _level = Guard.Against.EnumOutOfRange(level, nameof(level), message: LevelRequired);
         }
 
         /// <summary>
