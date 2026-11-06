@@ -13,7 +13,7 @@ public sealed class WhenBytesAreCompressed
         var random = RandomNumberGenerator.Create();
         random.GetNonZeroBytes(expected);
 
-        var compressor = new DeflateCompressor(level: CompressionLevel.Fastest);
+        var compressor = new DeflateCompressor(new StreamCompressor.Options { Level = CompressionLevel.Fastest });
 
         // Act
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);
@@ -34,7 +34,7 @@ public sealed class WhenBytesAreCompressed
         // Arrange
         byte[] expected = [];
 
-        var compressor = new DeflateCompressor(level: CompressionLevel.Fastest);
+        var compressor = new DeflateCompressor(new StreamCompressor.Options { Level = CompressionLevel.Fastest });
 
         // Act
         IEnumerable<byte> compressed = await compressor.Compress(expected, CancellationToken.None);

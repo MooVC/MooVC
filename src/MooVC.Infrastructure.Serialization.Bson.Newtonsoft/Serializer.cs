@@ -2,20 +2,17 @@ namespace MooVC.Infrastructure.Serialization.Bson.Newtonsoft
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
     using global::Newtonsoft.Json;
     using global::Newtonsoft.Json.Bson;
     using MooVC.Compression;
     using MooVC.Serialization;
     using static System.String;
     using static MooVC.Infrastructure.Serialization.Bson.Newtonsoft.Resources;
+    using Serialization = MooVC.Serialization.Configuration.Type;
 
     /// <summary>
     /// Provides BSON serialization using Newtonsoft.Json.
@@ -24,9 +21,14 @@ namespace MooVC.Infrastructure.Serialization.Bson.Newtonsoft
     /// Serializes through <see cref="BsonDataWriter" /> and deserializes through <see cref="BsonDataReader" />, while honoring configured encoding and date/time kind handling.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public sealed class Serializer
+    public sealed partial class Serializer
         : SynchronousSerializer
     {
+        /// <summary>
+        /// Gets the type identifier for the Newtonsoft BSON serializer.
+        /// </summary>
+        public static readonly Serialization NewtonsoftBson = "Newtonsoft.Bson";
+
         /// <summary>
         /// Gets the default text encoding used by the serializer.
         /// </summary>
@@ -74,7 +76,7 @@ namespace MooVC.Infrastructure.Serialization.Bson.Newtonsoft
             using (var binary = new BinaryReader(source, Encoding, true))
             using (var reader = new BsonDataReader(source, readRootValueAsArray, Kind))
             {
-                var result = Json.Deserialize<T>(reader);
+                T result = Json.Deserialize<T>(reader);
 
                 if (ReferenceEquals(result, null))
                 {

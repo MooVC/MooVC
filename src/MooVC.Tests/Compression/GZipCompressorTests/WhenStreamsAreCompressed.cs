@@ -13,7 +13,7 @@ public sealed class WhenStreamsAreCompressed
         // Arrange
         byte[] expected = [];
 
-        var compressor = new GZipCompressor();
+        var compressor = new GZipCompressor(new StreamCompressor.Options());
         using var stream = new MemoryStream(expected);
 
         // Act
@@ -36,7 +36,7 @@ public sealed class WhenStreamsAreCompressed
         var random = RandomNumberGenerator.Create();
         random.GetNonZeroBytes(expected);
 
-        var compressor = new GZipCompressor();
+        var compressor = new GZipCompressor(new StreamCompressor.Options());
         using var stream = new MemoryStream(expected);
 
         // Act
