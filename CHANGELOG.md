@@ -4,6 +4,30 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [10.0.0] - 2026-11-11
+
+## Added
+
+- Support for .NET 11.
+
+## Updated
+
+- Updated [Apex.Serialization](https://github.com/dbolin/Apex.Serialization) to `8.0.0` for .NET 10.0.
+- Updated [Apex.Serialization](https://github.com/dbolin/Apex.Serialization) to `9.0.0` for .NET 11.0.
+- Updated [Microsoft.Bcl.AsyncInterfaces](https://github.com/dotnet/runtime) from `10.0.14` to-  `11.0.0`.
+- Updated [Microsoft.Extensions.Configuration](https://github.com/dotnet/runtime) from `10.0.14` to-  `11.0.0`.
+- Updated [Microsoft.Extensions.Configuration.Binder](https://github.com/dotnet/runtime) from-  `10.0.14` to `11.0.0`.
+- Updated [Microsoft.Extensions.DependencyInjection](https://github.com/dotnet/runtime) from `10.0- .14` to `11.0.0`.
+- Updated [Microsoft.Extensions.DependencyInjection.Abstractions](https://github.com/dotnet/runtime)-  from `10.0.14` to `11.0.0`.
+- Updated [Microsoft.Extensions.Hosting.Abstractions](https://github.com/dotnet/runtime) from-  `10.0.14` to `11.0.0`.
+- Updated [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime) from-  `10.0.14` to `11.0.0`.
+- Updated [Microsoft.Extensions.Options.ConfigurationExtensions](https://github.com/dotnet/runtime)-  from `10.0.14` to `11.0.0`.
+- Updated [System.Collections.Immutable](https://github.com/dotnet/runtime) from `10.0.14` to-  `11.0.0`.
+
+## Removed
+
+- Support for .NET 8 and .NET 9.
+
 # [9.6.0] - 2026-11-04
 
 ## Added

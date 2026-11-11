@@ -1,5 +1,6 @@
 namespace MooVC.Infrastructure.Serialization.Apex.SerializerTests.FactoryTests;
 
+using System.Diagnostics.CodeAnalysis;
 using global::Apex.Serialization;
 using Microsoft.Extensions.Configuration;
 using MooVC.Composition;
@@ -100,6 +101,7 @@ public sealed class WhenTryCreateIsCalled
     }
 
     [Test]
+    [SuppressMessage("Minor Code Smell", "S8969:Null-forgiving operators should not be redundant", Justification = "False positive.")]
     public async Task GivenACompressorThenTheCreatedSerializerCompressesAndRoundTripsAnInstance()
     {
         // Arrange
@@ -107,13 +109,15 @@ public sealed class WhenTryCreateIsCalled
         const byte GZipHeaderSecondByte = 0x8B;
         const string Value = "Compressed factory serialization sample";
         var compressor = new GZipCompressor(new StreamCompressor.Options());
-        var strategy = Substitute.For<IInstanceStrategy<ICompressor, Compression>>();
+        IInstanceStrategy<ICompressor, Compression> strategy = Substitute.For<IInstanceStrategy<ICompressor, Compression>>();
+
         _ = strategy.TryCreate(Arg.Any<IConfigurationSection>(), GZipCompressor.GZip, out Arg.Any<ICompressor?>())
             .Returns(call =>
             {
                 call[CompressorArgumentIndex] = compressor;
                 return true;
             });
+
         var factory = new Serializer.Factory([strategy]);
         IConfigurationSection configuration = CreateConfiguration("GZip");
         const string Original = Value;
@@ -132,6 +136,7 @@ public sealed class WhenTryCreateIsCalled
     }
 
     [Test]
+    [SuppressMessage("Minor Code Smell", "S8969:Null-forgiving operators should not be redundant", Justification = "False positive.")]
     public async Task GivenGraphSettingsThenTheCreatedSerializerPreservesSharedReferences()
     {
         // Arrange

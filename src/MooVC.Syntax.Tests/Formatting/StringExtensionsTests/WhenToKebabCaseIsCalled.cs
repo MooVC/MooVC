@@ -215,10 +215,13 @@ public sealed class WhenToKebabCaseIsCalled
             return string.Concat(first, remaining);
         }
 
-        string[] words = [.. Enumerable
-            .Range(0, WordCount)
-            .Select(_ => _generator.Lorem.Word())
-            .Select(word => ToPascalCase(word, FirstCharacterIndex, RemainingCharactersOffset))];
+        string[] words =
+        [
+            .. Enumerable
+                .Range(0, WordCount)
+                .Select(_ => _generator.Lorem.Word())
+                .Select(word => ToPascalCase(word, FirstCharacterIndex, RemainingCharactersOffset)),
+        ];
 
         // Act & Assert
         foreach (string word in words)

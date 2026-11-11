@@ -5,9 +5,6 @@ namespace MooVC.Syntax.CSharp
     using Ardalis.GuardClauses;
     using static MooVC.Syntax.CSharp.DefinitionExtensions_Resources;
 
-    /// <summary>
-    /// Provides helper methods for configuring <see cref="Definition" /> instances.
-    /// </summary>
     public static partial class DefinitionExtensions
     {
         /// <summary>

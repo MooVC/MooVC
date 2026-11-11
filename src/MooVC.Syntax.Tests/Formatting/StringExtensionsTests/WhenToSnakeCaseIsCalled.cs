@@ -214,10 +214,13 @@ public sealed class WhenToSnakeCaseIsCalled
             return string.Concat(first, remaining);
         }
 
-        string[] words = [.. Enumerable
-            .Range(0, wordCount)
-            .Select(_ => _generator.Lorem.Word())
-            .Select(word => ToPascalCase(word, firstCharacterIndex, remainingCharactersOffset))];
+        string[] words =
+        [
+            .. Enumerable
+                .Range(0, wordCount)
+                .Select(_ => _generator.Lorem.Word())
+                .Select(word => ToPascalCase(word, firstCharacterIndex, remainingCharactersOffset)),
+        ];
 
         // Act & Assert
         foreach (string word in words)

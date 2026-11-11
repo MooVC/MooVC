@@ -8,10 +8,10 @@
     <ExcludeByAttribute>Obsolete</ExcludeByAttribute>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
-    <NoWarn>CA1859;CA1861;IDE0039;xUnit1044;</NoWarn>
+    <NoWarn>CA1859;CA1861;IDE0039;S6966</NoWarn>
     <Nullable>enable</Nullable>
     <RootNamespace>$(MSBuildProjectName.Replace('.Tests', ''))</RootNamespace>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
