@@ -4,6 +4,12 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [10.0.1] - 2026-11-11
+
+## Fixed
+
+- Restored compatibility with the .NET 10 compiler host for analyzers and source generators that depend on MooVC. The `netstandard2.0` and `net10.0` builds use version `10.0.15` of `Microsoft.Bcl.AsyncInterfaces`, the Microsoft.Extensions packages updated in 10.0.0, and `System.Collections.Immutable`. The `net11.0` build uses `11.0.0` for these dependencies.
+
 # [10.0.0] - 2026-11-11
 
 ## Added
