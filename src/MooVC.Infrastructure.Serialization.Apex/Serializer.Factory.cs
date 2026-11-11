@@ -10,9 +10,6 @@ using MooVC.Serialization.Composition;
 using Compression = MooVC.Compression.Configuration.Type;
 using Serialization = MooVC.Serialization.Configuration.Type;
 
-/// <summary>
-/// Represents a factory for creating instances of <see cref="Serializer"/>.
-/// </summary>
 public partial class Serializer
 {
     /// <summary>

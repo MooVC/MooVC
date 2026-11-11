@@ -20,7 +20,7 @@ public sealed class WhenValidateIsCalled
                 {
                     Name = ArgumentName,
                     Value = Snippet.From($"alpha{Environment.NewLine}beta"),
-                }
+                },
             ],
         };
 

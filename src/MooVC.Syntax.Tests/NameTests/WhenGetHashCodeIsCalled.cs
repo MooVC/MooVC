@@ -8,11 +8,14 @@ public sealed class WhenGetHashCodeIsCalled
     public async Task GivenDifferentValueThenHashesAreNotEqual()
     {
         // Arrange
-        string[] words = [.. _generator
-            .Random
-            .WordsArray(100)
-            .Distinct()
-            .OrderBy(_ => Random.Shared.Next())];
+        string[] words =
+        [
+            .. _generator
+                .Random
+                .WordsArray(100)
+                .Distinct()
+                .OrderBy(_ => Random.Shared.Next()),
+        ];
 
         var firstMember = new Identifier(words[0]);
         var secondMember = new Identifier(words[^1]);

@@ -199,10 +199,13 @@ public sealed class WhenToCamelCaseIsCalled
             return string.Concat(first, remaining);
         }
 
-        string[] words = [.. Enumerable
-            .Range(0, WordCount)
-            .Select(_ => _generator.Lorem.Word())
-            .Select(CapitalizeFirstLetter)];
+        string[] words =
+        [
+            .. Enumerable
+                .Range(0, WordCount)
+                .Select(_ => _generator.Lorem.Word())
+                .Select(CapitalizeFirstLetter),
+        ];
 
         // Act & Assert
         foreach (string word in words)

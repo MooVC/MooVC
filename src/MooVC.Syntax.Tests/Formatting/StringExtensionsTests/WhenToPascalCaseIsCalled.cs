@@ -179,9 +179,12 @@ public sealed class WhenToPascalCaseIsCalled
         // Arrange
         const int wordCount = 10;
 
-        string[] words = [.. Enumerable
-            .Range(0, wordCount)
-            .Select(_ => _generator.Lorem.Word())];
+        string[] words =
+        [
+            .. Enumerable
+                .Range(0, wordCount)
+                .Select(_ => _generator.Lorem.Word()),
+        ];
 
         // Act & Assert
         foreach (string word in words)
