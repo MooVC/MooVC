@@ -20,7 +20,7 @@ namespace MooVC.Syntax
     /// </summary>
     /// <remarks>
     /// Implicit conversions create an instance from raw syntax text (<see langword="string" />). Empty text becomes
-    /// <see cref="Empty" />, a single newline becomes <see cref="Blank" />, and other text is stored as snippet lines.
+    /// <see cref="Empty" />, a single newline becomes <see cref="Blank" />, and other text is split on CRLF, LF, or CR.
     /// </remarks>
     [AutoInitializeWith(nameof(Empty))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
@@ -39,6 +39,8 @@ namespace MooVC.Syntax
         public static readonly Snippet Empty = new Snippet(ImmutableArray<string>.Empty);
 
         private const int SingleLine = 1;
+
+        private static readonly string[] _lineSeparators = new[] { "\r\n", "\n", "\r" };
 
         /// <summary>
         /// Initializes a new instance of the Snippet class.
@@ -135,7 +137,7 @@ namespace MooVC.Syntax
                 return Empty;
             }
 
-            if (values.Length == 1 && values[0] == Environment.NewLine)
+            if (values.Length == 1 && _lineSeparators.Contains(values[0]))
             {
                 return Blank;
             }
@@ -144,12 +146,7 @@ namespace MooVC.Syntax
 
             foreach (string value in values)
             {
-                string[] lines = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-
-                foreach (string line in lines)
-                {
-                    builder.Add(line);
-                }
+                builder.AddRange(value.Split(_lineSeparators, StringSplitOptions.None));
             }
 
             return builder.ToImmutable();
