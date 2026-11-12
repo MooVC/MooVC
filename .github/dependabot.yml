@@ -4,6 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "Microsoft.CodeAnalysis.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "System.Collections.Immutable"
+        update-types: ["version-update:semver-major"]
     groups:
       all-dependencies:
         patterns:
