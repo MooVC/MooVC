@@ -124,14 +124,14 @@ namespace MooVC.Syntax.CSharp
 
             private static Snippet Format(string keyword, Snippet.Options options, Snippet snippet, Scopes scope = default)
             {
+                keyword = scope is null || scope == Scopes.Unspecified
+                    ? keyword
+                    : $"{scope} {keyword}";
+
                 if (snippet.IsEmpty)
                 {
                     return Snippet.From(options, $"{keyword};");
                 }
-
-                keyword = scope is null || scope == Scopes.Unspecified
-                    ? keyword
-                    : $"{scope} {keyword}";
 
                 return snippet.Block(options, opening: Snippet.From(options, keyword));
             }
