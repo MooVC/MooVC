@@ -4,6 +4,19 @@ All notable changes to MooVC will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [10.1.0] - 2026-11-14
+
+## Added
+
+- C# interface builders support covariant and contravariant type parameters with generic constraints.
+- C# syntax builders for binary, unary, and conversion operators accept explicit operand and result types and custom parameter names.
+- C# method, property, and indexer builders support explicit interface implementations. Indexers support multiple parameters, and property and indexer builders support setter-only declarations and accessor-specific accessibility.
+
+## Fixed
+
+- Updated Valuify to 1.9.1 so generated indexer hashes use each parameter's value hash.
+- C# struct declarations render their implemented interfaces.
+
 # [10.0.3] - 2026-11-13
 
 ## Fixed

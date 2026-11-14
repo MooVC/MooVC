@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.MethodTests;
+namespace MooVC.Syntax.CSharp.MethodTests;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -61,6 +61,30 @@ public sealed class WhenToSnippetIsCalled
         // Assert
         string expected = """
             public string Perform(int value)
+            {
+                return value;
+            }
+            """;
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenExplicitInterfaceThenQualifiedMethodHasNoAccessibilityModifier()
+    {
+        // Arrange
+        Method subject = MethodTestsData.Create(body: Snippet.From("return value;"))
+            .WithExplicitInterface(Symbol.Undefined.Named(("IContract", "Example")));
+
+        Method.Options options = Method.Options.Default
+            .WithQualifications(qualifications => qualifications.WithFormat(Qualification.Options.Formats.Global));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        const string expected = """
+            string global::Example.IContract.Perform(int value)
             {
                 return value;
             }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.ConversionTests;
+using Type = MooVC.Syntax.CSharp.Type;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -37,7 +38,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var result = conversions.ToSnippet(Snippet.Options.Default, type);
+        var result = conversions.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
@@ -51,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        Func<Snippet> act = () => _ = conversions.ToSnippet(Snippet.Options.Default, type!);
+        Func<Snippet> act = () => _ = conversions.ToSnippet(Type.Options.Default, type!);
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
@@ -64,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Conversion> conversions = [ConversionTestsData.Create()];
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = conversions.ToSnippet(options!, type);
@@ -86,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Conversion> conversions = [protectedBetaTo, publicAlphaFrom, publicAlphaTo];
 
         // Act
-        var snippet = conversions.ToSnippet(Snippet.Options.Default, type);
+        var snippet = conversions.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

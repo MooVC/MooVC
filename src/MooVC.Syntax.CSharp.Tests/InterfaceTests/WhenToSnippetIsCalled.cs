@@ -40,6 +40,32 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
+    public async Task GivenVariantTypeParametersWithConstraintsThenRendersVarianceOnlyInTheParameterList()
+    {
+        // Arrange
+        var referenceType = Constraint.Unspecified.WithNature(Natures.Class);
+        var declaration = ((Declaration)"IVisitor").WithArguments(
+            Generic.Undefined.Named("TInput").WithVariance(Generic.Variances.In).WithConstraints(referenceType),
+            Generic.Undefined.Named("TOutput").WithConstraints(referenceType).WithVariance(Generic.Variances.Out),
+            Generic.Undefined.Named("TContext"));
+        Interface subject = InterfaceTestsData.Create(name: declaration);
+        Snippet expected = """
+            public interface IVisitor<in TInput, out TOutput, TContext>
+
+                where TInput : class
+                where TOutput : class
+            {
+            }
+            """;
+
+        // Act
+        var result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).IsEqualTo(expected);
+    }
+
+    [Test]
     public async Task GivenValuesThenReturnsInterfaceSignature()
     {
         // Arrange

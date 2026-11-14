@@ -75,9 +75,11 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator that can be used to iterate through the symbols in the collection.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Comparisons
-                .SelectMany(comparison => comparison.Subject)
-                .Concat(Conversions.SelectMany(conversion => conversion)))
+            foreach (Qualifier qualifier in Binaries
+                .SelectMany(binary => binary.Left.Concat(binary.Result).Concat(binary.Right))
+                .Concat(Comparisons.SelectMany(comparison => comparison.Subject))
+                .Concat(Conversions.SelectMany(conversion => conversion))
+                .Concat(Unaries.SelectMany(unary => unary.Operand.Concat(unary.Result))))
             {
                 yield return qualifier;
             }

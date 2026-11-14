@@ -162,15 +162,7 @@ namespace MooVC.Syntax.CSharp
                 return Snippet.Empty;
             }
 
-            const string separator = " ";
-
-            string attributes = Attributes.ToSnippet(options);
-            string @default = GetDefault();
-            string modifier = Modifier;
-            var name = Name.ToSnippet(options);
-            string type = Type.ToSnippet(options);
-
-            return separator.Combine(attributes, modifier, type, name, @default);
+            return ToSnippet(options, Snippet.Empty, string.Empty);
         }
 
         /// <summary>
@@ -211,6 +203,19 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        internal Snippet ToSnippet(Options options, Snippet fallbackType, string fallbackName)
+        {
+            const string separator = " ";
+
+            string attributes = Attributes.ToSnippet(options);
+            string @default = GetDefault();
+            string modifier = Modifier;
+            string name = Name.IsUnnamed ? fallbackName : Name.ToSnippet(options).ToString();
+            Snippet type = Type.IsUndefined ? fallbackType : Type.ToSnippet(options);
+
+            return separator.Combine(attributes, modifier, type, name, @default);
         }
 
         private string GetDefault()

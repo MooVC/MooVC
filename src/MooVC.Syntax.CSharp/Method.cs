@@ -54,6 +54,12 @@ namespace MooVC.Syntax.CSharp
         public Snippet Body { get; internal set; } = Snippet.Empty;
 
         /// <summary>
+        /// Gets the interface that this method explicitly implements.
+        /// </summary>
+        /// <value>The interface type or an undefined symbol for an ordinary method.</value>
+        public Symbol ExplicitInterface { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
         /// Gets the extensibility modifier applied to the method declaration.
         /// </summary>
         /// <value>The extensibility modifier (abstract, virtual, override, etc.).</value>
@@ -132,6 +138,7 @@ namespace MooVC.Syntax.CSharp
         {
             foreach (Qualifier qualifier in Attributes
                 .SelectMany(attribute => attribute)
+                .Concat(ExplicitInterface)
                 .Concat(Name)
                 .Concat(Parameters.SelectMany(parameter => parameter))
                 .Concat(Result))
@@ -211,6 +218,7 @@ namespace MooVC.Syntax.CSharp
 
             return validationContext
                 .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .AndIf(!ExplicitInterface.IsUndefined, nameof(ExplicitInterface), ExplicitInterface)
                 .AndIf(!Parameters.IsDefaultOrEmpty, nameof(Parameters), parameter => !parameter.IsUndefined, Parameters)
                 .And(nameof(Name), _ => !Name.IsUnspecified, Name)
                 .And(nameof(Result), Result)
@@ -229,10 +237,10 @@ namespace MooVC.Syntax.CSharp
         private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
-            string name = Name;
+            string name = ExplicitInterface.IsUndefined ? Name.ToString() : $"{ExplicitInterface.ToSnippet(options)}.{Name}";
             var parameters = Parameters.ToSnippet(options);
             string result = Result.IsVoid ? Snippet.From(options, "void") : Result.ToSnippet(options);
-            string scope = Scope.ToString(options);
+            string scope = ExplicitInterface.IsUndefined ? Scope.ToString(options) : string.Empty;
             var clauses = Name.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
             string signature = Separator.Combine(scope, extensibility, result, $"{name}({parameters})");
 
@@ -251,6 +259,7 @@ namespace MooVC.Syntax.CSharp
             return $"{nameof(Method)} {{ " +
                 $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
+                $"{nameof(ExplicitInterface)} = `{DebuggerDisplayFormatter.Format(ExplicitInterface)}`, " +
                 $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
                 $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +

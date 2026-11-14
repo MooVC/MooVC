@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.BinaryTests;
+using Type = MooVC.Syntax.CSharp.Type;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -37,7 +38,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var result = binaries.ToSnippet(Snippet.Options.Default, type);
+        var result = binaries.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
@@ -51,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        Func<Snippet> act = () => _ = binaries.ToSnippet(Snippet.Options.Default, type!);
+        Func<Snippet> act = () => _ = binaries.ToSnippet(Type.Options.Default, type!);
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
@@ -64,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Binary> binaries = [BinaryTestsData.Create()];
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = binaries.ToSnippet(options!, type);
@@ -86,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Binary> binaries = [publicSubtract, protectedMultiply, publicAdd];
 
         // Act
-        var snippet = binaries.ToSnippet(Snippet.Options.Default, type);
+        var snippet = binaries.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

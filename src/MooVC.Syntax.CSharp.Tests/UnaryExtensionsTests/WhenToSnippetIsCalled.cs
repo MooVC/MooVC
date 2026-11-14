@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using MooVC.Syntax.CSharp;
 using MooVC.Syntax.CSharp.UnaryTests;
+using Type = MooVC.Syntax.CSharp.Type;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -37,7 +38,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
 
         // Act
-        var result = unaries.ToSnippet(Snippet.Options.Default, type);
+        var result = unaries.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(result).IsEqualTo(Snippet.Empty);
@@ -51,7 +52,7 @@ public sealed class WhenToSnippetIsCalled
         OperatorsTestsData.TestType? type = default;
 
         // Act
-        Func<Snippet> act = () => _ = unaries.ToSnippet(Snippet.Options.Default, type!);
+        Func<Snippet> act = () => _ = unaries.ToSnippet(Type.Options.Default, type!);
 
         // Assert
         ArgumentNullException exception = await Assert.That(act).Throws<ArgumentNullException>().And.IsNotNull();
@@ -64,7 +65,7 @@ public sealed class WhenToSnippetIsCalled
         // Arrange
         ImmutableArray<Unary> unaries = [UnaryTestsData.Create()];
         OperatorsTestsData.TestType type = OperatorsTestsData.Create();
-        Snippet.Options? options = default;
+        Type.Options? options = default;
 
         // Act
         Func<Snippet> act = () => _ = unaries.ToSnippet(options!, type);
@@ -86,7 +87,7 @@ public sealed class WhenToSnippetIsCalled
         ImmutableArray<Unary> unaries = [publicDecrement, protectedNegate, publicIncrement];
 
         // Act
-        var snippet = unaries.ToSnippet(Snippet.Options.Default, type);
+        var snippet = unaries.ToSnippet(Type.Options.Default, type);
 
         // Assert
         _ = await Assert.That(snippet.ToString()).IsEqualTo(GivenValuesThenAnOrderedSnippetIsReturnedExpected);

@@ -26,4 +26,19 @@ public sealed class WhenAcceptsIsCalled
         _ = await Assert.That(result.Result).IsEqualTo(original.Result);
         _ = await Assert.That(result.Scope).IsEqualTo(original.Scope);
     }
+
+    [Test]
+    public async Task GivenUndefinedParameterThenClearsAllParameters()
+    {
+        // Arrange
+        Indexer original = IndexerTestsData.Create()
+            .WithParameters(Parameter.Undefined.Named(ParameterName).OfType(typeof(int)));
+
+        // Act
+        Indexer result = original.Accepts(Parameter.Undefined);
+
+        // Assert
+        _ = await Assert.That(result.Parameters).IsEmpty();
+        _ = await Assert.That(original.Parameters.Length).IsEqualTo(2);
+    }
 }

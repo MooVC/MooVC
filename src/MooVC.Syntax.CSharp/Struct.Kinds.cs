@@ -101,12 +101,10 @@ namespace MooVC.Syntax.CSharp
                 left = _value;
                 right = string.Empty;
 
-                if (IsCompound && IsRecord)
+                if (IsRecord)
                 {
-                    string[] parts = _value.Split(' ');
-
-                    left = parts[0];
-                    right = parts[1];
+                    left = IsReadOnly ? "readonly" : string.Empty;
+                    right = "record";
                 }
             }
         }

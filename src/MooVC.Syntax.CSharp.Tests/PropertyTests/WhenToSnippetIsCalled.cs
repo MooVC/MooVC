@@ -1,4 +1,4 @@
-﻿namespace MooVC.Syntax.CSharp.PropertyTests;
+namespace MooVC.Syntax.CSharp.PropertyTests;
 
 public sealed class WhenToSnippetIsCalled
 {
@@ -23,12 +23,15 @@ public sealed class WhenToSnippetIsCalled
     }
 
     [Test]
-    public async Task GivenGetOnlyPropertyWhenInlineIsLambdaThenBodyIsRendered()
+    [Arguments(false)]
+    [Arguments(true)]
+    public async Task GivenGetOnlyPropertyWhenInlineIsLambdaThenBodyIsRendered(bool specifyScope)
     {
         // Arrange
         var behaviours = new Property.Methods
         {
             Get = Snippet.From("value;"),
+            GetterScope = specifyScope ? Scopes.Public : Scopes.Unspecified,
             Set = new() { Mode = Property.Methods.Setter.Modes.ReadOnly },
         };
 
@@ -41,6 +44,43 @@ public sealed class WhenToSnippetIsCalled
         const string Expected = "public string Value => value;";
 
         _ = await Assert.That(representation).IsEqualTo(Expected);
+    }
+
+    [Test]
+    public async Task GivenRestrictedGetterThenGetterScopeIsRendered()
+    {
+        // Arrange
+        Property subject = PropertyTestsData.Create(behaviours: Property.Methods.Default
+            .WithGetterScope(Scopes.Internal));
+
+        // Act
+        string representation = subject.ToSnippet(Property.Options.Default);
+
+        // Assert
+        const string expected = "public string Value { internal get; init; }";
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task GivenSetterOnlyExplicitInterfaceThenQualifiedPropertyIsRendered()
+    {
+        // Arrange
+        Property subject = PropertyTestsData.Create(behaviours: Property.Methods.Default
+            .HasGetter(false)
+            .WithSet(setter => setter.WithMode(Property.Methods.Setter.Modes.Set)))
+            .WithExplicitInterface(Symbol.Undefined.Named(("IContract", "Example")));
+
+        Property.Options options = Property.Options.Default
+            .WithQualifications(qualifications => qualifications.WithFormat(Qualification.Options.Formats.Global));
+
+        // Act
+        string representation = subject.ToSnippet(options);
+
+        // Assert
+        const string expected = "string global::Example.IContract.Value { set; }";
+
+        _ = await Assert.That(representation).IsEqualTo(expected);
     }
 
     [Test]

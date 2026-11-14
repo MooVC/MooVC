@@ -125,10 +125,12 @@ namespace MooVC.Syntax.CSharp
             {
                 Guard.Against.Conversion<Options, Indexer.Options>(options);
 
-                return options.Indexers.ForkOn(
-                    indexers => indexers.Snippets.IsUnspecified,
-                    indexers => indexers.WithSnippets(options.Snippets),
-                    _ => _);
+                return options.Indexers
+                    .ForkOn(
+                        indexers => indexers.Qualifications.IsUnspecified && !options.Qualifications.IsUnspecified,
+                        indexers => indexers.WithQualifications(options.Qualifications),
+                        _ => _)
+                    .ForkOn(indexers => indexers.Snippets.IsUnspecified, indexers => indexers.WithSnippets(options.Snippets), _ => _);
             }
 
             /// <summary>

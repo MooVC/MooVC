@@ -41,6 +41,18 @@ namespace MooVC.Syntax.CSharp
             public Snippet Get { get; internal set; } = Snippet.Empty;
 
             /// <summary>
+            /// Gets the accessibility of the getter.
+            /// </summary>
+            /// <value>The scope or an unspecified scope to inherit the property accessibility.</value>
+            public Scopes GetterScope { get; internal set; } = Scopes.Unspecified;
+
+            /// <summary>
+            /// Gets a value indicating whether a getter is emitted.
+            /// </summary>
+            /// <value><see langword="true"/> when the property declares a getter.</value>
+            public bool HasGetter { get; internal set; } = true;
+
+            /// <summary>
             /// Gets a value indicating whether the Methods is default.
             /// </summary>
             /// <value>A value indicating whether the Methods is default.</value>
@@ -96,23 +108,27 @@ namespace MooVC.Syntax.CSharp
             {
                 _ = Guard.Against.Null(options, message: MethodsToStringOptionsRequired.Format(typeof(Methods)));
 
-                if (options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty)
+                Scopes getterScope = GetterScope == scope ? Scopes.Unspecified : GetterScope;
+
+                if (HasGetter && options.Block.Inline.IsLambda && Set.Mode.IsReadOnly && !Get.IsEmpty && getterScope == Scopes.Unspecified)
                 {
                     return Get;
                 }
 
-                Snippet get = Format("get", options, Get);
+                Snippet get = HasGetter ? Format("get", options, Get, getterScope) : Snippet.Empty;
 
                 if (Set.Mode.IsReadOnly)
                 {
                     return get;
                 }
 
-                scope = Set.Scope == scope
-                    ? default
-                    : Set.Scope;
+                Scopes setterScope = Set.Scope == scope ? Scopes.Unspecified : Set.Scope;
+                Snippet set = Format(Set.Mode.ToString(), options, Set.Behaviour, setterScope);
 
-                Snippet set = Format(Set.Mode.ToString(), options, Set.Behaviour, scope: scope);
+                if (!HasGetter)
+                {
+                    return set;
+                }
 
                 if (Get.IsEmpty && Set.Behaviour.IsEmpty)
                 {
@@ -140,6 +156,8 @@ namespace MooVC.Syntax.CSharp
             {
                 return $"{nameof(Methods)} {{ " +
                     $"{nameof(Get)} = `{DebuggerDisplayFormatter.Format(Get)}`, " +
+                    $"{nameof(GetterScope)} = `{DebuggerDisplayFormatter.Format(GetterScope)}`, " +
+                    $"{nameof(HasGetter)} = `{DebuggerDisplayFormatter.Format(HasGetter)}`, " +
                     $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
                     $"{nameof(Set)} = `{DebuggerDisplayFormatter.Format(Set)}` }}";
             }

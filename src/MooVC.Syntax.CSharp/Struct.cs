@@ -145,15 +145,26 @@ namespace MooVC.Syntax.CSharp
                 signature = $"{signature}({parameters})";
             }
 
+            var declaration = Snippet.From(options, signature);
+
+            if (!Interfaces.IsDefaultOrEmpty)
+            {
+                string interfaces = string.Join(", ", Interfaces.Select(@interface => @interface.ToSnippet(options).ToString()));
+
+                declaration = Snippet.From(options, $": {interfaces}")
+                    .Shift(options)
+                    .Prepend(options, declaration);
+            }
+
             if (!clauses.IsEmpty)
             {
                 return clauses
                     .Shift(options)
                     .Prepend(options, Environment.NewLine)
-                    .Prepend(options, signature);
+                    .Prepend(options, declaration);
             }
 
-            return Snippet.From(options, signature);
+            return declaration;
         }
 
         private string GetDebuggerDisplay()

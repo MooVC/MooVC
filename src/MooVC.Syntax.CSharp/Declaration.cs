@@ -220,23 +220,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The generated snippet.</returns>
         public Snippet ToSnippet(Snippet.Options options)
         {
-            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Declaration)));
-
-            if (IsUnspecified)
-            {
-                return Snippet.Empty;
-            }
-
-            string signature = Name;
-
-            if (!Arguments.IsDefaultOrEmpty)
-            {
-                var parameters = Arguments.ToSnippet(Generic.Names, options);
-
-                signature = $"{signature}<{parameters}>";
-            }
-
-            return Snippet.From(options, signature);
+            return ToSnippet(options, Generic.Names);
         }
 
         /// <summary>
@@ -265,6 +249,33 @@ namespace MooVC.Syntax.CSharp
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Renders a declaration using the supplied formatter for type parameter names.
+        /// </summary>
+        /// <param name="options">The snippet formatting options.</param>
+        /// <param name="formatParameter">The formatter to apply to each type parameter.</param>
+        /// <returns>The formatted declaration.</returns>
+        internal Snippet ToSnippet(Snippet.Options options, Func<Generic, string> formatParameter)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Declaration)));
+
+            if (IsUnspecified)
+            {
+                return Snippet.Empty;
+            }
+
+            string signature = Name;
+
+            if (!Arguments.IsDefaultOrEmpty)
+            {
+                var parameters = Arguments.ToSnippet(formatParameter, options);
+
+                signature = $"{signature}<{parameters}>";
+            }
+
+            return Snippet.From(options, signature);
         }
 
         private string GetDebuggerDisplay()

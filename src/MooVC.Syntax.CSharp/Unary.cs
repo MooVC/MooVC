@@ -52,10 +52,20 @@ namespace MooVC.Syntax.CSharp
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
+        /// Gets the operand, which defaults to the containing type with a camel-cased name.
+        /// </summary>
+        public Parameter Operand { get; internal set; } = Parameter.Undefined;
+
+        /// <summary>
         /// Gets the operator on the Unary.
         /// </summary>
         /// <value>The operator.</value>
         public Types Operator { get; internal set; } = Types.Unspecified;
+
+        /// <summary>
+        /// Gets the result type, which defaults to the containing type.
+        /// </summary>
+        public Symbol Result { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
         /// Gets the scope on the Unary.
@@ -78,7 +88,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -103,7 +113,19 @@ namespace MooVC.Syntax.CSharp
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Unary)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(typeof(Types), typeof(Unary)));
 
-            return ToSnippet(type.Declaration, options);
+            return Render(type.Declaration, Type.Options.Default.WithSnippets(options));
+        }
+
+        /// <summary>
+        /// Renders an operator whose operand and result types are specified explicitly.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet, or an empty snippet when a type is missing.</returns>
+        public Snippet ToSnippet(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Unary)));
+
+            return Render(Declaration.Unspecified, options);
         }
 
         /// <summary>
@@ -120,18 +142,28 @@ namespace MooVC.Syntax.CSharp
             }
         }
 
-        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
+        internal Snippet ToSnippet(Type.Options options, Concept type)
         {
-            if (IsUndefined || declaration.IsUnspecified)
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Unary)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(typeof(Types), typeof(Unary)));
+
+            return Render(type.Declaration, options);
+        }
+
+        private Snippet Render(Declaration declaration, Type.Options options)
+        {
+            if (IsUndefined || (declaration.IsUnspecified && (Operand.Type.IsUndefined || Result.IsUndefined)))
             {
                 return Snippet.Empty;
             }
 
             string @operator = Operator;
-            string name = declaration.Name.ToString().ToCamelCase();
+            var name = declaration.IsUnspecified ? "value" : declaration.Name.ToString().ToCamelCase();
             string scope = Scope;
-            var type = declaration.ToSnippet(options);
-            var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} {name})");
+            Snippet type = declaration.ToSnippet(options);
+            Snippet operand = Operand.ToSnippet((Method.Options)options, type, name);
+            Snippet result = Result.IsUndefined ? type : Result.ToSnippet(options);
+            var signature = Snippet.From(options, $"{scope} static {result} operator {@operator}({operand})");
 
             return Body.Block(options, signature);
         }
@@ -141,7 +173,9 @@ namespace MooVC.Syntax.CSharp
             return $"{nameof(Unary)} {{ " +
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Operand)} = `{DebuggerDisplayFormatter.Format(Operand)}`, " +
                 $"{nameof(Operator)} = `{DebuggerDisplayFormatter.Format(Operator)}`, " +
+                $"{nameof(Result)} = `{DebuggerDisplayFormatter.Format(Result)}`, " +
                 $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }
     }

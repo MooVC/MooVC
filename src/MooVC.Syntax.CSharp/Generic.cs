@@ -18,8 +18,8 @@ namespace MooVC.Syntax.CSharp
     /// Represents a generic type-parameter declaration.
     /// </summary>
     /// <remarks>
-    /// Implicit conversions create an instance from a type-parameter name (<see cref="Name" />). Constraint symbols
-    /// remain explicit state on the generic declaration.
+    /// Implicit conversions create an instance from a type-parameter name (<see cref="Name" />).
+    /// Constraints and variance are configured separately from the name.
     /// </remarks>
     [AutoInitializeWith(nameof(Undefined))]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
@@ -66,6 +66,11 @@ namespace MooVC.Syntax.CSharp
         /// <value>A value indicating whether the Generic is undefined.</value>
         [Ignore]
         public bool IsUndefined => this == Undefined;
+
+        /// <summary>
+        /// Gets the variance modifier used when declaring this type parameter on an interface.
+        /// </summary>
+        public Variances Variance { get; internal set; } = Variances.None;
 
         /// <summary>
         /// Defines an implicit conversion from <see cref="Generic" /> to <see cref="string" />.
@@ -173,12 +178,22 @@ namespace MooVC.Syntax.CSharp
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// Renders the type parameter's name with its variance modifier when specified.
+        /// </summary>
+        /// <returns>The name to use in an interface's type parameter list.</returns>
+        internal string ToVariantName()
+        {
+            return Variance == Variances.None ? (string)Name : $"{Variance} {Name}";
+        }
+
         private string GetDebuggerDisplay()
         {
             return $"{nameof(Generic)} {{ " +
                 $"{nameof(Constraints)} = `{DebuggerDisplayFormatter.Format(Constraints)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
-                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}` }}";
+                $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +
+                $"{nameof(Variance)} = `{DebuggerDisplayFormatter.Format(Variance)}` }}";
         }
     }
 }

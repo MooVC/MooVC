@@ -51,10 +51,25 @@ namespace MooVC.Syntax.CSharp
         public bool IsUndefined => this == Undefined;
 
         /// <summary>
+        /// Gets the left operand, which defaults to the containing type and the name <c>left</c>.
+        /// </summary>
+        public Parameter Left { get; internal set; } = Parameter.Undefined;
+
+        /// <summary>
         /// Gets the operator on the Binary.
         /// </summary>
         /// <value>The operator.</value>
         public Types Operator { get; internal set; } = Types.Unspecified;
+
+        /// <summary>
+        /// Gets the result type, which defaults to the containing type.
+        /// </summary>
+        public Symbol Result { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
+        /// Gets the right operand, which defaults to the containing type and the name <c>right</c>.
+        /// </summary>
+        public Parameter Right { get; internal set; } = Parameter.Undefined;
 
         /// <summary>
         /// Gets the scope on the Binary.
@@ -77,7 +92,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -102,7 +117,19 @@ namespace MooVC.Syntax.CSharp
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Binary)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Binary)));
 
-            return ToSnippet(type.Declaration, options);
+            return Render(type.Declaration, Type.Options.Default.WithSnippets(options));
+        }
+
+        /// <summary>
+        /// Renders an operator whose operand and result types are specified explicitly.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet, or an empty snippet when a type is missing.</returns>
+        public Snippet ToSnippet(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Binary)));
+
+            return Render(Declaration.Unspecified, options);
         }
 
         /// <summary>
@@ -119,17 +146,29 @@ namespace MooVC.Syntax.CSharp
             }
         }
 
-        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
+        internal Snippet ToSnippet(Type.Options options, Concept type)
         {
-            if (IsUndefined || declaration.IsUnspecified)
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Binary)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Binary)));
+
+            return Render(type.Declaration, options);
+        }
+
+        private Snippet Render(Declaration declaration, Type.Options options)
+        {
+            if (IsUndefined || (declaration.IsUnspecified && (Left.Type.IsUndefined || Right.Type.IsUndefined || Result.IsUndefined)))
             {
                 return Snippet.Empty;
             }
 
+            Parameter.Options parameters = (Method.Options)options;
+            Snippet type = declaration.ToSnippet(options);
+            Snippet left = Left.ToSnippet(parameters, type, "left");
+            Snippet result = Result.IsUndefined ? type : Result.ToSnippet(options);
+            Snippet right = Right.ToSnippet(parameters, type, "right");
             string @operator = Operator;
             string scope = Scope;
-            var type = declaration.ToSnippet(options);
-            var signature = Snippet.From(options, $"{scope} static {type} operator {@operator}({type} left, {type} right)");
+            var signature = Snippet.From(options, $"{scope} static {result} operator {@operator}({left}, {right})");
 
             return Body.Block(options, signature);
         }
@@ -139,7 +178,10 @@ namespace MooVC.Syntax.CSharp
             return $"{nameof(Binary)} {{ " +
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
+                $"{nameof(Left)} = `{DebuggerDisplayFormatter.Format(Left)}`, " +
                 $"{nameof(Operator)} = `{DebuggerDisplayFormatter.Format(Operator)}`, " +
+                $"{nameof(Result)} = `{DebuggerDisplayFormatter.Format(Result)}`, " +
+                $"{nameof(Right)} = `{DebuggerDisplayFormatter.Format(Right)}`, " +
                 $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }
     }

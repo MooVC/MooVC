@@ -2,6 +2,7 @@ namespace MooVC.Syntax.CSharp
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
     using System.Linq;
@@ -12,6 +13,7 @@ namespace MooVC.Syntax.CSharp
     using Valuify;
     using static MooVC.Syntax.CSharp.Indexer_Resources;
     using static MooVC.Syntax.Snippet.Options.Blocks;
+    using DescriptorIgnore = Fluentify.IgnoreAttribute;
     using Ignore = Valuify.IgnoreAttribute;
 
     /// <summary>
@@ -52,17 +54,34 @@ namespace MooVC.Syntax.CSharp
         public Methods Behaviours { get; internal set; } = Methods.Default;
 
         /// <summary>
+        /// Gets the interface that this indexer explicitly implements.
+        /// </summary>
+        /// <value>The interface type or an undefined symbol for an ordinary indexer.</value>
+        public Symbol ExplicitInterface { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
         /// Gets the extensibility on the Indexer.
         /// </summary>
         /// <value>The extensibility.</value>
         public Modifiers Extensibility { get; internal set; } = Modifiers.Implicit;
 
         /// <summary>
-        /// Gets the parameter on the Indexer.
+        /// Gets the first parameter on the indexer.
         /// </summary>
-        /// <value>The parameter.</value>
-        [Descriptor("Accepts")]
-        public Parameter Parameter { get; internal set; } = Parameter.Undefined;
+        /// <value>The first parameter or an undefined parameter if there are none.</value>
+        [DescriptorIgnore]
+        [Ignore]
+        public Parameter Parameter
+        {
+            get => Parameters.IsDefaultOrEmpty ? Parameter.Undefined : Parameters[0];
+            internal set => Parameters = value.IsUndefined ? ImmutableArray<Parameter>.Empty : ImmutableArray.Create(value);
+        }
+
+        /// <summary>
+        /// Gets the ordered parameters on the indexer.
+        /// </summary>
+        /// <value>The indexer parameters.</value>
+        public ImmutableArray<Parameter> Parameters { get; internal set; } = ImmutableArray<Parameter>.Empty;
 
         /// <summary>
         /// Gets the result on the Indexer.
@@ -107,7 +126,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator for the combined sequence of parameter and result symbols.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            foreach (Qualifier qualifier in Parameter.Concat(Result))
+            foreach (Qualifier qualifier in ExplicitInterface.Concat(Parameters.SelectMany(parameter => parameter)).Concat(Result))
             {
                 yield return qualifier;
             }
@@ -137,7 +156,7 @@ namespace MooVC.Syntax.CSharp
             }
 
             Snippet signature = GetSignature(options);
-            var methods = Behaviours.ToSnippet(options);
+            var methods = Behaviours.ToSnippet(options, Scope);
             Snippet.Options snippets = FormatBlockStyle(methods, options);
 
             return methods.Block(snippets, signature);
@@ -146,7 +165,7 @@ namespace MooVC.Syntax.CSharp
         /// <summary>
         /// Validates the Indexer.
         /// </summary>
-        /// <remarks>Required members include: Behaviours, Extensibility, Result, Parameter.</remarks>
+        /// <remarks>Required members include: Behaviours, Extensibility, Result, Parameters.</remarks>
         /// <param name="validationContext">The validation context.</param>
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -158,10 +177,10 @@ namespace MooVC.Syntax.CSharp
 
             IEnumerable<ValidationResult> results = Enumerable.Empty<ValidationResult>();
 
-            if (Behaviours.IsDefault || Behaviours.Get.IsEmpty)
+            if ((!Behaviours.HasGetter || Behaviours.Get.IsEmpty) && Behaviours.Set.IsEmpty)
             {
                 results = results.Append(new ValidationResult(
-                    ValidateBehavioursRequired.Format(nameof(Behaviours), nameof(Indexer), nameof(Methods.Get)),
+                    ValidateBehavioursRequired.Format(nameof(Behaviours), nameof(Indexer), $"{nameof(Methods.Get)}/{nameof(Methods.Set)}"),
                     new[] { nameof(Behaviours) }));
             }
 
@@ -184,8 +203,13 @@ namespace MooVC.Syntax.CSharp
                     new[] { nameof(Result) }));
             }
 
+            ImmutableArray<Parameter> parameters = Parameters.IsDefaultOrEmpty
+                ? ImmutableArray.Create(Parameter.Undefined)
+                : Parameters;
+
             return validationContext
-                .Include(nameof(Parameter), _ => !Parameter.IsUndefined, results, Parameter)
+                .Include(nameof(Parameters), parameter => !parameter.IsUndefined, results, parameters)
+                .AndIf(!ExplicitInterface.IsUndefined, nameof(ExplicitInterface), ExplicitInterface)
                 .Results;
         }
 
@@ -212,10 +236,11 @@ namespace MooVC.Syntax.CSharp
         private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
-            string parameter = Parameter;
-            string result = Result.WithMode(Result.Modes.Synchronous);
-            string scope = Scope.ToString(options);
-            string signature = Separator.Combine(scope, extensibility, result, $"this[{parameter}]");
+            string parameters = Parameters.ToSnippet(options);
+            string result = Result.WithMode(Result.Modes.Synchronous).ToSnippet(options);
+            string scope = ExplicitInterface.IsUndefined ? Scope.ToString(options) : string.Empty;
+            string name = ExplicitInterface.IsUndefined ? "this" : $"{ExplicitInterface.ToSnippet(options)}.this";
+            string signature = Separator.Combine(scope, extensibility, result, $"{name}[{parameters}]");
 
             return Snippet.From(options, signature);
         }
@@ -224,9 +249,10 @@ namespace MooVC.Syntax.CSharp
         {
             return $"{nameof(Indexer)} {{ " +
                 $"{nameof(Behaviours)} = `{DebuggerDisplayFormatter.Format(Behaviours)}`, " +
+                $"{nameof(ExplicitInterface)} = `{DebuggerDisplayFormatter.Format(ExplicitInterface)}`, " +
                 $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
-                $"{nameof(Parameter)} = `{DebuggerDisplayFormatter.Format(Parameter)}`, " +
+                $"{nameof(Parameters)} = `{DebuggerDisplayFormatter.Format(Parameters)}`, " +
                 $"{nameof(Result)} = `{DebuggerDisplayFormatter.Format(Result)}`, " +
                 $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}` }}";
         }

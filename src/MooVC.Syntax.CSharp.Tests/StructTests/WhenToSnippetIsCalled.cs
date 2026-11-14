@@ -8,6 +8,20 @@ public sealed class WhenToSnippetIsCalled
     private const string StructName = "Payload";
 
     [Test]
+    public async Task GivenImplementedInterfacesThenQualifiedNamesFollowTheDeclaration()
+    {
+        // Arrange
+        var subject = StructTestsData.Create().Implements(Symbol.Undefined.Named("Example.IComponent"), Symbol.Undefined.Named("Example.IPayload"));
+        var options = Type.Options.Default.WithQualifications(qualifications => qualifications.WithFormat(Qualification.Options.Formats.Global));
+
+        // Act
+        string result = subject.ToSnippet(options);
+
+        // Assert
+        _ = await Assert.That(result).Contains(": global::Example.IComponent, global::Example.IPayload");
+    }
+
+    [Test]
     public async Task GivenOptionsNotProvidedThenArgumentNullExceptionIsThrown()
     {
         // Arrange
@@ -65,5 +79,18 @@ public sealed class WhenToSnippetIsCalled
         _ = await Assert.That(result).Contains($"{Struct.Kinds.ReadOnly} partial struct {StructName}");
         _ = await Assert.That(result).Contains(ParameterName);
         _ = await Assert.That(result).Contains("where");
+    }
+
+    [Test]
+    public async Task GivenRecordStructThenRecordKeywordFollowsPartial()
+    {
+        // Arrange
+        Struct subject = StructTestsData.Create(behavior: Struct.Kinds.Record, isPartial: true).Named(StructName);
+
+        // Act
+        string result = subject.ToSnippet(Type.Options.Default);
+
+        // Assert
+        _ = await Assert.That(result).Contains($"partial record struct {StructName}");
     }
 }

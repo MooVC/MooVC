@@ -64,6 +64,12 @@ namespace MooVC.Syntax.CSharp
         public Snippet Default { get; internal set; } = Snippet.Empty;
 
         /// <summary>
+        /// Gets the interface that this property explicitly implements.
+        /// </summary>
+        /// <value>The interface type or an undefined symbol for an ordinary property.</value>
+        public Symbol ExplicitInterface { get; internal set; } = Symbol.Undefined;
+
+        /// <summary>
         /// Gets the extensibility on the Property.
         /// </summary>
         /// <value>The extensibility.</value>
@@ -147,6 +153,7 @@ namespace MooVC.Syntax.CSharp
         {
             foreach (Qualifier qualifier in Attributes
                 .SelectMany(attribute => attribute)
+                .Concat(ExplicitInterface)
                 .Concat(Type))
             {
                 yield return qualifier;
@@ -227,6 +234,7 @@ namespace MooVC.Syntax.CSharp
 
             return validationContext
                 .IncludeIf(!Attributes.IsDefaultOrEmpty, nameof(Attributes), attribute => !attribute.IsUnspecified, results, Attributes)
+                .AndIf(!ExplicitInterface.IsUndefined, nameof(ExplicitInterface), ExplicitInterface)
                 .And(nameof(Name), _ => !Name.IsUnnamed, Name)
                 .And(nameof(Type), _ => !Type.IsUndefined, Type)
                 .Results;
@@ -243,9 +251,10 @@ namespace MooVC.Syntax.CSharp
 
         private Snippet.Options FormatBlockStyle(Snippet behaviours, Options options)
         {
+            bool hasRestrictedGetter = Behaviours.GetterScope != Scopes.Unspecified && Behaviours.GetterScope != Scope;
             bool isSingleLineBraces = behaviours.IsSingleLine
                 && options.Snippets.Block.Inline.IsLambda
-                && (Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly);
+                && (!Behaviours.HasGetter || Behaviours.Get.IsEmpty || !Behaviours.Set.Mode.IsReadOnly || hasRestrictedGetter);
 
             if (isSingleLineBraces)
             {
@@ -260,8 +269,8 @@ namespace MooVC.Syntax.CSharp
         private Snippet GetSignature(Options options)
         {
             string extensibility = Extensibility;
-            string name = Name;
-            string scope = Scope.ToString(options.Implied);
+            string name = ExplicitInterface.IsUndefined ? Name.ToString() : $"{ExplicitInterface.ToSnippet(options)}.{Name}";
+            string scope = ExplicitInterface.IsUndefined ? Scope.ToString(options.Implied) : string.Empty;
             string type = Type.ToSnippet(options);
             string signature = Separator.Combine(scope, extensibility, type, name);
 
@@ -274,6 +283,7 @@ namespace MooVC.Syntax.CSharp
                 $"{nameof(Attributes)} = `{DebuggerDisplayFormatter.Format(Attributes)}`, " +
                 $"{nameof(Behaviours)} = `{DebuggerDisplayFormatter.Format(Behaviours)}`, " +
                 $"{nameof(Default)} = `{DebuggerDisplayFormatter.Format(Default)}`, " +
+                $"{nameof(ExplicitInterface)} = `{DebuggerDisplayFormatter.Format(ExplicitInterface)}`, " +
                 $"{nameof(Extensibility)} = `{DebuggerDisplayFormatter.Format(Extensibility)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
                 $"{nameof(Name)} = `{DebuggerDisplayFormatter.Format(Name)}`, " +

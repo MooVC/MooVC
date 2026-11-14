@@ -49,6 +49,11 @@ namespace MooVC.Syntax.CSharp
         public Intents Direction { get; internal set; } = Intents.To;
 
         /// <summary>
+        /// Gets the input parameter, which defaults to the type selected by the direction and the name <c>subject</c>.
+        /// </summary>
+        public Parameter Input { get; internal set; } = Parameter.Undefined;
+
+        /// <summary>
         /// Gets a value indicating whether the Conversion is undefined.
         /// </summary>
         /// <value>A value indicating whether the Conversion is undefined.</value>
@@ -60,6 +65,11 @@ namespace MooVC.Syntax.CSharp
         /// </summary>
         /// <value>The mode.</value>
         public Types Mode { get; internal set; } = Types.Implicit;
+
+        /// <summary>
+        /// Gets the result type, which defaults to the type selected by the direction.
+        /// </summary>
+        public Symbol Result { get; internal set; } = Symbol.Undefined;
 
         /// <summary>
         /// Gets the scope on the Conversion.
@@ -80,7 +90,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>An enumerator that can be used to iterate through the collection of symbols.</returns>
         public IEnumerator<Qualifier> GetEnumerator()
         {
-            return Target.GetEnumerator();
+            return Target.Concat(Input).Concat(Result).GetEnumerator();
         }
 
         /// <summary>
@@ -89,7 +99,7 @@ namespace MooVC.Syntax.CSharp
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return ToSnippet(Declaration.Unspecified, Snippet.Options.Default);
+            return ToSnippet(Options.Default);
         }
 
         /// <summary>
@@ -114,7 +124,19 @@ namespace MooVC.Syntax.CSharp
             _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Conversion)));
             _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Conversion)));
 
-            return ToSnippet(type.Declaration, options);
+            return Render(type.Declaration, Type.Options.Default.WithSnippets(options));
+        }
+
+        /// <summary>
+        /// Renders a conversion whose input and result types are specified explicitly.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The generated snippet, or an empty snippet when a type is missing.</returns>
+        public Snippet ToSnippet(Options options)
+        {
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Conversion)));
+
+            return Render(Declaration.Unspecified, options);
         }
 
         /// <summary>
@@ -137,7 +159,9 @@ namespace MooVC.Syntax.CSharp
                 results = results.Append(new ValidationResult(ValidateBodyRequired.Format(nameof(Body), nameof(Conversion)), new[] { nameof(Body) }));
             }
 
-            if (Target.IsUndefined)
+            bool needsTarget = Direction == Intents.To ? Result.IsUndefined : Input.Type.IsUndefined;
+
+            if (needsTarget && Target.IsUndefined)
             {
                 results = results.Append(new ValidationResult(
                     ValidateSubjectRequired.Format(nameof(Target), nameof(Conversion)),
@@ -161,32 +185,30 @@ namespace MooVC.Syntax.CSharp
             return GetEnumerator();
         }
 
-        private void GetInputAndResult(Declaration declaration, out string input, out string result)
+        internal Snippet ToSnippet(Type.Options options, Concept type)
         {
-            if (Direction == Intents.To)
-            {
-                input = declaration;
-                result = Target;
-            }
-            else
-            {
-                input = Target;
-                result = declaration;
-            }
+            _ = Guard.Against.Null(options, message: ToSnippetOptionsRequired.Format(typeof(Conversion)));
+            _ = Guard.Against.Null(type, message: ToSnippetTypeRequired.Format(nameof(Types), nameof(Conversion)));
+
+            return Render(type.Declaration, options);
         }
 
-        private Snippet ToSnippet(Declaration declaration, Snippet.Options options)
+        private Snippet Render(Declaration declaration, Type.Options options)
         {
-            if (IsUndefined || declaration.IsUnspecified)
+            if (IsUndefined || (declaration.IsUnspecified && (Input.Type.IsUndefined || Result.IsUndefined)))
             {
                 return Snippet.Empty;
             }
 
-            GetInputAndResult(declaration, out string input, out string result);
-
+            bool convertsToTarget = Direction == Intents.To;
+            Snippet owner = declaration.ToSnippet(options);
+            Snippet target = Target.ToSnippet(options);
+            Snippet fallbackResult = convertsToTarget ? target : owner;
+            Snippet input = Input.ToSnippet((Method.Options)options, convertsToTarget ? owner : target, "subject");
+            Snippet result = Result.IsUndefined ? fallbackResult : Result.ToSnippet(options);
             string mode = Mode;
             string scope = Scope;
-            var signature = Snippet.From($"{scope} static {mode} operator {result}({input} subject)");
+            var signature = Snippet.From(options, $"{scope} static {mode} operator {result}({input})");
 
             return Body.Block(options, signature);
         }
@@ -196,8 +218,10 @@ namespace MooVC.Syntax.CSharp
             return $"{nameof(Conversion)} {{ " +
                 $"{nameof(Body)} = `{DebuggerDisplayFormatter.Format(Body)}`, " +
                 $"{nameof(Direction)} = `{DebuggerDisplayFormatter.Format(Direction)}`, " +
+                $"{nameof(Input)} = `{DebuggerDisplayFormatter.Format(Input)}`, " +
                 $"{nameof(IsUndefined)} = `{DebuggerDisplayFormatter.Format(IsUndefined)}`, " +
                 $"{nameof(Mode)} = `{DebuggerDisplayFormatter.Format(Mode)}`, " +
+                $"{nameof(Result)} = `{DebuggerDisplayFormatter.Format(Result)}`, " +
                 $"{nameof(Scope)} = `{DebuggerDisplayFormatter.Format(Scope)}`, " +
                 $"{nameof(Target)} = `{DebuggerDisplayFormatter.Format(Target)}` }}";
         }

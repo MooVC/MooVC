@@ -63,8 +63,12 @@ namespace MooVC.Syntax.CSharp
         private Snippet GetSignature(Options options)
         {
             var attributes = Attributes.ToSnippet(options);
-            var clauses = Declaration.Arguments.ToSnippet(parameter => parameter.ToSnippet(options), options);
-            string name = Declaration;
+
+            Snippet clauses = Declaration.Arguments.IsDefaultOrEmpty
+                ? Snippet.Empty
+                : Snippet.Empty.Combine(options, Declaration.Arguments.Select(parameter => parameter.ToSnippet(options)).ToArray());
+
+            string name = Declaration.ToSnippet(options, parameter => parameter.ToVariantName());
             string partial = IsPartial.Partial();
             string scope = Scope;
             string signature = Separator.Combine(scope, partial, $"interface {name}");

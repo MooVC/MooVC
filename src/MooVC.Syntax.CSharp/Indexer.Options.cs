@@ -77,6 +77,12 @@ namespace MooVC.Syntax.CSharp
             public bool IsUnspecified => _isUnspecified;
 
             /// <summary>
+            /// Gets the formatting options used for the indexer types.
+            /// </summary>
+            /// <value>The qualification options.</value>
+            public Qualification.Options Qualifications { get; internal set; } = Qualification.Options.Unspecified;
+
+            /// <summary>
             /// Gets the options for the Snippets.
             /// </summary>
             /// <value>The behaviour.</value>
@@ -98,6 +104,30 @@ namespace MooVC.Syntax.CSharp
             }
 
             /// <summary>
+            /// Gets the formatting options used for indexer parameters.
+            /// </summary>
+            /// <param name="options">The indexer options.</param>
+            /// <returns>The parameter options.</returns>
+            public static implicit operator Parameter.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Parameter.Options>(options);
+
+                return Parameter.Options.Camel.WithQualifications(options.Qualifications);
+            }
+
+            /// <summary>
+            /// Gets the formatting options used for the indexer types.
+            /// </summary>
+            /// <param name="options">The indexer options.</param>
+            /// <returns>The qualification options.</returns>
+            public static implicit operator Qualification.Options(Options options)
+            {
+                Guard.Against.Conversion<Options, Qualification.Options>(options);
+
+                return options.Qualifications;
+            }
+
+            /// <summary>
             /// Defines an implicit conversion from <see cref="Options" /> to <see cref="Snippet.Options" />.
             /// </summary>
             /// <param name="options">The <see cref="Options" /> value to convert.</param>
@@ -115,6 +145,7 @@ namespace MooVC.Syntax.CSharp
                     $"{nameof(Implied)} = `{DebuggerDisplayFormatter.Format(Implied)}`, " +
                     $"{nameof(IsDefault)} = `{DebuggerDisplayFormatter.Format(IsDefault)}`, " +
                     $"{nameof(IsUnspecified)} = `{DebuggerDisplayFormatter.Format(IsUnspecified)}`, " +
+                    $"{nameof(Qualifications)} = `{DebuggerDisplayFormatter.Format(Qualifications)}`, " +
                     $"{nameof(Snippets)} = `{DebuggerDisplayFormatter.Format(Snippets)}` }}";
             }
         }
